@@ -36,7 +36,7 @@ public class RootFolderDemoDataCreatorImpl
 	public Folder create(long userId, long groupId, String name)
 		throws PortalException {
 
-		return createBaseFolder(userId, groupId, 0, name);
+		return createFolder(userId, groupId, 0, name);
 	}
 
 }
