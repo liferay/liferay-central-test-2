@@ -59,13 +59,6 @@ public class AdaptiveMediaImageLocalServiceImpl
 		return adaptiveMediaImagePersistence.update(image);
 	}
 
-	public AdaptiveMediaImage fetchAdaptiveMediaImage(
-		String configurationUuid, long fileVersionId) {
-
-		return adaptiveMediaImagePersistence.fetchByC_F(
-			configurationUuid, fileVersionId);
-	}
-
 	public void deleteAdaptiveMediaImageFileVersion(long fileVersionId) {
 		List<AdaptiveMediaImage> images =
 			adaptiveMediaImagePersistence.findByFileVersionId(fileVersionId);
@@ -73,6 +66,13 @@ public class AdaptiveMediaImageLocalServiceImpl
 		for (AdaptiveMediaImage image : images) {
 			adaptiveMediaImagePersistence.remove(image);
 		}
+	}
+
+	public AdaptiveMediaImage fetchAdaptiveMediaImage(
+		String configurationUuid, long fileVersionId) {
+
+		return adaptiveMediaImagePersistence.fetchByC_F(
+			configurationUuid, fileVersionId);
 	}
 
 	@ServiceReference(type = DLAppLocalService.class)

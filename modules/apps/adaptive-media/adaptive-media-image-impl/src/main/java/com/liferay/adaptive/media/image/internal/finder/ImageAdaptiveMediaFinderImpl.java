@@ -44,7 +44,6 @@ import java.nio.charset.StandardCharsets;
 
 import java.util.Collection;
 import java.util.Map;
-import java.util.Optional;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Stream;
@@ -107,28 +106,20 @@ public class ImageAdaptiveMediaFinderImpl implements ImageAdaptiveMediaFinder {
 						configurationEntry.getUUID(),
 						fileVersion.getFileVersionId()) != null)
 			).map(
-				configurationEntry ->
-					_createMedia(fileVersion, uriFactory, configurationEntry));
+					configurationEntry ->
+						_createMedia(
+							fileVersion, uriFactory, configurationEntry));
 		}
 
-		return configurationEntries.stream().
-			filter(
+		return configurationEntries.stream().filter(
+			configurationEntry ->
+				_imageLocalService.fetchAdaptiveMediaImage(
+					configurationEntry.getUUID(),
+					fileVersion.getFileVersionId()) !=
+					null).map(
 				configurationEntry ->
-					_imageLocalService.fetchAdaptiveMediaImage(
-						configurationEntry.getUUID(),
-						fileVersion.getFileVersionId()) != null).
-			map(
-				configurationEntry ->
-					_createMedia(
-						fileVersion, uriFactory, configurationEntry)).
-			sorted(queryBuilder.getComparator());
-	}
-
-	@Reference(unbind = "-")
-	public void setAdaptiveMediaURIResolver(
-		AdaptiveMediaURIResolver adaptiveMediaURIResolver) {
-
-		_uriResolver = adaptiveMediaURIResolver;
+					_createMedia(fileVersion, uriFactory, configurationEntry)).
+				sorted(queryBuilder.getComparator());
 	}
 
 	@Reference(unbind = "-")
@@ -136,6 +127,13 @@ public class ImageAdaptiveMediaFinderImpl implements ImageAdaptiveMediaFinder {
 		AdaptiveMediaImageLocalService imageLocalService) {
 
 		_imageLocalService = imageLocalService;
+	}
+
+	@Reference(unbind = "-")
+	public void setAdaptiveMediaURIResolver(
+		AdaptiveMediaURIResolver adaptiveMediaURIResolver) {
+
+		_uriResolver = adaptiveMediaURIResolver;
 	}
 
 	@Reference(unbind = "-")
@@ -259,8 +257,8 @@ public class ImageAdaptiveMediaFinderImpl implements ImageAdaptiveMediaFinder {
 		return this::_createFileEntryURL;
 	}
 
-	private AdaptiveMediaImageLocalService _imageLocalService;
 	private ImageAdaptiveMediaConfigurationHelper _configurationHelper;
+	private AdaptiveMediaImageLocalService _imageLocalService;
 	private ImageProcessor _imageProcessor;
 	private ImageStorage _imageStorage;
 	private AdaptiveMediaURIResolver _uriResolver;

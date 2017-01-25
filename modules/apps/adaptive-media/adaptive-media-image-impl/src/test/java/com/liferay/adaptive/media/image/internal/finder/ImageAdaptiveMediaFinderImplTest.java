@@ -922,7 +922,9 @@ public class ImageAdaptiveMediaFinderImplTest {
 	}
 
 	@Test
-	public void testGetMediaQueryWith200MaxHeightAspectRatio() throws Exception {
+	public void testGetMediaQueryWith200MaxHeightAspectRatio()
+		throws Exception {
+
 		ImageAdaptiveMediaConfigurationEntry configurationEntry1 =
 			new ImageAdaptiveMediaConfigurationEntryImpl(
 				StringUtil.randomString(), StringUtil.randomString(),
@@ -980,7 +982,8 @@ public class ImageAdaptiveMediaFinderImplTest {
 			_finder.getAdaptiveMedia(
 				queryBuilder ->
 					queryBuilder.forVersion(_fileVersion).with(
-						ImageAdaptiveMediaAttribute.IMAGE_MAX_HEIGHT, 200).done());
+						ImageAdaptiveMediaAttribute.IMAGE_MAX_HEIGHT,
+						200).done());
 
 		List<AdaptiveMedia<ImageAdaptiveMediaProcessor>> adaptiveMedias =
 			stream.collect(Collectors.toList());
@@ -1303,11 +1306,11 @@ public class ImageAdaptiveMediaFinderImplTest {
 	private final FileVersion _fileVersion = Mockito.mock(FileVersion.class);
 	private final ImageAdaptiveMediaFinderImpl _finder =
 		new ImageAdaptiveMediaFinderImpl();
+	private final AdaptiveMediaImageLocalService _imageLocalService =
+		Mockito.mock(AdaptiveMediaImageLocalService.class);
 	private final ImageProcessor _imageProcessor = Mockito.mock(
 		ImageProcessor.class);
 	private final ImageStorage _imageStorage = Mockito.mock(ImageStorage.class);
-	private final AdaptiveMediaImageLocalService _imageLocalService =
-		Mockito.mock(AdaptiveMediaImageLocalService.class);
 	private final AdaptiveMediaURIResolver _uriResolver = Mockito.mock(
 		AdaptiveMediaURIResolver.class);
 

@@ -53,8 +53,8 @@ public class AdaptiveMediaApiQueryContextProvider
 		return availableAttributes ->
 			Arrays.stream(queries).map(
 				query -> parseQuery(query, availableAttributes)).filter(
-					Optional::isPresent).map(Optional::get).collect(
-						Collectors.toList());
+				Optional::isPresent).map(Optional::get).collect(
+				Collectors.toList());
 	}
 
 	protected Optional<AdaptiveMediaApiQuery.QueryAttribute> parseQuery(

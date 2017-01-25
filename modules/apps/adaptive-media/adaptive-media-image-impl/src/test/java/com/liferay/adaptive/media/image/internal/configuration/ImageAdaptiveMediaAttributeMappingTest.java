@@ -35,11 +35,10 @@ public class ImageAdaptiveMediaAttributeMappingTest {
 			ImageAdaptiveMediaAttributeMapping.fromProperties(
 				Collections.emptyMap());
 
-		Optional<Integer> HeightOptional =
-			attributeMapping.getAttributeValue(
-				ImageAdaptiveMediaAttribute.IMAGE_HEIGHT);
+		Optional<Integer> heightOptional = attributeMapping.getAttributeValue(
+			ImageAdaptiveMediaAttribute.IMAGE_HEIGHT);
 
-		Assert.assertFalse(HeightOptional.isPresent());
+		Assert.assertFalse(heightOptional.isPresent());
 
 		Optional<Integer> maxHeightOptional =
 			attributeMapping.getAttributeValue(
@@ -47,10 +46,10 @@ public class ImageAdaptiveMediaAttributeMappingTest {
 
 		Assert.assertFalse(maxHeightOptional.isPresent());
 
-		Optional<Integer> WidthOptional = attributeMapping.getAttributeValue(
+		Optional<Integer> widthOptional = attributeMapping.getAttributeValue(
 			ImageAdaptiveMediaAttribute.IMAGE_WIDTH);
 
-		Assert.assertFalse(WidthOptional.isPresent());
+		Assert.assertFalse(widthOptional.isPresent());
 
 		Optional<Integer> maxWidthOptional = attributeMapping.getAttributeValue(
 			ImageAdaptiveMediaAttribute.IMAGE_MAX_WIDTH);
@@ -68,11 +67,9 @@ public class ImageAdaptiveMediaAttributeMappingTest {
 		ImageAdaptiveMediaAttributeMapping attributeMapping =
 			ImageAdaptiveMediaAttributeMapping.fromProperties(
 				MapUtil.fromArray(
-					ImageAdaptiveMediaAttribute.IMAGE_HEIGHT.getName(),
-					"100",
+					ImageAdaptiveMediaAttribute.IMAGE_HEIGHT.getName(), "100",
 					ImageAdaptiveMediaAttribute.IMAGE_MAX_HEIGHT.getName(),
-					"200",
-					ImageAdaptiveMediaAttribute.IMAGE_WIDTH.getName(),
+					"200", ImageAdaptiveMediaAttribute.IMAGE_WIDTH.getName(),
 					"300",
 					ImageAdaptiveMediaAttribute.IMAGE_MAX_WIDTH.getName(),
 					"400"));
@@ -86,9 +83,8 @@ public class ImageAdaptiveMediaAttributeMappingTest {
 			ImageAdaptiveMediaAttributeMapping.fromProperties(
 				MapUtil.fromArray("foo", StringUtil.randomString()));
 
-		Optional<Integer> heightOptional =
-			attributeMapping.getAttributeValue(
-				ImageAdaptiveMediaAttribute.IMAGE_HEIGHT);
+		Optional<Integer> heightOptional = attributeMapping.getAttributeValue(
+			ImageAdaptiveMediaAttribute.IMAGE_HEIGHT);
 
 		Assert.assertFalse(heightOptional.isPresent());
 
@@ -109,18 +105,15 @@ public class ImageAdaptiveMediaAttributeMappingTest {
 		ImageAdaptiveMediaAttributeMapping attributeMapping =
 			ImageAdaptiveMediaAttributeMapping.fromProperties(
 				MapUtil.fromArray(
-					ImageAdaptiveMediaAttribute.IMAGE_HEIGHT.getName(),
-					"100",
+					ImageAdaptiveMediaAttribute.IMAGE_HEIGHT.getName(), "100",
 					ImageAdaptiveMediaAttribute.IMAGE_MAX_HEIGHT.getName(),
-					"200",
-					ImageAdaptiveMediaAttribute.IMAGE_WIDTH.getName(),
+					"200", ImageAdaptiveMediaAttribute.IMAGE_WIDTH.getName(),
 					"300",
 					ImageAdaptiveMediaAttribute.IMAGE_MAX_WIDTH.getName(),
 					"400"));
 
-		Optional<Integer> heightOptional =
-			attributeMapping.getAttributeValue(
-				ImageAdaptiveMediaAttribute.IMAGE_HEIGHT);
+		Optional<Integer> heightOptional = attributeMapping.getAttributeValue(
+			ImageAdaptiveMediaAttribute.IMAGE_HEIGHT);
 
 		Assert.assertEquals(Integer.valueOf(100), heightOptional.get());
 

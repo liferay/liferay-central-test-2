@@ -126,8 +126,7 @@ public class ImageAdaptiveMediaQueryBuilderImplTest {
 		FileVersion fileVersion = Mockito.mock(FileVersion.class);
 
 		_queryBuilder.forVersion(fileVersion).with(
-			ImageAdaptiveMediaAttribute.IMAGE_HEIGHT,
-			(Optional<Integer>)null);
+			ImageAdaptiveMediaAttribute.IMAGE_HEIGHT, (Optional<Integer>)null);
 	}
 
 	private final ImageAdaptiveMediaQueryBuilderImpl _queryBuilder =

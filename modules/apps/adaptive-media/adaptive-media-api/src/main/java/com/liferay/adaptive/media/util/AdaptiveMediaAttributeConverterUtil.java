@@ -27,7 +27,6 @@ import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
  * </p>
  *
  * @author Alejandro Hernández
- *
  */
 public class AdaptiveMediaAttributeConverterUtil {
 
