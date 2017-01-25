@@ -38,7 +38,7 @@ public class SubfolderDemoDataCreatorImpl
 
 		Folder folder = dlAppLocalService.getFolder(folderId);
 
-		return createBaseFolder(userId, folder.getGroupId(), folderId, name);
+		return createFolder(userId, folder.getGroupId(), folderId, name);
 	}
 
 }

@@ -53,7 +53,7 @@ public abstract class BaseFolderDemoDataCreatorImpl
 		_folderIds.clear();
 	}
 
-	protected Folder createBaseFolder(
+	protected Folder createFolder(
 			long userId, long groupId, long folderId, String name)
 		throws PortalException {
 
