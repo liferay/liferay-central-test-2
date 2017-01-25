@@ -116,6 +116,7 @@ AUI.add(
 							function(field) {
 								fields.push(
 									{
+										dataType: field.get('dataType'),
 										label: field.get('label') || field.get('fieldName'),
 										options: field.get('options'),
 										type: field.get('type'),

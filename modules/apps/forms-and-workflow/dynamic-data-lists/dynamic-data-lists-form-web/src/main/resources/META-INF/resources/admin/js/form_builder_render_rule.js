@@ -227,6 +227,18 @@ AUI.add(
 						return actions;
 					},
 
+					_getFieldDataType: function(fieldName) {
+						var instance = this;
+
+						var field = instance.get('fields').find(
+							function(field) {
+								return field.value === fieldName;
+							}
+						);
+
+						return field.dataType;
+					},
+
 					_getOptionsLabel: function(field, optionValue) {
 						var instance = this;
 

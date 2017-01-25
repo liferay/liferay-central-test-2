@@ -1,25 +1,6 @@
 AUI.add(
 	'liferay-ddl-form-builder-render-rule-condition',
 	function(A) {
-		var textOperators = [
-			{
-				label: Liferay.Language.get('is-equal-to'),
-				value: 'equals-to'
-			},
-			{
-				label: Liferay.Language.get('is-not-equal-to'),
-				value: 'not-equals-to'
-			},
-			{
-				label: Liferay.Language.get('contains'),
-				value: 'contains'
-			},
-			{
-				label: Liferay.Language.get('does-not-contain'),
-				value: 'not-contains'
-			}
-		];
-
 		var FormBuilderRenderRuleCondition = function(config) {};
 
 		FormBuilderRenderRuleCondition.ATTRS = {
@@ -45,7 +26,6 @@ AUI.add(
 				boundingBox.delegate('click', A.bind(instance._handleLogicOperatorChange, instance), '.logic-operator');
 				boundingBox.delegate('click', A.bind(instance._handleDeleteConditionClick, instance), '.condition-card-delete');
 				boundingBox.delegate('click', A.bind(instance._handleAddConditionClick, instance), '.form-builder-rule-add-condition');
-				boundingBox.delegate('click', A.bind(instance._handleLogicOperatorChange, instance), '.logic-operator');
 
 				instance.after(instance._toggleShowRemoveButton, instance, '_addCondition');
 
@@ -257,7 +237,7 @@ AUI.add(
 
 				var index = instance._conditionsIndexes[instance._conditionsIndexes.length - 1] + 1;
 
-				var conditionTemplateRenderer = SoyTemplateUtil.getTemplateRenderer('ddl.rule.condition');
+				var conditionTemplateRenderer = Liferay.DDM.SoyTemplateUtil.getTemplateRenderer('ddl.rule.condition');
 
 				conditionListNode.append(
 					conditionTemplateRenderer(
@@ -282,6 +262,7 @@ AUI.add(
 				var index = fieldName.split('-')[0];
 
 				if (fieldName.match('-condition-first-operand')) {
+					instance._updateOperatorList(field.get('dataType'), index);
 					instance._updateSecondOperandFieldVisibility(index);
 				}
 				else if (fieldName.match('-condition-operator')) {
@@ -291,6 +272,44 @@ AUI.add(
 				else if (fieldName.match('-condition-second-operand-type')) {
 					instance._updateSecondOperandFieldVisibility(index);
 				}
+			},
+
+			_updateOperatorList: function(dataType, conditionIndex) {
+				var instance = this;
+
+				var operator = instance._getOperator(conditionIndex);
+
+				var operatorTypes = instance.get('functionsMetadata');
+
+				var options = [];
+				var i;
+
+				if (dataType === 'string') {
+					for (i = 0; i < operatorTypes.text.length; i++) {
+						options.push(
+							A.merge(
+								{
+									value: operatorTypes.text[i].name
+								},
+								operatorTypes.text[i]
+							)
+						);
+					}
+				}
+				else if (dataType === 'number') {
+					for (i = 0; i < operatorTypes.number.length; i++) {
+						options.push(
+							A.merge(
+								{
+									value: operatorTypes.number[i].name
+								},
+								operatorTypes.number[i]
+							)
+						);
+					}
+				}
+
+				operator.set('options', options);
 			},
 
 			_handleDeleteConditionClick: function(event) {
@@ -424,19 +443,11 @@ AUI.add(
 
 				var value;
 
-				var operators = [];
-
-				if (condition) {
-					value = condition.operator;
-				}
-console.log(instance.get('functionsMetadata'));
 				var field = new Liferay.DDM.Field.Select(
 					{
 						bubbleTargets: [instance],
 						fieldName: index + '-condition-operator',
-						options: textOperators,
 						showLabel: false,
-						value: value,
 						visible: true
 					}
 				);
@@ -444,6 +455,12 @@ console.log(instance.get('functionsMetadata'));
 				field.render(container);
 
 				instance._conditions[index + '-condition-operator'] = field;
+
+				if (condition) {
+					instance._updateOperatorList(instance._getFieldDataType(condition.operands[0].value), index);
+
+					field.setValue(condition.operator);
+				}
 			},
 
 			_renderSecondOperandInput: function(index, condition, container) {

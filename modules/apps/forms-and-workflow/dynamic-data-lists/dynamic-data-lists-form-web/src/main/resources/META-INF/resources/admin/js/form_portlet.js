@@ -52,7 +52,7 @@ AUI.add(
 						valueFn: '_valueFormBuilder'
 					},
 
-					functionOperatorsMetadata: {
+					functionsMetadata: {
 						value: []
 					},
 
