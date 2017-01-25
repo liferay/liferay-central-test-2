@@ -377,7 +377,7 @@ public class AxisBuild extends BaseBuild {
 
 	@Override
 	protected FailureMessageGenerator[] getFailureMessageGenerators() {
-		return _failureMessageGenerators;
+		return _FAILURE_MESSAGE_GENERATORS;
 	}
 
 	@Override
@@ -478,18 +478,19 @@ public class AxisBuild extends BaseBuild {
 
 	protected String axisVariable;
 
+	private static final FailureMessageGenerator[] _FAILURE_MESSAGE_GENERATORS =
+		{
+			new IntegrationTestTimeoutFailureMessageGenerator(),
+			new LocalGitMirrorFailureMessageGenerator(),
+			new PluginFailureMessageGenerator(),
+			new PluginGitIDFailureMessageGenerator(),
+			new SemanticVersioningFailureMessageGenerator(),
+			new SourceFormatFailureMessageGenerator(),
+
+			new GenericFailureMessageGenerator()
+		};
+
 	private static final Pattern _axisVariablePattern = Pattern.compile(
 		"AXIS_VARIABLE=(?<axisNumber>[^,]+),.*");
-
-	private static final FailureMessageGenerator[] _failureMessageGenerators = {
-		new IntegrationTestTimeoutFailureMessageGenerator(),
-		new LocalGitMirrorFailureMessageGenerator(),
-		new PluginFailureMessageGenerator(),
-		new PluginGitIDFailureMessageGenerator(),
-		new SemanticVersioningFailureMessageGenerator(),
-		new SourceFormatFailureMessageGenerator(),
-
-		new GenericFailureMessageGenerator()
-	};
 
 }
