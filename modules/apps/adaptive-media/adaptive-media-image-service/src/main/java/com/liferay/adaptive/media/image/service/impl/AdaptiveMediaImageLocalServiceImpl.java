@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -50,6 +51,7 @@ public class AdaptiveMediaImageLocalServiceImpl
 
 		image.setCompanyId(fileVersion.getCompanyId());
 		image.setGroupId(fileVersion.getGroupId());
+		image.setCreateDate(new Date());
 		image.setFileVersionId(fileVersionId);
 		image.setHeight(height);
 		image.setWidth(width);
