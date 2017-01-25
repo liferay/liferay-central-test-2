@@ -106,6 +106,10 @@ public interface AdaptiveMediaImageLocalService extends BaseLocalService,
 		long adaptiveMediaImageId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public AdaptiveMediaImage fetchAdaptiveMediaImage(
+		java.lang.String configurationUuid, long fileVersionId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public AdaptiveMediaImage fetchAdaptiveMediaImage(long adaptiveMediaImageId);
 
 	/**

@@ -98,6 +98,12 @@ public class AdaptiveMediaImageLocalServiceUtil {
 	}
 
 	public static com.liferay.adaptive.media.image.model.AdaptiveMediaImage fetchAdaptiveMediaImage(
+		java.lang.String configurationUuid, long fileVersionId) {
+		return getService()
+				   .fetchAdaptiveMediaImage(configurationUuid, fileVersionId);
+	}
+
+	public static com.liferay.adaptive.media.image.model.AdaptiveMediaImage fetchAdaptiveMediaImage(
 		long adaptiveMediaImageId) {
 		return getService().fetchAdaptiveMediaImage(adaptiveMediaImageId);
 	}

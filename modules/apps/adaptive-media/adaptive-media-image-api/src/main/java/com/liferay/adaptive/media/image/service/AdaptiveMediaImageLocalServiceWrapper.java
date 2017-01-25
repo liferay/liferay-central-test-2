@@ -95,6 +95,13 @@ public class AdaptiveMediaImageLocalServiceWrapper
 
 	@Override
 	public com.liferay.adaptive.media.image.model.AdaptiveMediaImage fetchAdaptiveMediaImage(
+		java.lang.String configurationUuid, long fileVersionId) {
+		return _adaptiveMediaImageLocalService.fetchAdaptiveMediaImage(configurationUuid,
+			fileVersionId);
+	}
+
+	@Override
+	public com.liferay.adaptive.media.image.model.AdaptiveMediaImage fetchAdaptiveMediaImage(
 		long adaptiveMediaImageId) {
 		return _adaptiveMediaImageLocalService.fetchAdaptiveMediaImage(adaptiveMediaImageId);
 	}
