@@ -109,6 +109,13 @@ public final class ImageAdaptiveMediaProcessorImpl
 		_configurationHelper = configurationHelper;
 	}
 
+	@Reference
+	public void setImageLocalService(
+		AdaptiveMediaImageLocalService imageLocalService) {
+
+		_imageLocalService = imageLocalService;
+	};
+
 	@Reference(unbind = "-")
 	public void setImageProcessor(ImageProcessor imageProcessor) {
 		_imageProcessor = imageProcessor;
@@ -133,10 +140,7 @@ public final class ImageAdaptiveMediaProcessorImpl
 	}
 
 	private ImageAdaptiveMediaConfigurationHelper _configurationHelper;
-
-	@Reference
 	private AdaptiveMediaImageLocalService _imageLocalService;
-
 	private ImageProcessor _imageProcessor;
 	private ImageStorage _imageStorage;
 
