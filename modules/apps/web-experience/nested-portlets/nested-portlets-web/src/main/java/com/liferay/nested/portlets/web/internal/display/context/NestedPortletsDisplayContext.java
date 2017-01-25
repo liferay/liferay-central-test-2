@@ -52,13 +52,13 @@ public class NestedPortletsDisplayContext {
 				NestedPortletsPortletInstanceConfiguration.class);
 	}
 
+	/**
+	  * @see com.liferay.portal.util.PortalImpl#getOriginalServletRequest
+	  */
 	public HttpServletRequest getLastForwardRequest() {
-		HttpServletRequest originalRequest = null;
-
-		HttpServletRequestWrapper currentRequestWrapper = null;
-
 		HttpServletRequest currentRequest = _request;
-
+		HttpServletRequestWrapper currentRequestWrapper = null;
+		HttpServletRequest originalRequest = null;
 		HttpServletRequest nextRequest = null;
 
 		while (currentRequest instanceof HttpServletRequestWrapper) {
