@@ -35,8 +35,8 @@ public enum DemoImageAdaptiveMediaConfigurationVariant {
 	public Map<String, String> getProperties() {
 		Map<String, String> properties = new HashMap<>();
 
-		properties.put("height", String.valueOf(_height));
-		properties.put("width", String.valueOf(_width));
+		properties.put("max-height", String.valueOf(_maxHeight));
+		properties.put("max-width", String.valueOf(_maxWidth));
 
 		return properties;
 	}
@@ -46,17 +46,17 @@ public enum DemoImageAdaptiveMediaConfigurationVariant {
 	}
 
 	private DemoImageAdaptiveMediaConfigurationVariant(
-		String name, String uuid, int width, int height) {
+		String name, String uuid, int maxWidth, int maxHeight) {
 
 		_name = name;
 		_uuid = uuid;
-		_width = width;
-		_height = height;
+		_maxWidth = maxWidth;
+		_maxHeight = maxHeight;
 	}
 
-	private final int _height;
+	private final int _maxHeight;
+	private final int _maxWidth;
 	private final String _name;
 	private final String _uuid;
-	private final int _width;
 
 }

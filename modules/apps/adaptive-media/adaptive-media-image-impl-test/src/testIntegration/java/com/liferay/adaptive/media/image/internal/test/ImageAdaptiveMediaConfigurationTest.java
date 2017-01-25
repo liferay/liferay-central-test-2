@@ -113,8 +113,8 @@ public class ImageAdaptiveMediaConfigurationTest {
 
 		Map<String, String> properties = new HashMap<>();
 
-		properties.put("height", "100");
-		properties.put("width", "100");
+		properties.put("max-height", "100");
+		properties.put("max-width", "100");
 
 		configurationHelper.addImageAdaptiveMediaConfigurationEntry(
 			TestPropsValues.getCompanyId(), "one", "1", properties);
@@ -134,8 +134,8 @@ public class ImageAdaptiveMediaConfigurationTest {
 
 		Map<String, String> properties = new HashMap<>();
 
-		properties.put("height", "100");
-		properties.put("width", "100");
+		properties.put("max-height", "100");
+		properties.put("max-width", "100");
 
 		configurationHelper.addImageAdaptiveMediaConfigurationEntry(
 			TestPropsValues.getCompanyId(), "one", "1", properties);
@@ -154,8 +154,8 @@ public class ImageAdaptiveMediaConfigurationTest {
 
 		Map<String, String> properties = new HashMap<>();
 
-		properties.put("height", "100");
-		properties.put("width", "100");
+		properties.put("max-height", "100");
+		properties.put("max-width", "100");
 
 		configurationHelper.addImageAdaptiveMediaConfigurationEntry(
 			TestPropsValues.getCompanyId(), "one", "1", properties);

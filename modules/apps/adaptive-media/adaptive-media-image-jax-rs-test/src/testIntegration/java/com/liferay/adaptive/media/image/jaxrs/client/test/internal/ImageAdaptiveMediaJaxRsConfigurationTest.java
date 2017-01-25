@@ -304,9 +304,11 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 
 			jsonObject.addProperty("id", id);
 
-			jsonObject.addProperty("height", String.valueOf(_getRandomLong()));
+			jsonObject.addProperty(
+				"max-height", String.valueOf(_getRandomLong()));
 
-			jsonObject.addProperty("width", String.valueOf(_getRandomLong()));
+			jsonObject.addProperty(
+				"max-width", String.valueOf(_getRandomLong()));
 
 			_configurationJsonObjects.add(jsonObject);
 		}

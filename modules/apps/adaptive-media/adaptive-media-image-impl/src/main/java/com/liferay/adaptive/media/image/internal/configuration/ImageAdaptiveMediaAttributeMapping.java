@@ -66,13 +66,13 @@ public class ImageAdaptiveMediaAttributeMapping {
 			AdaptiveMediaAttribute.fileName(),
 			_getAttributeValue(properties, AdaptiveMediaAttribute.fileName()));
 		attributes.put(
-			ImageAdaptiveMediaAttribute.IMAGE_HEIGHT,
+			ImageAdaptiveMediaAttribute.IMAGE_MAX_HEIGHT,
 			_getAttributeValue(
-				properties, ImageAdaptiveMediaAttribute.IMAGE_HEIGHT));
+				properties, ImageAdaptiveMediaAttribute.IMAGE_MAX_HEIGHT));
 		attributes.put(
-			ImageAdaptiveMediaAttribute.IMAGE_WIDTH,
+			ImageAdaptiveMediaAttribute.IMAGE_MAX_WIDTH,
 			_getAttributeValue(
-				properties, ImageAdaptiveMediaAttribute.IMAGE_WIDTH));
+				properties, ImageAdaptiveMediaAttribute.IMAGE_MAX_WIDTH));
 
 		return new ImageAdaptiveMediaAttributeMapping(attributes);
 	}

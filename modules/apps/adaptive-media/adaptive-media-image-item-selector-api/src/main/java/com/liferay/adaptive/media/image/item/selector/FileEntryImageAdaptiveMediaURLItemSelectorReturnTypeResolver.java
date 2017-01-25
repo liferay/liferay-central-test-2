@@ -79,7 +79,8 @@ public class FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolver
 			_finder.getAdaptiveMedia(
 				queryBuilder ->
 					queryBuilder.allForFileEntry(fileEntry).orderBy(
-						ImageAdaptiveMediaAttribute.IMAGE_WIDTH, true).done());
+						ImageAdaptiveMediaAttribute.IMAGE_MAX_WIDTH, true).
+							done());
 
 		List<AdaptiveMedia<ImageAdaptiveMediaProcessor>> adaptiveMediaList =
 			stream.collect(Collectors.toList());
@@ -106,8 +107,8 @@ public class FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolver
 		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia,
 		AdaptiveMedia<ImageAdaptiveMediaProcessor> previousAdaptiveMedia) {
 
-		Optional<Integer> widthOptional = adaptiveMedia.getAttributeValue(
-			ImageAdaptiveMediaAttribute.IMAGE_WIDTH);
+		Optional<Integer> maxWidthOptional = adaptiveMedia.getAttributeValue(
+			ImageAdaptiveMediaAttribute.IMAGE_MAX_WIDTH);
 
 		JSONObject sourceJSONObject = JSONFactoryUtil.createJSONObject();
 
@@ -115,19 +116,19 @@ public class FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolver
 
 		JSONObject attributesJSONObject = JSONFactoryUtil.createJSONObject();
 
-		widthOptional.ifPresent(
-			width -> {
-				attributesJSONObject.put("max-width", width + "px");
+		maxWidthOptional.ifPresent(
+			maxWidth -> {
+				attributesJSONObject.put("max-width", maxWidth + "px");
 
 				if (previousAdaptiveMedia != null) {
-					Optional<Integer> previousWidthOptional =
+					Optional<Integer> previousMaxWidthOptional =
 						previousAdaptiveMedia.getAttributeValue(
-							ImageAdaptiveMediaAttribute.IMAGE_WIDTH);
+							ImageAdaptiveMediaAttribute.IMAGE_MAX_WIDTH);
 
-					previousWidthOptional.ifPresent(
-						previousWidth ->
+					previousMaxWidthOptional.ifPresent(
+						previousMaxWidth ->
 							attributesJSONObject.put(
-								"min-width", previousWidth + "px"));
+								"min-width", previousMaxWidth + "px"));
 				}
 			});
 

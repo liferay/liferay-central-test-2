@@ -75,21 +75,21 @@ public class ImageAdaptiveMediaConfigurationEntryParser {
 
 		Map<String, String> properties = configurationEntry.getProperties();
 
-		if (properties.get("height") != null) {
-			int height = GetterUtil.getInteger(properties.get("height"));
+		if (properties.get("max-height") != null) {
+			int height = GetterUtil.getInteger(properties.get("max-height"));
 
-			sb.append("height=");
+			sb.append("max-height=");
 			sb.append(height);
 
-			if (properties.get("width") != null) {
+			if (properties.get("max-width") != null) {
 				sb.append(StringPool.SEMICOLON);
 			}
 		}
 
-		if (properties.get("width") != null) {
-			int width = GetterUtil.getInteger(properties.get("width"));
+		if (properties.get("max-width") != null) {
+			int width = GetterUtil.getInteger(properties.get("max-width"));
 
-			sb.append("width=");
+			sb.append("max-width=");
 			sb.append(width);
 		}
 

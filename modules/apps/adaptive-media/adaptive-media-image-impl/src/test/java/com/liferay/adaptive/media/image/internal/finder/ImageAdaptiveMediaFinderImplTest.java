@@ -147,7 +147,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 		ImageAdaptiveMediaConfigurationEntry configurationEntry =
 			new ImageAdaptiveMediaConfigurationEntryImpl(
 				StringUtil.randomString(), StringUtil.randomString(),
-				MapUtil.fromArray("height", "100", "width", "200"));
+				MapUtil.fromArray("max-height", "100", "max-width", "200"));
 
 		Mockito.when(
 			_fileVersion.getFileName()
@@ -191,12 +191,12 @@ public class ImageAdaptiveMediaFinderImplTest {
 
 		Assert.assertEquals(
 			adaptiveMedia.getAttributeValue(
-				ImageAdaptiveMediaAttribute.IMAGE_HEIGHT),
+				ImageAdaptiveMediaAttribute.IMAGE_MAX_HEIGHT),
 			Optional.of(100));
 
 		Assert.assertEquals(
 			adaptiveMedia.getAttributeValue(
-				ImageAdaptiveMediaAttribute.IMAGE_WIDTH),
+				ImageAdaptiveMediaAttribute.IMAGE_MAX_WIDTH),
 			Optional.of(200));
 	}
 
@@ -205,15 +205,15 @@ public class ImageAdaptiveMediaFinderImplTest {
 		ImageAdaptiveMediaConfigurationEntry configurationEntry1 =
 			new ImageAdaptiveMediaConfigurationEntryImpl(
 				StringUtil.randomString(), StringUtil.randomString(),
-				MapUtil.fromArray("height", "100", "width", "200"));
+				MapUtil.fromArray("max-height", "100", "max-width", "200"));
 		ImageAdaptiveMediaConfigurationEntry configurationEntry2 =
 			new ImageAdaptiveMediaConfigurationEntryImpl(
 				StringUtil.randomString(), StringUtil.randomString(),
-				MapUtil.fromArray("height", "100", "width", "800"));
+				MapUtil.fromArray("max-height", "100", "max-width", "800"));
 		ImageAdaptiveMediaConfigurationEntry configurationEntry3 =
 			new ImageAdaptiveMediaConfigurationEntryImpl(
 				StringUtil.randomString(), StringUtil.randomString(),
-				MapUtil.fromArray("height", "100", "width", "400"));
+				MapUtil.fromArray("max-height", "100", "max-width", "400"));
 
 		List<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
 			Arrays.asList(
@@ -250,7 +250,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 			_finder.getAdaptiveMedia(
 				queryBuilder ->
 					queryBuilder.allForVersion(_fileVersion).orderBy(
-						ImageAdaptiveMediaAttribute.IMAGE_WIDTH, true).done());
+						ImageAdaptiveMediaAttribute.IMAGE_MAX_WIDTH, true).done());
 
 		List<AdaptiveMedia<ImageAdaptiveMediaProcessor>> adaptiveMediaList =
 			stream.collect(Collectors.toList());
@@ -262,7 +262,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 
 		Assert.assertEquals(
 			adaptiveMedia1.getAttributeValue(
-				ImageAdaptiveMediaAttribute.IMAGE_WIDTH),
+				ImageAdaptiveMediaAttribute.IMAGE_MAX_WIDTH),
 			Optional.of(200));
 
 		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia2 =
@@ -270,7 +270,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 
 		Assert.assertEquals(
 			adaptiveMedia2.getAttributeValue(
-				ImageAdaptiveMediaAttribute.IMAGE_WIDTH),
+				ImageAdaptiveMediaAttribute.IMAGE_MAX_WIDTH),
 			Optional.of(400));
 
 		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia3 =
@@ -278,7 +278,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 
 		Assert.assertEquals(
 			adaptiveMedia3.getAttributeValue(
-				ImageAdaptiveMediaAttribute.IMAGE_WIDTH),
+				ImageAdaptiveMediaAttribute.IMAGE_MAX_WIDTH),
 			Optional.of(800));
 	}
 
@@ -287,15 +287,15 @@ public class ImageAdaptiveMediaFinderImplTest {
 		ImageAdaptiveMediaConfigurationEntry configurationEntry1 =
 			new ImageAdaptiveMediaConfigurationEntryImpl(
 				StringUtil.randomString(), StringUtil.randomString(),
-				MapUtil.fromArray("height", "100", "width", "200"));
+				MapUtil.fromArray("max-height", "100", "max-width", "200"));
 		ImageAdaptiveMediaConfigurationEntry configurationEntry2 =
 			new ImageAdaptiveMediaConfigurationEntryImpl(
 				StringUtil.randomString(), StringUtil.randomString(),
-				MapUtil.fromArray("height", "100", "width", "800"));
+				MapUtil.fromArray("max-height", "100", "max-width", "800"));
 		ImageAdaptiveMediaConfigurationEntry configurationEntry3 =
 			new ImageAdaptiveMediaConfigurationEntryImpl(
 				StringUtil.randomString(), StringUtil.randomString(),
-				MapUtil.fromArray("height", "100", "width", "400"));
+				MapUtil.fromArray("max-height", "100", "max-width", "400"));
 
 		List<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
 			Arrays.asList(
@@ -332,7 +332,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 			_finder.getAdaptiveMedia(
 				queryBuilder ->
 					queryBuilder.allForVersion(_fileVersion).orderBy(
-						ImageAdaptiveMediaAttribute.IMAGE_WIDTH, false).done());
+						ImageAdaptiveMediaAttribute.IMAGE_MAX_WIDTH, false).done());
 
 		List<AdaptiveMedia<ImageAdaptiveMediaProcessor>> adaptiveMediaList =
 			stream.collect(Collectors.toList());
@@ -344,7 +344,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 
 		Assert.assertEquals(
 			adaptiveMedia1.getAttributeValue(
-				ImageAdaptiveMediaAttribute.IMAGE_WIDTH),
+				ImageAdaptiveMediaAttribute.IMAGE_MAX_WIDTH),
 			Optional.of(800));
 
 		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia2 =
@@ -352,7 +352,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 
 		Assert.assertEquals(
 			adaptiveMedia2.getAttributeValue(
-				ImageAdaptiveMediaAttribute.IMAGE_WIDTH),
+				ImageAdaptiveMediaAttribute.IMAGE_MAX_WIDTH),
 			Optional.of(400));
 
 		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia3 =
@@ -360,7 +360,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 
 		Assert.assertEquals(
 			adaptiveMedia3.getAttributeValue(
-				ImageAdaptiveMediaAttribute.IMAGE_WIDTH),
+				ImageAdaptiveMediaAttribute.IMAGE_MAX_WIDTH),
 			Optional.of(200));
 	}
 
@@ -461,7 +461,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 		ImageAdaptiveMediaConfigurationEntry configurationEntry =
 			new ImageAdaptiveMediaConfigurationEntryImpl(
 				StringUtil.randomString(), StringUtil.randomString(),
-				MapUtil.fromArray("height", "100"));
+				MapUtil.fromArray("max-height", "100"));
 
 		Mockito.when(
 			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
@@ -503,12 +503,12 @@ public class ImageAdaptiveMediaFinderImplTest {
 
 		Assert.assertEquals(
 			adaptiveMedia.getAttributeValue(
-				ImageAdaptiveMediaAttribute.IMAGE_HEIGHT),
+				ImageAdaptiveMediaAttribute.IMAGE_MAX_HEIGHT),
 			Optional.of(100));
 
 		Assert.assertEquals(
 			adaptiveMedia.getAttributeValue(
-				ImageAdaptiveMediaAttribute.IMAGE_WIDTH),
+				ImageAdaptiveMediaAttribute.IMAGE_MAX_WIDTH),
 			Optional.empty());
 	}
 
@@ -517,12 +517,12 @@ public class ImageAdaptiveMediaFinderImplTest {
 		ImageAdaptiveMediaConfigurationEntry configurationEntry1 =
 			new ImageAdaptiveMediaConfigurationEntryImpl(
 				StringUtil.randomString(), StringUtil.randomString(),
-				MapUtil.fromArray("height", "100", "width", "200"));
+				MapUtil.fromArray("max-height", "100", "max-width", "200"));
 
 		ImageAdaptiveMediaConfigurationEntry configurationEntry2 =
 			new ImageAdaptiveMediaConfigurationEntryImpl(
 				StringUtil.randomString(), StringUtil.randomString(),
-				MapUtil.fromArray("height", "200", "width", "200"));
+				MapUtil.fromArray("max-height", "200", "max-width", "200"));
 
 		Mockito.when(
 			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
@@ -555,7 +555,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 			_finder.getAdaptiveMedia(
 				queryBuilder ->
 					queryBuilder.forVersion(_fileVersion).with(
-						ImageAdaptiveMediaAttribute.IMAGE_HEIGHT, 100).done());
+						ImageAdaptiveMediaAttribute.IMAGE_MAX_HEIGHT, 100).done());
 
 		List<AdaptiveMedia<ImageAdaptiveMediaProcessor>> adaptiveMedias =
 			stream.collect(Collectors.toList());
@@ -563,20 +563,20 @@ public class ImageAdaptiveMediaFinderImplTest {
 		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia0 =
 			adaptiveMedias.get(0);
 
-		Optional<Integer> adaptiveMedia0Optional =
+		Optional<Integer> adaptiveMedia0MaxHeightOptional =
 			adaptiveMedia0.getAttributeValue(
-				ImageAdaptiveMediaAttribute.IMAGE_HEIGHT);
+				ImageAdaptiveMediaAttribute.IMAGE_MAX_HEIGHT);
 
-		Assert.assertEquals(100, (int)adaptiveMedia0Optional.get());
+		Assert.assertEquals(100, (int)adaptiveMedia0MaxHeightOptional.get());
 
 		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia1 =
 			adaptiveMedias.get(1);
 
-		Optional<Integer> adaptiveMedia1Optional =
+		Optional<Integer> adaptiveMedia1MaxHeightOptional =
 			adaptiveMedia1.getAttributeValue(
-				ImageAdaptiveMediaAttribute.IMAGE_HEIGHT);
+				ImageAdaptiveMediaAttribute.IMAGE_MAX_HEIGHT);
 
-		Assert.assertEquals(200, (int)adaptiveMedia1Optional.get());
+		Assert.assertEquals(200, (int)adaptiveMedia1MaxHeightOptional.get());
 	}
 
 	@Test
@@ -584,12 +584,12 @@ public class ImageAdaptiveMediaFinderImplTest {
 		ImageAdaptiveMediaConfigurationEntry configurationEntry1 =
 			new ImageAdaptiveMediaConfigurationEntryImpl(
 				StringUtil.randomString(), StringUtil.randomString(),
-				MapUtil.fromArray("height", "100", "width", "200"));
+				MapUtil.fromArray("max-height", "100", "max-width", "200"));
 
 		ImageAdaptiveMediaConfigurationEntry configurationEntry2 =
 			new ImageAdaptiveMediaConfigurationEntryImpl(
 				StringUtil.randomString(), StringUtil.randomString(),
-				MapUtil.fromArray("height", "200", "width", "200"));
+				MapUtil.fromArray("max-height", "200", "max-width", "200"));
 
 		Mockito.when(
 			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
@@ -622,7 +622,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 			_finder.getAdaptiveMedia(
 				queryBuilder ->
 					queryBuilder.forVersion(_fileVersion).with(
-						ImageAdaptiveMediaAttribute.IMAGE_HEIGHT, 200).done());
+						ImageAdaptiveMediaAttribute.IMAGE_MAX_HEIGHT, 200).done());
 
 		List<AdaptiveMedia<ImageAdaptiveMediaProcessor>> adaptiveMedias =
 			stream.collect(Collectors.toList());
@@ -630,20 +630,20 @@ public class ImageAdaptiveMediaFinderImplTest {
 		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia0 =
 			adaptiveMedias.get(0);
 
-		Optional<Integer> adaptiveMedia0Optional =
+		Optional<Integer> adaptiveMedia0MaxHeightOptional =
 			adaptiveMedia0.getAttributeValue(
-				ImageAdaptiveMediaAttribute.IMAGE_HEIGHT);
+				ImageAdaptiveMediaAttribute.IMAGE_MAX_HEIGHT);
 
-		Assert.assertEquals(200, (int)adaptiveMedia0Optional.get());
+		Assert.assertEquals(200, (int)adaptiveMedia0MaxHeightOptional.get());
 
 		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia1 =
 			adaptiveMedias.get(1);
 
-		Optional<Integer> adaptiveMedia1Optional =
+		Optional<Integer> adaptiveMedia1MaxHeightOptional =
 			adaptiveMedia1.getAttributeValue(
-				ImageAdaptiveMediaAttribute.IMAGE_HEIGHT);
+				ImageAdaptiveMediaAttribute.IMAGE_MAX_HEIGHT);
 
-		Assert.assertEquals(100, (int)adaptiveMedia1Optional.get());
+		Assert.assertEquals(100, (int)adaptiveMedia1MaxHeightOptional.get());
 	}
 
 	@Test
@@ -651,12 +651,12 @@ public class ImageAdaptiveMediaFinderImplTest {
 		ImageAdaptiveMediaConfigurationEntry configurationEntry1 =
 			new ImageAdaptiveMediaConfigurationEntryImpl(
 				StringUtil.randomString(), "small",
-				MapUtil.fromArray("height", "100", "width", "200"));
+				MapUtil.fromArray("max-height", "100", "max-width", "200"));
 
 		ImageAdaptiveMediaConfigurationEntry configurationEntry2 =
 			new ImageAdaptiveMediaConfigurationEntryImpl(
 				StringUtil.randomString(), "medium",
-				MapUtil.fromArray("height", "200", "width", "200"));
+				MapUtil.fromArray("max-height", "200", "max-width", "200"));
 
 		Mockito.when(
 			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
@@ -711,12 +711,12 @@ public class ImageAdaptiveMediaFinderImplTest {
 		ImageAdaptiveMediaConfigurationEntry configurationEntry1 =
 			new ImageAdaptiveMediaConfigurationEntryImpl(
 				StringUtil.randomString(), StringUtil.randomString(),
-				MapUtil.fromArray("height", "100"));
+				MapUtil.fromArray("max-height", "100"));
 
 		ImageAdaptiveMediaConfigurationEntry configurationEntry2 =
 			new ImageAdaptiveMediaConfigurationEntryImpl(
 				StringUtil.randomString(), StringUtil.randomString(),
-				MapUtil.fromArray("height", "200"));
+				MapUtil.fromArray("max-height", "200"));
 
 		Mockito.when(
 			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
@@ -749,7 +749,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 			_finder.getAdaptiveMedia(
 				queryBuilder ->
 					queryBuilder.forVersion(_fileVersion).with(
-						ImageAdaptiveMediaAttribute.IMAGE_WIDTH, 100).done());
+						ImageAdaptiveMediaAttribute.IMAGE_MAX_HEIGHT, 100).done());
 
 		List<AdaptiveMedia<ImageAdaptiveMediaProcessor>> adaptiveMedias =
 			stream.collect(Collectors.toList());
@@ -757,20 +757,20 @@ public class ImageAdaptiveMediaFinderImplTest {
 		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia0 =
 			adaptiveMedias.get(0);
 
-		Optional<Integer> adaptiveMedia0Optional =
+		Optional<Integer> adaptiveMedia0MaxHeightOptional =
 			adaptiveMedia0.getAttributeValue(
-				ImageAdaptiveMediaAttribute.IMAGE_HEIGHT);
+				ImageAdaptiveMediaAttribute.IMAGE_MAX_HEIGHT);
 
-		Assert.assertEquals(100, (int)adaptiveMedia0Optional.get());
+		Assert.assertEquals(100, (int)adaptiveMedia0MaxHeightOptional.get());
 
 		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia1 =
 			adaptiveMedias.get(1);
 
-		Optional<Integer> adaptiveMedia1Optional =
+		Optional<Integer> adaptiveMedia1MaxHeightOptional =
 			adaptiveMedia1.getAttributeValue(
-				ImageAdaptiveMediaAttribute.IMAGE_HEIGHT);
+				ImageAdaptiveMediaAttribute.IMAGE_MAX_HEIGHT);
 
-		Assert.assertEquals(200, (int)adaptiveMedia1Optional.get());
+		Assert.assertEquals(200, (int)adaptiveMedia1MaxHeightOptional.get());
 	}
 
 	@Test
@@ -803,7 +803,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 		ImageAdaptiveMediaConfigurationEntry configurationEntry =
 			new ImageAdaptiveMediaConfigurationEntryImpl(
 				StringUtil.randomString(), StringUtil.randomString(),
-				MapUtil.fromArray("height", "100", "width", "200"));
+				MapUtil.fromArray("max-height", "100", "max-width", "200"));
 
 		Mockito.when(
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(

@@ -59,11 +59,11 @@ public class ImageProcessor {
 
 			Optional<Integer> heightOptional =
 				attributeMapping.getAttributeValue(
-					ImageAdaptiveMediaAttribute.IMAGE_HEIGHT);
+					ImageAdaptiveMediaAttribute.IMAGE_MAX_HEIGHT);
 
 			Optional<Integer> widthOptional =
 				attributeMapping.getAttributeValue(
-					ImageAdaptiveMediaAttribute.IMAGE_WIDTH);
+					ImageAdaptiveMediaAttribute.IMAGE_MAX_WIDTH);
 
 			RenderedImage renderedImage = _readImage(
 				fileVersion.getContentStream(false));

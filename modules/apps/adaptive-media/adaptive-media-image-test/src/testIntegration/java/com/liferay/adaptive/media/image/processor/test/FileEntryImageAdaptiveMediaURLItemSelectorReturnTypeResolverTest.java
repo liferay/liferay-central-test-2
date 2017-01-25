@@ -159,10 +159,10 @@ public class FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolverTest {
 		properties.put(
 			"imageVariants",
 			new String[] {
-				"small:uuid0:width=100;height=100",
-				"big:uuid1:width=1200;height=800",
-				"medium:uuid2:width=800;height=600",
-				"extra:uuid3:width=2400;height=1800"
+				"small:uuid0:max-width=100;max-height=100",
+				"big:uuid1:max-width=1200;max-height=800",
+				"medium:uuid2:max-width=800;max-height=600",
+				"extra:uuid3:max-width=2400;max-height=1800"
 			});
 
 		configuration.update(properties);

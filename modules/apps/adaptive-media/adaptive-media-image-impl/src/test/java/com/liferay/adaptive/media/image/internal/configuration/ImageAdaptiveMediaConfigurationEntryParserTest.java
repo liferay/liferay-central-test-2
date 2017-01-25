@@ -34,7 +34,7 @@ public class ImageAdaptiveMediaConfigurationEntryParserTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testEmptyName() {
-		_configurationEntryParser.parse(":12345:height=100;width=200");
+		_configurationEntryParser.parse(":12345:max-height=100;max-width=200");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -44,14 +44,14 @@ public class ImageAdaptiveMediaConfigurationEntryParserTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testEmptyUUID() {
-		_configurationEntryParser.parse("test::height=100;width=200");
+		_configurationEntryParser.parse("test::max-height=100;max-width=200");
 	}
 
 	@Test
-	public void testGetConfigurationStringWithHeight() {
+	public void testGetConfigurationStringWithMaxHeight() {
 		Map<String, String> properties = new HashMap<>();
 
-		properties.put("height", "100");
+		properties.put("max-height", "100");
 
 		ImageAdaptiveMediaConfigurationEntry configurationEntry =
 			new ImageAdaptiveMediaConfigurationEntryImpl(
@@ -61,15 +61,15 @@ public class ImageAdaptiveMediaConfigurationEntryParserTest {
 			_configurationEntryParser.getConfigurationString(
 				configurationEntry);
 
-		Assert.assertEquals("test:12345:height=100", configurationString);
+		Assert.assertEquals("test:12345:max-height=100", configurationString);
 	}
 
 	@Test
-	public void testGetConfigurationStringWithHeightAndWidth() {
+	public void testGetConfigurationStringWithMaxHeightAndMaxWidth() {
 		Map<String, String> properties = new HashMap<>();
 
-		properties.put("height", "100");
-		properties.put("width", "200");
+		properties.put("max-height", "100");
+		properties.put("max-width", "200");
 
 		ImageAdaptiveMediaConfigurationEntry configurationEntry =
 			new ImageAdaptiveMediaConfigurationEntryImpl(
@@ -80,14 +80,14 @@ public class ImageAdaptiveMediaConfigurationEntryParserTest {
 				configurationEntry);
 
 		Assert.assertEquals(
-			"test:12345:height=100;width=200", configurationString);
+			"test:12345:max-height=100;max-width=200", configurationString);
 	}
 
 	@Test
-	public void testGetConfigurationStringWithWidth() {
+	public void testGetConfigurationStringWithMaxWidth() {
 		Map<String, String> properties = new HashMap<>();
 
-		properties.put("width", "200");
+		properties.put("max-width", "200");
 
 		ImageAdaptiveMediaConfigurationEntry configurationEntry =
 			new ImageAdaptiveMediaConfigurationEntryImpl(
@@ -97,7 +97,7 @@ public class ImageAdaptiveMediaConfigurationEntryParserTest {
 			_configurationEntryParser.getConfigurationString(
 				configurationEntry);
 
-		Assert.assertEquals("test:12345:width=200", configurationString);
+		Assert.assertEquals("test:12345:max-width=200", configurationString);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -107,12 +107,12 @@ public class ImageAdaptiveMediaConfigurationEntryParserTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testMissingName() {
-		_configurationEntryParser.parse("12345:height=100;width=200");
+		_configurationEntryParser.parse("12345:max-height=100;max-width=200");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testMissingUUID() {
-		_configurationEntryParser.parse("test:height=100;width=200");
+		_configurationEntryParser.parse("test:max-height=100;max-width=200");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -123,15 +123,16 @@ public class ImageAdaptiveMediaConfigurationEntryParserTest {
 	@Test
 	public void testValidString() {
 		ImageAdaptiveMediaConfigurationEntry configurationEntry =
-			_configurationEntryParser.parse("test:12345:height=100;width=200");
+			_configurationEntryParser.parse(
+				"test:12345:max-height=100;max-width=200");
 
 		Assert.assertEquals("test", configurationEntry.getName());
 		Assert.assertEquals("12345", configurationEntry.getUUID());
 
 		Map<String, String> properties = configurationEntry.getProperties();
 
-		Assert.assertEquals("100", properties.get("height"));
-		Assert.assertEquals("200", properties.get("width"));
+		Assert.assertEquals("100", properties.get("max-height"));
+		Assert.assertEquals("200", properties.get("max-width"));
 		Assert.assertEquals(2, properties.size());
 	}
 

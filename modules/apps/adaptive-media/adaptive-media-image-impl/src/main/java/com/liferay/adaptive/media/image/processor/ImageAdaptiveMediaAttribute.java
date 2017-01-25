@@ -26,15 +26,15 @@ import java.util.Map;
 public final class ImageAdaptiveMediaAttribute {
 
 	public static final AdaptiveMediaAttribute
-		<ImageAdaptiveMediaProcessor, Integer> IMAGE_HEIGHT =
+		<ImageAdaptiveMediaProcessor, Integer> IMAGE_MAX_HEIGHT =
 			new AdaptiveMediaAttribute<>(
-				"height", AdaptiveMediaAttributeConverterUtil::parseInt,
+				"max-height", AdaptiveMediaAttributeConverterUtil::parseInt,
 				ImageAdaptiveMediaAttribute::_intDistance);
 
 	public static final AdaptiveMediaAttribute
-		<ImageAdaptiveMediaProcessor, Integer> IMAGE_WIDTH =
+		<ImageAdaptiveMediaProcessor, Integer> IMAGE_MAX_WIDTH =
 			new AdaptiveMediaAttribute<>(
-				"width", AdaptiveMediaAttributeConverterUtil::parseInt,
+				"max-width", AdaptiveMediaAttributeConverterUtil::parseInt,
 				ImageAdaptiveMediaAttribute::_intDistance);
 
 	/**
@@ -61,11 +61,11 @@ public final class ImageAdaptiveMediaAttribute {
 
 	static {
 		_allowedAttributes.put(
-			ImageAdaptiveMediaAttribute.IMAGE_WIDTH.getName(),
-			ImageAdaptiveMediaAttribute.IMAGE_WIDTH);
+			ImageAdaptiveMediaAttribute.IMAGE_MAX_WIDTH.getName(),
+			ImageAdaptiveMediaAttribute.IMAGE_MAX_WIDTH);
 		_allowedAttributes.put(
-			ImageAdaptiveMediaAttribute.IMAGE_HEIGHT.getName(),
-			ImageAdaptiveMediaAttribute.IMAGE_HEIGHT);
+			ImageAdaptiveMediaAttribute.IMAGE_MAX_HEIGHT.getName(),
+			ImageAdaptiveMediaAttribute.IMAGE_MAX_HEIGHT);
 	}
 
 }

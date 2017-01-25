@@ -63,8 +63,8 @@ public class EditImageConfigurationEntryMVCActionCommand
 
 		Map<String, String> properties = new HashMap<>();
 
-		properties.put("height", maxHeight);
-		properties.put("width", maxWidth);
+		properties.put("max-height", maxHeight);
+		properties.put("max-width", maxWidth);
 
 		Optional<ImageAdaptiveMediaConfigurationEntry>
 			configurationEntryOptional =

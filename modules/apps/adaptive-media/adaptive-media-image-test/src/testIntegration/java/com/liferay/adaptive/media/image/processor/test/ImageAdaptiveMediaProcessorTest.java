@@ -204,8 +204,8 @@ public class ImageAdaptiveMediaProcessorTest {
 	private void _addTestVariant() throws Exception {
 		Map<String, String> properties = new HashMap<>();
 
-		properties.put("height", "100");
-		properties.put("width", "100");
+		properties.put("max-height", "100");
+		properties.put("max-width", "100");
 
 		_configurationHelper.addImageAdaptiveMediaConfigurationEntry(
 			TestPropsValues.getCompanyId(), "small", "0", properties);
