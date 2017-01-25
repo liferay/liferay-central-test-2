@@ -147,7 +147,7 @@ public class AlloyFriendlyURLMapper extends DefaultFriendlyURLMapper {
 		return ParamUtil.getString(request, "p_p_lifecycle", "0");
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(
+	private static final Log _log = LogFactoryUtil.getLog(
 		AlloyFriendlyURLMapper.class);
 
 }

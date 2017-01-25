@@ -62,7 +62,7 @@ public class AlloyException extends Exception {
 		super(cause);
 	}
 
-	protected Object[] arguments = null;
+	protected Object[] arguments;
 	protected boolean log = true;
 
 }

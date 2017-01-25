@@ -49,42 +49,42 @@ public class AlloyServiceInvoker {
 			Class<?> modelClass = classLoader.loadClass(className);
 
 			addModelMethod = serviceClass.getMethod(
-				"add" + simpleClassName, new Class[] {modelClass});
+				"add" + simpleClassName, new Class<?>[] {modelClass});
 
 			createModelMethod = serviceClass.getMethod(
-				"create" + simpleClassName, new Class[] {long.class});
+				"create" + simpleClassName, new Class<?>[] {long.class});
 			deleteModelMethod = serviceClass.getMethod(
-				"delete" + simpleClassName, new Class[] {long.class});
+				"delete" + simpleClassName, new Class<?>[] {long.class});
 			dynamicQueryCountMethod1 = serviceClass.getMethod(
-				"dynamicQueryCount", new Class[] {DynamicQuery.class});
+				"dynamicQueryCount", new Class<?>[] {DynamicQuery.class});
 			dynamicQueryCountMethod2 = serviceClass.getMethod(
 				"dynamicQueryCount",
-				new Class[] {DynamicQuery.class, Projection.class});
+				new Class<?>[] {DynamicQuery.class, Projection.class});
 			dynamicQueryMethod1 = serviceClass.getMethod(
-				"dynamicQuery", new Class[0]);
+				"dynamicQuery", new Class<?>[0]);
 			dynamicQueryMethod2 = serviceClass.getMethod(
-				"dynamicQuery", new Class[] {DynamicQuery.class});
+				"dynamicQuery", new Class<?>[] {DynamicQuery.class});
 			dynamicQueryMethod3 = serviceClass.getMethod(
 				"dynamicQuery",
-				new Class[] {DynamicQuery.class, int.class, int.class});
+				new Class<?>[] {DynamicQuery.class, int.class, int.class});
 			dynamicQueryMethod4 = serviceClass.getMethod(
 				"dynamicQuery",
-				new Class[] {
+				new Class<?>[] {
 					DynamicQuery.class, int.class, int.class,
 					OrderByComparator.class
 				});
 			fetchModelMethod = serviceClass.getMethod(
-				"fetch" + simpleClassName, new Class[] {long.class});
+				"fetch" + simpleClassName, new Class<?>[] {long.class});
 			getModelMethod = serviceClass.getMethod(
-				"get" + simpleClassName, new Class[] {long.class});
+				"get" + simpleClassName, new Class<?>[] {long.class});
 			getModelsCountMethod = serviceClass.getMethod(
 				"get" + TextFormatter.formatPlural(simpleClassName) + "Count",
-				new Class[0]);
+				new Class<?>[0]);
 			getModelsMethod = serviceClass.getMethod(
 				"get" + TextFormatter.formatPlural(simpleClassName),
-				new Class[] {int.class, int.class});
+				new Class<?>[] {int.class, int.class});
 			updateModelMethod = serviceClass.getMethod(
-				"update" + simpleClassName, new Class[] {modelClass});
+				"update" + simpleClassName, new Class<?>[] {modelClass});
 		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
@@ -136,7 +136,7 @@ public class AlloyServiceInvoker {
 	}
 
 	/**
-	 * @deprecated As of 6.2.0, replaced by {@link
+	 * @deprecated As of 1.0.0, replaced by {@link
 	 *             #executeDynamicQuery(DynamicQuery)}
 	 */
 	@Deprecated
@@ -146,7 +146,7 @@ public class AlloyServiceInvoker {
 	}
 
 	/**
-	 * @deprecated As of 6.2.0, replaced by {@link
+	 * @deprecated As of 1.0.0, replaced by {@link
 	 *             #executeDynamicQueryCount(DynamicQuery)}
 	 */
 	@Deprecated
