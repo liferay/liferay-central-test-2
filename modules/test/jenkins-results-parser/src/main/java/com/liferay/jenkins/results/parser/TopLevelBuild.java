@@ -189,9 +189,9 @@ public class TopLevelBuild extends BaseBuild {
 							getGitRepositoryDetailsPropertiesTempMapURL(
 								repositoryType));
 
-					Set<?> keySet = gitRepositoryDetailsJSONObject.keySet();
+					Set<?> set = gitRepositoryDetailsJSONObject.keySet();
 
-					if (keySet.isEmpty()) {
+					if (set.isEmpty()) {
 						continue;
 					}
 
