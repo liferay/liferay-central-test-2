@@ -82,12 +82,14 @@ public class SemanticVersioningFailureMessageGenerator
 		start = consoleText.lastIndexOf("\n", start);
 
 		return Dom4JUtil.getNewElement(
-			"div", null, Dom4JUtil.getNewElement(
-				"p", null, "Please fix ", Dom4JUtil.getNewElement(
-					"strong", null, "semantic versioning"),
-				" on ", Dom4JUtil.getNewElement(
-					"strong", null, getBaseBranchAnchorElement(
-						build.getTopLevelBuild()),
+			"div", null,
+			Dom4JUtil.getNewElement(
+				"p", null, "Please fix ",
+				Dom4JUtil.getNewElement("strong", null, "semantic versioning"),
+				" on ",
+				Dom4JUtil.getNewElement(
+					"strong", null,
+					getBaseBranchAnchorElement(build.getTopLevelBuild()),
 					getConsoleOutputSnippetElement(
 						consoleText, true, start, end))));
 	}
