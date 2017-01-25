@@ -1,0 +1,5 @@
+Bundle-Name: Liferay Alloy MVC
+Bundle-SymbolicName: com.liferay.alloy.mvc
+Bundle-Version: 1.0.0
+Liferay-Releng-Module-Group-Description:
+Liferay-Releng-Module-Group-Title:
