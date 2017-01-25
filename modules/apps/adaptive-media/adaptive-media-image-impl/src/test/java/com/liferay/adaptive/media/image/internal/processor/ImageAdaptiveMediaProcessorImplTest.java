@@ -17,6 +17,7 @@ package com.liferay.adaptive.media.image.internal.processor;
 import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
+import com.liferay.adaptive.media.image.exception.DuplicateAdaptiveMediaImageException;
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationEntryImpl;
 import com.liferay.adaptive.media.image.internal.util.ImageProcessor;
 import com.liferay.adaptive.media.image.internal.util.ImageStorage;
@@ -112,6 +113,48 @@ public class ImageAdaptiveMediaProcessorImplTest {
 		).delete(
 			_fileVersion
 		);
+	}
+
+	@Test(expected = AdaptiveMediaRuntimeException.IOException.class)
+	public void testProcessDuplicateAdaptiveMediaImageExceptionInImageService()
+		throws Exception {
+
+		Mockito.when(
+			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
+		).thenReturn(
+			true
+		);
+
+		ImageAdaptiveMediaConfigurationEntry configurationEntry =
+			new ImageAdaptiveMediaConfigurationEntryImpl(
+				StringUtil.randomString(), StringUtil.randomString(),
+				Collections.emptyMap());
+
+		Mockito.when(
+			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
+				Mockito.any(long.class))
+		).thenReturn(
+			Collections.singleton(configurationEntry)
+		);
+
+		RenderedImage renderedImage = Mockito.mock(RenderedImage.class);
+
+		Mockito.when(
+			_imageProcessor.scaleImage(_fileVersion, configurationEntry)
+		).thenReturn(
+			renderedImage
+		);
+
+		Mockito.when(
+			_imageLocalService.addAdaptiveMediaImage(
+				Mockito.any(String.class), Mockito.any(Long.class),
+				Mockito.any(Integer.class), Mockito.any(Integer.class),
+				Mockito.any(Integer.class))
+		).thenThrow(
+			DuplicateAdaptiveMediaImageException.class
+		);
+
+		_processor.process(_fileVersion);
 	}
 
 	@Test
