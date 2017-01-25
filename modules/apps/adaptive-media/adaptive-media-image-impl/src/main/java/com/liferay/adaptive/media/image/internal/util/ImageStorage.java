@@ -91,32 +91,6 @@ public class ImageStorage {
 		}
 	}
 
-	public Optional<ImageInfo> getImageInfo(
-		FileVersion fileVersion,
-		ImageAdaptiveMediaConfigurationEntry configurationEntry) {
-
-		try {
-			String fileVersionVariantPath = getFileVersionVariantPath(
-				fileVersion, configurationEntry);
-
-			if (!DLStoreUtil.hasDirectory(
-					fileVersion.getCompanyId(), CompanyConstants.SYSTEM,
-					fileVersionVariantPath)) {
-
-				return Optional.empty();
-			}
-
-			File file = getFile(
-				fileVersion.getCompanyId(), fileVersionVariantPath);
-
-			return Optional.of(
-				new ImageInfo(fileVersion.getMimeType(), file.length()));
-		}
-		catch (PortalException pe) {
-			throw new AdaptiveMediaRuntimeException.IOException(pe);
-		}
-	}
-
 	public void save(
 		FileVersion fileVersion,
 		ImageAdaptiveMediaConfigurationEntry configurationEntry,
