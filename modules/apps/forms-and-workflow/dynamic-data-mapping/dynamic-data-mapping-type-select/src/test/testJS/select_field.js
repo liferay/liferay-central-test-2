@@ -125,7 +125,7 @@ describe(
 				it(
 					'should return a value if set a valid value',
 					function(done) {
-						selectField = createSelectField();	
+						selectField = createSelectField();
 
 						var container = selectField.get('container');
 
