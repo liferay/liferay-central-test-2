@@ -182,7 +182,8 @@ public class Dom4JUtil {
 
 	public static Element toCodeSnippetElement(String content) {
 		return getNewElement(
-			"pre", null, getNewElement(
+			"pre", null,
+			getNewElement(
 				"code", null, JenkinsResultsParserUtil.redact(content)));
 	}
 
