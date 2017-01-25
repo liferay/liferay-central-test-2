@@ -75,8 +75,14 @@ public class Dom4JUtil {
 
 		outputFormat.setTrimText(false);
 
-		XMLWriter xmlWriter = pretty ? new XMLWriter(
-			writer, outputFormat) : new XMLWriter(writer);
+		XMLWriter xmlWriter = null;
+		
+		if (pretty) {
+			xmlWriter = new XMLWriter(writer, outputFormat);
+		}
+		else {
+			xmlWriter = new XMLWriter(writer);
+		}
 
 		xmlWriter.write(element);
 
