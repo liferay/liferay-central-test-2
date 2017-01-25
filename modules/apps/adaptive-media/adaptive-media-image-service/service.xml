@@ -22,6 +22,7 @@
 
 		<column name="configurationUuid" type="String" />
 		<column name="fileVersionId" type="long" />
+		<column name="mimeType" type="String" />
 		<column name="height" type="int" />
 		<column name="width" type="int" />
 		<column name="size" type="long" />
