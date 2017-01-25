@@ -59,6 +59,13 @@ public class AdaptiveMediaImageLocalServiceImpl
 		return adaptiveMediaImagePersistence.update(image);
 	}
 
+	public AdaptiveMediaImage fetchAdaptiveMediaImage(
+		String configurationUuid, long fileVersionId) {
+
+		return adaptiveMediaImagePersistence.fetchByC_F(
+			configurationUuid, fileVersionId);
+	}
+
 	public void deleteAdaptiveMediaImageFileVersion(long fileVersionId) {
 		List<AdaptiveMediaImage> images =
 			adaptiveMediaImagePersistence.findByFileVersionId(fileVersionId);
