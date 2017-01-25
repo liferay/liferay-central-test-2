@@ -156,10 +156,16 @@ public class BatchBuild extends BaseBuild {
 
 			String axisBuildURL = childJSONObject.getString("url");
 
-			Matcher axisBuildURLMatcher =
-				fromArchive ? AxisBuild.buildURLPattern.matcher(
-					axisBuildURL) : AxisBuild.buildURLPattern.matcher(
-						axisBuildURL);
+			Matcher axisBuildURLMatcher = null;
+
+			if (fromArchive) {
+				axisBuildURLMatcher = AxisBuild.buildURLPattern.matcher(
+					axisBuildURL);
+			}
+			else {
+				axisBuildURLMatcher = AxisBuild.buildURLPattern.matcher(
+					axisBuildURL);
+			}
 
 			axisBuildURLMatcher.find();
 
