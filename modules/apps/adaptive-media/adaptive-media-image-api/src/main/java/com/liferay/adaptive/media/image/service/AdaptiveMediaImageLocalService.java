@@ -72,8 +72,9 @@ public interface AdaptiveMediaImageLocalService extends BaseLocalService,
 		AdaptiveMediaImage adaptiveMediaImage);
 
 	public AdaptiveMediaImage addAdaptiveMediaImage(
-		java.lang.String configurationUuid, long fileVersionId, int height,
-		int width, int size) throws PortalException;
+		java.lang.String configurationUuid, long fileVersionId,
+		java.lang.String mimeType, int width, int size, int height)
+		throws PortalException;
 
 	/**
 	* Creates a new adaptive media image with the primary key. Does not add the adaptive media image to the database.
