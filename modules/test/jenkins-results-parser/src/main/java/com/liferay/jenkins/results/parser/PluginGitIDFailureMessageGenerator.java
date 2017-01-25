@@ -74,10 +74,12 @@ public class PluginGitIDFailureMessageGenerator
 		TopLevelBuild topLevelBuild = build.getTopLevelBuild();
 
 		Element messageElement = Dom4JUtil.getNewElement(
-			"p", null, "Please update ", Dom4JUtil.getNewElement(
-				"strong", null, getGitCommitPluginsAnchorElement(
-					topLevelBuild)),
-			" to an existing Git ID from ", Dom4JUtil.getNewElement(
+			"p", null, "Please update ",
+			Dom4JUtil.getNewElement(
+				"strong", null,
+				getGitCommitPluginsAnchorElement(topLevelBuild)),
+			" to an existing Git ID from ",
+			Dom4JUtil.getNewElement(
 				"strong", null, getPluginsBranchAnchorElement(topLevelBuild)),
 			".", getConsoleOutputSnippetElement(consoleText, true, end));
 
