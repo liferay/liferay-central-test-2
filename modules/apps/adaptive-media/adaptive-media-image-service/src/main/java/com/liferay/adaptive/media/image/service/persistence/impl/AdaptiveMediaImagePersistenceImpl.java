@@ -4316,6 +4316,7 @@ public class AdaptiveMediaImagePersistenceImpl extends BasePersistenceImpl<Adapt
 		adaptiveMediaImageImpl.setCreateDate(adaptiveMediaImage.getCreateDate());
 		adaptiveMediaImageImpl.setConfigurationUuid(adaptiveMediaImage.getConfigurationUuid());
 		adaptiveMediaImageImpl.setFileVersionId(adaptiveMediaImage.getFileVersionId());
+		adaptiveMediaImageImpl.setMimeType(adaptiveMediaImage.getMimeType());
 		adaptiveMediaImageImpl.setHeight(adaptiveMediaImage.getHeight());
 		adaptiveMediaImageImpl.setWidth(adaptiveMediaImage.getWidth());
 		adaptiveMediaImageImpl.setSize(adaptiveMediaImage.getSize());

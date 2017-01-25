@@ -13,6 +13,7 @@
 		<property name="createDate" type="org.hibernate.type.TimestampType" />
 		<property name="configurationUuid" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="fileVersionId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="mimeType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="height" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="width" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property column="size_" name="size" type="com.liferay.portal.dao.orm.hibernate.LongType" />

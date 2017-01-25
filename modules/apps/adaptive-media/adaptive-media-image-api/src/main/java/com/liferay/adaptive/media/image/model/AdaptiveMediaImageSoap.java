@@ -40,6 +40,7 @@ public class AdaptiveMediaImageSoap implements Serializable {
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setConfigurationUuid(model.getConfigurationUuid());
 		soapModel.setFileVersionId(model.getFileVersionId());
+		soapModel.setMimeType(model.getMimeType());
 		soapModel.setHeight(model.getHeight());
 		soapModel.setWidth(model.getWidth());
 		soapModel.setSize(model.getSize());
@@ -154,6 +155,14 @@ public class AdaptiveMediaImageSoap implements Serializable {
 		_fileVersionId = fileVersionId;
 	}
 
+	public String getMimeType() {
+		return _mimeType;
+	}
+
+	public void setMimeType(String mimeType) {
+		_mimeType = mimeType;
+	}
+
 	public int getHeight() {
 		return _height;
 	}
@@ -185,6 +194,7 @@ public class AdaptiveMediaImageSoap implements Serializable {
 	private Date _createDate;
 	private String _configurationUuid;
 	private long _fileVersionId;
+	private String _mimeType;
 	private int _height;
 	private int _width;
 	private long _size;

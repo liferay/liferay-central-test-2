@@ -6,6 +6,7 @@ create table AdaptiveMediaImage (
 	createDate DATE null,
 	configurationUuid VARCHAR(75) null,
 	fileVersionId LONG,
+	mimeType VARCHAR(75) null,
 	height INTEGER,
 	width INTEGER,
 	size_ LONG

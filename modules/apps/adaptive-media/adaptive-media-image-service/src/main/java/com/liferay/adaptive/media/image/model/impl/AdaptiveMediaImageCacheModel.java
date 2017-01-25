@@ -66,7 +66,7 @@ public class AdaptiveMediaImageCacheModel implements CacheModel<AdaptiveMediaIma
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(23);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -82,6 +82,8 @@ public class AdaptiveMediaImageCacheModel implements CacheModel<AdaptiveMediaIma
 		sb.append(configurationUuid);
 		sb.append(", fileVersionId=");
 		sb.append(fileVersionId);
+		sb.append(", mimeType=");
+		sb.append(mimeType);
 		sb.append(", height=");
 		sb.append(height);
 		sb.append(", width=");
@@ -123,6 +125,14 @@ public class AdaptiveMediaImageCacheModel implements CacheModel<AdaptiveMediaIma
 		}
 
 		adaptiveMediaImageImpl.setFileVersionId(fileVersionId);
+
+		if (mimeType == null) {
+			adaptiveMediaImageImpl.setMimeType(StringPool.BLANK);
+		}
+		else {
+			adaptiveMediaImageImpl.setMimeType(mimeType);
+		}
+
 		adaptiveMediaImageImpl.setHeight(height);
 		adaptiveMediaImageImpl.setWidth(width);
 		adaptiveMediaImageImpl.setSize(size);
@@ -145,6 +155,7 @@ public class AdaptiveMediaImageCacheModel implements CacheModel<AdaptiveMediaIma
 		configurationUuid = objectInput.readUTF();
 
 		fileVersionId = objectInput.readLong();
+		mimeType = objectInput.readUTF();
 
 		height = objectInput.readInt();
 
@@ -179,6 +190,13 @@ public class AdaptiveMediaImageCacheModel implements CacheModel<AdaptiveMediaIma
 
 		objectOutput.writeLong(fileVersionId);
 
+		if (mimeType == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(mimeType);
+		}
+
 		objectOutput.writeInt(height);
 
 		objectOutput.writeInt(width);
@@ -193,6 +211,7 @@ public class AdaptiveMediaImageCacheModel implements CacheModel<AdaptiveMediaIma
 	public long createDate;
 	public String configurationUuid;
 	public long fileVersionId;
+	public String mimeType;
 	public int height;
 	public int width;
 	public long size;

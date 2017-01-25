@@ -65,6 +65,7 @@ public class AdaptiveMediaImageWrapper implements AdaptiveMediaImage,
 		attributes.put("createDate", getCreateDate());
 		attributes.put("configurationUuid", getConfigurationUuid());
 		attributes.put("fileVersionId", getFileVersionId());
+		attributes.put("mimeType", getMimeType());
 		attributes.put("height", getHeight());
 		attributes.put("width", getWidth());
 		attributes.put("size", getSize());
@@ -114,6 +115,12 @@ public class AdaptiveMediaImageWrapper implements AdaptiveMediaImage,
 
 		if (fileVersionId != null) {
 			setFileVersionId(fileVersionId);
+		}
+
+		String mimeType = (String)attributes.get("mimeType");
+
+		if (mimeType != null) {
+			setMimeType(mimeType);
 		}
 
 		Integer height = (Integer)attributes.get("height");
@@ -218,6 +225,16 @@ public class AdaptiveMediaImageWrapper implements AdaptiveMediaImage,
 	@Override
 	public java.lang.String getConfigurationUuid() {
 		return _adaptiveMediaImage.getConfigurationUuid();
+	}
+
+	/**
+	* Returns the mime type of this adaptive media image.
+	*
+	* @return the mime type of this adaptive media image
+	*/
+	@Override
+	public java.lang.String getMimeType() {
+		return _adaptiveMediaImage.getMimeType();
 	}
 
 	/**
@@ -404,6 +421,16 @@ public class AdaptiveMediaImageWrapper implements AdaptiveMediaImage,
 	@Override
 	public void setHeight(int height) {
 		_adaptiveMediaImage.setHeight(height);
+	}
+
+	/**
+	* Sets the mime type of this adaptive media image.
+	*
+	* @param mimeType the mime type of this adaptive media image
+	*/
+	@Override
+	public void setMimeType(java.lang.String mimeType) {
+		_adaptiveMediaImage.setMimeType(mimeType);
 	}
 
 	@Override

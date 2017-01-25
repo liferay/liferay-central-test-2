@@ -69,6 +69,7 @@ public class AdaptiveMediaImageModelImpl extends BaseModelImpl<AdaptiveMediaImag
 			{ "createDate", Types.TIMESTAMP },
 			{ "configurationUuid", Types.VARCHAR },
 			{ "fileVersionId", Types.BIGINT },
+			{ "mimeType", Types.VARCHAR },
 			{ "height", Types.INTEGER },
 			{ "width", Types.INTEGER },
 			{ "size_", Types.BIGINT }
@@ -83,12 +84,13 @@ public class AdaptiveMediaImageModelImpl extends BaseModelImpl<AdaptiveMediaImag
 		TABLE_COLUMNS_MAP.put("createDate", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("configurationUuid", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("fileVersionId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("mimeType", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("height", Types.INTEGER);
 		TABLE_COLUMNS_MAP.put("width", Types.INTEGER);
 		TABLE_COLUMNS_MAP.put("size_", Types.BIGINT);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table AdaptiveMediaImage (uuid_ VARCHAR(75) null,adaptiveMediaImageId LONG not null primary key,groupId LONG,companyId LONG,createDate DATE null,configurationUuid VARCHAR(75) null,fileVersionId LONG,height INTEGER,width INTEGER,size_ LONG)";
+	public static final String TABLE_SQL_CREATE = "create table AdaptiveMediaImage (uuid_ VARCHAR(75) null,adaptiveMediaImageId LONG not null primary key,groupId LONG,companyId LONG,createDate DATE null,configurationUuid VARCHAR(75) null,fileVersionId LONG,mimeType VARCHAR(75) null,height INTEGER,width INTEGER,size_ LONG)";
 	public static final String TABLE_SQL_DROP = "drop table AdaptiveMediaImage";
 	public static final String ORDER_BY_JPQL = " ORDER BY adaptiveMediaImage.adaptiveMediaImageId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY AdaptiveMediaImage.adaptiveMediaImageId ASC";
@@ -157,6 +159,7 @@ public class AdaptiveMediaImageModelImpl extends BaseModelImpl<AdaptiveMediaImag
 		attributes.put("createDate", getCreateDate());
 		attributes.put("configurationUuid", getConfigurationUuid());
 		attributes.put("fileVersionId", getFileVersionId());
+		attributes.put("mimeType", getMimeType());
 		attributes.put("height", getHeight());
 		attributes.put("width", getWidth());
 		attributes.put("size", getSize());
@@ -209,6 +212,12 @@ public class AdaptiveMediaImageModelImpl extends BaseModelImpl<AdaptiveMediaImag
 
 		if (fileVersionId != null) {
 			setFileVersionId(fileVersionId);
+		}
+
+		String mimeType = (String)attributes.get("mimeType");
+
+		if (mimeType != null) {
+			setMimeType(mimeType);
 		}
 
 		Integer height = (Integer)attributes.get("height");
@@ -365,6 +374,21 @@ public class AdaptiveMediaImageModelImpl extends BaseModelImpl<AdaptiveMediaImag
 	}
 
 	@Override
+	public String getMimeType() {
+		if (_mimeType == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _mimeType;
+		}
+	}
+
+	@Override
+	public void setMimeType(String mimeType) {
+		_mimeType = mimeType;
+	}
+
+	@Override
 	public int getHeight() {
 		return _height;
 	}
@@ -432,6 +456,7 @@ public class AdaptiveMediaImageModelImpl extends BaseModelImpl<AdaptiveMediaImag
 		adaptiveMediaImageImpl.setCreateDate(getCreateDate());
 		adaptiveMediaImageImpl.setConfigurationUuid(getConfigurationUuid());
 		adaptiveMediaImageImpl.setFileVersionId(getFileVersionId());
+		adaptiveMediaImageImpl.setMimeType(getMimeType());
 		adaptiveMediaImageImpl.setHeight(getHeight());
 		adaptiveMediaImageImpl.setWidth(getWidth());
 		adaptiveMediaImageImpl.setSize(getSize());
@@ -553,6 +578,14 @@ public class AdaptiveMediaImageModelImpl extends BaseModelImpl<AdaptiveMediaImag
 
 		adaptiveMediaImageCacheModel.fileVersionId = getFileVersionId();
 
+		adaptiveMediaImageCacheModel.mimeType = getMimeType();
+
+		String mimeType = adaptiveMediaImageCacheModel.mimeType;
+
+		if ((mimeType != null) && (mimeType.length() == 0)) {
+			adaptiveMediaImageCacheModel.mimeType = null;
+		}
+
 		adaptiveMediaImageCacheModel.height = getHeight();
 
 		adaptiveMediaImageCacheModel.width = getWidth();
@@ -564,7 +597,7 @@ public class AdaptiveMediaImageModelImpl extends BaseModelImpl<AdaptiveMediaImag
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(21);
+		StringBundler sb = new StringBundler(23);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -580,6 +613,8 @@ public class AdaptiveMediaImageModelImpl extends BaseModelImpl<AdaptiveMediaImag
 		sb.append(getConfigurationUuid());
 		sb.append(", fileVersionId=");
 		sb.append(getFileVersionId());
+		sb.append(", mimeType=");
+		sb.append(getMimeType());
 		sb.append(", height=");
 		sb.append(getHeight());
 		sb.append(", width=");
@@ -593,7 +628,7 @@ public class AdaptiveMediaImageModelImpl extends BaseModelImpl<AdaptiveMediaImag
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(34);
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.adaptive.media.image.model.AdaptiveMediaImage");
@@ -626,6 +661,10 @@ public class AdaptiveMediaImageModelImpl extends BaseModelImpl<AdaptiveMediaImag
 		sb.append(
 			"<column><column-name>fileVersionId</column-name><column-value><![CDATA[");
 		sb.append(getFileVersionId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>mimeType</column-name><column-value><![CDATA[");
+		sb.append(getMimeType());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>height</column-name><column-value><![CDATA[");
@@ -664,6 +703,7 @@ public class AdaptiveMediaImageModelImpl extends BaseModelImpl<AdaptiveMediaImag
 	private long _fileVersionId;
 	private long _originalFileVersionId;
 	private boolean _setOriginalFileVersionId;
+	private String _mimeType;
 	private int _height;
 	private int _width;
 	private long _size;

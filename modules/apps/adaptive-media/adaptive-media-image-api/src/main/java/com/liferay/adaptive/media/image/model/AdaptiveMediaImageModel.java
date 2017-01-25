@@ -167,6 +167,21 @@ public interface AdaptiveMediaImageModel extends BaseModel<AdaptiveMediaImage>,
 	public void setFileVersionId(long fileVersionId);
 
 	/**
+	 * Returns the mime type of this adaptive media image.
+	 *
+	 * @return the mime type of this adaptive media image
+	 */
+	@AutoEscape
+	public String getMimeType();
+
+	/**
+	 * Sets the mime type of this adaptive media image.
+	 *
+	 * @param mimeType the mime type of this adaptive media image
+	 */
+	public void setMimeType(String mimeType);
+
+	/**
 	 * Returns the height of this adaptive media image.
 	 *
 	 * @return the height of this adaptive media image

@@ -137,6 +137,8 @@ public class AdaptiveMediaImagePersistenceTest {
 
 		newAdaptiveMediaImage.setFileVersionId(RandomTestUtil.nextLong());
 
+		newAdaptiveMediaImage.setMimeType(RandomTestUtil.randomString());
+
 		newAdaptiveMediaImage.setHeight(RandomTestUtil.nextInt());
 
 		newAdaptiveMediaImage.setWidth(RandomTestUtil.nextInt());
@@ -162,6 +164,8 @@ public class AdaptiveMediaImagePersistenceTest {
 			newAdaptiveMediaImage.getConfigurationUuid());
 		Assert.assertEquals(existingAdaptiveMediaImage.getFileVersionId(),
 			newAdaptiveMediaImage.getFileVersionId());
+		Assert.assertEquals(existingAdaptiveMediaImage.getMimeType(),
+			newAdaptiveMediaImage.getMimeType());
 		Assert.assertEquals(existingAdaptiveMediaImage.getHeight(),
 			newAdaptiveMediaImage.getHeight());
 		Assert.assertEquals(existingAdaptiveMediaImage.getWidth(),
@@ -262,7 +266,8 @@ public class AdaptiveMediaImagePersistenceTest {
 		return OrderByComparatorFactoryUtil.create("AdaptiveMediaImage",
 			"uuid", true, "adaptiveMediaImageId", true, "groupId", true,
 			"companyId", true, "createDate", true, "configurationUuid", true,
-			"fileVersionId", true, "height", true, "width", true, "size", true);
+			"fileVersionId", true, "mimeType", true, "height", true, "width",
+			true, "size", true);
 	}
 
 	@Test
@@ -503,6 +508,8 @@ public class AdaptiveMediaImagePersistenceTest {
 		adaptiveMediaImage.setConfigurationUuid(RandomTestUtil.randomString());
 
 		adaptiveMediaImage.setFileVersionId(RandomTestUtil.nextLong());
+
+		adaptiveMediaImage.setMimeType(RandomTestUtil.randomString());
 
 		adaptiveMediaImage.setHeight(RandomTestUtil.nextInt());
 
