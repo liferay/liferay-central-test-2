@@ -86,10 +86,8 @@ public class LocalGitMirrorFailureMessageGenerator
 		Element messageElement = Dom4JUtil.getNewElement("div");
 
 		Dom4JUtil.getNewElement(
-			"p", messageElement,
-			"Unable to synchronize with ",
-			Dom4JUtil.getNewElement("strong", null, "local Git mirror"),
-			".");
+			"p", messageElement, "Unable to synchronize with ",
+			Dom4JUtil.getNewElement("strong", null, "local Git mirror"), ".");
 
 		int end = consoleText.indexOf(_LOCAL_GIT_FAILURE_END_STRING);
 
