@@ -28,8 +28,22 @@ public class ImageAdaptiveMediaAttributeTest {
 	@Test(
 		expected = AdaptiveMediaRuntimeException.AdaptiveMediaAttributeFormatException.class
 	)
+	public void testImageHeightFailsForNonIntegers() {
+		ImageAdaptiveMediaAttribute.IMAGE_HEIGHT.convert("xyz");
+	}
+
+	@Test(
+		expected = AdaptiveMediaRuntimeException.AdaptiveMediaAttributeFormatException.class
+	)
 	public void testImageMaxHeightFailsForNonIntegers() {
 		ImageAdaptiveMediaAttribute.IMAGE_MAX_HEIGHT.convert("xyz");
+	}
+
+	@Test
+	public void testImageHeightRecognizesIntegers() {
+		int result = ImageAdaptiveMediaAttribute.IMAGE_HEIGHT.convert("42");
+
+		Assert.assertEquals(42, result);
 	}
 
 	@Test
@@ -42,8 +56,22 @@ public class ImageAdaptiveMediaAttributeTest {
 	@Test(
 		expected = AdaptiveMediaRuntimeException.AdaptiveMediaAttributeFormatException.class
 	)
+	public void testImageWidthFailsForNonIntegers() {
+		ImageAdaptiveMediaAttribute.IMAGE_WIDTH.convert("xyz");
+	}
+
+	@Test(
+		expected = AdaptiveMediaRuntimeException.AdaptiveMediaAttributeFormatException.class
+	)
 	public void testImageMaxWidthFailsForNonIntegers() {
 		ImageAdaptiveMediaAttribute.IMAGE_MAX_WIDTH.convert("xyz");
+	}
+
+	@Test
+	public void testImageWidthRecognizesIntegers() {
+		int result = ImageAdaptiveMediaAttribute.IMAGE_WIDTH.convert("42");
+
+		Assert.assertEquals(42, result);
 	}
 
 	@Test
