@@ -76,7 +76,7 @@ public class Dom4JUtil {
 		outputFormat.setTrimText(false);
 
 		XMLWriter xmlWriter = null;
-		
+
 		if (pretty) {
 			xmlWriter = new XMLWriter(writer, outputFormat);
 		}
