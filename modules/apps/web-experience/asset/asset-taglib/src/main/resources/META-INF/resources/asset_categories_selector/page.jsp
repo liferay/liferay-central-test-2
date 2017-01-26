@@ -17,6 +17,8 @@
 <%@ include file="/asset_categories_selector/init.jsp" %>
 
 <%
+String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_ui_asset_categories_selector_page") + StringPool.UNDERLINE;
+
 List<String[]> categoryIdsTitles = (List<String[]>)request.getAttribute("liferay-asset:asset-categories-selector:categoryIdsTitles");
 String className = (String)request.getAttribute("liferay-asset:asset-categories-selector:className");
 long classTypePK = GetterUtil.getLong((String)request.getAttribute("liferay-asset:asset-categories-selector:classTypePK"));
@@ -27,8 +29,6 @@ boolean showRequiredLabel = GetterUtil.getBoolean((String)request.getAttribute("
 List<AssetVocabulary> vocabularies = (List<AssetVocabulary>)request.getAttribute("liferay-asset:asset-categories-selector:vocabularies");
 
 int maxEntries = GetterUtil.getInteger(PropsUtil.get(PropsKeys.ASSET_CATEGORIES_SELECTOR_MAX_ENTRIES));
-
-String randomNamespace = PortalUtil.generateRandomKey(request, "assetCategoriesSelector") + StringPool.UNDERLINE;
 %>
 
 <c:choose>
@@ -44,7 +44,7 @@ String randomNamespace = PortalUtil.generateRandomKey(request, "assetCategoriesS
 			<span class="field-content">
 				<label id="<portlet:namespace />assetCategoriesLabel_<%= vocabulary.getVocabularyId() %>">
 					<%= vocabulary.getTitle(locale) %>
-
+d
 					<c:if test="<%= vocabulary.getGroupId() != themeDisplay.getSiteGroupId() %>">
 
 						<%
