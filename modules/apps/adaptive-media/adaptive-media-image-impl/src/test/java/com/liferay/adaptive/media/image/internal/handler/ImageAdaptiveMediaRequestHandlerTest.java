@@ -17,6 +17,8 @@ package com.liferay.adaptive.media.image.internal.handler;
 import com.liferay.adaptive.media.AdaptiveMedia;
 import com.liferay.adaptive.media.AdaptiveMediaException;
 import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
+import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
+import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
 import com.liferay.adaptive.media.image.finder.ImageAdaptiveMediaFinder;
 import com.liferay.adaptive.media.image.internal.util.Tuple;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
@@ -27,7 +29,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
-import java.util.stream.Stream;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -46,14 +47,20 @@ public class ImageAdaptiveMediaRequestHandlerTest {
 	public void setUp() {
 		_requestHandler.setImageAdaptiveMediaFinder(_finder);
 		_requestHandler.setPathInterpreter(_pathInterpreter);
+		_requestHandler.setImageAdaptiveMediaConfigurationHelper(
+			_configurationHelper);
 	}
 
 	@Test(expected = AdaptiveMediaRuntimeException.class)
 	public void testFinderFailsWithMediaProcessorException() throws Exception {
+		Map<String, String> pathProperties = new HashMap<>();
+
+		pathProperties.put("configuration-uuid", "testUuid");
+
 		Mockito.when(
 			_pathInterpreter.interpretPath(Mockito.any(String.class))
 		).thenReturn(
-			Optional.of(Tuple.of(_fileVersion, new HashMap<>()))
+			Optional.of(Tuple.of(_fileVersion, pathProperties))
 		);
 
 		Mockito.when(
@@ -62,15 +69,40 @@ public class ImageAdaptiveMediaRequestHandlerTest {
 			AdaptiveMediaException.class
 		);
 
+		ImageAdaptiveMediaConfigurationEntry configurationEntry = Mockito.mock(
+			ImageAdaptiveMediaConfigurationEntry.class);
+
+		Map<String, String> configurationEntryProperties = new HashMap<>();
+
+		configurationEntryProperties.put("max-height", "200");
+		configurationEntryProperties.put("max-width", "200");
+
+		Mockito.when(
+			configurationEntry.getProperties()
+		).thenReturn(
+			configurationEntryProperties
+		);
+
+		Mockito.when(
+			_configurationHelper.getImageAdaptiveMediaConfigurationEntry(
+				Mockito.anyLong(), Mockito.anyString())
+		).thenReturn(
+			Optional.of(configurationEntry)
+		);
+
 		_requestHandler.handleRequest(_request);
 	}
 
 	@Test(expected = AdaptiveMediaRuntimeException.class)
 	public void testFinderFailsWithPortalException() throws Exception {
+		Map<String, String> pathProperties = new HashMap<>();
+
+		pathProperties.put("configuration-uuid", "testUuid");
+
 		Mockito.when(
 			_pathInterpreter.interpretPath(Mockito.any(String.class))
 		).thenReturn(
-			Optional.of(Tuple.of(_fileVersion, new HashMap<>()))
+			Optional.of(Tuple.of(_fileVersion, pathProperties))
 		);
 
 		Mockito.when(
@@ -79,11 +111,32 @@ public class ImageAdaptiveMediaRequestHandlerTest {
 			PortalException.class
 		);
 
+		ImageAdaptiveMediaConfigurationEntry configurationEntry = Mockito.mock(
+			ImageAdaptiveMediaConfigurationEntry.class);
+
+		Map<String, String> configurationEntryProperties = new HashMap<>();
+
+		configurationEntryProperties.put("max-height", "200");
+		configurationEntryProperties.put("max-width", "200");
+
+		Mockito.when(
+			configurationEntry.getProperties()
+		).thenReturn(
+			configurationEntryProperties
+		);
+
+		Mockito.when(
+			_configurationHelper.getImageAdaptiveMediaConfigurationEntry(
+				Mockito.anyLong(), Mockito.anyString())
+		).thenReturn(
+			Optional.of(configurationEntry)
+		);
+
 		_requestHandler.handleRequest(_request);
 	}
 
 	@Test
-	public void testInvalidPathd() throws Exception {
+	public void testInvalidPath() throws Exception {
 		Mockito.when(
 			_pathInterpreter.interpretPath(Mockito.any(String.class))
 		).thenReturn(
@@ -115,35 +168,8 @@ public class ImageAdaptiveMediaRequestHandlerTest {
 		Assert.assertFalse(mediaOptional.isPresent());
 	}
 
-	@Test
-	public void testWithNoConfigurationInvokesFinderWithDefaults()
-		throws Exception {
-
-		Map<String, String> properties = new HashMap<>();
-
-		Mockito.when(
-			_pathInterpreter.interpretPath(Mockito.any(String.class))
-		).thenReturn(
-			Optional.of(Tuple.of(_fileVersion, properties))
-		);
-
-		Mockito.when(
-			_finder.getAdaptiveMedia(Mockito.any(Function.class))
-		).thenReturn(
-			Stream.empty()
-		);
-
-		_requestHandler.handleRequest(_request);
-
-		Mockito.verify(
-			_finder
-		).getAdaptiveMedia(
-			Mockito.any(Function.class)
-		);
-
-		Assert.assertFalse(properties.isEmpty());
-	}
-
+	private final ImageAdaptiveMediaConfigurationHelper _configurationHelper =
+		Mockito.mock(ImageAdaptiveMediaConfigurationHelper.class);
 	private final FileVersion _fileVersion = Mockito.mock(FileVersion.class);
 	private final ImageAdaptiveMediaFinder _finder = Mockito.mock(
 		ImageAdaptiveMediaFinder.class);
