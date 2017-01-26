@@ -55,8 +55,7 @@ public class ImageProcessor {
 			RenderedImage renderedImage = _readImage(
 				fileVersion.getContentStream(false));
 
-			Map<String, String> properties =
-				configurationEntry.getProperties();
+			Map<String, String> properties = configurationEntry.getProperties();
 
 			int maxHeight = GetterUtil.getInteger(properties.get("max-height"));
 			int maxWidth = GetterUtil.getInteger(properties.get("max-width"));

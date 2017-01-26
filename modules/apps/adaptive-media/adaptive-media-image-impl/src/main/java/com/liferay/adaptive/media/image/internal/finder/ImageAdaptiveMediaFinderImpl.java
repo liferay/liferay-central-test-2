@@ -216,8 +216,7 @@ public class ImageAdaptiveMediaFinderImpl implements ImageAdaptiveMediaFinder {
 			AdaptiveMediaAttribute<Object, String> contentTypeAttribute =
 				AdaptiveMediaAttribute.contentType();
 
-			properties.put(
-				contentTypeAttribute.getName(), image.getMimeType());
+			properties.put(contentTypeAttribute.getName(), image.getMimeType());
 
 			AdaptiveMediaAttribute<Object, Integer> contentLengthAttribute =
 				AdaptiveMediaAttribute.contentLength();

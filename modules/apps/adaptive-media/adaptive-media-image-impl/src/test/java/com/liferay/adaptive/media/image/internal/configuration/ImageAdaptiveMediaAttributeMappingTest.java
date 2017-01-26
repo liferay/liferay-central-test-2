@@ -103,12 +103,10 @@ public class ImageAdaptiveMediaAttributeMappingTest {
 		ImageAdaptiveMediaAttributeMapping attributeMapping =
 			ImageAdaptiveMediaAttributeMapping.fromProperties(
 				MapUtil.fromArray(
-					ImageAdaptiveMediaAttribute.IMAGE_HEIGHT.getName(),
-					"100"));
+					ImageAdaptiveMediaAttribute.IMAGE_HEIGHT.getName(), "100"));
 
-		Optional<Integer> heightOptional =
-			attributeMapping.getAttributeValue(
-				ImageAdaptiveMediaAttribute.IMAGE_HEIGHT);
+		Optional<Integer> heightOptional = attributeMapping.getAttributeValue(
+			ImageAdaptiveMediaAttribute.IMAGE_HEIGHT);
 
 		Assert.assertEquals(Integer.valueOf(100), heightOptional.get());
 

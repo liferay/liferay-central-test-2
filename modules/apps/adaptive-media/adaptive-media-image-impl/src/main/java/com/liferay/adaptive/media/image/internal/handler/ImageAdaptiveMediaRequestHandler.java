@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.model.FileVersion;
+import com.liferay.portal.kernel.util.GetterUtil;
 
 import java.io.IOException;
 
@@ -41,7 +42,6 @@ import java.util.Optional;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
-import com.liferay.portal.kernel.util.GetterUtil;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -54,8 +54,6 @@ import org.osgi.service.component.annotations.Reference;
 )
 public class ImageAdaptiveMediaRequestHandler
 	implements AdaptiveMediaRequestHandler<ImageAdaptiveMediaProcessor> {
-
-	private ImageAdaptiveMediaConfigurationHelper _configurationHelper;
 
 	@Override
 	public Optional<AdaptiveMedia<ImageAdaptiveMediaProcessor>> handleRequest(
@@ -90,6 +88,13 @@ public class ImageAdaptiveMediaRequestHandler
 		_pathInterpreter = pathInterpreter;
 	}
 
+	@Reference
+	protected void setImageAdaptiveMediaConfigurationHelper(
+		ImageAdaptiveMediaConfigurationHelper configurationHelper) {
+
+		_configurationHelper = configurationHelper;
+	}
+
 	private Optional<AdaptiveMedia<ImageAdaptiveMediaProcessor>>
 		_findAdaptiveMedia(
 			FileVersion fileVersion,
@@ -117,22 +122,14 @@ public class ImageAdaptiveMediaRequestHandler
 			return _finder.getAdaptiveMedia(
 				queryBuilder -> queryBuilder.forVersion(fileVersion).with(
 					ImageAdaptiveMediaAttribute.IMAGE_HEIGHT,
-					GetterUtil.getInteger(properties.get("max-height"))).
-					with(
+					GetterUtil.getInteger(properties.get("max-height"))).with(
 						ImageAdaptiveMediaAttribute.IMAGE_WIDTH,
-						GetterUtil.getInteger(properties.get("max-width")))
-					.done()).findFirst();
+						GetterUtil.getInteger(properties.get("max-width"))).
+						done()).findFirst();
 		}
 		catch (AdaptiveMediaException | PortalException e) {
 			throw new AdaptiveMediaRuntimeException(e);
 		}
-	}
-
-	@Reference
-	protected void setImageAdaptiveMediaConfigurationHelper(
-		ImageAdaptiveMediaConfigurationHelper configurationHelper) {
-
-		_configurationHelper = configurationHelper;
 	}
 
 	private Optional<Tuple<FileVersion, ImageAdaptiveMediaAttributeMapping>>
@@ -224,6 +221,7 @@ public class ImageAdaptiveMediaRequestHandler
 	@Reference(unbind = "-")
 	private AdaptiveMediaAsyncProcessorLocator _asyncProcessorLocator;
 
+	private ImageAdaptiveMediaConfigurationHelper _configurationHelper;
 	private ImageAdaptiveMediaFinder _finder;
 	private PathInterpreter _pathInterpreter;
 

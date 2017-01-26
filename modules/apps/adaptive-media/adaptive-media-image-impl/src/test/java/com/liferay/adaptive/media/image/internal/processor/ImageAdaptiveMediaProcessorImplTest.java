@@ -324,8 +324,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 		).addAdaptiveMediaImage(
 			Mockito.any(String.class), Mockito.any(Long.class),
 			Mockito.any(String.class), Mockito.any(Integer.class),
-			Mockito.any(Integer.class),
-			Mockito.any(Integer.class)
+			Mockito.any(Integer.class), Mockito.any(Integer.class)
 		);
 	}
 
