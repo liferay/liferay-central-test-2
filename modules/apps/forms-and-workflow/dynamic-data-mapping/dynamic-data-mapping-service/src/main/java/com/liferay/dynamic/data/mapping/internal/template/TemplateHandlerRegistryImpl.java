@@ -129,8 +129,8 @@ public class TemplateHandlerRegistryImpl implements TemplateHandlerRegistry {
 
 	@Deactivate
 	protected synchronized void deactivate() {
-		_classNameTemplateHandlers.clear();
 		_classNameIdTemplateHandlers.clear();
+		_classNameTemplateHandlers.clear();
 
 		for (ServiceRegistration<?> serviceRegistration :
 				_serviceRegistrations.values()) {
