@@ -34,6 +34,7 @@ import java.util.List;
 public class AdaptiveMediaImageLocalServiceImpl
 	extends AdaptiveMediaImageLocalServiceBaseImpl {
 
+	@Override
 	public AdaptiveMediaImage addAdaptiveMediaImage(
 			String configurationUuid, long fileVersionId, String mimeType,
 			int width, int size, int height)
@@ -62,6 +63,7 @@ public class AdaptiveMediaImageLocalServiceImpl
 		return adaptiveMediaImagePersistence.update(image);
 	}
 
+	@Override
 	public void deleteAdaptiveMediaImageFileVersion(long fileVersionId) {
 		List<AdaptiveMediaImage> images =
 			adaptiveMediaImagePersistence.findByFileVersionId(fileVersionId);
@@ -71,6 +73,7 @@ public class AdaptiveMediaImageLocalServiceImpl
 		}
 	}
 
+	@Override
 	public AdaptiveMediaImage fetchAdaptiveMediaImage(
 		String configurationUuid, long fileVersionId) {
 
