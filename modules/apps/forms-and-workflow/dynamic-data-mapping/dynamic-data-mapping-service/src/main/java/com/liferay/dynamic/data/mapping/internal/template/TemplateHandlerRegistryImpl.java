@@ -65,22 +65,22 @@ public class TemplateHandlerRegistryImpl implements TemplateHandlerRegistry {
 
 	@Override
 	public long[] getClassNameIds() {
-		return ArrayUtil.toLongArray(_templateHandlerByIds.keySet());
+		return ArrayUtil.toLongArray(_classNameIdTemplateHandlers.keySet());
 	}
 
 	@Override
 	public TemplateHandler getTemplateHandler(long classNameId) {
-		return _templateHandlerByIds.get(classNameId);
+		return _classNameIdTemplateHandlers.get(classNameId);
 	}
 
 	@Override
 	public TemplateHandler getTemplateHandler(String className) {
-		return _templateHandlerByClassNames.get(className);
+		return _classNameTemplateHandlers.get(className);
 	}
 
 	@Override
 	public List<TemplateHandler> getTemplateHandlers() {
-		return new ArrayList<>(_templateHandlerByClassNames.values());
+		return new ArrayList<>(_classNameTemplateHandlers.values());
 	}
 
 	@Activate
@@ -88,12 +88,12 @@ public class TemplateHandlerRegistryImpl implements TemplateHandlerRegistry {
 		_bundleContext = bundleContext;
 
 		for (Map.Entry<String, TemplateHandler> entry :
-				_templateHandlerByClassNames.entrySet()) {
+				_classNameTemplateHandlers.entrySet()) {
 
 			String className = entry.getKey();
 			TemplateHandler templateHandler = entry.getValue();
 
-			_templateHandlerByIds.put(
+			_classNameIdTemplateHandlers.put(
 				_portal.getClassNameId(className), templateHandler);
 
 			if (_serviceRegistrations.containsKey(className)) {
@@ -115,13 +115,13 @@ public class TemplateHandlerRegistryImpl implements TemplateHandlerRegistry {
 
 		String className = templateHandler.getClassName();
 
-		_templateHandlerByClassNames.put(className, templateHandler);
+		_classNameTemplateHandlers.put(className, templateHandler);
 
 		if (_bundleContext == null) {
 			return;
 		}
 
-		_templateHandlerByIds.put(
+		_classNameIdTemplateHandlers.put(
 			_portal.getClassNameId(className), templateHandler);
 
 		registerPortalInstanceLifecycleListener(templateHandler);
@@ -129,8 +129,8 @@ public class TemplateHandlerRegistryImpl implements TemplateHandlerRegistry {
 
 	@Deactivate
 	protected synchronized void deactivate() {
-		_templateHandlerByClassNames.clear();
-		_templateHandlerByIds.clear();
+		_classNameTemplateHandlers.clear();
+		_classNameIdTemplateHandlers.clear();
 
 		for (ServiceRegistration<?> serviceRegistration :
 				_serviceRegistrations.values()) {
@@ -170,10 +170,11 @@ public class TemplateHandlerRegistryImpl implements TemplateHandlerRegistry {
 
 		String className = templateHandler.getClassName();
 
-		_templateHandlerByClassNames.remove(className);
+		_classNameTemplateHandlers.remove(className);
 
 		if (_portal != null) {
-			_templateHandlerByIds.remove(_portal.getClassNameId(className));
+			_classNameIdTemplateHandlers.remove(
+				_portal.getClassNameId(className));
 		}
 
 		ServiceRegistration<?> serviceRegistration =
@@ -212,14 +213,14 @@ public class TemplateHandlerRegistryImpl implements TemplateHandlerRegistry {
 	}
 
 	private BundleContext _bundleContext;
+	private final Map<Long, TemplateHandler> _classNameIdTemplateHandlers =
+		new ConcurrentHashMap<>();
+	private final Map<String, TemplateHandler> _classNameTemplateHandlers =
+		new ConcurrentHashMap<>();
 	private DDMTemplateManager _ddmTemplateManager;
 	private GroupLocalService _groupLocalService;
 	private Portal _portal;
 	private final Map<String, ServiceRegistration<?>> _serviceRegistrations =
-		new ConcurrentHashMap<>();
-	private final Map<String, TemplateHandler> _templateHandlerByClassNames =
-		new ConcurrentHashMap<>();
-	private final Map<Long, TemplateHandler> _templateHandlerByIds =
 		new ConcurrentHashMap<>();
 	private UserLocalService _userLocalService;
 
