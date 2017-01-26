@@ -330,13 +330,13 @@ public class UserFinderTest {
 
 	@Test
 	public void testFindBySocialUsers() throws Exception {
-		List<User> socialUsers = UserFinderUtil.findBySocialUsers(
+		List<User> users = UserFinderUtil.findBySocialUsers(
 			TestPropsValues.getCompanyId(), _groupUser.getUserId(),
 			SocialRelationConstants.TYPE_BI_CONNECTION, StringPool.EQUAL,
 			WorkflowConstants.STATUS_APPROVED, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, new UserFirstNameComparator(true));
 
-		Assert.assertEquals(1, socialUsers.size());
+		Assert.assertEquals(1, users.size());
 	}
 
 	private static Group _group;
