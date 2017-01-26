@@ -78,7 +78,7 @@ public class WorkflowTaskManagerImplTest
 
 		assignWorkflowTaskToUser(siteAdminUser, siteAdminUser);
 
-		approveWorkflowTask(siteAdminUser);
+		completeWorkflowTask(siteAdminUser, "approve");
 
 		blogsEntry = BlogsEntryLocalServiceUtil.getBlogsEntry(
 			blogsEntry.getEntryId());
@@ -108,7 +108,7 @@ public class WorkflowTaskManagerImplTest
 		Assert.assertEquals(
 			WorkflowConstants.STATUS_PENDING, record.getStatus());
 
-		approveWorkflowTask(adminUser);
+		completeWorkflowTask(adminUser, "approve");
 
 		record = DDLRecordLocalServiceUtil.getRecord(record.getRecordId());
 
@@ -143,13 +143,35 @@ public class WorkflowTaskManagerImplTest
 
 		checkUserNotificationEventsByUsers(portalContentReviewerUser);
 
-		approveWorkflowTask(portalContentReviewerUser);
+		completeWorkflowTask(portalContentReviewerUser, "approve");
 
 		blogsEntry = BlogsEntryLocalServiceUtil.getBlogsEntry(
 			blogsEntry.getEntryId());
 
 		Assert.assertEquals(
 			WorkflowConstants.STATUS_APPROVED, blogsEntry.getStatus());
+
+		deactiveWorkflow(BlogsEntry.class.getName(), 0);
+	}
+
+	@Test
+	public void testRejectWorkflowBlogsEntryAsSiteAdmin() throws Exception {
+		activeSingleApproverWorkflow(BlogsEntry.class.getName(), 0);
+
+		BlogsEntry blogsEntry = addBlogsEntry();
+
+		checkUserNotificationEventsByUsers(
+			adminUser, portalContentReviewerUser, siteAdminUser);
+
+		assignWorkflowTaskToUser(siteAdminUser, siteAdminUser);
+
+		completeWorkflowTask(siteAdminUser, "reject");
+
+		blogsEntry = BlogsEntryLocalServiceUtil.getBlogsEntry(
+			blogsEntry.getEntryId());
+
+		Assert.assertEquals(
+			WorkflowConstants.STATUS_PENDING, blogsEntry.getStatus());
 
 		deactiveWorkflow(BlogsEntry.class.getName(), 0);
 	}
