@@ -19,6 +19,8 @@ import com.liferay.adaptive.media.AdaptiveMediaAttribute;
 import com.liferay.adaptive.media.AdaptiveMediaException;
 import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
 import com.liferay.adaptive.media.handler.AdaptiveMediaRequestHandler;
+import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
+import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
 import com.liferay.adaptive.media.image.finder.ImageAdaptiveMediaFinder;
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaAttributeMapping;
 import com.liferay.adaptive.media.image.internal.util.Tuple;
@@ -35,11 +37,11 @@ import java.io.IOException;
 
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Stream;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -52,6 +54,8 @@ import org.osgi.service.component.annotations.Reference;
 )
 public class ImageAdaptiveMediaRequestHandler
 	implements AdaptiveMediaRequestHandler<ImageAdaptiveMediaProcessor> {
+
+	private ImageAdaptiveMediaConfigurationHelper _configurationHelper;
 
 	@Override
 	public Optional<AdaptiveMedia<ImageAdaptiveMediaProcessor>> handleRequest(
@@ -92,24 +96,43 @@ public class ImageAdaptiveMediaRequestHandler
 			ImageAdaptiveMediaAttributeMapping attributeMapping) {
 
 		try {
-			Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> mediaStream =
-				_finder.getAdaptiveMedia(
-					queryBuilder ->
-						queryBuilder.forVersion(fileVersion).with(
-							ImageAdaptiveMediaAttribute.IMAGE_HEIGHT,
-							attributeMapping.getAttributeValue(
-								ImageAdaptiveMediaAttribute.IMAGE_MAX_HEIGHT)).
-							with(
-								ImageAdaptiveMediaAttribute.IMAGE_WIDTH,
-								attributeMapping.getAttributeValue(
-									ImageAdaptiveMediaAttribute.
-										IMAGE_MAX_WIDTH)).done());
+			Optional<ImageAdaptiveMediaConfigurationEntry>
+				configurationEntryOptional = attributeMapping.getAttributeValue(
+					AdaptiveMediaAttribute.configurationUuid()).flatMap(
+						configurationUuid ->
+							_configurationHelper.
+								getImageAdaptiveMediaConfigurationEntry(
+									fileVersion.getCompanyId(),
+									configurationUuid));
 
-			return mediaStream.findFirst();
+			if (!configurationEntryOptional.isPresent()) {
+				return Optional.empty();
+			}
+
+			ImageAdaptiveMediaConfigurationEntry configurationEntry =
+				configurationEntryOptional.get();
+
+			Map<String, String> properties = configurationEntry.getProperties();
+
+			return _finder.getAdaptiveMedia(
+				queryBuilder -> queryBuilder.forVersion(fileVersion).with(
+					ImageAdaptiveMediaAttribute.IMAGE_HEIGHT,
+					GetterUtil.getInteger(properties.get("max-height"))).
+					with(
+						ImageAdaptiveMediaAttribute.IMAGE_WIDTH,
+						GetterUtil.getInteger(properties.get("max-width")))
+					.done()).findFirst();
 		}
 		catch (AdaptiveMediaException | PortalException e) {
 			throw new AdaptiveMediaRuntimeException(e);
 		}
+	}
+
+	@Reference
+	protected void setImageAdaptiveMediaConfigurationHelper(
+		ImageAdaptiveMediaConfigurationHelper configurationHelper) {
+
+		_configurationHelper = configurationHelper;
 	}
 
 	private Optional<Tuple<FileVersion, ImageAdaptiveMediaAttributeMapping>>

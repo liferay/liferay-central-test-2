@@ -70,17 +70,9 @@ public class ImageAdaptiveMediaAttributeMapping {
 			_getAttributeValue(
 				properties, ImageAdaptiveMediaAttribute.IMAGE_HEIGHT));
 		attributes.put(
-			ImageAdaptiveMediaAttribute.IMAGE_MAX_HEIGHT,
-			_getAttributeValue(
-				properties, ImageAdaptiveMediaAttribute.IMAGE_MAX_HEIGHT));
-		attributes.put(
 			ImageAdaptiveMediaAttribute.IMAGE_WIDTH,
 			_getAttributeValue(
 				properties, ImageAdaptiveMediaAttribute.IMAGE_WIDTH));
-		attributes.put(
-			ImageAdaptiveMediaAttribute.IMAGE_MAX_WIDTH,
-			_getAttributeValue(
-				properties, ImageAdaptiveMediaAttribute.IMAGE_MAX_WIDTH));
 
 		return new ImageAdaptiveMediaAttributeMapping(attributes);
 	}

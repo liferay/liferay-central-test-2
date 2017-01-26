@@ -32,21 +32,9 @@ public final class ImageAdaptiveMediaAttribute {
 				ImageAdaptiveMediaAttribute::_intDistance);
 
 	public static final AdaptiveMediaAttribute
-		<ImageAdaptiveMediaProcessor, Integer> IMAGE_MAX_HEIGHT =
-			new AdaptiveMediaAttribute<>(
-				"max-height", AdaptiveMediaAttributeConverterUtil::parseInt,
-				ImageAdaptiveMediaAttribute::_intDistance);
-
-	public static final AdaptiveMediaAttribute
 		<ImageAdaptiveMediaProcessor, Integer> IMAGE_WIDTH =
 			new AdaptiveMediaAttribute<>(
 				"width", AdaptiveMediaAttributeConverterUtil::parseInt,
-				ImageAdaptiveMediaAttribute::_intDistance);
-
-	public static final AdaptiveMediaAttribute
-		<ImageAdaptiveMediaProcessor, Integer> IMAGE_MAX_WIDTH =
-			new AdaptiveMediaAttribute<>(
-				"max-width", AdaptiveMediaAttributeConverterUtil::parseInt,
 				ImageAdaptiveMediaAttribute::_intDistance);
 
 	/**
@@ -76,14 +64,8 @@ public final class ImageAdaptiveMediaAttribute {
 			ImageAdaptiveMediaAttribute.IMAGE_HEIGHT.getName(),
 			ImageAdaptiveMediaAttribute.IMAGE_HEIGHT);
 		_allowedAttributes.put(
-			ImageAdaptiveMediaAttribute.IMAGE_MAX_HEIGHT.getName(),
-			ImageAdaptiveMediaAttribute.IMAGE_MAX_HEIGHT);
-		_allowedAttributes.put(
 			ImageAdaptiveMediaAttribute.IMAGE_WIDTH.getName(),
 			ImageAdaptiveMediaAttribute.IMAGE_WIDTH);
-		_allowedAttributes.put(
-			ImageAdaptiveMediaAttribute.IMAGE_MAX_WIDTH.getName(),
-			ImageAdaptiveMediaAttribute.IMAGE_MAX_WIDTH);
 	}
 
 }

@@ -211,19 +211,11 @@ public class ImageAdaptiveMediaFinderImplTest {
 			adaptiveMedia.getAttributeValue(
 				ImageAdaptiveMediaAttribute.IMAGE_HEIGHT),
 			Optional.of(99));
-		Assert.assertEquals(
-			adaptiveMedia.getAttributeValue(
-				ImageAdaptiveMediaAttribute.IMAGE_MAX_HEIGHT),
-			Optional.of(100));
 
 		Assert.assertEquals(
 			adaptiveMedia.getAttributeValue(
 				ImageAdaptiveMediaAttribute.IMAGE_WIDTH),
 			Optional.of(199));
-		Assert.assertEquals(
-			adaptiveMedia.getAttributeValue(
-				ImageAdaptiveMediaAttribute.IMAGE_MAX_WIDTH),
-			Optional.of(200));
 	}
 
 	@Test
@@ -315,10 +307,6 @@ public class ImageAdaptiveMediaFinderImplTest {
 			adaptiveMedia1.getAttributeValue(
 				ImageAdaptiveMediaAttribute.IMAGE_WIDTH),
 			Optional.of(199));
-		Assert.assertEquals(
-			adaptiveMedia1.getAttributeValue(
-				ImageAdaptiveMediaAttribute.IMAGE_MAX_WIDTH),
-			Optional.of(200));
 
 		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia2 =
 			adaptiveMediaList.get(1);
@@ -327,10 +315,6 @@ public class ImageAdaptiveMediaFinderImplTest {
 			adaptiveMedia2.getAttributeValue(
 				ImageAdaptiveMediaAttribute.IMAGE_WIDTH),
 			Optional.of(399));
-		Assert.assertEquals(
-			adaptiveMedia2.getAttributeValue(
-				ImageAdaptiveMediaAttribute.IMAGE_MAX_WIDTH),
-			Optional.of(400));
 
 		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia3 =
 			adaptiveMediaList.get(2);
@@ -339,10 +323,6 @@ public class ImageAdaptiveMediaFinderImplTest {
 			adaptiveMedia3.getAttributeValue(
 				ImageAdaptiveMediaAttribute.IMAGE_WIDTH),
 			Optional.of(799));
-		Assert.assertEquals(
-			adaptiveMedia3.getAttributeValue(
-				ImageAdaptiveMediaAttribute.IMAGE_MAX_WIDTH),
-			Optional.of(800));
 	}
 
 	@Test
@@ -434,10 +414,6 @@ public class ImageAdaptiveMediaFinderImplTest {
 			adaptiveMedia1.getAttributeValue(
 				ImageAdaptiveMediaAttribute.IMAGE_WIDTH),
 			Optional.of(799));
-		Assert.assertEquals(
-			adaptiveMedia1.getAttributeValue(
-				ImageAdaptiveMediaAttribute.IMAGE_MAX_WIDTH),
-			Optional.of(800));
 
 		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia2 =
 			adaptiveMediaList.get(1);
@@ -446,10 +422,6 @@ public class ImageAdaptiveMediaFinderImplTest {
 			adaptiveMedia2.getAttributeValue(
 				ImageAdaptiveMediaAttribute.IMAGE_WIDTH),
 			Optional.of(399));
-		Assert.assertEquals(
-			adaptiveMedia2.getAttributeValue(
-				ImageAdaptiveMediaAttribute.IMAGE_MAX_WIDTH),
-			Optional.of(400));
 
 		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia3 =
 			adaptiveMediaList.get(2);
@@ -458,10 +430,6 @@ public class ImageAdaptiveMediaFinderImplTest {
 			adaptiveMedia3.getAttributeValue(
 				ImageAdaptiveMediaAttribute.IMAGE_WIDTH),
 			Optional.of(199));
-		Assert.assertEquals(
-			adaptiveMedia3.getAttributeValue(
-				ImageAdaptiveMediaAttribute.IMAGE_MAX_WIDTH),
-			Optional.of(200));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -621,19 +589,11 @@ public class ImageAdaptiveMediaFinderImplTest {
 			adaptiveMedia.getAttributeValue(
 				ImageAdaptiveMediaAttribute.IMAGE_HEIGHT),
 			Optional.of(99));
-		Assert.assertEquals(
-			adaptiveMedia.getAttributeValue(
-				ImageAdaptiveMediaAttribute.IMAGE_MAX_HEIGHT),
-			Optional.of(100));
 
 		Assert.assertEquals(
 			adaptiveMedia.getAttributeValue(
 				ImageAdaptiveMediaAttribute.IMAGE_WIDTH),
 			Optional.of(1000));
-		Assert.assertEquals(
-			adaptiveMedia.getAttributeValue(
-				ImageAdaptiveMediaAttribute.IMAGE_MAX_WIDTH),
-			Optional.empty());
 	}
 
 	@Test
@@ -709,12 +669,6 @@ public class ImageAdaptiveMediaFinderImplTest {
 
 		Assert.assertEquals(99, (int)adaptiveMedia0HeightOptional.get());
 
-		Optional<Integer> adaptiveMedia0MaxHeightOptional =
-			adaptiveMedia0.getAttributeValue(
-				ImageAdaptiveMediaAttribute.IMAGE_MAX_HEIGHT);
-
-		Assert.assertEquals(100, (int)adaptiveMedia0MaxHeightOptional.get());
-
 		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia1 =
 			adaptiveMedias.get(1);
 
@@ -723,12 +677,6 @@ public class ImageAdaptiveMediaFinderImplTest {
 				ImageAdaptiveMediaAttribute.IMAGE_HEIGHT);
 
 		Assert.assertEquals(199, (int)adaptiveMedia1HeightOptional.get());
-
-		Optional<Integer> adaptiveMedia1MaxHeightOptional =
-			adaptiveMedia1.getAttributeValue(
-				ImageAdaptiveMediaAttribute.IMAGE_MAX_HEIGHT);
-
-		Assert.assertEquals(200, (int)adaptiveMedia1MaxHeightOptional.get());
 	}
 
 	@Test
@@ -804,12 +752,6 @@ public class ImageAdaptiveMediaFinderImplTest {
 
 		Assert.assertEquals(199, (int)adaptiveMedia0HeightOptional.get());
 
-		Optional<Integer> adaptiveMedia0MaxHeightOptional =
-			adaptiveMedia0.getAttributeValue(
-				ImageAdaptiveMediaAttribute.IMAGE_MAX_HEIGHT);
-
-		Assert.assertEquals(200, (int)adaptiveMedia0MaxHeightOptional.get());
-
 		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia1 =
 			adaptiveMedias.get(1);
 
@@ -818,12 +760,6 @@ public class ImageAdaptiveMediaFinderImplTest {
 				ImageAdaptiveMediaAttribute.IMAGE_HEIGHT);
 
 		Assert.assertEquals(99, (int)adaptiveMedia1HeightOptional.get());
-
-		Optional<Integer> adaptiveMedia1MaxHeightOptional =
-			adaptiveMedia1.getAttributeValue(
-				ImageAdaptiveMediaAttribute.IMAGE_MAX_HEIGHT);
-
-		Assert.assertEquals(100, (int)adaptiveMedia1MaxHeightOptional.get());
 	}
 
 	@Test
@@ -899,12 +835,6 @@ public class ImageAdaptiveMediaFinderImplTest {
 
 		Assert.assertEquals(99, (int)adaptiveMedia0HeightOptional.get());
 
-		Optional<Integer> adaptiveMedia0MaxHeightOptional =
-			adaptiveMedia0.getAttributeValue(
-				ImageAdaptiveMediaAttribute.IMAGE_MAX_HEIGHT);
-
-		Assert.assertEquals(100, (int)adaptiveMedia0MaxHeightOptional.get());
-
 		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia1 =
 			adaptiveMedias.get(1);
 
@@ -913,110 +843,6 @@ public class ImageAdaptiveMediaFinderImplTest {
 				ImageAdaptiveMediaAttribute.IMAGE_HEIGHT);
 
 		Assert.assertEquals(55, (int)adaptiveMedia1HeightOptional.get());
-
-		Optional<Integer> adaptiveMedia1MaxHeightOptional =
-			adaptiveMedia1.getAttributeValue(
-				ImageAdaptiveMediaAttribute.IMAGE_MAX_HEIGHT);
-
-		Assert.assertEquals(200, (int)adaptiveMedia1MaxHeightOptional.get());
-	}
-
-	@Test
-	public void testGetMediaQueryWith200MaxHeightAspectRatio()
-		throws Exception {
-
-		ImageAdaptiveMediaConfigurationEntry configurationEntry1 =
-			new ImageAdaptiveMediaConfigurationEntryImpl(
-				StringUtil.randomString(), StringUtil.randomString(),
-				MapUtil.fromArray("max-height", "100", "max-width", "200"));
-
-		ImageAdaptiveMediaConfigurationEntry configurationEntry2 =
-			new ImageAdaptiveMediaConfigurationEntryImpl(
-				StringUtil.randomString(), StringUtil.randomString(),
-				MapUtil.fromArray("max-height", "200", "max-width", "100"));
-
-		Mockito.when(
-			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				Mockito.any(long.class))
-		).thenReturn(
-			Arrays.asList(configurationEntry1, configurationEntry2)
-		);
-
-		Mockito.when(
-			_fileVersion.getFileName()
-		).thenReturn(
-			StringUtil.randomString()
-		);
-
-		Mockito.when(
-			_fileVersion.getMimeType()
-		).thenReturn(
-			"image/jpeg"
-		);
-
-		AdaptiveMediaImage image1 = _mockImage(99, 199, 1000L);
-
-		Mockito.when(
-			_imageLocalService.fetchAdaptiveMediaImage(
-				configurationEntry1.getUUID(), _fileVersion.getFileVersionId())
-		).thenReturn(
-			image1
-		);
-
-		AdaptiveMediaImage image2 = _mockImage(55, 99, 1000L);
-
-		Mockito.when(
-			_imageLocalService.fetchAdaptiveMediaImage(
-				configurationEntry2.getUUID(), _fileVersion.getFileVersionId())
-		).thenReturn(
-			image2
-		);
-
-		Mockito.when(
-			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
-		).thenReturn(
-			true
-		);
-
-		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream =
-			_finder.getAdaptiveMedia(
-				queryBuilder ->
-					queryBuilder.forVersion(_fileVersion).with(
-						ImageAdaptiveMediaAttribute.IMAGE_MAX_HEIGHT,
-						200).done());
-
-		List<AdaptiveMedia<ImageAdaptiveMediaProcessor>> adaptiveMedias =
-			stream.collect(Collectors.toList());
-
-		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia0 =
-			adaptiveMedias.get(0);
-
-		Optional<Integer> adaptiveMedia0HeightOptional =
-			adaptiveMedia0.getAttributeValue(
-				ImageAdaptiveMediaAttribute.IMAGE_HEIGHT);
-
-		Assert.assertEquals(55, (int)adaptiveMedia0HeightOptional.get());
-
-		Optional<Integer> adaptiveMedia0MaxHeightOptional =
-			adaptiveMedia0.getAttributeValue(
-				ImageAdaptiveMediaAttribute.IMAGE_MAX_HEIGHT);
-
-		Assert.assertEquals(200, (int)adaptiveMedia0MaxHeightOptional.get());
-
-		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia1 =
-			adaptiveMedias.get(1);
-
-		Optional<Integer> adaptiveMedia1HeightOptional =
-			adaptiveMedia1.getAttributeValue(
-				ImageAdaptiveMediaAttribute.IMAGE_HEIGHT);
-
-		Assert.assertEquals(99, (int)adaptiveMedia1HeightOptional.get());
-
-		Optional<Integer> adaptiveMedia1MaxHeightOptional =
-			adaptiveMedia1.getAttributeValue(
-				ImageAdaptiveMediaAttribute.IMAGE_MAX_HEIGHT);
-
-		Assert.assertEquals(100, (int)adaptiveMedia1MaxHeightOptional.get());
 	}
 
 	@Test
@@ -1168,12 +994,6 @@ public class ImageAdaptiveMediaFinderImplTest {
 
 		Assert.assertEquals(99, (int)adaptiveMedia0HeightOptional.get());
 
-		Optional<Integer> adaptiveMedia0MaxHeightOptional =
-			adaptiveMedia0.getAttributeValue(
-				ImageAdaptiveMediaAttribute.IMAGE_MAX_HEIGHT);
-
-		Assert.assertEquals(100, (int)adaptiveMedia0MaxHeightOptional.get());
-
 		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia1 =
 			adaptiveMedias.get(1);
 
@@ -1182,12 +1002,6 @@ public class ImageAdaptiveMediaFinderImplTest {
 				ImageAdaptiveMediaAttribute.IMAGE_HEIGHT);
 
 		Assert.assertEquals(199, (int)adaptiveMedia1HeightOptional.get());
-
-		Optional<Integer> adaptiveMedia1MaxHeightOptional =
-			adaptiveMedia1.getAttributeValue(
-				ImageAdaptiveMediaAttribute.IMAGE_MAX_HEIGHT);
-
-		Assert.assertEquals(200, (int)adaptiveMedia1MaxHeightOptional.get());
 	}
 
 	@Test
