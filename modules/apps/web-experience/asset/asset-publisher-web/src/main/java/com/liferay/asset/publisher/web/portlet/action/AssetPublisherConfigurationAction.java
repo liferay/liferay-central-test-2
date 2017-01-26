@@ -517,13 +517,13 @@ public class AssetPublisherConfigurationAction
 	}
 
 	@Reference(unbind = "-")
-	protected void setItemSelector(ItemSelector itemSelector) {
-		this.itemSelector = itemSelector;
+	protected void setGroupLocalService(GroupLocalService groupLocalService) {
+		this.groupLocalService = groupLocalService;
 	}
 
 	@Reference(unbind = "-")
-	protected void setGroupLocalService(GroupLocalService groupLocalService) {
-		this.groupLocalService = groupLocalService;
+	protected void setItemSelector(ItemSelector itemSelector) {
+		this.itemSelector = itemSelector;
 	}
 
 	@Reference(unbind = "-")
@@ -749,9 +749,9 @@ public class AssetPublisherConfigurationAction
 
 	protected AssetTagLocalService assetTagLocalService;
 	protected GroupLocalService groupLocalService;
+	protected ItemSelector itemSelector;
 	protected LayoutLocalService layoutLocalService;
 	protected LayoutRevisionLocalService layoutRevisionLocalService;
-	protected ItemSelector itemSelector;
 
 	@Reference
 	protected Portal portal;
