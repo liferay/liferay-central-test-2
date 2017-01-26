@@ -200,15 +200,12 @@ public class PortletContainerImpl implements PortletContainer {
 	protected void processPublicRenderParameters(
 		HttpServletRequest request, Layout layout, Portlet portlet) {
 
+		PortletApp portletApp = portlet.getPortletApp();
+		PortletQName portletQName = PortletQNameUtil.getPortletQName();
+		Map<String, String[]> publicRenderParameters = null;
 		ThemeDisplay themeDisplay = null;
 
-		PortletApp portletApp = portlet.getPortletApp();
-
-		Map<String, String[]> publicRenderParameters = null;
-
 		Map<String, String[]> parameters = request.getParameterMap();
-
-		PortletQName portletQName = PortletQNameUtil.getPortletQName();
 
 		for (Map.Entry<String, String[]> entry : parameters.entrySet()) {
 			String name = entry.getKey();
