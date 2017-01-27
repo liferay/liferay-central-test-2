@@ -33,7 +33,6 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.test.IdempotentRetryAssert;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
 import com.liferay.portal.kernel.test.rule.Sync;
@@ -54,8 +53,6 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.concurrent.Callable;
-import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -540,46 +537,22 @@ public class JournalIndexerTest {
 	}
 
 	protected void assertSearchCount(
-			final int expectedCount, final long groupId, final boolean head,
-			final int status, final SearchContext searchContext)
+			int expectedCount, long groupId, boolean head, int status,
+			SearchContext searchContext)
 		throws Exception {
 
-		IdempotentRetryAssert.retryAssert(
-			3, TimeUnit.SECONDS,
-			new Callable<Void>() {
+		Hits hits = search(groupId, head, status, searchContext);
 
-				@Override
-				public Void call() throws Exception {
-					int actualCount = searchCount(
-						groupId, head, status, searchContext);
-
-					Assert.assertEquals(expectedCount, actualCount);
-
-					return null;
-				}
-
-			});
+		Assert.assertEquals(hits.toString(), expectedCount, hits.getLength());
 	}
 
 	protected void assertSearchCount(
-			final int expectedCount, final long groupId,
-			final SearchContext searchContext)
+			int expectedCount, long groupId, SearchContext searchContext)
 		throws Exception {
 
-		IdempotentRetryAssert.retryAssert(
-			10, TimeUnit.SECONDS,
-			new Callable<Void>() {
+		Hits hits = search(groupId, searchContext);
 
-				@Override
-				public Void call() throws Exception {
-					int actualCount = searchCount(groupId, searchContext);
-
-					Assert.assertEquals(expectedCount, actualCount);
-
-					return null;
-				}
-
-			});
+		Assert.assertEquals(hits.toString(), expectedCount, hits.getLength());
 	}
 
 	protected void indexVersions(boolean delete, boolean all) throws Exception {
@@ -706,7 +679,7 @@ public class JournalIndexerTest {
 		assertSearchCount(1, _group.getGroupId(), searchContext2);
 	}
 
-	protected int searchCount(
+	protected Hits search(
 			long groupId, boolean head, int status, SearchContext searchContext)
 		throws Exception {
 
@@ -717,15 +690,13 @@ public class JournalIndexerTest {
 		searchContext.setAttribute("status", status);
 		searchContext.setGroupIds(new long[] {groupId});
 
-		Hits results = indexer.search(searchContext);
-
-		return results.getLength();
+		return indexer.search(searchContext);
 	}
 
-	protected int searchCount(long groupId, SearchContext searchContext)
+	protected Hits search(long groupId, SearchContext searchContext)
 		throws Exception {
 
-		return searchCount(
+		return search(
 			groupId, true, WorkflowConstants.STATUS_APPROVED, searchContext);
 	}
 
