@@ -45,9 +45,7 @@ public class LoremIpsumBlogsEntryDemoDataCreatorImpl
 		throws IOException, PortalException {
 
 		String title = _getRandomElement(_titles);
-
 		String subtitle = _getRandomElement(_subtitles);
-
 		String content = _getRandomContent();
 
 		return createBlogsEntry(userId, groupId, title, subtitle, content);
