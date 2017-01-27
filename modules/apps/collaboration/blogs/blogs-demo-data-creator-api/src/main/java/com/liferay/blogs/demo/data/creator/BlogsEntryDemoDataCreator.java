@@ -14,7 +14,7 @@
 
 package com.liferay.blogs.demo.data.creator;
 
-import com.liferay.blogs.model.BlogsEntry;
+import com.liferay.blogs.kernel.model.BlogsEntry;
 import com.liferay.portal.kernel.exception.PortalException;
 
 import java.io.IOException;
