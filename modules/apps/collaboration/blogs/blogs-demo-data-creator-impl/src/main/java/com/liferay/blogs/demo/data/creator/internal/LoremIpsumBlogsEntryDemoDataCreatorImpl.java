@@ -25,9 +25,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.IOException;
-import java.io.InputStream;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -55,6 +53,15 @@ public class LoremIpsumBlogsEntryDemoDataCreatorImpl
 		return createBlogsEntry(userId, groupId, title, subtitle, content);
 	}
 
+	private static List<String> _read(String fileName) {
+		return Arrays.asList(
+			StringUtil.split(
+				StringUtil.read(
+					LoremIpsumBlogsEntryDemoDataCreatorImpl.class,
+					"dependencies/lorem/ipsum/" + fileName + ".txt"),
+				CharPool.NEW_LINE));
+	}
+
 	private String _getRandomContent() {
 		int numberOfParagraphs = RandomUtil.nextInt(5) + 3;
 
@@ -76,17 +83,8 @@ public class LoremIpsumBlogsEntryDemoDataCreatorImpl
 	private static final Log _log = LogFactoryUtil.getLog(
 		LoremIpsumBlogsEntryDemoDataCreatorImpl.class);
 
-	private static List<String> _entryParagraphs = _read("paragraphs");
-	private static List<String> _entrySubtitles = _read("subtitles");
-	private static List<String> _entryTitles = _read("titles");
-
-	private static List<String> _read(String fileName) {
-		return Arrays.asList(
-			StringUtil.split(
-				StringUtil.read(
-					LoremIpsumBlogsEntryDemoDataCreatorImpl.class,
-					"dependencies/lorem/ipsum/" + fileName + ".txt"),
-					CharPool.NEW_LINE));
-	}
+	private static final List<String> _entryParagraphs = _read("paragraphs");
+	private static final List<String> _entrySubtitles = _read("subtitles");
+	private static final List<String> _entryTitles = _read("titles");
 
 }
