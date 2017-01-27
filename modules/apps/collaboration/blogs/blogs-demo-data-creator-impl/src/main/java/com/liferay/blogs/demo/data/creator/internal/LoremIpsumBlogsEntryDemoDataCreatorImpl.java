@@ -44,9 +44,9 @@ public class LoremIpsumBlogsEntryDemoDataCreatorImpl
 	public BlogsEntry create(long userId, long groupId)
 		throws IOException, PortalException {
 
-		String title = _getRandomElement(_entryTitles);
+		String title = _getRandomElement(_titles);
 
-		String subtitle = _getRandomElement(_entrySubtitles);
+		String subtitle = _getRandomElement(_subtitles);
 
 		String content = _getRandomContent();
 
@@ -63,13 +63,13 @@ public class LoremIpsumBlogsEntryDemoDataCreatorImpl
 	}
 
 	private String _getRandomContent() {
-		int numberOfParagraphs = RandomUtil.nextInt(5) + 3;
+		int count = RandomUtil.nextInt(5) + 3;
 
-		StringBundler sb = new StringBundler(numberOfParagraphs * 3);
+		StringBundler sb = new StringBundler(count * 3);
 
-		for (int i = 0; i < numberOfParagraphs; i++) {
+		for (int i = 0; i < count; i++) {
 			sb.append("<p>");
-			sb.append(_getRandomElement(_entryParagraphs));
+			sb.append(_getRandomElement(_paragraphs));
 			sb.append("</p>");
 		}
 
@@ -83,8 +83,8 @@ public class LoremIpsumBlogsEntryDemoDataCreatorImpl
 	private static final Log _log = LogFactoryUtil.getLog(
 		LoremIpsumBlogsEntryDemoDataCreatorImpl.class);
 
-	private static final List<String> _entryParagraphs = _read("paragraphs");
-	private static final List<String> _entrySubtitles = _read("subtitles");
-	private static final List<String> _entryTitles = _read("titles");
+	private static final List<String> _paragraphs = _read("paragraphs");
+	private static final List<String> _subtitles = _read("subtitles");
+	private static final List<String> _titles = _read("titles");
 
 }
