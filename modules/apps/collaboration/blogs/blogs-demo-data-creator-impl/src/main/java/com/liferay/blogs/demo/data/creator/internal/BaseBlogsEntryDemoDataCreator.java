@@ -58,7 +58,6 @@ public abstract class BaseBlogsEntryDemoDataCreator
 
 		serviceContext.setAddGroupPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
-
 		serviceContext.setScopeGroupId(groupId);
 
 		ImageSelector imageSelector = new ImageSelector(
