@@ -82,30 +82,19 @@ public class LoremIpsumBlogsEntryDemoDataCreatorImpl
 
 	static {
 		_entryParagraphs.addAll(
-			_getAllLines("dependencies/lorem/ipsum/paragraphs.txt"));
+			_read("dependencies/lorem/ipsum/paragraphs.txt"));
 		_entrySubtitles.addAll(
-			_getAllLines("dependencies/lorem/ipsum/subtitles.txt"));
+			_read("dependencies/lorem/ipsum/subtitles.txt"));
 		_entryTitles.addAll(
-			_getAllLines("dependencies/lorem/ipsum/titles.txt"));
+			_read("dependencies/lorem/ipsum/titles.txt"));
 	}
 
-	private static List<String> _getAllLines(String fileName) {
-		try (InputStream is =
-				LoremIpsumBlogsEntryDemoDataCreatorImpl.class.
-					getResourceAsStream(fileName)) {
-
-			String fileContent = StringUtil.read(is);
-
-			return Arrays.asList(
-				StringUtil.split(fileContent, CharPool.NEW_LINE));
-		}
-		catch (IOException ioe) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(ioe);
-			}
-
-			return new ArrayList<>();
-		}
+	private static List<String> _read(String fileName) {
+		return Arrays.asList(
+			StringUtil.split(
+				StringUtil.read(
+					LoremIpsumBlogsEntryDemoDataCreatorImpl.class, fileName),
+					CharPool.NEW_LINE));
 	}
 
 }
