@@ -76,15 +76,16 @@ public class LoremIpsumBlogsEntryDemoDataCreatorImpl
 	private static final Log _log = LogFactoryUtil.getLog(
 		LoremIpsumBlogsEntryDemoDataCreatorImpl.class);
 
-	private static List<String> _entryParagraphs = _read("dependencies/lorem/ipsum/paragraphs.txt");
-	private static List<String> _entrySubtitles = _read("dependencies/lorem/ipsum/subtitles.txt");
-	private static List<String> _entryTitles = _read("dependencies/lorem/ipsum/titles.txt");
+	private static List<String> _entryParagraphs = _read("paragraphs");
+	private static List<String> _entrySubtitles = _read("subtitles");
+	private static List<String> _entryTitles = _read("titles");
 
 	private static List<String> _read(String fileName) {
 		return Arrays.asList(
 			StringUtil.split(
 				StringUtil.read(
-					LoremIpsumBlogsEntryDemoDataCreatorImpl.class, fileName),
+					LoremIpsumBlogsEntryDemoDataCreatorImpl.class,
+					"dependencies/lorem/ipsum/" + fileName + ".txt"),
 					CharPool.NEW_LINE));
 	}
 
