@@ -1015,9 +1015,8 @@ AUI.add(
 
 						var portletNamespace = instance.get('portletNamespace');
 
-						var portletURL = Liferay.PortletURL.createURL(themeDisplay.getURLControlPanel());
+						var portletURL = Liferay.PortletURL.createURL(themeDisplay.getSiteAdminURL());
 
-						portletURL.setDoAsGroupId(instance.get('doAsGroupId'));
 						portletURL.setParameter('criteria', criteria);
 						portletURL.setParameter('itemSelectedEventName', portletNamespace + 'selectDocumentLibrary');
 						portletURL.setParameter('p_p_auth', container.getData('itemSelectorAuthToken'));
@@ -1061,9 +1060,8 @@ AUI.add(
 					getUploadURL: function() {
 						var instance = this;
 
-						var portletURL = Liferay.PortletURL.createURL(themeDisplay.getURLControlPanel());
+						var portletURL = Liferay.PortletURL.createURL(themeDisplay.getSiteAdminURL());
 
-						portletURL.setDoAsGroupId(instance.get('doAsGroupId'));
 						portletURL.setLifecycle(Liferay.PortletURL.ACTION_PHASE);
 						portletURL.setParameter('cmd', 'add_temp');
 						portletURL.setParameter('javax.portlet.action', '/document_library/upload_file_entry');
