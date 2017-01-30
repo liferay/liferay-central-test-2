@@ -242,7 +242,7 @@ AUI.add(
 			_getTemplateResourceURL: function() {
 				var instance = this;
 
-				var portletURL = Liferay.PortletURL.createURL(themeDisplay.getURLControlPanel());
+				var portletURL = Liferay.PortletURL.createRenderURL(themeDisplay.getURLControlPanel());
 
 				var container = instance.get('container');
 
@@ -1201,7 +1201,7 @@ AUI.add(
 
 						var container = instance.get('container');
 
-						var url = Liferay.PortletURL.createURL(themeDisplay.getURLControlPanel());
+						var url = Liferay.PortletURL.createRenderURL(themeDisplay.getURLControlPanel());
 
 						url.setParameter('eventName', 'selectContent');
 						url.setParameter('groupId', themeDisplay.getScopeGroupId());
