@@ -3,7 +3,7 @@
 ;
 [subrepo]
 	cmdver = liferay
-	commit = 15f83ab7c84e7599c9c1f0c71c80bbda1af1daad
+	commit = 958e033056c84ff4bea0c5f202f645bf745a7ad3
 	mode = push
-	parent = f6c971f6f6b5aa3ab63f571a0e56ca9706f79081
+	parent = a18b0aef402e1351272b4d35b986c1b7206e378d
 	remote = git@github.com:liferay/com-liferay-flags.git
