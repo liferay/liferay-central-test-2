@@ -16,6 +16,18 @@
 
 <%@ include file="/html/taglib/aui/panel/init.jsp" %>
 
-<div id="<%= id %>"></div>
+<%
+String bodyContentString = StringPool.BLANK;
 
-<div id="<%= id %>bodyContent">
+Object bodyContent = request.getAttribute("aui:panel:bodyContent");
+
+if (bodyContent != null) {
+	bodyContentString = bodyContent.toString();
+}
+%>
+
+<liferay-ui:panel-container extended="<%= !collapsed %>" id="<%= id %>" markupView="lexicon" persistState="<%= true %>">
+	<liferay-ui:panel collapsible="<%= collapsible %>" extended="<%= !collapsed %>" id="<%= id %>" markupView="lexicon" persistState="<%= true %>" title="<%= localizeLabel ? LanguageUtil.get(request, label) : label %>">
+		<%= bodyContentString %>
+	</liferay-ui:panel>
+</liferay-ui:panel-container>

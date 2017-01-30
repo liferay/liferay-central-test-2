@@ -24,12 +24,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.jsp.tagext.BodyTag;
 
 /**
  * @author Julio Camarero
  * @author Brian Wing Shun Chan
  */
-public class PanelTag extends BasePanelTag {
+public class PanelTag extends BasePanelTag implements BodyTag {
 
 	public void addToolTag(ToolTag toolTag) {
 		if (_toolTags == null) {
@@ -47,6 +48,8 @@ public class PanelTag extends BasePanelTag {
 	protected void cleanUp() {
 		super.cleanUp();
 
+		_page = null;
+
 		if (_toolTags != null) {
 			for (ToolTag toolTag : _toolTags) {
 				toolTag.cleanUp();
@@ -57,8 +60,23 @@ public class PanelTag extends BasePanelTag {
 	}
 
 	@Override
+	protected String getPage() {
+		if (Validator.isNull(_page)) {
+			return "/html/taglib/aui/panel/page.jsp";
+		}
+		else {
+			return _page;
+		}
+	}
+
+	@Override
 	protected boolean isCleanUpSetAttributes() {
 		return _CLEAN_UP_SET_ATTRIBUTES;
+	}
+
+	@Override
+	protected int processStartTag() throws Exception {
+		return EVAL_BODY_BUFFERED;
 	}
 
 	@Override
@@ -78,6 +96,7 @@ public class PanelTag extends BasePanelTag {
 
 	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;
 
+	private java.lang.String _page;
 	private List<ToolTag> _toolTags;
 
 }

@@ -85,13 +85,8 @@ public abstract class BasePanelTag extends com.liferay.taglib.util.IncludeTag {
 	}
 
 	@Override
-	protected String getEndPage() {
-		return _END_PAGE;
-	}
-
-	@Override
-	protected String getStartPage() {
-		return _START_PAGE;
+	protected String getPage() {
+		return _PAGE;
 	}
 
 	@Override
@@ -105,11 +100,8 @@ public abstract class BasePanelTag extends com.liferay.taglib.util.IncludeTag {
 
 	protected static final String _ATTRIBUTE_NAMESPACE = "aui:panel:";
 
-	private static final String _END_PAGE =
-		"/html/taglib/aui/panel/end.jsp";
-
-	private static final String _START_PAGE =
-		"/html/taglib/aui/panel/start.jsp";
+	private static final String _PAGE =
+		"/html/taglib/aui/panel/page.jsp";
 
 	private boolean _collapsed = false;
 	private boolean _collapsible = false;
