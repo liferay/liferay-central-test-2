@@ -87,6 +87,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		deleteTempDirectory();
 
+		// DLFolder
+
 		updateDLFolderUserName();
 	}
 
@@ -155,10 +157,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 				}
 				else {
 					if (_log.isInfoEnabled()) {
-						_log.info(
-							"User " + userId + " does not exist in the " +
-								"database. The userNames of DLFolders with " +
-									"this userId will not be updated.");
+						_log.info("User " + userId + " does not exist");
 					}
 				}
 			}
