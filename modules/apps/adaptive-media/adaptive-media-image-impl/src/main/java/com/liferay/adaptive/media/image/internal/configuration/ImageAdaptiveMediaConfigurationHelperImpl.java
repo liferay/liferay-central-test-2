@@ -301,6 +301,18 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 		}
 	}
 
+	@Override
+	public ImageAdaptiveMediaConfigurationEntry
+			updateImageAdaptiveMediaConfigurationEntry(
+				long companyId, String name, String uuid,
+				Map<String, String> properties)
+		throws ImageAdaptiveMediaConfigurationException, IOException {
+
+		deleteImageAdaptiveMediaConfigurationEntry(companyId, uuid);
+		return addImageAdaptiveMediaConfigurationEntry(
+			companyId, name, uuid, properties);
+	}
+
 	@Reference(unbind = "-")
 	protected void setImageAdaptiveMediaConfigurationEntryParser(
 		ImageAdaptiveMediaConfigurationEntryParser configurationEntryParser) {

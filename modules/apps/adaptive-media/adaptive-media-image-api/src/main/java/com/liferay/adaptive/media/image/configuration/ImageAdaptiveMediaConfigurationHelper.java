@@ -71,4 +71,10 @@ public interface ImageAdaptiveMediaConfigurationHelper {
 
 	public void resetDefaultConfiguration(long companyId);
 
+	public ImageAdaptiveMediaConfigurationEntry
+			updateImageAdaptiveMediaConfigurationEntry(
+				long companyId, String name, String uuid,
+				Map<String, String> properties)
+		throws ImageAdaptiveMediaConfigurationException, IOException;
+
 }
