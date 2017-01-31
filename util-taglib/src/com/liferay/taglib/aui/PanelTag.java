@@ -48,24 +48,12 @@ public class PanelTag extends BasePanelTag implements BodyTag {
 	protected void cleanUp() {
 		super.cleanUp();
 
-		_page = null;
-
 		if (_toolTags != null) {
 			for (ToolTag toolTag : _toolTags) {
 				toolTag.cleanUp();
 			}
 
 			_toolTags = null;
-		}
-	}
-
-	@Override
-	protected String getPage() {
-		if (Validator.isNull(_page)) {
-			return "/html/taglib/aui/panel/page.jsp";
-		}
-		else {
-			return _page;
 		}
 	}
 
@@ -96,7 +84,6 @@ public class PanelTag extends BasePanelTag implements BodyTag {
 
 	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;
 
-	private java.lang.String _page;
 	private List<ToolTag> _toolTags;
 
 }
