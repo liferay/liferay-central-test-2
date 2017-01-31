@@ -3,7 +3,7 @@
 ;
 [subrepo]
 	cmdver = liferay
-	commit = ff8c1127d3420b024815014eb570cd39b10d424f
+	commit = 9d93aff98800e2a7c34bf68ab05b68d36bd9a3c6
 	mode = push
-	parent = 2218a3e97cbad05b307af47185c243a7c84421f1
+	parent = 4087131a9f4542adf13de4d14c5e2e41e75827b3
 	remote = git@github.com:liferay/com-liferay-portal-security.git
