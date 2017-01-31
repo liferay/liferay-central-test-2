@@ -86,7 +86,7 @@ public class KaleoDefinitionVersionModelImpl extends BaseModelImpl<KaleoDefiniti
 			{ "name", Types.VARCHAR },
 			{ "title", Types.VARCHAR },
 			{ "description", Types.VARCHAR },
-			{ "content", Types.VARCHAR },
+			{ "content", Types.CLOB },
 			{ "version", Types.VARCHAR },
 			{ "active_", Types.BOOLEAN },
 			{ "startKaleoNodeId", Types.BIGINT },
@@ -108,14 +108,14 @@ public class KaleoDefinitionVersionModelImpl extends BaseModelImpl<KaleoDefiniti
 		TABLE_COLUMNS_MAP.put("name", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("title", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("description", Types.VARCHAR);
-		TABLE_COLUMNS_MAP.put("content", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("content", Types.CLOB);
 		TABLE_COLUMNS_MAP.put("version", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("active_", Types.BOOLEAN);
 		TABLE_COLUMNS_MAP.put("startKaleoNodeId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("status", Types.INTEGER);
 	}
 
-	public static final String TABLE_SQL_CREATE = "create table KaleoDefinitionVersion (kaleoDefinitionVersionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null,createDate DATE null,kaleoDefinitionId LONG,name VARCHAR(75) null,title STRING null,description VARCHAR(75) null,content VARCHAR(75) null,version VARCHAR(75) null,active_ BOOLEAN,startKaleoNodeId LONG,status INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table KaleoDefinitionVersion (kaleoDefinitionVersionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(200) null,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null,createDate DATE null,kaleoDefinitionId LONG,name VARCHAR(200) null,title STRING null,description STRING null,content TEXT null,version VARCHAR(75) null,active_ BOOLEAN,startKaleoNodeId LONG,status INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table KaleoDefinitionVersion";
 	public static final String ORDER_BY_JPQL = " ORDER BY kaleoDefinitionVersion.kaleoDefinitionVersionId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY KaleoDefinitionVersion.kaleoDefinitionVersionId ASC";
