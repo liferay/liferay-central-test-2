@@ -56,8 +56,11 @@ ${dataFactory.toInsertSQL(ddmTemplateModel)}
 			<#assign journalArticleLocalizationModel = dataFactory.newJournalArticleLocalizationModel(journalArticleModel, journalArticleCount, versionCount) />
 
 			${dataFactory.toInsertSQL(journalArticleLocalizationModel)}
+
 			${dataFactory.toInsertSQL(dataFactory.newDDMTemplateLinkModel(journalArticleModel, ddmTemplateModel.templateId))}
+
 			${dataFactory.toInsertSQL(dataFactory.newDDMStorageLinkModel(journalArticleModel, ddmStructureModel.structureId))}
+
 			${dataFactory.toInsertSQL(dataFactory.newSocialActivityModel(journalArticleModel))}
 
 			<#if versionCount = dataFactory.maxJournalArticleVersionCount>
@@ -78,6 +81,7 @@ ${dataFactory.toInsertSQL(ddmTemplateModel)}
 		/>
 
 		${dataFactory.toInsertSQL(dataFactory.newPortletPreferencesModel(layoutModel.plid, portletIdPrefix + journalArticleCount, journalArticleResourceModel))}
+
 		${dataFactory.toInsertSQL(dataFactory.newJournalContentSearchModel(journalArticleModel, layoutModel.plid))}
 	</#list>
 </#list>

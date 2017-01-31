@@ -36,6 +36,7 @@
 	</#if>
 
 	${dataFactory.toInsertSQL(ddmContentModel)}
+
 	${dataFactory.toInsertSQL(dataFactory.newDDMStorageLinkModel(_ddmStorageLinkId, ddmContentModel, _ddmStructureId))}
 </#macro>
 
@@ -45,7 +46,9 @@
 	_ddmStructureVersionModel
 >
 	${dataFactory.toInsertSQL(_ddmStructureModel)}
+
 	${dataFactory.toInsertSQL(_ddmStructureLayoutModel)}
+
 	${dataFactory.toInsertSQL(_ddmStructureVersionModel)}
 </#macro>
 
@@ -100,6 +103,7 @@
 				<#local dlFileEntryMetadataModel = dataFactory.newDLFileEntryMetadataModel(ddmStorageLinkId, _ddmStructureId, dlFileVersionModel)>
 
 				${dataFactory.toInsertSQL(dlFileEntryMetadataModel)}
+
 				${dataFactory.toInsertSQL(dataFactory.newDDMStructureLinkModel(dlFileEntryMetadataModel))}
 
 				${dataFactory.getCSVWriter("documentLibrary").write(dlFolderModel.folderId + "," + dlFileEntryModel.name + "," + dlFileEntryModel.fileEntryId + "," + dataFactory.getDateLong(dlFileEntryModel.createDate) + "," + dataFactory.getDateLong(dlFolderModel.createDate) + "\n")}
@@ -132,6 +136,7 @@
 	_layoutModel
 >
 	${dataFactory.toInsertSQL(_layoutModel)}
+
 	${dataFactory.toInsertSQL(dataFactory.newLayoutFriendlyURLModel(_layoutModel))}
 </#macro>
 
@@ -182,6 +187,7 @@
 	_roleIds = []
 >
 	${dataFactory.toInsertSQL(_userModel)}
+
 	${dataFactory.toInsertSQL(dataFactory.newContactModel(_userModel))}
 
 	<#list _roleIds as roleId>

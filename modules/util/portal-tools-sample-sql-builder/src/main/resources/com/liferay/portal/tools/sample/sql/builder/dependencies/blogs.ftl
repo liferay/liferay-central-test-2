@@ -2,6 +2,7 @@
 
 <#list blogsEntryModels as blogsEntryModel>
 	${dataFactory.toInsertSQL(blogsEntryModel)}
+
 	${dataFactory.toInsertSQL(dataFactory.newFriendlyURLModel(blogsEntryModel))}
 
 	<@insertAssetEntry
@@ -24,6 +25,7 @@
 	/>
 
 	${dataFactory.toInsertSQL(dataFactory.newSubscriptionModel(blogsEntryModel))}
+
 	${dataFactory.toInsertSQL(dataFactory.newSocialActivityModel(blogsEntryModel))}
 
 	${dataFactory.getCSVWriter("blog").write(blogsEntryModel.entryId + "," + blogsEntryModel.urlTitle + "," + mbThreadId + "," + mbRootMessageId + "\n")}
