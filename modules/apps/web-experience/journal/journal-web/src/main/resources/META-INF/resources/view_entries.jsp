@@ -19,7 +19,7 @@
 <%
 String referringPortletResource = ParamUtil.getString(request, "referringPortletResource");
 
-ArticleSearch articleSearchContainer = journalDisplayContext.getSearchContainer();
+SearchContainer articleSearchContainer = journalDisplayContext.getSearchContainer();
 
 request.setAttribute("view.jsp-total", String.valueOf(articleSearchContainer.getTotal()));
 
