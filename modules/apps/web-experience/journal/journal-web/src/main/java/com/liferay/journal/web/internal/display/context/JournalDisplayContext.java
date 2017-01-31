@@ -36,7 +36,6 @@ import com.liferay.journal.util.comparator.FolderArticleDisplayDateComparator;
 import com.liferay.journal.util.comparator.FolderArticleModifiedDateComparator;
 import com.liferay.journal.web.configuration.JournalWebConfiguration;
 import com.liferay.journal.web.internal.portlet.action.ActionUtil;
-import com.liferay.journal.web.internal.search.ArticleSearch;
 import com.liferay.journal.web.internal.search.EntriesChecker;
 import com.liferay.journal.web.internal.search.EntriesMover;
 import com.liferay.journal.web.internal.search.JournalSearcher;
@@ -540,12 +539,12 @@ public class JournalDisplayContext {
 		return _restrictionType;
 	}
 
-	public ArticleSearch getSearchContainer() throws PortalException {
+	public SearchContainer getSearchContainer() throws PortalException {
 		ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		ArticleSearch articleSearchContainer = new ArticleSearch(
-			_liferayPortletRequest, getPortletURL());
+		SearchContainer articleSearchContainer = new SearchContainer(
+			_liferayPortletRequest, getPortletURL(), null, null);
 
 		if (!isSearch()) {
 			articleSearchContainer.setEmptyResultsMessageCssClass(
@@ -824,7 +823,7 @@ public class JournalDisplayContext {
 	}
 
 	public int getTotal() throws PortalException {
-		ArticleSearch articleSearch = getSearchContainer();
+		SearchContainer articleSearch = getSearchContainer();
 
 		return articleSearch.getTotal();
 	}
