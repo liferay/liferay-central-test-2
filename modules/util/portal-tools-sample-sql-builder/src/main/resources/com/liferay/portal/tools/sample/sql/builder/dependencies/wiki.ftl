@@ -7,7 +7,9 @@
 
 	<#list wikiPageModels as wikiPageModel>
 		${dataFactory.toInsertSQL(wikiPageModel)}
+
 		${dataFactory.toInsertSQL(dataFactory.newSubscriptionModel(wikiPageModel))}
+
 		${dataFactory.toInsertSQL(dataFactory.newWikiPageResourceModel(wikiPageModel))}
 
 		<@insertAssetEntry
