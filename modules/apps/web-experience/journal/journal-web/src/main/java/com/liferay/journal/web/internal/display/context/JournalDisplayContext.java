@@ -540,6 +540,12 @@ public class JournalDisplayContext {
 			portletURL.setParameter("status", String.valueOf(getStatus()));
 		}
 
+		String delta = ParamUtil.getString(_request, "delta");
+
+		if (Validator.isNotNull(delta)) {
+			portletURL.setParameter("delta", delta);
+		}
+
 		String deltaEntry = ParamUtil.getString(_request, "deltaEntry");
 
 		if (Validator.isNotNull(deltaEntry)) {
