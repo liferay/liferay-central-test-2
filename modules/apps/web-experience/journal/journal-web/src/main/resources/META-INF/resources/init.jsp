@@ -108,7 +108,6 @@ page import="com.liferay.journal.web.internal.display.context.JournalMoveEntries
 page import="com.liferay.journal.web.internal.display.context.util.JournalWebRequestHelper" %><%@
 page import="com.liferay.journal.web.internal.portlet.JournalPortlet" %><%@
 page import="com.liferay.journal.web.internal.portlet.action.ActionUtil" %><%@
-page import="com.liferay.journal.web.internal.search.ArticleSearch" %><%@
 page import="com.liferay.journal.web.internal.search.FeedSearch" %><%@
 page import="com.liferay.journal.web.internal.search.FeedSearchTerms" %><%@
 page import="com.liferay.journal.web.util.JournalPortletUtil" %><%@
