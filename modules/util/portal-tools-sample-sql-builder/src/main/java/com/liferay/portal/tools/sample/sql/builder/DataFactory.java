@@ -499,7 +499,7 @@ public class DataFactory {
 
 		if (writer == null) {
 			throw new IllegalArgumentException(
-				"Unknown csv file name: " + csvFileName);
+				"Unknown CSV file name: " + csvFileName);
 		}
 
 		return writer;

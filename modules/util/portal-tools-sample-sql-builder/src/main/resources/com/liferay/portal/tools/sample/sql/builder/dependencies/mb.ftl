@@ -8,6 +8,7 @@
 
 	<#list mbThreadModels as mbThreadModel>
 		${dataFactory.toInsertSQL(mbThreadModel)}
+
 		${dataFactory.toInsertSQL(dataFactory.newSubscriptionModel(mbThreadModel))}
 
 		<@insertAssetEntry
