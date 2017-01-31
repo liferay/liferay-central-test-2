@@ -20,7 +20,11 @@ import com.liferay.announcements.web.constants.AnnouncementsPortletKeys;
 import com.liferay.announcements.web.constants.AnnouncementsWebKeys;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
+import com.liferay.portal.kernel.sanitizer.Sanitizer;
+import com.liferay.portal.kernel.sanitizer.SanitizerException;
+import com.liferay.portal.kernel.sanitizer.SanitizerUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -64,7 +68,8 @@ public class PreviewEntryMVCRenderCommand implements MVCRenderCommand {
 	}
 
 	private AnnouncementsEntry _getAnnouncementsEntry(
-		PortletRequest portletRequest) {
+			PortletRequest portletRequest)
+		throws PortletException {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -95,6 +100,16 @@ public class PreviewEntryMVCRenderCommand implements MVCRenderCommand {
 		boolean alert = ParamUtil.getBoolean(portletRequest, "alert");
 
 		AnnouncementsEntry entry = new AnnouncementsEntryImpl();
+
+		try {
+			content = SanitizerUtil.sanitize(
+				themeDisplay.getCompanyId(), themeDisplay.getSiteGroupId(),
+				user.getUserId(), AnnouncementsEntry.class.getName(), 0,
+				ContentTypes.TEXT_HTML, Sanitizer.MODE_ALL, content, null);
+		}
+		catch (SanitizerException se) {
+			throw new PortletException(se);
+		}
 
 		entry.setCompanyId(user.getCompanyId());
 		entry.setUserId(user.getUserId());
