@@ -81,7 +81,7 @@ public class ImageAdaptiveMediaConfigResource {
 		configRepr.setUuid(id);
 
 		try {
-			_configurationHelper.addImageAdaptiveMediaConfigurationEntry(
+			_configurationHelper.updateImageAdaptiveMediaConfigurationEntry(
 				_companyId, configRepr.getName(), id, properties);
 
 			if (configRepr.isEnabled()) {
