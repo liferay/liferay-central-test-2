@@ -17,14 +17,7 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String referringPortletResource = ParamUtil.getString(request, "referringPortletResource");
-
 SearchContainer articleSearchContainer = journalDisplayContext.getSearchContainer();
-
-request.setAttribute("view.jsp-total", String.valueOf(articleSearchContainer.getTotal()));
-
-request.setAttribute("view_entries.jsp-entryEnd", String.valueOf(articleSearchContainer.getEnd()));
-request.setAttribute("view_entries.jsp-entryStart", String.valueOf(articleSearchContainer.getStart()));
 
 String displayStyle = journalDisplayContext.getDisplayStyle();
 
