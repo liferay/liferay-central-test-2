@@ -24,12 +24,17 @@ import com.liferay.dynamic.data.lists.service.DDLRecordLocalServiceUtil;
 import com.liferay.dynamic.data.lists.service.DDLRecordSetLocalServiceUtil;
 import com.liferay.dynamic.data.mapping.model.DDMForm;
 import com.liferay.dynamic.data.mapping.model.DDMStructure;
+import com.liferay.dynamic.data.mapping.model.DDMTemplate;
 import com.liferay.dynamic.data.mapping.storage.DDMFormFieldValue;
 import com.liferay.dynamic.data.mapping.storage.DDMFormValues;
 import com.liferay.dynamic.data.mapping.storage.StorageType;
 import com.liferay.dynamic.data.mapping.test.util.DDMFormTestUtil;
 import com.liferay.dynamic.data.mapping.test.util.DDMFormValuesTestUtil;
 import com.liferay.dynamic.data.mapping.test.util.DDMStructureTestHelper;
+import com.liferay.dynamic.data.mapping.test.util.DDMStructureTestUtil;
+import com.liferay.dynamic.data.mapping.test.util.DDMTemplateTestUtil;
+import com.liferay.journal.model.JournalArticle;
+import com.liferay.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
@@ -92,12 +97,14 @@ public class BaseWorkflowTaskManagerTestCase {
 		setUpUsers();
 	}
 
-	protected void activeSingleApproverWorkflow(String className, long classPK)
+	protected void activeSingleApproverWorkflow(
+			String className, long classPK, long typePK)
 		throws PortalException {
 
 		WorkflowDefinitionLinkLocalServiceUtil.updateWorkflowDefinitionLink(
 			adminUser.getUserId(), TestPropsValues.getCompanyId(),
-			group.getGroupId(), className, classPK, 0, "Single Approver@1");
+			group.getGroupId(), className, classPK, typePK,
+			"Single Approver@1");
 	}
 
 	protected BlogsEntry addBlogsEntry() throws PortalException {
@@ -108,6 +115,45 @@ public class BaseWorkflowTaskManagerTestCase {
 			return BlogsEntryLocalServiceUtil.addEntry(
 				adminUser.getUserId(), StringUtil.randomString(),
 				StringUtil.randomString(), new Date(), serviceContext);
+		}
+	}
+
+	protected JournalArticle addJournalArticle(long folderId)
+		throws Exception, PortalException {
+
+		try (CaptureAppender captureAppender =
+				Log4JLoggerTestUtil.configureLog4JLogger(
+					"com.liferay.util.mail.MailEngine", Level.OFF)) {
+
+			long groupId = group.getGroupId();
+
+			Map<Locale, String> titleMap = new HashMap<>();
+
+			titleMap.put(
+				LocaleUtil.getDefault(), RandomTestUtil.randomString());
+
+			Map<Locale, String> descriptionMap = new HashMap<>();
+
+			descriptionMap.put(
+				LocaleUtil.getDefault(), RandomTestUtil.randomString());
+
+			String content = DDMStructureTestUtil.getSampleStructuredContent();
+
+			DDMForm ddmForm = DDMStructureTestUtil.getSampleDDMForm();
+
+			DDMStructure ddmStructure = DDMStructureTestUtil.addStructure(
+				groupId, JournalArticle.class.getName(), ddmForm);
+
+			DDMTemplate ddmTemplate = DDMTemplateTestUtil.addTemplate(
+				groupId, ddmStructure.getStructureId(),
+				PortalUtil.getClassNameId(JournalArticle.class));
+
+			serviceContext = (ServiceContext)serviceContext.clone();
+
+			return JournalArticleLocalServiceUtil.addArticle(
+				adminUser.getUserId(), groupId, folderId, titleMap,
+				descriptionMap, content, ddmStructure.getStructureKey(),
+				ddmTemplate.getTemplateKey(), serviceContext);
 		}
 	}
 

@@ -21,6 +21,10 @@ import com.liferay.dynamic.data.lists.model.DDLRecord;
 import com.liferay.dynamic.data.lists.model.DDLRecordSet;
 import com.liferay.dynamic.data.lists.model.DDLRecordVersion;
 import com.liferay.dynamic.data.lists.service.DDLRecordLocalServiceUtil;
+import com.liferay.journal.model.JournalArticle;
+import com.liferay.journal.model.JournalFolder;
+import com.liferay.journal.model.JournalFolderConstants;
+import com.liferay.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
@@ -68,8 +72,37 @@ public class WorkflowTaskManagerImplTest
 	}
 
 	@Test
+	public void testApproveJournalArticleAsAdmin() throws Exception {
+		activeSingleApproverWorkflow(JournalFolder.class.getName(), 0, -1);
+
+		JournalArticle article = addJournalArticle(
+			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+
+		checkUserNotificationEventsByUsers(
+			adminUser, portalContentReviewerUser, siteAdminUser);
+
+		assignWorkflowTaskToUser(adminUser, adminUser);
+
+		Assert.assertEquals(
+			WorkflowConstants.STATUS_PENDING, article.getStatus());
+
+		completeWorkflowTask(adminUser, "approve");
+
+		long articleId = article.getId();
+
+		article = JournalArticleLocalServiceUtil.getArticle(articleId);
+
+		checkWorkflowInstance(JournalArticle.class.getName(), articleId);
+
+		Assert.assertEquals(
+			WorkflowConstants.STATUS_APPROVED, article.getStatus());
+
+		deactiveWorkflow(JournalArticle.class.getName(), articleId);
+	}
+
+	@Test
 	public void testApproveWorkflowBlogsEntryAsSiteAdmin() throws Exception {
-		activeSingleApproverWorkflow(BlogsEntry.class.getName(), 0);
+		activeSingleApproverWorkflow(BlogsEntry.class.getName(), 0, 0);
 
 		BlogsEntry blogsEntry = addBlogsEntry();
 
@@ -94,7 +127,7 @@ public class WorkflowTaskManagerImplTest
 		DDLRecordSet recordSet = addRecordSet();
 
 		activeSingleApproverWorkflow(
-			DDLRecordSet.class.getName(), recordSet.getRecordSetId());
+			DDLRecordSet.class.getName(), recordSet.getRecordSetId(), 0);
 
 		DDLRecord record = addRecord(recordSet);
 
@@ -128,7 +161,7 @@ public class WorkflowTaskManagerImplTest
 	public void testAssignApproveWorkflowBlogsEntryAsPortalContentReviewer()
 		throws Exception {
 
-		activeSingleApproverWorkflow(BlogsEntry.class.getName(), 0);
+		activeSingleApproverWorkflow(BlogsEntry.class.getName(), 0, 0);
 
 		BlogsEntry blogsEntry = addBlogsEntry();
 
@@ -156,7 +189,7 @@ public class WorkflowTaskManagerImplTest
 
 	@Test
 	public void testRejectWorkflowBlogsEntryAsSiteAdmin() throws Exception {
-		activeSingleApproverWorkflow(BlogsEntry.class.getName(), 0);
+		activeSingleApproverWorkflow(BlogsEntry.class.getName(), 0, 0);
 
 		BlogsEntry blogsEntry = addBlogsEntry();
 
