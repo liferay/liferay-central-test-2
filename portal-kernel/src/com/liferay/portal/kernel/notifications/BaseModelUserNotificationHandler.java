@@ -125,9 +125,10 @@ public abstract class BaseModelUserNotificationHandler
 
 		String entryURL = jsonObject.getString("entryURL");
 
+		String entryURLDomain = HttpUtil.getDomain(entryURL);
+
 		String portalURL = serviceContext.getPortalURL();
 
-		String entryURLDomain = HttpUtil.getDomain(entryURL);
 		String portalURLDomain = HttpUtil.getDomain(portalURL);
 
 		if (!entryURLDomain.equals(portalURLDomain)) {
