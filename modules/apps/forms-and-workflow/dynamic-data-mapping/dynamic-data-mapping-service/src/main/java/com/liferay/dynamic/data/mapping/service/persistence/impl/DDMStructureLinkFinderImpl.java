@@ -38,7 +38,7 @@ public class DDMStructureLinkFinderImpl
 	extends DDMStructureLinkFinderBaseImpl implements DDMStructureLinkFinder {
 
 	public static final String COUNT_BY_C_C_N_D =
-		DDMStructureLinkFinder .class.getName() + ".countByC_C_N_D";
+		DDMStructureLinkFinder.class.getName() + ".countByC_C_N_D";
 
 	public static final String FIND_BY_C_C_N_D =
 		DDMStructureLinkFinder.class.getName() + ".findByC_C_N_D";
