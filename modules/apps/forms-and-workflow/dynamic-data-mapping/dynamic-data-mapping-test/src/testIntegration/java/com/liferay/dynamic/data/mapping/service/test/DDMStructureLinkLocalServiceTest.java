@@ -68,7 +68,7 @@ public class DDMStructureLinkLocalServiceTest extends BaseDDMServiceTestCase {
 			_classNameId, _classPK, ddmStructure2.getStructureId());
 
 		int count =
-			DDMStructureLinkLocalServiceUtil.getCountStructureLinkStructures(
+			DDMStructureLinkLocalServiceUtil.getStructureLinkStructuresCount(
 				_classNameId, _classPK, "Abc");
 
 		Assert.assertEquals(2, count);
@@ -89,7 +89,7 @@ public class DDMStructureLinkLocalServiceTest extends BaseDDMServiceTestCase {
 			_classNameId, _classPK, ddmStructure2.getStructureId());
 
 		int count =
-			DDMStructureLinkLocalServiceUtil.getCountStructureLinkStructures(
+			DDMStructureLinkLocalServiceUtil.getStructureLinkStructuresCount(
 				_classNameId, _classPK, "Test1");
 
 		Assert.assertEquals(1, count);

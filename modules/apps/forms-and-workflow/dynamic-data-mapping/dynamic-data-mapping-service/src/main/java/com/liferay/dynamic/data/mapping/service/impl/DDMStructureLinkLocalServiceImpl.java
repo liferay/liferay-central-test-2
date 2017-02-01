@@ -106,14 +106,6 @@ public class DDMStructureLinkLocalServiceImpl
 	}
 
 	@Override
-	public int getCountStructureLinkStructures(
-		long classNameId, long classPK, String keywords) {
-
-		return ddmStructureLinkFinder.countByKeywords(
-			classNameId, classPK, keywords);
-	}
-
-	@Override
 	public DDMStructureLink getStructureLink(long structureLinkId)
 		throws PortalException {
 
@@ -223,6 +215,14 @@ public class DDMStructureLinkLocalServiceImpl
 		}
 
 		return structures;
+	}
+
+	@Override
+	public int getStructureLinkStructuresCount(
+		long classNameId, long classPK, String keywords) {
+
+		return ddmStructureLinkFinder.countByKeywords(
+			classNameId, classPK, keywords);
 	}
 
 	@Override
