@@ -109,17 +109,14 @@ public abstract class BaseItemSelectorViewDisplayContext
 		PortletURL portletURL = PortletURLUtil.clone(
 			this.portletURL, (LiferayPortletResponse)getPortletResponse());
 
-		long groupId = ParamUtil.getLong(request, "groupId");
-
 		long plid = ParamUtil.getLong(request, "plid");
-
+		long groupId = ParamUtil.getLong(request, "groupId");
 		boolean privateLayout = ParamUtil.getBoolean(request, "privateLayout");
-
 		String portletResource = ParamUtil.getString(
 			request, "portletResource");
 
-		portletURL.setParameter("groupId", String.valueOf(groupId));
 		portletURL.setParameter("plid", String.valueOf(plid));
+		portletURL.setParameter("groupId", String.valueOf(groupId));
 		portletURL.setParameter("privateLayout", String.valueOf(privateLayout));
 		portletURL.setParameter("portletResource", portletResource);
 
