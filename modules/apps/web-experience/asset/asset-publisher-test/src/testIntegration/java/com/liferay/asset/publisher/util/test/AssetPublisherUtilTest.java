@@ -438,11 +438,11 @@ public class AssetPublisherUtilTest {
 			AssetQueryRule assetQueryRule = assetQueryRules.get(i);
 
 			portletPreferences.setValue(
-				"queryContains" + i,
-				String.valueOf(assetQueryRule.isContains()));
-			portletPreferences.setValue(
 				"queryAndOperator" + i,
 				String.valueOf(assetQueryRule.isAndOperator()));
+			portletPreferences.setValue(
+				"queryContains" + i,
+				String.valueOf(assetQueryRule.isContains()));
 			portletPreferences.setValue(
 				"queryName" + i, assetQueryRule.getName());
 			portletPreferences.setValues(
