@@ -13,3 +13,5 @@
  * details.
  */
 --%>
+
+<%@ page import="com.liferay.expando.kernel.model.ExpandoBridge" %>
