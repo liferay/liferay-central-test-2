@@ -302,6 +302,8 @@ public class JournalArticleExportImportContentProcessor
 					jsonObject = _jsonFactory.createJSONObject(json);
 				}
 				catch (JSONException jsone) {
+					_log.debug(jsone, jsone);
+
 					continue;
 				}
 

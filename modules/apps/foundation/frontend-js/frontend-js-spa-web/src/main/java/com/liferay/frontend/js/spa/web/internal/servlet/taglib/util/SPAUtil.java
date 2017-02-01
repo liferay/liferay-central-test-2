@@ -186,6 +186,7 @@ public class SPAUtil {
 	}
 
 	private static final String _VALID_STATUS_CODES;
+
 	private static final String _redirectParamName;
 	private static final String _spaExcludedPaths;
 
