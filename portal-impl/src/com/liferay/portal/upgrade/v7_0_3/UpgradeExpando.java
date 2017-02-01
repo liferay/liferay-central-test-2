@@ -27,13 +27,11 @@ import java.sql.ResultSet;
 public class UpgradeExpando extends UpgradeProcess {
 
 	protected void deleteOrphanExpandoRow() throws Exception {
-		StringBundler sb = new StringBundler(5);
+		StringBundler sb = new StringBundler(3);
 
-		sb.append("select rowId_ from ExpandoRow ");
-		sb.append("where rowId_ not in ");
-		sb.append("(select distinct ExpandoRow.rowId_ ");
-		sb.append("from  ExpandoRow inner join ExpandoValue on ");
-		sb.append("ExpandoRow.rowId_ = ExpandoValue.rowId_)");
+		sb.append("select rowId_ from ExpandoRow where rowId_ not in (select ");
+		sb.append("distinct ExpandoRow.rowId_ from  ExpandoRow inner join ");
+		sb.append("ExpandoValue on ExpandoRow.rowId_ = ExpandoValue.rowId_)");
 
 		try (PreparedStatement ps1 =
 				AutoBatchPreparedStatementUtil.concurrentAutoBatch(
