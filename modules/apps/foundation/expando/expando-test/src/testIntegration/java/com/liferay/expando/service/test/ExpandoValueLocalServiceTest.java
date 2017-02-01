@@ -178,7 +178,7 @@ public class ExpandoValueLocalServiceTest {
 	}
 
 	@Test
-	public void testDeleteOnlyOneColumn() throws Exception {
+	public void testDeleteOneColumn() throws Exception {
 		ExpandoColumn column1 = ExpandoTestUtil.addColumn(
 			_expandoTable, "Test Column 1", ExpandoColumnConstants.STRING);
 
