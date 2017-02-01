@@ -20,6 +20,7 @@ import com.liferay.dynamic.data.mapping.expression.DDMExpressionException;
 import com.liferay.dynamic.data.mapping.expression.DDMExpressionFactory;
 import com.liferay.dynamic.data.mapping.form.evaluator.DDMFormEvaluationException;
 import com.liferay.dynamic.data.mapping.form.evaluator.DDMFormEvaluationResult;
+import com.liferay.dynamic.data.mapping.form.evaluator.DDMFormEvaluatorContext;
 import com.liferay.dynamic.data.mapping.form.evaluator.DDMFormFieldEvaluationResult;
 import com.liferay.dynamic.data.mapping.form.evaluator.impl.internal.functions.CallFunction;
 import com.liferay.dynamic.data.mapping.form.evaluator.impl.internal.functions.GetPropertyFunction;
@@ -66,21 +67,23 @@ public class DDMFormEvaluatorHelper {
 	public DDMFormEvaluatorHelper(
 		DDMDataProviderTracker ddmDataProviderTracker,
 		DDMDataProviderInstanceService ddmDataProviderInstanceService,
-		DDMExpressionFactory ddmExpressionFactory, DDMForm ddmForm,
-		DDMFormValues ddmFormValues,
+		DDMExpressionFactory ddmExpressionFactory,
+		DDMFormEvaluatorContext ddmFormEvaluatorContext,
 		DDMFormValuesJSONDeserializer ddmFormValuesJSONDeserializer,
-		JSONFactory jsonFactory, Locale locale) {
+		JSONFactory jsonFactory) {
 
 		_ddmDataProviderTracker = ddmDataProviderTracker;
 		_ddmDataProviderInstanceService = ddmDataProviderInstanceService;
 		_ddmExpressionFactory = ddmExpressionFactory;
-		_ddmForm = ddmForm;
-		_ddmFormFieldsMap = ddmForm.getDDMFormFieldsMap(true);
+		_ddmForm = ddmFormEvaluatorContext.getDDMForm();
+
+		_ddmFormFieldsMap = _ddmForm.getDDMFormFieldsMap(true);
+
 		_ddmFormValuesJSONDeserializer = ddmFormValuesJSONDeserializer;
 		_jsonFactory = jsonFactory;
-		_locale = locale;
+		_locale = ddmFormEvaluatorContext.getLocale();
 
-		createDDMFormFieldValues(ddmFormValues);
+		createDDMFormFieldValues(ddmFormEvaluatorContext.getDDMFormValues());
 
 		createDDMFormFieldRuleEvaluationResultsMap();
 	}

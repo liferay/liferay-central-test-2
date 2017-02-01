@@ -34,6 +34,10 @@ public class DDMFormEvaluatorContext {
 		_locale = locale;
 	}
 
+	public void addProperty(String key, Object value) {
+		_properties.put(key, value);
+	}
+
 	public DDMForm getDDMForm() {
 		return _ddmForm;
 	}
