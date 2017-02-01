@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.Sync;
 import com.liferay.portal.kernel.test.rule.SynchronousDestinationTestRule;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
+import com.liferay.portal.kernel.workflow.WorkflowTask;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 
 import org.junit.After;
@@ -188,7 +189,7 @@ public class WorkflowTaskManagerImplTest
 	}
 
 	@Test
-	public void testRejectWorkflowBlogsEntryAsSiteAdmin() throws Exception {
+	public void testRejectWorkflowBlogsEntryAndViewAssignee() throws Exception {
 		activeSingleApproverWorkflow(BlogsEntry.class.getName(), 0, 0);
 
 		BlogsEntry blogsEntry = addBlogsEntry();
@@ -196,15 +197,24 @@ public class WorkflowTaskManagerImplTest
 		checkUserNotificationEventsByUsers(
 			adminUser, portalContentReviewerUser, siteAdminUser);
 
-		assignWorkflowTaskToUser(siteAdminUser, siteAdminUser);
+		assignWorkflowTaskToUser(adminUser, portalContentReviewerUser);
 
-		completeWorkflowTask(siteAdminUser, "reject");
+		checkUserNotificationEventsByUsers(portalContentReviewerUser);
+
+		completeWorkflowTask(portalContentReviewerUser, "reject");
+
+		checkUserNotificationEventsByUsers(adminUser);
 
 		blogsEntry = BlogsEntryLocalServiceUtil.getBlogsEntry(
 			blogsEntry.getEntryId());
 
 		Assert.assertEquals(
 			WorkflowConstants.STATUS_PENDING, blogsEntry.getStatus());
+
+		WorkflowTask workflowTask = getWorkflowTask();
+
+		Assert.assertEquals(
+			adminUser.getUserId(), workflowTask.getAssigneeUserId());
 
 		deactiveWorkflow(BlogsEntry.class.getName(), 0);
 	}
