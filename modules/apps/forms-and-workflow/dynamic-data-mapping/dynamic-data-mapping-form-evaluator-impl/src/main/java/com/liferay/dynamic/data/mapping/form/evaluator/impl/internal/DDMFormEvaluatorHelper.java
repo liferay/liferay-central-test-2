@@ -22,6 +22,7 @@ import com.liferay.dynamic.data.mapping.form.evaluator.DDMFormEvaluationExceptio
 import com.liferay.dynamic.data.mapping.form.evaluator.DDMFormEvaluationResult;
 import com.liferay.dynamic.data.mapping.form.evaluator.DDMFormEvaluatorContext;
 import com.liferay.dynamic.data.mapping.form.evaluator.DDMFormFieldEvaluationResult;
+import com.liferay.dynamic.data.mapping.form.evaluator.impl.internal.functions.BelongsToRoleFunction;
 import com.liferay.dynamic.data.mapping.form.evaluator.impl.internal.functions.CallFunction;
 import com.liferay.dynamic.data.mapping.form.evaluator.impl.internal.functions.GetPropertyFunction;
 import com.liferay.dynamic.data.mapping.form.evaluator.impl.internal.functions.JumpPageFunction;
@@ -44,6 +45,7 @@ import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -59,6 +61,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @author Leonardo Barros
  */
@@ -70,7 +74,7 @@ public class DDMFormEvaluatorHelper {
 		DDMExpressionFactory ddmExpressionFactory,
 		DDMFormEvaluatorContext ddmFormEvaluatorContext,
 		DDMFormValuesJSONDeserializer ddmFormValuesJSONDeserializer,
-		JSONFactory jsonFactory) {
+		JSONFactory jsonFactory, UserLocalService userLocalService) {
 
 		_ddmDataProviderTracker = ddmDataProviderTracker;
 		_ddmDataProviderInstanceService = ddmDataProviderInstanceService;
@@ -81,7 +85,10 @@ public class DDMFormEvaluatorHelper {
 
 		_ddmFormValuesJSONDeserializer = ddmFormValuesJSONDeserializer;
 		_jsonFactory = jsonFactory;
+		_userLocalService = userLocalService;
 		_locale = ddmFormEvaluatorContext.getLocale();
+
+		_request = ddmFormEvaluatorContext.getProperty("request");
 
 		createDDMFormFieldValues(ddmFormEvaluatorContext.getDDMFormValues());
 
@@ -370,6 +377,9 @@ public class DDMFormEvaluatorHelper {
 		DDMFormRuleEvaluator ddmFormRuleEvaluator) {
 
 		ddmFormRuleEvaluator.setDDMExpressionFunction(
+			"belongsTo",
+			new BelongsToRoleFunction(_request, _userLocalService));
+		ddmFormRuleEvaluator.setDDMExpressionFunction(
 			"call",
 			new CallFunction(
 				_ddmDataProviderTracker, _ddmDataProviderInstanceService,
@@ -598,5 +608,7 @@ public class DDMFormEvaluatorHelper {
 	private final JSONFactory _jsonFactory;
 	private final Locale _locale;
 	private final Map<Integer, Integer> _pageFlow = new HashMap<>();
+	private final HttpServletRequest _request;
+	private final UserLocalService _userLocalService;
 
 }

@@ -50,8 +50,8 @@ public class DDMFormEvaluatorContext {
 		return _locale;
 	}
 
-	public Map<String, Object> getProperties() {
-		return _properties;
+	public <T> T getProperty(String key) {
+		return (T)_properties.get(key);
 	}
 
 	public void setDDMForm(DDMForm ddmForm) {
