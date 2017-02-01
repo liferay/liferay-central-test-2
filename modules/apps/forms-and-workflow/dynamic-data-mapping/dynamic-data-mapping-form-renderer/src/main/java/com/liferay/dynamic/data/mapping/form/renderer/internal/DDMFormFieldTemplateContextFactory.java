@@ -132,6 +132,9 @@ public class DDMFormFieldTemplateContextFactory {
 		setDDMFormFieldTemplateContextNestedTemplateContexts(
 			ddmFormFieldTemplateContext, nestedDDMFormFieldTemplateContext);
 
+		setDDMFormFieldTemplateContextOptions(
+			ddmFormFieldTemplateContext, ddmFormFieldEvaluationResult,
+			ddmFormField.getDDMFormFieldOptions());
 		setDDMFormFieldTemplateContextReadOnly(
 			ddmFormFieldTemplateContext, ddmFormFieldEvaluationResult);
 		setDDMFormFieldTemplateContextRepeatable(
@@ -149,9 +152,6 @@ public class DDMFormFieldTemplateContextFactory {
 			ddmFormFieldValue.getValue());
 		setDDMFormFieldTemplateContextVisible(
 			ddmFormFieldTemplateContext, ddmFormFieldEvaluationResult);
-		setDDMFormFieldTemplateContextOptions(
-			ddmFormFieldTemplateContext, ddmFormFieldEvaluationResult,
-			ddmFormField.getDDMFormFieldOptions());
 
 		// Contributed template parameters
 
