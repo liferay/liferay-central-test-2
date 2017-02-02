@@ -46,6 +46,18 @@ import org.osgi.service.component.annotations.Reference;
 )
 public class GetRolesMVCResourceCommand extends BaseMVCResourceCommand {
 
+	@Override
+	protected void doServeResource(
+			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
+		throws Exception {
+
+		List<Role> roles = _roleService.getRoles(
+			CompanyThreadLocal.getCompanyId(), null);
+
+		JSONPortletResponseUtil.writeJSON(
+			resourceRequest, resourceResponse, toJSONArray(roles));
+	}
+
 	protected JSONArray toJSONArray(List<Role> roles) {
 		JSONArray jsonArray = _jsonFactory.createJSONArray();
 
@@ -63,18 +75,6 @@ public class GetRolesMVCResourceCommand extends BaseMVCResourceCommand {
 		jsonObject.put("name", role.getName());
 
 		return jsonObject;
-	}
-
-	@Override
-	protected void doServeResource(
-			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
-		throws Exception {
-
-		List<Role> roles = _roleService.getRoles(
-			CompanyThreadLocal.getCompanyId(), null);
-
-		JSONPortletResponseUtil.writeJSON(
-			resourceRequest, resourceResponse, toJSONArray(roles));
 	}
 
 	@Reference
