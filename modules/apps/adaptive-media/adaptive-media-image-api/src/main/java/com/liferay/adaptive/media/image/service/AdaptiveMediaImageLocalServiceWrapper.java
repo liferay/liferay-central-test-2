@@ -204,6 +204,12 @@ public class AdaptiveMediaImageLocalServiceWrapper
 		return _adaptiveMediaImageLocalService.getAdaptiveMediaImagesCount();
 	}
 
+	@Override
+	public int getPercentage(long companyId, java.lang.String configurationUuid) {
+		return _adaptiveMediaImageLocalService.getPercentage(companyId,
+			configurationUuid);
+	}
+
 	/**
 	* Returns the OSGi service identifier.
 	*

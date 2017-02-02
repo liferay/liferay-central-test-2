@@ -195,6 +195,11 @@ public class AdaptiveMediaImageLocalServiceUtil {
 		return getService().getAdaptiveMediaImagesCount();
 	}
 
+	public static int getPercentage(long companyId,
+		java.lang.String configurationUuid) {
+		return getService().getPercentage(companyId, configurationUuid);
+	}
+
 	/**
 	* Returns the OSGi service identifier.
 	*

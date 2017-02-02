@@ -185,6 +185,9 @@ public interface AdaptiveMediaImageLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getAdaptiveMediaImagesCount();
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getPercentage(long companyId, java.lang.String configurationUuid);
+
 	/**
 	* Returns the OSGi service identifier.
 	*
