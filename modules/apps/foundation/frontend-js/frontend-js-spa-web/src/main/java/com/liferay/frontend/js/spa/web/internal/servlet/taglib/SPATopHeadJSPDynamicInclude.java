@@ -103,20 +103,6 @@ public class SPATopHeadJSPDynamicInclude extends BaseJSPDynamicInclude {
 		scriptData.writeTo(response.getWriter());
 	}
 
-	private static final String _initTemplate;
-
-	static {
-		try (InputStream inputStream =
-				SPATopHeadJSPDynamicInclude.class.getResourceAsStream(
-					"/META-INF/resources/init.tmpl")) {
-
-			_initTemplate = StringUtil.read(inputStream);
-		}
-		catch (IOException ioe) {
-			throw new ExceptionInInitializerError(ioe);
-		}
-	}
-
 	@Override
 	public void register(DynamicIncludeRegistry dynamicIncludeRegistry) {
 		boolean singlePageApplicationEnabled = GetterUtil.getBoolean(
@@ -149,6 +135,20 @@ public class SPATopHeadJSPDynamicInclude extends BaseJSPDynamicInclude {
 
 	protected void unsetSPAUtil(SPAUtil spaUtil) {
 		_spaUtil = null;
+	}
+
+	private static final String _initTemplate;
+
+	static {
+		try (InputStream inputStream =
+				SPATopHeadJSPDynamicInclude.class.getResourceAsStream(
+					"/META-INF/resources/init.tmpl")) {
+
+			_initTemplate = StringUtil.read(inputStream);
+		}
+		catch (IOException ioe) {
+			throw new ExceptionInInitializerError(ioe);
+		}
 	}
 
 	@Reference
