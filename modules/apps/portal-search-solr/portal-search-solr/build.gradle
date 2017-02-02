@@ -29,10 +29,6 @@ dependencies {
 	testCompile group: "com.liferay", name: "com.liferay.portal.search.test.util", version: "1.0.0"
 }
 
-liferayOSGi {
-	expandCompileInclude = false
-}
-
 test {
 	systemProperty "com.liferay.portal.search.solr.test.unit.started", System.getProperty("com.liferay.portal.search.solr.test.unit.started")
 }
