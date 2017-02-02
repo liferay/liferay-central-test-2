@@ -94,11 +94,11 @@ public class DefaultIndexerRequestBufferOverflowHandler
 			if (_log.isWarnEnabled()) {
 				StringBundler sb = new StringBundler(4);
 
-				sb.append("Invalid minimumBufferAvailabilityPercentage: ");
+				sb.append("Invalid minimum buffer availability percentage: ");
 				sb.append(
 					indexerRegistryConfiguration.
 						minimumBufferAvailabilityPercentage());
-				sb.append("using default value");
+				sb.append(", using default value");
 				sb.append(_DEFAULT_MINIMUM_BUFFER_AVAILABILITY_PERCENTAGE);
 
 				_log.warn(sb.toString());
