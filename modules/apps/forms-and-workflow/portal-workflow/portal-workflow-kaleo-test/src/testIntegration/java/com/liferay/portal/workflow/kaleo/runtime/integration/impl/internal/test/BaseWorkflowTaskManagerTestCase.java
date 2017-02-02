@@ -34,7 +34,10 @@ import com.liferay.dynamic.data.mapping.test.util.DDMStructureTestHelper;
 import com.liferay.dynamic.data.mapping.test.util.DDMStructureTestUtil;
 import com.liferay.dynamic.data.mapping.test.util.DDMTemplateTestUtil;
 import com.liferay.journal.model.JournalArticle;
+import com.liferay.journal.model.JournalFolder;
+import com.liferay.journal.model.JournalFolderConstants;
 import com.liferay.journal.service.JournalArticleLocalServiceUtil;
+import com.liferay.journal.service.JournalFolderLocalServiceUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
@@ -156,6 +159,18 @@ public class BaseWorkflowTaskManagerTestCase {
 				adminUser.getUserId(), group.getGroupId(), folderId, titleMap,
 				descriptionMap, content, ddmStructure.getStructureKey(),
 				ddmTemplate.getTemplateKey(), serviceContext);
+		}
+	}
+
+	protected JournalFolder addJournalFolder() throws PortalException {
+		try (CaptureAppender captureAppender =
+				Log4JLoggerTestUtil.configureLog4JLogger(
+					"com.liferay.util.mail.MailEngine", Level.OFF)) {
+
+			return JournalFolderLocalServiceUtil.addFolder(
+				adminUser.getUserId(), group.getGroupId(),
+				JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID, "Folder Name",
+				"This is a test folder.", serviceContext);
 		}
 	}
 
@@ -334,6 +349,19 @@ public class BaseWorkflowTaskManagerTestCase {
 		siteAdminUser = createUser(RoleConstants.SITE_ADMINISTRATOR);
 
 		_users.add(siteAdminUser);
+	}
+
+	protected void updateJournalFolder(
+			long folderId, long ddmStructureId, int restrictionType)
+		throws PortalException {
+
+		long[] ddmStructureIds = {ddmStructureId};
+
+		JournalFolderLocalServiceUtil.updateFolder(
+			adminUser.getUserId(), group.getGroupId(), folderId,
+			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID, "Folder Name",
+			"This is a test folder.", ddmStructureIds, restrictionType, false,
+			serviceContext);
 	}
 
 	protected User adminUser;
