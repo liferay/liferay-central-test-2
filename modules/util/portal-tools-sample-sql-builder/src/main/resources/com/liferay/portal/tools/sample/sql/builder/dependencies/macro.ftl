@@ -45,7 +45,9 @@
 	_ddmStructureVersionModel
 >
 	${dataFactory.toInsertSQL(_ddmStructureModel)}
+
 	${dataFactory.toInsertSQL(_ddmStructureLayoutModel)}
+
 	${dataFactory.toInsertSQL(_ddmStructureVersionModel)}
 </#macro>
 
@@ -100,6 +102,7 @@
 				<#local dlFileEntryMetadataModel = dataFactory.newDLFileEntryMetadataModel(ddmStorageLinkId, _ddmStructureId, dlFileVersionModel)>
 
 				${dataFactory.toInsertSQL(dlFileEntryMetadataModel)}
+
 				${dataFactory.toInsertSQL(dataFactory.newDDMStructureLinkModel(dlFileEntryMetadataModel))}
 
 				${dataFactory.getCSVWriter("documentLibrary").write(dlFolderModel.folderId + "," + dlFileEntryModel.name + "," + dlFileEntryModel.fileEntryId + "," + dataFactory.getDateLong(dlFileEntryModel.createDate) + "," + dataFactory.getDateLong(dlFolderModel.createDate) + "\n")}

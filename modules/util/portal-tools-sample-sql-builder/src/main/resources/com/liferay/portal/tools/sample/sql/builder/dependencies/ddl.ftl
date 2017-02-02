@@ -28,6 +28,7 @@
 	<#assign ddlRecordSetModel = dataFactory.newDDLRecordSetModel(ddmStructureModel, ddlRecordSetCount) />
 
 	${dataFactory.toInsertSQL(ddlRecordSetModel)}
+
 	${dataFactory.toInsertSQL(dataFactory.newDDMStructureLinkModel(ddlRecordSetModel))}
 
 	<#assign ddlRecordCounts = dataFactory.getSequence(dataFactory.maxDDLRecordCount) />
@@ -36,6 +37,7 @@
 		<#assign ddlRecordModel = dataFactory.newDDLRecordModel(ddlRecordSetModel) />
 
 		${dataFactory.toInsertSQL(ddlRecordModel)}
+
 		${dataFactory.toInsertSQL(dataFactory.newDDLRecordVersionModel(ddlRecordModel))}
 
 		<@insertDDMContent
