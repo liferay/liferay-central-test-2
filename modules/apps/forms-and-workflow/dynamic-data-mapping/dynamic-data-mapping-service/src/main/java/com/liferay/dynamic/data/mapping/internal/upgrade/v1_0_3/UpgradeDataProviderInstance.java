@@ -47,25 +47,31 @@ public class UpgradeDataProviderInstance extends UpgradeProcess {
 		_ddmFormValuesJSONSerializer = ddmFormValuesJSONSerializer;
 	}
 
-	protected void addDefaultOutputParameter(DDMFormValues definitionDDMForm) {
+	protected void addDefaultOutputParameter(DDMFormValues ddmFormValues) {
 		Map<String, List<DDMFormFieldValue>> ddmFormFieldValuesMap =
-			definitionDDMForm.getDDMFormFieldValuesMap();
+			ddmFormValues.getDDMFormFieldValuesMap();
 
-		List<DDMFormFieldValue> ddmFormFieldValueList =
-			ddmFormFieldValuesMap.get("key");
+		if (!ddmFormFieldValuesMap.containsKey("key") ||
+			!ddmFormFieldValuesMap.containsKey("value")) {
 
-		DDMFormFieldValue keyDDMFormFieldValue = ddmFormFieldValueList.get(0);
+			return;
+		}
 
-		ddmFormFieldValueList = ddmFormFieldValuesMap.get("value");
+		List<DDMFormFieldValue> ddmFormFieldValues = ddmFormFieldValuesMap.get(
+			"key");
 
-		DDMFormFieldValue valueDDMFormFieldValue = ddmFormFieldValueList.get(0);
+		DDMFormFieldValue keyDDMFormFieldValue = ddmFormFieldValues.get(0);
 
-		String outputPath = createOutputPathValue(
-			definitionDDMForm.getDefaultLocale(),
-			keyDDMFormFieldValue.getValue(), valueDDMFormFieldValue.getValue());
+		ddmFormFieldValues = ddmFormFieldValuesMap.get("value");
 
-		definitionDDMForm.addDDMFormFieldValue(
-			createDefaultOutputParameter(definitionDDMForm, outputPath));
+		DDMFormFieldValue valueDDMFormFieldValue = ddmFormFieldValues.get(0);
+
+		String outputParameterPath = createOutputPathValue(
+			ddmFormValues.getDefaultLocale(), keyDDMFormFieldValue.getValue(),
+			valueDDMFormFieldValue.getValue());
+
+		ddmFormValues.addDDMFormFieldValue(
+			createDefaultOutputParameter(ddmFormValues, outputParameterPath));
 	}
 
 	protected DDMFormFieldValue createDDMFormFieldValue(
@@ -85,25 +91,25 @@ public class UpgradeDataProviderInstance extends UpgradeProcess {
 	}
 
 	protected DDMFormFieldValue createDefaultOutputParameter(
-		DDMFormValues ddmFormValues, String outputPath) {
+		DDMFormValues ddmFormValues, String outputParameterPath) {
 
-		DDMFormFieldValue outputParameters = createDDMFormFieldValue(
+		DDMFormFieldValue ddmFormFieldValue = createDDMFormFieldValue(
 			ddmFormValues, "outputParameters", null);
 
-		outputParameters.addNestedDDMFormFieldValue(
+		ddmFormFieldValue.addNestedDDMFormFieldValue(
 			createDDMFormFieldValue(
 				ddmFormValues, "outputParameterName",
 				_DEFAULT_OUTPUT_PARAMETER_NAME));
 
-		outputParameters.addNestedDDMFormFieldValue(
+		ddmFormFieldValue.addNestedDDMFormFieldValue(
 			createDDMFormFieldValue(
-				ddmFormValues, "outputParameterPath", outputPath));
+				ddmFormValues, "outputParameterPath", outputParameterPath));
 
-		outputParameters.addNestedDDMFormFieldValue(
+		ddmFormFieldValue.addNestedDDMFormFieldValue(
 			createDDMFormFieldValue(
 				ddmFormValues, "outputParameterType", "text"));
 
-		return outputParameters;
+		return ddmFormFieldValue;
 	}
 
 	protected String createOutputPathValue(
@@ -152,13 +158,13 @@ public class UpgradeDataProviderInstance extends UpgradeProcess {
 			String dataProviderInstanceDefinition)
 		throws Exception {
 
-		DDMFormValues definitionDDMForm =
+		DDMFormValues ddmFormValues =
 			_ddmFormValuesJSONDeserializer.deserialize(
 				null, dataProviderInstanceDefinition);
 
-		addDefaultOutputParameter(definitionDDMForm);
+		addDefaultOutputParameter(ddmFormValues);
 
-		return _ddmFormValuesJSONSerializer.serialize(definitionDDMForm);
+		return _ddmFormValuesJSONSerializer.serialize(ddmFormValues);
 	}
 
 	private static final String _DEFAULT_OUTPUT_PARAMETER_NAME =
