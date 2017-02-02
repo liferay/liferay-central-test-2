@@ -274,44 +274,6 @@ AUI.add(
 				}
 			},
 
-			_updateOperatorList: function(dataType, conditionIndex) {
-				var instance = this;
-
-				var operator = instance._getOperator(conditionIndex);
-
-				var operatorTypes = instance.get('functionsMetadata');
-
-				var options = [];
-				var i;
-
-				if (dataType === 'string') {
-					for (i = 0; i < operatorTypes.text.length; i++) {
-						options.push(
-							A.merge(
-								{
-									value: operatorTypes.text[i].name
-								},
-								operatorTypes.text[i]
-							)
-						);
-					}
-				}
-				else if (dataType === 'number') {
-					for (i = 0; i < operatorTypes.number.length; i++) {
-						options.push(
-							A.merge(
-								{
-									value: operatorTypes.number[i].name
-								},
-								operatorTypes.number[i]
-							)
-						);
-					}
-				}
-
-				operator.set('options', options);
-			},
-
 			_handleDeleteConditionClick: function(event) {
 				var instance = this;
 
@@ -440,8 +402,6 @@ AUI.add(
 
 			_renderOperator: function(index, condition, container) {
 				var instance = this;
-
-				var value;
 
 				var field = new Liferay.DDM.Field.Select(
 					{
@@ -588,6 +548,43 @@ AUI.add(
 				field.render(container);
 
 				instance._conditions[index + '-condition-second-operand-type'] = field;
+			},
+
+			_updateOperatorList: function(dataType, conditionIndex) {
+				var instance = this;
+
+				var operator = instance._getOperator(conditionIndex);
+
+				var operatorTypes = instance.get('functionsMetadata');
+
+				var options = [];
+
+				if (dataType === 'string') {
+					for (var i = 0; i < operatorTypes.text.length; i++) {
+						options.push(
+							A.merge(
+								{
+									value: operatorTypes.text[i].name
+								},
+								operatorTypes.text[i]
+							)
+						);
+					}
+				}
+				else if (dataType === 'number') {
+					for (var j = 0; j < operatorTypes.number.length; j++) {
+						options.push(
+							A.merge(
+								{
+									value: operatorTypes.number[j].name
+								},
+								operatorTypes.number[j]
+							)
+						);
+					}
+				}
+
+				operator.set('options', options);
 			},
 
 			_updateSecondOperandFieldVisibility: function(index) {

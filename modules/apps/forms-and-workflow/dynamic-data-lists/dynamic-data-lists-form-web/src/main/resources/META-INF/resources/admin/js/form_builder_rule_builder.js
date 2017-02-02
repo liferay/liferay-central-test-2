@@ -266,10 +266,12 @@ AUI.add(
 						var rulesDescription = [];
 
 						for (var i = 0; i < rules.length; i++) {
-							rulesDescription.push({
-								actions: instance._getActionsDescription(rules[i].actions),
-								conditions: rules[i].conditions
-							});
+							rulesDescription.push(
+								{
+									actions: instance._getActionsDescription(rules[i].actions),
+									conditions: rules[i].conditions
+								}
+							);
 						}
 
 						return rulesDescription;

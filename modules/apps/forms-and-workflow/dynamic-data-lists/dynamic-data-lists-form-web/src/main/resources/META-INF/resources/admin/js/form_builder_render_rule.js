@@ -3,11 +3,6 @@ AUI.add(
 	function(A) {
 		var CSS_CAN_REMOVE_ITEM = A.getClassName('can', 'remove', 'item');
 
-		var MAP_SECOND_OPERANDS = {
-			fields: '-condition-second-operand-select',
-			options: '-condition-second-operand-options-select'
-		};
-
 		var SoyTemplateUtil = Liferay.DDM.SoyTemplateUtil;
 
 		var FormBuilderRenderRule = A.Component.create(
@@ -269,6 +264,20 @@ AUI.add(
 						);
 					},
 
+					_handleActionChange: function(event) {
+						var instance = this;
+
+						var field = event.target;
+
+						var fieldName = field.get('fieldName');
+
+						var index = fieldName.split('-')[0];
+
+						if (fieldName.match('-target')) {
+							instance._createTargetSelect(index, event.newVal[0]);
+						}
+					},
+
 					_handleAddActionClick: function() {
 						var instance = this;
 
@@ -320,20 +329,6 @@ AUI.add(
 						}
 
 						instance._toggleShowRemoveButton();
-					},
-
-					_handleActionChange: function(event) {
-						var instance = this;
-
-						var field = event.target;
-
-						var fieldName = field.get('fieldName');
-
-						var index = fieldName.split('-')[0];
-
-						if (fieldName.match('-target')) {
-							instance._createTargetSelect(index, event.newVal[0]);
-						}
 					},
 
 					_handleSaveClick: function() {
@@ -388,6 +383,6 @@ AUI.add(
 	},
 	'',
 	{
-		requires: ['liferay-ddl-form-builder-rule-template', 'liferay-ddm-form-renderer-field', 'liferay-ddl-form-builder-render-rule-condition'	]
+		requires: ['liferay-ddl-form-builder-render-rule-condition', 'liferay-ddl-form-builder-rule-template', 'liferay-ddm-form-renderer-field']
 	}
 );
