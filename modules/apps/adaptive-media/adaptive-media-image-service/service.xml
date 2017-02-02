@@ -41,6 +41,10 @@
 		<finder name="FileVersionId" return-type="Collection">
 			<finder-column name="fileVersionId" />
 		</finder>
+		<finder name="C_C" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="configurationUuid" />
+		</finder>
 		<finder name="C_F" return-type="AdaptiveMediaImage" unique="true">
 			<finder-column name="configurationUuid" />
 			<finder-column name="fileVersionId" />
