@@ -47,22 +47,22 @@ import org.osgi.service.component.annotations.Reference;
 public class GetRolesMVCResourceCommand extends BaseMVCResourceCommand {
 
 	protected JSONArray createJSONArray(List<Role> roles) {
-		JSONArray rolesJSONArray = _jsonFactory.createJSONArray();
+		JSONArray jsonArray = _jsonFactory.createJSONArray();
 
 		for (Role role : roles) {
-			rolesJSONArray.put(createJSONObject(role));
+			jsonArray.put(createJSONObject(role));
 		}
 
-		return rolesJSONArray;
+		return jsonArray;
 	}
 
 	protected JSONObject createJSONObject(Role role) {
-		JSONObject roleJSONObject = _jsonFactory.createJSONObject();
+		JSONObject jsonObject = _jsonFactory.createJSONObject();
 
-		roleJSONObject.put("id", role.getRoleId());
-		roleJSONObject.put("name", role.getName());
+		jsonObject.put("id", role.getRoleId());
+		jsonObject.put("name", role.getName());
 
-		return roleJSONObject;
+		return jsonObject;
 	}
 
 	@Override
