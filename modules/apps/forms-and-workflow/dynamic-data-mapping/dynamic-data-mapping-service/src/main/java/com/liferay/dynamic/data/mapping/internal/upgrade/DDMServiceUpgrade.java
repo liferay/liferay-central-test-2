@@ -26,9 +26,7 @@ import com.liferay.dynamic.data.mapping.internal.upgrade.v1_0_0.UpgradeLastPubli
 import com.liferay.dynamic.data.mapping.internal.upgrade.v1_0_0.UpgradeSchema;
 import com.liferay.dynamic.data.mapping.internal.upgrade.v1_0_1.UpgradeResourcePermission;
 import com.liferay.dynamic.data.mapping.internal.upgrade.v1_0_2.UpgradeCheckboxFieldToCheckboxMultipleField;
-import com.liferay.dynamic.data.mapping.internal.upgrade.v1_0_2.UpgradeDataProviderInstance;
-import com.liferay.dynamic.data.mapping.internal.upgrade.v1_0_3.UpgradeFormFieldSettingsDefinition;
-import com.liferay.dynamic.data.mapping.internal.upgrade.v1_0_3.UpgradeRestDDMDataProviderInstanceDefinition;
+import com.liferay.dynamic.data.mapping.internal.upgrade.v1_0_3.UpgradeDDMFormFieldSettings;
 import com.liferay.dynamic.data.mapping.io.DDMFormJSONDeserializer;
 import com.liferay.dynamic.data.mapping.io.DDMFormJSONSerializer;
 import com.liferay.dynamic.data.mapping.io.DDMFormLayoutJSONSerializer;
@@ -94,14 +92,17 @@ public class DDMServiceUpgrade implements UpgradeStepRegistrator {
 				UpgradeDDMStructure(
 					_ddmExpressionFactory, _ddmFormJSONDeserializer,
 					_ddmFormJSONSerializer),
-			new UpgradeDataProviderInstance(_jsonFactory));
+			new com.liferay.dynamic.data.mapping.internal.upgrade.v1_0_2.
+				UpgradeDataProviderInstance(_jsonFactory));
 
 		registry.register(
 			"com.liferay.dynamic.data.mapping.service", "1.0.2", "1.0.3",
-			new UpgradeFormFieldSettingsDefinition(
-				_ddmFormJSONDeserializer, _ddmFormJSONSerializer),
-			new UpgradeRestDDMDataProviderInstanceDefinition(
-				_ddmFormValuesJSONDeserializer, _ddmFormValuesJSONSerializer));
+			new com.liferay.dynamic.data.mapping.internal.upgrade.v1_0_3.
+				UpgradeDataProviderInstance(
+					_ddmFormValuesJSONDeserializer,
+					_ddmFormValuesJSONSerializer),
+			new UpgradeDDMFormFieldSettings(
+				_ddmFormJSONDeserializer, _ddmFormJSONSerializer));
 	}
 
 	@Reference

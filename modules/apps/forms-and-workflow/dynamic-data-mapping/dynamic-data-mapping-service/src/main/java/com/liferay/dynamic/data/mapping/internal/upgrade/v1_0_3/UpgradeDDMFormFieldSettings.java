@@ -30,9 +30,9 @@ import java.util.Map;
 /**
  * @author Rafael Praxedes
  */
-public class UpgradeFormFieldSettingsDefinition extends UpgradeProcess {
+public class UpgradeDDMFormFieldSettings extends UpgradeProcess {
 
-	public UpgradeFormFieldSettingsDefinition(
+	public UpgradeDDMFormFieldSettings(
 		DDMFormJSONDeserializer ddmFormJSONDeserializer,
 		DDMFormJSONSerializer ddmFormJSONSerializer) {
 
@@ -65,7 +65,7 @@ public class UpgradeFormFieldSettingsDefinition extends UpgradeProcess {
 					long structureId = rs.getLong(1);
 					String definition = rs.getString(2);
 
-					String newDefinition = upgradeRecordSetStructureDefinition(
+					String newDefinition = upgradeRecordSetStructure(
 						definition);
 
 					ps2.setString(1, newDefinition);
@@ -80,7 +80,7 @@ public class UpgradeFormFieldSettingsDefinition extends UpgradeProcess {
 		}
 	}
 
-	protected String upgradeRecordSetStructureDefinition(String definition)
+	protected String upgradeRecordSetStructure(String definition)
 		throws Exception {
 
 		DDMForm ddmForm = _ddmFormJSONDeserializer.deserialize(definition);
@@ -90,7 +90,8 @@ public class UpgradeFormFieldSettingsDefinition extends UpgradeProcess {
 
 			if (properties.containsKey("ddmDataProviderInstanceId")) {
 				properties.put(
-					"ddmDataProviderOutput", _DEFAULT_OUTPUT_PARAMETER_NAME);
+					"ddmDataProviderInstanceOutput",
+					_DEFAULT_OUTPUT_PARAMETER_NAME);
 			}
 		}
 

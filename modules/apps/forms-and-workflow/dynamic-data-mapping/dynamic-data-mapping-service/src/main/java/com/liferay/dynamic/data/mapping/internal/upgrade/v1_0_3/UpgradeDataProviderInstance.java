@@ -37,10 +37,9 @@ import java.util.Map;
 /**
  * @author Rafael Praxedes
  */
-public class UpgradeRestDDMDataProviderInstanceDefinition
-	extends UpgradeProcess {
+public class UpgradeDataProviderInstance extends UpgradeProcess {
 
-	public UpgradeRestDDMDataProviderInstanceDefinition(
+	public UpgradeDataProviderInstance(
 		DDMFormValuesJSONDeserializer ddmFormValuesJSONDeserializer,
 		DDMFormValuesJSONSerializer ddmFormValuesJSONSerializer) {
 
