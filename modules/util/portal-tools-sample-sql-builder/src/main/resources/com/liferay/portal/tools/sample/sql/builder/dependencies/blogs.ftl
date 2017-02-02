@@ -3,10 +3,6 @@
 <#list blogsEntryModels as blogsEntryModel>
 	${dataFactory.toInsertSQL(blogsEntryModel)}
 
-	<@insertResourcePermissions
-		_entry = blogsEntryModel
-	/>
-
 	<@insertAssetEntry
 		_entry = blogsEntryModel
 		_categoryAndTag = true

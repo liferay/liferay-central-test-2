@@ -10,10 +10,6 @@
 
 ${dataFactory.toInsertSQL(ddmTemplateModel)}
 
-<@insertResourcePermissions
-	_entry = ddmTemplateModel
-/>
-
 <#assign
 	journalArticlePageCounts = dataFactory.getSequence(dataFactory.maxJournalArticlePageCount)
 
@@ -70,10 +66,6 @@ ${dataFactory.toInsertSQL(ddmTemplateModel)}
 				/>
 			</#if>
 		</#list>
-
-		<@insertResourcePermissions
-			_entry = journalArticleResourceModel
-		/>
 
 		<@insertMBDiscussion
 			_classNameId = dataFactory.journalArticleClassNameId
