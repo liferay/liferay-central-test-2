@@ -118,14 +118,27 @@ public class BaseWorkflowTaskManagerTestCase {
 		}
 	}
 
+	protected void addDDMStructure() throws Exception, PortalException {
+		long groupId = group.getGroupId();
+
+		DDMForm ddmForm = DDMStructureTestUtil.getSampleDDMForm();
+
+		ddmStructure = DDMStructureTestUtil.addStructure(
+			groupId, JournalArticle.class.getName(), ddmForm);
+
+		ddmTemplate = DDMTemplateTestUtil.addTemplate(
+			groupId, ddmStructure.getStructureId(),
+			PortalUtil.getClassNameId(JournalArticle.class));
+
+		structurePK = ddmStructure.getPrimaryKey();
+	}
+
 	protected JournalArticle addJournalArticle(long folderId)
-		throws Exception, PortalException {
+		throws PortalException {
 
 		try (CaptureAppender captureAppender =
 				Log4JLoggerTestUtil.configureLog4JLogger(
 					"com.liferay.util.mail.MailEngine", Level.OFF)) {
-
-			long groupId = group.getGroupId();
 
 			Map<Locale, String> titleMap = new HashMap<>();
 
@@ -139,19 +152,8 @@ public class BaseWorkflowTaskManagerTestCase {
 
 			String content = DDMStructureTestUtil.getSampleStructuredContent();
 
-			DDMForm ddmForm = DDMStructureTestUtil.getSampleDDMForm();
-
-			DDMStructure ddmStructure = DDMStructureTestUtil.addStructure(
-				groupId, JournalArticle.class.getName(), ddmForm);
-
-			DDMTemplate ddmTemplate = DDMTemplateTestUtil.addTemplate(
-				groupId, ddmStructure.getStructureId(),
-				PortalUtil.getClassNameId(JournalArticle.class));
-
-			serviceContext = (ServiceContext)serviceContext.clone();
-
 			return JournalArticleLocalServiceUtil.addArticle(
-				adminUser.getUserId(), groupId, folderId, titleMap,
+				adminUser.getUserId(), group.getGroupId(), folderId, titleMap,
 				descriptionMap, content, ddmStructure.getStructureKey(),
 				ddmTemplate.getTemplateKey(), serviceContext);
 		}
@@ -337,11 +339,18 @@ public class BaseWorkflowTaskManagerTestCase {
 	protected User adminUser;
 
 	@DeleteAfterTestRun
+	protected DDMStructure ddmStructure;
+
+	@DeleteAfterTestRun
+	protected DDMTemplate ddmTemplate;
+
+	@DeleteAfterTestRun
 	protected Group group;
 
 	protected User portalContentReviewerUser;
 	protected ServiceContext serviceContext;
 	protected User siteAdminUser;
+	protected long structurePK;
 
 	@DeleteAfterTestRun
 	private final List<User> _users = new ArrayList<>();

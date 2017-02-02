@@ -76,6 +76,8 @@ public class WorkflowTaskManagerImplTest
 	public void testApproveJournalArticleAsAdmin() throws Exception {
 		activeSingleApproverWorkflow(JournalFolder.class.getName(), 0, -1);
 
+		addDDMStructure();
+
 		JournalArticle article = addJournalArticle(
 			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
