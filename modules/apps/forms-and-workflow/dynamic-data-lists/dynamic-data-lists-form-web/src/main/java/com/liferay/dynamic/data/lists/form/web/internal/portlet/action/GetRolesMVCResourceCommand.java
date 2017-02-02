@@ -46,17 +46,17 @@ import org.osgi.service.component.annotations.Reference;
 )
 public class GetRolesMVCResourceCommand extends BaseMVCResourceCommand {
 
-	protected JSONArray createJSONArray(List<Role> roles) {
+	protected JSONArray toJSONArray(List<Role> roles) {
 		JSONArray jsonArray = _jsonFactory.createJSONArray();
 
 		for (Role role : roles) {
-			jsonArray.put(createJSONObject(role));
+			jsonArray.put(toJSONObject(role));
 		}
 
 		return jsonArray;
 	}
 
-	protected JSONObject createJSONObject(Role role) {
+	protected JSONObject toJSONObject(Role role) {
 		JSONObject jsonObject = _jsonFactory.createJSONObject();
 
 		jsonObject.put("id", role.getRoleId());
@@ -74,7 +74,7 @@ public class GetRolesMVCResourceCommand extends BaseMVCResourceCommand {
 			CompanyThreadLocal.getCompanyId(), null);
 
 		JSONPortletResponseUtil.writeJSON(
-			resourceRequest, resourceResponse, createJSONArray(roles));
+			resourceRequest, resourceResponse, toJSONArray(roles));
 	}
 
 	@Reference
