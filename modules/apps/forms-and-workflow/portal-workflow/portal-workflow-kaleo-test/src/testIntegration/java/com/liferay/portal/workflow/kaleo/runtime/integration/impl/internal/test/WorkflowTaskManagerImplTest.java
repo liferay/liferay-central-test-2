@@ -100,7 +100,126 @@ public class WorkflowTaskManagerImplTest
 		Assert.assertEquals(
 			WorkflowConstants.STATUS_APPROVED, article.getStatus());
 
-		deactiveWorkflow(JournalArticle.class.getName(), articleId);
+		deactiveWorkflow(
+			JournalFolder.class.getName(),
+			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+	}
+
+	@Test
+	public void testApproveJournalArticleInChildFolderUsingFolderSpecificWorkflow()
+		throws Exception {
+
+		JournalFolder folder = addJournalFolder();
+
+		long folderId = folder.getFolderId();
+
+		updateJournalFolder(
+			folderId, 0, JournalFolderConstants.RESTRICTION_TYPE_WORKFLOW);
+
+		activeSingleApproverWorkflow(
+			JournalFolder.class.getName(), folderId, -1);
+
+		addDDMStructure();
+
+		JournalArticle article = addJournalArticle(folderId);
+
+		checkUserNotificationEventsByUsers(
+			adminUser, portalContentReviewerUser, siteAdminUser);
+
+		assignWorkflowTaskToUser(adminUser, adminUser);
+
+		Assert.assertEquals(
+			WorkflowConstants.STATUS_PENDING, article.getStatus());
+
+		completeWorkflowTask(adminUser, "approve");
+
+		long articleId = article.getId();
+
+		article = JournalArticleLocalServiceUtil.getArticle(articleId);
+
+		checkWorkflowInstance(JournalArticle.class.getName(), articleId);
+
+		Assert.assertEquals(
+			WorkflowConstants.STATUS_APPROVED, article.getStatus());
+
+		deactiveWorkflow(JournalFolder.class.getName(), folderId);
+	}
+
+	@Test
+	public void testApproveJournalArticleInChildFolderUsingParentFolderWorkflow()
+		throws Exception {
+
+		activeSingleApproverWorkflow(JournalFolder.class.getName(), 0, -1);
+
+		JournalFolder folder = addJournalFolder();
+
+		long folderId = folder.getFolderId();
+
+		addDDMStructure();
+
+		JournalArticle article = addJournalArticle(folderId);
+
+		checkUserNotificationEventsByUsers(
+			adminUser, portalContentReviewerUser, siteAdminUser);
+
+		assignWorkflowTaskToUser(adminUser, adminUser);
+
+		Assert.assertEquals(
+			WorkflowConstants.STATUS_PENDING, article.getStatus());
+
+		completeWorkflowTask(adminUser, "approve");
+
+		long articleId = article.getId();
+
+		article = JournalArticleLocalServiceUtil.getArticle(articleId);
+
+		checkWorkflowInstance(JournalArticle.class.getName(), articleId);
+
+		Assert.assertEquals(
+			WorkflowConstants.STATUS_APPROVED, article.getStatus());
+
+		deactiveWorkflow(JournalFolder.class.getName(), folderId);
+	}
+
+	@Test
+	public void testApproveJournalArticleInChildFolderUsingStructureSpecificWorkflow()
+		throws Exception {
+
+		JournalFolder folder = addJournalFolder();
+
+		addDDMStructure();
+
+		long folderId = folder.getFolderId();
+
+		updateJournalFolder(
+			folderId, structurePK,
+			JournalFolderConstants.RESTRICTION_TYPE_DDM_STRUCTURES_AND_WORKFLOW);
+
+		activeSingleApproverWorkflow(
+			JournalFolder.class.getName(), folderId, structurePK);
+
+		JournalArticle article = addJournalArticle(folderId);
+
+		checkUserNotificationEventsByUsers(
+			adminUser, portalContentReviewerUser, siteAdminUser);
+
+		assignWorkflowTaskToUser(adminUser, adminUser);
+
+		Assert.assertEquals(
+			WorkflowConstants.STATUS_PENDING, article.getStatus());
+
+		completeWorkflowTask(adminUser, "approve");
+
+		long articleId = article.getId();
+
+		article = JournalArticleLocalServiceUtil.getArticle(articleId);
+
+		checkWorkflowInstance(JournalArticle.class.getName(), articleId);
+
+		Assert.assertEquals(
+			WorkflowConstants.STATUS_APPROVED, article.getStatus());
+
+		deactiveWorkflow(JournalFolder.class.getName(), folderId);
 	}
 
 	@Test
