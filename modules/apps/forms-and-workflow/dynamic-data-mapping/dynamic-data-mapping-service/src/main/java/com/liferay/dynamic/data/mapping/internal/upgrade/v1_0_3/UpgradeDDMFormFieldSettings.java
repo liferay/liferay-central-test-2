@@ -90,16 +90,12 @@ public class UpgradeDDMFormFieldSettings extends UpgradeProcess {
 
 			if (properties.containsKey("ddmDataProviderInstanceId")) {
 				properties.put(
-					"ddmDataProviderInstanceOutput",
-					_DEFAULT_OUTPUT_PARAMETER_NAME);
+					"ddmDataProviderInstanceOutput", "Default-Output");
 			}
 		}
 
 		return _ddmFormJSONSerializer.serialize(ddmForm);
 	}
-
-	private static final String _DEFAULT_OUTPUT_PARAMETER_NAME =
-		"Default-Output";
 
 	private static final int _SCOPE_FORMS = 2;
 
