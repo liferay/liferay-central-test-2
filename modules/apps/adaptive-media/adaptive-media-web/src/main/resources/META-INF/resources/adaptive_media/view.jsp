@@ -117,6 +117,19 @@ PortletURL portletURL = renderResponse.createRenderURL();
 				/>
 
 				<%
+				int percentage = AdaptiveMediaImageLocalServiceUtil.getPercentage(themeDisplay.getCompanyId(), configurationEntry.getUUID());
+				%>
+
+				<liferay-ui:search-container-column-text
+					cssClass="table-cell-content"
+					name="optimized-images"
+				>
+					<div class="progress">
+						<div aria-valuemax="100" aria-valuemin="0" aria-valuenow="<%= percentage %>" class="progress-bar" role="progressbar" style="<%= "width: " + percentage + "%;" %>"><%= percentage + "%" %></div>
+					</div>
+				</liferay-ui:search-container-column-text>
+
+				<%
 				Map<String, String> properties = configurationEntry.getProperties();
 				%>
 
