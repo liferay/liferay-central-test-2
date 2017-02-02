@@ -232,6 +232,15 @@ public class AdaptiveMediaImagePersistenceTest {
 	}
 
 	@Test
+	public void testCountByC_C() throws Exception {
+		_persistence.countByC_C(RandomTestUtil.nextLong(), StringPool.BLANK);
+
+		_persistence.countByC_C(0L, StringPool.NULL);
+
+		_persistence.countByC_C(0L, (String)null);
+	}
+
+	@Test
 	public void testCountByC_F() throws Exception {
 		_persistence.countByC_F(StringPool.BLANK, RandomTestUtil.nextLong());
 

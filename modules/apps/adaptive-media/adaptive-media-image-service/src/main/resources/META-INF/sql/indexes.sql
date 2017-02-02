@@ -1,4 +1,4 @@
-create index IX_F12E3AB5 on AdaptiveMediaImage (companyId);
+create index IX_DC80A26C on AdaptiveMediaImage (companyId, configurationUuid[$COLUMN_LENGTH:75$]);
 create unique index IX_3AFA259 on AdaptiveMediaImage (configurationUuid[$COLUMN_LENGTH:75$], fileVersionId);
 create index IX_E83FA4F4 on AdaptiveMediaImage (fileVersionId);
 create index IX_EAFFEA77 on AdaptiveMediaImage (groupId);
