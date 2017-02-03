@@ -24,20 +24,16 @@ import java.util.Collection;
  * Provides a class for creating adaptive media configurations.
  *
  * @author Alejandro Hernández
- *
- * @review
  */
 public interface ImageAdaptiveMediaConfigurationDemoDataCreator {
 
 	/**
-	 * Creates a {@link ImageAdaptiveMediaConfigurationEntry} for a certain
-	 * company
+	 * Creates a {@link ImageAdaptiveMediaConfigurationEntry} for a company
 	 *
-	 * @param companyId id of the company where the configuration will be created
-	 * @param configurationVariant configuration to be created
-	 * @return created configuration
-	 *
-	 * @review
+	 * @param companyId ID of the company where the configuration will be
+	 * created
+	 * @param configurationVariant the configuration to create
+	 * @return the configuration
 	 */
 	public ImageAdaptiveMediaConfigurationEntry create(
 			long companyId,
@@ -45,14 +41,13 @@ public interface ImageAdaptiveMediaConfigurationDemoDataCreator {
 		throws IOException;
 
 	/**
-	  * Creates all {@link ImageAdaptiveMediaConfigurationEntry} based on the
+	  * Creates a collection of {@link ImageAdaptiveMediaConfigurationEntry} 
+	  * configurations based on the
 	  * {@link DemoImageAdaptiveMediaConfigurationVariant} enum
 	  *
-	  * @param companyId id of the company where the configurations will be
-	 *                      created
-	  * @return list of created configurations
-	 *
-	 * @review
+	  * @param companyId ID of the company where the configurations will be 
+	  * created
+	  * @return a list of the configurations
 	  */
 	public Collection<ImageAdaptiveMediaConfigurationEntry> create(
 			long companyId)
@@ -60,8 +55,6 @@ public interface ImageAdaptiveMediaConfigurationDemoDataCreator {
 
 	/**
 	 * Deletes the configurations created by this demo data creator
-	 *
-	 * @review
 	 */
 	public void delete() throws IOException;
 
