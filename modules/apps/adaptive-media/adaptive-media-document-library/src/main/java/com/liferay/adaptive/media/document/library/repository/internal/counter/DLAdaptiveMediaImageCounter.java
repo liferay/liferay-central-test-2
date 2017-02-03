@@ -12,10 +12,11 @@
  * details.
  */
 
-package com.liferay.adaptive.media.document.library.repository.internal;
+package com.liferay.adaptive.media.document.library.repository.internal.counter;
 
 import com.liferay.adaptive.media.image.counter.AdaptiveMediaImageCounter;
 import com.liferay.adaptive.media.image.service.persistence.AdaptiveMediaImageFinder;
+
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -23,26 +24,24 @@ import org.osgi.service.component.annotations.Reference;
  * @author Sergio González
  */
 @Component(
-	immediate = true,
-	property = {"class.name=com.liferay.blogs.model.BlogsEntry"},
+	immediate = true, property = {"class.name=DL"},
 	service = AdaptiveMediaImageCounter.class
 )
-public class BlogsAdaptiveMediaImageCounter implements AdaptiveMediaImageCounter {
+public class DLAdaptiveMediaImageCounter implements AdaptiveMediaImageCounter {
 
 	@Override
 	public int countExpectedAdaptiveMediaImages(long companyId) {
-		return _adaptiveMediaImageFinder.countByBlogsFileEntries(
+		return _adaptiveMediaImageFinder.countByDLLiferayFileEntries(
 			companyId, _SUPPORTED_MIME_TYPES);
-
 	}
 
-	@Reference
-	protected AdaptiveMediaImageFinder _adaptiveMediaImageFinder;
-
-	private final static String[] _SUPPORTED_MIME_TYPES = new String[] {
+	private static final String[] _SUPPORTED_MIME_TYPES = new String[] {
 		"image/bmp", "image/gif", "image/jpeg", "image/pjpeg", "image/png",
 		"image/tiff", "image/x-citrix-jpeg", "image/x-citrix-png",
 		"image/x-ms-bmp", "image/x-png", "image/x-tiff"
 	};
+
+	@Reference
+	private AdaptiveMediaImageFinder _adaptiveMediaImageFinder;
 
 }
