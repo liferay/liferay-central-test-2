@@ -2867,7 +2867,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  com.liferay.portal.kernel.exception,com.liferay.portal.kernel.model,c
  om.liferay.portal.kernel.security.auth,com.liferay.portal.kernel.secu
  rity.permission,javax.portlet,javax.servlet.http",com.liferay.portal.
- kernel.service.persistence;version="1.4.0";uses:="com.liferay.portal.
+ kernel.service.persistence;version="1.5.0";uses:="com.liferay.portal.
  kernel.dao.orm,com.liferay.portal.kernel.exception,com.liferay.portal
  .kernel.model,com.liferay.portal.kernel.security.permission,com.lifer
  ay.portal.kernel.service,com.liferay.portal.kernel.util",com.liferay.
