@@ -70,7 +70,7 @@
 </tr>
 <tr>
 	<td>LOADED</td>
-	<td>//div[@data-qa-id='app-loaded']//span[contains(.,'${key_portletName}')]</td>
+	<td>//div[@data-qa-id='app-loaded']//span[contains(.,'${key_portletName}')] | //div[contains(@class,'portlet-content')]/h2[contains(.,'${key_portletName}')]</td>
 	<td></td>
 </tr>
 <tr>
