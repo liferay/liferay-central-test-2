@@ -14,6 +14,7 @@
 
 package com.liferay.dynamic.data.mapping.form.renderer.internal.servlet.taglib;
 
+import com.liferay.portal.kernel.servlet.DynamicResourceInclude;
 import com.liferay.portal.kernel.servlet.taglib.BaseDynamicInclude;
 import com.liferay.portal.kernel.servlet.taglib.DynamicInclude;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
@@ -34,8 +35,12 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Bruno Basto
  */
-@Component(immediate = true, service = DynamicInclude.class)
-public class DDMFormRendererTopHeadDynamicInclude extends BaseDynamicInclude {
+@Component(
+	immediate = true,
+	service = {DynamicInclude.class, DynamicResourceInclude.class}
+)
+public class DDMFormRendererTopHeadDynamicInclude
+	extends BaseDynamicInclude implements DynamicResourceInclude {
 
 	@Activate
 	public void activate() {
@@ -50,6 +55,11 @@ public class DDMFormRendererTopHeadDynamicInclude extends BaseDynamicInclude {
 
 		_postfix = _postfix.concat(
 			"/css/main.css\" rel=\"stylesheet\" type = \"text/css\" />");
+	}
+
+	@Override
+	public ServletContext getServletContext() {
+		return _servletContext;
 	}
 
 	@Override
