@@ -850,6 +850,31 @@ public interface DDMStructureLocalService extends BaseLocalService,
 	public List<DDMStructure> getStructures(long groupId, long classNameId,
 		int start, int end, OrderByComparator<DDMStructure> orderByComparator);
 
+	/**
+	* Returns an ordered range of all the structures matching the group,
+	* class name ID, name, and description.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end -
+	* start</code> instances. <code>start</code> and <code>end</code> are not
+	* primary keys, they are indexes in the result set. Thus, <code>0</code>
+	* refers to the first result in the set. Setting both <code>start</code>
+	* and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full
+	* result set.
+	* </p>
+	*
+	* @param groupId the primary key of the group
+	* @param classNameId the primary key of the class name for the structure's
+	related model
+	* @param name the name keywords
+	* @param description the description keywords
+	* @param start the lower bound of the range of structures to return
+	* @param end the upper bound of the range of structures to return (not
+	inclusive)
+	* @param orderByComparator the comparator to order the structures
+	(optionally <code>null</code>)
+	* @return the range of matching structures ordered by the comparator
+	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<DDMStructure> getStructures(long groupId, long classNameId,
 		java.lang.String name, java.lang.String description, int start,
