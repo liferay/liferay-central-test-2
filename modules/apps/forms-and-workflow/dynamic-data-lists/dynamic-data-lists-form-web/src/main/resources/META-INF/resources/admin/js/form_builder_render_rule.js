@@ -49,7 +49,7 @@ AUI.add(
 						value: {
 							and: Liferay.Language.get('and'),
 							cancel: Liferay.Language.get('cancel'),
-							description: Liferay.Language.get('define-here-a-condition-to-change-fields-and-elements-from-your-current-form'),
+							description: Liferay.Language.get('define-condition-and-action-to-change-fields-and-elements-on-the-form'),
 							enable: Liferay.Language.get('enable'),
 							if: Liferay.Language.get('if'),
 							jumpToPage: Liferay.Language.get('jump-to-page'),

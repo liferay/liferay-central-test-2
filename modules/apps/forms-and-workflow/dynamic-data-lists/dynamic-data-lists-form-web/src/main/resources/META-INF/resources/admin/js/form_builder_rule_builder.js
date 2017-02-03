@@ -26,7 +26,7 @@ AUI.add(
 							contains: Liferay.Language.get('contains'),
 							delete: Liferay.Language.get('delete'),
 							edit: Liferay.Language.get('edit'),
-							emptyListText: Liferay.Language.get('there-are-no-rules-yet-click-on-plus-icon-bellow-to-add-the-first'),
+							emptyListText: Liferay.Language.get('there-are-no-rules-yet-click-on-plus-icon-below-to-add-the-first'),
 							'enable-field': Liferay.Language.get('enable-x'),
 							'equals-to': Liferay.Language.get('is-equal-to'),
 							'jump-from-page-to-page': Liferay.Language.get('jump-from-x-to-x'),
