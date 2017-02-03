@@ -144,12 +144,12 @@ public class LockLocalServiceTest {
 		String key = "testKey";
 		String owner1 = "testOwner1";
 
-		Optional<Lock> lock = LockLocalServiceUtil.tryLock(
+		Optional<Lock> optional = LockLocalServiceUtil.tryLock(
 			className, key, owner1);
 
-		Assert.assertTrue(lock.isPresent());
+		Assert.assertTrue(optional.isPresent());
 
-		Lock lock1 = lock.get();
+		Lock lock1 = optional.get();
 
 		Assert.assertEquals(owner1, lock1.getOwner());
 
@@ -157,22 +157,22 @@ public class LockLocalServiceTest {
 
 		String owner2 = "owner2";
 
-		lock = LockLocalServiceUtil.tryLock(className, key, owner2);
+		optional = LockLocalServiceUtil.tryLock(className, key, owner2);
 
-		Assert.assertTrue(lock.isPresent());
+		Assert.assertTrue(optional.isPresent());
 
-		Lock lock2 = lock.get();
+		Lock lock2 = optional.get();
 
 		Assert.assertEquals(owner1, lock2.getOwner());
 		Assert.assertFalse(lock2.isNew());
 
 		LockLocalServiceUtil.unlock(className, key, owner1);
 
-		lock = LockLocalServiceUtil.tryLock(className, key, owner2);
+		optional = LockLocalServiceUtil.tryLock(className, key, owner2);
 
-		Assert.assertTrue(lock.isPresent());
+		Assert.assertTrue(optional.isPresent());
 
-		lock2 = lock.get();
+		lock2 = optional.get();
 
 		Assert.assertEquals(owner2, lock2.getOwner());
 		Assert.assertTrue(lock2.isNew());

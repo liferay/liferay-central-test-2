@@ -370,12 +370,12 @@ public class LDAPUserImporterImpl implements LDAPUserImporter, UserImporter {
 			LDAPImportConfiguration ldapImportConfiguration =
 				_ldapImportConfigurationProvider.getConfiguration(companyId);
 
-			Optional<Lock> tryLock = _lockManager.tryLock(
+			Optional<Lock> optional = _lockManager.tryLock(
 				defaultUserId, UserImporter.class.getName(), companyId,
 				LDAPUserImporterImpl.class.getName(), false,
 				ldapImportConfiguration.importLockExpirationTime());
 
-			if (tryLock.isPresent()) {
+			if (optional.isPresent()) {
 				Collection<LDAPServerConfiguration> ldapServerConfigurations =
 					_ldapServerConfigurationProvider.getConfigurations(
 						companyId);
