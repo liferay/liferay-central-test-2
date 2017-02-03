@@ -56,18 +56,18 @@ public class FriendlyURLResolverRegistryUtil {
 	public static Collection<FriendlyURLResolver>
 		getFriendlyURLResolversAsCollection() {
 
-		List<FriendlyURLResolver> list = new ArrayList<>();
+		List<FriendlyURLResolver> friendlyURLResolvers = new ArrayList<>();
 
 		for (String key : _serviceTrackerMap.keySet()) {
 			FriendlyURLResolver friendlyURLResolver =
 				_serviceTrackerMap.getService(key);
 
 			if (friendlyURLResolver != null) {
-				list.add(friendlyURLResolver);
+				friendlyURLResolvers.add(friendlyURLResolver);
 			}
 		}
 
-		return list;
+		return friendlyURLResolvers;
 	}
 
 	public static String[] getURLSeparators() {
