@@ -125,7 +125,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 					name="optimized-images"
 				>
 					<div class="progress">
-						<div aria-valuemax="100" aria-valuemin="0" aria-valuenow="<%= percentage %>" class="progress-bar" role="progressbar" style="<%= "width: " + percentage + "%;" %>"><%= percentage + "%" %></div>
+						<div aria-valuemax="100" aria-valuemin="0" aria-valuenow="<%= percentage %>" class="<%= (percentage == 100) ? "progress-bar progress-bar-success" : "progress-bar" %>" role="progressbar" style="<%= "width: " + percentage + "%;" %>"><%= percentage + "%" %></div>
 					</div>
 				</liferay-ui:search-container-column-text>
 
