@@ -301,10 +301,22 @@ AUI.add(
 
 						var conditions = [];
 
+						var logicOperator = instance.get('logicOperator');
+
+						var strings = instance.get('strings');
+
+						if (logicOperator === 'OR') {
+							logicOperator = strings.or;
+						}
+						else {
+							logicOperator = strings.and;
+						}
+
 						for (var i = 0; i < instance._conditionsIndexes.length; i++) {
 							var index = instance._conditionsIndexes[i];
 
 							var condition = {
+								logicOperator: logicOperator.toLowerCase(),
 								'operands': [
 									{
 										label: instance._getFieldLabel(instance._getFirstOperandValue(index)),
