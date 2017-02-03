@@ -4471,6 +4471,49 @@
 		</execute>
 	</command>
 
+	<command name="ViewRuleConditionOperatorFieldOptions" priority="2">
+		<description message="This is a use case for LPS-69733." />
+
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Forms" />
+		</execute>
+
+		<execute macro="FormsAdminNavigator#gotoAddForm" />
+
+		<execute macro="Form#editName" />
+
+		<execute macro="Form#editDescription" />
+
+		<execute macro="Form#gotoAddField">
+			<var name="fieldType" value="Text Field" />
+		</execute>
+
+		<execute macro="Form#editFieldLabel">
+			<var name="fieldValue" value="Text Field" />
+		</execute>
+
+		<execute macro="Form#closeSidebar" />
+
+		<execute macro="FormsAdminNavigator#gotoRules" />
+
+		<execute macro="FormRules#addRule" />
+
+		<execute macro="FormRules#viewConditionOperatorOptionsNotPresent">
+			<var name="conditionRowNumber" value="1" />
+		</execute>
+
+		<execute macro="FormRules#selectConditionField">
+			<var name="conditionField" value="Text Field" />
+			<var name="conditionRowNumber" value="1" />
+		</execute>
+
+		<execute macro="FormRules#viewConditionOperatorOptionsIsPresent">
+			<var name="conditionRowNumber" value="1" />
+		</execute>
+	</command>
+
 	<command name="ViewSaveNotification" priority="3">
 		<description message="This is a use case for LPS-68390." />
 
