@@ -231,9 +231,9 @@ public class RoleLocalServiceTest {
 			companyId, keyword, excludedRoleNames, roleTypes, 0, groupId,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
-		_role = roles.get(0);
+		Role role = roles.get(0);
 
-		Assert.assertEquals(team.getTeamId(), _role.getClassPK());
+		Assert.assertEquals(team.getTeamId(), role.getClassPK());
 	}
 
 	@Test
