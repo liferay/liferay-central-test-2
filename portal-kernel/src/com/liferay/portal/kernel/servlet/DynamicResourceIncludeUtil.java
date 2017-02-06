@@ -14,17 +14,11 @@
 
 package com.liferay.portal.kernel.servlet;
 
-import com.liferay.registry.Registry;
-import com.liferay.registry.RegistryUtil;
-import com.liferay.registry.ServiceReference;
-import com.liferay.registry.ServiceTracker;
-import com.liferay.registry.ServiceTrackerCustomizer;
+import com.liferay.registry.collections.ServiceTrackerCollections;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 
@@ -34,9 +28,8 @@ import javax.servlet.ServletContext;
 public class DynamicResourceIncludeUtil {
 
 	public static ServletContext getPathServletContext(String path) {
-		for (ServletContext servletContext :
-				_instance._servletContexts.values()) {
 
+		for (ServletContext servletContext : _servletContexts) {
 			if (path.startsWith(servletContext.getContextPath())) {
 				return servletContext;
 			}
@@ -71,65 +64,8 @@ public class DynamicResourceIncludeUtil {
 		return null;
 	}
 
-	private DynamicResourceIncludeUtil() {
-		Registry registry = RegistryUtil.getRegistry();
-
-		_serviceTracker = registry.trackServices(
-			DynamicResourceInclude.class,
-			new DynamicResourceIncludeServiceTrackerCustomizer());
-
-		_serviceTracker.open();
-	}
-
-	private static final DynamicResourceIncludeUtil _instance =
-		new DynamicResourceIncludeUtil();
-
-	private final ServiceTracker<DynamicResourceInclude, DynamicResourceInclude>
-		_serviceTracker;
-	private final Map<ServiceReference<DynamicResourceInclude>, ServletContext>
-		_servletContexts = new ConcurrentHashMap<>();
-
-	private class DynamicResourceIncludeServiceTrackerCustomizer
-		implements ServiceTrackerCustomizer
-			<DynamicResourceInclude, DynamicResourceInclude> {
-
-		@Override
-		public DynamicResourceInclude addingService(
-			ServiceReference<DynamicResourceInclude> serviceReference) {
-
-			Registry registry = RegistryUtil.getRegistry();
-
-			DynamicResourceInclude dynamicResourceInclude = registry.getService(
-				serviceReference);
-
-			ServletContext servletContext =
-				dynamicResourceInclude.getServletContext();
-
-			if (servletContext != null) {
-				_servletContexts.put(serviceReference, servletContext);
-			}
-
-			return dynamicResourceInclude;
-		}
-
-		@Override
-		public void modifiedService(
-			ServiceReference<DynamicResourceInclude> serviceReference,
-			DynamicResourceInclude dynamicResourceInclude) {
-		}
-
-		@Override
-		public void removedService(
-			ServiceReference<DynamicResourceInclude> serviceReference,
-			DynamicResourceInclude dynamicResourceInclude) {
-
-			Registry registry = RegistryUtil.getRegistry();
-
-			registry.ungetService(serviceReference);
-
-			_servletContexts.remove(serviceReference);
-		}
-
-	}
+	private static final List<ServletContext>
+		_servletContexts = ServiceTrackerCollections.openList(
+			ServletContext.class);
 
 }
