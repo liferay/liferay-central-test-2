@@ -54,35 +54,35 @@ public class LastSessionRecorderHibernateTransactionManager
 				new Log() {
 
 					@Override
-					public void debug(Object o) {
+					public void debug(Object object) {
 					}
 
 					@Override
-					public void debug(Object o, Throwable t) {
+					public void debug(Object object, Throwable throwable) {
 					}
 
 					@Override
-					public void error(Object o) {
+					public void error(Object object) {
 					}
 
 					@Override
-					public void error(Object o, Throwable t) {
+					public void error(Object object, Throwable throwable) {
 					}
 
 					@Override
-					public void fatal(Object o) {
+					public void fatal(Object object) {
 					}
 
 					@Override
-					public void fatal(Object o, Throwable t) {
+					public void fatal(Object object, Throwable throwable) {
 					}
 
 					@Override
-					public void info(Object o) {
+					public void info(Object object) {
 					}
 
 					@Override
-					public void info(Object o, Throwable t) {
+					public void info(Object object, Throwable throwable) {
 					}
 
 					@Override
@@ -116,19 +116,19 @@ public class LastSessionRecorderHibernateTransactionManager
 					}
 
 					@Override
-					public void trace(Object o) {
+					public void trace(Object object) {
 					}
 
 					@Override
-					public void trace(Object o, Throwable t) {
+					public void trace(Object object, Throwable throwable) {
 					}
 
 					@Override
-					public void warn(Object o) {
+					public void warn(Object object) {
 					}
 
 					@Override
-					public void warn(Object o, Throwable t) {
+					public void warn(Object object, Throwable throwable) {
 					}
 
 				});
