@@ -43,4 +43,14 @@ ImageAdaptiveMediaConfigurationEntry configurationEntry = (ImageAdaptiveMediaCon
 		trash="<%= false %>"
 		url="<%= deleteImageConfigurationEntryURL %>"
 	/>
+
+	<portlet:actionURL name="/adaptive_media/optimize_images" var="optimizeImagesURL">
+		<portlet:param name="redirect" value="<%= currentURL %>" />
+		<portlet:param name="entryUuid" value="<%= String.valueOf(configurationEntry.getUUID()) %>" />
+	</portlet:actionURL>
+
+	<liferay-ui:icon
+		message="optimize-remaining"
+		url="<%= optimizeImagesURL %>"
+	/>
 </liferay-ui:icon-menu>
