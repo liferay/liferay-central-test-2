@@ -49,7 +49,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Sergio González
  */
 @Component(
-	immediate = true, property = {"model.class.name=DL"},
+	immediate = true, property = {"adaptive.media.key=document-library"},
 	service = AdaptiveMediaImageOptimizer.class
 )
 public class DLAdaptiveMediaImageOptimizer
@@ -191,7 +191,7 @@ public class DLAdaptiveMediaImageOptimizer
 	@Reference
 	private ImageAdaptiveMediaConfigurationHelper _configurationHelper;
 
-	@Reference(target = "(class.name=DL)")
+	@Reference(target = "(adaptive.media.key=document-library)")
 	private AdaptiveMediaImageCounter _counter;
 
 	@Reference

@@ -27,7 +27,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Sergio González
  */
 @Component(
-	immediate = true, property = {"class.name=DL"},
+	immediate = true, property = {"adaptive.media.key=document-library"},
 	service = AdaptiveMediaImageCounter.class
 )
 public class DLAdaptiveMediaImageCounter implements AdaptiveMediaImageCounter {

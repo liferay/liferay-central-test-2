@@ -55,7 +55,7 @@ public class AdaptiveMediaImageOptimizerUtil {
 	public void activate(BundleContext bundleContext) {
 		_serviceTrackerMap = ServiceTrackerMapFactory.openSingleValueMap(
 			bundleContext, AdaptiveMediaImageOptimizer.class,
-			"model.class.name");
+			"adaptive.media.key");
 	}
 
 	private static ServiceTrackerMap<String, AdaptiveMediaImageOptimizer>

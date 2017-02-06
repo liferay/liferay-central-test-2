@@ -29,8 +29,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Sergio González
  */
 @Component(
-	immediate = true,
-	property = {"class.name=com.liferay.blogs.model.BlogsEntry"},
+	immediate = true, property = {"adaptive.media.key=blogs"},
 	service = AdaptiveMediaImageCounter.class
 )
 public class BlogsAdaptiveMediaImageCounter

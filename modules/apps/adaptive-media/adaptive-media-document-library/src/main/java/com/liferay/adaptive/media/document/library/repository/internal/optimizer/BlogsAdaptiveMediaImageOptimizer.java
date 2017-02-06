@@ -49,8 +49,7 @@ import org.osgi.service.component.annotations.Reference;
  * @author Sergio González
  */
 @Component(
-	immediate = true,
-	property = {"model.class.name=com.liferay.blogs.model.BlogsEntry"},
+	immediate = true, property = {"adaptive.media.key=blogs"},
 	service = AdaptiveMediaImageOptimizer.class
 )
 public class BlogsAdaptiveMediaImageOptimizer
@@ -193,7 +192,7 @@ public class BlogsAdaptiveMediaImageOptimizer
 	@Reference
 	private ImageAdaptiveMediaConfigurationHelper _configurationHelper;
 
-	@Reference(target = "(class.name=com.liferay.blogs.model.BlogsEntry)")
+	@Reference(target = "(adaptive.media.key=blogs)")
 	private AdaptiveMediaImageCounter _counter;
 
 	@Reference

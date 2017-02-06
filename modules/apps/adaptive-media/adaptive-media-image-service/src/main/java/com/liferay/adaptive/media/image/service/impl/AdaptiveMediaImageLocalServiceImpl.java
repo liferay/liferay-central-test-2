@@ -81,7 +81,8 @@ public class AdaptiveMediaImageLocalServiceImpl
 		BundleContext bundleContext = bundle.getBundleContext();
 
 		_serviceTrackerMap = ServiceTrackerMapFactory.singleValueMap(
-			bundleContext, AdaptiveMediaImageCounter.class, "class.name");
+			bundleContext, AdaptiveMediaImageCounter.class,
+			"adaptive.media.key");
 
 		_serviceTrackerMap.open();
 	}
