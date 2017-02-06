@@ -63,30 +63,31 @@ public class BlogsAdaptiveMediaImageOptimizer
 				companyId);
 
 		int total =
-			counter.countExpectedAdaptiveMediaImages(companyId) *
+			_counter.countExpectedAdaptiveMediaImages(companyId) *
 				configurationEntries.size();
 
-		final AtomicInteger counter = new AtomicInteger(0);
+		final AtomicInteger atomicCounter = new AtomicInteger(0);
 
 		for (ImageAdaptiveMediaConfigurationEntry configurationEntry :
 				configurationEntries) {
 
-			_optimize(companyId, configurationEntry.getUUID(), total, counter);
+			_optimize(
+				companyId, configurationEntry.getUUID(), total, atomicCounter);
 		}
 	}
 
 	@Override
 	public void optimize(long companyId, String configurationEntryUuid) {
-		int total = counter.countExpectedAdaptiveMediaImages(companyId);
+		int total = _counter.countExpectedAdaptiveMediaImages(companyId);
 
-		final AtomicInteger counter = new AtomicInteger(0);
+		final AtomicInteger atomicCounter = new AtomicInteger(0);
 
-		_optimize(companyId, configurationEntryUuid, total, counter);
+		_optimize(companyId, configurationEntryUuid, total, atomicCounter);
 	}
 
 	private void _optimize(
 		long companyId, String configurationEntryUuid, int total,
-		AtomicInteger counter) {
+		AtomicInteger atomicCounter) {
 
 		ActionableDynamicQuery actionableDynamicQuery =
 			_dlFileEntryLocalService.getActionableDynamicQuery();
@@ -131,7 +132,8 @@ public class BlogsAdaptiveMediaImageOptimizer
 						_processor.process(
 							fileEntry.getFileVersion(), configurationEntryUuid);
 
-						_sendStatusMessage(counter.incrementAndGet(), total);
+						_sendStatusMessage(
+							atomicCounter.incrementAndGet(), total);
 					}
 					catch (AdaptiveMediaException | PortalException e) {
 						_log.error(
@@ -157,9 +159,12 @@ public class BlogsAdaptiveMediaImageOptimizer
 		message.put(
 			BackgroundTaskConstants.BACKGROUND_TASK_ID,
 			BackgroundTaskThreadLocal.getBackgroundTaskId());
+
+		Class<? extends BlogsAdaptiveMediaImageOptimizer> clazz = getClass();
+
 		message.put(
-			OptimizeImagesBackgroundTaskConstants.CLASS_NAME,
-			getClass().getName());
+			OptimizeImagesBackgroundTaskConstants.CLASS_NAME, clazz.getName());
+
 		message.put(OptimizeImagesBackgroundTaskConstants.COUNT, count);
 		message.put(OptimizeImagesBackgroundTaskConstants.TOTAL, total);
 
@@ -178,9 +183,6 @@ public class BlogsAdaptiveMediaImageOptimizer
 	private static final Log _log = LogFactoryUtil.getLog(
 		BlogsAdaptiveMediaImageOptimizer.class);
 
-	@Reference(target = "(class.name=com.liferay.blogs.model.BlogsEntry)")
-	AdaptiveMediaImageCounter counter;
-
 	@Reference
 	private BackgroundTaskStatusMessageSender
 		_backgroundTaskStatusMessageSender;
@@ -190,6 +192,9 @@ public class BlogsAdaptiveMediaImageOptimizer
 
 	@Reference
 	private ImageAdaptiveMediaConfigurationHelper _configurationHelper;
+
+	@Reference(target = "(class.name=com.liferay.blogs.model.BlogsEntry)")
+	private AdaptiveMediaImageCounter _counter;
 
 	@Reference
 	private DLFileEntryLocalService _dlFileEntryLocalService;

@@ -25,8 +25,7 @@ import com.liferay.portal.kernel.repository.model.FileVersion;
 public interface ImageAdaptiveMediaProcessor
 	extends AdaptiveMediaProcessor<FileVersion, ImageAdaptiveMediaProcessor> {
 
-	public void process(
-			FileVersion fileVersion, String configurationEntryUuid)
+	public void process(FileVersion fileVersion, String configurationEntryUuid)
 		throws AdaptiveMediaException, PortalException;
 
 }

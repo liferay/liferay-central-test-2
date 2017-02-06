@@ -34,6 +34,7 @@ import java.awt.image.RenderedImage;
 
 import java.io.IOException;
 import java.io.InputStream;
+
 import java.util.Optional;
 
 import org.osgi.service.component.annotations.Component;
@@ -101,10 +102,8 @@ public final class ImageAdaptiveMediaProcessorImpl
 		ImageAdaptiveMediaConfigurationEntry configurationEntry =
 			configurationEntryOptional.get();
 
-		AdaptiveMediaImage image =
-			_imageLocalService.fetchAdaptiveMediaImage(
-				configurationEntry.getUUID(),
-				fileVersion.getFileVersionId());
+		AdaptiveMediaImage image = _imageLocalService.fetchAdaptiveMediaImage(
+			configurationEntry.getUUID(), fileVersion.getFileVersionId());
 
 		if (image != null) {
 			return;
@@ -120,14 +119,12 @@ public final class ImageAdaptiveMediaProcessorImpl
 
 			inputStream = new UnsyncByteArrayInputStream(bytes);
 
-			_imageStorage.save(
-				fileVersion, configurationEntry, inputStream);
+			_imageStorage.save(fileVersion, configurationEntry, inputStream);
 
 			_imageLocalService.addAdaptiveMediaImage(
-				configurationEntry.getUUID(),
-				fileVersion.getFileVersionId(), fileVersion.getMimeType(),
-				renderedImage.getWidth(), bytes.length,
-				renderedImage.getHeight());
+				configurationEntry.getUUID(), fileVersion.getFileVersionId(),
+				fileVersion.getMimeType(), renderedImage.getWidth(),
+				bytes.length, renderedImage.getHeight());
 		}
 		catch (IOException | PortalException e) {
 			throw new AdaptiveMediaRuntimeException.IOException(e);
