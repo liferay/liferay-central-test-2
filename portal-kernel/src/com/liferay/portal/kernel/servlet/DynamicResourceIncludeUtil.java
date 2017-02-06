@@ -18,6 +18,7 @@ import com.liferay.registry.collections.ServiceTrackerCollections;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -28,7 +29,6 @@ import javax.servlet.ServletContext;
 public class DynamicResourceIncludeUtil {
 
 	public static ServletContext getPathServletContext(String path) {
-
 		for (ServletContext servletContext : _servletContexts) {
 			if (path.startsWith(servletContext.getContextPath())) {
 				return servletContext;
@@ -64,8 +64,7 @@ public class DynamicResourceIncludeUtil {
 		return null;
 	}
 
-	private static final List<ServletContext>
-		_servletContexts = ServiceTrackerCollections.openList(
-			ServletContext.class);
+	private static final List<ServletContext> _servletContexts =
+		ServiceTrackerCollections.openList(ServletContext.class);
 
 }
