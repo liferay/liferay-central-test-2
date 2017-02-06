@@ -15,6 +15,8 @@
 package com.liferay.adaptive.media.web.internal.portlet.configuration.icon;
 
 import com.liferay.adaptive.media.web.constants.AdaptiveMediaPortletKeys;
+import com.liferay.adaptive.media.web.internal.background.task.OptimizeImagesAllConfigurationsBackgroundTaskExecutor;
+import com.liferay.portal.kernel.backgroundtask.BackgroundTaskManager;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.configuration.icon.BasePortletConfigurationIcon;
 import com.liferay.portal.kernel.portlet.configuration.icon.PortletConfigurationIcon;
@@ -99,8 +101,22 @@ public class OptimizeImagesPortletConfigurationIcon
 			return false;
 		}
 
+		int backgroundTasksCount =
+			_backgroundTaskManager.getBackgroundTasksCount(
+				0,
+				OptimizeImagesAllConfigurationsBackgroundTaskExecutor.class.
+					getName(),
+				false);
+
+		if (backgroundTasksCount != 0) {
+			return false;
+		}
+
 		return true;
 	}
+
+	@Reference
+	private BackgroundTaskManager _backgroundTaskManager;
 
 	@Reference
 	private Portal _portal;

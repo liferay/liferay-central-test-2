@@ -28,15 +28,22 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 page import="com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry" %><%@
 page import="com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper" %><%@
 page import="com.liferay.adaptive.media.image.service.AdaptiveMediaImageLocalServiceUtil" %><%@
+page import="com.liferay.adaptive.media.web.internal.background.task.OptimizeImagesSingleConfigurationBackgroundTaskExecutor" %><%@
 page import="com.liferay.adaptive.media.web.internal.constants.AdaptiveMediaWebKeys" %><%@
 page import="com.liferay.adaptive.media.web.internal.search.ImageConfigurationEntriesChecker" %><%@
+page import="com.liferay.portal.kernel.backgroundtask.BackgroundTask" %><%@
+page import="com.liferay.portal.kernel.backgroundtask.BackgroundTaskConstants" %><%@
+page import="com.liferay.portal.kernel.backgroundtask.BackgroundTaskManagerUtil" %><%@
 page import="com.liferay.portal.kernel.dao.search.ResultRow" %><%@
 page import="com.liferay.portal.kernel.language.LanguageUtil" %><%@
 page import="com.liferay.portal.kernel.language.UnicodeLanguageUtil" %><%@
+page import="com.liferay.portal.kernel.model.CompanyConstants" %><%@
 page import="com.liferay.portal.kernel.util.ListUtil" %><%@
 page import="com.liferay.portal.kernel.util.ParamUtil" %><%@
 page import="com.liferay.portal.kernel.util.StringPool" %><%@
 page import="com.liferay.portal.kernel.util.WebKeys" %>
+
+<%@ page import="java.io.Serializable" %>
 
 <%@ page import="java.util.List" %><%@
 page import="java.util.Map" %>
