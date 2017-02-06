@@ -19,6 +19,7 @@ import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigur
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
 import com.liferay.adaptive.media.image.internal.util.ImageProcessor;
 import com.liferay.adaptive.media.image.internal.util.ImageStorage;
+import com.liferay.adaptive.media.image.model.AdaptiveMediaImage;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
 import com.liferay.adaptive.media.image.service.AdaptiveMediaImageLocalService;
 import com.liferay.adaptive.media.processor.AdaptiveMediaProcessor;
@@ -33,6 +34,7 @@ import java.awt.image.RenderedImage;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Optional;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -75,31 +77,63 @@ public final class ImageAdaptiveMediaProcessorImpl
 		for (ImageAdaptiveMediaConfigurationEntry configurationEntry :
 				configurationEntries) {
 
-			RenderedImage renderedImage = _imageProcessor.scaleImage(
-				fileVersion, configurationEntry);
+			process(fileVersion, configurationEntry.getUUID());
+		}
+	}
 
-			InputStream inputStream = null;
+	@Override
+	public void process(
+		FileVersion fileVersion, String configurationEntryUuid) {
 
-			try {
-				byte[] bytes = _getBytes(fileVersion, renderedImage);
+		if (!_imageProcessor.isMimeTypeSupported(fileVersion.getMimeType())) {
+			return;
+		}
 
-				inputStream = new UnsyncByteArrayInputStream(bytes);
+		Optional<ImageAdaptiveMediaConfigurationEntry>
+			configurationEntryOptional =
+				_configurationHelper.getImageAdaptiveMediaConfigurationEntry(
+					fileVersion.getCompanyId(), configurationEntryUuid);
 
-				_imageStorage.save(
-					fileVersion, configurationEntry, inputStream);
+		if (!configurationEntryOptional.isPresent()) {
+			return;
+		}
 
-				_imageLocalService.addAdaptiveMediaImage(
-					configurationEntry.getUUID(),
-					fileVersion.getFileVersionId(), fileVersion.getMimeType(),
-					renderedImage.getWidth(), bytes.length,
-					renderedImage.getHeight());
-			}
-			catch (IOException | PortalException e) {
-				throw new AdaptiveMediaRuntimeException.IOException(e);
-			}
-			finally {
-				StreamUtil.cleanUp(inputStream);
-			}
+		ImageAdaptiveMediaConfigurationEntry configurationEntry =
+			configurationEntryOptional.get();
+
+		AdaptiveMediaImage image =
+			_imageLocalService.fetchAdaptiveMediaImage(
+				configurationEntry.getUUID(),
+				fileVersion.getFileVersionId());
+
+		if (image != null) {
+			return;
+		}
+
+		RenderedImage renderedImage = _imageProcessor.scaleImage(
+			fileVersion, configurationEntry);
+
+		InputStream inputStream = null;
+
+		try {
+			byte[] bytes = _getBytes(fileVersion, renderedImage);
+
+			inputStream = new UnsyncByteArrayInputStream(bytes);
+
+			_imageStorage.save(
+				fileVersion, configurationEntry, inputStream);
+
+			_imageLocalService.addAdaptiveMediaImage(
+				configurationEntry.getUUID(),
+				fileVersion.getFileVersionId(), fileVersion.getMimeType(),
+				renderedImage.getWidth(), bytes.length,
+				renderedImage.getHeight());
+		}
+		catch (IOException | PortalException e) {
+			throw new AdaptiveMediaRuntimeException.IOException(e);
+		}
+		finally {
+			StreamUtil.cleanUp(inputStream);
 		}
 	}
 
