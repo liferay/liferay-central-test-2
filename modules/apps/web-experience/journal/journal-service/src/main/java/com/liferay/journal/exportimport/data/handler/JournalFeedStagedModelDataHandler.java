@@ -331,7 +331,7 @@ public class JournalFeedStagedModelDataHandler
 	}
 
 	/**
-	 * @deprecated As of 7.0.0
+	 * @deprecated As of 3.6.0
 	 */
 	@Deprecated
 	protected void setJournalFeedExportImportContentProcessor(
