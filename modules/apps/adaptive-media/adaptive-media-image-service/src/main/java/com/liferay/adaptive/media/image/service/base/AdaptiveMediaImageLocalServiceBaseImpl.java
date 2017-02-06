@@ -18,7 +18,6 @@ import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.adaptive.media.image.model.AdaptiveMediaImage;
 import com.liferay.adaptive.media.image.service.AdaptiveMediaImageLocalService;
-import com.liferay.adaptive.media.image.service.persistence.AdaptiveMediaImageFinder;
 import com.liferay.adaptive.media.image.service.persistence.AdaptiveMediaImagePersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
@@ -414,25 +413,6 @@ public abstract class AdaptiveMediaImageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Returns the adaptive media image finder.
-	 *
-	 * @return the adaptive media image finder
-	 */
-	public AdaptiveMediaImageFinder getAdaptiveMediaImageFinder() {
-		return adaptiveMediaImageFinder;
-	}
-
-	/**
-	 * Sets the adaptive media image finder.
-	 *
-	 * @param adaptiveMediaImageFinder the adaptive media image finder
-	 */
-	public void setAdaptiveMediaImageFinder(
-		AdaptiveMediaImageFinder adaptiveMediaImageFinder) {
-		this.adaptiveMediaImageFinder = adaptiveMediaImageFinder;
-	}
-
-	/**
 	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
@@ -507,8 +487,6 @@ public abstract class AdaptiveMediaImageLocalServiceBaseImpl
 	protected AdaptiveMediaImageLocalService adaptiveMediaImageLocalService;
 	@BeanReference(type = AdaptiveMediaImagePersistence.class)
 	protected AdaptiveMediaImagePersistence adaptiveMediaImagePersistence;
-	@BeanReference(type = AdaptiveMediaImageFinder.class)
-	protected AdaptiveMediaImageFinder adaptiveMediaImageFinder;
 	@ServiceReference(type = com.liferay.counter.kernel.service.CounterLocalService.class)
 	protected com.liferay.counter.kernel.service.CounterLocalService counterLocalService;
 	@ServiceReference(type = PersistedModelLocalServiceRegistry.class)
