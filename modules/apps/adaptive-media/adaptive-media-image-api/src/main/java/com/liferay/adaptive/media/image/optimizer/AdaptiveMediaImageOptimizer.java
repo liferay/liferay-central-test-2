@@ -12,19 +12,18 @@
  * details.
  */
 
-package com.liferay.adaptive.media.image.service.persistence;
+package com.liferay.adaptive.media.image.optimizer;
 
 import aQute.bnd.annotation.ProviderType;
 
 /**
- * @author Brian Wing Shun Chan
- * @generated
+ * @author Sergio González
  */
 @ProviderType
-public interface AdaptiveMediaImageFinder {
-	public int countByBlogsFileEntries(long companyId,
-		java.lang.String[] mimeTypes);
+public interface AdaptiveMediaImageOptimizer {
 
-	public int countByDLLiferayFileEntries(long companyId,
-		java.lang.String[] mimeTypes);
+	public void optimize(long companyId);
+
+	public void optimize(long companyId, String configurationEntryUuid);
+
 }
