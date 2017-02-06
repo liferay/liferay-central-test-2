@@ -15,7 +15,12 @@
 package com.liferay.adaptive.media.document.library.repository.internal.counter;
 
 import com.liferay.adaptive.media.image.counter.AdaptiveMediaImageCounter;
-import com.liferay.adaptive.media.image.service.persistence.AdaptiveMediaImageFinder;
+import com.liferay.blogs.model.BlogsEntry;
+import com.liferay.document.library.kernel.service.DLFileEntryLocalService;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.Property;
+import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
+import com.liferay.portal.kernel.service.ClassNameLocalService;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -33,17 +38,37 @@ public class BlogsAdaptiveMediaImageCounter
 
 	@Override
 	public int countExpectedAdaptiveMediaImages(long companyId) {
-		return _adaptiveMediaImageFinder.countByBlogsFileEntries(
-			companyId, _SUPPORTED_MIME_TYPES);
+		DynamicQuery dynamicQuery = _dlFileEntryLocalService.dynamicQuery();
+
+		Property companyIdProperty = PropertyFactoryUtil.forName("companyId");
+
+		dynamicQuery.add(companyIdProperty.eq(companyId));
+
+		Property classNameIdProperty = PropertyFactoryUtil.forName(
+			"classNameId");
+
+		long classNameId = _classNameLocalService.getClassNameId(
+			BlogsEntry.class.getName());
+
+		dynamicQuery.add(classNameIdProperty.eq(classNameId));
+
+		Property mimeTypeProperty = PropertyFactoryUtil.forName("mimeType");
+
+		dynamicQuery.add(mimeTypeProperty.in(_SUPPORTED_IMAGE_MIME_TYPES));
+
+		return (int)_dlFileEntryLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
-	private static final String[] _SUPPORTED_MIME_TYPES = new String[] {
+	private static final String[] _SUPPORTED_IMAGE_MIME_TYPES = new String[] {
 		"image/bmp", "image/gif", "image/jpeg", "image/pjpeg", "image/png",
 		"image/tiff", "image/x-citrix-jpeg", "image/x-citrix-png",
 		"image/x-ms-bmp", "image/x-png", "image/x-tiff"
 	};
 
 	@Reference
-	private AdaptiveMediaImageFinder _adaptiveMediaImageFinder;
+	private ClassNameLocalService _classNameLocalService;
+
+	@Reference
+	private DLFileEntryLocalService _dlFileEntryLocalService;
 
 }

@@ -15,7 +15,10 @@
 package com.liferay.adaptive.media.document.library.repository.internal.counter;
 
 import com.liferay.adaptive.media.image.counter.AdaptiveMediaImageCounter;
-import com.liferay.adaptive.media.image.service.persistence.AdaptiveMediaImageFinder;
+import com.liferay.document.library.kernel.service.DLFileEntryLocalService;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.Property;
+import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -31,17 +34,32 @@ public class DLAdaptiveMediaImageCounter implements AdaptiveMediaImageCounter {
 
 	@Override
 	public int countExpectedAdaptiveMediaImages(long companyId) {
-		return _adaptiveMediaImageFinder.countByDLLiferayFileEntries(
-			companyId, _SUPPORTED_MIME_TYPES);
+		DynamicQuery dynamicQuery = _dlFileEntryLocalService.dynamicQuery();
+
+		Property companyIdProperty = PropertyFactoryUtil.forName("companyId");
+
+		dynamicQuery.add(companyIdProperty.eq(companyId));
+
+		Property groupIdProperty = PropertyFactoryUtil.forName("groupId");
+		Property repositoryIdProperty = PropertyFactoryUtil.forName(
+			"repositoryId");
+
+		dynamicQuery.add(groupIdProperty.eqProperty(repositoryIdProperty));
+
+		Property mimeTypeProperty = PropertyFactoryUtil.forName("mimeType");
+
+		dynamicQuery.add(mimeTypeProperty.in(_SUPPORTED_IMAGE_MIME_TYPES));
+
+		return (int)_dlFileEntryLocalService.dynamicQueryCount(dynamicQuery);
 	}
 
-	private static final String[] _SUPPORTED_MIME_TYPES = new String[] {
+	private static final String[] _SUPPORTED_IMAGE_MIME_TYPES = new String[] {
 		"image/bmp", "image/gif", "image/jpeg", "image/pjpeg", "image/png",
 		"image/tiff", "image/x-citrix-jpeg", "image/x-citrix-png",
 		"image/x-ms-bmp", "image/x-png", "image/x-tiff"
 	};
 
 	@Reference
-	private AdaptiveMediaImageFinder _adaptiveMediaImageFinder;
+	private DLFileEntryLocalService _dlFileEntryLocalService;
 
 }
