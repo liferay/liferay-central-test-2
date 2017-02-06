@@ -19,9 +19,25 @@ package com.liferay.adaptive.media.web.internal.background.task;
  */
 public class OptimizeImagesBackgroundTaskConstants {
 
+	public static final String CLASS_NAME = "className";
+
 	public static final String COMPANY_ID = "companyId";
 
 	public static final String CONFIGURATION_ENTRY_UUID =
 		"configurationEntryUuid";
+
+	public static final String COUNT = "count";
+
+	public static final String PHASE = "phase";
+
+	public static final String PORTAL_END = "portalEnd";
+
+	public static final String PORTAL_START = "portalStart";
+
+	public static final String SINGLE_END = "singleEnd";
+
+	public static final String SINGLE_START = "singleStart";
+
+	public static final String TOTAL = "total";
 
 }

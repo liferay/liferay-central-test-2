@@ -17,11 +17,16 @@ package com.liferay.adaptive.media.document.library.repository.internal.optimize
 import com.liferay.adaptive.media.AdaptiveMediaException;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
+import com.liferay.adaptive.media.image.counter.AdaptiveMediaImageCounter;
 import com.liferay.adaptive.media.image.optimizer.AdaptiveMediaImageOptimizer;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
 import com.liferay.adaptive.media.image.service.AdaptiveMediaImageLocalService;
+import com.liferay.adaptive.media.web.internal.background.task.OptimizeImagesBackgroundTaskConstants;
 import com.liferay.document.library.kernel.model.DLFileEntry;
 import com.liferay.document.library.kernel.service.DLFileEntryLocalService;
+import com.liferay.portal.kernel.backgroundtask.BackgroundTaskConstants;
+import com.liferay.portal.kernel.backgroundtask.BackgroundTaskStatusMessageSender;
+import com.liferay.portal.kernel.backgroundtask.BackgroundTaskThreadLocal;
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.Property;
@@ -29,11 +34,13 @@ import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.service.ClassNameLocalService;
 import com.liferay.portal.repository.liferayrepository.model.LiferayFileEntry;
 
 import java.util.Collection;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -54,15 +61,32 @@ public class DLAdaptiveMediaImageOptimizer
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
 				companyId);
 
+		int total =
+			counter.countExpectedAdaptiveMediaImages(companyId) *
+				configurationEntries.size();
+
+		final AtomicInteger counter = new AtomicInteger(0);
+
 		for (ImageAdaptiveMediaConfigurationEntry configurationEntry :
 				configurationEntries) {
 
-			optimize(companyId, configurationEntry.getUUID());
+			_optimize(companyId, configurationEntry.getUUID(), total, counter);
 		}
 	}
 
 	@Override
 	public void optimize(long companyId, String configurationEntryUuid) {
+		int total = counter.countExpectedAdaptiveMediaImages(companyId);
+
+		final AtomicInteger counter = new AtomicInteger(0);
+
+		_optimize(companyId, configurationEntryUuid, total, counter);
+	}
+
+	private void _optimize(
+		long companyId, String configurationEntryUuid, int total,
+		AtomicInteger counter) {
+
 		ActionableDynamicQuery actionableDynamicQuery =
 			_dlFileEntryLocalService.getActionableDynamicQuery();
 
@@ -104,6 +128,8 @@ public class DLAdaptiveMediaImageOptimizer
 					try {
 						_processor.process(
 							fileEntry.getFileVersion(), configurationEntryUuid);
+
+						_sendStatusMessage(counter.incrementAndGet(), total);
 					}
 					catch (AdaptiveMediaException | PortalException e) {
 						_log.error(
@@ -123,6 +149,25 @@ public class DLAdaptiveMediaImageOptimizer
 		}
 	}
 
+	private void _sendStatusMessage(int count, int total) {
+		Message message = new Message();
+
+		message.put(
+			BackgroundTaskConstants.BACKGROUND_TASK_ID,
+			BackgroundTaskThreadLocal.getBackgroundTaskId());
+
+		message.put(
+			OptimizeImagesBackgroundTaskConstants.CLASS_NAME,
+			getClass().getName());
+		message.put(OptimizeImagesBackgroundTaskConstants.COUNT, count);
+		message.put(OptimizeImagesBackgroundTaskConstants.TOTAL, total);
+
+		message.put("status", BackgroundTaskConstants.STATUS_IN_PROGRESS);
+
+		_backgroundTaskStatusMessageSender.sendBackgroundTaskStatusMessage(
+			message);
+	}
+
 	private static final String[] _SUPPORTED_IMAGE_MIME_TYPES = new String[] {
 		"image/bmp", "image/gif", "image/jpeg", "image/pjpeg", "image/png",
 		"image/tiff", "image/x-citrix-jpeg", "image/x-citrix-png",
@@ -131,6 +176,10 @@ public class DLAdaptiveMediaImageOptimizer
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		DLAdaptiveMediaImageOptimizer.class);
+
+	@Reference
+	private BackgroundTaskStatusMessageSender
+		_backgroundTaskStatusMessageSender;
 
 	@Reference
 	private ClassNameLocalService _classNameLocalService;
@@ -146,5 +195,8 @@ public class DLAdaptiveMediaImageOptimizer
 
 	@Reference
 	private ImageAdaptiveMediaProcessor _processor;
+
+	@Reference(target = "(class.name=DL)")
+	AdaptiveMediaImageCounter counter;
 
 }

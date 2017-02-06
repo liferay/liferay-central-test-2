@@ -32,8 +32,16 @@ public class OptimizeImagesSingleConfigurationBackgroundTaskExecutor
 	protected void optimizeImages(String configurationEntryUuid, long companyId)
 		throws Exception {
 
+		OptimizeImagesStatusMessageSenderUtil.sendStatusMessage(
+			OptimizeImagesBackgroundTaskConstants.SINGLE_START, companyId,
+			configurationEntryUuid);
+
 		AdaptiveMediaImageOptimizerUtil.optimize(
 			companyId, configurationEntryUuid);
+
+		OptimizeImagesStatusMessageSenderUtil.sendStatusMessage(
+			OptimizeImagesBackgroundTaskConstants.SINGLE_END, companyId,
+			configurationEntryUuid);
 	}
 
 }

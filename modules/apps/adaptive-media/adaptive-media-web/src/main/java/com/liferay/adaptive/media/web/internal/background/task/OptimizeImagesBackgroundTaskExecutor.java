@@ -14,6 +14,7 @@
 
 package com.liferay.adaptive.media.web.internal.background.task;
 
+import com.liferay.adaptive.media.web.internal.background.task.display.OptimizeImagesBackgroundTaskDisplay;
 import com.liferay.portal.kernel.backgroundtask.BackgroundTask;
 import com.liferay.portal.kernel.backgroundtask.BackgroundTaskConstants;
 import com.liferay.portal.kernel.backgroundtask.BackgroundTaskResult;
@@ -32,6 +33,8 @@ public abstract class OptimizeImagesBackgroundTaskExecutor
 	extends BaseBackgroundTaskExecutor {
 
 	public OptimizeImagesBackgroundTaskExecutor() {
+		setBackgroundTaskStatusMessageTranslator(
+			new OptimizeImagesBackgroundTaskStatusMessageTranslator());
 		setIsolationLevel(BackgroundTaskConstants.ISOLATION_LEVEL_COMPANY);
 	}
 
@@ -57,7 +60,7 @@ public abstract class OptimizeImagesBackgroundTaskExecutor
 	public BackgroundTaskDisplay getBackgroundTaskDisplay(
 		BackgroundTask backgroundTask) {
 
-		return null;
+		return new OptimizeImagesBackgroundTaskDisplay(backgroundTask);
 	}
 
 	protected abstract void optimizeImages(
