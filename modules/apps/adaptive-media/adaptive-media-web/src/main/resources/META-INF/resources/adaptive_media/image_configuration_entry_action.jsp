@@ -20,51 +20,49 @@
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 ImageAdaptiveMediaConfigurationEntry configurationEntry = (ImageAdaptiveMediaConfigurationEntry)row.getObject();
-%>
 
-<liferay-ui:icon-menu direction="left-side" icon="<%= StringPool.BLANK %>" markupView="lexicon" message="<%= StringPool.BLANK %>" showWhenSingleIcon="<%= true %>">
-	<liferay-portlet:renderURL var="editImageConfigurationEntryURL">
-		<portlet:param name="mvcRenderCommandName" value="/adaptive_media/edit_image_configuration_entry" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="entryUuid" value="<%= String.valueOf(configurationEntry.getUUID()) %>" />
-	</liferay-portlet:renderURL>
+boolean optimizeImagesEnabled = true;
 
-	<liferay-ui:icon
-		message="edit"
-		url="<%= editImageConfigurationEntryURL %>"
-	/>
+List<BackgroundTask> reindexSingleBackgroundTasks = BackgroundTaskManagerUtil.getBackgroundTasks(CompanyConstants.SYSTEM, OptimizeImagesSingleConfigurationBackgroundTaskExecutor.class.getName(), BackgroundTaskConstants.STATUS_IN_PROGRESS);
 
-	<portlet:actionURL name="/adaptive_media/delete_image_configuration_entry" var="deleteImageConfigurationEntryURL">
-		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="rowIdsImageAdaptiveMediaConfigurationEntry" value="<%= String.valueOf(configurationEntry.getUUID()) %>" />
-	</portlet:actionURL>
+if (!reindexSingleBackgroundTasks.isEmpty()) {
+	for (BackgroundTask reindexSingleBackgroundTask : reindexSingleBackgroundTasks) {
+		Map<String, Serializable> taskContextMap = reindexSingleBackgroundTask.getTaskContextMap();
 
-	<liferay-ui:icon-delete
-		trash="<%= false %>"
-		url="<%= deleteImageConfigurationEntryURL %>"
-	/>
+		String configurationEntryUuid = (String)taskContextMap.get("configurationEntryUuid");
 
-	<%
-	boolean optimizeImagesEnabled = true;
+		if (configurationEntryUuid.equals(configurationEntry.getUUID())) {
+			optimizeImagesEnabled = false;
 
-	List<BackgroundTask> reindexSingleBackgroundTasks = BackgroundTaskManagerUtil.getBackgroundTasks(CompanyConstants.SYSTEM, OptimizeImagesSingleConfigurationBackgroundTaskExecutor.class.getName(), BackgroundTaskConstants.STATUS_IN_PROGRESS);
-
-	if (!reindexSingleBackgroundTasks.isEmpty()) {
-		for (BackgroundTask backgroundTask : reindexSingleBackgroundTasks) {
-			Map<String, Serializable> taskContextMap = backgroundTask.getTaskContextMap();
-
-			String configurationEntryUuid = (String)taskContextMap.get("configurationEntryUuid");
-
-			if (configurationEntryUuid.equals(configurationEntry.getUUID())) {
-				optimizeImagesEnabled = false;
-
-				break;
-			}
+			break;
 		}
 	}
-	%>
+}
+%>
 
-	<c:if test="<%= optimizeImagesEnabled %>">
+<c:if test="<%= optimizeImagesEnabled %>">
+	<liferay-ui:icon-menu direction="left-side" icon="<%= StringPool.BLANK %>" markupView="lexicon" message="<%= StringPool.BLANK %>" showWhenSingleIcon="<%= true %>">
+		<liferay-portlet:renderURL var="editImageConfigurationEntryURL">
+			<portlet:param name="mvcRenderCommandName" value="/adaptive_media/edit_image_configuration_entry" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="entryUuid" value="<%= String.valueOf(configurationEntry.getUUID()) %>" />
+		</liferay-portlet:renderURL>
+
+		<liferay-ui:icon
+			message="edit"
+			url="<%= editImageConfigurationEntryURL %>"
+		/>
+
+		<portlet:actionURL name="/adaptive_media/delete_image_configuration_entry" var="deleteImageConfigurationEntryURL">
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="rowIdsImageAdaptiveMediaConfigurationEntry" value="<%= String.valueOf(configurationEntry.getUUID()) %>" />
+		</portlet:actionURL>
+
+		<liferay-ui:icon-delete
+			trash="<%= false %>"
+			url="<%= deleteImageConfigurationEntryURL %>"
+		/>
+
 		<portlet:actionURL name="/adaptive_media/optimize_images" var="optimizeImagesURL">
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="entryUuid" value="<%= String.valueOf(configurationEntry.getUUID()) %>" />
@@ -74,5 +72,5 @@ ImageAdaptiveMediaConfigurationEntry configurationEntry = (ImageAdaptiveMediaCon
 			message="optimize-remaining"
 			url="<%= optimizeImagesURL %>"
 		/>
-	</c:if>
-</liferay-ui:icon-menu>
+	</liferay-ui:icon-menu>
+</c:if>

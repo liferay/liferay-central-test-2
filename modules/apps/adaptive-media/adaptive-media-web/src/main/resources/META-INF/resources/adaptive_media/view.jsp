@@ -81,6 +81,10 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 	<portlet:actionURL name="/adaptive_media/delete_image_configuration_entry" var="deleteImageConfigurationEntryURL" />
 
+	<%
+	int optimizeImagesAllConfigurationsBackgroundTasksCount = BackgroundTaskManagerUtil.getBackgroundTasksCount(CompanyConstants.SYSTEM, OptimizeImagesAllConfigurationsBackgroundTaskExecutor.class.getName(), false);
+	%>
+
 	<aui:form action="<%= deleteImageConfigurationEntryURL.toString() %>" method="post" name="fm">
 		<liferay-ui:search-container
 			emptyResultsMessage="there-are-no-image-resolutions"
@@ -145,9 +149,11 @@ PortletURL portletURL = renderResponse.createRenderURL();
 					value='<%= properties.get("max-height") %>'
 				/>
 
-				<liferay-ui:search-container-column-jsp
-					path="/adaptive_media/image_configuration_entry_action.jsp"
-				/>
+				<c:if test="<%= optimizeImagesAllConfigurationsBackgroundTasksCount == 0 %>">
+					<liferay-ui:search-container-column-jsp
+						path="/adaptive_media/image_configuration_entry_action.jsp"
+					/>
+				</c:if>
 			</liferay-ui:search-container-row>
 
 			<liferay-ui:search-iterator displayStyle="list" markupView="lexicon" />

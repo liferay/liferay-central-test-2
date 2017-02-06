@@ -28,6 +28,7 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 page import="com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry" %><%@
 page import="com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper" %><%@
 page import="com.liferay.adaptive.media.image.service.AdaptiveMediaImageLocalServiceUtil" %><%@
+page import="com.liferay.adaptive.media.web.internal.background.task.OptimizeImagesAllConfigurationsBackgroundTaskExecutor" %><%@
 page import="com.liferay.adaptive.media.web.internal.background.task.OptimizeImagesSingleConfigurationBackgroundTaskExecutor" %><%@
 page import="com.liferay.adaptive.media.web.internal.constants.AdaptiveMediaWebKeys" %><%@
 page import="com.liferay.adaptive.media.web.internal.search.ImageConfigurationEntriesChecker" %><%@
