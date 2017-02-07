@@ -22,6 +22,7 @@ import java.util.Set;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Deactivate;
 
 /**
  * @author Sergio González
@@ -30,6 +31,10 @@ import org.osgi.service.component.annotations.Component;
 public class AdaptiveMediaImageOptimizerUtil {
 
 	public static void optimize(long companyId) {
+		if (_serviceTrackerMap == null) {
+			return;
+		}
+
 		Set<String> modelClassNames = _serviceTrackerMap.keySet();
 
 		for (String modelClassName : modelClassNames) {
@@ -41,6 +46,10 @@ public class AdaptiveMediaImageOptimizerUtil {
 	}
 
 	public static void optimize(long companyId, String configurationEntryUuid) {
+		if (_serviceTrackerMap == null) {
+			return;
+		}
+
 		Set<String> modelClassNames = _serviceTrackerMap.keySet();
 
 		for (String modelClassName : modelClassNames) {
@@ -52,10 +61,17 @@ public class AdaptiveMediaImageOptimizerUtil {
 	}
 
 	@Activate
-	public void activate(BundleContext bundleContext) {
+	protected void activate(BundleContext bundleContext) {
 		_serviceTrackerMap = ServiceTrackerMapFactory.openSingleValueMap(
 			bundleContext, AdaptiveMediaImageOptimizer.class,
 			"adaptive.media.key");
+	}
+
+	@Deactivate
+	protected void deactivate() {
+		_serviceTrackerMap.close();
+
+		_serviceTrackerMap = null;
 	}
 
 	private static ServiceTrackerMap<String, AdaptiveMediaImageOptimizer>
