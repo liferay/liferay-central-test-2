@@ -14,6 +14,7 @@
 
 package com.liferay.portal.kernel.util;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -535,14 +536,14 @@ public class StringUtilTest {
 
 		String[] lines = StringUtil.splitLines(singleLine);
 
-		Assert.assertEquals(1, lines.length);
+		Assert.assertEquals(Arrays.toString(lines), 1, lines.length);
 		Assert.assertEquals(singleLine, lines[0]);
 
 		String splitByReturn = "abcd\refg\rhijk\rlmn\r";
 
 		lines = StringUtil.splitLines(splitByReturn);
 
-		Assert.assertEquals(4, lines.length);
+		Assert.assertEquals(Arrays.toString(lines), 4, lines.length);
 		Assert.assertEquals("abcd", lines[0]);
 		Assert.assertEquals("efg", lines[1]);
 		Assert.assertEquals("hijk", lines[2]);
@@ -552,7 +553,7 @@ public class StringUtilTest {
 
 		lines = StringUtil.splitLines(splitByNewLine);
 
-		Assert.assertEquals(4, lines.length);
+		Assert.assertEquals(Arrays.toString(lines), 4, lines.length);
 		Assert.assertEquals("abcd", lines[0]);
 		Assert.assertEquals("efg", lines[1]);
 		Assert.assertEquals("hijk", lines[2]);
@@ -562,7 +563,7 @@ public class StringUtilTest {
 
 		lines = StringUtil.splitLines(splitByBoth);
 
-		Assert.assertEquals(4, lines.length);
+		Assert.assertEquals(Arrays.toString(lines), 4, lines.length);
 		Assert.assertEquals("abcd", lines[0]);
 		Assert.assertEquals("efg", lines[1]);
 		Assert.assertEquals("hijk", lines[2]);
@@ -572,7 +573,7 @@ public class StringUtilTest {
 
 		lines = StringUtil.splitLines(splitByMix);
 
-		Assert.assertEquals(5, lines.length);
+		Assert.assertEquals(Arrays.toString(lines), 5, lines.length);
 		Assert.assertEquals("abcd", lines[0]);
 		Assert.assertEquals("efg", lines[1]);
 		Assert.assertEquals("hijk", lines[2]);
