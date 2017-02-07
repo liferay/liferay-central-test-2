@@ -106,7 +106,7 @@ public class ServiceContextCallbackUtilTest {
 						lock.wait();
 					}
 
-					// this should be called after thread2.push
+					// This should be called after thread2#push
 
 					Map<Layout, Object> proxiedLayouts2 =
 						ProxiedLayoutsThreadLocal.getProxiedLayouts();
