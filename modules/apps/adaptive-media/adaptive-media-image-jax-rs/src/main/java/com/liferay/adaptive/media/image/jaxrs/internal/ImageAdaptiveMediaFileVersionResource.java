@@ -223,6 +223,14 @@ public class ImageAdaptiveMediaFileVersionResource {
 		return uriOptional.map((uri) -> uri.toString());
 	}
 
+	private List<ImageAdaptiveMediaRepr> _getImageAdaptiveMediaList(
+		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream) {
+
+		return stream.flatMap(
+			(adaptiveMedia) ->
+				_getRepr(adaptiveMedia)).collect(Collectors.toList());
+	}
+
 	private InputStream _getInputStream(
 			Optional<AdaptiveMedia<ImageAdaptiveMediaProcessor>>
 				adaptiveMediaOptional,
@@ -243,14 +251,6 @@ public class ImageAdaptiveMediaFileVersionResource {
 		}
 
 		return inputStream;
-	}
-
-	private List<ImageAdaptiveMediaRepr> _getImageAdaptiveMediaList(
-		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream) {
-
-		return stream.flatMap(
-			(adaptiveMedia) ->
-				_getRepr(adaptiveMedia)).collect(Collectors.toList());
 	}
 
 	private Stream<ImageAdaptiveMediaRepr> _getRepr(
@@ -316,10 +316,10 @@ public class ImageAdaptiveMediaFileVersionResource {
 		_allowedAttributes.putAll(AdaptiveMediaAttribute.allowedAttributes());
 	}
 
+	private final AdaptiveMediaAsyncProcessor<FileVersion, ?> _asyncProcessor;
 	private final ImageAdaptiveMediaConfigurationHelper _configurationHelper;
 	private final FileVersion _fileVersion;
 	private final ImageAdaptiveMediaFinder _finder;
 	private final UriBuilder _uriBuilder;
-	private final AdaptiveMediaAsyncProcessor<FileVersion, ?> _asyncProcessor;
 
 }

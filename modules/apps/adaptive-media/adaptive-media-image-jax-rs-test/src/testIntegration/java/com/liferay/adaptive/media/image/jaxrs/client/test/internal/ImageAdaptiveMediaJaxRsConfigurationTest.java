@@ -261,15 +261,16 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 			});
 	}
 
-	private Invocation.Builder _getBaseRequest(
-		Function<WebTarget, WebTarget> webTargetBuilder) {
-		return ImageAdaptiveMediaTestUtil.getConfigurationRequest(
-			webTargetBuilder);
-	}
-
 	private Invocation.Builder _getAuthenticatedInvocationBuilder(String id) {
 		return _getUnauthenticatedInvocationBuilder(
 			id).header("Authorization", TEST_AUTH);
+	}
+
+	private Invocation.Builder _getBaseRequest(
+		Function<WebTarget, WebTarget> webTargetBuilder) {
+
+		return ImageAdaptiveMediaTestUtil.getConfigurationRequest(
+			webTargetBuilder);
 	}
 
 	private String _getId(JsonObject configurationJsonObject) {

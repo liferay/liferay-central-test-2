@@ -46,48 +46,9 @@ import org.junit.runner.RunWith;
 @RunWith(Arquillian.class)
 public class ImageAdaptiveMediaJaxRsMediaTest {
 
-	private static final String _GET_VARIANT_BY_CONFIG = "/config/{id}";
-	private static final String _GET_VARIANTS = "/variants";
-	private static final String _GET_VARIANT_BY_ATTRIBUTE = "/data";
-
-	@Test
-	public void testGettingNonAdaptiveByConfigReturnsOriginal() {
-		String id = _getRandomConfigurationId();
-
-		long fileEntryId = _getRandomNonAdaptiveFileEntryId();
-
-		Response response = _getConfigEndpointResponse(id, fileEntryId, true);
-
-		Assert.assertEquals(200, response.getStatus());
-		Assert.assertEquals("image", response.getMediaType().getType());
-	}
-
-	@Test
-	public void testGettingNonAdaptiveByConfigReturns404IfParam() {
-		String id = _getRandomConfigurationId();
-
-		long fileEntryId = _getRandomNonAdaptiveFileEntryId();
-
-		Response response = _getConfigEndpointResponse(id, fileEntryId, false);
-
-		Assert.assertEquals(404, response.getStatus());
-	}
-
 	@Test
 	public void testGettingAdaptiveByConfigReturnsData() {
 		String id = _getRandomConfigurationId();
-
-		long fileEntryId = _getRandomAdaptiveFileEntryId();
-
-		Response response = _getConfigEndpointResponse(id, fileEntryId, true);
-
-		Assert.assertEquals(200, response.getStatus());
-		Assert.assertEquals("image", response.getMediaType().getType());
-	}
-
-	@Test
-	public void testGettingAdaptiveByInvalidConfigReturnsOriginal() {
-		String id = ImageAdaptiveMediaTestUtil.getRandomUuid();
 
 		long fileEntryId = _getRandomAdaptiveFileEntryId();
 
@@ -109,6 +70,29 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 	}
 
 	@Test
+	public void testGettingAdaptiveByInvalidConfigReturnsOriginal() {
+		String id = ImageAdaptiveMediaTestUtil.getRandomUuid();
+
+		long fileEntryId = _getRandomAdaptiveFileEntryId();
+
+		Response response = _getConfigEndpointResponse(id, fileEntryId, true);
+
+		Assert.assertEquals(200, response.getStatus());
+		Assert.assertEquals("image", response.getMediaType().getType());
+	}
+
+	@Test
+	public void testGettingAdaptiveDataWithAttributeReturnsData() {
+		long fileEntryId = _getRandomAdaptiveFileEntryId();
+
+		Response response = _getDataEndpointResponse(
+			fileEntryId, true, _getRandomQueryParams());
+
+		Assert.assertEquals(200, response.getStatus());
+		Assert.assertEquals("image", response.getMediaType().getType());
+	}
+
+	@Test
 	public void testGettingDataWithoutAttributeReturns400() {
 		long fileEntryId = _getRandomNonAdaptiveFileEntryId();
 
@@ -118,11 +102,23 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 	}
 
 	@Test
-	public void testGettingNonAdaptiveDataWithAttributeReturnsOriginal() {
+	public void testGettingNonAdaptiveByConfigReturns404IfParam() {
+		String id = _getRandomConfigurationId();
+
 		long fileEntryId = _getRandomNonAdaptiveFileEntryId();
 
-		Response response = _getDataEndpointResponse(
-			fileEntryId, true, _getRandomQueryParams());
+		Response response = _getConfigEndpointResponse(id, fileEntryId, false);
+
+		Assert.assertEquals(404, response.getStatus());
+	}
+
+	@Test
+	public void testGettingNonAdaptiveByConfigReturnsOriginal() {
+		String id = _getRandomConfigurationId();
+
+		long fileEntryId = _getRandomNonAdaptiveFileEntryId();
+
+		Response response = _getConfigEndpointResponse(id, fileEntryId, true);
 
 		Assert.assertEquals(200, response.getStatus());
 		Assert.assertEquals("image", response.getMediaType().getType());
@@ -139,14 +135,34 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 	}
 
 	@Test
-	public void testGettingAdaptiveDataWithAttributeReturnsData() {
-		long fileEntryId = _getRandomAdaptiveFileEntryId();
+	public void testGettingNonAdaptiveDataWithAttributeReturnsOriginal() {
+		long fileEntryId = _getRandomNonAdaptiveFileEntryId();
 
 		Response response = _getDataEndpointResponse(
 			fileEntryId, true, _getRandomQueryParams());
 
 		Assert.assertEquals(200, response.getStatus());
 		Assert.assertEquals("image", response.getMediaType().getType());
+	}
+
+	@Test
+	public void testGettingVariantsOfAdaptiveReturnsFullArray() {
+		long fileEntryId = _getRandomAdaptiveFileEntryId();
+
+		JsonArray jsonArray = _getVariantsInvocationBuilder(
+			fileEntryId, _getRandomQueryParams(), null).get(JsonArray.class);
+
+		Assert.assertEquals(_configurationIds.size(), jsonArray.size());
+	}
+
+	@Test
+	public void testGettingVariantsOfNonAdaptiveReturnsEmptyArray() {
+		long fileEntryId = _getRandomNonAdaptiveFileEntryId();
+
+		JsonArray jsonArray = _getVariantsInvocationBuilder(
+			fileEntryId, _getRandomQueryParams(), null).get(JsonArray.class);
+
+		Assert.assertEquals(0, jsonArray.size());
 	}
 
 	@Test
@@ -183,24 +199,32 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 		Assert.assertEquals(400, response.getStatus());
 	}
 
-	@Test
-	public void testGettingVariantsOfNonAdaptiveReturnsEmptyArray() {
-		long fileEntryId = _getRandomNonAdaptiveFileEntryId();
+	private Invocation.Builder _getAdaptiveMediaRequest(
+		Function<WebTarget, WebTarget> webTargetResolver, long fileEntryId) {
 
-		JsonArray jsonArray = _getVariantsInvocationBuilder(
-			fileEntryId, _getRandomQueryParams(), null).get(JsonArray.class);
+		return ImageAdaptiveMediaTestUtil.getMediaRequest(webTarget -> {
+			WebTarget resolvedWebTarget = webTarget.resolveTemplate(
+				"fileEntryId", fileEntryId);
 
-		Assert.assertEquals(0, jsonArray.size());
+			return webTargetResolver.apply(resolvedWebTarget);
+		}).header("Authorization", TEST_AUTH);
 	}
 
-	@Test
-	public void testGettingVariantsOfAdaptiveReturnsFullArray() {
-		long fileEntryId = _getRandomAdaptiveFileEntryId();
+	private Response _getConfigEndpointResponse(
+		String id, long fileEntryId, boolean useOriginal) {
 
-		JsonArray jsonArray = _getVariantsInvocationBuilder(
-			fileEntryId, _getRandomQueryParams(), null).get(JsonArray.class);
+		return _getAdaptiveMediaRequest(
+			webTarget -> {
+				WebTarget resolvedWebTarget = webTarget.path(
+					_GET_VARIANT_BY_CONFIG).resolveTemplate("id", id);
 
-		Assert.assertEquals(_configurationIds.size(), jsonArray.size());
+				if (!useOriginal) {
+					return resolvedWebTarget.queryParam("original", false);
+				}
+
+				return resolvedWebTarget;
+			},
+			fileEntryId).get();
 	}
 
 	private Response _getDataEndpointResponse(
@@ -228,6 +252,30 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 			fileEntryId).get();
 	}
 
+	private long _getRandomAdaptiveFileEntryId() {
+		return _adaptiveFileEntryIds.get(
+			RandomUtil.nextInt(_adaptiveFileEntryIds.size()));
+	}
+
+	private String _getRandomAttribute(String attribute) {
+		return String.format("%s:%d", attribute, RandomUtil.nextInt(1000));
+	}
+
+	private String _getRandomConfigurationId() {
+		return _configurationIds.get(
+			RandomUtil.nextInt(_configurationIds.size()));
+	}
+
+	private long _getRandomNonAdaptiveFileEntryId() {
+		return _nonAdaptiveFileEntryIds.get(
+			RandomUtil.nextInt(_nonAdaptiveFileEntryIds.size()));
+	}
+
+	private List<String> _getRandomQueryParams() {
+		return _attributes.stream().map(this::_getRandomAttribute).collect(
+			Collectors.toList());
+	}
+
 	private Invocation.Builder _getVariantsInvocationBuilder(
 		long fileEntryId, List<String> queryParams, String order) {
 
@@ -252,60 +300,16 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 			fileEntryId);
 	}
 
-	private Response _getConfigEndpointResponse(
-		String id, long fileEntryId, boolean useOriginal) {
+	private static final String _GET_VARIANT_BY_ATTRIBUTE = "/data";
 
-		return _getAdaptiveMediaRequest(
-			webTarget -> {
-				WebTarget resolvedWebTarget = webTarget.path(
-					_GET_VARIANT_BY_CONFIG).resolveTemplate("id", id);
+	private static final String _GET_VARIANT_BY_CONFIG = "/config/{id}";
 
-				if (!useOriginal) {
-					return resolvedWebTarget.queryParam("original", false);
-				}
+	private static final String _GET_VARIANTS = "/variants";
 
-				return resolvedWebTarget;
-			},
-			fileEntryId).get();
-	}
-
-	private long _getRandomAdaptiveFileEntryId() {
-		return _adaptiveFileEntryIds.get(
-			RandomUtil.nextInt(_adaptiveFileEntryIds.size()));
-	}
-
-	private Invocation.Builder _getAdaptiveMediaRequest(
-		Function<WebTarget, WebTarget> webTargetResolver, long fileEntryId) {
-
-		return ImageAdaptiveMediaTestUtil.getMediaRequest(webTarget -> {
-			WebTarget resolvedWebTarget = webTarget.resolveTemplate(
-				"fileEntryId", fileEntryId);
-
-			return webTargetResolver.apply(resolvedWebTarget);
-		}).header("Authorization", TEST_AUTH);
-	}
-
-	private List<String> _getRandomQueryParams() {
-		return _attributes.stream().map(this::_getRandomAttribute).collect(
-			Collectors.toList());
-	}
-
-	private String _getRandomAttribute(String attribute) {
-		return String.format("%s:%d", attribute, RandomUtil.nextInt(1000));
-	}
-
-	private long _getRandomNonAdaptiveFileEntryId() {
-		return _nonAdaptiveFileEntryIds.get(
-			RandomUtil.nextInt(_nonAdaptiveFileEntryIds.size()));
-	}
-
-	private String _getRandomConfigurationId() {
-		return _configurationIds.get(
-			RandomUtil.nextInt(_configurationIds.size()));
-	}
-
-	private static final List<String> _configurationIds = new ArrayList<>();
+	private static final List<Long> _adaptiveFileEntryIds;
 	private static final List<String> _attributes = new ArrayList<>();
+	private static final List<String> _configurationIds = new ArrayList<>();
+	private static final List<Long> _nonAdaptiveFileEntryIds;
 
 	static {
 		_configurationIds.add("demo-xsmall");
@@ -330,9 +334,5 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 		_adaptiveFileEntryIds = ImageAdaptiveMediaTestUtil.getFileEntryIds(
 			3, groupId, "image-with-%d.jpeg", adaptiveMediaFolderId);
 	}
-
-	private static List<Long> _adaptiveFileEntryIds;
-
-	private static List<Long> _nonAdaptiveFileEntryIds;
 
 }
