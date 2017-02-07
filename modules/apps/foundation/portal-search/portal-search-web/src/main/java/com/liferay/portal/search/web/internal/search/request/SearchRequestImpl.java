@@ -76,10 +76,11 @@ public class SearchRequestImpl implements SearchRequest {
 
 		Hits hits = search(searchContext);
 
-		searchContainer.setTotal(hits.getLength());
 		searchContainer.setResults(hits.toList());
 
 		searchContainer.setSearch(true);
+
+		searchContainer.setTotal(hits.getLength());
 
 		SearchResponseImpl searchResponseImpl = buildSearchResponse(
 			hits, searchContext, searchContainer);
