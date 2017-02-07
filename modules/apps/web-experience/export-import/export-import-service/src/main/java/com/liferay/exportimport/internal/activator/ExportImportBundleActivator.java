@@ -26,22 +26,19 @@ import org.osgi.framework.BundleContext;
  */
 public class ExportImportBundleActivator implements BundleActivator {
 
-	public static final String DOT_CLEAR_PROXIED_LAYOUTS =
-		".clearProxiedLayouts";
-
 	@Override
 	public void start(BundleContext bundleContext) throws Exception {
 		Bundle bundle = bundleContext.getBundle();
 
 		ServiceContextCallbackUtil.registerPopCallback(
-			bundle.getSymbolicName() + DOT_CLEAR_PROXIED_LAYOUTS,
+			bundle.getSymbolicName() + _DOT_CLEAR_PROXIED_LAYOUTS,
 			() -> {
 				ProxiedLayoutsThreadLocal.clearProxiedLayouts();
 				return null;
 			});
 
 		ServiceContextCallbackUtil.registerPushCallback(
-			bundle.getSymbolicName() + DOT_CLEAR_PROXIED_LAYOUTS,
+			bundle.getSymbolicName() + _DOT_CLEAR_PROXIED_LAYOUTS,
 			() -> {
 				ProxiedLayoutsThreadLocal.clearProxiedLayouts();
 				return null;
@@ -53,10 +50,13 @@ public class ExportImportBundleActivator implements BundleActivator {
 		Bundle bundle = bundleContext.getBundle();
 
 		ServiceContextCallbackUtil.unRegisterPopCallback(
-			bundle.getSymbolicName() + DOT_CLEAR_PROXIED_LAYOUTS);
+			bundle.getSymbolicName() + _DOT_CLEAR_PROXIED_LAYOUTS);
 
 		ServiceContextCallbackUtil.unRegisterPushCallback(
-			bundle.getSymbolicName() + DOT_CLEAR_PROXIED_LAYOUTS);
+			bundle.getSymbolicName() + _DOT_CLEAR_PROXIED_LAYOUTS);
 	}
+
+	private static final String _DOT_CLEAR_PROXIED_LAYOUTS =
+		".clearProxiedLayouts";
 
 }
