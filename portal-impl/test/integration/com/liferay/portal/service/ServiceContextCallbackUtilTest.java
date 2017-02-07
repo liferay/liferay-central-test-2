@@ -61,9 +61,10 @@ public class ServiceContextCallbackUtilTest {
 				ProxiedLayoutsThreadLocal.clearProxiedLayouts();
 
 				if (_log.isDebugEnabled()) {
+					Thread currentThread = Thread.currentThread();
+
 					_log.debug(
-						Thread.currentThread().getName() +
-							" pop callback finished.");
+						currentThread.getName() + " pop callback finished");
 				}
 
 				return null;
@@ -125,6 +126,7 @@ public class ServiceContextCallbackUtilTest {
 		Thread thread1 = new Thread(task1);
 
 		thread1.setName("thread1");
+
 		thread1.start();
 
 		Runnable task2 = () -> {
@@ -152,6 +154,7 @@ public class ServiceContextCallbackUtilTest {
 		Thread thread2 = new Thread(task2);
 
 		thread2.setName("thread2");
+
 		thread2.start();
 
 		thread1.join();
