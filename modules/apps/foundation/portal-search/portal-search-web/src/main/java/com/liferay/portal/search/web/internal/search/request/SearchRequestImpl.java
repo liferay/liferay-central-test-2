@@ -128,22 +128,17 @@ public class SearchRequestImpl implements SearchRequest {
 
 		SearchResponseImpl searchResponseImpl = new SearchResponseImpl();
 
-		searchResponseImpl.setHits(hits);
-
 		searchResponseImpl.setDocuments(hits.toList());
 		searchResponseImpl.setHighlights(hits.getQueryTerms());
-		searchResponseImpl.setTotalHits(hits.getLength());
-
-		searchResponseImpl.setSearchContext(searchContext);
-
+		searchResponseImpl.setHits(hits);
 		searchResponseImpl.setKeywords(searchContext.getKeywords());
-		searchResponseImpl.setQueryString(
-			(String)searchContext.getAttribute("queryString"));
-
-		searchResponseImpl.setSearchContainer(searchContainer);
-
 		searchResponseImpl.setPaginationDelta(searchContainer.getDelta());
 		searchResponseImpl.setPaginationStart(searchContainer.getCur());
+		searchResponseImpl.setQueryString(
+			(String)searchContext.getAttribute("queryString"));
+		searchResponseImpl.setSearchContainer(searchContainer);
+		searchResponseImpl.setSearchContext(searchContext);
+		searchResponseImpl.setTotalHits(hits.getLength());
 
 		return searchResponseImpl;
 	}
