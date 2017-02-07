@@ -634,8 +634,7 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 			}
 		}
 
-		String permissionSQL = CustomSQLUtil.get(
-			FIND_BY_RESOURCE_PERMISSION);
+		String permissionSQL = CustomSQLUtil.get(FIND_BY_RESOURCE_PERMISSION);
 
 		if (Validator.isNotNull(bridgeJoin)) {
 			permissionSQL = bridgeJoin.concat(permissionSQL);
