@@ -82,7 +82,7 @@ if (entry == null) {
 
 		<aui:input name="url" />
 
-		<aui:field-wrapper label="content">
+		<aui:field-wrapper label="content" required="<%= true %>">
 			<liferay-ui:input-editor contents="<%= content %>" editorName='<%= PropsUtil.get("editor.wysiwyg.portal-web.docroot.html.portlet.announcements.edit_entry.jsp") %>' />
 
 			<aui:input name="content" type="hidden" />
