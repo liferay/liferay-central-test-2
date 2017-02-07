@@ -634,10 +634,11 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 			}
 		}
 
-		String permissionQuery = CustomSQLUtil.get(FIND_BY_RESOURCE_PERMISSION);
+		String permissionSQL = CustomSQLUtil.get(
+			FIND_BY_RESOURCE_PERMISSION);
 
 		if (Validator.isNotNull(bridgeJoin)) {
-			permissionQuery = bridgeJoin.concat(permissionQuery);
+			permissionSQL = bridgeJoin.concat(permissionSQL);
 		}
 
 		String roleIdsOrOwnerIdSQL = getRoleIdsOrOwnerIdSQL(
@@ -676,8 +677,8 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 			groupAdminSQL = groupAdminResourcePermissionSB.toString();
 		}
 
-		permissionQuery = StringUtil.replace(
-			permissionQuery,
+		permissionSQL = StringUtil.replace(
+			permissionSQL,
 			new String[] {
 				"[$CLASS_NAME$]", "[$COMPANY_ID$]",
 				"[$GROUP_ADMIN_RESOURCE_PERMISSION$]",
@@ -708,7 +709,7 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 
 			sb.append(_WHERE_CLAUSE);
 
-			_appendPermissionQuery(sb, classPKField, permissionQuery);
+			_appendPermissionSQL(sb, classPKField, permissionSQL);
 
 			if (pos != -1) {
 				sb.append(sql.substring(pos));
@@ -719,7 +720,7 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 
 			sb.append(sql.substring(0, pos));
 
-			_appendPermissionQuery(sb, classPKField, permissionQuery);
+			_appendPermissionSQL(sb, classPKField, permissionSQL);
 
 			sb.append("AND ");
 
@@ -729,13 +730,13 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 		return sb.toString();
 	}
 
-	private void _appendPermissionQuery(
-		StringBundler sb, String classPKField, String permissionQuery) {
+	private void _appendPermissionSQL(
+		StringBundler sb, String classPKField, String permissionSQL) {
 
 		sb.append("(");
 		sb.append(classPKField);
 		sb.append(" IN (");
-		sb.append(permissionQuery);
+		sb.append(permissionSQL);
 		sb.append(")) ");
 	}
 
