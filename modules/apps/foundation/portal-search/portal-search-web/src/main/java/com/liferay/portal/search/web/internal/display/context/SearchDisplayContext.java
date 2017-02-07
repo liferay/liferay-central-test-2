@@ -86,8 +86,8 @@ public class SearchDisplayContext {
 
 		if (keywords == null) {
 			_hits = null;
-			_searchContext = null;
 			_searchContainer = null;
+			_searchContext = null;
 
 			return;
 		}
@@ -114,8 +114,8 @@ public class SearchDisplayContext {
 		SearchResponseImpl searchResponseImpl = searchRequestImpl.search();
 
 		_hits = searchResponseImpl.getHits();
-		_searchContext = searchResponseImpl.getSearchContext();
 		_searchContainer = searchResponseImpl.getSearchContainer();
+		_searchContext = searchResponseImpl.getSearchContext();
 	}
 
 	public int getCollatedSpellCheckResultDisplayThreshold() {
