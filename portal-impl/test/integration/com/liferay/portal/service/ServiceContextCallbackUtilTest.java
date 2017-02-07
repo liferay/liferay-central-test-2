@@ -86,7 +86,7 @@ public class ServiceContextCallbackUtilTest {
 
 		final Lock lock = new Lock();
 
-		Runnable task1 = () -> {
+		Runnable runnable1 = () -> {
 			String threadName = Thread.currentThread().getName();
 
 			if (_log.isDebugEnabled()) {
@@ -123,13 +123,13 @@ public class ServiceContextCallbackUtilTest {
 			}
 		};
 
-		Thread thread1 = new Thread(task1);
+		Thread thread1 = new Thread(runnable1);
 
 		thread1.setName("thread1");
 
 		thread1.start();
 
-		Runnable task2 = () -> {
+		Runnable runnable2 = () -> {
 			String threadName = Thread.currentThread().getName();
 
 			if (_log.isDebugEnabled()) {
@@ -151,7 +151,7 @@ public class ServiceContextCallbackUtilTest {
 			ServiceContextThreadLocal.popServiceContext();
 		};
 
-		Thread thread2 = new Thread(task2);
+		Thread thread2 = new Thread(runnable2);
 
 		thread2.setName("thread2");
 
