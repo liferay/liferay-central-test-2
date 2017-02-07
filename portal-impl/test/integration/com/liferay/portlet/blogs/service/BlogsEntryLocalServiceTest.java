@@ -433,7 +433,9 @@ public class BlogsEntryLocalServiceTest {
 				_user.getCompanyId(), _group.getGroupId(), new Date(),
 				_statusInTrashQueryDefinition);
 
-		Assert.assertEquals(initialCount + 1, groupsEntriesInTrash.size());
+		Assert.assertEquals(
+			groupsEntriesInTrash.toString(), initialCount + 1,
+			groupsEntriesInTrash.size());
 
 		for (BlogsEntry groupsEntry : groupsEntriesInTrash) {
 			Assert.assertEquals(
@@ -480,7 +482,7 @@ public class BlogsEntryLocalServiceTest {
 		List<BlogsEntry> entries =
 			BlogsEntryLocalServiceUtil.getNoAssetEntries();
 
-		Assert.assertEquals(1, entries.size());
+		Assert.assertEquals(entries.toString(), 1, entries.size());
 		Assert.assertEquals(entry, entries.get(0));
 	}
 
@@ -642,7 +644,8 @@ public class BlogsEntryLocalServiceTest {
 			BlogsEntryLocalServiceUtil.getCompanyEntries(
 				_user.getCompanyId(), new Date(), queryDefinition);
 
-		Assert.assertEquals(initialCount + 1, actualEntries.size());
+		Assert.assertEquals(
+			actualEntries.toString(), initialCount + 1, actualEntries.size());
 
 		assertBlogsEntriesStatus(actualEntries, statusInTrash);
 	}
@@ -707,7 +710,8 @@ public class BlogsEntryLocalServiceTest {
 				_group.getGroupId(), queryDefinition);
 		}
 
-		Assert.assertEquals(initialCount + 1, actualEntries.size());
+		Assert.assertEquals(
+			actualEntries.toString(), initialCount + 1, actualEntries.size());
 
 		assertBlogsEntriesStatus(actualEntries, statusInTrash);
 	}
@@ -776,7 +780,8 @@ public class BlogsEntryLocalServiceTest {
 				_group.getGroupId(), _user.getUserId(), new Date(),
 				queryDefinition);
 
-		Assert.assertEquals(initialCount + 1, actualEntries.size());
+		Assert.assertEquals(
+			actualEntries.toString(), initialCount + 1, actualEntries.size());
 
 		assertBlogsEntriesStatus(actualEntries, statusInTrash);
 	}
@@ -833,7 +838,8 @@ public class BlogsEntryLocalServiceTest {
 			BlogsEntryLocalServiceUtil.getOrganizationEntries(
 				_organization.getOrganizationId(), new Date(), queryDefinition);
 
-		Assert.assertEquals(initialCount + 1, actualEntries.size());
+		Assert.assertEquals(
+			actualEntries.toString(), initialCount + 1, actualEntries.size());
 
 		assertBlogsEntriesStatus(actualEntries, statusInTrash);
 	}

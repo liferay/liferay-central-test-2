@@ -76,7 +76,9 @@ public class BlogsEntryAttachmentFileEntryHelperTest {
 			blogsEntryAttachmentFileEntryReferences =
 				getBlogsEntryAttachmentFileEntryReferences(tempFileEntry);
 
-		Assert.assertEquals(1, blogsEntryAttachmentFileEntryReferences.size());
+		Assert.assertEquals(
+			blogsEntryAttachmentFileEntryReferences.toString(), 1,
+			blogsEntryAttachmentFileEntryReferences.size());
 
 		BlogsEntryAttachmentFileEntryReference
 			blogsEntryAttachmentFileEntryReference =
@@ -131,7 +133,9 @@ public class BlogsEntryAttachmentFileEntryHelperTest {
 				getTempBlogsEntryAttachmentFileEntries(
 					getContent(tempFileEntryImgTag));
 
-		Assert.assertEquals(1, tempBlogsEntryAttachmentFileEntries.size());
+		Assert.assertEquals(
+			tempBlogsEntryAttachmentFileEntries.toString(), 1,
+			tempBlogsEntryAttachmentFileEntries.size());
 
 		for (FileEntry tempBlogsEntryAttachmentFileEntry :
 				tempBlogsEntryAttachmentFileEntries) {
@@ -158,7 +162,9 @@ public class BlogsEntryAttachmentFileEntryHelperTest {
 				getTempBlogsEntryAttachmentFileEntries(
 					getContent(tempFileEntryImgTag));
 
-		Assert.assertEquals(1, tempBlogsEntryAttachmentFileEntries.size());
+		Assert.assertEquals(
+			tempBlogsEntryAttachmentFileEntries.toString(), 1,
+			tempBlogsEntryAttachmentFileEntries.size());
 
 		for (FileEntry tempBlogsEntryAttachmentFileEntry :
 				tempBlogsEntryAttachmentFileEntries) {

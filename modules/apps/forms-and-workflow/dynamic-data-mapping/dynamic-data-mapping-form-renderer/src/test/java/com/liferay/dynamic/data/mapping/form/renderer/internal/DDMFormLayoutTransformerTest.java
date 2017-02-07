@@ -100,7 +100,7 @@ public class DDMFormLayoutTransformerTest {
 
 		List<Object> pages = ddmFormLayoutTransformer.getPages();
 
-		Assert.assertEquals(1, pages.size());
+		Assert.assertEquals(pages.toString(), 1, pages.size());
 
 		Map<String, Object> page1 = (Map<String, Object>)pages.get(0);
 
@@ -108,13 +108,13 @@ public class DDMFormLayoutTransformerTest {
 
 		List<Object> rows = (List<Object>)page1.get("rows");
 
-		Assert.assertEquals(3, rows.size());
+		Assert.assertEquals(rows.toString(), 3, rows.size());
 
 		Map<String, Object> row1 = (Map<String, Object>)rows.get(0);
 
 		List<Object> columnsRow1 = (List<Object>)row1.get("columns");
 
-		Assert.assertEquals(2, columnsRow1.size());
+		Assert.assertEquals(columnsRow1.toString(), 2, columnsRow1.size());
 
 		assertColumnEquals(
 			new String[] {"Rendered Field 1"}, 6,
@@ -127,7 +127,7 @@ public class DDMFormLayoutTransformerTest {
 
 		List<Object> columnsRow2 = (List<Object>)row2.get("columns");
 
-		Assert.assertEquals(1, columnsRow2.size());
+		Assert.assertEquals(columnsRow2.toString(), 1, columnsRow2.size());
 
 		assertColumnEquals(
 			new String[] {"Rendered Field 3"}, 12,
@@ -137,7 +137,7 @@ public class DDMFormLayoutTransformerTest {
 
 		List<Object> columnsRow3 = (List<Object>)row3.get("columns");
 
-		Assert.assertEquals(1, columnsRow3.size());
+		Assert.assertEquals(columnsRow3.toString(), 1, columnsRow3.size());
 
 		assertColumnEquals(
 			new String[] {"Rendered Field 4", "Rendered Field 5"}, 12,
@@ -188,7 +188,7 @@ public class DDMFormLayoutTransformerTest {
 
 		List<Object> pages = ddmFormLayoutTransformer.getPages();
 
-		Assert.assertEquals(2, pages.size());
+		Assert.assertEquals(pages.toString(), 2, pages.size());
 
 		Map<String, Object> page1 = (Map<String, Object>)pages.get(0);
 

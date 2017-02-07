@@ -305,7 +305,7 @@ public class OrganizationLocalServiceTest {
 		List<Organization> organizations =
 			OrganizationLocalServiceUtil.getNoAssetOrganizations();
 
-		Assert.assertEquals(1, organizations.size());
+		Assert.assertEquals(organizations.toString(), 1, organizations.size());
 		Assert.assertEquals(organizationB, organizations.get(0));
 	}
 

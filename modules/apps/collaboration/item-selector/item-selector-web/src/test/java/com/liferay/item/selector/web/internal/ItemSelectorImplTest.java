@@ -107,7 +107,7 @@ public class ItemSelectorImplTest extends PowerMockito {
 		Assert.assertNotNull(parameters.get("0_json")[0]);
 		Assert.assertNotNull(parameters.get("1_json")[0]);
 
-		Assert.assertEquals(4, parameters.size());
+		Assert.assertEquals(parameters.toString(), 4, parameters.size());
 	}
 
 	@Test
@@ -158,7 +158,9 @@ public class ItemSelectorImplTest extends PowerMockito {
 			(ItemSelectorView<?>)
 				flickrItemSelectorViewRenderer.getItemSelectorView() instanceof
 					FlickrItemSelectorView);
-		Assert.assertEquals(2, itemSelectorViewRenderers.size());
+		Assert.assertEquals(
+			itemSelectorViewRenderers.toString(), 2,
+			itemSelectorViewRenderers.size());
 	}
 
 	protected ItemSelectorRendering getItemSelectorRendering() {

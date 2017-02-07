@@ -107,7 +107,8 @@ public class DDMTemplateStagedModelDataHandlerTest
 		List<StagedModel> dependentStagedModels = dependentStagedModelsMap.get(
 			DDMStructure.class.getSimpleName());
 
-		Assert.assertEquals(1, dependentStagedModels.size());
+		Assert.assertEquals(
+			dependentStagedModels.toString(), 1, dependentStagedModels.size());
 
 		DDMStructure structure = (DDMStructure)dependentStagedModels.get(0);
 

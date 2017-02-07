@@ -592,7 +592,8 @@ public abstract class BasePortletExportImportTestCase
 			importedAssetEntry.getEntryId());
 
 		Assert.assertEquals(
-			originalAssetLinks.size(), importedAssetLinks.size());
+			importedAssetLinks.toString(), originalAssetLinks.size(),
+			importedAssetLinks.size());
 
 		for (AssetLink originalLink : originalAssetLinks) {
 			AssetEntry sourceAssetEntry = AssetEntryLocalServiceUtil.getEntry(
@@ -638,7 +639,8 @@ public abstract class BasePortletExportImportTestCase
 			}
 		}
 
-		Assert.assertEquals(0, importedAssetLinks.size());
+		Assert.assertEquals(
+			importedAssetLinks.toString(), 0, importedAssetLinks.size());
 	}
 
 	protected void validateVersions() throws Exception {

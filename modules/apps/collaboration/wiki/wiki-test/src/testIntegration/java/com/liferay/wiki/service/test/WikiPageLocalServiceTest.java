@@ -138,6 +138,7 @@ public class WikiPageLocalServiceTest {
 			copyPage.getAttachmentsFileEntries();
 
 		Assert.assertEquals(
+			attachmentsFileEntries.toString(),
 			copyAttachmentsFileEntries.size(), attachmentsFileEntries.size());
 
 		FileEntry fileEntry = attachmentsFileEntries.get(0);
@@ -333,7 +334,8 @@ public class WikiPageLocalServiceTest {
 
 		List<WikiPage> pages = WikiPageLocalServiceUtil.getNoAssetPages();
 
-		Assert.assertEquals(initialPages.size() + 1, pages.size());
+		Assert.assertEquals(
+			pages.toString(), initialPages.size() + 1, pages.size());
 		Assert.assertEquals(page, pages.get(pages.size() - 1));
 	}
 

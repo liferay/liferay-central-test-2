@@ -181,7 +181,9 @@ public class StorageAdapterTest extends BaseDDMServiceTestCase {
 			List<DDMFormFieldEvaluationResult> ddmFormFieldEvaluationResults =
 				msvv.getDDMFormFieldEvaluationResults();
 
-			Assert.assertEquals(1, ddmFormFieldEvaluationResults.size());
+			Assert.assertEquals(
+				ddmFormFieldEvaluationResults.toString(), 1,
+				ddmFormFieldEvaluationResults.size());
 
 			DDMFormFieldEvaluationResult ddmFormFieldEvaluationResult =
 				ddmFormFieldEvaluationResults.get(0);

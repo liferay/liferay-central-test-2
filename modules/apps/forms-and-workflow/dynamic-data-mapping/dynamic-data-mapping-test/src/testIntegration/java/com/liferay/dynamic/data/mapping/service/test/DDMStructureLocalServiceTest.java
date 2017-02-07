@@ -321,7 +321,7 @@ public class DDMStructureLocalServiceTest extends BaseDDMServiceTestCase {
 
 		List<DDMTemplate> templates = structure.getTemplates();
 
-		Assert.assertEquals(2, templates.size());
+		Assert.assertEquals(templates.toString(), 2, templates.size());
 	}
 
 	@Test
@@ -343,7 +343,7 @@ public class DDMStructureLocalServiceTest extends BaseDDMServiceTestCase {
 			WorkflowConstants.STATUS_ANY, true, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 
-		Assert.assertEquals(2, structures.size());
+		Assert.assertEquals(structures.toString(), 2, structures.size());
 	}
 
 	@Test
@@ -358,7 +358,7 @@ public class DDMStructureLocalServiceTest extends BaseDDMServiceTestCase {
 			WorkflowConstants.STATUS_APPROVED, true, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 
-		Assert.assertEquals(3, structures.size());
+		Assert.assertEquals(structures.toString(), 3, structures.size());
 	}
 
 	@Test
@@ -398,7 +398,7 @@ public class DDMStructureLocalServiceTest extends BaseDDMServiceTestCase {
 			WorkflowConstants.STATUS_DRAFT, true, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 
-		Assert.assertEquals(1, structures.size());
+		Assert.assertEquals(structures.toString(), 1, structures.size());
 	}
 
 	@Test
@@ -429,7 +429,7 @@ public class DDMStructureLocalServiceTest extends BaseDDMServiceTestCase {
 			WorkflowConstants.STATUS_APPROVED, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, new StructureIdComparator(true));
 
-		Assert.assertEquals(2, structures.size());
+		Assert.assertEquals(structures.toString(), 2, structures.size());
 		Assert.assertEquals("To Do", getStructureName(structures.get(0)));
 		Assert.assertEquals("To Doing", getStructureName(structures.get(1)));
 	}
@@ -461,7 +461,7 @@ public class DDMStructureLocalServiceTest extends BaseDDMServiceTestCase {
 			WorkflowConstants.STATUS_APPROVED, true, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 
-		Assert.assertEquals(0, structures.size());
+		Assert.assertEquals(structures.toString(), 0, structures.size());
 	}
 
 	@Test
@@ -491,7 +491,7 @@ public class DDMStructureLocalServiceTest extends BaseDDMServiceTestCase {
 			WorkflowConstants.STATUS_APPROVED, true, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 
-		Assert.assertEquals(0, structures.size());
+		Assert.assertEquals(structures.toString(), 0, structures.size());
 	}
 
 	@Test
@@ -505,7 +505,7 @@ public class DDMStructureLocalServiceTest extends BaseDDMServiceTestCase {
 			WorkflowConstants.STATUS_APPROVED, true, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 
-		Assert.assertEquals(1, structures.size());
+		Assert.assertEquals(structures.toString(), 1, structures.size());
 	}
 
 	@Test
@@ -581,7 +581,9 @@ public class DDMStructureLocalServiceTest extends BaseDDMServiceTestCase {
 			DDMDataProviderInstanceLinkLocalServiceUtil.
 				getDataProviderInstanceLinks(structure.getStructureId());
 
-		Assert.assertEquals(2, dataProviderInstanceLinks.size());
+		Assert.assertEquals(
+			dataProviderInstanceLinks.toString(), 2,
+			dataProviderInstanceLinks.size());
 
 		// Remove one of the data provider instance links
 
@@ -596,7 +598,9 @@ public class DDMStructureLocalServiceTest extends BaseDDMServiceTestCase {
 			DDMDataProviderInstanceLinkLocalServiceUtil.
 				getDataProviderInstanceLinks(structure.getStructureId());
 
-		Assert.assertEquals(1, dataProviderInstanceLinks.size());
+		Assert.assertEquals(
+			dataProviderInstanceLinks.toString(), 1,
+			dataProviderInstanceLinks.size());
 
 		DDMStructureLocalServiceUtil.deleteStructure(structure);
 
@@ -604,7 +608,9 @@ public class DDMStructureLocalServiceTest extends BaseDDMServiceTestCase {
 			DDMDataProviderInstanceLinkLocalServiceUtil.
 				getDataProviderInstanceLinks(structure.getStructureId());
 
-		Assert.assertEquals(0, dataProviderInstanceLinks.size());
+		Assert.assertEquals(
+			dataProviderInstanceLinks.toString(), 0,
+			dataProviderInstanceLinks.size());
 	}
 
 	@Test(expected = InvalidParentStructureException.class)

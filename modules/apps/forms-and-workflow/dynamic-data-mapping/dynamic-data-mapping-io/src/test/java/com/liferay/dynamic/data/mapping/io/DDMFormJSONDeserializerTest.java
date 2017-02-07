@@ -173,7 +173,8 @@ public class DDMFormJSONDeserializerTest
 		List<DDMFormFieldRule> ddmFormFieldRules =
 			ddmFormField.getDDMFormFieldRules();
 
-		Assert.assertEquals(2, ddmFormFieldRules.size());
+		Assert.assertEquals(
+			ddmFormFieldRules.toString(), 2, ddmFormFieldRules.size());
 
 		DDMFormFieldRule ddmFormFieldRule = ddmFormFieldRules.get(0);
 

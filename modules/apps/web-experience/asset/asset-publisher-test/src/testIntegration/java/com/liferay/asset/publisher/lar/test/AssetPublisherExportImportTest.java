@@ -973,7 +973,8 @@ public class AssetPublisherExportImportTest
 		List<AssetEntry> actualAssetEntries) {
 
 		Assert.assertEquals(
-			expectedAssetEntries.size(), actualAssetEntries.size());
+			actualAssetEntries.toString(), expectedAssetEntries.size(),
+			actualAssetEntries.size());
 
 		Iterator<AssetEntry> expectedAssetEntriesIterator =
 			expectedAssetEntries.iterator();

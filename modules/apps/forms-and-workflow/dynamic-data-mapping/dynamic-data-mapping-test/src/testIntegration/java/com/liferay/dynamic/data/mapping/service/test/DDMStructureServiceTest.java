@@ -90,7 +90,7 @@ public class DDMStructureServiceTest extends BaseDDMServiceTestCase {
 			TestPropsValues.getCompanyId(), groupIds, _classNameId,
 			WorkflowConstants.STATUS_ANY);
 
-		Assert.assertEquals(3, structures.size());
+		Assert.assertEquals(structures.toString(), 3, structures.size());
 	}
 
 	@Test
@@ -106,7 +106,7 @@ public class DDMStructureServiceTest extends BaseDDMServiceTestCase {
 			StringPool.BLANK, WorkflowConstants.STATUS_ANY, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 
-		Assert.assertEquals(3, structures.size());
+		Assert.assertEquals(structures.toString(), 3, structures.size());
 	}
 
 	@Test
@@ -127,7 +127,7 @@ public class DDMStructureServiceTest extends BaseDDMServiceTestCase {
 			DDMStructureConstants.TYPE_DEFAULT, WorkflowConstants.STATUS_ANY,
 			true, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
-		Assert.assertEquals(1, structures.size());
+		Assert.assertEquals(structures.toString(), 1, structures.size());
 		Assert.assertEquals(structure, structures.get(0));
 	}
 
@@ -149,7 +149,7 @@ public class DDMStructureServiceTest extends BaseDDMServiceTestCase {
 			DDMStructureConstants.TYPE_DEFAULT, WorkflowConstants.STATUS_ANY,
 			false, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
-		Assert.assertEquals(3, structures.size());
+		Assert.assertEquals(structures.toString(), 3, structures.size());
 	}
 
 	@Test

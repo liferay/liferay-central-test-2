@@ -419,7 +419,7 @@ public class GroupServiceTest {
 			TestPropsValues.getCompanyId(), null, groupParams,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
-		Assert.assertEquals(1, groups.size());
+		Assert.assertEquals(groups.toString(), 1, groups.size());
 		Assert.assertEquals(group, groups.get(0));
 
 		Assert.assertEquals(
@@ -427,7 +427,7 @@ public class GroupServiceTest {
 
 		groups = GroupLocalServiceUtil.getRoleGroups(roleId);
 
-		Assert.assertEquals(1, groups.size());
+		Assert.assertEquals(groups.toString(), 1, groups.size());
 		Assert.assertEquals(group, groups.get(0));
 	}
 
