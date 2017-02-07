@@ -530,7 +530,6 @@ public class DLServiceVerifyProcess extends VerifyProcess {
 		updateClassNameId();
 		updateFileEntryAssets();
 		updateFolderAssets();
-		verifyTree();
 	}
 
 	protected String getMimeType(InputStream inputStream, String title) {
@@ -839,17 +838,6 @@ public class DLServiceVerifyProcess extends VerifyProcess {
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Assets verified for folders");
-			}
-		}
-	}
-
-	protected void verifyTree() throws Exception {
-		try (LoggingTimer loggingTimer = new LoggingTimer()) {
-			long[] companyIds =
-				_portalInstancesLocalService.getCompanyIdsBySQL();
-
-			for (long companyId : companyIds) {
-				_dlFolderLocalService.rebuildTree(companyId);
 			}
 		}
 	}
