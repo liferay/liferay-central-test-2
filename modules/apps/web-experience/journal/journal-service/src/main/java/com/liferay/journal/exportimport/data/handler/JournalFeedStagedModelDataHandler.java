@@ -330,10 +330,7 @@ public class JournalFeedStagedModelDataHandler
 		_journalCreationStrategy = journalCreationStrategy;
 	}
 
-	/**
-	 * @deprecated As of 3.6.0
-	 */
-	@Deprecated
+	@Reference(unbind = "-")
 	protected void setJournalFeedExportImportContentProcessor(
 		JournalFeedExportImportContentProcessor
 			journalFeedExportImportContentProcessor) {
@@ -355,8 +352,8 @@ public class JournalFeedStagedModelDataHandler
 	private DDMStructureLocalService _ddmStructureLocalService;
 	private DDMTemplateLocalService _ddmTemplateLocalService;
 	private JournalCreationStrategy _journalCreationStrategy;
-	private final JournalFeedExportImportContentProcessor
-		_journalFeedExportImportContentProcessor = null;
+	private JournalFeedExportImportContentProcessor
+		_journalFeedExportImportContentProcessor;
 	private JournalFeedLocalService _journalFeedLocalService;
 
 }

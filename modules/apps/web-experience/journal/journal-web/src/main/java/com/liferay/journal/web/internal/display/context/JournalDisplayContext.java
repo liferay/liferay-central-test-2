@@ -127,7 +127,7 @@ public class JournalDisplayContext {
 	}
 
 	public String[] getCharactersBlacklist() throws PortalException {
-		ThemeDisplay themeDisplay = (ThemeDisplay) _request.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		JournalServiceConfiguration journalServiceConfiguration =
