@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.comment.taglib.internal.action.path;
+package com.liferay.comment.taglib.internal.portlet.path;
 
 import org.osgi.service.component.annotations.Component;
 
