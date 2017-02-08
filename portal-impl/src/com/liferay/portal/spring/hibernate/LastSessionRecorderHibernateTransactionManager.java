@@ -47,7 +47,7 @@ public class LastSessionRecorderHibernateTransactionManager
 		try {
 			Class.forName(SpringHibernateThreadLocalUtil.class.getName());
 
-			Log nullLog = new Log() {
+			Log dummyLog = new Log() {
 
 				@Override
 				public void debug(Object object) {
@@ -132,12 +132,12 @@ public class LastSessionRecorderHibernateTransactionManager
 			Field loggerField = ReflectionUtil.getDeclaredField(
 				TransactionSynchronizationManager.class, "logger");
 
-			loggerField.set(null, nullLog);
+			loggerField.set(null, dummyLog);
 
 			loggerField = ReflectionUtil.getDeclaredField(
 				SessionFactoryUtils.class, "logger");
 
-			loggerField.set(null, nullLog);
+			loggerField.set(null, dummyLog);
 		}
 		catch (Exception e) {
 			throw new ExceptionInInitializerError(e);
