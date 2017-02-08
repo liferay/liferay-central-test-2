@@ -27,8 +27,6 @@ import com.liferay.portal.xml.SAXReaderImpl;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 
-import org.mockito.Mockito;
-
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.core.classloader.annotations.SuppressStaticInitializationFor;
 import org.powermock.modules.junit4.PowerMockRunner;
@@ -40,8 +38,8 @@ import org.powermock.modules.junit4.PowerMockRunner;
 @RunWith(PowerMockRunner.class)
 @SuppressStaticInitializationFor(
 	{
-		"com.liferay.portal.util.PropsValues",
-		"com.liferay.portal.kernel.xml.SAXReaderUtil"
+		"com.liferay.portal.kernel.xml.SAXReaderUtil",
+		"com.liferay.portal.util.PropsValues"
 	}
 )
 public class DDMFormXSDDeserializerTest
@@ -90,7 +88,7 @@ public class DDMFormXSDDeserializerTest
 	}
 
 	protected void setUpPropsValues() {
-		mockStatic(PropsValues.class, Mockito.RETURNS_DEFAULTS);
+		mockStatic(PropsValues.class);
 	}
 
 	protected void setUpSAXReaderUtil() {
