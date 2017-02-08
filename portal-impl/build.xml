@@ -593,6 +593,12 @@ svn://svn.liferay.com/repos/public/alloy/trunk/sandbox/taglibs.
 		<delete file="ServiceBuilder.temp" />
 	</target>
 
+	<target name="format-source-bnd">
+		<antcall target="format-source">
+			<param name="source.file.extensions" value="bnd,gradle" />
+		</antcall>
+	</target>
+
 	<target name="format-source-current-branch">
 		<antcall target="format-source">
 			<param name="format.current.branch" value="true" />
