@@ -85,7 +85,6 @@ public class DeleteExpiredTicketsMessageListener
 						"type", SubscriptionConstants.TICKET_TYPE),
 					RestrictionsFactoryUtil.eq(
 						"classNameId", subscriptionClassNameId))));
-
 		actionableDynamicQuery.setPerformActionMethod(
 			(Ticket ticket) -> {
 				if (ticket.isExpired()) {
