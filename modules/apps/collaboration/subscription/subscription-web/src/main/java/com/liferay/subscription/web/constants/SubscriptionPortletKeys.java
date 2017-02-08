@@ -20,6 +20,6 @@ package com.liferay.subscription.web.constants;
 public class SubscriptionPortletKeys {
 
 	public static final String UNSUBSCRIBE =
-		"com_liferay_subscription_web_portlet_UnsubscribePortlet";
+		"com_liferay_subscription_web_internal_portlet_UnsubscribePortlet";
 
 }
