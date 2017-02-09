@@ -137,13 +137,10 @@ public class UpgradeDocumentLibraryTypeContent extends UpgradeProcess {
 
 		long groupId = GetterUtil.getLong(parts[2]);
 
-		String uuid = null;
+		String uuid = parts[5];
 
 		if (parts.length == 5) {
 			uuid = getUuidByDocumentLibraryURLWithoutUuid(parts);
-		}
-		else {
-			uuid = parts[5];
 		}
 
 		return _dlAppLocalService.getFileEntryByUuidAndGroupId(uuid, groupId);
