@@ -2,9 +2,6 @@
 
 set -e
 
-PREFIX='adaptive-media-'
-MODULES='api demo-data-creator-api demo-data-creator-impl document-library image-impl image-item-selector-api image-jax-rs image-js web'
-
-for m in ${MODULES}; do
-	(cd ${PREFIX}${m} && ../scripts/run.sh ../gradlew deploy)
+for module in `ls -d */ | grep adaptive-media | grep -v test | grep -v demo`; do
+	(cd ${module} && ../scripts/run.sh ../gradlew deploy)
 done
