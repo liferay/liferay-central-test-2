@@ -1141,9 +1141,7 @@
 		</execute>
 	</command>
 
-	<!-- LPS-64793 -->
-
-	<!-- <command name="ViewBlogsEntriesWithSpecialCharactersOnPublicAndPrivateVirtualHostPages" priority="3">
+	<command name="ViewBlogsEntriesWithSpecialCharactersOnPublicAndPrivateVirtualHostPages" priority="3">
 		<var name="entryTitleSpecialCharacter" value="true" />
 		<var name="privatePageVirtualHostURL" value="www.baker.com" />
 
@@ -1276,7 +1274,7 @@
 			<var name="entryContent" value="Blogs Entry2 Content" />
 			<var name="entryTitle"><![CDATA[Blogs Entry Title `~!@#$%^&*(){}[],.<>/?|]]></var>
 		</execute>
-	</command> -->
+	</command>
 
 	<command name="ViewBlogsEntryAsPublishedViaAP" priority="3">
 		<execute macro="Page#add">
