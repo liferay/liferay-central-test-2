@@ -78,8 +78,7 @@ public class AssetVocabularySettingsImportHelper
 		}
 		else {
 			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"ClassName with value '" + className + " was not found");
+				_log.warn("No class name found for " + className);
 			}
 
 			return false;
@@ -160,9 +159,7 @@ public class AssetVocabularySettingsImportHelper
 		}
 
 		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"ClassType with classTypeName = " + classTypeName +
-					" was not found");
+			_log.warn("No class type found for " + className);
 		}
 
 		return AssetCategoryConstants.ALL_CLASS_TYPE_PK;
