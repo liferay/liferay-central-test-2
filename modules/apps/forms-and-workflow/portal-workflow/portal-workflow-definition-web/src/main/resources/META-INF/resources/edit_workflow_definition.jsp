@@ -43,40 +43,85 @@ renderResponse.setTitle((workflowDefinition == null) ? LanguageUtil.get(request,
 	<portlet:param name="mvcPath" value="/edit_workflow_definition.jsp" />
 </liferay-portlet:actionURL>
 
-<div class="container-fluid-1280 workflow-definition-container">
-	<aui:form action="<%= editWorkflowDefinitionURL %>" enctype="multipart/form-data" method="post">
-		<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
-		<aui:input name="name" type="hidden" value="<%= name %>" />
-		<aui:input name="version" type="hidden" value="<%= version %>" />
+<c:if test="<%= workflowDefinition != null %>">
+	<liferay-frontend:management-bar>
+		<liferay-frontend:management-bar-buttons>
+			<liferay-frontend:management-bar-sidenav-toggler-button
+				icon="info-circle"
+				label="info"
+			/>
+		</liferay-frontend:management-bar-buttons>
+	</liferay-frontend:management-bar>
+</c:if>
 
-		<div class="card-horizontal">
-			<div class="card-row card-row-padded">
-				<liferay-ui:error exception="<%= WorkflowDefinitionFileException.class %>" message="please-enter-a-valid-file" />
+<div class="closed container-fluid-1280 sidenav-container sidenav-right" id="<portlet:namespace />infoPanelId">
+	<c:if test="<%= workflowDefinition != null %>">
+		<div class="sidenav-menu-slider">
+			<div class="sidebar sidebar-default sidenav-menu">
+				<div class="sidebar-header">
+					<aui:icon cssClass="icon-monospaced sidenav-close text-default visible-xs-inline-block" image="times" markupView="lexicon" url="javascript:;" />
+				</div>
 
-				<aui:fieldset>
-					<div class="col-xs-6">
-						<aui:field-wrapper label="title">
-							<liferay-ui:input-localized name="title" xml='<%= BeanPropertiesUtil.getString(workflowDefinition, "title") %>' />
-						</aui:field-wrapper>
+				<liferay-ui:tabs cssClass="navbar-no-collapse" names="details,versions" refresh="<%= false %>" type="dropdown">
+					<liferay-ui:section>
+						<div class="sidebar-body">
+							<h3 class="version">
+								<liferay-ui:message key="version" /> <%= workflowDefinition.getVersion() %>
+							</h3>
 
-						<aui:field-wrapper label="file">
-							<div class="lfr-dynamic-uploader">
-								<div class="lfr-upload-container" id="<portlet:namespace />fileUpload"></div>
-
-								<aui:input name="tempFileName" type="hidden" />
+							<div>
+								<aui:model-context bean="<%= workflowDefinition %>" model="<%= WorkflowDefinition.class %>" />
 							</div>
-						</aui:field-wrapper>
-					</div>
-				</aui:fieldset>
+						</div>
+					</liferay-ui:section>
+
+					<liferay-ui:section>
+						<div class="sidebar-body">
+							<liferay-util:include page="/view_workflow_definition_history.jsp" servletContext="<%= application %>">
+								<liferay-util:param name="redirect" value="<%= redirect %>" />
+							</liferay-util:include>
+						</div>
+					</liferay-ui:section>
+				</liferay-ui:tabs>
 			</div>
 		</div>
+	</c:if>
 
-		<aui:button-row>
-			<aui:button cssClass="btn-lg" type="submit" />
+	<div class="sidenav-content">
+		<aui:form action="<%= editWorkflowDefinitionURL %>" enctype="multipart/form-data" method="post">
+			<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+			<aui:input name="name" type="hidden" value="<%= name %>" />
+			<aui:input name="version" type="hidden" value="<%= version %>" />
 
-			<aui:button cssClass="btn-lg" href="<%= redirect %>" type="cancel" />
-		</aui:button-row>
-	</aui:form>
+			<div class="card-horizontal">
+				<div class="card-row card-row-padded">
+					<liferay-ui:error exception="<%= WorkflowDefinitionFileException.class %>" message="please-enter-a-valid-file" />
+
+					<aui:fieldset>
+						<div class="col-xs-6">
+							<aui:field-wrapper label="title">
+								<liferay-ui:input-localized name="title" xml='<%= BeanPropertiesUtil.getString(workflowDefinition, "title") %>' />
+							</aui:field-wrapper>
+
+							<aui:field-wrapper label="file">
+								<div class="lfr-dynamic-uploader">
+									<div class="lfr-upload-container" id="<portlet:namespace />fileUpload"></div>
+
+									<aui:input name="tempFileName" type="hidden" />
+								</div>
+							</aui:field-wrapper>
+						</div>
+					</aui:fieldset>
+				</div>
+			</div>
+
+			<aui:button-row>
+				<aui:button cssClass="btn-lg" type="submit" />
+
+				<aui:button cssClass="btn-lg" href="<%= redirect %>" type="cancel" />
+			</aui:button-row>
+		</aui:form>
+	</div>
 </div>
 
 <%
