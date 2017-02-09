@@ -21,12 +21,10 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 WorkflowDefinition workflowDefinition = (WorkflowDefinition)request.getAttribute(WebKeys.WORKFLOW_DEFINITION);
 
-String name = StringPool.BLANK;
-String version = StringPool.BLANK;
+String content = StringPool.BLANK;
 
 if (workflowDefinition != null) {
-	name = workflowDefinition.getName();
-	version = String.valueOf(workflowDefinition.getVersion());
+	content = workflowDefinition.getContent();
 }
 
 PortletURL portletURL = renderResponse.createRenderURL();
@@ -88,35 +86,39 @@ renderResponse.setTitle((workflowDefinition == null) ? LanguageUtil.get(request,
 	</c:if>
 
 	<div class="sidenav-content">
-		<aui:form action="<%= editWorkflowDefinitionURL %>" enctype="multipart/form-data" method="post">
+		<aui:form action="<%= editWorkflowDefinitionURL %>" method="post" name="fm">
 			<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
-			<aui:input name="name" type="hidden" value="<%= name %>" />
-			<aui:input name="version" type="hidden" value="<%= version %>" />
+			<aui:input name="content" type="hidden" value="<%= content %>" />
 
 			<div class="card-horizontal">
-				<div class="card-row card-row-padded">
+				<div class="card-row-padded">
 					<liferay-ui:error exception="<%= WorkflowDefinitionFileException.class %>" message="please-enter-a-valid-file" />
 
 					<aui:fieldset>
-						<div class="col-xs-6">
+						<aui:col>
 							<aui:field-wrapper label="title">
 								<liferay-ui:input-localized name="title" xml='<%= BeanPropertiesUtil.getString(workflowDefinition, "title") %>' />
 							</aui:field-wrapper>
+						</aui:col>
 
-							<aui:field-wrapper label="file">
-								<div class="lfr-dynamic-uploader">
-									<div class="lfr-upload-container" id="<portlet:namespace />fileUpload"></div>
+						<aui:col id="contentSourceWrapper">
+							<div class="content-source" id="<portlet:namespace />contentEditor"></div>
+						</aui:col>
 
-									<aui:input name="tempFileName" type="hidden" />
-								</div>
-							</aui:field-wrapper>
-						</div>
+						<aui:col>
+							<aui:input inlineLabel="left" label="file" name="definition" type="file" />
+						</aui:col>
 					</aui:fieldset>
 				</div>
 			</div>
 
 			<aui:button-row>
-				<aui:button cssClass="btn-lg" type="submit" />
+
+				<%
+				String taglibOnClick = "Liferay.fire('" + liferayPortletResponse.getNamespace() + "saveDefinition');";
+				%>
+
+				<aui:button cssClass="btn-lg" onClick="<%= taglibOnClick %>" primary="<%= true %>" value='<%= LanguageUtil.get(request, "save") %>' />
 
 				<aui:button cssClass="btn-lg" href="<%= redirect %>" type="cancel" />
 			</aui:button-row>
@@ -124,55 +126,73 @@ renderResponse.setTitle((workflowDefinition == null) ? LanguageUtil.get(request,
 	</div>
 </div>
 
-<%
-Date expirationDate = new Date(System.currentTimeMillis() + PropsValues.SESSION_TIMEOUT * Time.MINUTE);
+<aui:script use="aui-ace-editor,liferay-xml-formatter">
+	var STR_VALUE = 'value';
 
-Ticket ticket = TicketLocalServiceUtil.addTicket(user.getCompanyId(), User.class.getName(), user.getUserId(), TicketConstants.TYPE_IMPERSONATE, null, expirationDate, new ServiceContext());
-%>
-
-<aui:script use="liferay-upload">
-	var tempFileNameInput = A.one('#<portlet:namespace />tempFileName');
-
-	new Liferay.Upload(
+	var contentEditor = new A.AceEditor(
 		{
-			after: {
-				render: function() {
-					var instance = this;
+			boundingBox: '#<portlet:namespace />contentEditor',
+			height: 600,
+			mode: 'xml',
+			tabSize: 4,
+			width: 600
+		}
+	).render();
 
-					var boundingBox = this.get('boundingBox');
+	var editorContentElement = A.one('#<portlet:namespace />content');
 
-					boundingBox.one('.select-files-container').placeBefore(boundingBox.one('.upload-list'));
-				},
-				tempFileRemoved: function() {
-					tempFileNameInput.val('');
-				},
-				uploadComplete: function(file) {
-					tempFileNameInput.val(file.name);
-				}
-			},
-			boundingBox: '#<portlet:namespace />fileUpload',
+	if (editorContentElement) {
+		contentEditor.set(STR_VALUE, editorContentElement.val());
+	}
 
-			<%
-			DecimalFormatSymbols decimalFormatSymbols = DecimalFormatSymbols.getInstance(locale);
-			%>
+	contentEditor.set('width', A.one('#<portlet:namespace />contentSourceWrapper').get('clientWidth'));
 
-			decimalSeparator: '<%= decimalFormatSymbols.getDecimalSeparator() %>',
-			deleteFile: '<liferay-portlet:actionURL doAsUserId="<%= user.getUserId() %>" name="deleteWorkflowDefinitionFile"><portlet:param name="mvcPath" value="/edit_workflow_definition.jsp" /></liferay-portlet:actionURL>&ticketKey=<%= ticket.getKey() %>',
-			fileDescription: '<%= StringUtil.merge(PrefsPropsUtil.getStringArray(PropsKeys.DL_FILE_EXTENSIONS, StringPool.COMMA)) %>',
-			maxFileSize: '<%= PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE) %> B',
-			multipleFiles: false,
-			namespace: '<portlet:namespace />',
-			restoreState: false,
-			tempFileURL: {
-				method: Liferay.Service.bind('/dlapp/get-temp-file-names'),
-				params: {
-					folderId: '0',
-					folderName: '<%= UploadWorkflowDefinitionFileMVCActionCommand.TEMP_FOLDER_NAME %>',
-					groupId: <%= scopeGroupId %>
-				}
-			},
-			tempRandomSuffix: '<%= TempFileEntryUtil.TEMP_RANDOM_SUFFIX %>',
-			uploadFile: '<liferay-portlet:resourceURL doAsUserId="<%= user.getUserId() %>" id="uploadWorkflowDefinitionFile" />&ticketKey=<%= ticket.getKey() %>'
+	var sidenavSlider = $('#<portlet:namespace />infoPanelId');
+
+	sidenavSlider.on(
+		'closed.lexicon.sidenav',
+		function(event) {
+			contentEditor.set('width', A.one('#<portlet:namespace />contentSourceWrapper').get('clientWidth'));
+		}
+	);
+
+	sidenavSlider.on(
+		'open.lexicon.sidenav',
+		function(event) {
+			contentEditor.set('width', A.one('#<portlet:namespace />contentSourceWrapper').get('clientWidth'));
+		}
+	);
+
+	var definitionFile = $('#<portlet:namespace />definition');
+
+	definitionFile.on(
+		'change',
+		function(evt) {
+			var files = evt.target.files;
+
+			if (files) {
+				var reader = new FileReader();
+
+				reader.onloadend = function(evt) {
+
+					if (evt.target.readyState == FileReader.DONE) {
+						contentEditor.set(STR_VALUE, evt.target.result);
+					}
+				};
+
+				reader.readAsText(files[0]);
+			}
+		}
+	);
+
+	Liferay.on(
+		'<portlet:namespace />saveDefinition',
+		function(event) {
+			var form = AUI.$('#<portlet:namespace />fm');
+
+			form.fm('content').val(contentEditor.get(STR_VALUE));
+
+			submitForm(form);
 		}
 	);
 </aui:script>
