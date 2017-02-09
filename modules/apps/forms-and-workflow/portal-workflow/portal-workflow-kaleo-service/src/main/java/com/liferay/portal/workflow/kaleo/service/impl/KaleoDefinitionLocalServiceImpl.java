@@ -59,8 +59,8 @@ public class KaleoDefinitionLocalServiceImpl
 		// Kaleo definition version
 
 		activateKaleoDefinitionVersion(
-			kaleoDefinition.getName(), getVersion(kaleoDefinition.getVersion()),
-			startKaleoNodeId, serviceContext);
+			kaleoDefinitionId, getVersion(kaleoDefinition.getVersion()),
+			startKaleoNodeId);
 	}
 
 	@Override
@@ -79,8 +79,7 @@ public class KaleoDefinitionLocalServiceImpl
 		// Kaleo definition version
 
 		updateKaleoDefinitionVersionActive(
-			kaleoDefinition.getName(), getVersion(kaleoDefinition.getVersion()),
-			true, serviceContext);
+			kaleoDefinitionId, getVersion(kaleoDefinition.getVersion()), true);
 	}
 
 	@Override
@@ -100,8 +99,8 @@ public class KaleoDefinitionLocalServiceImpl
 		// Kaleo definition version
 
 		updateKaleoDefinitionVersionActive(
-			kaleoDefinition.getName(), getVersion(kaleoDefinition.getVersion()),
-			true, serviceContext);
+			kaleoDefinition.getKaleoDefinitionId(),
+			getVersion(kaleoDefinition.getVersion()), true);
 	}
 
 	@Override
@@ -158,9 +157,8 @@ public class KaleoDefinitionLocalServiceImpl
 		// Kaleo definition version
 
 		updateKaleoDefinitionVersionActive(
-			kaleoDefinition.getName(),
-			String.valueOf(kaleoDefinition.getVersion()), false,
-			serviceContext);
+			kaleoDefinition.getKaleoDefinitionId(),
+			getVersion(kaleoDefinition.getVersion()), false);
 	}
 
 	@Override
@@ -433,21 +431,19 @@ public class KaleoDefinitionLocalServiceImpl
 		// Kaleo definition version
 
 		updateKaleoDefinitionVersionTitle(
-			kaleoDefinition.getName(),
-			String.valueOf(kaleoDefinition.getVersion()), title,
-			serviceContext);
+			kaleoDefinition.getKaleoDefinitionId(),
+			getVersion(kaleoDefinition.getVersion()), title);
 
 		return kaleoDefinition;
 	}
 
 	protected void activateKaleoDefinitionVersion(
-			String name, String version, long startKaleoNodeId,
-			ServiceContext serviceContext)
+			long kaleoDefinitionId, String version, long startKaleoNodeId)
 		throws PortalException {
 
 		KaleoDefinitionVersion kaleoDefinitionVersion =
 			kaleoDefinitionVersionLocalService.getKaleoDefinitionVersion(
-				name, version, serviceContext);
+				kaleoDefinitionId, version);
 
 		kaleoDefinitionVersion.setStartKaleoNodeId(startKaleoNodeId);
 		kaleoDefinitionVersion.setActive(true);
@@ -507,8 +503,8 @@ public class KaleoDefinitionLocalServiceImpl
 		// Kaleo definition version
 
 		updateKaleoDefinitionVersionActive(
-			name, getVersion(previousKaleoDefinition.getVersion()), false,
-			serviceContext);
+			previousKaleoDefinition.getKaleoDefinitionId(),
+			getVersion(previousKaleoDefinition.getVersion()), false);
 	}
 
 	protected String getNextVersion(String version, boolean majorVersion) {
@@ -536,13 +532,12 @@ public class KaleoDefinitionLocalServiceImpl
 	}
 
 	protected void updateKaleoDefinitionVersionActive(
-			String name, String version, boolean active,
-			ServiceContext serviceContext)
+			long kaleoDefinitionId, String version, boolean active)
 		throws PortalException {
 
 		KaleoDefinitionVersion kaleoDefinitionVersion =
 			kaleoDefinitionVersionLocalService.getKaleoDefinitionVersion(
-				name, version, serviceContext);
+				kaleoDefinitionId, version);
 
 		kaleoDefinitionVersion.setActive(active);
 
@@ -550,13 +545,12 @@ public class KaleoDefinitionLocalServiceImpl
 	}
 
 	protected void updateKaleoDefinitionVersionTitle(
-			String name, String version, String title,
-			ServiceContext serviceContext)
+			long kaleoDefinitionId, String version, String title)
 		throws PortalException {
 
 		KaleoDefinitionVersion kaleoDefinitionVersion =
 			kaleoDefinitionVersionLocalService.getKaleoDefinitionVersion(
-				name, version, serviceContext);
+				kaleoDefinitionId, version);
 
 		kaleoDefinitionVersion.setTitle(title);
 
