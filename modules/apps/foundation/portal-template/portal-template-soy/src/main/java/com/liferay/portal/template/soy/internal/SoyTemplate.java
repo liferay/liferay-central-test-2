@@ -14,6 +14,7 @@
 
 package com.liferay.portal.template.soy.internal;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.io.CharStreams;
 import com.google.template.soy.SoyFileSet;
 import com.google.template.soy.SoyFileSet.Builder;
@@ -116,6 +117,12 @@ public class SoyTemplate extends AbstractMultiResourceTemplate {
 
 				value = UnsafeSanitizedContentOrdainer.ordainAsSafe(
 					htmlValue.toString(), SanitizedContent.ContentKind.HTML);
+			}
+			else {
+				// TODO Just for testing purposes, need to see if we
+				// want to leave it here, or move to a different place
+
+				value = _objectMapper.convertValue(value, Map.class);
 			}
 
 			soyMapData.put(key, _templateContextHelper.deserializeValue(value));
@@ -241,6 +248,7 @@ public class SoyTemplate extends AbstractMultiResourceTemplate {
 			LanguageUtil.getLanguageId(locale));
 	}
 
+	private final ObjectMapper _objectMapper = new ObjectMapper();
 	private final boolean _privileged;
 	private final SoyTemplateContextHelper _templateContextHelper;
 
