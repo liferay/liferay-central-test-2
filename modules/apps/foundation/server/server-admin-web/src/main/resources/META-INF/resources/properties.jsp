@@ -83,6 +83,7 @@ serverURL.setParameter("tabs2", tabs2);
 	for (Map.Entry<Object, Object> entry : properties.entrySet()) {
 		String property = (String)entry.getKey();
 		String value = StringPool.BLANK;
+
 		boolean overriddenPropertyValue = false;
 
 		if (ArrayUtil.contains(PropsValues.ADMIN_OBFUSCATED_PROPERTIES, property)) {
@@ -90,10 +91,12 @@ serverURL.setParameter("tabs2", tabs2);
 		}
 		else if (portalPropertiesTab && serverPortletPreferencesMap.containsKey(property)) {
 			value = serverPortletPreferences.getValue(property, StringPool.BLANK);
+
 			overriddenPropertyValue = true;
 		}
 		else if (portalPropertiesTab && companyPortletPreferencesMap.containsKey(property)) {
 			value = companyPortletPreferences.getValue(property, StringPool.BLANK);
+
 			overriddenPropertyValue = true;
 		}
 		else {
