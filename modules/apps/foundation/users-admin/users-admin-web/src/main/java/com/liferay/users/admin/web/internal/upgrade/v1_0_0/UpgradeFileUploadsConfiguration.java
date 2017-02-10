@@ -57,18 +57,15 @@ public class UpgradeFileUploadsConfiguration extends UpgradeProcess {
 			_prefsProps.getBoolean(
 				_OLD_KEY_USERS_IMAGE_CHECK_TOKEN,
 				defaultConfig.imageCheckToken()));
-
 		properties.put(
 			"imageMaxHeight",
 			_prefsProps.getInteger(
 				_OLD_KEY_USERS_IMAGE_MAX_HEIGHT,
 				defaultConfig.imageMaxHeight()));
-
 		properties.put(
 			"imageMaxSize",
 			_prefsProps.getLong(
 				_OLD_KEY_USERS_IMAGE_MAX_SIZE, defaultConfig.imageMaxSize()));
-
 		properties.put(
 			"imageMaxWidth",
 			_prefsProps.getInteger(
