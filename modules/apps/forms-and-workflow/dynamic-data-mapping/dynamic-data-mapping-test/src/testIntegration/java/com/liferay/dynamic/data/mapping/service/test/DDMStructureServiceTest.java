@@ -246,7 +246,7 @@ public class DDMStructureServiceTest extends BaseDDMServiceTestCase {
 			StringPool.BLANK, WorkflowConstants.STATUS_ANY, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 
-		Assert.assertEquals(2, structures.size());
+		Assert.assertEquals(structures.toString(), 2, structures.size());
 	}
 
 	@Test
@@ -286,7 +286,7 @@ public class DDMStructureServiceTest extends BaseDDMServiceTestCase {
 			StringPool.BLANK, WorkflowConstants.STATUS_ANY, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 
-		Assert.assertEquals(1, structures.size());
+		Assert.assertEquals(structures.toString(), 1, structures.size());
 	}
 
 	protected void setUpPermissionThreadLocal() throws Exception {
