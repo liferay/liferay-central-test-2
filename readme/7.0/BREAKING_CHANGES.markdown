@@ -4150,7 +4150,7 @@ addition, this change avoids future security issues from outdated flash movies.
 
 #### What changed?
 
-All Journal portlet properties have been moved to an OSGI configuration.
+All Journal portlet properties have been moved to an OSGi configuration.
 
 #### Who is affected?
 
@@ -4246,8 +4246,8 @@ Portal by means of an OSGi container.
 #### What changed?
 
 The Shopping file uploads portlet properties have been moved from Server
-Administration to an OSGI configuration named `ShoppingFileUploadsConfiguration`
-in the `shopping-api` module.
+Administration to an OSGi configuration named
+`ShoppingFileUploadsConfiguration.java` in the `shopping-api` module.
 
 #### Who is affected?
 
@@ -4262,7 +4262,7 @@ This affects anyone who is using the following portlet properties:
 
 Instead of overriding the `portal.properties` file, you can manage the
 properties from Portal's configuration administrator. This can be accessed by
-navigating to Liferay's Control Panel &rarr; *Configuration* &rarr; *System
+navigating to Liferay's *Control Panel* &rarr; *Configuration* &rarr; *System
 Settings* &rarr; *Shopping Cart Images* and editing the settings there.
 
 If you would like to include the new configuration in your application, follow
@@ -4315,18 +4315,17 @@ Portal by means of an OSGi container.
 
 #### What changed?
 
-The `aui:tool` tag has been deprecated with no direct
-replacement.
+The `aui:tool` tag has been deprecated with no direct replacement.
 
 #### Who is affected?
 
-Plugins or templates that are using the `aui:tool` tag must
-remove their usage of the tag.
+Plugins or templates that are using the `aui:tool` tag must remove their usage
+of the tag.
 
 #### How should I update my code?
 
-There is no direct replacement. You should remove all usages of the
-`aui:tool` tag.
+There is no direct replacement. You should remove all usages of the `aui:tool`
+tag.
 
 #### Why was this change made?
 
