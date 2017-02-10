@@ -71,9 +71,9 @@ serverURL.setParameter("tabs2", tabs2);
 
 	Properties properties = null;
 
-	boolean isTabPortalProperties = tabs2.equals("portal-properties");
+	boolean portalPropertiesTab = tabs2.equals("portal-properties");
 
-	if (isTabPortalProperties) {
+	if (portalPropertiesTab) {
 		properties = PropsUtil.getProperties(true);
 	}
 	else {
@@ -88,11 +88,11 @@ serverURL.setParameter("tabs2", tabs2);
 		if (ArrayUtil.contains(PropsValues.ADMIN_OBFUSCATED_PROPERTIES, property)) {
 			value = StringPool.EIGHT_STARS;
 		}
-		else if (isTabPortalProperties && serverPortletPreferencesMap.containsKey(property)) {
+		else if (portalPropertiesTab && serverPortletPreferencesMap.containsKey(property)) {
 			value = serverPortletPreferences.getValue(property, StringPool.BLANK);
 			overriddenPropertyValue = true;
 		}
-		else if (isTabPortalProperties && companyPortletPreferencesMap.containsKey(property)) {
+		else if (portalPropertiesTab && companyPortletPreferencesMap.containsKey(property)) {
 			value = companyPortletPreferences.getValue(property, StringPool.BLANK);
 			overriddenPropertyValue = true;
 		}
@@ -130,7 +130,7 @@ serverURL.setParameter("tabs2", tabs2);
 			String property = (String)entry.getKey();
 			String value = (String)entry.getValue();
 
-			boolean overriddenPropertyValue = isTabPortalProperties && overriddenProperties.contains(property);
+			boolean overriddenPropertyValue = portalPropertiesTab && overriddenProperties.contains(property);
 			%>
 
 			<liferay-ui:search-container-column-text
