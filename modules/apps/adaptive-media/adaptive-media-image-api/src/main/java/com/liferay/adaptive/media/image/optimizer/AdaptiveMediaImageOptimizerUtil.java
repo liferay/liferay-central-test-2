@@ -16,6 +16,8 @@ package com.liferay.adaptive.media.image.optimizer;
 
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMap;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMapFactory;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.util.Set;
 
@@ -32,6 +34,12 @@ public class AdaptiveMediaImageOptimizerUtil {
 
 	public static void optimize(long companyId) {
 		if (_serviceTrackerMap == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Cannot optimize for company id " + companyId +
+						" because the component is not actived");
+			}
+
 			return;
 		}
 
@@ -47,6 +55,12 @@ public class AdaptiveMediaImageOptimizerUtil {
 
 	public static void optimize(long companyId, String configurationEntryUuid) {
 		if (_serviceTrackerMap == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Cannot optimize for company id " + companyId +
+					" because the component is not actived");
+			}
+
 			return;
 		}
 
@@ -73,6 +87,9 @@ public class AdaptiveMediaImageOptimizerUtil {
 
 		_serviceTrackerMap = null;
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		AdaptiveMediaImageOptimizerUtil.class);
 
 	private static ServiceTrackerMap<String, AdaptiveMediaImageOptimizer>
 		_serviceTrackerMap;
