@@ -49,7 +49,7 @@ public class PathInterpreterTest {
 	@Test
 	public void testFileEntryPath() throws Exception {
 		Mockito.when(
-			_dlAppLocalService.getFileEntry(Mockito.any(long.class))
+			_dlAppLocalService.getFileEntry(Mockito.anyLong())
 		).thenReturn(
 			_fileEntry
 		);
@@ -62,7 +62,7 @@ public class PathInterpreterTest {
 
 		Mockito.when(
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntry(
-				Mockito.any(long.class), Mockito.eq("x"))
+				Mockito.anyLong(), Mockito.eq("x"))
 		).thenReturn(
 			Optional.of(_configurationEntry)
 		);
@@ -115,7 +115,7 @@ public class PathInterpreterTest {
 
 		Mockito.when(
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntry(
-				Mockito.any(long.class), Mockito.eq("x"))
+				Mockito.anyLong(), Mockito.eq("x"))
 		).thenReturn(
 			Optional.of(_configurationEntry)
 		);

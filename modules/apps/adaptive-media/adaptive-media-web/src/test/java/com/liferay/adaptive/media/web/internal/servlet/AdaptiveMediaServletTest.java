@@ -49,7 +49,7 @@ public class AdaptiveMediaServletTest {
 		);
 
 		Mockito.when(
-			_requestHandlerLocator.locateForPattern(Mockito.any(String.class))
+			_requestHandlerLocator.locateForPattern(Mockito.anyString())
 		).thenReturn(
 			_requestHandler
 		);
@@ -66,7 +66,7 @@ public class AdaptiveMediaServletTest {
 			_response
 		).sendError(
 			Mockito.eq(HttpServletResponse.SC_BAD_REQUEST),
-			Mockito.any(String.class));
+			Mockito.anyString());
 	}
 
 	@Test
@@ -78,7 +78,7 @@ public class AdaptiveMediaServletTest {
 		);
 
 		Mockito.when(
-			_requestHandlerLocator.locateForPattern(Mockito.any(String.class))
+			_requestHandlerLocator.locateForPattern(Mockito.anyString())
 		).thenReturn(
 			_requestHandler
 		);
@@ -94,8 +94,7 @@ public class AdaptiveMediaServletTest {
 		Mockito.verify(
 			_response
 		).sendError(
-			Mockito.eq(HttpServletResponse.SC_NOT_FOUND),
-			Mockito.any(String.class));
+			Mockito.eq(HttpServletResponse.SC_NOT_FOUND), Mockito.anyString());
 	}
 
 	@Test
@@ -107,7 +106,7 @@ public class AdaptiveMediaServletTest {
 		);
 
 		Mockito.when(
-			_requestHandlerLocator.locateForPattern(Mockito.any(String.class))
+			_requestHandlerLocator.locateForPattern(Mockito.anyString())
 		).thenReturn(
 			_requestHandler
 		);
@@ -123,8 +122,7 @@ public class AdaptiveMediaServletTest {
 		Mockito.verify(
 			_response
 		).sendError(
-			Mockito.eq(HttpServletResponse.SC_NOT_FOUND),
-			Mockito.any(String.class));
+			Mockito.eq(HttpServletResponse.SC_NOT_FOUND), Mockito.anyString());
 	}
 
 	@Test
@@ -136,7 +134,7 @@ public class AdaptiveMediaServletTest {
 		);
 
 		Mockito.when(
-			_requestHandlerLocator.locateForPattern(Mockito.any(String.class))
+			_requestHandlerLocator.locateForPattern(Mockito.anyString())
 		).thenReturn(
 			_requestHandler
 		);
@@ -152,8 +150,7 @@ public class AdaptiveMediaServletTest {
 		Mockito.verify(
 			_response
 		).sendError(
-			Mockito.eq(HttpServletResponse.SC_FORBIDDEN),
-			Mockito.any(String.class));
+			Mockito.eq(HttpServletResponse.SC_FORBIDDEN), Mockito.anyString());
 	}
 
 	@Test
@@ -165,7 +162,7 @@ public class AdaptiveMediaServletTest {
 		);
 
 		Mockito.when(
-			_requestHandlerLocator.locateForPattern(Mockito.any(String.class))
+			_requestHandlerLocator.locateForPattern(Mockito.anyString())
 		).thenReturn(
 			null
 		);
@@ -175,8 +172,7 @@ public class AdaptiveMediaServletTest {
 		Mockito.verify(
 			_response
 		).sendError(
-			Mockito.eq(HttpServletResponse.SC_NOT_FOUND),
-			Mockito.any(String.class));
+			Mockito.eq(HttpServletResponse.SC_NOT_FOUND), Mockito.anyString());
 	}
 
 	private final HttpServletRequest _request = Mockito.mock(

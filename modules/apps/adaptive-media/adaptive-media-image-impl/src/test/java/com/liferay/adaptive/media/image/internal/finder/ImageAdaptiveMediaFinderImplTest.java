@@ -73,7 +73,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 
 		Mockito.when(
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				Mockito.any(long.class))
+				Mockito.anyLong())
 		).thenReturn(
 			Collections.singleton(configurationEntry)
 		);
@@ -85,7 +85,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 		);
 
 		Mockito.when(
-			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
+			_imageProcessor.isMimeTypeSupported(Mockito.anyString())
 		).thenReturn(
 			true
 		);
@@ -107,7 +107,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 
 		Mockito.when(
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				Mockito.any(long.class))
+				Mockito.anyLong())
 		).thenReturn(
 			Collections.singleton(configurationEntry)
 		);
@@ -140,7 +140,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 		);
 
 		Mockito.when(
-			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
+			_imageProcessor.isMimeTypeSupported(Mockito.anyString())
 		).thenReturn(
 			true
 		);
@@ -162,7 +162,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 
 		Mockito.when(
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				Mockito.any(long.class))
+				Mockito.anyLong())
 		).thenReturn(
 			Collections.singleton(configurationEntry)
 		);
@@ -189,7 +189,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 		);
 
 		Mockito.when(
-			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
+			_imageProcessor.isMimeTypeSupported(Mockito.anyString())
 		).thenReturn(
 			true
 		);
@@ -239,7 +239,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 
 		Mockito.when(
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				Mockito.any(long.class))
+				Mockito.anyLong())
 		).thenReturn(
 			configurationEntries
 		);
@@ -284,7 +284,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 		);
 
 		Mockito.when(
-			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
+			_imageProcessor.isMimeTypeSupported(Mockito.anyString())
 		).thenReturn(
 			true
 		);
@@ -346,7 +346,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 
 		Mockito.when(
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				Mockito.any(long.class))
+				Mockito.anyLong())
 		).thenReturn(
 			configurationEntries
 		);
@@ -391,7 +391,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 		);
 
 		Mockito.when(
-			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
+			_imageProcessor.isMimeTypeSupported(Mockito.anyString())
 		).thenReturn(
 			true
 		);
@@ -450,13 +450,13 @@ public class ImageAdaptiveMediaFinderImplTest {
 	public void testGetMediaConfigurationError() throws Exception {
 		Mockito.when(
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				Mockito.any(long.class))
+				Mockito.anyLong())
 		).thenThrow(
 			AdaptiveMediaRuntimeException.InvalidConfiguration.class
 		);
 
 		Mockito.when(
-			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
+			_imageProcessor.isMimeTypeSupported(Mockito.anyString())
 		).thenReturn(
 			true
 		);
@@ -474,7 +474,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 
 		Mockito.when(
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				Mockito.any(long.class))
+				Mockito.anyLong())
 		).thenReturn(
 			Collections.singleton(configurationEntry)
 		);
@@ -501,7 +501,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 		);
 
 		Mockito.when(
-			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
+			_imageProcessor.isMimeTypeSupported(Mockito.anyString())
 		).thenReturn(
 			true
 		);
@@ -540,7 +540,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 
 		Mockito.when(
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				Mockito.any(long.class))
+				Mockito.anyLong())
 		).thenReturn(
 			Collections.singleton(configurationEntry)
 		);
@@ -567,7 +567,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 		);
 
 		Mockito.when(
-			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
+			_imageProcessor.isMimeTypeSupported(Mockito.anyString())
 		).thenReturn(
 			true
 		);
@@ -610,7 +610,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 
 		Mockito.when(
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				Mockito.any(long.class))
+				Mockito.anyLong())
 		).thenReturn(
 			Arrays.asList(configurationEntry1, configurationEntry2)
 		);
@@ -646,7 +646,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 		);
 
 		Mockito.when(
-			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
+			_imageProcessor.isMimeTypeSupported(Mockito.anyString())
 		).thenReturn(
 			true
 		);
@@ -693,7 +693,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 
 		Mockito.when(
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				Mockito.any(long.class))
+				Mockito.anyLong())
 		).thenReturn(
 			Arrays.asList(configurationEntry1, configurationEntry2)
 		);
@@ -729,7 +729,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 		);
 
 		Mockito.when(
-			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
+			_imageProcessor.isMimeTypeSupported(Mockito.anyString())
 		).thenReturn(
 			true
 		);
@@ -776,7 +776,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 
 		Mockito.when(
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				Mockito.any(long.class))
+				Mockito.anyLong())
 		).thenReturn(
 			Arrays.asList(configurationEntry1, configurationEntry2)
 		);
@@ -812,7 +812,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 		);
 
 		Mockito.when(
-			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
+			_imageProcessor.isMimeTypeSupported(Mockito.anyString())
 		).thenReturn(
 			true
 		);
@@ -859,7 +859,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 
 		Mockito.when(
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				Mockito.any(long.class))
+				Mockito.anyLong())
 		).thenReturn(
 			Arrays.asList(configurationEntry1, configurationEntry2)
 		);
@@ -895,7 +895,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 		);
 
 		Mockito.when(
-			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
+			_imageProcessor.isMimeTypeSupported(Mockito.anyString())
 		).thenReturn(
 			true
 		);
@@ -935,7 +935,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 
 		Mockito.when(
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				Mockito.any(long.class))
+				Mockito.anyLong())
 		).thenReturn(
 			Arrays.asList(configurationEntry1, configurationEntry2)
 		);
@@ -971,7 +971,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 		);
 
 		Mockito.when(
-			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
+			_imageProcessor.isMimeTypeSupported(Mockito.anyString())
 		).thenReturn(
 			true
 		);
@@ -1007,7 +1007,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 	@Test
 	public void testGetMediaWhenNotSupported() throws Exception {
 		Mockito.when(
-			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
+			_imageProcessor.isMimeTypeSupported(Mockito.anyString())
 		).thenReturn(
 			false
 		);
@@ -1038,7 +1038,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 
 		Mockito.when(
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				Mockito.any(long.class))
+				Mockito.anyLong())
 		).thenReturn(
 			Collections.singleton(configurationEntry)
 		);
@@ -1065,7 +1065,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 		);
 
 		Mockito.when(
-			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
+			_imageProcessor.isMimeTypeSupported(Mockito.anyString())
 		).thenReturn(
 			true
 		);

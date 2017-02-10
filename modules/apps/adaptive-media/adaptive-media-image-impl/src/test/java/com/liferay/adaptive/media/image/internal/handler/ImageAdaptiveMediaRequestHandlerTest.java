@@ -58,7 +58,7 @@ public class ImageAdaptiveMediaRequestHandlerTest {
 		pathProperties.put("configuration-uuid", "testUuid");
 
 		Mockito.when(
-			_pathInterpreter.interpretPath(Mockito.any(String.class))
+			_pathInterpreter.interpretPath(Mockito.anyString())
 		).thenReturn(
 			Optional.of(Tuple.of(_fileVersion, pathProperties))
 		);
@@ -100,7 +100,7 @@ public class ImageAdaptiveMediaRequestHandlerTest {
 		pathProperties.put("configuration-uuid", "testUuid");
 
 		Mockito.when(
-			_pathInterpreter.interpretPath(Mockito.any(String.class))
+			_pathInterpreter.interpretPath(Mockito.anyString())
 		).thenReturn(
 			Optional.of(Tuple.of(_fileVersion, pathProperties))
 		);
@@ -138,7 +138,7 @@ public class ImageAdaptiveMediaRequestHandlerTest {
 	@Test
 	public void testInvalidPath() throws Exception {
 		Mockito.when(
-			_pathInterpreter.interpretPath(Mockito.any(String.class))
+			_pathInterpreter.interpretPath(Mockito.anyString())
 		).thenReturn(
 			Optional.empty()
 		);
@@ -157,7 +157,7 @@ public class ImageAdaptiveMediaRequestHandlerTest {
 	@Test
 	public void testPathInterpreterFailure() throws Exception {
 		Mockito.when(
-			_pathInterpreter.interpretPath(Mockito.any(String.class))
+			_pathInterpreter.interpretPath(Mockito.anyString())
 		).thenThrow(
 			AdaptiveMediaRuntimeException.class
 		);

@@ -60,7 +60,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 	@Test
 	public void testCleanUpFileVersion() throws Exception {
 		Mockito.when(
-			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
+			_imageProcessor.isMimeTypeSupported(Mockito.anyString())
 		).thenReturn(
 			true
 		);
@@ -83,7 +83,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 	@Test(expected = AdaptiveMediaRuntimeException.IOException.class)
 	public void testCleanUpIOException() {
 		Mockito.when(
-			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
+			_imageProcessor.isMimeTypeSupported(Mockito.anyString())
 		).thenReturn(
 			true
 		);
@@ -102,7 +102,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 	@Test
 	public void testCleanUpWhenNotSupported() {
 		Mockito.when(
-			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
+			_imageProcessor.isMimeTypeSupported(Mockito.anyString())
 		).thenReturn(
 			false
 		);
@@ -121,7 +121,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 		throws Exception {
 
 		Mockito.when(
-			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
+			_imageProcessor.isMimeTypeSupported(Mockito.anyString())
 		).thenReturn(
 			true
 		);
@@ -133,7 +133,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 
 		Mockito.when(
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				Mockito.any(long.class))
+				Mockito.anyLong())
 		).thenReturn(
 			Collections.singleton(configurationEntry)
 		);
@@ -155,9 +155,8 @@ public class ImageAdaptiveMediaProcessorImplTest {
 
 		Mockito.when(
 			_imageLocalService.addAdaptiveMediaImage(
-				Mockito.any(String.class), Mockito.any(Long.class),
-				Mockito.any(String.class), Mockito.any(Integer.class),
-				Mockito.any(Integer.class), Mockito.any(Integer.class))
+				Mockito.anyString(), Mockito.anyLong(), Mockito.anyString(),
+				Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt())
 		).thenThrow(
 			DuplicateAdaptiveMediaImageException.class
 		);
@@ -168,7 +167,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 	@Test
 	public void testProcessFileVersion() throws Exception {
 		Mockito.when(
-			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
+			_imageProcessor.isMimeTypeSupported(Mockito.anyString())
 		).thenReturn(
 			true
 		);
@@ -180,7 +179,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 
 		Mockito.when(
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				Mockito.any(long.class))
+				Mockito.anyLong())
 		).thenReturn(
 			Collections.singleton(configurationEntry)
 		);
@@ -219,14 +218,14 @@ public class ImageAdaptiveMediaProcessorImplTest {
 	@Test(expected = AdaptiveMediaRuntimeException.InvalidConfiguration.class)
 	public void testProcessInvalidConfigurationException() throws Exception {
 		Mockito.when(
-			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
+			_imageProcessor.isMimeTypeSupported(Mockito.anyString())
 		).thenReturn(
 			true
 		);
 
 		Mockito.when(
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				Mockito.any(long.class))
+				Mockito.anyLong())
 		).thenThrow(
 			AdaptiveMediaRuntimeException.InvalidConfiguration.class
 		);
@@ -237,7 +236,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 	@Test(expected = AdaptiveMediaRuntimeException.IOException.class)
 	public void testProcessIOExceptionInImageProcessor() throws Exception {
 		Mockito.when(
-			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
+			_imageProcessor.isMimeTypeSupported(Mockito.anyString())
 		).thenReturn(
 			true
 		);
@@ -249,7 +248,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 
 		Mockito.when(
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				Mockito.any(long.class))
+				Mockito.anyLong())
 		).thenReturn(
 			Collections.singleton(configurationEntry)
 		);
@@ -273,7 +272,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 	@Test(expected = AdaptiveMediaRuntimeException.IOException.class)
 	public void testProcessIOExceptionInStorage() throws Exception {
 		Mockito.when(
-			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
+			_imageProcessor.isMimeTypeSupported(Mockito.anyString())
 		).thenReturn(
 			true
 		);
@@ -285,7 +284,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 
 		Mockito.when(
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				Mockito.any(long.class))
+				Mockito.anyLong())
 		).thenReturn(
 			Collections.singleton(configurationEntry)
 		);
@@ -321,14 +320,14 @@ public class ImageAdaptiveMediaProcessorImplTest {
 	@Test
 	public void testProcessWhenNoConfigurationEntries() throws Exception {
 		Mockito.when(
-			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
+			_imageProcessor.isMimeTypeSupported(Mockito.anyString())
 		).thenReturn(
 			true
 		);
 
 		Mockito.when(
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				Mockito.any(long.class))
+				Mockito.anyLong())
 		).thenReturn(
 			Collections.emptyList()
 		);
@@ -351,16 +350,16 @@ public class ImageAdaptiveMediaProcessorImplTest {
 		Mockito.verify(
 			_imageLocalService, Mockito.never()
 		).addAdaptiveMediaImage(
-			Mockito.any(String.class), Mockito.any(Long.class),
-			Mockito.any(String.class), Mockito.any(Integer.class),
-			Mockito.any(Integer.class), Mockito.any(Integer.class)
+			Mockito.anyString(), Mockito.anyLong(), Mockito.anyString(),
+			Mockito.anyInt(), Mockito.any(Integer.class),
+			Mockito.any(Integer.class)
 		);
 	}
 
 	@Test
 	public void testProcessWhenNotSupported() throws Exception {
 		Mockito.when(
-			_imageProcessor.isMimeTypeSupported(Mockito.any(String.class))
+			_imageProcessor.isMimeTypeSupported(Mockito.anyString())
 		).thenReturn(
 			false
 		);
@@ -385,9 +384,9 @@ public class ImageAdaptiveMediaProcessorImplTest {
 		Mockito.verify(
 			_imageLocalService, Mockito.never()
 		).addAdaptiveMediaImage(
-			Mockito.any(String.class), Mockito.any(Long.class),
-			Mockito.any(String.class), Mockito.any(Integer.class),
-			Mockito.any(Integer.class), Mockito.any(Integer.class)
+			Mockito.anyString(), Mockito.anyLong(), Mockito.anyString(),
+			Mockito.anyInt(), Mockito.any(Integer.class),
+			Mockito.any(Integer.class)
 		);
 	}
 
