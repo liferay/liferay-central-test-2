@@ -34,6 +34,7 @@ import com.liferay.dynamic.data.mapping.service.DDMStructureLocalService;
 import com.liferay.dynamic.data.mapping.service.DDMTemplateLinkLocalService;
 import com.liferay.dynamic.data.mapping.service.DDMTemplateLocalService;
 import com.liferay.dynamic.data.mapping.storage.Fields;
+import com.liferay.dynamic.data.mapping.util.DDMXML;
 import com.liferay.expando.kernel.util.ExpandoBridgeUtil;
 import com.liferay.exportimport.content.processor.ExportImportContentProcessor;
 import com.liferay.exportimport.content.processor.ExportImportContentProcessorRegistryUtil;
@@ -8075,6 +8076,10 @@ public class JournalArticleLocalServiceImpl
 
 	@ServiceReference(type = DDMTemplateLocalService.class)
 	protected DDMTemplateLocalService ddmTemplateLocalService;
+
+	@Deprecated
+	@ServiceReference(type = DDMXML.class)
+	protected DDMXML ddmXML;
 
 	@ServiceReference(type = JournalConverter.class)
 	protected JournalConverter journalConverter;
