@@ -73,6 +73,7 @@ AUI.add(
 
 						instance._actionFactory = new Liferay.DDL.FormBuilderActionFactory(
 							{
+								bubbleTargets: [instance],
 								fields: instance.get('fields'),
 								getDataProviderParametersSettingsURL: instance.get('getDataProviderParametersSettingsURL'),
 								getDataProviders: instance.get('getDataProviders'),

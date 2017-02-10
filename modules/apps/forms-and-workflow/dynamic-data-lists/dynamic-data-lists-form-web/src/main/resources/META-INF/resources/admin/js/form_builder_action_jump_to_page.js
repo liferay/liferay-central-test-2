@@ -95,6 +95,7 @@ AUI.add(
 
 						instance._sourceField = new Liferay.DDM.Field.Select(
 							{
+								bubbleTargets: [instance],
 								fieldName: instance.get('index') + '-action',
 								label: Liferay.Language.get('the'),
 								options: instance.get('options'),
