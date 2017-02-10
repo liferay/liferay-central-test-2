@@ -61,7 +61,9 @@ public class PortletTrackerTest extends BasePortletContainerTestCase {
 	public void testPortletTrackerRegistrationUsingPortletClassName()
 		throws Exception {
 
-		_testPortletTrackerRegistration(_INTERNAL_CLASS_PORTLET_ID);
+		_testPortletTrackerRegistration(
+			"com_liferay_portal_osgi_web_portlet_container_test_" +
+				"PortletTrackerTest_InternalClassTestPortlet");
 	}
 
 	@Test
@@ -93,7 +95,7 @@ public class PortletTrackerTest extends BasePortletContainerTestCase {
 	}
 
 	@Test
-	public void testPortletTrackerRegistrationUsingSimplePortletName()
+	public void testPortletTrackerRegistrationUsingSimpleName()
 		throws Exception {
 
 		_testPortletTrackerRegistration("simplename", "simplename");
@@ -123,18 +125,18 @@ public class PortletTrackerTest extends BasePortletContainerTestCase {
 
 		Assert.assertEquals(200, response.getCode());
 
-		Assert.assertTrue(_internalClassPortlet.isCalledRender());
+		Assert.assertTrue(_internalClassTestPortlet.isCalledRender());
 
-		_internalClassPortlet.reset();
+		_internalClassTestPortlet.reset();
 	}
 
 	private void _testPortletTrackerRegistration(String expectedPortletId)
 		throws Exception {
 
-		// make PortletTracker register portlet using class name
+		// Register portlet using class name
 
 		registerService(
-			javax.portlet.Portlet.class, _internalClassPortlet,
+			javax.portlet.Portlet.class, _internalClassTestPortlet,
 			new HashMapDictionary<String, Object>());
 
 		_testPortletIsAvailable(expectedPortletId);
@@ -144,23 +146,19 @@ public class PortletTrackerTest extends BasePortletContainerTestCase {
 			String givenPortletId, String expectedPortletId)
 		throws Exception {
 
-		// make PortletTracker register portlet using actualPortletId
+		// Register portlet using actual portlet ID
 
 		setUpPortlet(
-			_internalClassPortlet, new HashMapDictionary<String, Object>(),
+			_internalClassTestPortlet, new HashMapDictionary<String, Object>(),
 			givenPortletId, false);
 
 		_testPortletIsAvailable(expectedPortletId);
 	}
 
-	private static final String _INTERNAL_CLASS_PORTLET_ID =
-		"com_liferay_portal_osgi_web_portlet_container_test_" +
-			"PortletTrackerTest_InternalClassPortlet";
+	private final InternalClassTestPortlet _internalClassTestPortlet =
+		new InternalClassTestPortlet();
 
-	private final InternalClassPortlet _internalClassPortlet =
-		new InternalClassPortlet();
-
-	private class InternalClassPortlet extends TestPortlet {
+	private class InternalClassTestPortlet extends TestPortlet {
 
 		@Override
 		public void render(
@@ -171,7 +169,10 @@ public class PortletTrackerTest extends BasePortletContainerTestCase {
 
 			PrintWriter printWriter = renderResponse.getWriter();
 
-			printWriter.write(getClass().getName());
+			Class<?> clazz = getClass();
+
+			printWriter.write(clazz.getName());
+
 			printWriter.write(getPortletName());
 		}
 
