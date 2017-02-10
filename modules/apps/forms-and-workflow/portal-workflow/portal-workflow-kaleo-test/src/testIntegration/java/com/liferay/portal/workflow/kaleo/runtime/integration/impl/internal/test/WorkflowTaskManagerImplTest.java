@@ -21,23 +21,22 @@ import com.liferay.dynamic.data.lists.model.DDLRecord;
 import com.liferay.dynamic.data.lists.model.DDLRecordSet;
 import com.liferay.dynamic.data.lists.model.DDLRecordVersion;
 import com.liferay.dynamic.data.lists.service.DDLRecordLocalServiceUtil;
+import com.liferay.dynamic.data.mapping.model.DDMStructure;
+import com.liferay.dynamic.data.mapping.test.util.DDMStructureTestUtil;
 import com.liferay.journal.model.JournalArticle;
+import com.liferay.journal.model.JournalArticleConstants;
 import com.liferay.journal.model.JournalFolder;
 import com.liferay.journal.model.JournalFolderConstants;
 import com.liferay.journal.service.JournalArticleLocalServiceUtil;
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.security.permission.PermissionChecker;
-import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.Sync;
 import com.liferay.portal.kernel.test.rule.SynchronousDestinationTestRule;
+import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowTask;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
@@ -58,169 +57,149 @@ public class WorkflowTaskManagerImplTest
 			new LiferayIntegrationTestRule(),
 			SynchronousDestinationTestRule.INSTANCE);
 
-	@Before
-	@Override
-	public void setUp() throws Exception {
-		super.setUp();
-
-		_originalPermissionChecker =
-			PermissionThreadLocal.getPermissionChecker();
-	}
-
-	@After
-	public void tearDown() throws PortalException {
-		PermissionThreadLocal.setPermissionChecker(_originalPermissionChecker);
-	}
-
 	@Test
 	public void testApproveJournalArticleAsAdmin() throws Exception {
-		activeSingleApproverWorkflow(JournalFolder.class.getName(), 0, -1);
-
-		addDDMStructure();
+		activeSingleApproverWorkflow(
+			JournalFolder.class.getName(),
+			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+			JournalArticleConstants.DDM_STRUCTURE_ID_ALL);
 
 		JournalArticle article = addJournalArticle(
 			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+
+		Assert.assertEquals(
+			WorkflowConstants.STATUS_PENDING, article.getStatus());
 
 		checkUserNotificationEventsByUsers(
 			adminUser, portalContentReviewerUser, siteAdminUser);
 
 		assignWorkflowTaskToUser(adminUser, adminUser);
 
-		Assert.assertEquals(
-			WorkflowConstants.STATUS_PENDING, article.getStatus());
+		completeWorkflowTask(adminUser, Constants.APPROVE);
 
-		completeWorkflowTask(adminUser, "approve");
+		checkWorkflowInstance(JournalArticle.class.getName(), article.getId());
 
-		long articleId = article.getId();
-
-		article = JournalArticleLocalServiceUtil.getArticle(articleId);
-
-		checkWorkflowInstance(JournalArticle.class.getName(), articleId);
+		article = JournalArticleLocalServiceUtil.getArticle(article.getId());
 
 		Assert.assertEquals(
 			WorkflowConstants.STATUS_APPROVED, article.getStatus());
 
 		deactiveWorkflow(
 			JournalFolder.class.getName(),
-			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+			JournalArticleConstants.DDM_STRUCTURE_ID_ALL);
 	}
 
 	@Test
 	public void testApproveJournalArticleInFolderInheritedWorkflow()
 		throws Exception {
 
-		activeSingleApproverWorkflow(JournalFolder.class.getName(), 0, -1);
+		activeSingleApproverWorkflow(
+			JournalFolder.class.getName(),
+			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+			JournalArticleConstants.DDM_STRUCTURE_ID_ALL);
 
 		JournalFolder folder = addJournalFolder();
 
-		long folderId = folder.getFolderId();
+		JournalArticle article = addJournalArticle(folder.getFolderId());
 
-		addDDMStructure();
-
-		JournalArticle article = addJournalArticle(folderId);
+		Assert.assertEquals(
+			WorkflowConstants.STATUS_PENDING, article.getStatus());
 
 		checkUserNotificationEventsByUsers(
 			adminUser, portalContentReviewerUser, siteAdminUser);
 
 		assignWorkflowTaskToUser(adminUser, adminUser);
 
-		Assert.assertEquals(
-			WorkflowConstants.STATUS_PENDING, article.getStatus());
+		completeWorkflowTask(adminUser, Constants.APPROVE);
 
-		completeWorkflowTask(adminUser, "approve");
+		checkWorkflowInstance(JournalArticle.class.getName(), article.getId());
 
-		long articleId = article.getId();
-
-		article = JournalArticleLocalServiceUtil.getArticle(articleId);
-
-		checkWorkflowInstance(JournalArticle.class.getName(), articleId);
+		article = JournalArticleLocalServiceUtil.getArticle(article.getId());
 
 		Assert.assertEquals(
 			WorkflowConstants.STATUS_APPROVED, article.getStatus());
 
-		deactiveWorkflow(JournalFolder.class.getName(), folderId);
+		deactiveWorkflow(
+			JournalFolder.class.getName(),
+			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+			JournalArticleConstants.DDM_STRUCTURE_ID_ALL);
 	}
 
 	@Test
 	public void testApproveJournalArticleInFolderStructureSpecificWorkflow()
 		throws Exception {
 
-		JournalFolder folder = addJournalFolder();
+		DDMStructure ddmStructure = DDMStructureTestUtil.addStructure(
+			group.getGroupId(), JournalArticle.class.getName());
 
-		addDDMStructure();
-
-		long folderId = folder.getFolderId();
-
-		updateJournalFolder(
-			folderId, structurePK,
+		JournalFolder folder = addJournalFolder(
+			ddmStructure.getStructureId(),
 			JournalFolderConstants.
 				RESTRICTION_TYPE_DDM_STRUCTURES_AND_WORKFLOW);
 
 		activeSingleApproverWorkflow(
-			JournalFolder.class.getName(), folderId, structurePK);
+			JournalFolder.class.getName(), folder.getFolderId(),
+			ddmStructure.getStructureId());
 
-		JournalArticle article = addJournalArticle(folderId);
+		JournalArticle article = addJournalArticle(
+			folder.getFolderId(), ddmStructure);
+
+		Assert.assertEquals(
+			WorkflowConstants.STATUS_PENDING, article.getStatus());
 
 		checkUserNotificationEventsByUsers(
 			adminUser, portalContentReviewerUser, siteAdminUser);
 
 		assignWorkflowTaskToUser(adminUser, adminUser);
 
-		Assert.assertEquals(
-			WorkflowConstants.STATUS_PENDING, article.getStatus());
+		completeWorkflowTask(adminUser, Constants.APPROVE);
 
-		completeWorkflowTask(adminUser, "approve");
+		checkWorkflowInstance(JournalArticle.class.getName(), article.getId());
 
-		long articleId = article.getId();
-
-		article = JournalArticleLocalServiceUtil.getArticle(articleId);
-
-		checkWorkflowInstance(JournalArticle.class.getName(), articleId);
+		article = JournalArticleLocalServiceUtil.getArticle(article.getId());
 
 		Assert.assertEquals(
 			WorkflowConstants.STATUS_APPROVED, article.getStatus());
 
-		deactiveWorkflow(JournalFolder.class.getName(), folderId);
+		deactiveWorkflow(
+			JournalFolder.class.getName(), folder.getFolderId(),
+			ddmStructure.getStructureId());
 	}
 
 	@Test
 	public void testApproveJournalArticleUsingFolderSpecificWorkflow()
 		throws Exception {
 
-		JournalFolder folder = addJournalFolder();
-
-		long folderId = folder.getFolderId();
-
-		updateJournalFolder(
-			folderId, 0, JournalFolderConstants.RESTRICTION_TYPE_WORKFLOW);
+		JournalFolder folder = addJournalFolder(
+			0, JournalFolderConstants.RESTRICTION_TYPE_WORKFLOW);
 
 		activeSingleApproverWorkflow(
-			JournalFolder.class.getName(), folderId, -1);
+			JournalFolder.class.getName(), folder.getFolderId(),
+			JournalArticleConstants.DDM_STRUCTURE_ID_ALL);
 
-		addDDMStructure();
+		JournalArticle article = addJournalArticle(folder.getFolderId());
 
-		JournalArticle article = addJournalArticle(folderId);
+		Assert.assertEquals(
+			WorkflowConstants.STATUS_PENDING, article.getStatus());
 
 		checkUserNotificationEventsByUsers(
 			adminUser, portalContentReviewerUser, siteAdminUser);
 
 		assignWorkflowTaskToUser(adminUser, adminUser);
 
-		Assert.assertEquals(
-			WorkflowConstants.STATUS_PENDING, article.getStatus());
+		completeWorkflowTask(adminUser, Constants.APPROVE);
 
-		completeWorkflowTask(adminUser, "approve");
+		checkWorkflowInstance(JournalArticle.class.getName(), article.getId());
 
-		long articleId = article.getId();
-
-		article = JournalArticleLocalServiceUtil.getArticle(articleId);
-
-		checkWorkflowInstance(JournalArticle.class.getName(), articleId);
+		article = JournalArticleLocalServiceUtil.getArticle(article.getId());
 
 		Assert.assertEquals(
 			WorkflowConstants.STATUS_APPROVED, article.getStatus());
 
-		deactiveWorkflow(JournalFolder.class.getName(), folderId);
+		deactiveWorkflow(
+			JournalFolder.class.getName(), folder.getFolderId(),
+			JournalArticleConstants.DDM_STRUCTURE_ID_ALL);
 	}
 
 	@Test
@@ -234,7 +213,7 @@ public class WorkflowTaskManagerImplTest
 
 		assignWorkflowTaskToUser(siteAdminUser, siteAdminUser);
 
-		completeWorkflowTask(siteAdminUser, "approve");
+		completeWorkflowTask(siteAdminUser, Constants.APPROVE);
 
 		blogsEntry = BlogsEntryLocalServiceUtil.getBlogsEntry(
 			blogsEntry.getEntryId());
@@ -242,7 +221,7 @@ public class WorkflowTaskManagerImplTest
 		Assert.assertEquals(
 			WorkflowConstants.STATUS_APPROVED, blogsEntry.getStatus());
 
-		deactiveWorkflow(BlogsEntry.class.getName(), 0);
+		deactiveWorkflow(BlogsEntry.class.getName(), 0, 0);
 	}
 
 	@Test
@@ -259,25 +238,23 @@ public class WorkflowTaskManagerImplTest
 
 		assignWorkflowTaskToUser(adminUser, adminUser);
 
-		record = DDLRecordLocalServiceUtil.getRecord(record.getRecordId());
-
 		Assert.assertEquals(
 			WorkflowConstants.STATUS_PENDING, record.getStatus());
 
-		completeWorkflowTask(adminUser, "approve");
-
-		record = DDLRecordLocalServiceUtil.getRecord(record.getRecordId());
+		completeWorkflowTask(adminUser, Constants.APPROVE);
 
 		DDLRecordVersion recordVersion = record.getRecordVersion();
 
 		checkWorkflowInstance(
 			DDLRecord.class.getName(), recordVersion.getRecordVersionId());
 
+		record = DDLRecordLocalServiceUtil.getRecord(record.getRecordId());
+
 		Assert.assertEquals(
 			WorkflowConstants.STATUS_APPROVED, record.getStatus());
 
 		deactiveWorkflow(
-			DDLRecordSet.class.getName(), recordSet.getRecordSetId());
+			DDLRecordSet.class.getName(), recordSet.getRecordSetId(), 0);
 	}
 
 	@Test
@@ -299,7 +276,7 @@ public class WorkflowTaskManagerImplTest
 
 		checkUserNotificationEventsByUsers(portalContentReviewerUser);
 
-		completeWorkflowTask(portalContentReviewerUser, "approve");
+		completeWorkflowTask(portalContentReviewerUser, Constants.APPROVE);
 
 		blogsEntry = BlogsEntryLocalServiceUtil.getBlogsEntry(
 			blogsEntry.getEntryId());
@@ -307,7 +284,7 @@ public class WorkflowTaskManagerImplTest
 		Assert.assertEquals(
 			WorkflowConstants.STATUS_APPROVED, blogsEntry.getStatus());
 
-		deactiveWorkflow(BlogsEntry.class.getName(), 0);
+		deactiveWorkflow(BlogsEntry.class.getName(), 0, 0);
 	}
 
 	@Test
@@ -323,7 +300,7 @@ public class WorkflowTaskManagerImplTest
 
 		checkUserNotificationEventsByUsers(portalContentReviewerUser);
 
-		completeWorkflowTask(portalContentReviewerUser, "reject");
+		completeWorkflowTask(portalContentReviewerUser, Constants.REJECT);
 
 		checkUserNotificationEventsByUsers(adminUser);
 
@@ -338,9 +315,7 @@ public class WorkflowTaskManagerImplTest
 		Assert.assertEquals(
 			adminUser.getUserId(), workflowTask.getAssigneeUserId());
 
-		deactiveWorkflow(BlogsEntry.class.getName(), 0);
+		deactiveWorkflow(BlogsEntry.class.getName(), 0, 0);
 	}
-
-	private PermissionChecker _originalPermissionChecker;
 
 }
