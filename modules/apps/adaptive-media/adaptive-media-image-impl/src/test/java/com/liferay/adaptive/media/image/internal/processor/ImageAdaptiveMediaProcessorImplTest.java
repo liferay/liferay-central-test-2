@@ -32,6 +32,7 @@ import java.awt.image.RenderedImage;
 import java.io.InputStream;
 
 import java.util.Collections;
+import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -137,6 +138,13 @@ public class ImageAdaptiveMediaProcessorImplTest {
 			Collections.singleton(configurationEntry)
 		);
 
+		Mockito.when(
+			_configurationHelper.getImageAdaptiveMediaConfigurationEntry(
+				Mockito.anyLong(), Mockito.anyString())
+		).thenReturn(
+			Optional.of(configurationEntry)
+		);
+
 		RenderedImage renderedImage = Mockito.mock(RenderedImage.class);
 
 		Mockito.when(
@@ -175,6 +183,13 @@ public class ImageAdaptiveMediaProcessorImplTest {
 				Mockito.any(long.class))
 		).thenReturn(
 			Collections.singleton(configurationEntry)
+		);
+
+		Mockito.when(
+			_configurationHelper.getImageAdaptiveMediaConfigurationEntry(
+				Mockito.anyLong(), Mockito.anyString())
+		).thenReturn(
+			Optional.of(configurationEntry)
 		);
 
 		RenderedImage renderedImage = Mockito.mock(RenderedImage.class);
@@ -240,6 +255,13 @@ public class ImageAdaptiveMediaProcessorImplTest {
 		);
 
 		Mockito.when(
+			_configurationHelper.getImageAdaptiveMediaConfigurationEntry(
+				Mockito.anyLong(), Mockito.anyString())
+		).thenReturn(
+			Optional.of(configurationEntry)
+		);
+
+		Mockito.when(
 			_imageProcessor.scaleImage(_fileVersion, configurationEntry)
 		).thenThrow(
 			AdaptiveMediaRuntimeException.IOException.class
@@ -266,6 +288,13 @@ public class ImageAdaptiveMediaProcessorImplTest {
 				Mockito.any(long.class))
 		).thenReturn(
 			Collections.singleton(configurationEntry)
+		);
+
+		Mockito.when(
+			_configurationHelper.getImageAdaptiveMediaConfigurationEntry(
+				Mockito.anyLong(), Mockito.anyString())
+		).thenReturn(
+			Optional.of(configurationEntry)
 		);
 
 		RenderedImage renderedImage = Mockito.mock(RenderedImage.class);
