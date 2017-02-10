@@ -50,7 +50,9 @@ public class AdaptiveMediaDLItemSelectorViewReturnTypeProviderTest
 				populateSupportedItemSelectorReturnTypes(
 					supportedItemSelectorReturnTypes);
 
-		Assert.assertEquals(1, itemSelectorReturnTypes.size());
+		Assert.assertEquals(
+			itemSelectorReturnTypes.toString(), 1,
+			itemSelectorReturnTypes.size());
 
 		ItemSelectorReturnType itemSelectorReturnType =
 			itemSelectorReturnTypes.get(0);
@@ -80,7 +82,9 @@ public class AdaptiveMediaDLItemSelectorViewReturnTypeProviderTest
 				populateSupportedItemSelectorReturnTypes(
 					supportedItemSelectorReturnTypes);
 
-		Assert.assertEquals(3, itemSelectorReturnTypes.size());
+		Assert.assertEquals(
+			itemSelectorReturnTypes.toString(), 3,
+			itemSelectorReturnTypes.size());
 
 		Assert.assertTrue(
 			itemSelectorReturnTypes.get(0) instanceof

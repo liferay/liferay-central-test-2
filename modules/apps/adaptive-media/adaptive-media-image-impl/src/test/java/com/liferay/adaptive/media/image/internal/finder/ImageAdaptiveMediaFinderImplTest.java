@@ -202,7 +202,8 @@ public class ImageAdaptiveMediaFinderImplTest {
 		List<AdaptiveMedia<ImageAdaptiveMediaProcessor>> adaptiveMediaList =
 			stream.collect(Collectors.toList());
 
-		Assert.assertEquals(1, adaptiveMediaList.size());
+		Assert.assertEquals(
+			adaptiveMediaList.toString(), 1, adaptiveMediaList.size());
 
 		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia =
 			adaptiveMediaList.get(0);
@@ -298,7 +299,8 @@ public class ImageAdaptiveMediaFinderImplTest {
 		List<AdaptiveMedia<ImageAdaptiveMediaProcessor>> adaptiveMediaList =
 			stream.collect(Collectors.toList());
 
-		Assert.assertEquals(3, adaptiveMediaList.size());
+		Assert.assertEquals(
+			adaptiveMediaList.toString(), 3, adaptiveMediaList.size());
 
 		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia1 =
 			adaptiveMediaList.get(0);
@@ -405,7 +407,8 @@ public class ImageAdaptiveMediaFinderImplTest {
 		List<AdaptiveMedia<ImageAdaptiveMediaProcessor>> adaptiveMediaList =
 			stream.collect(Collectors.toList());
 
-		Assert.assertEquals(3, adaptiveMediaList.size());
+		Assert.assertEquals(
+			adaptiveMediaList.toString(), 3, adaptiveMediaList.size());
 
 		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia1 =
 			adaptiveMediaList.get(0);
@@ -523,7 +526,8 @@ public class ImageAdaptiveMediaFinderImplTest {
 		List<AdaptiveMedia<ImageAdaptiveMediaProcessor>> adaptiveMediaList =
 			stream.collect(Collectors.toList());
 
-		Assert.assertEquals(1, adaptiveMediaList.size());
+		Assert.assertEquals(
+			adaptiveMediaList.toString(), 1, adaptiveMediaList.size());
 
 		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia =
 			adaptiveMediaList.get(0);
@@ -580,7 +584,8 @@ public class ImageAdaptiveMediaFinderImplTest {
 		List<AdaptiveMedia<ImageAdaptiveMediaProcessor>> adaptiveMediaList =
 			stream.collect(Collectors.toList());
 
-		Assert.assertEquals(1, adaptiveMediaList.size());
+		Assert.assertEquals(
+			adaptiveMediaList.toString(), 1, adaptiveMediaList.size());
 
 		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia =
 			adaptiveMediaList.get(0);
@@ -909,7 +914,8 @@ public class ImageAdaptiveMediaFinderImplTest {
 		List<AdaptiveMedia<ImageAdaptiveMediaProcessor>> adaptiveMedias =
 			stream.collect(Collectors.toList());
 
-		Assert.assertEquals(1, adaptiveMedias.size());
+		Assert.assertEquals(
+			adaptiveMedias.toString(), 1, adaptiveMedias.size());
 
 		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia0 =
 			adaptiveMedias.get(0);
@@ -1019,7 +1025,8 @@ public class ImageAdaptiveMediaFinderImplTest {
 
 		Object[] adaptiveMediaArray = stream.toArray();
 
-		Assert.assertEquals(0, adaptiveMediaArray.length);
+		Assert.assertEquals(
+			Arrays.toString(adaptiveMediaArray), 0, adaptiveMediaArray.length);
 	}
 
 	@Test(expected = IllegalArgumentException.class)

@@ -211,7 +211,9 @@ public class AdaptiveMediaBlogsEditorConfigContributorTest
 		List<ItemSelectorReturnType> desiredItemSelectorReturnTypes =
 			blogsItemSelectorCriterion.getDesiredItemSelectorReturnTypes();
 
-		Assert.assertEquals(2, desiredItemSelectorReturnTypes.size());
+		Assert.assertEquals(
+			desiredItemSelectorReturnTypes.toString(), 2,
+			desiredItemSelectorReturnTypes.size());
 		Assert.assertTrue(
 			desiredItemSelectorReturnTypes.get(0) instanceof
 				ImageAdaptiveMediaURLItemSelectorReturnType);

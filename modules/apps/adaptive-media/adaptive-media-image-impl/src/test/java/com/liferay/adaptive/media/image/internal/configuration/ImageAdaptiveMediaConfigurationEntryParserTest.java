@@ -133,7 +133,7 @@ public class ImageAdaptiveMediaConfigurationEntryParserTest {
 
 		Assert.assertEquals("100", properties.get("max-height"));
 		Assert.assertEquals("200", properties.get("max-width"));
-		Assert.assertEquals(2, properties.size());
+		Assert.assertEquals(properties.toString(), 2, properties.size());
 	}
 
 	private final ImageAdaptiveMediaConfigurationEntryParser

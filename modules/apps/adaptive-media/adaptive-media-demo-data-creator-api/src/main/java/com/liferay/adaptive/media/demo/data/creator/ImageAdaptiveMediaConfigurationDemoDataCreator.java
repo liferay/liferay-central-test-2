@@ -41,11 +41,11 @@ public interface ImageAdaptiveMediaConfigurationDemoDataCreator {
 		throws IOException;
 
 	/**
-	  * Creates a collection of {@link ImageAdaptiveMediaConfigurationEntry} 
+	  * Creates a collection of {@link ImageAdaptiveMediaConfigurationEntry}
 	  * configurations based on the
 	  * {@link DemoImageAdaptiveMediaConfigurationVariant} enum
 	  *
-	  * @param companyId ID of the company where the configurations will be 
+	  * @param companyId ID of the company where the configurations will be
 	  * created
 	  * @return a list of the configurations
 	  */
