@@ -2969,7 +2969,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  om.liferay.portal.kernel.webdav,javax.servlet.http",com.liferay.porta
  l.kernel.webserver;version="1.0.0",com.liferay.portal.kernel.words;ve
  rsion="1.0.0";uses:="com.liferay.portal.kernel.jazzy",com.liferay.por
- tal.kernel.workflow;version="7.0.0";uses:="com.liferay.asset.kernel.m
+ tal.kernel.workflow;version="7.1.0";uses:="com.liferay.asset.kernel.m
  odel,com.liferay.portal.kernel.exception,com.liferay.portal.kernel.me
  ssaging.proxy,com.liferay.portal.kernel.model,com.liferay.portal.kern
  el.portlet,com.liferay.portal.kernel.service,com.liferay.portal.kerne
