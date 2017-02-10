@@ -245,9 +245,24 @@ AUI.add(
 						for (var i = indexes.length - 1; i >= 0; i--) {
 							var currentIndex = indexes[i];
 
-							var action = instance._actions[currentIndex + '-action'];
+							var action = {
+								action: instance._actions[currentIndex + '-target'].getValue()
+							};
 
-							actions.push(action.getValue());
+							var target;
+
+							var targetField = instance._actions[currentIndex + '-action'];
+
+							if (targetField) {
+								target = targetField.getValue();
+							}
+
+							actions.push(
+								A.merge(
+									target,
+									action
+								)
+							);
 						}
 
 						return actions;

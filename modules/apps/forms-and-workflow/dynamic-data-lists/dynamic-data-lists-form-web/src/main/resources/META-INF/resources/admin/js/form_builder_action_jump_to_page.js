@@ -39,7 +39,6 @@ AUI.add(
 						var instance = this;
 
 						return {
-							action: 'jump-to-page',
 							source: instance._sourceField.getValue(),
 							target: instance._targetField.getValue()
 						};
