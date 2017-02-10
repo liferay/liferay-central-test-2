@@ -81,6 +81,8 @@ AUI.add(
 								portletNamespace: instance.get('portletNamespace')
 							}
 						);
+
+						instance._validator = new Liferay.DDL.FormBuilderRuleValidator();
 					},
 
 					bindUI: function() {
@@ -91,13 +93,13 @@ AUI.add(
 						boundingBox.delegate('click', A.bind(instance._handleAddActionClick, instance), '.form-builder-rule-add-action');
 						boundingBox.delegate('click', A.bind(instance._handleCancelClick, instance), '.form-builder-rule-settings-cancel');
 						boundingBox.delegate('click', A.bind(instance._handleDeleteActionClick, instance), '.action-card-delete');
-
 						boundingBox.delegate('click', A.bind(instance._handleSaveClick, instance), '.form-builder-rule-settings-save');
 
 						instance.after(instance._toggleShowRemoveButton, instance, '_addAction');
 
 						instance.after('fieldsChange', A.bind(instance._afterFieldsChange, instance));
 						instance.after('pagesChange', A.bind(instance._afterPagesChange, instance));
+						instance.after('*:valueChange', A.bind(instance._afterValueChange, instance));
 
 						instance.on('*:valueChange', A.bind(instance._handleActionChange, instance));
 					},
@@ -123,6 +125,8 @@ AUI.add(
 
 						instance._renderConditions(rule.conditions);
 						instance._renderActions(rule.actions);
+
+						instance._validateRule();
 
 						return FormBuilderRenderRule.superclass.render.apply(instance, []);
 					},
@@ -305,7 +309,8 @@ AUI.add(
 								logicalOperator: instance.get('logicOperator'),
 								plusIcon: Liferay.Util.getLexiconIconTpl('plus', 'icon-monospaced'),
 								showLabel: false,
-								strings: instance.get('strings')
+								strings: instance.get('strings'),
+								invalid: !instance._isValidRule(rule)
 							}
 						);
 					},
@@ -316,10 +321,10 @@ AUI.add(
 						var field = event.target;
 
 						var fieldName = field.get('fieldName');
+ 
+						if (fieldName && fieldName.match('-target')) {
+							var index = fieldName.split('-')[0];
 
-						var index = fieldName.split('-')[0];
-
-						if (fieldName.match('-target')) {
 							instance._createTargetSelect(index, event.newVal[0]);
 						}
 					},
@@ -426,6 +431,41 @@ AUI.add(
 						conditionList.toggleClass(CSS_CAN_REMOVE_ITEM, conditionItems.size() > 2);
 
 						actionList.toggleClass(CSS_CAN_REMOVE_ITEM, actionItems.size() > 2);
+					},
+
+					_validateRule: function() {
+						var instance = this;
+
+						var contentBox = instance.get('contentBox');
+
+						var saveButton = contentBox.one('.form-builder-rule-settings-save');
+
+						var rule = {
+							actions: instance._getActions(),
+							condition: instance._getConditions(),
+							'logical-operator': instance.get('logicOperator')
+						};
+
+						if (instance._isValidRule(rule)) {
+							saveButton.removeAttribute('disabled');
+						}
+						else {
+							saveButton.setAttribute('disabled', '');
+						}
+					},
+
+					_afterValueChange: function() {
+						var instance = this;
+
+						instance._validateRule();
+					},
+
+					_isValidRule: function(rule) {
+						var instance = this;
+
+						var validator = instance._validator;
+
+						return validator.isValidRule(rule);
 					}
 				}
 			}
