@@ -40,7 +40,8 @@ public class MBMessageBBCodeFormatUploadHandlerTest {
 
 	@Before
 	public void setUp() {
-		_handler.setPortletFileRepository(_portletFileRepository);
+		_mbMessageBBCodeFormatUploadHandler.setPortletFileRepository(
+			_portletFileRepository);
 	}
 
 	@Test
@@ -65,8 +66,9 @@ public class MBMessageBBCodeFormatUploadHandlerTest {
 		fileEntryReferences.add(
 			new MBAttachmentFileEntryReference(tempFileId, fileEntry));
 
-		String finalContent = _handler.replaceImageReferences(
-			originalContent, fileEntryReferences);
+		String finalContent =
+			_mbMessageBBCodeFormatUploadHandler.replaceImageReferences(
+				originalContent, fileEntryReferences);
 
 		Assert.assertEquals(originalContent, finalContent);
 	}
@@ -96,8 +98,9 @@ public class MBMessageBBCodeFormatUploadHandlerTest {
 		fileEntryReferences.add(
 			new MBAttachmentFileEntryReference(tempFileId, fileEntry));
 
-		String finalContent = _handler.replaceImageReferences(
-			originalContent, fileEntryReferences);
+		String finalContent =
+			_mbMessageBBCodeFormatUploadHandler.replaceImageReferences(
+				originalContent, fileEntryReferences);
 
 		Assert.assertEquals("[img]" + finalURL + "[/img]", finalContent);
 	}
@@ -135,14 +138,16 @@ public class MBMessageBBCodeFormatUploadHandlerTest {
 			expectedContent.append("[img]" + finalURL + "[/img]");
 		}
 
-		String finalContent = _handler.replaceImageReferences(
-			originalContent.toString(), fileEntryReferences);
+		String finalContent =
+			_mbMessageBBCodeFormatUploadHandler.replaceImageReferences(
+				originalContent.toString(), fileEntryReferences);
 
 		Assert.assertEquals(expectedContent.toString(), finalContent);
 	}
 
-	private final MBMessageBBCodeFormatUploadHandler _handler =
-		new MBMessageBBCodeFormatUploadHandler();
+	private final MBMessageBBCodeFormatUploadHandler
+		_mbMessageBBCodeFormatUploadHandler =
+			new MBMessageBBCodeFormatUploadHandler();
 
 	@Mock
 	private PortletFileRepository _portletFileRepository;

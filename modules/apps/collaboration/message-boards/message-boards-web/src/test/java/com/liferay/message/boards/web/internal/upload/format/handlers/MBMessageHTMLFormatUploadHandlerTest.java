@@ -40,7 +40,8 @@ public class MBMessageHTMLFormatUploadHandlerTest {
 
 	@Before
 	public void setUp() {
-		_handler.setPortletFileRepository(_portletFileRepository);
+		_mbMessageHTMLFormatUploadHandler.setPortletFileRepository(
+			_portletFileRepository);
 	}
 
 	@Test
@@ -65,8 +66,9 @@ public class MBMessageHTMLFormatUploadHandlerTest {
 		fileEntryReferences.add(
 			new MBAttachmentFileEntryReference(tempFileId, fileEntry));
 
-		String finalContent = _handler.replaceImageReferences(
-			originalContent, fileEntryReferences);
+		String finalContent =
+			_mbMessageHTMLFormatUploadHandler.replaceImageReferences(
+				originalContent, fileEntryReferences);
 
 		Assert.assertEquals(originalContent, finalContent);
 	}
@@ -96,8 +98,9 @@ public class MBMessageHTMLFormatUploadHandlerTest {
 		fileEntryReferences.add(
 			new MBAttachmentFileEntryReference(tempFileId, fileEntry));
 
-		String finalContent = _handler.replaceImageReferences(
-			originalContent, fileEntryReferences);
+		String finalContent =
+			_mbMessageHTMLFormatUploadHandler.replaceImageReferences(
+				originalContent, fileEntryReferences);
 
 		Assert.assertEquals("<img src=\"" + finalURL + "\" />", finalContent);
 	}
@@ -135,14 +138,16 @@ public class MBMessageHTMLFormatUploadHandlerTest {
 			expectedContent.append("<img src=\"" + finalURL + "\" />");
 		}
 
-		String finalContent = _handler.replaceImageReferences(
-			originalContent.toString(), fileEntryReferences);
+		String finalContent =
+			_mbMessageHTMLFormatUploadHandler.replaceImageReferences(
+				originalContent.toString(), fileEntryReferences);
 
 		Assert.assertEquals(expectedContent.toString(), finalContent);
 	}
 
-	private final MBMessageHTMLFormatUploadHandler _handler =
-		new MBMessageHTMLFormatUploadHandler();
+	private final MBMessageHTMLFormatUploadHandler
+		_mbMessageHTMLFormatUploadHandler =
+			new MBMessageHTMLFormatUploadHandler();
 
 	@Mock
 	private PortletFileRepository _portletFileRepository;
