@@ -4343,6 +4343,7 @@ This change was made as part of the modularization efforts to ease portal
 configuration changes.
 
 ---------------------------------------
+
 ### Deprecated the aui:tool Tag with No Direct Replacement
 - **Date:** 2017-Feb-02
 - **JIRA Ticket:** LPS-70422
