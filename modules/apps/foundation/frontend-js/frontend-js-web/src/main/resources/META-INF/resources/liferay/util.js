@@ -1158,6 +1158,8 @@
 				Util.submitForm(form);
 
 				form.attr('target', '');
+
+				Util._submitLocked = null;
 			}
 		},
 
