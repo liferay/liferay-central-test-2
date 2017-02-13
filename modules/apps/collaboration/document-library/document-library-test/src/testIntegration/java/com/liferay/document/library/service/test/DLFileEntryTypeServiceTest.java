@@ -162,7 +162,7 @@ public class DLFileEntryTypeServiceTest {
 	}
 
 	@Test
-	public void testAddFileEntryTypeWithNonEmptyDDMForm() throws Exception {
+	public void testAddFileEntryTypeWithNonemptyDDMForm() throws Exception {
 		ServiceContext serviceContext = new ServiceContext();
 
 		byte[] testFileBytes = FileUtil.getBytes(
