@@ -60,7 +60,7 @@ public class SoyJavaScriptRenderer {
 		}
 		catch (Exception e) {
 			if (_log.isDebugEnabled()) {
-				_log.debug("Unable to read template.");
+				_log.debug("Unable to read template");
 			}
 		}
 
