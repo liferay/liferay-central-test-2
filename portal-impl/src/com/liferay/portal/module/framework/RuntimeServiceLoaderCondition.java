@@ -46,7 +46,7 @@ public class RuntimeServiceLoaderCondition implements ServiceLoaderCondition {
 
 		try {
 			moduleFrameworkBaseDirName = URLEncoder.encode(
-				moduleFrameworkBaseDirName, "UTF-8");
+				moduleFrameworkBaseDirName, StringPool.UTF8);
 		}
 		catch (UnsupportedEncodingException uee) {
 			return false;
