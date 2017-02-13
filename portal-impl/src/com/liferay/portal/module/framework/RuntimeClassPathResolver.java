@@ -56,7 +56,8 @@ public class RuntimeClassPathResolver implements ClassPathResolver {
 				path = StringPool.SLASH + path;
 			}
 
-			urls[i] = new URL("file", null, URLEncoder.encode(path, "UTF-8"));
+			urls[i] = new URL(
+				"file", null, URLEncoder.encode(path, StringPool.UTF8));
 		}
 
 		return urls;
