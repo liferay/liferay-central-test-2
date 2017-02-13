@@ -2724,7 +2724,7 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		QueryDefinition<JournalArticle> approvedQueryDefinition =
-			new QueryDefinition<JournalArticle>(
+			new QueryDefinition<>(
 				WorkflowConstants.STATUS_APPROVED, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, new ArticleVersionComparator());
 
@@ -2736,7 +2736,7 @@ public class JournalArticleLocalServiceImpl
 				ddmStructureKeys, approvedQueryDefinition));
 
 		QueryDefinition<JournalArticle> trashQueryDefinition =
-			new QueryDefinition<JournalArticle>(
+			new QueryDefinition<>(
 				WorkflowConstants.STATUS_IN_TRASH, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, new ArticleVersionComparator());
 
