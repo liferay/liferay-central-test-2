@@ -115,7 +115,6 @@ public class AddDefaultJournalStructuresPortalInstanceLifecycleListener
 	private DefaultDDMStructureHelper _defaultDDMStructureHelper;
 	private GroupLocalService _groupLocalService;
 	private volatile JournalServiceConfiguration _journalServiceConfiguration;
-
 	private UserLocalService _userLocalService;
 
 }
