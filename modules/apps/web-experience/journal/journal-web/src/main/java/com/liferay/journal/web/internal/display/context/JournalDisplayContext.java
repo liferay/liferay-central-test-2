@@ -444,6 +444,10 @@ public class JournalDisplayContext {
 		return _orderByType;
 	}
 
+	public String[] getOrderColumns() {
+		return new String[] {"display-date", "modified-date", "title"};
+	}
+
 	public PortletURL getPortletURL() throws PortalException {
 		PortletURL portletURL = _liferayPortletResponse.createRenderURL();
 
