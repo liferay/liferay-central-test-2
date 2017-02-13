@@ -85,7 +85,7 @@
 			"repeatable": false,
 			"required": true,
 			"rules": [
-			{
+				{
 					"expression": "isReadOnly(SelectField)",
 					"type": "READ_ONLY"
 				}
