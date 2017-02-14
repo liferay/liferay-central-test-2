@@ -60,9 +60,8 @@ public abstract class BaseUserDemoDataCreator implements UserDemoDataCreator {
 	public User createUser(long companyId, String emailAddress)
 		throws PortalException {
 
-		Date birthDate = new Date();
 		boolean male = true;
-
+		Date birthDate = new Date();
 		byte[] portraitBytes = null;
 
 		try (InputStream is = (new URL(_RANDOM_USER_API)).openStream()) {
@@ -74,10 +73,8 @@ public abstract class BaseUserDemoDataCreator implements UserDemoDataCreator {
 				"results").getJSONObject(0);
 
 			emailAddress = _getEmailAddress(emailAddress, userJsonObject);
-
 			male = StringUtil.equalsIgnoreCase(
 				userJsonObject.getString("gender"), "male");
-
 			birthDate = _getBirthDate(birthDate, userJsonObject);
 
 			JSONObject pictureJSONObject = userJsonObject.getJSONObject(
