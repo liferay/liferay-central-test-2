@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 
-<project default="default">
+<project default="test">
 	<taskdef classname="com.liferay.ant.mirrors.get.MirrorsGetTask" classpath="classes" name="mirrors-get" />
 
-	<target name="default">
+	<target name="test">
 		<mirrors-get
 			dest="test"
 			force="true"
@@ -28,6 +28,11 @@
 			verbose="true"
 		/>
 
-		<mirrors-get dest="test" force="true" src="abc" verbose="true" />-->
+		<mirrors-get
+			dest="test"
+			force="true"
+			src="abc"
+			verbose="true"
+		/>-->
 	</target>
 </project>
