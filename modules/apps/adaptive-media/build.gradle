@@ -43,10 +43,10 @@ repositories {
 }
 
 task coverageReport(type: org.gradle.testing.jacoco.tasks.JacocoReport) {
-	additionalSourceDirs = files(subprojects.sourceSets.main.allSource.srcDirs)
-	classDirectories = files(subprojects.sourceSets.main.output)
-	executionData = files(subprojects.jacocoTestReport.executionData)
-	sourceDirectories = files(subprojects.sourceSets.main.allSource.srcDirs)
+	additionalSourceDirs = files(subprojects.findAll{!it.childProjects}.sourceSets.main.allSource.srcDirs)
+	classDirectories = files(subprojects.findAll{!it.childProjects}.sourceSets.main.output)
+	executionData = files(subprojects.findAll{!it.childProjects}.jacocoTestReport.executionData)
+	sourceDirectories = files(subprojects.findAll{!it.childProjects}.sourceSets.main.allSource.srcDirs)
 
 	reports {
 		html.enabled = true
@@ -65,6 +65,6 @@ tasks.coveralls {
 }
 
 coveralls.jacocoReportPath = "build/reports/jacoco/coverageReport/coverageReport.xml"
-coveralls.sourceDirs = files(subprojects.sourceSets.main.allSource.srcDirs).collect {
+coveralls.sourceDirs = files(subprojects.findAll{!it.childProjects}.sourceSets.main.allSource.srcDirs).collect {
 	file -> file.absolutePath
 }
