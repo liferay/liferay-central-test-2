@@ -48,7 +48,6 @@ import java.util.List;
 
 /**
  * @author Daniel Kocsis
- *
  * @deprecated As of 7.0.0
  */
 @Deprecated
