@@ -10,8 +10,8 @@ dependencies {
 	provided group: "com.liferay.portal", name: "com.liferay.portal.test", version: "1.0.0"
 	provided group: "com.liferay", name: "com.liferay.users.admin.demo.data.creator.api", version: "1.0.0"
 	provided group: "org.osgi", name: "org.osgi.core", version: "5.0.0"
-	provided project(":adaptive-media-demo-data-creator-api")
-	provided project(":adaptive-media-image-impl")
+	provided project(":apps:adaptive-media:adaptive-media-demo-data-creator-api")
+	provided project(":apps:adaptive-media:adaptive-media-image-impl")
 
 	testIntegrationCompile group: "com.google.code.gson", name: "gson", version: "2.2.4"
 	testIntegrationCompile group: "com.liferay.arquillian", name: "com.liferay.arquillian.arquillian-container-liferay", version: "1.0.4"

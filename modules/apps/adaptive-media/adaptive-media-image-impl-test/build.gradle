@@ -3,6 +3,6 @@ targetCompatibility = "1.8"
 
 dependencies {
 	testIntegrationCompile group: "com.liferay", name: "com.liferay.arquillian.extension.junit.bridge", version: "1.0.5"
-	testIntegrationCompile project(":adaptive-media-api")
-	testIntegrationCompile project(":adaptive-media-image-impl")
+	testIntegrationCompile project(":apps:adaptive-media:adaptive-media-api")
+	testIntegrationCompile project(":apps:adaptive-media:adaptive-media-image-impl")
 }
