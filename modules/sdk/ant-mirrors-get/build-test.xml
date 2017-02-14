@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 
-<project default="test">
+<project>
 	<taskdef classname="com.liferay.ant.mirrors.get.MirrorsGetTask" classpath="classes" name="mirrors-get" />
 
-	<target name="test">
+	<target name="test-1">
 		<mirrors-get
 			dest="test"
 			force="true"
@@ -11,15 +11,19 @@
 			trylocalnetwork="true"
 			verbose="true"
 		/>
+	</target>
 
-		<!--<mirrors-get
+	<target name="test-2">
+		<mirrors-get
 			dest="test"
 			force="true"
 			src="http://mirrors.lax.liferay.com/dtb5pzswcit1e.cloudfront.net/product_files/Pivotal-tc-Server/pivotal-tc-server-developer-3.1.2.RELEASE.zip"
 			trylocalnetwork="true"
 			verbose="true"
 		/>
+	</target>
 
+	<target name="test-3">
 		<mirrors-get
 			dest="test"
 			force="true"
@@ -27,12 +31,14 @@
 			trylocalnetwork="false"
 			verbose="true"
 		/>
+	</target>
 
+	<target name="test-4">
 		<mirrors-get
 			dest="test"
 			force="true"
 			src="abc"
 			verbose="true"
-		/>-->
+		/>
 	</target>
 </project>
