@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.dynamic.data.mapping.data.provider.rest.internal.cache;
+package com.liferay.dynamic.data.mapping.data.provider.internal.cache;
 
 import com.liferay.portal.kernel.cache.PortalCacheManagerNames;
 import com.liferay.portal.kernel.cache.configurator.PortalCacheConfiguratorSettings;
