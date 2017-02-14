@@ -2,6 +2,7 @@
 ; Do not manually edit this file.
 ;
 [subrepo]
+	autopull = false
 	cmdver = liferay
 	commit = 76d7419936d4f4ea69290ab9420f8821aff5b596
 	mode = push
