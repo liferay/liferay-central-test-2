@@ -1167,16 +1167,6 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_C_T,
 				args);
 
-			args = new Object[] {
-					ticketModelImpl.getCompanyId(),
-					ticketModelImpl.getClassNameId(),
-					ticketModelImpl.getClassPK(), ticketModelImpl.getType()
-				};
-
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_C_C_T, args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_C_C_T,
-				args);
-
 			finderCache.removeResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY);
 			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL,
 				FINDER_ARGS_EMPTY);
