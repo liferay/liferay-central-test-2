@@ -10,3 +10,4 @@ groups:
       enabled: false
     users:
     - leoadb
+    - marcellustavares
