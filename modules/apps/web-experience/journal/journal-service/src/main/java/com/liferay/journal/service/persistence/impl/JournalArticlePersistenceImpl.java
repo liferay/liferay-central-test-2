@@ -31870,8 +31870,278 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 
-		if (isNew || !JournalArticleModelImpl.COLUMN_BITMASK_ENABLED) {
+		if (!JournalArticleModelImpl.COLUMN_BITMASK_ENABLED) {
 			finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+		}
+		else
+		 if (isNew) {
+			Object[] args = new Object[] { journalArticleModelImpl.getUuid() };
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_UUID, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UUID,
+				args);
+
+			args = new Object[] {
+					journalArticleModelImpl.getUuid(),
+					journalArticleModelImpl.getCompanyId()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_UUID_C, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UUID_C,
+				args);
+
+			args = new Object[] { journalArticleModelImpl.getResourcePrimKey() };
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_RESOURCEPRIMKEY, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_RESOURCEPRIMKEY,
+				args);
+
+			args = new Object[] { journalArticleModelImpl.getGroupId() };
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
+				args);
+
+			args = new Object[] { journalArticleModelImpl.getCompanyId() };
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_COMPANYID, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
+				args);
+
+			args = new Object[] { journalArticleModelImpl.getDDMStructureKey() };
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_DDMSTRUCTUREKEY, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_DDMSTRUCTUREKEY,
+				args);
+
+			args = new Object[] { journalArticleModelImpl.getDDMTemplateKey() };
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_DDMTEMPLATEKEY, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_DDMTEMPLATEKEY,
+				args);
+
+			args = new Object[] { journalArticleModelImpl.getLayoutUuid() };
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_LAYOUTUUID, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_LAYOUTUUID,
+				args);
+
+			args = new Object[] { journalArticleModelImpl.getSmallImageId() };
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_SMALLIMAGEID, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_SMALLIMAGEID,
+				args);
+
+			args = new Object[] {
+					journalArticleModelImpl.getResourcePrimKey(),
+					journalArticleModelImpl.getIndexable()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_R_I, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_R_I,
+				args);
+
+			args = new Object[] {
+					journalArticleModelImpl.getResourcePrimKey(),
+					journalArticleModelImpl.getStatus()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_R_ST, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_R_ST,
+				args);
+
+			args = new Object[] {
+					journalArticleModelImpl.getGroupId(),
+					journalArticleModelImpl.getUserId()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_U, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_U,
+				args);
+
+			args = new Object[] {
+					journalArticleModelImpl.getGroupId(),
+					journalArticleModelImpl.getFolderId()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_F, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_F,
+				args);
+
+			args = new Object[] {
+					journalArticleModelImpl.getGroupId(),
+					journalArticleModelImpl.getArticleId()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_A, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_A,
+				args);
+
+			args = new Object[] {
+					journalArticleModelImpl.getGroupId(),
+					journalArticleModelImpl.getUrlTitle()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_UT, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_UT,
+				args);
+
+			args = new Object[] {
+					journalArticleModelImpl.getGroupId(),
+					journalArticleModelImpl.getDDMStructureKey()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_DDMSK, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_DDMSK,
+				args);
+
+			args = new Object[] {
+					journalArticleModelImpl.getGroupId(),
+					journalArticleModelImpl.getDDMTemplateKey()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_DDMTK, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_DDMTK,
+				args);
+
+			args = new Object[] {
+					journalArticleModelImpl.getGroupId(),
+					journalArticleModelImpl.getLayoutUuid()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_L, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_L,
+				args);
+
+			args = new Object[] {
+					journalArticleModelImpl.getGroupId(),
+					journalArticleModelImpl.getStatus()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_ST, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_ST,
+				args);
+
+			args = new Object[] {
+					journalArticleModelImpl.getCompanyId(),
+					journalArticleModelImpl.getVersion()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_V, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_V,
+				args);
+
+			args = new Object[] {
+					journalArticleModelImpl.getCompanyId(),
+					journalArticleModelImpl.getStatus()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_ST, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_ST,
+				args);
+
+			args = new Object[] {
+					journalArticleModelImpl.getClassNameId(),
+					journalArticleModelImpl.getDDMTemplateKey()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_DDMTK, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_DDMTK,
+				args);
+
+			args = new Object[] {
+					journalArticleModelImpl.getResourcePrimKey(),
+					journalArticleModelImpl.getIndexable(),
+					journalArticleModelImpl.getStatus()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_R_I_S, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_R_I_S,
+				args);
+
+			args = new Object[] {
+					journalArticleModelImpl.getGroupId(),
+					journalArticleModelImpl.getUserId(),
+					journalArticleModelImpl.getClassNameId()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_U_C, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_U_C,
+				args);
+
+			args = new Object[] {
+					journalArticleModelImpl.getGroupId(),
+					journalArticleModelImpl.getFolderId(),
+					journalArticleModelImpl.getStatus()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_F_ST, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_F_ST,
+				args);
+
+			args = new Object[] {
+					journalArticleModelImpl.getGroupId(),
+					journalArticleModelImpl.getClassNameId(),
+					journalArticleModelImpl.getClassPK()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_C_C, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_C_C,
+				args);
+
+			args = new Object[] {
+					journalArticleModelImpl.getGroupId(),
+					journalArticleModelImpl.getClassNameId(),
+					journalArticleModelImpl.getDDMTemplateKey()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_C_DDMTK, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_C_DDMTK,
+				args);
+
+			args = new Object[] {
+					journalArticleModelImpl.getGroupId(),
+					journalArticleModelImpl.getClassNameId(),
+					journalArticleModelImpl.getLayoutUuid()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_C_L, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_C_L,
+				args);
+
+			args = new Object[] {
+					journalArticleModelImpl.getGroupId(),
+					journalArticleModelImpl.getArticleId(),
+					journalArticleModelImpl.getStatus()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_A_ST, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_A_ST,
+				args);
+
+			args = new Object[] {
+					journalArticleModelImpl.getGroupId(),
+					journalArticleModelImpl.getUrlTitle(),
+					journalArticleModelImpl.getStatus()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_G_UT_ST, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_G_UT_ST,
+				args);
+
+			args = new Object[] {
+					journalArticleModelImpl.getCompanyId(),
+					journalArticleModelImpl.getVersion(),
+					journalArticleModelImpl.getStatus()
+				};
+
+			finderCache.removeResult(FINDER_PATH_COUNT_BY_C_V_ST, args);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_C_V_ST,
+				args);
+
+			finderCache.removeResult(FINDER_PATH_COUNT_ALL, FINDER_ARGS_EMPTY);
+			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_ALL,
+				FINDER_ARGS_EMPTY);
 		}
 
 		else {

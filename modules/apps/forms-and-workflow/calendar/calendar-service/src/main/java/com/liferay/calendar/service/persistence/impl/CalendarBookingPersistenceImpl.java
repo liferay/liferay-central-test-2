@@ -5858,15 +5858,6 @@ public class CalendarBookingPersistenceImpl extends BasePersistenceImpl<Calendar
 				args);
 
 			args = new Object[] {
-					calendarBookingModelImpl.getRecurringCalendarBookingId()
-				};
-
-			finderCache.removeResult(FINDER_PATH_COUNT_BY_RECURRINGCALENDARBOOKINGID,
-				args);
-			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_RECURRINGCALENDARBOOKINGID,
-				args);
-
-			args = new Object[] {
 					calendarBookingModelImpl.getCalendarId(),
 					calendarBookingModelImpl.getStatus()
 				};
