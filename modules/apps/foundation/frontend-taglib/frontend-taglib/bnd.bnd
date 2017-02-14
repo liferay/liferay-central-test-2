@@ -11,6 +11,9 @@ Provide-Capability:\
 	osgi.extender;\
 		osgi.extender="jsp.taglib";\
 		uri="http://liferay.com/tld/frontend";\
+		version:Version="${Bundle-Version}",\
+	soy;\
+		type="frontend-taglib";\
 		version:Version="${Bundle-Version}"
 Require-Capability:\
 	osgi.extender;\
