@@ -1,10 +1,6 @@
 <?xml version="1.0"?>
 
 <project default="default">
-	<path id="lib.classpath">
-		<fileset dir="classes" />
-	</path>
-
 	<taskdef classname="com.liferay.ant.mirrors.get.MirrorsGetTask" classpath="classes" name="mirrors-get" />
 
 	<target name="default">
