@@ -120,7 +120,6 @@ public class RebaseErrorTopLevelBuild extends TopLevelBuild {
 		sb.append("/");
 		sb.append("liferay-portal-ee");
 		sb.append("/issues/comments/");
-
 		sb.append(stopPropertiesTempMap.get("TOP_LEVEL_GITHUB_COMMENT_ID"));
 
 		JSONObject jsonObject = getJSONObjectFromURL(sb.toString());
@@ -237,10 +236,10 @@ public class RebaseErrorTopLevelBuild extends TopLevelBuild {
 			System.out.println("'" + actualCommentTokens.get(i) + "'");
 
 			if (matcher.find()) {
-				System.out.println("Tokens matched.");
+				System.out.println("Tokens matched");
 			}
 			else {
-				System.out.println("Tokens mismatched.");
+				System.out.println("Tokens mismatched");
 
 				return false;
 			}
