@@ -14,6 +14,11 @@
 
 package com.liferay.portlet.documentlibrary.util;
 
+import com.drew.imaging.ImageMetadataReader;
+import com.drew.imaging.ImageProcessingException;
+import com.drew.metadata.Metadata;
+import com.drew.metadata.exif.ExifIFD0Directory;
+
 import com.liferay.document.library.kernel.exception.NoSuchFileEntryException;
 import com.liferay.document.library.kernel.model.DLProcessorConstants;
 import com.liferay.document.library.kernel.store.DLStoreUtil;
@@ -24,12 +29,12 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.image.ImageBag;
 import com.liferay.portal.kernel.image.ImageTool;
 import com.liferay.portal.kernel.image.ImageToolUtil;
-import com.liferay.portal.kernel.io.DummyWriter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -54,17 +59,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.Vector;
 import java.util.concurrent.Future;
-
-import org.apache.tika.exception.TikaException;
-import org.apache.tika.metadata.Metadata;
-import org.apache.tika.metadata.TIFF;
-import org.apache.tika.parser.AutoDetectParser;
-import org.apache.tika.parser.ParseContext;
-import org.apache.tika.parser.Parser;
-import org.apache.tika.sax.WriteOutContentHandler;
-
-import org.xml.sax.ContentHandler;
-import org.xml.sax.SAXException;
 
 /**
  * @author Sergio González
@@ -333,8 +327,7 @@ public class ImageProcessorImpl
 			}
 
 			renderedImage = _tiffOrientationTransform(
-				renderedImage,
-				_getTiffOrientationValue(destinationFileVersion));
+				renderedImage, destinationFileVersion);
 
 			if (!_hasPreview(destinationFileVersion)) {
 				_storePreviewImage(destinationFileVersion, renderedImage);
@@ -359,25 +352,24 @@ public class ImageProcessorImpl
 	private String _getTiffOrientationValue(FileVersion fileVersion)
 		throws PortalException {
 
-		try {
-			Metadata metadata = new Metadata();
+		try (InputStream is = fileVersion.getContentStream(false)) {
+			Metadata metadata = ImageMetadataReader.readMetadata(is);
 
-			ContentHandler contentHandler = new WriteOutContentHandler(
-				new DummyWriter());
+			ExifIFD0Directory exifIFD0Directory =
+				metadata.getFirstDirectoryOfType(ExifIFD0Directory.class);
 
-			Parser parser = new AutoDetectParser();
+			if (exifIFD0Directory.containsTag(
+					ExifIFD0Directory.TAG_ORIENTATION)) {
 
-			parser.parse(
-				fileVersion.getContentStream(false), contentHandler, metadata,
-				new ParseContext());
-
-			return metadata.get(TIFF.ORIENTATION.getName());
+				return exifIFD0Directory.getString(
+					ExifIFD0Directory.TAG_ORIENTATION);
+			}
 		}
-		catch (IOException | SAXException | TikaException e) {
+		catch (Exception e) {
 			_log.error(e, e);
 		}
 
-		return null;
+		return ImageTool.ORIENTATION_VALUE_HORIZONTAL_NORMAL;
 	}
 
 	private String _getType(FileVersion fileVersion) {
@@ -419,8 +411,8 @@ public class ImageProcessorImpl
 			String previewFilePath = getPreviewFilePath(fileVersion, type);
 
 			if (!DLStoreUtil.hasFile(
-					fileVersion.getCompanyId(), REPOSITORY_ID,
-					previewFilePath)) {
+				fileVersion.getCompanyId(), REPOSITORY_ID,
+				previewFilePath)) {
 
 				return false;
 			}
@@ -437,25 +429,28 @@ public class ImageProcessorImpl
 		return false;
 	}
 
-	private boolean _previewGenerationRequired(FileVersion fileVersion) {
-		if (_isTiff(fileVersion.getMimeType())) {
+	private boolean _previewGenerationRequired(FileVersion fileVersion)
+		throws PortalException {
+
+		String mimeType = fileVersion.getMimeType();
+
+		if (_isTiff(mimeType)) {
 			return true;
 		}
 
-		String orientationValue = null;
+		String[] dlFileEntryPreviewImageMimeTypes =
+			PropsValues.DL_FILE_ENTRY_PREVIEW_IMAGE_MIME_TYPES;
 
-		try {
-			orientationValue = _getTiffOrientationValue(fileVersion);
-		}
-		catch (PortalException pe) {
-			_log.error("Unable to get the TIFF orientation value", pe);
-		}
+		if (_DL_FILE_ENTRY_EXIF_METADATA_ROTATION_ENABLED &&
+			(ArrayUtil.contains(dlFileEntryPreviewImageMimeTypes, mimeType))) {
 
-		if (Validator.isNotNull(orientationValue) &&
-			!orientationValue.equals(
-				ImageTool.ORIENTATION_VALUE_HORIZONTAL_NORMAL)) {
+			String orientationValue = _getTiffOrientationValue(fileVersion);
 
-			return true;
+			if (!orientationValue.equals(
+					ImageTool.ORIENTATION_VALUE_HORIZONTAL_NORMAL)) {
+
+				return true;
+			}
 		}
 
 		return false;
@@ -541,11 +536,16 @@ public class ImageProcessorImpl
 	}
 
 	private RenderedImage _tiffOrientationTransform(
-			RenderedImage renderedImage, String tiffOrientationValue)
-		throws PortalException {
+			RenderedImage renderedImage, FileVersion fileVersion)
+		throws Exception {
 
-		if (!_DL_FILE_ENTRY_EXIF_METADATA_ROTATION_ENABLED ||
-			Validator.isNull(tiffOrientationValue) ||
+		if (!_DL_FILE_ENTRY_EXIF_METADATA_ROTATION_ENABLED) {
+			return renderedImage;
+		}
+
+		String tiffOrientationValue = _getTiffOrientationValue(fileVersion);
+
+		if (Validator.isNull(tiffOrientationValue) ||
 			tiffOrientationValue.equals(
 				ImageTool.ORIENTATION_VALUE_HORIZONTAL_NORMAL)) {
 
