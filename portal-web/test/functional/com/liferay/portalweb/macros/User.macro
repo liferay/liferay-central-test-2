@@ -460,7 +460,7 @@
 
 				<execute function="AssertClick" locator1="NavBar#BASIC_SEARCH_BUTTON" value1="Search" />
 
-				<execute function="AssertTextEquals" locator1="Message#INFO" value1="No users were found." />
+				<execute function="AssertTextEquals" locator1="Message#EMPTY_INFO" value1="No users were found." />
 			</then>
 			<elseif>
 				<equals arg1="${userAdvancedSearch}" arg2="Middle Name" />
@@ -478,7 +478,7 @@
 
 					<execute function="AssertClick" locator1="NavBar#BASIC_SEARCH_BUTTON" value1="Search" />
 
-					<execute function="AssertTextEquals" locator1="Message#INFO" value1="No users were found." />
+					<execute function="AssertTextEquals" locator1="Message#EMPTY_INFO" value1="No users were found." />
 				</then>
 			</elseif>
 			<elseif>
@@ -497,7 +497,7 @@
 
 					<execute function="AssertClick" locator1="NavBar#BASIC_SEARCH_BUTTON" value1="Search" />
 
-					<execute function="AssertTextEquals" locator1="Message#INFO" value1="No users were found." />
+					<execute function="AssertTextEquals" locator1="Message#EMPTY_INFO" value1="No users were found." />
 				</then>
 			</elseif>
 			<elseif>
@@ -516,7 +516,7 @@
 
 					<execute function="AssertClick" locator1="NavBar#BASIC_SEARCH_BUTTON" value1="Search" />
 
-					<execute function="AssertTextEquals" locator1="Message#INFO" value1="No users were found." />
+					<execute function="AssertTextEquals" locator1="Message#EMPTY_INFO" value1="No users were found." />
 				</then>
 			</elseif>
 			<elseif>
@@ -535,7 +535,7 @@
 
 					<execute function="AssertClick" locator1="NavBar#BASIC_SEARCH_BUTTON" value1="Search" />
 
-					<execute function="AssertTextEquals" locator1="Message#INFO" value1="No users were found." />
+					<execute function="AssertTextEquals" locator1="Message#EMPTY_INFO" value1="No users were found." />
 				</then>
 			</elseif>
 		</if>
@@ -580,7 +580,7 @@
 		<if>
 			<equals arg1="${searchNoResults}" arg2="true" />
 			<then>
-				<execute function="AssertTextEquals" locator1="Message#INFO" value1="No users were found." />
+				<execute function="AssertTextEquals" locator1="Message#EMPTY_INFO" value1="No users were found." />
 
 				<var name="key_userScreenName" value="${userScreenName}" />
 
@@ -637,7 +637,7 @@
 		<if>
 			<equals arg1="${searchNoResults}" arg2="true" />
 			<then>
-				<execute function="AssertTextEquals" locator1="Message#INFO" value1="No users were found." />
+				<execute function="AssertTextEquals" locator1="Message#EMPTY_INFO" value1="No users were found." />
 
 				<var name="key_userScreenName" value="${userScreenName}" />
 
@@ -694,7 +694,7 @@
 		<if>
 			<equals arg1="${searchNoResults}" arg2="true" />
 			<then>
-				<execute function="AssertTextEquals" locator1="Message#INFO" value1="No users were found." />
+				<execute function="AssertTextEquals" locator1="Message#EMPTY_INFO" value1="No users were found." />
 
 				<var name="key_userScreenName" value="${userScreenName}" />
 
@@ -751,7 +751,7 @@
 		<if>
 			<equals arg1="${searchNoResults}" arg2="true" />
 			<then>
-				<execute function="AssertTextEquals" locator1="Message#INFO" value1="No users were found." />
+				<execute function="AssertTextEquals" locator1="Message#EMPTY_INFO" value1="No users were found." />
 
 				<var name="key_userScreenName" value="${userScreenName}" />
 
