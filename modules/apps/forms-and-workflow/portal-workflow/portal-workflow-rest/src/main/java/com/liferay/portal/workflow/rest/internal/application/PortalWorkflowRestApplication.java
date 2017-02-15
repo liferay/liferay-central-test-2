@@ -14,6 +14,9 @@
 
 package com.liferay.portal.workflow.rest.internal.application;
 
+import com.liferay.portal.workflow.rest.internal.context.provider.CompanyContextProvider;
+import com.liferay.portal.workflow.rest.internal.context.provider.UserContextProvider;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -32,6 +35,9 @@ public class PortalWorkflowRestApplication extends Application {
 	@Override
 	public Set<Class<?>> getClasses() {
 		Set<Class<?>> classes = new HashSet<>();
+
+		classes.add(CompanyContextProvider.class);
+		classes.add(UserContextProvider.class);
 
 		return classes;
 	}
