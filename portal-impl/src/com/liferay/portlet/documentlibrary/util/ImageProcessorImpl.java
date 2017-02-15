@@ -24,7 +24,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.image.ImageBag;
 import com.liferay.portal.kernel.image.ImageTool;
 import com.liferay.portal.kernel.image.ImageToolUtil;
-import com.liferay.portal.kernel.io.DummyWriter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.DestinationNames;
@@ -32,14 +31,12 @@ import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Element;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 
 import java.awt.image.ColorModel;
@@ -47,24 +44,12 @@ import java.awt.image.RenderedImage;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 
 import java.util.List;
 import java.util.Set;
 import java.util.Vector;
 import java.util.concurrent.Future;
-
-import org.apache.tika.exception.TikaException;
-import org.apache.tika.metadata.Metadata;
-import org.apache.tika.metadata.TIFF;
-import org.apache.tika.parser.AutoDetectParser;
-import org.apache.tika.parser.ParseContext;
-import org.apache.tika.parser.Parser;
-import org.apache.tika.sax.WriteOutContentHandler;
-
-import org.xml.sax.ContentHandler;
-import org.xml.sax.SAXException;
 
 /**
  * @author Sergio González
@@ -332,10 +317,6 @@ public class ImageProcessorImpl
 				}
 			}
 
-			renderedImage = _tiffOrientationTransform(
-				renderedImage,
-				_getTiffOrientationValue(destinationFileVersion));
-
 			if (!_hasPreview(destinationFileVersion)) {
 				_storePreviewImage(destinationFileVersion, renderedImage);
 			}
@@ -354,30 +335,6 @@ public class ImageProcessorImpl
 
 			_fileVersionIds.remove(destinationFileVersion.getFileVersionId());
 		}
-	}
-
-	private String _getTiffOrientationValue(FileVersion fileVersion)
-		throws PortalException {
-
-		try {
-			Metadata metadata = new Metadata();
-
-			ContentHandler contentHandler = new WriteOutContentHandler(
-				new DummyWriter());
-
-			Parser parser = new AutoDetectParser();
-
-			parser.parse(
-				fileVersion.getContentStream(false), contentHandler, metadata,
-				new ParseContext());
-
-			return metadata.get(TIFF.ORIENTATION.getName());
-		}
-		catch (IOException | SAXException | TikaException e) {
-			_log.error(e, e);
-		}
-
-		return null;
 	}
 
 	private String _getType(FileVersion fileVersion) {
@@ -401,7 +358,7 @@ public class ImageProcessorImpl
 		else if (mimeType.equals(ContentTypes.IMAGE_PNG)) {
 			type = ImageTool.TYPE_PNG;
 		}
-		else if (!_isTiff(mimeType)) {
+		else if (!_previewGenerationRequired(fileVersion)) {
 			type = fileVersion.getExtension();
 		}
 
@@ -429,36 +386,15 @@ public class ImageProcessorImpl
 		return true;
 	}
 
-	private boolean _isTiff(String mimeType) {
+	private boolean _previewGenerationRequired(FileVersion fileVersion) {
+		String mimeType = fileVersion.getMimeType();
+
 		if (mimeType.contains("tiff") || mimeType.contains("tif")) {
 			return true;
 		}
-
-		return false;
-	}
-
-	private boolean _previewGenerationRequired(FileVersion fileVersion) {
-		if (_isTiff(fileVersion.getMimeType())) {
-			return true;
+		else {
+			return false;
 		}
-
-		String orientationValue = null;
-
-		try {
-			orientationValue = _getTiffOrientationValue(fileVersion);
-		}
-		catch (PortalException pe) {
-			_log.error("Could not obtain the tiff orientation value", pe);
-		}
-
-		if (Validator.isNotNull(orientationValue) &&
-			!orientationValue.equals(
-				ImageTool.ORIENTATION_VALUE_HORIZONTAL_NORMAL)) {
-
-			return true;
-		}
-
-		return false;
 	}
 
 	private void _queueGeneration(
@@ -539,65 +475,6 @@ public class ImageProcessorImpl
 			FileUtil.delete(file);
 		}
 	}
-
-	private RenderedImage _tiffOrientationTransform(
-			RenderedImage renderedImage, String tiffOrientationValue)
-		throws PortalException {
-
-		if (!_DL_FILE_ENTRY_EXIF_METADATA_ROTATION_ENABLED ||
-			Validator.isNull(tiffOrientationValue) ||
-			tiffOrientationValue.equals(
-				ImageTool.ORIENTATION_VALUE_HORIZONTAL_NORMAL)) {
-
-			return renderedImage;
-		}
-		else if (tiffOrientationValue.equals(
-					ImageTool.ORIENTATION_VALUE_MIRROR_HORIZONTAL)) {
-
-			return ImageToolUtil.flipHorizontal(renderedImage);
-		}
-		else if (tiffOrientationValue.equals(
-					ImageTool.
-						ORIENTATION_VALUE_MIRROR_HORIZONTAL_ROTATE_90_CW)) {
-
-			return ImageToolUtil.flipVertical(
-				ImageToolUtil.rotate(renderedImage, 90));
-		}
-		else if (tiffOrientationValue.equals(
-					ImageTool.
-						ORIENTATION_VALUE_MIRROR_HORIZONTAL_ROTATE_270_CW)) {
-
-			return ImageToolUtil.flipVertical(
-				ImageToolUtil.rotate(renderedImage, 270));
-		}
-		else if (tiffOrientationValue.equals(
-					ImageTool.ORIENTATION_VALUE_MIRROR_VERTICAL)) {
-
-			return ImageToolUtil.flipVertical(renderedImage);
-		}
-		else if (tiffOrientationValue.equals(
-					ImageTool.ORIENTATION_VALUE_ROTATE_90_CW)) {
-
-			return ImageToolUtil.rotate(renderedImage, 90);
-		}
-		else if (tiffOrientationValue.equals(
-					ImageTool.ORIENTATION_VALUE_ROTATE_180)) {
-
-			return ImageToolUtil.rotate(renderedImage, 180);
-		}
-		else if (tiffOrientationValue.equals(
-					ImageTool.ORIENTATION_VALUE_ROTATE_270_CW)) {
-
-			return ImageToolUtil.rotate(renderedImage, 270);
-		}
-
-		return renderedImage;
-	}
-
-	private static final boolean _DL_FILE_ENTRY_EXIF_METADATA_ROTATION_ENABLED =
-		GetterUtil.getBoolean(
-			PropsUtil.get(
-				"dl.file.entry.image.exif.metadata.rotation.enabled"));
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		ImageProcessorImpl.class);
