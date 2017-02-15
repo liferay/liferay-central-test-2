@@ -59,7 +59,7 @@ public class WorkflowTaskManagerImplTest
 
 	@Test
 	public void testApproveJournalArticleAsAdmin() throws Exception {
-		activeSingleApproverWorkflow(
+		activateSingleApproverWorkflow(
 			JournalFolder.class.getName(),
 			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			JournalArticleConstants.DDM_STRUCTURE_ID_ALL);
@@ -84,7 +84,7 @@ public class WorkflowTaskManagerImplTest
 		Assert.assertEquals(
 			WorkflowConstants.STATUS_APPROVED, article.getStatus());
 
-		deactiveWorkflow(
+		deactivateWorkflow(
 			JournalFolder.class.getName(),
 			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			JournalArticleConstants.DDM_STRUCTURE_ID_ALL);
@@ -94,7 +94,7 @@ public class WorkflowTaskManagerImplTest
 	public void testApproveJournalArticleInFolderInheritedWorkflow()
 		throws Exception {
 
-		activeSingleApproverWorkflow(
+		activateSingleApproverWorkflow(
 			JournalFolder.class.getName(),
 			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			JournalArticleConstants.DDM_STRUCTURE_ID_ALL);
@@ -120,7 +120,7 @@ public class WorkflowTaskManagerImplTest
 		Assert.assertEquals(
 			WorkflowConstants.STATUS_APPROVED, article.getStatus());
 
-		deactiveWorkflow(
+		deactivateWorkflow(
 			JournalFolder.class.getName(),
 			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			JournalArticleConstants.DDM_STRUCTURE_ID_ALL);
@@ -138,7 +138,7 @@ public class WorkflowTaskManagerImplTest
 			JournalFolderConstants.
 				RESTRICTION_TYPE_DDM_STRUCTURES_AND_WORKFLOW);
 
-		activeSingleApproverWorkflow(
+		activateSingleApproverWorkflow(
 			JournalFolder.class.getName(), folder.getFolderId(),
 			ddmStructure.getStructureId());
 
@@ -162,7 +162,7 @@ public class WorkflowTaskManagerImplTest
 		Assert.assertEquals(
 			WorkflowConstants.STATUS_APPROVED, article.getStatus());
 
-		deactiveWorkflow(
+		deactivateWorkflow(
 			JournalFolder.class.getName(), folder.getFolderId(),
 			ddmStructure.getStructureId());
 	}
@@ -174,7 +174,7 @@ public class WorkflowTaskManagerImplTest
 		JournalFolder folder = addJournalFolder(
 			0, JournalFolderConstants.RESTRICTION_TYPE_WORKFLOW);
 
-		activeSingleApproverWorkflow(
+		activateSingleApproverWorkflow(
 			JournalFolder.class.getName(), folder.getFolderId(),
 			JournalArticleConstants.DDM_STRUCTURE_ID_ALL);
 
@@ -197,14 +197,14 @@ public class WorkflowTaskManagerImplTest
 		Assert.assertEquals(
 			WorkflowConstants.STATUS_APPROVED, article.getStatus());
 
-		deactiveWorkflow(
+		deactivateWorkflow(
 			JournalFolder.class.getName(), folder.getFolderId(),
 			JournalArticleConstants.DDM_STRUCTURE_ID_ALL);
 	}
 
 	@Test
 	public void testApproveWorkflowBlogsEntryAsSiteAdmin() throws Exception {
-		activeSingleApproverWorkflow(BlogsEntry.class.getName(), 0, 0);
+		activateSingleApproverWorkflow(BlogsEntry.class.getName(), 0, 0);
 
 		BlogsEntry blogsEntry = addBlogsEntry();
 
@@ -221,14 +221,14 @@ public class WorkflowTaskManagerImplTest
 		Assert.assertEquals(
 			WorkflowConstants.STATUS_APPROVED, blogsEntry.getStatus());
 
-		deactiveWorkflow(BlogsEntry.class.getName(), 0, 0);
+		deactivateWorkflow(BlogsEntry.class.getName(), 0, 0);
 	}
 
 	@Test
 	public void testApproveWorkflowDDLRecordAsAdmin() throws Exception {
 		DDLRecordSet recordSet = addRecordSet();
 
-		activeSingleApproverWorkflow(
+		activateSingleApproverWorkflow(
 			DDLRecordSet.class.getName(), recordSet.getRecordSetId(), 0);
 
 		DDLRecord record = addRecord(recordSet);
@@ -253,7 +253,7 @@ public class WorkflowTaskManagerImplTest
 		Assert.assertEquals(
 			WorkflowConstants.STATUS_APPROVED, record.getStatus());
 
-		deactiveWorkflow(
+		deactivateWorkflow(
 			DDLRecordSet.class.getName(), recordSet.getRecordSetId(), 0);
 	}
 
@@ -261,7 +261,7 @@ public class WorkflowTaskManagerImplTest
 	public void testAssignApproveWorkflowBlogsEntryAsPortalContentReviewer()
 		throws Exception {
 
-		activeSingleApproverWorkflow(BlogsEntry.class.getName(), 0, 0);
+		activateSingleApproverWorkflow(BlogsEntry.class.getName(), 0, 0);
 
 		BlogsEntry blogsEntry = addBlogsEntry();
 
@@ -284,12 +284,12 @@ public class WorkflowTaskManagerImplTest
 		Assert.assertEquals(
 			WorkflowConstants.STATUS_APPROVED, blogsEntry.getStatus());
 
-		deactiveWorkflow(BlogsEntry.class.getName(), 0, 0);
+		deactivateWorkflow(BlogsEntry.class.getName(), 0, 0);
 	}
 
 	@Test
 	public void testRejectWorkflowBlogsEntryAndViewAssignee() throws Exception {
-		activeSingleApproverWorkflow(BlogsEntry.class.getName(), 0, 0);
+		activateSingleApproverWorkflow(BlogsEntry.class.getName(), 0, 0);
 
 		BlogsEntry blogsEntry = addBlogsEntry();
 
@@ -315,7 +315,7 @@ public class WorkflowTaskManagerImplTest
 		Assert.assertEquals(
 			adminUser.getUserId(), workflowTask.getAssigneeUserId());
 
-		deactiveWorkflow(BlogsEntry.class.getName(), 0, 0);
+		deactivateWorkflow(BlogsEntry.class.getName(), 0, 0);
 	}
 
 }
