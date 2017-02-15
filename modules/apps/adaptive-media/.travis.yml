@@ -1,6 +1,9 @@
 language: java
 install: /bin/true
-sudo: false
+sudo: required
+
+services:
+  - docker
 
 jdk:
   - oraclejdk8
@@ -14,16 +17,11 @@ cache:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
 
-install:
-  - ./scripts/install_bundle.sh
-  - ./scripts/run.sh ./gradlew setupTestableTomcat
+before_script:
+  - ./gradlew runDocker
 
 script:
-  - ../bundles/tomcat-8.0.32/bin/startup.sh
-  - ./scripts/run_unit_tests.sh
-  - ./scripts/deploy_modules.sh
-  - travis_wait ./scripts/wait_until_startup.sh
-  - ./scripts/run_integration_tests.sh
+  - ./gradlew testIntegration
 
 after_success:
   - ./gradlew coveralls
