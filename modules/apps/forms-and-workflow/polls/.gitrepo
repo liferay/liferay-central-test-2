@@ -5,6 +5,7 @@
 	autopull = false
 	cmdver = liferay
 	commit = 0b829580884439fda8eee25746e44e2024194d6b
+	mergebuttonmergecommits = false
 	mode = push
 	parent = 25c2c204af098ce5333479bb13d750107dbdd1df
 	remote = git@github.com:liferay/com-liferay-polls.git

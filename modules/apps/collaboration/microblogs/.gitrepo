@@ -5,6 +5,7 @@
 	autopull = false
 	cmdver = liferay
 	commit = c9a34bdf086047d81196aae5a77851c2965bfa7b
+	mergebuttonmergecommits = false
 	mode = push
 	parent = 5568119ed62b22ced07014cecc8bd127edd39583
 	remote = git@github.com:liferay/com-liferay-microblogs.git

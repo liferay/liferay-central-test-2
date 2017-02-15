@@ -5,6 +5,7 @@
 	autopull = false
 	cmdver = liferay
 	commit = 4085ca2258251433d0c79240705587f49049b5d4
+	mergebuttonmergecommits = false
 	mode = push
 	parent = 7973cac2fec4e840e5d7ec8cab8c9dff22f46161
 	remote = git@github.com:liferay/com-liferay-frontend-taglib.git

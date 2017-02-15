@@ -5,6 +5,7 @@
 	autopull = false
 	cmdver = liferay
 	commit = 1e2672b309ad9908492cac5486493075826e7a64
+	mergebuttonmergecommits = false
 	mode = push
 	parent = e5e87497e94ffdb2be1946d48573cef903dedab2
 	remote = git@github.com:liferay/com-liferay-portal-security-sso.git

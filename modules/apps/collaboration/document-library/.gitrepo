@@ -5,6 +5,7 @@
 	autopull = false
 	cmdver = liferay
 	commit = e96ea958e87f73de3fd320170ab1e2f9d8d28e28
+	mergebuttonmergecommits = false
 	mode = push
 	parent = abbd8dea4d22db80b89bcba6f9369f76b2903db4
 	remote = git@github.com:liferay/com-liferay-document-library.git
