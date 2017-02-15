@@ -73,6 +73,7 @@ create index IX_1A479F32 on KaleoTimer (kaleoClassName[$COLUMN_LENGTH:200$], kal
 
 create index IX_DB96C55B on KaleoTimerInstanceToken (kaleoInstanceId);
 create index IX_F904A89A on KaleoTimerInstanceToken (kaleoInstanceTokenId, blocking, completed);
+create index IX_DB279423 on KaleoTimerInstanceToken (kaleoInstanceTokenId, completed);
 create index IX_13A5BA2C on KaleoTimerInstanceToken (kaleoInstanceTokenId, kaleoTimerId);
 
 create index IX_41D6C6D on KaleoTransition (companyId);
