@@ -452,7 +452,7 @@ public class JournalDisplayContext {
 				JournalWebConfiguration.class.getName());
 
 		String[] orderColumns =
-			new String[] {"display-date", "modified-date", "title"};
+			new String[] {"display-date", "modified-date"};
 
 		if (!journalWebConfiguration.journalArticleForceAutogenerateId()) {
 			orderColumns = ArrayUtil.append(orderColumns, "id");
