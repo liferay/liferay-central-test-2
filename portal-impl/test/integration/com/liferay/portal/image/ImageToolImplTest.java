@@ -102,19 +102,6 @@ public class ImageToolImplTest {
 		read("liferay.png");
 	}
 
-	@Test
-	public void testRotation90Degrees() throws Exception {
-		ImageBag imageBag = ImageToolUtil.read(
-			getFile("rotation_90_degrees.jpg"));
-
-		RenderedImage originalImage = imageBag.getRenderedImage();
-
-		RenderedImage rotatedImage = ImageToolUtil.rotate(originalImage, 90);
-
-		Assert.assertEquals(originalImage.getHeight(), rotatedImage.getWidth());
-		Assert.assertEquals(originalImage.getWidth(), rotatedImage.getHeight());
-	}
-
 	protected void crop(String fileName) throws Exception {
 
 		// Crop bottom right
