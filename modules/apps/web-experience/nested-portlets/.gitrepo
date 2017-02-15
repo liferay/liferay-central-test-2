@@ -5,6 +5,7 @@
 	autopull = false
 	cmdver = liferay
 	commit = 8e37b2dfbc868b76a5a7782e1b1044bf9bd71182
+	mergebuttonmergecommits = false
 	mode = push
 	parent = e7331cb5fb7d50141c09cb65d2008097055f5c61
 	remote = git@github.com:liferay/com-liferay-nested-portlets.git

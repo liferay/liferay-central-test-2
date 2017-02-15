@@ -5,6 +5,7 @@
 	autopull = false
 	cmdver = liferay
 	commit = b9877c473e19dec9f18de91edac88ec64ef66efc
+	mergebuttonmergecommits = false
 	mode = push
 	parent = 60b7d09dc7a7acabb797e94c2bb11c089f289615
 	remote = git@github.com:liferay/com-liferay-invitation.git

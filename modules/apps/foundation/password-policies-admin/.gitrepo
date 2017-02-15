@@ -5,6 +5,7 @@
 	autopull = false
 	cmdver = liferay
 	commit = b3085f4a4451efd5affd2d2e3c51a6ccd826b5df
+	mergebuttonmergecommits = false
 	mode = push
 	parent = 1c07fb018007cedd73ba63b7adc8538d7c653631
 	remote = git@github.com:liferay/com-liferay-password-policies-admin.git

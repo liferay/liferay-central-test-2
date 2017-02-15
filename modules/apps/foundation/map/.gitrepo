@@ -5,6 +5,7 @@
 	autopull = false
 	cmdver = liferay
 	commit = 7828dad6d75fa303cbfac3a966ad3ab4a65f16c2
+	mergebuttonmergecommits = false
 	mode = push
 	parent = 58f4f4dd6ac22001a55d7a41014e93b2c7789b1f
 	remote = git@github.com:liferay/com-liferay-map.git

@@ -5,6 +5,7 @@
 	autopull = false
 	cmdver = liferay
 	commit = 029a8c5d20aafe5b788fb22c945736507d7f3799
+	mergebuttonmergecommits = false
 	mode = push
 	parent = ef7fcf2a19afc8cbfeee3a99c934825a5d2dc0c1
 	remote = git@github.com:liferay/com-liferay-hello-soy.git

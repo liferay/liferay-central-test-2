@@ -5,6 +5,7 @@
 	autopull = false
 	cmdver = liferay
 	commit = 839d50410ce1dcb701f22f4c750345e0a17993d5
+	mergebuttonmergecommits = false
 	mode = push
 	parent = 8608417305e618cef05a455c72242f0d365cffc4
 	remote = git@github.com:liferay/com-liferay-xstream.git

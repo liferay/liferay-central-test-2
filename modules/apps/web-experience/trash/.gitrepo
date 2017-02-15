@@ -5,6 +5,7 @@
 	autopull = false
 	cmdver = liferay
 	commit = a6b25acdf0244d9072a2670ecafe050cf6d7882e
+	mergebuttonmergecommits = false
 	mode = push
 	parent = b580e070a9c9bd5c5070128617c15acff23f4827
 	remote = git@github.com:liferay/com-liferay-trash.git

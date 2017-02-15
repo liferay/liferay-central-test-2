@@ -5,6 +5,7 @@
 	autopull = false
 	cmdver = liferay
 	commit = 271d5c9bf1dc5198a2555e9d3a8596872047c854
+	mergebuttonmergecommits = false
 	mode = push
 	parent = 75afe4ecfbaa4bacbefdb3fcb19511365cc224f5
 	remote = git@github.com:liferay/com-liferay-portal-store.git

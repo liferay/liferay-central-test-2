@@ -5,6 +5,7 @@
 	autopull = false
 	cmdver = liferay
 	commit = 56d7d7c4afadc885c334d27ce8a52b7de1694932
+	mergebuttonmergecommits = false
 	mode = push
 	parent = 99cb073401e59ef44bc5587e5cf0c9e3f1c97622
 	remote = git@github.com:liferay/com-liferay-screens.git

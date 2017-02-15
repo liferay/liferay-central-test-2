@@ -5,6 +5,7 @@
 	autopull = false
 	cmdver = liferay
 	commit = e450a69db69bbb847a8c76fb74f3a5dff19e39dc
+	mergebuttonmergecommits = false
 	mode = push
 	parent = 61cc6d0c33cca88f7a41c083d66e4377cb4500e4
 	remote = git@github.com:liferay/com-liferay-hello-velocity.git

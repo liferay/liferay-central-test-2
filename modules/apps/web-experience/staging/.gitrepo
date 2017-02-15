@@ -5,6 +5,7 @@
 	autopull = false
 	cmdver = liferay
 	commit = 21af4f1ce0a22950a1c1a877f39acf431df145de
+	mergebuttonmergecommits = false
 	mode = push
 	parent = a1c950c7386928deb478190c124a34dfb2a6e25a
 	remote = git@github.com:liferay/com-liferay-staging.git

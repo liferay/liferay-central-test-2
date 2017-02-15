@@ -5,6 +5,7 @@
 	autopull = false
 	cmdver = liferay
 	commit = 463393c6f824bd2632074e837d7c026334265f98
+	mergebuttonmergecommits = false
 	mode = push
 	parent = b662648fe4ef86c4bebcc35ffe555237df6947f8
 	remote = git@github.com:liferay/com-liferay-portal-lock.git

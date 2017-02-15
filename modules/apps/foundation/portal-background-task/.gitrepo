@@ -5,6 +5,7 @@
 	autopull = false
 	cmdver = liferay
 	commit = 05aeb01099b843a1e1abfc149e1d2ebdd278bb54
+	mergebuttonmergecommits = false
 	mode = push
 	parent = c832b18dbd530cb882c61ce19677e1a59058bb9f
 	remote = git@github.com:liferay/com-liferay-portal-background-task.git

@@ -5,6 +5,7 @@
 	autopull = false
 	cmdver = liferay
 	commit = de47285577d358866c836b31e8bb096119514b47
+	mergebuttonmergecommits = false
 	mode = push
 	parent = 092f37d39997c807bd75a272b1a3237905423922
 	remote = git@github.com:liferay/com-liferay-iframe.git

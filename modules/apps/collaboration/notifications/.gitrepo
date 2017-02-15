@@ -5,6 +5,7 @@
 	autopull = false
 	cmdver = liferay
 	commit = bf0c2a8f60bb7e1f9289ce54047eec3c65569690
+	mergebuttonmergecommits = false
 	mode = push
 	parent = 7f991b85a60ea27d11f088e12a564aff6d33ad89
 	remote = git@github.com:liferay/com-liferay-notifications.git

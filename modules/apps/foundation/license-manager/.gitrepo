@@ -5,6 +5,7 @@
 	autopull = false
 	cmdver = liferay
 	commit = f20c262bfda70c9bb51551d9f072344dea4b9c62
+	mergebuttonmergecommits = false
 	mode = push
 	parent = 7f5c15c3958eaa85156b05c832b61bb96561f1e9
 	remote = git@github.com:liferay/com-liferay-license-manager.git

@@ -5,6 +5,7 @@
 	autopull = false
 	cmdver = liferay
 	commit = 54b6bc9a807876c8089a9fa3f37347854583f33d
+	mergebuttonmergecommits = false
 	mode = push
 	parent = e467b7bdc7d1dd891b792c89b25af6852825bc51
 	remote = git@github.com:liferay/com-liferay-portal-portlet-bridge.git

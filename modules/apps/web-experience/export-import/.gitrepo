@@ -5,6 +5,7 @@
 	autopull = false
 	cmdver = liferay
 	commit = 8a83932d9e8ecda0f9c2d9735ac6ab7f20f85203
+	mergebuttonmergecommits = false
 	mode = push
 	parent = 6b1ee021f32e1ab24be560a8459d289099f8929b
 	remote = git@github.com:liferay/com-liferay-export-import.git

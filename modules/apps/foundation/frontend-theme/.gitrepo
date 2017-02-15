@@ -5,6 +5,7 @@
 	autopull = false
 	cmdver = liferay
 	commit = 5744b189dff006fd87eb6bd5b6c7470f8419f749
+	mergebuttonmergecommits = false
 	mode = push
 	parent = fc8ed7a166bc03619cdf4535ae43c96a72ff60c9
 	remote = git@github.com:liferay/com-liferay-frontend-theme.git

@@ -5,6 +5,7 @@
 	autopull = false
 	cmdver = liferay
 	commit = 1c4513a9e36b1f4aff6175fb89c78c0f5d7eaaf0
+	mergebuttonmergecommits = false
 	mode = push
 	parent = be928f00c28c5e5a7f0eae5afa19c2eae24102f4
 	remote = git@github.com:liferay/com-liferay-social.git

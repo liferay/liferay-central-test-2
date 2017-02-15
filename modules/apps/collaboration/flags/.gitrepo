@@ -5,6 +5,7 @@
 	autopull = false
 	cmdver = liferay
 	commit = 4fa5e51bbdef4139a848c536fe287a6d0cc4fa41
+	mergebuttonmergecommits = false
 	mode = push
 	parent = 847ea4d54ed0fc59a2056685f6fa3abcb99056e1
 	remote = git@github.com:liferay/com-liferay-flags.git
