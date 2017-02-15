@@ -38,8 +38,6 @@ import javax.ws.rs.core.Response;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
 
-import org.json.JSONException;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -60,7 +58,9 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 	}
 
 	@Test
-	public void testAddConfigurationReturnsConfigurationObject() {
+	public void testAddConfigurationReturnsConfigurationObject()
+		throws Exception {
+
 		JsonObject randomConfigurationJsonObject =
 			_getRandomConfigurationJsonObject();
 
@@ -70,7 +70,9 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 		JsonObject responseJsonObject = builder.put(
 			Entity.json(randomConfigurationJsonObject), JsonObject.class);
 
-		_assertEquals(randomConfigurationJsonObject, responseJsonObject);
+		JSONAssert.assertEquals(
+			randomConfigurationJsonObject.toString(),
+			responseJsonObject.toString(), true);
 	}
 
 	@Test
@@ -98,7 +100,7 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 	}
 
 	@Test
-	public void testDeleteConfigurationDeletesConfiguration() {
+	public void testDeleteConfigurationDeletesConfiguration() throws Exception {
 		JsonObject configurationJsonObject = _addConfiguration(
 			_getRandomConfigurationJsonObject());
 
@@ -107,7 +109,9 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 
 		JsonObject responseJsonObject = builder.get(JsonObject.class);
 
-		_assertEquals(configurationJsonObject, responseJsonObject);
+		JSONAssert.assertEquals(
+			configurationJsonObject.toString(), responseJsonObject.toString(),
+			true);
 
 		builder.delete();
 
@@ -161,7 +165,7 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 	}
 
 	@Test
-	public void testGetAllConfigurationsNonEmpty() {
+	public void testGetAllConfigurationsNonEmpty() throws Exception {
 		Map<String, JsonObject> configurations = _addConfigurations(
 			_configurationJsonObjects);
 
@@ -173,20 +177,22 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 
 		Assert.assertEquals(configurations.size(), responseJsonArray.size());
 
-		responseJsonArray.forEach(
-			responseJsonElement -> {
-				JsonObject responseJsonObject =
-					responseJsonElement.getAsJsonObject();
+		for (JsonElement responseJsonElement : responseJsonArray) {
+			JsonObject responseJsonObject =
+				responseJsonElement.getAsJsonObject();
 
-				JsonObject expectedObject = configurations.get(
-					_getId(responseJsonObject));
+			JsonObject expectedObject = configurations.get(
+				_getId(responseJsonObject));
 
-				_assertEquals(expectedObject, responseJsonObject);
-			});
+			JSONAssert.assertEquals(
+				expectedObject.toString(), responseJsonObject.toString(), true);
+		}
 	}
 
 	@Test
-	public void testGetConfigurationWithExistingIdReturnsConfiguration() {
+	public void testGetConfigurationWithExistingIdReturnsConfiguration()
+		throws Exception {
+
 		JsonObject configurationJsonObject = _addConfiguration(
 			_getRandomConfigurationJsonObject());
 
@@ -195,7 +201,9 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 
 		JsonObject responseJsonObject = builder.get(JsonObject.class);
 
-		_assertEquals(configurationJsonObject, responseJsonObject);
+		JSONAssert.assertEquals(
+			configurationJsonObject.toString(), responseJsonObject.toString(),
+			true);
 	}
 
 	@Test
@@ -231,19 +239,6 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 			});
 
 		return configurationJsonObjectMap;
-	}
-
-	private void _assertEquals(
-		JsonObject expectedJsonObject, JsonObject actualJsonObject) {
-
-		try {
-			JSONAssert.assertEquals(
-				expectedJsonObject.toString(), actualJsonObject.toString(),
-				true);
-		}
-		catch (JSONException jsone) {
-			Assert.fail(jsone.getMessage());
-		}
 	}
 
 	private void _deleteAllConfigurationEntries() {
