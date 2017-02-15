@@ -5,5 +5,13 @@ Export-Package:\
 	com.liferay.adaptive.media.image.configuration,\
 	com.liferay.adaptive.media.image.finder,\
 	com.liferay.adaptive.media.image.processor
+Import-Package:\
+	!com.adobe.xmp.*,\
+	\
+	!com.drew.*,\
+	*
 Liferay-Releng-Module-Group-Description:
 Liferay-Releng-Module-Group-Title: Adaptive Media
+-includeresource:\
+	@metadata-extractor-[0-9]*.jar,\
+	@xmpcore-[0-9]*.jar

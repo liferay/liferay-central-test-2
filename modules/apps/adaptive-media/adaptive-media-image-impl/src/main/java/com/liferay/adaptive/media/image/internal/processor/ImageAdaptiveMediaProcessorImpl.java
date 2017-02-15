@@ -17,6 +17,7 @@ package com.liferay.adaptive.media.image.internal.processor;
 import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
+import com.liferay.adaptive.media.image.internal.processor.util.TiffOrientationTransformer;
 import com.liferay.adaptive.media.image.internal.util.ImageProcessor;
 import com.liferay.adaptive.media.image.internal.util.ImageStorage;
 import com.liferay.adaptive.media.image.model.AdaptiveMediaImage;
@@ -115,6 +116,15 @@ public final class ImageAdaptiveMediaProcessorImpl
 		InputStream inputStream = null;
 
 		try {
+			Optional<Integer> orientationValueOptional =
+				_tiffOrientationTransformer.getTiffOrientationValue(
+					fileVersion.getContentStream(false));
+
+			if (orientationValueOptional.isPresent()) {
+				renderedImage = _tiffOrientationTransformer.transform(
+					renderedImage, orientationValueOptional.get());
+			}
+
 			byte[] bytes = _getBytes(fileVersion, renderedImage);
 
 			inputStream = new UnsyncByteArrayInputStream(bytes);
@@ -146,7 +156,7 @@ public final class ImageAdaptiveMediaProcessorImpl
 		AdaptiveMediaImageLocalService imageLocalService) {
 
 		_imageLocalService = imageLocalService;
-	};
+	}
 
 	@Reference(unbind = "-")
 	public void setImageProcessor(ImageProcessor imageProcessor) {
@@ -156,6 +166,13 @@ public final class ImageAdaptiveMediaProcessorImpl
 	@Reference(unbind = "-")
 	public void setImageStorage(ImageStorage imageStorage) {
 		_imageStorage = imageStorage;
+	}
+
+	@Reference
+	public void setTiffOrientationTransformer(
+		TiffOrientationTransformer tiffOrientationTransformer) {
+
+		_tiffOrientationTransformer = tiffOrientationTransformer;
 	}
 
 	private byte[] _getBytes(
@@ -175,5 +192,6 @@ public final class ImageAdaptiveMediaProcessorImpl
 	private AdaptiveMediaImageLocalService _imageLocalService;
 	private ImageProcessor _imageProcessor;
 	private ImageStorage _imageStorage;
+	private TiffOrientationTransformer _tiffOrientationTransformer;
 
 }
