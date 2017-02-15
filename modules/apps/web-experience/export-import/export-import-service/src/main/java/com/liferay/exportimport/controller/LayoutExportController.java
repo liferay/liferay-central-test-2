@@ -779,9 +779,15 @@ public class LayoutExportController implements ExportController {
 			return false;
 		}
 
-		LayoutRevision layoutRevision =
-			_layoutRevisionLocalService.fetchLayoutRevision(
-				layoutSetBranchId, true, layout.getPlid());
+		LayoutRevision layoutRevision = LayoutStagingUtil.getLayoutRevision(
+			layout);
+
+		if (layoutRevision != null) {
+			return true;
+		}
+
+		layoutRevision = _layoutRevisionLocalService.fetchLayoutRevision(
+			layoutSetBranchId, true, layout.getPlid());
 
 		if (layoutRevision == null) {
 			return false;
