@@ -448,7 +448,7 @@ public class ImageProcessorImpl
 			orientationValue = _getTiffOrientationValue(fileVersion);
 		}
 		catch (PortalException pe) {
-			_log.error("Unable to get the TIFF orientation value", pe);
+			_log.error("Could not obtain the tiff orientation value", pe);
 		}
 
 		if (Validator.isNotNull(orientationValue) &&
