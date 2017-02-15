@@ -58,7 +58,7 @@ public class AdaptiveMediaImageOptimizerUtil {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"Cannot optimize for company id " + companyId +
-					" because the component is not actived");
+						" because the component is not actived");
 			}
 
 			return;

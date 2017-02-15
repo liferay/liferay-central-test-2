@@ -15,7 +15,7 @@
 package com.liferay.adaptive.media.image.jaxrs.internal.provider;
 
 import com.liferay.adaptive.media.AdaptiveMediaAttribute;
-import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
+import com.liferay.adaptive.media.AdaptiveMediaRuntimeException.AdaptiveMediaAttributeFormatException;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -77,9 +77,7 @@ public class AdaptiveMediaApiQueryContextProvider
 				new AdaptiveMediaApiQuery.QueryAttribute(
 					attribute, attribute.convert(keyValuePair[1])));
 		}
-		catch (AdaptiveMediaRuntimeException.
-			AdaptiveMediaAttributeFormatException amafe) {
-
+		catch (AdaptiveMediaAttributeFormatException amafe) {
 			throw new BadRequestException(
 				String.format(
 					"Incorrect or malformed query {q=\"%s\"}", query));
