@@ -19,6 +19,7 @@ import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigur
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
 import com.liferay.adaptive.media.image.exception.DuplicateAdaptiveMediaImageException;
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationEntryImpl;
+import com.liferay.adaptive.media.image.internal.processor.util.TiffOrientationTransformer;
 import com.liferay.adaptive.media.image.internal.util.ImageProcessor;
 import com.liferay.adaptive.media.image.internal.util.ImageStorage;
 import com.liferay.adaptive.media.image.service.AdaptiveMediaImageLocalService;
@@ -51,6 +52,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 		_processor.setImageProcessor(_imageProcessor);
 		_processor.setImageAdaptiveMediaConfigurationHelper(
 			_configurationHelper);
+		_processor.setTiffOrientationTransformer(_tiffOrientationTransformer);
 
 		ImageToolUtil imageToolUtil = new ImageToolUtil();
 
@@ -154,6 +156,13 @@ public class ImageAdaptiveMediaProcessorImplTest {
 		);
 
 		Mockito.when(
+			_tiffOrientationTransformer.getTiffOrientationValue(
+				Mockito.any(InputStream.class))
+		).thenReturn(
+			Optional.empty()
+		);
+
+		Mockito.when(
 			_imageLocalService.addAdaptiveMediaImage(
 				Mockito.anyString(), Mockito.anyLong(), Mockito.anyString(),
 				Mockito.anyInt(), Mockito.anyInt(), Mockito.anyInt())
@@ -197,6 +206,13 @@ public class ImageAdaptiveMediaProcessorImplTest {
 			_imageProcessor.scaleImage(_fileVersion, configurationEntry)
 		).thenReturn(
 			renderedImage
+		);
+
+		Mockito.when(
+			_tiffOrientationTransformer.getTiffOrientationValue(
+				Mockito.any(InputStream.class))
+		).thenReturn(
+			Optional.empty()
 		);
 
 		_processor.process(_fileVersion);
@@ -304,6 +320,13 @@ public class ImageAdaptiveMediaProcessorImplTest {
 			renderedImage
 		);
 
+		Mockito.when(
+			_tiffOrientationTransformer.getTiffOrientationValue(
+				Mockito.any(InputStream.class))
+		).thenReturn(
+			Optional.empty()
+		);
+
 		Mockito.doThrow(
 			AdaptiveMediaRuntimeException.IOException.class
 		).when(
@@ -401,5 +424,7 @@ public class ImageAdaptiveMediaProcessorImplTest {
 	private final ImageTool _imageTool = Mockito.mock(ImageTool.class);
 	private final ImageAdaptiveMediaProcessorImpl _processor =
 		new ImageAdaptiveMediaProcessorImpl();
+	private final TiffOrientationTransformer _tiffOrientationTransformer =
+		Mockito.mock(TiffOrientationTransformer.class);
 
 }
