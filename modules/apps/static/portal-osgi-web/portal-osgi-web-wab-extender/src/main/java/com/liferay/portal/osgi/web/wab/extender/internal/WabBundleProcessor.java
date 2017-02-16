@@ -806,11 +806,12 @@ public class WabBundleProcessor {
 	private final Set<ServiceRegistration<Filter>> _filterServiceRegistrations =
 		new ConcurrentSkipListSet<>();
 	private final Set<ServiceRegistration<?>> _listenerServiceRegistrations =
-		new ConcurrentSkipListSet<>(new ListenerServiceRegistrationComparator());
+		new ConcurrentSkipListSet<>(
+			new ListenerServiceRegistrationComparator());
 	private final Logger _logger;
 	private ServiceReference<ServletContextHelperRegistration>
 		_servletContextHelperRegistrationServiceReference;
-	private final Set<ServiceRegistration<Servlet>> _servletServiceRegistrations =
-		new ConcurrentSkipListSet<>();
+	private final Set<ServiceRegistration<Servlet>>
+		_servletServiceRegistrations = new ConcurrentSkipListSet<>();
 
 }
