@@ -25,7 +25,7 @@ import org.osgi.framework.ServiceRegistration;
 /**
  * @author Juan Gonzalez
  */
-public class ListenerRegistrationComparator
+public class ListenerServiceRegistrationComparator
 	implements Comparator<ServiceRegistration<?>> {
 
 	@Override
