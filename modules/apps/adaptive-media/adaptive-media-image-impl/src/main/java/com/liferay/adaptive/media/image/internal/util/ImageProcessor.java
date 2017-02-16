@@ -51,9 +51,8 @@ public class ImageProcessor {
 		FileVersion fileVersion,
 		ImageAdaptiveMediaConfigurationEntry configurationEntry) {
 
-		try {
-			RenderedImage renderedImage = _readImage(
-				fileVersion.getContentStream(false));
+		try (InputStream is = fileVersion.getContentStream(false)) {
+			RenderedImage renderedImage = _readImage(is);
 
 			Map<String, String> properties = configurationEntry.getProperties();
 
