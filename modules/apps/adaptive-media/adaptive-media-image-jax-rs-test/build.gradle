@@ -6,7 +6,6 @@ dependencies {
 }
 
 dependencies {
-	runtimeLib group: "com.liferay", name: "com.liferay.users.admin.demo.data.creator.api", version: "1.0.0"
 	runtimeLib group: "com.liferay.portal", name: "com.liferay.portal.test.integration", version: "default"
 	runtimeLib group: "com.liferay.portal", name: "com.liferay.portal.test", version: "default"
 	runtimeLib group: "org.apache.aries.jmx", name: "org.apache.aries.jmx", version: "1.1.5"
