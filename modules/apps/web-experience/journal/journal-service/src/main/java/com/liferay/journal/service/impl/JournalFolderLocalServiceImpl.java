@@ -758,6 +758,38 @@ public class JournalFolderLocalServiceImpl
 	}
 
 	@Override
+	public List<DDMStructure> searchDDMStructures(
+			long companyId, long[] groupIds, long folderId, int restrictionType,
+			String keywords, int start, int end,
+			OrderByComparator<DDMStructure> obc)
+		throws PortalException {
+
+		if (restrictionType ==
+				JournalFolderConstants.
+					RESTRICTION_TYPE_DDM_STRUCTURES_AND_WORKFLOW) {
+
+			return ddmStructureLocalService.search(
+				companyId, groupIds,
+				classNameLocalService.getClassNameId(JournalFolder.class),
+				folderId, keywords, start, end, obc);
+		}
+
+		folderId = getOverridedDDMStructuresFolderId(folderId);
+
+		if (folderId != JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+			return ddmStructureLocalService.search(
+				companyId, groupIds,
+				classNameLocalService.getClassNameId(JournalFolder.class),
+				folderId, keywords, start, end, obc);
+		}
+
+		return ddmStructureLocalService.search(
+			companyId, groupIds,
+			classNameLocalService.getClassNameId(JournalArticle.class),
+			keywords, WorkflowConstants.STATUS_ANY, start, end, obc);
+	}
+
+	@Override
 	public void subscribe(long userId, long groupId, long folderId)
 		throws PortalException {
 
