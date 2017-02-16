@@ -55,6 +55,7 @@ page import="com.liferay.dynamic.data.mapping.service.permission.DDMStructurePer
 page import="com.liferay.dynamic.data.mapping.service.permission.DDMTemplatePermission" %><%@
 page import="com.liferay.dynamic.data.mapping.storage.DDMFormValues" %><%@
 page import="com.liferay.dynamic.data.mapping.util.DDMNavigationHelper" %><%@
+page import="com.liferay.dynamic.data.mapping.util.comparator.StructureModifiedDateComparator" %><%@
 page import="com.liferay.frontend.taglib.servlet.taglib.util.AddMenuKeys" %><%@
 page import="com.liferay.item.selector.ItemSelector" %><%@
 page import="com.liferay.item.selector.ItemSelectorReturnType" %><%@
