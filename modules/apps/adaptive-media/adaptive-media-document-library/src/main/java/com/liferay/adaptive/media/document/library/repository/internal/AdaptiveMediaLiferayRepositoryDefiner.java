@@ -14,7 +14,14 @@
 
 package com.liferay.adaptive.media.document.library.repository.internal;
 
+import com.liferay.portal.kernel.repository.DocumentRepository;
+import com.liferay.portal.kernel.repository.capabilities.Capability;
+import com.liferay.portal.kernel.repository.capabilities.ProcessorCapability;
+import com.liferay.portal.kernel.repository.registry.CapabilityRegistry;
 import com.liferay.portal.kernel.repository.registry.RepositoryDefiner;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
@@ -26,6 +33,19 @@ import org.osgi.service.component.annotations.Deactivate;
 @Component(immediate = true, service = RepositoryDefiner.class)
 public class AdaptiveMediaLiferayRepositoryDefiner
 	extends BaseOverridingRepositoryDefiner {
+
+	@Override
+	public void registerCapabilities(
+		CapabilityRegistry<DocumentRepository> capabilityRegistry) {
+
+		Set<Class<? extends Capability>> excludedCapabilities = new HashSet<>();
+
+		excludedCapabilities.add(ProcessorCapability.class);
+
+		super.registerCapabilities(
+			new OverridingCapabilityRegistry<>(
+				capabilityRegistry, excludedCapabilities));
+	}
 
 	@Activate
 	protected void activate() {
