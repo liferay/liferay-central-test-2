@@ -8077,6 +8077,9 @@ public class JournalArticleLocalServiceImpl
 	@ServiceReference(type = DDMTemplateLocalService.class)
 	protected DDMTemplateLocalService ddmTemplateLocalService;
 
+	/**
+	 * @deprecated As of 3.8.0, replaced by {@link #journalConverter}
+	 */
 	@Deprecated
 	@ServiceReference(type = DDMXML.class)
 	protected DDMXML ddmXML;
