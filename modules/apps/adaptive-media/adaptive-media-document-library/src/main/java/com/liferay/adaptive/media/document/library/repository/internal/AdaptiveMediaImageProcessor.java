@@ -217,13 +217,11 @@ public class AdaptiveMediaImageProcessor
 		throws AdaptiveMediaException, PortalException {
 
 		return _imageAdaptiveMediaFinder.getAdaptiveMedia(queryBuilder ->
-			queryBuilder.forVersion(fileVersion).
-				with(
-					ImageAdaptiveMediaAttribute.IMAGE_WIDTH,
-					PropsValues.DL_FILE_ENTRY_THUMBNAIL_MAX_WIDTH).
-				with(
-					ImageAdaptiveMediaAttribute.IMAGE_HEIGHT,
-					PropsValues.DL_FILE_ENTRY_THUMBNAIL_MAX_HEIGHT).done());
+			queryBuilder.forVersion(fileVersion).with(
+				ImageAdaptiveMediaAttribute.IMAGE_WIDTH,
+				PropsValues.DL_FILE_ENTRY_THUMBNAIL_MAX_WIDTH).with(
+				ImageAdaptiveMediaAttribute.IMAGE_HEIGHT,
+				PropsValues.DL_FILE_ENTRY_THUMBNAIL_MAX_HEIGHT).done());
 	}
 
 	private boolean _isMimeTypeSupported(String mimeType) {
