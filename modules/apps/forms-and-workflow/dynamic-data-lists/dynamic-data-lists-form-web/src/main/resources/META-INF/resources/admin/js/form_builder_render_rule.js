@@ -153,6 +153,12 @@ AUI.add(
 						instance._actionFactory.set('pages', event.newVal);
 					},
 
+					_afterValueChange: function() {
+						var instance = this;
+
+						instance._validateRule();
+					},
+
 					_canDeleteCondition: function() {
 						var instance = this;
 
@@ -306,11 +312,11 @@ AUI.add(
 								actions: rule ? rule.actions : [],
 								conditions: rule ? rule.conditions : [],
 								deleteIcon: Liferay.Util.getLexiconIconTpl('trash', 'icon-monospaced'),
+								invalid: !instance._isValidRule(rule),
 								logicalOperator: instance.get('logicOperator'),
 								plusIcon: Liferay.Util.getLexiconIconTpl('plus', 'icon-monospaced'),
 								showLabel: false,
-								strings: instance.get('strings'),
-								invalid: !instance._isValidRule(rule)
+								strings: instance.get('strings')
 							}
 						);
 					},
@@ -321,7 +327,7 @@ AUI.add(
 						var field = event.target;
 
 						var fieldName = field.get('fieldName');
- 
+
 						if (fieldName && fieldName.match('-target')) {
 							var index = fieldName.split('-')[0];
 
@@ -401,6 +407,14 @@ AUI.add(
 						);
 					},
 
+					_isValidRule: function(rule) {
+						var instance = this;
+
+						var validator = instance._validator;
+
+						return validator.isValidRule(rule);
+					},
+
 					_renderActions: function(actions) {
 						var instance = this;
 
@@ -452,20 +466,6 @@ AUI.add(
 						else {
 							saveButton.setAttribute('disabled', '');
 						}
-					},
-
-					_afterValueChange: function() {
-						var instance = this;
-
-						instance._validateRule();
-					},
-
-					_isValidRule: function(rule) {
-						var instance = this;
-
-						var validator = instance._validator;
-
-						return validator.isValidRule(rule);
 					}
 				}
 			}

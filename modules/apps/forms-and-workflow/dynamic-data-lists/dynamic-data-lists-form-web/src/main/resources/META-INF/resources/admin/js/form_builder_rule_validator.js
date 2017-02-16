@@ -18,7 +18,7 @@ AUI.add(
 					},
 
 					_isPropertyAction: function(type) {
-						return type === 'show' | type === 'enable' | type === 'required';
+						return type === 'show' | type === 'enable' | type === 'require' | type === 'jump-to-page';
 					},
 
 					_isValidAction: function(action) {
