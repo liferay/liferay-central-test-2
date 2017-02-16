@@ -1,2 +1,2 @@
 contextPaths=/adaptive-media-rest
-jaxrs.application.filters=(component.name=com.liferay.adaptive.media.image.jaxrs.internal.ImageAdaptiveMediaJaxRsApplication)
+jaxRsApplicationFilterStrings=(component.name=com.liferay.adaptive.media.image.jaxrs.internal.ImageAdaptiveMediaJaxRsApplication)
