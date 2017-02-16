@@ -56,7 +56,8 @@ public class TiffOrientationTransformer {
 			ExifIFD0Directory exifIFD0Directory =
 				metadata.getFirstDirectoryOfType(ExifIFD0Directory.class);
 
-			if (!exifIFD0Directory.containsTag(
+			if ((exifIFD0Directory == null) ||
+				!exifIFD0Directory.containsTag(
 					ExifIFD0Directory.TAG_ORIENTATION)) {
 
 				return Optional.empty();
