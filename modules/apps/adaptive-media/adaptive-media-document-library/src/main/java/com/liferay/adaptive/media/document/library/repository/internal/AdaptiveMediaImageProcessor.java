@@ -47,70 +47,60 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(
 	immediate = true, property = {"service.ranking:Integer=100"},
-	service = DLProcessor.class
+	service = {AdaptiveMediaImageProcessor.class, DLProcessor.class}
 )
 public class AdaptiveMediaImageProcessor
 	implements DLProcessor, ImageProcessor {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void cleanUp(FileEntry fileEntry) {
-		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void cleanUp(FileVersion fileVersion) {
-		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void copy(
 		FileVersion sourceFileVersion, FileVersion destinationFileVersion) {
-
-		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void exportGeneratedFiles(
-			PortletDataContext portletDataContext, FileEntry fileEntry,
-			Element fileEntryElement)
-		throws Exception {
-
-		throw new UnsupportedOperationException();
+		PortletDataContext portletDataContext, FileEntry fileEntry,
+		Element fileEntryElement) {
 	}
 
 	@Override
 	public void generateImages(
 			FileVersion sourceFileVersion, FileVersion destinationFileVersion)
 		throws Exception {
-
-		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Set<String> getImageMimeTypes() {
-		throw new UnsupportedOperationException();
+		return _supportedMimeTypes;
 	}
 
 	@Override
 	public InputStream getPreviewAsStream(FileVersion fileVersion)
 		throws Exception {
 
-		throw new UnsupportedOperationException();
+		return _imageProcessor.getPreviewAsStream(fileVersion);
 	}
 
 	@Override
 	public long getPreviewFileSize(FileVersion fileVersion) throws Exception {
-		throw new UnsupportedOperationException();
+		return _imageProcessor.getPreviewFileSize(fileVersion);
 	}
 
 	@Override
 	public String getPreviewType(FileVersion fileVersion) {
-		throw new UnsupportedOperationException();
+		return _imageProcessor.getPreviewType(fileVersion);
 	}
 
 	@Override
@@ -171,8 +161,6 @@ public class AdaptiveMediaImageProcessor
 			PortletDataContext portletDataContext, FileEntry fileEntry,
 			FileEntry importedFileEntry, Element fileEntryElement)
 		throws Exception {
-
-		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -201,15 +189,11 @@ public class AdaptiveMediaImageProcessor
 			long custom1ImageId, long custom2ImageId, InputStream is,
 			String type)
 		throws Exception {
-
-		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public void trigger(
 		FileVersion sourceFileVersion, FileVersion destinationFileVersion) {
-
-		throw new UnsupportedOperationException();
 	}
 
 	private Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>>
