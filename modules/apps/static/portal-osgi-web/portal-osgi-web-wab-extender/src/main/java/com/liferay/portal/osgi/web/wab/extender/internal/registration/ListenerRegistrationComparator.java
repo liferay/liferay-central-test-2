@@ -33,38 +33,44 @@ public class ListenerRegistrationComparator
 		ServiceRegistration<?> serviceRegistration1,
 		ServiceRegistration<?> serviceRegistration2) {
 
+		Integer servletContextListenerCount1 = 0;
+
 		ServiceReference<?> serviceReference1 =
 			serviceRegistration1.getReference();
+
+		String[] objectClassNames1 = (String[])serviceReference1.getProperty(
+			Constants.OBJECTCLASS);
+
+		for (String objectClassName : objectClassNames1) {
+			if (objectClassName.equals(
+					ServletContextListener.class.getName())) {
+
+				servletContextListenerCount1++;
+			}
+		}
+
+		Integer servletContextListenerCount2 = 0;
+
 		ServiceReference<?> serviceReference2 =
 			serviceRegistration2.getReference();
 
-		String[] objectClass1 = (String[])serviceReference1.getProperty(
+		String[] objectClassNames2 = (String[])serviceReference2.getProperty(
 			Constants.OBJECTCLASS);
 
-		String[] objectClass2 = (String[])serviceReference2.getProperty(
-			Constants.OBJECTCLASS);
+		for (String objectClassName : objectClassNames2) {
+			if (objectClassName.equals(
+					ServletContextListener.class.getName())) {
 
-		Integer servletContextListener1 = 0;
-
-		for (String objectClass : objectClass1) {
-			if (objectClass.equals(ServletContextListener.class.getName())) {
-				servletContextListener1++;
+				servletContextListenerCount2++;
 			}
 		}
 
-		Integer servletContextListener2 = 0;
-
-		for (String objectClass : objectClass2) {
-			if (objectClass.equals(ServletContextListener.class.getName())) {
-				servletContextListener2++;
-			}
+		if (servletContextListenerCount1.equals(servletContextListenerCount2)) {
+			servletContextListenerCount2++;
 		}
 
-		if (servletContextListener1.equals(servletContextListener2)) {
-			servletContextListener2++;
-		}
-
-		return servletContextListener1.compareTo(servletContextListener2);
+		return servletContextListenerCount1.compareTo(
+			servletContextListenerCount2);
 	}
 
 }
