@@ -51,66 +51,70 @@ if (entry == null) {
 
 	<aui:model-context bean="<%= entry %>" model="<%= AnnouncementsEntry.class %>" />
 
-	<aui:fieldset>
-		<c:choose>
-			<c:when test="<%= entry != null %>">
-				<%@ include file="/entry_scope.jspf" %>
-			</c:when>
-			<c:otherwise>
+	<aui:fieldset-group markupView="lexicon">
+		<aui:fieldset>
+			<h1><aui:input autoFocus="<%= windowState.equals(WindowState.MAXIMIZED) %>" name="title" /></h1>
+
+			<aui:field-wrapper label="content" required="<%= true %>">
+				<liferay-ui:input-editor contents="<%= content %>" editorName='<%= PropsUtil.get("editor.wysiwyg.portal-web.docroot.html.portlet.announcements.edit_entry.jsp") %>' />
+
+				<aui:input name="content" type="hidden" />
+			</aui:field-wrapper>
+		</aui:fieldset>
+
+		<aui:fieldset collapsed="<%= true %>" collapsible="<%= true %>" label="configuration">
+			<c:choose>
+				<c:when test="<%= entry != null %>">
+					<%@ include file="/entry_scope.jspf" %>
+				</c:when>
+				<c:otherwise>
+
+					<%
+					String distributionScope = ParamUtil.getString(request, "distributionScope");
+
+					long classNameId = -1;
+					long classPK = -1;
+
+					String[] distributionScopeArray = StringUtil.split(distributionScope);
+
+					if (distributionScopeArray.length == 2) {
+						classNameId = GetterUtil.getLong(distributionScopeArray[0]);
+						classPK = GetterUtil.getLong(distributionScopeArray[1]);
+					}
+
+					boolean submitOnChange = false;
+					%>
+
+					<%@ include file="/entry_select_scope.jspf" %>
+				</c:otherwise>
+			</c:choose>
+
+			<aui:input name="url" />
+
+			<aui:select name="type">
 
 				<%
-				String distributionScope = ParamUtil.getString(request, "distributionScope");
-
-				long classNameId = -1;
-				long classPK = -1;
-
-				String[] distributionScopeArray = StringUtil.split(distributionScope);
-
-				if (distributionScopeArray.length == 2) {
-					classNameId = GetterUtil.getLong(distributionScopeArray[0]);
-					classPK = GetterUtil.getLong(distributionScopeArray[1]);
-				}
-
-				boolean submitOnChange = false;
+				for (String curType : AnnouncementsEntryConstants.TYPES) {
 				%>
 
-				<%@ include file="/entry_select_scope.jspf" %>
-			</c:otherwise>
-		</c:choose>
+					<aui:option label="<%= curType %>" selected="<%= (entry != null) && curType.equals(entry.getType()) %>" />
 
-		<aui:input autoFocus="<%= windowState.equals(WindowState.MAXIMIZED) %>" name="title" />
+				<%
+				}
+				%>
 
-		<aui:input name="url" />
+			</aui:select>
 
-		<aui:field-wrapper label="content" required="<%= true %>">
-			<liferay-ui:input-editor contents="<%= content %>" editorName='<%= PropsUtil.get("editor.wysiwyg.portal-web.docroot.html.portlet.announcements.edit_entry.jsp") %>' />
+			<aui:select name="priority">
+				<aui:option label="normal" selected="<%= (entry != null) && (entry.getPriority() == 0) %>" value="0" />
+				<aui:option label="important" selected="<%= (entry != null) && (entry.getPriority() == 1) %>" value="1" />
+			</aui:select>
 
-			<aui:input name="content" type="hidden" />
-		</aui:field-wrapper>
+			<aui:input dateTogglerCheckboxLabel="display-immediately" disabled="<%= displayImmediately %>" name="displayDate" />
 
-		<aui:select name="type">
-
-			<%
-			for (String curType : AnnouncementsEntryConstants.TYPES) {
-			%>
-
-				<aui:option label="<%= curType %>" selected="<%= (entry != null) && curType.equals(entry.getType()) %>" />
-
-			<%
-			}
-			%>
-
-		</aui:select>
-
-		<aui:select name="priority">
-			<aui:option label="normal" selected="<%= (entry != null) && (entry.getPriority() == 0) %>" value="0" />
-			<aui:option label="important" selected="<%= (entry != null) && (entry.getPriority() == 1) %>" value="1" />
-		</aui:select>
-
-		<aui:input dateTogglerCheckboxLabel="display-immediately" disabled="<%= displayImmediately %>" name="displayDate" />
-
-		<aui:input name="expirationDate" />
-	</aui:fieldset>
+			<aui:input name="expirationDate" />
+		</aui:fieldset>
+	</aui:fieldset-group>
 
 	<aui:button-row>
 		<aui:button cssClass="btn-lg" type="submit" />
