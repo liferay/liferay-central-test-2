@@ -17,6 +17,7 @@ package com.liferay.adaptive.media.image.internal.test;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.Sync;
 import com.liferay.portal.kernel.test.rule.SynchronousDestinationTestRule;
@@ -27,12 +28,15 @@ import com.liferay.registry.Registry;
 import com.liferay.registry.RegistryUtil;
 import com.liferay.registry.ServiceTracker;
 
+import java.io.IOException;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Optional;
 
+import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
@@ -76,19 +80,12 @@ public class ImageAdaptiveMediaConfigurationTest {
 
 	@Before
 	public void setUp() throws Exception {
-		ImageAdaptiveMediaConfigurationHelper configurationHelper =
-			_serviceTracker.getService();
+		_deleteAllConfigurationEntries();
+	}
 
-		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
-			configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				TestPropsValues.getCompanyId(), configurationEntry -> true);
-
-		for (ImageAdaptiveMediaConfigurationEntry configurationEntry :
-				configurationEntries) {
-
-			configurationHelper.forceDeleteImageAdaptiveMediaConfigurationEntry(
-				TestPropsValues.getCompanyId(), configurationEntry.getUUID());
-		}
+	@After
+	public void tearDown() throws Exception {
+		_deleteAllConfigurationEntries();
 	}
 
 	@Test
@@ -327,6 +324,24 @@ public class ImageAdaptiveMediaConfigurationTest {
 					TestPropsValues.getCompanyId(), "0");
 
 		Assert.assertFalse(configurationEntryOptional.isPresent());
+	}
+
+	private void _deleteAllConfigurationEntries()
+		throws IOException, PortalException {
+
+		ImageAdaptiveMediaConfigurationHelper configurationHelper =
+			_serviceTracker.getService();
+
+		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
+			configurationHelper.getImageAdaptiveMediaConfigurationEntries(
+				TestPropsValues.getCompanyId(), configurationEntry -> true);
+
+		for (ImageAdaptiveMediaConfigurationEntry configurationEntry :
+			configurationEntries) {
+
+			configurationHelper.forceDeleteImageAdaptiveMediaConfigurationEntry(
+				TestPropsValues.getCompanyId(), configurationEntry.getUUID());
+		}
 	}
 
 	private static ServiceTracker

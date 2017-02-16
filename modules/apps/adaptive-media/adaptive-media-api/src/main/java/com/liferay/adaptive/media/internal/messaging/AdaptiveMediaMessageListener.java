@@ -82,7 +82,9 @@ public class AdaptiveMediaMessageListener extends BaseMessageListener {
 				command.execute(processor, model, modelId);
 			}
 			catch (Exception e) {
-				_log.error(e);
+				if (_log.isWarnEnabled()) {
+					_log.warn(e, e);
+				}
 			}
 		}
 

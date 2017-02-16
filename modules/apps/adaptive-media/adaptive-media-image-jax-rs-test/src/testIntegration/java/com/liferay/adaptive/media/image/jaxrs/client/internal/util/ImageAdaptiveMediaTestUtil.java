@@ -167,7 +167,7 @@ public class ImageAdaptiveMediaTestUtil {
 	}
 
 	private static final String _CONFIGURATION_BASE_PATH =
-		"/o/adaptive-media/images/configuration";
+		"/o/adaptive-media-rest/images/configuration";
 
 	private static final String _GET_COMPANY_PATH =
 		"/company/get-company-by-virtual-host";
@@ -181,7 +181,7 @@ public class ImageAdaptiveMediaTestUtil {
 	private static final String _JSONWS_BASE_PATH = "/api/jsonws";
 
 	private static final String _MEDIA_BASE_PATH =
-		"o/adaptive-media/images/content/file/{fileEntryId}/version/last";
+		"o/adaptive-media-rest/images/content/file/{fileEntryId}/version/last";
 
 	private static final String _SERVER_CONTEXT = "http://localhost:8080";
 

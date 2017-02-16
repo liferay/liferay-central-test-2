@@ -63,7 +63,7 @@ public class TestBundleActivator implements BundleActivator {
 			Folder nonAdaptiveMediaFolder = _rootFolderDemoDataCreator.create(
 				user.getUserId(), groupId, "Non Adaptive Media");
 
-			for (int i = 0; i < 2; i++) {
+			for (int i = 0; i < 5; i++) {
 				String fileName = String.format("image-without-%d.jpeg", i);
 
 				_fileEntryDemoDataCreator.create(
@@ -76,7 +76,7 @@ public class TestBundleActivator implements BundleActivator {
 			Folder adaptiveMediaFolder = _rootFolderDemoDataCreator.create(
 				user.getUserId(), groupId, "Adaptive Media");
 
-			for (int i = 0; i < 3; i++) {
+			for (int i = 0; i < 2; i++) {
 				String fileName = String.format("image-with-%d.jpeg", i);
 
 				_fileEntryDemoDataCreator.create(

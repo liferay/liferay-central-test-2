@@ -17,12 +17,15 @@ package com.liferay.adaptive.media.image.jaxrs.internal;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
 import com.liferay.adaptive.media.image.finder.ImageAdaptiveMediaFinder;
 import com.liferay.adaptive.media.processor.AdaptiveMediaAsyncProcessorLocator;
+import com.liferay.document.library.kernel.exception.NoSuchFileEntryException;
+import com.liferay.document.library.kernel.exception.NoSuchFileVersionException;
 import com.liferay.document.library.kernel.service.DLAppService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Context;
@@ -53,7 +56,14 @@ public class ImageAdaptiveMediaRootResource {
 			@PathParam("version") String version)
 		throws PortalException {
 
-		FileEntry fileEntry = dlAppService.getFileEntry(fileEntryId);
+		FileEntry fileEntry = null;
+
+		try {
+			fileEntry = dlAppService.getFileEntry(fileEntryId);
+		}
+		catch (NoSuchFileEntryException nsfee) {
+			throw new NotFoundException();
+		}
 
 		FileVersion fileVersion = null;
 
@@ -74,7 +84,14 @@ public class ImageAdaptiveMediaRootResource {
 			@PathParam("fileVersionId") long fileVersionId)
 		throws PortalException {
 
-		FileVersion fileVersion = dlAppService.getFileVersion(fileVersionId);
+		FileVersion fileVersion = null;
+
+		try {
+			fileVersion = dlAppService.getFileVersion(fileVersionId);
+		}
+		catch (NoSuchFileVersionException nsfve) {
+			throw new NotFoundException();
+		}
 
 		return new ImageAdaptiveMediaFileVersionResource(
 			fileVersion, finder, configurationHelper, _asyncProcessorLocator,

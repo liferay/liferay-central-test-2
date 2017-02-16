@@ -94,7 +94,7 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 
 	@Test
 	public void testGettingDataWithoutAttributeReturns400() {
-		long fileEntryId = _getRandomNonAdaptiveFileEntryId();
+		long fileEntryId = _nonAdaptiveFileEntryIds.get(0);
 
 		Response response = _getDataEndpointResponse(fileEntryId, true, null);
 
@@ -105,7 +105,7 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 	public void testGettingNonAdaptiveByConfigReturns404IfParam() {
 		String id = _getRandomConfigurationId();
 
-		long fileEntryId = _getRandomNonAdaptiveFileEntryId();
+		long fileEntryId = _nonAdaptiveFileEntryIds.get(0);
 
 		Response response = _getConfigEndpointResponse(id, fileEntryId, false);
 
@@ -116,7 +116,7 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 	public void testGettingNonAdaptiveByConfigReturnsOriginal() {
 		String id = _getRandomConfigurationId();
 
-		long fileEntryId = _getRandomNonAdaptiveFileEntryId();
+		long fileEntryId = _nonAdaptiveFileEntryIds.get(1);
 
 		Response response = _getConfigEndpointResponse(id, fileEntryId, true);
 
@@ -126,7 +126,7 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 
 	@Test
 	public void testGettingNonAdaptiveDataWithAttributeReturns404IfParam() {
-		long fileEntryId = _getRandomNonAdaptiveFileEntryId();
+		long fileEntryId = _nonAdaptiveFileEntryIds.get(2);
 
 		Response response = _getDataEndpointResponse(
 			fileEntryId, false, _getRandomQueryParams());
@@ -136,7 +136,7 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 
 	@Test
 	public void testGettingNonAdaptiveDataWithAttributeReturnsOriginal() {
-		long fileEntryId = _getRandomNonAdaptiveFileEntryId();
+		long fileEntryId = _nonAdaptiveFileEntryIds.get(3);
 
 		Response response = _getDataEndpointResponse(
 			fileEntryId, true, _getRandomQueryParams());
@@ -157,7 +157,7 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 
 	@Test
 	public void testGettingVariantsOfNonAdaptiveReturnsEmptyArray() {
-		long fileEntryId = _getRandomNonAdaptiveFileEntryId();
+		long fileEntryId = _nonAdaptiveFileEntryIds.get(4);
 
 		JsonArray jsonArray = _getVariantsInvocationBuilder(
 			fileEntryId, _getRandomQueryParams(), null).get(JsonArray.class);
@@ -167,7 +167,7 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 
 	@Test
 	public void testGettingVariantsWithoutAttributesReturns400() {
-		long fileEntryId = _getRandomNonAdaptiveFileEntryId();
+		long fileEntryId = _nonAdaptiveFileEntryIds.get(0);
 
 		Response response = _getVariantsInvocationBuilder(
 			fileEntryId, null, null).get();
@@ -177,7 +177,7 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 
 	@Test
 	public void testGettingVariantsWithWrongAttributesReturns400() {
-		long fileEntryId = _getRandomNonAdaptiveFileEntryId();
+		long fileEntryId = _nonAdaptiveFileEntryIds.get(0);
 
 		List<String> queryParams = new ArrayList<>();
 
@@ -191,7 +191,7 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 
 	@Test
 	public void testGettingVariantsWithWrongOrderReturns400() {
-		long fileEntryId = _getRandomNonAdaptiveFileEntryId();
+		long fileEntryId = _nonAdaptiveFileEntryIds.get(0);
 
 		Response response = _getVariantsInvocationBuilder(
 			fileEntryId, null, "wrong").get();
@@ -266,11 +266,6 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 			RandomUtil.nextInt(_configurationIds.size()));
 	}
 
-	private long _getRandomNonAdaptiveFileEntryId() {
-		return _nonAdaptiveFileEntryIds.get(
-			RandomUtil.nextInt(_nonAdaptiveFileEntryIds.size()));
-	}
-
 	private List<String> _getRandomQueryParams() {
 		return _attributes.stream().map(this::_getRandomAttribute).collect(
 			Collectors.toList());
@@ -329,10 +324,10 @@ public class ImageAdaptiveMediaJaxRsMediaTest {
 			groupId, "Adaptive Media");
 
 		_nonAdaptiveFileEntryIds = ImageAdaptiveMediaTestUtil.getFileEntryIds(
-			2, groupId, "image-without-%d.jpeg", nonAdaptiveMediaFolderId);
+			5, groupId, "image-without-%d.jpeg", nonAdaptiveMediaFolderId);
 
 		_adaptiveFileEntryIds = ImageAdaptiveMediaTestUtil.getFileEntryIds(
-			3, groupId, "image-with-%d.jpeg", adaptiveMediaFolderId);
+			2, groupId, "image-with-%d.jpeg", adaptiveMediaFolderId);
 	}
 
 }
