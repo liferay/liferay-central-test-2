@@ -234,6 +234,10 @@ public interface Portal {
 	 */
 	public String addPreservedParameters(ThemeDisplay themeDisplay, String url);
 
+	public String addPreservedParameters(
+		ThemeDisplay themeDisplay, String url, boolean typeControlPanel,
+		boolean doAsUser);
+
 	public void addUserLocaleOptionsMessage(HttpServletRequest request);
 
 	/**

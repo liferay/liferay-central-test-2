@@ -772,6 +772,23 @@ public class PortalImpl implements Portal {
 		ThemeDisplay themeDisplay, Layout layout, String url,
 		boolean doAsUser) {
 
+		return addPreservedParameters(
+			themeDisplay, url, layout.isTypeControlPanel(), doAsUser);
+	}
+
+	@Override
+	public String addPreservedParameters(
+		ThemeDisplay themeDisplay, String url) {
+
+		return addPreservedParameters(
+			themeDisplay, themeDisplay.getLayout(), url, true);
+	}
+
+	@Override
+	public String addPreservedParameters(
+		ThemeDisplay themeDisplay, String url, boolean typeControlPanel,
+		boolean doAsUser) {
+
 		if (doAsUser) {
 			if (Validator.isNotNull(themeDisplay.getDoAsUserId())) {
 				url = HttpUtil.setParameter(
@@ -785,7 +802,7 @@ public class PortalImpl implements Portal {
 			}
 		}
 
-		if (layout.isTypeControlPanel()) {
+		if (typeControlPanel) {
 			if (Validator.isNotNull(themeDisplay.getPpid())) {
 				url = HttpUtil.setParameter(
 					url, "p_p_id", themeDisplay.getPpid());
@@ -810,14 +827,6 @@ public class PortalImpl implements Portal {
 		}
 
 		return url;
-	}
-
-	@Override
-	public String addPreservedParameters(
-		ThemeDisplay themeDisplay, String url) {
-
-		return addPreservedParameters(
-			themeDisplay, themeDisplay.getLayout(), url, true);
 	}
 
 	@Override
