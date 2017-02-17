@@ -1852,8 +1852,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 	@Override
 	public void registerExportingClassedModel(ClassedModel classedModel) {
-		Serializable primaryKeyObj =
-			ExportImportClassedModelUtil.getPrimaryKeyObj(classedModel);
 		String modelClassName = ExportImportClassedModelUtil.getClassName(
 			classedModel);
 
@@ -1863,6 +1861,9 @@ public class PortletDataContextImpl implements PortletDataContext {
 		if (primaryKeyObjs == null) {
 			primaryKeyObjs = new HashSet<>();
 		}
+
+		Serializable primaryKeyObj =
+			ExportImportClassedModelUtil.getPrimaryKeyObj(classedModel);
 
 		primaryKeyObjs.add(primaryKeyObj);
 
