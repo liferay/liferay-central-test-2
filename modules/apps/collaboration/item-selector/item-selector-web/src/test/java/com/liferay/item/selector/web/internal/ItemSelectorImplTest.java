@@ -127,7 +127,8 @@ public class ItemSelectorImplTest extends PowerMockito {
 		List<ItemSelectorCriterion> itemSelectorCriteria =
 			_itemSelectorImpl.getItemSelectorCriteria(itemSelectorURL);
 
-		Assert.assertEquals(2, itemSelectorCriteria.size());
+		Assert.assertEquals(
+			itemSelectorCriteria.toString(), 2, itemSelectorCriteria.size());
 
 		MediaItemSelectorCriterion mediaItemSelectorCriterion =
 			(MediaItemSelectorCriterion)itemSelectorCriteria.get(0);
@@ -139,7 +140,9 @@ public class ItemSelectorImplTest extends PowerMockito {
 		List<ItemSelectorReturnType> desiredItemSelectorReturnTypes =
 			mediaItemSelectorCriterion.getDesiredItemSelectorReturnTypes();
 
-		Assert.assertEquals(2, desiredItemSelectorReturnTypes.size());
+		Assert.assertEquals(
+			desiredItemSelectorReturnTypes.toString(), 2,
+			desiredItemSelectorReturnTypes.size());
 
 		Assert.assertTrue(
 			desiredItemSelectorReturnTypes.get(0) instanceof
