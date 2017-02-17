@@ -14,6 +14,7 @@
 
 package com.liferay.item.selector.test;
 
+import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.ItemSelectorView;
 import com.liferay.item.selector.ItemSelectorViewReturnTypeProvider;
@@ -24,7 +25,6 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.List;
 
-import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
 
 import org.junit.After;
@@ -85,7 +85,9 @@ public class ItemSelectorViewReturnTypeProviderHandlerTest {
 				_itemSelectorViewReturnTypeProviderHandler.
 					getSupportedItemSelectorReturnTypes(testItemSelectorView);
 
-			Assert.assertEquals(1, itemSelectorReturnTypes.size());
+			Assert.assertEquals(
+				itemSelectorReturnTypes.toString(), 1,
+				itemSelectorReturnTypes.size());
 
 			ItemSelectorReturnType itemSelectorReturnType =
 				itemSelectorReturnTypes.get(0);

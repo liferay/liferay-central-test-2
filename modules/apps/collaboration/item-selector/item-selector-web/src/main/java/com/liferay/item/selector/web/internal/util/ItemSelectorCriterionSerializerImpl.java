@@ -165,7 +165,7 @@ public class ItemSelectorCriterionSerializerImpl
 	private ServiceTracker
 		<ItemSelectorViewReturnTypeProvider,
 			ItemSelectorViewReturnTypeProvider>
-		_serviceTracker;
+				_serviceTracker;
 	private ServiceTracker<ItemSelectorView, ItemSelectorView>
 		_serviceTrackerItemSelectorView;
 	private ServiceTrackerMap<String, ItemSelectorView> _serviceTrackerMap;

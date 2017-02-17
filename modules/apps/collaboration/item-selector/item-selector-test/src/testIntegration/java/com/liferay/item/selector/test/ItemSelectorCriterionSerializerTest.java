@@ -14,6 +14,7 @@
 
 package com.liferay.item.selector.test;
 
+import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.item.selector.ItemSelectorCriterion;
 import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.ItemSelectorView;
@@ -26,7 +27,6 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.List;
 
-import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
 
 import org.junit.After;
@@ -106,7 +106,8 @@ public class ItemSelectorCriterionSerializerTest {
 						getDesiredItemSelectorReturnTypes();
 
 			Assert.assertEquals(
-				1, deserializedDesiredItemSelectorReturnTypes.size());
+				deserializedDesiredItemSelectorReturnTypes.toString(), 1,
+				deserializedDesiredItemSelectorReturnTypes.size());
 
 			ItemSelectorReturnType deserializedItemSelectorReturnType =
 				deserializedDesiredItemSelectorReturnTypes.get(0);

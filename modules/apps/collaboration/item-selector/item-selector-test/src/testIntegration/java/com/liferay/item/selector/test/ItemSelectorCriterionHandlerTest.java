@@ -14,6 +14,7 @@
 
 package com.liferay.item.selector.test;
 
+import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.item.selector.ItemSelectorCriterion;
 import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.ItemSelectorView;
@@ -25,7 +26,6 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.List;
 
-import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.test.api.ArquillianResource;
 
 import org.junit.After;
@@ -95,7 +95,8 @@ public class ItemSelectorCriterionHandlerTest {
 					_itemSelectorCriterionHandler.getItemSelectorViews(
 						itemSelectorCriterion);
 
-			Assert.assertEquals(1, itemSelectorViews.size());
+			Assert.assertEquals(
+				itemSelectorViews.toString(), 1, itemSelectorViews.size());
 
 			ItemSelectorView<TestItemSelectorCriterion> itemSelectorView =
 				itemSelectorViews.get(0);
@@ -103,7 +104,9 @@ public class ItemSelectorCriterionHandlerTest {
 			List<ItemSelectorReturnType> supportedItemSelectorReturnTypes =
 				itemSelectorView.getSupportedItemSelectorReturnTypes();
 
-			Assert.assertEquals(1, supportedItemSelectorReturnTypes.size());
+			Assert.assertEquals(
+				supportedItemSelectorReturnTypes.toString(), 1,
+				supportedItemSelectorReturnTypes.size());
 
 			ItemSelectorReturnType itemSelectorReturnType =
 				supportedItemSelectorReturnTypes.get(0);
