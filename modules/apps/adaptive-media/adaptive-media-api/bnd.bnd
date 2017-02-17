@@ -6,6 +6,7 @@ Export-Package:\
 	com.liferay.adaptive.media.finder,\
 	com.liferay.adaptive.media.handler,\
 	com.liferay.adaptive.media.processor,\
+	com.liferay.adaptive.media.processor.content,\
 	com.liferay.adaptive.media.util
 Liferay-Releng-Module-Group-Description:
 Liferay-Releng-Module-Group-Title: Adaptive Media
