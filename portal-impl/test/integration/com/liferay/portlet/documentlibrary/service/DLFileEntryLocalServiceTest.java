@@ -155,13 +155,13 @@ public class DLFileEntryLocalServiceTest {
 				RandomTestUtil.randomString(), RandomTestUtil.randomString(),
 				serviceContext);
 
-			DLFileEntry copyFileEntry =
+			DLFileEntry copyDLFileEntry =
 				DLFileEntryLocalServiceUtil.copyFileEntry(
 					TestPropsValues.getUserId(), _group.getGroupId(),
 					_group.getGroupId(), fileEntry.getFileEntryId(),
 					destinationFolder.getFolderId(), serviceContext);
 
-			ExpandoBridge expandoBridge = copyFileEntry.getExpandoBridge();
+			ExpandoBridge expandoBridge = copyDLFileEntry.getExpandoBridge();
 
 			String attributeValue = GetterUtil.getString(
 				expandoBridge.getAttribute("ExpandoAttributeName"));
@@ -169,9 +169,9 @@ public class DLFileEntryLocalServiceTest {
 			Assert.assertEquals("ExpandoAttributeValue", attributeValue);
 
 			Assert.assertEquals(
-				fileEntryTypeId, copyFileEntry.getFileEntryTypeId());
+				fileEntryTypeId, copyDLFileEntry.getFileEntryTypeId());
 
-			DLFileVersion copyDLFileVersion = copyFileEntry.getFileVersion();
+			DLFileVersion copyDLFileVersion = copyDLFileEntry.getFileVersion();
 
 			List<DDMStructure> copyDDMStructures =
 				copyDLFileVersion.getDDMStructures();
@@ -453,14 +453,14 @@ public class DLFileEntryLocalServiceTest {
 
 	@Test(expected = NoSuchFolderException.class)
 	public void testMoveFileEntryToInvalidDLFolder() throws Exception {
-		DLFolder originFolder = DLTestUtil.addDLFolder(_group.getGroupId());
+		DLFolder originDLFolder = DLTestUtil.addDLFolder(_group.getGroupId());
 
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil.addFileEntry(
-			TestPropsValues.getUserId(), originFolder.getGroupId(),
-			originFolder.getRepositoryId(), originFolder.getFolderId(),
+			TestPropsValues.getUserId(), originDLFolder.getGroupId(),
+			originDLFolder.getRepositoryId(), originDLFolder.getFolderId(),
 			StringUtil.randomString(), ContentTypes.TEXT_PLAIN,
 			StringUtil.randomString(), StringPool.BLANK, StringPool.BLANK,
 			DLFileEntryTypeConstants.FILE_ENTRY_TYPE_ID_BASIC_DOCUMENT,
@@ -469,13 +469,13 @@ public class DLFileEntryLocalServiceTest {
 
 		Group destinationGroup = GroupTestUtil.addGroup();
 
-		DLFolder destinationFolder = DLTestUtil.addDLFolder(
+		DLFolder destinationDLFolder = DLTestUtil.addDLFolder(
 			destinationGroup.getGroupId());
 
 		try {
 			DLFileEntryLocalServiceUtil.moveFileEntry(
 				TestPropsValues.getUserId(), dlFileEntry.getFileEntryId(),
-				destinationFolder.getFolderId(), serviceContext);
+				destinationDLFolder.getFolderId(), serviceContext);
 		}
 		finally {
 			GroupLocalServiceUtil.deleteGroup(destinationGroup);

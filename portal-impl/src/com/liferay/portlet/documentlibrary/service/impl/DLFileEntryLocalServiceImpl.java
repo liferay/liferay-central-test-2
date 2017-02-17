@@ -2068,10 +2068,10 @@ public class DLFileEntryLocalServiceImpl
 		throws PortalException {
 
 		if (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-			DLFolder dlParentFolder = dlFolderPersistence.findByPrimaryKey(
+			DLFolder parentDLFolder = dlFolderPersistence.findByPrimaryKey(
 				folderId);
 
-			if (groupId != dlParentFolder.getGroupId()) {
+			if (groupId != parentDLFolder.getGroupId()) {
 				throw new NoSuchFolderException();
 			}
 		}
