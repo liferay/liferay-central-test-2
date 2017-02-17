@@ -25,8 +25,6 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.List;
 
-import org.jboss.arquillian.test.api.ArquillianResource;
-
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -36,6 +34,7 @@ import org.junit.runner.RunWith;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleException;
+import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.ServiceReference;
 import org.osgi.framework.ServiceRegistration;
 
@@ -47,7 +46,10 @@ public class ItemSelectorViewReturnTypeProviderHandlerTest {
 
 	@Before
 	public void setUp() throws Exception {
-		_bundleContext = bundle.getBundleContext();
+		_bundle = FrameworkUtil.getBundle(
+			ItemSelectorViewReturnTypeProviderHandlerTest.class);
+
+		_bundleContext = _bundle.getBundleContext();
 
 		_serviceReference = _bundleContext.getServiceReference(
 			ItemSelectorViewReturnTypeProviderHandler.class);
@@ -100,9 +102,6 @@ public class ItemSelectorViewReturnTypeProviderHandlerTest {
 		}
 	}
 
-	@ArquillianResource
-	public Bundle bundle;
-
 	protected ServiceRegistration<ItemSelectorView> registerItemSelectorView(
 		ItemSelectorView itemSelectorView, String itemSelectorViewKey) {
 
@@ -133,6 +132,7 @@ public class ItemSelectorViewReturnTypeProviderHandlerTest {
 		serviceRegistrations.forEach(ServiceRegistration::unregister);
 	}
 
+	private Bundle _bundle;
 	private BundleContext _bundleContext;
 	private ItemSelectorViewReturnTypeProviderHandler
 		_itemSelectorViewReturnTypeProviderHandler;
