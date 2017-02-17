@@ -69,7 +69,7 @@ public class Transformer {
 				URL url = classLoader.getResource(errorTemplateId);
 
 				if (url != null) {
-					_errorTemplates.put(
+					_errorTemplateResources.put(
 						langType,
 						new URLTemplateResource(errorTemplateId, url));
 				}
@@ -177,7 +177,7 @@ public class Transformer {
 	}
 
 	protected TemplateResource getErrorTemplateResource(String langType) {
-		return _errorTemplates.get(langType);
+		return _errorTemplateResources.get(langType);
 	}
 
 	protected Template getTemplate(
@@ -256,7 +256,7 @@ public class Transformer {
 
 	private static final Log _log = LogFactoryUtil.getLog(Transformer.class);
 
-	private final Map<String, TemplateResource> _errorTemplates =
+	private final Map<String, TemplateResource> _errorTemplateResources =
 		new HashMap<>();
 	private final boolean _restricted;
 
