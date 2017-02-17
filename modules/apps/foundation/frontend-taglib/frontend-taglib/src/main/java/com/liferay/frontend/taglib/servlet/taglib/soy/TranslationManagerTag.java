@@ -41,9 +41,9 @@ public class TranslationManagerTag extends TemplateRendererTag {
 		Set<Locale> locales = LanguageUtil.getAvailableLocales(
 			themeDisplay.getSiteGroupId());
 
-		JSONObject localesJSON = JSONFactoryUtil.createJSONObject();
+		JSONObject localesJSONObject = JSONFactoryUtil.createJSONObject();
 
-		JSONArray availableLocalesArray = JSONFactoryUtil.createJSONArray();
+		JSONArray availableLocalesJSONArray = JSONFactoryUtil.createJSONArray();
 
 		for (Locale curLocale : locales) {
 			String w3cLanguageId = LocaleUtil.toW3cLanguageId(curLocale);
@@ -58,15 +58,15 @@ public class TranslationManagerTag extends TemplateRendererTag {
 			localeJSON.put(
 				"name", curLocale.getDisplayName(themeDisplay.getLocale()));
 
-			localesJSON.put(languageId, localeJSON);
+			localesJSONObject.put(languageId, localeJSON);
 
 			if (ArrayUtil.contains(_availableLocales, curLocale)) {
-				availableLocalesArray.put(languageId);
+				availableLocalesJSONArray.put(languageId);
 			}
 		}
 
-		putValue("availableLocales", availableLocalesArray);
-		putValue("locales", localesJSON);
+		putValue("availableLocales", availableLocalesJSONArray);
+		putValue("locales", localesJSONObject);
 		putValue("pathThemeImages", themeDisplay.getPathThemeImages());
 
 		setTemplateNamespace("TranslationManager.render");
