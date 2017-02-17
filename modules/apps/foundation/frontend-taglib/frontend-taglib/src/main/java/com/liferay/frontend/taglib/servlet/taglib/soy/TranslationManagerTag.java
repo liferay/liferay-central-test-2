@@ -35,38 +35,39 @@ public class TranslationManagerTag extends TemplateRendererTag {
 
 	@Override
 	public int doStartTag() {
+		JSONArray availableLocalesJSONArray = JSONFactoryUtil.createJSONArray();
+		JSONObject localesJSONObject = JSONFactoryUtil.createJSONObject();
+
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		Set<Locale> locales = LanguageUtil.getAvailableLocales(
 			themeDisplay.getSiteGroupId());
 
-		JSONObject localesJSONObject = JSONFactoryUtil.createJSONObject();
+		for (Locale locale : locales) {
+			String languageId = LocaleUtil.toLanguageId(locale);
 
-		JSONArray availableLocalesJSONArray = JSONFactoryUtil.createJSONArray();
-
-		for (Locale curLocale : locales) {
-			String w3cLanguageId = LocaleUtil.toW3cLanguageId(curLocale);
-
-			String languageId = LocaleUtil.toLanguageId(curLocale);
+			if (ArrayUtil.contains(_availableLocales, locale)) {
+				availableLocalesJSONArray.put(languageId);
+			}
 
 			JSONObject localeJSONObject = JSONFactoryUtil.createJSONObject();
 
+			String w3cLanguageId = LocaleUtil.toW3cLanguageId(locale);
+
 			localeJSONObject.put("code", w3cLanguageId);
 			localeJSONObject.put("icon", StringUtil.toLowerCase(w3cLanguageId));
+
 			localeJSONObject.put("id", languageId);
 			localeJSONObject.put(
-				"name", curLocale.getDisplayName(themeDisplay.getLocale()));
+				"name", locale.getDisplayName(themeDisplay.getLocale()));
 
 			localesJSONObject.put(languageId, localeJSONObject);
-
-			if (ArrayUtil.contains(_availableLocales, curLocale)) {
-				availableLocalesJSONArray.put(languageId);
-			}
 		}
 
 		putValue("availableLocales", availableLocalesJSONArray);
 		putValue("locales", localesJSONObject);
+
 		putValue("pathThemeImages", themeDisplay.getPathThemeImages());
 
 		setTemplateNamespace("TranslationManager.render");
