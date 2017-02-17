@@ -15,6 +15,7 @@
 package com.liferay.portal.workflow.rest.internal.application;
 
 import com.liferay.portal.workflow.rest.internal.context.provider.CompanyContextProvider;
+import com.liferay.portal.workflow.rest.internal.context.provider.LocaleContextProvider;
 import com.liferay.portal.workflow.rest.internal.context.provider.UserContextProvider;
 import com.liferay.portal.workflow.rest.internal.resource.WorkflowListedTaskResource;
 
@@ -39,6 +40,7 @@ public class PortalWorkflowRestApplication extends Application {
 		Set<Class<?>> classes = new HashSet<>();
 
 		classes.add(CompanyContextProvider.class);
+		classes.add(LocaleContextProvider.class);
 		classes.add(UserContextProvider.class);
 
 		return classes;
