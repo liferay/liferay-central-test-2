@@ -2673,7 +2673,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  ray.portal.kernel.servlet.taglib.ui,javax.portlet",com.liferay.portal
  .kernel.portlet.toolbar.contributor.locator;version="1.0.0";uses:="co
  m.liferay.portal.kernel.portlet.toolbar.contributor,javax.portlet",co
- m.liferay.portal.kernel.portletdisplaytemplate;version="6.3.0";uses:=
+ m.liferay.portal.kernel.portletdisplaytemplate;version="6.4.0";uses:=
  "com.liferay.dynamic.data.mapping.kernel,com.liferay.portal.kernel.te
  mplate,javax.servlet.http",com.liferay.portal.kernel.portletfilerepos
  itory;version="1.0.0";uses:="com.liferay.portal.kernel.exception,com.
