@@ -18,6 +18,7 @@ import com.liferay.portal.workflow.rest.internal.context.provider.CompanyContext
 import com.liferay.portal.workflow.rest.internal.context.provider.LocaleContextProvider;
 import com.liferay.portal.workflow.rest.internal.context.provider.UserContextProvider;
 import com.liferay.portal.workflow.rest.internal.resource.WorkflowListedTaskResource;
+import com.liferay.portal.workflow.rest.internal.resource.WorkflowTaskResource;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -51,11 +52,15 @@ public class PortalWorkflowRestApplication extends Application {
 		HashSet<Object> singletons = new HashSet<>();
 
 		singletons.add(_workflowListedTaskResource);
+		singletons.add(_workflowTaskResource);
 
 		return singletons;
 	}
 
 	@Reference
 	private WorkflowListedTaskResource _workflowListedTaskResource;
+
+	@Reference
+	private WorkflowTaskResource _workflowTaskResource;
 
 }
