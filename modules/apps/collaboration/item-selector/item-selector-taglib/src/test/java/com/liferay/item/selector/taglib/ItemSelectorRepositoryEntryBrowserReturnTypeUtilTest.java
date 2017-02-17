@@ -42,6 +42,7 @@ public class ItemSelectorRepositoryEntryBrowserReturnTypeUtilTest {
 			new URLItemSelectorReturnType();
 
 		itemSelectorReturnTypes.add(existingFileEntryReturnType);
+
 		itemSelectorReturnTypes.add(new Base64ItemSelectorReturnType());
 
 		ItemSelectorReturnType itemSelectorReturnType =
@@ -90,7 +91,9 @@ public class ItemSelectorRepositoryEntryBrowserReturnTypeUtilTest {
 			getFirstAvailableExistingFileEntryReturnType(
 				itemSelectorReturnTypes);
 
-		Assert.assertEquals(3, itemSelectorReturnTypes.size());
+		Assert.assertEquals(
+			itemSelectorReturnTypes.toString(), 3,
+			itemSelectorReturnTypes.size());
 	}
 
 }
