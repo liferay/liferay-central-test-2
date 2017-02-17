@@ -103,6 +103,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 		updateDLFolderUserName();
 
+		// Tree path
+
 		updateTreePath();
 	}
 
@@ -190,7 +192,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 					}
 					catch (SQLException sqle) {
 						_log.error(
-							"Unable to get folders with parentId " +
+							"Unable to get folders with parent primary key " +
 								parentPrimaryKey,
 							sqle);
 					}
@@ -211,7 +213,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 					}
 					catch (SQLException sqle) {
 						_log.error(
-							"Unable to update DL file entries with tree path " +
+							"Unable to update file entries with tree path " +
 								treePath,
 							sqle);
 					}
@@ -225,8 +227,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 					}
 					catch (SQLException sqle) {
 						_log.error(
-							"Unable to update DL file shortcuts with tree " +
-								"path " + treePath,
+							"Unable to update file shortcuts with tree path " +
+								treePath,
 							sqle);
 					}
 
@@ -239,8 +241,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 					}
 					catch (SQLException sqle) {
 						_log.error(
-							"Unable to update DL file versions with tree " +
-								"path " + treePath,
+							"Unable to update file versions with tree path " +
+								treePath,
 							sqle);
 					}
 				}
@@ -361,7 +363,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 					}
 					catch (PortalException pe) {
 						_log.error(
-							"Unable to update tree paths on company " +
+							"Unable to update tree paths for company " +
 								companyId,
 							pe);
 					}
