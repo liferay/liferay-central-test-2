@@ -68,6 +68,8 @@ public class AdaptiveMediaBlogsEditorConfigContributor
 			allowedContent = "picture[*](*); source[*](*);";
 		}
 
+		allowedContent += " img[*](*);";
+
 		jsonObject.put("allowedContent", allowedContent);
 
 		String itemSelectorURL = jsonObject.getString(

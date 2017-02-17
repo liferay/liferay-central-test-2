@@ -1,13 +1,5 @@
 (function() {
-	var Lang = AUI().Lang;
-
 	var STR_ADAPTIVE_MEDIA_RETURN_TYPE = 'com.liferay.adaptive.media.image.item.selector.ImageAdaptiveMediaURLItemSelectorReturnType';
-
-	var STR_FILE_ENTRY_RETURN_TYPE = 'com.liferay.item.selector.criteria.FileEntryItemSelectorReturnType';
-
-	var TPL_PICTURE_TAG = '<picture>{sources}<img src="{defaultSrc}"></picture>';
-
-	var TPL_SOURCE_TAG = '<source srcset="{srcset}" media="{media}">';
 
 	CKEDITOR.plugins.add(
 		'adaptivemedia',
@@ -43,66 +35,19 @@
 				);
 			},
 
-			_getPictureElement: function(selectedItem) {
-				var pictureEl;
-
-				try {
-					var itemValue = JSON.parse(selectedItem.value);
-
-					var sources = '';
-
-					itemValue.sources.forEach(
-						function(source) {
-							var propertyNames = Object.getOwnPropertyNames(source.attributes);
-
-							var mediaText = propertyNames.reduce(
-								function(previous, current) {
-									var value = '(' + current + ':' + source.attributes[current] + ')';
-
-									return previous ? previous + ' and ' + value : value;
-								},
-								''
-							);
-
-							sources += Lang.sub(
-								TPL_SOURCE_TAG,
-								{
-									media: mediaText,
-									srcset: source.src
-								}
-							);
-						}
-					);
-
-					var pictureHtml = Lang.sub(
-						TPL_PICTURE_TAG,
-						{
-							defaultSrc: itemValue.defaultSource,
-							sources: sources
-						}
-					);
-
-					pictureEl = CKEDITOR.dom.element.createFromHtml(pictureHtml);
-				}
-				catch (e) {
-				}
-
-				return pictureEl;
-			},
-
 			_onSelectedImageChange: function(editor, imageSrc, selectedItem) {
-				var instance = this;
-
-				var el;
+				var img = CKEDITOR.dom.element.createFromHtml('<img>');
 
 				if (selectedItem.returnType === STR_ADAPTIVE_MEDIA_RETURN_TYPE) {
-					el = instance._getPictureElement(selectedItem);
+					var itemValue = JSON.parse(selectedItem.value);
+					img.setAttribute('src', itemValue.url);
+					img.setAttribute('data-fileEntryId', itemValue.fileEntryId);
 				}
 				else {
-					el = CKEDITOR.dom.element.createFromHtml('<img src="' + imageSrc + '">');
+					img.setAttribute('src', imageSrc);
 				}
 
-				editor.insertElement(el);
+				editor.insertElement(img);
 
 				editor.setData(editor.getData());
 			}
