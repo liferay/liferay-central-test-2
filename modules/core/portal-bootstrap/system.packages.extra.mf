@@ -2892,7 +2892,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  ,com.liferay.portal.kernel.util,javax.servlet,javax.servlet.http",com
  .liferay.portal.kernel.servlet.taglib.util;version="6.3.0";uses:="com
  .liferay.portal.kernel.util",com.liferay.portal.kernel.settings;versi
- on="1.0.0";uses:="com.liferay.portal.kernel.exception,com.liferay.por
+ on="1.1.0";uses:="com.liferay.portal.kernel.exception,com.liferay.por
  tal.kernel.model,com.liferay.portal.kernel.resource.manager,javax.por
  tlet",com.liferay.portal.kernel.settings.definition;version="1.0.0",c
  om.liferay.portal.kernel.social;version="1.0.0";uses:="com.liferay.po
