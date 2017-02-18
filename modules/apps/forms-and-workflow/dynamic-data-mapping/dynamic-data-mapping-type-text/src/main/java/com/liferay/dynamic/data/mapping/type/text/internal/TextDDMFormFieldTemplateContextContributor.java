@@ -101,6 +101,10 @@ public class TextDDMFormFieldTemplateContextContributor
 		DDMDataProviderContext ddmDataProviderContext,
 		DDMFormFieldRenderingContext ddmFormFieldRenderingContext) {
 
+		if (ddmDataProviderContext.getType() == null) {
+			return;
+		}
+
 		List<DDMDataProviderContextContributor>
 			ddmDataProviderContextContributors =
 				ddmDataProviderTracker.getDDMDataProviderContextContributors(

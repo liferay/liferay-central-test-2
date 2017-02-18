@@ -99,6 +99,10 @@ public class SelectDDMFormFieldTemplateContextContributor
 		DDMDataProviderContext ddmDataProviderContext,
 		DDMFormFieldRenderingContext ddmFormFieldRenderingContext) {
 
+		if (ddmDataProviderContext.getType() == null) {
+			return;
+		}
+
 		List<DDMDataProviderContextContributor>
 			ddmDataProviderContextContributors =
 				ddmDataProviderTracker.getDDMDataProviderContextContributors(
