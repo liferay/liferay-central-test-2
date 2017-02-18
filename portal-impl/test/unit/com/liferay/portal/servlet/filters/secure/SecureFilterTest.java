@@ -35,10 +35,14 @@ import org.powermock.modules.junit4.PowerMockRunner;
 public class SecureFilterTest {
 
 	@Test
-	public void testSecureFilterIsEnabledIfConfiguredDisabled() {
+	public void testSecureFilterIsEnabledIfDisabled() {
 		mockStatic(PropsUtil.class);
 
-		when(PropsUtil.get(SecureFilter.class.getName())).thenReturn("false");
+		when(
+			PropsUtil.get(SecureFilter.class.getName())
+		).thenReturn(
+			"false"
+		);
 
 		SecureFilter secureFilter = new SecureFilter();
 
@@ -46,10 +50,14 @@ public class SecureFilterTest {
 	}
 
 	@Test
-	public void testSecureFilterIsEnabledIfConfiguredEnabled() {
+	public void testSecureFilterIsEnabledIfEnabled() {
 		mockStatic(PropsUtil.class);
 
-		when(PropsUtil.get(SecureFilter.class.getName())).thenReturn("true");
+		when(
+			PropsUtil.get(SecureFilter.class.getName())
+		).thenReturn(
+			"true"
+		);
 
 		SecureFilter secureFilter = new SecureFilter();
 
