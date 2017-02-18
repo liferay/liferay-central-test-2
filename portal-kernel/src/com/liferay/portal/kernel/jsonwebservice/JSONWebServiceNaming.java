@@ -57,7 +57,6 @@ public class JSONWebServiceNaming {
 		String className = clazz.getName();
 
 		className = StringUtil.replace(className, ".kernel.", ".");
-
 		className =
 			StringUtil.replace(className, ".model.", ".model.impl.") +
 				"ModelImpl";
