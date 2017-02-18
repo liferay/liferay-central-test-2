@@ -91,10 +91,10 @@ public class ThreadLocalCache<T> {
 
 		sb.append("{cache=");
 		sb.append(_cache.toString());
-		sb.append(", lifecycle=");
-		sb.append(_lifecycle);
 		sb.append(", id=");
 		sb.append(_id);
+		sb.append(", lifecycle=");
+		sb.append(_lifecycle);
 		sb.append("}");
 
 		return sb.toString();
