@@ -5831,6 +5831,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		if (resultsMap != null) {
 			resultsMap.put("user", user);
+			resultsMap.put("userId", user.getUserId());
 		}
 
 		if (authResult == Authenticator.SUCCESS) {
