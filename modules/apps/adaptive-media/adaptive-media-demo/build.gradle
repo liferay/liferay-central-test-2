@@ -8,3 +8,7 @@ dependencies {
 	provided project(":apps:adaptive-media:adaptive-media-demo-data-creator-api")
 	provided project(":apps:adaptive-media:adaptive-media-image-impl")
 }
+
+if (!project.hasProperty("TEST")) {
+	deploy.enabled = false
+}
