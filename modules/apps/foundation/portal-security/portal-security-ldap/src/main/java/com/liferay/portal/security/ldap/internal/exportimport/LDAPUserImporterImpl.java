@@ -802,7 +802,7 @@ public class LDAPUserImporterImpl implements LDAPUserImporter, UserImporter {
 					String fullUserDN = _portalLDAP.getNameInNamespace(
 						ldapServerId, companyId, searchResult);
 
-					if (ldapImportContext.isImportedUser(fullUserDN)) {
+					if (ldapImportContext.containsImportedUser(fullUserDN)) {
 						continue;
 					}
 
