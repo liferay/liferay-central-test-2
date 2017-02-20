@@ -17,6 +17,7 @@ package com.liferay.portal.workflow.rest.internal.resource;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.workflow.WorkflowException;
 import com.liferay.portal.kernel.workflow.WorkflowInstanceManager;
 import com.liferay.portal.kernel.workflow.WorkflowTask;
 import com.liferay.portal.kernel.workflow.WorkflowTaskManager;
@@ -29,6 +30,8 @@ import java.io.Serializable;
 
 import java.util.Locale;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -70,6 +73,7 @@ public class WorkflowTaskResource {
 	@Produces("application/json")
 	public WorkflowOperationResultModel updateStatus(
 		@Context Company company, @Context User user,
+		@Context HttpServletResponse response,
 		@PathParam("workflowTaskId") long workflowTaskId,
 		WorkflowTaskTransitionOperationModel operation) {
 
@@ -94,6 +98,14 @@ public class WorkflowTaskResource {
 				WorkflowOperationResultModel.SUCCESS);
 		}
 		catch (PortalException pe) {
+			if (pe instanceof WorkflowException) {
+				response.setStatus(HttpServletResponse.SC_CONFLICT);
+			}
+			else {
+				response.setStatus(
+					HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+			}
+
 			return new WorkflowOperationResultModel(
 				WorkflowOperationResultModel.ERROR, pe.getMessage());
 		}
