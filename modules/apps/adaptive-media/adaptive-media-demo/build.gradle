@@ -1,8 +1,6 @@
 dependencies {
-	compile fileTree(dir: 'libs', include: ['*.jar'])
-}
-
-dependencies {
+	provided group: "com.liferay", name: "com.liferay.document.library.demo.data.creator.api", version: "1.0.0"
+	provided group: "com.liferay", name: "com.liferay.document.library.demo.data.creator.impl", version: "1.0.0"
 	provided group: "com.liferay", name: "com.liferay.portal.instance.lifecycle", version: "3.0.0"
 	provided group: "com.liferay", name: "com.liferay.users.admin.demo.data.creator.api", version: "1.0.0"
 	provided group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "2.0.0"
