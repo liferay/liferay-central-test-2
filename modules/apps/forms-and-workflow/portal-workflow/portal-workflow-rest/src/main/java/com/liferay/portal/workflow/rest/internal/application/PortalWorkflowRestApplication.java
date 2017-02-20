@@ -16,6 +16,7 @@ package com.liferay.portal.workflow.rest.internal.application;
 
 import com.liferay.portal.workflow.rest.internal.context.provider.CompanyContextProvider;
 import com.liferay.portal.workflow.rest.internal.context.provider.UserContextProvider;
+import com.liferay.portal.workflow.rest.internal.resource.WorkflowListedTaskResource;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,6 +25,7 @@ import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Adam Brandizzi
@@ -46,7 +48,12 @@ public class PortalWorkflowRestApplication extends Application {
 	public Set<Object> getSingletons() {
 		HashSet<Object> singletons = new HashSet<>();
 
+		singletons.add(_workflowListedTaskResource);
+
 		return singletons;
 	}
+
+	@Reference
+	private WorkflowListedTaskResource _workflowListedTaskResource;
 
 }
