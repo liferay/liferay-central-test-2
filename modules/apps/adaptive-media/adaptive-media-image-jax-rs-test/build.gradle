@@ -2,13 +2,11 @@ sourceCompatibility = "1.8"
 targetCompatibility = "1.8"
 
 dependencies {
-	compile fileTree(dir: 'libs', include: ['*.jar'])
-}
-
-dependencies {
+	provided group: "com.liferay", name: "com.liferay.document.library.demo.data.creator.api", version: "1.0.0"
+	provided group: "com.liferay", name: "com.liferay.document.library.demo.data.creator.impl", version: "1.0.0"
+	provided group: "com.liferay", name: "com.liferay.users.admin.demo.data.creator.api", version: "1.0.0"
 	provided group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "2.0.0"
 	provided group: "com.liferay.portal", name: "com.liferay.portal.test", version: "1.0.0"
-	provided group: "com.liferay", name: "com.liferay.users.admin.demo.data.creator.api", version: "1.0.0"
 	provided group: "org.osgi", name: "org.osgi.core", version: "5.0.0"
 	provided project(":apps:adaptive-media:adaptive-media-demo-data-creator-api")
 	provided project(":apps:adaptive-media:adaptive-media-image-impl")
