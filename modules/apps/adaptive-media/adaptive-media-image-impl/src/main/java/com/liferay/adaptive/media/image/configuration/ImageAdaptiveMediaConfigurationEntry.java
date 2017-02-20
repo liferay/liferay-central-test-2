@@ -27,4 +27,6 @@ public interface ImageAdaptiveMediaConfigurationEntry {
 
 	public String getUUID();
 
+	public boolean isEnabled();
+
 }

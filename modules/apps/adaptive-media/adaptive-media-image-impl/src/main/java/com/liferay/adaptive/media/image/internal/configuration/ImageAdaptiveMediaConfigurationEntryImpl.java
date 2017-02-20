@@ -28,9 +28,17 @@ public class ImageAdaptiveMediaConfigurationEntryImpl
 	public ImageAdaptiveMediaConfigurationEntryImpl(
 		String name, String uuid, Map<String, String> properties) {
 
+		this(name, uuid, properties, true);
+	}
+
+	public ImageAdaptiveMediaConfigurationEntryImpl(
+		String name, String uuid, Map<String, String> properties,
+		boolean enabled) {
+
 		_name = name;
 		_uuid = uuid;
 		_properties = properties;
+		_enabled = enabled;
 	}
 
 	@Override
@@ -48,6 +56,12 @@ public class ImageAdaptiveMediaConfigurationEntryImpl
 		return _uuid;
 	}
 
+	@Override
+	public boolean isEnabled() {
+		return _enabled;
+	}
+
+	private final boolean _enabled;
 	private final String _name;
 	private final Map<String, String> _properties;
 	private final String _uuid;

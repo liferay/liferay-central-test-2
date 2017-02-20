@@ -73,7 +73,7 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 
 		ImageAdaptiveMediaConfigurationEntry configurationEntry =
 			new ImageAdaptiveMediaConfigurationEntryImpl(
-				name, uuid, properties);
+				name, uuid, properties, true);
 
 		updatedConfigurationEntries.add(configurationEntry);
 

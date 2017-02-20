@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.util.Validator;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.osgi.service.component.annotations.Component;
@@ -93,6 +94,15 @@ public class ImageAdaptiveMediaConfigurationEntryParser {
 			sb.append(width);
 		}
 
+		if ((properties.get("max-height") != null) ||
+			(properties.get("max-width") != null)) {
+
+			sb.append(StringPool.COLON);
+		}
+
+		sb.append("enabled=");
+		sb.append(String.valueOf(configurationEntry.isEnabled()));
+
 		return sb.toString();
 	}
 
@@ -110,7 +120,7 @@ public class ImageAdaptiveMediaConfigurationEntryParser {
 
 		String[] fields = _FIELD_SEPARATOR_PATTERN.split(s);
 
-		if (fields.length != 3) {
+		if ((fields.length != 3) && (fields.length != 4)) {
 			throw new IllegalArgumentException(
 				"Invalid image adaptive media configuration: " + s);
 		}
@@ -134,12 +144,31 @@ public class ImageAdaptiveMediaConfigurationEntryParser {
 			properties.put(keyValuePair[0], keyValuePair[1]);
 		}
 
+		boolean enabled = true;
+
+		if (fields.length == 4) {
+			String disabledAttribute = fields[3];
+
+			Matcher matcher = _DISABLED_SEPARATOR_PATTERN.matcher(
+				disabledAttribute);
+
+			if (!matcher.matches()) {
+				throw new IllegalArgumentException(
+					"Invalid image adaptive media configuration: " + s);
+			}
+
+			enabled = GetterUtil.getBoolean(matcher.group(1));
+		}
+
 		return new ImageAdaptiveMediaConfigurationEntryImpl(
-			name, uuid, properties);
+			name, uuid, properties, enabled);
 	}
 
 	private static final Pattern _ATTRIBUTE_SEPARATOR_PATTERN = Pattern.compile(
 		"\\s*;\\s*");
+
+	private static final Pattern _DISABLED_SEPARATOR_PATTERN = Pattern.compile(
+		"enabled=(true|false)");
 
 	private static final Pattern _FIELD_SEPARATOR_PATTERN = Pattern.compile(
 		"\\s*:\\s*");
