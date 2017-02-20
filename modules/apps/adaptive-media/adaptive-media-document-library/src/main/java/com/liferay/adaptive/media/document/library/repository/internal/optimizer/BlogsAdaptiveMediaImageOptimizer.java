@@ -21,7 +21,7 @@ import com.liferay.adaptive.media.image.counter.AdaptiveMediaImageCounter;
 import com.liferay.adaptive.media.image.optimizer.AdaptiveMediaImageOptimizer;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
 import com.liferay.adaptive.media.web.internal.background.task.OptimizeImagesBackgroundTaskConstants;
-import com.liferay.blogs.model.BlogsEntry;
+import com.liferay.blogs.kernel.model.BlogsEntry;
 import com.liferay.document.library.kernel.model.DLFileEntry;
 import com.liferay.document.library.kernel.service.DLFileEntryLocalService;
 import com.liferay.portal.kernel.backgroundtask.BackgroundTaskConstants;

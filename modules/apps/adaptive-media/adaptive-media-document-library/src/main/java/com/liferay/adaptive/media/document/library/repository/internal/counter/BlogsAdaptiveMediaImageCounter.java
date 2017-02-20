@@ -15,7 +15,7 @@
 package com.liferay.adaptive.media.document.library.repository.internal.counter;
 
 import com.liferay.adaptive.media.image.counter.AdaptiveMediaImageCounter;
-import com.liferay.blogs.model.BlogsEntry;
+import com.liferay.blogs.kernel.model.BlogsEntry;
 import com.liferay.document.library.kernel.service.DLFileEntryLocalService;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.Property;
