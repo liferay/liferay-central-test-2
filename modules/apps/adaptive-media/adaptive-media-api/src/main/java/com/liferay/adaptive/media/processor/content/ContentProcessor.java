@@ -34,22 +34,21 @@ import org.osgi.service.component.annotations.Deactivate;
 public class ContentProcessor {
 
 	public <T> T process(ContentType<T> contentType, T originalContent) {
-		try {
-			List<ConcreteContentProcessor> processors = ListUtil.fromCollection(
-				_processorsMap.getService(contentType));
+		List<ConcreteContentProcessor> processors = ListUtil.fromCollection(
+			_processorsMap.getService(contentType));
 
-			T processedContent = originalContent;
+		T processedContent = originalContent;
 
-			for (ConcreteContentProcessor<T> processor : processors) {
+		for (ConcreteContentProcessor<T> processor : processors) {
+			try {
 				processedContent = processor.process(processedContent);
 			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
 
-			return processedContent;
-		}
-		catch (Exception e) {
-			_log.error(e);
-			return originalContent;
-		}
+		return processedContent;
 	}
 
 	@Activate
