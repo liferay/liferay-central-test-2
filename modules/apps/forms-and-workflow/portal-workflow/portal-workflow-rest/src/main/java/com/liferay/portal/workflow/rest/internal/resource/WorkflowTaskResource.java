@@ -18,18 +18,12 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.workflow.WorkflowException;
-import com.liferay.portal.kernel.workflow.WorkflowInstanceManager;
-import com.liferay.portal.kernel.workflow.WorkflowTask;
-import com.liferay.portal.kernel.workflow.WorkflowTaskManager;
 import com.liferay.portal.workflow.rest.internal.helper.PortalWorkflowRestDisplayContext;
 import com.liferay.portal.workflow.rest.internal.model.WorkflowOperationResultModel;
 import com.liferay.portal.workflow.rest.internal.model.WorkflowTaskModel;
 import com.liferay.portal.workflow.rest.internal.model.WorkflowTaskTransitionOperationModel;
 
-import java.io.Serializable;
-
 import java.util.Locale;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -60,11 +54,8 @@ public class WorkflowTaskResource {
 			@PathParam("workflowTaskId") long workflowTaskId)
 		throws PortalException {
 
-		WorkflowTask workflowTask = _workflowTaskManager.getWorkflowTask(
-			company.getCompanyId(), workflowTaskId);
-
 		return _portalWorkflowRestDisplayContext.getWorkflowTaskModel(
-			company.getCompanyId(), user.getUserId(), workflowTask, locale);
+			company.getCompanyId(), user.getUserId(), workflowTaskId, locale);
 	}
 
 	@Consumes("application/json")
@@ -77,47 +68,38 @@ public class WorkflowTaskResource {
 		@PathParam("workflowTaskId") long workflowTaskId,
 		WorkflowTaskTransitionOperationModel operation) {
 
-		long companyId = company.getCompanyId();
-
-		WorkflowTask workflowTask;
-
 		try {
-			workflowTask = _workflowTaskManager.getWorkflowTask(
-				companyId, workflowTaskId);
+			_portalWorkflowRestDisplayContext.completeWorkflowTask(
+				company.getCompanyId(), user.getUserId(), workflowTaskId,
+				operation);
 
-			Map<String, Serializable> workflowContext =
-				_portalWorkflowRestDisplayContext.getWorkflowContext(
-					companyId, workflowTask);
-
-			_workflowTaskManager.completeWorkflowTask(
-				companyId, user.getUserId(), workflowTaskId,
-				operation.getTransition(), operation.getComment(),
-				workflowContext);
-
-			return new WorkflowOperationResultModel(
-				WorkflowOperationResultModel.SUCCESS);
+			return getSuccessResult();
 		}
 		catch (PortalException pe) {
-			if (pe instanceof WorkflowException) {
-				response.setStatus(HttpServletResponse.SC_CONFLICT);
-			}
-			else {
-				response.setStatus(
-					HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-			}
-
-			return new WorkflowOperationResultModel(
-				WorkflowOperationResultModel.ERROR, pe.getMessage());
+			return getFailureResult(response, pe);
 		}
+	}
+
+	protected WorkflowOperationResultModel getFailureResult(
+		HttpServletResponse response, PortalException pe) {
+
+		if (pe instanceof WorkflowException) {
+			response.setStatus(HttpServletResponse.SC_CONFLICT);
+		}
+		else {
+			response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+		}
+
+		return new WorkflowOperationResultModel(
+			WorkflowOperationResultModel.ERROR, pe.getMessage());
+	}
+
+	protected WorkflowOperationResultModel getSuccessResult() {
+		return new WorkflowOperationResultModel(
+			WorkflowOperationResultModel.SUCCESS);
 	}
 
 	@Reference
 	private PortalWorkflowRestDisplayContext _portalWorkflowRestDisplayContext;
-
-	@Reference
-	private WorkflowInstanceManager _workflowInstanceManager;
-
-	@Reference
-	private WorkflowTaskManager _workflowTaskManager;
 
 }

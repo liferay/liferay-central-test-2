@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
+import com.liferay.portal.kernel.workflow.WorkflowException;
 import com.liferay.portal.kernel.workflow.WorkflowHandler;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
 import com.liferay.portal.kernel.workflow.WorkflowInstance;
@@ -32,6 +33,7 @@ import com.liferay.portal.kernel.workflow.WorkflowTaskManager;
 import com.liferay.portal.workflow.rest.internal.model.WorkflowAssetModel;
 import com.liferay.portal.workflow.rest.internal.model.WorkflowListedTaskModel;
 import com.liferay.portal.workflow.rest.internal.model.WorkflowTaskModel;
+import com.liferay.portal.workflow.rest.internal.model.WorkflowTaskTransitionOperationModel;
 import com.liferay.portal.workflow.rest.internal.model.WorkflowUserModel;
 
 import java.io.Serializable;
@@ -48,6 +50,22 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(immediate = true, service = PortalWorkflowRestDisplayContext.class)
 public class PortalWorkflowRestDisplayContext {
+
+	public WorkflowTask completeWorkflowTask(
+			long companyId, long userId, long workflowTaskId,
+			WorkflowTaskTransitionOperationModel operation)
+		throws PortalException, WorkflowException {
+
+		WorkflowTask workflowTask = _workflowTaskManager.getWorkflowTask(
+			companyId, workflowTaskId);
+
+		Map<String, Serializable> workflowContext = getWorkflowContext(
+			companyId, workflowTask);
+
+		return _workflowTaskManager.completeWorkflowTask(
+			companyId, userId, workflowTaskId, operation.getTransition(),
+			operation.getComment(), workflowContext);
+	}
 
 	public Map<String, Serializable> getWorkflowContext(
 			long companyId, WorkflowTask workflowTask)
@@ -69,6 +87,16 @@ public class PortalWorkflowRestDisplayContext {
 			workflowTask, userModel);
 
 		return workflowTaskModel;
+	}
+
+	public WorkflowTaskModel getWorkflowTaskModel(
+			long companyId, long userId, long workflowTaskId, Locale locale)
+		throws PortalException {
+
+		WorkflowTask workflowTask = _workflowTaskManager.getWorkflowTask(
+			companyId, workflowTaskId);
+
+		return getWorkflowTaskModel(companyId, userId, workflowTask, locale);
 	}
 
 	public WorkflowTaskModel getWorkflowTaskModel(
