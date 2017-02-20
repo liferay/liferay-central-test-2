@@ -51,7 +51,7 @@ public class ResetDefaultValuesMVCActionCommand extends BaseMVCActionCommand {
 			themeDisplay.getCompanyId());
 	}
 
-	@Reference
+	@Reference(unbind = "-")
 	protected void setImageAdaptiveMediaConfigurationHelper(
 		ImageAdaptiveMediaConfigurationHelper
 			imageAdaptiveMediaConfigurationHelper) {

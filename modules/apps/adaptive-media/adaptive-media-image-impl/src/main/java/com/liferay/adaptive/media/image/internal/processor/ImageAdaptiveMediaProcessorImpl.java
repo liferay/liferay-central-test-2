@@ -151,7 +151,7 @@ public final class ImageAdaptiveMediaProcessorImpl
 		_configurationHelper = configurationHelper;
 	}
 
-	@Reference
+	@Reference(unbind = "-")
 	public void setImageLocalService(
 		AdaptiveMediaImageLocalService imageLocalService) {
 
@@ -168,7 +168,7 @@ public final class ImageAdaptiveMediaProcessorImpl
 		_imageStorage = imageStorage;
 	}
 
-	@Reference
+	@Reference(unbind = "-")
 	public void setTiffOrientationTransformer(
 		TiffOrientationTransformer tiffOrientationTransformer) {
 

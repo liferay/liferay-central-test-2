@@ -78,7 +78,7 @@ public class ImageAdaptiveMediaRequestHandler
 			});
 	}
 
-	@Reference
+	@Reference(unbind = "-")
 	public void setImageAdaptiveMediaConfigurationHelper(
 		ImageAdaptiveMediaConfigurationHelper configurationHelper) {
 

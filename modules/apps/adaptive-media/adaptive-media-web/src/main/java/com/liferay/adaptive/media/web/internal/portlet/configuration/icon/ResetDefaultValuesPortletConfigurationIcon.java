@@ -115,7 +115,7 @@ public class ResetDefaultValuesPortletConfigurationIcon
 		super.setServletContext(servletContext);
 	}
 
-	@Reference
+	@Reference(unbind = "-")
 	protected void setImageAdaptiveMediaConfigurationHelper(
 		ImageAdaptiveMediaConfigurationHelper
 			imageAdaptiveMediaConfigurationHelper) {
