@@ -21,11 +21,18 @@ import com.liferay.portal.kernel.workflow.WorkflowInstanceManager;
 import com.liferay.portal.kernel.workflow.WorkflowTask;
 import com.liferay.portal.kernel.workflow.WorkflowTaskManager;
 import com.liferay.portal.workflow.rest.internal.helper.PortalWorkflowRestDisplayContext;
+import com.liferay.portal.workflow.rest.internal.model.WorkflowOperationResultModel;
 import com.liferay.portal.workflow.rest.internal.model.WorkflowTaskModel;
+import com.liferay.portal.workflow.rest.internal.model.WorkflowTaskTransitionOperationModel;
+
+import java.io.Serializable;
 
 import java.util.Locale;
+import java.util.Map;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -55,6 +62,41 @@ public class WorkflowTaskResource {
 
 		return _portalWorkflowRestDisplayContext.getWorkflowTaskModel(
 			company.getCompanyId(), user.getUserId(), workflowTask, locale);
+	}
+
+	@Consumes("application/json")
+	@Path("/{workflowTaskId}")
+	@POST
+	@Produces("application/json")
+	public WorkflowOperationResultModel updateStatus(
+		@Context Company company, @Context User user,
+		@PathParam("workflowTaskId") long workflowTaskId,
+		WorkflowTaskTransitionOperationModel operation) {
+
+		long companyId = company.getCompanyId();
+
+		WorkflowTask workflowTask;
+
+		try {
+			workflowTask = _workflowTaskManager.getWorkflowTask(
+				companyId, workflowTaskId);
+
+			Map<String, Serializable> workflowContext =
+				_portalWorkflowRestDisplayContext.getWorkflowContext(
+					companyId, workflowTask);
+
+			_workflowTaskManager.completeWorkflowTask(
+				companyId, user.getUserId(), workflowTaskId,
+				operation.getTransition(), operation.getComment(),
+				workflowContext);
+
+			return new WorkflowOperationResultModel(
+				WorkflowOperationResultModel.SUCCESS);
+		}
+		catch (PortalException pe) {
+			return new WorkflowOperationResultModel(
+				WorkflowOperationResultModel.ERROR, pe.getMessage());
+		}
 	}
 
 	@Reference
