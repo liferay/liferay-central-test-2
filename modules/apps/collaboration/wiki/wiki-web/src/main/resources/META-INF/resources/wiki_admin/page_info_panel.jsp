@@ -218,7 +218,15 @@ if (wikiPageInfoPanelDisplayContext.isSinglePageSelection()) {
 						<h4><liferay-ui:message arguments="<%= curPage.getVersion() %>" key="version-x" /></h4>
 
 						<small class="text-muted">
-							<liferay-ui:message arguments="<%= new Object[] {curPage.getUserName(), dateFormatDateTime.format(curPage.getCreateDate())} %>" key="by-x-on-x" />
+							<%
+							String userName = curPage.getUserName();
+
+							if (Validator.isNull(userName)) {
+								userName = "Liferay";
+							}
+							%>
+
+							<liferay-ui:message arguments="<%= new Object[] {HtmlUtil.escape(userName), dateFormatDateTime.format(curPage.getCreateDate())} %>" key="by-x-on-x" />
 						</small>
 					</div>
 
