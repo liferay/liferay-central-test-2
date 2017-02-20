@@ -193,10 +193,10 @@ public class HTMLContentProcessorImpl
 	private static final String _ADAPTIVE_ATTR = "data-fileEntryId";
 
 	private static final Pattern _FILE_ENTRY_ID_PATTERN = Pattern.compile(
-		"^<img .*" + _ADAPTIVE_ATTR + "=\"([0-9]*)\".*/>$",
+		"^<img .*?" + _ADAPTIVE_ATTR + "=\"([0-9]*)\".*?/>$",
 		Pattern.CASE_INSENSITIVE);
 
-	private static final Pattern _IMG_PATTERN = Pattern.compile("<img.*/>");
+	private static final Pattern _IMG_PATTERN = Pattern.compile("<img.*?/>");
 
 	private DLAppLocalService _dlAppLocalService;
 	private ImageAdaptiveMediaFinder _imageAdaptiveMediaFinder;

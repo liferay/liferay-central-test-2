@@ -139,12 +139,12 @@ public class HTMLContentProcessorImplTest {
 		"<img data-fileEntryId=\"" + _FILE_ENTRY_ID + "\" src=\"adaptable\"/>";
 
 	private static final String _HTML_WITH_ADAPTABLE_PICTURES =
-		"<div><div>" + _HTML_ADAPTABLE_IMG + "</div></div>";
+		"<div><div>" + _HTML_ADAPTABLE_IMG + "</div></div><br/>";
 
 	private static final String _HTML_WITH_ADAPTIVE_PICTURE_TAG =
 		"<div><div><picture><source media=\"(max-width:" + _ADAPTIVE_WIDTH +
 			"px)\" srcset=\"" + _ADAPTIVE_URL + "\"/>" + _HTML_ADAPTABLE_IMG +
-				"</picture></div></div>";
+				"</picture></div></div><br/>";
 
 	private static final String _HTML_WITH_NO_ADAPTABLE_PICTURES =
 		"<div><div><img src=\"no.adaptable\"/></div></div>";
