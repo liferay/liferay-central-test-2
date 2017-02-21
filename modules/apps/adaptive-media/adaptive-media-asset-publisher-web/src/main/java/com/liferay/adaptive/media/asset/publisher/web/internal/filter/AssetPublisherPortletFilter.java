@@ -12,11 +12,10 @@
  * details.
  */
 
-package com.liferay.adaptive.media.blogs.web.internal.filter;
+package com.liferay.adaptive.media.asset.publisher.web.internal.filter;
 
 import com.liferay.adaptive.media.web.filter.BaseAdaptiveMediaPortletFilter;
-import com.liferay.blogs.web.constants.BlogsPortletKeys;
-import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.asset.publisher.web.constants.AssetPublisherPortletKeys;
 
 import javax.portlet.RenderRequest;
 import javax.portlet.filter.PortletFilter;
@@ -28,17 +27,17 @@ import org.osgi.service.component.annotations.Component;
  */
 @Component(
 	immediate = true,
-	property = {"javax.portlet.name=" + BlogsPortletKeys.BLOGS},
+	property = {
+		"javax.portlet.name=" + AssetPublisherPortletKeys.ASSET_PUBLISHER
+	},
 	service = PortletFilter.class
 )
-public class BlogsPortletFilter extends BaseAdaptiveMediaPortletFilter {
+public class AssetPublisherPortletFilter
+	extends BaseAdaptiveMediaPortletFilter {
 
 	@Override
 	protected boolean mustProcessContent(RenderRequest renderRequest) {
-		String mvcRenderCommandName = ParamUtil.getString(
-			renderRequest, "mvcRenderCommandName");
-
-		return "/blogs/view_entry".equals(mvcRenderCommandName);
+		return true;
 	}
 
 }
