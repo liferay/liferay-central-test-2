@@ -314,11 +314,11 @@ public class LPKGBundleTrackerCustomizer
 					if (_log.isInfoEnabled()) {
 						StringBundler sb = new StringBundler();
 
-						sb.append("Skipping installation of \"");
+						sb.append("Skipping installation of ");
 						sb.append(symbolicName);
-						sb.append("\" with version \"");
+						sb.append(" with version ");
 						sb.append(version.toString());
-						sb.append("\" in ");
+						sb.append(" in ");
 						sb.append(bundle.getSymbolicName());
 						sb.append(" because an identical bundle exists");
 
