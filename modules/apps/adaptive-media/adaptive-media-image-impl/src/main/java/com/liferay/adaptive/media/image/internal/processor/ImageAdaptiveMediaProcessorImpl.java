@@ -20,16 +20,14 @@ import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigur
 import com.liferay.adaptive.media.image.internal.processor.util.TiffOrientationTransformer;
 import com.liferay.adaptive.media.image.internal.util.ImageProcessor;
 import com.liferay.adaptive.media.image.internal.util.ImageStorage;
+import com.liferay.adaptive.media.image.internal.util.RenderedImageUtil;
 import com.liferay.adaptive.media.image.model.AdaptiveMediaImage;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
 import com.liferay.adaptive.media.image.service.AdaptiveMediaImageLocalService;
 import com.liferay.adaptive.media.processor.AdaptiveMediaProcessor;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.image.ImageToolUtil;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
-import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.repository.model.FileVersion;
-import com.liferay.portal.kernel.util.StreamUtil;
 
 import java.awt.image.RenderedImage;
 
@@ -113,8 +111,6 @@ public final class ImageAdaptiveMediaProcessorImpl
 		RenderedImage renderedImage = _imageProcessor.scaleImage(
 			fileVersion, configurationEntry);
 
-		InputStream inputStream = null;
-
 		try {
 			Optional<Integer> orientationValueOptional =
 				_tiffOrientationTransformer.getTiffOrientationValue(
@@ -125,11 +121,15 @@ public final class ImageAdaptiveMediaProcessorImpl
 					renderedImage, orientationValueOptional.get());
 			}
 
-			byte[] bytes = _getBytes(fileVersion, renderedImage);
+			byte[] bytes = RenderedImageUtil.getRenderedImageContentStream(
+				renderedImage, fileVersion.getMimeType());
 
-			inputStream = new UnsyncByteArrayInputStream(bytes);
+			try (InputStream inputStream = new UnsyncByteArrayInputStream(
+					bytes)) {
 
-			_imageStorage.save(fileVersion, configurationEntry, inputStream);
+				_imageStorage.save(
+					fileVersion, configurationEntry, inputStream);
+			}
 
 			_imageLocalService.addAdaptiveMediaImage(
 				configurationEntry.getUUID(), fileVersion.getFileVersionId(),
@@ -138,9 +138,6 @@ public final class ImageAdaptiveMediaProcessorImpl
 		}
 		catch (IOException | PortalException e) {
 			throw new AdaptiveMediaRuntimeException.IOException(e);
-		}
-		finally {
-			StreamUtil.cleanUp(inputStream);
 		}
 	}
 
@@ -173,19 +170,6 @@ public final class ImageAdaptiveMediaProcessorImpl
 		TiffOrientationTransformer tiffOrientationTransformer) {
 
 		_tiffOrientationTransformer = tiffOrientationTransformer;
-	}
-
-	private byte[] _getBytes(
-			FileVersion fileVersion, RenderedImage renderedImage)
-		throws IOException {
-
-		try (UnsyncByteArrayOutputStream baos =
-				new UnsyncByteArrayOutputStream()) {
-
-			ImageToolUtil.write(renderedImage, fileVersion.getMimeType(), baos);
-
-			return baos.toByteArray();
-		}
 	}
 
 	private ImageAdaptiveMediaConfigurationHelper _configurationHelper;

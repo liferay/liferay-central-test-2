@@ -14,6 +14,10 @@
 
 package com.liferay.adaptive.media.image.internal.util;
 
+import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
+import com.liferay.portal.kernel.image.ImageToolUtil;
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
+
 import java.awt.image.RenderedImage;
 
 import java.io.IOException;
@@ -29,6 +33,22 @@ import javax.imageio.stream.ImageInputStream;
  * @author Adolfo Pérez
  */
 public class RenderedImageUtil {
+
+	public static byte[] getRenderedImageContentStream(
+			RenderedImage renderedImage, String mimeType)
+		throws IOException {
+
+		try (UnsyncByteArrayOutputStream baos =
+				new UnsyncByteArrayOutputStream()) {
+
+			ImageToolUtil.write(renderedImage, mimeType, baos);
+
+			return baos.toByteArray();
+		}
+		catch (IOException ioe) {
+			throw new AdaptiveMediaRuntimeException.IOException(ioe);
+		}
+	}
 
 	public static RenderedImage readImage(InputStream inputStream)
 		throws IOException {
