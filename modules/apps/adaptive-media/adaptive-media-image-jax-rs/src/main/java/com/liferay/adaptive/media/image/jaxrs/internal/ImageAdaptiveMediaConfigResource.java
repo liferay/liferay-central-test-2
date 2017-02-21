@@ -15,6 +15,7 @@
 package com.liferay.adaptive.media.image.jaxrs.internal;
 
 import com.liferay.adaptive.media.ImageAdaptiveMediaConfigurationException;
+import com.liferay.adaptive.media.ImageAdaptiveMediaConfigurationException.InvalidStateImageAdaptiveMediaConfigurationEntryException;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -102,7 +103,9 @@ public class ImageAdaptiveMediaConfigResource {
 			_configurationHelper.deleteImageAdaptiveMediaConfigurationEntry(
 				_companyId, id);
 		}
-		catch (IOException ioe) {
+		catch (InvalidStateImageAdaptiveMediaConfigurationEntryException |
+			   IOException e) {
+
 			throw new InternalServerErrorException();
 		}
 	}
