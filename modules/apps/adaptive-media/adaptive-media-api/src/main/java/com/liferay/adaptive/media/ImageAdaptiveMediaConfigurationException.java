@@ -89,6 +89,33 @@ public class ImageAdaptiveMediaConfigurationException extends Exception {
 
 	}
 
+	public static final class
+		InvalidStateImageAdaptiveMediaConfigurationEntryException
+			extends ImageAdaptiveMediaConfigurationException {
+
+		public InvalidStateImageAdaptiveMediaConfigurationEntryException() {
+		}
+
+		public InvalidStateImageAdaptiveMediaConfigurationEntryException(
+			String s) {
+
+			super(s);
+		}
+
+		public InvalidStateImageAdaptiveMediaConfigurationEntryException(
+			String s, Throwable throwable) {
+
+			super(s, throwable);
+		}
+
+		public InvalidStateImageAdaptiveMediaConfigurationEntryException(
+			Throwable throwable) {
+
+			super(throwable);
+		}
+
+	}
+
 	/**
 	 * This exception is raised when the height value is not valid.
 	 */

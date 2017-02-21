@@ -85,7 +85,7 @@ public class ImageAdaptiveMediaDisableConfigurationTest {
 		for (ImageAdaptiveMediaConfigurationEntry configurationEntry :
 				configurationEntries) {
 
-			configurationHelper.deleteImageAdaptiveMediaConfigurationEntry(
+			configurationHelper.forceDeleteImageAdaptiveMediaConfigurationEntry(
 				TestPropsValues.getCompanyId(), configurationEntry.getUUID());
 		}
 	}

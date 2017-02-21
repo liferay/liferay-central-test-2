@@ -87,8 +87,10 @@ public class ImageAdaptiveMediaProcessorTest {
 		for (ImageAdaptiveMediaConfigurationEntry configurationEntry :
 				configurationEntries) {
 
-			_configurationHelper.deleteImageAdaptiveMediaConfigurationEntry(
-				TestPropsValues.getCompanyId(), configurationEntry.getUUID());
+			_configurationHelper.
+				forceDeleteImageAdaptiveMediaConfigurationEntry(
+					TestPropsValues.getCompanyId(),
+					configurationEntry.getUUID());
 		}
 
 		_addTestVariant();

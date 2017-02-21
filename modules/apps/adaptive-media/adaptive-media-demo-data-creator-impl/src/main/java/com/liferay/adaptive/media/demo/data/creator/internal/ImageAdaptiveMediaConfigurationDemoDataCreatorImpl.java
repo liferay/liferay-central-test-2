@@ -93,8 +93,9 @@ public class ImageAdaptiveMediaConfigurationDemoDataCreatorImpl
 			List<String> uuids = _configurationIds.get(companyId);
 
 			for (String uuid : uuids) {
-				_configurationHelper.deleteImageAdaptiveMediaConfigurationEntry(
-					companyId, uuid);
+				_configurationHelper.
+					forceDeleteImageAdaptiveMediaConfigurationEntry(
+						companyId, uuid);
 
 				uuids.remove(uuid);
 			}

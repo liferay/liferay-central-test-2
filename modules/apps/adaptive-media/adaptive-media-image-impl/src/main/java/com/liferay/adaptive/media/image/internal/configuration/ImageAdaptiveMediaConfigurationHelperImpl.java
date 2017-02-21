@@ -16,6 +16,7 @@ package com.liferay.adaptive.media.image.internal.configuration;
 
 import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
 import com.liferay.adaptive.media.ImageAdaptiveMediaConfigurationException;
+import com.liferay.adaptive.media.ImageAdaptiveMediaConfigurationException.InvalidStateImageAdaptiveMediaConfigurationEntryException;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
 import com.liferay.portal.kernel.settings.CompanyServiceSettingsLocator;
@@ -85,18 +86,26 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 	@Override
 	public void deleteImageAdaptiveMediaConfigurationEntry(
 			long companyId, String uuid)
-		throws IOException {
+		throws InvalidStateImageAdaptiveMediaConfigurationEntryException,
+			IOException {
 
-		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
-			getImageAdaptiveMediaConfigurationEntries(companyId);
+		Optional<ImageAdaptiveMediaConfigurationEntry>
+			configurationEntryOptional =
+				getImageAdaptiveMediaConfigurationEntry(companyId, uuid);
 
-		List<ImageAdaptiveMediaConfigurationEntry> updatedConfigurationEntries =
-			configurationEntries.stream().filter(
-				configurationEntry ->
-					!configurationEntry.getUUID().equals(uuid)).collect(
-				Collectors.toList());
+		if (!configurationEntryOptional.isPresent()) {
+			return;
+		}
 
-		_updateConfiguration(companyId, updatedConfigurationEntries);
+		ImageAdaptiveMediaConfigurationEntry configurationEntry =
+			configurationEntryOptional.get();
+
+		if (configurationEntry.isEnabled()) {
+			throw new
+				InvalidStateImageAdaptiveMediaConfigurationEntryException();
+		}
+
+		forceDeleteImageAdaptiveMediaConfigurationEntry(companyId, uuid);
 	}
 
 	@Override
@@ -173,6 +182,31 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 				configurationEntry.getProperties(), true);
 
 		updatedConfigurationEntries.add(newConfigurationEntry);
+
+		_updateConfiguration(companyId, updatedConfigurationEntries);
+	}
+
+	@Override
+	public void forceDeleteImageAdaptiveMediaConfigurationEntry(
+			long companyId, String uuid)
+		throws IOException {
+
+		Optional<ImageAdaptiveMediaConfigurationEntry>
+			configurationEntryOptional =
+				getImageAdaptiveMediaConfigurationEntry(companyId, uuid);
+
+		if (!configurationEntryOptional.isPresent()) {
+			return;
+		}
+
+		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
+			getImageAdaptiveMediaConfigurationEntries(companyId);
+
+		List<ImageAdaptiveMediaConfigurationEntry> updatedConfigurationEntries =
+			configurationEntries.stream().filter(
+				curConfigurationEntry ->
+					!curConfigurationEntry.getUUID().equals(uuid)).collect(
+				Collectors.toList());
 
 		_updateConfiguration(companyId, updatedConfigurationEntries);
 	}
