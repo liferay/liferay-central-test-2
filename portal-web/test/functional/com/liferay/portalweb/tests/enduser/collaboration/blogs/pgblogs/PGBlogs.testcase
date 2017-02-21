@@ -1514,6 +1514,8 @@
 	</command>
 
 	<command name="ViewBlogEntryViaEditedCustomURL">
+		<description message="This is a usecase for LPS-66970" />
+
 		<execute macro="Navigator#gotoPage">
 			<var name="pageName" value="Blogs Page" />
 		</execute>
@@ -1544,7 +1546,9 @@
 			<var name="customURL" value="this-should-redirect-to-the-previous-entry" />
 		</execute>
 
-		<execute macro="Button#clickPublish" />
+		<execute function="SelectFrame#selectFrameTop" />
+
+		<execute macro="PortletEntry#publish" />
 
 		<execute macro="User#logoutPG" />
 
