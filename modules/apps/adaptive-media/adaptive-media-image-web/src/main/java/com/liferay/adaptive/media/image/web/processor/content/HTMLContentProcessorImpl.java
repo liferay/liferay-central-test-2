@@ -58,7 +58,7 @@ public class HTMLContentProcessorImpl
 		Matcher matcher = _IMG_PATTERN.matcher(html);
 
 		while (matcher.find()) {
-			String picture = _getPictureElement(matcher.group(0));
+			String picture = _getPictureElement(matcher);
 
 			matcher.appendReplacement(sb, Matcher.quoteReplacement(picture));
 		}
@@ -115,28 +115,23 @@ public class HTMLContentProcessorImpl
 		});
 	}
 
-	private String _getPictureElement(String img)
+	private String _getPictureElement(Matcher matcher)
 		throws AdaptiveMediaException, PortalException {
 
-		Matcher matcher = _FILE_ENTRY_ID_PATTERN.matcher(img);
+		String img = matcher.group(0);
+		Long fileEntryId = Long.valueOf(matcher.group(1));
 
-		if (matcher.matches()) {
-			Long fileEntryId = Long.valueOf(matcher.group(1));
+		List<AdaptiveMedia<ImageAdaptiveMediaProcessor>> adaptiveMediaList =
+			_getAdaptiveMedias(fileEntryId).collect(Collectors.toList());
 
-			List<AdaptiveMedia<ImageAdaptiveMediaProcessor>> adaptiveMediaList =
-				_getAdaptiveMedias(fileEntryId).collect(Collectors.toList());
+		StringBundler sb = new StringBundler(3 + adaptiveMediaList.size());
 
-			StringBundler sb = new StringBundler(3 + adaptiveMediaList.size());
+		sb.append("<picture>");
+		_getSourceElements(adaptiveMediaList).forEach(sb::append);
+		sb.append(img);
+		sb.append("</picture>");
 
-			sb.append("<picture>");
-			_getSourceElements(adaptiveMediaList).forEach(sb::append);
-			sb.append(img);
-			sb.append("</picture>");
-
-			return sb.toString();
-		}
-
-		return img;
+		return sb.toString();
 	}
 
 	private String _getSourceElement(
@@ -192,11 +187,9 @@ public class HTMLContentProcessorImpl
 
 	private static final String _ADAPTIVE_ATTR = "data-fileEntryId";
 
-	private static final Pattern _FILE_ENTRY_ID_PATTERN = Pattern.compile(
-		"^<img .*?" + _ADAPTIVE_ATTR + "=\"([0-9]*)\".*?/>$",
+	private static final Pattern _IMG_PATTERN = Pattern.compile(
+		"<img .*?" + _ADAPTIVE_ATTR + "=\"([0-9]*)\".*?/>",
 		Pattern.CASE_INSENSITIVE);
-
-	private static final Pattern _IMG_PATTERN = Pattern.compile("<img.*?/>");
 
 	private DLAppLocalService _dlAppLocalService;
 	private ImageAdaptiveMediaFinder _imageAdaptiveMediaFinder;
