@@ -73,11 +73,9 @@ public class AlloyEditorLinkBrowseDynamicInclude extends BaseDynamicInclude {
 		dynamicIncludeRegistry.register(
 			"com.liferay.frontend.editor.alloyeditor.web#alloyeditor#" +
 				"additionalResources");
-
 		dynamicIncludeRegistry.register(
 			"com.liferay.frontend.editor.alloyeditor.web#alloyeditor_bbcode#" +
 				"additionalResources");
-
 		dynamicIncludeRegistry.register(
 			"com.liferay.frontend.editor.alloyeditor.web#alloyeditor_creole#" +
 				"additionalResources");
