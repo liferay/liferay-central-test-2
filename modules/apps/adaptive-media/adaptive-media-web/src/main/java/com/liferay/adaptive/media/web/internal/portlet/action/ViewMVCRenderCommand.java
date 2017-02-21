@@ -20,11 +20,13 @@ import com.liferay.adaptive.media.web.constants.AdaptiveMediaPortletKeys;
 import com.liferay.adaptive.media.web.internal.constants.AdaptiveMediaWebKeys;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Predicate;
 
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
@@ -49,15 +51,9 @@ public class ViewMVCRenderCommand implements MVCRenderCommand {
 	public String render(
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
 		Collection<ImageAdaptiveMediaConfigurationEntry>
 			configurationEntriesCollection =
-				_imageAdaptiveMediaConfigurationHelper.
-					getImageAdaptiveMediaConfigurationEntries(
-						themeDisplay.getCompanyId(),
-						configurationEntry -> true);
+				_getImageAdaptiveMediaConfigurationEntries(renderRequest);
 
 		List<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
 			new ArrayList<>(configurationEntriesCollection);
@@ -80,6 +76,33 @@ public class ViewMVCRenderCommand implements MVCRenderCommand {
 
 		_imageAdaptiveMediaConfigurationHelper =
 			imageAdaptiveMediaConfigurationHelper;
+	}
+
+	private Collection<ImageAdaptiveMediaConfigurationEntry>
+		_getImageAdaptiveMediaConfigurationEntries(
+			RenderRequest renderRequest) {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		String entriesNavigation = ParamUtil.getString(
+			renderRequest, "entriesNavigation", "all");
+
+		Predicate<ImageAdaptiveMediaConfigurationEntry> predicate = null;
+
+		if (entriesNavigation.equals("enabled")) {
+			predicate = configurationEntry -> configurationEntry.isEnabled();
+		}
+		else if (entriesNavigation.equals("disabled")) {
+			predicate = configurationEntry -> !configurationEntry.isEnabled();
+		}
+		else {
+			predicate = configurationEntry -> true;
+		}
+
+		return _imageAdaptiveMediaConfigurationHelper.
+			getImageAdaptiveMediaConfigurationEntries(
+				themeDisplay.getCompanyId(), predicate);
 	}
 
 	private ImageAdaptiveMediaConfigurationHelper
