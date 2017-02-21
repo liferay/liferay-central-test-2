@@ -128,7 +128,7 @@ public class HTMLContentProcessorImpl
 
 		sb.append("<picture>");
 		_getSourceElements(adaptiveMediaList).forEach(sb::append);
-		sb.append(img);
+		sb.append(img.replaceAll(_ATTR_REGEX, ""));
 		sb.append("</picture>");
 
 		return sb.toString();
@@ -185,11 +185,11 @@ public class HTMLContentProcessorImpl
 			ImageAdaptiveMediaAttribute.IMAGE_WIDTH);
 	}
 
-	private static final String _ADAPTIVE_ATTR = "data-fileEntryId";
+	private static final String _ATTR_REGEX =
+		"\\s*data-fileEntryId=\"([0-9]*)\"";
 
 	private static final Pattern _IMG_PATTERN = Pattern.compile(
-		"<img .*?" + _ADAPTIVE_ATTR + "=\"([0-9]*)\".*?/>",
-		Pattern.CASE_INSENSITIVE);
+		"<img .*?" + _ATTR_REGEX + ".*?/>", Pattern.CASE_INSENSITIVE);
 
 	private DLAppLocalService _dlAppLocalService;
 	private ImageAdaptiveMediaFinder _imageAdaptiveMediaFinder;
