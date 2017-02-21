@@ -111,8 +111,8 @@ public class AssetCategoriesDisplayContext {
 					catch (NoSuchModelException nsme) {
 						if (_log.isDebugEnabled()) {
 							_log.debug(
-								"Unable to get Asset Type for classTypePK " +
-									classTypePK,
+								"Unable to get asset type for class type " +
+									"primary key " + classTypePK,
 								nsme);
 						}
 
