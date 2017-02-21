@@ -130,32 +130,19 @@ public class LDAPUserImporterImpl implements LDAPUserImporter, UserImporter {
 			Attributes attributes, String password)
 		throws Exception {
 
-		Properties userMappings = _ldapSettings.getUserMappings(
-			ldapServerId, companyId);
-		Properties userExpandoMappings = _ldapSettings.getUserExpandoMappings(
-			ldapServerId, companyId);
-		Properties contactMappings = _ldapSettings.getContactMappings(
-			ldapServerId, companyId);
-		Properties contactExpandoMappings =
-			_ldapSettings.getContactExpandoMappings(ldapServerId, companyId);
-
 		LDAPServerConfiguration ldapServerConfiguration =
 			_ldapServerConfigurationProvider.getConfiguration(
 				companyId, ldapServerId);
 
-		String[] userIgnoreAttributes =
-			ldapServerConfiguration.userIgnoreAttributes();
-
-		Set<String> ldapUserIgnoreAttributes = new HashSet<>(
-			Arrays.asList(userIgnoreAttributes));
-
-		Properties groupMappings = _ldapSettings.getGroupMappings(
-			ldapServerId, companyId);
-
 		LDAPImportContext ldapImportContext = getLDAPImportContext(
-			companyId, ldapServerId, ldapContext, userMappings,
-			userExpandoMappings, contactMappings, contactExpandoMappings,
-			groupMappings, ldapUserIgnoreAttributes);
+			companyId, ldapServerId, ldapContext,
+			_ldapSettings.getUserMappings(ldapServerId, companyId),
+			_ldapSettings.getUserExpandoMappings(ldapServerId, companyId),
+			_ldapSettings.getContactMappings(ldapServerId, companyId),
+			_ldapSettings.getContactExpandoMappings(ldapServerId, companyId),
+			_ldapSettings.getGroupMappings(ldapServerId, companyId),
+			new HashSet<>(
+			Arrays.asList(ldapServerConfiguration.userIgnoreAttributes())));
 
 		User user = importUser(
 			ldapImportContext, StringPool.BLANK, attributes, password);
