@@ -103,6 +103,23 @@ public class HTMLContentProcessorImplTest {
 			_htmlContentProcessor.process(_HTML_WITH_NO_ADAPTABLE_PICTURES));
 	}
 
+	@Test
+	public void testTheAttributeIsCaseInsensitive() throws Exception {
+		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia =
+			_createAdaptiveMedia(_ADAPTIVE_WIDTH, _ADAPTIVE_URL);
+
+		Mockito.when(
+			_imageAdaptiveMediaFinder.getAdaptiveMedia(Mockito.any())
+		).thenReturn(
+			Stream.of(adaptiveMedia)
+		);
+
+		Assert.assertEquals(
+			_HTML_WITH_ADAPTIVE_PICTURE_TAG,
+			_htmlContentProcessor.process(
+				_HTML_WITH_ADAPTABLE_PICTURES_LOWERCASE));
+	}
+
 	private AdaptiveMedia<ImageAdaptiveMediaProcessor> _createAdaptiveMedia(
 		int imageWidth, String url) {
 
@@ -138,11 +155,17 @@ public class HTMLContentProcessorImplTest {
 	private static final String _HTML_ADAPTABLE_IMG =
 		"<img data-fileEntryId=\"" + _FILE_ENTRY_ID + "\" src=\"adaptable\"/>";
 
+	private static final String _HTML_ADAPTABLE_IMG_LOWERCASE =
+		"<img data-fileentryid=\"" + _FILE_ENTRY_ID + "\" src=\"adaptable\"/>";
+
 	private static final String _HTML_ADAPTABLE_IMG_WITHOUT_ATTR =
 		"<img src=\"adaptable\"/>";
 
 	private static final String _HTML_WITH_ADAPTABLE_PICTURES =
 		"<div><div>" + _HTML_ADAPTABLE_IMG + "</div></div><br/>";
+
+	private static final String _HTML_WITH_ADAPTABLE_PICTURES_LOWERCASE =
+		"<div><div>" + _HTML_ADAPTABLE_IMG_LOWERCASE + "</div></div><br/>";
 
 	private static final String _HTML_WITH_ADAPTIVE_PICTURE_TAG =
 		"<div><div><picture><source media=\"(max-width:" + _ADAPTIVE_WIDTH +
