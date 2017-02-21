@@ -126,6 +126,10 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 		return (v1, v2) -> 0;
 	}
 
+	public ConfigurationStatus getConfigurationStatus() {
+		return _configurationStatus;
+	}
+
 	public String getConfigurationUuid() {
 		return _configurationUuid;
 	}
@@ -201,9 +205,24 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 		return this;
 	}
 
+	@Override
+	public InitialStep withConfigurationStatus(
+		ConfigurationStatus configurationStatus) {
+
+		if (configurationStatus == null) {
+			throw new IllegalArgumentException(
+				"Configuration status cannot be null");
+		}
+
+		_configurationStatus = configurationStatus;
+
+		return this;
+	}
+
 	private final Map
 		<AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, ?>, Object>
 			_attributes = new LinkedHashMap<>();
+	private ConfigurationStatus _configurationStatus;
 	private String _configurationUuid;
 	private FileEntry _fileEntry;
 	private FileVersion _fileVersion;

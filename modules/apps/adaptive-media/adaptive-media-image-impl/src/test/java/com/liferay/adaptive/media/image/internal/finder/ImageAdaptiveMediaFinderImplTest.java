@@ -21,6 +21,7 @@ import com.liferay.adaptive.media.AdaptiveMediaURIResolver;
 import com.liferay.adaptive.media.finder.AdaptiveMediaQuery;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
+import com.liferay.adaptive.media.image.finder.ImageAdaptiveMediaQueryBuilder;
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationEntryImpl;
 import com.liferay.adaptive.media.image.internal.util.ImageProcessor;
 import com.liferay.adaptive.media.image.internal.util.ImageStorage;
@@ -72,9 +73,14 @@ public class ImageAdaptiveMediaFinderImplTest {
 				StringUtil.randomString(), StringUtil.randomString(),
 				new HashMap<>());
 
+		ImageAdaptiveMediaQueryBuilder.ConfigurationStatus
+			enabledConfigurationStatus =
+				ImageAdaptiveMediaQueryBuilder.ConfigurationStatus.ENABLED;
+
 		Mockito.when(
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				Mockito.anyLong())
+				_fileEntry.getCompanyId(),
+				enabledConfigurationStatus.getPredicate())
 		).thenReturn(
 			Collections.singleton(configurationEntry)
 		);
@@ -106,9 +112,14 @@ public class ImageAdaptiveMediaFinderImplTest {
 				StringUtil.randomString(), StringUtil.randomString(),
 				new HashMap<>());
 
+		ImageAdaptiveMediaQueryBuilder.ConfigurationStatus
+			enabledConfigurationStatus =
+				ImageAdaptiveMediaQueryBuilder.ConfigurationStatus.ENABLED;
+
 		Mockito.when(
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				Mockito.anyLong())
+				_fileVersion.getCompanyId(),
+				enabledConfigurationStatus.getPredicate())
 		).thenReturn(
 			Collections.singleton(configurationEntry)
 		);
@@ -161,9 +172,14 @@ public class ImageAdaptiveMediaFinderImplTest {
 				StringUtil.randomString(), StringUtil.randomString(),
 				MapUtil.fromArray("max-height", "100", "max-width", "200"));
 
+		ImageAdaptiveMediaQueryBuilder.ConfigurationStatus
+			enabledConfigurationStatus =
+				ImageAdaptiveMediaQueryBuilder.ConfigurationStatus.ENABLED;
+
 		Mockito.when(
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				Mockito.anyLong())
+				_fileVersion.getCompanyId(),
+				enabledConfigurationStatus.getPredicate())
 		).thenReturn(
 			Collections.singleton(configurationEntry)
 		);
@@ -239,9 +255,14 @@ public class ImageAdaptiveMediaFinderImplTest {
 			Arrays.asList(
 				configurationEntry1, configurationEntry2, configurationEntry3);
 
+		ImageAdaptiveMediaQueryBuilder.ConfigurationStatus
+			enabledConfigurationStatus =
+				ImageAdaptiveMediaQueryBuilder.ConfigurationStatus.ENABLED;
+
 		Mockito.when(
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				Mockito.anyLong())
+				_fileVersion.getCompanyId(),
+				enabledConfigurationStatus.getPredicate())
 		).thenReturn(
 			configurationEntries
 		);
@@ -347,9 +368,14 @@ public class ImageAdaptiveMediaFinderImplTest {
 			Arrays.asList(
 				configurationEntry1, configurationEntry2, configurationEntry3);
 
+		ImageAdaptiveMediaQueryBuilder.ConfigurationStatus
+			enabledConfigurationStatus =
+				ImageAdaptiveMediaQueryBuilder.ConfigurationStatus.ENABLED;
+
 		Mockito.when(
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				Mockito.anyLong())
+				_fileVersion.getCompanyId(),
+				enabledConfigurationStatus.getPredicate())
 		).thenReturn(
 			configurationEntries
 		);
@@ -454,7 +480,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 	public void testGetMediaConfigurationError() throws Exception {
 		Mockito.when(
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				Mockito.anyLong())
+				Mockito.anyLong(), Mockito.any(Predicate.class))
 		).thenThrow(
 			AdaptiveMediaRuntimeException.InvalidConfiguration.class
 		);
@@ -476,9 +502,14 @@ public class ImageAdaptiveMediaFinderImplTest {
 				StringUtil.randomString(), StringUtil.randomString(),
 				Collections.emptyMap());
 
+		ImageAdaptiveMediaQueryBuilder.ConfigurationStatus
+			enabledConfigurationStatus =
+				ImageAdaptiveMediaQueryBuilder.ConfigurationStatus.ENABLED;
+
 		Mockito.when(
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				Mockito.anyLong())
+				_fileVersion.getCompanyId(),
+				enabledConfigurationStatus.getPredicate())
 		).thenReturn(
 			Collections.singleton(configurationEntry)
 		);
@@ -543,9 +574,14 @@ public class ImageAdaptiveMediaFinderImplTest {
 				StringUtil.randomString(), StringUtil.randomString(),
 				MapUtil.fromArray("max-height", "100"));
 
+		ImageAdaptiveMediaQueryBuilder.ConfigurationStatus
+			enabledConfigurationStatus =
+				ImageAdaptiveMediaQueryBuilder.ConfigurationStatus.ENABLED;
+
 		Mockito.when(
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				Mockito.anyLong())
+				_fileVersion.getCompanyId(),
+				enabledConfigurationStatus.getPredicate())
 		).thenReturn(
 			Collections.singleton(configurationEntry)
 		);
@@ -614,9 +650,14 @@ public class ImageAdaptiveMediaFinderImplTest {
 				StringUtil.randomString(), StringUtil.randomString(),
 				MapUtil.fromArray("max-height", "200", "max-width", "200"));
 
+		ImageAdaptiveMediaQueryBuilder.ConfigurationStatus
+			enabledConfigurationStatus =
+				ImageAdaptiveMediaQueryBuilder.ConfigurationStatus.ENABLED;
+
 		Mockito.when(
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				Mockito.anyLong())
+				_fileVersion.getCompanyId(),
+				enabledConfigurationStatus.getPredicate())
 		).thenReturn(
 			Arrays.asList(configurationEntry1, configurationEntry2)
 		);
@@ -697,9 +738,14 @@ public class ImageAdaptiveMediaFinderImplTest {
 				StringUtil.randomString(), StringUtil.randomString(),
 				MapUtil.fromArray("max-height", "200", "max-width", "200"));
 
+		ImageAdaptiveMediaQueryBuilder.ConfigurationStatus
+			enabledConfigurationStatus =
+				ImageAdaptiveMediaQueryBuilder.ConfigurationStatus.ENABLED;
+
 		Mockito.when(
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				Mockito.anyLong())
+				_fileVersion.getCompanyId(),
+				enabledConfigurationStatus.getPredicate())
 		).thenReturn(
 			Arrays.asList(configurationEntry1, configurationEntry2)
 		);
@@ -780,9 +826,14 @@ public class ImageAdaptiveMediaFinderImplTest {
 				StringUtil.randomString(), StringUtil.randomString(),
 				MapUtil.fromArray("max-height", "200", "max-width", "100"));
 
+		ImageAdaptiveMediaQueryBuilder.ConfigurationStatus
+			enabledConfigurationStatus =
+				ImageAdaptiveMediaQueryBuilder.ConfigurationStatus.ENABLED;
+
 		Mockito.when(
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				Mockito.anyLong())
+				_fileVersion.getCompanyId(),
+				enabledConfigurationStatus.getPredicate())
 		).thenReturn(
 			Arrays.asList(configurationEntry1, configurationEntry2)
 		);
@@ -863,9 +914,14 @@ public class ImageAdaptiveMediaFinderImplTest {
 				StringUtil.randomString(), "medium",
 				MapUtil.fromArray("max-height", "200", "max-width", "200"));
 
+		ImageAdaptiveMediaQueryBuilder.ConfigurationStatus
+			allConfigurationStatus =
+				ImageAdaptiveMediaQueryBuilder.ConfigurationStatus.ALL;
+
 		Mockito.when(
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				Mockito.anyLong(), Mockito.any(Predicate.class))
+				_fileVersion.getCompanyId(),
+				allConfigurationStatus.getPredicate())
 		).thenReturn(
 			Arrays.asList(configurationEntry1, configurationEntry2)
 		);
@@ -929,6 +985,289 @@ public class ImageAdaptiveMediaFinderImplTest {
 	}
 
 	@Test
+	public void
+			testGetMediaQueryWithConfigurationStatusAttributeForConfiguration()
+		throws Exception {
+
+		ImageAdaptiveMediaConfigurationEntry configurationEntry1 =
+			new ImageAdaptiveMediaConfigurationEntryImpl(
+				StringUtil.randomString(), "small",
+				MapUtil.fromArray("max-height", "100", "max-width", "200"));
+
+		ImageAdaptiveMediaConfigurationEntry configurationEntry2 =
+			new ImageAdaptiveMediaConfigurationEntryImpl(
+				StringUtil.randomString(), "medium",
+				MapUtil.fromArray("max-height", "200", "max-width", "200"),
+				false);
+
+		Mockito.when(
+			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
+				_fileVersion.getCompanyId(),
+				ImageAdaptiveMediaQueryBuilder.ConfigurationStatus.ALL.
+					getPredicate())
+		).thenReturn(
+			Arrays.asList(configurationEntry1, configurationEntry2)
+		);
+
+		Mockito.when(
+			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
+				_fileVersion.getCompanyId(),
+				ImageAdaptiveMediaQueryBuilder.ConfigurationStatus.DISABLED.
+					getPredicate())
+		).thenReturn(
+			Arrays.asList(configurationEntry2)
+		);
+
+		Mockito.when(
+			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
+				_fileVersion.getCompanyId(),
+				ImageAdaptiveMediaQueryBuilder.ConfigurationStatus.ENABLED.
+					getPredicate())
+		).thenReturn(
+			Arrays.asList(configurationEntry1)
+		);
+
+		Mockito.when(
+			_fileVersion.getFileName()
+		).thenReturn(
+			StringUtil.randomString()
+		);
+
+		Mockito.when(
+			_fileVersion.getMimeType()
+		).thenReturn(
+			"image/jpeg"
+		);
+
+		AdaptiveMediaImage image1 = _mockImage(99, 199, 1000L);
+
+		Mockito.when(
+			_imageLocalService.fetchAdaptiveMediaImage(
+				configurationEntry1.getUUID(), _fileVersion.getFileVersionId())
+		).thenReturn(
+			image1
+		);
+
+		AdaptiveMediaImage image2 = _mockImage(199, 199, 1000L);
+
+		Mockito.when(
+			_imageLocalService.fetchAdaptiveMediaImage(
+				configurationEntry2.getUUID(), _fileVersion.getFileVersionId())
+		).thenReturn(
+			image2
+		);
+
+		Mockito.when(
+			_imageProcessor.isMimeTypeSupported(Mockito.anyString())
+		).thenReturn(
+			true
+		);
+
+		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream =
+			_finder.getAdaptiveMedia(
+				queryBuilder ->
+					queryBuilder.forVersion(_fileVersion).
+						withConfigurationStatus(
+							ImageAdaptiveMediaQueryBuilder.
+								ConfigurationStatus.ENABLED).forConfiguration(
+						"small").done());
+
+		List<AdaptiveMedia<ImageAdaptiveMediaProcessor>> adaptiveMedias =
+			stream.collect(Collectors.toList());
+
+		Assert.assertEquals(
+			adaptiveMedias.toString(), 1, adaptiveMedias.size());
+
+		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia0 =
+			adaptiveMedias.get(0);
+
+		Optional<String> adaptiveMedia0Optional =
+			adaptiveMedia0.getAttributeValue(
+				AdaptiveMediaAttribute.configurationUuid());
+
+		Assert.assertEquals("small", adaptiveMedia0Optional.get());
+
+		stream = _finder.getAdaptiveMedia(
+			queryBuilder ->
+				queryBuilder.forVersion(_fileVersion).withConfigurationStatus(
+					ImageAdaptiveMediaQueryBuilder.
+						ConfigurationStatus.ALL).forConfiguration("small").
+					done());
+
+		adaptiveMedias = stream.collect(Collectors.toList());
+
+		Assert.assertEquals(
+			adaptiveMedias.toString(), 1, adaptiveMedias.size());
+
+		adaptiveMedia0 = adaptiveMedias.get(0);
+
+		adaptiveMedia0Optional = adaptiveMedia0.getAttributeValue(
+			AdaptiveMediaAttribute.configurationUuid());
+
+		Assert.assertEquals("small", adaptiveMedia0Optional.get());
+
+		stream = _finder.getAdaptiveMedia(
+			queryBuilder ->
+				queryBuilder.forVersion(_fileVersion).withConfigurationStatus(
+					ImageAdaptiveMediaQueryBuilder.
+						ConfigurationStatus.DISABLED).forConfiguration("small").
+					done());
+
+		adaptiveMedias = stream.collect(Collectors.toList());
+
+		Assert.assertEquals(
+			adaptiveMedias.toString(), 0, adaptiveMedias.size());
+	}
+
+	@Test
+	public void testGetMediaQueryWithConfigurationStatusAttributeWithWidth()
+		throws Exception {
+
+		ImageAdaptiveMediaConfigurationEntry configurationEntry1 =
+			new ImageAdaptiveMediaConfigurationEntryImpl(
+				StringUtil.randomString(), "1",
+				MapUtil.fromArray("max-height", "100"));
+
+		ImageAdaptiveMediaConfigurationEntry configurationEntry2 =
+			new ImageAdaptiveMediaConfigurationEntryImpl(
+				StringUtil.randomString(), "2",
+				MapUtil.fromArray("max-height", "200"), false);
+
+		ImageAdaptiveMediaQueryBuilder.ConfigurationStatus
+			enabledConfigurationStatus =
+				ImageAdaptiveMediaQueryBuilder.ConfigurationStatus.ENABLED;
+
+		Mockito.when(
+			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
+				_fileVersion.getCompanyId(),
+				enabledConfigurationStatus.getPredicate())
+		).thenReturn(
+			Arrays.asList(configurationEntry1)
+		);
+
+		ImageAdaptiveMediaQueryBuilder.ConfigurationStatus
+			disabledConfigurationStatus =
+				ImageAdaptiveMediaQueryBuilder.ConfigurationStatus.DISABLED;
+
+		Mockito.when(
+			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
+				_fileVersion.getCompanyId(),
+				disabledConfigurationStatus.getPredicate())
+		).thenReturn(
+			Arrays.asList(configurationEntry2)
+		);
+
+		ImageAdaptiveMediaQueryBuilder.ConfigurationStatus
+			allConfigurationStatus =
+				ImageAdaptiveMediaQueryBuilder.ConfigurationStatus.ALL;
+
+		Mockito.when(
+			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
+				_fileVersion.getCompanyId(),
+				allConfigurationStatus.getPredicate())
+		).thenReturn(
+			Arrays.asList(configurationEntry1, configurationEntry2)
+		);
+
+		Mockito.when(
+			_fileVersion.getFileName()
+		).thenReturn(
+			StringUtil.randomString()
+		);
+
+		Mockito.when(
+			_fileVersion.getMimeType()
+		).thenReturn(
+			"image/jpeg"
+		);
+
+		AdaptiveMediaImage image1 = _mockImage(100, 1000, 1000L);
+
+		Mockito.when(
+			_imageLocalService.fetchAdaptiveMediaImage(
+				configurationEntry1.getUUID(), _fileVersion.getFileVersionId())
+		).thenReturn(
+			image1
+		);
+
+		AdaptiveMediaImage image2 = _mockImage(200, 1000, 1000L);
+
+		Mockito.when(
+			_imageLocalService.fetchAdaptiveMediaImage(
+				configurationEntry2.getUUID(), _fileVersion.getFileVersionId())
+		).thenReturn(
+			image2
+		);
+
+		Mockito.when(
+			_imageProcessor.isMimeTypeSupported(Mockito.anyString())
+		).thenReturn(
+			true
+		);
+
+		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream =
+			_finder.getAdaptiveMedia(
+				queryBuilder ->
+					queryBuilder.forVersion(_fileVersion).
+						withConfigurationStatus(enabledConfigurationStatus).
+						with(ImageAdaptiveMediaAttribute.IMAGE_WIDTH, 100).
+						done());
+
+		List<AdaptiveMedia<ImageAdaptiveMediaProcessor>> adaptiveMedias =
+			stream.collect(Collectors.toList());
+
+		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia0 =
+			adaptiveMedias.get(0);
+
+		Optional<String> adaptiveMedia0ConfigurationUuidOptional =
+			adaptiveMedia0.getAttributeValue(
+				AdaptiveMediaAttribute.configurationUuid());
+
+		Assert.assertEquals("1", adaptiveMedia0ConfigurationUuidOptional.get());
+
+		stream = _finder.getAdaptiveMedia(
+			queryBuilder ->
+				queryBuilder.forVersion(_fileVersion).withConfigurationStatus(
+					disabledConfigurationStatus).with(
+					ImageAdaptiveMediaAttribute.IMAGE_WIDTH, 100).done());
+
+		adaptiveMedias = stream.collect(Collectors.toList());
+
+		adaptiveMedia0 = adaptiveMedias.get(0);
+
+		adaptiveMedia0ConfigurationUuidOptional =
+			adaptiveMedia0.getAttributeValue(
+				AdaptiveMediaAttribute.configurationUuid());
+
+		Assert.assertEquals("2", adaptiveMedia0ConfigurationUuidOptional.get());
+
+		stream = _finder.getAdaptiveMedia(
+			queryBuilder ->
+				queryBuilder.forVersion(_fileVersion).withConfigurationStatus(
+					allConfigurationStatus).with(
+					ImageAdaptiveMediaAttribute.IMAGE_WIDTH, 100).done());
+
+		adaptiveMedias = stream.collect(Collectors.toList());
+
+		adaptiveMedia0 = adaptiveMedias.get(0);
+
+		adaptiveMedia0ConfigurationUuidOptional =
+			adaptiveMedia0.getAttributeValue(
+				AdaptiveMediaAttribute.configurationUuid());
+
+		Assert.assertEquals("1", adaptiveMedia0ConfigurationUuidOptional.get());
+
+		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia1 =
+			adaptiveMedias.get(1);
+
+		Optional<String> adaptiveMedia1ConfigurationUuidOptional =
+			adaptiveMedia1.getAttributeValue(
+				AdaptiveMediaAttribute.configurationUuid());
+
+		Assert.assertEquals("2", adaptiveMedia1ConfigurationUuidOptional.get());
+	}
+
+	@Test
 	public void testGetMediaQueryWithNoMatchingAttributes() throws Exception {
 		ImageAdaptiveMediaConfigurationEntry configurationEntry1 =
 			new ImageAdaptiveMediaConfigurationEntryImpl(
@@ -940,9 +1279,14 @@ public class ImageAdaptiveMediaFinderImplTest {
 				StringUtil.randomString(), StringUtil.randomString(),
 				MapUtil.fromArray("max-height", "200"));
 
+		ImageAdaptiveMediaQueryBuilder.ConfigurationStatus
+			enabledConfigurationStatus =
+				ImageAdaptiveMediaQueryBuilder.ConfigurationStatus.ENABLED;
+
 		Mockito.when(
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				Mockito.anyLong())
+				_fileVersion.getCompanyId(),
+				enabledConfigurationStatus.getPredicate())
 		).thenReturn(
 			Arrays.asList(configurationEntry1, configurationEntry2)
 		);
@@ -1044,9 +1388,14 @@ public class ImageAdaptiveMediaFinderImplTest {
 				StringUtil.randomString(), StringUtil.randomString(),
 				MapUtil.fromArray("max-height", "100", "max-width", "200"));
 
+		ImageAdaptiveMediaQueryBuilder.ConfigurationStatus
+			enabledConfigurationStatus =
+				ImageAdaptiveMediaQueryBuilder.ConfigurationStatus.ENABLED;
+
 		Mockito.when(
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				Mockito.anyLong())
+				_fileVersion.getCompanyId(),
+				enabledConfigurationStatus.getPredicate())
 		).thenReturn(
 			Collections.singleton(configurationEntry)
 		);

@@ -93,14 +93,25 @@ public class ImageAdaptiveMediaFinderImpl implements ImageAdaptiveMediaFinder {
 		BiFunction<FileVersion, ImageAdaptiveMediaConfigurationEntry, URI>
 			uriFactory = _getURIFactory(queryBuilder);
 
-		if (queryBuilder.hasConfiguration()) {
-			Collection<ImageAdaptiveMediaConfigurationEntry>
-				configurationEntries =
-					_configurationHelper.
-						getImageAdaptiveMediaConfigurationEntries(
-							fileVersion.getCompanyId(),
-							configurationEntry -> true);
+		ImageAdaptiveMediaQueryBuilder.ConfigurationStatus configurationStatus =
+			queryBuilder.getConfigurationStatus();
 
+		if (configurationStatus == null) {
+			if (queryBuilder.hasConfiguration()) {
+				configurationStatus =
+					ImageAdaptiveMediaQueryBuilder.ConfigurationStatus.ALL;
+			}
+			else {
+				configurationStatus =
+					ImageAdaptiveMediaQueryBuilder.ConfigurationStatus.ENABLED;
+			}
+		}
+
+		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
+			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
+				fileVersion.getCompanyId(), configurationStatus.getPredicate());
+
+		if (queryBuilder.hasConfiguration()) {
 			return configurationEntries.stream().filter(
 				configurationEntry ->
 					configurationEntry.getUUID().equals(
@@ -113,10 +124,6 @@ public class ImageAdaptiveMediaFinderImpl implements ImageAdaptiveMediaFinder {
 						_createMedia(
 							fileVersion, uriFactory, configurationEntry));
 		}
-
-		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
-			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				fileVersion.getCompanyId());
 
 		return configurationEntries.stream().filter(
 			configurationEntry ->

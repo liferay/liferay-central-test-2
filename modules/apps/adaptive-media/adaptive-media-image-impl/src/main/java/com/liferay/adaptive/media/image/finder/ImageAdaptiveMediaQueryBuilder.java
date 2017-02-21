@@ -17,11 +17,13 @@ package com.liferay.adaptive.media.image.finder;
 import com.liferay.adaptive.media.AdaptiveMediaAttribute;
 import com.liferay.adaptive.media.finder.AdaptiveMediaQuery;
 import com.liferay.adaptive.media.finder.AdaptiveMediaQueryBuilder;
+import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 
 import java.util.Optional;
+import java.util.function.Predicate;
 
 /**
  * @author Adolfo Pérez
@@ -38,9 +40,32 @@ public interface ImageAdaptiveMediaQueryBuilder
 
 	public InitialStep forVersion(FileVersion fileVersion);
 
+	public enum ConfigurationStatus {
+
+		ALL(configurationEntry -> true),
+		ENABLED(configurationEntry -> configurationEntry.isEnabled()),
+		DISABLED(configurationEntry -> !configurationEntry.isEnabled());
+
+		public Predicate<ImageAdaptiveMediaConfigurationEntry> getPredicate() {
+			return _predicate;
+		}
+
+		private ConfigurationStatus(
+			Predicate<ImageAdaptiveMediaConfigurationEntry> predicate) {
+
+			_predicate = predicate;
+		}
+
+		private final Predicate _predicate;
+
+	}
+
 	public interface ConfigurationStep {
 
 		public FinalStep forConfiguration(String configurationUuid);
+
+		public InitialStep withConfigurationStatus(
+			ConfigurationStatus configurationStatus);
 
 	}
 
