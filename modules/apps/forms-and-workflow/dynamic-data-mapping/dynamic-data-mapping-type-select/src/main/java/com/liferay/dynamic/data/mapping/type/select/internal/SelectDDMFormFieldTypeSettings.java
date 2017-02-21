@@ -107,8 +107,7 @@ public interface SelectDDMFormFieldTypeSettings
 
 	@DDMFormField(
 		label = "%allow-multiple-selections",
-		properties = {"showAsSwitcher=true"},
-		visibilityExpression = "false"
+		properties = {"showAsSwitcher=true"}, visibilityExpression = "FALSE"
 	)
 	public boolean multiple();
 
