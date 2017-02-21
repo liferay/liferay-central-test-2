@@ -41,6 +41,15 @@ public class AdaptiveMediaImageLocalServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.adaptive.media.image.service.impl.AdaptiveMediaImageLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static com.liferay.adaptive.media.image.model.AdaptiveMediaImage addAdaptiveMediaImage(
+		com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry configurationEntry,
+		com.liferay.portal.kernel.repository.model.FileVersion fileVersion,
+		int width, int height, java.io.InputStream inputStream, int size)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return getService()
+				   .addAdaptiveMediaImage(configurationEntry, fileVersion,
+			width, height, inputStream, size);
+	}
 
 	/**
 	* Adds the adaptive media image to the database. Also notifies the appropriate model listeners.
@@ -51,15 +60,6 @@ public class AdaptiveMediaImageLocalServiceUtil {
 	public static com.liferay.adaptive.media.image.model.AdaptiveMediaImage addAdaptiveMediaImage(
 		com.liferay.adaptive.media.image.model.AdaptiveMediaImage adaptiveMediaImage) {
 		return getService().addAdaptiveMediaImage(adaptiveMediaImage);
-	}
-
-	public static com.liferay.adaptive.media.image.model.AdaptiveMediaImage addAdaptiveMediaImage(
-		java.lang.String configurationUuid, long fileVersionId,
-		java.lang.String mimeType, int width, int size, int height)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService()
-				   .addAdaptiveMediaImage(configurationUuid, fileVersionId,
-			mimeType, width, size, height);
 	}
 
 	/**
@@ -200,6 +200,14 @@ public class AdaptiveMediaImageLocalServiceUtil {
 		return getService().getPercentage(companyId, configurationUuid);
 	}
 
+	public static java.io.InputStream getAdaptiveMediaImageContentStream(
+		com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry configurationEntry,
+		com.liferay.portal.kernel.repository.model.FileVersion fileVersion) {
+		return getService()
+				   .getAdaptiveMediaImageContentStream(configurationEntry,
+			fileVersion);
+	}
+
 	/**
 	* Returns the OSGi service identifier.
 	*
@@ -330,7 +338,8 @@ public class AdaptiveMediaImageLocalServiceUtil {
 		return getService().dynamicQueryCount(dynamicQuery, projection);
 	}
 
-	public static void deleteAdaptiveMediaImageFileVersion(long fileVersionId) {
+	public static void deleteAdaptiveMediaImageFileVersion(long fileVersionId)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		getService().deleteAdaptiveMediaImageFileVersion(fileVersionId);
 	}
 

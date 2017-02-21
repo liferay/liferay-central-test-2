@@ -34,6 +34,16 @@ public class AdaptiveMediaImageLocalServiceWrapper
 		_adaptiveMediaImageLocalService = adaptiveMediaImageLocalService;
 	}
 
+	@Override
+	public com.liferay.adaptive.media.image.model.AdaptiveMediaImage addAdaptiveMediaImage(
+		com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry configurationEntry,
+		com.liferay.portal.kernel.repository.model.FileVersion fileVersion,
+		int width, int height, java.io.InputStream inputStream, int size)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		return _adaptiveMediaImageLocalService.addAdaptiveMediaImage(configurationEntry,
+			fileVersion, width, height, inputStream, size);
+	}
+
 	/**
 	* Adds the adaptive media image to the database. Also notifies the appropriate model listeners.
 	*
@@ -44,15 +54,6 @@ public class AdaptiveMediaImageLocalServiceWrapper
 	public com.liferay.adaptive.media.image.model.AdaptiveMediaImage addAdaptiveMediaImage(
 		com.liferay.adaptive.media.image.model.AdaptiveMediaImage adaptiveMediaImage) {
 		return _adaptiveMediaImageLocalService.addAdaptiveMediaImage(adaptiveMediaImage);
-	}
-
-	@Override
-	public com.liferay.adaptive.media.image.model.AdaptiveMediaImage addAdaptiveMediaImage(
-		java.lang.String configurationUuid, long fileVersionId,
-		java.lang.String mimeType, int width, int size, int height)
-		throws com.liferay.portal.kernel.exception.PortalException {
-		return _adaptiveMediaImageLocalService.addAdaptiveMediaImage(configurationUuid,
-			fileVersionId, mimeType, width, size, height);
 	}
 
 	/**
@@ -210,6 +211,14 @@ public class AdaptiveMediaImageLocalServiceWrapper
 			configurationUuid);
 	}
 
+	@Override
+	public java.io.InputStream getAdaptiveMediaImageContentStream(
+		com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry configurationEntry,
+		com.liferay.portal.kernel.repository.model.FileVersion fileVersion) {
+		return _adaptiveMediaImageLocalService.getAdaptiveMediaImageContentStream(configurationEntry,
+			fileVersion);
+	}
+
 	/**
 	* Returns the OSGi service identifier.
 	*
@@ -351,7 +360,8 @@ public class AdaptiveMediaImageLocalServiceWrapper
 	}
 
 	@Override
-	public void deleteAdaptiveMediaImageFileVersion(long fileVersionId) {
+	public void deleteAdaptiveMediaImageFileVersion(long fileVersionId)
+		throws com.liferay.portal.kernel.exception.PortalException {
 		_adaptiveMediaImageLocalService.deleteAdaptiveMediaImageFileVersion(fileVersionId);
 	}
 

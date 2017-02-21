@@ -16,6 +16,7 @@ package com.liferay.adaptive.media.image.service;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.model.AdaptiveMediaImage;
 
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
@@ -25,6 +26,7 @@ import com.liferay.portal.kernel.dao.orm.Projection;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.model.PersistedModel;
+import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.search.Indexable;
 import com.liferay.portal.kernel.search.IndexableType;
 import com.liferay.portal.kernel.service.BaseLocalService;
@@ -34,6 +36,7 @@ import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.kernel.util.OrderByComparator;
 
+import java.io.InputStream;
 import java.io.Serializable;
 
 import java.util.List;
@@ -60,6 +63,10 @@ public interface AdaptiveMediaImageLocalService extends BaseLocalService,
 	 *
 	 * Never modify or reference this interface directly. Always use {@link AdaptiveMediaImageLocalServiceUtil} to access the adaptive media image local service. Add custom service methods to {@link com.liferay.adaptive.media.image.service.impl.AdaptiveMediaImageLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public AdaptiveMediaImage addAdaptiveMediaImage(
+		ImageAdaptiveMediaConfigurationEntry configurationEntry,
+		FileVersion fileVersion, int width, int height,
+		InputStream inputStream, int size) throws PortalException;
 
 	/**
 	* Adds the adaptive media image to the database. Also notifies the appropriate model listeners.
@@ -70,11 +77,6 @@ public interface AdaptiveMediaImageLocalService extends BaseLocalService,
 	@Indexable(type = IndexableType.REINDEX)
 	public AdaptiveMediaImage addAdaptiveMediaImage(
 		AdaptiveMediaImage adaptiveMediaImage);
-
-	public AdaptiveMediaImage addAdaptiveMediaImage(
-		java.lang.String configurationUuid, long fileVersionId,
-		java.lang.String mimeType, int width, int size, int height)
-		throws PortalException;
 
 	/**
 	* Creates a new adaptive media image with the primary key. Does not add the adaptive media image to the database.
@@ -188,6 +190,11 @@ public interface AdaptiveMediaImageLocalService extends BaseLocalService,
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getPercentage(long companyId, java.lang.String configurationUuid);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public InputStream getAdaptiveMediaImageContentStream(
+		ImageAdaptiveMediaConfigurationEntry configurationEntry,
+		FileVersion fileVersion);
+
 	/**
 	* Returns the OSGi service identifier.
 	*
@@ -292,5 +299,6 @@ public interface AdaptiveMediaImageLocalService extends BaseLocalService,
 	public long dynamicQueryCount(DynamicQuery dynamicQuery,
 		Projection projection);
 
-	public void deleteAdaptiveMediaImageFileVersion(long fileVersionId);
+	public void deleteAdaptiveMediaImageFileVersion(long fileVersionId)
+		throws PortalException;
 }
