@@ -42,6 +42,7 @@ import com.liferay.dynamic.data.mapping.util.DDMFormFactory;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
+import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 import com.liferay.portal.kernel.service.WorkflowDefinitionLinkLocalService;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -101,13 +102,23 @@ public class SaveRecordSetMVCCommandHelper {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			DDMStructure.class.getName(), portletRequest);
 
-		return ddmStructureService.addStructure(
-			groupId, DDMStructureConstants.DEFAULT_PARENT_STRUCTURE_ID,
-			_portal.getClassNameId(DDLRecordSet.class), structureKey,
-			getLocalizedMap(themeDisplay.getSiteDefaultLocale(), name),
-			getLocalizedMap(themeDisplay.getSiteDefaultLocale(), description),
-			ddmForm, ddmFormLayout, storageType,
-			DDMStructureConstants.TYPE_AUTO, serviceContext);
+		try {
+			serviceContext.setAttribute("form", ddmForm);
+
+			ServiceContextThreadLocal.pushServiceContext(serviceContext);
+
+			return ddmStructureService.addStructure(
+				groupId, DDMStructureConstants.DEFAULT_PARENT_STRUCTURE_ID,
+				_portal.getClassNameId(DDLRecordSet.class), structureKey,
+				getLocalizedMap(themeDisplay.getSiteDefaultLocale(), name),
+				getLocalizedMap(
+					themeDisplay.getSiteDefaultLocale(), description),
+				ddmForm, ddmFormLayout, storageType,
+				DDMStructureConstants.TYPE_AUTO, serviceContext);
+		}
+		finally {
+			ServiceContextThreadLocal.popServiceContext();
+		}
 	}
 
 	protected DDLRecordSet addRecordSet(
@@ -283,11 +294,21 @@ public class SaveRecordSetMVCCommandHelper {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			DDMStructure.class.getName(), portletRequest);
 
-		return ddmStructureService.updateStructure(
-			ddmStructureId, DDMStructureConstants.DEFAULT_PARENT_STRUCTURE_ID,
-			getLocalizedMap(ddmForm.getDefaultLocale(), name),
-			getLocalizedMap(ddmForm.getDefaultLocale(), description), ddmForm,
-			ddmFormLayout, serviceContext);
+		try {
+			serviceContext.setAttribute("form", ddmForm);
+
+			ServiceContextThreadLocal.pushServiceContext(serviceContext);
+
+			return ddmStructureService.updateStructure(
+				ddmStructureId,
+				DDMStructureConstants.DEFAULT_PARENT_STRUCTURE_ID,
+				getLocalizedMap(ddmForm.getDefaultLocale(), name),
+				getLocalizedMap(ddmForm.getDefaultLocale(), description),
+				ddmForm, ddmFormLayout, serviceContext);
+		}
+		finally {
+			ServiceContextThreadLocal.popServiceContext();
+		}
 	}
 
 	protected DDLRecordSet updateRecordSet(
