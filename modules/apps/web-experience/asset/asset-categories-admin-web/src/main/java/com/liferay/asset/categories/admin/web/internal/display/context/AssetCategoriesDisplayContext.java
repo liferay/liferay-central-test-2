@@ -109,11 +109,11 @@ public class AssetCategoriesDisplayContext {
 						name = classType.getName();
 					}
 					catch (NoSuchModelException nsme) {
-						if (_log.isWarnEnabled()) {
-							_log.warn(
-								"Error when loading Asset Types for " +
-									"AssetVocabulary " + vocabulary.getName() +
-										": " + nsme.getMessage());
+						if (_log.isDebugEnabled()) {
+							_log.debug(
+								"Unable to get Asset Type for classTypePK " +
+									classTypePK,
+								nsme);
 						}
 
 						continue;
@@ -133,7 +133,7 @@ public class AssetCategoriesDisplayContext {
 				sb.append(StringPool.STAR);
 			}
 
-			sb.append(StringPool.COMMA);
+			sb.append(StringPool.COMMA_AND_SPACE);
 		}
 
 		if (sb.index() == 0) {
