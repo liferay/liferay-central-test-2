@@ -44,6 +44,10 @@ public interface ImageAdaptiveMediaConfigurationHelper {
 			long companyId, String uuid)
 		throws IOException;
 
+	public void enableImageAdaptiveMediaConfigurationEntry(
+			long companyId, String uuid)
+		throws IOException;
+
 	public Collection<ImageAdaptiveMediaConfigurationEntry>
 		getImageAdaptiveMediaConfigurationEntries(long companyId);
 

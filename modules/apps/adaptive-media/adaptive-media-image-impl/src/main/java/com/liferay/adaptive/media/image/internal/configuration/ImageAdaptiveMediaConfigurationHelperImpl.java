@@ -139,6 +139,45 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 	}
 
 	@Override
+	public void enableImageAdaptiveMediaConfigurationEntry(
+			long companyId, String uuid)
+		throws IOException {
+
+		Optional<ImageAdaptiveMediaConfigurationEntry>
+			configurationEntryOptional =
+				getImageAdaptiveMediaConfigurationEntry(companyId, uuid);
+
+		if (!configurationEntryOptional.isPresent()) {
+			return;
+		}
+
+		ImageAdaptiveMediaConfigurationEntry configurationEntry =
+			configurationEntryOptional.get();
+
+		if (configurationEntry.isEnabled()) {
+			return;
+		}
+
+		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
+			getImageAdaptiveMediaConfigurationEntries(companyId);
+
+		List<ImageAdaptiveMediaConfigurationEntry> updatedConfigurationEntries =
+			configurationEntries.stream().filter(
+				curConfigurationEntry ->
+					!curConfigurationEntry.getUUID().equals(uuid)).collect(
+				Collectors.toList());
+
+		ImageAdaptiveMediaConfigurationEntry newConfigurationEntry =
+			new ImageAdaptiveMediaConfigurationEntryImpl(
+				configurationEntry.getName(), configurationEntry.getUUID(),
+				configurationEntry.getProperties(), true);
+
+		updatedConfigurationEntries.add(newConfigurationEntry);
+
+		_updateConfiguration(companyId, updatedConfigurationEntries);
+	}
+
+	@Override
 	public Collection<ImageAdaptiveMediaConfigurationEntry>
 		getImageAdaptiveMediaConfigurationEntries(long companyId) {
 
