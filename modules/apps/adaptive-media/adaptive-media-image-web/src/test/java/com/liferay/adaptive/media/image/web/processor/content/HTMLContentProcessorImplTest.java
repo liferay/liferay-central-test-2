@@ -88,6 +88,21 @@ public class HTMLContentProcessorImplTest {
 	}
 
 	@Test
+	public void testReturnsTheSameHTMLIfNoAdaptiveMediaImagesArePresent()
+		throws Exception {
+
+		Mockito.when(
+			_imageAdaptiveMediaFinder.getAdaptiveMedia(Mockito.any())
+		).thenReturn(
+			Stream.empty()
+		);
+
+		Assert.assertEquals(
+			_HTML_WITH_ADAPTABLE_PICTURES,
+			_htmlContentProcessor.process(_HTML_WITH_ADAPTABLE_PICTURES));
+	}
+
+	@Test
 	public void testReturnsTheSameHTMLIfNoImagesArePresent() throws Exception {
 		Assert.assertEquals(
 			_HTML_WITHOUT_PICTURES,

@@ -124,6 +124,10 @@ public class HTMLContentProcessorImpl
 		List<AdaptiveMedia<ImageAdaptiveMediaProcessor>> adaptiveMediaList =
 			_getAdaptiveMedias(fileEntryId).collect(Collectors.toList());
 
+		if (adaptiveMediaList.isEmpty()) {
+			return img;
+		}
+
 		StringBundler sb = new StringBundler(3 + adaptiveMediaList.size());
 
 		sb.append("<picture>");
