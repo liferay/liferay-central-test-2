@@ -16,24 +16,32 @@ package com.liferay.adaptive.media.image.service.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
+import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
 import com.liferay.adaptive.media.image.counter.AdaptiveMediaImageCounter;
 import com.liferay.adaptive.media.image.exception.DuplicateAdaptiveMediaImageException;
 import com.liferay.adaptive.media.image.model.AdaptiveMediaImage;
 import com.liferay.adaptive.media.image.service.base.AdaptiveMediaImageLocalServiceBaseImpl;
+import com.liferay.adaptive.media.image.storage.ImageStorage;
 import com.liferay.document.library.kernel.service.DLAppLocalService;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMap;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMapFactory;
+import com.liferay.osgi.util.ServiceTrackerFactory;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
+import java.io.InputStream;
+
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
+import org.osgi.util.tracker.ServiceTracker;
 
 /**
  * @author Sergio González
@@ -45,7 +53,7 @@ public class AdaptiveMediaImageLocalServiceImpl
 	@Override
 	public AdaptiveMediaImage addAdaptiveMediaImage(
 			String configurationUuid, long fileVersionId, String mimeType,
-			int width, int size, int height)
+			int width, int size, int height, InputStream inputStream)
 		throws PortalException {
 
 		_checkDuplicates(configurationUuid, fileVersionId);
@@ -68,6 +76,19 @@ public class AdaptiveMediaImageLocalServiceImpl
 		image.setSize(size);
 		image.setConfigurationUuid(configurationUuid);
 
+		ImageAdaptiveMediaConfigurationHelper configurationHelper =
+			_configurationHelperServiceTracker.getService();
+
+		Optional<ImageAdaptiveMediaConfigurationEntry>
+			configurationEntryOptional =
+				configurationHelper.getImageAdaptiveMediaConfigurationEntry(
+					fileVersion.getCompanyId(), configurationUuid);
+
+		ImageStorage imageStorage = _imageStorageServiceTracker.getService();
+
+		imageStorage.save(
+			fileVersion, configurationEntryOptional.get(), inputStream);
+
 		return adaptiveMediaImagePersistence.update(image);
 	}
 
@@ -78,29 +99,43 @@ public class AdaptiveMediaImageLocalServiceImpl
 		Bundle bundle = FrameworkUtil.getBundle(
 			AdaptiveMediaImageLocalServiceImpl.class);
 
+		_imageStorageServiceTracker = ServiceTrackerFactory.open(
+			bundle, ImageStorage.class);
+		_configurationHelperServiceTracker = ServiceTrackerFactory.open(
+			bundle, ImageAdaptiveMediaConfigurationHelper.class);
+
 		BundleContext bundleContext = bundle.getBundleContext();
 
-		_serviceTrackerMap = ServiceTrackerMapFactory.singleValueMap(
+		_serviceTrackerMap = ServiceTrackerMapFactory.openSingleValueMap(
 			bundleContext, AdaptiveMediaImageCounter.class,
 			"adaptive.media.key");
-
-		_serviceTrackerMap.open();
 	}
 
 	@Override
-	public void deleteAdaptiveMediaImageFileVersion(long fileVersionId) {
+	public void deleteAdaptiveMediaImageFileVersion(long fileVersionId)
+		throws PortalException {
+
 		List<AdaptiveMediaImage> images =
 			adaptiveMediaImagePersistence.findByFileVersionId(fileVersionId);
 
 		for (AdaptiveMediaImage image : images) {
 			adaptiveMediaImagePersistence.remove(image);
 		}
+
+		FileVersion fileVersion = dlAppLocalService.getFileVersion(
+			fileVersionId);
+
+		ImageStorage imageStorage = _imageStorageServiceTracker.getService();
+
+		imageStorage.delete(fileVersion);
 	}
 
 	@Override
 	public void destroy() {
 		super.destroy();
 
+		_imageStorageServiceTracker.close();
+		_configurationHelperServiceTracker.close();
 		_serviceTrackerMap.close();
 	}
 
@@ -150,6 +185,12 @@ public class AdaptiveMediaImageLocalServiceImpl
 		}
 	}
 
+	private ServiceTracker
+		<ImageAdaptiveMediaConfigurationHelper,
+			ImageAdaptiveMediaConfigurationHelper>
+				_configurationHelperServiceTracker;
+	private ServiceTracker<ImageStorage, ImageStorage>
+		_imageStorageServiceTracker;
 	private ServiceTrackerMap<String, AdaptiveMediaImageCounter>
 		_serviceTrackerMap;
 

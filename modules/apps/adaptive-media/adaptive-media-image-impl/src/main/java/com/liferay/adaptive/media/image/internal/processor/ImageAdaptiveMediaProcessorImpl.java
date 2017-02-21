@@ -23,7 +23,6 @@ import com.liferay.adaptive.media.image.internal.util.RenderedImageUtil;
 import com.liferay.adaptive.media.image.model.AdaptiveMediaImage;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
 import com.liferay.adaptive.media.image.service.AdaptiveMediaImageLocalService;
-import com.liferay.adaptive.media.image.storage.ImageStorage;
 import com.liferay.adaptive.media.processor.AdaptiveMediaProcessor;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
@@ -32,7 +31,6 @@ import com.liferay.portal.kernel.repository.model.FileVersion;
 import java.awt.image.RenderedImage;
 
 import java.io.IOException;
-import java.io.InputStream;
 
 import java.util.Optional;
 
@@ -52,14 +50,19 @@ public final class ImageAdaptiveMediaProcessorImpl
 
 	@Override
 	public void cleanUp(FileVersion fileVersion) {
-		if (!_imageProcessor.isMimeTypeSupported(fileVersion.getMimeType())) {
-			return;
+		try {
+			if (!_imageProcessor.isMimeTypeSupported(
+					fileVersion.getMimeType())) {
+
+				return;
+			}
+
+			_imageLocalService.deleteAdaptiveMediaImageFileVersion(
+				fileVersion.getFileVersionId());
 		}
-
-		_imageStorage.delete(fileVersion);
-
-		_imageLocalService.deleteAdaptiveMediaImageFileVersion(
-			fileVersion.getFileVersionId());
+		catch (PortalException pe) {
+			throw new AdaptiveMediaRuntimeException.IOException(pe);
+		}
 	}
 
 	@Override
@@ -124,17 +127,11 @@ public final class ImageAdaptiveMediaProcessorImpl
 			byte[] bytes = RenderedImageUtil.getRenderedImageContentStream(
 				renderedImage, fileVersion.getMimeType());
 
-			try (InputStream inputStream = new UnsyncByteArrayInputStream(
-					bytes)) {
-
-				_imageStorage.save(
-					fileVersion, configurationEntry, inputStream);
-			}
-
 			_imageLocalService.addAdaptiveMediaImage(
 				configurationEntry.getUUID(), fileVersion.getFileVersionId(),
 				fileVersion.getMimeType(), renderedImage.getWidth(),
-				bytes.length, renderedImage.getHeight());
+				bytes.length, renderedImage.getHeight(),
+				new UnsyncByteArrayInputStream(bytes));
 		}
 		catch (IOException | PortalException e) {
 			throw new AdaptiveMediaRuntimeException.IOException(e);
@@ -161,11 +158,6 @@ public final class ImageAdaptiveMediaProcessorImpl
 	}
 
 	@Reference(unbind = "-")
-	public void setImageStorage(ImageStorage imageStorage) {
-		_imageStorage = imageStorage;
-	}
-
-	@Reference(unbind = "-")
 	public void setTiffOrientationTransformer(
 		TiffOrientationTransformer tiffOrientationTransformer) {
 
@@ -175,7 +167,6 @@ public final class ImageAdaptiveMediaProcessorImpl
 	private ImageAdaptiveMediaConfigurationHelper _configurationHelper;
 	private AdaptiveMediaImageLocalService _imageLocalService;
 	private ImageProcessor _imageProcessor;
-	private ImageStorage _imageStorage;
 	private TiffOrientationTransformer _tiffOrientationTransformer;
 
 }
