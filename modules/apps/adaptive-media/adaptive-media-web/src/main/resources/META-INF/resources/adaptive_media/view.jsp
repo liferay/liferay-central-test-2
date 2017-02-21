@@ -120,6 +120,12 @@ PortletURL portletURL = renderResponse.createRenderURL();
 					value="<%= configurationEntry.getName() %>"
 				/>
 
+				<liferay-ui:search-container-column-text
+					name="state"
+					orderable="<%= false %>"
+					value='<%= LanguageUtil.get(request, configurationEntry.isEnabled() ? "enabled" : "disabled") %>'
+				/>
+
 				<%
 				int percentage = AdaptiveMediaImageLocalServiceUtil.getPercentage(themeDisplay.getCompanyId(), configurationEntry.getUUID());
 				%>
