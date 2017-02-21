@@ -56,7 +56,8 @@ public class ViewMVCRenderCommand implements MVCRenderCommand {
 			configurationEntriesCollection =
 				_imageAdaptiveMediaConfigurationHelper.
 					getImageAdaptiveMediaConfigurationEntries(
-						themeDisplay.getCompanyId());
+						themeDisplay.getCompanyId(),
+						configurationEntry -> true);
 
 		List<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
 			new ArrayList<>(configurationEntriesCollection);

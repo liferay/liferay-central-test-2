@@ -80,7 +80,7 @@ public class ImageAdaptiveMediaEnableConfigurationTest {
 
 		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
 			configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				TestPropsValues.getCompanyId());
+				TestPropsValues.getCompanyId(), configurationEntry -> true);
 
 		for (ImageAdaptiveMediaConfigurationEntry configurationEntry :
 				configurationEntries) {
@@ -147,6 +147,52 @@ public class ImageAdaptiveMediaEnableConfigurationTest {
 				TestPropsValues.getCompanyId(), "2");
 
 		_assertEnabled(secondConfigurationEntryOptional);
+	}
+
+	@Test
+	public void testEnableConfigurationEntryWithExistingDisabledConfiguration()
+		throws Exception {
+
+		ImageAdaptiveMediaConfigurationHelper configurationHelper =
+			_serviceTracker.getService();
+
+		Map<String, String> properties = new HashMap<>();
+
+		properties.put("max-height", "100");
+		properties.put("max-width", "100");
+
+		configurationHelper.addImageAdaptiveMediaConfigurationEntry(
+			TestPropsValues.getCompanyId(), "one", "1", properties);
+
+		configurationHelper.disableImageAdaptiveMediaConfigurationEntry(
+			TestPropsValues.getCompanyId(), "1");
+
+		properties = new HashMap<>();
+
+		properties.put("max-height", "200");
+		properties.put("max-width", "200");
+
+		configurationHelper.addImageAdaptiveMediaConfigurationEntry(
+			TestPropsValues.getCompanyId(), "two", "2", properties);
+
+		configurationHelper.disableImageAdaptiveMediaConfigurationEntry(
+			TestPropsValues.getCompanyId(), "2");
+
+		configurationHelper.enableImageAdaptiveMediaConfigurationEntry(
+			TestPropsValues.getCompanyId(), "1");
+
+		Optional<ImageAdaptiveMediaConfigurationEntry>
+			configurationEntryOptional =
+				configurationHelper.getImageAdaptiveMediaConfigurationEntry(
+					TestPropsValues.getCompanyId(), "1");
+
+		_assertEnabled(configurationEntryOptional);
+
+		configurationEntryOptional =
+			configurationHelper.getImageAdaptiveMediaConfigurationEntry(
+				TestPropsValues.getCompanyId(), "2");
+
+		_assertDisabled(configurationEntryOptional);
 	}
 
 	@Test

@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 /**
  * @author Alejandro Hernández
@@ -56,6 +57,11 @@ public interface ImageAdaptiveMediaConfigurationHelper {
 
 	public Collection<ImageAdaptiveMediaConfigurationEntry>
 		getImageAdaptiveMediaConfigurationEntries(long companyId);
+
+	public Collection<ImageAdaptiveMediaConfigurationEntry>
+		getImageAdaptiveMediaConfigurationEntries(
+			long companyId,
+			Predicate<? super ImageAdaptiveMediaConfigurationEntry> predicate);
 
 	public Optional<ImageAdaptiveMediaConfigurationEntry>
 		getImageAdaptiveMediaConfigurationEntry(

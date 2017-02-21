@@ -34,6 +34,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -62,7 +63,8 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 		_checkProperties(properties);
 
 		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
-			getImageAdaptiveMediaConfigurationEntries(companyId);
+			getImageAdaptiveMediaConfigurationEntries(
+				companyId, configurationEntry -> true);
 
 		_checkDuplicates(configurationEntries, uuid);
 
@@ -129,7 +131,8 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 		}
 
 		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
-			getImageAdaptiveMediaConfigurationEntries(companyId);
+			getImageAdaptiveMediaConfigurationEntries(
+				companyId, curConfigurationEntry -> true);
 
 		List<ImageAdaptiveMediaConfigurationEntry> updatedConfigurationEntries =
 			configurationEntries.stream().filter(
@@ -168,7 +171,8 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 		}
 
 		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
-			getImageAdaptiveMediaConfigurationEntries(companyId);
+			getImageAdaptiveMediaConfigurationEntries(
+				companyId, curConfigurationEntry -> true);
 
 		List<ImageAdaptiveMediaConfigurationEntry> updatedConfigurationEntries =
 			configurationEntries.stream().filter(
@@ -200,7 +204,8 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 		}
 
 		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
-			getImageAdaptiveMediaConfigurationEntries(companyId);
+			getImageAdaptiveMediaConfigurationEntries(
+				companyId, curConfigurationEntry -> true);
 
 		List<ImageAdaptiveMediaConfigurationEntry> updatedConfigurationEntries =
 			configurationEntries.stream().filter(
@@ -218,12 +223,28 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 		Stream<ImageAdaptiveMediaConfigurationEntry> configurationEntryStream =
 			_getConfigurationEntries(companyId);
 
-		configurationEntryStream = configurationEntryStream.sorted(
+		return configurationEntryStream.filter(
+			configurationEntry -> configurationEntry.isEnabled()).sorted(
+				(configurationEntry1, configurationEntry2) ->
+					configurationEntry1.getName().compareTo(
+						configurationEntry2.getName())).collect(
+				Collectors.toList());
+	}
+
+	@Override
+	public Collection<ImageAdaptiveMediaConfigurationEntry>
+		getImageAdaptiveMediaConfigurationEntries(
+			long companyId,
+			Predicate<? super ImageAdaptiveMediaConfigurationEntry> predicate) {
+
+		Stream<ImageAdaptiveMediaConfigurationEntry> configurationEntryStream =
+			_getConfigurationEntries(companyId);
+
+		return configurationEntryStream.filter(predicate).sorted(
 			(configurationEntry1, configurationEntry2) ->
 				configurationEntry1.getName().compareTo(
-					configurationEntry2.getName()));
-
-		return configurationEntryStream.collect(Collectors.toList());
+					configurationEntry2.getName())).collect(
+				Collectors.toList());
 	}
 
 	@Override

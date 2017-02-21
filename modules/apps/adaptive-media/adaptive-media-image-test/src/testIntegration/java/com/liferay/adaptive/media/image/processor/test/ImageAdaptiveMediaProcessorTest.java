@@ -82,7 +82,7 @@ public class ImageAdaptiveMediaProcessorTest {
 
 		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				TestPropsValues.getCompanyId());
+				TestPropsValues.getCompanyId(), configurationEntry -> true);
 
 		for (ImageAdaptiveMediaConfigurationEntry configurationEntry :
 				configurationEntries) {
@@ -94,6 +94,39 @@ public class ImageAdaptiveMediaProcessorTest {
 		}
 
 		_addTestVariant();
+	}
+
+	@Test
+	public void testAddingFileEntryWithDisabledConfigurationCreatesNoMedia()
+		throws Exception {
+
+		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
+			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
+				TestPropsValues.getCompanyId(), configurationEntry -> true);
+
+		for (ImageAdaptiveMediaConfigurationEntry configurationEntry :
+				configurationEntries) {
+
+			_configurationHelper.disableImageAdaptiveMediaConfigurationEntry(
+				TestPropsValues.getCompanyId(), configurationEntry.getUUID());
+		}
+
+		try (DestinationReplacer destinationReplacer = new DestinationReplacer(
+				"liferay/adaptive_media_processor")) {
+
+			ServiceContext serviceContext =
+				ServiceContextTestUtil.getServiceContext(
+					_group, TestPropsValues.getUserId());
+
+			FileEntry fileEntry = _addNonImageFileEntry(serviceContext);
+
+			Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream =
+				_finder.getAdaptiveMedia(
+					queryBuilder ->
+						queryBuilder.allForFileEntry(fileEntry).done());
+
+			Assert.assertEquals(0, stream.count());
+		}
 	}
 
 	@Ignore

@@ -81,7 +81,7 @@ public class ImageAdaptiveMediaDeleteConfigurationTest {
 
 		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
 			configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				TestPropsValues.getCompanyId());
+				TestPropsValues.getCompanyId(), configurationEntry -> true);
 
 		for (ImageAdaptiveMediaConfigurationEntry configurationEntry :
 				configurationEntries) {
@@ -149,6 +149,52 @@ public class ImageAdaptiveMediaDeleteConfigurationTest {
 				TestPropsValues.getCompanyId(), "2");
 
 		Assert.assertFalse(secondConfigurationEntryOptional.isPresent());
+	}
+
+	@Test
+	public void testDeleteConfigurationEntryWithExistingDisabledConfiguration()
+		throws Exception {
+
+		ImageAdaptiveMediaConfigurationHelper configurationHelper =
+			_serviceTracker.getService();
+
+		Map<String, String> properties = new HashMap<>();
+
+		properties.put("max-height", "100");
+		properties.put("max-width", "100");
+
+		configurationHelper.addImageAdaptiveMediaConfigurationEntry(
+			TestPropsValues.getCompanyId(), "one", "1", properties);
+
+		configurationHelper.disableImageAdaptiveMediaConfigurationEntry(
+			TestPropsValues.getCompanyId(), "1");
+
+		properties = new HashMap<>();
+
+		properties.put("max-height", "200");
+		properties.put("max-width", "200");
+
+		configurationHelper.addImageAdaptiveMediaConfigurationEntry(
+			TestPropsValues.getCompanyId(), "two", "2", properties);
+
+		configurationHelper.disableImageAdaptiveMediaConfigurationEntry(
+			TestPropsValues.getCompanyId(), "2");
+
+		configurationHelper.deleteImageAdaptiveMediaConfigurationEntry(
+			TestPropsValues.getCompanyId(), "2");
+
+		Optional<ImageAdaptiveMediaConfigurationEntry>
+			configurationEntryOptional =
+				configurationHelper.getImageAdaptiveMediaConfigurationEntry(
+					TestPropsValues.getCompanyId(), "1");
+
+		_assertDisabled(configurationEntryOptional);
+
+		configurationEntryOptional =
+			configurationHelper.getImageAdaptiveMediaConfigurationEntry(
+				TestPropsValues.getCompanyId(), "2");
+
+		Assert.assertFalse(configurationEntryOptional.isPresent());
 	}
 
 	@Test
@@ -416,6 +462,49 @@ public class ImageAdaptiveMediaDeleteConfigurationTest {
 	}
 
 	@Test
+	public void testForceDeleteConfigurationEntryWithExistingDisabledConfiguration()
+		throws Exception {
+
+		ImageAdaptiveMediaConfigurationHelper configurationHelper =
+			_serviceTracker.getService();
+
+		Map<String, String> properties = new HashMap<>();
+
+		properties.put("max-height", "100");
+		properties.put("max-width", "100");
+
+		configurationHelper.addImageAdaptiveMediaConfigurationEntry(
+			TestPropsValues.getCompanyId(), "one", "1", properties);
+
+		configurationHelper.disableImageAdaptiveMediaConfigurationEntry(
+			TestPropsValues.getCompanyId(), "1");
+
+		properties = new HashMap<>();
+
+		properties.put("max-height", "200");
+		properties.put("max-width", "200");
+
+		configurationHelper.addImageAdaptiveMediaConfigurationEntry(
+			TestPropsValues.getCompanyId(), "two", "2", properties);
+
+		configurationHelper.forceDeleteImageAdaptiveMediaConfigurationEntry(
+			TestPropsValues.getCompanyId(), "2");
+
+		Optional<ImageAdaptiveMediaConfigurationEntry>
+			configurationEntryOptional =
+				configurationHelper.getImageAdaptiveMediaConfigurationEntry(
+					TestPropsValues.getCompanyId(), "1");
+
+		_assertDisabled(configurationEntryOptional);
+
+		configurationEntryOptional =
+			configurationHelper.getImageAdaptiveMediaConfigurationEntry(
+				TestPropsValues.getCompanyId(), "2");
+
+		Assert.assertFalse(configurationEntryOptional.isPresent());
+	}
+
+	@Test
 	public void testForceDeleteDeletedConfigurationEntry() throws Exception {
 		ImageAdaptiveMediaConfigurationHelper configurationHelper =
 			_serviceTracker.getService();
@@ -626,6 +715,18 @@ public class ImageAdaptiveMediaDeleteConfigurationTest {
 			configurationEntryOptional.get();
 
 		Assert.assertTrue(configurationEntry.isEnabled());
+	}
+
+	private void _assertDisabled(
+		Optional<ImageAdaptiveMediaConfigurationEntry>
+			configurationEntryOptional) {
+
+		Assert.assertTrue(configurationEntryOptional.isPresent());
+
+		ImageAdaptiveMediaConfigurationEntry configurationEntry =
+			configurationEntryOptional.get();
+
+		Assert.assertFalse(configurationEntry.isEnabled());
 	}
 
 	private static ServiceTracker
