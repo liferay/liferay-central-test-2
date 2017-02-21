@@ -147,6 +147,9 @@ public class DDMFormEvaluatorHelper {
 
 		ddmFormFieldEvaluationResult.setValue(value);
 
+		ddmFormFieldEvaluationResult.setProperty(
+			"dataType", ddmFormField.getDataType());
+
 		return ddmFormFieldEvaluationResult;
 	}
 
@@ -438,6 +441,12 @@ public class DDMFormEvaluatorHelper {
 				if (Validator.isNotNull(valueString)) {
 					ddmExpression.setIntegerVariableValue(
 						ddmFormFieldName, GetterUtil.getInteger(valueString));
+				}
+			}
+			else if (ddmFormField.getDataType().equals(FieldConstants.DOUBLE)) {
+				if (Validator.isNotNull(valueString)) {
+					ddmExpression.setDoubleVariableValue(
+						ddmFormFieldName, GetterUtil.getDouble(valueString));
 				}
 			}
 			else if (dataType.equals(FieldConstants.BOOLEAN)) {
