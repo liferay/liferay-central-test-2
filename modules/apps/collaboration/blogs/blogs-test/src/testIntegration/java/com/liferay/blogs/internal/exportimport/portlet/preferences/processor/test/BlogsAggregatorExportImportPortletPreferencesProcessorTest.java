@@ -192,8 +192,8 @@ public class BlogsAggregatorExportImportPortletPreferencesProcessorTest {
 
 		Assert.assertEquals(_organization.getUuid(), exportedOrganizationId);
 
-		// Update organization to have a different primary key - we will swap
-		// to the new one and we'll  verify it
+		// Update organization to have a different primary key. We will swap
+		// to the new one and verify it.
 
 		OrganizationLocalServiceUtil.deleteOrganization(
 			_organization.getOrganizationId());
@@ -204,7 +204,7 @@ public class BlogsAggregatorExportImportPortletPreferencesProcessorTest {
 
 		OrganizationLocalServiceUtil.updateOrganization(_organization);
 
-		// Test the import part
+		// Test the import
 
 		PortletPreferences importedPortletPreferences =
 			blogsAggregatorPortletPreferencesProcessor.
