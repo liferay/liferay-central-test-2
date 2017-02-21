@@ -27,12 +27,7 @@ import java.awt.image.RenderedImage;
 import java.io.IOException;
 import java.io.InputStream;
 
-import java.util.Iterator;
 import java.util.Map;
-
-import javax.imageio.ImageIO;
-import javax.imageio.ImageReader;
-import javax.imageio.stream.ImageInputStream;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -52,7 +47,7 @@ public class ImageProcessor {
 		ImageAdaptiveMediaConfigurationEntry configurationEntry) {
 
 		try (InputStream is = fileVersion.getContentStream(false)) {
-			RenderedImage renderedImage = _readImage(is);
+			RenderedImage renderedImage = RenderedImageUtil.readImage(is);
 
 			Map<String, String> properties = configurationEntry.getProperties();
 
@@ -64,38 +59,6 @@ public class ImageProcessor {
 		catch (IOException | PortalException e) {
 			throw new AdaptiveMediaRuntimeException.IOException(e);
 		}
-	}
-
-	private RenderedImage _readImage(InputStream inputStream)
-		throws IOException {
-
-		ImageInputStream imageInputStream = ImageIO.createImageInputStream(
-			inputStream);
-
-		Iterator<ImageReader> iterator = ImageIO.getImageReaders(
-			imageInputStream);
-
-		while (iterator.hasNext()) {
-			ImageReader imageReader = null;
-
-			try {
-				imageReader = iterator.next();
-
-				imageReader.setInput(imageInputStream);
-
-				return imageReader.read(0);
-			}
-			catch (IOException ioe) {
-				continue;
-			}
-			finally {
-				if (imageReader != null) {
-					imageReader.dispose();
-				}
-			}
-		}
-
-		throw new IOException("Unsupported image type");
 	}
 
 }
