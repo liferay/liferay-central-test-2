@@ -12,19 +12,17 @@
  * details.
  */
 
-package com.liferay.adaptive.media.image.internal.util;
+package com.liferay.adaptive.media.image.internal.storage;
 
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationEntryImpl;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.util.StringUtil;
-
-import java.util.Collections;
-
 import org.junit.Assert;
 import org.junit.Test;
-
 import org.mockito.Mockito;
+
+import java.util.Collections;
 
 /**
  * @author Adolfo Pérez
@@ -102,6 +100,6 @@ public class ImageStorageTest {
 		Assert.assertEquals("adaptive/1/2/3/4/xyz", fileVersionVariantPath);
 	}
 
-	private final ImageStorage _imageStorage = new ImageStorage();
+	private final ImageStorageImpl _imageStorage = new ImageStorageImpl();
 
 }

@@ -5,7 +5,8 @@ Export-Package:\
 	com.liferay.adaptive.media.image.configuration,\
 	com.liferay.adaptive.media.image.constants,\
 	com.liferay.adaptive.media.image.finder,\
-	com.liferay.adaptive.media.image.processor
+	com.liferay.adaptive.media.image.processor,\
+	com.liferay.adaptive.media.image.storage
 Import-Package:\
 	!com.adobe.xmp.*,\
 	\
