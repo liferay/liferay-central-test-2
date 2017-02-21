@@ -71,17 +71,12 @@ public final class ImageAdaptiveMediaProcessorImpl
 			return;
 		}
 
-		long companyId = fileVersion.getCompanyId();
-
 		Iterable<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				companyId);
+				fileVersion.getCompanyId());
 
-		for (ImageAdaptiveMediaConfigurationEntry configurationEntry :
-				configurationEntries) {
-
-			process(fileVersion, configurationEntry.getUUID());
-		}
+		configurationEntries.forEach(configurationEntry ->
+			process(fileVersion, configurationEntry.getUUID()));
 	}
 
 	@Override
