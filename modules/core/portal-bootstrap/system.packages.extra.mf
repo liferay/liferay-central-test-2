@@ -2838,7 +2838,7 @@ Export-Package: com.liferay.ibm.icu;version="4.0.1",com.liferay.ibm.ic
  e.access.policy;version="1.0.0",com.liferay.portal.kernel.security.ss
  o;version="1.0.0";uses:="javax.servlet.http",com.liferay.portal.kerne
  l.security.xml;version="1.0.0";uses:="javax.xml.parsers,javax.xml.str
- eam,org.xml.sax",com.liferay.portal.kernel.service;version="1.11.0";u
+ eam,org.xml.sax",com.liferay.portal.kernel.service;version="1.12.0";u
  ses:="com.liferay.announcements.kernel.model,com.liferay.expando.kern
  el.model,com.liferay.exportimport.kernel.lar,com.liferay.exportimport
  .kernel.model,com.liferay.portal.kernel.cache.thread.local,com.lifera
