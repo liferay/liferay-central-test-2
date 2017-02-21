@@ -17,6 +17,7 @@ package com.liferay.adaptive.media.document.library.repository.internal;
 import com.liferay.adaptive.media.AdaptiveMedia;
 import com.liferay.adaptive.media.AdaptiveMediaAttribute;
 import com.liferay.adaptive.media.AdaptiveMediaException;
+import com.liferay.adaptive.media.image.constants.ImageAdaptiveMediaConstants;
 import com.liferay.adaptive.media.image.finder.ImageAdaptiveMediaFinder;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaAttribute;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
@@ -27,7 +28,6 @@ import com.liferay.exportimport.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
-import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.util.ImageProcessorImpl;
@@ -83,7 +83,7 @@ public class AdaptiveMediaImageProcessor
 
 	@Override
 	public Set<String> getImageMimeTypes() {
-		return _supportedMimeTypes;
+		return ImageAdaptiveMediaConstants.SUPPORTED_MIME_TYPES;
 	}
 
 	@Override
@@ -209,15 +209,9 @@ public class AdaptiveMediaImageProcessor
 	}
 
 	private boolean _isMimeTypeSupported(String mimeType) {
-		return _supportedMimeTypes.contains(mimeType);
+		return ImageAdaptiveMediaConstants.SUPPORTED_MIME_TYPES.contains(
+			mimeType);
 	}
-
-	private static final Set<String> _supportedMimeTypes =
-		SetUtil.fromArray(new String[] {
-			"image/bmp", "image/gif", "image/jpeg", "image/pjpeg", "image/png",
-			"image/tiff", "image/x-citrix-jpeg", "image/x-citrix-png",
-			"image/x-ms-bmp", "image/x-png", "image/x-tiff"
-		});
 
 	@Reference
 	private ImageAdaptiveMediaFinder _imageAdaptiveMediaFinder;

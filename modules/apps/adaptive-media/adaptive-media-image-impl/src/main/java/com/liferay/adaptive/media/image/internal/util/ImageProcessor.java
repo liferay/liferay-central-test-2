@@ -16,11 +16,11 @@ package com.liferay.adaptive.media.image.internal.util;
 
 import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
+import com.liferay.adaptive.media.image.constants.ImageAdaptiveMediaConstants;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.image.ImageToolUtil;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.SetUtil;
 
 import java.awt.image.RenderedImage;
 
@@ -29,7 +29,6 @@ import java.io.InputStream;
 
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
@@ -44,7 +43,8 @@ import org.osgi.service.component.annotations.Component;
 public class ImageProcessor {
 
 	public boolean isMimeTypeSupported(String mimeType) {
-		return _supportedMimeTypes.contains(mimeType);
+		return ImageAdaptiveMediaConstants.SUPPORTED_MIME_TYPES.contains(
+			mimeType);
 	}
 
 	public RenderedImage scaleImage(
@@ -97,12 +97,5 @@ public class ImageProcessor {
 
 		throw new IOException("Unsupported image type");
 	}
-
-	private static final Set<String> _supportedMimeTypes =
-		SetUtil.fromArray(new String[] {
-			"image/bmp", "image/gif", "image/jpeg", "image/pjpeg", "image/png",
-			"image/tiff", "image/x-citrix-jpeg", "image/x-citrix-png",
-			"image/x-ms-bmp", "image/x-png", "image/x-tiff"
-		});
 
 }

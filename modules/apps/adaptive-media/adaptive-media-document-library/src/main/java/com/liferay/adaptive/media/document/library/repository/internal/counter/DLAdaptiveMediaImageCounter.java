@@ -14,6 +14,7 @@
 
 package com.liferay.adaptive.media.document.library.repository.internal.counter;
 
+import com.liferay.adaptive.media.image.constants.ImageAdaptiveMediaConstants;
 import com.liferay.adaptive.media.image.counter.AdaptiveMediaImageCounter;
 import com.liferay.document.library.kernel.service.DLFileEntryLocalService;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
@@ -48,16 +49,12 @@ public class DLAdaptiveMediaImageCounter implements AdaptiveMediaImageCounter {
 
 		Property mimeTypeProperty = PropertyFactoryUtil.forName("mimeType");
 
-		dynamicQuery.add(mimeTypeProperty.in(_SUPPORTED_IMAGE_MIME_TYPES));
+		dynamicQuery.add(
+			mimeTypeProperty.in(
+				ImageAdaptiveMediaConstants.SUPPORTED_MIME_TYPES));
 
 		return (int)_dlFileEntryLocalService.dynamicQueryCount(dynamicQuery);
 	}
-
-	private static final String[] _SUPPORTED_IMAGE_MIME_TYPES = new String[] {
-		"image/bmp", "image/gif", "image/jpeg", "image/pjpeg", "image/png",
-		"image/tiff", "image/x-citrix-jpeg", "image/x-citrix-png",
-		"image/x-ms-bmp", "image/x-png", "image/x-tiff"
-	};
 
 	@Reference
 	private DLFileEntryLocalService _dlFileEntryLocalService;

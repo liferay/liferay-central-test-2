@@ -17,6 +17,7 @@ package com.liferay.adaptive.media.document.library.repository.internal.optimize
 import com.liferay.adaptive.media.AdaptiveMediaException;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
+import com.liferay.adaptive.media.image.constants.ImageAdaptiveMediaConstants;
 import com.liferay.adaptive.media.image.counter.AdaptiveMediaImageCounter;
 import com.liferay.adaptive.media.image.optimizer.AdaptiveMediaImageOptimizer;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
@@ -113,7 +114,8 @@ public class BlogsAdaptiveMediaImageOptimizer
 						"mimeType");
 
 					dynamicQuery.add(
-						mimeTypeProperty.in(_SUPPORTED_IMAGE_MIME_TYPES));
+						mimeTypeProperty.in(
+							ImageAdaptiveMediaConstants.SUPPORTED_MIME_TYPES));
 				}
 
 			});
@@ -172,12 +174,6 @@ public class BlogsAdaptiveMediaImageOptimizer
 		_backgroundTaskStatusMessageSender.sendBackgroundTaskStatusMessage(
 			message);
 	}
-
-	private static final String[] _SUPPORTED_IMAGE_MIME_TYPES = new String[] {
-		"image/bmp", "image/gif", "image/jpeg", "image/pjpeg", "image/png",
-		"image/tiff", "image/x-citrix-jpeg", "image/x-citrix-png",
-		"image/x-ms-bmp", "image/x-png", "image/x-tiff"
-	};
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		BlogsAdaptiveMediaImageOptimizer.class);
