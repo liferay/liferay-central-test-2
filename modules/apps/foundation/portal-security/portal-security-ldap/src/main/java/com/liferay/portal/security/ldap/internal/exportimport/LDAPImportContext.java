@@ -27,20 +27,21 @@ import javax.naming.ldap.LdapContext;
 public class LDAPImportContext {
 
 	public LDAPImportContext(
-		long companyId, long ldapServerId, LdapContext ldapContext,
-		Properties userMappings, Properties userExpandoMappings,
-		Properties contactMappings, Properties contactExpandoMappings,
-		Properties groupMappings, Set<String> ldapUserIgnoreAttributes) {
+		long companyId, Properties contactExpandoMappings,
+		Properties contactMappings, Properties groupMappings,
+		LdapContext ldapContext, long ldapServerId,
+		Set<String> ldapUserIgnoreAttributes, Properties userExpandoMappings,
+		Properties userMappings) {
 
 		_companyId = companyId;
-		_ldapServerId = ldapServerId;
-		_ldapContext = ldapContext;
-		_userMappings = userMappings;
-		_userExpandoMappings = userExpandoMappings;
-		_contactMappings = contactMappings;
 		_contactExpandoMappings = contactExpandoMappings;
+		_contactMappings = contactMappings;
 		_groupMappings = groupMappings;
+		_ldapContext = ldapContext;
+		_ldapServerId = ldapServerId;
 		_ldapUserIgnoreAttributes = ldapUserIgnoreAttributes;
+		_userExpandoMappings = userExpandoMappings;
+		_userMappings = userMappings;
 	}
 
 	public void addImportedUserId(String fullUserDN, long userId) {
