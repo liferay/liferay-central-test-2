@@ -1856,7 +1856,7 @@ app.server.type=@{app.server.type}]]></echo>
 
 				<execute>
 					<![CDATA[
-						mkdir -p modules/core/portal-bootstrap/
+						mkdir -p modules/core/portal-bootstrap
 
 						unzip -p liferay-portal-source.zip modules/core/portal-bootstrap/build/system.packages.extra.mf > modules/core/portal-bootstrap/system.packages.extra.mf
 					]]>
@@ -2261,7 +2261,7 @@ ${output.content}</echo>
 
 				<execute>
 					<![CDATA[
-						mkdir -p modules/core/portal-bootstrap/
+						mkdir -p modules/core/portal-bootstrap
 
 						unzip -p liferay-portal-source.zip modules/core/portal-bootstrap/build/system.packages.extra.mf > modules/core/portal-bootstrap/system.packages.extra.mf
 					]]>
