@@ -382,6 +382,10 @@ public class DDMFormEvaluatorHelper {
 			"belongsTo",
 			new BelongsToRoleFunction(_request, _userLocalService));
 		ddmFormRuleEvaluator.setDDMExpressionFunction(
+			"calculate",
+			new SetPropertyFunction(
+				_ddmFormFieldEvaluationResultsMap, "value"));
+		ddmFormRuleEvaluator.setDDMExpressionFunction(
 			"call",
 			new CallFunction(
 				_ddmDataProviderTracker, _ddmDataProviderInstanceService,
