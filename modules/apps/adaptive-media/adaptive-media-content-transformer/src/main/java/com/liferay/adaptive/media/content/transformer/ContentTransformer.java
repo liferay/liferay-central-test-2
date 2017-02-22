@@ -24,6 +24,7 @@ public interface ContentTransformer<T> {
 
 	public ContentTransformerContentType<T> getContentType();
 
-	public T process(T content) throws AdaptiveMediaException, PortalException;
+	public T transform(T content)
+		throws AdaptiveMediaException, PortalException;
 
 }

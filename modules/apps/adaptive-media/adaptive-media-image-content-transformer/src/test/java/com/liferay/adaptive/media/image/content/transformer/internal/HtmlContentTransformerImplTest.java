@@ -46,8 +46,7 @@ public class HtmlContentTransformerImplTest {
 	@Before
 	public void setUp() throws AdaptiveMediaException, PortalException {
 		_htmlContentTransformer.setDlAppLocalService(_dlAppLocalService);
-		_htmlContentTransformer.setImageAdaptiveMediaFinder(
-			_imageAdaptiveMediaFinder);
+		_htmlContentTransformer.setImageAdaptiveMediaFinder(_finder);
 	}
 
 	@Test
@@ -58,14 +57,14 @@ public class HtmlContentTransformerImplTest {
 			_createAdaptiveMedia(_ADAPTIVE_WIDTH, _ADAPTIVE_URL);
 
 		Mockito.when(
-			_imageAdaptiveMediaFinder.getAdaptiveMedia(Mockito.any())
+			_finder.getAdaptiveMedia(Mockito.any())
 		).thenAnswer(
 			invocation -> Stream.of(adaptiveMedia)
 		);
 
 		Assert.assertEquals(
 			_duplicateWithNewLine(_HTML_WITH_ADAPTIVE_PICTURE_TAG),
-			_htmlContentTransformer.process(
+			_htmlContentTransformer.transform(
 				_duplicateWithNewLine(_HTML_WITH_ADAPTABLE_PICTURES)));
 	}
 
@@ -77,14 +76,14 @@ public class HtmlContentTransformerImplTest {
 			_createAdaptiveMedia(_ADAPTIVE_WIDTH, _ADAPTIVE_URL);
 
 		Mockito.when(
-			_imageAdaptiveMediaFinder.getAdaptiveMedia(Mockito.any())
+			_finder.getAdaptiveMedia(Mockito.any())
 		).thenReturn(
 			Stream.of(adaptiveMedia)
 		);
 
 		Assert.assertEquals(
 			_HTML_WITH_ADAPTIVE_PICTURE_TAG,
-			_htmlContentTransformer.process(_HTML_WITH_ADAPTABLE_PICTURES));
+			_htmlContentTransformer.transform(_HTML_WITH_ADAPTABLE_PICTURES));
 	}
 
 	@Test
@@ -92,21 +91,21 @@ public class HtmlContentTransformerImplTest {
 		throws Exception {
 
 		Mockito.when(
-			_imageAdaptiveMediaFinder.getAdaptiveMedia(Mockito.any())
+			_finder.getAdaptiveMedia(Mockito.any())
 		).thenReturn(
 			Stream.empty()
 		);
 
 		Assert.assertEquals(
 			_HTML_WITH_ADAPTABLE_PICTURES,
-			_htmlContentTransformer.process(_HTML_WITH_ADAPTABLE_PICTURES));
+			_htmlContentTransformer.transform(_HTML_WITH_ADAPTABLE_PICTURES));
 	}
 
 	@Test
 	public void testReturnsTheSameHTMLIfNoImagesArePresent() throws Exception {
 		Assert.assertEquals(
 			_HTML_WITHOUT_PICTURES,
-			_htmlContentTransformer.process(_HTML_WITHOUT_PICTURES));
+			_htmlContentTransformer.transform(_HTML_WITHOUT_PICTURES));
 	}
 
 	@Test
@@ -115,7 +114,8 @@ public class HtmlContentTransformerImplTest {
 
 		Assert.assertEquals(
 			_HTML_WITH_NO_ADAPTABLE_PICTURES,
-			_htmlContentTransformer.process(_HTML_WITH_NO_ADAPTABLE_PICTURES));
+			_htmlContentTransformer.transform(
+				_HTML_WITH_NO_ADAPTABLE_PICTURES));
 	}
 
 	@Test
@@ -124,14 +124,14 @@ public class HtmlContentTransformerImplTest {
 			_createAdaptiveMedia(_ADAPTIVE_WIDTH, _ADAPTIVE_URL);
 
 		Mockito.when(
-			_imageAdaptiveMediaFinder.getAdaptiveMedia(Mockito.any())
+			_finder.getAdaptiveMedia(Mockito.any())
 		).thenReturn(
 			Stream.of(adaptiveMedia)
 		);
 
 		Assert.assertEquals(
 			_HTML_WITH_ADAPTIVE_PICTURE_TAG,
-			_htmlContentTransformer.process(
+			_htmlContentTransformer.transform(
 				_HTML_WITH_ADAPTABLE_PICTURES_LOWERCASE));
 	}
 
@@ -197,10 +197,10 @@ public class HtmlContentTransformerImplTest {
 	@Mock
 	private DLAppLocalService _dlAppLocalService;
 
+	@Mock
+	private ImageAdaptiveMediaFinder _finder;
+
 	private final HtmlContentTransformerImpl _htmlContentTransformer =
 		new HtmlContentTransformerImpl();
-
-	@Mock
-	private ImageAdaptiveMediaFinder _imageAdaptiveMediaFinder;
 
 }

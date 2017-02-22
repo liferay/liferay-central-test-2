@@ -74,7 +74,7 @@ public class BlogsPortletFilter implements RenderFilter {
 
 		String content = bufferCacheServletResponse.getString();
 
-		String transformedContent = contentTransformerHandler.process(
+		String transformedContent = contentTransformerHandler.transform(
 			ContentTransformerContentTypes.HTML, content);
 
 		ServletResponseUtil.write(httpServletResponse, transformedContent);

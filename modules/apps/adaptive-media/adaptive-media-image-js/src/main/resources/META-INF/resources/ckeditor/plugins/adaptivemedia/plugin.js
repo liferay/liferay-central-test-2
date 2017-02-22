@@ -40,6 +40,7 @@
 
 				if (selectedItem.returnType === STR_ADAPTIVE_MEDIA_RETURN_TYPE) {
 					var itemValue = JSON.parse(selectedItem.value);
+
 					img.setAttribute('src', itemValue.url);
 					img.setAttribute('data-fileEntryId', itemValue.fileEntryId);
 				}

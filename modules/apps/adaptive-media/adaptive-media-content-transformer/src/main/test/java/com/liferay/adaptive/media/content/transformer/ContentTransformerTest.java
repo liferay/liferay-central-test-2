@@ -74,57 +74,59 @@ public class ContentTransformerTest {
 		TestContentTransformerContentType<String> contentTypeB =
 			new TestContentTransformerContentType<>();
 
-		String processedContentA = "processedContentA";
-		String processedContentB = "processedContentB";
+		String transformedContentA = "transformedContentA";
+		String transformedContentB = "transformedContentB";
 
 		_registerContentTransformer(
-			contentTypeA, _ORIGINAL_CONTENT, processedContentA);
+			contentTypeA, _ORIGINAL_CONTENT, transformedContentA);
 
 		_registerContentTransformer(
-			contentTypeB, _ORIGINAL_CONTENT, processedContentB);
+			contentTypeB, _ORIGINAL_CONTENT, transformedContentB);
 
 		Assert.assertEquals(
-			processedContentA,
-			_contentTransformerHandler.process(
+			transformedContentA,
+			_contentTransformerHandler.transform(
 				contentTypeA, _ORIGINAL_CONTENT));
 
 		Assert.assertEquals(
-			processedContentB,
-			_contentTransformerHandler.process(
+			transformedContentB,
+			_contentTransformerHandler.transform(
 				contentTypeB, _ORIGINAL_CONTENT));
 	}
 
 	@Test
-	public void testReturnsTheContentProcessedByAChainOfContentTransformers()
+	public void testReturnsTheContentTransformedByAChainOfContentTransformers()
 		throws Exception {
 
-		String intermediateProcessedContent = "intermediateProcessedContent";
-		String finalProcessedContent = "finalProcessedContent";
+		String intermediateTransformedContent =
+			"intermediateTransformedContent";
+		String finalTransformedContent = "finalTransformedContent";
 
 		_registerContentTransformer(
-			_contentType, _ORIGINAL_CONTENT, intermediateProcessedContent);
+			_contentType, _ORIGINAL_CONTENT, intermediateTransformedContent);
 
 		_registerContentTransformer(
-			_contentType, intermediateProcessedContent, finalProcessedContent);
+			_contentType, intermediateTransformedContent,
+			finalTransformedContent);
 
 		Assert.assertEquals(
-			finalProcessedContent,
-			_contentTransformerHandler.process(
+			finalTransformedContent,
+			_contentTransformerHandler.transform(
 				_contentType, _ORIGINAL_CONTENT));
 	}
 
 	@Test
-	public void testReturnsTheContentProcessedByATransformerForAContentType()
+	public void testReturnsTheContentTransformedByATransformerForAContentType()
 		throws Exception {
 
-		String processedContent = "processedContent";
+		String transformedContent = "transformedContent";
 
 		_registerContentTransformer(
-			_contentType, _ORIGINAL_CONTENT, processedContent);
+			_contentType, _ORIGINAL_CONTENT, transformedContent);
 
 		Assert.assertEquals(
-			processedContent,
-			_contentTransformerHandler.process(
+			transformedContent,
+			_contentTransformerHandler.transform(
 				_contentType, _ORIGINAL_CONTENT));
 	}
 
@@ -136,7 +138,7 @@ public class ContentTransformerTest {
 
 		Assert.assertSame(
 			_ORIGINAL_CONTENT,
-			_contentTransformerHandler.process(
+			_contentTransformerHandler.transform(
 				_contentType, _ORIGINAL_CONTENT));
 	}
 
@@ -144,7 +146,7 @@ public class ContentTransformerTest {
 	public void testReturnsTheSameContentIfThereAreNoContentTransformers() {
 		Assert.assertSame(
 			_ORIGINAL_CONTENT,
-			_contentTransformerHandler.process(
+			_contentTransformerHandler.transform(
 				_contentType, _ORIGINAL_CONTENT));
 	}
 
@@ -152,22 +154,22 @@ public class ContentTransformerTest {
 	public void testRunsTheOtherTransformersEvenIfOneOfThemFails()
 		throws Exception {
 
-		String processedContent = "processedContent";
+		String transformedContent = "transformedContent";
 
 		_registerFailingContentTransformer(_contentType, _ORIGINAL_CONTENT);
 
 		_registerContentTransformer(
-			_contentType, _ORIGINAL_CONTENT, processedContent);
+			_contentType, _ORIGINAL_CONTENT, transformedContent);
 
 		Assert.assertEquals(
-			processedContent,
-			_contentTransformerHandler.process(
+			transformedContent,
+			_contentTransformerHandler.transform(
 				_contentType, _ORIGINAL_CONTENT));
 	}
 
 	private ContentTransformer<String> _registerContentTransformer(
 			ContentTransformerContentType<String> contentType,
-			String originalContent, String processedContent)
+			String originalContent, String transformedContent)
 		throws Exception {
 
 		ContentTransformer<String> contentTransformer = Mockito.mock(
@@ -180,9 +182,9 @@ public class ContentTransformerTest {
 		);
 
 		Mockito.when(
-			contentTransformer.process(originalContent)
+			contentTransformer.transform(originalContent)
 		).thenReturn(
-			processedContent
+			transformedContent
 		);
 
 		_framework.getBundleContext().registerService(
@@ -200,7 +202,7 @@ public class ContentTransformerTest {
 			_registerContentTransformer(contentType, originalContent, "");
 
 		Mockito.when(
-			failingContentTransformer.process(originalContent)
+			failingContentTransformer.transform(originalContent)
 		).thenThrow(
 			new AdaptiveMediaException(
 				"Do not worry :), this is an expected exception")

@@ -33,7 +33,7 @@ import org.osgi.service.component.annotations.Deactivate;
 @Component(immediate = true, service = ContentTransformerHandler.class)
 public class ContentTransformerHandler {
 
-	public <T> T process(
+	public <T> T transform(
 		ContentTransformerContentType<T> contentType, T originalContent) {
 
 		List<ContentTransformer> contentTransformers = ListUtil.fromCollection(
@@ -43,7 +43,7 @@ public class ContentTransformerHandler {
 
 		for (ContentTransformer<T> contentTransformer : contentTransformers) {
 			try {
-				transformedContent = contentTransformer.process(
+				transformedContent = contentTransformer.transform(
 					transformedContent);
 			}
 			catch (Exception e) {

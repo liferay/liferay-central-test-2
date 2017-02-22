@@ -49,8 +49,21 @@ public class HtmlContentTransformerImpl implements ContentTransformer<String> {
 		return ContentTransformerContentTypes.HTML;
 	}
 
+	@Reference(unbind = "-")
+	public void setDlAppLocalService(DLAppLocalService dlAppLocalService) {
+		_dlAppLocalService = dlAppLocalService;
+	}
+
+	@Reference(
+		target = "(model.class.name=com.liferay.portal.kernel.repository.model.FileVersion)",
+		unbind = "-"
+	)
+	public void setImageAdaptiveMediaFinder(ImageAdaptiveMediaFinder finder) {
+		_finder = finder;
+	}
+
 	@Override
-	public String process(String html)
+	public String transform(String html)
 		throws AdaptiveMediaException, PortalException {
 
 		StringBuffer sb = new StringBuffer(html.length());
@@ -67,28 +80,13 @@ public class HtmlContentTransformerImpl implements ContentTransformer<String> {
 		return sb.toString();
 	}
 
-	@Reference(unbind = "-")
-	public void setDlAppLocalService(DLAppLocalService dlAppLocalService) {
-		_dlAppLocalService = dlAppLocalService;
-	}
-
-	@Reference(
-		target = "(model.class.name=com.liferay.portal.kernel.repository.model.FileVersion)",
-		unbind = "-"
-	)
-	public void setImageAdaptiveMediaFinder(
-		ImageAdaptiveMediaFinder imageAdaptiveMediaFinder) {
-
-		_imageAdaptiveMediaFinder = imageAdaptiveMediaFinder;
-	}
-
 	private Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>>
 			_getAdaptiveMedias(long fileEntryId)
 		throws AdaptiveMediaException, PortalException {
 
 		FileEntry fileEntry = _dlAppLocalService.getFileEntry(fileEntryId);
 
-		return _imageAdaptiveMediaFinder.getAdaptiveMedia(
+		return _finder.getAdaptiveMedia(
 			queryBuilder -> queryBuilder.allForFileEntry(
 				fileEntry).orderBy(
 					ImageAdaptiveMediaAttribute.IMAGE_WIDTH, true).done());
@@ -98,16 +96,16 @@ public class HtmlContentTransformerImpl implements ContentTransformer<String> {
 		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia,
 		AdaptiveMedia<ImageAdaptiveMediaProcessor> previousAdaptiveMedia) {
 
-		return _getWidth(adaptiveMedia).map(maxWidth -> {
-			String constraints = "max-width:" + maxWidth + "px";
+		return _getWidth(adaptiveMedia).map(width -> {
+			String constraints = "max-width:" + width + "px";
 
 			if (previousAdaptiveMedia != null) {
-				Optional<Integer> optionalWidth = _getWidth(
+				Optional<Integer> widthOptional = _getWidth(
 					previousAdaptiveMedia);
 
-				constraints += optionalWidth.map(
-					previousMaxWidth ->
-						" and min-width:" + previousMaxWidth + "px").orElse("");
+				constraints += widthOptional.map(
+					previousWidth ->
+						" and min-width:" + previousWidth + "px").orElse("");
 			}
 
 			return "(" + constraints + ")";
@@ -120,17 +118,19 @@ public class HtmlContentTransformerImpl implements ContentTransformer<String> {
 		String img = matcher.group(0);
 		Long fileEntryId = Long.valueOf(matcher.group(1));
 
-		List<AdaptiveMedia<ImageAdaptiveMediaProcessor>> adaptiveMediaList =
+		List<AdaptiveMedia<ImageAdaptiveMediaProcessor>> adaptiveMedias =
 			_getAdaptiveMedias(fileEntryId).collect(Collectors.toList());
 
-		if (adaptiveMediaList.isEmpty()) {
+		if (adaptiveMedias.isEmpty()) {
 			return img;
 		}
 
-		StringBundler sb = new StringBundler(3 + adaptiveMediaList.size());
+		StringBundler sb = new StringBundler(3 + adaptiveMedias.size());
 
 		sb.append("<picture>");
-		_getSourceElements(adaptiveMediaList).forEach(sb::append);
+
+		_getSourceElements(adaptiveMedias).forEach(sb::append);
+
 		sb.append(img.replaceAll(_ATTR_REGEX, ""));
 		sb.append("</picture>");
 
@@ -155,14 +155,13 @@ public class HtmlContentTransformerImpl implements ContentTransformer<String> {
 		sb.append(" srcset=\"");
 		sb.append(adaptiveMedia.getURI());
 		sb.append("\"");
-
 		sb.append("/>");
 
 		return sb.toString();
 	}
 
 	private List<String> _getSourceElements(
-			List<AdaptiveMedia<ImageAdaptiveMediaProcessor>> adaptiveMediaList)
+			List<AdaptiveMedia<ImageAdaptiveMediaProcessor>> adaptiveMedias)
 		throws AdaptiveMediaException, PortalException {
 
 		List<String> sourceElements = new ArrayList<>();
@@ -170,7 +169,7 @@ public class HtmlContentTransformerImpl implements ContentTransformer<String> {
 		AdaptiveMedia previousAdaptiveMedia = null;
 
 		for (AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia :
-				adaptiveMediaList) {
+				adaptiveMedias) {
 
 			sourceElements.add(
 				_getSourceElement(previousAdaptiveMedia, adaptiveMedia));
@@ -195,6 +194,6 @@ public class HtmlContentTransformerImpl implements ContentTransformer<String> {
 		"<img .*?" + _ATTR_REGEX + ".*?/>", Pattern.CASE_INSENSITIVE);
 
 	private DLAppLocalService _dlAppLocalService;
-	private ImageAdaptiveMediaFinder _imageAdaptiveMediaFinder;
+	private ImageAdaptiveMediaFinder _finder;
 
 }
