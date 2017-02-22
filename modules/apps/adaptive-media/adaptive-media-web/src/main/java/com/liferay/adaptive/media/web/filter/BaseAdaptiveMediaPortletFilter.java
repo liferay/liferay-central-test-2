@@ -14,7 +14,7 @@
 
 package com.liferay.adaptive.media.web.filter;
 
-import com.liferay.adaptive.media.processor.content.ContentProcessor;
+import com.liferay.adaptive.media.processor.content.ContentProcessorHandler;
 import com.liferay.adaptive.media.web.constants.ContentTypes;
 import com.liferay.portal.kernel.servlet.BufferCacheServletResponse;
 import com.liferay.portal.kernel.servlet.ServletResponseUtil;
@@ -59,7 +59,7 @@ public abstract class BaseAdaptiveMediaPortletFilter implements RenderFilter {
 
 			String content = bufferCacheServletResponse.getString();
 
-			String processedContent = contentProcessor.process(
+			String processedContent = contentProcessorHandler.process(
 				ContentTypes.HTML, content);
 
 			ServletResponseUtil.write(httpServletResponse, processedContent);
@@ -73,7 +73,7 @@ public abstract class BaseAdaptiveMediaPortletFilter implements RenderFilter {
 	protected abstract boolean mustProcessContent(RenderRequest renderRequest);
 
 	@Reference
-	protected ContentProcessor contentProcessor;
+	protected ContentProcessorHandler contentProcessorHandler;
 
 	@Reference
 	protected Portal portal;

@@ -14,66 +14,16 @@
 
 package com.liferay.adaptive.media.processor.content;
 
-import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMap;
-import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMapFactory;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.ListUtil;
-
-import java.util.List;
-
-import org.osgi.framework.BundleContext;
-import org.osgi.service.component.annotations.Activate;
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Deactivate;
+import com.liferay.adaptive.media.AdaptiveMediaException;
+import com.liferay.portal.kernel.exception.PortalException;
 
 /**
  * @author Alejandro Tardín
  */
-@Component(immediate = true, service = ContentProcessor.class)
-public class ContentProcessor {
+public interface ContentProcessor<T> {
 
-	public <T> T process(ContentType<T> contentType, T originalContent) {
-		List<ConcreteContentProcessor> processors = ListUtil.fromCollection(
-			_processorsMap.getService(contentType));
+	public ContentType<T> getContentType();
 
-		T processedContent = originalContent;
-
-		for (ConcreteContentProcessor<T> processor : processors) {
-			try {
-				processedContent = processor.process(processedContent);
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return processedContent;
-	}
-
-	@Activate
-	protected void activate(BundleContext bundleContext) {
-		_processorsMap = ServiceTrackerMapFactory.openMultiValueMap(
-			bundleContext, ConcreteContentProcessor.class, null,
-			(serviceReference, emitter) -> {
-				ConcreteContentProcessor processor = bundleContext.getService(
-					serviceReference);
-
-				emitter.emit(processor.getContentType());
-
-				bundleContext.ungetService(serviceReference);
-			});
-	}
-
-	@Deactivate
-	protected void deactivate() {
-		_processorsMap.close();
-	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		ContentProcessor.class);
-
-	private ServiceTrackerMap<ContentType, List<ConcreteContentProcessor>>
-		_processorsMap;
+	public T process(T content) throws AdaptiveMediaException, PortalException;
 
 }

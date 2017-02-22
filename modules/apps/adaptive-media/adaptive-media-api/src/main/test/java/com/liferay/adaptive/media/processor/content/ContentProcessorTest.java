@@ -55,12 +55,12 @@ public class ContentProcessorTest {
 
 		_framework.start();
 
-		_contentProcessor.activate(_framework.getBundleContext());
+		_contentProcessorHandler.activate(_framework.getBundleContext());
 	}
 
 	@After
 	public final void tearDown() throws Exception {
-		_contentProcessor.deactivate();
+		_contentProcessorHandler.deactivate();
 		_framework.stop();
 		_framework.waitForStop(0);
 	}
@@ -75,19 +75,19 @@ public class ContentProcessorTest {
 		String processedContentA = "processedContentA";
 		String processedContentB = "processedContentB";
 
-		_registerConcreteContentProcessor(
+		_registerContentProcessor(
 			contentTypeA, _ORIGINAL_CONTENT, processedContentA);
 
-		_registerConcreteContentProcessor(
+		_registerContentProcessor(
 			contentTypeB, _ORIGINAL_CONTENT, processedContentB);
 
 		Assert.assertEquals(
 			processedContentA,
-			_contentProcessor.process(contentTypeA, _ORIGINAL_CONTENT));
+			_contentProcessorHandler.process(contentTypeA, _ORIGINAL_CONTENT));
 
 		Assert.assertEquals(
 			processedContentB,
-			_contentProcessor.process(contentTypeB, _ORIGINAL_CONTENT));
+			_contentProcessorHandler.process(contentTypeB, _ORIGINAL_CONTENT));
 	}
 
 	@Test
@@ -97,15 +97,15 @@ public class ContentProcessorTest {
 		String intermediateProcessedContent = "intermediateProcessedContent";
 		String finalProcessedContent = "finalProcessedContent";
 
-		_registerConcreteContentProcessor(
+		_registerContentProcessor(
 			_contentType, _ORIGINAL_CONTENT, intermediateProcessedContent);
 
-		_registerConcreteContentProcessor(
+		_registerContentProcessor(
 			_contentType, intermediateProcessedContent, finalProcessedContent);
 
 		Assert.assertEquals(
 			finalProcessedContent,
-			_contentProcessor.process(_contentType, _ORIGINAL_CONTENT));
+			_contentProcessorHandler.process(_contentType, _ORIGINAL_CONTENT));
 	}
 
 	@Test
@@ -114,31 +114,30 @@ public class ContentProcessorTest {
 
 		String processedContent = "processedContent";
 
-		_registerConcreteContentProcessor(
+		_registerContentProcessor(
 			_contentType, _ORIGINAL_CONTENT, processedContent);
 
 		Assert.assertEquals(
 			processedContent,
-			_contentProcessor.process(_contentType, _ORIGINAL_CONTENT));
+			_contentProcessorHandler.process(_contentType, _ORIGINAL_CONTENT));
 	}
 
 	@Test
 	public void testReturnsTheSameContentIfAProcessorThrowsAnException()
 		throws Exception {
 
-		_registerFailingConcreteContentProcessor(
-			_contentType, _ORIGINAL_CONTENT);
+		_registerFailingContentProcessor(_contentType, _ORIGINAL_CONTENT);
 
 		Assert.assertSame(
 			_ORIGINAL_CONTENT,
-			_contentProcessor.process(_contentType, _ORIGINAL_CONTENT));
+			_contentProcessorHandler.process(_contentType, _ORIGINAL_CONTENT));
 	}
 
 	@Test
 	public void testReturnsTheSameContentIfThereAreNoContentProcessors() {
 		Assert.assertSame(
 			_ORIGINAL_CONTENT,
-			_contentProcessor.process(_contentType, _ORIGINAL_CONTENT));
+			_contentProcessorHandler.process(_contentType, _ORIGINAL_CONTENT));
 	}
 
 	@Test
@@ -147,49 +146,48 @@ public class ContentProcessorTest {
 
 		String processedContent = "processedContent";
 
-		_registerFailingConcreteContentProcessor(
-			_contentType, _ORIGINAL_CONTENT);
+		_registerFailingContentProcessor(_contentType, _ORIGINAL_CONTENT);
 
-		_registerConcreteContentProcessor(
+		_registerContentProcessor(
 			_contentType, _ORIGINAL_CONTENT, processedContent);
 
 		Assert.assertEquals(
 			processedContent,
-			_contentProcessor.process(_contentType, _ORIGINAL_CONTENT));
+			_contentProcessorHandler.process(_contentType, _ORIGINAL_CONTENT));
 	}
 
-	private ConcreteContentProcessor<String> _registerConcreteContentProcessor(
+	private ContentProcessor<String> _registerContentProcessor(
 			ContentType<String> contentType, String originalContent,
 			String processedContent)
 		throws Exception {
 
-		ConcreteContentProcessor<String> concreteProcessor = Mockito.mock(
-			ConcreteContentProcessor.class);
+		ContentProcessor<String> contentProcessor = Mockito.mock(
+			ContentProcessor.class);
 
 		Mockito.when(
-			concreteProcessor.getContentType()
+			contentProcessor.getContentType()
 		).thenReturn(
 			contentType
 		);
 
 		Mockito.when(
-			concreteProcessor.process(originalContent)
+			contentProcessor.process(originalContent)
 		).thenReturn(
 			processedContent
 		);
 
 		_framework.getBundleContext().registerService(
-			ConcreteContentProcessor.class, concreteProcessor, null);
+			ContentProcessor.class, contentProcessor, null);
 
-		return concreteProcessor;
+		return contentProcessor;
 	}
 
-	private void _registerFailingConcreteContentProcessor(
+	private void _registerFailingContentProcessor(
 			ContentType<String> contentType, String originalContent)
 		throws Exception {
 
-		ConcreteContentProcessor<String> failingContentProcessor =
-			_registerConcreteContentProcessor(contentType, originalContent, "");
+		ContentProcessor<String> failingContentProcessor =
+			_registerContentProcessor(contentType, originalContent, "");
 
 		Mockito.when(
 			failingContentProcessor.process(originalContent)
@@ -201,7 +199,8 @@ public class ContentProcessorTest {
 
 	private static final String _ORIGINAL_CONTENT = "originalContent";
 
-	private final ContentProcessor _contentProcessor = new ContentProcessor();
+	private final ContentProcessorHandler _contentProcessorHandler =
+		new ContentProcessorHandler();
 	private final ContentType<String> _contentType = new TestContentType<>();
 	private Framework _framework;
 

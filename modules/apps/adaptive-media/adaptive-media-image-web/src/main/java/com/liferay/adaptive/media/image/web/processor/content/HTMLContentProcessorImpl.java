@@ -19,7 +19,7 @@ import com.liferay.adaptive.media.AdaptiveMediaException;
 import com.liferay.adaptive.media.image.finder.ImageAdaptiveMediaFinder;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaAttribute;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
-import com.liferay.adaptive.media.processor.content.ConcreteContentProcessor;
+import com.liferay.adaptive.media.processor.content.ContentProcessor;
 import com.liferay.adaptive.media.processor.content.ContentType;
 import com.liferay.adaptive.media.web.constants.ContentTypes;
 import com.liferay.document.library.kernel.service.DLAppLocalService;
@@ -41,9 +41,8 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Alejandro Tardín
  */
-@Component(immediate = true, service = ConcreteContentProcessor.class)
-public class HTMLContentProcessorImpl
-	implements ConcreteContentProcessor<String> {
+@Component(immediate = true, service = ContentProcessor.class)
+public class HTMLContentProcessorImpl implements ContentProcessor<String> {
 
 	@Override
 	public ContentType<String> getContentType() {
