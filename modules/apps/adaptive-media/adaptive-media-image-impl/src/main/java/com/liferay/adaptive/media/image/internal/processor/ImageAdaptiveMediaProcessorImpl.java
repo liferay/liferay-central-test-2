@@ -123,8 +123,7 @@ public final class ImageAdaptiveMediaProcessorImpl
 				renderedImage, fileVersion.getMimeType());
 
 			_imageLocalService.addAdaptiveMediaImage(
-				configurationEntry.getUUID(), fileVersion.getFileVersionId(),
-				fileVersion.getMimeType(), renderedImage.getWidth(),
+				configurationEntry, fileVersion, renderedImage.getWidth(),
 				bytes.length, renderedImage.getHeight(),
 				new UnsyncByteArrayInputStream(bytes));
 		}

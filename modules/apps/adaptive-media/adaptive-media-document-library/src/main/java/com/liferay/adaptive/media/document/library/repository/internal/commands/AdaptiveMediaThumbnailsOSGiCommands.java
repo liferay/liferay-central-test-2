@@ -246,10 +246,9 @@ public class AdaptiveMediaThumbnailsOSGiCommands {
 				RenderedImage renderedImage = imageBag.getRenderedImage();
 
 				_imageLocalService.addAdaptiveMediaImage(
-					configurationEntry.getUUID(),
-					fileVersion.getFileVersionId(), fileVersion.getMimeType(),
-					renderedImage.getWidth(), renderedImage.getWidth(),
-					bytes.length, new UnsyncByteArrayInputStream(bytes));
+					configurationEntry, fileVersion, renderedImage.getWidth(),
+					renderedImage.getWidth(), bytes.length,
+					new UnsyncByteArrayInputStream(bytes));
 			}
 		}
 		catch (IOException | PortalException e) {

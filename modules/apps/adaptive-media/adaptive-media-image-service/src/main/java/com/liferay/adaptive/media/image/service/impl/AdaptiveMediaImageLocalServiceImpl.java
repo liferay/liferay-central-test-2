@@ -36,7 +36,6 @@ import java.io.InputStream;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
@@ -52,14 +51,13 @@ public class AdaptiveMediaImageLocalServiceImpl
 
 	@Override
 	public AdaptiveMediaImage addAdaptiveMediaImage(
-			String configurationUuid, long fileVersionId, String mimeType,
-			int width, int size, int height, InputStream inputStream)
+			ImageAdaptiveMediaConfigurationEntry configurationEntry,
+			FileVersion fileVersion, int width, int size, int height,
+			InputStream inputStream)
 		throws PortalException {
 
-		_checkDuplicates(configurationUuid, fileVersionId);
-
-		FileVersion fileVersion = dlAppLocalService.getFileVersion(
-			fileVersionId);
+		_checkDuplicates(
+			configurationEntry.getUUID(), fileVersion.getFileVersionId());
 
 		long imageId = counterLocalService.increment();
 
@@ -69,25 +67,16 @@ public class AdaptiveMediaImageLocalServiceImpl
 		image.setCompanyId(fileVersion.getCompanyId());
 		image.setGroupId(fileVersion.getGroupId());
 		image.setCreateDate(new Date());
-		image.setFileVersionId(fileVersionId);
-		image.setMimeType(mimeType);
+		image.setFileVersionId(fileVersion.getFileVersionId());
+		image.setMimeType(fileVersion.getMimeType());
 		image.setHeight(height);
 		image.setWidth(width);
 		image.setSize(size);
-		image.setConfigurationUuid(configurationUuid);
-
-		ImageAdaptiveMediaConfigurationHelper configurationHelper =
-			_configurationHelperServiceTracker.getService();
-
-		Optional<ImageAdaptiveMediaConfigurationEntry>
-			configurationEntryOptional =
-				configurationHelper.getImageAdaptiveMediaConfigurationEntry(
-					fileVersion.getCompanyId(), configurationUuid);
+		image.setConfigurationUuid(configurationEntry.getUUID());
 
 		ImageStorage imageStorage = _imageStorageServiceTracker.getService();
 
-		imageStorage.save(
-			fileVersion, configurationEntryOptional.get(), inputStream);
+		imageStorage.save(fileVersion, configurationEntry, inputStream);
 
 		return adaptiveMediaImagePersistence.update(image);
 	}
