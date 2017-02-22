@@ -148,6 +148,16 @@ public class AdaptiveMediaImageLocalServiceImpl
 	}
 
 	@Override
+	public InputStream getAdaptiveMediaImageContentStream(
+		ImageAdaptiveMediaConfigurationEntry configurationEntry,
+		FileVersion fileVersion) {
+
+		ImageStorage imageStorage = _imageStorageServiceTracker.getService();
+
+		return imageStorage.getContentStream(fileVersion, configurationEntry);
+	}
+
+	@Override
 	public int getPercentage(final long companyId, String configurationUuid) {
 		Collection<AdaptiveMediaImageCounter> adaptiveMediaImageCounters =
 			_serviceTrackerMap.values();
