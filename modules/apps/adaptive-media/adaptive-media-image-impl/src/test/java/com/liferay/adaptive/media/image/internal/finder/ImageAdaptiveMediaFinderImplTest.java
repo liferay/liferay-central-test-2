@@ -28,7 +28,6 @@ import com.liferay.adaptive.media.image.model.AdaptiveMediaImage;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaAttribute;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
 import com.liferay.adaptive.media.image.service.AdaptiveMediaImageLocalService;
-import com.liferay.adaptive.media.image.storage.ImageStorage;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
@@ -62,7 +61,6 @@ public class ImageAdaptiveMediaFinderImplTest {
 		_finder.setAdaptiveMediaURIResolver(_uriResolver);
 		_finder.setImageAdaptiveMediaConfigurationHelper(_configurationHelper);
 		_finder.setImageProcessor(_imageProcessor);
-		_finder.setImageStorage(_imageStorage);
 		_finder.setAdaptiveMediaImageLocalService(_imageLocalService);
 	}
 
@@ -544,8 +542,8 @@ public class ImageAdaptiveMediaFinderImplTest {
 		InputStream inputStream = Mockito.mock(InputStream.class);
 
 		Mockito.when(
-			_imageStorage.getContentStream(
-				_fileVersion, configurationEntry)
+			_imageLocalService.getAdaptiveMediaImageContentStream(
+				configurationEntry, _fileVersion)
 		).thenReturn(
 			inputStream
 		);
@@ -1441,9 +1439,9 @@ public class ImageAdaptiveMediaFinderImplTest {
 		adaptiveMedia.getInputStream();
 
 		Mockito.verify(
-			_imageStorage
-		).getContentStream(
-			_fileVersion, configurationEntry
+			_imageLocalService
+		).getAdaptiveMediaImageContentStream(
+			configurationEntry, _fileVersion
 		);
 	}
 
@@ -1481,7 +1479,6 @@ public class ImageAdaptiveMediaFinderImplTest {
 		Mockito.mock(AdaptiveMediaImageLocalService.class);
 	private final ImageProcessor _imageProcessor = Mockito.mock(
 		ImageProcessor.class);
-	private final ImageStorage _imageStorage = Mockito.mock(ImageStorage.class);
 	private final AdaptiveMediaURIResolver _uriResolver = Mockito.mock(
 		AdaptiveMediaURIResolver.class);
 

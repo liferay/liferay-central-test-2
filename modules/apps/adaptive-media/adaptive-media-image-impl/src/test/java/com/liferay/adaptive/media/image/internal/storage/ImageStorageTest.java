@@ -18,11 +18,13 @@ import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigur
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationEntryImpl;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.util.StringUtil;
-import org.junit.Assert;
-import org.junit.Test;
-import org.mockito.Mockito;
 
 import java.util.Collections;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+import org.mockito.Mockito;
 
 /**
  * @author Adolfo Pérez
