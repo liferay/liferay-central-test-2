@@ -87,6 +87,23 @@ public class HtmlContentTransformerImplTest {
 	}
 
 	@Test
+	public void testReplacesTwoConsecutiveImageTags() throws Exception {
+		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia =
+			_createAdaptiveMedia(_ADAPTIVE_WIDTH, _ADAPTIVE_URL);
+
+		Mockito.when(
+			_finder.getAdaptiveMedia(Mockito.any())
+		).thenAnswer(
+			invocation -> Stream.of(adaptiveMedia)
+		);
+
+		Assert.assertEquals(
+			_HTML_ADAPTIVE_PICTURE + _HTML_ADAPTIVE_PICTURE,
+			_htmlContentTransformer.transform(
+				_HTML_ADAPTABLE_IMG + _HTML_ADAPTABLE_IMG));
+	}
+
+	@Test
 	public void testReturnsTheSameHTMLIfNoAdaptiveMediaImagesArePresent()
 		throws Exception {
 
@@ -176,6 +193,11 @@ public class HtmlContentTransformerImplTest {
 	private static final String _HTML_ADAPTABLE_IMG_WITHOUT_ATTR =
 		"<img src=\"adaptable\"/>";
 
+	private static final String _HTML_ADAPTIVE_PICTURE =
+		"<picture><source media=\"(max-width:" + _ADAPTIVE_WIDTH + "px)\" " +
+			"srcset=\"" + _ADAPTIVE_URL + "\"/>" +
+				_HTML_ADAPTABLE_IMG_WITHOUT_ATTR + "</picture>";
+
 	private static final String _HTML_WITH_ADAPTABLE_PICTURES =
 		"<div><div>" + _HTML_ADAPTABLE_IMG + "</div></div><br/>";
 
@@ -183,10 +205,7 @@ public class HtmlContentTransformerImplTest {
 		"<div><div>" + _HTML_ADAPTABLE_IMG_LOWERCASE + "</div></div><br/>";
 
 	private static final String _HTML_WITH_ADAPTIVE_PICTURE_TAG =
-		"<div><div><picture><source media=\"(max-width:" + _ADAPTIVE_WIDTH +
-			"px)\" srcset=\"" + _ADAPTIVE_URL + "\"/>" +
-				_HTML_ADAPTABLE_IMG_WITHOUT_ATTR +
-					"</picture></div></div><br/>";
+		"<div><div>" + _HTML_ADAPTIVE_PICTURE + "</div></div><br/>";
 
 	private static final String _HTML_WITH_NO_ADAPTABLE_PICTURES =
 		"<div><div><img src=\"no.adaptable\"/></div></div>";
