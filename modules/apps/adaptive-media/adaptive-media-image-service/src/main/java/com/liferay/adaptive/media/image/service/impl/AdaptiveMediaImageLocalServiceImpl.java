@@ -52,8 +52,8 @@ public class AdaptiveMediaImageLocalServiceImpl
 	@Override
 	public AdaptiveMediaImage addAdaptiveMediaImage(
 			ImageAdaptiveMediaConfigurationEntry configurationEntry,
-			FileVersion fileVersion, int width, int size, int height,
-			InputStream inputStream)
+			FileVersion fileVersion, int width, int height,
+			InputStream inputStream, int size)
 		throws PortalException {
 
 		_checkDuplicates(

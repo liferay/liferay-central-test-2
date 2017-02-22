@@ -124,8 +124,8 @@ public final class ImageAdaptiveMediaProcessorImpl
 
 			_imageLocalService.addAdaptiveMediaImage(
 				configurationEntry, fileVersion, renderedImage.getWidth(),
-				bytes.length, renderedImage.getHeight(),
-				new UnsyncByteArrayInputStream(bytes));
+				renderedImage.getHeight(),
+				new UnsyncByteArrayInputStream(bytes), bytes.length);
 		}
 		catch (IOException | PortalException e) {
 			throw new AdaptiveMediaRuntimeException.IOException(e);

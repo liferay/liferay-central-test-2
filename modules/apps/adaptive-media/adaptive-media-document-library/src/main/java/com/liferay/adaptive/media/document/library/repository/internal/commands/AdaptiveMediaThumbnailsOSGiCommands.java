@@ -247,8 +247,8 @@ public class AdaptiveMediaThumbnailsOSGiCommands {
 
 				_imageLocalService.addAdaptiveMediaImage(
 					configurationEntry, fileVersion, renderedImage.getWidth(),
-					renderedImage.getWidth(), bytes.length,
-					new UnsyncByteArrayInputStream(bytes));
+					renderedImage.getWidth(),
+					new UnsyncByteArrayInputStream(bytes), bytes.length);
 			}
 		}
 		catch (IOException | PortalException e) {
