@@ -38,14 +38,12 @@ import com.liferay.portal.kernel.search.QueryConfig;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
-import com.liferay.portal.kernel.search.SortFactoryUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
-import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portlet.asset.service.base.AssetTagLocalServiceBaseImpl;
@@ -660,15 +658,14 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 
 	@Override
 	public BaseModelSearchResult<AssetTag> searchTags(
-			long[] groupIds, String name, int start, int end,
-			OrderByComparator<AssetTag> obc)
+			long[] groupIds, String name, int start, int end, Sort sort)
 		throws PortalException {
 
 		ServiceContext serviceContext =
 			ServiceContextThreadLocal.getServiceContext();
 
 		SearchContext searchContext = buildSearchContext(
-			serviceContext.getCompanyId(), groupIds, name, start, end, obc);
+			serviceContext.getCompanyId(), groupIds, name, start, end, sort);
 
 		return searchTags(searchContext);
 	}
@@ -723,42 +720,23 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 
 	protected SearchContext buildSearchContext(
 		long companyId, long[] groupIds, String name, int start, int end,
-		OrderByComparator<AssetTag> obc) {
+		Sort sort) {
 
 		SearchContext searchContext = new SearchContext();
 
 		Map<String, Serializable> attributes = new HashMap<>();
 
-		String fixedName = StringUtil.replace(name, ' ', "%20");
-
-		attributes.put(Field.NAME, fixedName);
+		attributes.put(Field.NAME, name);
 
 		searchContext.setAttributes(attributes);
 
 		searchContext.setCompanyId(companyId);
 		searchContext.setEnd(end);
 		searchContext.setGroupIds(groupIds);
-		searchContext.setKeywords(fixedName);
+		searchContext.setKeywords(name);
 		searchContext.setStart(start);
 
-		if (obc != null) {
-			String orderType = "ASC";
-
-			if (!obc.isAscending()) {
-				orderType = "DESC";
-			}
-
-			String fieldName = obc.getOrderByFields()[0];
-
-			int type = Sort.STRING_TYPE;
-
-			if (!fieldName.equals(Field.NAME)) {
-				type = Sort.INT_TYPE;
-			}
-
-			Sort sort = SortFactoryUtil.getSort(
-				AssetTag.class, type, fieldName, orderType);
-
+		if (sort != null) {
 			searchContext.setSorts(sort);
 		}
 
