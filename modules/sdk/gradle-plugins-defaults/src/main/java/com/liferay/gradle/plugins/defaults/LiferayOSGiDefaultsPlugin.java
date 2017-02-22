@@ -944,7 +944,7 @@ public class LiferayOSGiDefaultsPlugin implements Plugin<Project> {
 	private Jar _addTaskJarJSP(Project project) {
 		Jar jar = GradleUtil.addTask(project, JAR_JSP_TASK_NAME, Jar.class);
 
-		jar.setClassifier("jsp");
+		jar.setClassifier("jspc");
 		jar.setDescription(
 			"Assembles a jar archive containing the compiled JSP classes for " +
 				"this project.");
