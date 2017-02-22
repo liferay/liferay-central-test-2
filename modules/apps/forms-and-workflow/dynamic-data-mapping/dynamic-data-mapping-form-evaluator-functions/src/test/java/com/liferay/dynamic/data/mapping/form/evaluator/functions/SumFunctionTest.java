@@ -26,15 +26,18 @@ public class SumFunctionTest {
 	public void testEvaluateArray1() throws Exception {
 		SumFunction sumFunction = new SumFunction();
 
-		Assert.assertEquals(7, sumFunction.evaluate(new Object[] {1, 2, 4}));
+		Object parameters = new Integer[] {1, 2, 4};
+
+		Assert.assertEquals(7, sumFunction.evaluate(parameters));
 	}
 
 	@Test
 	public void testEvaluateArray2() throws Exception {
 		SumFunction sumFunction = new SumFunction();
 
-		Assert.assertEquals(
-			15.8, sumFunction.evaluate(new Object[] {3.8, 5, 7}));
+		Object parameters = new Double[] {3.8, 5d, 7d};
+
+		Assert.assertEquals(15.8, sumFunction.evaluate(parameters));
 	}
 
 	@Test

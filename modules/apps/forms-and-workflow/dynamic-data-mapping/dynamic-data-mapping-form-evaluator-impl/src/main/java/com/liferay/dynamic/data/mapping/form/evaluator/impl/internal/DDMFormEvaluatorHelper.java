@@ -128,6 +128,8 @@ public class DDMFormEvaluatorHelper {
 			new DDMFormFieldEvaluationResult(
 				ddmFormField.getName(), ddmFormFieldValue.getInstanceId());
 
+		setDDMFormFieldEvaluationResultDataType(
+			ddmFormField, ddmFormFieldEvaluationResult);
 		setDDMFormFieldEvaluationResultReadOnly(
 			ddmFormFieldEvaluationResult, ddmFormField);
 		setDDMFormFieldEvaluationResultRequired(
@@ -146,9 +148,6 @@ public class DDMFormEvaluatorHelper {
 			ddmFormField.getDataType(), valueString);
 
 		ddmFormFieldEvaluationResult.setValue(value);
-
-		ddmFormFieldEvaluationResult.setProperty(
-			"dataType", ddmFormField.getDataType());
 
 		return ddmFormFieldEvaluationResult;
 	}
@@ -460,6 +459,14 @@ public class DDMFormEvaluatorHelper {
 					ddmFormFieldName, valueString);
 			}
 		}
+	}
+
+	protected void setDDMFormFieldEvaluationResultDataType(
+		DDMFormField ddmFormField,
+		DDMFormFieldEvaluationResult ddmFormFieldEvaluationResult) {
+
+		ddmFormFieldEvaluationResult.setProperty(
+			"dataType", ddmFormField.getDataType());
 	}
 
 	protected void setDDMFormFieldEvaluationResultReadOnly(
