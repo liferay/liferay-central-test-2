@@ -83,7 +83,7 @@ public class AdaptiveMediaImageProcessor
 
 	@Override
 	public Set<String> getImageMimeTypes() {
-		return ImageAdaptiveMediaConstants.SUPPORTED_MIME_TYPES;
+		return ImageAdaptiveMediaConstants.getSupportedMimeTypes();
 	}
 
 	@Override
@@ -209,8 +209,10 @@ public class AdaptiveMediaImageProcessor
 	}
 
 	private boolean _isMimeTypeSupported(String mimeType) {
-		return ImageAdaptiveMediaConstants.SUPPORTED_MIME_TYPES.contains(
-			mimeType);
+		Set<String> supportedMimeTypes =
+			ImageAdaptiveMediaConstants.getSupportedMimeTypes();
+
+		return supportedMimeTypes.contains(mimeType);
 	}
 
 	@Reference

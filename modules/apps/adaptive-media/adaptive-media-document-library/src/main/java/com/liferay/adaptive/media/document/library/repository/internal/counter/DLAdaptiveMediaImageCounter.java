@@ -51,7 +51,7 @@ public class DLAdaptiveMediaImageCounter implements AdaptiveMediaImageCounter {
 
 		dynamicQuery.add(
 			mimeTypeProperty.in(
-				ImageAdaptiveMediaConstants.SUPPORTED_MIME_TYPES));
+				ImageAdaptiveMediaConstants.getSupportedMimeTypes()));
 
 		return (int)_dlFileEntryLocalService.dynamicQueryCount(dynamicQuery);
 	}

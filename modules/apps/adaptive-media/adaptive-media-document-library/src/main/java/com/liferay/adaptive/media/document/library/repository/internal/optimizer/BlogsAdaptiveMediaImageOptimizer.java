@@ -115,7 +115,8 @@ public class BlogsAdaptiveMediaImageOptimizer
 
 					dynamicQuery.add(
 						mimeTypeProperty.in(
-							ImageAdaptiveMediaConstants.SUPPORTED_MIME_TYPES));
+							ImageAdaptiveMediaConstants.
+								getSupportedMimeTypes()));
 				}
 
 			});

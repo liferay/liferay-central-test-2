@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import java.util.Map;
+import java.util.Set;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -38,8 +39,10 @@ import org.osgi.service.component.annotations.Component;
 public class ImageProcessor {
 
 	public boolean isMimeTypeSupported(String mimeType) {
-		return ImageAdaptiveMediaConstants.SUPPORTED_MIME_TYPES.contains(
-			mimeType);
+		Set<String> supportedMimeTypes =
+			ImageAdaptiveMediaConstants.getSupportedMimeTypes();
+
+		return supportedMimeTypes.contains(mimeType);
 	}
 
 	public RenderedImage scaleImage(

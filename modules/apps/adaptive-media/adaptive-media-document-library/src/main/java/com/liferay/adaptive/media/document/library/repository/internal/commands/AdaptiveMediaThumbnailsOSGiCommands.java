@@ -45,6 +45,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -184,9 +185,7 @@ public class AdaptiveMediaThumbnailsOSGiCommands {
 		throws PortalException {
 
 		try {
-			Pattern pattern = Pattern.compile(".*/\\d+/\\d+/\\d+/(\\d+)\\..+$");
-
-			Matcher matcher = pattern.matcher(fileName);
+			Matcher matcher = _FILE_NAME_PATTERN.matcher(fileName);
 
 			if (!matcher.matches()) {
 				return null;
@@ -212,8 +211,10 @@ public class AdaptiveMediaThumbnailsOSGiCommands {
 	}
 
 	private boolean _isMimeTypeSupported(FileVersion fileVersion) {
-		return ImageAdaptiveMediaConstants.SUPPORTED_MIME_TYPES.contains(
-			fileVersion.getMimeType());
+		Set<String> supportedMimeTypes =
+			ImageAdaptiveMediaConstants.getSupportedMimeTypes();
+
+		return supportedMimeTypes.contains(fileVersion.getMimeType());
 	}
 
 	private void _migrate(
@@ -255,6 +256,9 @@ public class AdaptiveMediaThumbnailsOSGiCommands {
 			_log.error(e);
 		}
 	}
+
+	private static final Pattern _FILE_NAME_PATTERN = Pattern.compile(
+		".*/\\d+/\\d+/\\d+/(\\d+)\\..+$");
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		AdaptiveMediaThumbnailsOSGiCommands.class);

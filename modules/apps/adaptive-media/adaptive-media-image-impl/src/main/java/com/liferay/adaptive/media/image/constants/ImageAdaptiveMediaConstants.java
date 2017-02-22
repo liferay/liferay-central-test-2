@@ -24,7 +24,11 @@ import java.util.Set;
  */
 public class ImageAdaptiveMediaConstants {
 
-	public static final Set<String> SUPPORTED_MIME_TYPES =
+	public static final Set<String> getSupportedMimeTypes() {
+		return _supportedMimeTypes;
+	}
+
+	private static final Set<String> _supportedMimeTypes =
 		Collections.unmodifiableSet(
 			SetUtil.fromArray(
 				new String[] {
