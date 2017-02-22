@@ -31,7 +31,7 @@ public class SumFunction implements DDMExpressionFunction {
 	public Object evaluate(Object... parameters) {
 		Object[] values = null;
 
-		if ((parameters.length == 1) && parameters[0].getClass().isArray()) {
+		if ((parameters.length == 1) && isArray(parameters[0])) {
 			values = (Object[])parameters[0];
 		}
 		else {
@@ -67,6 +67,12 @@ public class SumFunction implements DDMExpressionFunction {
 		}
 
 		return sum;
+	}
+
+	protected boolean isArray(Object parameter) {
+		Class<?> clazz = parameter.getClass();
+
+		return clazz.isArray();
 	}
 
 }
