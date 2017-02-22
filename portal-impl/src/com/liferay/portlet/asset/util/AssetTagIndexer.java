@@ -106,8 +106,7 @@ public class AssetTagIndexer extends BaseIndexer<AssetTag> {
 		Document document = getBaseModelDocument(CLASS_NAME, assetTag);
 
 		document.addTextSortable(Field.NAME, assetTag.getName());
-		document.addTextSortable(
-			"assetCount", String.valueOf(assetTag.getAssetCount()));
+		document.addNumberSortable("assetCount", assetTag.getAssetCount());
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Document " + assetTag + " indexed successfully");
