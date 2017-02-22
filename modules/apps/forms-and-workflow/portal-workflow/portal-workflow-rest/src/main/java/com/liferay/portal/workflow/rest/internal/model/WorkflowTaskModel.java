@@ -33,6 +33,7 @@ public class WorkflowTaskModel {
 		_description = null;
 		_dueDate = null;
 		_name = null;
+		_state = null;
 		_user = null;
 		_transitions = null;
 		_workflowTaskId = 0;
@@ -40,12 +41,13 @@ public class WorkflowTaskModel {
 
 	public WorkflowTaskModel(
 		WorkflowTask workflowTask, WorkflowUserModel userModel,
-		WorkflowAssetModel assetModel, List<String> transitions) {
+		WorkflowAssetModel assetModel, String state, List<String> transitions) {
 
 		_asset = assetModel;
 		_description = workflowTask.getDescription();
 		_dueDate = workflowTask.getDueDate();
 		_name = workflowTask.getName();
+		_state = state;
 		_transitions = transitions;
 		_workflowTaskId = workflowTask.getWorkflowTaskId();
 		_user = userModel;
@@ -72,6 +74,11 @@ public class WorkflowTaskModel {
 	}
 
 	@XmlElement
+	public String getState() {
+		return _state;
+	}
+
+	@XmlElement
 	public List<String> getTransitions() {
 		return _transitions;
 	}
@@ -90,6 +97,7 @@ public class WorkflowTaskModel {
 	private final String _description;
 	private final Date _dueDate;
 	private final String _name;
+	private final String _state;
 	private final List<String> _transitions;
 	private final WorkflowUserModel _user;
 	private final long _workflowTaskId;

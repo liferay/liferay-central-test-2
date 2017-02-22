@@ -18,8 +18,10 @@ import com.liferay.asset.kernel.model.AssetEntry;
 import com.liferay.asset.kernel.model.AssetRenderer;
 import com.liferay.asset.kernel.model.AssetRendererFactory;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.UserLocalService;
+import com.liferay.portal.kernel.service.WorkflowInstanceLinkLocalService;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowException;
@@ -67,6 +69,21 @@ public class PortalWorkflowRestDisplayContext {
 			operation.getComment(), workflowContext);
 	}
 
+	public String getState(
+			long companyId, WorkflowTask workflowTask, Locale locale)
+		throws PortalException {
+
+		long groupId = getWorkflowGroupId(companyId, workflowTask);
+		String className = getWorkflowContextEntryClassName(
+			workflowTask, companyId);
+		long classPK = getWorkflowContextEntryClassPK(companyId, workflowTask);
+
+		String state = _workflowInstanceLinkLocalService.getState(
+			companyId, groupId, className, classPK);
+
+		return LanguageUtil.get(locale, state);
+	}
+
 	public Map<String, Serializable> getWorkflowContext(
 			long companyId, WorkflowTask workflowTask)
 		throws PortalException {
@@ -78,13 +95,15 @@ public class PortalWorkflowRestDisplayContext {
 	}
 
 	public WorkflowListedTaskModel getWorkflowListedTaskModel(
-			WorkflowTask workflowTask)
+			long companyId, WorkflowTask workflowTask, Locale locale)
 		throws PortalException {
 
 		WorkflowUserModel userModel = getWorkflowUserModel(workflowTask);
 
+		String state = getState(companyId, workflowTask, locale);
+
 		WorkflowListedTaskModel workflowTaskModel = new WorkflowListedTaskModel(
-			workflowTask, userModel);
+			workflowTask, userModel, state);
 
 		return workflowTaskModel;
 	}
@@ -109,11 +128,13 @@ public class PortalWorkflowRestDisplayContext {
 
 		WorkflowUserModel userModel = getWorkflowUserModel(workflowTask);
 
+		String state = getState(companyId, workflowTask, locale);
+
 		List<String> transitions = _workflowTaskManager.getNextTransitionNames(
 			companyId, userId, workflowTask.getWorkflowTaskId());
 
 		return new WorkflowTaskModel(
-			workflowTask, userModel, assetModel, transitions);
+			workflowTask, userModel, assetModel, state, transitions);
 	}
 
 	public WorkflowUserModel getWorkflowUserModel(WorkflowTask workflowTask)
@@ -178,6 +199,16 @@ public class PortalWorkflowRestDisplayContext {
 				WorkflowConstants.CONTEXT_ENTRY_CLASS_PK));
 	}
 
+	protected long getWorkflowGroupId(long companyId, WorkflowTask workflowTask)
+		throws PortalException {
+
+		Map<String, Serializable> workflowContext = getWorkflowContext(
+			companyId, workflowTask);
+
+		return GetterUtil.getLong(
+			(String)workflowContext.get(WorkflowConstants.CONTEXT_GROUP_ID));
+	}
+
 	protected WorkflowHandler<?> getWorkflowHandler(
 			long companyId, WorkflowTask workflowTask)
 		throws PortalException {
@@ -186,6 +217,14 @@ public class PortalWorkflowRestDisplayContext {
 			workflowTask, companyId);
 
 		return WorkflowHandlerRegistryUtil.getWorkflowHandler(className);
+	}
+
+	protected WorkflowInstance getWorkflowInstance(
+			long companyId, WorkflowTask workflowTask)
+		throws PortalException {
+
+		return WorkflowInstanceManagerUtil.getWorkflowInstance(
+			companyId, workflowTask.getWorkflowInstanceId());
 	}
 
 	protected WorkflowInstance getWorkflowInstance(
@@ -198,6 +237,9 @@ public class PortalWorkflowRestDisplayContext {
 
 	@Reference
 	private UserLocalService _userLocalService;
+
+	@Reference
+	private WorkflowInstanceLinkLocalService _workflowInstanceLinkLocalService;
 
 	@Reference
 	private WorkflowInstanceManager _workflowInstanceManager;

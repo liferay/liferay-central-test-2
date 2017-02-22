@@ -23,6 +23,7 @@ import com.liferay.portal.workflow.rest.internal.model.WorkflowListedTaskModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -42,7 +43,7 @@ public class WorkflowListedTaskResource {
 	@GET
 	@Produces("application/json")
 	public List<WorkflowListedTaskModel> getUserWorkflowTaskHeaders(
-			@Context User user)
+			@Context User user, @Context Locale locale)
 		throws PortalException {
 
 		List<WorkflowListedTaskModel> workflowTaskModels = new ArrayList<>();
@@ -54,7 +55,7 @@ public class WorkflowListedTaskResource {
 		for (WorkflowTask workflowTask : workflowTasks) {
 			WorkflowListedTaskModel workflowTaskModel =
 				_portalWorkflowRestDisplayContext.getWorkflowListedTaskModel(
-					workflowTask);
+					user.getCompanyId(), workflowTask, locale);
 
 			workflowTaskModels.add(workflowTaskModel);
 		}

@@ -31,16 +31,18 @@ public class WorkflowListedTaskModel {
 		_name = null;
 		_description = null;
 		_dueDate = null;
+		_state = null;
 		_user = null;
 		_workflowTaskId = 0;
 	}
 
 	public WorkflowListedTaskModel(
-		WorkflowTask workflowTask, WorkflowUserModel userModel) {
+		WorkflowTask workflowTask, WorkflowUserModel userModel, String state) {
 
 		_name = workflowTask.getName();
 		_description = workflowTask.getDescription();
 		_dueDate = workflowTask.getDueDate();
+		_state = state;
 		_workflowTaskId = workflowTask.getWorkflowTaskId();
 		_user = userModel;
 	}
@@ -61,6 +63,11 @@ public class WorkflowListedTaskModel {
 	}
 
 	@XmlElement
+	public String getState() {
+		return _state;
+	}
+
+	@XmlElement
 	public WorkflowUserModel getUser() {
 		return _user;
 	}
@@ -73,6 +80,7 @@ public class WorkflowListedTaskModel {
 	private final String _description;
 	private final Date _dueDate;
 	private final String _name;
+	private final String _state;
 	private final WorkflowUserModel _user;
 	private final long _workflowTaskId;
 
