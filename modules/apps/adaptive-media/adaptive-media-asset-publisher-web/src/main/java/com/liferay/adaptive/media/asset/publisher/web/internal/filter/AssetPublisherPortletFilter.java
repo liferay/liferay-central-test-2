@@ -14,13 +14,27 @@
 
 package com.liferay.adaptive.media.asset.publisher.web.internal.filter;
 
-import com.liferay.adaptive.media.web.filter.BaseAdaptiveMediaPortletFilter;
+import com.liferay.adaptive.media.processor.content.ContentProcessorHandler;
+import com.liferay.adaptive.media.web.constants.ContentTypes;
 import com.liferay.asset.publisher.web.constants.AssetPublisherPortletKeys;
+import com.liferay.portal.kernel.servlet.BufferCacheServletResponse;
+import com.liferay.portal.kernel.servlet.ServletResponseUtil;
+import com.liferay.portal.kernel.util.Portal;
 
+import java.io.IOException;
+
+import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
+import javax.portlet.filter.FilterChain;
+import javax.portlet.filter.FilterConfig;
 import javax.portlet.filter.PortletFilter;
+import javax.portlet.filter.RenderFilter;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Alejandro Tardín
@@ -32,12 +46,42 @@ import org.osgi.service.component.annotations.Component;
 	},
 	service = PortletFilter.class
 )
-public class AssetPublisherPortletFilter
-	extends BaseAdaptiveMediaPortletFilter {
+public class AssetPublisherPortletFilter implements RenderFilter {
 
 	@Override
-	protected boolean mustProcessContent(RenderRequest renderRequest) {
-		return true;
+	public void destroy() {
 	}
+
+	@Override
+	public void doFilter(
+			RenderRequest renderRequest, RenderResponse renderResponse,
+			FilterChain filterChain)
+		throws IOException, PortletException {
+
+		filterChain.doFilter(renderRequest, renderResponse);
+
+		HttpServletResponse httpServletResponse = portal.getHttpServletResponse(
+			renderResponse);
+
+		BufferCacheServletResponse bufferCacheServletResponse =
+			(BufferCacheServletResponse)httpServletResponse;
+
+		String content = bufferCacheServletResponse.getString();
+
+		String processedContent = contentProcessorHandler.process(
+			ContentTypes.HTML, content);
+
+		ServletResponseUtil.write(httpServletResponse, processedContent);
+	}
+
+	@Override
+	public void init(FilterConfig filterConfig) {
+	}
+
+	@Reference
+	protected ContentProcessorHandler contentProcessorHandler;
+
+	@Reference
+	protected Portal portal;
 
 }
