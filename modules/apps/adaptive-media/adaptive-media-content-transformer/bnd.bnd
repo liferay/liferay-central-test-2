@@ -1,0 +1,6 @@
+Bundle-Name: Liferay Adaptive Media Content Transformer
+Bundle-SymbolicName: com.liferay.adaptive.media.content.transformer
+Bundle-Version: 1.0.0
+Export-Package: com.liferay.adaptive.media.content.transformer
+Liferay-Releng-Module-Group-Description:
+Liferay-Releng-Module-Group-Title: Adaptive Media

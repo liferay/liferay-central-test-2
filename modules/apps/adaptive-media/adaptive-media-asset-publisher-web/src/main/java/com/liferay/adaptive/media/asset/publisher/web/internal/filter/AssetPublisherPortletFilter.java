@@ -14,8 +14,8 @@
 
 package com.liferay.adaptive.media.asset.publisher.web.internal.filter;
 
-import com.liferay.adaptive.media.processor.content.ContentProcessorHandler;
-import com.liferay.adaptive.media.web.constants.ContentTypes;
+import com.liferay.adaptive.media.content.transformer.ContentTransformerHandler;
+import com.liferay.adaptive.media.image.content.transformer.constants.ContentTransformerContentTypes;
 import com.liferay.asset.publisher.web.constants.AssetPublisherPortletKeys;
 import com.liferay.portal.kernel.servlet.BufferCacheServletResponse;
 import com.liferay.portal.kernel.servlet.ServletResponseUtil;
@@ -68,10 +68,10 @@ public class AssetPublisherPortletFilter implements RenderFilter {
 
 		String content = bufferCacheServletResponse.getString();
 
-		String processedContent = contentProcessorHandler.process(
-			ContentTypes.HTML, content);
+		String transformedContent = contentTransformerHandler.process(
+			ContentTransformerContentTypes.HTML, content);
 
-		ServletResponseUtil.write(httpServletResponse, processedContent);
+		ServletResponseUtil.write(httpServletResponse, transformedContent);
 	}
 
 	@Override
@@ -79,7 +79,7 @@ public class AssetPublisherPortletFilter implements RenderFilter {
 	}
 
 	@Reference
-	protected ContentProcessorHandler contentProcessorHandler;
+	protected ContentTransformerHandler contentTransformerHandler;
 
 	@Reference
 	protected Portal portal;

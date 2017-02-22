@@ -1,0 +1,83 @@
+/**
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ * <p>
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ * <p>
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+
+package com.liferay.adaptive.media.content.transformer;
+
+import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMap;
+import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMapFactory;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ListUtil;
+
+import java.util.List;
+
+import org.osgi.framework.BundleContext;
+import org.osgi.service.component.annotations.Activate;
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Deactivate;
+
+/**
+ * @author Alejandro Tardín
+ */
+@Component(immediate = true, service = ContentTransformerHandler.class)
+public class ContentTransformerHandler {
+
+	public <T> T process(
+		ContentTransformerContentType<T> contentType, T originalContent) {
+
+		List<ContentTransformer> contentTransformers = ListUtil.fromCollection(
+			_contentTransformersMap.getService(contentType));
+
+		T transformedContent = originalContent;
+
+		for (ContentTransformer<T> contentTransformer : contentTransformers) {
+			try {
+				transformedContent = contentTransformer.process(
+					transformedContent);
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return transformedContent;
+	}
+
+	@Activate
+	protected void activate(BundleContext bundleContext) {
+		_contentTransformersMap = ServiceTrackerMapFactory.openMultiValueMap(
+			bundleContext, ContentTransformer.class, null,
+			(serviceReference, emitter) -> {
+				ContentTransformer contentTransformer =
+					bundleContext.getService(serviceReference);
+
+				emitter.emit(contentTransformer.getContentType());
+
+				bundleContext.ungetService(serviceReference);
+			});
+	}
+
+	@Deactivate
+	protected void deactivate() {
+		_contentTransformersMap.close();
+	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		ContentTransformerHandler.class);
+
+	private ServiceTrackerMap
+		<ContentTransformerContentType, List<ContentTransformer>>
+			_contentTransformersMap;
+
+}
