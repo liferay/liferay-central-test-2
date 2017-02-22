@@ -20,10 +20,13 @@ import com.liferay.document.library.demo.data.creator.RootFolderDemoDataCreator;
 import com.liferay.portal.instance.lifecycle.BasePortalInstanceLifecycleListener;
 import com.liferay.portal.instance.lifecycle.PortalInstanceLifecycleListener;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.module.framework.ModuleServiceLifecycle;
+import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.users.admin.demo.data.creator.OmniAdminUserDemoDataCreator;
@@ -52,9 +55,13 @@ public class ImageAdaptiveMediaDemo
 		Folder nonAdaptiveMediaFolder = _rootFolderDemoDataCreator.create(
 			user.getUserId(), guestGroup.getGroupId(), "Non Adaptive Media");
 
+		_log("Images without adaptive-media:");
+
 		for (int i = 0; i < 5; i++) {
-			_fileEntryDemoDataCreator.create(
+			FileEntry fileEntry = _fileEntryDemoDataCreator.create(
 				user.getUserId(), nonAdaptiveMediaFolder.getFolderId());
+
+			_log(fileEntry.getFileEntryId());
 		}
 
 		_configurationDemoDataCreator.create(company.getCompanyId());
@@ -62,9 +69,13 @@ public class ImageAdaptiveMediaDemo
 		Folder adaptiveMediaFolder = _rootFolderDemoDataCreator.create(
 			user.getUserId(), guestGroup.getGroupId(), "Adaptive Media");
 
+		_log("Images with adaptive-media:");
+
 		for (int i = 0; i < 5; i++) {
-			_fileEntryDemoDataCreator.create(
+			FileEntry fileEntry = _fileEntryDemoDataCreator.create(
 				user.getUserId(), adaptiveMediaFolder.getFolderId());
+
+			_log(fileEntry.getFileEntryId());
 		}
 	}
 
@@ -114,6 +125,15 @@ public class ImageAdaptiveMediaDemo
 
 		_rootFolderDemoDataCreator = rootFolderDemoDataCreator;
 	}
+
+	private void _log(Object msg) {
+		if (_log.isInfoEnabled()) {
+			_log.info(msg);
+		}
+	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		ImageAdaptiveMediaDemo.class);
 
 	private ImageAdaptiveMediaConfigurationDemoDataCreator
 		_configurationDemoDataCreator;
