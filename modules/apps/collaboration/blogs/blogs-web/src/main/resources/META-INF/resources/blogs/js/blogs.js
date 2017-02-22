@@ -180,6 +180,15 @@ AUI.add(
 						instance._setDescriptionReadOnly(instance._shortenDescription);
 
 						instance.setDescription(description);
+
+						var form = Liferay.Form.get(instance.ns('fm'));
+
+						if (!instance._shortenDescription) {
+							form.addRule(instance.ns('descriptionEditor'), 'required');
+						}
+						else {
+							form.removeRule(instance.ns('descriptionEditor'), 'required');
+						}
 					},
 
 					_getPrincipalForm: function(formName) {
@@ -461,6 +470,6 @@ AUI.add(
 	},
 	'',
 	{
-		requires: ['aui-base', 'aui-io-request', 'liferay-portlet-base']
+		requires: ['aui-base', 'aui-io-request', 'liferay-form', 'liferay-portlet-base']
 	}
 );
