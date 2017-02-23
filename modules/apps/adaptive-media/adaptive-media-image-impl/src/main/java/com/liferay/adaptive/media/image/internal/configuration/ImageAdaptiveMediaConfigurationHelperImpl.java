@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import java.io.IOException;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -225,10 +226,9 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 
 		return configurationEntryStream.filter(
 			configurationEntry -> configurationEntry.isEnabled()).sorted(
-				(configurationEntry1, configurationEntry2) ->
-					configurationEntry1.getName().compareTo(
-						configurationEntry2.getName())).collect(
-				Collectors.toList());
+				Comparator.comparing(
+					ImageAdaptiveMediaConfigurationEntry::getName)).collect(
+						Collectors.toList());
 	}
 
 	@Override
@@ -241,10 +241,9 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 			_getConfigurationEntries(companyId);
 
 		return configurationEntryStream.filter(predicate).sorted(
-			(configurationEntry1, configurationEntry2) ->
-				configurationEntry1.getName().compareTo(
-					configurationEntry2.getName())).collect(
-				Collectors.toList());
+			Comparator.comparing(
+				ImageAdaptiveMediaConfigurationEntry::getName)).collect(
+					Collectors.toList());
 	}
 
 	@Override
