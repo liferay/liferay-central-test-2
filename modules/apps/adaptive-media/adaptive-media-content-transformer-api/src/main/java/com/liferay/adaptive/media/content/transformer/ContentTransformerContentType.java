@@ -17,4 +17,8 @@ package com.liferay.adaptive.media.content.transformer;
 /**
  * @author Alejandro Tardín
  */
-public interface ContentTransformerContentType<T> {}
+public interface ContentTransformerContentType<T> {
+
+	public String getKey();
+
+}

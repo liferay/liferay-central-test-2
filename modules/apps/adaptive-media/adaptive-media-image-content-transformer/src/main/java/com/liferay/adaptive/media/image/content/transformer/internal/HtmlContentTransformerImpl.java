@@ -41,7 +41,10 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Alejandro Tardín
  */
-@Component(immediate = true, service = ContentTransformer.class)
+@Component(
+	immediate = true, property = "content.transformer.content.type=html",
+	service = ContentTransformer.class
+)
 public class HtmlContentTransformerImpl implements ContentTransformer<String> {
 
 	@Override

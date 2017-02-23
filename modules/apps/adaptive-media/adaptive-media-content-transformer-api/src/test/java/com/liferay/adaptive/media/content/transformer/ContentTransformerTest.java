@@ -219,6 +219,12 @@ public class ContentTransformerTest {
 
 	private static class TestContentTransformerContentType<T>
 		implements ContentTransformerContentType<T> {
+
+		@Override
+		public String getKey() {
+			return "test";
+		}
+
 	}
 
 }

@@ -22,6 +22,6 @@ import com.liferay.adaptive.media.content.transformer.ContentTransformerContentT
 public class ContentTransformerContentTypes {
 
 	public static final ContentTransformerContentType<String> HTML =
-		new ContentTransformerContentType<String>() {};
+		() -> "html";
 
 }
