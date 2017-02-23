@@ -43,13 +43,12 @@ public class SumFunction implements DDMExpressionFunction {
 		boolean integerSum = true;
 
 		for (Object value : values) {
-			if (!Integer.class.isInstance(value)) {
-				integerSum = false;
+			if (!Number.class.isInstance(value)) {
+				continue;
 			}
 
-			if (!Number.class.isInstance(value)) {
-				throw new IllegalArgumentException(
-					"The parameters should be numbers");
+			if (!Integer.class.isInstance(value)) {
+				integerSum = false;
 			}
 
 			Number number = (Number)value;
