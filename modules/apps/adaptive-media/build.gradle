@@ -232,7 +232,9 @@ configure(subprojects.findAll {!it.childProjects}) {
 	runDocker.dependsOn deployLibs
 	runDocker.dependsOn deployRuntimeLibs
 
-	setUpTestableTomcat.enabled = false
+	if (project.hasProperty('docker')) {
+		setUpTestableTomcat.enabled = false
+	}
 	startTestableTomcat.enabled = false
 	stopTestableTomcat.enabled = false
 }
