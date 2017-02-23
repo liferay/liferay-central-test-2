@@ -102,6 +102,6 @@ public class ImageStorageTest {
 		Assert.assertEquals("adaptive/1/2/3/4/xyz", fileVersionVariantPath);
 	}
 
-	private final ImageStorageImpl _imageStorage = new ImageStorageImpl();
+	private final ImageStorage _imageStorage = new ImageStorage();
 
 }

@@ -16,7 +16,6 @@ package com.liferay.adaptive.media.image.internal.storage;
 
 import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
-import com.liferay.adaptive.media.image.storage.ImageStorage;
 import com.liferay.document.library.kernel.store.DLStoreUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.CompanyConstants;
@@ -32,7 +31,7 @@ import org.osgi.service.component.annotations.Component;
  * @author Adolfo Pérez
  */
 @Component(immediate = true, service = ImageStorage.class)
-public class ImageStorageImpl implements ImageStorage {
+public class ImageStorage {
 
 	public void copy(
 		FileVersion sourceFileVersion, FileVersion destinationFileVersion) {

@@ -16,8 +16,8 @@ dependencies {
 	provided group: "org.osgi", name: "org.osgi.core", version: "5.0.0"
 	provided project(":apps:adaptive-media:adaptive-media-api")
 	provided project(":apps:adaptive-media:adaptive-media-image-api")
-	provided project(":apps:adaptive-media:adaptive-media-image-impl")
 
 	testCompile group: "junit", name: "junit", version: "4.12"
 	testCompile group: "org.mockito", name: "mockito-core", version: "1.10.8", transitive: true
+	testCompile project(":apps:adaptive-media:adaptive-media-image-impl")
 }
