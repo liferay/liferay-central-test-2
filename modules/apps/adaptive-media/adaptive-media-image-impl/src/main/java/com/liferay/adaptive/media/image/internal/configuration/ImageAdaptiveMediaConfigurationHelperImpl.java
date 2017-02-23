@@ -137,7 +137,7 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 		List<ImageAdaptiveMediaConfigurationEntry> updatedConfigurationEntries =
 			configurationEntries.stream().filter(
 				curConfigurationEntry ->
-					!curConfigurationEntry.getUUID().equals(uuid)).collect(
+					!uuid.equals(curConfigurationEntry.getUUID())).collect(
 				Collectors.toList());
 
 		ImageAdaptiveMediaConfigurationEntry newConfigurationEntry =
@@ -177,7 +177,7 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 		List<ImageAdaptiveMediaConfigurationEntry> updatedConfigurationEntries =
 			configurationEntries.stream().filter(
 				curConfigurationEntry ->
-					!curConfigurationEntry.getUUID().equals(uuid)).collect(
+					!uuid.equals(curConfigurationEntry.getUUID())).collect(
 				Collectors.toList());
 
 		ImageAdaptiveMediaConfigurationEntry newConfigurationEntry =
@@ -210,7 +210,7 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 		List<ImageAdaptiveMediaConfigurationEntry> updatedConfigurationEntries =
 			configurationEntries.stream().filter(
 				curConfigurationEntry ->
-					!curConfigurationEntry.getUUID().equals(uuid)).collect(
+					!uuid.equals(curConfigurationEntry.getUUID())).collect(
 				Collectors.toList());
 
 		_updateConfiguration(companyId, updatedConfigurationEntries);
