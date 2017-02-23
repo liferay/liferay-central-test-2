@@ -44,7 +44,8 @@ AUI.add(
 							savedAtMessage: Liferay.Language.get('entry-saved-at-x'),
 							savedDraftAtMessage: Liferay.Language.get('draft-saved-at-x'),
 							saveDraftError: Liferay.Language.get('could-not-save-draft-to-the-server'),
-							saveDraftMessage: Liferay.Language.get('saving-draft')
+							saveDraftMessage: Liferay.Language.get('saving-draft'),
+							titleRequiredAtPublish: Liferay.Language.get('this-field-is-required-to-publish-the-entry')
 						}
 					}
 				},
@@ -114,6 +115,24 @@ AUI.add(
 						}
 					},
 
+					_beforePublishBtnClick: function(event) {
+						var instance = this;
+
+						var form = Liferay.Form.get(instance.ns('fm'));
+
+						var strings = instance.get('strings');
+
+						form.addRule(instance.ns('titleEditor'), 'required', strings.titleRequiredAtPublish);
+					},
+
+					_beforeSaveBtnClick: function() {
+						var instance = this;
+
+						var form = Liferay.Form.get(instance.ns('fm'));
+
+						form.removeRule(instance.ns('titleEditor'), 'required');
+					},
+
 					_bindUI: function() {
 						var instance = this;
 
@@ -128,6 +147,7 @@ AUI.add(
 
 						if (publishButton) {
 							eventHandles.push(
+								publishButton.before(STR_CLICK, A.bind('_beforePublishBtnClick', instance)),
 								publishButton.on(STR_CLICK, A.bind('_checkImagesBeforeSave', instance, false, false))
 							);
 						}
@@ -136,6 +156,7 @@ AUI.add(
 
 						if (saveButton) {
 							eventHandles.push(
+								saveButton.before(STR_CLICK, A.bind('_beforeSaveBtnClick', instance)),
 								saveButton.on(STR_CLICK, A.bind('_checkImagesBeforeSave', instance, true, false))
 							);
 						}
