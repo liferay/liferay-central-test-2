@@ -29,10 +29,9 @@ public class UpgradeResourcePermission extends UpgradeProcess {
 
 	protected void createIndex() throws Exception {
 		try (LoggingTimer loggingTimer = new LoggingTimer()) {
-			runSQLTemplateString(
+			runSQL(
 				"create index IX_D5F1E2A2 on ResourcePermission " +
-					"(name[$COLUMN_LENGTH:255$])",
-				false, false);
+					"(name[$COLUMN_LENGTH:255$])");
 		}
 	}
 
