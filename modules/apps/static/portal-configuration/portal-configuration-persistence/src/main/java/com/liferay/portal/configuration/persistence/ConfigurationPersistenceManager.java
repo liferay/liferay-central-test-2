@@ -597,9 +597,8 @@ public class ConfigurationPersistenceManager
 		return ConfigurationHandler.read(inputStream);
 	}
 
-	@SuppressWarnings("rawtypes")
 	private Dictionary<?, ?> _copyDictionary(Dictionary<?, ?> dictionary) {
-		Dictionary newDictionary = new HashMapDictionary();
+		Dictionary newDictionary = new HashMapDictionary<>();
 
 		Enumeration<?> keys = dictionary.keys();
 
