@@ -85,7 +85,7 @@ public class GitWorkingDirectory {
 
 			if (timeout >= 24) {
 				throw new InterruptedException(
-					"Failed to checkout branch " + branchName);
+					"Unable to checkout branch " + branchName);
 			}
 		}
 	}
