@@ -105,24 +105,19 @@ public class ImageAdaptiveMediaFinderImpl implements ImageAdaptiveMediaFinder {
 				configurationEntry ->
 					configurationEntry.getUUID().equals(
 						queryBuilder.getConfigurationUuid()) &&
-					(_imageLocalService.fetchAdaptiveMediaImage(
-						configurationEntry.getUUID(),
-						fileVersion.getFileVersionId()) != null)
-			).map(
-					configurationEntry ->
-						_createMedia(
-							fileVersion, uriFactory, configurationEntry));
+					_hasAdaptiveMedia(fileVersion, configurationEntry)).map(
+						configurationEntry ->
+							_createMedia(
+								fileVersion, uriFactory, configurationEntry));
 		}
 
 		return configurationEntries.stream().filter(
 			configurationEntry ->
-				_imageLocalService.fetchAdaptiveMediaImage(
-					configurationEntry.getUUID(),
-					fileVersion.getFileVersionId()) !=
-					null).map(
-				configurationEntry ->
-					_createMedia(fileVersion, uriFactory, configurationEntry)).
-				sorted(queryBuilder.getComparator());
+				_hasAdaptiveMedia(fileVersion, configurationEntry)).map(
+					configurationEntry ->
+						_createMedia(
+							fileVersion, uriFactory, configurationEntry)).
+			sorted(queryBuilder.getComparator());
 	}
 
 	@Reference(unbind = "-")
@@ -257,6 +252,21 @@ public class ImageAdaptiveMediaFinderImpl implements ImageAdaptiveMediaFinder {
 		}
 
 		return this::_createFileEntryURL;
+	}
+
+	private boolean _hasAdaptiveMedia(
+		FileVersion fileVersion,
+		ImageAdaptiveMediaConfigurationEntry configurationEntry) {
+
+		AdaptiveMediaImage adaptiveMediaImage =
+			_imageLocalService.fetchAdaptiveMediaImage(
+				configurationEntry.getUUID(), fileVersion.getFileVersionId());
+
+		if (adaptiveMediaImage == null) {
+			return false;
+		}
+
+		return true;
 	}
 
 	private ImageAdaptiveMediaConfigurationHelper _configurationHelper;
