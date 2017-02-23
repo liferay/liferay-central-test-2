@@ -248,7 +248,7 @@ public class AdaptiveMediaThumbnailsOSGiCommands {
 
 				_imageLocalService.addAdaptiveMediaImage(
 					configurationEntry, fileVersion, renderedImage.getWidth(),
-					renderedImage.getWidth(),
+					renderedImage.getHeight(),
 					new UnsyncByteArrayInputStream(bytes), bytes.length);
 			}
 		}
