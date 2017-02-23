@@ -8447,6 +8447,8 @@ if (ppstate.equals("normal")) {
 	</target>
 
 	<target name="record-test-case-method-names">
+		<setup-libs />
+
 		<delete failonerror="false" file="${test.ext.properties.file}" />
 
 		<if>
@@ -8522,6 +8524,8 @@ if (ppstate.equals("normal")) {
 	</target>
 
 	<target name="record-test-generated-properties">
+		<setup-libs />
+
 		<delete failonerror="false" file="${test.ext.properties.file}" />
 
 		<if>
