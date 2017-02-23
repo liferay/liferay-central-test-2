@@ -20,20 +20,15 @@ import aQute.bnd.annotation.ProviderType;
  * @author Leonardo Barros
  */
 @ProviderType
-public class NotExpression extends UnaryExpression {
+public class StringTerm extends Term {
 
-	public NotExpression(Expression operandExpression) {
-		super(operandExpression);
-	}
-
-	@Override
-	public <T> T accept(ExpressionVisitor<T> visitor) {
-		return visitor.visit(this);
+	public StringTerm(String value) {
+		super(value);
 	}
 
 	@Override
 	public String toString() {
-		return String.format("not(%s)", getOperandExpression());
+		return String.format("'%s'", getValue());
 	}
 
 }
