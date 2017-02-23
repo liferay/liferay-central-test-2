@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.adaptive.media.image.jaxrs.client.test.internal.provider;
+package com.liferay.adaptive.media.image.jaxrs.client.internal.provider;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

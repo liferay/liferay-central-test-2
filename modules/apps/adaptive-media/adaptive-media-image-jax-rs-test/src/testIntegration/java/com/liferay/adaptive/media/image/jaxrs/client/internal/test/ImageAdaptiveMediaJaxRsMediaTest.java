@@ -12,13 +12,13 @@
  * details.
  */
 
-package com.liferay.adaptive.media.image.jaxrs.client.test.internal;
+package com.liferay.adaptive.media.image.jaxrs.client.internal.test;
 
-import static com.liferay.adaptive.media.image.jaxrs.client.test.internal.util.ImageAdaptiveMediaTestUtil.TEST_AUTH;
+import static com.liferay.adaptive.media.image.jaxrs.client.internal.util.ImageAdaptiveMediaTestUtil.TEST_AUTH;
 
 import com.google.gson.JsonArray;
 
-import com.liferay.adaptive.media.image.jaxrs.client.test.internal.util.ImageAdaptiveMediaTestUtil;
+import com.liferay.adaptive.media.image.jaxrs.client.internal.util.ImageAdaptiveMediaTestUtil;
 import com.liferay.arquillian.deploymentscenario.annotations.BndFile;
 import com.liferay.portal.kernel.security.RandomUtil;
 
