@@ -101,9 +101,11 @@ AUI.add(
 							description = instance._shorten(text);
 						}
 
-						instance.one('#description').val(description);
+						var descriptionNode = instance.one('#description');
 
-						instance._setDescriptionReadOnly(instance._shortenDescription);
+						descriptionNode.val(description);
+
+						descriptionNode.attr('disabled', instance._shortenDescription);
 
 						var form = Liferay.Form.get(instance.ns('fm'));
 
@@ -396,19 +398,6 @@ AUI.add(
 							instance.one('#workflowAction').val(draft ? constants.ACTION_SAVE_DRAFT : constants.ACTION_PUBLISH);
 
 							submitForm(form);
-						}
-					},
-
-					_setDescriptionReadOnly: function(readOnly) {
-						var instance = this;
-
-						var descriptionNode = instance.one('#description');
-
-						if (!readOnly) {
-							descriptionNode.removeAttribute('readonly');
-						}
-						else {
-							descriptionNode.attr('readonly', readOnly);
 						}
 					},
 
