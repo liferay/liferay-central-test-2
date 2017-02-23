@@ -183,6 +183,10 @@ public class FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolverTest {
 
 			String key = jsonObject.getString("key");
 
+			Assert.assertTrue(
+				"Unexpected attribute found '" + key + "'",
+				key.equals("max-width") || key.equals("min-width"));
+
 			if (key.equals("max-width")) {
 				String value = jsonObject.getString("value");
 
@@ -197,22 +201,16 @@ public class FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolverTest {
 
 				assertedMinWidth = true;
 			}
-			else {
-				Assert.fail("Unexpected attribute found '" + key + "'");
-			}
 		}
 
-		if ((expectedMaxWidth != 0) && !assertedMaxWidth) {
-			Assert.fail(
-				"Couldn't find expected max-width of '" + expectedMaxWidth +
-					"' in '" + sourceJSONObject.toString() + "'");
-		}
-
-		if ((expectedMinWidth != 0) && !assertedMinWidth) {
-			Assert.fail(
-				"Couldn't find expected min-width of '" + expectedMinWidth +
-					"' in '" + sourceJSONObject.toString() + "'");
-		}
+		Assert.assertTrue(
+			"Couldn't find expected max-width of '" + expectedMaxWidth +
+				"' in '" + sourceJSONObject.toString() + "'",
+			(expectedMaxWidth == 0) || assertedMaxWidth);
+		Assert.assertTrue(
+			"Couldn't find expected min-width of '" + expectedMinWidth +
+				"' in '" + sourceJSONObject.toString() + "'",
+			(expectedMinWidth == 0) || assertedMinWidth);
 	}
 
 	private void _assertSrcSource(
