@@ -17,7 +17,6 @@ package com.liferay.adaptive.media.image.service.impl;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
-import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
 import com.liferay.adaptive.media.image.counter.AdaptiveMediaImageCounter;
 import com.liferay.adaptive.media.image.exception.DuplicateAdaptiveMediaImageException;
 import com.liferay.adaptive.media.image.model.AdaptiveMediaImage;
@@ -26,7 +25,6 @@ import com.liferay.adaptive.media.image.storage.ImageStorage;
 import com.liferay.document.library.kernel.service.DLAppLocalService;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMap;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMapFactory;
-import com.liferay.osgi.util.ServiceTrackerFactory;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.spring.extender.service.ServiceReference;
@@ -40,7 +38,6 @@ import java.util.List;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
-import org.osgi.util.tracker.ServiceTracker;
 
 /**
  * @author Sergio González
@@ -74,8 +71,6 @@ public class AdaptiveMediaImageLocalServiceImpl
 		image.setSize(size);
 		image.setConfigurationUuid(configurationEntry.getUUID());
 
-		ImageStorage imageStorage = _imageStorageServiceTracker.getService();
-
 		imageStorage.save(fileVersion, configurationEntry, inputStream);
 
 		return adaptiveMediaImagePersistence.update(image);
@@ -87,11 +82,6 @@ public class AdaptiveMediaImageLocalServiceImpl
 
 		Bundle bundle = FrameworkUtil.getBundle(
 			AdaptiveMediaImageLocalServiceImpl.class);
-
-		_imageStorageServiceTracker = ServiceTrackerFactory.open(
-			bundle, ImageStorage.class);
-		_configurationHelperServiceTracker = ServiceTrackerFactory.open(
-			bundle, ImageAdaptiveMediaConfigurationHelper.class);
 
 		BundleContext bundleContext = bundle.getBundleContext();
 
@@ -114,8 +104,6 @@ public class AdaptiveMediaImageLocalServiceImpl
 		FileVersion fileVersion = dlAppLocalService.getFileVersion(
 			fileVersionId);
 
-		ImageStorage imageStorage = _imageStorageServiceTracker.getService();
-
 		imageStorage.delete(fileVersion);
 	}
 
@@ -123,8 +111,6 @@ public class AdaptiveMediaImageLocalServiceImpl
 	public void destroy() {
 		super.destroy();
 
-		_imageStorageServiceTracker.close();
-		_configurationHelperServiceTracker.close();
 		_serviceTrackerMap.close();
 	}
 
@@ -140,8 +126,6 @@ public class AdaptiveMediaImageLocalServiceImpl
 	public InputStream getAdaptiveMediaImageContentStream(
 		ImageAdaptiveMediaConfigurationEntry configurationEntry,
 		FileVersion fileVersion) {
-
-		ImageStorage imageStorage = _imageStorageServiceTracker.getService();
 
 		return imageStorage.getContentStream(fileVersion, configurationEntry);
 	}
@@ -172,6 +156,9 @@ public class AdaptiveMediaImageLocalServiceImpl
 	@ServiceReference(type = DLAppLocalService.class)
 	protected DLAppLocalService dlAppLocalService;
 
+	@ServiceReference(type = ImageStorage.class)
+	protected ImageStorage imageStorage;
+
 	private void _checkDuplicates(String configurationUuid, long fileVersionId)
 		throws DuplicateAdaptiveMediaImageException {
 
@@ -184,12 +171,6 @@ public class AdaptiveMediaImageLocalServiceImpl
 		}
 	}
 
-	private ServiceTracker
-		<ImageAdaptiveMediaConfigurationHelper,
-			ImageAdaptiveMediaConfigurationHelper>
-				_configurationHelperServiceTracker;
-	private ServiceTracker<ImageStorage, ImageStorage>
-		_imageStorageServiceTracker;
 	private ServiceTrackerMap<String, AdaptiveMediaImageCounter>
 		_serviceTrackerMap;
 
