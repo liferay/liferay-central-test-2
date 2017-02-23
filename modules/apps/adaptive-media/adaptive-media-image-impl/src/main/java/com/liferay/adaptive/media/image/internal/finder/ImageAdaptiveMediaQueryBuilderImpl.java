@@ -127,7 +127,15 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 	}
 
 	public ConfigurationStatus getConfigurationStatus() {
-		return _configurationStatus;
+		if (_configurationStatus != null) {
+			return _configurationStatus;
+		}
+
+		if (hasConfiguration()) {
+			return ImageAdaptiveMediaQueryBuilder.ConfigurationStatus.ALL;
+		}
+
+		return ImageAdaptiveMediaQueryBuilder.ConfigurationStatus.ENABLED;
 	}
 
 	public String getConfigurationUuid() {

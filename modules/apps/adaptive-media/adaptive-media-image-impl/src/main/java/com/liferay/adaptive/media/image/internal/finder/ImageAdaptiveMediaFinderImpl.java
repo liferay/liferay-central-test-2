@@ -96,17 +96,6 @@ public class ImageAdaptiveMediaFinderImpl implements ImageAdaptiveMediaFinder {
 		ImageAdaptiveMediaQueryBuilder.ConfigurationStatus configurationStatus =
 			queryBuilder.getConfigurationStatus();
 
-		if (configurationStatus == null) {
-			if (queryBuilder.hasConfiguration()) {
-				configurationStatus =
-					ImageAdaptiveMediaQueryBuilder.ConfigurationStatus.ALL;
-			}
-			else {
-				configurationStatus =
-					ImageAdaptiveMediaQueryBuilder.ConfigurationStatus.ENABLED;
-			}
-		}
-
 		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
 				fileVersion.getCompanyId(), configurationStatus.getPredicate());
