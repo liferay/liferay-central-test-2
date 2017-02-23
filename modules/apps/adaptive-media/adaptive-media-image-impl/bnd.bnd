@@ -1,5 +1,5 @@
 Bundle-Name: Liferay Adaptive Media Image Implementation
-Bundle-SymbolicName: com.liferay.adaptive.media.image
+Bundle-SymbolicName: com.liferay.adaptive.media.image.impl
 Bundle-Version: 1.0.0
 Export-Package:\
 	com.liferay.adaptive.media.image.configuration,\
