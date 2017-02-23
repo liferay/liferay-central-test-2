@@ -46,6 +46,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 import org.osgi.service.component.annotations.Component;
@@ -100,19 +101,12 @@ public class ImageAdaptiveMediaFinderImpl implements ImageAdaptiveMediaFinder {
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
 				fileVersion.getCompanyId(), configurationStatus.getPredicate());
 
-		if (queryBuilder.hasConfiguration()) {
-			return configurationEntries.stream().filter(
-				configurationEntry ->
-					configurationEntry.getUUID().equals(
-						queryBuilder.getConfigurationUuid()) &&
-					_hasAdaptiveMedia(fileVersion, configurationEntry)).map(
-						configurationEntry ->
-							_createMedia(
-								fileVersion, uriFactory, configurationEntry));
-		}
+		Predicate<ImageAdaptiveMediaConfigurationEntry> filter =
+			queryBuilder.getConfigurationEntryFilter();
 
 		return configurationEntries.stream().filter(
 			configurationEntry ->
+				filter.test(configurationEntry) &&
 				_hasAdaptiveMedia(fileVersion, configurationEntry)).map(
 					configurationEntry ->
 						_createMedia(

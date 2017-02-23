@@ -15,13 +15,18 @@
 package com.liferay.adaptive.media.image.internal.finder;
 
 import com.liferay.adaptive.media.AdaptiveMediaAttribute;
+import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
+import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationEntryImpl;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaAttribute;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
+import com.liferay.portal.kernel.util.StringUtil;
 
+import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -32,16 +37,6 @@ import org.mockito.Mockito;
  * @author Adolfo Pérez
  */
 public class ImageAdaptiveMediaQueryBuilderImplTest {
-
-	@Test
-	public void testConfigurationAttributeQuery() {
-		FileVersion fileVersion = Mockito.mock(FileVersion.class);
-
-		_queryBuilder.forVersion(fileVersion).forConfiguration("small");
-
-		Assert.assertEquals(true, _queryBuilder.hasConfiguration());
-		Assert.assertEquals("small", _queryBuilder.getConfigurationUuid());
-	}
 
 	@Test
 	public void testFileEntryQueryReturnsLatestFileVersion() throws Exception {
@@ -63,6 +58,40 @@ public class ImageAdaptiveMediaQueryBuilderImplTest {
 
 		Assert.assertEquals(
 			fileEntry.getLatestFileVersion(), _queryBuilder.getFileVersion());
+	}
+
+	@Test
+	public void testMatchingConfigurationAttributeQuery() {
+		FileVersion fileVersion = Mockito.mock(FileVersion.class);
+
+		_queryBuilder.forVersion(fileVersion).forConfiguration("small");
+
+		ImageAdaptiveMediaConfigurationEntry configurationEntry =
+			new ImageAdaptiveMediaConfigurationEntryImpl(
+				StringUtil.randomString(), "small", Collections.emptyMap(),
+				true);
+
+		Predicate<ImageAdaptiveMediaConfigurationEntry> filter =
+			_queryBuilder.getConfigurationEntryFilter();
+
+		Assert.assertTrue(filter.test(configurationEntry));
+	}
+
+	@Test
+	public void testNonMatchingConfigurationAttributeQuery() {
+		FileVersion fileVersion = Mockito.mock(FileVersion.class);
+
+		_queryBuilder.forVersion(fileVersion).forConfiguration("small");
+
+		ImageAdaptiveMediaConfigurationEntry configurationEntry =
+			new ImageAdaptiveMediaConfigurationEntryImpl(
+				StringUtil.randomString(), StringUtil.randomString(),
+				Collections.emptyMap(), true);
+
+		Predicate<ImageAdaptiveMediaConfigurationEntry> filter =
+			_queryBuilder.getConfigurationEntryFilter();
+
+		Assert.assertFalse(filter.test(configurationEntry));
 	}
 
 	@Test
