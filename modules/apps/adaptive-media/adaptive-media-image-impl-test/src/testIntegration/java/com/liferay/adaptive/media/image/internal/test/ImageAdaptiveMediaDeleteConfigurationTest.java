@@ -705,18 +705,6 @@ public class ImageAdaptiveMediaDeleteConfigurationTest {
 		Assert.assertFalse(configurationEntryOptional.isPresent());
 	}
 
-	private void _assertEnabled(
-		Optional<ImageAdaptiveMediaConfigurationEntry>
-			configurationEntryOptional) {
-
-		Assert.assertTrue(configurationEntryOptional.isPresent());
-
-		ImageAdaptiveMediaConfigurationEntry configurationEntry =
-			configurationEntryOptional.get();
-
-		Assert.assertTrue(configurationEntry.isEnabled());
-	}
-
 	private void _assertDisabled(
 		Optional<ImageAdaptiveMediaConfigurationEntry>
 			configurationEntryOptional) {
@@ -727,6 +715,18 @@ public class ImageAdaptiveMediaDeleteConfigurationTest {
 			configurationEntryOptional.get();
 
 		Assert.assertFalse(configurationEntry.isEnabled());
+	}
+
+	private void _assertEnabled(
+		Optional<ImageAdaptiveMediaConfigurationEntry>
+			configurationEntryOptional) {
+
+		Assert.assertTrue(configurationEntryOptional.isPresent());
+
+		ImageAdaptiveMediaConfigurationEntry configurationEntry =
+			configurationEntryOptional.get();
+
+		Assert.assertTrue(configurationEntry.isEnabled());
 	}
 
 	private static ServiceTracker
