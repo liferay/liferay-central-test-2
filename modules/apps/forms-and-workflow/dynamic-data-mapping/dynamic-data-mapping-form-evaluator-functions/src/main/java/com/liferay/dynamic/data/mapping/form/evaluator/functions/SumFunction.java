@@ -38,11 +38,6 @@ public class SumFunction implements DDMExpressionFunction {
 			values = parameters;
 		}
 
-		if (values.length < 2) {
-			throw new IllegalArgumentException(
-				"Two or more parameters are expected");
-		}
-
 		double sum = 0;
 
 		boolean integerSum = true;

@@ -54,18 +54,4 @@ public class SumFunctionTest {
 		Assert.assertEquals(21.4D, sumFunction.evaluate(1, 13.4, 7));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void testEvaluateInvalid1() throws Exception {
-		SumFunction sumFunction = new SumFunction();
-
-		sumFunction.evaluate(2);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void testEvaluateInvalid2() throws Exception {
-		SumFunction sumFunction = new SumFunction();
-
-		sumFunction.evaluate(2, "text");
-	}
-
 }
