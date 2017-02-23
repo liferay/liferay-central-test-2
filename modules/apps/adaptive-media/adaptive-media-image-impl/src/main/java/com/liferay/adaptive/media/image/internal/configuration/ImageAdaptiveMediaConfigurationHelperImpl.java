@@ -228,7 +228,7 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 			configurationEntry -> configurationEntry.isEnabled()).sorted(
 				Comparator.comparing(
 					ImageAdaptiveMediaConfigurationEntry::getName)).collect(
-						Collectors.toList());
+				Collectors.toList());
 	}
 
 	@Override
@@ -243,7 +243,7 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 		return configurationEntryStream.filter(predicate).sorted(
 			Comparator.comparing(
 				ImageAdaptiveMediaConfigurationEntry::getName)).collect(
-					Collectors.toList());
+				Collectors.toList());
 	}
 
 	@Override
