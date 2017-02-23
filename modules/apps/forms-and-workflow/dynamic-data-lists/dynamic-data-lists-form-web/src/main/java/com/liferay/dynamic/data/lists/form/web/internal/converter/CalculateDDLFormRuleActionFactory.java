@@ -30,7 +30,10 @@ public class CalculateDDLFormRuleActionFactory {
 		List<Expression> expressions, ActionExpressionVisitor visitor) {
 
 		String target = visitor.doVisit(expressions.get(0));
-		String expression = visitor.doVisit(expressions.get(1));
+		String expression = expressions.get(1).toString();
+
+		expression = expression.replaceAll(
+			"(getValue\\(\\'([^\\(]+)\\'\\))", "$2");
 
 		return new CalculateDDLFormRuleAction(target, expression);
 	}
