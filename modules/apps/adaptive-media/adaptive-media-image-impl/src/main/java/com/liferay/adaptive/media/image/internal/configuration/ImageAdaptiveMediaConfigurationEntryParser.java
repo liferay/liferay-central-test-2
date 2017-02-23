@@ -31,11 +31,12 @@ import org.osgi.service.component.annotations.Component;
  * Parses ConfigAdmin configuration entries.
  *
  * <p>
- * A configuration entry must be a string of the following form:
+ * A configuration entry must be a string of the following form (items inside
+ * square brackets are optional):
  * </p>
  *
  * <code>
- * name:uuid:key0=val0;key1=val1;...;keyN=valN
+ * name:uuid:key0=val0;key1=val1;...;keyN=valN[:enable=flag]
  * </code>
  *
  * <p>
@@ -55,9 +56,16 @@ import org.osgi.service.component.annotations.Component;
  * the resulting {@link ImageAdaptiveMediaConfigurationEntry} might
  * require a particular set of attributes.
  * </li>
+ * <li>
+ * <code>enabled</code> is a boolean value (<code>true</code> or
+ * <code>false</code>). If not <code>true</code> the configuration will be
+ * ignored when processing images. If not specified, the default value is
+ * <code>true</code>.
+ * </li>
  * </ul>
  *
  * @author Adolfo Pérez
+ * @review
  */
 @Component(
 	immediate = true, service = ImageAdaptiveMediaConfigurationEntryParser.class
