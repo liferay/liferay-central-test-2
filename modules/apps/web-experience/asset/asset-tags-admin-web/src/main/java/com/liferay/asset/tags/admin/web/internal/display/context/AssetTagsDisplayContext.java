@@ -238,10 +238,9 @@ public class AssetTagsDisplayContext {
 					tagsSearchContainer.getStart(),
 					tagsSearchContainer.getEnd(), sort);
 
-			tagsSearchContainer.setTotal(baseModelSearchResult.getLength());
-
 			tagsSearchContainer.setResults(
 				baseModelSearchResult.getBaseModels());
+			tagsSearchContainer.setTotal(baseModelSearchResult.getLength());
 		}
 		else {
 			String orderByCol = getOrderByCol();
