@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.adaptive.media.image.content.transformer.constants;
+package com.liferay.adaptive.media.content.transformer.constants;
 
 import com.liferay.adaptive.media.content.transformer.ContentTransformerContentType;
 
