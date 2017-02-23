@@ -239,6 +239,7 @@ public class AssetTagsDisplayContext {
 					tagsSearchContainer.getEnd(), sort);
 
 			tagsSearchContainer.setTotal(baseModelSearchResult.getLength());
+
 			tagsSearchContainer.setResults(
 				baseModelSearchResult.getBaseModels());
 		}
