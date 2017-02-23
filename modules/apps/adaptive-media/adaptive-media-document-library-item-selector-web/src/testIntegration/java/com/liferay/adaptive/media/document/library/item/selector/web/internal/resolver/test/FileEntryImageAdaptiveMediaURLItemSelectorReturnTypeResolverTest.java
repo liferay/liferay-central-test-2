@@ -12,11 +12,11 @@
  * details.
  */
 
-package com.liferay.adaptive.media.image.processor.test;
+package com.liferay.adaptive.media.document.library.item.selector.web.internal.resolver.test;
 
+import com.liferay.adaptive.media.document.library.item.selector.web.internal.resolver.FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolver;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
-import com.liferay.adaptive.media.image.item.selector.FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolver;
 import com.liferay.adaptive.media.image.test.util.DestinationReplacer;
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.document.library.kernel.model.DLFolderConstants;

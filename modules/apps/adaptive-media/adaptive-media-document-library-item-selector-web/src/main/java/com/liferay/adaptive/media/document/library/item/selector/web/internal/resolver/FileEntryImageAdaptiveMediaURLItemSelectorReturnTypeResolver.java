@@ -12,10 +12,11 @@
  * details.
  */
 
-package com.liferay.adaptive.media.image.item.selector;
+package com.liferay.adaptive.media.document.library.item.selector.web.internal.resolver;
 
 import com.liferay.adaptive.media.AdaptiveMedia;
 import com.liferay.adaptive.media.image.finder.ImageAdaptiveMediaFinder;
+import com.liferay.adaptive.media.image.item.selector.ImageAdaptiveMediaURLItemSelectorReturnType;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaAttribute;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
 import com.liferay.document.library.kernel.util.DLUtil;
