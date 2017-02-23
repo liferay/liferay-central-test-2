@@ -22,10 +22,13 @@ import com.liferay.adaptive.media.image.exception.DuplicateAdaptiveMediaImageExc
 import com.liferay.adaptive.media.image.internal.storage.ImageStorage;
 import com.liferay.adaptive.media.image.model.AdaptiveMediaImage;
 import com.liferay.adaptive.media.image.service.base.AdaptiveMediaImageLocalServiceBaseImpl;
+import com.liferay.document.library.kernel.exception.NoSuchFileVersionException;
 import com.liferay.document.library.kernel.service.DLAppLocalService;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMap;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMapFactory;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.spring.extender.service.ServiceReference;
 
@@ -101,10 +104,17 @@ public class AdaptiveMediaImageLocalServiceImpl
 			adaptiveMediaImagePersistence.remove(image);
 		}
 
-		FileVersion fileVersion = dlAppLocalService.getFileVersion(
-			fileVersionId);
+		try {
+			FileVersion fileVersion = dlAppLocalService.getFileVersion(
+				fileVersionId);
 
-		imageStorage.delete(fileVersion);
+			imageStorage.delete(fileVersion);
+		}
+		catch (NoSuchFileVersionException nsfve) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Deleted stale AdaptiveMediaImage", nsfve);
+			}
+		}
 	}
 
 	@Override
@@ -170,6 +180,9 @@ public class AdaptiveMediaImageLocalServiceImpl
 			throw new DuplicateAdaptiveMediaImageException();
 		}
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		AdaptiveMediaImageLocalServiceImpl.class);
 
 	private ServiceTrackerMap<String, AdaptiveMediaImageCounter>
 		_serviceTrackerMap;
