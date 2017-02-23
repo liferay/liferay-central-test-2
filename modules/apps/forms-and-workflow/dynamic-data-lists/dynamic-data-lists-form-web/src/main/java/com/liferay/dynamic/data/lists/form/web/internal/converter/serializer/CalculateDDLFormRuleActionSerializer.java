@@ -41,7 +41,7 @@ public class CalculateDDLFormRuleActionSerializer
 	@Override
 	public String serialize() {
 		ServiceContext serviceContext =
-			ServiceContextThreadLocal.popServiceContext();
+			ServiceContextThreadLocal.getServiceContext();
 
 		DDMForm ddmForm = (DDMForm)serviceContext.getAttribute("form");
 
