@@ -1564,8 +1564,21 @@ public class JournalArticleLocalServiceImpl
 				orderByComparator);
 		}
 
-		return journalArticlePersistence.fetchByG_A_ST_First(
-			groupId, articleId, status, orderByComparator);
+		if (JournalServiceConfigurationValues.
+				FETCH_LATEST_ARTICLE_WITH_PAGINATION) {
+
+			return journalArticlePersistence.fetchByG_A_ST_First(
+				groupId, articleId, status, orderByComparator);
+		}
+
+		List<JournalArticle> journalArticles =
+			journalArticlePersistence.findByG_A_ST(groupId, articleId, status);
+
+		if (journalArticles.isEmpty()) {
+			return null;
+		}
+
+		return Collections.max(journalArticles, orderByComparator);
 	}
 
 	@Override

@@ -25,6 +25,12 @@ public class JournalServiceConfigurationValues {
 		JournalServiceConfigurationUtil.getArray(
 			JournalServiceConfigurationKeys.CHAR_BLACKLIST);
 
+	public static final boolean FETCH_LATEST_ARTICLE_WITH_PAGINATION =
+		GetterUtil.getBoolean(
+			JournalServiceConfigurationUtil.get(
+				JournalServiceConfigurationKeys.
+					FETCH_LATEST_ARTICLE_WITH_PAGINATION));
+
 	public static final int JOURNAL_ARTICLE_CHECK_INTERVAL =
 		GetterUtil.getInteger(
 			JournalServiceConfigurationUtil.get(

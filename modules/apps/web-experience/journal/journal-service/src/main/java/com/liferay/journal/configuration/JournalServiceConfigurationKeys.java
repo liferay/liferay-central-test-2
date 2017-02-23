@@ -23,6 +23,9 @@ public class JournalServiceConfigurationKeys {
 
 	public static final String ERROR_TEMPLATE = "error.template";
 
+	public static final String FETCH_LATEST_ARTICLE_WITH_PAGINATION =
+		"fetch.latest.article.with.pagination";
+
 	public static final String JOURNAL_ARTICLE_CHECK_INTERVAL =
 		"journal.article.check.interval";
 
