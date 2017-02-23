@@ -14,6 +14,8 @@
 
 package com.liferay.adaptive.media.image.processor.test;
 
+import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
+import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
 import com.liferay.adaptive.media.image.item.selector.FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolver;
 import com.liferay.adaptive.media.image.test.util.DestinationReplacer;
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
@@ -35,7 +37,6 @@ import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
 import com.liferay.portal.kernel.test.util.TestPropsValues;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.HashMapDictionary;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.service.test.ServiceTestUtil;
@@ -43,20 +44,17 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.registry.Registry;
 import com.liferay.registry.RegistryUtil;
 
-import java.io.IOException;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
-import java.util.Dictionary;
-
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.ClassRule;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import org.osgi.service.cm.Configuration;
-import org.osgi.service.cm.ConfigurationAdmin;
 
 /**
  * @author Sergio González
@@ -76,17 +74,46 @@ public class FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolverTest {
 	public void setUp() throws Exception {
 		_group = GroupTestUtil.addGroup();
 
-		_configurationAdmin = _getService(ConfigurationAdmin.class);
+		_configurationHelper = _getService(
+			ImageAdaptiveMediaConfigurationHelper.class);
 		_dlAppLocalService = _getService(DLAppLocalService.class);
 		_resolver = _getService(
 			FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolver.class);
 
 		ServiceTestUtil.setUser(TestPropsValues.getUser());
 
+		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
+			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
+				TestPropsValues.getCompanyId(), configurationEntry -> true);
+
+		for (ImageAdaptiveMediaConfigurationEntry configurationEntry :
+				configurationEntries) {
+
+			_configurationHelper.
+				forceDeleteImageAdaptiveMediaConfigurationEntry(
+					TestPropsValues.getCompanyId(),
+					configurationEntry.getUUID());
+		}
+
 		_addTestVariant();
 	}
 
-	@Ignore
+	@After
+	public void tearDown() throws Exception {
+		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
+			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
+				TestPropsValues.getCompanyId(), configurationEntry -> true);
+
+		for (ImageAdaptiveMediaConfigurationEntry configurationEntry :
+				configurationEntries) {
+
+			_configurationHelper.
+				forceDeleteImageAdaptiveMediaConfigurationEntry(
+					TestPropsValues.getCompanyId(),
+					configurationEntry.getUUID());
+		}
+	}
+
 	@Test
 	public void testAddingFileEntryWithImageCreatesMedia() throws Exception {
 		try (DestinationReplacer destinationReplacer = new DestinationReplacer(
@@ -127,10 +154,10 @@ public class FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolverTest {
 				sourcesJSONArray.getJSONObject(3), fileEntry.getFileEntryId(),
 				"uuid3");
 
-			_assertAttibutes(sourcesJSONArray.getJSONObject(0), 100, 0);
-			_assertAttibutes(sourcesJSONArray.getJSONObject(1), 800, 100);
-			_assertAttibutes(sourcesJSONArray.getJSONObject(2), 1200, 800);
-			_assertAttibutes(sourcesJSONArray.getJSONObject(3), 2400, 1200);
+			_assertAttibutes(sourcesJSONArray.getJSONObject(0), 50, 0);
+			_assertAttibutes(sourcesJSONArray.getJSONObject(1), 200, 50);
+			_assertAttibutes(sourcesJSONArray.getJSONObject(2), 280, 200);
+			_assertAttibutes(sourcesJSONArray.getJSONObject(3), 330, 280);
 		}
 	}
 
@@ -144,59 +171,67 @@ public class FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolverTest {
 			_getImageBytes(), serviceContext);
 	}
 
-	private void _addTestVariant() throws IOException {
-		Configuration configuration = _configurationAdmin.getConfiguration(
-			"com.liferay.adaptive.media.image.internal.configuration." +
-				"ImageAdaptiveMediaCompanyConfiguration",
-			null);
+	private void _addTestVariant() throws Exception {
+		Map<String, String> properties = new HashMap<>();
 
-		Dictionary<String, Object> properties = configuration.getProperties();
+		properties.put("max-height", "50");
+		properties.put("max-width", "50");
 
-		if (properties == null) {
-			properties = new HashMapDictionary<>();
-		}
+		_configurationHelper.addImageAdaptiveMediaConfigurationEntry(
+			TestPropsValues.getCompanyId(), "small", "uuid0", properties);
 
-		properties.put(
-			"imageVariants",
-			new String[] {
-				"small:uuid0:max-width=100;max-height=100",
-				"big:uuid1:max-width=1200;max-height=800",
-				"medium:uuid2:max-width=800;max-height=600",
-				"extra:uuid3:max-width=2400;max-height=1800"
-			});
+		properties = new HashMap<>();
 
-		configuration.update(properties);
+		properties.put("max-height", "400");
+		properties.put("max-width", "280");
+
+		_configurationHelper.addImageAdaptiveMediaConfigurationEntry(
+			TestPropsValues.getCompanyId(), "big", "uuid1", properties);
+
+		properties = new HashMap<>();
+
+		properties.put("max-height", "300");
+		properties.put("max-width", "200");
+
+		_configurationHelper.addImageAdaptiveMediaConfigurationEntry(
+			TestPropsValues.getCompanyId(), "medium", "uuid2", properties);
+
+		properties = new HashMap<>();
+
+		properties.put("max-height", "500");
+		properties.put("max-width", "330");
+
+		_configurationHelper.addImageAdaptiveMediaConfigurationEntry(
+			TestPropsValues.getCompanyId(), "extra", "uuid3", properties);
 	}
 
 	private void _assertAttibutes(
 		JSONObject sourceJSONObject, int expectedMaxWidth,
 		int expectedMinWidth) {
 
-		JSONArray attributesJSONArray = sourceJSONObject.getJSONArray(
+		JSONObject attributesJSONObject = sourceJSONObject.getJSONObject(
 			"attributes");
+
+		JSONArray attributeNamesJSONArray = attributesJSONObject.names();
 
 		boolean assertedMaxWidth = false;
 		boolean assertedMinWidth = false;
 
-		for (int i = 0; i < attributesJSONArray.length(); i++) {
-			JSONObject jsonObject = attributesJSONArray.getJSONObject(i);
-
-			String key = jsonObject.getString("key");
+		for (int i = 0; i < attributeNamesJSONArray.length(); i++) {
+			String key = attributeNamesJSONArray.getString(i);
 
 			Assert.assertTrue(
 				"Unexpected attribute found '" + key + "'",
 				key.equals("max-width") || key.equals("min-width"));
 
-			if (key.equals("max-width")) {
-				String value = jsonObject.getString("value");
+			String value = attributesJSONObject.getString(key);
 
+			if (key.equals("max-width")) {
 				Assert.assertEquals(expectedMaxWidth + "px", value);
 
 				assertedMaxWidth = true;
 			}
 			else if (key.equals("min-width")) {
-				String value = jsonObject.getString("value");
-
 				Assert.assertEquals(expectedMinWidth + "px", value);
 
 				assertedMinWidth = true;
@@ -244,7 +279,7 @@ public class FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolverTest {
 		}
 	}
 
-	private ConfigurationAdmin _configurationAdmin;
+	private ImageAdaptiveMediaConfigurationHelper _configurationHelper;
 	private DLAppLocalService _dlAppLocalService;
 
 	@DeleteAfterTestRun
