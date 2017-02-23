@@ -62,7 +62,7 @@ public class LogicalEvaluationTest {
 	@Test
 	public void testEqualsExpression() throws Exception {
 		Assert.assertTrue(evaluate("true = true"));
-		Assert.assertTrue(evaluate("1 = 1.0"));
+		Assert.assertFalse(evaluate("1 = 1.0"));
 		Assert.assertTrue(evaluate("\"Joe\" == \"Joe\""));
 		Assert.assertFalse(evaluate("true == FALSE"));
 	}

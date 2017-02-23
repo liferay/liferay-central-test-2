@@ -95,7 +95,7 @@ public class FunctionEvaluationTest {
 	private static class AbsFunction implements DDMExpressionFunction {
 
 		public Object evaluate(Object... parameters) {
-			double parameter = (double)parameters[0];
+			double parameter = Double.parseDouble(parameters[0].toString());
 
 			return Math.abs(parameter);
 		}
@@ -115,8 +115,8 @@ public class FunctionEvaluationTest {
 	private static class PowFunction implements DDMExpressionFunction {
 
 		public Object evaluate(Object... parameters) {
-			double parameter1 = (double)parameters[0];
-			double parameter2 = (double)parameters[1];
+			double parameter1 = Double.parseDouble(parameters[0].toString());
+			double parameter2 = Double.parseDouble(parameters[1].toString());
 
 			return Math.pow(parameter1, parameter2);
 		}

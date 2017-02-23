@@ -34,7 +34,7 @@ public class ArithmeticEvaluationTest {
 
 	@Test
 	public void testCombinedDecimalExpression() throws Exception {
-		int expected = -((1 + 3) - 4 * (2 - (2 + (4 - 5)) * (5 - 2) * 5) +1);
+		int expected = -((1 + 3) - 4 * (2 - (2 + (4 - 5)) * (5 - 2) * 5) + 1);
 
 		Number actual = evaluate(
 			"-((1 + 3) - 4 * (2 - (2 + (4 - 5)) * (5 - 2) * 5) +1)");
@@ -55,8 +55,8 @@ public class ArithmeticEvaluationTest {
 			-(-2.5 + 4 * (2.1 + ((11 + 3.2) - 2) * (.5 + 6) - (2.6 * 1.1 - 4)));
 
 		Number actual = evaluate(
-			"-(-2.5 + 4 * (2.1 + ((11 + 3.2) - 2) * (.5 + 6) - " +
-				"(2.6 * 1.1 - 4)))");
+			"-(-2.5 + 4 * (2.1 + ((11 + 3.2) - 2) * (.5 + 6) - (2.6 * 1.1 - " +
+				"4)))");
 
 		Assert.assertEquals(expected, actual.doubleValue(), .1);
 	}
@@ -71,8 +71,10 @@ public class ArithmeticEvaluationTest {
 	public void testDivisionExpression() throws Exception {
 		Assert.assertEquals(2, evaluate("4 / 2").intValue());
 		Assert.assertEquals(4L, evaluate("12 / 3").longValue());
-		Assert.assertEquals(7.5f, evaluate("15 / 2").floatValue(), .1);
-		Assert.assertEquals(8.5d, evaluate("17 / 2").doubleValue(), .1);
+		Assert.assertEquals(7.0f, evaluate("15 / 2").floatValue(), .1);
+		Assert.assertEquals(7.5f, evaluate("15 / 2.0").floatValue(), .1);
+		Assert.assertEquals(8.0d, evaluate("17 / 2").doubleValue(), .1);
+		Assert.assertEquals(8.5d, evaluate("17 / 2.0").doubleValue(), .1);
 	}
 
 	@Test
