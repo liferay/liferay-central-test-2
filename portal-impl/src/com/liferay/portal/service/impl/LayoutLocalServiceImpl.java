@@ -2562,9 +2562,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		layout.setColorSchemeId(colorSchemeId);
 		layout.setCss(css);
 
-		layoutPersistence.update(layout);
-
-		return layout;
+		return layoutPersistence.update(layout);
 	}
 
 	/**
@@ -2587,7 +2585,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		layout.setModifiedDate(now);
 		layout.setName(name, LocaleUtil.fromLanguageId(languageId));
 
-		layoutPersistence.update(layout);
+		layout = layoutPersistence.update(layout);
 
 		Group group = layout.getGroup();
 
@@ -2687,9 +2685,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		layout.setModifiedDate(now);
 		layout.setParentLayoutId(parentLayoutId);
 
-		layoutPersistence.update(layout);
-
-		return layout;
+		return layoutPersistence.update(layout);
 	}
 
 	/**
@@ -2815,7 +2811,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		layout.setModifiedDate(new Date());
 		layout.setPriority(nextPriority);
 
-		layoutPersistence.update(layout);
+		layout = layoutPersistence.update(layout);
 
 		List<Layout> layouts = layoutPersistence.findByG_P_P(
 			layout.getGroupId(), layout.isPrivateLayout(),
@@ -2853,7 +2849,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			curLayout.setModifiedDate(layout.getModifiedDate());
 			curLayout.setPriority(curNextPriority);
 
-			layoutPersistence.update(curLayout);
+			curLayout = layoutPersistence.update(curLayout);
 
 			if (curLayout.equals(layout)) {
 				layout = curLayout;
