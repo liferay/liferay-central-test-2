@@ -1571,14 +1571,14 @@ public class JournalArticleLocalServiceImpl
 				groupId, articleId, status, orderByComparator);
 		}
 
-		List<JournalArticle> journalArticles =
-			journalArticlePersistence.findByG_A_ST(groupId, articleId, status);
+		List<JournalArticle> articles = journalArticlePersistence.findByG_A_ST(
+			groupId, articleId, status);
 
-		if (journalArticles.isEmpty()) {
+		if (articles.isEmpty()) {
 			return null;
 		}
 
-		return Collections.max(journalArticles, orderByComparator);
+		return Collections.max(articles, orderByComparator);
 	}
 
 	@Override
