@@ -14,6 +14,7 @@
 
 package com.liferay.adaptive.media.web.internal.background.task;
 
+import com.liferay.adaptive.media.web.constants.OptimizeImagesBackgroundTaskConstants;
 import com.liferay.portal.kernel.backgroundtask.BackgroundTaskStatus;
 import com.liferay.portal.kernel.backgroundtask.BackgroundTaskStatusMessageTranslator;
 import com.liferay.portal.kernel.messaging.Message;

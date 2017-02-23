@@ -15,8 +15,8 @@
 package com.liferay.adaptive.media.web.internal.portlet.action;
 
 import com.liferay.adaptive.media.web.constants.AdaptiveMediaPortletKeys;
+import com.liferay.adaptive.media.web.constants.OptimizeImagesBackgroundTaskConstants;
 import com.liferay.adaptive.media.web.internal.background.task.OptimizeImagesAllConfigurationsBackgroundTaskExecutor;
-import com.liferay.adaptive.media.web.internal.background.task.OptimizeImagesBackgroundTaskConstants;
 import com.liferay.adaptive.media.web.internal.background.task.OptimizeImagesSingleConfigurationBackgroundTaskExecutor;
 import com.liferay.portal.background.task.constants.BackgroundTaskContextMapConstants;
 import com.liferay.portal.kernel.backgroundtask.BackgroundTask;

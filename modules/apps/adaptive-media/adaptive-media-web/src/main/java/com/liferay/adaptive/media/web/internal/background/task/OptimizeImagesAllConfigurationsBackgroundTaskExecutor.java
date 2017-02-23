@@ -15,6 +15,7 @@
 package com.liferay.adaptive.media.web.internal.background.task;
 
 import com.liferay.adaptive.media.image.optimizer.AdaptiveMediaImageOptimizerUtil;
+import com.liferay.adaptive.media.web.constants.OptimizeImagesBackgroundTaskConstants;
 import com.liferay.portal.kernel.backgroundtask.BackgroundTaskExecutor;
 
 /**
