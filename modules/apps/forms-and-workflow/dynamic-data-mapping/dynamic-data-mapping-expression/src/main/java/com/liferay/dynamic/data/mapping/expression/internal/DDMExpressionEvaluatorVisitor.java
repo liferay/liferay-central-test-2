@@ -14,35 +14,35 @@
 
 package com.liferay.dynamic.data.mapping.expression.internal;
 
-import static com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.AdditionExpressionContext;
-import static com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.AndExpressionContext;
-import static com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.BooleanParenthesisContext;
-import static com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.DivisionExpressionContext;
-import static com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.EqualsExpressionContext;
-import static com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.ExpressionContext;
-import static com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.FloatingPointLiteralContext;
-import static com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.FunctionCallExpressionContext;
-import static com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.FunctionParametersContext;
-import static com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.GreaterThanExpressionContext;
-import static com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.GreaterThanOrEqualsExpressionContext;
-import static com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.IntegerLiteralContext;
-import static com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.LessThanExpressionContext;
-import static com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.LessThanOrEqualsExpressionContext;
-import static com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.LogicalConstantContext;
-import static com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.LogicalVariableContext;
-import static com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.MinusExpressionContext;
-import static com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.MultiplicationExpressionContext;
-import static com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.NotEqualsExpressionContext;
-import static com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.NotExpressionContext;
-import static com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.NumericParenthesisContext;
-import static com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.NumericVariableContext;
-import static com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.OrExpressionContext;
-import static com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.StringLiteralContext;
-import static com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.SubtractionExpressionContext;
-
 import com.liferay.dynamic.data.mapping.expression.DDMExpressionFunction;
 import com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionBaseVisitor;
 import com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser;
+import com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.AdditionExpressionContext;
+import com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.AndExpressionContext;
+import com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.BooleanParenthesisContext;
+import com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.DivisionExpressionContext;
+import com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.EqualsExpressionContext;
+import com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.ExpressionContext;
+import com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.FloatingPointLiteralContext;
+import com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.FunctionCallExpressionContext;
+import com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.FunctionParametersContext;
+import com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.GreaterThanExpressionContext;
+import com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.GreaterThanOrEqualsExpressionContext;
+import com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.IntegerLiteralContext;
+import com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.LessThanExpressionContext;
+import com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.LessThanOrEqualsExpressionContext;
+import com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.LogicalConstantContext;
+import com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.LogicalVariableContext;
+import com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.MinusExpressionContext;
+import com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.MultiplicationExpressionContext;
+import com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.NotEqualsExpressionContext;
+import com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.NotExpressionContext;
+import com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.NumericParenthesisContext;
+import com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.NumericVariableContext;
+import com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.OrExpressionContext;
+import com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.StringLiteralContext;
+import com.liferay.dynamic.data.mapping.expression.internal.parser.DDMExpressionParser.SubtractionExpressionContext;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.util.ArrayList;
@@ -75,10 +75,19 @@ public class DDMExpressionEvaluatorVisitor
 	public Object visitAdditionExpression(
 		@NotNull AdditionExpressionContext context) {
 
-		Number l = visitChild(context, 0);
-		Number r = visitChild(context, 2);
+		try {
+			Number l = visitChild(context, 0);
+			Number r = visitChild(context, 2);
 
-		return l.doubleValue() + r.doubleValue();
+			if (l instanceof Integer && r instanceof Integer) {
+				return l.intValue() + r.intValue();
+			}
+
+			return l.doubleValue() + r.doubleValue();
+		}
+		catch (ClassCastException cce) {
+			return StringPool.BLANK;
+		}
 	}
 
 	@Override
@@ -100,10 +109,19 @@ public class DDMExpressionEvaluatorVisitor
 	public Object visitDivisionExpression(
 		@NotNull DivisionExpressionContext context) {
 
-		Number l = visitChild(context, 0);
-		Number r = visitChild(context, 2);
+		try {
+			Number l = visitChild(context, 0);
+			Number r = visitChild(context, 2);
 
-		return l.doubleValue() / r.doubleValue();
+			if (l instanceof Integer && r instanceof Integer) {
+				return l.intValue() / r.intValue();
+			}
+
+			return l.doubleValue() / r.doubleValue();
+		}
+		catch (ClassCastException cce) {
+			return StringPool.BLANK;
+		}
 	}
 
 	@Override
@@ -154,47 +172,87 @@ public class DDMExpressionEvaluatorVisitor
 	public Object visitGreaterThanExpression(
 		@NotNull GreaterThanExpressionContext context) {
 
-		Number l = visitChild(context, 0);
-		Number r = visitChild(context, 2);
+		try {
+			Number l = visitChild(context, 0);
+			Number r = visitChild(context, 2);
 
-		return l.doubleValue() > r.doubleValue();
+			if (l instanceof Integer && r instanceof Integer) {
+				return l.intValue() > r.intValue();
+			}
+
+			return l.doubleValue() > r.doubleValue();
+		}
+		catch (ClassCastException cce) {
+			return StringPool.BLANK;
+		}
 	}
 
 	@Override
 	public Object visitGreaterThanOrEqualsExpression(
 		@NotNull GreaterThanOrEqualsExpressionContext context) {
 
-		Number l = visitChild(context, 0);
-		Number r = visitChild(context, 2);
+		try {
+			Number l = visitChild(context, 0);
+			Number r = visitChild(context, 2);
 
-		return l.doubleValue() >= r.doubleValue();
+			if (l instanceof Integer && r instanceof Integer) {
+				return l.intValue() >= r.intValue();
+			}
+
+			return l.doubleValue() >= r.doubleValue();
+		}
+		catch (ClassCastException cce) {
+			return StringPool.BLANK;
+		}
 	}
 
 	@Override
 	public Object visitIntegerLiteral(@NotNull IntegerLiteralContext context) {
 		Number number = Long.parseLong(context.getText());
 
-		return number.doubleValue();
+		if (number.longValue() > Integer.MAX_VALUE) {
+			return number.longValue();
+		}
+
+		return number.intValue();
 	}
 
 	@Override
 	public Object visitLessThanExpression(
 		@NotNull LessThanExpressionContext context) {
 
-		Number l = visitChild(context, 0);
-		Number r = visitChild(context, 2);
+		try {
+			Number l = visitChild(context, 0);
+			Number r = visitChild(context, 2);
 
-		return l.doubleValue() < r.doubleValue();
+			if (l instanceof Integer && r instanceof Integer) {
+				return l.intValue() < r.intValue();
+			}
+
+			return l.doubleValue() < r.doubleValue();
+		}
+		catch (ClassCastException cce) {
+			return StringPool.BLANK;
+		}
 	}
 
 	@Override
 	public Object visitLessThanOrEqualsExpression(
 		@NotNull LessThanOrEqualsExpressionContext context) {
 
-		Number l = visitChild(context, 0);
-		Number r = visitChild(context, 2);
+		try {
+			Number l = visitChild(context, 0);
+			Number r = visitChild(context, 2);
 
-		return l.doubleValue() <= r.doubleValue();
+			if (l instanceof Integer && r instanceof Integer) {
+				return l.intValue() <= r.intValue();
+			}
+
+			return l.doubleValue() <= r.doubleValue();
+		}
+		catch (ClassCastException cce) {
+			return StringPool.BLANK;
+		}
 	}
 
 	@Override
@@ -226,19 +284,37 @@ public class DDMExpressionEvaluatorVisitor
 	public Object visitMinusExpression(
 		@NotNull MinusExpressionContext context) {
 
-		Number number = visitChild(context, 1);
+		try {
+			Number number = visitChild(context, 1);
 
-		return -(number.doubleValue());
+			if (number instanceof Integer) {
+				return -(number.intValue());
+			}
+
+			return -(number.doubleValue());
+		}
+		catch (ClassCastException cce) {
+			return StringPool.BLANK;
+		}
 	}
 
 	@Override
 	public Object visitMultiplicationExpression(
 		@NotNull MultiplicationExpressionContext context) {
 
-		Number l = visitChild(context, 0);
-		Number r = visitChild(context, 2);
+		try {
+			Number l = visitChild(context, 0);
+			Number r = visitChild(context, 2);
 
-		return l.doubleValue() * r.doubleValue();
+			if (l instanceof Integer && r instanceof Integer) {
+				return l.intValue() * r.intValue();
+			}
+
+			return l.doubleValue() * r.doubleValue();
+		}
+		catch (ClassCastException cce) {
+			return StringPool.BLANK;
+		}
 	}
 
 	@Override
@@ -298,10 +374,19 @@ public class DDMExpressionEvaluatorVisitor
 	public Object visitSubtractionExpression(
 		@NotNull SubtractionExpressionContext context) {
 
-		Number l = visitChild(context, 0);
-		Number r = visitChild(context, 2);
+		try {
+			Number l = visitChild(context, 0);
+			Number r = visitChild(context, 2);
 
-		return l.doubleValue() - r.doubleValue();
+			if (l instanceof Integer && r instanceof Integer) {
+				return l.intValue() - r.intValue();
+			}
+
+			return l.doubleValue() - r.doubleValue();
+		}
+		catch (ClassCastException cce) {
+			return StringPool.BLANK;
+		}
 	}
 
 	protected String getFunctionName(Token functionNameToken) {
