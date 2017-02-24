@@ -102,11 +102,7 @@ public class ImageAdaptiveMediaConfigurationEntryParser {
 			sb.append(width);
 		}
 
-		if ((properties.get("max-height") != null) ||
-			(properties.get("max-width") != null)) {
-
-			sb.append(StringPool.COLON);
-		}
+		sb.append(StringPool.COLON);
 
 		sb.append("enabled=");
 		sb.append(String.valueOf(configurationEntry.isEnabled()));

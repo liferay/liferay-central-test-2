@@ -16,6 +16,7 @@ package com.liferay.adaptive.media.image.internal.configuration;
 
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -121,6 +122,19 @@ public class ImageAdaptiveMediaConfigurationEntryParserTest {
 	}
 
 	@Test
+	public void testGetConfigurationStringWithNoProperties() {
+		ImageAdaptiveMediaConfigurationEntry configurationEntry =
+			new ImageAdaptiveMediaConfigurationEntryImpl(
+				"test", "12345", Collections.emptyMap());
+
+		String configurationString =
+			_configurationEntryParser.getConfigurationString(
+				configurationEntry);
+
+		Assert.assertEquals("test:12345::enabled=true", configurationString);
+	}
+
+	@Test
 	public void testGetDisabledConfigurationStringWithMaxHeight() {
 		Map<String, String> properties = new HashMap<>();
 
@@ -179,7 +193,7 @@ public class ImageAdaptiveMediaConfigurationEntryParserTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testInvalidEnabledAttribute() {
 		_configurationEntryParser.parse(
-			"test::max-height=100;max-width=200:disabled=true");
+			"test:12345:max-height=100;max-width=200:disabled=true");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
