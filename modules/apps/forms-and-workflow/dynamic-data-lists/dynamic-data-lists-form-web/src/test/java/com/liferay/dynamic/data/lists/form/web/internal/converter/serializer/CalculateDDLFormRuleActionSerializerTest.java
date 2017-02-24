@@ -88,7 +88,7 @@ public class CalculateDDLFormRuleActionSerializerTest extends PowerMockito {
 		mockStatic(ServiceContextThreadLocal.class);
 
 		when(
-			ServiceContextThreadLocal.popServiceContext()
+			ServiceContextThreadLocal.getServiceContext()
 		).thenReturn(
 			_serviceContext
 		);
