@@ -23,7 +23,7 @@ import java.util.function.Function;
 /**
  * @author Adolfo Pérez
  */
-public class AdaptiveMediaConfigurationPropertiesComparator<S, T>
+public class AdaptiveMediaConfigurationPropertiesComparator<T>
 	implements Comparator<Map<String, String>> {
 
 	public AdaptiveMediaConfigurationPropertiesComparator(

@@ -19,7 +19,6 @@ import com.liferay.adaptive.media.document.library.repository.internal.util.comp
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
 import com.liferay.adaptive.media.image.constants.ImageAdaptiveMediaConstants;
-import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
 import com.liferay.adaptive.media.image.service.AdaptiveMediaImageLocalService;
 import com.liferay.document.library.kernel.service.DLAppLocalService;
 import com.liferay.document.library.kernel.store.DLStoreUtil;
@@ -144,17 +143,14 @@ public class AdaptiveMediaThumbnailsOSGiCommands {
 					_configurationHelper.
 						getImageAdaptiveMediaConfigurationEntries(companyId);
 
-			AdaptiveMediaConfigurationPropertiesComparator
-				<ImageAdaptiveMediaProcessor, Integer>
-					widthComparator = ComparatorUtil.distanceTo(
-						"max-width",
-						PropsValues.DL_FILE_ENTRY_THUMBNAIL_MAX_WIDTH);
+			AdaptiveMediaConfigurationPropertiesComparator<Integer>
+				widthComparator = ComparatorUtil.distanceTo(
+					"max-width", PropsValues.DL_FILE_ENTRY_THUMBNAIL_MAX_WIDTH);
 
-			AdaptiveMediaConfigurationPropertiesComparator
-				<ImageAdaptiveMediaProcessor, Integer>
-					heightComparator = ComparatorUtil.distanceTo(
-						"max-height",
-						PropsValues.DL_FILE_ENTRY_THUMBNAIL_MAX_HEIGHT);
+			AdaptiveMediaConfigurationPropertiesComparator<Integer>
+				heightComparator = ComparatorUtil.distanceTo(
+					"max-height",
+					PropsValues.DL_FILE_ENTRY_THUMBNAIL_MAX_HEIGHT);
 
 			Optional<ImageAdaptiveMediaConfigurationEntry>
 				configurationEntryOptional =

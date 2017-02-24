@@ -19,9 +19,8 @@ package com.liferay.adaptive.media.document.library.repository.internal.util.com
  */
 public class ComparatorUtil {
 
-	public static final <S>
-		AdaptiveMediaConfigurationPropertiesComparator<S, Integer> distanceTo(
-			String attributeName, int value) {
+	public static final AdaptiveMediaConfigurationPropertiesComparator<Integer>
+		distanceTo(String attributeName, int value) {
 
 		return new AdaptiveMediaConfigurationPropertiesComparator<>(
 			attributeName, (s) -> Math.abs(Integer.parseInt(s) - value),
