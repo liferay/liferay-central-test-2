@@ -43,6 +43,8 @@ public class KaleoDefinitionLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException {
 
+		// Kaleo definition
+
 		KaleoDefinition kaleoDefinition =
 			kaleoDefinitionPersistence.findByPrimaryKey(kaleoDefinitionId);
 
@@ -67,6 +69,8 @@ public class KaleoDefinitionLocalServiceImpl
 			long kaleoDefinitionId, ServiceContext serviceContext)
 		throws PortalException {
 
+		// Kaleo definition
+
 		KaleoDefinition kaleoDefinition =
 			kaleoDefinitionPersistence.findByPrimaryKey(kaleoDefinitionId);
 
@@ -85,6 +89,8 @@ public class KaleoDefinitionLocalServiceImpl
 	public void activateKaleoDefinition(
 			String name, int version, ServiceContext serviceContext)
 		throws PortalException {
+
+		// Kaleo definition
 
 		KaleoDefinition kaleoDefinition =
 			kaleoDefinitionPersistence.fetchByC_N_V(
@@ -111,6 +117,8 @@ public class KaleoDefinitionLocalServiceImpl
 			String name, String title, String description, String content,
 			int version, ServiceContext serviceContext)
 		throws PortalException {
+
+		// Kaleo definition
 
 		User user = userLocalService.getUser(serviceContext.getGuestOrUserId());
 		Date now = new Date();
@@ -419,6 +427,8 @@ public class KaleoDefinitionLocalServiceImpl
 			ServiceContext serviceContext, KaleoDefinition kaleoDefinition)
 		throws PortalException {
 
+		// Kaleo definition
+
 		User user = userLocalService.getUser(serviceContext.getGuestOrUserId());
 		Date now = new Date();
 
@@ -455,6 +465,8 @@ public class KaleoDefinitionLocalServiceImpl
 			String name, int version, String title,
 			ServiceContext serviceContext)
 		throws PortalException {
+
+		// Kaleo definition
 
 		KaleoDefinition kaleoDefinition =
 			kaleoDefinitionPersistence.findByC_N_V(
