@@ -18,7 +18,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.workflow.WorkflowException;
-import com.liferay.portal.workflow.rest.internal.helper.PortalWorkflowRestDisplayContext;
+import com.liferay.portal.workflow.rest.internal.helper.WorkflowRestDisplayContext;
 import com.liferay.portal.workflow.rest.internal.model.WorkflowOperationResultModel;
 import com.liferay.portal.workflow.rest.internal.model.WorkflowTaskModel;
 import com.liferay.portal.workflow.rest.internal.model.WorkflowTaskTransitionOperationModel;
@@ -54,7 +54,7 @@ public class WorkflowTaskResource {
 			@PathParam("workflowTaskId") long workflowTaskId)
 		throws PortalException {
 
-		return _portalWorkflowRestDisplayContext.getWorkflowTaskModel(
+		return _workflowRestDisplayContext.getWorkflowTaskModel(
 			company.getCompanyId(), user.getUserId(), workflowTaskId, locale);
 	}
 
@@ -69,7 +69,7 @@ public class WorkflowTaskResource {
 		WorkflowTaskTransitionOperationModel operation) {
 
 		try {
-			_portalWorkflowRestDisplayContext.completeWorkflowTask(
+			_workflowRestDisplayContext.completeWorkflowTask(
 				company.getCompanyId(), user.getUserId(), workflowTaskId,
 				operation);
 
@@ -100,6 +100,6 @@ public class WorkflowTaskResource {
 	}
 
 	@Reference
-	private PortalWorkflowRestDisplayContext _portalWorkflowRestDisplayContext;
+	private WorkflowRestDisplayContext _workflowRestDisplayContext;
 
 }

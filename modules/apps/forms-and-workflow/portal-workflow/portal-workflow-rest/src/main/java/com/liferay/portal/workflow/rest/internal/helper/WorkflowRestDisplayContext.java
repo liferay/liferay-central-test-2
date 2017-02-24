@@ -50,8 +50,8 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * @author Adam Brandizzi
  */
-@Component(immediate = true, service = PortalWorkflowRestDisplayContext.class)
-public class PortalWorkflowRestDisplayContext {
+@Component(immediate = true, service = WorkflowRestDisplayContext.class)
+public class WorkflowRestDisplayContext {
 
 	public WorkflowTask completeWorkflowTask(
 			long companyId, long userId, long workflowTaskId,

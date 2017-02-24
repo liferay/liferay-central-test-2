@@ -34,7 +34,7 @@ import org.osgi.service.component.annotations.Reference;
  */
 @ApplicationPath("/workflow")
 @Component(immediate = true, service = Application.class)
-public class PortalWorkflowRestApplication extends Application {
+public class WorkflowRestApplication extends Application {
 
 	@Override
 	public Set<Class<?>> getClasses() {

@@ -19,7 +19,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.workflow.WorkflowTask;
 import com.liferay.portal.kernel.workflow.WorkflowTaskManager;
-import com.liferay.portal.workflow.rest.internal.helper.PortalWorkflowRestDisplayContext;
+import com.liferay.portal.workflow.rest.internal.helper.WorkflowRestDisplayContext;
 import com.liferay.portal.workflow.rest.internal.model.WorkflowListedTaskModel;
 
 import java.util.ArrayList;
@@ -56,7 +56,7 @@ public class WorkflowListedTaskResource {
 
 		for (WorkflowTask workflowTask : workflowTasks) {
 			WorkflowListedTaskModel workflowTaskModel =
-				_portalWorkflowRestDisplayContext.getWorkflowListedTaskModel(
+				_workflowRestDisplayContext.getWorkflowListedTaskModel(
 					user.getCompanyId(), workflowTask, locale);
 
 			workflowTaskModels.add(workflowTaskModel);
@@ -66,7 +66,7 @@ public class WorkflowListedTaskResource {
 	}
 
 	@Reference
-	private PortalWorkflowRestDisplayContext _portalWorkflowRestDisplayContext;
+	private WorkflowRestDisplayContext _workflowRestDisplayContext;
 
 	@Reference
 	private WorkflowTaskManager _workflowTaskManager;
