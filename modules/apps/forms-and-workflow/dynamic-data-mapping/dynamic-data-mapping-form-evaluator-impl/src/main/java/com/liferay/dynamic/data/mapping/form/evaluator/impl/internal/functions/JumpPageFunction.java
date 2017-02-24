@@ -33,10 +33,10 @@ public class JumpPageFunction implements DDMExpressionFunction {
 			throw new IllegalArgumentException("Two parameters are expected");
 		}
 
-		Double fromPageIndex = (Double)parameters[0];
-		Double toPageIndex = (Double)parameters[1];
+		Integer fromPageIndex = (Integer)parameters[0];
+		Integer toPageIndex = (Integer)parameters[1];
 
-		_pageFlow.put(fromPageIndex.intValue(), toPageIndex.intValue());
+		_pageFlow.put(fromPageIndex, toPageIndex);
 
 		return true;
 	}
