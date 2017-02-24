@@ -34,8 +34,8 @@ public class WorkflowTaskModel {
 		_dueDate = null;
 		_name = null;
 		_state = null;
-		_user = null;
 		_transitions = null;
+		_user = null;
 		_workflowTaskId = 0;
 	}
 
@@ -49,8 +49,8 @@ public class WorkflowTaskModel {
 		_name = workflowTask.getName();
 		_state = state;
 		_transitions = transitions;
-		_workflowTaskId = workflowTask.getWorkflowTaskId();
 		_user = userModel;
+		_workflowTaskId = workflowTask.getWorkflowTaskId();
 	}
 
 	@XmlElement

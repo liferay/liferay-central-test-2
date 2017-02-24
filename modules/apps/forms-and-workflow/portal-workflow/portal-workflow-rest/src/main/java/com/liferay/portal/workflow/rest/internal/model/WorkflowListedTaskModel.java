@@ -28,9 +28,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class WorkflowListedTaskModel {
 
 	public WorkflowListedTaskModel() {
-		_name = null;
 		_description = null;
 		_dueDate = null;
+		_name = null;
 		_state = null;
 		_user = null;
 		_workflowTaskId = 0;
@@ -39,12 +39,12 @@ public class WorkflowListedTaskModel {
 	public WorkflowListedTaskModel(
 		WorkflowTask workflowTask, WorkflowUserModel userModel, String state) {
 
-		_name = workflowTask.getName();
 		_description = workflowTask.getDescription();
 		_dueDate = workflowTask.getDueDate();
+		_name = workflowTask.getName();
 		_state = state;
-		_workflowTaskId = workflowTask.getWorkflowTaskId();
 		_user = userModel;
+		_workflowTaskId = workflowTask.getWorkflowTaskId();
 	}
 
 	@XmlElement
