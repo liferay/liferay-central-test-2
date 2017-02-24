@@ -17,6 +17,7 @@ package com.liferay.adaptive.media.image.internal.util;
 import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.constants.ImageAdaptiveMediaConstants;
+import com.liferay.adaptive.media.image.internal.processor.util.TiffOrientationTransformer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.image.ImageToolUtil;
 import com.liferay.portal.kernel.repository.model.FileVersion;
@@ -28,9 +29,11 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Adolfo Pérez
@@ -50,7 +53,15 @@ public class ImageProcessor {
 		ImageAdaptiveMediaConfigurationEntry configurationEntry) {
 
 		try (InputStream is = fileVersion.getContentStream(false)) {
+			Optional<Integer> tiffOrientationValueOptional =
+				_getTiffOrientationValue(fileVersion);
+
 			RenderedImage renderedImage = RenderedImageUtil.readImage(is);
+
+			if (tiffOrientationValueOptional.isPresent()) {
+				renderedImage = _tiffOrientationTransformer.transform(
+					renderedImage, tiffOrientationValueOptional.get());
+			}
 
 			Map<String, String> properties = configurationEntry.getProperties();
 
@@ -63,5 +74,17 @@ public class ImageProcessor {
 			throw new AdaptiveMediaRuntimeException.IOException(e);
 		}
 	}
+
+	private Optional<Integer> _getTiffOrientationValue(FileVersion fileVersion)
+		throws IOException, PortalException {
+
+		try (InputStream inputStream = fileVersion.getContentStream(false)) {
+			return _tiffOrientationTransformer.getTiffOrientationValue(
+				inputStream);
+		}
+	}
+
+	@Reference
+	private TiffOrientationTransformer _tiffOrientationTransformer;
 
 }

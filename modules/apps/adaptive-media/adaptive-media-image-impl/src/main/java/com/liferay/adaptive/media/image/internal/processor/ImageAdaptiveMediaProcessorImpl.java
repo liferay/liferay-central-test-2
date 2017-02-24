@@ -17,7 +17,6 @@ package com.liferay.adaptive.media.image.internal.processor;
 import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
-import com.liferay.adaptive.media.image.internal.processor.util.TiffOrientationTransformer;
 import com.liferay.adaptive.media.image.internal.util.ImageProcessor;
 import com.liferay.adaptive.media.image.internal.util.RenderedImageUtil;
 import com.liferay.adaptive.media.image.model.AdaptiveMediaImage;
@@ -31,7 +30,6 @@ import com.liferay.portal.kernel.repository.model.FileVersion;
 import java.awt.image.RenderedImage;
 
 import java.io.IOException;
-import java.io.InputStream;
 
 import java.util.Optional;
 
@@ -110,16 +108,7 @@ public final class ImageAdaptiveMediaProcessorImpl
 		RenderedImage renderedImage = _imageProcessor.scaleImage(
 			fileVersion, configurationEntry);
 
-		try (InputStream inputStream = fileVersion.getContentStream(false)) {
-			Optional<Integer> orientationValueOptional =
-				_tiffOrientationTransformer.getTiffOrientationValue(
-					inputStream);
-
-			if (orientationValueOptional.isPresent()) {
-				renderedImage = _tiffOrientationTransformer.transform(
-					renderedImage, orientationValueOptional.get());
-			}
-
+		try {
 			byte[] bytes = RenderedImageUtil.getRenderedImageContentStream(
 				renderedImage, fileVersion.getMimeType());
 
@@ -152,16 +141,8 @@ public final class ImageAdaptiveMediaProcessorImpl
 		_imageProcessor = imageProcessor;
 	}
 
-	@Reference(unbind = "-")
-	public void setTiffOrientationTransformer(
-		TiffOrientationTransformer tiffOrientationTransformer) {
-
-		_tiffOrientationTransformer = tiffOrientationTransformer;
-	}
-
 	private ImageAdaptiveMediaConfigurationHelper _configurationHelper;
 	private AdaptiveMediaImageLocalService _imageLocalService;
 	private ImageProcessor _imageProcessor;
-	private TiffOrientationTransformer _tiffOrientationTransformer;
 
 }
