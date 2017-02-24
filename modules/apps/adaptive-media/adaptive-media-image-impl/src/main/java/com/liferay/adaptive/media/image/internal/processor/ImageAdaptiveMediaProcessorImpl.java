@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.repository.model.FileVersion;
 import java.awt.image.RenderedImage;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 import java.util.Optional;
 
@@ -109,10 +110,10 @@ public final class ImageAdaptiveMediaProcessorImpl
 		RenderedImage renderedImage = _imageProcessor.scaleImage(
 			fileVersion, configurationEntry);
 
-		try {
+		try (InputStream inputStream = fileVersion.getContentStream(false)) {
 			Optional<Integer> orientationValueOptional =
 				_tiffOrientationTransformer.getTiffOrientationValue(
-					fileVersion.getContentStream(false));
+					inputStream);
 
 			if (orientationValueOptional.isPresent()) {
 				renderedImage = _tiffOrientationTransformer.transform(
