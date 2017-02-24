@@ -296,6 +296,8 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 
 			String id = ImageAdaptiveMediaTestUtil.getRandomUuid();
 
+			jsonObject.addProperty("enabled", true);
+
 			jsonObject.addProperty("name", id + " Size");
 
 			jsonObject.addProperty("id", id);

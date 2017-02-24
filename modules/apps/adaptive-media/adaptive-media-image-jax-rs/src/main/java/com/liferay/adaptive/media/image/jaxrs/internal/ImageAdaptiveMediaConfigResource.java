@@ -70,7 +70,8 @@ public class ImageAdaptiveMediaConfigResource {
 
 		if ((configRepr == null) ||
 			MapUtil.isEmpty(configRepr.getProperties()) ||
-			Validator.isNull(configRepr.getName())) {
+			Validator.isNull(configRepr.getName()) ||
+			Validator.isNull(configRepr.isEnabled())) {
 
 			throw new BadRequestException();
 		}
@@ -82,6 +83,15 @@ public class ImageAdaptiveMediaConfigResource {
 		try {
 			_configurationHelper.addImageAdaptiveMediaConfigurationEntry(
 				_companyId, configRepr.getName(), id, properties);
+
+			if (configRepr.isEnabled()) {
+				_configurationHelper.enableImageAdaptiveMediaConfigurationEntry(
+					_companyId, id);
+			}
+			else {
+				_configurationHelper.
+					disableImageAdaptiveMediaConfigurationEntry(_companyId, id);
+			}
 		}
 		catch (IOException | ImageAdaptiveMediaConfigurationException e) {
 			throw new InternalServerErrorException();
