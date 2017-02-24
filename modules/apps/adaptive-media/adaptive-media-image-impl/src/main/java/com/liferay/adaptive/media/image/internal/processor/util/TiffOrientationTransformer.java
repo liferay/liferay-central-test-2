@@ -20,6 +20,8 @@ import com.drew.metadata.Metadata;
 import com.drew.metadata.MetadataException;
 import com.drew.metadata.exif.ExifIFD0Directory;
 
+import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
+import com.liferay.adaptive.media.image.internal.util.RenderedImageUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -38,6 +40,7 @@ import java.io.InputStream;
 
 import java.util.Hashtable;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 import org.osgi.service.component.annotations.Component;
 
@@ -47,35 +50,31 @@ import org.osgi.service.component.annotations.Component;
 @Component(immediate = true, service = TiffOrientationTransformer.class)
 public class TiffOrientationTransformer {
 
-	public Optional<Integer> getTiffOrientationValue(InputStream inputStream)
+	public RenderedImage transform(Supplier<InputStream> inputStreamSupplier)
 		throws PortalException {
 
 		try {
-			Metadata metadata = ImageMetadataReader.readMetadata(inputStream);
+			Optional<Integer> tiffOrientationValueOptional =
+				_getTiffOrientationValue(inputStreamSupplier);
 
-			ExifIFD0Directory exifIFD0Directory =
-				metadata.getFirstDirectoryOfType(ExifIFD0Directory.class);
-
-			if ((exifIFD0Directory == null) ||
-				!exifIFD0Directory.containsTag(
-					ExifIFD0Directory.TAG_ORIENTATION)) {
-
-				return Optional.empty();
+			if (tiffOrientationValueOptional.isPresent()) {
+				return _doTransform(
+					inputStreamSupplier, tiffOrientationValueOptional.get());
 			}
 
-			return Optional.of(
-				exifIFD0Directory.getInt(ExifIFD0Directory.TAG_ORIENTATION));
+			return RenderedImageUtil.readImage(inputStreamSupplier.get());
 		}
-		catch (ImageProcessingException | IOException | MetadataException e) {
-			_log.error(e, e);
+		catch (IOException ioe) {
+			throw new AdaptiveMediaRuntimeException.IOException(ioe);
 		}
-
-		return Optional.empty();
 	}
 
-	public RenderedImage transform(
-			RenderedImage renderedImage, int tiffOrientationValue)
-		throws PortalException {
+	private RenderedImage _doTransform(
+			Supplier<InputStream> inputStreamSupplier, int tiffOrientationValue)
+		throws IOException {
+
+		RenderedImage renderedImage = RenderedImageUtil.readImage(
+			inputStreamSupplier.get());
 
 		if (tiffOrientationValue == _ORIENTATION_VALUE_HORIZONTAL_NORMAL) {
 			return renderedImage;
@@ -165,6 +164,33 @@ public class TiffOrientationTransformer {
 		renderedImage.copyData(writableRaster);
 
 		return bufferedImage;
+	}
+
+	private Optional<Integer> _getTiffOrientationValue(
+			Supplier<InputStream> inputStreamSupplier)
+		throws PortalException {
+
+		try (InputStream inputStream = inputStreamSupplier.get()) {
+			Metadata metadata = ImageMetadataReader.readMetadata(inputStream);
+
+			ExifIFD0Directory exifIFD0Directory =
+				metadata.getFirstDirectoryOfType(ExifIFD0Directory.class);
+
+			if ((exifIFD0Directory == null) ||
+				!exifIFD0Directory.containsTag(
+					ExifIFD0Directory.TAG_ORIENTATION)) {
+
+				return Optional.empty();
+			}
+
+			return Optional.of(
+				exifIFD0Directory.getInt(ExifIFD0Directory.TAG_ORIENTATION));
+		}
+		catch (ImageProcessingException | IOException | MetadataException e) {
+			_log.error(e, e);
+		}
+
+		return Optional.empty();
 	}
 
 	private RenderedImage _rotate(RenderedImage renderedImage, int degrees) {
