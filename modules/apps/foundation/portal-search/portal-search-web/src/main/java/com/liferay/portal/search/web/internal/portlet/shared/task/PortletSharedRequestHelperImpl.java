@@ -46,8 +46,8 @@ public class PortletSharedRequestHelperImpl
 	@Override
 	public String getCompleteURL(RenderRequest renderRequest) {
 
-		// Must use HttpUtil, instead of @Reference Http
-		// otherwise Component remains undeployed, with no stack trace.
+		// Must use HttpUtil instead of @Reference Http, otherwise, the
+		// component remains undeployed, with no stack trace
 
 		String urlString = HttpUtil.getCompleteURL(
 			getSharedRequest(renderRequest));
