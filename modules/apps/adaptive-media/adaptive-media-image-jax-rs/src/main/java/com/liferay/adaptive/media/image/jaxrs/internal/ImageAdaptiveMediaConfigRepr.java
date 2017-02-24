@@ -42,6 +42,8 @@ public class ImageAdaptiveMediaConfigRepr {
 		_name = configurationEntry.getName();
 
 		_uuid = configurationEntry.getUUID();
+
+		_enabled = configurationEntry.isEnabled();
 	}
 
 	@JsonAnySetter
@@ -63,6 +65,14 @@ public class ImageAdaptiveMediaConfigRepr {
 		return _uuid;
 	}
 
+	public Boolean isEnabled() {
+		return _enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		_enabled = enabled;
+	}
+
 	public void setName(String name) {
 		_name = name;
 	}
@@ -71,6 +81,7 @@ public class ImageAdaptiveMediaConfigRepr {
 		_uuid = uuid;
 	}
 
+	private Boolean _enabled;
 	private String _name;
 	private final Map<String, String> _properties = new HashMap<>();
 	private String _uuid;
