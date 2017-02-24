@@ -14,6 +14,7 @@
 
 package com.liferay.portal.workflow.rest.internal.resource;
 
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.workflow.WorkflowTask;
@@ -50,7 +51,8 @@ public class WorkflowListedTaskResource {
 
 		List<WorkflowTask> workflowTasks =
 			_workflowTaskManager.getWorkflowTasksByUser(
-				user.getCompanyId(), user.getUserId(), false, -1, -1, null);
+				user.getCompanyId(), user.getUserId(), false, QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS, null);
 
 		for (WorkflowTask workflowTask : workflowTasks) {
 			WorkflowListedTaskModel workflowTaskModel =
