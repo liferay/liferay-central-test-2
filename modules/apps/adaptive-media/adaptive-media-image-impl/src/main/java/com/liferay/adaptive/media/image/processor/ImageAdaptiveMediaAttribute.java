@@ -66,6 +66,8 @@ public final class ImageAdaptiveMediaAttribute {
 		_allowedAttributes.put(
 			ImageAdaptiveMediaAttribute.IMAGE_WIDTH.getName(),
 			ImageAdaptiveMediaAttribute.IMAGE_WIDTH);
+
+		_allowedAttributes.putAll(AdaptiveMediaAttribute.allowedAttributes());
 	}
 
 }

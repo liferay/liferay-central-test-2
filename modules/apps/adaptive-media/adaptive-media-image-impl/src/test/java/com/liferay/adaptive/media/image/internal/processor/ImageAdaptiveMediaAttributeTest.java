@@ -14,8 +14,13 @@
 
 package com.liferay.adaptive.media.image.internal.processor;
 
+import com.liferay.adaptive.media.AdaptiveMediaAttribute;
 import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaAttribute;
+
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -24,6 +29,26 @@ import org.junit.Test;
  * @author Adolfo Pérez
  */
 public class ImageAdaptiveMediaAttributeTest {
+
+	@Test
+	public void testAllPublicAttributesAreSupported() {
+		Collection<AdaptiveMediaAttribute<?, ?>> publicAttributes =
+			Arrays.asList(
+				AdaptiveMediaAttribute.configurationUuid(),
+				AdaptiveMediaAttribute.contentLength(),
+				AdaptiveMediaAttribute.contentType(),
+				AdaptiveMediaAttribute.fileName(),
+				ImageAdaptiveMediaAttribute.IMAGE_HEIGHT,
+				ImageAdaptiveMediaAttribute.IMAGE_WIDTH);
+
+		Map<String, AdaptiveMediaAttribute<?, ?>> allowedAttributesMap =
+			ImageAdaptiveMediaAttribute.allowedAttributes();
+
+		Collection<AdaptiveMediaAttribute<?, ?>> allowedAttributes =
+			allowedAttributesMap.values();
+
+		Assert.assertTrue(allowedAttributes.containsAll(publicAttributes));
+	}
 
 	@Test(
 		expected = AdaptiveMediaRuntimeException.AdaptiveMediaAttributeFormatException.class
