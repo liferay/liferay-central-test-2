@@ -66,12 +66,13 @@ public class WorkflowTaskResource {
 		@Context Company company, @Context User user,
 		@Context HttpServletResponse response,
 		@PathParam("workflowTaskId") long workflowTaskId,
-		WorkflowTaskTransitionOperationModel operation) {
+		WorkflowTaskTransitionOperationModel
+			workflowTaskTransitionOperationModel) {
 
 		try {
 			_workflowRestDisplayContext.completeWorkflowTask(
 				company.getCompanyId(), user.getUserId(), workflowTaskId,
-				operation);
+				workflowTaskTransitionOperationModel);
 
 			return getSuccessWorkflowOperationResultModel();
 		}
