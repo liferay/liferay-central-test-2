@@ -44,13 +44,14 @@ public class WorkflowTaskModel {
 		WorkflowAssetModel workflowAssetModel, String state,
 		List<String> transitions) {
 
+		_workflowUserModel = workflowUserModel;
 		_workflowAssetModel = workflowAssetModel;
+
 		_description = workflowTask.getDescription();
 		_dueDate = workflowTask.getDueDate();
 		_name = workflowTask.getName();
 		_state = state;
 		_transitions = transitions;
-		_workflowUserModel = workflowUserModel;
 		_workflowTaskId = workflowTask.getWorkflowTaskId();
 	}
 
