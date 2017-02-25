@@ -72,7 +72,6 @@ public class WorkflowHelper {
 
 		WorkflowUserModel workflowUserModel = getWorkflowUserModel(
 			workflowTask);
-
 		String state = getState(
 			companyId, workflowTask.getWorkflowTaskId(), locale);
 
@@ -86,15 +85,11 @@ public class WorkflowHelper {
 
 		WorkflowTask workflowTask = _workflowTaskManager.getWorkflowTask(
 			companyId, workflowTaskId);
-
 		WorkflowUserModel workflowUserModel = getWorkflowUserModel(
 			workflowTask);
-
 		WorkflowAssetModel workflowAssetModel = getWorkflowAssetModel(
 			companyId, workflowTaskId, locale);
-
 		String state = getState(companyId, workflowTaskId, locale);
-
 		List<String> transitions = _workflowTaskManager.getNextTransitionNames(
 			companyId, userId, workflowTaskId);
 
