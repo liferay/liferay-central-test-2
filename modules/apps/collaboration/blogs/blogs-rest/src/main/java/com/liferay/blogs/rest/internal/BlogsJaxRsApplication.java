@@ -14,7 +14,7 @@
 
 package com.liferay.blogs.rest.internal;
 
-import com.liferay.blogs.rest.internal.resources.BlogsRootResource;
+import com.liferay.blogs.rest.internal.resource.BlogsRootResource;
 import com.liferay.portal.kernel.util.SetUtil;
 
 import java.util.Collections;

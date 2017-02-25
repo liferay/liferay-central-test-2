@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.blogs.rest.internal.resources;
+package com.liferay.blogs.rest.internal.resource;
 
 import com.liferay.blogs.model.BlogsEntry;
 import com.liferay.blogs.rest.internal.model.BlogsEntryModel;
