@@ -29,33 +29,33 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class WorkflowTaskModel {
 
 	public WorkflowTaskModel() {
-		_asset = null;
+		_workflowAssetModel = null;
 		_description = null;
 		_dueDate = null;
 		_name = null;
 		_state = null;
 		_transitions = null;
-		_user = null;
+		_workflowUserModel = null;
 		_workflowTaskId = 0;
 	}
 
 	public WorkflowTaskModel(
-		WorkflowTask workflowTask, WorkflowUserModel userModel,
-		WorkflowAssetModel assetModel, String state, List<String> transitions) {
+		WorkflowTask workflowTask, WorkflowUserModel workflowUserModel,
+		WorkflowAssetModel workflowAssetModel, String state, List<String> transitions) {
 
-		_asset = assetModel;
+		_workflowAssetModel = workflowAssetModel;
 		_description = workflowTask.getDescription();
 		_dueDate = workflowTask.getDueDate();
 		_name = workflowTask.getName();
 		_state = state;
 		_transitions = transitions;
-		_user = userModel;
+		_workflowUserModel = workflowUserModel;
 		_workflowTaskId = workflowTask.getWorkflowTaskId();
 	}
 
 	@XmlElement
-	public WorkflowAssetModel getAsset() {
-		return _asset;
+	public WorkflowAssetModel getWorkflowAssetModel() {
+		return _workflowAssetModel;
 	}
 
 	@XmlElement
@@ -84,8 +84,8 @@ public class WorkflowTaskModel {
 	}
 
 	@XmlElement
-	public WorkflowUserModel getUser() {
-		return _user;
+	public WorkflowUserModel getWorkflowUserModel() {
+		return _workflowUserModel;
 	}
 
 	@XmlElement
@@ -93,13 +93,13 @@ public class WorkflowTaskModel {
 		return _workflowTaskId;
 	}
 
-	private final WorkflowAssetModel _asset;
+	private final WorkflowAssetModel _workflowAssetModel;
 	private final String _description;
 	private final Date _dueDate;
 	private final String _name;
 	private final String _state;
 	private final List<String> _transitions;
-	private final WorkflowUserModel _user;
+	private final WorkflowUserModel _workflowUserModel;
 	private final long _workflowTaskId;
 
 }
