@@ -53,27 +53,31 @@ public class WorkflowHelper {
 
 	public WorkflowTask completeWorkflowTask(
 			long companyId, long userId, long workflowTaskId,
-			WorkflowTaskTransitionOperationModel operation)
+			WorkflowTaskTransitionOperationModel
+				workflowTaskTransitionOperationModel)
 		throws PortalException {
 
 		Map<String, Serializable> workflowContext = getWorkflowContext(
 			companyId, workflowTaskId);
 
 		return _workflowTaskManager.completeWorkflowTask(
-			companyId, userId, workflowTaskId, operation.getTransition(),
-			operation.getComment(), workflowContext);
+			companyId, userId, workflowTaskId,
+			workflowTaskTransitionOperationModel.getTransition(),
+			workflowTaskTransitionOperationModel.getComment(), workflowContext);
 	}
 
 	public WorkflowListedTaskModel getWorkflowListedTaskModel(
 			long companyId, WorkflowTask workflowTask, Locale locale)
 		throws PortalException {
 
-		WorkflowUserModel userModel = getWorkflowUserModel(workflowTask);
+		WorkflowUserModel workflowUserModel = getWorkflowUserModel(
+			workflowTask);
 
 		String state = getState(
 			companyId, workflowTask.getWorkflowTaskId(), locale);
 
-		return new WorkflowListedTaskModel(workflowTask, userModel, state);
+		return new WorkflowListedTaskModel(
+			workflowTask, workflowUserModel, state);
 	}
 
 	public WorkflowTaskModel getWorkflowTaskModel(
@@ -83,9 +87,10 @@ public class WorkflowHelper {
 		WorkflowTask workflowTask = _workflowTaskManager.getWorkflowTask(
 			companyId, workflowTaskId);
 
-		WorkflowUserModel userModel = getWorkflowUserModel(workflowTask);
+		WorkflowUserModel workflowUserModel = getWorkflowUserModel(
+			workflowTask);
 
-		WorkflowAssetModel assetModel = getWorkflowAssetModel(
+		WorkflowAssetModel workflowAssetModel = getWorkflowAssetModel(
 			companyId, workflowTaskId, locale);
 
 		String state = getState(companyId, workflowTaskId, locale);
@@ -94,7 +99,8 @@ public class WorkflowHelper {
 			companyId, userId, workflowTaskId);
 
 		return new WorkflowTaskModel(
-			workflowTask, userModel, assetModel, state, transitions);
+			workflowTask, workflowUserModel, workflowAssetModel, state,
+			transitions);
 	}
 
 	protected String getState(
@@ -165,11 +171,11 @@ public class WorkflowHelper {
 	protected WorkflowUserModel getWorkflowUserModel(WorkflowTask workflowTask)
 		throws PortalException {
 
-		User assignedUser = _userLocalService.fetchUser(
+		User user = _userLocalService.fetchUser(
 			workflowTask.getAssigneeUserId());
 
-		if (assignedUser != null) {
-			return new WorkflowUserModel(assignedUser);
+		if (user != null) {
+			return new WorkflowUserModel(user);
 		}
 
 		return null;
