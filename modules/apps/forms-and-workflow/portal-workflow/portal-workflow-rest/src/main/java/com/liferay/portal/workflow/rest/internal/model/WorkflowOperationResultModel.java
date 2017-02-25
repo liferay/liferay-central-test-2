@@ -23,9 +23,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class WorkflowOperationResultModel {
 
-	public static final String ERROR = "error";
+	public static final String STATUS_ERROR = "error";
 
-	public static final String SUCCESS = "success";
+	public static final String STATUS_SUCCESS = "success";
 
 	public WorkflowOperationResultModel() {
 	}

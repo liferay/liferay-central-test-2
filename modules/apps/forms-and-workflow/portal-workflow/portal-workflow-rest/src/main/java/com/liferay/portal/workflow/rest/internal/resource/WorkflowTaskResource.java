@@ -93,14 +93,14 @@ public class WorkflowTaskResource {
 		}
 
 		return new WorkflowOperationResultModel(
-			WorkflowOperationResultModel.ERROR, pe.getMessage());
+			WorkflowOperationResultModel.STATUS_ERROR, pe.getMessage());
 	}
 
 	protected WorkflowOperationResultModel
 		getSuccessWorkflowOperationResultModel() {
 
 		return new WorkflowOperationResultModel(
-			WorkflowOperationResultModel.SUCCESS);
+			WorkflowOperationResultModel.STATUS_SUCCESS);
 	}
 
 	@Reference
