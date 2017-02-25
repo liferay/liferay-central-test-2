@@ -49,7 +49,7 @@ public class WorkflowJaxRsApplication extends Application {
 
 	@Override
 	public Set<Object> getSingletons() {
-		HashSet<Object> singletons = new HashSet<>();
+		Set<Object> singletons = new HashSet<>();
 
 		singletons.add(_workflowListedTaskResource);
 		singletons.add(_workflowTaskResource);
