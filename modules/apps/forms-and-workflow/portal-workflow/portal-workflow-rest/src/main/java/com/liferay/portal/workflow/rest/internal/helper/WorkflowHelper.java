@@ -127,14 +127,15 @@ public class WorkflowHelper {
 
 		String className = GetterUtil.getString(
 			workflowContext.get(WorkflowConstants.CONTEXT_ENTRY_CLASS_NAME));
-		long classPK = GetterUtil.getLong(
-			workflowContext.get(WorkflowConstants.CONTEXT_ENTRY_CLASS_PK));
 
 		WorkflowHandler<?> workflowHandler =
 			WorkflowHandlerRegistryUtil.getWorkflowHandler(className);
 
 		AssetRendererFactory<?> assetRendererFactory =
 			workflowHandler.getAssetRendererFactory();
+
+		long classPK = GetterUtil.getLong(
+			workflowContext.get(WorkflowConstants.CONTEXT_ENTRY_CLASS_PK));
 
 		AssetEntry assetEntry = assetRendererFactory.getAssetEntry(
 			className, classPK);
