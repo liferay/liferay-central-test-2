@@ -29,14 +29,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class WorkflowTaskModel {
 
 	public WorkflowTaskModel() {
-		_workflowAssetModel = null;
 		_description = null;
 		_dueDate = null;
 		_name = null;
 		_state = null;
 		_transitions = null;
-		_workflowUserModel = null;
+		_workflowAssetModel = null;
 		_workflowTaskId = 0;
+		_workflowUserModel = null;
 	}
 
 	public WorkflowTaskModel(
