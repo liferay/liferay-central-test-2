@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.blogs.rest.internal;
+package com.liferay.blogs.rest.internal.application;
 
 import com.liferay.blogs.rest.internal.resource.BlogsRootResource;
 import com.liferay.portal.kernel.util.SetUtil;
