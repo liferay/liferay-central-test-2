@@ -73,15 +73,16 @@ public class WorkflowTaskResource {
 				company.getCompanyId(), user.getUserId(), workflowTaskId,
 				operation);
 
-			return getSuccessResult();
+			return getSuccessWorkflowOperationResultModel();
 		}
 		catch (PortalException pe) {
-			return getFailureResult(response, pe);
+			return getFailureWorkflowOperationResultModel(response, pe);
 		}
 	}
 
-	protected WorkflowOperationResultModel getFailureResult(
-		HttpServletResponse response, PortalException pe) {
+	protected WorkflowOperationResultModel
+		getFailureWorkflowOperationResultModel(
+			HttpServletResponse response, PortalException pe) {
 
 		if (pe instanceof WorkflowException) {
 			response.setStatus(HttpServletResponse.SC_CONFLICT);
@@ -94,7 +95,9 @@ public class WorkflowTaskResource {
 			WorkflowOperationResultModel.ERROR, pe.getMessage());
 	}
 
-	protected WorkflowOperationResultModel getSuccessResult() {
+	protected WorkflowOperationResultModel
+		getSuccessWorkflowOperationResultModel() {
+
 		return new WorkflowOperationResultModel(
 			WorkflowOperationResultModel.SUCCESS);
 	}
