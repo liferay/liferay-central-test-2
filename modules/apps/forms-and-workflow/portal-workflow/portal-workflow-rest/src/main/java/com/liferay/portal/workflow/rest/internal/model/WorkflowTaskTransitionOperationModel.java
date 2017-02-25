@@ -18,9 +18,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * {@link WorkflowTaskTransitionOperationModel} represents a transition
- * operation that can be applied to a task.
- *
  * @author Adam Brandizzi
  */
 @XmlRootElement
