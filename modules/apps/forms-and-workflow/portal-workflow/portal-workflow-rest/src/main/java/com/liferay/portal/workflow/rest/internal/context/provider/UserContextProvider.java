@@ -45,7 +45,7 @@ public class UserContextProvider implements ContextProvider<User> {
 		}
 		catch (PortalException pe) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Current user could not be retrieved", pe);
+				_log.warn("Unable to get user", pe);
 			}
 
 			return null;

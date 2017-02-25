@@ -45,7 +45,7 @@ public class CompanyContextProvider implements ContextProvider<Company> {
 		}
 		catch (PortalException pe) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Current company could not be retrieved", pe);
+				_log.warn("Unable to get company", pe);
 			}
 
 			return null;
