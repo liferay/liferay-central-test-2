@@ -51,7 +51,7 @@ public class PageContextWrapper extends PageContext {
 
 	@Override
 	public Object findAttribute(String name) {
-		if (_JSP_PAGECONTEXT_FORCE_GET_ATTRIBUTE) {
+		if (_JSP_PAGE_CONTEXT_FORCE_GET_ATTRIBUTE) {
 			return _pageContext.getAttribute(name);
 		}
 
@@ -242,9 +242,9 @@ public class PageContextWrapper extends PageContext {
 		_pageContext.setAttribute(name, value, scope);
 	}
 
-	private static final boolean _JSP_PAGECONTEXT_FORCE_GET_ATTRIBUTE =
+	private static final boolean _JSP_PAGE_CONTEXT_FORCE_GET_ATTRIBUTE =
 		GetterUtil.getBoolean(
-			PropsUtil.get(PropsKeys.JSP_PAGECONTEXT_FORCE_GET_ATTRIBUTE));
+			PropsUtil.get(PropsKeys.JSP_PAGE_CONTEXT_FORCE_GET_ATTRIBUTE));
 
 	private final PageContext _pageContext;
 
