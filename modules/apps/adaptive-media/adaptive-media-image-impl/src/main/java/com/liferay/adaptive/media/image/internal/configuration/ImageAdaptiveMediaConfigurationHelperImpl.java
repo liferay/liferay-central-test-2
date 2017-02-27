@@ -308,7 +308,7 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 				Map<String, String> properties)
 		throws ImageAdaptiveMediaConfigurationException, IOException {
 
-		deleteImageAdaptiveMediaConfigurationEntry(companyId, uuid);
+		forceDeleteImageAdaptiveMediaConfigurationEntry(companyId, uuid);
 		return addImageAdaptiveMediaConfigurationEntry(
 			companyId, name, uuid, properties);
 	}

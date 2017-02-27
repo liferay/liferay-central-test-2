@@ -250,7 +250,13 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 
 		responseJsonArray.forEach(
 			jsonElement -> {
-				String id = _getId(jsonElement.getAsJsonObject());
+				JsonObject jsonObject = jsonElement.getAsJsonObject();
+
+				jsonObject.addProperty("enabled", false);
+
+				_addConfiguration(jsonObject);
+
+				String id = _getId(jsonObject);
 
 				_getAuthenticatedInvocationBuilder(id).delete();
 			});
