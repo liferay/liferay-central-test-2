@@ -1047,7 +1047,7 @@ public class SchedulerEngineHelperImpl implements SchedulerEngineHelper {
 
 			ServiceRegistration<MessageListener>
 				messageListenerServiceRegistration =
-					_messageListenerServiceRegistrations.get(
+					_messageListenerServiceRegistrations.remove(
 						schedulerEntry.getEventListenerClass());
 
 			messageListenerServiceRegistration.unregister();
