@@ -44,7 +44,6 @@ public class MBMailMessageTest {
 		ObjectValuePair<String, InputStream> inputStreamOVP =
 			inputStreamOVPs.get(0);
 
-
 		Assert.assertEquals("Tílde.txt", inputStreamOVP.getKey());
 	}
 
