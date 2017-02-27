@@ -210,7 +210,7 @@ public class LDAPUserExporterImpl implements UserExporter {
 			else {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"Cannot find or create LDAP bindings for group: " +
+						"Unable to get or add LDAP bindings for user group " +
 							userGroup.getName());
 				}
 			}
@@ -237,7 +237,7 @@ public class LDAPUserExporterImpl implements UserExporter {
 		catch (SchemaViolationException sve) {
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					"Cannot modify LDAP bindings for group: " +
+					"Unable to update LDAP bindings for user group " +
 						userGroup.getName(),
 					sve);
 			}
