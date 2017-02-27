@@ -80,12 +80,15 @@ public class PDFProcessorTest {
 		_serviceContext = ServiceContextTestUtil.getServiceContext(
 			_group.getGroupId());
 
-		Field field = ReflectionUtil.getDeclaredField(
-			PropsValues.class, "DL_FILE_ENTRY_PREVIEW_FORK_PROCESS_ENABLED");
+		Field dlFileEntryPreviewForkProcessEnabledField =
+			ReflectionUtil.getDeclaredField(
+				PropsValues.class,
+				"DL_FILE_ENTRY_PREVIEW_FORK_PROCESS_ENABLED");
 
-		_dlFileEntryPreviewForkProcessEnabled = field.get(null);
+		_dlFileEntryPreviewForkProcessEnabled =
+			dlFileEntryPreviewForkProcessEnabledField.get(null);
 
-		field.set(null, Boolean.FALSE);
+		dlFileEntryPreviewForkProcessEnabledField.set(null, Boolean.FALSE);
 	}
 
 	@After
@@ -94,10 +97,13 @@ public class PDFProcessorTest {
 			_dlProcessorServiceRegistration.unregister();
 		}
 
-		Field field = ReflectionUtil.getDeclaredField(
-			PropsValues.class, "DL_FILE_ENTRY_PREVIEW_FORK_PROCESS_ENABLED");
+		Field dlFileEntryPreviewForkProcessEnabledField =
+			ReflectionUtil.getDeclaredField(
+				PropsValues.class,
+				"DL_FILE_ENTRY_PREVIEW_FORK_PROCESS_ENABLED");
 
-		field.set(null, _dlFileEntryPreviewForkProcessEnabled);
+		dlFileEntryPreviewForkProcessEnabledField.set(
+			null, _dlFileEntryPreviewForkProcessEnabled);
 	}
 
 	@Test
