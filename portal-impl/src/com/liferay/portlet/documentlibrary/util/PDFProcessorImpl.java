@@ -622,8 +622,7 @@ public class PDFProcessorImpl
 		File decryptedFile = getDecryptedTempFile(tempFileId);
 		File thumbnailFile = getThumbnailTempFile(tempFileId);
 
-		int previewFilesCount = _getDecryptedNumberOfPagesCount(
-			file, decryptedFile);
+		int previewFilesCount = _getPreviewFilesCount(file, decryptedFile);
 
 		if (previewFilesCount == 0) {
 			_log.error(
@@ -822,9 +821,7 @@ public class PDFProcessorImpl
 		}
 	}
 
-	private int _getDecryptedNumberOfPagesCount(
-		File encryptedFile, File decryptedFile) {
-
+	private int _getPreviewFilesCount(File encryptedFile, File decryptedFile) {
 		String[] decryptPasswords = ArrayUtil.append(
 			PropsValues.
 				DL_FILE_ENTRY_PREVIEW_GENERATION_DECRYPT_PASSWORDS_PDFBOX,
