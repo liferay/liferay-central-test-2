@@ -54,9 +54,9 @@ public class LiferayPDFBoxConverter {
 		try (PDDocument pdDocument = PDDocument.load(_inputFile)) {
 			PDFRenderer pdfRenderer = new PDFRenderer(pdDocument);
 
-			PDPageTree pages = pdDocument.getPages();
+			PDPageTree pdPageTree = pdDocument.getPages();
 
-			int count = pages.getCount();
+			int count = pdPageTree.getCount();
 
 			for (int i = 0; i < count; i++) {
 				if (_generateThumbnail && (i == 0)) {
