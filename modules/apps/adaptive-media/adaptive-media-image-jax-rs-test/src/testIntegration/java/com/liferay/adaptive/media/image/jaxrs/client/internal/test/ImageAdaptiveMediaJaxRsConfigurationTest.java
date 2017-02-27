@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.Invocation;
@@ -186,7 +187,7 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 	}
 
 	@Test
-	public void testGetAllConfigurationsNonEmpty() throws Exception {
+	public void testGetAllConfigurationsListOnlyEnabled() throws Exception {
 		Map<String, JsonObject> configurations = _addConfigurations(
 			_configurationJsonObjects);
 
@@ -196,13 +197,20 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 
 		JsonArray responseJsonArray = builder.get(JsonArray.class);
 
-		Assert.assertEquals(configurations.size(), responseJsonArray.size());
+		Map<String, JsonObject> enabledConfigurations = configurations
+			.entrySet().stream()
+			.filter(predicate ->
+				predicate.getValue().get("enabled").getAsBoolean())
+			.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+		Assert.assertEquals(
+			enabledConfigurations.size(), responseJsonArray.size());
 
 		for (JsonElement responseJsonElement : responseJsonArray) {
 			JsonObject responseJsonObject =
 				responseJsonElement.getAsJsonObject();
 
-			JsonObject expectedObject = configurations.get(
+			JsonObject expectedObject = enabledConfigurations.get(
 				_getId(responseJsonObject));
 
 			JSONAssert.assertEquals(
@@ -305,15 +313,24 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 	private JsonObject _getRandomConfigurationJsonObject() {
 		Random random = new Random();
 
-		return _configurationJsonObjects.get(
+		JsonObject jsonObject = _configurationJsonObjects.get(
 			random.nextInt(_configurationJsonObjects.size()));
+
+		if (!jsonObject.get("enabled").getAsBoolean()) {
+			jsonObject.remove("enabled");
+			jsonObject.addProperty("enabled", true);
+		}
+
+		return jsonObject;
 	}
 
 	private JsonObject _getRandomDisabledConfigurationJsonObject() {
 		JsonObject jsonObject = _getRandomConfigurationJsonObject();
 
-		jsonObject.remove("enabled");
-		jsonObject.addProperty("enabled", false);
+		if (jsonObject.get("enabled").getAsBoolean()) {
+			jsonObject.remove("enabled");
+			jsonObject.addProperty("enabled", false);
+		}
 
 		return jsonObject;
 	}
@@ -332,7 +349,9 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 
 			String id = ImageAdaptiveMediaTestUtil.getRandomUuid();
 
-			jsonObject.addProperty("enabled", true);
+			Boolean enabled = new Random().nextBoolean();
+
+			jsonObject.addProperty("enabled", enabled);
 
 			jsonObject.addProperty("name", id + " Size");
 
