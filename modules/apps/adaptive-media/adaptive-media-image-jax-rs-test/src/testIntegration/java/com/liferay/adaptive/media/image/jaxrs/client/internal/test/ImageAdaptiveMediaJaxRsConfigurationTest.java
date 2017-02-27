@@ -100,9 +100,21 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 	}
 
 	@Test
-	public void testDeleteConfigurationDeletesConfiguration() throws Exception {
+	public void testDeleteConfigurationWithoutAuthorizationReturns403() {
+		Invocation.Builder builder = _getUnauthenticatedInvocationBuilder(
+			ImageAdaptiveMediaTestUtil.getRandomUuid());
+
+		Response response = builder.delete();
+
+		Assert.assertEquals(403, response.getStatus());
+	}
+
+	@Test
+	public void testDeleteDisabledConfigurationDeletesConfiguration()
+		throws Exception {
+
 		JsonObject configurationJsonObject = _addConfiguration(
-			_getRandomConfigurationJsonObject());
+			_getRandomDisabledConfigurationJsonObject());
 
 		Invocation.Builder builder = _getAuthenticatedInvocationBuilder(
 			_getId(configurationJsonObject));
@@ -121,19 +133,28 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 	}
 
 	@Test
-	public void testDeleteConfigurationWithoutAuthorizationReturns403() {
-		Invocation.Builder builder = _getUnauthenticatedInvocationBuilder(
-			ImageAdaptiveMediaTestUtil.getRandomUuid());
+	public void testDeleteEnabledConfigurationReturns400() throws Exception {
+		JsonObject configurationJsonObject = _addConfiguration(
+			_getRandomConfigurationJsonObject());
+
+		Invocation.Builder builder = _getAuthenticatedInvocationBuilder(
+			_getId(configurationJsonObject));
+
+		JsonObject responseJsonObject = builder.get(JsonObject.class);
+
+		JSONAssert.assertEquals(
+			configurationJsonObject.toString(), responseJsonObject.toString(),
+			true);
 
 		Response response = builder.delete();
 
-		Assert.assertEquals(403, response.getStatus());
+		Assert.assertEquals(400, response.getStatus());
 	}
 
 	@Test
 	public void testDeleteExistingConfigurationReturns204() {
 		JsonObject configurationJsonObject = _addConfiguration(
-			_getRandomConfigurationJsonObject());
+			_getRandomDisabledConfigurationJsonObject());
 
 		Invocation.Builder builder = _getAuthenticatedInvocationBuilder(
 			_getId(configurationJsonObject));
@@ -286,6 +307,15 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 
 		return _configurationJsonObjects.get(
 			random.nextInt(_configurationJsonObjects.size()));
+	}
+
+	private JsonObject _getRandomDisabledConfigurationJsonObject() {
+		JsonObject jsonObject = _getRandomConfigurationJsonObject();
+
+		jsonObject.remove("enabled");
+		jsonObject.addProperty("enabled", false);
+
+		return jsonObject;
 	}
 
 	private Invocation.Builder _getUnauthenticatedInvocationBuilder(String id) {

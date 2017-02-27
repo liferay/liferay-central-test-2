@@ -113,9 +113,13 @@ public class ImageAdaptiveMediaConfigResource {
 			_configurationHelper.deleteImageAdaptiveMediaConfigurationEntry(
 				_companyId, id);
 		}
-		catch (InvalidStateImageAdaptiveMediaConfigurationEntryException |
-			   IOException e) {
+		catch (
+			InvalidStateImageAdaptiveMediaConfigurationEntryException
+				isiamcee) {
 
+			throw new BadRequestException();
+		}
+		catch (IOException ioe) {
 			throw new InternalServerErrorException();
 		}
 	}
