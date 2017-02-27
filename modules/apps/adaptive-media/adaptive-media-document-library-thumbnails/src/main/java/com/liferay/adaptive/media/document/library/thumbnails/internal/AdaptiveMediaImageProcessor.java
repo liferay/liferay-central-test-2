@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.adaptive.media.document.library.repository.internal;
+package com.liferay.adaptive.media.document.library.thumbnails.internal;
 
 import com.liferay.adaptive.media.AdaptiveMedia;
 import com.liferay.adaptive.media.AdaptiveMediaAttribute;
