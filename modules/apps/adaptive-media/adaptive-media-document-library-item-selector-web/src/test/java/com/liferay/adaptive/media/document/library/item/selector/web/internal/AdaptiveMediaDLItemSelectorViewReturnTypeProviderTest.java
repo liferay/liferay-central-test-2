@@ -12,9 +12,8 @@
  * details.
  */
 
-package com.liferay.adaptive.media.document.library.item.selector.web.internal.test;
+package com.liferay.adaptive.media.document.library.item.selector.web.internal;
 
-import com.liferay.adaptive.media.document.library.item.selector.web.internal.AdaptiveMediaDLItemSelectorViewReturnTypeProvider;
 import com.liferay.adaptive.media.image.item.selector.ImageAdaptiveMediaURLItemSelectorReturnType;
 import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.ItemSelectorViewReturnTypeProvider;

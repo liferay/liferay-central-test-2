@@ -14,17 +14,20 @@
 
 package com.liferay.adaptive.media.document.library.item.selector.web.internal.resolver.test;
 
-import com.liferay.adaptive.media.document.library.item.selector.web.internal.resolver.FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolver;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
-import com.liferay.adaptive.media.image.test.util.DestinationReplacer;
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.document.library.kernel.model.DLFolderConstants;
 import com.liferay.document.library.kernel.service.DLAppLocalService;
 import com.liferay.document.library.kernel.util.DLUtil;
+import com.liferay.item.selector.ItemSelectorReturnTypeResolver;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.messaging.Destination;
+import com.liferay.portal.kernel.messaging.MessageBus;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
+import com.liferay.portal.kernel.messaging.SynchronousDestination;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -77,8 +80,9 @@ public class FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolverTest {
 		_configurationHelper = _getService(
 			ImageAdaptiveMediaConfigurationHelper.class);
 		_dlAppLocalService = _getService(DLAppLocalService.class);
+
 		_resolver = _getService(
-			FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolver.class);
+			ItemSelectorReturnTypeResolver.class, _OBJECT_CLASS);
 
 		ServiceTestUtil.setUser(TestPropsValues.getUser());
 
@@ -159,6 +163,32 @@ public class FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolverTest {
 			_assertAttibutes(sourcesJSONArray.getJSONObject(2), 280, 200);
 			_assertAttibutes(sourcesJSONArray.getJSONObject(3), 330, 280);
 		}
+	}
+
+	public class DestinationReplacer implements AutoCloseable {
+
+		public DestinationReplacer(String destinationName) {
+			MessageBus messageBus = MessageBusUtil.getMessageBus();
+
+			_destination = messageBus.getDestination(destinationName);
+
+			SynchronousDestination synchronousDestination =
+				new SynchronousDestination();
+
+			synchronousDestination.setName(destinationName);
+
+			messageBus.replace(synchronousDestination);
+		}
+
+		@Override
+		public void close() throws Exception {
+			MessageBus messageBus = MessageBusUtil.getMessageBus();
+
+			messageBus.replace(_destination);
+		}
+
+		private final Destination _destination;
+
 	}
 
 	private FileEntry _addImageFileEntry(ServiceContext serviceContext)
@@ -264,8 +294,8 @@ public class FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolverTest {
 		return FileUtil.getBytes(
 			FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolverTest.
 				class,
-			"/com/liferay/adaptive/media/image/processor/test/dependencies" +
-				"/image.jpg");
+			"/com/liferay/adaptive/media/document/library/item/selector/web" +
+				"/internal/resolver/test/dependencies/image.jpg");
 	}
 
 	private <T> T _getService(Class<T> clazz) {
@@ -279,13 +309,30 @@ public class FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolverTest {
 		}
 	}
 
+	private <T> T _getService(Class<T> clazz, String filter) {
+		try {
+			Registry registry = RegistryUtil.getRegistry();
+
+			Collection<T> services = registry.getServices(clazz, filter);
+
+			return services.iterator().next();
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	private static final String _OBJECT_CLASS =
+		"(objectClass=com.liferay.adaptive.media.document.library.item." +
+			"selector.web.internal.resolver." +
+				"FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolver)";
+
 	private ImageAdaptiveMediaConfigurationHelper _configurationHelper;
 	private DLAppLocalService _dlAppLocalService;
 
 	@DeleteAfterTestRun
 	private Group _group;
 
-	private FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolver
-		_resolver;
+	private ItemSelectorReturnTypeResolver _resolver;
 
 }
