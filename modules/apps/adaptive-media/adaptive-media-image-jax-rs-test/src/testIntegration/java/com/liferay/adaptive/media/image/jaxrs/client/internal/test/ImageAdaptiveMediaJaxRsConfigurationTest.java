@@ -187,35 +187,13 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 	}
 
 	@Test
-	public void testGetAllConfigurationsListOnlyEnabled() throws Exception {
-		Map<String, JsonObject> configurations = _addConfigurations(
-			_configurationJsonObjects);
+	public void testGetConfigurationsListsDisabledIfParam() throws Exception {
+		_assertList(false);
+	}
 
-		Invocation.Builder builder =
-			ImageAdaptiveMediaTestUtil.getConfigurationRequest(
-				IDENTITY_WEB_TARGET_RESOLVER);
-
-		JsonArray responseJsonArray = builder.get(JsonArray.class);
-
-		Map<String, JsonObject> enabledConfigurations = configurations
-			.entrySet().stream()
-			.filter(predicate ->
-				predicate.getValue().get("enabled").getAsBoolean())
-			.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-
-		Assert.assertEquals(
-			enabledConfigurations.size(), responseJsonArray.size());
-
-		for (JsonElement responseJsonElement : responseJsonArray) {
-			JsonObject responseJsonObject =
-				responseJsonElement.getAsJsonObject();
-
-			JsonObject expectedObject = enabledConfigurations.get(
-				_getId(responseJsonObject));
-
-			JSONAssert.assertEquals(
-				expectedObject.toString(), responseJsonObject.toString(), true);
-		}
+	@Test
+	public void testGetConfigurationsListsOnlyEnabled() throws Exception {
+		_assertList(true);
 	}
 
 	@Test
@@ -270,10 +248,40 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 		return configurationJsonObjectMap;
 	}
 
-	private void _deleteAllConfigurationEntries() {
+	private void _assertList(Boolean enabled) throws Exception {
+		Map<String, JsonObject> configurations = _addConfigurations(
+			_configurationJsonObjects);
+
 		Invocation.Builder builder =
 			ImageAdaptiveMediaTestUtil.getConfigurationRequest(
-				IDENTITY_WEB_TARGET_RESOLVER);
+				webTarget -> webTarget.queryParam("enabled", enabled));
+
+		JsonArray responseJsonArray = builder.get(JsonArray.class);
+
+		Map<String, JsonObject> enabledConfigurations =
+			configurations.entrySet().stream().filter(predicate -> predicate.
+				getValue().get("enabled").getAsBoolean() == enabled).collect(
+				Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+		Assert.assertEquals(
+			enabledConfigurations.size(), responseJsonArray.size());
+
+		for (JsonElement responseJsonElement : responseJsonArray) {
+			JsonObject responseJsonObject =
+				responseJsonElement.getAsJsonObject();
+
+			JsonObject expectedObject = enabledConfigurations.get(
+				_getId(responseJsonObject));
+
+			JSONAssert.assertEquals(
+				expectedObject.toString(), responseJsonObject.toString(), true);
+		}
+	}
+
+	private void _deleteAll(Boolean enabled) {
+		Invocation.Builder builder =
+			ImageAdaptiveMediaTestUtil.getConfigurationRequest(webTarget ->
+				webTarget.queryParam("enabled", enabled));
 
 		JsonArray responseJsonArray = builder.get(JsonArray.class);
 
@@ -289,6 +297,11 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 
 				_getAuthenticatedInvocationBuilder(id).delete();
 			});
+	}
+
+	private void _deleteAllConfigurationEntries() {
+		_deleteAll(false);
+		_deleteAll(true);
 	}
 
 	private Invocation.Builder _getAuthenticatedInvocationBuilder(String id) {
@@ -317,7 +330,6 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 			random.nextInt(_configurationJsonObjects.size()));
 
 		if (!jsonObject.get("enabled").getAsBoolean()) {
-			jsonObject.remove("enabled");
 			jsonObject.addProperty("enabled", true);
 		}
 
@@ -328,7 +340,6 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 		JsonObject jsonObject = _getRandomConfigurationJsonObject();
 
 		if (jsonObject.get("enabled").getAsBoolean()) {
-			jsonObject.remove("enabled");
 			jsonObject.addProperty("enabled", false);
 		}
 

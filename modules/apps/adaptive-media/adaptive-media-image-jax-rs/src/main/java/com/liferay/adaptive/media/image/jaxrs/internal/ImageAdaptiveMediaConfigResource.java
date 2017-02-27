@@ -34,6 +34,7 @@ import java.util.stream.Collectors;
 
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.ForbiddenException;
 import javax.ws.rs.GET;
 import javax.ws.rs.InternalServerErrorException;
@@ -42,6 +43,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 
 /**
  * @author Alejandro Hernández
@@ -143,10 +145,13 @@ public class ImageAdaptiveMediaConfigResource {
 
 	@GET
 	@Produces("application/json")
-	public List<ImageAdaptiveMediaConfigRepr> getConfigurations() {
+	public List<ImageAdaptiveMediaConfigRepr> getConfigurations(
+		@DefaultValue("true") @QueryParam("enabled") boolean enabled) {
+
 		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
 			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				_companyId);
+				_companyId, configurationEntry ->
+					configurationEntry.isEnabled() == enabled);
 
 		return configurationEntries.stream().map(
 			ImageAdaptiveMediaConfigRepr::new).collect(Collectors.toList());
