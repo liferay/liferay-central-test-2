@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.adaptive.media.document.library.repository.internal.util.comparator;
+package com.liferay.adaptive.media.document.library.thumbnails.internal.util.comparator;
 
 import com.liferay.portal.kernel.util.MapUtil;
 

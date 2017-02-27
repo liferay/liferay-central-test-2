@@ -12,10 +12,10 @@
  * details.
  */
 
-package com.liferay.adaptive.media.document.library.repository.internal.commands;
+package com.liferay.adaptive.media.document.library.thumbnails.internal.commands;
 
-import com.liferay.adaptive.media.document.library.repository.internal.util.comparator.AdaptiveMediaConfigurationPropertiesComparator;
-import com.liferay.adaptive.media.document.library.repository.internal.util.comparator.ComparatorUtil;
+import com.liferay.adaptive.media.document.library.thumbnails.internal.util.comparator.AdaptiveMediaConfigurationPropertiesComparator;
+import com.liferay.adaptive.media.document.library.thumbnails.internal.util.comparator.ComparatorUtil;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
 import com.liferay.adaptive.media.image.constants.ImageAdaptiveMediaConstants;

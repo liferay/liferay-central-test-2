@@ -9,6 +9,4 @@ dependencies {
 	provided project(":apps:adaptive-media:adaptive-media-image-api")
 	provided project(":apps:adaptive-media:adaptive-media-image-impl")
 	provided project(":apps:adaptive-media:adaptive-media-web")
-
-	testCompile group: "junit", name: "junit", version: "4.12"
 }
