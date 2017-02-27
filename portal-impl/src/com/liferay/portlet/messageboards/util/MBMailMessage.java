@@ -42,7 +42,7 @@ public class MBMailMessage {
 		}
 		catch (UnsupportedEncodingException uee) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Error decoding filename: " + fileName, uee);
+				_log.warn("Unable to decode file name " + fileName, uee);
 			}
 		}
 
