@@ -21,7 +21,6 @@ import com.liferay.osgi.service.tracker.collections.list.ServiceTrackerListFacto
 import java.util.Iterator;
 
 import org.osgi.framework.BundleContext;
-import org.osgi.framework.BundleEvent;
 import org.osgi.framework.FrameworkUtil;
 
 /**
@@ -50,13 +49,6 @@ public class ContentTransformerUtil {
 
 			_contentTransformerHandlers = ServiceTrackerListFactory.open(
 				bundleContext, ContentTransformerHandler.class);
-
-			bundleContext.addBundleListener(event -> {
-				if (BundleEvent.STOPPED == event.getType()) {
-					_contentTransformerHandlers.close();
-					_contentTransformerHandlers = null;
-				}
-			});
 		}
 
 		return _contentTransformerHandlers;
