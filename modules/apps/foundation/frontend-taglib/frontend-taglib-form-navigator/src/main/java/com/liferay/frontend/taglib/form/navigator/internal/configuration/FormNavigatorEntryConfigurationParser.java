@@ -76,7 +76,7 @@ public class FormNavigatorEntryConfigurationParser {
 		_formNavigatorEntryKeysMap = new HashMap<>();
 
 		for (String line : formNavigatorEntryKeys) {
-			Matcher matcher = _LINE_PATTERN.matcher(line);
+			Matcher matcher = _pattern.matcher(line);
 
 			while (matcher.find()) {
 				String key = matcher.group("key");
@@ -97,7 +97,7 @@ public class FormNavigatorEntryConfigurationParser {
 		return keys;
 	}
 
-	private static final Pattern _LINE_PATTERN = Pattern.compile(
+	private static final Pattern _pattern = Pattern.compile(
 		"^(?<key>.*)=(?<value>.*)$", Pattern.MULTILINE);
 
 	private FormNavigatorConfiguration _formNavigatorConfiguration;
