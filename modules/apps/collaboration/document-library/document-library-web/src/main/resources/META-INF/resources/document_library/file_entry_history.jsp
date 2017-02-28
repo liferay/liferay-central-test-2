@@ -55,6 +55,9 @@ for (FileVersion fileVersion : fileVersions) {
 						</c:otherwise>
 					</c:choose>
 				</dd>
+				<dd>
+					<liferay-ui:message arguments="<%= new Object[] {HtmlUtil.escape(fileVersion.getUserName()), dateFormatDateTime.format(fileVersion.getCreateDate())} %>" key="by-x-on-x" translateArguments="<%= false %>" />
+				</dd>
 			</dl>
 		</aui:col>
 	</aui:row>
