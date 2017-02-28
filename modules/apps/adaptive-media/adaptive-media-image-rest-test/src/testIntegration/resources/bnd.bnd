@@ -1,0 +1,7 @@
+Bundle-Activator: com.liferay.adaptive.media.image.rest.test.media.internal.activator.TestBundleActivator
+Bundle-Name: Liferay Adaptive Media Image REST Media Test
+Bundle-SymbolicName: com.liferay.adaptive.media.image.rest.test.media
+Bundle-Version: 1.0.0
+Liferay-Releng-Module-Group-Description:
+Liferay-Releng-Module-Group-Title: Adaptive Media
+Private-Package: com.liferay.adaptive.media.image.rest.test.media.internal.activator
