@@ -135,7 +135,7 @@ public class FormNavigatorEntryUtil {
 		String formNavigatorId, String categoryKey, T formModelBean) {
 
 		Optional<List<FormNavigatorEntry<T>>> formNavigationEntriesOptional =
-			_getFormNavigatorEntriesFromConfiguration(
+			_getConfigurationFormNavigatorEntries(
 				formNavigatorId, categoryKey, formModelBean);
 
 		if (formNavigationEntriesOptional.isPresent()) {
@@ -148,7 +148,7 @@ public class FormNavigatorEntryUtil {
 	}
 
 	private static <T> Optional<List<FormNavigatorEntry<T>>>
-		_getFormNavigatorEntriesFromConfiguration(
+		_getConfigurationFormNavigatorEntries(
 			String formNavigatorId, String categoryKey, T formModelBean) {
 
 		FormNavigatorEntryConfigurationHelper
