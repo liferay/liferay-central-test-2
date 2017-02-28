@@ -29,7 +29,7 @@ import org.junit.Before;
 /**
  * @author Alejandro Tardín
  */
-public abstract class FormNavigatorEntryConfigurationRetrieverBaseTest {
+public abstract class FormNavigatorEntryConfigurationRetrieverBaseTestCase {
 
 	@Before
 	public void setUp() throws Exception {
