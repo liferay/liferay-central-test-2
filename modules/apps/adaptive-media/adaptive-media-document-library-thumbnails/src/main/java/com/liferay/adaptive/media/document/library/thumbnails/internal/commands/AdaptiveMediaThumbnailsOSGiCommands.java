@@ -117,7 +117,7 @@ public class AdaptiveMediaThumbnailsOSGiCommands {
 					if ((fileVersion == null) ||
 						!_isMimeTypeSupported(fileVersion)) {
 
-						return;
+						continue;
 					}
 
 					// See LPS-70788
