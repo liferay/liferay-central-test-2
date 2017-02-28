@@ -256,23 +256,21 @@ public class JenkinsResultsParserUtil {
 		return sb.toString();
 	}
 
-	public static List<File> findFiles(File basedir, String fileNameRegex) {
-		List<File> foundFiles = new ArrayList<>();
+	public static List<File> findFiles(File basedir, String regex) {
+		List<File> files = new ArrayList<>();
 
-		File[] files = basedir.listFiles();
-
-		for (File file : files) {
+		for (File file : basedir.listFiles()) {
 			String fileName = file.getName();
 
 			if (file.isDirectory()) {
-				foundFiles.addAll(findFiles(file, fileNameRegex));
+				files.addAll(findFiles(file, regex));
 			}
-			else if (fileName.matches(fileNameRegex)) {
-				foundFiles.add(file);
+			else if (fileName.matches(regex)) {
+				files.add(file);
 			}
 		}
 
-		return foundFiles;
+		return files;
 	}
 
 	public static String fixFileName(String fileName) {
