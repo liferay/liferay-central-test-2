@@ -21,6 +21,7 @@ import com.liferay.osgi.service.tracker.collections.list.ServiceTrackerListFacto
 import java.util.Iterator;
 
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.BundleEvent;
 import org.osgi.framework.FrameworkUtil;
 
 /**
@@ -29,23 +30,8 @@ import org.osgi.framework.FrameworkUtil;
 public class ContentTransformerUtil {
 
 	public static ContentTransformerHandler getContentTransformerHandler() {
-		if (_contentTransformerHandler == null) {
-			_contentTransformerHandler = _getContentTransformerHandler();
-		}
-
-		return _contentTransformerHandler;
-	}
-
-	private static ContentTransformerHandler _getContentTransformerHandler() {
-		BundleContext bundleContext = FrameworkUtil.getBundle(
-			ContentTransformerUtil.class).getBundleContext();
-
-		ServiceTrackerList<ContentTransformerHandler, ContentTransformerHandler>
-			contentTransformerHandlers = ServiceTrackerListFactory.open(
-				bundleContext, ContentTransformerHandler.class);
-
 		Iterator<ContentTransformerHandler> iterator =
-			contentTransformerHandlers.iterator();
+			_getContentTransformerHandlers().iterator();
 
 		if (iterator.hasNext()) {
 			return iterator.next();
@@ -54,6 +40,30 @@ public class ContentTransformerUtil {
 		return null;
 	}
 
-	private static ContentTransformerHandler _contentTransformerHandler;
+	private static
+		ServiceTrackerList<ContentTransformerHandler, ContentTransformerHandler>
+			_getContentTransformerHandlers() {
+
+		if (_contentTransformerHandlers == null) {
+			BundleContext bundleContext = FrameworkUtil.getBundle(
+				ContentTransformerUtil.class).getBundleContext();
+
+			_contentTransformerHandlers = ServiceTrackerListFactory.open(
+				bundleContext, ContentTransformerHandler.class);
+
+			bundleContext.addBundleListener(event -> {
+				if (BundleEvent.STOPPED == event.getType()) {
+					_contentTransformerHandlers.close();
+					_contentTransformerHandlers = null;
+				}
+			});
+		}
+
+		return _contentTransformerHandlers;
+	}
+
+	private static
+		ServiceTrackerList<ContentTransformerHandler, ContentTransformerHandler>
+			_contentTransformerHandlers;
 
 }
