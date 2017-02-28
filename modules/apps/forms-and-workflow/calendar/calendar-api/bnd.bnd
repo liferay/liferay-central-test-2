@@ -1,6 +1,6 @@
 Bundle-Name: Liferay Calendar API
 Bundle-SymbolicName: com.liferay.calendar.api
-Bundle-Version: 2.0.5
+Bundle-Version: 2.0.6
 Export-Package:\
 	com.google.ical.iter,\
 	com.google.ical.util,\
