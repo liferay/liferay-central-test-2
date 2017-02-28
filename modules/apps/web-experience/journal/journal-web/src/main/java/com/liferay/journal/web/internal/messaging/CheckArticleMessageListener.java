@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.scheduler.SchedulerEntryImpl;
 import com.liferay.portal.kernel.scheduler.TimeUnit;
 import com.liferay.portal.kernel.scheduler.Trigger;
 import com.liferay.portal.kernel.scheduler.TriggerFactory;
-import com.liferay.portal.kernel.scheduler.TriggerFactoryUtil;
 
 import java.util.Map;
 
@@ -59,9 +58,9 @@ public class CheckArticleMessageListener extends BaseMessageListener {
 
 		String className = clazz.getName();
 
-		Trigger trigger = TriggerFactoryUtil.createTrigger(
-			className, className, journalWebConfiguration.checkInterval(),
-			TimeUnit.MINUTE);
+		Trigger trigger = _triggerFactory.createTrigger(
+			className, className, null, null,
+			journalWebConfiguration.checkInterval(), TimeUnit.MINUTE);
 
 		SchedulerEntry schedulerEntry = new SchedulerEntryImpl(
 			className, trigger);
@@ -99,11 +98,10 @@ public class CheckArticleMessageListener extends BaseMessageListener {
 		_schedulerEngineHelper = schedulerEngineHelper;
 	}
 
-	@Reference(unbind = "-")
-	protected void setTriggerFactory(TriggerFactory triggerFactory) {
-	}
-
 	private JournalArticleLocalService _journalArticleLocalService;
 	private SchedulerEngineHelper _schedulerEngineHelper;
+
+	@Reference
+	private TriggerFactory _triggerFactory;
 
 }
