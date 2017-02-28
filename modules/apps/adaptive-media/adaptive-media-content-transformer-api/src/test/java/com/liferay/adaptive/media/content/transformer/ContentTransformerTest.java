@@ -15,13 +15,14 @@
 package com.liferay.adaptive.media.content.transformer;
 
 import com.liferay.adaptive.media.AdaptiveMediaException;
+import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMap;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.ServiceLoader;
+import java.util.Set;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -31,8 +32,6 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import org.osgi.framework.BundleException;
-import org.osgi.framework.launch.Framework;
-import org.osgi.framework.launch.FrameworkFactory;
 
 /**
  * @author Alejandro Tardín
@@ -41,28 +40,12 @@ public class ContentTransformerTest {
 
 	@Before
 	public void setUp() throws BundleException {
-		FrameworkFactory factory = ServiceLoader.load(
-			FrameworkFactory.class).iterator().next();
-
-		Map<String, String> configuration = new HashMap<>();
-
-		Path cacheFolder = Paths.get(
-			System.getProperty("java.io.tmpdir"), "osgi-cache");
-
-		configuration.put("org.osgi.framework.storage", cacheFolder.toString());
-
-		_framework = factory.newFramework(configuration);
-
-		_framework.start();
-
-		_contentTransformerHandler.activate(_framework.getBundleContext());
+		_contentTransformerHandler.setServiceTrackerMap(_serviceTrackerMap);
 	}
 
 	@After
 	public final void tearDown() throws Exception {
 		_contentTransformerHandler.deactivate();
-		_framework.stop();
-		_framework.waitForStop(0);
 	}
 
 	@Test
@@ -187,8 +170,7 @@ public class ContentTransformerTest {
 			transformedContent
 		);
 
-		_framework.getBundleContext().registerService(
-			ContentTransformer.class, contentTransformer, null);
+		_serviceTrackerMap.register(contentTransformer);
 
 		return contentTransformer;
 	}
@@ -215,7 +197,8 @@ public class ContentTransformerTest {
 		new ContentTransformerHandler();
 	private final ContentTransformerContentType<String> _contentType =
 		new TestContentTransformerContentType<>();
-	private Framework _framework;
+	private final MockServiceTrackerMap _serviceTrackerMap =
+		new MockServiceTrackerMap();
 
 	private static class TestContentTransformerContentType<T>
 		implements ContentTransformerContentType<T> {
@@ -224,6 +207,55 @@ public class ContentTransformerTest {
 		public String getKey() {
 			return "test";
 		}
+
+	}
+
+	private final class MockServiceTrackerMap implements
+		ServiceTrackerMap<ContentTransformerContentType,
+			List<ContentTransformer>> {
+
+		@Override
+		public void close() {
+			_contentTransformerMap.clear();
+		}
+
+		@Override
+		public boolean containsKey(ContentTransformerContentType contentType) {
+			return _contentTransformerMap.containsKey(contentType);
+		}
+
+		@Override
+		public List<ContentTransformer> getService(
+			ContentTransformerContentType contentType) {
+
+			return _contentTransformerMap.get(contentType);
+		}
+
+		@Override
+		public Set<ContentTransformerContentType> keySet() {
+			return _contentTransformerMap.keySet();
+		}
+
+		@Override
+		public void open() {
+		}
+
+		public void register(ContentTransformer contentTransformer) {
+			List<ContentTransformer> formNavigatorEntryConfigurationParsers =
+				_contentTransformerMap.computeIfAbsent(
+					contentTransformer.getContentType(),
+					key -> new ArrayList<>());
+
+			formNavigatorEntryConfigurationParsers.add(contentTransformer);
+		}
+
+		@Override
+		public Collection<List<ContentTransformer>> values() {
+			return _contentTransformerMap.values();
+		}
+
+		private final Map<ContentTransformerContentType,
+			List<ContentTransformer>> _contentTransformerMap = new HashMap<>();
 
 	}
 

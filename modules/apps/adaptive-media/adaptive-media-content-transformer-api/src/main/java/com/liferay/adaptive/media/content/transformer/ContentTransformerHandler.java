@@ -73,6 +73,14 @@ public class ContentTransformerHandler {
 		_contentTransformersMap.close();
 	}
 
+	protected final void setServiceTrackerMap(
+		ServiceTrackerMap
+			<ContentTransformerContentType, List<ContentTransformer>>
+				serviceTrackerMap) {
+
+		_contentTransformersMap = serviceTrackerMap;
+	}
+
 	private static final Log _log = LogFactoryUtil.getLog(
 		ContentTransformerHandler.class);
 
