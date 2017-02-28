@@ -40,6 +40,7 @@ import java.awt.image.RenderedImage;
 
 import java.io.IOException;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
@@ -48,7 +49,6 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -173,7 +173,7 @@ public class AdaptiveMediaThumbnailsOSGiCommands {
 				Collectors.toList());
 		}
 
-		return Stream.of(companyIds).map(Long::parseLong).collect(
+		return Arrays.stream(companyIds).map(Long::parseLong).collect(
 			Collectors.toList());
 	}
 

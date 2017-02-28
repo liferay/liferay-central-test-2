@@ -240,10 +240,11 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 		Stream<ImageAdaptiveMediaConfigurationEntry> configurationEntryStream =
 			_getConfigurationEntries(companyId);
 
-		return configurationEntryStream.filter(predicate).sorted(
-			Comparator.comparing(
-				ImageAdaptiveMediaConfigurationEntry::getName)).collect(
-				Collectors.toList());
+		Comparator<ImageAdaptiveMediaConfigurationEntry> comparator =
+			Comparator.comparing(ImageAdaptiveMediaConfigurationEntry::getName);
+
+		return configurationEntryStream.filter(
+			predicate).sorted(comparator).collect(Collectors.toList());
 	}
 
 	@Override

@@ -337,7 +337,7 @@ public class ImageAdaptiveMediaConfigurationTest {
 				TestPropsValues.getCompanyId(), configurationEntry -> true);
 
 		for (ImageAdaptiveMediaConfigurationEntry configurationEntry :
-			configurationEntries) {
+				configurationEntries) {
 
 			configurationHelper.forceDeleteImageAdaptiveMediaConfigurationEntry(
 				TestPropsValues.getCompanyId(), configurationEntry.getUUID());

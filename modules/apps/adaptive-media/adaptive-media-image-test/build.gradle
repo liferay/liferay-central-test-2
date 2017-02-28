@@ -6,8 +6,8 @@ dependencies {
 }
 
 dependencies {
-	runtimeLib group: "com.liferay.portal", name: "com.liferay.portal.test.integration", version: "default"
-	runtimeLib group: "com.liferay.portal", name: "com.liferay.portal.test", version: "default"
+	runtimeLib group: "com.liferay.portal", name: "com.liferay.portal.test.integration", version: "1.0.0"
+	runtimeLib group: "com.liferay.portal", name: "com.liferay.portal.test", version: "1.0.0"
 	runtimeLib group: "org.apache.aries.jmx", name: "org.apache.aries.jmx", version: "1.1.5"
 	runtimeLib group: "org.apache.aries", name: "org.apache.aries.util", version: "1.1.3"
 

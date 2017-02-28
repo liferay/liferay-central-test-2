@@ -11,6 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
+
 package com.liferay.adaptive.media.document.library.repository.internal.util.comparator;
 
 import com.liferay.portal.kernel.util.MapUtil;
