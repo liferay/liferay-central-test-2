@@ -131,22 +131,6 @@ public class FormNavigatorEntryUtil {
 		return filteredFormNavigatorEntries;
 	}
 
-	private static <T> List<FormNavigatorEntry<T>> _getFormNavigatorEntries(
-		String formNavigatorId, String categoryKey, T formModelBean) {
-
-		Optional<List<FormNavigatorEntry<T>>> formNavigationEntriesOptional =
-			_getConfigurationFormNavigatorEntries(
-				formNavigatorId, categoryKey, formModelBean);
-
-		if (formNavigationEntriesOptional.isPresent()) {
-			return formNavigationEntriesOptional.get();
-		}
-		else {
-			return (List)_instance._formNavigatorEntries.getService(
-				_getKey(formNavigatorId, categoryKey));
-		}
-	}
-
 	private static <T> Optional<List<FormNavigatorEntry<T>>>
 		_getConfigurationFormNavigatorEntries(
 			String formNavigatorId, String categoryKey, T formModelBean) {
@@ -161,6 +145,22 @@ public class FormNavigatorEntryUtil {
 
 		return formNavigatorEntryConfigurationHelper.getFormNavigatorEntries(
 			formNavigatorId, categoryKey, formModelBean);
+	}
+
+	private static <T> List<FormNavigatorEntry<T>> _getFormNavigatorEntries(
+		String formNavigatorId, String categoryKey, T formModelBean) {
+
+		Optional<List<FormNavigatorEntry<T>>> formNavigationEntriesOptional =
+			_getConfigurationFormNavigatorEntries(
+				formNavigatorId, categoryKey, formModelBean);
+
+		if (formNavigationEntriesOptional.isPresent()) {
+			return formNavigationEntriesOptional.get();
+		}
+		else {
+			return (List)_instance._formNavigatorEntries.getService(
+				_getKey(formNavigatorId, categoryKey));
+		}
 	}
 
 	private static String _getKey(String formNavigatorId, String categoryKey) {
