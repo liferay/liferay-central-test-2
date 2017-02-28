@@ -562,8 +562,8 @@ public class WabProcessor {
 
 		if (portalDependencyJars.length > 0) {
 			_log.error(
-				"portal-dependency-jars is deprecated. JARs listed will not " +
-					"be included in the classpath.");
+				"The property \"portal-dependency-jars\" is deprecated. " +
+					"Specified JARs will not be included in the class path.");
 		}
 
 		processFiles(
