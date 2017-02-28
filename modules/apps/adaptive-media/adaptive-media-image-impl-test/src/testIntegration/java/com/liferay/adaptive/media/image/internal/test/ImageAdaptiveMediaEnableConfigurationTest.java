@@ -22,20 +22,11 @@ import com.liferay.portal.kernel.test.rule.Sync;
 import com.liferay.portal.kernel.test.rule.SynchronousDestinationTestRule;
 import com.liferay.portal.kernel.test.util.TestPropsValues;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
-import com.liferay.registry.Filter;
-import com.liferay.registry.Registry;
-import com.liferay.registry.RegistryUtil;
-import com.liferay.registry.ServiceTracker;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import org.junit.AfterClass;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
@@ -46,7 +37,8 @@ import org.junit.runner.RunWith;
  */
 @RunWith(Arquillian.class)
 @Sync
-public class ImageAdaptiveMediaEnableConfigurationTest {
+public class ImageAdaptiveMediaEnableConfigurationTest
+	extends ImageAdaptiveMediaConfigurationBaseTest {
 
 	@ClassRule
 	@Rule
@@ -55,45 +47,10 @@ public class ImageAdaptiveMediaEnableConfigurationTest {
 			new LiferayIntegrationTestRule(),
 			SynchronousDestinationTestRule.INSTANCE);
 
-	@BeforeClass
-	public static void setUpClass() {
-		Registry registry = RegistryUtil.getRegistry();
-
-		Filter filter = registry.getFilter(
-			"(objectClass=" +
-				ImageAdaptiveMediaConfigurationHelper.class.getName() + ")");
-
-		_serviceTracker = registry.trackServices(filter);
-
-		_serviceTracker.open();
-	}
-
-	@AfterClass
-	public static void tearDownClass() {
-		_serviceTracker.close();
-	}
-
-	@Before
-	public void setUp() throws Exception {
-		ImageAdaptiveMediaConfigurationHelper configurationHelper =
-			_serviceTracker.getService();
-
-		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
-			configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				TestPropsValues.getCompanyId(), configurationEntry -> true);
-
-		for (ImageAdaptiveMediaConfigurationEntry configurationEntry :
-				configurationEntries) {
-
-			configurationHelper.forceDeleteImageAdaptiveMediaConfigurationEntry(
-				TestPropsValues.getCompanyId(), configurationEntry.getUUID());
-		}
-	}
-
 	@Test
 	public void testEnableAllConfigurationEntries() throws Exception {
 		ImageAdaptiveMediaConfigurationHelper configurationHelper =
-			_serviceTracker.getService();
+			serviceTracker.getService();
 
 		Map<String, String> properties = new HashMap<>();
 
@@ -122,14 +79,14 @@ public class ImageAdaptiveMediaEnableConfigurationTest {
 				configurationHelper.getImageAdaptiveMediaConfigurationEntry(
 					TestPropsValues.getCompanyId(), "1");
 
-		_assertDisabled(firstConfigurationEntryOptional);
+		assertDisabled(firstConfigurationEntryOptional);
 
 		Optional<ImageAdaptiveMediaConfigurationEntry>
 			secondConfigurationEntryOptional =
 				configurationHelper.getImageAdaptiveMediaConfigurationEntry(
 					TestPropsValues.getCompanyId(), "2");
 
-		_assertDisabled(secondConfigurationEntryOptional);
+		assertDisabled(secondConfigurationEntryOptional);
 
 		configurationHelper.enableImageAdaptiveMediaConfigurationEntry(
 			TestPropsValues.getCompanyId(), "1");
@@ -140,13 +97,13 @@ public class ImageAdaptiveMediaEnableConfigurationTest {
 			configurationHelper.getImageAdaptiveMediaConfigurationEntry(
 				TestPropsValues.getCompanyId(), "1");
 
-		_assertEnabled(firstConfigurationEntryOptional);
+		assertEnabled(firstConfigurationEntryOptional);
 
 		secondConfigurationEntryOptional =
 			configurationHelper.getImageAdaptiveMediaConfigurationEntry(
 				TestPropsValues.getCompanyId(), "2");
 
-		_assertEnabled(secondConfigurationEntryOptional);
+		assertEnabled(secondConfigurationEntryOptional);
 	}
 
 	@Test
@@ -154,7 +111,7 @@ public class ImageAdaptiveMediaEnableConfigurationTest {
 		throws Exception {
 
 		ImageAdaptiveMediaConfigurationHelper configurationHelper =
-			_serviceTracker.getService();
+			serviceTracker.getService();
 
 		Map<String, String> properties = new HashMap<>();
 
@@ -186,19 +143,19 @@ public class ImageAdaptiveMediaEnableConfigurationTest {
 				configurationHelper.getImageAdaptiveMediaConfigurationEntry(
 					TestPropsValues.getCompanyId(), "1");
 
-		_assertEnabled(configurationEntryOptional);
+		assertEnabled(configurationEntryOptional);
 
 		configurationEntryOptional =
 			configurationHelper.getImageAdaptiveMediaConfigurationEntry(
 				TestPropsValues.getCompanyId(), "2");
 
-		_assertDisabled(configurationEntryOptional);
+		assertDisabled(configurationEntryOptional);
 	}
 
 	@Test
 	public void testEnableEnabledConfigurationEntry() throws Exception {
 		ImageAdaptiveMediaConfigurationHelper configurationHelper =
-			_serviceTracker.getService();
+			serviceTracker.getService();
 
 		Map<String, String> properties = new HashMap<>();
 
@@ -213,7 +170,7 @@ public class ImageAdaptiveMediaEnableConfigurationTest {
 				configurationHelper.getImageAdaptiveMediaConfigurationEntry(
 					TestPropsValues.getCompanyId(), "1");
 
-		_assertEnabled(configurationEntryOptional);
+		assertEnabled(configurationEntryOptional);
 
 		configurationHelper.enableImageAdaptiveMediaConfigurationEntry(
 			TestPropsValues.getCompanyId(), "1");
@@ -222,13 +179,13 @@ public class ImageAdaptiveMediaEnableConfigurationTest {
 			configurationHelper.getImageAdaptiveMediaConfigurationEntry(
 				TestPropsValues.getCompanyId(), "1");
 
-		_assertEnabled(configurationEntryOptional);
+		assertEnabled(configurationEntryOptional);
 	}
 
 	@Test
 	public void testEnableFirstConfigurationEntry() throws Exception {
 		ImageAdaptiveMediaConfigurationHelper configurationHelper =
-			_serviceTracker.getService();
+			serviceTracker.getService();
 
 		Map<String, String> properties = new HashMap<>();
 
@@ -257,14 +214,14 @@ public class ImageAdaptiveMediaEnableConfigurationTest {
 				configurationHelper.getImageAdaptiveMediaConfigurationEntry(
 					TestPropsValues.getCompanyId(), "1");
 
-		_assertDisabled(firstConfigurationEntryOptional);
+		assertDisabled(firstConfigurationEntryOptional);
 
 		Optional<ImageAdaptiveMediaConfigurationEntry>
 			secondConfigurationEntryOptional =
 				configurationHelper.getImageAdaptiveMediaConfigurationEntry(
 					TestPropsValues.getCompanyId(), "2");
 
-		_assertDisabled(secondConfigurationEntryOptional);
+		assertDisabled(secondConfigurationEntryOptional);
 
 		configurationHelper.enableImageAdaptiveMediaConfigurationEntry(
 			TestPropsValues.getCompanyId(), "1");
@@ -273,19 +230,19 @@ public class ImageAdaptiveMediaEnableConfigurationTest {
 			configurationHelper.getImageAdaptiveMediaConfigurationEntry(
 				TestPropsValues.getCompanyId(), "1");
 
-		_assertEnabled(firstConfigurationEntryOptional);
+		assertEnabled(firstConfigurationEntryOptional);
 
 		secondConfigurationEntryOptional =
 			configurationHelper.getImageAdaptiveMediaConfigurationEntry(
 				TestPropsValues.getCompanyId(), "2");
 
-		_assertDisabled(secondConfigurationEntryOptional);
+		assertDisabled(secondConfigurationEntryOptional);
 	}
 
 	@Test
 	public void testEnableSecondConfigurationEntry() throws Exception {
 		ImageAdaptiveMediaConfigurationHelper configurationHelper =
-			_serviceTracker.getService();
+			serviceTracker.getService();
 
 		Map<String, String> properties = new HashMap<>();
 
@@ -314,14 +271,14 @@ public class ImageAdaptiveMediaEnableConfigurationTest {
 				configurationHelper.getImageAdaptiveMediaConfigurationEntry(
 					TestPropsValues.getCompanyId(), "1");
 
-		_assertDisabled(firstConfigurationEntryOptional);
+		assertDisabled(firstConfigurationEntryOptional);
 
 		Optional<ImageAdaptiveMediaConfigurationEntry>
 			secondConfigurationEntryOptional =
 				configurationHelper.getImageAdaptiveMediaConfigurationEntry(
 					TestPropsValues.getCompanyId(), "2");
 
-		_assertDisabled(secondConfigurationEntryOptional);
+		assertDisabled(secondConfigurationEntryOptional);
 
 		configurationHelper.enableImageAdaptiveMediaConfigurationEntry(
 			TestPropsValues.getCompanyId(), "2");
@@ -330,19 +287,19 @@ public class ImageAdaptiveMediaEnableConfigurationTest {
 			configurationHelper.getImageAdaptiveMediaConfigurationEntry(
 				TestPropsValues.getCompanyId(), "1");
 
-		_assertDisabled(firstConfigurationEntryOptional);
+		assertDisabled(firstConfigurationEntryOptional);
 
 		secondConfigurationEntryOptional =
 			configurationHelper.getImageAdaptiveMediaConfigurationEntry(
 				TestPropsValues.getCompanyId(), "2");
 
-		_assertEnabled(secondConfigurationEntryOptional);
+		assertEnabled(secondConfigurationEntryOptional);
 	}
 
 	@Test
 	public void testEnableUniqueConfigurationEntry() throws Exception {
 		ImageAdaptiveMediaConfigurationHelper configurationHelper =
-			_serviceTracker.getService();
+			serviceTracker.getService();
 
 		Map<String, String> properties = new HashMap<>();
 
@@ -360,7 +317,7 @@ public class ImageAdaptiveMediaEnableConfigurationTest {
 				configurationHelper.getImageAdaptiveMediaConfigurationEntry(
 					TestPropsValues.getCompanyId(), "1");
 
-		_assertDisabled(configurationEntryOptional);
+		assertDisabled(configurationEntryOptional);
 
 		configurationHelper.enableImageAdaptiveMediaConfigurationEntry(
 			TestPropsValues.getCompanyId(), "1");
@@ -369,35 +326,7 @@ public class ImageAdaptiveMediaEnableConfigurationTest {
 			configurationHelper.getImageAdaptiveMediaConfigurationEntry(
 				TestPropsValues.getCompanyId(), "1");
 
-		_assertEnabled(configurationEntryOptional);
+		assertEnabled(configurationEntryOptional);
 	}
-
-	private void _assertDisabled(
-		Optional<ImageAdaptiveMediaConfigurationEntry>
-			configurationEntryOptional) {
-
-		Assert.assertTrue(configurationEntryOptional.isPresent());
-
-		ImageAdaptiveMediaConfigurationEntry configurationEntry =
-			configurationEntryOptional.get();
-
-		Assert.assertFalse(configurationEntry.isEnabled());
-	}
-
-	private void _assertEnabled(
-		Optional<ImageAdaptiveMediaConfigurationEntry>
-			configurationEntryOptional) {
-
-		Assert.assertTrue(configurationEntryOptional.isPresent());
-
-		ImageAdaptiveMediaConfigurationEntry configurationEntry =
-			configurationEntryOptional.get();
-
-		Assert.assertTrue(configurationEntry.isEnabled());
-	}
-
-	private static ServiceTracker
-		<ImageAdaptiveMediaConfigurationHelper,
-			ImageAdaptiveMediaConfigurationHelper> _serviceTracker;
 
 }
