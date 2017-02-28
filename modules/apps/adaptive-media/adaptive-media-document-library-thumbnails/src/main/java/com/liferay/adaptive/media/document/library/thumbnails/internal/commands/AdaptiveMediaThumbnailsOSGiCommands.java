@@ -19,6 +19,7 @@ import com.liferay.adaptive.media.document.library.thumbnails.internal.util.comp
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
 import com.liferay.adaptive.media.image.constants.ImageAdaptiveMediaConstants;
+import com.liferay.adaptive.media.image.model.AdaptiveMediaImage;
 import com.liferay.adaptive.media.image.service.AdaptiveMediaImageLocalService;
 import com.liferay.document.library.kernel.service.DLAppLocalService;
 import com.liferay.document.library.kernel.store.DLStoreUtil;
@@ -232,6 +233,15 @@ public class AdaptiveMediaThumbnailsOSGiCommands {
 				FileVersion fileVersion = _getFileVersion(fileName);
 
 				if (fileVersion == null) {
+					continue;
+				}
+
+				AdaptiveMediaImage adaptiveMediaImage =
+					_imageLocalService.fetchAdaptiveMediaImage(
+						configurationEntry.getUUID(),
+						fileVersion.getFileVersionId());
+
+				if (adaptiveMediaImage != null) {
 					continue;
 				}
 
