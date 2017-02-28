@@ -75,11 +75,6 @@ public class PDFProcessorTest {
 
 	@Before
 	public void setUp() throws Exception {
-		_group = GroupTestUtil.addGroup();
-
-		_serviceContext = ServiceContextTestUtil.getServiceContext(
-			_group.getGroupId());
-
 		Field dlFileEntryPreviewForkProcessEnabledField =
 			ReflectionUtil.getDeclaredField(
 				PropsValues.class,
@@ -89,14 +84,15 @@ public class PDFProcessorTest {
 			dlFileEntryPreviewForkProcessEnabledField.get(null);
 
 		dlFileEntryPreviewForkProcessEnabledField.set(null, Boolean.FALSE);
+
+		_group = GroupTestUtil.addGroup();
+
+		_serviceContext = ServiceContextTestUtil.getServiceContext(
+			_group.getGroupId());
 	}
 
 	@After
 	public void tearDown() throws Exception {
-		if (_dlProcessorServiceRegistration != null) {
-			_dlProcessorServiceRegistration.unregister();
-		}
-
 		Field dlFileEntryPreviewForkProcessEnabledField =
 			ReflectionUtil.getDeclaredField(
 				PropsValues.class,
@@ -104,6 +100,10 @@ public class PDFProcessorTest {
 
 		dlFileEntryPreviewForkProcessEnabledField.set(
 			null, _dlFileEntryPreviewForkProcessEnabled);
+
+		if (_dlProcessorServiceRegistration != null) {
+			_dlProcessorServiceRegistration.unregister();
+		}
 	}
 
 	@Test
