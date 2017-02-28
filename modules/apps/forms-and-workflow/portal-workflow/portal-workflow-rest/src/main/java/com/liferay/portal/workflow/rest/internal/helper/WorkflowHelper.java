@@ -85,8 +85,10 @@ public class WorkflowHelper {
 
 		WorkflowTask workflowTask = _workflowTaskManager.getWorkflowTask(
 			companyId, workflowTaskId);
+
 		WorkflowUserModel workflowUserModel = getWorkflowUserModel(
 			workflowTask);
+
 		WorkflowAssetModel workflowAssetModel = getWorkflowAssetModel(
 			companyId, workflowTaskId, locale);
 		String state = getState(companyId, workflowTaskId, locale);
