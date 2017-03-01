@@ -42,7 +42,8 @@ public class ImageAdaptiveMediaModel {
 
 		_url = url;
 
-		_config = new ImageAdaptiveMediaConfigModel(configurationEntry);
+		_configurationEntryModel =
+			new ImageAdaptiveMediaConfigurationEntryModel(configurationEntry);
 
 		ImageAdaptiveMediaAttribute.allowedAttributes().forEach(
 			(attributeName, attribute) -> _parseAttributes(
@@ -59,8 +60,10 @@ public class ImageAdaptiveMediaModel {
 	}
 
 	@JsonProperty("configuration")
-	public ImageAdaptiveMediaConfigModel getConfig() {
-		return _config;
+	public ImageAdaptiveMediaConfigurationEntryModel
+		getConfigurationEntryModel() {
+
+		return _configurationEntryModel;
 	}
 
 	@JsonAnyGetter
@@ -72,8 +75,10 @@ public class ImageAdaptiveMediaModel {
 		return _url;
 	}
 
-	public void setConfig(ImageAdaptiveMediaConfigModel config) {
-		_config = config;
+	public void setConfigurationEntryModel(
+		ImageAdaptiveMediaConfigurationEntryModel configurationEntryModel) {
+
+		_configurationEntryModel = configurationEntryModel;
 	}
 
 	public void setUrl(String url) {
@@ -91,7 +96,7 @@ public class ImageAdaptiveMediaModel {
 			attributeValue -> _properties.put(attributeName, attributeValue));
 	}
 
-	private ImageAdaptiveMediaConfigModel _config;
+	private ImageAdaptiveMediaConfigurationEntryModel _configurationEntryModel;
 	private final Map<String, Object> _properties = new HashMap<>();
 	private String _url;
 

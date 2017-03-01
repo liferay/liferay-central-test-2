@@ -37,7 +37,7 @@ import org.osgi.service.component.annotations.Reference;
  */
 @ApplicationPath("/")
 @Component(immediate = true, service = Application.class)
-public class ImageAdaptiveMediaJaxRsApplication extends Application {
+public class ImageAdaptiveMediaApplication extends Application {
 
 	public Set<Class<?>> getClasses() {
 		return new HashSet<>(

@@ -12,13 +12,13 @@
  * details.
  */
 
-package com.liferay.adaptive.media.image.rest.client.internal.internal.util;
+package com.liferay.adaptive.media.image.rest.client.internal.util;
 
 import aQute.lib.base64.Base64;
 
 import com.google.gson.JsonObject;
 
-import com.liferay.adaptive.media.image.rest.client.internal.internal.provider.GsonProvider;
+import com.liferay.adaptive.media.image.rest.client.internal.provider.GsonProvider;
 
 import java.util.ArrayList;
 import java.util.HashMap;

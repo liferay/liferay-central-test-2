@@ -12,16 +12,16 @@
  * details.
  */
 
-package com.liferay.adaptive.media.image.rest.client.internal.internal.test;
+package com.liferay.adaptive.media.image.rest.client.internal.test;
 
-import static com.liferay.adaptive.media.image.rest.client.internal.internal.util.ImageAdaptiveMediaTestUtil.IDENTITY_WEB_TARGET_RESOLVER;
-import static com.liferay.adaptive.media.image.rest.client.internal.internal.util.ImageAdaptiveMediaTestUtil.TEST_AUTH;
+import static com.liferay.adaptive.media.image.rest.client.internal.util.ImageAdaptiveMediaTestUtil.IDENTITY_WEB_TARGET_RESOLVER;
+import static com.liferay.adaptive.media.image.rest.client.internal.util.ImageAdaptiveMediaTestUtil.TEST_AUTH;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import com.liferay.adaptive.media.image.rest.client.internal.internal.util.ImageAdaptiveMediaTestUtil;
+import com.liferay.adaptive.media.image.rest.client.internal.util.ImageAdaptiveMediaTestUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;

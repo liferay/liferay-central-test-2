@@ -29,12 +29,12 @@ import java.util.Map;
  *
  * @author Alejandro Hernández
  */
-public class ImageAdaptiveMediaConfigModel {
+public class ImageAdaptiveMediaConfigurationEntryModel {
 
-	public ImageAdaptiveMediaConfigModel() {
+	public ImageAdaptiveMediaConfigurationEntryModel() {
 	}
 
-	public ImageAdaptiveMediaConfigModel(
+	public ImageAdaptiveMediaConfigurationEntryModel(
 		ImageAdaptiveMediaConfigurationEntry configurationEntry) {
 
 		_properties.putAll(configurationEntry.getProperties());

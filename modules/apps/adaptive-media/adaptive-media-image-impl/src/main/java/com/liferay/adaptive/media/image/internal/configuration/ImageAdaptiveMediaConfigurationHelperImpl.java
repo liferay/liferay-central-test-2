@@ -310,6 +310,7 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 		throws ImageAdaptiveMediaConfigurationException, IOException {
 
 		forceDeleteImageAdaptiveMediaConfigurationEntry(companyId, uuid);
+
 		return addImageAdaptiveMediaConfigurationEntry(
 			companyId, name, uuid, properties);
 	}

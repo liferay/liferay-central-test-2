@@ -18,7 +18,7 @@ import com.liferay.adaptive.media.ImageAdaptiveMediaConfigurationException;
 import com.liferay.adaptive.media.ImageAdaptiveMediaConfigurationException.InvalidStateImageAdaptiveMediaConfigurationEntryException;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
-import com.liferay.adaptive.media.image.rest.internal.model.ImageAdaptiveMediaConfigModel;
+import com.liferay.adaptive.media.image.rest.internal.model.ImageAdaptiveMediaConfigurationEntryModel;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionThreadLocal;
@@ -63,32 +63,33 @@ public class ImageAdaptiveMediaConfigResource {
 	@Path("/{id}")
 	@Produces("application/json")
 	@PUT
-	public ImageAdaptiveMediaConfigModel addConfiguration(
+	public ImageAdaptiveMediaConfigurationEntryModel addConfigurationEntry(
 			@PathParam("id") String id,
-			ImageAdaptiveMediaConfigModel configRepr)
+			ImageAdaptiveMediaConfigurationEntryModel configurationEntryModel)
 		throws PortalException {
 
 		if (!_permissionChecker.isCompanyAdmin()) {
 			throw new ForbiddenException();
 		}
 
-		if ((configRepr == null) ||
-			MapUtil.isEmpty(configRepr.getProperties()) ||
-			Validator.isNull(configRepr.getName()) ||
-			Validator.isNull(configRepr.isEnabled())) {
+		if ((configurationEntryModel == null) ||
+			MapUtil.isEmpty(configurationEntryModel.getProperties()) ||
+			Validator.isNull(configurationEntryModel.getName()) ||
+			Validator.isNull(configurationEntryModel.isEnabled())) {
 
 			throw new BadRequestException();
 		}
 
-		Map<String, String> properties = configRepr.getProperties();
+		Map<String, String> properties =
+			configurationEntryModel.getProperties();
 
-		configRepr.setUuid(id);
+		configurationEntryModel.setUuid(id);
 
 		try {
 			_configurationHelper.updateImageAdaptiveMediaConfigurationEntry(
-				_companyId, configRepr.getName(), id, properties);
+				_companyId, configurationEntryModel.getName(), id, properties);
 
-			if (configRepr.isEnabled()) {
+			if (configurationEntryModel.isEnabled()) {
 				_configurationHelper.enableImageAdaptiveMediaConfigurationEntry(
 					_companyId, id);
 			}
@@ -101,12 +102,12 @@ public class ImageAdaptiveMediaConfigResource {
 			throw new InternalServerErrorException();
 		}
 
-		return configRepr;
+		return configurationEntryModel;
 	}
 
 	@DELETE
 	@Path("/{id}")
-	public void deleteConfiguration(@PathParam("id") String id)
+	public void deleteConfigurationEntry(@PathParam("id") String id)
 		throws PortalException {
 
 		if (!_permissionChecker.isCompanyAdmin()) {
@@ -126,9 +127,25 @@ public class ImageAdaptiveMediaConfigResource {
 	}
 
 	@GET
+	@Produces("application/json")
+	public List<ImageAdaptiveMediaConfigurationEntryModel>
+		getConfigurationEntries(
+			@DefaultValue("true") @QueryParam("enabled") boolean enabled) {
+
+		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
+			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
+				_companyId, configurationEntry ->
+					configurationEntry.isEnabled() == enabled);
+
+		return configurationEntries.stream().map(
+			ImageAdaptiveMediaConfigurationEntryModel::new).collect(
+				Collectors.toList());
+	}
+
+	@GET
 	@Path("/{id}")
 	@Produces("application/json")
-	public ImageAdaptiveMediaConfigModel getConfiguration(
+	public ImageAdaptiveMediaConfigurationEntryModel getConfigurationEntry(
 		@PathParam("id") String id) {
 
 		Optional<ImageAdaptiveMediaConfigurationEntry>
@@ -139,21 +156,8 @@ public class ImageAdaptiveMediaConfigResource {
 		ImageAdaptiveMediaConfigurationEntry configurationEntry =
 			configurationEntryOptional.orElseThrow(NotFoundException::new);
 
-		return new ImageAdaptiveMediaConfigModel(configurationEntry);
-	}
-
-	@GET
-	@Produces("application/json")
-	public List<ImageAdaptiveMediaConfigModel> getConfigurations(
-		@DefaultValue("true") @QueryParam("enabled") boolean enabled) {
-
-		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
-			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
-				_companyId, configurationEntry ->
-					configurationEntry.isEnabled() == enabled);
-
-		return configurationEntries.stream().map(
-			ImageAdaptiveMediaConfigModel::new).collect(Collectors.toList());
+		return new ImageAdaptiveMediaConfigurationEntryModel(
+			configurationEntry);
 	}
 
 	private final long _companyId;
