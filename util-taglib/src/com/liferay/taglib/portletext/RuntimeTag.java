@@ -239,7 +239,7 @@ public class RuntimeTag extends TagSupport {
 
 			JSONObject jsonObject = null;
 
-			boolean writeJSONObject = false;
+			boolean writeObject = false;
 
 			LayoutTypePortlet layoutTypePortlet =
 				themeDisplay.getLayoutTypePortlet();
@@ -254,7 +254,7 @@ public class RuntimeTag extends TagSupport {
 					portletInstance.getPortletInstanceKey(),
 					defaultPreferences);
 
-				writeJSONObject = true;
+				writeObject = true;
 			}
 
 			if (PortletPreferencesLocalServiceUtil.getPortletPreferencesCount(
@@ -277,10 +277,10 @@ public class RuntimeTag extends TagSupport {
 						themeDisplay.getPlid());
 				}
 
-				writeJSONObject = true;
+				writeObject = true;
 			}
 
-			if (writeJSONObject) {
+			if (writeObject) {
 				jsonObject = JSONFactoryUtil.createJSONObject();
 
 				PortletJSONUtil.populatePortletJSONObject(
