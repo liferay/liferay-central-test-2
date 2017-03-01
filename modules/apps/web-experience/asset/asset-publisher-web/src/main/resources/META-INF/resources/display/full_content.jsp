@@ -17,6 +17,14 @@
 <%@ include file="/init.jsp" %>
 
 <%
+String redirect = ParamUtil.getString(request, "redirect");
+
+if (Validator.isNull(redirect)) {
+	redirect = ParamUtil.getString(PortalUtil.getOriginalServletRequest(request), "redirect");
+}
+
+boolean showBackURL = GetterUtil.getBoolean(request.getAttribute("view.jsp-showBackURL"));
+
 List results = (List)request.getAttribute("view.jsp-results");
 
 int assetEntryIndex = ((Integer)request.getAttribute("view.jsp-assetEntryIndex")).intValue();
@@ -25,21 +33,12 @@ AssetEntry assetEntry = (AssetEntry)request.getAttribute("view.jsp-assetEntry");
 AssetRendererFactory<?> assetRendererFactory = (AssetRendererFactory<?>)request.getAttribute("view.jsp-assetRendererFactory");
 AssetRenderer<?> assetRenderer = (AssetRenderer<?>)request.getAttribute("view.jsp-assetRenderer");
 
-String assetEntryId = String.valueOf(assetEntry.getEntryId());
 String languageId = LanguageUtil.getLanguageId(request);
 
 String title = assetRenderer.getTitle(LocaleUtil.fromLanguageId(languageId));
 
 boolean print = ((Boolean)request.getAttribute("view.jsp-print")).booleanValue();
 boolean workflowEnabled = WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(assetEntry.getCompanyId(), assetEntry.getGroupId(), assetEntry.getClassName());
-
-String redirect = ParamUtil.getString(request, "redirect");
-
-if (Validator.isNull(redirect)) {
-	redirect = ParamUtil.getString(PortalUtil.getOriginalServletRequest(request), "redirect");
-}
-
-boolean showBackURL = GetterUtil.getBoolean(request.getAttribute("view.jsp-showBackURL"));
 
 assetPublisherDisplayContext.setLayoutAssetEntry(assetEntry);
 
