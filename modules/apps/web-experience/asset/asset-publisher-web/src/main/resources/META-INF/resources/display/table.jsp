@@ -40,7 +40,6 @@ PortletURL editPortletURL = assetRenderer.getURLEdit(liferayPortletRequest, life
 
 boolean viewInContext = ((Boolean)request.getAttribute("view.jsp-viewInContext")).booleanValue();
 
-String assetEntryId = String.valueOf(assetEntry.getEntryId());
 String viewURL = AssetPublisherHelper.getAssetViewURL(liferayPortletRequest, liferayPortletResponse, assetEntry, viewInContext);
 
 request.setAttribute("view.jsp-showIconLabel", false);
@@ -79,7 +78,7 @@ request.setAttribute("view.jsp-showIconLabel", false);
 
 			<tr>
 				<td class="clamp-horizontal content-column table-cell-content title-column" colspan="1">
-					<span class="asset-anchor lfr-asset-anchor" id="<%= assetEntryId %>"></span>
+					<span class="asset-anchor lfr-asset-anchor" id="<%= assetEntry.getEntryId() %>"></span>
 
 					<div class="clamp-container">
 						<span class="truncate-text">
