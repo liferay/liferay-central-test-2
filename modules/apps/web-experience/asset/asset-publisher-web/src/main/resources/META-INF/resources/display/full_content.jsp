@@ -25,6 +25,14 @@ if (Validator.isNull(redirect)) {
 
 boolean showBackURL = GetterUtil.getBoolean(request.getAttribute("view.jsp-showBackURL"));
 
+if (Validator.isNull(redirect)) {
+	PortletURL portletURL = renderResponse.createRenderURL();
+
+	portletURL.setParameter("mvcPath", "/view.jsp");
+
+	redirect = portletURL.toString();
+}
+
 List results = (List)request.getAttribute("view.jsp-results");
 
 int assetEntryIndex = ((Integer)request.getAttribute("view.jsp-assetEntryIndex")).intValue();
