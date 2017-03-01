@@ -130,12 +130,6 @@ public class ImageAdaptiveMediaDemo
 		_rootFolderDemoDataCreator = rootFolderDemoDataCreator;
 	}
 
-	private void _log(Object msg) {
-		if (_log.isInfoEnabled()) {
-			_log.info(msg);
-		}
-	}
-
 	private static final Log _log = LogFactoryUtil.getLog(
 		ImageAdaptiveMediaDemo.class);
 
