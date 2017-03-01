@@ -55,13 +55,15 @@ public class ImageAdaptiveMediaDemo
 		Folder nonAdaptiveMediaFolder = _rootFolderDemoDataCreator.create(
 			user.getUserId(), guestGroup.getGroupId(), "Non Adaptive Media");
 
-		_log("Images without adaptive-media:");
-
 		for (int i = 0; i < 5; i++) {
 			FileEntry fileEntry = _fileEntryDemoDataCreator.create(
 				user.getUserId(), nonAdaptiveMediaFolder.getFolderId());
 
-			_log(fileEntry.getFileEntryId());
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					"Non Adaptive Media Image created with file entry id " +
+						fileEntry.getFileEntryId());
+			}
 		}
 
 		_configurationDemoDataCreator.create(company.getCompanyId());
@@ -69,13 +71,15 @@ public class ImageAdaptiveMediaDemo
 		Folder adaptiveMediaFolder = _rootFolderDemoDataCreator.create(
 			user.getUserId(), guestGroup.getGroupId(), "Adaptive Media");
 
-		_log("Images with adaptive-media:");
-
 		for (int i = 0; i < 5; i++) {
 			FileEntry fileEntry = _fileEntryDemoDataCreator.create(
 				user.getUserId(), adaptiveMediaFolder.getFolderId());
 
-			_log(fileEntry.getFileEntryId());
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					"Adaptive Media Image created with file entry id " +
+						fileEntry.getFileEntryId());
+			}
 		}
 	}
 
