@@ -34,72 +34,72 @@ public class PortalSQLTransformer implements Transformer {
 
 	private static DB _db;
 
-	public static Function<String, String> noTransformationFunction =
+	public static final Function<String, String> TRANSFORMATION_FUNCTION_DEFAULT =
 		(String sql) -> sql;
 
-	public static Function<String, String>
-		bitwiseCheckDefaultTransformationFunction = noTransformationFunction;
-	public static final Pattern bitwiseCheckPattern = Pattern.compile(
+	public static final Function<String, String>
+		bitwiseCheckDefaultTransformationFunction = TRANSFORMATION_FUNCTION_DEFAULT;
+	public static final Pattern BITWISE_CHECK_PATTERN = Pattern.compile(
 		"BITAND\\((.+?),(.+?)\\)");
 
-	public static Function<String, String> bitwiseCheckTransformationFunction =
+	public static final Function<String, String> BITWISE_CHECK_TRANSFORMATION_FUNCTION =
 		(String sql) -> {
-			Matcher matcher = bitwiseCheckPattern.matcher(sql);
+			Matcher matcher = BITWISE_CHECK_PATTERN.matcher(sql);
 
 			return matcher.replaceAll("($1 & $2)");
 		};
 
-	public static Function<String, String> booleanTransformationFunction =
+	public static final Function<String, String> TRANSFORMATION_FUNCTION_BOOLEAN =
 		(String sql) -> StringUtil.replace(
 			sql, new String[] {"[$FALSE$]", "[$TRUE$]"},
 			new String[] {_db.getTemplateFalse(), _db.getTemplateTrue()});
-	public static final Pattern castClobTextPattern = Pattern.compile(
+	public static final Pattern PATTERN_CAST_CLOB_TEXT = Pattern.compile(
 		"CAST_CLOB_TEXT\\((.+?)\\)", Pattern.CASE_INSENSITIVE);
 
-	public static Function<String, String> castClobTextTransformationFunction =
+	public static final Function<String, String> CAST_CLOB_TEXT_TRANSFORMATION_FUNCTION =
 		(String sql) -> {
-			Matcher matcher = castClobTextPattern.matcher(sql);
+			Matcher matcher = PATTERN_CAST_CLOB_TEXT.matcher(sql);
 
 			return _replaceCastText(matcher);
 		};
 
-	public static final Pattern castLongPattern = Pattern.compile(
+	public static final Pattern PATTERN_CAST_LONG = Pattern.compile(
 		"CAST_LONG\\((.+?)\\)", Pattern.CASE_INSENSITIVE);
 
-	public static Function<String, String> castLongTransformationFunction =
+	public static final Function<String, String> CAST_LONG_TRANSFORMATION_FUNCTION =
 		(String sql) -> {
-			Matcher matcher = castLongPattern.matcher(sql);
+			Matcher matcher = PATTERN_CAST_LONG.matcher(sql);
 
 			return matcher.replaceAll("$1");
 		};
 
-	public static final Pattern castTextPattern = Pattern.compile(
+	public static final Pattern PATTERN_CAST_TEXT = Pattern.compile(
 		"CAST_TEXT\\((.+?)\\)", Pattern.CASE_INSENSITIVE);
-	public static Function<String, String> castTextTransformationFunction =
-		(String sql) -> _replaceCastText(castTextPattern.matcher(sql));
-	public static Function<String, String>
-		crossJoinDefaultTransformationFunction = noTransformationFunction;
-	public static Function<String, String> inStrDefaultTransformationFunction =
-		noTransformationFunction;
-	public static final Pattern instrPattern = Pattern.compile(
+	public static final Function<String, String> TRANSFORMATION_FUNCTION_CAST_TEXT =
+		(String sql) -> _replaceCastText(PATTERN_CAST_TEXT.matcher(sql));
+	public static final Function<String, String>
+		crossJoinDefaultTransformationFunction = TRANSFORMATION_FUNCTION_DEFAULT;
+	public static final Function<String, String> inStrDefaultTransformationFunction =
+		TRANSFORMATION_FUNCTION_DEFAULT;
+	public static final Pattern PATTERN_INSTR = Pattern.compile(
 		"INSTR\\((.+?),(.+?)\\)", Pattern.CASE_INSENSITIVE);
-	public static final Pattern integerDivisionPattern = Pattern.compile(
+	public static final Pattern PATTERN_INTEGER_DIVISION = Pattern.compile(
 		"INTEGER_DIV\\((.+?),(.+?)\\)", Pattern.CASE_INSENSITIVE);
 
-	public static Function<String, String>
-		integerDivisionTransformationFunction = (String sql) -> {
-			Matcher matcher = integerDivisionPattern.matcher(sql);
+	public static final Function<String, String>
+		TRANSFORMATION_FUNCTION_INTEGER_DIVISION = (String sql) -> {
+			Matcher matcher = PATTERN_INTEGER_DIVISION.matcher(sql);
 
 			return matcher.replaceAll("$1 / $2");
 		};
 
-	public static final Pattern modPattern = Pattern.compile(
+	public static final Pattern PATTERN_MOD = Pattern.compile(
 		"MOD\\((.+?),(.+?)\\)", Pattern.CASE_INSENSITIVE);
-	public static Function<String, String> nullDateTransformationFunction =
+	public static final Function<String, String> TRANSFORMATION_FUNCTION_NULL_DATE =
 		(String sql) -> StringUtil.replace(sql, "[$NULL_DATE$]", "NULL");
-	public static Function<String, String> substrDefaultTransformationFunction =
-		noTransformationFunction;
-	public static final Pattern substrPattern = Pattern.compile(
+	public static final Function<String, String> substrDefaultTransformationFunction =
+		TRANSFORMATION_FUNCTION_DEFAULT;
+	public static final Pattern PATTERN_SUBSTR = Pattern.compile(
 		"SUBSTR\\((.+?),(.+?),(.+?)\\)", Pattern.CASE_INSENSITIVE);
 
 	public static Transformer buildSQLTransformer(
@@ -118,20 +118,20 @@ public class PortalSQLTransformer implements Transformer {
 			return sql;
 		}
 
-		String newSQL = sql;
+		String modifiedSQL = sql;
 
 		for (Function<String, String> transformationFunction :
 				_transformationFunctions) {
 
-			newSQL = transformationFunction.apply(newSQL);
+			modifiedSQL = transformationFunction.apply(modifiedSQL);
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Original SQL " + sql);
-			_log.debug("Modified SQL " + newSQL);
+			_log.debug("Original SQL: " + sql);
+			_log.debug("Modified SQL: " + modifiedSQL);
 		}
 
-		return newSQL;
+		return modifiedSQL;
 	}
 
 	private final List<Function<String, String>> _transformationFunctions =
@@ -142,26 +142,26 @@ public class PortalSQLTransformer implements Transformer {
 
 		@Override
 		public TransformationFunctions bind(DB db) {
-			_transformer._setDb(db);
+			_portalSQLTransformer._setDb(db);
 
 			return this;
 		}
 
 		@Override
 		public Transformer build() {
-			return _transformer;
+			return _portalSQLTransformer;
 		}
 
 		@Override
 		public Build register(
 			Function<String, String>... transformationFunctions) {
 
-			_transformer._register(transformationFunctions);
+			_portalSQLTransformer._register(transformationFunctions);
 
 			return this;
 		}
 
-		private final PortalSQLTransformer _transformer =
+		private final PortalSQLTransformer _portalSQLTransformer =
 			new PortalSQLTransformer();
 
 	}

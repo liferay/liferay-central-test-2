@@ -38,21 +38,21 @@ public class HypersonicTransformationFunctionProvider
 	private static final Function<String, String>
 		_castClobTextTransformationFunction = (String sql) -> {
 			Pattern castClobTextPattern =
-				PortalSQLTransformer.castClobTextPattern;
+				PortalSQLTransformer.PATTERN_CAST_CLOB_TEXT;
 
 			return _replaceCastText(castClobTextPattern.matcher(sql));
 		};
 
 	private static final Function<String, String>
 		_castTextTransformationFunction = (String sql) -> {
-			Pattern castTextPattern = PortalSQLTransformer.castTextPattern;
+			Pattern castTextPattern = PortalSQLTransformer.PATTERN_CAST_TEXT;
 
 			return _replaceCastText(castTextPattern.matcher(sql));
 		};
 
 	private final Function<String, String> _castLongTransformationFunction =
 		(String sql) -> {
-			Matcher matcher = PortalSQLTransformer.castLongPattern.matcher(sql);
+			Matcher matcher = PortalSQLTransformer.PATTERN_CAST_LONG.matcher(sql);
 
 			return matcher.replaceAll("CONVERT($1, SQL_BIGINT)");
 		};
@@ -60,13 +60,13 @@ public class HypersonicTransformationFunctionProvider
 	private final Function<String, String>[] _transformationFunctions =
 		new Function[] {
 			PortalSQLTransformer.bitwiseCheckDefaultTransformationFunction,
-			PortalSQLTransformer.booleanTransformationFunction,
+			PortalSQLTransformer.TRANSFORMATION_FUNCTION_BOOLEAN,
 			_castClobTextTransformationFunction,
 			_castLongTransformationFunction, _castTextTransformationFunction,
 			PortalSQLTransformer.crossJoinDefaultTransformationFunction,
 			PortalSQLTransformer.inStrDefaultTransformationFunction,
-			PortalSQLTransformer.integerDivisionTransformationFunction,
-			PortalSQLTransformer.nullDateTransformationFunction,
+			PortalSQLTransformer.TRANSFORMATION_FUNCTION_INTEGER_DIVISION,
+			PortalSQLTransformer.TRANSFORMATION_FUNCTION_NULL_DATE,
 			PortalSQLTransformer.substrDefaultTransformationFunction
 		};
 
