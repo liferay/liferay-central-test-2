@@ -37,8 +37,8 @@ import javax.portlet.PortletPreferences;
 public class UpgradeLayoutType extends UpgradeProcess {
 
 	protected void addPortletPreferences(
-			long companyId, long groupId, long plid, String articleId,
-			String portletId)
+			long companyId, long groupId, long plid, String portletId,
+			String articleId)
 		throws Exception {
 
 		String portletPreferences = getPortletPreferences(groupId, articleId);
@@ -92,18 +92,19 @@ public class UpgradeLayoutType extends UpgradeProcess {
 		long resourcePrimKey = getResourcePrimKey(groupId, articleId);
 
 		if (resourcePrimKey == 0) {
-			throw new UpgradeException(
-				"Unable to find article with ID " + articleId);
+			throw new UpgradeException("Unable to get article " + articleId);
 		}
-
-		long assetEntryId = getAssetEntryId(resourcePrimKey);
 
 		PortletPreferences portletPreferences = new PortletPreferencesImpl();
 
-		portletPreferences.setValue("groupId", String.valueOf(groupId));
 		portletPreferences.setValue("articleId", articleId);
+
+		long assetEntryId = getAssetEntryId(resourcePrimKey);
+
 		portletPreferences.setValue(
 			"assetEntryId", String.valueOf(assetEntryId));
+
+		portletPreferences.setValue("groupId", String.valueOf(groupId));
 
 		return portletPreferences.toString();
 	}
@@ -113,10 +114,10 @@ public class UpgradeLayoutType extends UpgradeProcess {
 
 		try (PreparedStatement ps = connection.prepareStatement(
 				"select resourcePrimKey from JournalArticleResource where " +
-					"articleId = ? and groupId = ?")) {
+					"(groupId = ?) and (articleId = ?)")) {
 
-			ps.setString(1, articleId);
-			ps.setLong(2, groupId);
+			ps.setLong(1, groupId);
+			ps.setString(2, articleId);
 
 			try (ResultSet rs = ps.executeQuery()) {
 				while (rs.next()) {
@@ -132,7 +133,6 @@ public class UpgradeLayoutType extends UpgradeProcess {
 		UnicodeProperties newTypeSettings = new UnicodeProperties(true);
 
 		newTypeSettings.put("column-1", portletId);
-
 		newTypeSettings.put(
 			LayoutTypePortletConstants.LAYOUT_TEMPLATE_ID, "1_column");
 
@@ -154,24 +154,23 @@ public class UpgradeLayoutType extends UpgradeProcess {
 
 	protected void updateLayouts() throws Exception {
 		try (PreparedStatement ps = connection.prepareStatement(
-				"select companyId, groupId, plid, typeSettings from Layout " +
+				"select plid, groupId, companyId, typeSettings from Layout " +
 					"where type_ = ?")) {
 
 			ps.setString(1, "article");
 
 			try (ResultSet rs = ps.executeQuery()) {
 				while (rs.next()) {
-					long companyId = rs.getLong("companyId");
-					long groupId = rs.getLong("groupId");
 					long plid = rs.getLong("plid");
+					long groupId = rs.getLong("groupId");
+					long companyId = rs.getLong("companyId");
 					String typeSettings = rs.getString("typeSettings");
 
+					String portletId = getPortletId();
 					String articleId = getArticleId(typeSettings);
 
-					String portletId = getPortletId();
-
 					addPortletPreferences(
-						companyId, groupId, plid, articleId, portletId);
+						companyId, groupId, plid, portletId, articleId);
 
 					updateLayout(plid, portletId);
 				}
