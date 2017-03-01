@@ -194,7 +194,8 @@ public class HtmlContentTransformerImpl implements ContentTransformer<String> {
 		"(?i)\\s*data-fileEntryId=\"([0-9]*)\"";
 
 	private static final Pattern _IMG_PATTERN = Pattern.compile(
-		"<img .*?" + _ATTR_REGEX + ".*?/>", Pattern.CASE_INSENSITIVE);
+		"<img .*?" + _ATTR_REGEX + ".*?/>",
+		Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
 
 	private DLAppLocalService _dlAppLocalService;
 	private ImageAdaptiveMediaFinder _finder;

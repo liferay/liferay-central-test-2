@@ -137,6 +137,23 @@ public class HtmlContentTransformerImplTest {
 	}
 
 	@Test
+	public void testSupportsImageTagsWithNewLineCharacters() throws Exception {
+		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia =
+			_createAdaptiveMedia(_ADAPTIVE_WIDTH, _ADAPTIVE_URL);
+
+		Mockito.when(
+			_finder.getAdaptiveMedia(Mockito.any())
+		).thenAnswer(
+			invocation -> Stream.of(adaptiveMedia)
+		);
+
+		Assert.assertEquals(
+			_HTML_ADAPTIVE_PICTURE.replace("src=", "\nsrc="),
+			_htmlContentTransformer.transform(
+				_HTML_ADAPTABLE_IMG.replace("src=", "\nsrc=")));
+	}
+
+	@Test
 	public void testTheAttributeIsCaseInsensitive() throws Exception {
 		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia =
 			_createAdaptiveMedia(_ADAPTIVE_WIDTH, _ADAPTIVE_URL);
