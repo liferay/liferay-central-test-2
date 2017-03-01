@@ -22,6 +22,7 @@ import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
 import com.liferay.document.library.kernel.service.DLAppLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 
 import java.net.URI;
 
@@ -149,7 +150,7 @@ public class HtmlContentTransformerImplTest {
 		Assert.assertEquals(
 			_HTML_WITH_ADAPTIVE_PICTURE_TAG,
 			_htmlContentTransformer.transform(
-				_HTML_WITH_ADAPTABLE_PICTURES_LOWERCASE));
+				StringUtil.toLowerCase(_HTML_WITH_ADAPTABLE_PICTURES)));
 	}
 
 	private AdaptiveMedia<ImageAdaptiveMediaProcessor> _createAdaptiveMedia(
@@ -187,9 +188,6 @@ public class HtmlContentTransformerImplTest {
 	private static final String _HTML_ADAPTABLE_IMG =
 		"<img data-fileEntryId=\"" + _FILE_ENTRY_ID + "\" src=\"adaptable\"/>";
 
-	private static final String _HTML_ADAPTABLE_IMG_LOWERCASE =
-		"<img data-fileentryid=\"" + _FILE_ENTRY_ID + "\" src=\"adaptable\"/>";
-
 	private static final String _HTML_ADAPTABLE_IMG_WITHOUT_ATTR =
 		"<img src=\"adaptable\"/>";
 
@@ -200,9 +198,6 @@ public class HtmlContentTransformerImplTest {
 
 	private static final String _HTML_WITH_ADAPTABLE_PICTURES =
 		"<div><div>" + _HTML_ADAPTABLE_IMG + "</div></div><br/>";
-
-	private static final String _HTML_WITH_ADAPTABLE_PICTURES_LOWERCASE =
-		"<div><div>" + _HTML_ADAPTABLE_IMG_LOWERCASE + "</div></div><br/>";
 
 	private static final String _HTML_WITH_ADAPTIVE_PICTURE_TAG =
 		"<div><div>" + _HTML_ADAPTIVE_PICTURE + "</div></div><br/>";
