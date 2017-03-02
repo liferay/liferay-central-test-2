@@ -21,7 +21,6 @@ import com.liferay.document.library.kernel.model.DLFolderConstants;
 import com.liferay.document.library.kernel.service.DLAppLocalService;
 import com.liferay.document.library.kernel.util.DLUtil;
 import com.liferay.item.selector.ItemSelectorReturnTypeResolver;
-import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.messaging.Destination;
@@ -133,7 +132,8 @@ public class FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolverTest {
 
 			JSONObject jsonObject = JSONFactoryUtil.createJSONObject(value);
 
-			String defaultSource = jsonObject.getString("defaultSource");
+			String defaultSource = jsonObject.getString("url");
+			long fileEntryId = jsonObject.getLong("fileEntryId");
 
 			Assert.assertEquals(
 				DLUtil.getPreviewURL(
@@ -141,27 +141,7 @@ public class FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolverTest {
 					StringPool.BLANK, false, false),
 				defaultSource);
 
-			JSONArray sourcesJSONArray = jsonObject.getJSONArray("sources");
-
-			Assert.assertEquals(4, sourcesJSONArray.length());
-
-			_assertSrcSource(
-				sourcesJSONArray.getJSONObject(0), fileEntry.getFileEntryId(),
-				"uuid0");
-			_assertSrcSource(
-				sourcesJSONArray.getJSONObject(1), fileEntry.getFileEntryId(),
-				"uuid2");
-			_assertSrcSource(
-				sourcesJSONArray.getJSONObject(2), fileEntry.getFileEntryId(),
-				"uuid1");
-			_assertSrcSource(
-				sourcesJSONArray.getJSONObject(3), fileEntry.getFileEntryId(),
-				"uuid3");
-
-			_assertAttibutes(sourcesJSONArray.getJSONObject(0), 50, 0);
-			_assertAttibutes(sourcesJSONArray.getJSONObject(1), 200, 50);
-			_assertAttibutes(sourcesJSONArray.getJSONObject(2), 280, 200);
-			_assertAttibutes(sourcesJSONArray.getJSONObject(3), 330, 280);
+			Assert.assertEquals(fileEntry.getFileEntryId(), fileEntryId);
 		}
 	}
 
@@ -233,61 +213,6 @@ public class FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolverTest {
 
 		_configurationHelper.addImageAdaptiveMediaConfigurationEntry(
 			TestPropsValues.getCompanyId(), "extra", "uuid3", properties);
-	}
-
-	private void _assertAttibutes(
-		JSONObject sourceJSONObject, int expectedMaxWidth,
-		int expectedMinWidth) {
-
-		JSONObject attributesJSONObject = sourceJSONObject.getJSONObject(
-			"attributes");
-
-		JSONArray attributeNamesJSONArray = attributesJSONObject.names();
-
-		boolean assertedMaxWidth = false;
-		boolean assertedMinWidth = false;
-
-		for (int i = 0; i < attributeNamesJSONArray.length(); i++) {
-			String key = attributeNamesJSONArray.getString(i);
-
-			Assert.assertTrue(
-				"Unexpected attribute found '" + key + "'",
-				key.equals("max-width") || key.equals("min-width"));
-
-			String value = attributesJSONObject.getString(key);
-
-			if (key.equals("max-width")) {
-				Assert.assertEquals(expectedMaxWidth + "px", value);
-
-				assertedMaxWidth = true;
-			}
-			else if (key.equals("min-width")) {
-				Assert.assertEquals(expectedMinWidth + "px", value);
-
-				assertedMinWidth = true;
-			}
-		}
-
-		Assert.assertTrue(
-			"Couldn't find expected max-width of '" + expectedMaxWidth +
-				"' in '" + sourceJSONObject.toString() + "'",
-			(expectedMaxWidth == 0) || assertedMaxWidth);
-		Assert.assertTrue(
-			"Couldn't find expected min-width of '" + expectedMinWidth +
-				"' in '" + sourceJSONObject.toString() + "'",
-			(expectedMinWidth == 0) || assertedMinWidth);
-	}
-
-	private void _assertSrcSource(
-		JSONObject sourceJSONObject, long fileEntryId,
-		String configurationEntryUuid) {
-
-		String srcSource = sourceJSONObject.getString("src");
-
-		Assert.assertTrue(
-			srcSource.startsWith(
-				"/o/adaptive-media/image/" + fileEntryId + "/" +
-					configurationEntryUuid + "/"));
 	}
 
 	private byte[] _getImageBytes() throws Exception {
