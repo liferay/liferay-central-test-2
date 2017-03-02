@@ -213,17 +213,6 @@ configure(subprojects.findAll {!it.childProjects}) {
 		systemProperty "java.io.tmpdir", "${rootDir}/build/tmpdir"
 	}
 
-	task deployLibs(type: Copy) {
-		from "${projectDir}/libs"
-		exclude '*-javadoc.jar'
-		exclude '*-sources.jar'
-		into liferay.deployDir
-		rename {
-			String fileName ->
-				fileName.replaceAll("(.*)-((\\d\\.{1})*\\d)\\.jar", "\$1.jar")
-		}
-	}
-
 	task deployRuntimeLibs(type: Copy) {
 		into liferay.deployDir
 		from configurations.runtimeLib
@@ -234,7 +223,6 @@ configure(subprojects.findAll {!it.childProjects}) {
 	}
 
 	runDocker.dependsOn deploy
-	runDocker.dependsOn deployLibs
 	runDocker.dependsOn deployRuntimeLibs
 
 	if (project.hasProperty('docker')) {
