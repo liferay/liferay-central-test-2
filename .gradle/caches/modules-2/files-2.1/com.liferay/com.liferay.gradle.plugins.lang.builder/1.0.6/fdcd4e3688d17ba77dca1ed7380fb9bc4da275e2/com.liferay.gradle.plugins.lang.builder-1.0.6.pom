@@ -4,7 +4,8 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.liferay</groupId>
   <artifactId>com.liferay.gradle.plugins.lang.builder</artifactId>
-  <version>1.0.5</version>
+  <version>1.0.6</version>
+  <description>Liferay Gradle Plugins Lang Builder</description>
   <licenses>
     <license>
       <name>LGPL 2.1</name>
@@ -24,12 +25,6 @@
     <url>http://github.com/liferay/liferay-plugins</url>
   </scm>
   <dependencies>
-    <dependency>
-      <groupId>com.liferay</groupId>
-      <artifactId>com.liferay.lang.builder</artifactId>
-      <version>1.0.7</version>
-      <scope>provided</scope>
-    </dependency>
     <dependency>
       <groupId>com.liferay</groupId>
       <artifactId>com.liferay.gradle.util</artifactId>
