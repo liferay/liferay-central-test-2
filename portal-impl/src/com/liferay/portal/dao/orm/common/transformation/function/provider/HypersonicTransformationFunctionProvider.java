@@ -59,15 +59,11 @@ public class HypersonicTransformationFunctionProvider
 
 	private final Function<String, String>[] _transformationFunctions =
 		new Function[] {
-			PortalSQLTransformer.bitwiseCheckDefaultTransformationFunction,
 			PortalSQLTransformer.TRANSFORMATION_FUNCTION_BOOLEAN,
 			_castClobTextTransformationFunction,
 			_castLongTransformationFunction, _castTextTransformationFunction,
-			PortalSQLTransformer.crossJoinDefaultTransformationFunction,
-			PortalSQLTransformer.inStrDefaultTransformationFunction,
 			PortalSQLTransformer.TRANSFORMATION_FUNCTION_INTEGER_DIVISION,
-			PortalSQLTransformer.TRANSFORMATION_FUNCTION_NULL_DATE,
-			PortalSQLTransformer.substrDefaultTransformationFunction
+			PortalSQLTransformer.TRANSFORMATION_FUNCTION_NULL_DATE
 		};
 
 }
