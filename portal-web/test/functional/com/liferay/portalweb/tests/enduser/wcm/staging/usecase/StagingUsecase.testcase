@@ -3313,9 +3313,7 @@
 		</execute>
 	</command>
 
-	<!-- LPS-69254 -->
-
-	<!--<command name="StagingPublishPage" priority="5">
+	<command name="StagingPublishPage" priority="5">
 		<execute macro="ProductMenu#gotoControlPanelSites">
 			<var name="portlet" value="Sites" />
 		</execute>
@@ -3486,7 +3484,7 @@
 		<execute macro="Portlet#viewPG">
 			<var name="portletName" value="Wiki" />
 		</execute>
-	</command>-->
+	</command>
 
 	<command name="StagingRemoteDocumentSubtypeViaAP" priority="3">
 		<property name="custom.properties" value="tunneling.servlet.shared.secret=1234567890123456${line.separator}auth.verifier.TunnelAuthVerifier.hosts.allowed=" />
