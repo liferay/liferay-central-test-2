@@ -153,12 +153,12 @@ public class DDMExpressionImpl<T> implements DDMExpression<T> {
 	public void setIntegerVariableValue(
 		String variableName, Integer variableValue) {
 
-		setVariableValue(variableName, variableValue.intValue());
+		setVariableValue(variableName, variableValue.doubleValue());
 	}
 
 	@Override
 	public void setLongVariableValue(String variableName, Long variableValue) {
-		setVariableValue(variableName, variableValue.longValue());
+		setVariableValue(variableName, variableValue.doubleValue());
 	}
 
 	/**
