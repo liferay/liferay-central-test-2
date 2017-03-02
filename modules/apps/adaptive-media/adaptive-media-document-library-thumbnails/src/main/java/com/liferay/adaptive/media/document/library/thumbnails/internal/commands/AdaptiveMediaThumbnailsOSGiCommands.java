@@ -174,14 +174,8 @@ public class AdaptiveMediaThumbnailsOSGiCommands {
 				Collectors.toList());
 		}
 
-<<<<<<< 1d9fd4f3b1256bf3b4e4798320fbeb0ba8d9bdf0
 		return Arrays.stream(companyIds).map(Long::parseLong).collect(
 			Collectors.toList());
-=======
-		Stream<String> stream = Stream.of(companyIds);
-
-		return stream.map(Long::parseLong).collect(Collectors.toList());
->>>>>>> LPS-70921 SF - Silence chaining warning
 	}
 
 	private FileVersion _getFileVersion(String fileName)
