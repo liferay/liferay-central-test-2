@@ -911,18 +911,18 @@ public abstract class JournalArticleServiceBaseImpl extends BaseServiceImpl
 	}
 
 	/**
-	 * Returns the d l app local service.
+	 * Returns the dl app local service.
 	 *
-	 * @return the d l app local service
+	 * @return the dl app local service
 	 */
 	public com.liferay.document.library.kernel.service.DLAppLocalService getDLAppLocalService() {
 		return dlAppLocalService;
 	}
 
 	/**
-	 * Sets the d l app local service.
+	 * Sets the dl app local service.
 	 *
-	 * @param dlAppLocalService the d l app local service
+	 * @param dlAppLocalService the dl app local service
 	 */
 	public void setDLAppLocalService(
 		com.liferay.document.library.kernel.service.DLAppLocalService dlAppLocalService) {
@@ -930,18 +930,18 @@ public abstract class JournalArticleServiceBaseImpl extends BaseServiceImpl
 	}
 
 	/**
-	 * Returns the d l app remote service.
+	 * Returns the dl app remote service.
 	 *
-	 * @return the d l app remote service
+	 * @return the dl app remote service
 	 */
 	public com.liferay.document.library.kernel.service.DLAppService getDLAppService() {
 		return dlAppService;
 	}
 
 	/**
-	 * Sets the d l app remote service.
+	 * Sets the dl app remote service.
 	 *
-	 * @param dlAppService the d l app remote service
+	 * @param dlAppService the dl app remote service
 	 */
 	public void setDLAppService(
 		com.liferay.document.library.kernel.service.DLAppService dlAppService) {
