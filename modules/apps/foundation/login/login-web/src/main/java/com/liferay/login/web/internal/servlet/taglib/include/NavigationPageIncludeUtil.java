@@ -56,7 +56,6 @@ public class NavigationPageIncludeUtil {
 		_postPageIncludes = ServiceTrackerListFactory.open(
 			bundleContext, PageInclude.class,
 			"(login.web.navigation.position=post)");
-
 		_prePageIncludes = ServiceTrackerListFactory.open(
 			bundleContext, PageInclude.class,
 			"(login.web.navigation.position=pre)");
