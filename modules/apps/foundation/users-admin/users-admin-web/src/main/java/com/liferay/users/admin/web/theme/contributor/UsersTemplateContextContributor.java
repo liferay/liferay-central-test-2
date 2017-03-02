@@ -76,6 +76,7 @@ public class UsersTemplateContextContributor
 		contextObjects.put(
 			"user_greeting", HtmlUtil.escape(user.getGreeting()));
 		contextObjects.put("user_id", user.getUserId());
+		contextObjects.put("user_initialized", true);
 		contextObjects.put("user_last_login_ip", user.getLastLoginIP());
 		contextObjects.put("user_last_name", user.getLastName());
 		contextObjects.put("user_login_ip", user.getLoginIP());
@@ -98,8 +99,6 @@ public class UsersTemplateContextContributor
 		contextObjects.put(
 			"w3c_language_id",
 			LocaleUtil.toW3cLanguageId(themeDisplay.getLanguageId()));
-
-		contextObjects.put("user_initialized", true);
 	}
 
 	@Reference(unbind = "-")
