@@ -100,7 +100,7 @@ public class HtmlContentTransformerImpl implements ContentTransformer<String> {
 		AdaptiveMedia<ImageAdaptiveMediaProcessor> previousAdaptiveMedia) {
 
 		return _getWidth(adaptiveMedia).map(width -> {
-			String constraints = "max-width:" + width + "px";
+			String constraints = "(max-width:" + width + "px)";
 
 			if (previousAdaptiveMedia != null) {
 				Optional<Integer> widthOptional = _getWidth(
@@ -108,10 +108,10 @@ public class HtmlContentTransformerImpl implements ContentTransformer<String> {
 
 				constraints += widthOptional.map(
 					previousWidth ->
-						" and min-width:" + previousWidth + "px").orElse("");
+						" and (min-width:" + previousWidth + "px)").orElse("");
 			}
 
-			return "(" + constraints + ")";
+			return constraints;
 		});
 	}
 

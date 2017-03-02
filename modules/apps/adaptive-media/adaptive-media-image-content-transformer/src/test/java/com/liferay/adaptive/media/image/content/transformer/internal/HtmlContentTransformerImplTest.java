@@ -70,6 +70,25 @@ public class HtmlContentTransformerImplTest {
 	}
 
 	@Test
+	public void testAppliesSeveralMediaQueries() throws Exception {
+		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia1 =
+			_createAdaptiveMedia(_ADAPTIVE_MIN_WIDTH, _ADAPTIVE_URL_SMALL);
+
+		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia2 =
+			_createAdaptiveMedia(_ADAPTIVE_WIDTH, _ADAPTIVE_URL);
+
+		Mockito.when(
+			_finder.getAdaptiveMedia(Mockito.any())
+		).thenReturn(
+			Stream.of(adaptiveMedia1, adaptiveMedia2)
+		);
+
+		Assert.assertEquals(
+			_HTML_ADAPTIVE_PICTURE_WITH_TWO_SOURCES,
+			_htmlContentTransformer.transform(_HTML_ADAPTABLE_IMG));
+	}
+
+	@Test
 	public void testReplacesTheAdaptableImagesWithTheAdaptivePictureTag()
 		throws Exception {
 
@@ -196,7 +215,12 @@ public class HtmlContentTransformerImplTest {
 		return text + StringPool.NEW_LINE + text;
 	}
 
+	private static final int _ADAPTIVE_MIN_WIDTH = 1986;
+
 	private static final String _ADAPTIVE_URL = "http://very.adaptive.com";
+
+	private static final String _ADAPTIVE_URL_SMALL =
+		"http://small.very.adaptive.com";
 
 	private static final int _ADAPTIVE_WIDTH = 1989;
 
@@ -212,6 +236,14 @@ public class HtmlContentTransformerImplTest {
 		"<picture><source media=\"(max-width:" + _ADAPTIVE_WIDTH + "px)\" " +
 			"srcset=\"" + _ADAPTIVE_URL + "\"/>" +
 				_HTML_ADAPTABLE_IMG_WITHOUT_ATTR + "</picture>";
+
+	private static final String _HTML_ADAPTIVE_PICTURE_WITH_TWO_SOURCES =
+		"<picture><source media=\"(max-width:" + _ADAPTIVE_MIN_WIDTH +
+			"px)\" srcset=\"" + _ADAPTIVE_URL_SMALL + "\"/><source media=\"" +
+				"(max-width:" + _ADAPTIVE_WIDTH + "px) and (min-width:" +
+					_ADAPTIVE_MIN_WIDTH + "px)\" srcset=\"" + _ADAPTIVE_URL +
+						"\"/>" + _HTML_ADAPTABLE_IMG_WITHOUT_ATTR +
+							"</picture>";
 
 	private static final String _HTML_WITH_ADAPTABLE_PICTURES =
 		"<div><div>" + _HTML_ADAPTABLE_IMG + "</div></div><br/>";
