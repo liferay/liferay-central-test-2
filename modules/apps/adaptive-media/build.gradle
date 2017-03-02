@@ -37,8 +37,8 @@ def isAlreadyLoggedIn() {
 
 	if (dockerConfigFile.exists()) {
 		String dockerConfigContent = new String(
-				Files.readAllBytes(dockerConfigFile.toPath()),
-				Charset.forName("UTF-8"));
+			Files.readAllBytes(dockerConfigFile.toPath()),
+			Charset.forName("UTF-8"));
 
 		if (dockerConfigContent.contains("https://index.docker.io/v1/")) {
 			loggedIn = true;
@@ -67,8 +67,9 @@ task loginDocker << {
 
 				if (System.console() == null) {
 					throw new Exception(
-							"It is not possible to read docker credentials")
-				} else {
+						"It is not possible to read docker credentials")
+				}
+				else {
 					println "Using system in to prompt for docker user and password"
 
 					println "Please enter docker user:"
@@ -78,31 +79,32 @@ task loginDocker << {
 					dockerUser = new String(dockerUser)
 
 					char[] dockerPwdCharArray = System.console().
-							readPassword("Please enter docker password:")
+						readPassword("Please enter docker password:")
 
 					dockerPwd = new String(dockerPwdCharArray)
 				}
-
-			} else {
+			}
+			else {
 				println "Using DOCKER_USER and DOCKER_PWD environment variables"
 			}
 
 			if (dockerUser.size() <= 0) {
 				throw new Exception(
-						"You must enter docker user or set DOCKER_USER " +
-								"environment variable to proceed.")
+					"You must enter docker user or set DOCKER_USER " +
+						"environment variable to proceed.")
 			}
 
 			if (dockerPwd.size() <= 0) {
 				throw new Exception(
-						"You must enter docker password or set DOCKER_PWD " +
-								"environment variable to proceed.")
+					"You must enter docker password or set DOCKER_PWD " +
+						"environment variable to proceed.")
 			}
 
 			commandLine 'docker', 'login', "--username=$dockerUser",
 					"--password=$dockerPwd"
 
-		} else {
+		}
+		else {
 			commandLine 'echo', "User already logged in in docker"
 		}
 	}
@@ -111,7 +113,9 @@ task loginDocker << {
 task checkDocker() {
 	doLast {
 		def url = "http://localhost:8080";
+
 		println("Trying to reach " + url);
+
 		while (true) {
 			try {
 				print(".");
@@ -155,18 +159,18 @@ task runDocker(type: Exec) {
 	}
 
 	commandLine 'docker', 'run',
-			'-h', "localhost",
-			'-e', "JAVA_OPTS=$javaOpts",
-			'-p', '5005:5005',
-			'-p', '8080:8080',
-			'-p', '8099:8099',
-			'-p', '11311:11311',
-			'-v', "${rootDir}/../bundles/deploy:/liferay/deploy",
-			'-v', "${rootDir}/docker/portal-ext.properties:/liferay/portal-ext.properties",
-			'-v', "${rootDir}/build/tmpdir:${rootDir}/build/tmpdir",
-			'-d',
-			'--name', "com-liferay-adaptive-media",
-			'liferay/liferay-de:20170228072932334161125-db'
+		'-h', "localhost",
+		'-e', "JAVA_OPTS=$javaOpts",
+		'-p', '5005:5005',
+		'-p', '8080:8080',
+		'-p', '8099:8099',
+		'-p', '11311:11311',
+		'-v', "${rootDir}/../bundles/deploy:/liferay/deploy",
+		'-v', "${rootDir}/docker/portal-ext.properties:/liferay/portal-ext.properties",
+		'-v', "${rootDir}/build/tmpdir:${rootDir}/build/tmpdir",
+		'-d',
+		'--name', "com-liferay-adaptive-media",
+		'liferay/liferay-de:20170228072932334161125-db'
 
 	finalizedBy checkDocker
 }
@@ -214,16 +218,18 @@ configure(subprojects.findAll {!it.childProjects}) {
 		exclude '*-javadoc.jar'
 		exclude '*-sources.jar'
 		into liferay.deployDir
-		rename { String fileName ->
-			fileName.replaceAll("(.*)-((\\d\\.{1})*\\d)\\.jar", "\$1.jar")
+		rename {
+			String fileName ->
+				fileName.replaceAll("(.*)-((\\d\\.{1})*\\d)\\.jar", "\$1.jar")
 		}
 	}
 
 	task deployRuntimeLibs(type: Copy) {
 		into liferay.deployDir
 		from configurations.runtimeLib
-		rename { String fileName ->
-			fileName.replaceAll("(.*)-((\\d\\.{1})*\\d)\\.jar", "\$1.jar")
+		rename {
+			String fileName ->
+				fileName.replaceAll("(.*)-((\\d\\.{1})*\\d)\\.jar", "\$1.jar")
 		}
 	}
 
@@ -234,6 +240,7 @@ configure(subprojects.findAll {!it.childProjects}) {
 	if (project.hasProperty('docker')) {
 		setUpTestableTomcat.enabled = false
 	}
+
 	startTestableTomcat.enabled = false
 	stopTestableTomcat.enabled = false
 }
