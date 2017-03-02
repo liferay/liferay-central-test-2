@@ -187,7 +187,7 @@ for (Locale availableLocale : LanguageUtil.getAvailableLocales(themeDisplay.getS
 			try {
 				content = JSON.parse(content);
 			}
-			catch(e) {
+			catch (e) {
 				displayWarning('<%= UnicodeLanguageUtil.get(resourceBundle, "you-have-entered-invalid-json") %>');
 
 				return;
