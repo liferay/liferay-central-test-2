@@ -71,8 +71,8 @@ public class AnonymousNavigationPrePageInclude implements PageInclude {
 
 		renderURLTag.addParam(
 			"mvcRenderCommandName", "/login/create_anonymous_account");
-		renderURLTag.setWindowState(WindowState.MAXIMIZED.toString());
 		renderURLTag.setVar("anonymousURL");
+		renderURLTag.setWindowState(WindowState.MAXIMIZED.toString());
 
 		renderURLTag.doTag(pageContext);
 
