@@ -48,7 +48,6 @@
 </#if>
 
 <#assign
-
 	time_zone = user.getTimeZoneId()
 	is_login_redirect_required = portalUtil.isLoginRedirectRequired(request)
 	is_signed_in = theme_display.isSignedIn()
