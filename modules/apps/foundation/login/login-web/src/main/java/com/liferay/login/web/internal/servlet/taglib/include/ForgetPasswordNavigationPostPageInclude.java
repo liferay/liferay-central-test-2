@@ -67,8 +67,8 @@ public class ForgetPasswordNavigationPostPageInclude implements PageInclude {
 		renderURLTag.setPageContext(pageContext);
 
 		renderURLTag.addParam("mvcRenderCommandName", "/login/forgot_password");
-		renderURLTag.setWindowState(WindowState.MAXIMIZED.toString());
 		renderURLTag.setVar("forgotPasswordURL");
+		renderURLTag.setWindowState(WindowState.MAXIMIZED.toString());
 
 		renderURLTag.doTag(pageContext);
 
