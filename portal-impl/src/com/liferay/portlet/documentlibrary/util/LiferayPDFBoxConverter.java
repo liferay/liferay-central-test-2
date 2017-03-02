@@ -22,12 +22,10 @@ import java.awt.image.RenderedImage;
 
 import java.io.File;
 
-import java.util.List;
-
 import javax.imageio.ImageIO;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDDocumentCatalog;
+import org.apache.pdfbox.pdmodel.PDPageTree;
 import org.apache.pdfbox.pdmodel.PDPage;
 
 /**
@@ -54,13 +52,12 @@ public class LiferayPDFBoxConverter {
 
 	public void generateImagesPB() throws Exception {
 		try (PDDocument pdDocument = PDDocument.load(_inputFile)) {
-			PDDocumentCatalog pdDocumentCatalog =
-				pdDocument.getDocumentCatalog();
+			PDPageTree pages = pdDocument.getPages();
 
-			List<PDPage> pdPages = pdDocumentCatalog.getAllPages();
+			int count = pages.getCount();
 
-			for (int i = 0; i < pdPages.size(); i++) {
-				PDPage pdPage = pdPages.get(i);
+			for (int i = 0; i < count; i++) {
+				PDPage pdPage = pages.get(i);
 
 				if (_generateThumbnail && (i == 0)) {
 					_generateImagesPB(
