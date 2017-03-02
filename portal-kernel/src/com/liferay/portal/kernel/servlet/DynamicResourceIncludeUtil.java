@@ -33,6 +33,7 @@ public class DynamicResourceIncludeUtil {
 		for (ServletContext servletContext : _servletContexts) {
 			if (Validator.isNotNull(servletContext.getContextPath()) &&
 				path.startsWith(servletContext.getContextPath())) {
+
 				return servletContext;
 			}
 		}
