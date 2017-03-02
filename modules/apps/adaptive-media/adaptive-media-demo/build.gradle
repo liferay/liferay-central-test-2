@@ -1,5 +1,5 @@
 dependencies {
-	provided fileTree(dir: 'libs', include: ['*.jar'])
+	provided fileTree(dir: "libs", include: ["*.jar"])
 }
 
 dependencies {

@@ -28,12 +28,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.Invocation;
-import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
 
 import org.jboss.arquillian.container.test.api.RunAsClient;
@@ -190,11 +188,11 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 	@Test
 	public void testGetConfigurationsListsDisabledIfParam() throws Exception {
 		Map<String, JsonObject> configurations = _putConfigurations(
-				_configurationJsonObjects);
+			_configurationJsonObjects);
 
 		Invocation.Builder builder =
-				ImageAdaptiveMediaTestUtil.getConfigurationRequest(
-						webTarget -> webTarget.queryParam("enabled", false));
+			ImageAdaptiveMediaTestUtil.getConfigurationRequest(
+				webTarget -> webTarget.queryParam("enabled", false));
 
 		JsonArray responseJsonArray = builder.get(JsonArray.class);
 
@@ -210,11 +208,11 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 	@Test
 	public void testGetConfigurationsListsOnlyEnabled() throws Exception {
 		Map<String, JsonObject> configurations = _putConfigurations(
-				_configurationJsonObjects);
+			_configurationJsonObjects);
 
 		Invocation.Builder builder =
-				ImageAdaptiveMediaTestUtil.getConfigurationRequest(
-						webTarget -> webTarget.queryParam("enabled", true));
+			ImageAdaptiveMediaTestUtil.getConfigurationRequest(
+				webTarget -> webTarget.queryParam("enabled", true));
 
 		JsonArray responseJsonArray = builder.get(JsonArray.class);
 
@@ -258,38 +256,12 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 		return Math.abs(new Random().nextLong() % 1000);
 	}
 
-	private JsonObject _putConfiguration(JsonObject jsonObject) {
-		return _getAuthenticatedInvocationBuilder(_getId(jsonObject)).put(
-			Entity.json(jsonObject), JsonObject.class);
-	}
-
-	private Response _deleteConfiguration(JsonObject jsonObject) {
-		return _getAuthenticatedInvocationBuilder(_getId(jsonObject)).delete();
-	}
-
-	private Map<String, JsonObject> _putConfigurations(
-		List<JsonObject> configurationJsonObjects) {
-
-		Map<String, JsonObject> configurationJsonObjectMap = new HashMap<>();
-
-		configurationJsonObjects.forEach(
-			configurationJsonObject -> {
-				configurationJsonObjectMap.put(
-					_getId(configurationJsonObject), configurationJsonObject);
-
-				_putConfiguration(configurationJsonObject);
-			});
-
-		return configurationJsonObjectMap;
-	}
-
 	private void _assertConfigurations(
 			Map<String, JsonObject> configurationsMap,
 			JsonArray responseJsonArray)
 		throws Exception {
 
-		Assert.assertEquals(
-				configurationsMap.size(), responseJsonArray.size());
+		Assert.assertEquals(configurationsMap.size(), responseJsonArray.size());
 
 		for (JsonElement responseJsonElement : responseJsonArray) {
 			JsonObject responseJsonObject =
@@ -320,6 +292,10 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 
 				_deleteConfiguration(jsonObject);
 			});
+	}
+
+	private Response _deleteConfiguration(JsonObject jsonObject) {
+		return _getAuthenticatedInvocationBuilder(_getId(jsonObject)).delete();
 	}
 
 	private Invocation.Builder _getAuthenticatedInvocationBuilder(String id) {
@@ -360,6 +336,27 @@ public class ImageAdaptiveMediaJaxRsConfigurationTest {
 	private Invocation.Builder _getUnauthenticatedInvocationBuilder(String id) {
 		return ImageAdaptiveMediaTestUtil.getConfigurationRequest(
 			webTarget -> webTarget.path("/{id}").resolveTemplate("id", id));
+	}
+
+	private JsonObject _putConfiguration(JsonObject jsonObject) {
+		return _getAuthenticatedInvocationBuilder(_getId(jsonObject)).put(
+			Entity.json(jsonObject), JsonObject.class);
+	}
+
+	private Map<String, JsonObject> _putConfigurations(
+		List<JsonObject> configurationJsonObjects) {
+
+		Map<String, JsonObject> configurationJsonObjectMap = new HashMap<>();
+
+		configurationJsonObjects.forEach(
+			configurationJsonObject -> {
+				configurationJsonObjectMap.put(
+					_getId(configurationJsonObject), configurationJsonObject);
+
+				_putConfiguration(configurationJsonObject);
+			});
+
+		return configurationJsonObjectMap;
 	}
 
 	private static final List<JsonObject> _configurationJsonObjects =
