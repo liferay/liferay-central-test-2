@@ -440,13 +440,7 @@ public class DDMFormEvaluatorHelper {
 
 			String dataType = ddmFormField.getDataType();
 
-			if (ddmFormField.getDataType().equals(FieldConstants.INTEGER)) {
-				if (Validator.isNotNull(valueString)) {
-					ddmExpression.setIntegerVariableValue(
-						ddmFormFieldName, GetterUtil.getInteger(valueString));
-				}
-			}
-			else if (ddmFormField.getDataType().equals(FieldConstants.DOUBLE)) {
+			if (FieldConstants.isNumericType(ddmFormField.getDataType())) {
 				if (Validator.isNotNull(valueString)) {
 					ddmExpression.setDoubleVariableValue(
 						ddmFormFieldName, GetterUtil.getDouble(valueString));
