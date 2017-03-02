@@ -108,7 +108,7 @@ public class PathInterpreter {
 		throws PortalException {
 
 		if (fileVersionId == 0) {
-			return fileEntry.getLatestFileVersion();
+			return fileEntry.getFileVersion();
 		}
 
 		return _dlAppLocalService.getFileVersion(fileVersionId);

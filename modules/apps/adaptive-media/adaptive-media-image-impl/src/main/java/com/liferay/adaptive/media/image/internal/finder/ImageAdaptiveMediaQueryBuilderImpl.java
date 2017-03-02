@@ -156,7 +156,7 @@ public class ImageAdaptiveMediaQueryBuilderImpl
 			return _fileVersion;
 		}
 
-		_fileVersion = _fileEntry.getLatestFileVersion(true);
+		_fileVersion = _fileEntry.getFileVersion();
 
 		return _fileVersion;
 	}

@@ -140,8 +140,7 @@ public class AdaptiveMediaThumbnailsOSGiCommandsTest {
 		_configurationHelper.forceDeleteImageAdaptiveMediaConfigurationEntry(
 			_company.getCompanyId(), _THUMBNAIL_CONFIGURATION);
 
-		FileVersion latestFileVersion = _pngFileEntry.getLatestFileVersion(
-			true);
+		FileVersion latestFileVersion = _pngFileEntry.getFileVersion();
 
 		AdaptiveMediaImageLocalServiceUtil.deleteAdaptiveMediaImageFileVersion(
 			latestFileVersion.getFileVersionId());

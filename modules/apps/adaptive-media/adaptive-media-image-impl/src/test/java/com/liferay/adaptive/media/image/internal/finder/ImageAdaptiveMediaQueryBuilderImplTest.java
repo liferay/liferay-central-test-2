@@ -45,7 +45,7 @@ public class ImageAdaptiveMediaQueryBuilderImplTest {
 		_queryBuilder.allForFileEntry(fileEntry);
 
 		Assert.assertEquals(
-			fileEntry.getLatestFileVersion(), _queryBuilder.getFileVersion());
+			fileEntry.getFileVersion(), _queryBuilder.getFileVersion());
 	}
 
 	@Test
@@ -57,7 +57,7 @@ public class ImageAdaptiveMediaQueryBuilderImplTest {
 		_queryBuilder.forFileEntry(fileEntry).done();
 
 		Assert.assertEquals(
-			fileEntry.getLatestFileVersion(), _queryBuilder.getFileVersion());
+			fileEntry.getFileVersion(), _queryBuilder.getFileVersion());
 	}
 
 	@Test

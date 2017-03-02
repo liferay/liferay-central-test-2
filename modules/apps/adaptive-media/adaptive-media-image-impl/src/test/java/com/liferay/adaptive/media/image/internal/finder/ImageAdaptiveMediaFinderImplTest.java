@@ -65,7 +65,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 	}
 
 	@Test(expected = PortalException.class)
-	public void testFileEntryGetLatestFileVersionFails() throws Exception {
+	public void testFileEntryGetFileVersionFails() throws Exception {
 		ImageAdaptiveMediaConfigurationEntry configurationEntry =
 			new ImageAdaptiveMediaConfigurationEntryImpl(
 				StringUtil.randomString(), StringUtil.randomString(),
@@ -84,7 +84,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 		);
 
 		Mockito.when(
-			_fileEntry.getLatestFileVersion()
+			_fileEntry.getFileVersion()
 		).thenThrow(
 			PortalException.class
 		);
@@ -123,7 +123,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 		);
 
 		Mockito.when(
-			_fileEntry.getLatestFileVersion()
+			_fileEntry.getFileVersion()
 		).thenReturn(
 			_fileVersion
 		);

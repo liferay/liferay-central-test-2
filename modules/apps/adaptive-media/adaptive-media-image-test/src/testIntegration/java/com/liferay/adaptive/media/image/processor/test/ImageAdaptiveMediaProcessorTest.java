@@ -183,7 +183,7 @@ public class ImageAdaptiveMediaProcessorTest {
 
 			final FileEntry fileEntry = _addImageFileEntry(serviceContext);
 
-			_processor.cleanUp(fileEntry.getLatestFileVersion());
+			_processor.cleanUp(fileEntry.getLatestFileVersion(true));
 
 			Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream =
 				_finder.getAdaptiveMedia(
@@ -205,7 +205,7 @@ public class ImageAdaptiveMediaProcessorTest {
 
 			final FileEntry fileEntry = _addNonImageFileEntry(serviceContext);
 
-			_processor.cleanUp(fileEntry.getLatestFileVersion());
+			_processor.cleanUp(fileEntry.getLatestFileVersion(true));
 
 			Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream =
 				_finder.getAdaptiveMedia(

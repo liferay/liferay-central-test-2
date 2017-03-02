@@ -55,7 +55,7 @@ public class PathInterpreterTest {
 		);
 
 		Mockito.when(
-			_fileEntry.getLatestFileVersion()
+			_fileEntry.getFileVersion()
 		).thenReturn(
 			_fileVersion
 		);
@@ -87,7 +87,7 @@ public class PathInterpreterTest {
 	}
 
 	@Test(expected = AdaptiveMediaRuntimeException.class)
-	public void testFileEntryPathGetLatestFileVersionFailure()
+	public void testFileEntryPathGetFileVersionFailure()
 		throws Exception {
 
 		Mockito.when(
@@ -97,7 +97,7 @@ public class PathInterpreterTest {
 		);
 
 		Mockito.when(
-			_fileEntry.getLatestFileVersion()
+			_fileEntry.getFileVersion()
 		).thenThrow(
 			PortalException.class
 		);
