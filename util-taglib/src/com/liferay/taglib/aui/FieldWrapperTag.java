@@ -35,7 +35,7 @@ public class FieldWrapperTag extends BaseFieldWrapperTag {
 
 	@Override
 	protected String getEndPage() {
-		if ("right".equals(getInlineLabel())) {
+		if (Validator.equals(getInlineLabel(), "right")) {
 			return super.getEndPage();
 		}
 
@@ -45,7 +45,7 @@ public class FieldWrapperTag extends BaseFieldWrapperTag {
 	@Override
 	protected String getStartPage() {
 		if (Validator.isNotNull(getLabel()) &&
-			!"right".equals(getInlineLabel())) {
+			!Validator.equals(getInlineLabel(), "right")) {
 
 			return super.getStartPage();
 		}
