@@ -82,7 +82,7 @@ public class FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolverTest {
 		_dlAppLocalService = _getService(DLAppLocalService.class);
 
 		_resolver = _getService(
-			ItemSelectorReturnTypeResolver.class, _OBJECT_CLASS);
+			ItemSelectorReturnTypeResolver.class, _RESOLVER_FILTER);
 
 		ServiceTestUtil.setUser(TestPropsValues.getUser());
 
@@ -322,7 +322,7 @@ public class FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolverTest {
 		}
 	}
 
-	private static final String _OBJECT_CLASS =
+	private static final String _RESOLVER_FILTER =
 		"(objectClass=com.liferay.adaptive.media.document.library.item." +
 			"selector.web.internal.resolver." +
 				"FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolver)";

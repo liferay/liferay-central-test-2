@@ -75,7 +75,7 @@ public class ImageAdaptiveMediaConfigResource {
 		if ((configurationEntryModel == null) ||
 			MapUtil.isEmpty(configurationEntryModel.getProperties()) ||
 			Validator.isNull(configurationEntryModel.getName()) ||
-			Validator.isNull(configurationEntryModel.isEnabled())) {
+			(configurationEntryModel.isEnabled() == null)) {
 
 			throw new BadRequestException();
 		}
