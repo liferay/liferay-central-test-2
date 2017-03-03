@@ -446,6 +446,9 @@ public class CalEventImporter {
 				originalRecurrence);
 		}
 		catch (IllegalStateException ise) {
+
+			// LPS-65972
+
 			tzsRecurrence = (TZSRecurrence)_jsonSerializer.fromJSON(
 				originalRecurrence);
 		}
