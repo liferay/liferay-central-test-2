@@ -14,10 +14,10 @@
 
 package com.liferay.portal.dao.sql.transformer;
 
-import java.util.function.Function;
-
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import java.util.function.Function;
 
 /**
  * @author Manuel de la Peña
@@ -47,10 +47,10 @@ public class DefaultSQLTransformer implements SQLTransformer {
 
 		return transformedSQL;
 	}
-	
-	private Function<String, String>[] _functions;
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		DefaultSQLTransformer.class);
+
+	private final Function<String, String>[] _functions;
 
 }

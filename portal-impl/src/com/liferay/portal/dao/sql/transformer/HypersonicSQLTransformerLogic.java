@@ -14,18 +14,16 @@
 
 package com.liferay.portal.dao.sql.transformer;
 
+import com.liferay.portal.kernel.dao.db.DB;
+
 import java.util.function.Function;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import com.liferay.portal.kernel.dao.db.DB;
 
 /**
  * @author Manuel de la Peña
  */
-public class HypersonicSQLTransformerLogic
-	extends BaseSQLTransformerLogic {
-	
+public class HypersonicSQLTransformerLogic extends BaseSQLTransformerLogic {
+
 	public HypersonicSQLTransformerLogic(DB db) {
 		super(db);
 	}
