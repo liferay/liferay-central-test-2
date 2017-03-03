@@ -440,7 +440,8 @@ public class LayoutSetPrototypePropagationTest
 			SitesUtil.resetPrototype(layoutSet);
 
 			Assert.fail(
-				"The user should not be able to reset other user's dashboard");
+				"The user should not be able to reset another user's " +
+					"dashboard");
 		}
 		catch (PrincipalException pe) {
 		}
@@ -544,7 +545,6 @@ public class LayoutSetPrototypePropagationTest
 		// Users
 
 		_user1 = UserTestUtil.addUser();
-
 		_user2 = UserTestUtil.addUser();
 	}
 
