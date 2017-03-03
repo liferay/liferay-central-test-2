@@ -98,6 +98,24 @@
 		<execute function="AssertTextEquals" locator1="Comments#COMMENT_BODY_SPECIFIC" value1="${entryCommentEdit}" />
 	</command>
 
+	<command name="signInToCommentPG">
+		<execute function="AssertElementNotPresent" locator1="Comments#COMMENT_FIELD" />
+
+		<var name="key_entryCommentType" value="${entryCommentType}" />
+		<execute function="AssertClick" locator1="Comments#SIGN_IN_TO_COMMENTS_LINK" value1="Please sign in to ${entryCommentType}." />
+
+		<execute function="Type" locator1="TextInput#EMAIL_ADDRESS" value1="${userEmailAddress}" />
+		<execute function="Type" locator1="TextInput#PASSWORD" value1="test" />
+
+		<execute function="Click" locator1="Button#SIGN_IN" value1="Sign In" />
+
+		<execute function="AssertElementPresent" locator1="UserBar#USER_AVATAR_IMAGE" />
+
+		<execute macro="BlogsEntryComment#add">
+			<var name="entryComment" value="${entryComment}" />
+		</execute>
+	</command>
+
 	<command name="subscribePG">
 		<execute function="AssertClick" locator1="Comments#SUBSCRIBE_TO_COMMENTS_LINK" value1="Subscribe to Comments" />
 
