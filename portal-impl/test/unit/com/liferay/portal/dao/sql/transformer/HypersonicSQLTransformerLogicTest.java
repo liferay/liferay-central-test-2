@@ -25,6 +25,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 /**
  * @author Manuel de la Peña
+ * @author Brian Wing Shun Chan
  */
 @PrepareForTest(DBManagerUtil.class)
 @RunWith(PowerMockRunner.class)
