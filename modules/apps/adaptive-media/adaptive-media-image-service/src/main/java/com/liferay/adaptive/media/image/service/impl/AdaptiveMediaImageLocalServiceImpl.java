@@ -141,6 +141,14 @@ public class AdaptiveMediaImageLocalServiceImpl
 	}
 
 	@Override
+	public int getAdaptiveMediaImagesCount(
+		long companyId, String configurationUuid) {
+
+		return adaptiveMediaImagePersistence.countByC_C(
+			companyId, configurationUuid);
+	}
+
+	@Override
 	public int getPercentage(final long companyId, String configurationUuid) {
 		Collection<AdaptiveMediaImageCounter> adaptiveMediaImageCounters =
 			_serviceTrackerMap.values();
