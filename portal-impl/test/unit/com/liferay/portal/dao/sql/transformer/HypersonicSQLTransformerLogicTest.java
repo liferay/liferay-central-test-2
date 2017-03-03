@@ -49,7 +49,7 @@ public class HypersonicSQLTransformerLogicTest
 	public void testReplaceCastClobText() {
 		Assert.assertEquals(
 			"select CONVERT(foo, SQL_VARCHAR) from Foo",
-			sqlTransformer.transform(getCastClobTextSQL()));
+			sqlTransformer.transform(getCastClobTextInputSQL()));
 	}
 
 	@Override
@@ -57,19 +57,19 @@ public class HypersonicSQLTransformerLogicTest
 	public void testReplaceCastLong() {
 		Assert.assertEquals(
 			"select CONVERT(foo, SQL_BIGINT) from Foo",
-			sqlTransformer.transform(getCastLongSQL()));
+			sqlTransformer.transform(getCastLongInputSQL()));
 	}
 
 	@Override
 	@Test
 	public void testReplaceIntegerDivision() {
-		Assert.assertEquals("select foo /  bar from Foo", sqlTransformer.transform(getIntegerDivisionSQL()));
+		Assert.assertEquals("select foo /  bar from Foo", sqlTransformer.transform(getIntegerDivisionInputSQL()));
 	}
 
 	@Override
 	@Test
 	public void testReplaceNullDate() {
-		Assert.assertEquals("select NULL from Foo", sqlTransformer.transform(getNullDateSQL()));
+		Assert.assertEquals("select NULL from Foo", sqlTransformer.transform(getNullDateInputSQL()));
 	}
 
 }
