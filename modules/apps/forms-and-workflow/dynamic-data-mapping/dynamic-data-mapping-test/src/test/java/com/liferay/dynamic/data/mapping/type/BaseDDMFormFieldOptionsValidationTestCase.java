@@ -32,7 +32,7 @@ import org.junit.Test;
 /**
  * @author Marcellus Tavares
  */
-public class BaseDDMFormFieldOptionsValidationTest {
+public abstract class BaseDDMFormFieldOptionsValidationTestCase {
 
 	@Test(expected = DDMFormFieldValueValidationException.class)
 	public void testValidationWithNonRequiredOptionAndInvalidLocalizedValue()
@@ -128,8 +128,7 @@ public class BaseDDMFormFieldOptionsValidationTest {
 		ddmFormFieldValueValidator.validate(ddmFormField, ddmFormFieldValue);
 	}
 
-	protected DDMFormFieldValueValidator getDDMFormFieldValueValidator() {
-		return null;
-	}
+	protected abstract DDMFormFieldValueValidator
+		getDDMFormFieldValueValidator();
 
 }

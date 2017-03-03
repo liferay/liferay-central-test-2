@@ -25,7 +25,7 @@ import java.util.Map;
 /**
  * @author Marcellus Tavares
  */
-public abstract class BaseDDMFormRuleFunctionTest {
+public abstract class BaseDDMFormRuleFunctionTestCase {
 
 	protected DDMFormFieldEvaluationResult createDDMFormFieldEvaluationResult(
 		String fieldName, String propertyName, Object propertyValue) {
