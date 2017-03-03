@@ -36,49 +36,89 @@ public abstract class BaseSQLTransformerLogicTestCase {
 		);
 	}
 	
-	protected String getBitwiseCheckSQL() {
+	protected String getBitwiseCheckInputSQL() {
 		return "select BITAND(foo, bar) from Foo";
 	}
 
-	protected String getCastClobTextSQL() {
+	protected String getBitwiseCheckOutputSQL() {
+		return getBitwiseCheckInputSQL();
+	}
+
+	protected String getCastClobTextInputSQL() {
 		return "select CAST_CLOB_TEXT(foo) from Foo";
 	}
 
-	protected String getCastLongSQL() {
+	protected String getCastClobTextOutputSQL() {
+		return getCastClobTextInputSQL();
+	}
+
+	protected String getCastLongInputSQL() {
 		return "select CONVERT(foo, SQL_BIGINT) from Foo";
 	}
 
-	protected String getCrossJoinSQL() {
+	protected String getCastLongOutputSQL() {
+		return getCastLongInputSQL();
+	}
+
+	protected String getCrossJoinInputSQL() {
 		return "select * from Foo CROSS JOIN Bar";
 	}
 
-	protected String getInstrSQL() {
+	protected String getCrossJoinOutputSQL() {
+		return getCrossJoinInputSQL();
+	}
+
+	protected String getInstrInputSQL() {
 		return "select INSTR(foo) from Foo";
 	}
 
-	protected String getIntegerDivisionSQL() {
+	protected String getInstrOutputSQL() {
+		return getInstrInputSQL();
+	}
+
+	protected String getIntegerDivisionInputSQL() {
 		return "select INTEGER_DIV(foo, bar) from Foo";
 	}
 
-	protected String getModSQL() {
+	protected String getIntegerDivisionOutputSQL() {
+		return getIntegerDivisionInputSQL();
+	}
+
+	protected String getModInputSQL() {
 		return "select MOD(foo, bar) from Foo";
 	}
 
-	protected String getNullDateSQL() {
+	protected String getModOutputSQL() {
+		return getModInputSQL();
+	}
+
+	protected String getNullDateInputSQL() {
 		return "select [$NULL_DATE$] from Foo";
 	}
 
-	protected String getReplaceSQL() {
+	protected String getNullDateOutputSQL() {
+		return getNullDateInputSQL();
+	}
+
+	protected String getReplaceInputSQL() {
 		return "select replace(foo) from Foo";
 	}
 
-	protected String getSubstSQL() {
+	protected String getReplaceOutputSQL() {
+		return getReplaceInputSQL();
+	}
+
+	protected String getSubstInputSQL() {
 		return "select foo from Foo";
+	}
+
+	protected String getSubstOutputSQL() {
+		return getSubstInputSQL();
 	}
 
 	@Test
 	public void testReplaceBitwiseCheck() {
-		Assert.assertEquals(getBitwiseCheckSQL(), sqlTransformer.transform(getBitwiseCheckSQL()));
+		Assert.assertEquals(getBitwiseCheckOutputSQL(), sqlTransformer.transform(getBitwiseCheckInputSQL()));
 	}
 
 	public abstract void testReplaceCastClobText();
@@ -87,31 +127,31 @@ public abstract class BaseSQLTransformerLogicTestCase {
 
 	@Test
 	public void testReplaceCrossJoin() {
-		Assert.assertEquals(getCrossJoinSQL(), sqlTransformer.transform(getCrossJoinSQL()));
+		Assert.assertEquals(getCrossJoinOutputSQL(), sqlTransformer.transform(getCrossJoinInputSQL()));
 	}
 
 	@Test
 	public void testReplaceInstr() {
-		Assert.assertEquals(getInstrSQL(), sqlTransformer.transform(getInstrSQL()));
+		Assert.assertEquals(getInstrOutputSQL(), sqlTransformer.transform(getInstrInputSQL()));
 	}
 
 	public abstract void testReplaceIntegerDivision();
 
 	@Test
 	public void testReplaceMod() {
-		Assert.assertEquals(getModSQL(), sqlTransformer.transform(getModSQL()));
+		Assert.assertEquals(getModOutputSQL(), sqlTransformer.transform(getModInputSQL()));
 	}
 
 	public abstract void testReplaceNullDate();
 
 	@Test
 	public void testReplaceReplace() {
-		Assert.assertEquals(getReplaceSQL(), sqlTransformer.transform(getReplaceSQL()));
+		Assert.assertEquals(getReplaceOutputSQL(), sqlTransformer.transform(getReplaceInputSQL()));
 	}
 
 	@Test
 	public void testReplaceSubst() {
-		Assert.assertEquals(getSubstSQL(), sqlTransformer.transform(getSubstSQL()));
+		Assert.assertEquals(getSubstOutputSQL(), sqlTransformer.transform(getSubstInputSQL()));
 	}
 
 	@Test
