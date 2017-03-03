@@ -20,6 +20,7 @@ import com.liferay.calendar.service.CalendarLocalServiceUtil;
 import com.liferay.calendar.util.CalendarResourceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
+import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 
@@ -57,6 +58,31 @@ public class CalendarTestUtil {
 		CalendarResource calendarResource =
 			CalendarResourceUtil.getGroupCalendarResource(
 				group.getGroupId(), serviceContext);
+
+		Calendar calendar = calendarResource.getDefaultCalendar();
+
+		if (timeZone != null) {
+			calendar.setTimeZoneId(timeZone.getID());
+
+			CalendarLocalServiceUtil.updateCalendar(calendar);
+		}
+
+		return calendar;
+	}
+
+	public static Calendar addCalendar(User user, ServiceContext serviceContext)
+		throws PortalException {
+
+		return addCalendar(user, null, serviceContext);
+	}
+
+	public static Calendar addCalendar(
+			User user, TimeZone timeZone, ServiceContext serviceContext)
+		throws PortalException {
+
+		CalendarResource calendarResource =
+			CalendarResourceUtil.getUserCalendarResource(
+				user.getUserId(), serviceContext);
 
 		Calendar calendar = calendarResource.getDefaultCalendar();
 
