@@ -17,13 +17,104 @@ import templates from './CardsTreeView.soy';
  * - Improved accessibility for keyboard navigation following common tree widget patterns
  */
 class CardsTreeview extends Treeview {
+
+	created() {
+		this.nodes.forEach(
+			function(node) {
+				if (node.children) {
+					node.expanded = this.expandParentNodes_(node.children);
+				}
+			},
+			this
+		);
+	}
+
+	attached() {
+		this.addSelectedNodes_(this.nodes);
+	}
+
+	/**
+	 * Adds nodes with selected attribute to selectedNodes list in case when
+	 * they are still not there.
+	 *
+	 * @param nodes Nodes to check and add to selectedNodes list.
+	 * @protected
+	 */
+	addSelectedNodes_(nodes) {
+		nodes.forEach(
+			function(node) {
+				if (node.children) {
+					this.addSelectedNodes_(node.children);
+				}
+
+				if (node.selected) {
+					this.selectNode_(node.id);
+				}
+			},
+			this
+		);
+	}
+
+	/**
+	 * Deselects all selected tree nodes
+	 *
+	 * @param nodes List of nodes to deselect the elements in.
+	 * @protected
+	 */
+	deselectAll_(nodes) {
+		nodes.forEach(
+			function(node) {
+				node.selected = false;
+
+				if (node.children) {
+					this.deselectAll_(node.children);
+				}
+			},
+			this
+		);
+	}
+
+	/**
+	 * Expands all parent nodes of expanded children.
+	 *
+	 * @param nodes List of nodes to expand all parent nodes of expanded children.
+	 * @protected
+	 */
+	expandParentNodes_(nodes) {
+		let expanded = false;
+
+		for (let node of nodes) {
+			if (node.expanded) {
+				return true;
+			}
+
+			if (node.children) {
+				node.expanded = this.expandParentNodes_(node.children);
+			}
+		}
+
+		return false;
+	}
+
 	/**
 	 * Focus the given tree node.
 	 * @param {!Object} nodeObj
 	 * @protected
 	 */
 	focus_(nodeObj) {
+
+		let focusedNode = this.element.querySelector('.focused');
+
+		if (focusedNode) {
+			focusedNode.classList.remove('focused');
+		}
+
+		if (!nodeObj.id) {
+			return;
+		}
+
 		if (nodeObj) {
+			this.element.querySelector('[data-treeitemid="' + nodeObj.id + '"]').classList.add('focused');
 			this.element.querySelector('[data-treeitemid="' + nodeObj.id + '"] .card').focus();
 		}
 	}
@@ -96,16 +187,42 @@ class CardsTreeview extends Treeview {
 
 		let currentTargetId = currentTarget.getAttribute('data-treeitemid');
 
+		if (!currentTargetId) {
+			return;
+		}
+
+		this.focus_(
+			{
+				id: currentTargetId
+			}
+		);
+
+		if (currentTarget.classList.contains('disabled')) {
+			return;
+		}
+
+		this.selectNode_(currentTargetId);
+	}
+
+	/**
+	 * Selects specific node.
+	 *
+	 * @param nodeId ID of node to select.
+	 * @protected
+	 */
+	selectNode_(nodeId) {
 		if (this.multiSelection) {
-			if (this.selectedNodes.indexOf(currentTargetId + ',') !== -1) {
-				this.selectedNodes = this.selectedNodes.replace(currentTargetId + ',', '');
+			if (this.selectedNodes.indexOf(nodeId + ',') !== -1) {
+				this.selectedNodes = this.selectedNodes.replace(nodeId + ',', '');
 			}
 			else {
-				this.selectedNodes += currentTargetId + ',';
+				this.selectedNodes += nodeId + ',';
 			}
 		}
 		else {
-			this.selectedNodes = ',' + currentTargetId + ',';
+			this.deselectAll_(this.nodes);
+
+			this.selectedNodes = ',' + nodeId + ',';
 		}
 	}
 
@@ -145,9 +262,7 @@ class CardsTreeview extends Treeview {
 			this.focusNextNode_(node);
 		}
 		else if (event.keyCode === 13 || event.keyCode === 32) {
-			if (!dom.hasClass(event.delegateTarget.parentNode.parentNode, 'disabled')) {
-				this.handleNodeClicked_(event);
-			}
+			this.handleNodeClicked_(event);
 		}
 	}
 
