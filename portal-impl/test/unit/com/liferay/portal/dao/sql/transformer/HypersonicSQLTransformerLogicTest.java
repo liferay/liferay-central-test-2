@@ -45,25 +45,18 @@ public class HypersonicSQLTransformerLogicTest
 	}
 
 	@Override
-	@Test
-	public void testReplaceCastClobText() {
-		Assert.assertEquals(
-			"select CONVERT(foo, SQL_VARCHAR) from Foo",
-			sqlTransformer.transform(getCastClobTextInputSQL()));
+	protected String getCastClobTextOutputSQL() {
+		return "select CONVERT(foo, SQL_VARCHAR) from Foo";
 	}
 
 	@Override
-	@Test
-	public void testReplaceCastLong() {
-		Assert.assertEquals(
-			"select CONVERT(foo, SQL_BIGINT) from Foo",
-			sqlTransformer.transform(getCastLongInputSQL()));
+	protected String getCastLongOutputSQL() {
+		return "select CONVERT(foo, SQL_BIGINT) from Foo";
 	}
 
 	@Override
-	@Test
-	public void testReplaceIntegerDivision() {
-		Assert.assertEquals("select foo /  bar from Foo", sqlTransformer.transform(getIntegerDivisionInputSQL()));
+	protected String getIntegerDivisionOutputSQL() {
+		return "select foo /  bar from Foo";
 	}
 
 	@Override

@@ -121,9 +121,15 @@ public abstract class BaseSQLTransformerLogicTestCase {
 		Assert.assertEquals(getBitwiseCheckOutputSQL(), sqlTransformer.transform(getBitwiseCheckInputSQL()));
 	}
 
-	public abstract void testReplaceCastClobText();
+	@Test
+	public void testReplaceCastClobText() {
+		Assert.assertEquals(getCastClobTextOutputSQL(), sqlTransformer.transform(getCastClobTextInputSQL()));
+	}
 
-	public abstract void testReplaceCastLong();
+	@Test
+	public void testReplaceCastLong() {
+		Assert.assertEquals(getCastLongOutputSQL(), sqlTransformer.transform(getCastLongInputSQL()));
+	}
 
 	@Test
 	public void testReplaceCrossJoin() {
@@ -135,7 +141,10 @@ public abstract class BaseSQLTransformerLogicTestCase {
 		Assert.assertEquals(getInstrOutputSQL(), sqlTransformer.transform(getInstrInputSQL()));
 	}
 
-	public abstract void testReplaceIntegerDivision();
+	@Test
+	public void testReplaceIntegerDivision() {
+		Assert.assertEquals(getIntegerDivisionOutputSQL(), sqlTransformer.transform(getIntegerDivisionInputSQL()));
+	}
 
 	@Test
 	public void testReplaceMod() {
