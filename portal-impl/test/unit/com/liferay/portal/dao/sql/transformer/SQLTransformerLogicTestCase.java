@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.dao.orm.common.transformation.function.provider;
+package com.liferay.portal.dao.sql.transformer;
 
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBManagerUtil;
@@ -22,12 +22,16 @@ import org.powermock.api.mockito.PowerMockito;
 /**
  * @author Manuel de la Peña
  */
-public interface TransformationFunctionProviderTestCase {
+public interface SQLTransformerLogicTestCase {
 
-	public default void mockDB(DB db) {
+	public default void mock(DB db) {
 		PowerMockito.mockStatic(DBManagerUtil.class);
 
-		PowerMockito.when(DBManagerUtil.getDB()).thenReturn(db);
+		PowerMockito.when(
+			DBManagerUtil.getDB()
+		).thenReturn(
+			db
+		);
 	}
 
 	public void testReplaceBitwiseCheck();
@@ -38,7 +42,7 @@ public interface TransformationFunctionProviderTestCase {
 
 	public void testReplaceCrossJoin();
 
-	public void testReplaceInStr();
+	public void testReplaceInstr();
 
 	public void testReplaceIntegerDivision();
 
