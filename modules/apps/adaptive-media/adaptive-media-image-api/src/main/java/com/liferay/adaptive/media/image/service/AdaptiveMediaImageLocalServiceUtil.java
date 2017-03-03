@@ -195,6 +195,12 @@ public class AdaptiveMediaImageLocalServiceUtil {
 		return getService().getAdaptiveMediaImagesCount();
 	}
 
+	public static int getAdaptiveMediaImagesCount(long companyId,
+		java.lang.String configurationUuid) {
+		return getService()
+				   .getAdaptiveMediaImagesCount(companyId, configurationUuid);
+	}
+
 	public static int getPercentage(long companyId,
 		java.lang.String configurationUuid) {
 		return getService().getPercentage(companyId, configurationUuid);
