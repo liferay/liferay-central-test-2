@@ -439,7 +439,7 @@ public class CalEventImporter {
 			return null;
 		}
 
-		TZSRecurrence tzsRecurrence;
+		TZSRecurrence tzsRecurrence = null;
 
 		try {
 			tzsRecurrence = (TZSRecurrence)JSONFactoryUtil.deserialize(
