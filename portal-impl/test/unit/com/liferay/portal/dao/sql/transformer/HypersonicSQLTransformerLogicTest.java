@@ -40,82 +40,36 @@ public class HypersonicSQLTransformerLogicTest
 
 		mock(db);
 
-		_sqlTransformer = SQLTransformerFactory.getSQLTransformer(
+		sqlTransformer = SQLTransformerFactory.getSQLTransformer(
 			new HypersonicSQLTransformerLogic(db));
-	}
-
-	@Override
-	@Test
-	public void testReplaceBitwiseCheck() {
-		Assert.assertEquals(getBitwiseCheckSQL(), _sqlTransformer.transform(getBitwiseCheckSQL()));
 	}
 
 	@Override
 	@Test
 	public void testReplaceCastClobText() {
 		Assert.assertEquals(
-			getCastClobTextSQL(),
-			_sqlTransformer.transform("select CAST_CLOB_TEXT(foo) from Foo"));
+			"select CONVERT(foo, SQL_VARCHAR) from Foo",
+			sqlTransformer.transform(getCastClobTextSQL()));
 	}
 
 	@Override
 	@Test
 	public void testReplaceCastLong() {
 		Assert.assertEquals(
-			getCastLongSQL(),
-			_sqlTransformer.transform(
-				"select CAST_LONG(foo) from Foo"));
-	}
-
-	@Override
-	@Test
-	public void testReplaceCrossJoin() {
-		Assert.assertEquals(getCrossJoinSQL(), _sqlTransformer.transform(getCrossJoinSQL()));
-	}
-
-	@Override
-	@Test
-	public void testReplaceInstr() {
-		Assert.assertEquals(getInstrSQL(), _sqlTransformer.transform(getInstrSQL()));
+			"select CONVERT(foo, SQL_BIGINT) from Foo",
+			sqlTransformer.transform(getCastLongSQL()));
 	}
 
 	@Override
 	@Test
 	public void testReplaceIntegerDivision() {
-		Assert.assertEquals("select foo /  bar from Foo", _sqlTransformer.transform(getIntegerDivisionSQL()));
-	}
-
-	@Override
-	@Test
-	public void testReplaceMod() {
-		Assert.assertEquals(getModSQL(), _sqlTransformer.transform(getModSQL()));
+		Assert.assertEquals("select foo /  bar from Foo", sqlTransformer.transform(getIntegerDivisionSQL()));
 	}
 
 	@Override
 	@Test
 	public void testReplaceNullDate() {
-		Assert.assertEquals("select NULL from Foo", _sqlTransformer.transform(getNullDateSQL()));
+		Assert.assertEquals("select NULL from Foo", sqlTransformer.transform(getNullDateSQL()));
 	}
-
-	@Override
-	@Test
-	public void testReplaceReplace() {
-		Assert.assertEquals(getReplaceSQL(), _sqlTransformer.transform(getReplaceSQL()));
-	}
-
-	@Override
-	@Test
-	public void testReplaceSubst() {
-		Assert.assertEquals(getSubstSQL(), _sqlTransformer.transform(getSubstSQL()));
-	}
-
-	@Test
-	public void testTransform() {
-		String sql = "select * from Foo";
-
-		Assert.assertEquals(sql, _sqlTransformer.transform(sql));
-	}
-
-	private SQLTransformer _sqlTransformer;
 
 }
