@@ -16,6 +16,7 @@ package com.liferay.adaptive.media.web.internal.portlet.action;
 
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
+import com.liferay.adaptive.media.image.service.AdaptiveMediaImageLocalService;
 import com.liferay.adaptive.media.web.constants.AdaptiveMediaPortletKeys;
 import com.liferay.adaptive.media.web.internal.constants.AdaptiveMediaWebKeys;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
@@ -60,9 +61,28 @@ public class EditImageConfigurationEntryMVCRenderCommand
 					getImageAdaptiveMediaConfigurationEntry(
 						themeDisplay.getCompanyId(), entryUuid);
 
+		boolean configurationEntryEditable = true;
+
+		if (configurationEntryOptional.isPresent()) {
+			ImageAdaptiveMediaConfigurationEntry configurationEntry =
+				configurationEntryOptional.get();
+
+			int adaptiveMediaImagesCount =
+				_imageLocalService.getAdaptiveMediaImagesCount(
+					themeDisplay.getCompanyId(), configurationEntry.getUUID());
+
+			if (adaptiveMediaImagesCount != 0) {
+				configurationEntryEditable = false;
+			}
+		}
+
 		renderRequest.setAttribute(
 			AdaptiveMediaWebKeys.CONFIGURATION_ENTRY,
 			configurationEntryOptional.orElse(null));
+
+		renderRequest.setAttribute(
+			AdaptiveMediaWebKeys.CONFIGURATION_ENTRY_EDITABLE,
+			configurationEntryEditable);
 
 		return "/adaptive_media/edit_image_configuration_entry.jsp";
 	}
@@ -78,5 +98,8 @@ public class EditImageConfigurationEntryMVCRenderCommand
 
 	private ImageAdaptiveMediaConfigurationHelper
 		_imageAdaptiveMediaConfigurationHelper;
+
+	@Reference
+	private AdaptiveMediaImageLocalService _imageLocalService;
 
 }

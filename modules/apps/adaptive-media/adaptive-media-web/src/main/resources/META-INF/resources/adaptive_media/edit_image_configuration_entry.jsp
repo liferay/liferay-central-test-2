@@ -22,6 +22,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 portletDisplay.setShowBackIcon(true);
 portletDisplay.setURLBack(redirect);
 
+boolean configurationEntryEditable = GetterUtil.getBoolean(request.getAttribute(AdaptiveMediaWebKeys.CONFIGURATION_ENTRY_EDITABLE));
 ImageAdaptiveMediaConfigurationEntry configurationEntry = (ImageAdaptiveMediaConfigurationEntry)request.getAttribute(AdaptiveMediaWebKeys.CONFIGURATION_ENTRY);
 
 renderResponse.setTitle((configurationEntry != null) ? configurationEntry.getName() : LanguageUtil.get(request, "new-image-resolution"));
@@ -42,6 +43,12 @@ if (configurationEntry != null) {
 		<portlet:param name="mvcRenderCommandName" value="/adaptive_media/edit_image_configuration_entry" />
 	</portlet:actionURL>
 
+	<c:if test="<%= !configurationEntryEditable %>">
+		<div class="alert alert-info">
+			<liferay-ui:message key="this-resolution-has-already-optimized-images" />
+		</div>
+	</c:if>
+
 	<aui:form action="<%= editImageConfigurationEntryURL %>" method="post" name="fm">
 		<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 		<aui:input name="uuid" type="hidden" value="<%= (configurationEntry != null) ? configurationEntry.getUUID() : StringPool.BLANK %>" />
@@ -56,11 +63,11 @@ if (configurationEntry != null) {
 
 				<div class="row">
 					<div class="col-md-3">
-						<aui:input label="max-width-px" name="maxWidth" required="<%= true %>" value='<%= (properties != null) ? properties.get("max-width") : StringPool.BLANK %>' />
+						<aui:input disabled="<%= !configurationEntryEditable %>" label="max-width-px" name="maxWidth" required="<%= true %>" value='<%= (properties != null) ? properties.get("max-width") : StringPool.BLANK %>' />
 					</div>
 
 					<div class="col-md-3">
-						<aui:input label="max-height-px" name="maxHeight" required="<%= true %>" value='<%= (properties != null) ? properties.get("max-height") : StringPool.BLANK %>' />
+						<aui:input disabled="<%= !configurationEntryEditable %>" label="max-height-px" name="maxHeight" required="<%= true %>" value='<%= (properties != null) ? properties.get("max-height") : StringPool.BLANK %>' />
 					</div>
 				</div>
 			</aui:fieldset>
