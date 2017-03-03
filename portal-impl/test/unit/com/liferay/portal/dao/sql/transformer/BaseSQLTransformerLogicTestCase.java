@@ -142,7 +142,10 @@ public abstract class BaseSQLTransformerLogicTestCase {
 		Assert.assertEquals(getModOutputSQL(), sqlTransformer.transform(getModInputSQL()));
 	}
 
-	public abstract void testReplaceNullDate();
+	@Test
+	public void testReplaceNullDate() {
+		Assert.assertEquals(getNullDateOutputSQL(), sqlTransformer.transform(getNullDateInputSQL()));
+	}
 
 	@Test
 	public void testReplaceReplace() {

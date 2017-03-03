@@ -67,9 +67,8 @@ public class HypersonicSQLTransformerLogicTest
 	}
 
 	@Override
-	@Test
-	public void testReplaceNullDate() {
-		Assert.assertEquals("select NULL from Foo", sqlTransformer.transform(getNullDateInputSQL()));
+	protected String getNullDateOutputSQL() {
+		return "select NULL from Foo";
 	}
 
 }
