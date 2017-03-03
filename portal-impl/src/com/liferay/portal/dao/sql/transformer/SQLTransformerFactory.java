@@ -12,13 +12,17 @@
  * details.
  */
 
-package com.liferay.portal.dao.orm.common;
+package com.liferay.portal.dao.sql.transformer;
 
 /**
  * @author Manuel de la Peña
  */
-public interface Transformer {
+public class SQLTransformerFactory {
 
-	public String transform(String sql);
+	public static SQLTransformer getSQLTransformer(
+		SQLTransformerLogic sqlTransformerLogic) {
+
+		return new DefaultSQLTransformer(sqlTransformerLogic.getFunctions());
+	}
 
 }

@@ -12,15 +12,18 @@
  * details.
  */
 
-package com.liferay.portal.dao.orm.common.transformation.function.provider;
+package com.liferay.portal.dao.sql.transformer;
 
 import java.util.function.Function;
+
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 /**
  * @author Manuel de la Peña
  */
-public interface SQLTransformationFunctionProvider {
+public interface SQLTransformerLogic {
 
-	public Function<String, String>[] getTransformationFunctions();
+	public Function<String, String>[] getFunctions();
 
 }
