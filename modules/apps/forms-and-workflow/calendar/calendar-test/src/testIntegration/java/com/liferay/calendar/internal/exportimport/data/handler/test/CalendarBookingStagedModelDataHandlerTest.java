@@ -17,10 +17,13 @@ package com.liferay.calendar.internal.exportimport.data.handler.test;
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.calendar.model.Calendar;
 import com.liferay.calendar.model.CalendarBooking;
+import com.liferay.calendar.model.CalendarBookingModel;
 import com.liferay.calendar.model.CalendarResource;
 import com.liferay.calendar.service.CalendarBookingLocalServiceUtil;
 import com.liferay.calendar.test.util.CalendarBookingTestUtil;
 import com.liferay.calendar.test.util.CalendarTestUtil;
+import com.liferay.calendar.test.util.RecurrenceTestUtil;
+import com.liferay.exportimport.kernel.lar.StagedModelDataHandlerUtil;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.StagedModel;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -29,6 +32,7 @@ import com.liferay.portal.kernel.test.rule.Sync;
 import com.liferay.portal.kernel.test.rule.SynchronousDestinationTestRule;
 import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
 import com.liferay.portal.kernel.test.util.TestPropsValues;
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.lar.test.BaseWorkflowedStagedModelDataHandlerTestCase;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 
@@ -37,8 +41,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Assert;
 import org.junit.ClassRule;
 import org.junit.Rule;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
@@ -55,6 +61,71 @@ public class CalendarBookingStagedModelDataHandlerTest
 		new AggregateTestRule(
 			new LiferayIntegrationTestRule(),
 			SynchronousDestinationTestRule.INSTANCE);
+
+	@Test
+	public void testImportedCalendarBookingHasRecurringParentCalendarBookingId()
+		throws Exception {
+
+		initExport();
+
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(
+				stagingGroup, TestPropsValues.getUserId());
+
+		Calendar calendar = CalendarTestUtil.addCalendar(
+			stagingGroup, serviceContext);
+
+		CalendarBooking calendarBooking =
+			CalendarBookingTestUtil.addRecurringCalendarBooking(
+				TestPropsValues.getUser(), calendar,
+				RecurrenceTestUtil.getDailyRecurrence(), serviceContext);
+
+		CalendarBooking calendarBookingInstance =
+			CalendarBookingLocalServiceUtil.updateCalendarBookingInstance(
+				TestPropsValues.getUserId(),
+				calendarBooking.getCalendarBookingId(), 2,
+				calendar.getCalendarId(), calendarBooking.getTitleMap(),
+				calendarBooking.getDescriptionMap(),
+				calendarBooking.getLocation(),
+				calendarBooking.getStartTime() + Time.DAY * 2,
+				calendarBooking.getEndTime() + Time.DAY * 2,
+				calendarBooking.isAllDay(), null, false, 0, null, 0, null,
+				serviceContext);
+
+		Assert.assertEquals(
+			calendarBooking.getCalendarBookingId(),
+			calendarBookingInstance.getRecurringCalendarBookingId());
+
+		StagedModelDataHandlerUtil.exportStagedModel(
+			portletDataContext, calendarBooking);
+
+		initImport();
+
+		CalendarBooking exportedCalendarBooking =
+			(CalendarBooking)readExportedStagedModel(calendarBooking);
+
+		StagedModelDataHandlerUtil.importStagedModel(
+			portletDataContext, exportedCalendarBooking);
+
+		CalendarBooking importedCalendarBooking =
+			(CalendarBooking)getStagedModel(
+				exportedCalendarBooking.getUuid(), liveGroup);
+
+		List<CalendarBooking> importedCalendarBookingInstances =
+			CalendarBookingLocalServiceUtil.getRecurringCalendarBookings(
+				importedCalendarBooking);
+
+		CalendarBookingModel importedCalendarBookingInstance =
+			importedCalendarBookingInstances.get(0);
+
+		Assert.assertNotEquals(
+			calendarBooking.getCalendarBookingId(),
+			importedCalendarBookingInstance.getRecurringCalendarBookingId());
+
+		Assert.assertEquals(
+			importedCalendarBooking.getCalendarBookingId(),
+			importedCalendarBookingInstance.getRecurringCalendarBookingId());
+	}
 
 	@Override
 	protected Map<String, List<StagedModel>> addDependentStagedModelsMap(
