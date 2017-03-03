@@ -52,11 +52,12 @@
 				{let $nodeAttributes kind="attributes"}
 					class="treeview-node-main clearfix col-md-4
 					{$node.children ? ' hasChildren' : ''}
-					{strContains($disabledNodes, ',' + $node.id + ',') ? ' disabled' : ''}
-					{strContains($selectedNodes, ',' + $node.id + ',') ? ' selected' : ''}
+					{strContains($disabledNodes, ',' + $node.id + ',') or $node.disabled ? ' disabled' : ''}
+					{strContains($selectedNodes, ',' + $node.id + ',') or $node.selected ? ' selected' : ''}
 					"
 					data-treeitemid="{$node.id}"
 					data-treeitemname="{$node.name}"
+					data-treeitemvalue="{$node.value}"
 					aria-expanded="{$node.expanded ? 'true' : 'false'}"
 					role="treeitem"
 				{/let}
