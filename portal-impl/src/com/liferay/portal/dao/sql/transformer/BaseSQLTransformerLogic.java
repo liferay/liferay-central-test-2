@@ -14,12 +14,12 @@
 
 package com.liferay.portal.dao.sql.transformer;
 
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.util.StringUtil;
+
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import com.liferay.portal.kernel.dao.db.DB;
-import com.liferay.portal.kernel.util.StringUtil;
 
 /**
  * @author Manuel de la Peña
@@ -30,28 +30,21 @@ public abstract class BaseSQLTransformerLogic implements SQLTransformerLogic {
 		_db = db;
 	}
 
-	private DB _db;
-	
-	protected Pattern getBitwiseCheckPattern() {
-		return Pattern.compile("BITAND\\((.+?),(.+?)\\)");
-	}
-	
 	protected Function<String, String> getBitwiseCheckFunction() {
 		Pattern pattern = getBitwiseCheckPattern();
 
 		return (String sql) -> replaceBitwiseCheck(pattern.matcher(sql));
 	}
-	
+
+	protected Pattern getBitwiseCheckPattern() {
+		return Pattern.compile("BITAND\\((.+?),(.+?)\\)");
+	}
+
 	protected Function<String, String> getBooleanFunction() {
 		return (String sql) ->
 			StringUtil.replace(
 				sql, new String[] {"[$FALSE$]", "[$TRUE$]"},
 				new String[] {_db.getTemplateFalse(), _db.getTemplateTrue()});
-	}
-
-	protected Pattern getCastClobTextPattern() {
-		return Pattern.compile(
-			"CAST_CLOB_TEXT\\((.+?)\\)", Pattern.CASE_INSENSITIVE);
 	}
 
 	protected Function<String, String> getCastClobTextFunction() {
@@ -60,9 +53,9 @@ public abstract class BaseSQLTransformerLogic implements SQLTransformerLogic {
 		return (String sql) -> replaceCastText(pattern.matcher(sql));
 	}
 
-	protected Pattern getCastLongPattern() {
+	protected Pattern getCastClobTextPattern() {
 		return Pattern.compile(
-			"CAST_LONG\\((.+?)\\)", Pattern.CASE_INSENSITIVE);
+			"CAST_CLOB_TEXT\\((.+?)\\)", Pattern.CASE_INSENSITIVE);
 	}
 
 	protected Function<String, String> getCastLongFunction() {
@@ -71,9 +64,9 @@ public abstract class BaseSQLTransformerLogic implements SQLTransformerLogic {
 		return (String sql) -> replaceCastLong(pattern.matcher(sql));
 	}
 
-	protected Pattern getCastTextPattern() {
+	protected Pattern getCastLongPattern() {
 		return Pattern.compile(
-			"CAST_TEXT\\((.+?)\\)", Pattern.CASE_INSENSITIVE);
+			"CAST_LONG\\((.+?)\\)", Pattern.CASE_INSENSITIVE);
 	}
 
 	protected Function<String, String> getCastTextFunction() {
@@ -82,14 +75,14 @@ public abstract class BaseSQLTransformerLogic implements SQLTransformerLogic {
 		return (String sql) -> replaceCastText(pattern.matcher(sql));
 	}
 
+	protected Pattern getCastTextPattern() {
+		return Pattern.compile(
+			"CAST_TEXT\\((.+?)\\)", Pattern.CASE_INSENSITIVE);
+	}
+
 	protected Pattern getInstrPattern() {
 		return Pattern.compile(
 			"INSTR\\((.+?),(.+?)\\)", Pattern.CASE_INSENSITIVE);
-	}
-
-	protected Pattern getIntegerDivisionPattern() {
-		return Pattern.compile(
-			"INTEGER_DIV\\((.+?),(.+?)\\)", Pattern.CASE_INSENSITIVE);
 	}
 
 	protected Function<String, String> getIntegerDivisionFunction() {
@@ -98,15 +91,20 @@ public abstract class BaseSQLTransformerLogic implements SQLTransformerLogic {
 		return (String sql) -> replaceIntegerDivision(pattern.matcher(sql));
 	}
 
+	protected Pattern getIntegerDivisionPattern() {
+		return Pattern.compile(
+			"INTEGER_DIV\\((.+?),(.+?)\\)", Pattern.CASE_INSENSITIVE);
+	}
+
 	protected Pattern getModPattern() {
 		return Pattern.compile(
 			"MOD\\((.+?),(.+?)\\)", Pattern.CASE_INSENSITIVE);
 	}
-	
+
 	protected Function<String, String> getNullDateFunction() {
 		return (String sql) -> StringUtil.replace(sql, "[$NULL_DATE$]", "NULL");
 	}
-	
+
 	protected Pattern getSubstrPattern() {
 		return Pattern.compile(
 			"SUBSTR\\((.+?),(.+?),(.+?)\\)", Pattern.CASE_INSENSITIVE);
@@ -116,16 +114,18 @@ public abstract class BaseSQLTransformerLogic implements SQLTransformerLogic {
 		return matcher.replaceAll("($1 & $2)");
 	}
 
-	protected String replaceCastText(Matcher matcher) {
-		return matcher.replaceAll("$1");
-	}
-	
 	protected String replaceCastLong(Matcher matcher) {
 		return matcher.replaceAll("$1");
 	}
-	
+
+	protected String replaceCastText(Matcher matcher) {
+		return matcher.replaceAll("$1");
+	}
+
 	protected String replaceIntegerDivision(Matcher matcher) {
 		return matcher.replaceAll("$1 / $2");
 	}
+
+	private final DB _db;
 
 }

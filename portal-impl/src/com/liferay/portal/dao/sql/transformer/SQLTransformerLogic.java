@@ -16,9 +16,6 @@ package com.liferay.portal.dao.sql.transformer;
 
 import java.util.function.Function;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-
 /**
  * @author Manuel de la Peña
  */

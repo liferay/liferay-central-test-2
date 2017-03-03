@@ -15,12 +15,9 @@
 package com.liferay.portal.dao.sql.transformer;
 
 import com.liferay.portal.dao.db.HypersonicDB;
-import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBManagerUtil;
 
-import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import org.powermock.core.classloader.annotations.PrepareForTest;
