@@ -75,9 +75,6 @@ public class ExportImportPortletPreferencesProcessorHelperImpl
 				String newPreferencesValue =
 					exportPortletPreferencesNewValueFunction.apply(primaryKey);
 
-				//String newPreferencesValue = getExportPortletPreferencesValue(
-				//	portletDataContext, portlet, className, primaryKeyLong);
-
 				if (Validator.isNull(newPreferencesValue)) {
 					if (_log.isWarnEnabled()) {
 						StringBundler sb = new StringBundler(5);
@@ -133,10 +130,6 @@ public class ExportImportPortletPreferencesProcessorHelperImpl
 				Long newPrimaryKey =
 					importPortletPreferencesNewValueSupplier.apply(
 						portletPreferencesOldValue);
-
-				/*Long newPrimaryKey = getImportPortletPreferencesNewValue(
-					portletDataContext, clazz, companyGroupId, primaryKeys,
-					portletPreferencesOldValue);*/
 
 				if (Validator.isNull(newPrimaryKey)) {
 					if (_log.isInfoEnabled()) {
