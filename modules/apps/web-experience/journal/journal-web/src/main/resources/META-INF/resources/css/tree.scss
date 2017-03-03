@@ -1,8 +1,7 @@
 .portlet-journal-tree {
 	.card {
 		&:focus {
-			box-shadow: inset 0 0 0 2px #65B6F0;
-			outline: none;
+			outline: none
 		}
 
 		margin-bottom: 0;
@@ -13,7 +12,12 @@
 	}
 
 	.selected .card {
-		box-shadow: inset 0 0 0 2px #65B6F0;
+		box-shadow: inset 0 0 0 2px #65B6F0 !important;
+	}
+
+	.focused .card {
+		box-shadow: inset 0 0 0 2px #ABBCC3;
+		outline: none;
 	}
 
 	.disabled {
