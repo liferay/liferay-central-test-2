@@ -1204,11 +1204,11 @@ public class JournalDisplayContext {
 		for (JournalFolder folder : folders) {
 			JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-			JSONArray childrenJsonArray = _getFoldersJSONArray(
+			JSONArray childrenJSONArray = _getFoldersJSONArray(
 				groupId, folder.getFolderId());
 
-			if (childrenJsonArray.length() > 0) {
-				jsonObject.put("children", childrenJsonArray);
+			if (childrenJSONArray.length() > 0) {
+				jsonObject.put("children", childrenJSONArray);
 			}
 
 			jsonObject.put("icon", "folder");
