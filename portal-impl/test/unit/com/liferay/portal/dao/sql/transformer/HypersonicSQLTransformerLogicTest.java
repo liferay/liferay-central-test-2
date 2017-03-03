@@ -36,12 +36,7 @@ public class HypersonicSQLTransformerLogicTest
 
 	@Before
 	public void setUp() {
-		DB db = new HypersonicDB(1, 0);
-
-		mock(db);
-
-		sqlTransformer = SQLTransformerFactory.getSQLTransformer(
-			new HypersonicSQLTransformerLogic(db));
+		setDB(new HypersonicDB(1, 0));
 	}
 
 	@Override

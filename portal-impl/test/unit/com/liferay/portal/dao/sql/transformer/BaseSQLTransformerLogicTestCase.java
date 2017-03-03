@@ -26,7 +26,7 @@ import org.powermock.api.mockito.PowerMockito;
  */
 public abstract class BaseSQLTransformerLogicTestCase {
 
-	protected void mock(DB db) {
+	protected void setDB(DB db) {
 		PowerMockito.mockStatic(DBManagerUtil.class);
 
 		PowerMockito.when(
@@ -34,6 +34,9 @@ public abstract class BaseSQLTransformerLogicTestCase {
 		).thenReturn(
 			db
 		);
+
+		_sqlTransformer = SQLTransformerFactory.getSQLTransformer(
+			new HypersonicSQLTransformerLogic(db));
 	}
 	
 	protected String getBitwiseCheckOriginalSQL() {
@@ -118,62 +121,62 @@ public abstract class BaseSQLTransformerLogicTestCase {
 
 	@Test
 	public void testReplaceBitwiseCheck() {
-		Assert.assertEquals(getBitwiseCheckTransformedSQL(), sqlTransformer.transform(getBitwiseCheckOriginalSQL()));
+		Assert.assertEquals(getBitwiseCheckTransformedSQL(), _sqlTransformer.transform(getBitwiseCheckOriginalSQL()));
 	}
 
 	@Test
 	public void testReplaceCastClobText() {
-		Assert.assertEquals(getCastClobTextTransformedSQL(), sqlTransformer.transform(getCastClobTextOriginalSQL()));
+		Assert.assertEquals(getCastClobTextTransformedSQL(), _sqlTransformer.transform(getCastClobTextOriginalSQL()));
 	}
 
 	@Test
 	public void testReplaceCastLong() {
-		Assert.assertEquals(getCastLongTransformedSQL(), sqlTransformer.transform(getCastLongOriginalSQL()));
+		Assert.assertEquals(getCastLongTransformedSQL(), _sqlTransformer.transform(getCastLongOriginalSQL()));
 	}
 
 	@Test
 	public void testReplaceCrossJoin() {
-		Assert.assertEquals(getCrossJoinTransformedSQL(), sqlTransformer.transform(getCrossJoinOriginalSQL()));
+		Assert.assertEquals(getCrossJoinTransformedSQL(), _sqlTransformer.transform(getCrossJoinOriginalSQL()));
 	}
 
 	@Test
 	public void testReplaceInstr() {
-		Assert.assertEquals(getInstrTransformedSQL(), sqlTransformer.transform(getInstrOriginalSQL()));
+		Assert.assertEquals(getInstrTransformedSQL(), _sqlTransformer.transform(getInstrOriginalSQL()));
 	}
 
 	@Test
 	public void testReplaceIntegerDivision() {
-		Assert.assertEquals(getIntegerDivisionTransformedSQL(), sqlTransformer.transform(getIntegerDivisionOriginalSQL()));
+		Assert.assertEquals(getIntegerDivisionTransformedSQL(), _sqlTransformer.transform(getIntegerDivisionOriginalSQL()));
 	}
 
 	@Test
 	public void testReplaceMod() {
-		Assert.assertEquals(getModTransformedSQL(), sqlTransformer.transform(getModOriginalSQL()));
+		Assert.assertEquals(getModTransformedSQL(), _sqlTransformer.transform(getModOriginalSQL()));
 	}
 
 	@Test
 	public void testReplaceNullDate() {
-		Assert.assertEquals(getNullDateTransformedSQL(), sqlTransformer.transform(getNullDateOriginalSQL()));
+		Assert.assertEquals(getNullDateTransformedSQL(), _sqlTransformer.transform(getNullDateOriginalSQL()));
 	}
 
 	@Test
 	public void testReplaceReplace() {
-		Assert.assertEquals(getReplaceTransformedSQL(), sqlTransformer.transform(getReplaceOriginalSQL()));
+		Assert.assertEquals(getReplaceTransformedSQL(), _sqlTransformer.transform(getReplaceOriginalSQL()));
 	}
 
 	@Test
 	public void testReplaceSubst() {
-		Assert.assertEquals(getSubstTransformedSQL(), sqlTransformer.transform(getSubstOriginalSQL()));
+		Assert.assertEquals(getSubstTransformedSQL(), _sqlTransformer.transform(getSubstOriginalSQL()));
 	}
 
 	@Test
 	public void testTransform() {
 		String sql = "select * from Foo";
 
-		Assert.assertEquals(sql, sqlTransformer.transform(sql));
+		Assert.assertEquals(sql, _sqlTransformer.transform(sql));
 	}
 
-	protected SQLTransformer sqlTransformer;
+	private SQLTransformer _sqlTransformer;
 
 
 }
