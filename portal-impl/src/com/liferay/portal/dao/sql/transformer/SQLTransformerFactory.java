@@ -14,16 +14,37 @@
 
 package com.liferay.portal.dao.sql.transformer;
 
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBManagerUtil;
+import com.liferay.portal.kernel.dao.db.DBType;
+
 /**
  * @author Manuel de la Peña
  * @author Brian Wing Shun Chan
  */
 public class SQLTransformerFactory {
 
+	public static SQLTransformer getSQLTransformer() {
+		if (_sqlTransformer != null) {
+			return _sqlTransformer;
+		}
+
+		DB db = DBManagerUtil.getDB();
+
+		if (db.getDBType() == DBType.HYPERSONIC) {
+			_sqlTransformer = getSQLTransformer(
+				new HypersonicSQLTransformerLogic(db));
+		}
+
+		return _sqlTransformer;
+	}
+
 	public static SQLTransformer getSQLTransformer(
 		SQLTransformerLogic sqlTransformerLogic) {
 
 		return new DefaultSQLTransformer(sqlTransformerLogic.getFunctions());
 	}
+
+	private static SQLTransformer _sqlTransformer;
 
 }
