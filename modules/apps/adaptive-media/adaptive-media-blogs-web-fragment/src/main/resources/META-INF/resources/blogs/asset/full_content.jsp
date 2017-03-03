@@ -54,18 +54,10 @@ Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(),
 		</div>
 
 		<%
-		ContentTransformerHandler _contentTransformerHandler =
-			ContentTransformerUtil.getContentTransformerHandler();
-
-		String blogEntryContent = entry.getContent();
-
-		if (_contentTransformerHandler != null) {
-			blogEntryContent = _contentTransformerHandler.transform(
-				ContentTransformerContentTypes.HTML, blogEntryContent);
-		}
+		ContentTransformerHandler contentTransformerHandler = ContentTransformerUtil.getContentTransformerHandler();
 		%>
 
-		<%= blogEntryContent %>
+		<%= (contentTransformerHandler != null) ? contentTransformerHandler.transform(ContentTransformerContentTypes.HTML, entry.getContent()) : entry.getContent() %>
 
 		<liferay-expando:custom-attributes-available className="<%= BlogsEntry.class.getName() %>">
 			<liferay-expando:custom-attribute-list

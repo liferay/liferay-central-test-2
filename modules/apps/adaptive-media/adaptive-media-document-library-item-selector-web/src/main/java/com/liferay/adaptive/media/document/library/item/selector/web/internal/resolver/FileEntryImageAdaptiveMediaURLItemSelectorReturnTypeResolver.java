@@ -15,7 +15,6 @@
 package com.liferay.adaptive.media.document.library.item.selector.web.internal.resolver;
 
 import com.liferay.adaptive.media.image.item.selector.ImageAdaptiveMediaURLItemSelectorReturnType;
-
 import com.liferay.document.library.kernel.util.DLUtil;
 import com.liferay.item.selector.ItemSelectorReturnTypeResolver;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
