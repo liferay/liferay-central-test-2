@@ -45,22 +45,22 @@ public class HypersonicSQLTransformerLogicTest
 	}
 
 	@Override
-	protected String getCastClobTextOutputSQL() {
+	protected String getCastClobTextTransformedSQL() {
 		return "select CONVERT(foo, SQL_VARCHAR) from Foo";
 	}
 
 	@Override
-	protected String getCastLongOutputSQL() {
+	protected String getCastLongTransformedSQL() {
 		return "select CONVERT(foo, SQL_BIGINT) from Foo";
 	}
 
 	@Override
-	protected String getIntegerDivisionOutputSQL() {
+	protected String getIntegerDivisionTransformedSQL() {
 		return "select foo /  bar from Foo";
 	}
 
 	@Override
-	protected String getNullDateOutputSQL() {
+	protected String getNullDateTransformedSQL() {
 		return "select NULL from Foo";
 	}
 
