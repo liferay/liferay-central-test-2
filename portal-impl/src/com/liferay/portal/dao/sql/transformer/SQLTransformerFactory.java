@@ -16,6 +16,7 @@ package com.liferay.portal.dao.sql.transformer;
 
 /**
  * @author Manuel de la Peña
+ * @author Brian Wing Shun Chan
  */
 public class SQLTransformerFactory {
 

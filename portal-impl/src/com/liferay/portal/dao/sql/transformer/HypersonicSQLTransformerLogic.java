@@ -21,6 +21,7 @@ import java.util.regex.Matcher;
 
 /**
  * @author Manuel de la Peña
+ * @author Brian Wing Shun Chan
  */
 public class HypersonicSQLTransformerLogic extends BaseSQLTransformerLogic {
 

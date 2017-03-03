@@ -21,6 +21,7 @@ import java.util.function.Function;
 
 /**
  * @author Manuel de la Peña
+ * @author Brian Wing Shun Chan
  */
 public class DefaultSQLTransformer implements SQLTransformer {
 

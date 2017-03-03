@@ -23,6 +23,7 @@ import java.util.regex.Pattern;
 
 /**
  * @author Manuel de la Peña
+ * @author Brian Wing Shun Chan
  */
 public abstract class BaseSQLTransformerLogic implements SQLTransformerLogic {
 

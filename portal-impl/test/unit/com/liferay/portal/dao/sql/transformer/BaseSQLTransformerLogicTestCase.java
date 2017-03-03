@@ -24,6 +24,7 @@ import org.powermock.api.mockito.PowerMockito;
 
 /**
  * @author Manuel de la Peña
+ * @author Brian Wing Shun Chan
  */
 public abstract class BaseSQLTransformerLogicTestCase {
 
