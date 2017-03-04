@@ -19,7 +19,6 @@ import com.liferay.portal.json.JSONFactoryImpl;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -73,12 +72,8 @@ public class SelectDDMFormFieldTemplateContextContributorTest {
 	protected List<Object> getActualOptions(
 		DDMFormFieldOptions ddmFormFieldOptions, Locale locale) {
 
-		SelectDDMFormFieldContextHelper selectDDMFormFieldContextHelper =
-			new SelectDDMFormFieldContextHelper(
-				_jsonFactory, ddmFormFieldOptions, StringPool.BLANK, null,
-				locale);
-
-		return selectDDMFormFieldContextHelper.getOptions();
+		return _selectDDMFormFieldTemplateContextContributor.getOptions(
+			ddmFormFieldOptions, locale);
 	}
 
 	protected JSONArray toJSONArray(String... strings) {
@@ -92,5 +87,8 @@ public class SelectDDMFormFieldTemplateContextContributorTest {
 	}
 
 	private final JSONFactory _jsonFactory = new JSONFactoryImpl();
+	private final SelectDDMFormFieldTemplateContextContributor
+		_selectDDMFormFieldTemplateContextContributor =
+			new SelectDDMFormFieldTemplateContextContributor();
 
 }
