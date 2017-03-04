@@ -91,6 +91,8 @@ public abstract class BaseSearchFacet implements SearchFacet {
 			facetConfiguration = getDefaultConfiguration(companyId);
 		}
 
+		_facetConfiguration = facetConfiguration;
+
 		Facet facet = null;
 
 		if (searchContext != null) {
@@ -102,7 +104,6 @@ public abstract class BaseSearchFacet implements SearchFacet {
 		}
 
 		_facet = facet;
-		_facetConfiguration = facetConfiguration;
 	}
 
 	@Override
