@@ -33,7 +33,7 @@ import org.junit.Test;
 /**
  * @author Marcellus Tavares
  */
-public class SelectDDMFormFieldContextHelperTest {
+public class SelectDDMFormFieldTemplateContextContributorTest {
 
 	@Test
 	public void testGetOptions() {
