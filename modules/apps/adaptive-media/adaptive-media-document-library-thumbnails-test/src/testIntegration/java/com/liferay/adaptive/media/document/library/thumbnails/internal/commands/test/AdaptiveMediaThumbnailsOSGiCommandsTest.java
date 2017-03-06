@@ -35,11 +35,13 @@ import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.service.CompanyLocalServiceUtil;
 import com.liferay.portal.kernel.service.GroupLocalServiceUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.Sync;
 import com.liferay.portal.kernel.test.rule.SynchronousDestinationTestRule;
 import com.liferay.portal.kernel.test.util.CompanyTestUtil;
 import com.liferay.portal.kernel.test.util.GroupTestUtil;
+import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
 import com.liferay.portal.kernel.test.util.TestPropsValues;
 import com.liferay.portal.kernel.test.util.UserTestUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -133,6 +135,11 @@ public class AdaptiveMediaThumbnailsOSGiCommandsTest {
 		_configurationHelper.addImageAdaptiveMediaConfigurationEntry(
 			_company.getCompanyId(), _THUMBNAIL_CONFIGURATION,
 			_THUMBNAIL_CONFIGURATION, properties);
+
+		_serviceContext = ServiceContextTestUtil.getServiceContext(
+			_group, _user.getUserId());
+
+		ServiceContextThreadLocal.pushServiceContext(_serviceContext);
 	}
 
 	@After
@@ -148,6 +155,8 @@ public class AdaptiveMediaThumbnailsOSGiCommandsTest {
 		GroupLocalServiceUtil.deleteGroup(_group);
 
 		CompanyLocalServiceUtil.deleteCompany(_company);
+
+		ServiceContextThreadLocal.popServiceContext();
 	}
 
 	@Test
@@ -279,7 +288,7 @@ public class AdaptiveMediaThumbnailsOSGiCommandsTest {
 			_user.getUserId(), _group.getGroupId(),
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			StringUtil.randomString() + ".pdf", ContentTypes.APPLICATION_PDF,
-			_getFileContents("sample.pdf"), new ServiceContext());
+			_getFileContents("sample.pdf"), _serviceContext);
 	}
 
 	private FileEntry _addPNGFileEntry() throws Exception {
@@ -287,7 +296,7 @@ public class AdaptiveMediaThumbnailsOSGiCommandsTest {
 			_user.getUserId(), _group.getGroupId(),
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			StringUtil.randomString() + ".png", ContentTypes.IMAGE_PNG,
-			_getFileContents("sample.png"), new ServiceContext());
+			_getFileContents("sample.png"), _serviceContext);
 
 		return _pngFileEntry;
 	}
@@ -361,6 +370,7 @@ public class AdaptiveMediaThumbnailsOSGiCommandsTest {
 	private Company _company;
 	private Group _group;
 	private FileEntry _pngFileEntry;
+	private ServiceContext _serviceContext;
 	private User _user;
 
 }
