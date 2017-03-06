@@ -42,7 +42,7 @@ import org.junit.runner.RunWith;
 @RunWith(Arquillian.class)
 @Sync
 public class ImageAdaptiveMediaConfigurationTest
-	extends ImageAdaptiveMediaConfigurationBaseTest {
+	extends ImageAdaptiveMediaConfigurationBaseTestCase {
 
 	@ClassRule
 	@Rule

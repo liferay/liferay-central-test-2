@@ -37,7 +37,7 @@ import org.junit.BeforeClass;
 /**
  * @author Alejandro Hernández
  */
-public abstract class ImageAdaptiveMediaConfigurationBaseTest {
+public abstract class ImageAdaptiveMediaConfigurationBaseTestCase {
 
 	@BeforeClass
 	public static void setUpClass() {
