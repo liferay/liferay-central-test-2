@@ -14,6 +14,6 @@ dependencies {
 	provided project(":apps:adaptive-media:adaptive-media-image-impl")
 }
 
-if (project.hasProperty("TEST")) {
+if (!project.hasProperty("DEMO")) {
 	deploy.enabled = false
 }
