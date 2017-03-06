@@ -22,7 +22,9 @@ import com.liferay.adaptive.media.web.constants.AdaptiveMediaPortletKeys;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.util.HashMap;
@@ -62,6 +64,13 @@ public class EditImageConfigurationEntryMVCActionCommand
 		String maxHeight = ParamUtil.getString(actionRequest, "maxHeight");
 		String maxWidth = ParamUtil.getString(actionRequest, "maxWidth");
 
+		boolean automaticUuid = ParamUtil.getBoolean(
+			actionRequest, "automaticUuid");
+
+		if (automaticUuid) {
+			uuid = _getAutomaticUuid(themeDisplay.getCompanyId(), name);
+		}
+
 		Map<String, String> properties = new HashMap<>();
 
 		properties.put("max-height", maxHeight);
@@ -94,7 +103,7 @@ public class EditImageConfigurationEntryMVCActionCommand
 			else {
 				_imageAdaptiveMediaConfigurationHelper.
 					addImageAdaptiveMediaConfigurationEntry(
-						themeDisplay.getCompanyId(), name, name, properties);
+						themeDisplay.getCompanyId(), name, uuid, properties);
 			}
 		}
 		catch (ImageAdaptiveMediaConfigurationException iamce) {
@@ -109,6 +118,30 @@ public class EditImageConfigurationEntryMVCActionCommand
 
 		_imageAdaptiveMediaConfigurationHelper =
 			imageAdaptiveMediaConfigurationHelper;
+	}
+
+	private String _getAutomaticUuid(long companyId, String name) {
+		String normalizedName = FriendlyURLNormalizerUtil.normalize(name);
+
+		String curUuid = normalizedName;
+
+		for (int i = 1;; i++) {
+			Optional<ImageAdaptiveMediaConfigurationEntry>
+				imageAdaptiveMediaConfigurationEntryOptional =
+					_imageAdaptiveMediaConfigurationHelper.
+						getImageAdaptiveMediaConfigurationEntry(
+							companyId, curUuid);
+
+			if (!imageAdaptiveMediaConfigurationEntryOptional.isPresent()) {
+				break;
+			}
+
+			String suffix = StringPool.DASH + i;
+
+			curUuid = normalizedName + suffix;
+		}
+
+		return curUuid;
 	}
 
 	private boolean _isConfigurationEntryEditable(

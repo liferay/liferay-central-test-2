@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.settings.Settings;
 import com.liferay.portal.kernel.settings.SettingsException;
 import com.liferay.portal.kernel.settings.SettingsFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 
 import java.io.IOException;
@@ -61,23 +62,25 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 				Map<String, String> properties)
 		throws ImageAdaptiveMediaConfigurationException, IOException {
 
+		String normalizedUuid = FriendlyURLNormalizerUtil.normalize(uuid);
+
 		_checkProperties(properties);
 
 		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
 			getImageAdaptiveMediaConfigurationEntries(
 				companyId, configurationEntry -> true);
 
-		_checkDuplicates(configurationEntries, uuid);
+		_checkDuplicates(configurationEntries, normalizedUuid);
 
 		List<ImageAdaptiveMediaConfigurationEntry> updatedConfigurationEntries =
 			configurationEntries.stream().filter(
 				configurationEntry ->
-					!configurationEntry.getUUID().equals(uuid)).collect(
-				Collectors.toList());
+					!configurationEntry.getUUID().equals(normalizedUuid)).
+				collect(Collectors.toList());
 
 		ImageAdaptiveMediaConfigurationEntry configurationEntry =
 			new ImageAdaptiveMediaConfigurationEntryImpl(
-				name, uuid, properties, true);
+				name, normalizedUuid, properties, true);
 
 		updatedConfigurationEntries.add(configurationEntry);
 
