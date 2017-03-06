@@ -17,9 +17,9 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String eventName = ParamUtil.getString(request, "eventName", renderResponse.getNamespace() + "selectAddMenuItem");
-
 String keywords = ParamUtil.getString(request, "keywords");
+
+String eventName = ParamUtil.getString(request, "eventName", renderResponse.getNamespace() + "selectAddMenuItem");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
