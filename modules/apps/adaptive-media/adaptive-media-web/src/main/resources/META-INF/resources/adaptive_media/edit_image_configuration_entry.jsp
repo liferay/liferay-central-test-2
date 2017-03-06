@@ -91,12 +91,12 @@ if (configurationEntry != null) {
 					</h4>
 
 					<div class="form-group" id="<portlet:namespace />idOptions">
-						<aui:input checked="<%= automaticUuid %>" helpMessage="the-id-will-be-based-on-the-name-field" label="automatic" name="automaticUuid" type="radio" value="<%= true %>" />
+						<aui:input checked="<%= automaticUuid %>" disabled="<%= !configurationEntryEditable %>" helpMessage="the-id-will-be-based-on-the-name-field" label="automatic" name="automaticUuid" type="radio" value="<%= true %>" />
 
-						<aui:input checked="<%= !automaticUuid %>" label="custom" name="automaticUuid" type="radio" value="<%= false %>" />
+						<aui:input checked="<%= !automaticUuid %>" disabled="<%= !configurationEntryEditable %>" label="custom" name="automaticUuid" type="radio" value="<%= false %>" />
 					</div>
 
-					<aui:input cssClass="input-medium" disabled="<%= automaticUuid %>" label="primary-key" name="newUuid" type="text" value="<%= configurationEntryUuid %>" />
+					<aui:input cssClass="input-medium" disabled="<%= automaticUuid || !configurationEntryEditable %>" label="primary-key" name="newUuid" type="text" value="<%= configurationEntryUuid %>" />
 				</div>
 			</aui:fieldset>
 		</aui:fieldset-group>
@@ -109,25 +109,27 @@ if (configurationEntry != null) {
 	</aui:form>
 </div>
 
-<aui:script use="liferay-adaptivemedia">
-	var adaptiveMedia = Liferay.component(
-		'<portlet:namespace />AdaptiveMedia',
-		new Liferay.AdaptiveMedia(
-			{
-				namespace: '<portlet:namespace />'
+<c:if test="<%= configurationEntryEditable %>">
+	<aui:script use="liferay-adaptivemedia">
+		var adaptiveMedia = Liferay.component(
+			'<portlet:namespace />AdaptiveMedia',
+			new Liferay.AdaptiveMedia(
+				{
+					namespace: '<portlet:namespace />'
+				}
+			)
+		);
+
+		var name = AUI().one('#<portlet:namespace />name');
+
+		name.on('input', A.bind(<portlet:namespace />onInput, this));
+
+		function <portlet:namespace />onInput() {
+			var adaptiveMedia = Liferay.component('<portlet:namespace />AdaptiveMedia');
+
+			if (adaptiveMedia) {
+				adaptiveMedia.updateUuid(name.val());
 			}
-		)
-	);
-
-	var name = AUI().one('#<portlet:namespace />name');
-
-	name.on('input', A.bind(<portlet:namespace />onInput, this));
-
-	function <portlet:namespace />onInput() {
-		var adaptiveMedia = Liferay.component('<portlet:namespace />AdaptiveMedia');
-
-		if (adaptiveMedia) {
-			adaptiveMedia.updateUuid(name.val());
 		}
-	}
-</aui:script>
+	</aui:script>
+</c:if>
