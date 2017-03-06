@@ -187,14 +187,6 @@ class CardsTreeview extends Treeview {
 
 		let currentTargetId = currentTarget.getAttribute('data-treeitemid');
 
-		if (!currentTargetId) {
-			return;
-		}
-
-		if (currentTarget.classList.contains('disabled')) {
-			return;
-		}
-
 		this.selectNode_(currentTargetId);
 	}
 
