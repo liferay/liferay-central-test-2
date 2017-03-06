@@ -329,8 +329,8 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 		List<ImageAdaptiveMediaConfigurationEntry> updatedConfigurationEntries =
 			configurationEntries.stream().filter(
 				configurationEntry ->
-					!configurationEntry.getUUID().equals(oldUuid)).
-				collect(Collectors.toList());
+					!configurationEntry.getUUID().equals(oldUuid)).collect(
+				Collectors.toList());
 
 		ImageAdaptiveMediaConfigurationEntry configurationEntry =
 			new ImageAdaptiveMediaConfigurationEntryImpl(
