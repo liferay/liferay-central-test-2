@@ -87,7 +87,8 @@ public class ImageAdaptiveMediaConfigResource {
 
 		try {
 			_configurationHelper.updateImageAdaptiveMediaConfigurationEntry(
-				_companyId, configurationEntryModel.getName(), id, properties);
+				_companyId, id, configurationEntryModel.getName(), id,
+				properties);
 
 			if (configurationEntryModel.isEnabled()) {
 				_configurationHelper.enableImageAdaptiveMediaConfigurationEntry(

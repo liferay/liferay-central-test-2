@@ -64,13 +64,6 @@ public class EditImageConfigurationEntryMVCActionCommand
 		String maxHeight = ParamUtil.getString(actionRequest, "maxHeight");
 		String maxWidth = ParamUtil.getString(actionRequest, "maxWidth");
 
-		boolean automaticUuid = ParamUtil.getBoolean(
-			actionRequest, "automaticUuid");
-
-		if (automaticUuid) {
-			uuid = _getAutomaticUuid(themeDisplay.getCompanyId(), name);
-		}
-
 		Map<String, String> properties = new HashMap<>();
 
 		properties.put("max-height", maxHeight);
@@ -82,6 +75,18 @@ public class EditImageConfigurationEntryMVCActionCommand
 					getImageAdaptiveMediaConfigurationEntry(
 						themeDisplay.getCompanyId(), uuid);
 
+		boolean automaticUuid = ParamUtil.getBoolean(
+			actionRequest, "automaticUuid");
+
+		String newUuid = null;
+
+		if (automaticUuid) {
+			newUuid = _getAutomaticUuid(themeDisplay.getCompanyId(), name);
+		}
+		else {
+			newUuid = ParamUtil.getString(actionRequest, "newUuid");
+		}
+
 		try {
 			if (configurationEntryOptional.isPresent()) {
 				ImageAdaptiveMediaConfigurationEntry configurationEntry =
@@ -91,19 +96,20 @@ public class EditImageConfigurationEntryMVCActionCommand
 						themeDisplay.getCompanyId(),
 						configurationEntryOptional.get())) {
 
-					uuid = configurationEntry.getUUID();
+					newUuid = configurationEntry.getUUID();
 
 					properties = configurationEntry.getProperties();
 				}
 
 				_imageAdaptiveMediaConfigurationHelper.
 					updateImageAdaptiveMediaConfigurationEntry(
-						themeDisplay.getCompanyId(), name, uuid, properties);
+						themeDisplay.getCompanyId(), uuid, name, newUuid,
+						properties);
 			}
 			else {
 				_imageAdaptiveMediaConfigurationHelper.
 					addImageAdaptiveMediaConfigurationEntry(
-						themeDisplay.getCompanyId(), name, uuid, properties);
+						themeDisplay.getCompanyId(), name, newUuid, properties);
 			}
 		}
 		catch (ImageAdaptiveMediaConfigurationException iamce) {

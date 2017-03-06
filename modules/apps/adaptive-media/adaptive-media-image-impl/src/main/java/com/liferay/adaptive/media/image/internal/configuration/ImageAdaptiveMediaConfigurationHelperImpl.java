@@ -308,14 +308,39 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 	@Override
 	public ImageAdaptiveMediaConfigurationEntry
 			updateImageAdaptiveMediaConfigurationEntry(
-				long companyId, String name, String uuid,
+				long companyId, String oldUuid, String name, String newUuid,
 				Map<String, String> properties)
 		throws ImageAdaptiveMediaConfigurationException, IOException {
 
-		forceDeleteImageAdaptiveMediaConfigurationEntry(companyId, uuid);
+		String normalizedUuid = FriendlyURLNormalizerUtil.normalize(newUuid);
 
-		return addImageAdaptiveMediaConfigurationEntry(
-			companyId, name, uuid, properties);
+		_checkProperties(properties);
+
+		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
+			getImageAdaptiveMediaConfigurationEntries(
+				companyId, configurationEntry -> true);
+
+		_checkExists(configurationEntries, oldUuid);
+
+		if (!oldUuid.equals(normalizedUuid)) {
+			_checkDuplicates(configurationEntries, normalizedUuid);
+		}
+
+		List<ImageAdaptiveMediaConfigurationEntry> updatedConfigurationEntries =
+			configurationEntries.stream().filter(
+				configurationEntry ->
+					!configurationEntry.getUUID().equals(oldUuid)).
+				collect(Collectors.toList());
+
+		ImageAdaptiveMediaConfigurationEntry configurationEntry =
+			new ImageAdaptiveMediaConfigurationEntryImpl(
+				name, normalizedUuid, properties, true);
+
+		updatedConfigurationEntries.add(configurationEntry);
+
+		_updateConfiguration(companyId, updatedConfigurationEntries);
+
+		return configurationEntry;
 	}
 
 	@Reference(unbind = "-")
@@ -340,6 +365,25 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 		if (duplicateConfigurationEntryOptional.isPresent()) {
 			throw new ImageAdaptiveMediaConfigurationException.
 				DuplicateImageAdaptiveMediaConfigurationEntryException();
+		}
+	}
+
+	private void _checkExists(
+			Collection<ImageAdaptiveMediaConfigurationEntry>
+				configurationEntries,
+			String uuid)
+		throws ImageAdaptiveMediaConfigurationException {
+
+		Optional<ImageAdaptiveMediaConfigurationEntry>
+			duplicateConfigurationEntryOptional =
+				configurationEntries.stream().filter(
+					configurationEntry -> configurationEntry.getUUID().equals(
+						uuid)).findFirst();
+
+		if (!duplicateConfigurationEntryOptional.isPresent()) {
+			throw new ImageAdaptiveMediaConfigurationException.
+				NoSuchImageAdaptiveMediaConfigurationEntryException(
+					"{uuid=" + uuid + "}");
 		}
 	}
 

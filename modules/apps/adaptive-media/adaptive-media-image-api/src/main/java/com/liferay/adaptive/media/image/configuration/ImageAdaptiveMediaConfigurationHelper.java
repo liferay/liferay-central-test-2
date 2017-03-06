@@ -73,7 +73,7 @@ public interface ImageAdaptiveMediaConfigurationHelper {
 
 	public ImageAdaptiveMediaConfigurationEntry
 			updateImageAdaptiveMediaConfigurationEntry(
-				long companyId, String name, String uuid,
+				long companyId, String oldUuid, String name, String newUuid,
 				Map<String, String> properties)
 		throws ImageAdaptiveMediaConfigurationException, IOException;
 

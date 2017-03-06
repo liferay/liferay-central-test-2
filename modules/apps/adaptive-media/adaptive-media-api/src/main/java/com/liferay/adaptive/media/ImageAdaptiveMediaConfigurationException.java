@@ -139,4 +139,34 @@ public class ImageAdaptiveMediaConfigurationException extends Exception {
 
 	}
 
+	/**
+	 * This exception is raised when a configuration does not exist.
+	 *
+	 * @review
+	 */
+	public static final class
+		NoSuchImageAdaptiveMediaConfigurationEntryException
+			extends ImageAdaptiveMediaConfigurationException {
+
+		public NoSuchImageAdaptiveMediaConfigurationEntryException() {
+		}
+
+		public NoSuchImageAdaptiveMediaConfigurationEntryException(String s) {
+			super(s);
+		}
+
+		public NoSuchImageAdaptiveMediaConfigurationEntryException(
+			String s, Throwable throwable) {
+
+			super(s, throwable);
+		}
+
+		public NoSuchImageAdaptiveMediaConfigurationEntryException(
+			Throwable throwable) {
+
+			super(throwable);
+		}
+
+	}
+
 }

@@ -36,12 +36,12 @@ AUI.add(
 					updateUuid: function(title) {
 						var instance = this;
 
-						var uuidTitleInput = instance.one('#uuidTitle');
+						var newUuidInput = instance.one('#newUuid');
 
-						var uuidEmpty = !uuidTitleInput.val();
+						var uuidEmpty = !newUuidInput.val();
 
 						if (instance._automaticUuid() && (uuidEmpty || instance._originalUuidChanged)) {
-							uuidTitleInput.val(Liferay.Util.normalizeFriendlyURL(title));
+							newUuidInput.val(Liferay.Util.normalizeFriendlyURL(title));
 						}
 
 						instance._originalUuidChanged = true;
@@ -62,21 +62,21 @@ AUI.add(
 					_onChangeUuidOptions: function() {
 						var instance = this;
 
-						var uuidTitleInput = instance.one('#uuidTitle');
+						var newUuidInput = instance.one('#newUuid');
 
 						if (instance._automaticUuid()) {
-							instance._lastCustomUuuid = uuidTitleInput.val();
+							instance._lastCustomUuuid = newUuidInput.val();
 
 							var title = instance.one('#name').val();
 
 							instance.updateUuid(title);
 
-							uuidTitleInput.setAttribute('disabled', true);
+							newUuidInput.setAttribute('disabled', true);
 						}
 						else {
-							uuidTitleInput.val(instance._lastCustomUuuid || uuidTitleInput.val());
+							newUuidInput.val(instance._lastCustomUuuid || newUuidInput.val());
 
-							uuidTitleInput.removeAttribute('disabled');
+							newUuidInput.removeAttribute('disabled');
 						}
 					},
 
