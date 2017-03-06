@@ -39,7 +39,8 @@ import org.powermock.modules.junit4.PowerMockRunner;
  */
 @PrepareForTest({PortalClassLoaderUtil.class, ResourceBundleUtil.class})
 @RunWith(PowerMockRunner.class)
-public abstract class BaseDDMFormFieldTypeSettingsTest extends PowerMockito {
+public abstract class BaseDDMFormFieldTypeSettingsTestCase
+	extends PowerMockito {
 
 	@Before
 	public void setUp() {
