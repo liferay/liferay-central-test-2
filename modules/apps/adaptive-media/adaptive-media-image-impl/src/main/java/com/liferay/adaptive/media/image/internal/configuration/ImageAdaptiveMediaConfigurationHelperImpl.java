@@ -320,7 +320,20 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 			getImageAdaptiveMediaConfigurationEntries(
 				companyId, configurationEntry -> true);
 
-		_checkExists(configurationEntries, oldUuid);
+		Optional<ImageAdaptiveMediaConfigurationEntry>
+			oldConfigurationEntryOptional =
+				configurationEntries.stream().filter(
+					configurationEntry -> configurationEntry.getUUID().equals(
+						oldUuid)).findFirst();
+
+		if (!oldConfigurationEntryOptional.isPresent()) {
+			throw new ImageAdaptiveMediaConfigurationException.
+				NoSuchImageAdaptiveMediaConfigurationEntryException(
+					"{uuid=" + oldUuid + "}");
+		}
+
+		ImageAdaptiveMediaConfigurationEntry oldConfigurationEntry =
+			oldConfigurationEntryOptional.get();
 
 		if (!oldUuid.equals(normalizedUuid)) {
 			_checkDuplicates(configurationEntries, normalizedUuid);
@@ -334,7 +347,8 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 
 		ImageAdaptiveMediaConfigurationEntry configurationEntry =
 			new ImageAdaptiveMediaConfigurationEntryImpl(
-				name, normalizedUuid, properties, true);
+				name, normalizedUuid, properties,
+				oldConfigurationEntry.isEnabled());
 
 		updatedConfigurationEntries.add(configurationEntry);
 
@@ -365,25 +379,6 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 		if (duplicateConfigurationEntryOptional.isPresent()) {
 			throw new ImageAdaptiveMediaConfigurationException.
 				DuplicateImageAdaptiveMediaConfigurationEntryException();
-		}
-	}
-
-	private void _checkExists(
-			Collection<ImageAdaptiveMediaConfigurationEntry>
-				configurationEntries,
-			String uuid)
-		throws ImageAdaptiveMediaConfigurationException {
-
-		Optional<ImageAdaptiveMediaConfigurationEntry>
-			duplicateConfigurationEntryOptional =
-				configurationEntries.stream().filter(
-					configurationEntry -> configurationEntry.getUUID().equals(
-						uuid)).findFirst();
-
-		if (!duplicateConfigurationEntryOptional.isPresent()) {
-			throw new ImageAdaptiveMediaConfigurationException.
-				NoSuchImageAdaptiveMediaConfigurationEntryException(
-					"{uuid=" + uuid + "}");
 		}
 	}
 

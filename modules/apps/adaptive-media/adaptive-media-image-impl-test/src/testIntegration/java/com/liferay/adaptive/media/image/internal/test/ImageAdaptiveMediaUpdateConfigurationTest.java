@@ -152,6 +152,58 @@ public class ImageAdaptiveMediaUpdateConfigurationTest
 	}
 
 	@Test
+	public void testUpdateDisabledConfigurationEntry() throws Exception {
+		ImageAdaptiveMediaConfigurationHelper configurationHelper =
+			serviceTracker.getService();
+
+		Map<String, String> properties = new HashMap<>();
+
+		properties.put("max-height", "100");
+		properties.put("max-width", "100");
+
+		ImageAdaptiveMediaConfigurationEntry configurationEntry =
+			configurationHelper.addImageAdaptiveMediaConfigurationEntry(
+				TestPropsValues.getCompanyId(), "one", "1", properties);
+
+		configurationHelper.disableImageAdaptiveMediaConfigurationEntry(
+			TestPropsValues.getCompanyId(), configurationEntry.getUUID());
+
+		Optional<ImageAdaptiveMediaConfigurationEntry>
+			configurationEntryOptional =
+				configurationHelper.getImageAdaptiveMediaConfigurationEntry(
+					TestPropsValues.getCompanyId(), "1");
+
+		assertDisabled(configurationEntryOptional);
+
+		configurationHelper.updateImageAdaptiveMediaConfigurationEntry(
+			TestPropsValues.getCompanyId(), "1", "one-bis", "1-bis",
+				configurationEntry.getProperties());
+
+		configurationEntryOptional =
+			configurationHelper.getImageAdaptiveMediaConfigurationEntry(
+				TestPropsValues.getCompanyId(), "1-bis");
+
+		Assert.assertTrue(configurationEntryOptional.isPresent());
+
+		assertDisabled(configurationEntryOptional);
+
+		Assert.assertTrue(configurationEntryOptional.isPresent());
+
+		ImageAdaptiveMediaConfigurationEntry actualConfigurationEntry =
+			configurationEntryOptional.get();
+
+		Assert.assertEquals("one-bis", actualConfigurationEntry.getName());
+
+		Map<String, String> actualConfigurationEntry1Properties =
+			actualConfigurationEntry.getProperties();
+
+		Assert.assertEquals(
+			"100", actualConfigurationEntry1Properties.get("max-height"));
+		Assert.assertEquals(
+			"100", actualConfigurationEntry1Properties.get("max-width"));
+	}
+
+	@Test
 	public void testUpdateFirstConfigurationEntryProperties() throws Exception {
 		ImageAdaptiveMediaConfigurationHelper configurationHelper =
 			serviceTracker.getService();
