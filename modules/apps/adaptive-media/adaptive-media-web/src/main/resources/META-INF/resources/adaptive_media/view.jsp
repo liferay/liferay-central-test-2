@@ -75,7 +75,7 @@ AdaptiveMediaImageConfigurationHelper adaptiveMediaImageConfigurationHelper = (A
 PortletURL portletURL = renderResponse.createRenderURL();
 %>
 
-<div class="container-fluid-1280">
+<div class="container-fluid-1280" id="<portlet:namespace />adaptiveMediaConfiguration">
 	<c:if test="<%= adaptiveMediaImageConfigurationHelper.isDefaultConfiguration(themeDisplay.getCompanyId()) %>">
 		<div class="alert alert-info">
 			<liferay-ui:message key="this-configuration-was-not-saved-yet" />
@@ -140,6 +140,31 @@ PortletURL portletURL = renderResponse.createRenderURL();
 					<div class="progress">
 						<div aria-valuemax="100" aria-valuemin="0" aria-valuenow="<%= percentage %>" class="<%= (percentage == 100) ? "progress-bar progress-bar-success" : "progress-bar" %>" role="progressbar" style="<%= "width: " + percentage + "%;" %>"><%= percentage + "%" %></div>
 					</div>
+
+					<%
+					String uuid = String.valueOf(configurationEntry.getUUID());
+					%>
+
+					<div id="<portlet:namespace />OptimizeRemaining_<%= uuid %>"></div>
+
+					<portlet:resourceURL id="/adaptive_media/optimized_images_percentage" var="calculateOptimizedPercentageURL">
+						<portlet:param name="entryUuid" value="<%= uuid %>" />
+					</portlet:resourceURL>
+
+					<aui:script require="adaptive-media-web/adaptive_media/js/AdaptiveMediaProgress.es">
+						Liferay.component(
+							'<portlet:namespace />OptimizeRemaining<%= uuid %>',
+							new adaptiveMediaWebAdaptive_mediaJsAdaptiveMediaProgressEs.default(
+								{
+									namespace: '<portlet:namespace />',
+									percentage: <%= percentage %>,
+									percentageUrl: '<%= calculateOptimizedPercentageURL.toString() %>',
+									uuid: '<%= uuid %>'
+								},
+								<portlet:namespace />OptimizeRemaining_<%= uuid %>
+							)
+						);
+					</aui:script>
 				</liferay-ui:search-container-column-text>
 
 				<%
@@ -177,6 +202,12 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 			submitForm(form);
 		}
+	}
+
+	function <portlet:namespace />optimizeRemaining(uuid, backgroundTaskUrl) {
+		var component = Liferay.component('<portlet:namespace />OptimizeRemaining' + uuid);
+
+		component.startProgress(backgroundTaskUrl);
 	}
 </aui:script>
 
