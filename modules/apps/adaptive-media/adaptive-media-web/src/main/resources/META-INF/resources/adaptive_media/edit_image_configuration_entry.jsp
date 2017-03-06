@@ -87,7 +87,7 @@ if (configurationEntry != null) {
 					%>
 
 					<h4>
-						<liferay-ui:message key="id" />
+						<liferay-ui:message key="identifier" />
 					</h4>
 
 					<div class="form-group" id="<portlet:namespace />idOptions">
@@ -96,7 +96,7 @@ if (configurationEntry != null) {
 						<aui:input checked="<%= !automaticUuid %>" disabled="<%= !configurationEntryEditable %>" label="custom" name="automaticUuid" type="radio" value="<%= false %>" />
 					</div>
 
-					<aui:input cssClass="input-medium" disabled="<%= automaticUuid || !configurationEntryEditable %>" label="primary-key" name="newUuid" type="text" value="<%= configurationEntryUuid %>" />
+					<aui:input cssClass="input-medium" disabled="<%= automaticUuid || !configurationEntryEditable %>" label="id" name="newUuid" type="text" value="<%= configurationEntryUuid %>" />
 				</div>
 			</aui:fieldset>
 		</aui:fieldset-group>
