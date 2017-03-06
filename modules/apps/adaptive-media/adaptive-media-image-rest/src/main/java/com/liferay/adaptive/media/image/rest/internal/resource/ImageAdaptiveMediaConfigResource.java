@@ -86,9 +86,21 @@ public class ImageAdaptiveMediaConfigResource {
 		configurationEntryModel.setUuid(id);
 
 		try {
-			_configurationHelper.updateImageAdaptiveMediaConfigurationEntry(
-				_companyId, id, configurationEntryModel.getName(), id,
-				properties);
+			Optional<ImageAdaptiveMediaConfigurationEntry>
+				configurationEntryOptional =
+					_configurationHelper.
+						getImageAdaptiveMediaConfigurationEntry(_companyId, id);
+
+			if (configurationEntryOptional.isPresent()) {
+				_configurationHelper.updateImageAdaptiveMediaConfigurationEntry(
+					_companyId, id, configurationEntryModel.getName(), id,
+					properties);
+			}
+			else {
+				_configurationHelper.addImageAdaptiveMediaConfigurationEntry(
+					_companyId, configurationEntryModel.getName(), id,
+					properties);
+			}
 
 			if (configurationEntryModel.isEnabled()) {
 				_configurationHelper.enableImageAdaptiveMediaConfigurationEntry(
