@@ -17,6 +17,7 @@ package com.liferay.adaptive.media.web.internal.portlet.action;
 import com.liferay.adaptive.media.ImageAdaptiveMediaConfigurationException;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
+import com.liferay.adaptive.media.image.service.AdaptiveMediaImageLocalService;
 import com.liferay.adaptive.media.web.constants.AdaptiveMediaPortletKeys;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.servlet.SessionErrors;
@@ -72,16 +73,29 @@ public class EditImageConfigurationEntryMVCActionCommand
 					getImageAdaptiveMediaConfigurationEntry(
 						themeDisplay.getCompanyId(), uuid);
 
-		if (configurationEntryOptional.isPresent()) {
-			_imageAdaptiveMediaConfigurationHelper.
-				deleteImageAdaptiveMediaConfigurationEntry(
-					themeDisplay.getCompanyId(), uuid);
-		}
-
 		try {
-			_imageAdaptiveMediaConfigurationHelper.
-				addImageAdaptiveMediaConfigurationEntry(
-					themeDisplay.getCompanyId(), name, name, properties);
+			if (configurationEntryOptional.isPresent()) {
+				ImageAdaptiveMediaConfigurationEntry configurationEntry =
+					configurationEntryOptional.get();
+
+				if (!_isConfigurationEntryEditable(
+						themeDisplay.getCompanyId(),
+						configurationEntryOptional.get())) {
+
+					uuid = configurationEntry.getUUID();
+
+					properties = configurationEntry.getProperties();
+				}
+
+				_imageAdaptiveMediaConfigurationHelper.
+					updateImageAdaptiveMediaConfigurationEntry(
+						themeDisplay.getCompanyId(), name, uuid, properties);
+			}
+			else {
+				_imageAdaptiveMediaConfigurationHelper.
+					addImageAdaptiveMediaConfigurationEntry(
+						themeDisplay.getCompanyId(), name, name, properties);
+			}
 		}
 		catch (ImageAdaptiveMediaConfigurationException iamce) {
 			SessionErrors.add(actionRequest, iamce.getClass());
@@ -97,7 +111,25 @@ public class EditImageConfigurationEntryMVCActionCommand
 			imageAdaptiveMediaConfigurationHelper;
 	}
 
+	private boolean _isConfigurationEntryEditable(
+		long companyId,
+		ImageAdaptiveMediaConfigurationEntry configurationEntry) {
+
+		int adaptiveMediaImagesCount =
+			_imageLocalService.getAdaptiveMediaImagesCount(
+				companyId, configurationEntry.getUUID());
+
+		if (adaptiveMediaImagesCount == 0) {
+			return true;
+		}
+
+		return false;
+	}
+
 	private ImageAdaptiveMediaConfigurationHelper
 		_imageAdaptiveMediaConfigurationHelper;
+
+	@Reference
+	private AdaptiveMediaImageLocalService _imageLocalService;
 
 }
