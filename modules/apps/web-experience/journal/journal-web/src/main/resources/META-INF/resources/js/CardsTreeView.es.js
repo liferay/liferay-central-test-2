@@ -19,14 +19,7 @@ import templates from './CardsTreeView.soy';
 class CardsTreeview extends Treeview {
 
 	created() {
-		this.nodes.forEach(
-			function(node) {
-				if (node.children) {
-					node.expanded = this.expandParentNodes_(node.children);
-				}
-			},
-			this
-		);
+		this.expandSelectedNodesParentNodes_(this.nodes);
 	}
 
 	attached() {
@@ -80,20 +73,27 @@ class CardsTreeview extends Treeview {
 	 * @param nodes List of nodes to expand all parent nodes of expanded children.
 	 * @protected
 	 */
-	expandParentNodes_(nodes) {
-		let expanded = false;
+	expandSelectedNodesParentNodes_(nodes) {
+		let expanded,
+			expandedParent;
 
-		for (let node of nodes) {
-			if (node.expanded) {
-				return true;
+		nodes.forEach(
+			(node) => {
+				expanded = node.expanded;
+
+				if (node.selected) {
+					expandedParent = true; 
+				}
+
+				if (node.children) {
+					expanded = this.expandSelectedNodesParentNodes_(node.children) || expanded;
+				}
+
+				node.expanded = expanded;
 			}
+		);
 
-			if (node.children) {
-				node.expanded = this.expandParentNodes_(node.children);
-			}
-		}
-
-		return false;
+		return expandedParent;
 	}
 
 	/**
