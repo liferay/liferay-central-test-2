@@ -30,7 +30,7 @@ public class ContentTransformerUtil {
 
 	public static ContentTransformerHandler getContentTransformerHandler() {
 		Iterator<ContentTransformerHandler> iterator =
-			_getContentTransformerHandlers().iterator();
+			_instance._contentTransformerHandlers.iterator();
 
 		if (iterator.hasNext()) {
 			return iterator.next();
@@ -39,22 +39,18 @@ public class ContentTransformerUtil {
 		return null;
 	}
 
-	private static
-		ServiceTrackerList<ContentTransformerHandler, ContentTransformerHandler>
-			_getContentTransformerHandlers() {
+	private ContentTransformerUtil() {
+		BundleContext bundleContext = FrameworkUtil.getBundle(
+			ContentTransformerUtil.class).getBundleContext();
 
-		if (_contentTransformerHandlers == null) {
-			BundleContext bundleContext = FrameworkUtil.getBundle(
-				ContentTransformerUtil.class).getBundleContext();
-
-			_contentTransformerHandlers = ServiceTrackerListFactory.open(
-				bundleContext, ContentTransformerHandler.class);
-		}
-
-		return _contentTransformerHandlers;
+		_contentTransformerHandlers = ServiceTrackerListFactory.open(
+			bundleContext, ContentTransformerHandler.class);
 	}
 
-	private static
+	private static final ContentTransformerUtil _instance =
+		new ContentTransformerUtil();
+
+	private final
 		ServiceTrackerList<ContentTransformerHandler, ContentTransformerHandler>
 			_contentTransformerHandlers;
 
