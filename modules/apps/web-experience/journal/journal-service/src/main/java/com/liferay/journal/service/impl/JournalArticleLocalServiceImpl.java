@@ -95,6 +95,7 @@ import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.model.ResourceConstants;
 import com.liferay.portal.kernel.model.SystemEventConstants;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.model.WorkflowDefinitionLink;
 import com.liferay.portal.kernel.module.configuration.ConfigurationException;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.notifications.UserNotificationDefinition;
@@ -152,6 +153,7 @@ import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.webserver.WebServerServletTokenUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
+import com.liferay.portal.kernel.workflow.WorkflowHandler;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
@@ -821,10 +823,16 @@ public class JournalArticleLocalServiceImpl
 		newArticle.setSmallImageId(counterLocalService.increment());
 		newArticle.setSmallImageURL(oldArticle.getSmallImageURL());
 
-		if (oldArticle.isPending() ||
-			workflowDefinitionLinkLocalService.hasWorkflowDefinitionLink(
-				user.getCompanyId(), groupId, JournalArticle.class.getName())) {
+		WorkflowHandler workflowHandler =
+			WorkflowHandlerRegistryUtil.getWorkflowHandler(
+				JournalArticle.class.getName());
 
+		WorkflowDefinitionLink workflowDefinitionLink =
+			workflowHandler.getWorkflowDefinitionLink(
+				oldArticle.getCompanyId(), oldArticle.getGroupId(),
+				oldArticle.getId());
+
+		if (oldArticle.isPending() || (workflowDefinitionLink != null)) {
 			newArticle.setStatus(WorkflowConstants.STATUS_DRAFT);
 		}
 		else {
