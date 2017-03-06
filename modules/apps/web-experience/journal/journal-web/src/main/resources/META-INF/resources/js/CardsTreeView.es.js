@@ -191,12 +191,6 @@ class CardsTreeview extends Treeview {
 			return;
 		}
 
-		this.focus_(
-			{
-				id: currentTargetId
-			}
-		);
-
 		if (currentTarget.classList.contains('disabled')) {
 			return;
 		}
