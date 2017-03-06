@@ -73,6 +73,14 @@ if (configurationEntry != null) {
 					</div>
 				</div>
 
+				<div class="row">
+					<div class="col-md-12">
+						<c:if test="<%= configurationEntry == null %>">
+							<aui:input label="add-a-resolution-for-high-density-displays" name="addHighResolution" type="checkbox" />
+						</c:if>
+					</div>
+				</div>
+
 				<div class="form-group">
 
 					<%

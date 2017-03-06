@@ -23,9 +23,12 @@ import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.WebKeys;
+
+import java.io.IOException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -107,9 +110,19 @@ public class EditImageConfigurationEntryMVCActionCommand
 						properties);
 			}
 			else {
-				_imageAdaptiveMediaConfigurationHelper.
-					addImageAdaptiveMediaConfigurationEntry(
-						themeDisplay.getCompanyId(), name, newUuid, properties);
+				ImageAdaptiveMediaConfigurationEntry configurationEntry =
+					_imageAdaptiveMediaConfigurationHelper.
+						addImageAdaptiveMediaConfigurationEntry(
+							themeDisplay.getCompanyId(), name, newUuid,
+							properties);
+
+				boolean addHighResolution = ParamUtil.getBoolean(
+					actionRequest, "addHighResolution");
+
+				if (addHighResolution) {
+					_addHighResolutionConfigurationEntry(
+						themeDisplay.getCompanyId(), configurationEntry);
+				}
 			}
 		}
 		catch (ImageAdaptiveMediaConfigurationException iamce) {
@@ -124,6 +137,29 @@ public class EditImageConfigurationEntryMVCActionCommand
 
 		_imageAdaptiveMediaConfigurationHelper =
 			imageAdaptiveMediaConfigurationHelper;
+	}
+
+	private void _addHighResolutionConfigurationEntry(
+			long companyId,
+			ImageAdaptiveMediaConfigurationEntry configurationEntry)
+		throws ImageAdaptiveMediaConfigurationException, IOException {
+
+		Map<String, String> properties = configurationEntry.getProperties();
+
+		int doubleMaxHeight =
+			GetterUtil.getInteger(properties.get("max-height")) * 2;
+		int doubleMaxWidth =
+			GetterUtil.getInteger(properties.get("max-width")) * 2;
+
+		properties.put("max-height", String.valueOf(doubleMaxHeight));
+		properties.put("max-width", String.valueOf(doubleMaxWidth));
+
+		String name = configurationEntry.getName();
+		String uuid = configurationEntry.getUUID();
+
+		_imageAdaptiveMediaConfigurationHelper.
+			addImageAdaptiveMediaConfigurationEntry(
+				companyId, name.concat("-2x"), uuid.concat("-2x"), properties);
 	}
 
 	private String _getAutomaticUuid(long companyId, String name) {
