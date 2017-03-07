@@ -47,7 +47,8 @@ public class DDMForm implements Serializable {
 			addDDMFormRule(new DDMFormRule(ddmFormRule));
 		}
 
-		_ddmFormSuccessPageSettings = ddmForm.getDDMFormSuccessPageSettings();
+		_ddmFormSuccessPageSettings = new DDMFormSuccessPageSettings(
+			ddmForm.getDDMFormSuccessPageSettings());
 	}
 
 	public void addAvailableLocale(Locale locale) {

@@ -95,13 +95,14 @@ public abstract class BaseDDMFormDeserializerTestCase extends BaseDDMTestCase {
 
 		testBooleanDDMFormField(ddmFormFieldsMap.get("Boolean2282"));
 		testDateDDMFormField(ddmFormFieldsMap.get("Date2510"));
-		testDDMFormSuccessPageSettings(ddmForm.getDDMFormSuccessPageSettings());
 		testDecimalDDMFormField(ddmFormFieldsMap.get("Decimal3479"));
 		testDocumentLibraryDDMFormField(
 			ddmFormFieldsMap.get("Documents_and_Media4036"));
 		testHTMLDDMFormField(ddmFormFieldsMap.get("HTML4512"));
 		testNestedDDMFormFields(ddmFormFieldsMap.get("Text6980"));
 		testRadioDDMFormField(ddmFormFieldsMap.get("Radio5699"));
+
+		testDDMFormSuccessPageSettings(ddmForm.getDDMFormSuccessPageSettings());
 	}
 
 	protected abstract DDMForm deserialize(String serializedDDMForm)
