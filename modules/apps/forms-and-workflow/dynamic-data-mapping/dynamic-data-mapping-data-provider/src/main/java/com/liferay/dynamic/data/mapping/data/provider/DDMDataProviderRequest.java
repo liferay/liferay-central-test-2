@@ -29,6 +29,24 @@ public class DDMDataProviderRequest {
 		return _ddmDataProviderContext;
 	}
 
+	public String getEndValue() {
+		return _endValue;
+	}
+
+	public String getStartValue() {
+		return _startValue;
+	}
+
+	public void setEndValue(String endValue) {
+		_endValue = endValue;
+	}
+
+	public void setStartValue(String startValue) {
+		_startValue = startValue;
+	}
+
 	private final DDMDataProviderContext _ddmDataProviderContext;
+	private String _endValue;
+	private String _startValue;
 
 }
