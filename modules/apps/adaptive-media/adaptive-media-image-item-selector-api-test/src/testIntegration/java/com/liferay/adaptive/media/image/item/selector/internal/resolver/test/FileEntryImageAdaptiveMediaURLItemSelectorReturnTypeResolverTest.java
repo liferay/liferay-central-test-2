@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.adaptive.media.image.item.selector.api.internal.resolver.test;
+package com.liferay.adaptive.media.image.item.selector.internal.resolver.test;
 
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
@@ -294,8 +294,8 @@ public class FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolverTest {
 		return FileUtil.getBytes(
 			FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolverTest.
 				class,
-			"/com/liferay/adaptive/media/document/library/item/selector/web" +
-				"/internal/resolver/test/dependencies/image.jpg");
+			"/com/liferay/adaptive/media/image/item/selector/internal" +
+				"/resolver/test/dependencies/image.jpg");
 	}
 
 	private <T> T _getService(Class<T> clazz) {
@@ -323,9 +323,9 @@ public class FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolverTest {
 	}
 
 	private static final String _RESOLVER_FILTER =
-		"(objectClass=com.liferay.adaptive.media.document.library.item." +
-			"selector.web.internal.resolver." +
-				"FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolver)";
+		"(objectClass=com.liferay.adaptive.media.image.item.selector." +
+			"internal.resolver.FileEntryImageAdaptiveMediaURLItem" +
+				"SelectorReturnTypeResolver)";
 
 	private ImageAdaptiveMediaConfigurationHelper _configurationHelper;
 	private DLAppLocalService _dlAppLocalService;

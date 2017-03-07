@@ -27,13 +27,14 @@ import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.StringPool;
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Roberto Díaz
@@ -47,11 +48,11 @@ import java.util.stream.Stream;
 )
 public class FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolver
 	implements ItemSelectorReturnTypeResolver
-	<ImageAdaptiveMediaURLItemSelectorReturnType, FileEntry> {
+		<ImageAdaptiveMediaURLItemSelectorReturnType, FileEntry> {
 
 	@Override
 	public Class<ImageAdaptiveMediaURLItemSelectorReturnType>
-	getItemSelectorReturnTypeClass() {
+		getItemSelectorReturnTypeClass() {
 
 		return ImageAdaptiveMediaURLItemSelectorReturnType.class;
 	}
@@ -87,7 +88,7 @@ public class FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolver
 		AdaptiveMedia previousAdaptiveMedia = null;
 
 		for (AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia :
-			adaptiveMediaList) {
+				adaptiveMediaList) {
 
 			JSONObject sourceJSONObject = _getSourceJSONObject(
 				adaptiveMedia, previousAdaptiveMedia);
