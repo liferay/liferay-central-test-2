@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.editor.configuration.EditorConfigContributor;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.util.ArrayList;
@@ -62,13 +63,11 @@ public class AdaptiveMediaBlogsEditorConfigContributor
 		String allowedContent = jsonObject.getString("allowedContent");
 
 		if (Validator.isNotNull(allowedContent)) {
-			allowedContent = allowedContent + " picture[*](*); source[*](*); ";
+			allowedContent += StringPool.SPACE + _IMG_TAG_RULE;
 		}
 		else {
-			allowedContent = "picture[*](*); source[*](*);";
+			allowedContent = _IMG_TAG_RULE;
 		}
-
-		allowedContent += " img[*](*);";
 
 		jsonObject.put("allowedContent", allowedContent);
 
@@ -146,6 +145,8 @@ public class AdaptiveMediaBlogsEditorConfigContributor
 		itemSelectorCriterion.setDesiredItemSelectorReturnTypes(
 			desiredItemSelectorReturnTypes);
 	}
+
+	private static final String _IMG_TAG_RULE = "img[*](*);";
 
 	private ItemSelector _itemSelector;
 
