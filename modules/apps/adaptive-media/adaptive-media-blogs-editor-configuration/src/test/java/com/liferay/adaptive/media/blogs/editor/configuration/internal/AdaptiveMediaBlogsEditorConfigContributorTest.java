@@ -14,13 +14,13 @@
 
 package com.liferay.adaptive.media.blogs.editor.configuration.internal;
 
-import com.liferay.adaptive.media.image.item.selector.ImageAdaptiveMediaURLItemSelectorReturnType;
+import com.liferay.adaptive.media.image.item.selector.ImageAdaptiveMediaFileEntryItemSelectorReturnType;
 import com.liferay.blogs.item.selector.criterion.BlogsItemSelectorCriterion;
 import com.liferay.blogs.web.constants.BlogsPortletKeys;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.item.selector.ItemSelectorCriterion;
 import com.liferay.item.selector.ItemSelectorReturnType;
-import com.liferay.item.selector.criteria.URLItemSelectorReturnType;
+import com.liferay.item.selector.criteria.FileEntryItemSelectorReturnType;
 import com.liferay.item.selector.criteria.audio.criterion.AudioItemSelectorCriterion;
 import com.liferay.item.selector.criteria.file.criterion.FileItemSelectorCriterion;
 import com.liferay.portal.json.JSONFactoryImpl;
@@ -102,16 +102,16 @@ public class AdaptiveMediaBlogsEditorConfigContributorTest
 
 		when(
 			_itemSelector.getItemSelectorCriteria(
-				"blogsItemSelectorCriterionURLItemSelectorReturnType")
+				"blogsItemSelectorCriterionFileEntryItemSelectorReturnType")
 		).thenReturn(
-			_getBlogsItemSelectorCriterionURLItemSelectorReturnType()
+			_getBlogsItemSelectorCriterionFileEntryItemSelectorReturnType()
 		);
 
 		JSONObject originalJSONObject = JSONFactoryUtil.createJSONObject();
 
 		originalJSONObject.put(
 			"filebrowserImageBrowseLinkUrl",
-			"blogsItemSelectorCriterionURLItemSelectorReturnType");
+			"blogsItemSelectorCriterionFileEntryItemSelectorReturnType");
 
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
 			originalJSONObject.toJSONString());
@@ -157,9 +157,9 @@ public class AdaptiveMediaBlogsEditorConfigContributorTest
 
 		when(
 			_itemSelector.getItemSelectorCriteria(
-				"blogsItemSelectorCriterionURLItemSelectorReturnType")
+				"blogsItemSelectorCriterionFileEntryItemSelectorReturnType")
 		).thenReturn(
-			_getBlogsItemSelectorCriterionURLItemSelectorReturnType()
+			_getBlogsItemSelectorCriterionFileEntryItemSelectorReturnType()
 		);
 
 		JSONObject originalJSONObject = JSONFactoryUtil.createJSONObject();
@@ -168,7 +168,7 @@ public class AdaptiveMediaBlogsEditorConfigContributorTest
 			"extraPlugins", "ae_placeholder,ae_selectionregion,ae_uicore");
 		originalJSONObject.put(
 			"filebrowserImageBrowseLinkUrl",
-			"blogsItemSelectorCriterionURLItemSelectorReturnType");
+			"blogsItemSelectorCriterionFileEntryItemSelectorReturnType");
 
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
 			originalJSONObject.toJSONString());
@@ -190,7 +190,7 @@ public class AdaptiveMediaBlogsEditorConfigContributorTest
 	}
 
 	@Test
-	public void testAddImageAdaptiveMediaURLItemSelectorReturnType()
+	public void testAddImageAdaptiveMediaFileEntryItemSelectorReturnType()
 		throws Exception {
 
 		AdaptiveMediaBlogsEditorConfigContributor
@@ -202,10 +202,10 @@ public class AdaptiveMediaBlogsEditorConfigContributorTest
 
 		blogsItemSelectorCriterion.setDesiredItemSelectorReturnTypes(
 			Collections.<ItemSelectorReturnType>singletonList(
-				new URLItemSelectorReturnType()));
+				new FileEntryItemSelectorReturnType()));
 
 		adaptiveMediaBlogsEditorConfigContributor.
-			addImageAdaptiveMediaURLItemSelectorReturnType(
+			addImageAdaptiveMediaFileEntryItemSelectorReturnType(
 				blogsItemSelectorCriterion);
 
 		List<ItemSelectorReturnType> desiredItemSelectorReturnTypes =
@@ -216,10 +216,10 @@ public class AdaptiveMediaBlogsEditorConfigContributorTest
 			desiredItemSelectorReturnTypes.size());
 		Assert.assertTrue(
 			desiredItemSelectorReturnTypes.get(0) instanceof
-				ImageAdaptiveMediaURLItemSelectorReturnType);
+				ImageAdaptiveMediaFileEntryItemSelectorReturnType);
 		Assert.assertTrue(
 			desiredItemSelectorReturnTypes.get(1) instanceof
-				URLItemSelectorReturnType);
+				FileEntryItemSelectorReturnType);
 	}
 
 	@Test
@@ -267,16 +267,16 @@ public class AdaptiveMediaBlogsEditorConfigContributorTest
 
 		when(
 			_itemSelector.getItemSelectorCriteria(
-				"audioItemSelectorCriterionURLItemSelectorReturnType")
+				"audioItemSelectorCriterionFileEntryItemSelectorReturnType")
 		).thenReturn(
-			_getAudioItemSelectorCriterionURLItemSelectorReturnType()
+			_getAudioItemSelectorCriterionFileEntryItemSelectorReturnType()
 		);
 
 		JSONObject originalJSONObject = JSONFactoryUtil.createJSONObject();
 
 		originalJSONObject.put(
 			"filebrowserImageBrowseLinkUrl",
-			"audioItemSelectorCriterionURLItemSelectorReturnType");
+			"audioItemSelectorCriterionFileEntryItemSelectorReturnType");
 
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
 			originalJSONObject.toJSONString());
@@ -336,16 +336,16 @@ public class AdaptiveMediaBlogsEditorConfigContributorTest
 
 		when(
 			_itemSelector.getItemSelectorCriteria(
-				"blogsItemSelectorCriterionURLItemSelectorReturnType")
+				"blogsItemSelectorCriterionFileEntryItemSelectorReturnType")
 		).thenReturn(
-			_getBlogsItemSelectorCriterionURLItemSelectorReturnType()
+			_getBlogsItemSelectorCriterionFileEntryItemSelectorReturnType()
 		);
 
 		JSONObject originalJSONObject = JSONFactoryUtil.createJSONObject();
 
 		originalJSONObject.put(
 			"filebrowserImageBrowseLinkUrl",
-			"blogsItemSelectorCriterionURLItemSelectorReturnType");
+			"blogsItemSelectorCriterionFileEntryItemSelectorReturnType");
 
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
 			originalJSONObject.toJSONString());
@@ -396,16 +396,16 @@ public class AdaptiveMediaBlogsEditorConfigContributorTest
 
 		when(
 			_itemSelector.getItemSelectorCriteria(
-				"fileItemSelectorCriterionURLItemSelectorReturnType")
+				"fileItemSelectorCriterionFileEntryItemSelectorReturnType")
 		).thenReturn(
-			_getFileItemSelectorCriterionURLItemSelectorReturnType()
+			_getFileItemSelectorCriterionFileEntryItemSelectorReturnType()
 		);
 
 		JSONObject originalJSONObject = JSONFactoryUtil.createJSONObject();
 
 		originalJSONObject.put(
 			"filebrowserImageBrowseLinkUrl",
-			"fileItemSelectorCriterionURLItemSelectorReturnType");
+			"fileItemSelectorCriterionFileEntryItemSelectorReturnType");
 
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
 			originalJSONObject.toJSONString());
@@ -481,14 +481,14 @@ public class AdaptiveMediaBlogsEditorConfigContributorTest
 	}
 
 	private List<ItemSelectorCriterion>
-		_getAudioItemSelectorCriterionURLItemSelectorReturnType() {
+		_getAudioItemSelectorCriterionFileEntryItemSelectorReturnType() {
 
 		AudioItemSelectorCriterion audioItemSelectorCriterion =
 			new AudioItemSelectorCriterion();
 
 		audioItemSelectorCriterion.setDesiredItemSelectorReturnTypes(
 			Collections.<ItemSelectorReturnType>singletonList(
-				new URLItemSelectorReturnType()));
+				new FileEntryItemSelectorReturnType()));
 
 		List<ItemSelectorCriterion> itemSelectorCriteria = new ArrayList<>();
 
@@ -498,14 +498,14 @@ public class AdaptiveMediaBlogsEditorConfigContributorTest
 	}
 
 	private List<ItemSelectorCriterion>
-		_getBlogsItemSelectorCriterionURLItemSelectorReturnType() {
+		_getBlogsItemSelectorCriterionFileEntryItemSelectorReturnType() {
 
 		BlogsItemSelectorCriterion blogsItemSelectorCriterion =
 			new BlogsItemSelectorCriterion();
 
 		blogsItemSelectorCriterion.setDesiredItemSelectorReturnTypes(
 			Collections.<ItemSelectorReturnType>singletonList(
-				new URLItemSelectorReturnType()));
+				new FileEntryItemSelectorReturnType()));
 
 		List<ItemSelectorCriterion> itemSelectorCriteria = new ArrayList<>();
 
@@ -515,14 +515,14 @@ public class AdaptiveMediaBlogsEditorConfigContributorTest
 	}
 
 	private List<ItemSelectorCriterion>
-		_getFileItemSelectorCriterionURLItemSelectorReturnType() {
+		_getFileItemSelectorCriterionFileEntryItemSelectorReturnType() {
 
 		FileItemSelectorCriterion fileItemSelectorCriterion =
 			new FileItemSelectorCriterion();
 
 		fileItemSelectorCriterion.setDesiredItemSelectorReturnTypes(
 			Collections.<ItemSelectorReturnType>singletonList(
-				new URLItemSelectorReturnType()));
+				new FileEntryItemSelectorReturnType()));
 
 		List<ItemSelectorCriterion> itemSelectorCriteria = new ArrayList<>();
 

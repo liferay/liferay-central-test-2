@@ -14,7 +14,7 @@
 
 package com.liferay.adaptive.media.blogs.editor.configuration.internal;
 
-import com.liferay.adaptive.media.image.item.selector.ImageAdaptiveMediaFileEntryItemSelectorReturnType;
+import com.liferay.adaptive.media.image.item.selector.ImageAdaptiveMediaURLItemSelectorReturnType;
 import com.liferay.blogs.item.selector.criterion.BlogsItemSelectorCriterion;
 import com.liferay.blogs.web.constants.BlogsPortletKeys;
 import com.liferay.item.selector.ItemSelector;
@@ -39,14 +39,14 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 /**
- * @author Sergio González
+ * @author Alejandro Tardín
  */
 @Component(
 	property = {
 		"editor.config.key=contentEditor", "editor.name=alloyeditor",
 		"editor.name=ckeditor", "javax.portlet.name=" + BlogsPortletKeys.BLOGS,
 		"javax.portlet.name=" + BlogsPortletKeys.BLOGS_ADMIN,
-		"service.ranking:Integer=100"
+		"service.ranking:Integer=101"
 	},
 	service = EditorConfigContributor.class
 )
@@ -58,19 +58,6 @@ public class AdaptiveMediaBlogsEditorConfigContributor
 		JSONObject jsonObject, Map<String, Object> inputEditorTaglibAttributes,
 		ThemeDisplay themeDisplay,
 		RequestBackedPortletURLFactory requestBackedPortletURLFactory) {
-
-		String allowedContent = jsonObject.getString("allowedContent");
-
-		if (Validator.isNotNull(allowedContent)) {
-			allowedContent = allowedContent + " picture[*](*); source[*](*); ";
-		}
-		else {
-			allowedContent = "picture[*](*); source[*](*);";
-		}
-
-		allowedContent += " img[*](*);";
-
-		jsonObject.put("allowedContent", allowedContent);
 
 		String itemSelectorURL = jsonObject.getString(
 			"filebrowserImageBrowseLinkUrl");
@@ -91,7 +78,7 @@ public class AdaptiveMediaBlogsEditorConfigContributor
 				itemSelectorCriterion instanceof FileItemSelectorCriterion ||
 				itemSelectorCriterion instanceof ImageItemSelectorCriterion) {
 
-				addImageAdaptiveMediaFileEntryItemSelectorReturnType(
+				addImageAdaptiveMediaURLItemSelectorReturnType(
 					itemSelectorCriterion);
 
 				imageAdaptiveMediaURLItemSelectorReturnTypeAdded = true;
@@ -101,17 +88,6 @@ public class AdaptiveMediaBlogsEditorConfigContributor
 		if (!imageAdaptiveMediaURLItemSelectorReturnTypeAdded) {
 			return;
 		}
-
-		String extraPlugins = jsonObject.getString("extraPlugins");
-
-		if (Validator.isNotNull(extraPlugins)) {
-			extraPlugins = extraPlugins + ",adaptivemedia";
-		}
-		else {
-			extraPlugins = "adaptivemedia";
-		}
-
-		jsonObject.put("extraPlugins", extraPlugins);
 
 		String itemSelectedEventName = _itemSelector.getItemSelectedEventName(
 			itemSelectorURL);
@@ -132,14 +108,14 @@ public class AdaptiveMediaBlogsEditorConfigContributor
 		_itemSelector = itemSelector;
 	}
 
-	protected void addImageAdaptiveMediaFileEntryItemSelectorReturnType(
+	protected void addImageAdaptiveMediaURLItemSelectorReturnType(
 		ItemSelectorCriterion itemSelectorCriterion) {
 
 		List<ItemSelectorReturnType> desiredItemSelectorReturnTypes =
 			new ArrayList<>();
 
 		desiredItemSelectorReturnTypes.add(
-			new ImageAdaptiveMediaFileEntryItemSelectorReturnType());
+			new ImageAdaptiveMediaURLItemSelectorReturnType());
 		desiredItemSelectorReturnTypes.addAll(
 			itemSelectorCriterion.getDesiredItemSelectorReturnTypes());
 
