@@ -1,16 +1,17 @@
-import core from 'metal';
-import Component from 'metal-component';
-import Soy from 'metal-soy';
 import Ajax from 'metal-ajax';
-import ProgressBar from 'metal-progressbar';
+import Component from 'metal-component';
+import core from 'metal';
 import PortletBase from 'frontend-js-web/liferay/PortletBase.es';
+import ProgressBar from 'metal-progressbar';
+import Soy from 'metal-soy';
+
 import templates from './AdaptiveMediaProgress.soy';
 
 /**
  * AdaptiveMediaProgress
  *
  * @abstract
- * @extends {Component}
+ * @extends {PortletBase}
  */
 
 class AdaptiveMediaProgress extends PortletBase {
@@ -18,21 +19,9 @@ class AdaptiveMediaProgress extends PortletBase {
 	 * @inheritDoc
 	 */
 	created() {
-		this.id = 'OptimizeRemaining' + this.uuid +'Progress';
-	}
+		this.id = this.namespace + 'OptimizeRemaining' + this.uuid + 'Progress';
 
-	/**
-	 * @inheritDoc
-	 */
-	attached() {
-		this.progressbar = new ProgressBar(
-			{
-				barClass: this.getProgressBarClass_(this.percentage),
-				label: this.percentage + '%',
-				value: this.percentage
-			},
-			this.getElement_('ProgressBar')
-		);
+		this.updateProgressBar_(this.percentage);
 	}
 
 	startProgress(backgroundTaskUrl) {
@@ -47,17 +36,13 @@ class AdaptiveMediaProgress extends PortletBase {
 			this.intervalSpeed
 		);
 
-		this.showLoadingIndicator_();
+		this.showLoadingIndicator = true;
 	}
 
 	clearInterval_() {
 		if (this.intervalId) {
 			clearInterval(this.intervalId);
 		}
-	}
-
-	getElement_(elementId) {
-		return this.one('#' + this.id + elementId);
 	}
 
 	getOptimizedImagesPercentage_() {
@@ -70,7 +55,7 @@ class AdaptiveMediaProgress extends PortletBase {
 				this.updateProgressBar_(percentage);
 
 				if (percentage >= 100) {
-					this.onProgressComplete_();
+					this.onProgressBarComplete_();
 				}
 			} catch(e) {
 				clearInterval(this._intervalId);
@@ -78,27 +63,15 @@ class AdaptiveMediaProgress extends PortletBase {
 		});
 	}
 
-	getProgressBarClass_(percentage) {
-		return (percentage >= 100) ? 'progress-bar-success' : '';
-	}
-
-	hideLoadingIndicator_() {
-		this.getElement_('ProgressIndicator').classList.add('hide');
-	}
-
-	onProgressComplete_() {
+	onProgressBarComplete_() {
 		this.clearInterval_();
-		this.hideLoadingIndicator_();
-	}
-
-	showLoadingIndicator_() {
-		this.getElement_('ProgressIndicator').classList.remove('hide');
+		this.showLoadingIndicator = false;
 	}
 
 	updateProgressBar_(progress) {
-		this.progressbar.barClass = this.getProgressBarClass_(progress),
-		this.progressbar.label = progress + '%';
-		this.progressbar.value = progress;
+		this.progressBarClass = (progress >= 100) ? 'progress-bar-success' : '';
+		this.progressBarLabel = progress + '%';
+		this.progressBarValue = progress;
 	}
 }
 

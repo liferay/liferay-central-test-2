@@ -2,14 +2,21 @@
 
 /**
  *
- * @param? namespace
+ * @param progressBarClass
+ * @param progressBarLabel
+ * @param progressBarValue
  * @param? id
+ * @param showLoadingIndicator
  */
 {template .render}
-	{let $nsId: $namespace + $id /}
-	<div id="{$nsId}">
-		<div class="progress-container" id="{$nsId}ProgressBar"></div>
-		<div class="hide loading-icon loading-icon-sm" id="{$nsId}ProgressIndicator">
+	<div id="{$id}">
+		<div class="progress-container">
+			{call ProgressBar.render}
+				{param barClass: $progressBarClass /}
+				{param label: $progressBarLabel /}
+				{param value: $progressBarValue /}
+			{/call}
 		</div>
+		<div class="{$showLoadingIndicator ? '' : 'hide '}loading-icon loading-icon-sm"></div>
 	</div>
 {/template}
