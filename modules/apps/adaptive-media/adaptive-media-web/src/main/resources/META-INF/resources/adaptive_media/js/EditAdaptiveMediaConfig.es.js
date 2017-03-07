@@ -4,7 +4,6 @@ import { EventHandler } from 'metal-events';
 
 import PortletBase from 'frontend-js-web/liferay/PortletBase.es';
 
-
 /**
  * EditAdaptiveMediaConfig
  *
@@ -41,7 +40,7 @@ class EditAdaptiveMediaConfig extends PortletBase {
 
 		if (nameInput) {
 			this.eventHandler_.add(nameInput.addEventListener('input', (event) => {
-				this.updateUuid(event.currentTarget.value);
+				this.updateUuid();
 			}));
 		}
 
@@ -58,27 +57,35 @@ class EditAdaptiveMediaConfig extends PortletBase {
 		this.eventHandler_.removeAllListeners();
 	}
 
-	updateUuid(title) {
+	/**
+	 * Updates the uuid identifier based on the "name" field
+	 * if the "Automatic" option is selected
+	 */
+	updateUuid() {
 		var newUuidInput = this.newUuidInput;
 
 		var uuidEmpty = !newUuidInput.value;
 
 		if (this.isAutomaticUuid_() && (uuidEmpty || this._originalUuidChanged)) {
-			newUuidInput.value = Liferay.Util.normalizeFriendlyURL(title);
+			newUuidInput.value = Liferay.Util.normalizeFriendlyURL(this.nameInput.value);
 		}
 
 		this._originalUuidChanged = true;
 	}
 
+	/**
+	 * Checks if the uuid identifier has a custom
+	 * value or it has to be generated automatically.
+	 *
+	 * @protected
+	 */
 	onChangeUuidOptions_() {
 		let newUuidInput = this.newUuidInput;
 
 		if (this.isAutomaticUuid_()) {
 			this._lastCustomUuuid = newUuidInput.value;
 
-			let title = this.nameInput.value;
-
-			this.updateUuid(title);
+			this.updateUuid(this.nameInput.value);
 
 			newUuidInput.setAttribute('disabled', true);
 		}
@@ -89,6 +96,10 @@ class EditAdaptiveMediaConfig extends PortletBase {
 		}
 	}
 
+	/**
+	 * Returns if the "Automatic" check is selected
+	 * @return {Boolean} whether the "Automatic" radiobutton is checked or not.
+	 */
 	isAutomaticUuid_() {
 		return this.one('input:checked', '#idOptions').value === 'true';
 	}
