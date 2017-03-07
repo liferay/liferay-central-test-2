@@ -85,6 +85,22 @@ public class UpgradeDataProviderInstance extends UpgradeProcess {
 		ddmFormValues.addDDMFormFieldValue(
 			createDDMFormFieldValue(ddmFormValues, "pagination", "true"));
 	}
+	
+	protected void addStartEndParameters(DDMFormValues ddmFormValues) {
+		Map<String, List<DDMFormFieldValue>> ddmFormFieldValuesMap =
+				ddmFormValues.getDDMFormFieldValuesMap();
+
+		if (ddmFormFieldValuesMap.containsKey("startParameterName") ||
+			ddmFormFieldValuesMap.containsKey("endParameterName")) {
+			return;
+		}
+
+		ddmFormValues.addDDMFormFieldValue(
+			createDDMFormFieldValue(
+				ddmFormValues, "startParameterName", "start"));
+		ddmFormValues.addDDMFormFieldValue(
+			createDDMFormFieldValue(ddmFormValues, "endParameterName", "end"));
+	}
 
 	protected DDMFormFieldValue createDDMFormFieldValue(
 		DDMFormValues ddmFormValues, String name, String value) {
@@ -177,6 +193,8 @@ public class UpgradeDataProviderInstance extends UpgradeProcess {
 		addDefaultOutputParameter(ddmFormValues);
 
 		addPaginationParameter(ddmFormValues);
+
+		addStartEndParameters(ddmFormValues);
 
 		return _ddmFormValuesJSONSerializer.serialize(ddmFormValues);
 	}
