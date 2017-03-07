@@ -18,6 +18,7 @@ import com.liferay.dynamic.data.mapping.model.DDMForm;
 import com.liferay.dynamic.data.mapping.model.DDMFormField;
 import com.liferay.dynamic.data.mapping.model.DDMFormFieldOptions;
 import com.liferay.dynamic.data.mapping.model.DDMFormRule;
+import com.liferay.dynamic.data.mapping.model.DDMFormSuccessPageSettings;
 import com.liferay.dynamic.data.mapping.model.LocalizedValue;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -94,6 +95,7 @@ public abstract class BaseDDMFormDeserializerTestCase extends BaseDDMTestCase {
 
 		testBooleanDDMFormField(ddmFormFieldsMap.get("Boolean2282"));
 		testDateDDMFormField(ddmFormFieldsMap.get("Date2510"));
+		testDDMFormSuccessPageSettings(ddmForm.getDDMFormSuccessPageSettings());
 		testDecimalDDMFormField(ddmFormFieldsMap.get("Decimal3479"));
 		testDocumentLibraryDDMFormField(
 			ddmFormFieldsMap.get("Documents_and_Media4036"));
@@ -147,6 +149,15 @@ public abstract class BaseDDMFormDeserializerTestCase extends BaseDDMTestCase {
 	}
 
 	protected void testDDMFormRules(List<DDMFormRule> ddmFormRules) {
+	}
+
+	protected void testDDMFormSuccessPageSettings(
+		DDMFormSuccessPageSettings ddmFormSuccessPageSettings) {
+
+		Assert.assertNotNull(ddmFormSuccessPageSettings);
+		Assert.assertNull(ddmFormSuccessPageSettings.getBody());
+		Assert.assertNull(ddmFormSuccessPageSettings.getTitle());
+		Assert.assertFalse(ddmFormSuccessPageSettings.isEnabled());
 	}
 
 	protected void testDecimalDDMFormField(DDMFormField ddmFormField) {
