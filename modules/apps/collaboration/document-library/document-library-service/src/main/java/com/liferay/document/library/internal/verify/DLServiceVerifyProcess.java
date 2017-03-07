@@ -12,9 +12,8 @@
  * details.
  */
 
-package com.liferay.document.library.verify;
+package com.liferay.document.library.internal.verify;
 
-import com.liferay.asset.kernel.model.AssetEntry;
 import com.liferay.counter.kernel.service.CounterLocalService;
 import com.liferay.document.library.kernel.exception.DuplicateFileEntryException;
 import com.liferay.document.library.kernel.exception.DuplicateFolderNameException;
@@ -38,11 +37,6 @@ import com.liferay.portal.instances.service.PortalInstancesLocalService;
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.Criterion;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
-import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
-import com.liferay.portal.kernel.dao.orm.Projection;
-import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
-import com.liferay.portal.kernel.dao.orm.Property;
-import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
@@ -56,7 +50,6 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.LoggingTimer;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
-import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -75,6 +68,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 import org.springframework.context.ApplicationContext;
@@ -83,10 +77,12 @@ import org.springframework.context.ApplicationContext;
  * @author Raymond Augé
  * @author Douglas Wong
  * @author Alexander Chow
- * @deprecated As of 1.1.0, replaced by {@link
- *             com.liferay.document.library.internal.verify.DLServiceVerifyProcess}
  */
-@Deprecated
+@Component(
+	immediate = true,
+	property = {"verify.process.name=com.liferay.document.library.service"},
+	service = VerifyProcess.class
+)
 public class DLServiceVerifyProcess extends VerifyProcess {
 
 	protected void addDLFileVersion(DLFileEntry dlFileEntry) {
@@ -688,76 +684,34 @@ public class DLServiceVerifyProcess extends VerifyProcess {
 
 	protected void updateFileEntryAssets() throws Exception {
 		try (LoggingTimer loggingTimer = new LoggingTimer()) {
-			ActionableDynamicQuery actionableDynamicQuery =
-				_dlFileEntryLocalService.getActionableDynamicQuery();
-
-			actionableDynamicQuery.setAddCriteriaMethod(
-				new ActionableDynamicQuery.AddCriteriaMethod() {
-
-					@Override
-					public void addCriteria(DynamicQuery dynamicQuery) {
-						Property fileEntryIdProperty =
-							PropertyFactoryUtil.forName("fileEntryId");
-
-						DynamicQuery assetEntryDynamicQuery =
-							DynamicQueryFactoryUtil.forClass(AssetEntry.class);
-
-						Property classNameIdProperty =
-							PropertyFactoryUtil.forName("classNameId");
-
-						long classNameId = _portal.getClassNameId(
-							DLFileEntry.class);
-
-						assetEntryDynamicQuery.add(
-							classNameIdProperty.eq(classNameId));
-
-						Projection projection = ProjectionFactoryUtil.property(
-							"classPK");
-
-						assetEntryDynamicQuery.setProjection(projection);
-
-						dynamicQuery.add(
-							fileEntryIdProperty.notIn(assetEntryDynamicQuery));
-					}
-
-				});
+			List<DLFileEntry> dlFileEntries =
+				_dlFileEntryLocalService.getNoAssetFileEntries();
 
 			if (_log.isDebugEnabled()) {
-				long count = actionableDynamicQuery.performCount();
-
 				_log.debug(
-					"Processing " + count + " file entries with no asset");
+					"Processing " + dlFileEntries.size() +
+						" file entries with no asset");
 			}
 
-			actionableDynamicQuery.setPerformActionMethod(
-				new ActionableDynamicQuery.PerformActionMethod<DLFileEntry>() {
+			for (DLFileEntry dlFileEntry : dlFileEntries) {
+				FileEntry fileEntry = new LiferayFileEntry(dlFileEntry);
+				FileVersion fileVersion = new LiferayFileVersion(
+					dlFileEntry.getFileVersion());
 
-					@Override
-					public void performAction(DLFileEntry dlFileEntry)
-						throws PortalException {
-
-						FileEntry fileEntry = new LiferayFileEntry(dlFileEntry);
-						FileVersion fileVersion = new LiferayFileVersion(
-							dlFileEntry.getFileVersion());
-
-						try {
-							_dlAppHelperLocalService.updateAsset(
-								dlFileEntry.getUserId(), fileEntry, fileVersion,
-								null, null, null);
-						}
-						catch (Exception e) {
-							if (_log.isWarnEnabled()) {
-								_log.warn(
-									"Unable to update asset for file entry " +
-										dlFileEntry.getFileEntryId() + ": " +
-											e.getMessage());
-							}
-						}
+				try {
+					_dlAppHelperLocalService.updateAsset(
+						dlFileEntry.getUserId(), fileEntry, fileVersion, null,
+						null, null);
+				}
+				catch (Exception e) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(
+							"Unable to update asset for file entry " +
+								dlFileEntry.getFileEntryId() + ": " +
+									e.getMessage());
 					}
-
-				});
-
-			actionableDynamicQuery.performActions();
+				}
+			}
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Assets verified for file entries");
@@ -767,72 +721,30 @@ public class DLServiceVerifyProcess extends VerifyProcess {
 
 	protected void updateFolderAssets() throws Exception {
 		try (LoggingTimer loggingTimer = new LoggingTimer()) {
-			ActionableDynamicQuery actionableDynamicQuery =
-				_dlFolderLocalService.getActionableDynamicQuery();
-
-			actionableDynamicQuery.setAddCriteriaMethod(
-				new ActionableDynamicQuery.AddCriteriaMethod() {
-
-					@Override
-					public void addCriteria(DynamicQuery dynamicQuery) {
-						Property folderIdProperty = PropertyFactoryUtil.forName(
-							"folderId");
-
-						DynamicQuery assetEntryDynamicQuery =
-							DynamicQueryFactoryUtil.forClass(AssetEntry.class);
-
-						Property classNameIdProperty =
-							PropertyFactoryUtil.forName("classNameId");
-
-						long classNameId = _portal.getClassNameId(
-							DLFolder.class);
-
-						assetEntryDynamicQuery.add(
-							classNameIdProperty.eq(classNameId));
-
-						Projection projection = ProjectionFactoryUtil.property(
-							"classPK");
-
-						assetEntryDynamicQuery.setProjection(projection);
-
-						dynamicQuery.add(
-							folderIdProperty.notIn(assetEntryDynamicQuery));
-					}
-
-				});
+			List<DLFolder> dlFolders =
+				_dlFolderLocalService.getNoAssetFolders();
 
 			if (_log.isDebugEnabled()) {
-				long count = actionableDynamicQuery.performCount();
-
-				_log.debug("Processing " + count + " folders with no asset");
+				_log.debug(
+					"Processing " + dlFolders.size() +
+						" folders with no asset");
 			}
 
-			actionableDynamicQuery.setPerformActionMethod(
-				new ActionableDynamicQuery.PerformActionMethod<DLFolder>() {
+			for (DLFolder dlFolder : dlFolders) {
+				Folder folder = new LiferayFolder(dlFolder);
 
-					@Override
-					public void performAction(DLFolder dlFolder)
-						throws PortalException {
-
-						Folder folder = new LiferayFolder(dlFolder);
-
-						try {
-							_dlAppHelperLocalService.updateAsset(
-								dlFolder.getUserId(), folder, null, null, null);
-						}
-						catch (Exception e) {
-							if (_log.isWarnEnabled()) {
-								_log.warn(
-									"Unable to update asset for folder " +
-										dlFolder.getFolderId() + ": " +
-											e.getMessage());
-							}
-						}
+				try {
+					_dlAppHelperLocalService.updateAsset(
+						dlFolder.getUserId(), folder, null, null, null);
+				}
+				catch (Exception e) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(
+							"Unable to update asset for folder " +
+								dlFolder.getFolderId() + ": " + e.getMessage());
 					}
-
-				});
-
-			actionableDynamicQuery.performActions();
+				}
+			}
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Assets verified for folders");
@@ -864,9 +776,6 @@ public class DLServiceVerifyProcess extends VerifyProcess {
 	private DLFileEntryTypeLocalService _dlFileEntryTypeLocalService;
 	private DLFileVersionLocalService _dlFileVersionLocalService;
 	private DLFolderLocalService _dlFolderLocalService;
-
-	@Reference
-	private Portal _portal;
 
 	@Reference
 	private PortalInstancesLocalService _portalInstancesLocalService;
