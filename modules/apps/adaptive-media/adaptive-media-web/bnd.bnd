@@ -2,7 +2,6 @@ Bundle-Name: Liferay Adaptive Media Web
 Bundle-SymbolicName: com.liferay.adaptive.media.web
 Bundle-Version: 1.0.0
 Export-Package: com.liferay.adaptive.media.web.constants
-Liferay-JS-Config: /META-INF/resources/adaptive_media/js/config.js
 Liferay-Releng-Module-Group-Description:
 Liferay-Releng-Module-Group-Title: Adaptive Media
 Web-ContextPath: /adaptive-media-web
