@@ -87,10 +87,15 @@ if (!reindexSingleBackgroundTasks.isEmpty()) {
 		String backgroundTaskUrl = optimizeImagesURL.toString();
 		String uuid = String.valueOf(configurationEntry.getUUID());
 
-		String onClick = renderResponse.getNamespace() + "optimizeRemaining('" + uuid + "', '" + backgroundTaskUrl+ "');";
+		String onClick = renderResponse.getNamespace() + "optimizeRemaining('" + uuid + "', '" + backgroundTaskUrl + "');";
+
+		int percentage = AdaptiveMediaImageLocalServiceUtil.getPercentage(themeDisplay.getCompanyId(), configurationEntry.getUUID());
+
+		String cssClass = (!configurationEntry.isEnabled() || percentage == 100) ? "disabled" : "";
 		%>
 
 		<liferay-ui:icon
+			cssClass="<%= cssClass %>"
 			message="optimize-remaining"
 			onClick="<%= onClick %>"
 			url="javascript:;"
