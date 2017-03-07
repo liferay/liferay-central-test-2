@@ -61,15 +61,17 @@ public class DDMRESTDataProviderSettingsTest {
 		Map<String, DDMFormField> ddmFormFields = ddmForm.getDDMFormFieldsMap(
 			false);
 
-		Assert.assertEquals(ddmFormFields.toString(), 9, ddmFormFields.size());
+		Assert.assertEquals(ddmFormFields.toString(), 11, ddmFormFields.size());
 
 		assertCacheable(ddmFormFields.get("cacheable"));
+		assertEndParameterName(ddmFormFields.get("endParameterName"));
 		assertFilterable(ddmFormFields.get("filterable"));
 		assertFilterParameterName(ddmFormFields.get("filterParameterName"));
 		assertInputParameters(ddmFormFields.get("inputParameters"));
 		assertOutputParameters(ddmFormFields.get("outputParameters"));
 		assertPagination(ddmFormFields.get("pagination"));
 		assertPassword(ddmFormFields.get("password"));
+		assertStartParameterName(ddmFormFields.get("startParameterName"));
 		assertURL(ddmFormFields.get("url"));
 		assertUsername(ddmFormFields.get("username"));
 	}
@@ -80,6 +82,13 @@ public class DDMRESTDataProviderSettingsTest {
 		Assert.assertEquals("checkbox", ddmFormField.getType());
 		Assert.assertEquals("boolean", ddmFormField.getDataType());
 		Assert.assertEquals("true", ddmFormField.getProperty("showAsSwitcher"));
+	}
+
+	protected void assertEndParameterName(DDMFormField ddmFormField) {
+		Assert.assertNotNull(ddmFormField);
+
+		Assert.assertEquals("text", ddmFormField.getType());
+		Assert.assertEquals("string", ddmFormField.getDataType());
 	}
 
 	protected void assertFilterable(DDMFormField ddmFormField) {
@@ -258,6 +267,13 @@ public class DDMRESTDataProviderSettingsTest {
 
 		Assert.assertTrue(properties.containsKey("placeholder"));
 		Assert.assertTrue(properties.containsKey("tooltip"));
+	}
+
+	protected void assertStartParameterName(DDMFormField ddmFormField) {
+		Assert.assertNotNull(ddmFormField);
+
+		Assert.assertEquals("text", ddmFormField.getType());
+		Assert.assertEquals("string", ddmFormField.getDataType());
 	}
 
 	protected void assertURL(DDMFormField ddmFormField) {
