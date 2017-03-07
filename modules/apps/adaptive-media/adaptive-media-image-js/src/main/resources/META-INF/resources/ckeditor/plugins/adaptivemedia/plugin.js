@@ -1,7 +1,9 @@
 (function() {
 	var Lang = AUI().Lang;
 
-	var STR_ADAPTIVE_MEDIA_RETURN_TYPE = 'com.liferay.adaptive.media.image.item.selector.ImageAdaptiveMediaURLItemSelectorReturnType';
+	var STR_ADAPTIVE_MEDIA_URL_RETURN_TYPE = 'com.liferay.adaptive.media.image.item.selector.ImageAdaptiveMediaURLItemSelectorReturnType';
+
+	var STR_ADAPTIVE_MEDIA_FILE_ENTRY_RETURN_TYPE = 'com.liferay.adaptive.media.image.item.selector.ImageAdaptiveMediaFileEntryItemSelectorReturnType';
 
 	var TPL_PICTURE_TAG = '<picture>{sources}<img src="{defaultSrc}"></picture>';
 
@@ -91,7 +93,7 @@
 			_getImgElement: function(imageSrc, selectedItem) {
 				var imgEl = CKEDITOR.dom.element.createFromHtml('<img>');
 
-				if (selectedItem.returnType === STR_ADAPTIVE_MEDIA_RETURN_TYPE) {
+				if (selectedItem.returnType === STR_ADAPTIVE_MEDIA_FILE_ENTRY_RETURN_TYPE) {
 					var itemValue = JSON.parse(selectedItem.value);
 
 					imgEl.setAttribute('src', itemValue.url);
@@ -108,7 +110,7 @@
 				var el;
 				var instance = this;
 
-				if (selectedItem.returnType === STR_ADAPTIVE_MEDIA_RETURN_TYPE) {
+				if (selectedItem.returnType === STR_ADAPTIVE_MEDIA_URL_RETURN_TYPE) {
 					el = instance._getPictureElement(selectedItem);
 				}
 				else {
