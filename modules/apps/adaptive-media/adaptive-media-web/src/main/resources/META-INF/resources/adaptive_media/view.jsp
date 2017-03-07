@@ -75,8 +75,13 @@ AdaptiveMediaImageConfigurationHelper adaptiveMediaImageConfigurationHelper = (A
 PortletURL portletURL = renderResponse.createRenderURL();
 %>
 
+<<<<<<< 4bd8b5375d6bfbed27fd16cd8d074abb6802eec4
 <div class="container-fluid-1280" id="<portlet:namespace />adaptiveMediaConfiguration">
 	<c:if test="<%= adaptiveMediaImageConfigurationHelper.isDefaultConfiguration(themeDisplay.getCompanyId()) %>">
+=======
+<div class="container-fluid-1280">
+	<c:if test="<%= imageAdaptiveMediaConfigurationHelper.isDefaultConfiguration(themeDisplay.getCompanyId()) %>">
+>>>>>>> LPS-69533 Simplify metal component
 		<div class="alert alert-info">
 			<liferay-ui:message key="this-configuration-was-not-saved-yet" />
 		</div>
@@ -137,9 +142,6 @@ PortletURL portletURL = renderResponse.createRenderURL();
 					cssClass="table-cell-content"
 					name="optimized-images"
 				>
-					<div class="progress">
-						<div aria-valuemax="100" aria-valuemin="0" aria-valuenow="<%= percentage %>" class="<%= (percentage == 100) ? "progress-bar progress-bar-success" : "progress-bar" %>" role="progressbar" style="<%= "width: " + percentage + "%;" %>"><%= percentage + "%" %></div>
-					</div>
 
 					<%
 					String uuid = String.valueOf(configurationEntry.getUUID());

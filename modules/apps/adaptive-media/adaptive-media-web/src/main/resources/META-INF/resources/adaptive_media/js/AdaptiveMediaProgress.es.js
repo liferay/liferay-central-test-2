@@ -25,15 +25,9 @@ class AdaptiveMediaProgress extends PortletBase {
 	 * @inheritDoc
 	 */
 	attached() {
-		let barClass = 'progress-bar';
-
-		if (this.percentage == 100) {
-			barClass += ' progress-bar-success';
-		}
-
 		this.progressbar = new ProgressBar(
 			{
-				barClass: barClass,
+				barClass: this.getProgressBarClass_(this.percentage),
 				label: this.percentage + '%',
 				value: this.percentage
 			},
@@ -42,38 +36,58 @@ class AdaptiveMediaProgress extends PortletBase {
 	}
 
 	startProgress(backgroundTaskUrl) {
-		Ajax.request(backgroundTaskUrl);
+		if (backgroundTaskUrl) {
+			Ajax.request(backgroundTaskUrl);
+		}
 
-		this._intervalId = setInterval(this.getPercentage_(), 1000);
+		this.clearInterval_();
+
+		this.intervalId = setInterval(
+			this.getOptimizedImagesPercentage_.bind(this),
+			this.intervalSpeed
+		);
 
 		this.showLoadingIndicator_();
 	}
 
-	getPercentage_() {
+	clearInterval_() {
+		if (this.intervalId) {
+			clearInterval(this.intervalId);
+		}
+	}
+
+	getElement_(elementId) {
+		return this.one('#' + this.id + elementId);
+	}
+
+	getOptimizedImagesPercentage_() {
 		Ajax.request(this.percentageUrl).then((xhr) => {
-			let json = JSON.parse(xhr.response);
+			try {
+				let json = JSON.parse(xhr.response);
 
-			let percentage = parseInt(json.percentage);
+				let percentage = parseInt(json.percentage);
 
-			this.updateProgressBar_(percentage);
+				this.updateProgressBar_(percentage);
 
-			if (percentage === 100) {
-				this.onProgressComplete_();
+				if (percentage >= 100) {
+					this.onProgressComplete_();
+				}
+			} catch(e) {
+				clearInterval(this._intervalId);
 			}
 		});
 	}
 
-	getElement_(elementId) {
-		let finalId = this.id + elementId;
-		return this.one('#' + finalId);
+	getProgressBarClass_(percentage) {
+		return (percentage >= 100) ? 'progress-bar-success' : '';
 	}
 
 	hideLoadingIndicator_() {
 		this.getElement_('ProgressIndicator').classList.add('hide');
 	}
 
-	onProgressComplete_() {console.log('STOP!!!');
-		clearInterval(this._intervalId);
+	onProgressComplete_() {
+		this.clearInterval_();
 		this.hideLoadingIndicator_();
 	}
 
@@ -81,8 +95,10 @@ class AdaptiveMediaProgress extends PortletBase {
 		this.getElement_('ProgressIndicator').classList.remove('hide');
 	}
 
-	updateProgressBar_(value) {
-		this.progressbar.value = value;
+	updateProgressBar_(progress) {
+		this.progressbar.barClass = this.getProgressBarClass_(progress),
+		this.progressbar.label = progress + '%';
+		this.progressbar.value = progress;
 	}
 }
 
@@ -93,6 +109,11 @@ class AdaptiveMediaProgress extends PortletBase {
  * @type {!Object}
  */
 AdaptiveMediaProgress.STATE = {
+	intervalSpeed: {
+		validator: core.isNumber,
+		value: 1000
+	},
+
 	percentage: {
 		validator: core.isNumber,
 		value: 0
