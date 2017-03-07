@@ -88,7 +88,7 @@ public class MergeCentralSubrepositoryUtil {
 		centralGitWorkingDirectory.stageFileInCurrentBranch(ciMergeFilePath);
 
 		centralGitWorkingDirectory.commitStagedFilesToCurrentBranch(
-			"subrepo:ignore Create '" + ciMergeFilePath + "'");
+			"Create " + ciMergeFilePath + ".");
 	}
 
 	private static void _createMergeBranch(
