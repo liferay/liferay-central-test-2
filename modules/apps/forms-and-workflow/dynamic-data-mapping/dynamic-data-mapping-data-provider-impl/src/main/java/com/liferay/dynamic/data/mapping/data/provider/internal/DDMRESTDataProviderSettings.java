@@ -34,6 +34,15 @@ import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderParameterSe
 				"setRequired('filterParameterName', true)"
 			},
 			condition = "equals(getValue('filterable'), true)"
+		),
+		@DDMFormRule(
+			actions = {
+				"setVisible('startParameterName', true)",
+				"setVisible('endParameterName', true)",
+				"setRequired('startParameterName', true)",
+				"setRequired('endParameterName', true)"
+			},
+			condition = "equals(getValue('pagination'), true)"
 		)
 	}
 )
@@ -48,7 +57,8 @@ import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderParameterSe
 							value = {
 								"url", "username", "password", "filterable",
 								"filterParameterName", "cacheable",
-								"pagination", "inputParameters",
+								"pagination", "startParameterName",
+								"endParameterName", "inputParameters",
 								"outputParameters"
 							}
 						)
@@ -68,6 +78,15 @@ public interface DDMRESTDataProviderSettings
 	public boolean cacheable();
 
 	@DDMFormField(
+		label = "%end-parameter-name", predefinedValue = "end",
+		properties = {
+			"placeholder=%enter-a-name-that-matches-one-of-the-rest-providers-parameters",
+			"tooltip=%the-parameter-whose-value-will-be-used-as-an-end-by-the-rest-provider"
+		}
+	)
+	public String endParameterName();
+
+	@DDMFormField(
 		label = "%support-filtering-by-keyword",
 		properties = "showAsSwitcher=true"
 	)
@@ -83,7 +102,8 @@ public interface DDMRESTDataProviderSettings
 	public String filterParameterName();
 
 	@DDMFormField(
-		label = "%enable-pagination", properties = "showAsSwitcher=true"
+		label = "%support-pagination",
+		properties = "showAsSwitcher=true"
 	)
 	public boolean pagination();
 
@@ -95,6 +115,15 @@ public interface DDMRESTDataProviderSettings
 		}
 	)
 	public String password();
+
+	@DDMFormField(
+		label = "%start-parameter-name", predefinedValue = "start",
+		properties = {
+			"placeholder=%enter-a-name-that-matches-one-of-the-rest-providers-parameters",
+			"tooltip=%the-parameter-whose-value-will-be-used-as-a-start-by-the-rest-provider"
+		}
+	)
+	public String startParameterName();
 
 	@DDMFormField(
 		label = "%url",
