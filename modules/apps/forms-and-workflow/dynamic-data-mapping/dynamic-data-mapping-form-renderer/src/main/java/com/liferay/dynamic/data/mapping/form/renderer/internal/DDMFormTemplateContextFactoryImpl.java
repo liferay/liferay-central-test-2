@@ -184,34 +184,6 @@ public class DDMFormTemplateContextFactoryImpl
 			"/dynamic-data-mapping-form-context-provider/");
 	}
 
-	protected Set<String> getEvaluableDDMFormFieldNames(DDMForm ddmForm) {
-		Set<String> evaluableDDMFormFieldNames = new HashSet<>();
-
-		Map<String, DDMFormField> ddmFormFieldsMap =
-			ddmForm.getDDMFormFieldsMap(true);
-
-		Set<String> ddmFormFieldNames = ddmFormFieldsMap.keySet();
-
-		evaluableDDMFormFieldNames.addAll(
-			getReferencedFieldNamesByDDMFormRules(
-				ddmForm.getDDMFormRules(), ddmFormFieldNames));
-
-		for (DDMFormField ddmFormField : ddmFormFieldsMap.values()) {
-			if (isDDMFormFieldEvaluable(ddmFormField)) {
-				evaluableDDMFormFieldNames.add(ddmFormField.getName());
-			}
-
-			String visibilityExpression =
-				ddmFormField.getVisibilityExpression();
-
-			evaluableDDMFormFieldNames.addAll(
-				getReferencedFieldNamesByExpression(
-					visibilityExpression, ddmFormFieldNames));
-		}
-
-		return evaluableDDMFormFieldNames;
-	}
-
 	protected Map<String, String> getLanguageStringsMap(
 		ResourceBundle resourceBundle) {
 
@@ -238,40 +210,6 @@ public class DDMFormTemplateContextFactoryImpl
 			_ddmFormFieldTypeServicesTracker);
 
 		return ddmFormPagesTemplateContextFactory.create();
-	}
-
-	protected Set<String> getReferencedFieldNamesByDDMFormRules(
-		List<DDMFormRule> ddmFormRules, Set<String> ddmFormFieldNames) {
-
-		Set<String> referencedFieldNames = new HashSet<>();
-
-		for (DDMFormRule ddmFormRule : ddmFormRules) {
-			String condition = ddmFormRule.getCondition();
-
-			referencedFieldNames.addAll(
-				getReferencedFieldNamesByExpression(
-					condition, ddmFormFieldNames));
-		}
-
-		return referencedFieldNames;
-	}
-
-	protected Set<String> getReferencedFieldNamesByExpression(
-		String expression, Set<String> ddmFormFieldNames) {
-
-		if (Validator.isNull(expression)) {
-			return Collections.emptySet();
-		}
-
-		Set<String> referencedFieldNames = new HashSet<>();
-
-		for (String ddmFormFieldName : ddmFormFieldNames) {
-			if (expression.contains(ddmFormFieldName)) {
-				referencedFieldNames.add(ddmFormFieldName);
-			}
-		}
-
-		return referencedFieldNames;
 	}
 
 	protected String getRequiredFieldsWarningMessageHTML(
@@ -329,23 +267,6 @@ public class DDMFormTemplateContextFactoryImpl
 		}
 
 		return "ddm.paginated_form";
-	}
-
-	protected boolean isDDMFormFieldEvaluable(DDMFormField ddmFormField) {
-		if (ddmFormField.isRequired()) {
-			return true;
-		}
-
-		DDMFormFieldValidation ddmFormFieldValidation =
-			ddmFormField.getDDMFormFieldValidation();
-
-		if ((ddmFormFieldValidation != null) &&
-			Validator.isNotNull(ddmFormFieldValidation.getExpression())) {
-
-			return true;
-		}
-
-		return false;
 	}
 
 	protected void setDDMFormFieldsEvaluableProperty(DDMForm ddmForm) {
