@@ -1,0 +1,12 @@
+{
+	"dependencies": {
+		"metal": "^2.6.4",
+		"metal-events": "^2.6.4"
+	},
+	"devDependencies": {
+		"liferay-module-config-generator": "^1.2.1",
+		"metal-cli": "^2.1.2"
+	},
+	"name": "adaptive-media-web",
+	"version": "1.0.0"
+}

@@ -118,26 +118,11 @@ if (configurationEntry != null) {
 </div>
 
 <c:if test="<%= configurationEntryEditable %>">
-	<aui:script use="liferay-adaptivemedia">
-		var adaptiveMedia = Liferay.component(
-			'<portlet:namespace />AdaptiveMedia',
-			new Liferay.AdaptiveMedia(
-				{
-					namespace: '<portlet:namespace />'
-				}
-			)
-		);
-
-		var name = AUI().one('#<portlet:namespace />name');
-
-		name.on('input', A.bind(<portlet:namespace />onInput, this));
-
-		function <portlet:namespace />onInput() {
-			var adaptiveMedia = Liferay.component('<portlet:namespace />AdaptiveMedia');
-
-			if (adaptiveMedia) {
-				adaptiveMedia.updateUuid(name.val());
+	<aui:script require="adaptive-media-web/adaptive_media/js/EditAdaptiveMediaConfig.es">
+		new adaptiveMediaWebAdaptive_mediaJsEditAdaptiveMediaConfigEs.default(
+			{
+				namespace: '<portlet:namespace />'
 			}
-		}
+		);
 	</aui:script>
 </c:if>
