@@ -14,6 +14,7 @@
 
 package com.liferay.adaptive.media.blogs.item.selector.web.internal;
 
+import com.liferay.adaptive.media.image.item.selector.ImageAdaptiveMediaFileEntryItemSelectorReturnType;
 import com.liferay.adaptive.media.image.item.selector.ImageAdaptiveMediaURLItemSelectorReturnType;
 import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.ItemSelectorViewReturnTypeProvider;
@@ -51,14 +52,15 @@ public class AdaptiveMediaBlogsItemSelectorViewReturnTypeProviderTest
 					supportedItemSelectorReturnTypes);
 
 		Assert.assertEquals(
-			itemSelectorReturnTypes.toString(), 1,
+			itemSelectorReturnTypes.toString(), 2,
 			itemSelectorReturnTypes.size());
 
-		ItemSelectorReturnType itemSelectorReturnType =
-			itemSelectorReturnTypes.get(0);
+		Assert.assertTrue(
+			itemSelectorReturnTypes.get(0) instanceof
+				ImageAdaptiveMediaFileEntryItemSelectorReturnType);
 
 		Assert.assertTrue(
-			itemSelectorReturnType instanceof
+			itemSelectorReturnTypes.get(1) instanceof
 				ImageAdaptiveMediaURLItemSelectorReturnType);
 	}
 
@@ -83,7 +85,7 @@ public class AdaptiveMediaBlogsItemSelectorViewReturnTypeProviderTest
 					supportedItemSelectorReturnTypes);
 
 		Assert.assertEquals(
-			itemSelectorReturnTypes.toString(), 3,
+			itemSelectorReturnTypes.toString(), 4,
 			itemSelectorReturnTypes.size());
 
 		Assert.assertTrue(
@@ -94,6 +96,9 @@ public class AdaptiveMediaBlogsItemSelectorViewReturnTypeProviderTest
 				URLItemSelectorReturnType);
 		Assert.assertTrue(
 			itemSelectorReturnTypes.get(2) instanceof
+				ImageAdaptiveMediaFileEntryItemSelectorReturnType);
+		Assert.assertTrue(
+			itemSelectorReturnTypes.get(3) instanceof
 				ImageAdaptiveMediaURLItemSelectorReturnType);
 	}
 

@@ -14,6 +14,7 @@
 
 package com.liferay.adaptive.media.blogs.item.selector.web.internal;
 
+import com.liferay.adaptive.media.image.item.selector.ImageAdaptiveMediaFileEntryItemSelectorReturnType;
 import com.liferay.adaptive.media.image.item.selector.ImageAdaptiveMediaURLItemSelectorReturnType;
 import com.liferay.blogs.item.selector.web.constants.BlogsItemSelectorViewConstants;
 import com.liferay.item.selector.ItemSelectorReturnType;
@@ -38,6 +39,9 @@ public class AdaptiveMediaBlogsItemSelectorViewReturnTypeProvider
 	public List<ItemSelectorReturnType>
 		populateSupportedItemSelectorReturnTypes(
 			List<ItemSelectorReturnType> supportedItemSelectorReturnTypes) {
+
+		supportedItemSelectorReturnTypes.add(
+			new ImageAdaptiveMediaFileEntryItemSelectorReturnType());
 
 		supportedItemSelectorReturnTypes.add(
 			new ImageAdaptiveMediaURLItemSelectorReturnType());
