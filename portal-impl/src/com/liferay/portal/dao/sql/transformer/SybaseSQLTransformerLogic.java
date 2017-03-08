@@ -30,18 +30,12 @@ public class SybaseSQLTransformerLogic extends BaseSQLTransformerLogic {
 	public SybaseSQLTransformerLogic(DB db) {
 		super(db);
 
-		_functions = new Function[] {
+		setFunctions(
 			getBitwiseCheckFunction(), getBooleanFunction(),
 			getCastClobTextFunction(), getCastLongFunction(),
 			getCastTextFunction(), _getCrossJoinFunction(), _getInStrFunction(),
 			getIntegerDivisionFunction(), getNullDateFunction(),
-			_getSubstrFunction(), _getModFunction(), _getReplaceFunction()
-		};
-	}
-
-	@Override
-	public Function<String, String>[] getFunctions() {
-		return _functions;
+			_getSubstrFunction(), _getModFunction(), _getReplaceFunction());
 	}
 
 	@Override
@@ -92,7 +86,5 @@ public class SybaseSQLTransformerLogic extends BaseSQLTransformerLogic {
 			return matcher.replaceAll("SUBSTRING($1, $2, $3)");
 		};
 	}
-
-	private final Function<String, String>[] _functions;
 
 }

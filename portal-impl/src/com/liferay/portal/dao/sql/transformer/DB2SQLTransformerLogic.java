@@ -28,17 +28,11 @@ public class DB2SQLTransformerLogic extends BaseSQLTransformerLogic {
 	public DB2SQLTransformerLogic(DB db) {
 		super(db);
 
-		_functions = new Function[] {
+		setFunctions(
 			getBooleanFunction(), getCastClobTextFunction(),
 			getCastLongFunction(), getCastTextFunction(),
 			getIntegerDivisionFunction(), getNullDateFunction(),
-			_getLikeFunction()
-		};
-	}
-
-	@Override
-	public Function<String, String>[] getFunctions() {
-		return _functions;
+			_getLikeFunction());
 	}
 
 	@Override
@@ -57,7 +51,5 @@ public class DB2SQLTransformerLogic extends BaseSQLTransformerLogic {
 
 	private static final Pattern _likePattern = Pattern.compile(
 		"LIKE \\?", Pattern.CASE_INSENSITIVE);
-
-	private final Function<String, String>[] _functions;
 
 }

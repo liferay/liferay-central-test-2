@@ -29,26 +29,19 @@ public class MySQLSQLTransformerLogic extends BaseSQLTransformerLogic {
 		super(db);
 
 		if (!db.isSupportsStringCaseSensitiveQuery()) {
-			_functions = new Function[] {
+			setFunctions(
 				getBitwiseCheckFunction(), getBooleanFunction(),
 				getCastClobTextFunction(), getCastLongFunction(),
 				getCastTextFunction(), getIntegerDivisionFunction(),
-				getNullDateFunction(), _getLowerFunction()
-			};
+				getNullDateFunction(), _getLowerFunction());
 		}
 		else {
-			_functions = new Function[] {
+			setFunctions(
 				getBitwiseCheckFunction(), getBooleanFunction(),
 				getCastClobTextFunction(), getCastLongFunction(),
 				getCastTextFunction(), getIntegerDivisionFunction(),
-				getNullDateFunction()
-			};
+				getNullDateFunction());
 		}
-	}
-
-	@Override
-	public Function<String, String>[] getFunctions() {
-		return _functions;
 	}
 
 	@Override
@@ -101,7 +94,5 @@ public class MySQLSQLTransformerLogic extends BaseSQLTransformerLogic {
 	private static final String _LOWER_CLOSE = StringPool.CLOSE_PARENTHESIS;
 
 	private static final String _LOWER_OPEN = "lower(";
-
-	private final Function<String, String>[] _functions;
 
 }
