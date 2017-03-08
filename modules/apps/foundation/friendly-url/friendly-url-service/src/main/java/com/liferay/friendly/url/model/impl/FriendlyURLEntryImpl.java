@@ -19,6 +19,7 @@ import aQute.bnd.annotation.ProviderType;
 import com.liferay.friendly.url.model.FriendlyURLEntryLocalization;
 import com.liferay.friendly.url.service.FriendlyURLEntryLocalizationLocalServiceUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.Locale;
 
@@ -43,7 +44,7 @@ public class FriendlyURLEntryImpl extends FriendlyURLEntryBaseImpl {
 			return friendlyURLEntryLocalization.getUrlTitle();
 		}
 
-		return null;
+		return StringPool.BLANK;
 	}
 
 	@Override
