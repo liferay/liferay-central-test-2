@@ -587,6 +587,7 @@ public class JournalDisplayContext {
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
 		jsonObject.put("children", jsonArray);
+		jsonObject.put("disabled", true);
 		jsonObject.put("expanded", true);
 		jsonObject.put("icon", "home");
 		jsonObject.put("name", themeDisplay.getScopeGroupName());
