@@ -37,12 +37,12 @@ import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderParameterSe
 		),
 		@DDMFormRule(
 			actions = {
-				"setVisible('startParameterName', true)",
-				"setVisible('endParameterName', true)",
-				"setRequired('startParameterName', true)",
-				"setRequired('endParameterName', true)"
+				"setVisible('paginationStartParameterName', equals(getValue('pagination'), true))",
+				"setVisible('paginationEndParameterName', equals(getValue('pagination'), true))",
+				"setRequired('paginationStartParameterName', equals(getValue('pagination'), true))",
+				"setRequired('paginationEndParameterName', equals(getValue('pagination'), true))"
 			},
-			condition = "equals(getValue('pagination'), true)"
+			condition = "TRUE"
 		)
 	}
 )
@@ -57,8 +57,8 @@ import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderParameterSe
 							value = {
 								"url", "username", "password", "filterable",
 								"filterParameterName", "cacheable",
-								"pagination", "startParameterName",
-								"endParameterName", "inputParameters",
+								"pagination", "paginationStartParameterName",
+								"paginationEndParameterName", "inputParameters",
 								"outputParameters"
 							}
 						)
@@ -78,15 +78,6 @@ public interface DDMRESTDataProviderSettings
 	public boolean cacheable();
 
 	@DDMFormField(
-		label = "%end-parameter-name", predefinedValue = "end",
-		properties = {
-			"placeholder=%enter-a-name-that-matches-one-of-the-rest-providers-parameters",
-			"tooltip=%the-parameter-whose-value-will-be-used-as-an-end-by-the-rest-provider"
-		}
-	)
-	public String endParameterName();
-
-	@DDMFormField(
 		label = "%support-filtering-by-keyword",
 		properties = "showAsSwitcher=true"
 	)
@@ -102,10 +93,27 @@ public interface DDMRESTDataProviderSettings
 	public String filterParameterName();
 
 	@DDMFormField(
-		label = "%support-pagination",
-		properties = "showAsSwitcher=true"
+		label = "%support-pagination", properties = "showAsSwitcher=true"
 	)
 	public boolean pagination();
+
+	@DDMFormField(
+		label = "%end-parameter-name", predefinedValue = "end",
+		properties = {
+			"placeholder=%enter-a-name-that-matches-one-of-the-rest-providers-parameters",
+			"tooltip=%the-parameter-whose-value-will-be-used-as-an-end-by-the-rest-provider"
+		}
+	)
+	public String paginationEndParameterName();
+
+	@DDMFormField(
+		label = "%start-parameter-name", predefinedValue = "start",
+		properties = {
+			"placeholder=%enter-a-name-that-matches-one-of-the-rest-providers-parameters",
+			"tooltip=%the-parameter-whose-value-will-be-used-as-a-start-by-the-rest-provider"
+		}
+	)
+	public String paginationStartParameterName();
 
 	@DDMFormField(
 		label = "%password",
@@ -115,15 +123,6 @@ public interface DDMRESTDataProviderSettings
 		}
 	)
 	public String password();
-
-	@DDMFormField(
-		label = "%start-parameter-name", predefinedValue = "start",
-		properties = {
-			"placeholder=%enter-a-name-that-matches-one-of-the-rest-providers-parameters",
-			"tooltip=%the-parameter-whose-value-will-be-used-as-a-start-by-the-rest-provider"
-		}
-	)
-	public String startParameterName();
 
 	@DDMFormField(
 		label = "%url",

@@ -90,17 +90,18 @@ public class UpgradeDataProviderInstance extends UpgradeProcess {
 		Map<String, List<DDMFormFieldValue>> ddmFormFieldValuesMap =
 			ddmFormValues.getDDMFormFieldValuesMap();
 
-		if (ddmFormFieldValuesMap.containsKey("startParameterName") ||
-			ddmFormFieldValuesMap.containsKey("endParameterName")) {
+		if (ddmFormFieldValuesMap.containsKey("paginationStartParameterName") ||
+			ddmFormFieldValuesMap.containsKey("paginationEndParameterName")) {
 
 			return;
 		}
 
 		ddmFormValues.addDDMFormFieldValue(
 			createDDMFormFieldValue(
-				ddmFormValues, "startParameterName", "start"));
+				ddmFormValues, "paginationStartParameterName", "start"));
 		ddmFormValues.addDDMFormFieldValue(
-			createDDMFormFieldValue(ddmFormValues, "endParameterName", "end"));
+			createDDMFormFieldValue(
+				ddmFormValues, "paginationEndParameterName", "end"));
 	}
 
 	protected DDMFormFieldValue createDDMFormFieldValue(

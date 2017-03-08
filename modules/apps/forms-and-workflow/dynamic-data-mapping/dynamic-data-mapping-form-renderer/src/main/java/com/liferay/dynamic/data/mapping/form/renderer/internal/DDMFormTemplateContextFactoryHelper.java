@@ -57,9 +57,9 @@ public class DDMFormTemplateContextFactoryHelper {
 
 		Map<String, Map<String, Object>> map = new HashMap<>();
 
-		addDataProviderSettingsFromFieldSettings(ddmForm, map);
+		extractDataProviderSettingsFromFieldSettings(ddmForm, map);
 
-		addDataProviderSettingsFromAutoFillActions(ddmForm, map);
+		extractDataProviderSettingsFromAutoFillActions(ddmForm, map);
 
 		return map;
 	}
@@ -92,110 +92,14 @@ public class DDMFormTemplateContextFactoryHelper {
 		return evaluableDDMFormFieldNames;
 	}
 
-	protected void addDataProviderSettingsFromAutoFillActions(
-		DDMForm ddmForm, Map<String, Map<String, Object>> map) {
-
-		List<DDMFormRule> ddmFormRules = ddmForm.getDDMFormRules();
-
-		Map<String, DDMFormField> ddmFormFields = ddmForm.getDDMFormFieldsMap(
-			true);
-
-		ddmFormRules.stream().flatMap(
-			ddmFormRule -> ddmFormRule.getActions().stream()
-		).filter(
-			this::isAutofillAction
-		).forEach(
-			action -> addDDMDataProviderSettings(action, ddmFormFields, map)
-		);
-	}
-
-	protected void addDataProviderSettingsFromFieldSettings(
-		DDMForm ddmForm, Map<String, Map<String, Object>> map) {
-
-		Map<String, DDMFormField> ddmFormFields = ddmForm.getDDMFormFieldsMap(
-			true);
-
-		Stream<DDMFormField> ddmFormFieldStream =
-			ddmFormFields.values().stream();
-
-		ddmFormFieldStream.filter(
-			this::hasDDMDataProviderSetting
-		).forEach(
-			ddmFormField -> addDDMDataProviderSettings(ddmFormField, map)
-		);
-	}
-
-	protected void addDDMDataProviderSettings(
-		DDMFormField ddmFormField, Map<String, Map<String, Object>> map) {
-
-		long ddmDataProviderInstanceId = MapUtil.getLong(
-			ddmFormField.getProperties(), "ddmDataProviderInstanceId");
-
-		if (ddmDataProviderInstanceId == 0) {
-			return;
-		}
-
-		try {
-			DDMDataProviderInstance ddmDataProviderInstance =
-				_ddmDataProviderInstanceService.getDataProviderInstance(
-					ddmDataProviderInstanceId);
-
-			String ddmDataProviderInstanceOutput = GetterUtil.getString(
-				ddmFormField.getProperty("ddmDataProviderInstanceOutput"));
-
-			map.put(
-				ddmFormField.getName(),
-				createDDMDataProviderSettingsMap(
-					ddmDataProviderInstance.getUuid(),
-					ddmDataProviderInstanceOutput, Collections.emptyMap()));
-		}
-		catch (PortalException pe) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(pe, pe);
-			}
-		}
-	}
-
-	protected void addDDMDataProviderSettings(
-		String action, Map<String, DDMFormField> ddmFormFields,
-		Map<String, Map<String, Object>> map) {
-
-		Matcher matcher = _callFunctionPattern.matcher(action);
-
-		if (matcher.find()) {
-			String dataProviderInstanceUUID = matcher.group(1);
-
-			Map<String, String> inputParameters = extractAutoFillParameters(
-				matcher.group(2));
-
-			Map<String, String> outputParameters = extractAutoFillParameters(
-				matcher.group(3));
-
-			Stream<Entry<String, String>> outputParametersStream =
-				outputParameters.entrySet().stream();
-
-			outputParametersStream = outputParametersStream.filter(
-				entry -> isSelectField(ddmFormFields.get(entry.getKey())));
-
-			outputParametersStream.forEach(
-				entry -> {
-					map.put(
-						entry.getKey(),
-						createDDMDataProviderSettingsMap(
-							dataProviderInstanceUUID, entry.getValue(),
-							inputParameters));
-				});
-		}
-	}
-
-	protected Map<String, Object> createDDMDataProviderSettingsMap(
+	protected Map<String, Object> createDataProviderSettingsMap(
 		String dataProviderInstanceUUID, String outputParameterName,
 		Map<String, String> inputParameters) {
 
 		Map<String, Object> ddmDataProviderSettingsMap = new HashMap<>();
 
 		ddmDataProviderSettingsMap.put(
-			"ddmDataProviderInstanceUUID", dataProviderInstanceUUID);
+			"dataProviderInstanceUUID", dataProviderInstanceUUID);
 
 		ddmDataProviderSettingsMap.put("inputParameters", inputParameters);
 
@@ -224,6 +128,107 @@ public class DDMFormTemplateContextFactoryHelper {
 			});
 
 		return map;
+	}
+
+	protected void extractDataProviderSettings(
+		DDMFormField ddmFormField,
+		Map<String, Map<String, Object>> dataProviderSettings) {
+
+		long ddmDataProviderInstanceId = MapUtil.getLong(
+			ddmFormField.getProperties(), "ddmDataProviderInstanceId");
+
+		if (ddmDataProviderInstanceId == 0) {
+			return;
+		}
+
+		try {
+			DDMDataProviderInstance ddmDataProviderInstance =
+				_ddmDataProviderInstanceService.getDataProviderInstance(
+					ddmDataProviderInstanceId);
+
+			String ddmDataProviderInstanceOutput = GetterUtil.getString(
+				ddmFormField.getProperty("ddmDataProviderInstanceOutput"));
+
+			dataProviderSettings.put(
+				ddmFormField.getName(),
+				createDataProviderSettingsMap(
+					ddmDataProviderInstance.getUuid(),
+					ddmDataProviderInstanceOutput, Collections.emptyMap()));
+		}
+		catch (PortalException pe) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(pe, pe);
+			}
+		}
+	}
+
+	protected void extractDataProviderSettings(
+		String action, Map<String, DDMFormField> ddmFormFields,
+		Map<String, Map<String, Object>> dataProviderSettings) {
+
+		Matcher matcher = _callFunctionPattern.matcher(action);
+
+		if (matcher.find()) {
+			String dataProviderInstanceUUID = matcher.group(1);
+
+			Map<String, String> inputParameters = extractAutoFillParameters(
+				matcher.group(2));
+
+			Map<String, String> outputParameters = extractAutoFillParameters(
+				matcher.group(3));
+
+			Stream<Entry<String, String>> outputParametersStream =
+				outputParameters.entrySet().stream();
+
+			outputParametersStream = outputParametersStream.filter(
+				entry -> isSelectField(ddmFormFields.get(entry.getKey())));
+
+			outputParametersStream.forEach(
+				entry -> {
+					dataProviderSettings.put(
+						entry.getKey(),
+						createDataProviderSettingsMap(
+							dataProviderInstanceUUID, entry.getValue(),
+							inputParameters));
+				});
+		}
+	}
+
+	protected void extractDataProviderSettingsFromAutoFillActions(
+		DDMForm ddmForm,
+		Map<String, Map<String, Object>> dataProviderSettings) {
+
+		List<DDMFormRule> ddmFormRules = ddmForm.getDDMFormRules();
+
+		Map<String, DDMFormField> ddmFormFields = ddmForm.getDDMFormFieldsMap(
+			true);
+
+		ddmFormRules.stream().flatMap(
+			ddmFormRule -> ddmFormRule.getActions().stream()
+		).filter(
+			this::isAutofillAction
+		).forEach(
+			action -> extractDataProviderSettings(
+				action, ddmFormFields, dataProviderSettings)
+		);
+	}
+
+	protected void extractDataProviderSettingsFromFieldSettings(
+		DDMForm ddmForm,
+		Map<String, Map<String, Object>> dataProviderSettings) {
+
+		Map<String, DDMFormField> ddmFormFields = ddmForm.getDDMFormFieldsMap(
+			true);
+
+		Stream<DDMFormField> ddmFormFieldStream =
+			ddmFormFields.values().stream();
+
+		ddmFormFieldStream.filter(
+			this::hasDataProviderSettings
+		).forEach(
+			ddmFormField -> extractDataProviderSettings(
+				ddmFormField, dataProviderSettings)
+		);
 	}
 
 	protected Set<String> getReferencedFieldNamesByDDMFormRules(
@@ -260,7 +265,7 @@ public class DDMFormTemplateContextFactoryHelper {
 		return referencedFieldNames;
 	}
 
-	protected boolean hasDDMDataProviderSetting(DDMFormField ddmFormField) {
+	protected boolean hasDataProviderSettings(DDMFormField ddmFormField) {
 		if (MapUtil.getLong(
 				ddmFormField.getProperties(),
 				"ddmDataProviderInstanceId") > 0) {
@@ -301,11 +306,7 @@ public class DDMFormTemplateContextFactoryHelper {
 
 		String type = ddmFormField.getType();
 
-		if (type.equals("select")) {
-			return true;
-		}
-
-		return false;
+		return type.equals("select");
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(

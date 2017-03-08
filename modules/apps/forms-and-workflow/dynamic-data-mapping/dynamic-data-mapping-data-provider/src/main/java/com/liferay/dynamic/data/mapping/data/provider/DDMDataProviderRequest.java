@@ -29,24 +29,24 @@ public class DDMDataProviderRequest {
 		return _ddmDataProviderContext;
 	}
 
-	public String getEndValue() {
-		return _endValue;
+	public int getPaginationEnd() {
+		return _paginationEnd;
 	}
 
-	public String getStartValue() {
-		return _startValue;
+	public int getPaginationStart() {
+		return _paginationStart;
 	}
 
-	public void setEndValue(String endValue) {
-		_endValue = endValue;
+	public void setPaginationEnd(int paginationEnd) {
+		_paginationEnd = paginationEnd;
 	}
 
-	public void setStartValue(String startValue) {
-		_startValue = startValue;
+	public void setPaginationStart(int paginationStart) {
+		_paginationStart = paginationStart;
 	}
 
 	private final DDMDataProviderContext _ddmDataProviderContext;
-	private String _endValue;
-	private String _startValue;
+	private int _paginationEnd;
+	private int _paginationStart;
 
 }

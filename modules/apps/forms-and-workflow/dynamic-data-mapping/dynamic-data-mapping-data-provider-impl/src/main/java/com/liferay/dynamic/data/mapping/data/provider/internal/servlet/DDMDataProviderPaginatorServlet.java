@@ -174,8 +174,8 @@ public class DDMDataProviderPaginatorServlet extends HttpServlet {
 	protected List<Map<String, String>> executeDataProvider(
 		HttpServletRequest request, HttpServletResponse response) {
 
-		String ddmDataProviderInstanceUUID = ParamUtil.getString(
-			request, "ddmDataProviderInstanceUUID");
+		String dataProviderInstanceUUID = ParamUtil.getString(
+			request, "dataProviderInstanceUUID");
 
 		String outputParameterName = ParamUtil.getString(
 			request, "outputParameterName");
@@ -183,7 +183,7 @@ public class DDMDataProviderPaginatorServlet extends HttpServlet {
 		int start = ParamUtil.getInteger(request, "start");
 		int end = ParamUtil.getInteger(request, "end");
 
-		if (Validator.isNull(ddmDataProviderInstanceUUID) ||
+		if (Validator.isNull(dataProviderInstanceUUID) ||
 			Validator.isNull(outputParameterName) || (start < 0) ||
 			(end < 0) || (end < start) || (start == end)) {
 
@@ -195,7 +195,7 @@ public class DDMDataProviderPaginatorServlet extends HttpServlet {
 		try {
 			DDMDataProvider ddmDataProvider =
 				_ddmDataProviderTracker.getDDMDataProviderByInstanceId(
-					ddmDataProviderInstanceUUID);
+					dataProviderInstanceUUID);
 
 			DDMDataProviderContext ddmDataProviderContext = null;
 
@@ -205,8 +205,7 @@ public class DDMDataProviderPaginatorServlet extends HttpServlet {
 			else {
 				DDMDataProviderInstance ddmDataProviderInstance =
 					_ddmDataProviderInstanceService.
-						getDataProviderInstanceByUuid(
-							ddmDataProviderInstanceUUID);
+						getDataProviderInstanceByUuid(dataProviderInstanceUUID);
 
 				ddmDataProvider = _ddmDataProviderTracker.getDDMDataProvider(
 					ddmDataProviderInstance.getType());
@@ -221,8 +220,8 @@ public class DDMDataProviderPaginatorServlet extends HttpServlet {
 			DDMDataProviderRequest ddmDataProviderRequest =
 				new DDMDataProviderRequest(ddmDataProviderContext);
 
-			ddmDataProviderRequest.setStartValue(String.valueOf(start));
-			ddmDataProviderRequest.setEndValue(String.valueOf(end));
+			ddmDataProviderRequest.setPaginationStart(start);
+			ddmDataProviderRequest.setPaginationEnd(end);
 
 			DDMDataProviderResponse ddmDataProviderResponse =
 				ddmDataProvider.getData(ddmDataProviderRequest);

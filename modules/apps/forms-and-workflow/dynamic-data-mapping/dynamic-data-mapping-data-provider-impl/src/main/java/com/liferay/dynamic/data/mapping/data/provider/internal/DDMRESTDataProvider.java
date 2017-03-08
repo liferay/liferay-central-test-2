@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.CharPool;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -131,11 +130,9 @@ public class DDMRESTDataProvider implements DDMDataProvider {
 		}
 
 		if (ddmRESTDataProviderSettings.pagination()) {
-			int start = GetterUtil.getInteger(
-				ddmDataProviderRequest.getStartValue());
+			int start = ddmDataProviderRequest.getPaginationStart();
 
-			int end = GetterUtil.getInteger(
-				ddmDataProviderRequest.getEndValue());
+			int end = ddmDataProviderRequest.getPaginationEnd();
 
 			if (data.size() > (end - start)) {
 				data = ListUtil.subList(data, start, end);
@@ -272,11 +269,11 @@ public class DDMRESTDataProvider implements DDMDataProvider {
 
 		if (ddmRESTDataProviderSettings.pagination()) {
 			httpRequest.query(
-				ddmRESTDataProviderSettings.startParameterName(),
-				ddmDataProviderRequest.getStartValue());
+				ddmRESTDataProviderSettings.paginationEndParameterName(),
+				ddmDataProviderRequest.getPaginationStart());
 			httpRequest.query(
-				ddmRESTDataProviderSettings.endParameterName(),
-				ddmDataProviderRequest.getEndValue());
+				ddmRESTDataProviderSettings.paginationEndParameterName(),
+				ddmDataProviderRequest.getPaginationEnd());
 		}
 
 		httpRequest.query(ddmDataProviderContext.getParameters());

@@ -87,7 +87,7 @@ public class DDMFormTemplateContextFactoryHelperTest extends PowerMockito {
 
 		Assert.assertEquals(
 			_DATA_PROVIDER_INSTANCE_UUID,
-			fieldDataProviderSettingsMap.get("ddmDataProviderInstanceUUID"));
+			fieldDataProviderSettingsMap.get("dataProviderInstanceUUID"));
 
 		Assert.assertEquals(
 			"output", fieldDataProviderSettingsMap.get("outputParameterName"));
@@ -128,7 +128,7 @@ public class DDMFormTemplateContextFactoryHelperTest extends PowerMockito {
 
 		Assert.assertEquals(
 			_DATA_PROVIDER_INSTANCE_UUID,
-			fieldDataProviderSettingsMap.get("ddmDataProviderInstanceUUID"));
+			fieldDataProviderSettingsMap.get("dataProviderInstanceUUID"));
 
 		Assert.assertEquals(
 			"output", fieldDataProviderSettingsMap.get("outputParameterName"));
