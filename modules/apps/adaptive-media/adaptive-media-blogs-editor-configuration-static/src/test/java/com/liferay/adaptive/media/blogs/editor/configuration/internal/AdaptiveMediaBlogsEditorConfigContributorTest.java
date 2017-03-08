@@ -16,62 +16,68 @@ package com.liferay.adaptive.media.blogs.editor.configuration.internal;
 
 import com.liferay.adaptive.media.image.item.selector.ImageAdaptiveMediaURLItemSelectorReturnType;
 import com.liferay.blogs.item.selector.criterion.BlogsItemSelectorCriterion;
-import com.liferay.blogs.web.constants.BlogsPortletKeys;
 import com.liferay.item.selector.ItemSelector;
+import com.liferay.item.selector.ItemSelectorCriterion;
 import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.criteria.URLItemSelectorReturnType;
-import com.liferay.portal.json.JSONFactoryImpl;
-import com.liferay.portal.kernel.json.JSONFactoryUtil;
-import com.liferay.portal.kernel.portlet.LiferayPortletURL;
+import com.liferay.item.selector.criteria.file.criterion.FileItemSelectorCriterion;
+import com.liferay.item.selector.criteria.image.criterion.ImageItemSelectorCriterion;
+import com.liferay.portal.json.JSONObjectImpl;
+import com.liferay.portal.kernel.json.JSONException;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.portlet.PortletURL;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.Mockito;
+import org.mockito.runners.MockitoJUnitRunner;
 
-import org.powermock.api.mockito.PowerMockito;
+import org.skyscreamer.jsonassert.JSONAssert;
 
 /**
  * @author Alejandro Tardín
  */
-public class AdaptiveMediaBlogsEditorConfigContributorTest
-	extends PowerMockito {
+@RunWith(MockitoJUnitRunner.class)
+public class AdaptiveMediaBlogsEditorConfigContributorTest {
 
 	@Before
 	public void setUp() {
-		MockitoAnnotations.initMocks(this);
-
-		JSONFactoryUtil jsonFactoryUtil = new JSONFactoryUtil();
-
-		jsonFactoryUtil.setJSONFactory(new JSONFactoryImpl());
-
-		when(
-			_requestBackedPortletURLFactory.createActionURL(
-				BlogsPortletKeys.BLOGS)
+		Mockito.when(
+			_itemSelectorPortletURL.toString()
 		).thenReturn(
-			mock(LiferayPortletURL.class)
+			"itemSelectorPortletURL"
 		);
 
-		_inputEditorTaglibAttributes.put(
-			"liferay-ui:input-editor:name", "testEditor");
+		Mockito.when(
+			_itemSelector.getItemSelectedEventName(_itemSelectorURL)
+		).thenReturn(
+			_eventName
+		);
+
+		_adaptiveMediaBlogsEditorConfigContributor =
+			new AdaptiveMediaBlogsEditorConfigContributor();
+
+		_adaptiveMediaBlogsEditorConfigContributor.setItemSelector(
+			_itemSelector);
 	}
 
 	@Test
 	public void testAddImageAdaptiveMediaURLItemSelectorReturnType()
 		throws Exception {
-
-		AdaptiveMediaBlogsEditorConfigContributor
-			adaptiveMediaBlogsEditorConfigContributor =
-				new AdaptiveMediaBlogsEditorConfigContributor();
 
 		BlogsItemSelectorCriterion blogsItemSelectorCriterion =
 			new BlogsItemSelectorCriterion();
@@ -80,7 +86,7 @@ public class AdaptiveMediaBlogsEditorConfigContributorTest
 			Collections.<ItemSelectorReturnType>singletonList(
 				new URLItemSelectorReturnType()));
 
-		adaptiveMediaBlogsEditorConfigContributor.
+		_adaptiveMediaBlogsEditorConfigContributor.
 			addImageAdaptiveMediaURLItemSelectorReturnType(
 				blogsItemSelectorCriterion);
 
@@ -98,11 +104,222 @@ public class AdaptiveMediaBlogsEditorConfigContributorTest
 				URLItemSelectorReturnType);
 	}
 
+	@Test
+	public void testAddsPictureAndSourceAreAddedToAllowedContentForBlogs()
+		throws Exception {
+
+		_testAddsPictureTagToAllowedContent(
+			_getItemSelectorCriterion(BlogsItemSelectorCriterion.class));
+	}
+
+	@Test
+	public void testAddsPictureAndSourceAreAddedToAllowedContentForFile()
+		throws Exception {
+
+		_testAddsPictureTagToAllowedContent(
+			_getItemSelectorCriterion(FileItemSelectorCriterion.class));
+	}
+
+	@Test
+	public void testAddsPictureAndSourceAreAddedToAllowedContentForImage()
+		throws Exception {
+
+		_testAddsPictureTagToAllowedContent(
+			_getItemSelectorCriterion(ImageItemSelectorCriterion.class));
+	}
+
+	@Test
+	public void testDoesNothingForUnsupportedItemSelectorCriterion()
+		throws Exception {
+
+		JSONObject originalJSONObject = new JSONObjectImpl();
+
+		originalJSONObject.put("allowedContent", "a[*](*); div(*);");
+		originalJSONObject.put(
+			"filebrowserImageBrowseLinkUrl", _itemSelectorURL);
+
+		JSONObject jsonObject = new JSONObjectImpl(
+			originalJSONObject.toJSONString());
+
+		JSONObject expectedJSONObject = new JSONObjectImpl(
+			originalJSONObject.toJSONString());
+
+		Mockito.when(
+			_itemSelector.getItemSelectorCriteria(_itemSelectorURL)
+		).thenReturn(
+			Collections.<ItemSelectorCriterion>emptyList()
+		);
+
+		_adaptiveMediaBlogsEditorConfigContributor.populateConfigJSONObject(
+			jsonObject, _inputEditorTaglibAttributes, _themeDisplay,
+			_requestBackedPortletURLFactory);
+
+		JSONAssert.assertEquals(
+			expectedJSONObject.toJSONString(), jsonObject.toJSONString(), true);
+	}
+
+	@Test
+	public void testDoesNothingIfThereIsNotFileBrowserImageBrowseLinkUrl()
+		throws Exception {
+
+		JSONObject originalJSONObject = new JSONObjectImpl();
+
+		originalJSONObject.put("allowedContent", "a[*](*); div(*);");
+
+		JSONObject jsonObject = new JSONObjectImpl(
+			originalJSONObject.toJSONString());
+
+		JSONObject expectedJSONObject = new JSONObjectImpl(
+			originalJSONObject.toJSONString());
+
+		_adaptiveMediaBlogsEditorConfigContributor.populateConfigJSONObject(
+			jsonObject, _inputEditorTaglibAttributes, _themeDisplay,
+			_requestBackedPortletURLFactory);
+
+		JSONAssert.assertEquals(
+			expectedJSONObject.toJSONString(), jsonObject.toJSONString(), true);
+	}
+
+	@Test
+	public void testSetsPictureAndSourceAreAddedToAllowedContentForBlogs()
+		throws Exception {
+
+		_testSetsPictureTagToAllowedContent(
+			_getItemSelectorCriterion(BlogsItemSelectorCriterion.class));
+	}
+
+	@Test
+	public void testSetsPictureAndSourceAreAddedToAllowedContentForFile()
+		throws Exception {
+
+		_testSetsPictureTagToAllowedContent(
+			_getItemSelectorCriterion(FileItemSelectorCriterion.class));
+	}
+
+	@Test
+	public void testSetsPictureAndSourceAreAddedToAllowedContentForImage()
+		throws Exception {
+
+		_testSetsPictureTagToAllowedContent(
+			_getItemSelectorCriterion(ImageItemSelectorCriterion.class));
+	}
+
+	private ItemSelectorCriterion _getItemSelectorCriterion(
+			Class<? extends ItemSelectorCriterion> itemSelectorCriterionClass)
+		throws IllegalAccessException, InstantiationException {
+
+		ItemSelectorCriterion itemSelectorCriterion =
+			itemSelectorCriterionClass.newInstance();
+
+		itemSelectorCriterion.setDesiredItemSelectorReturnTypes(
+			new ArrayList<ItemSelectorReturnType>());
+
+		return itemSelectorCriterion;
+	}
+
+	private void _testAddsPictureTagToAllowedContent(
+			ItemSelectorCriterion itemSelectorCriterion)
+		throws JSONException, org.json.JSONException {
+
+		Mockito.when(
+			_itemSelector.getItemSelectorCriteria(_itemSelectorURL)
+		).thenReturn(
+			Arrays.asList(itemSelectorCriterion)
+		);
+
+		Mockito.when(
+			_itemSelector.getItemSelectorURL(
+				_requestBackedPortletURLFactory, _eventName,
+				itemSelectorCriterion)
+		).thenReturn(
+			_itemSelectorPortletURL
+		);
+
+		JSONObject originalJSONObject = new JSONObjectImpl();
+
+		originalJSONObject.put("allowedContent", "a[*](*); div(*);");
+		originalJSONObject.put(
+			"filebrowserImageBrowseLinkUrl", _itemSelectorURL);
+
+		JSONObject jsonObject = new JSONObjectImpl(
+			originalJSONObject.toJSONString());
+
+		JSONObject expectedJSONObject = new JSONObjectImpl(
+			originalJSONObject.toJSONString());
+
+		expectedJSONObject.put(
+			"allowedContent", "a[*](*); div(*); picture[*](*); source[*](*);");
+		expectedJSONObject.put(
+			"filebrowserImageBrowseLinkUrl",
+			_itemSelectorPortletURL.toString());
+		expectedJSONObject.put(
+			"filebrowserImageBrowseUrl", _itemSelectorPortletURL.toString());
+
+		_adaptiveMediaBlogsEditorConfigContributor.populateConfigJSONObject(
+			jsonObject, _inputEditorTaglibAttributes, _themeDisplay,
+			_requestBackedPortletURLFactory);
+
+		JSONAssert.assertEquals(
+			expectedJSONObject.toJSONString(), jsonObject.toJSONString(), true);
+	}
+
+	private void _testSetsPictureTagToAllowedContent(
+			ItemSelectorCriterion itemSelectorCriterion)
+		throws Exception {
+
+		Mockito.when(
+			_itemSelector.getItemSelectorCriteria(_itemSelectorURL)
+		).thenReturn(
+			Arrays.asList(itemSelectorCriterion)
+		);
+
+		Mockito.when(
+			_itemSelector.getItemSelectorURL(
+				_requestBackedPortletURLFactory, _eventName,
+				itemSelectorCriterion)
+		).thenReturn(
+			_itemSelectorPortletURL
+		);
+
+		JSONObject originalJSONObject = new JSONObjectImpl();
+
+		originalJSONObject.put(
+			"filebrowserImageBrowseLinkUrl", _itemSelectorURL);
+
+		JSONObject jsonObject = new JSONObjectImpl(
+			originalJSONObject.toJSONString());
+
+		_adaptiveMediaBlogsEditorConfigContributor.populateConfigJSONObject(
+			jsonObject, _inputEditorTaglibAttributes, _themeDisplay,
+			_requestBackedPortletURLFactory);
+
+		JSONObject expectedJSONObject = new JSONObjectImpl();
+
+		expectedJSONObject.put(
+			"allowedContent", "picture[*](*); source[*](*);");
+		expectedJSONObject.put(
+			"filebrowserImageBrowseLinkUrl",
+			_itemSelectorPortletURL.toString());
+		expectedJSONObject.put(
+			"filebrowserImageBrowseUrl", _itemSelectorPortletURL.toString());
+
+		JSONAssert.assertEquals(
+			expectedJSONObject.toJSONString(), jsonObject.toJSONString(), true);
+	}
+
+	private static final String _eventName = "selectedEventName";
+	private static final String _itemSelectorURL = "itemSelectorURL";
+
+	private AdaptiveMediaBlogsEditorConfigContributor
+		_adaptiveMediaBlogsEditorConfigContributor;
 	private final Map<String, Object> _inputEditorTaglibAttributes =
 		new HashMap<>();
 
 	@Mock
 	private ItemSelector _itemSelector;
+
+	@Mock
+	private PortletURL _itemSelectorPortletURL;
 
 	@Mock
 	private RequestBackedPortletURLFactory _requestBackedPortletURLFactory;

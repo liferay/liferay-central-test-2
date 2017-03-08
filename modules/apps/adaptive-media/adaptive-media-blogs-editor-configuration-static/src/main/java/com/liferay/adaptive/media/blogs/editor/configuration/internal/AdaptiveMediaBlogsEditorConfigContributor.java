@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.editor.configuration.EditorConfigContributor;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.util.ArrayList;
@@ -101,6 +102,8 @@ public class AdaptiveMediaBlogsEditorConfigContributor
 			"filebrowserImageBrowseLinkUrl", itemSelectorPortletURL.toString());
 		jsonObject.put(
 			"filebrowserImageBrowseUrl", itemSelectorPortletURL.toString());
+
+		_allowPictureTag(jsonObject);
 	}
 
 	@Reference(unbind = "-")
@@ -122,6 +125,22 @@ public class AdaptiveMediaBlogsEditorConfigContributor
 		itemSelectorCriterion.setDesiredItemSelectorReturnTypes(
 			desiredItemSelectorReturnTypes);
 	}
+
+	private void _allowPictureTag(JSONObject jsonObject) {
+		String allowedContent = jsonObject.getString("allowedContent");
+
+		if (Validator.isNotNull(allowedContent)) {
+			allowedContent += StringPool.SPACE + _PICTURE_TAG_RULE;
+		}
+		else {
+			allowedContent = _PICTURE_TAG_RULE;
+		}
+
+		jsonObject.put("allowedContent", allowedContent);
+	}
+
+	private static final String _PICTURE_TAG_RULE =
+		"picture[*](*); source[*](*);";
 
 	private ItemSelector _itemSelector;
 
