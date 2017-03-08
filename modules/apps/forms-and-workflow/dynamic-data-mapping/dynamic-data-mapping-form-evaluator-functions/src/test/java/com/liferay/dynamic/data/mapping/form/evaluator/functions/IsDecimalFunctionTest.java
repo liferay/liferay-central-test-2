@@ -24,25 +24,25 @@ public class IsDecimalFunctionTest {
 
 	@Test
 	public void testEvaluateFalse() throws Exception {
-		IsDecimalFunction isDecimal = new IsDecimalFunction();
+		IsDecimalFunction isDecimalFunction = new IsDecimalFunction();
 
-		Assert.assertFalse((Boolean)isDecimal.evaluate("simple text"));
+		Assert.assertFalse((Boolean)isDecimalFunction.evaluate("simple text"));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testEvaluateInvalid() throws Exception {
-		IsDecimalFunction isDecimal = new IsDecimalFunction();
+		IsDecimalFunction isDecimalFunction = new IsDecimalFunction();
 
-		isDecimal.evaluate("test", "test2");
+		isDecimalFunction.evaluate("test", "test2");
 	}
 
 	@Test
 	public void testEvaluateTrue() throws Exception {
-		IsDecimalFunction isDecimal = new IsDecimalFunction();
+		IsDecimalFunction isDecimalFunction = new IsDecimalFunction();
 
-		Assert.assertTrue((Boolean)isDecimal.evaluate("3"));
-		Assert.assertTrue((Boolean)isDecimal.evaluate("4.76"));
-		Assert.assertTrue((Boolean)isDecimal.evaluate("-50.67"));
+		Assert.assertTrue((Boolean)isDecimalFunction.evaluate("3"));
+		Assert.assertTrue((Boolean)isDecimalFunction.evaluate("4.76"));
+		Assert.assertTrue((Boolean)isDecimalFunction.evaluate("-50.67"));
 	}
 
 }

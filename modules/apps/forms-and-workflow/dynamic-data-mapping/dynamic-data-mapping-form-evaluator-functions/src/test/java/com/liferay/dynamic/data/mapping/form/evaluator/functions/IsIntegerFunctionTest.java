@@ -24,24 +24,24 @@ public class IsIntegerFunctionTest {
 
 	@Test
 	public void testEvaluateFalse() throws Exception {
-		IsIntegerFunction isNumber = new IsIntegerFunction();
+		IsIntegerFunction isIntegerFunction = new IsIntegerFunction();
 
-		Assert.assertFalse((Boolean)isNumber.evaluate("simple text"));
+		Assert.assertFalse((Boolean)isIntegerFunction.evaluate("simple text"));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testEvaluateInvalid() throws Exception {
-		IsIntegerFunction isNumber = new IsIntegerFunction();
+		IsIntegerFunction isIntegerFunction = new IsIntegerFunction();
 
-		isNumber.evaluate("test", "test2");
+		isIntegerFunction.evaluate("test", "test2");
 	}
 
 	@Test
 	public void testEvaluateTrue() throws Exception {
-		IsIntegerFunction isNumber = new IsIntegerFunction();
+		IsIntegerFunction isIntegerFunction = new IsIntegerFunction();
 
-		Assert.assertTrue((Boolean)isNumber.evaluate("3"));
-		Assert.assertTrue((Boolean)isNumber.evaluate("-50"));
+		Assert.assertTrue((Boolean)isIntegerFunction.evaluate("3"));
+		Assert.assertTrue((Boolean)isIntegerFunction.evaluate("-50"));
 	}
 
 }
