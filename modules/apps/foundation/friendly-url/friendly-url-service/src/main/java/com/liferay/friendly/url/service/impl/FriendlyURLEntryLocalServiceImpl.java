@@ -168,10 +168,10 @@ public class FriendlyURLEntryLocalServiceImpl
 
 				@Override
 				public void addCriteria(DynamicQuery dynamicQuery) {
-					Property classNameIdProperty = PropertyFactoryUtil.forName(
+					Property property = PropertyFactoryUtil.forName(
 						"classNameId");
 
-					dynamicQuery.add(classNameIdProperty.eq(classNameId));
+					dynamicQuery.add(property.eq(classNameId));
 				}
 
 			});
