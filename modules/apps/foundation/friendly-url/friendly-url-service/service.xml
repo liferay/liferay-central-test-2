@@ -95,10 +95,6 @@
 			<finder-column name="urlTitle" />
 			<finder-column name="languageId" />
 		</finder>
-
-		<!-- References -->
-
-		<reference entity="FriendlyURLEntry" package-path="com.liferay.friendly.url" />
 	</entity>
 	<exceptions>
 		<exception>DuplicateFriendlyURLEntry</exception>
