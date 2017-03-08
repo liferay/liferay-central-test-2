@@ -88,13 +88,13 @@ JSONArray privatePages = privatePagesObj.getJSONArray("children");
 				{
 					events: {
 						selectedNodesChanged: function(event) {
-							var treeItemId = event.newVal.replace(/(^,)|(,$)/g, '');
+							debugger;
 
-							var selectedPageNode = dom.toElement('[data-treeitemid="' + treeItemId + '"]');
+							var node = event.newVal[0];
 
 							var data = {
-								id: treeItemId,
-								name: selectedPageNode.getAttribute('data-treeitemvalue')
+								id: node.id,
+								name: node.value
 							};
 
 							Liferay.Util.getOpener().Liferay.fire(
