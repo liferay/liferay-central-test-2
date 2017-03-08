@@ -39,20 +39,20 @@ public class FormNavigatorEntryConfigurationRetrieverTest {
 		public void setUp() throws Exception {
 			super.setUp();
 
-			StringBundler sb1 = new StringBundler(5);
+			StringBundler sb = new StringBundler(5);
 
-			sb1.append("add.general");
-			sb1.append(StringPool.EQUAL);
-			sb1.append("formNavigatorEntryKey4,");
-			sb1.append("formNavigatorEntryKey3,");
-			sb1.append("formNavigatorEntryKey2,");
-			sb1.append("formNavigatorEntryKey1,");
-			sb1.append("formNavigatorEntryKey1,");
-			sb1.append("formNavigatorEntryKey2,");
-			sb1.append("formNavigatorEntryKey3,");
-			sb1.append("formNavigatorEntryKey4");
+			sb.append("add.general");
+			sb.append(StringPool.EQUAL);
+			sb.append("formNavigatorEntryKey4,");
+			sb.append("formNavigatorEntryKey3,");
+			sb.append("formNavigatorEntryKey2,");
+			sb.append("formNavigatorEntryKey1,");
+			sb.append("formNavigatorEntryKey1,");
+			sb.append("formNavigatorEntryKey2,");
+			sb.append("formNavigatorEntryKey3,");
+			sb.append("formNavigatorEntryKey4");
 
-			createConfiguration("form1", new String[] {sb1.toString()});
+			createConfiguration("form1", new String[] {sb.toString()});
 		}
 
 		@Test
@@ -203,14 +203,14 @@ public class FormNavigatorEntryConfigurationRetrieverTest {
 		public void setUp() throws Exception {
 			super.setUp();
 
-			StringBundler sb1 = new StringBundler(4);
+			StringBundler sb = new StringBundler(4);
 
-			sb1.append("general");
-			sb1.append(StringPool.EQUAL);
-			sb1.append("formNavigatorEntryKey1,");
-			sb1.append("formNavigatorEntryKey2");
+			sb.append("general");
+			sb.append(StringPool.EQUAL);
+			sb.append("formNavigatorEntryKey1,");
+			sb.append("formNavigatorEntryKey2");
 
-			createConfiguration("form1", new String[] {sb1.toString()});
+			createConfiguration("form1", new String[] {sb.toString()});
 		}
 
 		@Test
