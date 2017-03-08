@@ -23,12 +23,6 @@ class CardsTreeview extends Treeview {
 	 */
 	created() {
 		this.expandSelectedNodesParentNodes_(this.nodes);
-	}
-
-	/**
-	 * @inheritDoc
-	 */
-	attached() {
 		this.addSelectedNodes_(this.nodes);
 	}
 
@@ -47,30 +41,36 @@ class CardsTreeview extends Treeview {
 				}
 
 				if (node.selected) {
-					this.selectNode_(node.id);
+					this.selectNode_(node);
 				}
-			},
-			this
+			}
 		);
 	}
 
 	/**
 	 * Deselects all selected tree nodes
 	 *
-	 * @param nodes List of nodes to deselect the elements in.
 	 * @protected
 	 */
-	deselectAll_(nodes) {
-		nodes.forEach(
-			(node) => {
-				node.selected = false;
+	deselectAll_() {
+		for (var i = this.selectedNodes.length - 1; i >= 0; i--) {
+			this.selectedNodes[i].selected = false;
+			this.selectedNodes.pop();
+		}
+	}
 
-				if (node.children) {
-					this.deselectAll_(node.children);
-				}
-			},
-			this
-		);
+	/**
+	 * Selects specific nodes
+	 *
+	 * @param node to deselect.
+	 * @protected
+	 */
+	deselectNode_(node) {
+		node.selected = false;
+
+		this.selectedNodes.splice(this.selectedNodes.indexOf(node), 1);
+
+		this.selectedNodes = this.selectedNodes;
 	}
 
 	/**
@@ -178,11 +178,26 @@ class CardsTreeview extends Treeview {
 	 * @protected
 	 */
 	handleNodeClicked_(event) {
-		let currentTarget = event.delegateTarget.parentNode;
+		let path = event.delegateTarget.parentNode.parentNode.parentNode.getAttribute('data-treeview-path').split('-');
 
-		let currentTargetId = currentTarget.getAttribute('data-treeitemid');
+		let node = this.getNodeObj(path);
 
-		this.selectNode_(currentTargetId);
+		if (this.multiSelection) {
+			if (node.selected) {
+				this.deselectNode_(node);
+			}
+			else {
+				this.selectNode_(node);
+			}
+		}
+		else {
+			if (!node.selected) {
+				this.deselectAll_();
+				this.selectNode_(node);
+			}
+		}
+
+		this.nodes = this.nodes;
 	}
 
 	/**
@@ -228,23 +243,15 @@ class CardsTreeview extends Treeview {
 	/**
 	 * Selects specific node.
 	 *
-	 * @param nodeId ID of node to select.
+	 * @param node to select.
 	 * @protected
 	 */
-	selectNode_(nodeId) {
-		if (this.multiSelection) {
-			if (this.selectedNodes.indexOf(nodeId + ',') !== -1) {
-				this.selectedNodes = this.selectedNodes.replace(nodeId + ',', '');
-			}
-			else {
-				this.selectedNodes += nodeId + ',';
-			}
-		}
-		else {
-			this.deselectAll_(this.nodes);
+	selectNode_(node) {
+		node.selected = true;
 
-			this.selectedNodes = ',' + nodeId + ',';
-		}
+		this.selectedNodes.push(node);
+
+		this.selectedNodes = this.selectedNodes;
 	}
 
 	/**
@@ -277,6 +284,11 @@ CardsTreeview.STATE = {
 	multiSelection: {
 		validator: core.isBoolean,
 		value: false
+	},
+
+	selectedNodes: {
+		validator: core.isArray,
+		value: []
 	}
 };
 
