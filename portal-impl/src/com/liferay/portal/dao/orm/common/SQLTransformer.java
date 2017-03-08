@@ -38,8 +38,8 @@ public class SQLTransformer {
 	}
 
 	public static String transform(String sql) {
-		com.liferay.portal.dao.sql.transformer.SQLTransformer transformer =
-			_instance._getTransformer();
+		com.liferay.portal.dao.sql.transformer.SQLTransformer sqlTransformer =
+			_instance._getSQLTransformer();
 
 		return transformer.transform(sql);
 	}
@@ -57,9 +57,9 @@ public class SQLTransformer {
 	}
 
 	private com.liferay.portal.dao.sql.transformer.SQLTransformer
-		_getTransformer() {
+		_getSQLTransformer() {
 
-		return _transformer;
+		return _sqlTransformer;
 	}
 
 	private void _reloadSQLTransformer() {
@@ -72,7 +72,7 @@ public class SQLTransformer {
 
 		DB db = DBManagerUtil.getDB();
 
-		_transformer = SQLTransformerFactory.getSQLTransformer(db);
+		_sqlTransformer = SQLTransformerFactory.getSQLTransformer(db);
 	}
 
 	private String _transformFromHqlToJpql(String sql) {
@@ -82,7 +82,7 @@ public class SQLTransformer {
 			return newSQL;
 		}
 
-		newSQL = _transformer.transform(sql);
+		newSQL = _sqlTransformer.transform(sql);
 
 		newSQL = _transformPositionalParams(newSQL);
 
@@ -102,7 +102,7 @@ public class SQLTransformer {
 			return newSQL;
 		}
 
-		newSQL = _transformer.transform(sql);
+		newSQL = _sqlTransformer.transform(sql);
 
 		Matcher matcher = _jpqlCountPattern.matcher(newSQL);
 
@@ -159,7 +159,8 @@ public class SQLTransformer {
 	private static final Pattern _jpqlCountPattern = Pattern.compile(
 		"SELECT COUNT\\((\\S+)\\) FROM (\\S+) (\\S+)");
 
+	private com.liferay.portal.dao.sql.transformer.SQLTransformer
+		_sqlTransformer;
 	private Map<String, String> _transformedSqls;
-	private com.liferay.portal.dao.sql.transformer.SQLTransformer _transformer;
 
 }
