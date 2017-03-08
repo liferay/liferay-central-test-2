@@ -182,12 +182,6 @@ public class FriendlyURLEntryLocalizationLocalServiceWrapper
 		return _friendlyURLEntryLocalizationLocalService.getPersistedModel(primaryKeyObj);
 	}
 
-	@Override
-	public int getFriendlyURLEntryLocalizationCount(
-		com.liferay.friendly.url.model.FriendlyURLEntry friendlyURLEntry) {
-		return _friendlyURLEntryLocalizationLocalService.getFriendlyURLEntryLocalizationCount(friendlyURLEntry);
-	}
-
 	/**
 	* Returns the number of friendly url entry localizations.
 	*
@@ -196,6 +190,12 @@ public class FriendlyURLEntryLocalizationLocalServiceWrapper
 	@Override
 	public int getFriendlyURLEntryLocalizationsCount() {
 		return _friendlyURLEntryLocalizationLocalService.getFriendlyURLEntryLocalizationsCount();
+	}
+
+	@Override
+	public int getFriendlyURLEntryLocalizationsCount(
+		com.liferay.friendly.url.model.FriendlyURLEntry friendlyURLEntry) {
+		return _friendlyURLEntryLocalizationLocalService.getFriendlyURLEntryLocalizationsCount(friendlyURLEntry);
 	}
 
 	/**

@@ -165,10 +165,6 @@ public interface FriendlyURLEntryLocalizationLocalService
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getFriendlyURLEntryLocalizationCount(
-		FriendlyURLEntry friendlyURLEntry);
-
 	/**
 	* Returns the number of friendly url entry localizations.
 	*
@@ -176,6 +172,10 @@ public interface FriendlyURLEntryLocalizationLocalService
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getFriendlyURLEntryLocalizationsCount();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getFriendlyURLEntryLocalizationsCount(
+		FriendlyURLEntry friendlyURLEntry);
 
 	/**
 	* Returns the OSGi service identifier.
