@@ -41,7 +41,7 @@ public class SQLTransformer {
 		com.liferay.portal.dao.sql.transformer.SQLTransformer sqlTransformer =
 			_instance._getSQLTransformer();
 
-		return transformer.transform(sql);
+		return sqlTransformer.transform(sql);
 	}
 
 	public static String transformFromHqlToJpql(String sql) {
