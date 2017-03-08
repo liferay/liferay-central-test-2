@@ -442,25 +442,6 @@ public class DLFileEntryTypeServiceTest {
 		PrincipalThreadLocal.setName(TestPropsValues.getUserId());
 	}
 
-	private ServiceContext _getFolderServiceContext(
-			DLFileEntryType... dlFileEntryTypes)
-		throws PortalException {
-
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
-
-		serviceContext.setAttribute(
-			"defaultFileEntryTypeId", dlFileEntryTypes[0].getPrimaryKey());
-		serviceContext.setAttribute(
-			"dlFileEntryTypesSearchContainerPrimaryKeys",
-			ArrayUtil.toString(dlFileEntryTypes, "primaryKey"));
-		serviceContext.setAttribute(
-			"restrictionType",
-			DLFolderConstants.RESTRICTION_TYPE_FILE_ENTRY_TYPES_AND_WORKFLOW);
-
-		return serviceContext;
-	}
-
 	private long[] _getDDMStructureIds(DLFileEntryType dlFileEntryType) {
 		List<com.liferay.dynamic.data.mapping.kernel.DDMStructure>
 			ddmStructures = dlFileEntryType.getDDMStructures();
@@ -478,6 +459,25 @@ public class DLFileEntryTypeServiceTest {
 		}
 
 		return ddmStructureIds;
+	}
+
+	private ServiceContext _getFolderServiceContext(
+			DLFileEntryType... dlFileEntryTypes)
+		throws PortalException {
+
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
+
+		serviceContext.setAttribute(
+			"defaultFileEntryTypeId", dlFileEntryTypes[0].getPrimaryKey());
+		serviceContext.setAttribute(
+			"dlFileEntryTypesSearchContainerPrimaryKeys",
+			ArrayUtil.toString(dlFileEntryTypes, "primaryKey"));
+		serviceContext.setAttribute(
+			"restrictionType",
+			DLFolderConstants.RESTRICTION_TYPE_FILE_ENTRY_TYPES_AND_WORKFLOW);
+
+		return serviceContext;
 	}
 
 	private static final String _CONTENT =
