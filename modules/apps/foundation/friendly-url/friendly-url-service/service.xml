@@ -78,6 +78,9 @@
 		<column name="friendlyURLEntryId" type="long" />
 		<column name="urlTitle" type="String" />
 		<column name="languageId" type="String" />
+
+		<!-- Finder methods -->
+
 		<finder name="G_F" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="friendlyURLEntryId" />
@@ -92,6 +95,9 @@
 			<finder-column name="urlTitle" />
 			<finder-column name="languageId" />
 		</finder>
+
+		<!-- References -->
+
 		<reference entity="FriendlyURLEntry" package-path="com.liferay.friendly.url" />
 	</entity>
 	<exceptions>
