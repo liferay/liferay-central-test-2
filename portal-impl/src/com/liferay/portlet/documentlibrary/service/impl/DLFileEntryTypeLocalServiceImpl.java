@@ -820,13 +820,13 @@ public class DLFileEntryTypeLocalServiceImpl
 		}
 	}
 
-	private void _deleteDDMStructure(long fileEntryTypeId, long structureId)
+	private void _deleteDDMStructure(long fileEntryTypeId, long ddmStructureId)
 		throws PortalException {
 
 		deleteDDMStructureLinks(
-			fileEntryTypeId, Collections.singleton(structureId));
+			fileEntryTypeId, Collections.singleton(ddmStructureId));
 
-		DDMStructureManagerUtil.deleteStructure(structureId);
+		DDMStructureManagerUtil.deleteStructure(ddmStructureId);
 	}
 
 	private DDMForm _getDDMForm(
@@ -862,7 +862,7 @@ public class DLFileEntryTypeLocalServiceImpl
 	private long[] _updateDDMStructure(
 			long userId, String fileEntryTypeUuid, long fileEntryTypeId,
 			long groupId, Map<Locale, String> nameMap,
-			Map<Locale, String> descriptionMap, long[] structureIds,
+			Map<Locale, String> descriptionMap, long[] ddmStructureIds,
 			ServiceContext serviceContext)
 		throws PortalException {
 
@@ -887,10 +887,10 @@ public class DLFileEntryTypeLocalServiceImpl
 						fileEntryTypeId, ddmStructure.getStructureId());
 
 					return ArrayUtil.remove(
-						structureIds, ddmStructure.getStructureId());
+						ddmStructureIds, ddmStructure.getStructureId());
 				}
 
-				return structureIds;
+				return ddmStructureIds;
 			}
 
 			if (ddmStructure == null) {
@@ -910,7 +910,7 @@ public class DLFileEntryTypeLocalServiceImpl
 			}
 
 			return ArrayUtil.append(
-				structureIds, ddmStructure.getStructureId());
+				ddmStructureIds, ddmStructure.getStructureId());
 		}
 		catch (StructureDefinitionException sde) {
 			if (_log.isWarnEnabled()) {
@@ -918,14 +918,14 @@ public class DLFileEntryTypeLocalServiceImpl
 			}
 
 			if (ddmStructure != null) {
-				long structureId = ddmStructure.getStructureId();
+				long ddmStructureId = ddmStructure.getStructureId();
 
-				_deleteDDMStructure(fileEntryTypeId, structureId);
+				_deleteDDMStructure(fileEntryTypeId, ddmStructureId);
 
-				return ArrayUtil.remove(structureIds, structureId);
+				return ArrayUtil.remove(ddmStructureIds, ddmStructureId);
 			}
 
-			return structureIds;
+			return ddmStructureIds;
 		}
 	}
 
