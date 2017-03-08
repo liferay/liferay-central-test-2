@@ -53,7 +53,7 @@ class CardsTreeview extends Treeview {
 	 * @protected
 	 */
 	deselectAll_() {
-		for (var i = this.selectedNodes.length - 1; i >= 0; i--) {
+		for (let i = this.selectedNodes.length - 1; i >= 0; i--) {
 			this.selectedNodes[i].selected = false;
 			this.selectedNodes.pop();
 		}

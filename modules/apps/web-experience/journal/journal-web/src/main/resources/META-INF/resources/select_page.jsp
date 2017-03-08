@@ -88,8 +88,6 @@ JSONArray privatePages = privatePagesObj.getJSONArray("children");
 				{
 					events: {
 						selectedNodesChanged: function(event) {
-							debugger;
-
 							var node = event.newVal[0];
 
 							var data = {
