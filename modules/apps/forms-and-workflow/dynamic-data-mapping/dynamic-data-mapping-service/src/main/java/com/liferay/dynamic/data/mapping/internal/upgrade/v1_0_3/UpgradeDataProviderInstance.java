@@ -85,13 +85,14 @@ public class UpgradeDataProviderInstance extends UpgradeProcess {
 		ddmFormValues.addDDMFormFieldValue(
 			createDDMFormFieldValue(ddmFormValues, "pagination", "true"));
 	}
-	
+
 	protected void addStartEndParameters(DDMFormValues ddmFormValues) {
 		Map<String, List<DDMFormFieldValue>> ddmFormFieldValuesMap =
-				ddmFormValues.getDDMFormFieldValuesMap();
+			ddmFormValues.getDDMFormFieldValuesMap();
 
 		if (ddmFormFieldValuesMap.containsKey("startParameterName") ||
 			ddmFormFieldValuesMap.containsKey("endParameterName")) {
+
 			return;
 		}
 
