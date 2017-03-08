@@ -279,6 +279,34 @@ public class DDMDataProviderPaginatorServlet extends HttpServlet {
 		return keyValue;
 	}
 
+	protected String[] getKeyValuePaths(
+		String ddmDataProviderOutput,
+		DDMDataProviderParameterSettings ddmDataProviderParemeterSettings) {
+
+		for (DDMDataProviderOutputParametersSettings
+				ddmDataProviderOutputParametersSetting :
+					ddmDataProviderParemeterSettings.outputParameters()) {
+
+			if (ddmDataProviderOutput.equals(
+					ddmDataProviderOutputParametersSetting.
+						outputParameterName())) {
+
+				String[] paths = StringUtil.split(
+					ddmDataProviderOutputParametersSetting.
+						outputParameterPath(),
+					CharPool.SEMICOLON);
+
+				if (paths.length == 1) {
+					paths = ArrayUtil.append(paths, paths[0]);
+				}
+
+				return paths;
+			}
+		}
+
+		return null;
+	}
+
 	protected String[] getKeyValuePathsFromDataProviderOutputParameter(
 		String ddmDataProviderOutput, DDMDataProvider ddmDataProvider,
 		DDMDataProviderContext ddmDataProviderContext) {
@@ -293,26 +321,8 @@ public class DDMDataProviderPaginatorServlet extends HttpServlet {
 					ddmDataProviderContext.getSettingsInstance(
 						ddmDataProvider.getSettings());
 
-			for (DDMDataProviderOutputParametersSettings
-					ddmDataProviderOutputParametersSetting :
-						ddmDataProviderParemeterSettings.outputParameters()) {
-
-				if (ddmDataProviderOutput.equals(
-						ddmDataProviderOutputParametersSetting.
-							outputParameterName())) {
-
-					String[] paths = StringUtil.split(
-						ddmDataProviderOutputParametersSetting.
-							outputParameterPath(),
-						CharPool.SEMICOLON);
-
-					if (paths.length == 1) {
-						paths = ArrayUtil.append(paths, paths[0]);
-					}
-
-					return paths;
-				}
-			}
+			return getKeyValuePaths(
+				ddmDataProviderOutput, ddmDataProviderParemeterSettings);
 		}
 
 		return null;
