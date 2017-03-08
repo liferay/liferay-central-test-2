@@ -203,7 +203,7 @@ public class DDMStructureLocalServiceTest extends BaseDDMServiceTestCase {
 		List<String> actions = new ArrayList<>();
 
 		String action = String.format(
-			"call(\"%s\",\"\",\"\")", dataProviderInstance1.getUuid());
+			"call('%s','','')", dataProviderInstance1.getUuid());
 
 		actions.add(action);
 
@@ -675,10 +675,10 @@ public class DDMStructureLocalServiceTest extends BaseDDMServiceTestCase {
 		List<String> actions = new ArrayList<>();
 
 		String action1 = String.format(
-			"call(\"%s\",\"\",\"\")", dataProviderInstance1.getUuid());
+			"call('%s','','')", dataProviderInstance1.getUuid());
 
 		String action2 = String.format(
-			"call(\"%s\",\"\",\"\")", dataProviderInstance2.getUuid());
+			"call('%s','','')", dataProviderInstance2.getUuid());
 
 		actions.add(action1);
 		actions.add(action2);

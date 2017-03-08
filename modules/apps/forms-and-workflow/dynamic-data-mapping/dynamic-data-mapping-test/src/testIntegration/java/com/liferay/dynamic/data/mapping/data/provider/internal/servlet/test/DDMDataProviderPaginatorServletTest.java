@@ -99,12 +99,8 @@ public class DDMDataProviderPaginatorServletTest {
 		DDMDataProviderInstance ddmDataProviderInstance =
 			createDDMDataProviderInstance();
 
-		Map<String, String> params = new HashMap<>();
-
-		params.put(
-			"ddmDataProviderInstanceUUID", ddmDataProviderInstance.getUuid());
-
-		params.put("outputParameterName", "nameCurrentValue");
+		Map<String, String> params = createRequestParametersMap(
+			ddmDataProviderInstance);
 
 		HttpServletRequest httpServletRequest = createHttpServletRequest(
 			params, 0, 10);
@@ -122,12 +118,8 @@ public class DDMDataProviderPaginatorServletTest {
 		DDMDataProviderInstance ddmDataProviderInstance =
 			createDDMDataProviderInstance();
 
-		Map<String, String> params = new HashMap<>();
-
-		params.put(
-			"ddmDataProviderInstanceUUID", ddmDataProviderInstance.getUuid());
-
-		params.put("outputParameterName", "nameCurrentValue");
+		Map<String, String> params = createRequestParametersMap(
+			ddmDataProviderInstance);
 
 		HttpServletRequest httpServletRequest = createHttpServletRequest(
 			params, 0, 1);
@@ -150,12 +142,8 @@ public class DDMDataProviderPaginatorServletTest {
 		DDMDataProviderInstance ddmDataProviderInstance =
 			createDDMDataProviderInstance();
 
-		Map<String, String> params = new HashMap<>();
-
-		params.put(
-			"ddmDataProviderInstanceUUID", ddmDataProviderInstance.getUuid());
-
-		params.put("outputParameterName", "nameCurrentValue");
+		Map<String, String> params = createRequestParametersMap(
+			ddmDataProviderInstance);
 
 		HttpServletRequest httpServletRequest = createHttpServletRequest(
 			params, 0, 1);
@@ -185,12 +173,8 @@ public class DDMDataProviderPaginatorServletTest {
 		DDMDataProviderInstance ddmDataProviderInstance =
 			createDDMDataProviderInstance();
 
-		Map<String, String> params = new HashMap<>();
-
-		params.put(
-			"ddmDataProviderInstanceUUID", ddmDataProviderInstance.getUuid());
-
-		params.put("outputParameterName", "nameCurrentValue");
+		Map<String, String> params = createRequestParametersMap(
+			ddmDataProviderInstance);
 
 		HttpServletRequest httpServletRequest = createHttpServletRequest(
 			params, 1, 1);
@@ -232,9 +216,6 @@ public class DDMDataProviderPaginatorServletTest {
 				"cacheable", Boolean.FALSE.toString()));
 		ddmFormValues.addDDMFormFieldValue(
 			DDMFormValuesTestUtil.createUnlocalizedDDMFormFieldValue(
-				"endParameterName", "end"));
-		ddmFormValues.addDDMFormFieldValue(
-			DDMFormValuesTestUtil.createUnlocalizedDDMFormFieldValue(
 				"filterable", Boolean.FALSE.toString()));
 		ddmFormValues.addDDMFormFieldValue(
 			DDMFormValuesTestUtil.createUnlocalizedDDMFormFieldValue(
@@ -247,7 +228,10 @@ public class DDMDataProviderPaginatorServletTest {
 				"password", "test"));
 		ddmFormValues.addDDMFormFieldValue(
 			DDMFormValuesTestUtil.createUnlocalizedDDMFormFieldValue(
-				"startParameterName", "start"));
+				"paginationEndParameterName", "end"));
+		ddmFormValues.addDDMFormFieldValue(
+			DDMFormValuesTestUtil.createUnlocalizedDDMFormFieldValue(
+				"paginationStartParameterName", "start"));
 		ddmFormValues.addDDMFormFieldValue(
 			DDMFormValuesTestUtil.createUnlocalizedDDMFormFieldValue(
 				"url",
@@ -339,6 +323,19 @@ public class DDMDataProviderPaginatorServletTest {
 				"outputParameterType", outputParameterType));
 
 		return outputParameters;
+	}
+
+	protected Map<String, String> createRequestParametersMap(
+		DDMDataProviderInstance ddmDataProviderInstance) {
+
+		Map<String, String> params = new HashMap<>();
+
+		params.put(
+			"dataProviderInstanceUUID", ddmDataProviderInstance.getUuid());
+
+		params.put("outputParameterName", "nameCurrentValue");
+
+		return params;
 	}
 
 	protected MockHttpServletResponse executeDDMDataProviderPaginatorServlet(
