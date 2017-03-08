@@ -847,7 +847,6 @@ public class PDFProcessorImpl
 		return 0;
 	}
 
-
 	private boolean _hasImages(FileVersion fileVersion) throws Exception {
 		if (PropsValues.DL_FILE_ENTRY_PREVIEW_ENABLED) {
 			if (!hasPreview(fileVersion)) {
