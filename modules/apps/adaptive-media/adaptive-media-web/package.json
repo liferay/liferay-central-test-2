@@ -1,6 +1,7 @@
 {
 	"dependencies": {
 		"metal": "^2.6.4",
+		"metal-dom": "^2.6.4",
 		"metal-events": "^2.6.4"
 	},
 	"devDependencies": {
@@ -9,4 +10,4 @@
 	},
 	"name": "adaptive-media-web",
 	"version": "1.0.0"
-}
+	}
