@@ -128,7 +128,7 @@ public class FriendlyURLEntryLocalizationLocalServiceImpl
 	}
 
 	@Override
-	public int getFriendlyURLEntryLocalizationCount(
+	public int getFriendlyURLEntryLocalizationsCount(
 		FriendlyURLEntry friendlyURLEntry) {
 
 		if (friendlyURLEntry == null) {

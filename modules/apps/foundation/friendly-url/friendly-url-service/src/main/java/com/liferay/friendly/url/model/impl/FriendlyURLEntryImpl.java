@@ -50,7 +50,7 @@ public class FriendlyURLEntryImpl extends FriendlyURLEntryBaseImpl {
 	public boolean isLocalized() {
 		int localizationCount =
 			FriendlyURLEntryLocalizationLocalServiceUtil.
-				getFriendlyURLEntryLocalizationCount(this);
+				getFriendlyURLEntryLocalizationsCount(this);
 
 		if (localizationCount > 0) {
 			return true;
