@@ -163,7 +163,6 @@ public class FriendlyURLEntryLocalServiceImpl
 		ActionableDynamicQuery actionableDynamicQuery =
 			getActionableDynamicQuery();
 
-		actionableDynamicQuery.setGroupId(groupId);
 		actionableDynamicQuery.setAddCriteriaMethod(
 			new ActionableDynamicQuery.AddCriteriaMethod() {
 
@@ -176,7 +175,7 @@ public class FriendlyURLEntryLocalServiceImpl
 				}
 
 			});
-
+		actionableDynamicQuery.setGroupId(groupId);
 		actionableDynamicQuery.setPerformActionMethod(
 			new ActionableDynamicQuery.PerformActionMethod<FriendlyURLEntry>() {
 
