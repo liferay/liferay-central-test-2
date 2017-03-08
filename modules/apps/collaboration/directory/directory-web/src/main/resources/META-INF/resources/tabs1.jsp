@@ -48,14 +48,14 @@ portletURL.setParameter("mvcRenderCommandName", "/directory/view");
 
 	<aui:nav-bar-search>
 		<c:choose>
-			<c:when test='<%= tabs1.equals("users") || portletName.equals(PortletKeys.FRIENDS_DIRECTORY) %>'>
-				<liferay-util:include page="/user_search.jsp" servletContext="<%= application %>" />
-			</c:when>
 			<c:when test='<%= tabs1.equals("organizations") %>'>
 				<liferay-util:include page="/organization_search.jsp" servletContext="<%= application %>" />
 			</c:when>
 			<c:when test='<%= tabs1.equals("user-groups") %>'>
 				<liferay-ui:input-search markupView="lexicon" />
+			</c:when>
+			<c:when test='<%= tabs1.equals("users") || portletName.equals(PortletKeys.FRIENDS_DIRECTORY) %>'>
+				<liferay-util:include page="/user_search.jsp" servletContext="<%= application %>" />
 			</c:when>
 		</c:choose>
 	</aui:nav-bar-search>
