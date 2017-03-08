@@ -450,10 +450,10 @@ public class DLFileEntryTypeServiceTest {
 
 		int i = 0;
 
-		for (com.liferay.dynamic.data.mapping.kernel.DDMStructure structure :
+		for (com.liferay.dynamic.data.mapping.kernel.DDMStructure ddmStructure :
 				ddmStructures) {
 
-			ddmStructureIds[i] = structure.getStructureId();
+			ddmStructureIds[i] = ddmStructure.getStructureId();
 
 			i++;
 		}
