@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.journal.internal.util.impl;
+package com.liferay.journal.util.impl;
 
 import com.liferay.document.library.kernel.service.DLAppLocalService;
 import com.liferay.dynamic.data.mapping.model.DDMFormFieldType;
