@@ -29,17 +29,11 @@ public class OracleSQLTransformerLogic extends BaseSQLTransformerLogic {
 	public OracleSQLTransformerLogic(DB db) {
 		super(db);
 
-		_functions = new Function[] {
+		setFunctions(
 			getBooleanFunction(), _getCastClobTextFunction(),
 			getCastLongFunction(), getCastTextFunction(),
 			getIntegerDivisionFunction(), getNullDateFunction(),
-			_getEscapeFunction(), _getNotEqualsBlankStringFunction()
-		};
-	}
-
-	@Override
-	public Function<String, String>[] getFunctions() {
-		return _functions;
+			_getEscapeFunction(), _getNotEqualsBlankStringFunction());
 	}
 
 	@Override
@@ -71,7 +65,5 @@ public class OracleSQLTransformerLogic extends BaseSQLTransformerLogic {
 		return (String sql) -> StringUtil.replace(
 			sql, " != ''", " IS NOT NULL");
 	}
-
-	private final Function<String, String>[] _functions;
 
 }

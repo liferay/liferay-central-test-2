@@ -28,18 +28,12 @@ public class SQLServerSQLTransformerLogic extends BaseSQLTransformerLogic {
 	public SQLServerSQLTransformerLogic(DB db) {
 		super(db);
 
-		_functions = new Function[] {
+		setFunctions(
 			getBitwiseCheckFunction(), getBooleanFunction(),
 			getCastClobTextFunction(), getCastLongFunction(),
 			getCastTextFunction(), _getInStrFunction(),
 			getIntegerDivisionFunction(), getNullDateFunction(),
-			_getSubstrFunction(), _getModFunction()
-		};
-	}
-
-	@Override
-	public Function<String, String>[] getFunctions() {
-		return _functions;
+			_getSubstrFunction(), _getModFunction());
 	}
 
 	@Override
@@ -76,7 +70,5 @@ public class SQLServerSQLTransformerLogic extends BaseSQLTransformerLogic {
 			return matcher.replaceAll("SUBSTRING($1, $2, $3)");
 		};
 	}
-
-	private final Function<String, String>[] _functions;
 
 }

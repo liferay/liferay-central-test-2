@@ -29,18 +29,12 @@ public class PostgreSQLTransformerLogic extends BaseSQLTransformerLogic {
 	public PostgreSQLTransformerLogic(DB db) {
 		super(db);
 
-		_functions = new Function[] {
+		setFunctions(
 			getBitwiseCheckFunction(), getBooleanFunction(),
 			getCastClobTextFunction(), getCastLongFunction(),
 			getCastTextFunction(), _getInStrFunction(),
 			getIntegerDivisionFunction(), _getNullDateFunction(),
-			_getNegativeComparisonFunction()
-		};
-	}
-
-	@Override
-	public Function<String, String>[] getFunctions() {
-		return _functions;
+			_getNegativeComparisonFunction());
 	}
 
 	@Override
@@ -73,7 +67,5 @@ public class PostgreSQLTransformerLogic extends BaseSQLTransformerLogic {
 
 	private static final Pattern _negativeComparisonPattern = Pattern.compile(
 		"(!?=)( -([0-9]+)?)", Pattern.CASE_INSENSITIVE);
-
-	private final Function<String, String>[] _functions;
 
 }

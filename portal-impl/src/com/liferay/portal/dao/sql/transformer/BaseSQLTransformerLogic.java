@@ -31,6 +31,11 @@ public abstract class BaseSQLTransformerLogic implements SQLTransformerLogic {
 		_db = db;
 	}
 
+	@Override
+	public Function<String, String>[] getFunctions() {
+		return _functions;
+	}
+
 	protected Function<String, String> getBitwiseCheckFunction() {
 		Pattern pattern = getBitwiseCheckPattern();
 
@@ -129,6 +134,11 @@ public abstract class BaseSQLTransformerLogic implements SQLTransformerLogic {
 		return matcher.replaceAll("$1 / $2");
 	}
 
+	protected void setFunctions(Function... functions) {
+		_functions = functions;
+	}
+
 	private final DB _db;
+	private Function[] _functions;
 
 }
