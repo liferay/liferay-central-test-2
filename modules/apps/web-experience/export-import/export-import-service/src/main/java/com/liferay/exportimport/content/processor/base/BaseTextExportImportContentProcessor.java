@@ -1066,7 +1066,7 @@ public class BaseTextExportImportContentProcessor
 
 				sb.append("Unable to get layout with plid ");
 				sb.append(oldPlid);
-				sb.append(", using layout id  ");
+				sb.append(", using layout ID  ");
 				sb.append(newLayoutId);
 				sb.append(" instead");
 
