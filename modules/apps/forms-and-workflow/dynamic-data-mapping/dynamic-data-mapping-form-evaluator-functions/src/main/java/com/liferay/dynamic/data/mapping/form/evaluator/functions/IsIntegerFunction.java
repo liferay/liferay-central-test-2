@@ -24,10 +24,10 @@ import org.osgi.service.component.annotations.Component;
  * @author Leonardo Barros
  */
 @Component(
-	immediate = true, property = "ddm.form.evaluator.function.name=isDecimal",
+	immediate = true, property = "ddm.form.evaluator.function.name=isInteger",
 	service = DDMExpressionFunction.class
 )
-public class IsDecimal implements DDMExpressionFunction {
+public class IsIntegerFunction implements DDMExpressionFunction {
 
 	@Override
 	public Object evaluate(Object... parameters) {
@@ -35,10 +35,10 @@ public class IsDecimal implements DDMExpressionFunction {
 			throw new IllegalArgumentException("One parameter is expected");
 		}
 
-		Double value = NumberUtils.toDouble(
-			parameters[0].toString(), Double.NaN);
+		Integer value = NumberUtils.toInt(
+			parameters[0].toString(), Integer.MIN_VALUE);
 
-		return !value.isNaN();
+		return value != Integer.MIN_VALUE;
 	}
 
 }
