@@ -381,11 +381,11 @@ public class DLFileEntryTypeServiceTest {
 		serviceContext.setAttribute(
 			"ddmForm", DDMBeanTranslatorUtil.translate(new DDMForm()));
 
-		long[] structureIds = _getStructureIds(dlFileEntryType);
+		long[] ddmStructureIds = _getDDMStructureIds(dlFileEntryType);
 
 		DLFileEntryTypeServiceUtil.updateFileEntryType(
 			dlFileEntryType.getFileEntryTypeId(), StringUtil.randomString(),
-			StringUtil.randomId(), structureIds, serviceContext);
+			StringUtil.randomId(), ddmStructureIds, serviceContext);
 
 		dlFileEntryType = DLFileEntryTypeServiceUtil.getFileEntryType(
 			dlFileEntryType.getFileEntryTypeId());
@@ -461,23 +461,23 @@ public class DLFileEntryTypeServiceTest {
 		return serviceContext;
 	}
 
-	private long[] _getStructureIds(DLFileEntryType dlFileEntryType) {
+	private long[] _getDDMStructureIds(DLFileEntryType dlFileEntryType) {
 		List<com.liferay.dynamic.data.mapping.kernel.DDMStructure>
 			ddmStructures = dlFileEntryType.getDDMStructures();
 
-		long[] structureIds = new long[ddmStructures.size()];
+		long[] ddmStructureIds = new long[ddmStructures.size()];
 
 		int i = 0;
 
 		for (com.liferay.dynamic.data.mapping.kernel.DDMStructure structure :
 				ddmStructures) {
 
-			structureIds[i] = structure.getStructureId();
+			ddmStructureIds[i] = structure.getStructureId();
 
 			i++;
 		}
 
-		return structureIds;
+		return ddmStructureIds;
 	}
 
 	private static final String _CONTENT =
