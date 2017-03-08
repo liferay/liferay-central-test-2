@@ -87,9 +87,7 @@ public class PathInterpreterTest {
 	}
 
 	@Test(expected = AdaptiveMediaRuntimeException.class)
-	public void testFileEntryPathGetFileVersionFailure()
-		throws Exception {
-
+	public void testFileEntryPathGetFileVersionFailure() throws Exception {
 		Mockito.when(
 			_dlAppLocalService.getFileEntry(0)
 		).thenReturn(
