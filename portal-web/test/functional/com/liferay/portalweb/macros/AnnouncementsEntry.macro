@@ -12,10 +12,6 @@
 
 		<execute function="Type#typeCKEditorWaitForCKEditor" locator1="CKEditor#BODY_FIELD" value1="${entryContent}" />
 
-		<execute macro="Panel#expandPanel">
-			<var name="panelHeading" value="Configuration" />
-		</execute>
-
 		<execute function="Uncheck" locator1="Checkbox#DISPLAY_IMMEDIATELY" />
 
 		<var attribute="value" locator="//input[contains(@id,'displayDateHour')]" name="displayDateHour" />
@@ -66,10 +62,6 @@
 		<if>
 			<isset var="priority" />
 			<then>
-				<execute macro="Panel#expandPanel">
-					<var name="panelHeading" value="Configuration" />
-				</execute>
-
 				<execute function="Select" locator1="Announcements#PRIORITY_SELECT" value1="${priority}" />
 			</then>
 		</if>
@@ -77,10 +69,6 @@
 		<if>
 			<isset var="expirationDate" />
 			<then>
-				<execute macro="Panel#expandPanel">
-					<var name="panelHeading" value="Configuration" />
-				</execute>
-
 				<execute function="Type" locator1="TextInput#EXPIRATION_DATE" value1="${expirationDate}" />
 			</then>
 		</if>
