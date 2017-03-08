@@ -17,23 +17,12 @@ package com.liferay.friendly.url.model.impl;
 import aQute.bnd.annotation.ProviderType;
 
 /**
- * The extended model implementation for the FriendlyURLEntryLocalization service. Represents a row in the &quot;FriendlyURLEntryLocalization&quot; database table, with each column mapped to a property of this class.
- *
- * <p>
- * Helper methods and all application logic should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.liferay.friendly.url.model.FriendlyURLEntryLocalization} interface.
- * </p>
- *
  * @author Brian Wing Shun Chan
  */
 @ProviderType
 public class FriendlyURLEntryLocalizationImpl
 	extends FriendlyURLEntryLocalizationBaseImpl {
 
-	/**
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. All methods that expect a friendly url entry localization model instance should use the {@link com.liferay.friendly.url.model.FriendlyURLEntryLocalization} interface instead.
-	 */
 	public FriendlyURLEntryLocalizationImpl() {
 	}
 
