@@ -29,14 +29,6 @@ public class MySQLSQLTransformerLogicTest
 		super(new MySQLDB(5, 7));
 	}
 
-	@Override
-	@Test
-	public void testReplaceModWithExtraWhitespace() {
-		Assert.assertEquals(
-			getModTransformedSQL(),
-			sqlTransformer.transform(getModOriginalSQL()));
-	}
-
 	@Test
 	public void testReplaceLower() {
 		Assert.assertEquals(
@@ -63,8 +55,15 @@ public class MySQLSQLTransformerLogicTest
 	public void testReplaceLowerWithoutClosing() {
 		String sql = "select lower(foo from Foo";
 
+		Assert.assertEquals(sql, sqlTransformer.transform(sql));
+	}
+
+	@Override
+	@Test
+	public void testReplaceModWithExtraWhitespace() {
 		Assert.assertEquals(
-			sql, sqlTransformer.transform(sql));
+			getModTransformedSQL(),
+			sqlTransformer.transform(getModOriginalSQL()));
 	}
 
 	@Test
