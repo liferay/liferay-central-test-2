@@ -98,7 +98,7 @@ public class ByteChannelReader {
 			_byteBuffer.flip();
 		}
 		else {
-			throw new IOException("ByteChannel is not seekable");
+			throw new IOException("Byte channel is not seekable");
 		}
 	}
 
