@@ -305,6 +305,9 @@ public interface AdaptiveMediaImageEntryLocalService extends BaseLocalService,
 	public long dynamicQueryCount(DynamicQuery dynamicQuery,
 		Projection projection);
 
+	public void deleteAdaptiveMediaImageEntries(long companyId,
+		AdaptiveMediaImageConfigurationEntry configurationEntry);
+
 	public void deleteAdaptiveMediaImageEntryFileVersion(long fileVersionId)
 		throws PortalException;
 }
