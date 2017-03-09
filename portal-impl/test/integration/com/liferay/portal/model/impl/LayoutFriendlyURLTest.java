@@ -276,8 +276,7 @@ public class LayoutFriendlyURLTest {
 	}
 
 	@Test(expected = LayoutFriendlyURLsException.class)
-	public void
-			testInvalidFriendlyURLStartingWithLowerCaseLanguageIdAndCountryId()
+	public void testInvalidFriendlyURLStartingWithLowerCaseLanguageIdAndCountryId()
 		throws Exception {
 
 		Map<Locale, String> friendlyURLMap = new HashMap<>();
