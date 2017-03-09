@@ -18,20 +18,20 @@
 
 <%
 String eventName = ParamUtil.getString(request, "eventName", liferayPortletResponse.getNamespace() + "selectDisplayPage");
+String selectedTab = ParamUtil.getString(renderRequest, "selectedTab", "public-pages");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("mvcPath", "/select_page.jsp");
+portletURL.setParameter("eventName", eventName);
 
-String selectedTab = ParamUtil.getString(renderRequest, "selectedTab", "public-pages");
+JSONObject layoutsJSONObject = journalDisplayContext.getLayoutsJSON();
 
-String layoutUuid = ParamUtil.getString(renderRequest, "layoutUuid");
+JSONObject publicLayoutsJSONObject = layoutsJSONObject.getJSONObject("public");
+JSONObject privateLayoutsJSONObject = layoutsJSONObject.getJSONObject("private");
 
-JSONObject publicPagesObj = journalDisplayContext.getPagesJSON(false, layoutUuid);
-JSONObject privatePagesObj = journalDisplayContext.getPagesJSON(true, layoutUuid);
-
-JSONArray publicPages = publicPagesObj.getJSONArray("children");
-JSONArray privatePages = privatePagesObj.getJSONArray("children");
+JSONArray publicPages = publicLayoutsJSONObject.getJSONArray("children");
+JSONArray privatePages = privateLayoutsJSONObject.getJSONArray("children");
 %>
 
 <c:choose>
@@ -106,10 +106,10 @@ JSONArray privatePages = privatePagesObj.getJSONArray("children");
 
 					<c:choose>
 						<c:when test='<%= selectedTab.equals("public-pages") %>'>
-							nodes: [<%= publicPagesObj.toString() %>],
+							nodes: [<%= publicLayoutsJSONObject.toString() %>],
 						</c:when>
 						<c:otherwise>
-							nodes: [<%= privatePagesObj.toString() %>],
+							nodes: [<%= privateLayoutsJSONObject.toString() %>],
 						</c:otherwise>
 					</c:choose>
 

@@ -447,6 +447,15 @@ public class JournalDisplayContext {
 		return sb.toString();
 	}
 
+	public JSONObject getLayoutsJSON() throws Exception {
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+
+		jsonObject.put("private", _getLayoutsJSONObject(true));
+		jsonObject.put("public", _getLayoutsJSONObject(false));
+
+		return jsonObject;
+	}
+
 	public List<ManagementBarFilterItem> getManagementBarStatusFilterItems()
 		throws PortalException, PortletException {
 
@@ -571,28 +580,6 @@ public class JournalDisplayContext {
 		}
 
 		return orderColumns;
-	}
-
-	public JSONObject getPagesJSON(
-			boolean privateLayout, String selectedLayoutUuid)
-		throws Exception {
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		JSONArray jsonArray = _getPagesJSONArray(
-			themeDisplay.getScopeGroupId(), privateLayout, 0,
-			selectedLayoutUuid);
-
-		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
-
-		jsonObject.put("children", jsonArray);
-		jsonObject.put("disabled", true);
-		jsonObject.put("expanded", true);
-		jsonObject.put("icon", "home");
-		jsonObject.put("name", themeDisplay.getScopeGroupName());
-
-		return jsonObject;
 	}
 
 	public PortletURL getPortletURL() throws PortalException {
@@ -1283,7 +1270,7 @@ public class JournalDisplayContext {
 		return jsonArray;
 	}
 
-	private JSONArray _getPagesJSONArray(
+	private JSONArray _getLayoutsJSONArray(
 			long groupId, boolean privateLayout, long parentLayoutId,
 			String selectedLayoutUuid)
 		throws Exception {
@@ -1313,7 +1300,7 @@ public class JournalDisplayContext {
 				jsonObject.put("disabled", true);
 			}
 
-			JSONArray childrenJSONArray = _getPagesJSONArray(
+			JSONArray childrenJSONArray = _getLayoutsJSONArray(
 				groupId, privateLayout, layout.getLayoutId(),
 				selectedLayoutUuid);
 
@@ -1325,6 +1312,28 @@ public class JournalDisplayContext {
 		}
 
 		return jsonArray;
+	}
+
+	private JSONObject _getLayoutsJSONObject(boolean privateLayout)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		String layoutUuid = ParamUtil.getString(_request, "layoutUuid");
+
+		JSONArray jsonArray = _getLayoutsJSONArray(
+			themeDisplay.getScopeGroupId(), privateLayout, 0, layoutUuid);
+
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+
+		jsonObject.put("children", jsonArray);
+		jsonObject.put("disabled", true);
+		jsonObject.put("expanded", true);
+		jsonObject.put("icon", "home");
+		jsonObject.put("name", themeDisplay.getScopeGroupName());
+
+		return jsonObject;
 	}
 
 	private String[] _addMenuFavItems;

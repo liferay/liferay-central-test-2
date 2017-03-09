@@ -155,6 +155,3 @@ boolean changeStructure = GetterUtil.getBoolean(request.getAttribute("edit_artic
 		</aui:script>
 	</c:otherwise>
 </c:choose>
-
-<%!
-%>
