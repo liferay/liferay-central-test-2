@@ -154,7 +154,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 					</portlet:resourceURL>
 
 					<aui:script require="adaptive-media-web/adaptive_media/js/AdaptiveMediaProgress.es">
-						Liferay.component(
+						var component = Liferay.component(
 							'<portlet:namespace />OptimizeRemaining<%= uuid %>',
 							new adaptiveMediaWebAdaptive_mediaJsAdaptiveMediaProgressEs.default(
 								{
@@ -166,6 +166,10 @@ PortletURL portletURL = renderResponse.createRenderURL();
 								<portlet:namespace />OptimizeRemaining_<%= uuid %>
 							)
 						);
+
+						<c:if test="<%= optimizeImagesAllConfigurationsBackgroundTasksCount > 0 %>">
+							component.startProgress();
+						</c:if>
 					</aui:script>
 				</liferay-ui:search-container-column-text>
 
