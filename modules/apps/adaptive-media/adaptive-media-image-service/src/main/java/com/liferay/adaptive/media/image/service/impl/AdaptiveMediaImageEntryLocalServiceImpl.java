@@ -18,10 +18,10 @@ import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.counter.AdaptiveMediaImageCounter;
-import com.liferay.adaptive.media.image.exception.DuplicateAdaptiveMediaImageException;
+import com.liferay.adaptive.media.image.exception.DuplicateAdaptiveMediaImageEntryException;
 import com.liferay.adaptive.media.image.internal.storage.ImageStorage;
-import com.liferay.adaptive.media.image.model.AdaptiveMediaImage;
-import com.liferay.adaptive.media.image.service.base.AdaptiveMediaImageLocalServiceBaseImpl;
+import com.liferay.adaptive.media.image.model.AdaptiveMediaImageEntry;
+import com.liferay.adaptive.media.image.service.base.AdaptiveMediaImageEntryLocalServiceBaseImpl;
 import com.liferay.document.library.kernel.exception.NoSuchFileVersionException;
 import com.liferay.document.library.kernel.service.DLAppLocalService;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMap;
@@ -46,11 +46,11 @@ import org.osgi.framework.FrameworkUtil;
  * @author Sergio González
  */
 @ProviderType
-public class AdaptiveMediaImageLocalServiceImpl
-	extends AdaptiveMediaImageLocalServiceBaseImpl {
+public class AdaptiveMediaImageEntryLocalServiceImpl
+	extends AdaptiveMediaImageEntryLocalServiceBaseImpl {
 
 	@Override
-	public AdaptiveMediaImage addAdaptiveMediaImage(
+	public AdaptiveMediaImageEntry addAdaptiveMediaImageEntry(
 			ImageAdaptiveMediaConfigurationEntry configurationEntry,
 			FileVersion fileVersion, int width, int height,
 			InputStream inputStream, int size)
@@ -59,24 +59,24 @@ public class AdaptiveMediaImageLocalServiceImpl
 		_checkDuplicates(
 			configurationEntry.getUUID(), fileVersion.getFileVersionId());
 
-		long imageId = counterLocalService.increment();
+		long imageEntryId = counterLocalService.increment();
 
-		AdaptiveMediaImage image = adaptiveMediaImagePersistence.create(
-			imageId);
+		AdaptiveMediaImageEntry imageEntry =
+			adaptiveMediaImageEntryPersistence.create(imageEntryId);
 
-		image.setCompanyId(fileVersion.getCompanyId());
-		image.setGroupId(fileVersion.getGroupId());
-		image.setCreateDate(new Date());
-		image.setFileVersionId(fileVersion.getFileVersionId());
-		image.setMimeType(fileVersion.getMimeType());
-		image.setHeight(height);
-		image.setWidth(width);
-		image.setSize(size);
-		image.setConfigurationUuid(configurationEntry.getUUID());
+		imageEntry.setCompanyId(fileVersion.getCompanyId());
+		imageEntry.setGroupId(fileVersion.getGroupId());
+		imageEntry.setCreateDate(new Date());
+		imageEntry.setFileVersionId(fileVersion.getFileVersionId());
+		imageEntry.setMimeType(fileVersion.getMimeType());
+		imageEntry.setHeight(height);
+		imageEntry.setWidth(width);
+		imageEntry.setSize(size);
+		imageEntry.setConfigurationUuid(configurationEntry.getUUID());
 
 		imageStorage.save(fileVersion, configurationEntry, inputStream);
 
-		return adaptiveMediaImagePersistence.update(image);
+		return adaptiveMediaImageEntryPersistence.update(imageEntry);
 	}
 
 	@Override
@@ -84,7 +84,7 @@ public class AdaptiveMediaImageLocalServiceImpl
 		super.afterPropertiesSet();
 
 		Bundle bundle = FrameworkUtil.getBundle(
-			AdaptiveMediaImageLocalServiceImpl.class);
+			AdaptiveMediaImageEntryLocalServiceImpl.class);
 
 		BundleContext bundleContext = bundle.getBundleContext();
 
@@ -94,14 +94,15 @@ public class AdaptiveMediaImageLocalServiceImpl
 	}
 
 	@Override
-	public void deleteAdaptiveMediaImageFileVersion(long fileVersionId)
+	public void deleteAdaptiveMediaImageEntryFileVersion(long fileVersionId)
 		throws PortalException {
 
-		List<AdaptiveMediaImage> images =
-			adaptiveMediaImagePersistence.findByFileVersionId(fileVersionId);
+		List<AdaptiveMediaImageEntry> imageEntries =
+			adaptiveMediaImageEntryPersistence.findByFileVersionId(
+				fileVersionId);
 
-		for (AdaptiveMediaImage image : images) {
-			adaptiveMediaImagePersistence.remove(image);
+		for (AdaptiveMediaImageEntry imageEntry : imageEntries) {
+			adaptiveMediaImageEntryPersistence.remove(imageEntry);
 		}
 
 		try {
@@ -112,7 +113,7 @@ public class AdaptiveMediaImageLocalServiceImpl
 		}
 		catch (NoSuchFileVersionException nsfve) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Deleted stale AdaptiveMediaImage", nsfve);
+				_log.warn("Deleted stale AdaptiveMediaImageEntry", nsfve);
 			}
 		}
 	}
@@ -125,15 +126,23 @@ public class AdaptiveMediaImageLocalServiceImpl
 	}
 
 	@Override
-	public AdaptiveMediaImage fetchAdaptiveMediaImage(
+	public AdaptiveMediaImageEntry fetchAdaptiveMediaImageEntry(
 		String configurationUuid, long fileVersionId) {
 
-		return adaptiveMediaImagePersistence.fetchByC_F(
+		return adaptiveMediaImageEntryPersistence.fetchByC_F(
 			configurationUuid, fileVersionId);
 	}
 
 	@Override
-	public InputStream getAdaptiveMediaImageContentStream(
+	public int getAdaptiveMediaImageEntriesCount(
+		long companyId, String configurationUuid) {
+
+		return adaptiveMediaImageEntryPersistence.countByC_C(
+			companyId, configurationUuid);
+	}
+
+	@Override
+	public InputStream getAdaptiveMediaImageEntryContentStream(
 		ImageAdaptiveMediaConfigurationEntry configurationEntry,
 		FileVersion fileVersion) {
 
@@ -141,34 +150,23 @@ public class AdaptiveMediaImageLocalServiceImpl
 	}
 
 	@Override
-	public int getAdaptiveMediaImagesCount(
-		long companyId, String configurationUuid) {
-
-		return adaptiveMediaImagePersistence.countByC_C(
-			companyId, configurationUuid);
-	}
-
-	@Override
 	public int getPercentage(final long companyId, String configurationUuid) {
-		Collection<AdaptiveMediaImageCounter> adaptiveMediaImageCounters =
+		Collection<AdaptiveMediaImageCounter> imageCounters =
 			_serviceTrackerMap.values();
 
-		int expectedAdaptiveMediaImages =
-			adaptiveMediaImageCounters.stream().mapToInt(
-				adaptiveMediaImageCounter ->
-					adaptiveMediaImageCounter.countExpectedAdaptiveMediaImages(
-						companyId)).sum();
+		int expectedImageEntries = imageCounters.stream().mapToInt(
+			adaptiveMediaImageCounter ->
+				adaptiveMediaImageCounter.
+					countExpectedAdaptiveMediaImageEntries(companyId)).sum();
 
-		int actualAdaptiveMediaImages =
-			adaptiveMediaImagePersistence.countByC_C(
-				companyId, configurationUuid);
+		int actualImageEntries = adaptiveMediaImageEntryPersistence.countByC_C(
+			companyId, configurationUuid);
 
-		if (expectedAdaptiveMediaImages == 0) {
+		if (expectedImageEntries == 0) {
 			return 0;
 		}
 
-		return Math.min(
-			actualAdaptiveMediaImages * 100 / expectedAdaptiveMediaImages, 100);
+		return Math.min(actualImageEntries * 100 / expectedImageEntries, 100);
 	}
 
 	@ServiceReference(type = DLAppLocalService.class)
@@ -178,19 +176,19 @@ public class AdaptiveMediaImageLocalServiceImpl
 	protected ImageStorage imageStorage;
 
 	private void _checkDuplicates(String configurationUuid, long fileVersionId)
-		throws DuplicateAdaptiveMediaImageException {
+		throws DuplicateAdaptiveMediaImageEntryException {
 
-		AdaptiveMediaImage adaptiveMediaImage =
-			adaptiveMediaImagePersistence.fetchByC_F(
+		AdaptiveMediaImageEntry imageEntry =
+			adaptiveMediaImageEntryPersistence.fetchByC_F(
 				configurationUuid, fileVersionId);
 
-		if (adaptiveMediaImage != null) {
-			throw new DuplicateAdaptiveMediaImageException();
+		if (imageEntry != null) {
+			throw new DuplicateAdaptiveMediaImageEntryException();
 		}
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		AdaptiveMediaImageLocalServiceImpl.class);
+		AdaptiveMediaImageEntryLocalServiceImpl.class);
 
 	private ServiceTrackerMap<String, AdaptiveMediaImageCounter>
 		_serviceTrackerMap;

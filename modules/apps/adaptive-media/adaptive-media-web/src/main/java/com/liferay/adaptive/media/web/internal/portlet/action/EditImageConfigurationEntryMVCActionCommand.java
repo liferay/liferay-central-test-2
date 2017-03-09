@@ -17,7 +17,7 @@ package com.liferay.adaptive.media.web.internal.portlet.action;
 import com.liferay.adaptive.media.ImageAdaptiveMediaConfigurationException;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
-import com.liferay.adaptive.media.image.service.AdaptiveMediaImageLocalService;
+import com.liferay.adaptive.media.image.service.AdaptiveMediaImageEntryLocalService;
 import com.liferay.adaptive.media.web.constants.AdaptiveMediaPortletKeys;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.servlet.SessionErrors;
@@ -190,11 +190,11 @@ public class EditImageConfigurationEntryMVCActionCommand
 		long companyId,
 		ImageAdaptiveMediaConfigurationEntry configurationEntry) {
 
-		int adaptiveMediaImagesCount =
-			_imageLocalService.getAdaptiveMediaImagesCount(
+		int imageEntriesCount =
+			_imageEntryLocalService.getAdaptiveMediaImageEntriesCount(
 				companyId, configurationEntry.getUUID());
 
-		if (adaptiveMediaImagesCount == 0) {
+		if (imageEntriesCount == 0) {
 			return true;
 		}
 
@@ -205,6 +205,6 @@ public class EditImageConfigurationEntryMVCActionCommand
 		_imageAdaptiveMediaConfigurationHelper;
 
 	@Reference
-	private AdaptiveMediaImageLocalService _imageLocalService;
+	private AdaptiveMediaImageEntryLocalService _imageEntryLocalService;
 
 }

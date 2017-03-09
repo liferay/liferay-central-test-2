@@ -21,7 +21,6 @@ import com.liferay.adaptive.media.image.constants.ImageAdaptiveMediaConstants;
 import com.liferay.adaptive.media.image.counter.AdaptiveMediaImageCounter;
 import com.liferay.adaptive.media.image.optimizer.AdaptiveMediaImageOptimizer;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
-import com.liferay.adaptive.media.image.service.AdaptiveMediaImageLocalService;
 import com.liferay.adaptive.media.web.constants.OptimizeImagesBackgroundTaskConstants;
 import com.liferay.document.library.kernel.model.DLFileEntry;
 import com.liferay.document.library.kernel.service.DLFileEntryLocalService;
@@ -63,7 +62,7 @@ public class DLAdaptiveMediaImageOptimizer
 				companyId);
 
 		int total =
-			_counter.countExpectedAdaptiveMediaImages(companyId) *
+			_counter.countExpectedAdaptiveMediaImageEntries(companyId) *
 				configurationEntries.size();
 
 		final AtomicInteger atomicCounter = new AtomicInteger(0);
@@ -78,7 +77,7 @@ public class DLAdaptiveMediaImageOptimizer
 
 	@Override
 	public void optimize(long companyId, String configurationEntryUuid) {
-		int total = _counter.countExpectedAdaptiveMediaImages(companyId);
+		int total = _counter.countExpectedAdaptiveMediaImageEntries(companyId);
 
 		final AtomicInteger atomiCounter = new AtomicInteger(0);
 
@@ -193,9 +192,6 @@ public class DLAdaptiveMediaImageOptimizer
 
 	@Reference
 	private DLFileEntryLocalService _dlFileEntryLocalService;
-
-	@Reference
-	private AdaptiveMediaImageLocalService _imageService;
 
 	@Reference
 	private ImageAdaptiveMediaProcessor _processor;

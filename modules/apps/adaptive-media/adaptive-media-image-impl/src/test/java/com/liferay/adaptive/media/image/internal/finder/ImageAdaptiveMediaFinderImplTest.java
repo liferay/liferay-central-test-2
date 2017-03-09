@@ -24,10 +24,10 @@ import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigur
 import com.liferay.adaptive.media.image.finder.ImageAdaptiveMediaQueryBuilder;
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationEntryImpl;
 import com.liferay.adaptive.media.image.internal.util.ImageProcessor;
-import com.liferay.adaptive.media.image.model.AdaptiveMediaImage;
+import com.liferay.adaptive.media.image.model.AdaptiveMediaImageEntry;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaAttribute;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
-import com.liferay.adaptive.media.image.service.AdaptiveMediaImageLocalService;
+import com.liferay.adaptive.media.image.service.AdaptiveMediaImageEntryLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
@@ -61,7 +61,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 		_finder.setAdaptiveMediaURIResolver(_uriResolver);
 		_finder.setImageAdaptiveMediaConfigurationHelper(_configurationHelper);
 		_finder.setImageProcessor(_imageProcessor);
-		_finder.setAdaptiveMediaImageLocalService(_imageLocalService);
+		_finder.setAdaptiveMediaImageEntryLocalService(_imageEntryLocalService);
 	}
 
 	@Test(expected = PortalException.class)
@@ -140,13 +140,13 @@ public class ImageAdaptiveMediaFinderImplTest {
 			"image/jpeg"
 		);
 
-		AdaptiveMediaImage image = _mockImage(800, 900, 1000L);
+		AdaptiveMediaImageEntry imageEntry = _mockImage(800, 900, 1000L);
 
 		Mockito.when(
-			_imageLocalService.fetchAdaptiveMediaImage(
+			_imageEntryLocalService.fetchAdaptiveMediaImageEntry(
 				configurationEntry.getUUID(), _fileVersion.getFileVersionId())
 		).thenReturn(
-			image
+			imageEntry
 		);
 
 		Mockito.when(
@@ -194,13 +194,13 @@ public class ImageAdaptiveMediaFinderImplTest {
 			"image/jpeg"
 		);
 
-		AdaptiveMediaImage image = _mockImage(99, 199, 1000L);
+		AdaptiveMediaImageEntry imageEntry = _mockImage(99, 199, 1000L);
 
 		Mockito.when(
-			_imageLocalService.fetchAdaptiveMediaImage(
+			_imageEntryLocalService.fetchAdaptiveMediaImageEntry(
 				configurationEntry.getUUID(), _fileVersion.getFileVersionId())
 		).thenReturn(
-			image
+			imageEntry
 		);
 
 		Mockito.when(
@@ -277,31 +277,31 @@ public class ImageAdaptiveMediaFinderImplTest {
 			"image/jpeg"
 		);
 
-		AdaptiveMediaImage image1 = _mockImage(99, 199, 1000L);
+		AdaptiveMediaImageEntry imageEntry1 = _mockImage(99, 199, 1000L);
 
 		Mockito.when(
-			_imageLocalService.fetchAdaptiveMediaImage(
+			_imageEntryLocalService.fetchAdaptiveMediaImageEntry(
 				configurationEntry1.getUUID(), _fileVersion.getFileVersionId())
 		).thenReturn(
-			image1
+			imageEntry1
 		);
 
-		AdaptiveMediaImage image2 = _mockImage(99, 799, 1000L);
+		AdaptiveMediaImageEntry imageEntry2 = _mockImage(99, 799, 1000L);
 
 		Mockito.when(
-			_imageLocalService.fetchAdaptiveMediaImage(
+			_imageEntryLocalService.fetchAdaptiveMediaImageEntry(
 				configurationEntry2.getUUID(), _fileVersion.getFileVersionId())
 		).thenReturn(
-			image2
+			imageEntry2
 		);
 
-		AdaptiveMediaImage image3 = _mockImage(99, 399, 1000L);
+		AdaptiveMediaImageEntry imageEntry3 = _mockImage(99, 399, 1000L);
 
 		Mockito.when(
-			_imageLocalService.fetchAdaptiveMediaImage(
+			_imageEntryLocalService.fetchAdaptiveMediaImageEntry(
 				configurationEntry3.getUUID(), _fileVersion.getFileVersionId())
 		).thenReturn(
-			image3
+			imageEntry3
 		);
 
 		Mockito.when(
@@ -390,31 +390,31 @@ public class ImageAdaptiveMediaFinderImplTest {
 			"image/jpeg"
 		);
 
-		AdaptiveMediaImage image1 = _mockImage(99, 199, 1000L);
+		AdaptiveMediaImageEntry imageEntry1 = _mockImage(99, 199, 1000L);
 
 		Mockito.when(
-			_imageLocalService.fetchAdaptiveMediaImage(
+			_imageEntryLocalService.fetchAdaptiveMediaImageEntry(
 				configurationEntry1.getUUID(), _fileVersion.getFileVersionId())
 		).thenReturn(
-			image1
+			imageEntry1
 		);
 
-		AdaptiveMediaImage image2 = _mockImage(99, 799, 1000L);
+		AdaptiveMediaImageEntry imageEntry2 = _mockImage(99, 799, 1000L);
 
 		Mockito.when(
-			_imageLocalService.fetchAdaptiveMediaImage(
+			_imageEntryLocalService.fetchAdaptiveMediaImageEntry(
 				configurationEntry2.getUUID(), _fileVersion.getFileVersionId())
 		).thenReturn(
-			image2
+			imageEntry2
 		);
 
-		AdaptiveMediaImage image3 = _mockImage(99, 399, 1000L);
+		AdaptiveMediaImageEntry imageEntry3 = _mockImage(99, 399, 1000L);
 
 		Mockito.when(
-			_imageLocalService.fetchAdaptiveMediaImage(
+			_imageEntryLocalService.fetchAdaptiveMediaImageEntry(
 				configurationEntry3.getUUID(), _fileVersion.getFileVersionId())
 		).thenReturn(
-			image3
+			imageEntry3
 		);
 
 		Mockito.when(
@@ -524,13 +524,13 @@ public class ImageAdaptiveMediaFinderImplTest {
 			"image/jpeg"
 		);
 
-		AdaptiveMediaImage image = _mockImage(800, 900, 1000L);
+		AdaptiveMediaImageEntry imageEntry = _mockImage(800, 900, 1000L);
 
 		Mockito.when(
-			_imageLocalService.fetchAdaptiveMediaImage(
+			_imageEntryLocalService.fetchAdaptiveMediaImageEntry(
 				configurationEntry.getUUID(), _fileVersion.getFileVersionId())
 		).thenReturn(
-			image
+			imageEntry
 		);
 
 		Mockito.when(
@@ -542,7 +542,7 @@ public class ImageAdaptiveMediaFinderImplTest {
 		InputStream inputStream = Mockito.mock(InputStream.class);
 
 		Mockito.when(
-			_imageLocalService.getAdaptiveMediaImageContentStream(
+			_imageEntryLocalService.getAdaptiveMediaImageEntryContentStream(
 				configurationEntry, _fileVersion)
 		).thenReturn(
 			inputStream
@@ -596,13 +596,13 @@ public class ImageAdaptiveMediaFinderImplTest {
 			"image/jpeg"
 		);
 
-		AdaptiveMediaImage image = _mockImage(99, 1000, 1000L);
+		AdaptiveMediaImageEntry imageEntry = _mockImage(99, 1000, 1000L);
 
 		Mockito.when(
-			_imageLocalService.fetchAdaptiveMediaImage(
+			_imageEntryLocalService.fetchAdaptiveMediaImageEntry(
 				configurationEntry.getUUID(), _fileVersion.getFileVersionId())
 		).thenReturn(
-			image
+			imageEntry
 		);
 
 		Mockito.when(
@@ -672,22 +672,22 @@ public class ImageAdaptiveMediaFinderImplTest {
 			"image/jpeg"
 		);
 
-		AdaptiveMediaImage image1 = _mockImage(99, 199, 1000L);
+		AdaptiveMediaImageEntry imageEntry1 = _mockImage(99, 199, 1000L);
 
 		Mockito.when(
-			_imageLocalService.fetchAdaptiveMediaImage(
+			_imageEntryLocalService.fetchAdaptiveMediaImageEntry(
 				configurationEntry1.getUUID(), _fileVersion.getFileVersionId())
 		).thenReturn(
-			image1
+			imageEntry1
 		);
 
-		AdaptiveMediaImage image2 = _mockImage(199, 199, 1000L);
+		AdaptiveMediaImageEntry imageEntry2 = _mockImage(199, 199, 1000L);
 
 		Mockito.when(
-			_imageLocalService.fetchAdaptiveMediaImage(
+			_imageEntryLocalService.fetchAdaptiveMediaImageEntry(
 				configurationEntry2.getUUID(), _fileVersion.getFileVersionId())
 		).thenReturn(
-			image2
+			imageEntry2
 		);
 
 		Mockito.when(
@@ -760,22 +760,22 @@ public class ImageAdaptiveMediaFinderImplTest {
 			"image/jpeg"
 		);
 
-		AdaptiveMediaImage image1 = _mockImage(99, 199, 1000L);
+		AdaptiveMediaImageEntry imageEntry1 = _mockImage(99, 199, 1000L);
 
 		Mockito.when(
-			_imageLocalService.fetchAdaptiveMediaImage(
+			_imageEntryLocalService.fetchAdaptiveMediaImageEntry(
 				configurationEntry1.getUUID(), _fileVersion.getFileVersionId())
 		).thenReturn(
-			image1
+			imageEntry1
 		);
 
-		AdaptiveMediaImage image2 = _mockImage(199, 199, 1000L);
+		AdaptiveMediaImageEntry imageEntry2 = _mockImage(199, 199, 1000L);
 
 		Mockito.when(
-			_imageLocalService.fetchAdaptiveMediaImage(
+			_imageEntryLocalService.fetchAdaptiveMediaImageEntry(
 				configurationEntry2.getUUID(), _fileVersion.getFileVersionId())
 		).thenReturn(
-			image2
+			imageEntry2
 		);
 
 		Mockito.when(
@@ -848,22 +848,22 @@ public class ImageAdaptiveMediaFinderImplTest {
 			"image/jpeg"
 		);
 
-		AdaptiveMediaImage image1 = _mockImage(99, 199, 1000L);
+		AdaptiveMediaImageEntry imageEntry1 = _mockImage(99, 199, 1000L);
 
 		Mockito.when(
-			_imageLocalService.fetchAdaptiveMediaImage(
+			_imageEntryLocalService.fetchAdaptiveMediaImageEntry(
 				configurationEntry1.getUUID(), _fileVersion.getFileVersionId())
 		).thenReturn(
-			image1
+			imageEntry1
 		);
 
-		AdaptiveMediaImage image2 = _mockImage(55, 99, 1000L);
+		AdaptiveMediaImageEntry imageEntry2 = _mockImage(55, 99, 1000L);
 
 		Mockito.when(
-			_imageLocalService.fetchAdaptiveMediaImage(
+			_imageEntryLocalService.fetchAdaptiveMediaImageEntry(
 				configurationEntry2.getUUID(), _fileVersion.getFileVersionId())
 		).thenReturn(
-			image2
+			imageEntry2
 		);
 
 		Mockito.when(
@@ -936,22 +936,22 @@ public class ImageAdaptiveMediaFinderImplTest {
 			"image/jpeg"
 		);
 
-		AdaptiveMediaImage image1 = _mockImage(99, 199, 1000L);
+		AdaptiveMediaImageEntry imageEntry1 = _mockImage(99, 199, 1000L);
 
 		Mockito.when(
-			_imageLocalService.fetchAdaptiveMediaImage(
+			_imageEntryLocalService.fetchAdaptiveMediaImageEntry(
 				configurationEntry1.getUUID(), _fileVersion.getFileVersionId())
 		).thenReturn(
-			image1
+			imageEntry1
 		);
 
-		AdaptiveMediaImage image2 = _mockImage(199, 199, 1000L);
+		AdaptiveMediaImageEntry imageEntry2 = _mockImage(199, 199, 1000L);
 
 		Mockito.when(
-			_imageLocalService.fetchAdaptiveMediaImage(
+			_imageEntryLocalService.fetchAdaptiveMediaImageEntry(
 				configurationEntry2.getUUID(), _fileVersion.getFileVersionId())
 		).thenReturn(
-			image2
+			imageEntry2
 		);
 
 		Mockito.when(
@@ -1037,22 +1037,22 @@ public class ImageAdaptiveMediaFinderImplTest {
 			"image/jpeg"
 		);
 
-		AdaptiveMediaImage image1 = _mockImage(99, 199, 1000L);
+		AdaptiveMediaImageEntry imageEntry1 = _mockImage(99, 199, 1000L);
 
 		Mockito.when(
-			_imageLocalService.fetchAdaptiveMediaImage(
+			_imageEntryLocalService.fetchAdaptiveMediaImageEntry(
 				configurationEntry1.getUUID(), _fileVersion.getFileVersionId())
 		).thenReturn(
-			image1
+			imageEntry1
 		);
 
-		AdaptiveMediaImage image2 = _mockImage(199, 199, 1000L);
+		AdaptiveMediaImageEntry imageEntry2 = _mockImage(199, 199, 1000L);
 
 		Mockito.when(
-			_imageLocalService.fetchAdaptiveMediaImage(
+			_imageEntryLocalService.fetchAdaptiveMediaImageEntry(
 				configurationEntry2.getUUID(), _fileVersion.getFileVersionId())
 		).thenReturn(
-			image2
+			imageEntry2
 		);
 
 		Mockito.when(
@@ -1179,19 +1179,19 @@ public class ImageAdaptiveMediaFinderImplTest {
 			"image/jpeg"
 		);
 
-		AdaptiveMediaImage image1 = _mockImage(100, 1000, 1000L);
+		AdaptiveMediaImageEntry imageEntry1 = _mockImage(100, 1000, 1000L);
 
 		Mockito.when(
-			_imageLocalService.fetchAdaptiveMediaImage(
+			_imageEntryLocalService.fetchAdaptiveMediaImageEntry(
 				configurationEntry1.getUUID(), _fileVersion.getFileVersionId())
 		).thenReturn(
-			image1
+			imageEntry1
 		);
 
-		AdaptiveMediaImage image2 = _mockImage(200, 1000, 1000L);
+		AdaptiveMediaImageEntry image2 = _mockImage(200, 1000, 1000L);
 
 		Mockito.when(
-			_imageLocalService.fetchAdaptiveMediaImage(
+			_imageEntryLocalService.fetchAdaptiveMediaImageEntry(
 				configurationEntry2.getUUID(), _fileVersion.getFileVersionId())
 		).thenReturn(
 			image2
@@ -1301,19 +1301,19 @@ public class ImageAdaptiveMediaFinderImplTest {
 			"image/jpeg"
 		);
 
-		AdaptiveMediaImage image1 = _mockImage(99, 1000, 1000L);
+		AdaptiveMediaImageEntry imageEntry1 = _mockImage(99, 1000, 1000L);
 
 		Mockito.when(
-			_imageLocalService.fetchAdaptiveMediaImage(
+			_imageEntryLocalService.fetchAdaptiveMediaImageEntry(
 				configurationEntry1.getUUID(), _fileVersion.getFileVersionId())
 		).thenReturn(
-			image1
+			imageEntry1
 		);
 
-		AdaptiveMediaImage image2 = _mockImage(199, 1000, 1000L);
+		AdaptiveMediaImageEntry image2 = _mockImage(199, 1000, 1000L);
 
 		Mockito.when(
-			_imageLocalService.fetchAdaptiveMediaImage(
+			_imageEntryLocalService.fetchAdaptiveMediaImageEntry(
 				configurationEntry2.getUUID(), _fileVersion.getFileVersionId())
 		).thenReturn(
 			image2
@@ -1410,13 +1410,13 @@ public class ImageAdaptiveMediaFinderImplTest {
 			"image/jpeg"
 		);
 
-		AdaptiveMediaImage image = _mockImage(99, 99, 1000L);
+		AdaptiveMediaImageEntry imageEntry = _mockImage(99, 99, 1000L);
 
 		Mockito.when(
-			_imageLocalService.fetchAdaptiveMediaImage(
+			_imageEntryLocalService.fetchAdaptiveMediaImageEntry(
 				configurationEntry.getUUID(), _fileVersion.getFileVersionId())
 		).thenReturn(
-			image
+			imageEntry
 		);
 
 		Mockito.when(
@@ -1439,34 +1439,37 @@ public class ImageAdaptiveMediaFinderImplTest {
 		adaptiveMedia.getInputStream();
 
 		Mockito.verify(
-			_imageLocalService
-		).getAdaptiveMediaImageContentStream(
+			_imageEntryLocalService
+		).getAdaptiveMediaImageEntryContentStream(
 			configurationEntry, _fileVersion
 		);
 	}
 
-	private AdaptiveMediaImage _mockImage(int height, int width, long size) {
-		AdaptiveMediaImage image = Mockito.mock(AdaptiveMediaImage.class);
+	private AdaptiveMediaImageEntry _mockImage(
+		int height, int width, long size) {
+
+		AdaptiveMediaImageEntry imageEntry = Mockito.mock(
+			AdaptiveMediaImageEntry.class);
 
 		Mockito.when(
-			image.getHeight()
+			imageEntry.getHeight()
 		).thenReturn(
 			height
 		);
 
 		Mockito.when(
-			image.getWidth()
+			imageEntry.getWidth()
 		).thenReturn(
 			width
 		);
 
 		Mockito.when(
-			image.getSize()
+			imageEntry.getSize()
 		).thenReturn(
 			size
 		);
 
-		return image;
+		return imageEntry;
 	}
 
 	private final ImageAdaptiveMediaConfigurationHelper _configurationHelper =
@@ -1475,8 +1478,8 @@ public class ImageAdaptiveMediaFinderImplTest {
 	private final FileVersion _fileVersion = Mockito.mock(FileVersion.class);
 	private final ImageAdaptiveMediaFinderImpl _finder =
 		new ImageAdaptiveMediaFinderImpl();
-	private final AdaptiveMediaImageLocalService _imageLocalService =
-		Mockito.mock(AdaptiveMediaImageLocalService.class);
+	private final AdaptiveMediaImageEntryLocalService _imageEntryLocalService =
+		Mockito.mock(AdaptiveMediaImageEntryLocalService.class);
 	private final ImageProcessor _imageProcessor = Mockito.mock(
 		ImageProcessor.class);
 	private final AdaptiveMediaURIResolver _uriResolver = Mockito.mock(

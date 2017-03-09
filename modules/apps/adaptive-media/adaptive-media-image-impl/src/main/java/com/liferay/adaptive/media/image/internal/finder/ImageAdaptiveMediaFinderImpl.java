@@ -27,10 +27,10 @@ import com.liferay.adaptive.media.image.finder.ImageAdaptiveMediaQueryBuilder;
 import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaAttributeMapping;
 import com.liferay.adaptive.media.image.internal.processor.ImageAdaptiveMedia;
 import com.liferay.adaptive.media.image.internal.util.ImageProcessor;
-import com.liferay.adaptive.media.image.model.AdaptiveMediaImage;
+import com.liferay.adaptive.media.image.model.AdaptiveMediaImageEntry;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaAttribute;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
-import com.liferay.adaptive.media.image.service.AdaptiveMediaImageLocalService;
+import com.liferay.adaptive.media.image.service.AdaptiveMediaImageEntryLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 
@@ -112,10 +112,10 @@ public class ImageAdaptiveMediaFinderImpl implements ImageAdaptiveMediaFinder {
 	}
 
 	@Reference(unbind = "-")
-	public void setAdaptiveMediaImageLocalService(
-		AdaptiveMediaImageLocalService imageLocalService) {
+	public void setAdaptiveMediaImageEntryLocalService(
+		AdaptiveMediaImageEntryLocalService imageEntryLocalService) {
 
-		_imageLocalService = imageLocalService;
+		_imageEntryLocalService = imageEntryLocalService;
 	}
 
 	@Reference(unbind = "-")
@@ -179,43 +179,46 @@ public class ImageAdaptiveMediaFinderImpl implements ImageAdaptiveMediaFinder {
 
 		properties.put(fileNameAttribute.getName(), fileVersion.getFileName());
 
-		AdaptiveMediaImage image = _imageLocalService.fetchAdaptiveMediaImage(
-			configurationEntry.getUUID(), fileVersion.getFileVersionId());
+		AdaptiveMediaImageEntry imageEntry =
+			_imageEntryLocalService.fetchAdaptiveMediaImageEntry(
+				configurationEntry.getUUID(), fileVersion.getFileVersionId());
 
-		if (image != null) {
+		if (imageEntry != null) {
 			AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, Integer>
 				imageHeightAttribute = ImageAdaptiveMediaAttribute.IMAGE_HEIGHT;
 
 			properties.put(
 				imageHeightAttribute.getName(),
-				String.valueOf(image.getHeight()));
+				String.valueOf(imageEntry.getHeight()));
 
 			AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, Integer>
 				imageWidthAttribute = ImageAdaptiveMediaAttribute.IMAGE_WIDTH;
 
 			properties.put(
 				imageWidthAttribute.getName(),
-				String.valueOf(image.getWidth()));
+				String.valueOf(imageEntry.getWidth()));
 
 			AdaptiveMediaAttribute<Object, String> contentTypeAttribute =
 				AdaptiveMediaAttribute.contentType();
 
-			properties.put(contentTypeAttribute.getName(), image.getMimeType());
+			properties.put(
+				contentTypeAttribute.getName(), imageEntry.getMimeType());
 
 			AdaptiveMediaAttribute<Object, Integer> contentLengthAttribute =
 				AdaptiveMediaAttribute.contentLength();
 
 			properties.put(
 				contentLengthAttribute.getName(),
-				String.valueOf(image.getSize()));
+				String.valueOf(imageEntry.getSize()));
 		}
 
 		ImageAdaptiveMediaAttributeMapping attributeMapping =
 			ImageAdaptiveMediaAttributeMapping.fromProperties(properties);
 
 		return new ImageAdaptiveMedia(
-			() -> _imageLocalService.getAdaptiveMediaImageContentStream(
-				configurationEntry, fileVersion),
+			() ->
+				_imageEntryLocalService.getAdaptiveMediaImageEntryContentStream(
+					configurationEntry, fileVersion),
 			attributeMapping,
 			uriFactory.apply(fileVersion, configurationEntry));
 	}
@@ -244,11 +247,11 @@ public class ImageAdaptiveMediaFinderImpl implements ImageAdaptiveMediaFinder {
 		FileVersion fileVersion,
 		ImageAdaptiveMediaConfigurationEntry configurationEntry) {
 
-		AdaptiveMediaImage adaptiveMediaImage =
-			_imageLocalService.fetchAdaptiveMediaImage(
+		AdaptiveMediaImageEntry imageEntry =
+			_imageEntryLocalService.fetchAdaptiveMediaImageEntry(
 				configurationEntry.getUUID(), fileVersion.getFileVersionId());
 
-		if (adaptiveMediaImage == null) {
+		if (imageEntry == null) {
 			return false;
 		}
 
@@ -256,7 +259,7 @@ public class ImageAdaptiveMediaFinderImpl implements ImageAdaptiveMediaFinder {
 	}
 
 	private ImageAdaptiveMediaConfigurationHelper _configurationHelper;
-	private AdaptiveMediaImageLocalService _imageLocalService;
+	private AdaptiveMediaImageEntryLocalService _imageEntryLocalService;
 	private ImageProcessor _imageProcessor;
 	private AdaptiveMediaURIResolver _uriResolver;
 

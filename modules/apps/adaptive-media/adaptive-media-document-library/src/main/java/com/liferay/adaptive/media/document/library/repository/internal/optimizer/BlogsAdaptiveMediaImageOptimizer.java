@@ -63,7 +63,7 @@ public class BlogsAdaptiveMediaImageOptimizer
 				companyId);
 
 		int total =
-			_counter.countExpectedAdaptiveMediaImages(companyId) *
+			_counter.countExpectedAdaptiveMediaImageEntries(companyId) *
 				configurationEntries.size();
 
 		final AtomicInteger atomicCounter = new AtomicInteger(0);
@@ -78,7 +78,7 @@ public class BlogsAdaptiveMediaImageOptimizer
 
 	@Override
 	public void optimize(long companyId, String configurationEntryUuid) {
-		int total = _counter.countExpectedAdaptiveMediaImages(companyId);
+		int total = _counter.countExpectedAdaptiveMediaImageEntries(companyId);
 
 		final AtomicInteger atomicCounter = new AtomicInteger(0);
 

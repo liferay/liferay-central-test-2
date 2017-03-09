@@ -130,7 +130,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 				/>
 
 				<%
-				int percentage = AdaptiveMediaImageLocalServiceUtil.getPercentage(themeDisplay.getCompanyId(), configurationEntry.getUUID());
+				int percentage = AdaptiveMediaImageEntryLocalServiceUtil.getPercentage(themeDisplay.getCompanyId(), configurationEntry.getUUID());
 				%>
 
 				<liferay-ui:search-container-column-text

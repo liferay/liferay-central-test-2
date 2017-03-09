@@ -19,8 +19,8 @@ import com.liferay.adaptive.media.document.library.thumbnails.internal.util.comp
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
 import com.liferay.adaptive.media.image.constants.ImageAdaptiveMediaConstants;
-import com.liferay.adaptive.media.image.model.AdaptiveMediaImage;
-import com.liferay.adaptive.media.image.service.AdaptiveMediaImageLocalService;
+import com.liferay.adaptive.media.image.model.AdaptiveMediaImageEntry;
+import com.liferay.adaptive.media.image.service.AdaptiveMediaImageEntryLocalService;
 import com.liferay.document.library.kernel.service.DLAppLocalService;
 import com.liferay.document.library.kernel.store.DLStoreUtil;
 import com.liferay.document.library.kernel.util.DLPreviewableProcessor;
@@ -230,12 +230,12 @@ public class AdaptiveMediaThumbnailsOSGiCommands {
 					continue;
 				}
 
-				AdaptiveMediaImage adaptiveMediaImage =
-					_imageLocalService.fetchAdaptiveMediaImage(
+				AdaptiveMediaImageEntry imageEntry =
+					_imageEntryLocalService.fetchAdaptiveMediaImageEntry(
 						configurationEntry.getUUID(),
 						fileVersion.getFileVersionId());
 
-				if (adaptiveMediaImage != null) {
+				if (imageEntry != null) {
 					continue;
 				}
 
@@ -252,7 +252,7 @@ public class AdaptiveMediaThumbnailsOSGiCommands {
 
 				RenderedImage renderedImage = imageBag.getRenderedImage();
 
-				_imageLocalService.addAdaptiveMediaImage(
+				_imageEntryLocalService.addAdaptiveMediaImageEntry(
 					configurationEntry, fileVersion, renderedImage.getWidth(),
 					renderedImage.getHeight(),
 					new UnsyncByteArrayInputStream(bytes), bytes.length);
@@ -279,6 +279,6 @@ public class AdaptiveMediaThumbnailsOSGiCommands {
 	private DLAppLocalService _dlAppLocalService;
 
 	@Reference
-	private AdaptiveMediaImageLocalService _imageLocalService;
+	private AdaptiveMediaImageEntryLocalService _imageEntryLocalService;
 
 }

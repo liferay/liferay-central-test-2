@@ -19,9 +19,9 @@ import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigur
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
 import com.liferay.adaptive.media.image.internal.util.ImageProcessor;
 import com.liferay.adaptive.media.image.internal.util.RenderedImageUtil;
-import com.liferay.adaptive.media.image.model.AdaptiveMediaImage;
+import com.liferay.adaptive.media.image.model.AdaptiveMediaImageEntry;
 import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
-import com.liferay.adaptive.media.image.service.AdaptiveMediaImageLocalService;
+import com.liferay.adaptive.media.image.service.AdaptiveMediaImageEntryLocalService;
 import com.liferay.adaptive.media.processor.AdaptiveMediaProcessor;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
@@ -56,7 +56,7 @@ public final class ImageAdaptiveMediaProcessorImpl
 				return;
 			}
 
-			_imageLocalService.deleteAdaptiveMediaImageFileVersion(
+			_imageEntryLocalService.deleteAdaptiveMediaImageEntryFileVersion(
 				fileVersion.getFileVersionId());
 		}
 		catch (PortalException pe) {
@@ -98,10 +98,11 @@ public final class ImageAdaptiveMediaProcessorImpl
 		ImageAdaptiveMediaConfigurationEntry configurationEntry =
 			configurationEntryOptional.get();
 
-		AdaptiveMediaImage image = _imageLocalService.fetchAdaptiveMediaImage(
-			configurationEntry.getUUID(), fileVersion.getFileVersionId());
+		AdaptiveMediaImageEntry imageEntry =
+			_imageEntryLocalService.fetchAdaptiveMediaImageEntry(
+				configurationEntry.getUUID(), fileVersion.getFileVersionId());
 
-		if (image != null) {
+		if (imageEntry != null) {
 			return;
 		}
 
@@ -112,7 +113,7 @@ public final class ImageAdaptiveMediaProcessorImpl
 			byte[] bytes = RenderedImageUtil.getRenderedImageContentStream(
 				renderedImage, fileVersion.getMimeType());
 
-			_imageLocalService.addAdaptiveMediaImage(
+			_imageEntryLocalService.addAdaptiveMediaImageEntry(
 				configurationEntry, fileVersion, renderedImage.getWidth(),
 				renderedImage.getHeight(),
 				new UnsyncByteArrayInputStream(bytes), bytes.length);
@@ -130,10 +131,10 @@ public final class ImageAdaptiveMediaProcessorImpl
 	}
 
 	@Reference(unbind = "-")
-	public void setImageLocalService(
-		AdaptiveMediaImageLocalService imageLocalService) {
+	public void setImageEntryLocalService(
+		AdaptiveMediaImageEntryLocalService imageEntryLocalService) {
 
-		_imageLocalService = imageLocalService;
+		_imageEntryLocalService = imageEntryLocalService;
 	}
 
 	@Reference(unbind = "-")
@@ -142,7 +143,7 @@ public final class ImageAdaptiveMediaProcessorImpl
 	}
 
 	private ImageAdaptiveMediaConfigurationHelper _configurationHelper;
-	private AdaptiveMediaImageLocalService _imageLocalService;
+	private AdaptiveMediaImageEntryLocalService _imageEntryLocalService;
 	private ImageProcessor _imageProcessor;
 
 }

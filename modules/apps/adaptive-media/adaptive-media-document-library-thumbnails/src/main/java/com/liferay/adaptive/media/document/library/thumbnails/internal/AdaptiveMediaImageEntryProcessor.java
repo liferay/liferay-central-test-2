@@ -47,9 +47,9 @@ import org.osgi.service.component.annotations.Reference;
  */
 @Component(
 	immediate = true, property = {"service.ranking:Integer=100"},
-	service = {AdaptiveMediaImageProcessor.class, DLProcessor.class}
+	service = {AdaptiveMediaImageEntryProcessor.class, DLProcessor.class}
 )
-public class AdaptiveMediaImageProcessor
+public class AdaptiveMediaImageEntryProcessor
 	implements DLProcessor, ImageProcessor {
 
 	@Override

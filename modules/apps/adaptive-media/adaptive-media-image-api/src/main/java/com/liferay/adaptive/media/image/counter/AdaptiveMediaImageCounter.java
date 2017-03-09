@@ -19,6 +19,6 @@ package com.liferay.adaptive.media.image.counter;
  */
 public interface AdaptiveMediaImageCounter {
 
-	public int countExpectedAdaptiveMediaImages(long companyId);
+	public int countExpectedAdaptiveMediaImageEntries(long companyId);
 
 }

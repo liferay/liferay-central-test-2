@@ -92,7 +92,7 @@ public class ImageAdaptiveMediaFileVersionResource {
 		Optional<AdaptiveMedia<ImageAdaptiveMediaProcessor>>
 			adaptiveMediaOptional = stream.findFirst();
 
-		_processAdaptiveMediaImage(adaptiveMediaOptional, id);
+		_processAdaptiveMediaImageEntry(adaptiveMediaOptional, id);
 
 		InputStream is = _getInputStream(adaptiveMediaOptional, original);
 
@@ -275,7 +275,7 @@ public class ImageAdaptiveMediaFileVersionResource {
 		return Stream.empty();
 	}
 
-	private void _processAdaptiveMediaImage(
+	private void _processAdaptiveMediaImageEntry(
 			Optional<AdaptiveMedia<ImageAdaptiveMediaProcessor>>
 				adaptiveMediaOptional,
 			String id)

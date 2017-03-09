@@ -20,9 +20,10 @@ import aQute.bnd.annotation.ProviderType;
  * @author Brian Wing Shun Chan
  */
 @ProviderType
-public class AdaptiveMediaImageImpl extends AdaptiveMediaImageBaseImpl {
+public class AdaptiveMediaImageEntryImpl
+	extends AdaptiveMediaImageEntryBaseImpl {
 
-	public AdaptiveMediaImageImpl() {
+	public AdaptiveMediaImageEntryImpl() {
 	}
 
 }

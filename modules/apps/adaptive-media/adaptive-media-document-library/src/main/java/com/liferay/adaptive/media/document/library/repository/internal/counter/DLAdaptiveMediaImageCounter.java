@@ -34,7 +34,7 @@ import org.osgi.service.component.annotations.Reference;
 public class DLAdaptiveMediaImageCounter implements AdaptiveMediaImageCounter {
 
 	@Override
-	public int countExpectedAdaptiveMediaImages(long companyId) {
+	public int countExpectedAdaptiveMediaImageEntries(long companyId) {
 		DynamicQuery dynamicQuery = _dlFileEntryLocalService.dynamicQuery();
 
 		Property companyIdProperty = PropertyFactoryUtil.forName("companyId");
