@@ -16,26 +16,28 @@ package com.liferay.adaptive.media.image.exception;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.portal.kernel.exception.NoSuchModelException;
+import com.liferay.portal.kernel.exception.PortalException;
 
 /**
  * @author Brian Wing Shun Chan
  */
 @ProviderType
-public class NoSuchAdaptiveMediaImageException extends NoSuchModelException {
+public class DuplicateAdaptiveMediaImageEntryException extends PortalException {
 
-	public NoSuchAdaptiveMediaImageException() {
+	public DuplicateAdaptiveMediaImageEntryException() {
 	}
 
-	public NoSuchAdaptiveMediaImageException(String msg) {
+	public DuplicateAdaptiveMediaImageEntryException(String msg) {
 		super(msg);
 	}
 
-	public NoSuchAdaptiveMediaImageException(String msg, Throwable cause) {
+	public DuplicateAdaptiveMediaImageEntryException(
+		String msg, Throwable cause) {
+
 		super(msg, cause);
 	}
 
-	public NoSuchAdaptiveMediaImageException(Throwable cause) {
+	public DuplicateAdaptiveMediaImageEntryException(Throwable cause) {
 		super(cause);
 	}
 

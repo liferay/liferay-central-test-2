@@ -30,28 +30,28 @@ import java.util.Objects;
 
 /**
  * <p>
- * This class is a wrapper for {@link AdaptiveMediaImage}.
+ * This class is a wrapper for {@link AdaptiveMediaImageEntry}.
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see AdaptiveMediaImage
+ * @see AdaptiveMediaImageEntry
  * @generated
  */
 @ProviderType
-public class AdaptiveMediaImageWrapper implements AdaptiveMediaImage,
-	ModelWrapper<AdaptiveMediaImage> {
-	public AdaptiveMediaImageWrapper(AdaptiveMediaImage adaptiveMediaImage) {
-		_adaptiveMediaImage = adaptiveMediaImage;
+public class AdaptiveMediaImageEntryWrapper implements AdaptiveMediaImageEntry,
+	ModelWrapper<AdaptiveMediaImageEntry> {
+	public AdaptiveMediaImageEntryWrapper(AdaptiveMediaImageEntry adaptiveMediaImageEntry) {
+		_adaptiveMediaImageEntry = adaptiveMediaImageEntry;
 	}
 
 	@Override
 	public Class<?> getModelClass() {
-		return AdaptiveMediaImage.class;
+		return AdaptiveMediaImageEntry.class;
 	}
 
 	@Override
 	public String getModelClassName() {
-		return AdaptiveMediaImage.class.getName();
+		return AdaptiveMediaImageEntry.class.getName();
 	}
 
 	@Override
@@ -59,7 +59,7 @@ public class AdaptiveMediaImageWrapper implements AdaptiveMediaImage,
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("uuid", getUuid());
-		attributes.put("adaptiveMediaImageId", getAdaptiveMediaImageId());
+		attributes.put("adaptiveMediaImageEntryId", getAdaptiveMediaImageEntryId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("createDate", getCreateDate());
@@ -81,10 +81,10 @@ public class AdaptiveMediaImageWrapper implements AdaptiveMediaImage,
 			setUuid(uuid);
 		}
 
-		Long adaptiveMediaImageId = (Long)attributes.get("adaptiveMediaImageId");
+		Long adaptiveMediaImageEntryId = (Long)attributes.get("adaptiveMediaImageEntryId");
 
-		if (adaptiveMediaImageId != null) {
-			setAdaptiveMediaImageId(adaptiveMediaImageId);
+		if (adaptiveMediaImageEntryId != null) {
+			setAdaptiveMediaImageEntryId(adaptiveMediaImageEntryId);
 		}
 
 		Long groupId = (Long)attributes.get("groupId");
@@ -143,43 +143,43 @@ public class AdaptiveMediaImageWrapper implements AdaptiveMediaImage,
 	}
 
 	@Override
-	public AdaptiveMediaImage toEscapedModel() {
-		return new AdaptiveMediaImageWrapper(_adaptiveMediaImage.toEscapedModel());
+	public AdaptiveMediaImageEntry toEscapedModel() {
+		return new AdaptiveMediaImageEntryWrapper(_adaptiveMediaImageEntry.toEscapedModel());
 	}
 
 	@Override
-	public AdaptiveMediaImage toUnescapedModel() {
-		return new AdaptiveMediaImageWrapper(_adaptiveMediaImage.toUnescapedModel());
+	public AdaptiveMediaImageEntry toUnescapedModel() {
+		return new AdaptiveMediaImageEntryWrapper(_adaptiveMediaImageEntry.toUnescapedModel());
 	}
 
 	@Override
 	public boolean isCachedModel() {
-		return _adaptiveMediaImage.isCachedModel();
+		return _adaptiveMediaImageEntry.isCachedModel();
 	}
 
 	@Override
 	public boolean isEscapedModel() {
-		return _adaptiveMediaImage.isEscapedModel();
+		return _adaptiveMediaImageEntry.isEscapedModel();
 	}
 
 	@Override
 	public boolean isNew() {
-		return _adaptiveMediaImage.isNew();
+		return _adaptiveMediaImageEntry.isNew();
 	}
 
 	@Override
 	public ExpandoBridge getExpandoBridge() {
-		return _adaptiveMediaImage.getExpandoBridge();
+		return _adaptiveMediaImageEntry.getExpandoBridge();
 	}
 
 	@Override
-	public com.liferay.portal.kernel.model.CacheModel<AdaptiveMediaImage> toCacheModel() {
-		return _adaptiveMediaImage.toCacheModel();
+	public com.liferay.portal.kernel.model.CacheModel<AdaptiveMediaImageEntry> toCacheModel() {
+		return _adaptiveMediaImageEntry.toCacheModel();
 	}
 
 	@Override
-	public int compareTo(AdaptiveMediaImage adaptiveMediaImage) {
-		return _adaptiveMediaImage.compareTo(adaptiveMediaImage);
+	public int compareTo(AdaptiveMediaImageEntry adaptiveMediaImageEntry) {
+		return _adaptiveMediaImageEntry.compareTo(adaptiveMediaImageEntry);
 	}
 
 	/**
@@ -189,7 +189,7 @@ public class AdaptiveMediaImageWrapper implements AdaptiveMediaImage,
 	*/
 	@Override
 	public int getHeight() {
-		return _adaptiveMediaImage.getHeight();
+		return _adaptiveMediaImageEntry.getHeight();
 	}
 
 	/**
@@ -199,22 +199,22 @@ public class AdaptiveMediaImageWrapper implements AdaptiveMediaImage,
 	*/
 	@Override
 	public int getWidth() {
-		return _adaptiveMediaImage.getWidth();
+		return _adaptiveMediaImageEntry.getWidth();
 	}
 
 	@Override
 	public int hashCode() {
-		return _adaptiveMediaImage.hashCode();
+		return _adaptiveMediaImageEntry.hashCode();
 	}
 
 	@Override
 	public Serializable getPrimaryKeyObj() {
-		return _adaptiveMediaImage.getPrimaryKeyObj();
+		return _adaptiveMediaImageEntry.getPrimaryKeyObj();
 	}
 
 	@Override
 	public java.lang.Object clone() {
-		return new AdaptiveMediaImageWrapper((AdaptiveMediaImage)_adaptiveMediaImage.clone());
+		return new AdaptiveMediaImageEntryWrapper((AdaptiveMediaImageEntry)_adaptiveMediaImageEntry.clone());
 	}
 
 	/**
@@ -224,7 +224,7 @@ public class AdaptiveMediaImageWrapper implements AdaptiveMediaImage,
 	*/
 	@Override
 	public java.lang.String getConfigurationUuid() {
-		return _adaptiveMediaImage.getConfigurationUuid();
+		return _adaptiveMediaImageEntry.getConfigurationUuid();
 	}
 
 	/**
@@ -234,7 +234,7 @@ public class AdaptiveMediaImageWrapper implements AdaptiveMediaImage,
 	*/
 	@Override
 	public java.lang.String getMimeType() {
-		return _adaptiveMediaImage.getMimeType();
+		return _adaptiveMediaImageEntry.getMimeType();
 	}
 
 	/**
@@ -244,17 +244,17 @@ public class AdaptiveMediaImageWrapper implements AdaptiveMediaImage,
 	*/
 	@Override
 	public java.lang.String getUuid() {
-		return _adaptiveMediaImage.getUuid();
+		return _adaptiveMediaImageEntry.getUuid();
 	}
 
 	@Override
 	public java.lang.String toString() {
-		return _adaptiveMediaImage.toString();
+		return _adaptiveMediaImageEntry.toString();
 	}
 
 	@Override
 	public java.lang.String toXmlString() {
-		return _adaptiveMediaImage.toXmlString();
+		return _adaptiveMediaImageEntry.toXmlString();
 	}
 
 	/**
@@ -264,7 +264,7 @@ public class AdaptiveMediaImageWrapper implements AdaptiveMediaImage,
 	*/
 	@Override
 	public Date getCreateDate() {
-		return _adaptiveMediaImage.getCreateDate();
+		return _adaptiveMediaImageEntry.getCreateDate();
 	}
 
 	/**
@@ -273,8 +273,8 @@ public class AdaptiveMediaImageWrapper implements AdaptiveMediaImage,
 	* @return the adaptive media image ID of this adaptive media image
 	*/
 	@Override
-	public long getAdaptiveMediaImageId() {
-		return _adaptiveMediaImage.getAdaptiveMediaImageId();
+	public long getAdaptiveMediaImageEntryId() {
+		return _adaptiveMediaImageEntry.getAdaptiveMediaImageEntryId();
 	}
 
 	/**
@@ -284,7 +284,7 @@ public class AdaptiveMediaImageWrapper implements AdaptiveMediaImage,
 	*/
 	@Override
 	public long getCompanyId() {
-		return _adaptiveMediaImage.getCompanyId();
+		return _adaptiveMediaImageEntry.getCompanyId();
 	}
 
 	/**
@@ -294,7 +294,7 @@ public class AdaptiveMediaImageWrapper implements AdaptiveMediaImage,
 	*/
 	@Override
 	public long getFileVersionId() {
-		return _adaptiveMediaImage.getFileVersionId();
+		return _adaptiveMediaImageEntry.getFileVersionId();
 	}
 
 	/**
@@ -304,7 +304,7 @@ public class AdaptiveMediaImageWrapper implements AdaptiveMediaImage,
 	*/
 	@Override
 	public long getGroupId() {
-		return _adaptiveMediaImage.getGroupId();
+		return _adaptiveMediaImageEntry.getGroupId();
 	}
 
 	/**
@@ -314,7 +314,7 @@ public class AdaptiveMediaImageWrapper implements AdaptiveMediaImage,
 	*/
 	@Override
 	public long getPrimaryKey() {
-		return _adaptiveMediaImage.getPrimaryKey();
+		return _adaptiveMediaImageEntry.getPrimaryKey();
 	}
 
 	/**
@@ -324,27 +324,27 @@ public class AdaptiveMediaImageWrapper implements AdaptiveMediaImage,
 	*/
 	@Override
 	public long getSize() {
-		return _adaptiveMediaImage.getSize();
+		return _adaptiveMediaImageEntry.getSize();
 	}
 
 	@Override
 	public void persist() {
-		_adaptiveMediaImage.persist();
+		_adaptiveMediaImageEntry.persist();
 	}
 
 	/**
 	* Sets the adaptive media image ID of this adaptive media image.
 	*
-	* @param adaptiveMediaImageId the adaptive media image ID of this adaptive media image
+	* @param adaptiveMediaImageEntryId the adaptive media image ID of this adaptive media image
 	*/
 	@Override
-	public void setAdaptiveMediaImageId(long adaptiveMediaImageId) {
-		_adaptiveMediaImage.setAdaptiveMediaImageId(adaptiveMediaImageId);
+	public void setAdaptiveMediaImageEntryId(long adaptiveMediaImageEntryId) {
+		_adaptiveMediaImageEntry.setAdaptiveMediaImageEntryId(adaptiveMediaImageEntryId);
 	}
 
 	@Override
 	public void setCachedModel(boolean cachedModel) {
-		_adaptiveMediaImage.setCachedModel(cachedModel);
+		_adaptiveMediaImageEntry.setCachedModel(cachedModel);
 	}
 
 	/**
@@ -354,7 +354,7 @@ public class AdaptiveMediaImageWrapper implements AdaptiveMediaImage,
 	*/
 	@Override
 	public void setCompanyId(long companyId) {
-		_adaptiveMediaImage.setCompanyId(companyId);
+		_adaptiveMediaImageEntry.setCompanyId(companyId);
 	}
 
 	/**
@@ -364,7 +364,7 @@ public class AdaptiveMediaImageWrapper implements AdaptiveMediaImage,
 	*/
 	@Override
 	public void setConfigurationUuid(java.lang.String configurationUuid) {
-		_adaptiveMediaImage.setConfigurationUuid(configurationUuid);
+		_adaptiveMediaImageEntry.setConfigurationUuid(configurationUuid);
 	}
 
 	/**
@@ -374,23 +374,23 @@ public class AdaptiveMediaImageWrapper implements AdaptiveMediaImage,
 	*/
 	@Override
 	public void setCreateDate(Date createDate) {
-		_adaptiveMediaImage.setCreateDate(createDate);
+		_adaptiveMediaImageEntry.setCreateDate(createDate);
 	}
 
 	@Override
 	public void setExpandoBridgeAttributes(ExpandoBridge expandoBridge) {
-		_adaptiveMediaImage.setExpandoBridgeAttributes(expandoBridge);
+		_adaptiveMediaImageEntry.setExpandoBridgeAttributes(expandoBridge);
 	}
 
 	@Override
 	public void setExpandoBridgeAttributes(
 		com.liferay.portal.kernel.model.BaseModel<?> baseModel) {
-		_adaptiveMediaImage.setExpandoBridgeAttributes(baseModel);
+		_adaptiveMediaImageEntry.setExpandoBridgeAttributes(baseModel);
 	}
 
 	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
-		_adaptiveMediaImage.setExpandoBridgeAttributes(serviceContext);
+		_adaptiveMediaImageEntry.setExpandoBridgeAttributes(serviceContext);
 	}
 
 	/**
@@ -400,7 +400,7 @@ public class AdaptiveMediaImageWrapper implements AdaptiveMediaImage,
 	*/
 	@Override
 	public void setFileVersionId(long fileVersionId) {
-		_adaptiveMediaImage.setFileVersionId(fileVersionId);
+		_adaptiveMediaImageEntry.setFileVersionId(fileVersionId);
 	}
 
 	/**
@@ -410,7 +410,7 @@ public class AdaptiveMediaImageWrapper implements AdaptiveMediaImage,
 	*/
 	@Override
 	public void setGroupId(long groupId) {
-		_adaptiveMediaImage.setGroupId(groupId);
+		_adaptiveMediaImageEntry.setGroupId(groupId);
 	}
 
 	/**
@@ -420,7 +420,7 @@ public class AdaptiveMediaImageWrapper implements AdaptiveMediaImage,
 	*/
 	@Override
 	public void setHeight(int height) {
-		_adaptiveMediaImage.setHeight(height);
+		_adaptiveMediaImageEntry.setHeight(height);
 	}
 
 	/**
@@ -430,12 +430,12 @@ public class AdaptiveMediaImageWrapper implements AdaptiveMediaImage,
 	*/
 	@Override
 	public void setMimeType(java.lang.String mimeType) {
-		_adaptiveMediaImage.setMimeType(mimeType);
+		_adaptiveMediaImageEntry.setMimeType(mimeType);
 	}
 
 	@Override
 	public void setNew(boolean n) {
-		_adaptiveMediaImage.setNew(n);
+		_adaptiveMediaImageEntry.setNew(n);
 	}
 
 	/**
@@ -445,12 +445,12 @@ public class AdaptiveMediaImageWrapper implements AdaptiveMediaImage,
 	*/
 	@Override
 	public void setPrimaryKey(long primaryKey) {
-		_adaptiveMediaImage.setPrimaryKey(primaryKey);
+		_adaptiveMediaImageEntry.setPrimaryKey(primaryKey);
 	}
 
 	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
-		_adaptiveMediaImage.setPrimaryKeyObj(primaryKeyObj);
+		_adaptiveMediaImageEntry.setPrimaryKeyObj(primaryKeyObj);
 	}
 
 	/**
@@ -460,7 +460,7 @@ public class AdaptiveMediaImageWrapper implements AdaptiveMediaImage,
 	*/
 	@Override
 	public void setSize(long size) {
-		_adaptiveMediaImage.setSize(size);
+		_adaptiveMediaImageEntry.setSize(size);
 	}
 
 	/**
@@ -470,7 +470,7 @@ public class AdaptiveMediaImageWrapper implements AdaptiveMediaImage,
 	*/
 	@Override
 	public void setUuid(java.lang.String uuid) {
-		_adaptiveMediaImage.setUuid(uuid);
+		_adaptiveMediaImageEntry.setUuid(uuid);
 	}
 
 	/**
@@ -480,7 +480,7 @@ public class AdaptiveMediaImageWrapper implements AdaptiveMediaImage,
 	*/
 	@Override
 	public void setWidth(int width) {
-		_adaptiveMediaImage.setWidth(width);
+		_adaptiveMediaImageEntry.setWidth(width);
 	}
 
 	@Override
@@ -489,14 +489,14 @@ public class AdaptiveMediaImageWrapper implements AdaptiveMediaImage,
 			return true;
 		}
 
-		if (!(obj instanceof AdaptiveMediaImageWrapper)) {
+		if (!(obj instanceof AdaptiveMediaImageEntryWrapper)) {
 			return false;
 		}
 
-		AdaptiveMediaImageWrapper adaptiveMediaImageWrapper = (AdaptiveMediaImageWrapper)obj;
+		AdaptiveMediaImageEntryWrapper adaptiveMediaImageEntryWrapper = (AdaptiveMediaImageEntryWrapper)obj;
 
-		if (Objects.equals(_adaptiveMediaImage,
-					adaptiveMediaImageWrapper._adaptiveMediaImage)) {
+		if (Objects.equals(_adaptiveMediaImageEntry,
+					adaptiveMediaImageEntryWrapper._adaptiveMediaImageEntry)) {
 			return true;
 		}
 
@@ -504,24 +504,24 @@ public class AdaptiveMediaImageWrapper implements AdaptiveMediaImage,
 	}
 
 	@Override
-	public AdaptiveMediaImage getWrappedModel() {
-		return _adaptiveMediaImage;
+	public AdaptiveMediaImageEntry getWrappedModel() {
+		return _adaptiveMediaImageEntry;
 	}
 
 	@Override
 	public boolean isEntityCacheEnabled() {
-		return _adaptiveMediaImage.isEntityCacheEnabled();
+		return _adaptiveMediaImageEntry.isEntityCacheEnabled();
 	}
 
 	@Override
 	public boolean isFinderCacheEnabled() {
-		return _adaptiveMediaImage.isFinderCacheEnabled();
+		return _adaptiveMediaImageEntry.isFinderCacheEnabled();
 	}
 
 	@Override
 	public void resetOriginalValues() {
-		_adaptiveMediaImage.resetOriginalValues();
+		_adaptiveMediaImageEntry.resetOriginalValues();
 	}
 
-	private final AdaptiveMediaImage _adaptiveMediaImage;
+	private final AdaptiveMediaImageEntry _adaptiveMediaImageEntry;
 }

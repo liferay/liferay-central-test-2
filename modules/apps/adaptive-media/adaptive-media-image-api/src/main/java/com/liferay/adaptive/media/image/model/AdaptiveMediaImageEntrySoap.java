@@ -29,12 +29,12 @@ import java.util.List;
  * @generated
  */
 @ProviderType
-public class AdaptiveMediaImageSoap implements Serializable {
-	public static AdaptiveMediaImageSoap toSoapModel(AdaptiveMediaImage model) {
-		AdaptiveMediaImageSoap soapModel = new AdaptiveMediaImageSoap();
+public class AdaptiveMediaImageEntrySoap implements Serializable {
+	public static AdaptiveMediaImageEntrySoap toSoapModel(AdaptiveMediaImageEntry model) {
+		AdaptiveMediaImageEntrySoap soapModel = new AdaptiveMediaImageEntrySoap();
 
 		soapModel.setUuid(model.getUuid());
-		soapModel.setAdaptiveMediaImageId(model.getAdaptiveMediaImageId());
+		soapModel.setAdaptiveMediaImageEntryId(model.getAdaptiveMediaImageEntryId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setCreateDate(model.getCreateDate());
@@ -48,9 +48,9 @@ public class AdaptiveMediaImageSoap implements Serializable {
 		return soapModel;
 	}
 
-	public static AdaptiveMediaImageSoap[] toSoapModels(
-		AdaptiveMediaImage[] models) {
-		AdaptiveMediaImageSoap[] soapModels = new AdaptiveMediaImageSoap[models.length];
+	public static AdaptiveMediaImageEntrySoap[] toSoapModels(
+		AdaptiveMediaImageEntry[] models) {
+		AdaptiveMediaImageEntrySoap[] soapModels = new AdaptiveMediaImageEntrySoap[models.length];
 
 		for (int i = 0; i < models.length; i++) {
 			soapModels[i] = toSoapModel(models[i]);
@@ -59,15 +59,15 @@ public class AdaptiveMediaImageSoap implements Serializable {
 		return soapModels;
 	}
 
-	public static AdaptiveMediaImageSoap[][] toSoapModels(
-		AdaptiveMediaImage[][] models) {
-		AdaptiveMediaImageSoap[][] soapModels = null;
+	public static AdaptiveMediaImageEntrySoap[][] toSoapModels(
+		AdaptiveMediaImageEntry[][] models) {
+		AdaptiveMediaImageEntrySoap[][] soapModels = null;
 
 		if (models.length > 0) {
-			soapModels = new AdaptiveMediaImageSoap[models.length][models[0].length];
+			soapModels = new AdaptiveMediaImageEntrySoap[models.length][models[0].length];
 		}
 		else {
-			soapModels = new AdaptiveMediaImageSoap[0][0];
+			soapModels = new AdaptiveMediaImageEntrySoap[0][0];
 		}
 
 		for (int i = 0; i < models.length; i++) {
@@ -77,26 +77,26 @@ public class AdaptiveMediaImageSoap implements Serializable {
 		return soapModels;
 	}
 
-	public static AdaptiveMediaImageSoap[] toSoapModels(
-		List<AdaptiveMediaImage> models) {
-		List<AdaptiveMediaImageSoap> soapModels = new ArrayList<AdaptiveMediaImageSoap>(models.size());
+	public static AdaptiveMediaImageEntrySoap[] toSoapModels(
+		List<AdaptiveMediaImageEntry> models) {
+		List<AdaptiveMediaImageEntrySoap> soapModels = new ArrayList<AdaptiveMediaImageEntrySoap>(models.size());
 
-		for (AdaptiveMediaImage model : models) {
+		for (AdaptiveMediaImageEntry model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
-		return soapModels.toArray(new AdaptiveMediaImageSoap[soapModels.size()]);
+		return soapModels.toArray(new AdaptiveMediaImageEntrySoap[soapModels.size()]);
 	}
 
-	public AdaptiveMediaImageSoap() {
+	public AdaptiveMediaImageEntrySoap() {
 	}
 
 	public long getPrimaryKey() {
-		return _adaptiveMediaImageId;
+		return _adaptiveMediaImageEntryId;
 	}
 
 	public void setPrimaryKey(long pk) {
-		setAdaptiveMediaImageId(pk);
+		setAdaptiveMediaImageEntryId(pk);
 	}
 
 	public String getUuid() {
@@ -107,12 +107,12 @@ public class AdaptiveMediaImageSoap implements Serializable {
 		_uuid = uuid;
 	}
 
-	public long getAdaptiveMediaImageId() {
-		return _adaptiveMediaImageId;
+	public long getAdaptiveMediaImageEntryId() {
+		return _adaptiveMediaImageEntryId;
 	}
 
-	public void setAdaptiveMediaImageId(long adaptiveMediaImageId) {
-		_adaptiveMediaImageId = adaptiveMediaImageId;
+	public void setAdaptiveMediaImageEntryId(long adaptiveMediaImageEntryId) {
+		_adaptiveMediaImageEntryId = adaptiveMediaImageEntryId;
 	}
 
 	public long getGroupId() {
@@ -188,7 +188,7 @@ public class AdaptiveMediaImageSoap implements Serializable {
 	}
 
 	private String _uuid;
-	private long _adaptiveMediaImageId;
+	private long _adaptiveMediaImageEntryId;
 	private long _groupId;
 	private long _companyId;
 	private Date _createDate;

@@ -17,7 +17,7 @@ package com.liferay.adaptive.media.image.service;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
-import com.liferay.adaptive.media.image.model.AdaptiveMediaImage;
+import com.liferay.adaptive.media.image.model.AdaptiveMediaImageEntry;
 
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
@@ -42,28 +42,28 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Provides the local service interface for AdaptiveMediaImage. Methods of this
+ * Provides the local service interface for AdaptiveMediaImageEntry. Methods of this
  * service will not have security checks based on the propagated JAAS
  * credentials because this service can only be accessed from within the same
  * VM.
  *
  * @author Brian Wing Shun Chan
- * @see AdaptiveMediaImageLocalServiceUtil
- * @see com.liferay.adaptive.media.image.service.base.AdaptiveMediaImageLocalServiceBaseImpl
- * @see com.liferay.adaptive.media.image.service.impl.AdaptiveMediaImageLocalServiceImpl
+ * @see AdaptiveMediaImageEntryLocalServiceUtil
+ * @see com.liferay.adaptive.media.image.service.base.AdaptiveMediaImageEntryLocalServiceBaseImpl
+ * @see com.liferay.adaptive.media.image.service.impl.AdaptiveMediaImageEntryLocalServiceImpl
  * @generated
  */
 @ProviderType
 @Transactional(isolation = Isolation.PORTAL, rollbackFor =  {
 	PortalException.class, SystemException.class})
-public interface AdaptiveMediaImageLocalService extends BaseLocalService,
+public interface AdaptiveMediaImageEntryLocalService extends BaseLocalService,
 	PersistedModelLocalService {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. Always use {@link AdaptiveMediaImageLocalServiceUtil} to access the adaptive media image local service. Add custom service methods to {@link com.liferay.adaptive.media.image.service.impl.AdaptiveMediaImageLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify or reference this interface directly. Always use {@link AdaptiveMediaImageEntryLocalServiceUtil} to access the adaptive media image local service. Add custom service methods to {@link com.liferay.adaptive.media.image.service.impl.AdaptiveMediaImageEntryLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public AdaptiveMediaImage addAdaptiveMediaImage(
+	public AdaptiveMediaImageEntry addAdaptiveMediaImageEntry(
 		ImageAdaptiveMediaConfigurationEntry configurationEntry,
 		FileVersion fileVersion, int width, int height,
 		InputStream inputStream, int size) throws PortalException;
@@ -71,49 +71,49 @@ public interface AdaptiveMediaImageLocalService extends BaseLocalService,
 	/**
 	* Adds the adaptive media image to the database. Also notifies the appropriate model listeners.
 	*
-	* @param adaptiveMediaImage the adaptive media image
+	* @param adaptiveMediaImageEntry the adaptive media image
 	* @return the adaptive media image that was added
 	*/
 	@Indexable(type = IndexableType.REINDEX)
-	public AdaptiveMediaImage addAdaptiveMediaImage(
-		AdaptiveMediaImage adaptiveMediaImage);
+	public AdaptiveMediaImageEntry addAdaptiveMediaImageEntry(
+		AdaptiveMediaImageEntry adaptiveMediaImageEntry);
 
 	/**
 	* Creates a new adaptive media image with the primary key. Does not add the adaptive media image to the database.
 	*
-	* @param adaptiveMediaImageId the primary key for the new adaptive media image
+	* @param adaptiveMediaImageEntryId the primary key for the new adaptive media image
 	* @return the new adaptive media image
 	*/
-	public AdaptiveMediaImage createAdaptiveMediaImage(
-		long adaptiveMediaImageId);
+	public AdaptiveMediaImageEntry createAdaptiveMediaImageEntry(
+		long adaptiveMediaImageEntryId);
 
 	/**
 	* Deletes the adaptive media image from the database. Also notifies the appropriate model listeners.
 	*
-	* @param adaptiveMediaImage the adaptive media image
+	* @param adaptiveMediaImageEntry the adaptive media image
 	* @return the adaptive media image that was removed
 	*/
 	@Indexable(type = IndexableType.DELETE)
-	public AdaptiveMediaImage deleteAdaptiveMediaImage(
-		AdaptiveMediaImage adaptiveMediaImage);
+	public AdaptiveMediaImageEntry deleteAdaptiveMediaImageEntry(
+		AdaptiveMediaImageEntry adaptiveMediaImageEntry);
 
 	/**
 	* Deletes the adaptive media image with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param adaptiveMediaImageId the primary key of the adaptive media image
+	* @param adaptiveMediaImageEntryId the primary key of the adaptive media image
 	* @return the adaptive media image that was removed
 	* @throws PortalException if a adaptive media image with the primary key could not be found
 	*/
 	@Indexable(type = IndexableType.DELETE)
-	public AdaptiveMediaImage deleteAdaptiveMediaImage(
-		long adaptiveMediaImageId) throws PortalException;
+	public AdaptiveMediaImageEntry deleteAdaptiveMediaImageEntry(
+		long adaptiveMediaImageEntryId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public AdaptiveMediaImage fetchAdaptiveMediaImage(
+	public AdaptiveMediaImageEntry fetchAdaptiveMediaImageEntry(
 		java.lang.String configurationUuid, long fileVersionId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public AdaptiveMediaImage fetchAdaptiveMediaImage(long adaptiveMediaImageId);
+	public AdaptiveMediaImageEntry fetchAdaptiveMediaImageEntry(long adaptiveMediaImageEntryId);
 
 	/**
 	* Returns the adaptive media image matching the UUID and group.
@@ -123,18 +123,18 @@ public interface AdaptiveMediaImageLocalService extends BaseLocalService,
 	* @return the matching adaptive media image, or <code>null</code> if a matching adaptive media image could not be found
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public AdaptiveMediaImage fetchAdaptiveMediaImageByUuidAndGroupId(
+	public AdaptiveMediaImageEntry fetchAdaptiveMediaImageEntryByUuidAndGroupId(
 		java.lang.String uuid, long groupId);
 
 	/**
 	* Returns the adaptive media image with the primary key.
 	*
-	* @param adaptiveMediaImageId the primary key of the adaptive media image
+	* @param adaptiveMediaImageEntryId the primary key of the adaptive media image
 	* @return the adaptive media image
 	* @throws PortalException if a adaptive media image with the primary key could not be found
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public AdaptiveMediaImage getAdaptiveMediaImage(long adaptiveMediaImageId)
+	public AdaptiveMediaImageEntry getAdaptiveMediaImageEntry(long adaptiveMediaImageEntryId)
 		throws PortalException;
 
 	/**
@@ -146,18 +146,18 @@ public interface AdaptiveMediaImageLocalService extends BaseLocalService,
 	* @throws PortalException if a matching adaptive media image could not be found
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public AdaptiveMediaImage getAdaptiveMediaImageByUuidAndGroupId(
+	public AdaptiveMediaImageEntry getAdaptiveMediaImageEntryByUuidAndGroupId(
 		java.lang.String uuid, long groupId) throws PortalException;
 
 	/**
 	* Updates the adaptive media image in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
 	*
-	* @param adaptiveMediaImage the adaptive media image
+	* @param adaptiveMediaImageEntry the adaptive media image
 	* @return the adaptive media image that was updated
 	*/
 	@Indexable(type = IndexableType.REINDEX)
-	public AdaptiveMediaImage updateAdaptiveMediaImage(
-		AdaptiveMediaImage adaptiveMediaImage);
+	public AdaptiveMediaImageEntry updateAdaptiveMediaImageEntry(
+		AdaptiveMediaImageEntry adaptiveMediaImageEntry);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
@@ -185,17 +185,17 @@ public interface AdaptiveMediaImageLocalService extends BaseLocalService,
 	* @return the number of adaptive media images
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getAdaptiveMediaImagesCount();
+	public int getAdaptiveMediaImageEntriesCount();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getAdaptiveMediaImagesCount(long companyId,
+	public int getAdaptiveMediaImageEntriesCount(long companyId,
 		java.lang.String configurationUuid);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getPercentage(long companyId, java.lang.String configurationUuid);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public InputStream getAdaptiveMediaImageContentStream(
+	public InputStream getAdaptiveMediaImageEntryContentStream(
 		ImageAdaptiveMediaConfigurationEntry configurationEntry,
 		FileVersion fileVersion);
 
@@ -218,7 +218,7 @@ public interface AdaptiveMediaImageLocalService extends BaseLocalService,
 	* Performs a dynamic query on the database and returns a range of the matching rows.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.adaptive.media.image.model.impl.AdaptiveMediaImageModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.adaptive.media.image.model.impl.AdaptiveMediaImageEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param dynamicQuery the dynamic query
@@ -233,7 +233,7 @@ public interface AdaptiveMediaImageLocalService extends BaseLocalService,
 	* Performs a dynamic query on the database and returns an ordered range of the matching rows.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.adaptive.media.image.model.impl.AdaptiveMediaImageModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.adaptive.media.image.model.impl.AdaptiveMediaImageEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param dynamicQuery the dynamic query
@@ -249,7 +249,7 @@ public interface AdaptiveMediaImageLocalService extends BaseLocalService,
 	* Returns a range of all the adaptive media images.
 	*
 	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.adaptive.media.image.model.impl.AdaptiveMediaImageModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.adaptive.media.image.model.impl.AdaptiveMediaImageEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	* </p>
 	*
 	* @param start the lower bound of the range of adaptive media images
@@ -257,7 +257,7 @@ public interface AdaptiveMediaImageLocalService extends BaseLocalService,
 	* @return the range of adaptive media images
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<AdaptiveMediaImage> getAdaptiveMediaImages(int start, int end);
+	public List<AdaptiveMediaImageEntry> getAdaptiveMediaImageEntries(int start, int end);
 
 	/**
 	* Returns all the adaptive media images matching the UUID and company.
@@ -267,7 +267,7 @@ public interface AdaptiveMediaImageLocalService extends BaseLocalService,
 	* @return the matching adaptive media images, or an empty list if no matches were found
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<AdaptiveMediaImage> getAdaptiveMediaImagesByUuidAndCompanyId(
+	public List<AdaptiveMediaImageEntry> getAdaptiveMediaImageEntriesByUuidAndCompanyId(
 		java.lang.String uuid, long companyId);
 
 	/**
@@ -281,9 +281,9 @@ public interface AdaptiveMediaImageLocalService extends BaseLocalService,
 	* @return the range of matching adaptive media images, or an empty list if no matches were found
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<AdaptiveMediaImage> getAdaptiveMediaImagesByUuidAndCompanyId(
+	public List<AdaptiveMediaImageEntry> getAdaptiveMediaImageEntriesByUuidAndCompanyId(
 		java.lang.String uuid, long companyId, int start, int end,
-		OrderByComparator<AdaptiveMediaImage> orderByComparator);
+		OrderByComparator<AdaptiveMediaImageEntry> orderByComparator);
 
 	/**
 	* Returns the number of rows matching the dynamic query.
@@ -303,6 +303,6 @@ public interface AdaptiveMediaImageLocalService extends BaseLocalService,
 	public long dynamicQueryCount(DynamicQuery dynamicQuery,
 		Projection projection);
 
-	public void deleteAdaptiveMediaImageFileVersion(long fileVersionId)
+	public void deleteAdaptiveMediaImageEntryFileVersion(long fileVersionId)
 		throws PortalException;
 }
