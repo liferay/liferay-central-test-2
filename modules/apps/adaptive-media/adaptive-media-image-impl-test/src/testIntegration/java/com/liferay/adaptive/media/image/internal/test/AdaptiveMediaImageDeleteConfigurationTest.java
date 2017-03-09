@@ -631,34 +631,4 @@ public class AdaptiveMediaImageDeleteConfigurationTest
 		Assert.assertFalse(secondConfigurationEntryOptional.isPresent());
 	}
 
-	@Test
-	public void testForceDeleteUniqueConfigurationEntry() throws Exception {
-		AdaptiveMediaImageConfigurationHelper configurationHelper =
-			serviceTracker.getService();
-
-		Map<String, String> properties = new HashMap<>();
-
-		properties.put("max-height", "100");
-		properties.put("max-width", "100");
-
-		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "one", "1", properties);
-
-		Optional<AdaptiveMediaImageConfigurationEntry>
-			configurationEntryOptional =
-				configurationHelper.getAdaptiveMediaImageConfigurationEntry(
-					TestPropsValues.getCompanyId(), "1");
-
-		assertEnabled(configurationEntryOptional);
-
-		configurationHelper.forceDeleteAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "1");
-
-		configurationEntryOptional =
-			configurationHelper.getAdaptiveMediaImageConfigurationEntry(
-				TestPropsValues.getCompanyId(), "1");
-
-		Assert.assertFalse(configurationEntryOptional.isPresent());
-	}
-
 }
