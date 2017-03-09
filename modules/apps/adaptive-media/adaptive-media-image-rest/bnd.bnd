@@ -1,7 +1,6 @@
 Bundle-Name: Liferay Adaptive Media Image REST
 Bundle-SymbolicName: com.liferay.adaptive.media.image.rest
 Bundle-Version: 1.0.0
-ConfigurationPath: /configuration
 Import-Package:\
 	!com.fasterxml.jackson.*,\
 	\
@@ -12,5 +11,6 @@ Import-Package:\
 	!org.apache.commons.vfs2.*,\
 	*
 Include-Resource: configuration=src/main/resources/configuration
+Liferay-Configuration-Path: /configuration
 Liferay-Releng-Module-Group-Description:
 Liferay-Releng-Module-Group-Title: Adaptive Media
