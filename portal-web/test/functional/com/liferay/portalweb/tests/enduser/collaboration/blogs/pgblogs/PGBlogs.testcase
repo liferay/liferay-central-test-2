@@ -1123,6 +1123,8 @@
 	</command>
 
 	<command name="SignInToAddAndReplyBlogsEntryComment" priority="4">
+		<property name="portal.release" value="false" />
+
 		<execute macro="Navigator#gotoPage">
 			<var name="pageName" value="Blogs Page" />
 		</execute>
@@ -1405,6 +1407,8 @@
 	</command>
 
 	<command name="ViewBlogsEntryCommentAsGuest" priority="4">
+		<property name="portal.upstream" value="false" />
+
 		<execute macro="Navigator#gotoPage">
 			<var name="pageName" value="Blogs Page" />
 		</execute>
