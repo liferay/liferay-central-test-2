@@ -31,34 +31,14 @@ public class SQLServerSQLTransformerLogic extends BaseSQLTransformerLogic {
 		setFunctions(
 			getBitwiseCheckFunction(), getBooleanFunction(),
 			getCastClobTextFunction(), getCastLongFunction(),
-			getCastTextFunction(), getIntegerDivisionFunction(),
-			getModFunction(), getNullDateFunction(), _getInStrFunction(),
-			_getSubstrFunction());
+			getCastTextFunction(), getInstrFunction(),
+			getIntegerDivisionFunction(), getModFunction(),
+			getNullDateFunction(), getSubstrFunction());
 	}
 
 	@Override
 	protected String replaceCastText(Matcher matcher) {
 		return matcher.replaceAll("CAST($1 AS NVARCHAR(MAX))");
-	}
-
-	private Function<String, String> _getInStrFunction() {
-		Pattern pattern = getInstrPattern();
-
-		return (String sql) -> {
-			Matcher matcher = pattern.matcher(sql);
-
-			return matcher.replaceAll("CHARINDEX($2, $1)");
-		};
-	}
-
-	private Function<String, String> _getSubstrFunction() {
-		Pattern pattern = getSubstrPattern();
-
-		return (String sql) -> {
-			Matcher matcher = pattern.matcher(sql);
-
-			return matcher.replaceAll("SUBSTRING($1, $2, $3)");
-		};
 	}
 
 }

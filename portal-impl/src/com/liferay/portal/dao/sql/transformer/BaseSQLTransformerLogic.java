@@ -86,6 +86,12 @@ public abstract class BaseSQLTransformerLogic implements SQLTransformerLogic {
 			"CAST_TEXT\\((.+?)\\)", Pattern.CASE_INSENSITIVE);
 	}
 
+	protected Function<String, String> getInstrFunction() {
+		Pattern pattern = getInstrPattern();
+
+		return (String sql) -> replaceInstr(pattern.matcher(sql));
+	}
+
 	protected Pattern getInstrPattern() {
 		return Pattern.compile(
 			"INSTR\\(\\s*(.+?)\\s*,\\s*(.+?)\\s*\\)", Pattern.CASE_INSENSITIVE);
@@ -118,6 +124,12 @@ public abstract class BaseSQLTransformerLogic implements SQLTransformerLogic {
 		return (String sql) -> StringUtil.replace(sql, "[$NULL_DATE$]", "NULL");
 	}
 
+	protected Function<String, String> getSubstrFunction() {
+		Pattern pattern = getSubstrPattern();
+
+		return (String sql) -> replaceSubstr(pattern.matcher(sql));
+	}
+
 	protected Pattern getSubstrPattern() {
 		return Pattern.compile(
 			"SUBSTR\\(\\s*(.+?)\\s*,\\s*(.+?)\\s*,\\s*(.+?)\\s*\\)",
@@ -140,12 +152,20 @@ public abstract class BaseSQLTransformerLogic implements SQLTransformerLogic {
 		return matcher.replaceAll("$1");
 	}
 
+	protected String replaceInstr(Matcher matcher) {
+		return matcher.replaceAll("CHARINDEX($2, $1)");
+	}
+
 	protected String replaceIntegerDivision(Matcher matcher) {
 		return matcher.replaceAll("$1 / $2");
 	}
 
 	protected String replaceMod(Matcher matcher) {
 		return matcher.replaceAll("$1 % $2");
+	}
+
+	protected String replaceSubstr(Matcher matcher) {
+		return matcher.replaceAll("SUBSTRING($1, $2, $3)");
 	}
 
 	protected void setFunctions(Function... functions) {
