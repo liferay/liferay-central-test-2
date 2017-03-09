@@ -40,7 +40,8 @@ import java.util.Objects;
 @ProviderType
 public class AdaptiveMediaImageEntryWrapper implements AdaptiveMediaImageEntry,
 	ModelWrapper<AdaptiveMediaImageEntry> {
-	public AdaptiveMediaImageEntryWrapper(AdaptiveMediaImageEntry adaptiveMediaImageEntry) {
+	public AdaptiveMediaImageEntryWrapper(
+		AdaptiveMediaImageEntry adaptiveMediaImageEntry) {
 		_adaptiveMediaImageEntry = adaptiveMediaImageEntry;
 	}
 
@@ -59,7 +60,8 @@ public class AdaptiveMediaImageEntryWrapper implements AdaptiveMediaImageEntry,
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("uuid", getUuid());
-		attributes.put("adaptiveMediaImageEntryId", getAdaptiveMediaImageEntryId());
+		attributes.put("adaptiveMediaImageEntryId",
+			getAdaptiveMediaImageEntryId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("createDate", getCreateDate());
@@ -81,7 +83,8 @@ public class AdaptiveMediaImageEntryWrapper implements AdaptiveMediaImageEntry,
 			setUuid(uuid);
 		}
 
-		Long adaptiveMediaImageEntryId = (Long)attributes.get("adaptiveMediaImageEntryId");
+		Long adaptiveMediaImageEntryId = (Long)attributes.get(
+				"adaptiveMediaImageEntryId");
 
 		if (adaptiveMediaImageEntryId != null) {
 			setAdaptiveMediaImageEntryId(adaptiveMediaImageEntryId);
@@ -183,9 +186,9 @@ public class AdaptiveMediaImageEntryWrapper implements AdaptiveMediaImageEntry,
 	}
 
 	/**
-	* Returns the height of this adaptive media image.
+	* Returns the height of this adaptive media image entry.
 	*
-	* @return the height of this adaptive media image
+	* @return the height of this adaptive media image entry
 	*/
 	@Override
 	public int getHeight() {
@@ -193,9 +196,9 @@ public class AdaptiveMediaImageEntryWrapper implements AdaptiveMediaImageEntry,
 	}
 
 	/**
-	* Returns the width of this adaptive media image.
+	* Returns the width of this adaptive media image entry.
 	*
-	* @return the width of this adaptive media image
+	* @return the width of this adaptive media image entry
 	*/
 	@Override
 	public int getWidth() {
@@ -218,9 +221,9 @@ public class AdaptiveMediaImageEntryWrapper implements AdaptiveMediaImageEntry,
 	}
 
 	/**
-	* Returns the configuration uuid of this adaptive media image.
+	* Returns the configuration uuid of this adaptive media image entry.
 	*
-	* @return the configuration uuid of this adaptive media image
+	* @return the configuration uuid of this adaptive media image entry
 	*/
 	@Override
 	public java.lang.String getConfigurationUuid() {
@@ -228,9 +231,9 @@ public class AdaptiveMediaImageEntryWrapper implements AdaptiveMediaImageEntry,
 	}
 
 	/**
-	* Returns the mime type of this adaptive media image.
+	* Returns the mime type of this adaptive media image entry.
 	*
-	* @return the mime type of this adaptive media image
+	* @return the mime type of this adaptive media image entry
 	*/
 	@Override
 	public java.lang.String getMimeType() {
@@ -238,9 +241,9 @@ public class AdaptiveMediaImageEntryWrapper implements AdaptiveMediaImageEntry,
 	}
 
 	/**
-	* Returns the uuid of this adaptive media image.
+	* Returns the uuid of this adaptive media image entry.
 	*
-	* @return the uuid of this adaptive media image
+	* @return the uuid of this adaptive media image entry
 	*/
 	@Override
 	public java.lang.String getUuid() {
@@ -258,9 +261,9 @@ public class AdaptiveMediaImageEntryWrapper implements AdaptiveMediaImageEntry,
 	}
 
 	/**
-	* Returns the create date of this adaptive media image.
+	* Returns the create date of this adaptive media image entry.
 	*
-	* @return the create date of this adaptive media image
+	* @return the create date of this adaptive media image entry
 	*/
 	@Override
 	public Date getCreateDate() {
@@ -268,9 +271,9 @@ public class AdaptiveMediaImageEntryWrapper implements AdaptiveMediaImageEntry,
 	}
 
 	/**
-	* Returns the adaptive media image ID of this adaptive media image.
+	* Returns the adaptive media image entry ID of this adaptive media image entry.
 	*
-	* @return the adaptive media image ID of this adaptive media image
+	* @return the adaptive media image entry ID of this adaptive media image entry
 	*/
 	@Override
 	public long getAdaptiveMediaImageEntryId() {
@@ -278,9 +281,9 @@ public class AdaptiveMediaImageEntryWrapper implements AdaptiveMediaImageEntry,
 	}
 
 	/**
-	* Returns the company ID of this adaptive media image.
+	* Returns the company ID of this adaptive media image entry.
 	*
-	* @return the company ID of this adaptive media image
+	* @return the company ID of this adaptive media image entry
 	*/
 	@Override
 	public long getCompanyId() {
@@ -288,9 +291,9 @@ public class AdaptiveMediaImageEntryWrapper implements AdaptiveMediaImageEntry,
 	}
 
 	/**
-	* Returns the file version ID of this adaptive media image.
+	* Returns the file version ID of this adaptive media image entry.
 	*
-	* @return the file version ID of this adaptive media image
+	* @return the file version ID of this adaptive media image entry
 	*/
 	@Override
 	public long getFileVersionId() {
@@ -298,9 +301,9 @@ public class AdaptiveMediaImageEntryWrapper implements AdaptiveMediaImageEntry,
 	}
 
 	/**
-	* Returns the group ID of this adaptive media image.
+	* Returns the group ID of this adaptive media image entry.
 	*
-	* @return the group ID of this adaptive media image
+	* @return the group ID of this adaptive media image entry
 	*/
 	@Override
 	public long getGroupId() {
@@ -308,9 +311,9 @@ public class AdaptiveMediaImageEntryWrapper implements AdaptiveMediaImageEntry,
 	}
 
 	/**
-	* Returns the primary key of this adaptive media image.
+	* Returns the primary key of this adaptive media image entry.
 	*
-	* @return the primary key of this adaptive media image
+	* @return the primary key of this adaptive media image entry
 	*/
 	@Override
 	public long getPrimaryKey() {
@@ -318,9 +321,9 @@ public class AdaptiveMediaImageEntryWrapper implements AdaptiveMediaImageEntry,
 	}
 
 	/**
-	* Returns the size of this adaptive media image.
+	* Returns the size of this adaptive media image entry.
 	*
-	* @return the size of this adaptive media image
+	* @return the size of this adaptive media image entry
 	*/
 	@Override
 	public long getSize() {
@@ -333,9 +336,9 @@ public class AdaptiveMediaImageEntryWrapper implements AdaptiveMediaImageEntry,
 	}
 
 	/**
-	* Sets the adaptive media image ID of this adaptive media image.
+	* Sets the adaptive media image entry ID of this adaptive media image entry.
 	*
-	* @param adaptiveMediaImageEntryId the adaptive media image ID of this adaptive media image
+	* @param adaptiveMediaImageEntryId the adaptive media image entry ID of this adaptive media image entry
 	*/
 	@Override
 	public void setAdaptiveMediaImageEntryId(long adaptiveMediaImageEntryId) {
@@ -348,9 +351,9 @@ public class AdaptiveMediaImageEntryWrapper implements AdaptiveMediaImageEntry,
 	}
 
 	/**
-	* Sets the company ID of this adaptive media image.
+	* Sets the company ID of this adaptive media image entry.
 	*
-	* @param companyId the company ID of this adaptive media image
+	* @param companyId the company ID of this adaptive media image entry
 	*/
 	@Override
 	public void setCompanyId(long companyId) {
@@ -358,9 +361,9 @@ public class AdaptiveMediaImageEntryWrapper implements AdaptiveMediaImageEntry,
 	}
 
 	/**
-	* Sets the configuration uuid of this adaptive media image.
+	* Sets the configuration uuid of this adaptive media image entry.
 	*
-	* @param configurationUuid the configuration uuid of this adaptive media image
+	* @param configurationUuid the configuration uuid of this adaptive media image entry
 	*/
 	@Override
 	public void setConfigurationUuid(java.lang.String configurationUuid) {
@@ -368,9 +371,9 @@ public class AdaptiveMediaImageEntryWrapper implements AdaptiveMediaImageEntry,
 	}
 
 	/**
-	* Sets the create date of this adaptive media image.
+	* Sets the create date of this adaptive media image entry.
 	*
-	* @param createDate the create date of this adaptive media image
+	* @param createDate the create date of this adaptive media image entry
 	*/
 	@Override
 	public void setCreateDate(Date createDate) {
@@ -394,9 +397,9 @@ public class AdaptiveMediaImageEntryWrapper implements AdaptiveMediaImageEntry,
 	}
 
 	/**
-	* Sets the file version ID of this adaptive media image.
+	* Sets the file version ID of this adaptive media image entry.
 	*
-	* @param fileVersionId the file version ID of this adaptive media image
+	* @param fileVersionId the file version ID of this adaptive media image entry
 	*/
 	@Override
 	public void setFileVersionId(long fileVersionId) {
@@ -404,9 +407,9 @@ public class AdaptiveMediaImageEntryWrapper implements AdaptiveMediaImageEntry,
 	}
 
 	/**
-	* Sets the group ID of this adaptive media image.
+	* Sets the group ID of this adaptive media image entry.
 	*
-	* @param groupId the group ID of this adaptive media image
+	* @param groupId the group ID of this adaptive media image entry
 	*/
 	@Override
 	public void setGroupId(long groupId) {
@@ -414,9 +417,9 @@ public class AdaptiveMediaImageEntryWrapper implements AdaptiveMediaImageEntry,
 	}
 
 	/**
-	* Sets the height of this adaptive media image.
+	* Sets the height of this adaptive media image entry.
 	*
-	* @param height the height of this adaptive media image
+	* @param height the height of this adaptive media image entry
 	*/
 	@Override
 	public void setHeight(int height) {
@@ -424,9 +427,9 @@ public class AdaptiveMediaImageEntryWrapper implements AdaptiveMediaImageEntry,
 	}
 
 	/**
-	* Sets the mime type of this adaptive media image.
+	* Sets the mime type of this adaptive media image entry.
 	*
-	* @param mimeType the mime type of this adaptive media image
+	* @param mimeType the mime type of this adaptive media image entry
 	*/
 	@Override
 	public void setMimeType(java.lang.String mimeType) {
@@ -439,9 +442,9 @@ public class AdaptiveMediaImageEntryWrapper implements AdaptiveMediaImageEntry,
 	}
 
 	/**
-	* Sets the primary key of this adaptive media image.
+	* Sets the primary key of this adaptive media image entry.
 	*
-	* @param primaryKey the primary key of this adaptive media image
+	* @param primaryKey the primary key of this adaptive media image entry
 	*/
 	@Override
 	public void setPrimaryKey(long primaryKey) {
@@ -454,9 +457,9 @@ public class AdaptiveMediaImageEntryWrapper implements AdaptiveMediaImageEntry,
 	}
 
 	/**
-	* Sets the size of this adaptive media image.
+	* Sets the size of this adaptive media image entry.
 	*
-	* @param size the size of this adaptive media image
+	* @param size the size of this adaptive media image entry
 	*/
 	@Override
 	public void setSize(long size) {
@@ -464,9 +467,9 @@ public class AdaptiveMediaImageEntryWrapper implements AdaptiveMediaImageEntry,
 	}
 
 	/**
-	* Sets the uuid of this adaptive media image.
+	* Sets the uuid of this adaptive media image entry.
 	*
-	* @param uuid the uuid of this adaptive media image
+	* @param uuid the uuid of this adaptive media image entry
 	*/
 	@Override
 	public void setUuid(java.lang.String uuid) {
@@ -474,9 +477,9 @@ public class AdaptiveMediaImageEntryWrapper implements AdaptiveMediaImageEntry,
 	}
 
 	/**
-	* Sets the width of this adaptive media image.
+	* Sets the width of this adaptive media image entry.
 	*
-	* @param width the width of this adaptive media image
+	* @param width the width of this adaptive media image entry
 	*/
 	@Override
 	public void setWidth(int width) {

@@ -58,7 +58,7 @@ public class AdaptiveMediaImageEntryModelImpl extends BaseModelImpl<AdaptiveMedi
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. All methods that expect a adaptive media image model instance should use the {@link AdaptiveMediaImageEntry} interface instead.
+	 * Never modify or reference this class directly. All methods that expect a adaptive media image entry model instance should use the {@link AdaptiveMediaImageEntry} interface instead.
 	 */
 	public static final String TABLE_NAME = "AdaptiveMediaImageEntry";
 	public static final Object[][] TABLE_COLUMNS = {
@@ -111,7 +111,7 @@ public class AdaptiveMediaImageEntryModelImpl extends BaseModelImpl<AdaptiveMedi
 	public static final long FILEVERSIONID_COLUMN_BITMASK = 4L;
 	public static final long GROUPID_COLUMN_BITMASK = 8L;
 	public static final long UUID_COLUMN_BITMASK = 16L;
-	public static final long AdaptiveMediaImageEntryID_COLUMN_BITMASK = 32L;
+	public static final long ADAPTIVEMEDIAIMAGEENTRYID_COLUMN_BITMASK = 32L;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.adaptive.media.image.service.util.ServiceProps.get(
 				"lock.expiration.time.com.liferay.adaptive.media.image.model.AdaptiveMediaImageEntry"));
 
@@ -153,7 +153,8 @@ public class AdaptiveMediaImageEntryModelImpl extends BaseModelImpl<AdaptiveMedi
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
 		attributes.put("uuid", getUuid());
-		attributes.put("adaptiveMediaImageEntryId", getAdaptiveMediaImageEntryId());
+		attributes.put("adaptiveMediaImageEntryId",
+			getAdaptiveMediaImageEntryId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("createDate", getCreateDate());
@@ -178,7 +179,8 @@ public class AdaptiveMediaImageEntryModelImpl extends BaseModelImpl<AdaptiveMedi
 			setUuid(uuid);
 		}
 
-		Long adaptiveMediaImageEntryId = (Long)attributes.get("adaptiveMediaImageEntryId");
+		Long adaptiveMediaImageEntryId = (Long)attributes.get(
+				"adaptiveMediaImageEntryId");
 
 		if (adaptiveMediaImageEntryId != null) {
 			setAdaptiveMediaImageEntryId(adaptiveMediaImageEntryId);
@@ -631,7 +633,8 @@ public class AdaptiveMediaImageEntryModelImpl extends BaseModelImpl<AdaptiveMedi
 		StringBundler sb = new StringBundler(37);
 
 		sb.append("<model><model-name>");
-		sb.append("com.liferay.adaptive.media.image.model.AdaptiveMediaImageEntry");
+		sb.append(
+			"com.liferay.adaptive.media.image.model.AdaptiveMediaImageEntry");
 		sb.append("</model-name>");
 
 		sb.append(

@@ -47,179 +47,179 @@ public interface AdaptiveMediaImageEntryModel extends BaseModel<AdaptiveMediaIma
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this interface directly. All methods that expect a adaptive media image model instance should use the {@link AdaptiveMediaImageEntry} interface instead.
+	 * Never modify or reference this interface directly. All methods that expect a adaptive media image entry model instance should use the {@link AdaptiveMediaImageEntry} interface instead.
 	 */
 
 	/**
-	 * Returns the primary key of this adaptive media image.
+	 * Returns the primary key of this adaptive media image entry.
 	 *
-	 * @return the primary key of this adaptive media image
+	 * @return the primary key of this adaptive media image entry
 	 */
 	public long getPrimaryKey();
 
 	/**
-	 * Sets the primary key of this adaptive media image.
+	 * Sets the primary key of this adaptive media image entry.
 	 *
-	 * @param primaryKey the primary key of this adaptive media image
+	 * @param primaryKey the primary key of this adaptive media image entry
 	 */
 	public void setPrimaryKey(long primaryKey);
 
 	/**
-	 * Returns the uuid of this adaptive media image.
+	 * Returns the uuid of this adaptive media image entry.
 	 *
-	 * @return the uuid of this adaptive media image
+	 * @return the uuid of this adaptive media image entry
 	 */
 	@AutoEscape
 	public String getUuid();
 
 	/**
-	 * Sets the uuid of this adaptive media image.
+	 * Sets the uuid of this adaptive media image entry.
 	 *
-	 * @param uuid the uuid of this adaptive media image
+	 * @param uuid the uuid of this adaptive media image entry
 	 */
 	public void setUuid(String uuid);
 
 	/**
-	 * Returns the adaptive media image ID of this adaptive media image.
+	 * Returns the adaptive media image entry ID of this adaptive media image entry.
 	 *
-	 * @return the adaptive media image ID of this adaptive media image
+	 * @return the adaptive media image entry ID of this adaptive media image entry
 	 */
 	public long getAdaptiveMediaImageEntryId();
 
 	/**
-	 * Sets the adaptive media image ID of this adaptive media image.
+	 * Sets the adaptive media image entry ID of this adaptive media image entry.
 	 *
-	 * @param adaptiveMediaImageEntryId the adaptive media image ID of this adaptive media image
+	 * @param adaptiveMediaImageEntryId the adaptive media image entry ID of this adaptive media image entry
 	 */
 	public void setAdaptiveMediaImageEntryId(long adaptiveMediaImageEntryId);
 
 	/**
-	 * Returns the group ID of this adaptive media image.
+	 * Returns the group ID of this adaptive media image entry.
 	 *
-	 * @return the group ID of this adaptive media image
+	 * @return the group ID of this adaptive media image entry
 	 */
 	public long getGroupId();
 
 	/**
-	 * Sets the group ID of this adaptive media image.
+	 * Sets the group ID of this adaptive media image entry.
 	 *
-	 * @param groupId the group ID of this adaptive media image
+	 * @param groupId the group ID of this adaptive media image entry
 	 */
 	public void setGroupId(long groupId);
 
 	/**
-	 * Returns the company ID of this adaptive media image.
+	 * Returns the company ID of this adaptive media image entry.
 	 *
-	 * @return the company ID of this adaptive media image
+	 * @return the company ID of this adaptive media image entry
 	 */
 	@Override
 	public long getCompanyId();
 
 	/**
-	 * Sets the company ID of this adaptive media image.
+	 * Sets the company ID of this adaptive media image entry.
 	 *
-	 * @param companyId the company ID of this adaptive media image
+	 * @param companyId the company ID of this adaptive media image entry
 	 */
 	@Override
 	public void setCompanyId(long companyId);
 
 	/**
-	 * Returns the create date of this adaptive media image.
+	 * Returns the create date of this adaptive media image entry.
 	 *
-	 * @return the create date of this adaptive media image
+	 * @return the create date of this adaptive media image entry
 	 */
 	public Date getCreateDate();
 
 	/**
-	 * Sets the create date of this adaptive media image.
+	 * Sets the create date of this adaptive media image entry.
 	 *
-	 * @param createDate the create date of this adaptive media image
+	 * @param createDate the create date of this adaptive media image entry
 	 */
 	public void setCreateDate(Date createDate);
 
 	/**
-	 * Returns the configuration uuid of this adaptive media image.
+	 * Returns the configuration uuid of this adaptive media image entry.
 	 *
-	 * @return the configuration uuid of this adaptive media image
+	 * @return the configuration uuid of this adaptive media image entry
 	 */
 	@AutoEscape
 	public String getConfigurationUuid();
 
 	/**
-	 * Sets the configuration uuid of this adaptive media image.
+	 * Sets the configuration uuid of this adaptive media image entry.
 	 *
-	 * @param configurationUuid the configuration uuid of this adaptive media image
+	 * @param configurationUuid the configuration uuid of this adaptive media image entry
 	 */
 	public void setConfigurationUuid(String configurationUuid);
 
 	/**
-	 * Returns the file version ID of this adaptive media image.
+	 * Returns the file version ID of this adaptive media image entry.
 	 *
-	 * @return the file version ID of this adaptive media image
+	 * @return the file version ID of this adaptive media image entry
 	 */
 	public long getFileVersionId();
 
 	/**
-	 * Sets the file version ID of this adaptive media image.
+	 * Sets the file version ID of this adaptive media image entry.
 	 *
-	 * @param fileVersionId the file version ID of this adaptive media image
+	 * @param fileVersionId the file version ID of this adaptive media image entry
 	 */
 	public void setFileVersionId(long fileVersionId);
 
 	/**
-	 * Returns the mime type of this adaptive media image.
+	 * Returns the mime type of this adaptive media image entry.
 	 *
-	 * @return the mime type of this adaptive media image
+	 * @return the mime type of this adaptive media image entry
 	 */
 	@AutoEscape
 	public String getMimeType();
 
 	/**
-	 * Sets the mime type of this adaptive media image.
+	 * Sets the mime type of this adaptive media image entry.
 	 *
-	 * @param mimeType the mime type of this adaptive media image
+	 * @param mimeType the mime type of this adaptive media image entry
 	 */
 	public void setMimeType(String mimeType);
 
 	/**
-	 * Returns the height of this adaptive media image.
+	 * Returns the height of this adaptive media image entry.
 	 *
-	 * @return the height of this adaptive media image
+	 * @return the height of this adaptive media image entry
 	 */
 	public int getHeight();
 
 	/**
-	 * Sets the height of this adaptive media image.
+	 * Sets the height of this adaptive media image entry.
 	 *
-	 * @param height the height of this adaptive media image
+	 * @param height the height of this adaptive media image entry
 	 */
 	public void setHeight(int height);
 
 	/**
-	 * Returns the width of this adaptive media image.
+	 * Returns the width of this adaptive media image entry.
 	 *
-	 * @return the width of this adaptive media image
+	 * @return the width of this adaptive media image entry
 	 */
 	public int getWidth();
 
 	/**
-	 * Sets the width of this adaptive media image.
+	 * Sets the width of this adaptive media image entry.
 	 *
-	 * @param width the width of this adaptive media image
+	 * @param width the width of this adaptive media image entry
 	 */
 	public void setWidth(int width);
 
 	/**
-	 * Returns the size of this adaptive media image.
+	 * Returns the size of this adaptive media image entry.
 	 *
-	 * @return the size of this adaptive media image
+	 * @return the size of this adaptive media image entry
 	 */
 	public long getSize();
 
 	/**
-	 * Sets the size of this adaptive media image.
+	 * Sets the size of this adaptive media image entry.
 	 *
-	 * @param size the size of this adaptive media image
+	 * @param size the size of this adaptive media image entry
 	 */
 	public void setSize(long size);
 

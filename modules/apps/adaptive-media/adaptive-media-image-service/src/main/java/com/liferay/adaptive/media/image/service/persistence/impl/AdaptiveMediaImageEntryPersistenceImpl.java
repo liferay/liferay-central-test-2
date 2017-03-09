@@ -54,7 +54,7 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * The persistence implementation for the adaptive media image service.
+ * The persistence implementation for the adaptive media image entry service.
  *
  * <p>
  * Caching information and settings can be found in <code>portal.properties</code>
@@ -71,7 +71,7 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify or reference this class directly. Always use {@link AdaptiveMediaImageEntryUtil} to access the adaptive media image persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
+	 * Never modify or reference this class directly. Always use {@link AdaptiveMediaImageEntryUtil} to access the adaptive media image entry persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this class.
 	 */
 	public static final String FINDER_CLASS_NAME_ENTITY = AdaptiveMediaImageEntryImpl.class.getName();
 	public static final String FINDER_CLASS_NAME_LIST_WITH_PAGINATION = FINDER_CLASS_NAME_ENTITY +
@@ -111,10 +111,10 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 			new String[] { String.class.getName() });
 
 	/**
-	 * Returns all the adaptive media images where uuid = &#63;.
+	 * Returns all the adaptive media image entries where uuid = &#63;.
 	 *
 	 * @param uuid the uuid
-	 * @return the matching adaptive media images
+	 * @return the matching adaptive media image entries
 	 */
 	@Override
 	public List<AdaptiveMediaImageEntry> findByUuid(String uuid) {
@@ -122,58 +122,59 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns a range of all the adaptive media images where uuid = &#63;.
+	 * Returns a range of all the adaptive media image entries where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AdaptiveMediaImageEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param uuid the uuid
-	 * @param start the lower bound of the range of adaptive media images
-	 * @param end the upper bound of the range of adaptive media images (not inclusive)
-	 * @return the range of matching adaptive media images
+	 * @param start the lower bound of the range of adaptive media image entries
+	 * @param end the upper bound of the range of adaptive media image entries (not inclusive)
+	 * @return the range of matching adaptive media image entries
 	 */
 	@Override
-	public List<AdaptiveMediaImageEntry> findByUuid(String uuid, int start, int end) {
+	public List<AdaptiveMediaImageEntry> findByUuid(String uuid, int start,
+		int end) {
 		return findByUuid(uuid, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the adaptive media images where uuid = &#63;.
+	 * Returns an ordered range of all the adaptive media image entries where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AdaptiveMediaImageEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param uuid the uuid
-	 * @param start the lower bound of the range of adaptive media images
-	 * @param end the upper bound of the range of adaptive media images (not inclusive)
+	 * @param start the lower bound of the range of adaptive media image entries
+	 * @param end the upper bound of the range of adaptive media image entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching adaptive media images
+	 * @return the ordered range of matching adaptive media image entries
 	 */
 	@Override
-	public List<AdaptiveMediaImageEntry> findByUuid(String uuid, int start, int end,
-		OrderByComparator<AdaptiveMediaImageEntry> orderByComparator) {
+	public List<AdaptiveMediaImageEntry> findByUuid(String uuid, int start,
+		int end, OrderByComparator<AdaptiveMediaImageEntry> orderByComparator) {
 		return findByUuid(uuid, start, end, orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the adaptive media images where uuid = &#63;.
+	 * Returns an ordered range of all the adaptive media image entries where uuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AdaptiveMediaImageEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param uuid the uuid
-	 * @param start the lower bound of the range of adaptive media images
-	 * @param end the upper bound of the range of adaptive media images (not inclusive)
+	 * @param start the lower bound of the range of adaptive media image entries
+	 * @param end the upper bound of the range of adaptive media image entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the ordered range of matching adaptive media images
+	 * @return the ordered range of matching adaptive media image entries
 	 */
 	@Override
-	public List<AdaptiveMediaImageEntry> findByUuid(String uuid, int start, int end,
-		OrderByComparator<AdaptiveMediaImageEntry> orderByComparator,
+	public List<AdaptiveMediaImageEntry> findByUuid(String uuid, int start,
+		int end, OrderByComparator<AdaptiveMediaImageEntry> orderByComparator,
 		boolean retrieveFromCache) {
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -218,7 +219,7 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 				query = new StringBundler(3);
 			}
 
-			query.append(_SQL_SELECT_AdaptiveMediaImageEntry_WHERE);
+			query.append(_SQL_SELECT_ADAPTIVEMEDIAIMAGEENTRY_WHERE);
 
 			boolean bindUuid = false;
 
@@ -289,12 +290,12 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the first adaptive media image in the ordered set where uuid = &#63;.
+	 * Returns the first adaptive media image entry in the ordered set where uuid = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching adaptive media image
-	 * @throws NoSuchAdaptiveMediaImageEntryException if a matching adaptive media image could not be found
+	 * @return the first matching adaptive media image entry
+	 * @throws NoSuchAdaptiveMediaImageEntryException if a matching adaptive media image entry could not be found
 	 */
 	@Override
 	public AdaptiveMediaImageEntry findByUuid_First(String uuid,
@@ -320,16 +321,17 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the first adaptive media image in the ordered set where uuid = &#63;.
+	 * Returns the first adaptive media image entry in the ordered set where uuid = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching adaptive media image, or <code>null</code> if a matching adaptive media image could not be found
+	 * @return the first matching adaptive media image entry, or <code>null</code> if a matching adaptive media image entry could not be found
 	 */
 	@Override
 	public AdaptiveMediaImageEntry fetchByUuid_First(String uuid,
 		OrderByComparator<AdaptiveMediaImageEntry> orderByComparator) {
-		List<AdaptiveMediaImageEntry> list = findByUuid(uuid, 0, 1, orderByComparator);
+		List<AdaptiveMediaImageEntry> list = findByUuid(uuid, 0, 1,
+				orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -339,12 +341,12 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the last adaptive media image in the ordered set where uuid = &#63;.
+	 * Returns the last adaptive media image entry in the ordered set where uuid = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching adaptive media image
-	 * @throws NoSuchAdaptiveMediaImageEntryException if a matching adaptive media image could not be found
+	 * @return the last matching adaptive media image entry
+	 * @throws NoSuchAdaptiveMediaImageEntryException if a matching adaptive media image entry could not be found
 	 */
 	@Override
 	public AdaptiveMediaImageEntry findByUuid_Last(String uuid,
@@ -370,11 +372,11 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the last adaptive media image in the ordered set where uuid = &#63;.
+	 * Returns the last adaptive media image entry in the ordered set where uuid = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching adaptive media image, or <code>null</code> if a matching adaptive media image could not be found
+	 * @return the last matching adaptive media image entry, or <code>null</code> if a matching adaptive media image entry could not be found
 	 */
 	@Override
 	public AdaptiveMediaImageEntry fetchByUuid_Last(String uuid,
@@ -396,13 +398,13 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the adaptive media images before and after the current adaptive media image in the ordered set where uuid = &#63;.
+	 * Returns the adaptive media image entries before and after the current adaptive media image entry in the ordered set where uuid = &#63;.
 	 *
-	 * @param adaptiveMediaImageEntryId the primary key of the current adaptive media image
+	 * @param adaptiveMediaImageEntryId the primary key of the current adaptive media image entry
 	 * @param uuid the uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next adaptive media image
-	 * @throws NoSuchAdaptiveMediaImageEntryException if a adaptive media image with the primary key could not be found
+	 * @return the previous, current, and next adaptive media image entry
+	 * @throws NoSuchAdaptiveMediaImageEntryException if a adaptive media image entry with the primary key could not be found
 	 */
 	@Override
 	public AdaptiveMediaImageEntry[] findByUuid_PrevAndNext(
@@ -418,13 +420,13 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 
 			AdaptiveMediaImageEntry[] array = new AdaptiveMediaImageEntryImpl[3];
 
-			array[0] = getByUuid_PrevAndNext(session, adaptiveMediaImageEntry, uuid,
-					orderByComparator, true);
+			array[0] = getByUuid_PrevAndNext(session, adaptiveMediaImageEntry,
+					uuid, orderByComparator, true);
 
 			array[1] = adaptiveMediaImageEntry;
 
-			array[2] = getByUuid_PrevAndNext(session, adaptiveMediaImageEntry, uuid,
-					orderByComparator, false);
+			array[2] = getByUuid_PrevAndNext(session, adaptiveMediaImageEntry,
+					uuid, orderByComparator, false);
 
 			return array;
 		}
@@ -451,7 +453,7 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 			query = new StringBundler(3);
 		}
 
-		query.append(_SQL_SELECT_AdaptiveMediaImageEntry_WHERE);
+		query.append(_SQL_SELECT_ADAPTIVEMEDIAIMAGEENTRY_WHERE);
 
 		boolean bindUuid = false;
 
@@ -558,23 +560,23 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Removes all the adaptive media images where uuid = &#63; from the database.
+	 * Removes all the adaptive media image entries where uuid = &#63; from the database.
 	 *
 	 * @param uuid the uuid
 	 */
 	@Override
 	public void removeByUuid(String uuid) {
-		for (AdaptiveMediaImageEntry adaptiveMediaImageEntry : findByUuid(uuid,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+		for (AdaptiveMediaImageEntry adaptiveMediaImageEntry : findByUuid(
+				uuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(adaptiveMediaImageEntry);
 		}
 	}
 
 	/**
-	 * Returns the number of adaptive media images where uuid = &#63;.
+	 * Returns the number of adaptive media image entries where uuid = &#63;.
 	 *
 	 * @param uuid the uuid
-	 * @return the number of matching adaptive media images
+	 * @return the number of matching adaptive media image entries
 	 */
 	@Override
 	public int countByUuid(String uuid) {
@@ -587,7 +589,7 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 		if (count == null) {
 			StringBundler query = new StringBundler(2);
 
-			query.append(_SQL_COUNT_AdaptiveMediaImageEntry_WHERE);
+			query.append(_SQL_COUNT_ADAPTIVEMEDIAIMAGEENTRY_WHERE);
 
 			boolean bindUuid = false;
 
@@ -651,17 +653,18 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 			new String[] { String.class.getName(), Long.class.getName() });
 
 	/**
-	 * Returns the adaptive media image where uuid = &#63; and groupId = &#63; or throws a {@link NoSuchAdaptiveMediaImageEntryException} if it could not be found.
+	 * Returns the adaptive media image entry where uuid = &#63; and groupId = &#63; or throws a {@link NoSuchAdaptiveMediaImageEntryException} if it could not be found.
 	 *
 	 * @param uuid the uuid
 	 * @param groupId the group ID
-	 * @return the matching adaptive media image
-	 * @throws NoSuchAdaptiveMediaImageEntryException if a matching adaptive media image could not be found
+	 * @return the matching adaptive media image entry
+	 * @throws NoSuchAdaptiveMediaImageEntryException if a matching adaptive media image entry could not be found
 	 */
 	@Override
 	public AdaptiveMediaImageEntry findByUUID_G(String uuid, long groupId)
 		throws NoSuchAdaptiveMediaImageEntryException {
-		AdaptiveMediaImageEntry adaptiveMediaImageEntry = fetchByUUID_G(uuid, groupId);
+		AdaptiveMediaImageEntry adaptiveMediaImageEntry = fetchByUUID_G(uuid,
+				groupId);
 
 		if (adaptiveMediaImageEntry == null) {
 			StringBundler msg = new StringBundler(6);
@@ -687,11 +690,11 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the adaptive media image where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the adaptive media image entry where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
 	 * @param uuid the uuid
 	 * @param groupId the group ID
-	 * @return the matching adaptive media image, or <code>null</code> if a matching adaptive media image could not be found
+	 * @return the matching adaptive media image entry, or <code>null</code> if a matching adaptive media image entry could not be found
 	 */
 	@Override
 	public AdaptiveMediaImageEntry fetchByUUID_G(String uuid, long groupId) {
@@ -699,12 +702,12 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the adaptive media image where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the adaptive media image entry where uuid = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
 	 * @param uuid the uuid
 	 * @param groupId the group ID
 	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the matching adaptive media image, or <code>null</code> if a matching adaptive media image could not be found
+	 * @return the matching adaptive media image entry, or <code>null</code> if a matching adaptive media image entry could not be found
 	 */
 	@Override
 	public AdaptiveMediaImageEntry fetchByUUID_G(String uuid, long groupId,
@@ -730,7 +733,7 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 		if (result == null) {
 			StringBundler query = new StringBundler(4);
 
-			query.append(_SQL_SELECT_AdaptiveMediaImageEntry_WHERE);
+			query.append(_SQL_SELECT_ADAPTIVEMEDIAIMAGEENTRY_WHERE);
 
 			boolean bindUuid = false;
 
@@ -805,26 +808,27 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Removes the adaptive media image where uuid = &#63; and groupId = &#63; from the database.
+	 * Removes the adaptive media image entry where uuid = &#63; and groupId = &#63; from the database.
 	 *
 	 * @param uuid the uuid
 	 * @param groupId the group ID
-	 * @return the adaptive media image that was removed
+	 * @return the adaptive media image entry that was removed
 	 */
 	@Override
 	public AdaptiveMediaImageEntry removeByUUID_G(String uuid, long groupId)
 		throws NoSuchAdaptiveMediaImageEntryException {
-		AdaptiveMediaImageEntry adaptiveMediaImageEntry = findByUUID_G(uuid, groupId);
+		AdaptiveMediaImageEntry adaptiveMediaImageEntry = findByUUID_G(uuid,
+				groupId);
 
 		return remove(adaptiveMediaImageEntry);
 	}
 
 	/**
-	 * Returns the number of adaptive media images where uuid = &#63; and groupId = &#63;.
+	 * Returns the number of adaptive media image entries where uuid = &#63; and groupId = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param groupId the group ID
-	 * @return the number of matching adaptive media images
+	 * @return the number of matching adaptive media image entries
 	 */
 	@Override
 	public int countByUUID_G(String uuid, long groupId) {
@@ -837,7 +841,7 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 		if (count == null) {
 			StringBundler query = new StringBundler(3);
 
-			query.append(_SQL_COUNT_AdaptiveMediaImageEntry_WHERE);
+			query.append(_SQL_COUNT_ADAPTIVEMEDIAIMAGEENTRY_WHERE);
 
 			boolean bindUuid = false;
 
@@ -917,20 +921,21 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 			new String[] { String.class.getName(), Long.class.getName() });
 
 	/**
-	 * Returns all the adaptive media images where uuid = &#63; and companyId = &#63;.
+	 * Returns all the adaptive media image entries where uuid = &#63; and companyId = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param companyId the company ID
-	 * @return the matching adaptive media images
+	 * @return the matching adaptive media image entries
 	 */
 	@Override
-	public List<AdaptiveMediaImageEntry> findByUuid_C(String uuid, long companyId) {
+	public List<AdaptiveMediaImageEntry> findByUuid_C(String uuid,
+		long companyId) {
 		return findByUuid_C(uuid, companyId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the adaptive media images where uuid = &#63; and companyId = &#63;.
+	 * Returns a range of all the adaptive media image entries where uuid = &#63; and companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AdaptiveMediaImageEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
@@ -938,18 +943,18 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	 *
 	 * @param uuid the uuid
 	 * @param companyId the company ID
-	 * @param start the lower bound of the range of adaptive media images
-	 * @param end the upper bound of the range of adaptive media images (not inclusive)
-	 * @return the range of matching adaptive media images
+	 * @param start the lower bound of the range of adaptive media image entries
+	 * @param end the upper bound of the range of adaptive media image entries (not inclusive)
+	 * @return the range of matching adaptive media image entries
 	 */
 	@Override
-	public List<AdaptiveMediaImageEntry> findByUuid_C(String uuid, long companyId,
-		int start, int end) {
+	public List<AdaptiveMediaImageEntry> findByUuid_C(String uuid,
+		long companyId, int start, int end) {
 		return findByUuid_C(uuid, companyId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the adaptive media images where uuid = &#63; and companyId = &#63;.
+	 * Returns an ordered range of all the adaptive media image entries where uuid = &#63; and companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AdaptiveMediaImageEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
@@ -957,20 +962,20 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	 *
 	 * @param uuid the uuid
 	 * @param companyId the company ID
-	 * @param start the lower bound of the range of adaptive media images
-	 * @param end the upper bound of the range of adaptive media images (not inclusive)
+	 * @param start the lower bound of the range of adaptive media image entries
+	 * @param end the upper bound of the range of adaptive media image entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching adaptive media images
+	 * @return the ordered range of matching adaptive media image entries
 	 */
 	@Override
-	public List<AdaptiveMediaImageEntry> findByUuid_C(String uuid, long companyId,
-		int start, int end,
+	public List<AdaptiveMediaImageEntry> findByUuid_C(String uuid,
+		long companyId, int start, int end,
 		OrderByComparator<AdaptiveMediaImageEntry> orderByComparator) {
 		return findByUuid_C(uuid, companyId, start, end, orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the adaptive media images where uuid = &#63; and companyId = &#63;.
+	 * Returns an ordered range of all the adaptive media image entries where uuid = &#63; and companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AdaptiveMediaImageEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
@@ -978,15 +983,15 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	 *
 	 * @param uuid the uuid
 	 * @param companyId the company ID
-	 * @param start the lower bound of the range of adaptive media images
-	 * @param end the upper bound of the range of adaptive media images (not inclusive)
+	 * @param start the lower bound of the range of adaptive media image entries
+	 * @param end the upper bound of the range of adaptive media image entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the ordered range of matching adaptive media images
+	 * @return the ordered range of matching adaptive media image entries
 	 */
 	@Override
-	public List<AdaptiveMediaImageEntry> findByUuid_C(String uuid, long companyId,
-		int start, int end,
+	public List<AdaptiveMediaImageEntry> findByUuid_C(String uuid,
+		long companyId, int start, int end,
 		OrderByComparator<AdaptiveMediaImageEntry> orderByComparator,
 		boolean retrieveFromCache) {
 		boolean pagination = true;
@@ -1037,7 +1042,7 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 				query = new StringBundler(4);
 			}
 
-			query.append(_SQL_SELECT_AdaptiveMediaImageEntry_WHERE);
+			query.append(_SQL_SELECT_ADAPTIVEMEDIAIMAGEENTRY_WHERE);
 
 			boolean bindUuid = false;
 
@@ -1112,16 +1117,17 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the first adaptive media image in the ordered set where uuid = &#63; and companyId = &#63;.
+	 * Returns the first adaptive media image entry in the ordered set where uuid = &#63; and companyId = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching adaptive media image
-	 * @throws NoSuchAdaptiveMediaImageEntryException if a matching adaptive media image could not be found
+	 * @return the first matching adaptive media image entry
+	 * @throws NoSuchAdaptiveMediaImageEntryException if a matching adaptive media image entry could not be found
 	 */
 	@Override
-	public AdaptiveMediaImageEntry findByUuid_C_First(String uuid, long companyId,
+	public AdaptiveMediaImageEntry findByUuid_C_First(String uuid,
+		long companyId,
 		OrderByComparator<AdaptiveMediaImageEntry> orderByComparator)
 		throws NoSuchAdaptiveMediaImageEntryException {
 		AdaptiveMediaImageEntry adaptiveMediaImageEntry = fetchByUuid_C_First(uuid,
@@ -1147,18 +1153,19 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the first adaptive media image in the ordered set where uuid = &#63; and companyId = &#63;.
+	 * Returns the first adaptive media image entry in the ordered set where uuid = &#63; and companyId = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching adaptive media image, or <code>null</code> if a matching adaptive media image could not be found
+	 * @return the first matching adaptive media image entry, or <code>null</code> if a matching adaptive media image entry could not be found
 	 */
 	@Override
-	public AdaptiveMediaImageEntry fetchByUuid_C_First(String uuid, long companyId,
+	public AdaptiveMediaImageEntry fetchByUuid_C_First(String uuid,
+		long companyId,
 		OrderByComparator<AdaptiveMediaImageEntry> orderByComparator) {
-		List<AdaptiveMediaImageEntry> list = findByUuid_C(uuid, companyId, 0, 1,
-				orderByComparator);
+		List<AdaptiveMediaImageEntry> list = findByUuid_C(uuid, companyId, 0,
+				1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -1168,16 +1175,17 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the last adaptive media image in the ordered set where uuid = &#63; and companyId = &#63;.
+	 * Returns the last adaptive media image entry in the ordered set where uuid = &#63; and companyId = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching adaptive media image
-	 * @throws NoSuchAdaptiveMediaImageEntryException if a matching adaptive media image could not be found
+	 * @return the last matching adaptive media image entry
+	 * @throws NoSuchAdaptiveMediaImageEntryException if a matching adaptive media image entry could not be found
 	 */
 	@Override
-	public AdaptiveMediaImageEntry findByUuid_C_Last(String uuid, long companyId,
+	public AdaptiveMediaImageEntry findByUuid_C_Last(String uuid,
+		long companyId,
 		OrderByComparator<AdaptiveMediaImageEntry> orderByComparator)
 		throws NoSuchAdaptiveMediaImageEntryException {
 		AdaptiveMediaImageEntry adaptiveMediaImageEntry = fetchByUuid_C_Last(uuid,
@@ -1203,15 +1211,16 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the last adaptive media image in the ordered set where uuid = &#63; and companyId = &#63;.
+	 * Returns the last adaptive media image entry in the ordered set where uuid = &#63; and companyId = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching adaptive media image, or <code>null</code> if a matching adaptive media image could not be found
+	 * @return the last matching adaptive media image entry, or <code>null</code> if a matching adaptive media image entry could not be found
 	 */
 	@Override
-	public AdaptiveMediaImageEntry fetchByUuid_C_Last(String uuid, long companyId,
+	public AdaptiveMediaImageEntry fetchByUuid_C_Last(String uuid,
+		long companyId,
 		OrderByComparator<AdaptiveMediaImageEntry> orderByComparator) {
 		int count = countByUuid_C(uuid, companyId);
 
@@ -1230,14 +1239,14 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the adaptive media images before and after the current adaptive media image in the ordered set where uuid = &#63; and companyId = &#63;.
+	 * Returns the adaptive media image entries before and after the current adaptive media image entry in the ordered set where uuid = &#63; and companyId = &#63;.
 	 *
-	 * @param adaptiveMediaImageEntryId the primary key of the current adaptive media image
+	 * @param adaptiveMediaImageEntryId the primary key of the current adaptive media image entry
 	 * @param uuid the uuid
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next adaptive media image
-	 * @throws NoSuchAdaptiveMediaImageEntryException if a adaptive media image with the primary key could not be found
+	 * @return the previous, current, and next adaptive media image entry
+	 * @throws NoSuchAdaptiveMediaImageEntryException if a adaptive media image entry with the primary key could not be found
 	 */
 	@Override
 	public AdaptiveMediaImageEntry[] findByUuid_C_PrevAndNext(
@@ -1253,13 +1262,15 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 
 			AdaptiveMediaImageEntry[] array = new AdaptiveMediaImageEntryImpl[3];
 
-			array[0] = getByUuid_C_PrevAndNext(session, adaptiveMediaImageEntry,
-					uuid, companyId, orderByComparator, true);
+			array[0] = getByUuid_C_PrevAndNext(session,
+					adaptiveMediaImageEntry, uuid, companyId,
+					orderByComparator, true);
 
 			array[1] = adaptiveMediaImageEntry;
 
-			array[2] = getByUuid_C_PrevAndNext(session, adaptiveMediaImageEntry,
-					uuid, companyId, orderByComparator, false);
+			array[2] = getByUuid_C_PrevAndNext(session,
+					adaptiveMediaImageEntry, uuid, companyId,
+					orderByComparator, false);
 
 			return array;
 		}
@@ -1272,7 +1283,8 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	protected AdaptiveMediaImageEntry getByUuid_C_PrevAndNext(Session session,
-		AdaptiveMediaImageEntry adaptiveMediaImageEntry, String uuid, long companyId,
+		AdaptiveMediaImageEntry adaptiveMediaImageEntry, String uuid,
+		long companyId,
 		OrderByComparator<AdaptiveMediaImageEntry> orderByComparator,
 		boolean previous) {
 		StringBundler query = null;
@@ -1286,7 +1298,7 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 			query = new StringBundler(4);
 		}
 
-		query.append(_SQL_SELECT_AdaptiveMediaImageEntry_WHERE);
+		query.append(_SQL_SELECT_ADAPTIVEMEDIAIMAGEENTRY_WHERE);
 
 		boolean bindUuid = false;
 
@@ -1397,25 +1409,25 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Removes all the adaptive media images where uuid = &#63; and companyId = &#63; from the database.
+	 * Removes all the adaptive media image entries where uuid = &#63; and companyId = &#63; from the database.
 	 *
 	 * @param uuid the uuid
 	 * @param companyId the company ID
 	 */
 	@Override
 	public void removeByUuid_C(String uuid, long companyId) {
-		for (AdaptiveMediaImageEntry adaptiveMediaImageEntry : findByUuid_C(uuid,
-				companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+		for (AdaptiveMediaImageEntry adaptiveMediaImageEntry : findByUuid_C(
+				uuid, companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(adaptiveMediaImageEntry);
 		}
 	}
 
 	/**
-	 * Returns the number of adaptive media images where uuid = &#63; and companyId = &#63;.
+	 * Returns the number of adaptive media image entries where uuid = &#63; and companyId = &#63;.
 	 *
 	 * @param uuid the uuid
 	 * @param companyId the company ID
-	 * @return the number of matching adaptive media images
+	 * @return the number of matching adaptive media image entries
 	 */
 	@Override
 	public int countByUuid_C(String uuid, long companyId) {
@@ -1428,7 +1440,7 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 		if (count == null) {
 			StringBundler query = new StringBundler(3);
 
-			query.append(_SQL_COUNT_AdaptiveMediaImageEntry_WHERE);
+			query.append(_SQL_COUNT_ADAPTIVEMEDIAIMAGEENTRY_WHERE);
 
 			boolean bindUuid = false;
 
@@ -1507,10 +1519,10 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 			new String[] { Long.class.getName() });
 
 	/**
-	 * Returns all the adaptive media images where groupId = &#63;.
+	 * Returns all the adaptive media image entries where groupId = &#63;.
 	 *
 	 * @param groupId the group ID
-	 * @return the matching adaptive media images
+	 * @return the matching adaptive media image entries
 	 */
 	@Override
 	public List<AdaptiveMediaImageEntry> findByGroupId(long groupId) {
@@ -1518,16 +1530,16 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns a range of all the adaptive media images where groupId = &#63;.
+	 * Returns a range of all the adaptive media image entries where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AdaptiveMediaImageEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
-	 * @param start the lower bound of the range of adaptive media images
-	 * @param end the upper bound of the range of adaptive media images (not inclusive)
-	 * @return the range of matching adaptive media images
+	 * @param start the lower bound of the range of adaptive media image entries
+	 * @param end the upper bound of the range of adaptive media image entries (not inclusive)
+	 * @return the range of matching adaptive media image entries
 	 */
 	@Override
 	public List<AdaptiveMediaImageEntry> findByGroupId(long groupId, int start,
@@ -1536,17 +1548,17 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns an ordered range of all the adaptive media images where groupId = &#63;.
+	 * Returns an ordered range of all the adaptive media image entries where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AdaptiveMediaImageEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
-	 * @param start the lower bound of the range of adaptive media images
-	 * @param end the upper bound of the range of adaptive media images (not inclusive)
+	 * @param start the lower bound of the range of adaptive media image entries
+	 * @param end the upper bound of the range of adaptive media image entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching adaptive media images
+	 * @return the ordered range of matching adaptive media image entries
 	 */
 	@Override
 	public List<AdaptiveMediaImageEntry> findByGroupId(long groupId, int start,
@@ -1555,18 +1567,18 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns an ordered range of all the adaptive media images where groupId = &#63;.
+	 * Returns an ordered range of all the adaptive media image entries where groupId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AdaptiveMediaImageEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param groupId the group ID
-	 * @param start the lower bound of the range of adaptive media images
-	 * @param end the upper bound of the range of adaptive media images (not inclusive)
+	 * @param start the lower bound of the range of adaptive media image entries
+	 * @param end the upper bound of the range of adaptive media image entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the ordered range of matching adaptive media images
+	 * @return the ordered range of matching adaptive media image entries
 	 */
 	@Override
 	public List<AdaptiveMediaImageEntry> findByGroupId(long groupId, int start,
@@ -1615,7 +1627,7 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 				query = new StringBundler(3);
 			}
 
-			query.append(_SQL_SELECT_AdaptiveMediaImageEntry_WHERE);
+			query.append(_SQL_SELECT_ADAPTIVEMEDIAIMAGEENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -1672,12 +1684,12 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the first adaptive media image in the ordered set where groupId = &#63;.
+	 * Returns the first adaptive media image entry in the ordered set where groupId = &#63;.
 	 *
 	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching adaptive media image
-	 * @throws NoSuchAdaptiveMediaImageEntryException if a matching adaptive media image could not be found
+	 * @return the first matching adaptive media image entry
+	 * @throws NoSuchAdaptiveMediaImageEntryException if a matching adaptive media image entry could not be found
 	 */
 	@Override
 	public AdaptiveMediaImageEntry findByGroupId_First(long groupId,
@@ -1703,11 +1715,11 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the first adaptive media image in the ordered set where groupId = &#63;.
+	 * Returns the first adaptive media image entry in the ordered set where groupId = &#63;.
 	 *
 	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching adaptive media image, or <code>null</code> if a matching adaptive media image could not be found
+	 * @return the first matching adaptive media image entry, or <code>null</code> if a matching adaptive media image entry could not be found
 	 */
 	@Override
 	public AdaptiveMediaImageEntry fetchByGroupId_First(long groupId,
@@ -1723,12 +1735,12 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the last adaptive media image in the ordered set where groupId = &#63;.
+	 * Returns the last adaptive media image entry in the ordered set where groupId = &#63;.
 	 *
 	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching adaptive media image
-	 * @throws NoSuchAdaptiveMediaImageEntryException if a matching adaptive media image could not be found
+	 * @return the last matching adaptive media image entry
+	 * @throws NoSuchAdaptiveMediaImageEntryException if a matching adaptive media image entry could not be found
 	 */
 	@Override
 	public AdaptiveMediaImageEntry findByGroupId_Last(long groupId,
@@ -1754,11 +1766,11 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the last adaptive media image in the ordered set where groupId = &#63;.
+	 * Returns the last adaptive media image entry in the ordered set where groupId = &#63;.
 	 *
 	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching adaptive media image, or <code>null</code> if a matching adaptive media image could not be found
+	 * @return the last matching adaptive media image entry, or <code>null</code> if a matching adaptive media image entry could not be found
 	 */
 	@Override
 	public AdaptiveMediaImageEntry fetchByGroupId_Last(long groupId,
@@ -1780,13 +1792,13 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the adaptive media images before and after the current adaptive media image in the ordered set where groupId = &#63;.
+	 * Returns the adaptive media image entries before and after the current adaptive media image entry in the ordered set where groupId = &#63;.
 	 *
-	 * @param adaptiveMediaImageEntryId the primary key of the current adaptive media image
+	 * @param adaptiveMediaImageEntryId the primary key of the current adaptive media image entry
 	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next adaptive media image
-	 * @throws NoSuchAdaptiveMediaImageEntryException if a adaptive media image with the primary key could not be found
+	 * @return the previous, current, and next adaptive media image entry
+	 * @throws NoSuchAdaptiveMediaImageEntryException if a adaptive media image entry with the primary key could not be found
 	 */
 	@Override
 	public AdaptiveMediaImageEntry[] findByGroupId_PrevAndNext(
@@ -1802,13 +1814,13 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 
 			AdaptiveMediaImageEntry[] array = new AdaptiveMediaImageEntryImpl[3];
 
-			array[0] = getByGroupId_PrevAndNext(session, adaptiveMediaImageEntry,
-					groupId, orderByComparator, true);
+			array[0] = getByGroupId_PrevAndNext(session,
+					adaptiveMediaImageEntry, groupId, orderByComparator, true);
 
 			array[1] = adaptiveMediaImageEntry;
 
-			array[2] = getByGroupId_PrevAndNext(session, adaptiveMediaImageEntry,
-					groupId, orderByComparator, false);
+			array[2] = getByGroupId_PrevAndNext(session,
+					adaptiveMediaImageEntry, groupId, orderByComparator, false);
 
 			return array;
 		}
@@ -1820,8 +1832,9 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 		}
 	}
 
-	protected AdaptiveMediaImageEntry getByGroupId_PrevAndNext(Session session,
-		AdaptiveMediaImageEntry adaptiveMediaImageEntry, long groupId,
+	protected AdaptiveMediaImageEntry getByGroupId_PrevAndNext(
+		Session session, AdaptiveMediaImageEntry adaptiveMediaImageEntry,
+		long groupId,
 		OrderByComparator<AdaptiveMediaImageEntry> orderByComparator,
 		boolean previous) {
 		StringBundler query = null;
@@ -1835,7 +1848,7 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 			query = new StringBundler(3);
 		}
 
-		query.append(_SQL_SELECT_AdaptiveMediaImageEntry_WHERE);
+		query.append(_SQL_SELECT_ADAPTIVEMEDIAIMAGEENTRY_WHERE);
 
 		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -1928,23 +1941,23 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Removes all the adaptive media images where groupId = &#63; from the database.
+	 * Removes all the adaptive media image entries where groupId = &#63; from the database.
 	 *
 	 * @param groupId the group ID
 	 */
 	@Override
 	public void removeByGroupId(long groupId) {
-		for (AdaptiveMediaImageEntry adaptiveMediaImageEntry : findByGroupId(groupId,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+		for (AdaptiveMediaImageEntry adaptiveMediaImageEntry : findByGroupId(
+				groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(adaptiveMediaImageEntry);
 		}
 	}
 
 	/**
-	 * Returns the number of adaptive media images where groupId = &#63;.
+	 * Returns the number of adaptive media image entries where groupId = &#63;.
 	 *
 	 * @param groupId the group ID
-	 * @return the number of matching adaptive media images
+	 * @return the number of matching adaptive media image entries
 	 */
 	@Override
 	public int countByGroupId(long groupId) {
@@ -1957,7 +1970,7 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 		if (count == null) {
 			StringBundler query = new StringBundler(2);
 
-			query.append(_SQL_COUNT_AdaptiveMediaImageEntry_WHERE);
+			query.append(_SQL_COUNT_ADAPTIVEMEDIAIMAGEENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
 
@@ -2016,10 +2029,10 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 			new String[] { Long.class.getName() });
 
 	/**
-	 * Returns all the adaptive media images where companyId = &#63;.
+	 * Returns all the adaptive media image entries where companyId = &#63;.
 	 *
 	 * @param companyId the company ID
-	 * @return the matching adaptive media images
+	 * @return the matching adaptive media image entries
 	 */
 	@Override
 	public List<AdaptiveMediaImageEntry> findByCompanyId(long companyId) {
@@ -2028,59 +2041,61 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns a range of all the adaptive media images where companyId = &#63;.
+	 * Returns a range of all the adaptive media image entries where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AdaptiveMediaImageEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param companyId the company ID
-	 * @param start the lower bound of the range of adaptive media images
-	 * @param end the upper bound of the range of adaptive media images (not inclusive)
-	 * @return the range of matching adaptive media images
+	 * @param start the lower bound of the range of adaptive media image entries
+	 * @param end the upper bound of the range of adaptive media image entries (not inclusive)
+	 * @return the range of matching adaptive media image entries
 	 */
 	@Override
-	public List<AdaptiveMediaImageEntry> findByCompanyId(long companyId, int start,
-		int end) {
+	public List<AdaptiveMediaImageEntry> findByCompanyId(long companyId,
+		int start, int end) {
 		return findByCompanyId(companyId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the adaptive media images where companyId = &#63;.
+	 * Returns an ordered range of all the adaptive media image entries where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AdaptiveMediaImageEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param companyId the company ID
-	 * @param start the lower bound of the range of adaptive media images
-	 * @param end the upper bound of the range of adaptive media images (not inclusive)
+	 * @param start the lower bound of the range of adaptive media image entries
+	 * @param end the upper bound of the range of adaptive media image entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching adaptive media images
+	 * @return the ordered range of matching adaptive media image entries
 	 */
 	@Override
-	public List<AdaptiveMediaImageEntry> findByCompanyId(long companyId, int start,
-		int end, OrderByComparator<AdaptiveMediaImageEntry> orderByComparator) {
+	public List<AdaptiveMediaImageEntry> findByCompanyId(long companyId,
+		int start, int end,
+		OrderByComparator<AdaptiveMediaImageEntry> orderByComparator) {
 		return findByCompanyId(companyId, start, end, orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the adaptive media images where companyId = &#63;.
+	 * Returns an ordered range of all the adaptive media image entries where companyId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AdaptiveMediaImageEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param companyId the company ID
-	 * @param start the lower bound of the range of adaptive media images
-	 * @param end the upper bound of the range of adaptive media images (not inclusive)
+	 * @param start the lower bound of the range of adaptive media image entries
+	 * @param end the upper bound of the range of adaptive media image entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the ordered range of matching adaptive media images
+	 * @return the ordered range of matching adaptive media image entries
 	 */
 	@Override
-	public List<AdaptiveMediaImageEntry> findByCompanyId(long companyId, int start,
-		int end, OrderByComparator<AdaptiveMediaImageEntry> orderByComparator,
+	public List<AdaptiveMediaImageEntry> findByCompanyId(long companyId,
+		int start, int end,
+		OrderByComparator<AdaptiveMediaImageEntry> orderByComparator,
 		boolean retrieveFromCache) {
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -2125,7 +2140,7 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 				query = new StringBundler(3);
 			}
 
-			query.append(_SQL_SELECT_AdaptiveMediaImageEntry_WHERE);
+			query.append(_SQL_SELECT_ADAPTIVEMEDIAIMAGEENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
@@ -2182,12 +2197,12 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the first adaptive media image in the ordered set where companyId = &#63;.
+	 * Returns the first adaptive media image entry in the ordered set where companyId = &#63;.
 	 *
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching adaptive media image
-	 * @throws NoSuchAdaptiveMediaImageEntryException if a matching adaptive media image could not be found
+	 * @return the first matching adaptive media image entry
+	 * @throws NoSuchAdaptiveMediaImageEntryException if a matching adaptive media image entry could not be found
 	 */
 	@Override
 	public AdaptiveMediaImageEntry findByCompanyId_First(long companyId,
@@ -2213,11 +2228,11 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the first adaptive media image in the ordered set where companyId = &#63;.
+	 * Returns the first adaptive media image entry in the ordered set where companyId = &#63;.
 	 *
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching adaptive media image, or <code>null</code> if a matching adaptive media image could not be found
+	 * @return the first matching adaptive media image entry, or <code>null</code> if a matching adaptive media image entry could not be found
 	 */
 	@Override
 	public AdaptiveMediaImageEntry fetchByCompanyId_First(long companyId,
@@ -2233,12 +2248,12 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the last adaptive media image in the ordered set where companyId = &#63;.
+	 * Returns the last adaptive media image entry in the ordered set where companyId = &#63;.
 	 *
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching adaptive media image
-	 * @throws NoSuchAdaptiveMediaImageEntryException if a matching adaptive media image could not be found
+	 * @return the last matching adaptive media image entry
+	 * @throws NoSuchAdaptiveMediaImageEntryException if a matching adaptive media image entry could not be found
 	 */
 	@Override
 	public AdaptiveMediaImageEntry findByCompanyId_Last(long companyId,
@@ -2264,11 +2279,11 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the last adaptive media image in the ordered set where companyId = &#63;.
+	 * Returns the last adaptive media image entry in the ordered set where companyId = &#63;.
 	 *
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching adaptive media image, or <code>null</code> if a matching adaptive media image could not be found
+	 * @return the last matching adaptive media image entry, or <code>null</code> if a matching adaptive media image entry could not be found
 	 */
 	@Override
 	public AdaptiveMediaImageEntry fetchByCompanyId_Last(long companyId,
@@ -2279,8 +2294,8 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 			return null;
 		}
 
-		List<AdaptiveMediaImageEntry> list = findByCompanyId(companyId, count - 1,
-				count, orderByComparator);
+		List<AdaptiveMediaImageEntry> list = findByCompanyId(companyId,
+				count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -2290,13 +2305,13 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the adaptive media images before and after the current adaptive media image in the ordered set where companyId = &#63;.
+	 * Returns the adaptive media image entries before and after the current adaptive media image entry in the ordered set where companyId = &#63;.
 	 *
-	 * @param adaptiveMediaImageEntryId the primary key of the current adaptive media image
+	 * @param adaptiveMediaImageEntryId the primary key of the current adaptive media image entry
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next adaptive media image
-	 * @throws NoSuchAdaptiveMediaImageEntryException if a adaptive media image with the primary key could not be found
+	 * @return the previous, current, and next adaptive media image entry
+	 * @throws NoSuchAdaptiveMediaImageEntryException if a adaptive media image entry with the primary key could not be found
 	 */
 	@Override
 	public AdaptiveMediaImageEntry[] findByCompanyId_PrevAndNext(
@@ -2312,13 +2327,13 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 
 			AdaptiveMediaImageEntry[] array = new AdaptiveMediaImageEntryImpl[3];
 
-			array[0] = getByCompanyId_PrevAndNext(session, adaptiveMediaImageEntry,
-					companyId, orderByComparator, true);
+			array[0] = getByCompanyId_PrevAndNext(session,
+					adaptiveMediaImageEntry, companyId, orderByComparator, true);
 
 			array[1] = adaptiveMediaImageEntry;
 
-			array[2] = getByCompanyId_PrevAndNext(session, adaptiveMediaImageEntry,
-					companyId, orderByComparator, false);
+			array[2] = getByCompanyId_PrevAndNext(session,
+					adaptiveMediaImageEntry, companyId, orderByComparator, false);
 
 			return array;
 		}
@@ -2330,8 +2345,9 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 		}
 	}
 
-	protected AdaptiveMediaImageEntry getByCompanyId_PrevAndNext(Session session,
-		AdaptiveMediaImageEntry adaptiveMediaImageEntry, long companyId,
+	protected AdaptiveMediaImageEntry getByCompanyId_PrevAndNext(
+		Session session, AdaptiveMediaImageEntry adaptiveMediaImageEntry,
+		long companyId,
 		OrderByComparator<AdaptiveMediaImageEntry> orderByComparator,
 		boolean previous) {
 		StringBundler query = null;
@@ -2345,7 +2361,7 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 			query = new StringBundler(3);
 		}
 
-		query.append(_SQL_SELECT_AdaptiveMediaImageEntry_WHERE);
+		query.append(_SQL_SELECT_ADAPTIVEMEDIAIMAGEENTRY_WHERE);
 
 		query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
@@ -2438,7 +2454,7 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Removes all the adaptive media images where companyId = &#63; from the database.
+	 * Removes all the adaptive media image entries where companyId = &#63; from the database.
 	 *
 	 * @param companyId the company ID
 	 */
@@ -2451,10 +2467,10 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the number of adaptive media images where companyId = &#63;.
+	 * Returns the number of adaptive media image entries where companyId = &#63;.
 	 *
 	 * @param companyId the company ID
-	 * @return the number of matching adaptive media images
+	 * @return the number of matching adaptive media image entries
 	 */
 	@Override
 	public int countByCompanyId(long companyId) {
@@ -2467,7 +2483,7 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 		if (count == null) {
 			StringBundler query = new StringBundler(2);
 
-			query.append(_SQL_COUNT_AdaptiveMediaImageEntry_WHERE);
+			query.append(_SQL_COUNT_ADAPTIVEMEDIAIMAGEENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_COMPANYID_COMPANYID_2);
 
@@ -2526,10 +2542,10 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 			"countByConfigurationUuid", new String[] { String.class.getName() });
 
 	/**
-	 * Returns all the adaptive media images where configurationUuid = &#63;.
+	 * Returns all the adaptive media image entries where configurationUuid = &#63;.
 	 *
 	 * @param configurationUuid the configuration uuid
-	 * @return the matching adaptive media images
+	 * @return the matching adaptive media image entries
 	 */
 	@Override
 	public List<AdaptiveMediaImageEntry> findByConfigurationUuid(
@@ -2539,16 +2555,16 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns a range of all the adaptive media images where configurationUuid = &#63;.
+	 * Returns a range of all the adaptive media image entries where configurationUuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AdaptiveMediaImageEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param configurationUuid the configuration uuid
-	 * @param start the lower bound of the range of adaptive media images
-	 * @param end the upper bound of the range of adaptive media images (not inclusive)
-	 * @return the range of matching adaptive media images
+	 * @param start the lower bound of the range of adaptive media image entries
+	 * @param end the upper bound of the range of adaptive media image entries (not inclusive)
+	 * @return the range of matching adaptive media image entries
 	 */
 	@Override
 	public List<AdaptiveMediaImageEntry> findByConfigurationUuid(
@@ -2557,17 +2573,17 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns an ordered range of all the adaptive media images where configurationUuid = &#63;.
+	 * Returns an ordered range of all the adaptive media image entries where configurationUuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AdaptiveMediaImageEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param configurationUuid the configuration uuid
-	 * @param start the lower bound of the range of adaptive media images
-	 * @param end the upper bound of the range of adaptive media images (not inclusive)
+	 * @param start the lower bound of the range of adaptive media image entries
+	 * @param end the upper bound of the range of adaptive media image entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching adaptive media images
+	 * @return the ordered range of matching adaptive media image entries
 	 */
 	@Override
 	public List<AdaptiveMediaImageEntry> findByConfigurationUuid(
@@ -2578,18 +2594,18 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns an ordered range of all the adaptive media images where configurationUuid = &#63;.
+	 * Returns an ordered range of all the adaptive media image entries where configurationUuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AdaptiveMediaImageEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param configurationUuid the configuration uuid
-	 * @param start the lower bound of the range of adaptive media images
-	 * @param end the upper bound of the range of adaptive media images (not inclusive)
+	 * @param start the lower bound of the range of adaptive media image entries
+	 * @param end the upper bound of the range of adaptive media image entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the ordered range of matching adaptive media images
+	 * @return the ordered range of matching adaptive media image entries
 	 */
 	@Override
 	public List<AdaptiveMediaImageEntry> findByConfigurationUuid(
@@ -2644,7 +2660,7 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 				query = new StringBundler(3);
 			}
 
-			query.append(_SQL_SELECT_AdaptiveMediaImageEntry_WHERE);
+			query.append(_SQL_SELECT_ADAPTIVEMEDIAIMAGEENTRY_WHERE);
 
 			boolean bindConfigurationUuid = false;
 
@@ -2715,12 +2731,12 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the first adaptive media image in the ordered set where configurationUuid = &#63;.
+	 * Returns the first adaptive media image entry in the ordered set where configurationUuid = &#63;.
 	 *
 	 * @param configurationUuid the configuration uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching adaptive media image
-	 * @throws NoSuchAdaptiveMediaImageEntryException if a matching adaptive media image could not be found
+	 * @return the first matching adaptive media image entry
+	 * @throws NoSuchAdaptiveMediaImageEntryException if a matching adaptive media image entry could not be found
 	 */
 	@Override
 	public AdaptiveMediaImageEntry findByConfigurationUuid_First(
@@ -2747,11 +2763,11 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the first adaptive media image in the ordered set where configurationUuid = &#63;.
+	 * Returns the first adaptive media image entry in the ordered set where configurationUuid = &#63;.
 	 *
 	 * @param configurationUuid the configuration uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching adaptive media image, or <code>null</code> if a matching adaptive media image could not be found
+	 * @return the first matching adaptive media image entry, or <code>null</code> if a matching adaptive media image entry could not be found
 	 */
 	@Override
 	public AdaptiveMediaImageEntry fetchByConfigurationUuid_First(
@@ -2768,12 +2784,12 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the last adaptive media image in the ordered set where configurationUuid = &#63;.
+	 * Returns the last adaptive media image entry in the ordered set where configurationUuid = &#63;.
 	 *
 	 * @param configurationUuid the configuration uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching adaptive media image
-	 * @throws NoSuchAdaptiveMediaImageEntryException if a matching adaptive media image could not be found
+	 * @return the last matching adaptive media image entry
+	 * @throws NoSuchAdaptiveMediaImageEntryException if a matching adaptive media image entry could not be found
 	 */
 	@Override
 	public AdaptiveMediaImageEntry findByConfigurationUuid_Last(
@@ -2800,11 +2816,11 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the last adaptive media image in the ordered set where configurationUuid = &#63;.
+	 * Returns the last adaptive media image entry in the ordered set where configurationUuid = &#63;.
 	 *
 	 * @param configurationUuid the configuration uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching adaptive media image, or <code>null</code> if a matching adaptive media image could not be found
+	 * @return the last matching adaptive media image entry, or <code>null</code> if a matching adaptive media image entry could not be found
 	 */
 	@Override
 	public AdaptiveMediaImageEntry fetchByConfigurationUuid_Last(
@@ -2827,13 +2843,13 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the adaptive media images before and after the current adaptive media image in the ordered set where configurationUuid = &#63;.
+	 * Returns the adaptive media image entries before and after the current adaptive media image entry in the ordered set where configurationUuid = &#63;.
 	 *
-	 * @param adaptiveMediaImageEntryId the primary key of the current adaptive media image
+	 * @param adaptiveMediaImageEntryId the primary key of the current adaptive media image entry
 	 * @param configurationUuid the configuration uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next adaptive media image
-	 * @throws NoSuchAdaptiveMediaImageEntryException if a adaptive media image with the primary key could not be found
+	 * @return the previous, current, and next adaptive media image entry
+	 * @throws NoSuchAdaptiveMediaImageEntryException if a adaptive media image entry with the primary key could not be found
 	 */
 	@Override
 	public AdaptiveMediaImageEntry[] findByConfigurationUuid_PrevAndNext(
@@ -2850,14 +2866,14 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 			AdaptiveMediaImageEntry[] array = new AdaptiveMediaImageEntryImpl[3];
 
 			array[0] = getByConfigurationUuid_PrevAndNext(session,
-					adaptiveMediaImageEntry, configurationUuid, orderByComparator,
-					true);
+					adaptiveMediaImageEntry, configurationUuid,
+					orderByComparator, true);
 
 			array[1] = adaptiveMediaImageEntry;
 
 			array[2] = getByConfigurationUuid_PrevAndNext(session,
-					adaptiveMediaImageEntry, configurationUuid, orderByComparator,
-					false);
+					adaptiveMediaImageEntry, configurationUuid,
+					orderByComparator, false);
 
 			return array;
 		}
@@ -2885,7 +2901,7 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 			query = new StringBundler(3);
 		}
 
-		query.append(_SQL_SELECT_AdaptiveMediaImageEntry_WHERE);
+		query.append(_SQL_SELECT_ADAPTIVEMEDIAIMAGEENTRY_WHERE);
 
 		boolean bindConfigurationUuid = false;
 
@@ -2992,7 +3008,7 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Removes all the adaptive media images where configurationUuid = &#63; from the database.
+	 * Removes all the adaptive media image entries where configurationUuid = &#63; from the database.
 	 *
 	 * @param configurationUuid the configuration uuid
 	 */
@@ -3005,10 +3021,10 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the number of adaptive media images where configurationUuid = &#63;.
+	 * Returns the number of adaptive media image entries where configurationUuid = &#63;.
 	 *
 	 * @param configurationUuid the configuration uuid
-	 * @return the number of matching adaptive media images
+	 * @return the number of matching adaptive media image entries
 	 */
 	@Override
 	public int countByConfigurationUuid(String configurationUuid) {
@@ -3021,7 +3037,7 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 		if (count == null) {
 			StringBundler query = new StringBundler(2);
 
-			query.append(_SQL_COUNT_AdaptiveMediaImageEntry_WHERE);
+			query.append(_SQL_COUNT_ADAPTIVEMEDIAIMAGEENTRY_WHERE);
 
 			boolean bindConfigurationUuid = false;
 
@@ -3099,10 +3115,10 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 			new String[] { Long.class.getName() });
 
 	/**
-	 * Returns all the adaptive media images where fileVersionId = &#63;.
+	 * Returns all the adaptive media image entries where fileVersionId = &#63;.
 	 *
 	 * @param fileVersionId the file version ID
-	 * @return the matching adaptive media images
+	 * @return the matching adaptive media image entries
 	 */
 	@Override
 	public List<AdaptiveMediaImageEntry> findByFileVersionId(long fileVersionId) {
@@ -3111,61 +3127,61 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns a range of all the adaptive media images where fileVersionId = &#63;.
+	 * Returns a range of all the adaptive media image entries where fileVersionId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AdaptiveMediaImageEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param fileVersionId the file version ID
-	 * @param start the lower bound of the range of adaptive media images
-	 * @param end the upper bound of the range of adaptive media images (not inclusive)
-	 * @return the range of matching adaptive media images
+	 * @param start the lower bound of the range of adaptive media image entries
+	 * @param end the upper bound of the range of adaptive media image entries (not inclusive)
+	 * @return the range of matching adaptive media image entries
 	 */
 	@Override
-	public List<AdaptiveMediaImageEntry> findByFileVersionId(long fileVersionId,
-		int start, int end) {
+	public List<AdaptiveMediaImageEntry> findByFileVersionId(
+		long fileVersionId, int start, int end) {
 		return findByFileVersionId(fileVersionId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the adaptive media images where fileVersionId = &#63;.
+	 * Returns an ordered range of all the adaptive media image entries where fileVersionId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AdaptiveMediaImageEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param fileVersionId the file version ID
-	 * @param start the lower bound of the range of adaptive media images
-	 * @param end the upper bound of the range of adaptive media images (not inclusive)
+	 * @param start the lower bound of the range of adaptive media image entries
+	 * @param end the upper bound of the range of adaptive media image entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching adaptive media images
+	 * @return the ordered range of matching adaptive media image entries
 	 */
 	@Override
-	public List<AdaptiveMediaImageEntry> findByFileVersionId(long fileVersionId,
-		int start, int end,
+	public List<AdaptiveMediaImageEntry> findByFileVersionId(
+		long fileVersionId, int start, int end,
 		OrderByComparator<AdaptiveMediaImageEntry> orderByComparator) {
 		return findByFileVersionId(fileVersionId, start, end,
 			orderByComparator, true);
 	}
 
 	/**
-	 * Returns an ordered range of all the adaptive media images where fileVersionId = &#63;.
+	 * Returns an ordered range of all the adaptive media image entries where fileVersionId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AdaptiveMediaImageEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
 	 * @param fileVersionId the file version ID
-	 * @param start the lower bound of the range of adaptive media images
-	 * @param end the upper bound of the range of adaptive media images (not inclusive)
+	 * @param start the lower bound of the range of adaptive media image entries
+	 * @param end the upper bound of the range of adaptive media image entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the ordered range of matching adaptive media images
+	 * @return the ordered range of matching adaptive media image entries
 	 */
 	@Override
-	public List<AdaptiveMediaImageEntry> findByFileVersionId(long fileVersionId,
-		int start, int end,
+	public List<AdaptiveMediaImageEntry> findByFileVersionId(
+		long fileVersionId, int start, int end,
 		OrderByComparator<AdaptiveMediaImageEntry> orderByComparator,
 		boolean retrieveFromCache) {
 		boolean pagination = true;
@@ -3215,7 +3231,7 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 				query = new StringBundler(3);
 			}
 
-			query.append(_SQL_SELECT_AdaptiveMediaImageEntry_WHERE);
+			query.append(_SQL_SELECT_ADAPTIVEMEDIAIMAGEENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_FILEVERSIONID_FILEVERSIONID_2);
 
@@ -3272,15 +3288,16 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the first adaptive media image in the ordered set where fileVersionId = &#63;.
+	 * Returns the first adaptive media image entry in the ordered set where fileVersionId = &#63;.
 	 *
 	 * @param fileVersionId the file version ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching adaptive media image
-	 * @throws NoSuchAdaptiveMediaImageEntryException if a matching adaptive media image could not be found
+	 * @return the first matching adaptive media image entry
+	 * @throws NoSuchAdaptiveMediaImageEntryException if a matching adaptive media image entry could not be found
 	 */
 	@Override
-	public AdaptiveMediaImageEntry findByFileVersionId_First(long fileVersionId,
+	public AdaptiveMediaImageEntry findByFileVersionId_First(
+		long fileVersionId,
 		OrderByComparator<AdaptiveMediaImageEntry> orderByComparator)
 		throws NoSuchAdaptiveMediaImageEntryException {
 		AdaptiveMediaImageEntry adaptiveMediaImageEntry = fetchByFileVersionId_First(fileVersionId,
@@ -3303,17 +3320,18 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the first adaptive media image in the ordered set where fileVersionId = &#63;.
+	 * Returns the first adaptive media image entry in the ordered set where fileVersionId = &#63;.
 	 *
 	 * @param fileVersionId the file version ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching adaptive media image, or <code>null</code> if a matching adaptive media image could not be found
+	 * @return the first matching adaptive media image entry, or <code>null</code> if a matching adaptive media image entry could not be found
 	 */
 	@Override
-	public AdaptiveMediaImageEntry fetchByFileVersionId_First(long fileVersionId,
+	public AdaptiveMediaImageEntry fetchByFileVersionId_First(
+		long fileVersionId,
 		OrderByComparator<AdaptiveMediaImageEntry> orderByComparator) {
-		List<AdaptiveMediaImageEntry> list = findByFileVersionId(fileVersionId, 0,
-				1, orderByComparator);
+		List<AdaptiveMediaImageEntry> list = findByFileVersionId(fileVersionId,
+				0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -3323,15 +3341,16 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the last adaptive media image in the ordered set where fileVersionId = &#63;.
+	 * Returns the last adaptive media image entry in the ordered set where fileVersionId = &#63;.
 	 *
 	 * @param fileVersionId the file version ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching adaptive media image
-	 * @throws NoSuchAdaptiveMediaImageEntryException if a matching adaptive media image could not be found
+	 * @return the last matching adaptive media image entry
+	 * @throws NoSuchAdaptiveMediaImageEntryException if a matching adaptive media image entry could not be found
 	 */
 	@Override
-	public AdaptiveMediaImageEntry findByFileVersionId_Last(long fileVersionId,
+	public AdaptiveMediaImageEntry findByFileVersionId_Last(
+		long fileVersionId,
 		OrderByComparator<AdaptiveMediaImageEntry> orderByComparator)
 		throws NoSuchAdaptiveMediaImageEntryException {
 		AdaptiveMediaImageEntry adaptiveMediaImageEntry = fetchByFileVersionId_Last(fileVersionId,
@@ -3354,14 +3373,15 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the last adaptive media image in the ordered set where fileVersionId = &#63;.
+	 * Returns the last adaptive media image entry in the ordered set where fileVersionId = &#63;.
 	 *
 	 * @param fileVersionId the file version ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching adaptive media image, or <code>null</code> if a matching adaptive media image could not be found
+	 * @return the last matching adaptive media image entry, or <code>null</code> if a matching adaptive media image entry could not be found
 	 */
 	@Override
-	public AdaptiveMediaImageEntry fetchByFileVersionId_Last(long fileVersionId,
+	public AdaptiveMediaImageEntry fetchByFileVersionId_Last(
+		long fileVersionId,
 		OrderByComparator<AdaptiveMediaImageEntry> orderByComparator) {
 		int count = countByFileVersionId(fileVersionId);
 
@@ -3380,13 +3400,13 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the adaptive media images before and after the current adaptive media image in the ordered set where fileVersionId = &#63;.
+	 * Returns the adaptive media image entries before and after the current adaptive media image entry in the ordered set where fileVersionId = &#63;.
 	 *
-	 * @param adaptiveMediaImageEntryId the primary key of the current adaptive media image
+	 * @param adaptiveMediaImageEntryId the primary key of the current adaptive media image entry
 	 * @param fileVersionId the file version ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next adaptive media image
-	 * @throws NoSuchAdaptiveMediaImageEntryException if a adaptive media image with the primary key could not be found
+	 * @return the previous, current, and next adaptive media image entry
+	 * @throws NoSuchAdaptiveMediaImageEntryException if a adaptive media image entry with the primary key could not be found
 	 */
 	@Override
 	public AdaptiveMediaImageEntry[] findByFileVersionId_PrevAndNext(
@@ -3403,12 +3423,14 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 			AdaptiveMediaImageEntry[] array = new AdaptiveMediaImageEntryImpl[3];
 
 			array[0] = getByFileVersionId_PrevAndNext(session,
-					adaptiveMediaImageEntry, fileVersionId, orderByComparator, true);
+					adaptiveMediaImageEntry, fileVersionId, orderByComparator,
+					true);
 
 			array[1] = adaptiveMediaImageEntry;
 
 			array[2] = getByFileVersionId_PrevAndNext(session,
-					adaptiveMediaImageEntry, fileVersionId, orderByComparator, false);
+					adaptiveMediaImageEntry, fileVersionId, orderByComparator,
+					false);
 
 			return array;
 		}
@@ -3436,7 +3458,7 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 			query = new StringBundler(3);
 		}
 
-		query.append(_SQL_SELECT_AdaptiveMediaImageEntry_WHERE);
+		query.append(_SQL_SELECT_ADAPTIVEMEDIAIMAGEENTRY_WHERE);
 
 		query.append(_FINDER_COLUMN_FILEVERSIONID_FILEVERSIONID_2);
 
@@ -3529,7 +3551,7 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Removes all the adaptive media images where fileVersionId = &#63; from the database.
+	 * Removes all the adaptive media image entries where fileVersionId = &#63; from the database.
 	 *
 	 * @param fileVersionId the file version ID
 	 */
@@ -3542,10 +3564,10 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the number of adaptive media images where fileVersionId = &#63;.
+	 * Returns the number of adaptive media image entries where fileVersionId = &#63;.
 	 *
 	 * @param fileVersionId the file version ID
-	 * @return the number of matching adaptive media images
+	 * @return the number of matching adaptive media image entries
 	 */
 	@Override
 	public int countByFileVersionId(long fileVersionId) {
@@ -3558,7 +3580,7 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 		if (count == null) {
 			StringBundler query = new StringBundler(2);
 
-			query.append(_SQL_COUNT_AdaptiveMediaImageEntry_WHERE);
+			query.append(_SQL_COUNT_ADAPTIVEMEDIAIMAGEENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_FILEVERSIONID_FILEVERSIONID_2);
 
@@ -3616,11 +3638,11 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 			new String[] { Long.class.getName(), String.class.getName() });
 
 	/**
-	 * Returns all the adaptive media images where companyId = &#63; and configurationUuid = &#63;.
+	 * Returns all the adaptive media image entries where companyId = &#63; and configurationUuid = &#63;.
 	 *
 	 * @param companyId the company ID
 	 * @param configurationUuid the configuration uuid
-	 * @return the matching adaptive media images
+	 * @return the matching adaptive media image entries
 	 */
 	@Override
 	public List<AdaptiveMediaImageEntry> findByC_C(long companyId,
@@ -3630,7 +3652,7 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns a range of all the adaptive media images where companyId = &#63; and configurationUuid = &#63;.
+	 * Returns a range of all the adaptive media image entries where companyId = &#63; and configurationUuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AdaptiveMediaImageEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
@@ -3638,9 +3660,9 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	 *
 	 * @param companyId the company ID
 	 * @param configurationUuid the configuration uuid
-	 * @param start the lower bound of the range of adaptive media images
-	 * @param end the upper bound of the range of adaptive media images (not inclusive)
-	 * @return the range of matching adaptive media images
+	 * @param start the lower bound of the range of adaptive media image entries
+	 * @param end the upper bound of the range of adaptive media image entries (not inclusive)
+	 * @return the range of matching adaptive media image entries
 	 */
 	@Override
 	public List<AdaptiveMediaImageEntry> findByC_C(long companyId,
@@ -3649,7 +3671,7 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns an ordered range of all the adaptive media images where companyId = &#63; and configurationUuid = &#63;.
+	 * Returns an ordered range of all the adaptive media image entries where companyId = &#63; and configurationUuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AdaptiveMediaImageEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
@@ -3657,10 +3679,10 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	 *
 	 * @param companyId the company ID
 	 * @param configurationUuid the configuration uuid
-	 * @param start the lower bound of the range of adaptive media images
-	 * @param end the upper bound of the range of adaptive media images (not inclusive)
+	 * @param start the lower bound of the range of adaptive media image entries
+	 * @param end the upper bound of the range of adaptive media image entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of matching adaptive media images
+	 * @return the ordered range of matching adaptive media image entries
 	 */
 	@Override
 	public List<AdaptiveMediaImageEntry> findByC_C(long companyId,
@@ -3671,7 +3693,7 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns an ordered range of all the adaptive media images where companyId = &#63; and configurationUuid = &#63;.
+	 * Returns an ordered range of all the adaptive media image entries where companyId = &#63; and configurationUuid = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AdaptiveMediaImageEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
@@ -3679,11 +3701,11 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	 *
 	 * @param companyId the company ID
 	 * @param configurationUuid the configuration uuid
-	 * @param start the lower bound of the range of adaptive media images
-	 * @param end the upper bound of the range of adaptive media images (not inclusive)
+	 * @param start the lower bound of the range of adaptive media image entries
+	 * @param end the upper bound of the range of adaptive media image entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the ordered range of matching adaptive media images
+	 * @return the ordered range of matching adaptive media image entries
 	 */
 	@Override
 	public List<AdaptiveMediaImageEntry> findByC_C(long companyId,
@@ -3739,7 +3761,7 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 				query = new StringBundler(4);
 			}
 
-			query.append(_SQL_SELECT_AdaptiveMediaImageEntry_WHERE);
+			query.append(_SQL_SELECT_ADAPTIVEMEDIAIMAGEENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_C_C_COMPANYID_2);
 
@@ -3814,13 +3836,13 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the first adaptive media image in the ordered set where companyId = &#63; and configurationUuid = &#63;.
+	 * Returns the first adaptive media image entry in the ordered set where companyId = &#63; and configurationUuid = &#63;.
 	 *
 	 * @param companyId the company ID
 	 * @param configurationUuid the configuration uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching adaptive media image
-	 * @throws NoSuchAdaptiveMediaImageEntryException if a matching adaptive media image could not be found
+	 * @return the first matching adaptive media image entry
+	 * @throws NoSuchAdaptiveMediaImageEntryException if a matching adaptive media image entry could not be found
 	 */
 	@Override
 	public AdaptiveMediaImageEntry findByC_C_First(long companyId,
@@ -3850,19 +3872,19 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the first adaptive media image in the ordered set where companyId = &#63; and configurationUuid = &#63;.
+	 * Returns the first adaptive media image entry in the ordered set where companyId = &#63; and configurationUuid = &#63;.
 	 *
 	 * @param companyId the company ID
 	 * @param configurationUuid the configuration uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the first matching adaptive media image, or <code>null</code> if a matching adaptive media image could not be found
+	 * @return the first matching adaptive media image entry, or <code>null</code> if a matching adaptive media image entry could not be found
 	 */
 	@Override
 	public AdaptiveMediaImageEntry fetchByC_C_First(long companyId,
 		String configurationUuid,
 		OrderByComparator<AdaptiveMediaImageEntry> orderByComparator) {
-		List<AdaptiveMediaImageEntry> list = findByC_C(companyId, configurationUuid,
-				0, 1, orderByComparator);
+		List<AdaptiveMediaImageEntry> list = findByC_C(companyId,
+				configurationUuid, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -3872,13 +3894,13 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the last adaptive media image in the ordered set where companyId = &#63; and configurationUuid = &#63;.
+	 * Returns the last adaptive media image entry in the ordered set where companyId = &#63; and configurationUuid = &#63;.
 	 *
 	 * @param companyId the company ID
 	 * @param configurationUuid the configuration uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching adaptive media image
-	 * @throws NoSuchAdaptiveMediaImageEntryException if a matching adaptive media image could not be found
+	 * @return the last matching adaptive media image entry
+	 * @throws NoSuchAdaptiveMediaImageEntryException if a matching adaptive media image entry could not be found
 	 */
 	@Override
 	public AdaptiveMediaImageEntry findByC_C_Last(long companyId,
@@ -3908,12 +3930,12 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the last adaptive media image in the ordered set where companyId = &#63; and configurationUuid = &#63;.
+	 * Returns the last adaptive media image entry in the ordered set where companyId = &#63; and configurationUuid = &#63;.
 	 *
 	 * @param companyId the company ID
 	 * @param configurationUuid the configuration uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the last matching adaptive media image, or <code>null</code> if a matching adaptive media image could not be found
+	 * @return the last matching adaptive media image entry, or <code>null</code> if a matching adaptive media image entry could not be found
 	 */
 	@Override
 	public AdaptiveMediaImageEntry fetchByC_C_Last(long companyId,
@@ -3925,8 +3947,8 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 			return null;
 		}
 
-		List<AdaptiveMediaImageEntry> list = findByC_C(companyId, configurationUuid,
-				count - 1, count, orderByComparator);
+		List<AdaptiveMediaImageEntry> list = findByC_C(companyId,
+				configurationUuid, count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -3936,18 +3958,19 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the adaptive media images before and after the current adaptive media image in the ordered set where companyId = &#63; and configurationUuid = &#63;.
+	 * Returns the adaptive media image entries before and after the current adaptive media image entry in the ordered set where companyId = &#63; and configurationUuid = &#63;.
 	 *
-	 * @param adaptiveMediaImageEntryId the primary key of the current adaptive media image
+	 * @param adaptiveMediaImageEntryId the primary key of the current adaptive media image entry
 	 * @param companyId the company ID
 	 * @param configurationUuid the configuration uuid
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
-	 * @return the previous, current, and next adaptive media image
-	 * @throws NoSuchAdaptiveMediaImageEntryException if a adaptive media image with the primary key could not be found
+	 * @return the previous, current, and next adaptive media image entry
+	 * @throws NoSuchAdaptiveMediaImageEntryException if a adaptive media image entry with the primary key could not be found
 	 */
 	@Override
 	public AdaptiveMediaImageEntry[] findByC_C_PrevAndNext(
-		long adaptiveMediaImageEntryId, long companyId, String configurationUuid,
+		long adaptiveMediaImageEntryId, long companyId,
+		String configurationUuid,
 		OrderByComparator<AdaptiveMediaImageEntry> orderByComparator)
 		throws NoSuchAdaptiveMediaImageEntryException {
 		AdaptiveMediaImageEntry adaptiveMediaImageEntry = findByPrimaryKey(adaptiveMediaImageEntryId);
@@ -3993,7 +4016,7 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 			query = new StringBundler(4);
 		}
 
-		query.append(_SQL_SELECT_AdaptiveMediaImageEntry_WHERE);
+		query.append(_SQL_SELECT_ADAPTIVEMEDIAIMAGEENTRY_WHERE);
 
 		query.append(_FINDER_COLUMN_C_C_COMPANYID_2);
 
@@ -4104,25 +4127,26 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Removes all the adaptive media images where companyId = &#63; and configurationUuid = &#63; from the database.
+	 * Removes all the adaptive media image entries where companyId = &#63; and configurationUuid = &#63; from the database.
 	 *
 	 * @param companyId the company ID
 	 * @param configurationUuid the configuration uuid
 	 */
 	@Override
 	public void removeByC_C(long companyId, String configurationUuid) {
-		for (AdaptiveMediaImageEntry adaptiveMediaImageEntry : findByC_C(companyId,
-				configurationUuid, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+		for (AdaptiveMediaImageEntry adaptiveMediaImageEntry : findByC_C(
+				companyId, configurationUuid, QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS, null)) {
 			remove(adaptiveMediaImageEntry);
 		}
 	}
 
 	/**
-	 * Returns the number of adaptive media images where companyId = &#63; and configurationUuid = &#63;.
+	 * Returns the number of adaptive media image entries where companyId = &#63; and configurationUuid = &#63;.
 	 *
 	 * @param companyId the company ID
 	 * @param configurationUuid the configuration uuid
-	 * @return the number of matching adaptive media images
+	 * @return the number of matching adaptive media image entries
 	 */
 	@Override
 	public int countByC_C(long companyId, String configurationUuid) {
@@ -4135,7 +4159,7 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 		if (count == null) {
 			StringBundler query = new StringBundler(3);
 
-			query.append(_SQL_COUNT_AdaptiveMediaImageEntry_WHERE);
+			query.append(_SQL_COUNT_ADAPTIVEMEDIAIMAGEENTRY_WHERE);
 
 			query.append(_FINDER_COLUMN_C_C_COMPANYID_2);
 
@@ -4204,12 +4228,12 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 			new String[] { String.class.getName(), Long.class.getName() });
 
 	/**
-	 * Returns the adaptive media image where configurationUuid = &#63; and fileVersionId = &#63; or throws a {@link NoSuchAdaptiveMediaImageEntryException} if it could not be found.
+	 * Returns the adaptive media image entry where configurationUuid = &#63; and fileVersionId = &#63; or throws a {@link NoSuchAdaptiveMediaImageEntryException} if it could not be found.
 	 *
 	 * @param configurationUuid the configuration uuid
 	 * @param fileVersionId the file version ID
-	 * @return the matching adaptive media image
-	 * @throws NoSuchAdaptiveMediaImageEntryException if a matching adaptive media image could not be found
+	 * @return the matching adaptive media image entry
+	 * @throws NoSuchAdaptiveMediaImageEntryException if a matching adaptive media image entry could not be found
 	 */
 	@Override
 	public AdaptiveMediaImageEntry findByC_F(String configurationUuid,
@@ -4241,11 +4265,11 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the adaptive media image where configurationUuid = &#63; and fileVersionId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Returns the adaptive media image entry where configurationUuid = &#63; and fileVersionId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
 	 * @param configurationUuid the configuration uuid
 	 * @param fileVersionId the file version ID
-	 * @return the matching adaptive media image, or <code>null</code> if a matching adaptive media image could not be found
+	 * @return the matching adaptive media image entry, or <code>null</code> if a matching adaptive media image entry could not be found
 	 */
 	@Override
 	public AdaptiveMediaImageEntry fetchByC_F(String configurationUuid,
@@ -4254,12 +4278,12 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the adaptive media image where configurationUuid = &#63; and fileVersionId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Returns the adaptive media image entry where configurationUuid = &#63; and fileVersionId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
 	 * @param configurationUuid the configuration uuid
 	 * @param fileVersionId the file version ID
 	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the matching adaptive media image, or <code>null</code> if a matching adaptive media image could not be found
+	 * @return the matching adaptive media image entry, or <code>null</code> if a matching adaptive media image entry could not be found
 	 */
 	@Override
 	public AdaptiveMediaImageEntry fetchByC_F(String configurationUuid,
@@ -4286,7 +4310,7 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 		if (result == null) {
 			StringBundler query = new StringBundler(4);
 
-			query.append(_SQL_SELECT_AdaptiveMediaImageEntry_WHERE);
+			query.append(_SQL_SELECT_ADAPTIVEMEDIAIMAGEENTRY_WHERE);
 
 			boolean bindConfigurationUuid = false;
 
@@ -4336,7 +4360,7 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 
 					if ((adaptiveMediaImageEntry.getConfigurationUuid() == null) ||
 							!adaptiveMediaImageEntry.getConfigurationUuid()
-												   .equals(configurationUuid) ||
+														.equals(configurationUuid) ||
 							(adaptiveMediaImageEntry.getFileVersionId() != fileVersionId)) {
 						finderCache.putResult(FINDER_PATH_FETCH_BY_C_F,
 							finderArgs, adaptiveMediaImageEntry);
@@ -4362,11 +4386,11 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Removes the adaptive media image where configurationUuid = &#63; and fileVersionId = &#63; from the database.
+	 * Removes the adaptive media image entry where configurationUuid = &#63; and fileVersionId = &#63; from the database.
 	 *
 	 * @param configurationUuid the configuration uuid
 	 * @param fileVersionId the file version ID
-	 * @return the adaptive media image that was removed
+	 * @return the adaptive media image entry that was removed
 	 */
 	@Override
 	public AdaptiveMediaImageEntry removeByC_F(String configurationUuid,
@@ -4378,11 +4402,11 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the number of adaptive media images where configurationUuid = &#63; and fileVersionId = &#63;.
+	 * Returns the number of adaptive media image entries where configurationUuid = &#63; and fileVersionId = &#63;.
 	 *
 	 * @param configurationUuid the configuration uuid
 	 * @param fileVersionId the file version ID
-	 * @return the number of matching adaptive media images
+	 * @return the number of matching adaptive media image entries
 	 */
 	@Override
 	public int countByC_F(String configurationUuid, long fileVersionId) {
@@ -4395,7 +4419,7 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 		if (count == null) {
 			StringBundler query = new StringBundler(3);
 
-			query.append(_SQL_COUNT_AdaptiveMediaImageEntry_WHERE);
+			query.append(_SQL_COUNT_ADAPTIVEMEDIAIMAGEENTRY_WHERE);
 
 			boolean bindConfigurationUuid = false;
 
@@ -4457,19 +4481,20 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Caches the adaptive media image in the entity cache if it is enabled.
+	 * Caches the adaptive media image entry in the entity cache if it is enabled.
 	 *
-	 * @param adaptiveMediaImageEntry the adaptive media image
+	 * @param adaptiveMediaImageEntry the adaptive media image entry
 	 */
 	@Override
 	public void cacheResult(AdaptiveMediaImageEntry adaptiveMediaImageEntry) {
 		entityCache.putResult(AdaptiveMediaImageEntryModelImpl.ENTITY_CACHE_ENABLED,
-			AdaptiveMediaImageEntryImpl.class, adaptiveMediaImageEntry.getPrimaryKey(),
-			adaptiveMediaImageEntry);
+			AdaptiveMediaImageEntryImpl.class,
+			adaptiveMediaImageEntry.getPrimaryKey(), adaptiveMediaImageEntry);
 
 		finderCache.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
-				adaptiveMediaImageEntry.getUuid(), adaptiveMediaImageEntry.getGroupId()
+				adaptiveMediaImageEntry.getUuid(),
+				adaptiveMediaImageEntry.getGroupId()
 			}, adaptiveMediaImageEntry);
 
 		finderCache.putResult(FINDER_PATH_FETCH_BY_C_F,
@@ -4482,12 +4507,13 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Caches the adaptive media images in the entity cache if it is enabled.
+	 * Caches the adaptive media image entries in the entity cache if it is enabled.
 	 *
-	 * @param adaptiveMediaImageEntries the adaptive media images
+	 * @param adaptiveMediaImageEntries the adaptive media image entries
 	 */
 	@Override
-	public void cacheResult(List<AdaptiveMediaImageEntry> adaptiveMediaImageEntries) {
+	public void cacheResult(
+		List<AdaptiveMediaImageEntry> adaptiveMediaImageEntries) {
 		for (AdaptiveMediaImageEntry adaptiveMediaImageEntry : adaptiveMediaImageEntries) {
 			if (entityCache.getResult(
 						AdaptiveMediaImageEntryModelImpl.ENTITY_CACHE_ENABLED,
@@ -4502,7 +4528,7 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Clears the cache for all adaptive media images.
+	 * Clears the cache for all adaptive media image entries.
 	 *
 	 * <p>
 	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
@@ -4518,7 +4544,7 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Clears the cache for the adaptive media image.
+	 * Clears the cache for the adaptive media image entry.
 	 *
 	 * <p>
 	 * The {@link EntityCache} and {@link FinderCache} are both cleared by this method.
@@ -4527,7 +4553,8 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	@Override
 	public void clearCache(AdaptiveMediaImageEntry adaptiveMediaImageEntry) {
 		entityCache.removeResult(AdaptiveMediaImageEntryModelImpl.ENTITY_CACHE_ENABLED,
-			AdaptiveMediaImageEntryImpl.class, adaptiveMediaImageEntry.getPrimaryKey());
+			AdaptiveMediaImageEntryImpl.class,
+			adaptiveMediaImageEntry.getPrimaryKey());
 
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
@@ -4537,13 +4564,15 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	@Override
-	public void clearCache(List<AdaptiveMediaImageEntry> adaptiveMediaImageEntries) {
+	public void clearCache(
+		List<AdaptiveMediaImageEntry> adaptiveMediaImageEntries) {
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		finderCache.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
 		for (AdaptiveMediaImageEntry adaptiveMediaImageEntry : adaptiveMediaImageEntries) {
 			entityCache.removeResult(AdaptiveMediaImageEntryModelImpl.ENTITY_CACHE_ENABLED,
-				AdaptiveMediaImageEntryImpl.class, adaptiveMediaImageEntry.getPrimaryKey());
+				AdaptiveMediaImageEntryImpl.class,
+				adaptiveMediaImageEntry.getPrimaryKey());
 
 			clearUniqueFindersCache((AdaptiveMediaImageEntryModelImpl)adaptiveMediaImageEntry,
 				true);
@@ -4620,10 +4649,10 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Creates a new adaptive media image with the primary key. Does not add the adaptive media image to the database.
+	 * Creates a new adaptive media image entry with the primary key. Does not add the adaptive media image entry to the database.
 	 *
-	 * @param adaptiveMediaImageEntryId the primary key for the new adaptive media image
-	 * @return the new adaptive media image
+	 * @param adaptiveMediaImageEntryId the primary key for the new adaptive media image entry
+	 * @return the new adaptive media image entry
 	 */
 	@Override
 	public AdaptiveMediaImageEntry create(long adaptiveMediaImageEntryId) {
@@ -4642,11 +4671,11 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Removes the adaptive media image with the primary key from the database. Also notifies the appropriate model listeners.
+	 * Removes the adaptive media image entry with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param adaptiveMediaImageEntryId the primary key of the adaptive media image
-	 * @return the adaptive media image that was removed
-	 * @throws NoSuchAdaptiveMediaImageEntryException if a adaptive media image with the primary key could not be found
+	 * @param adaptiveMediaImageEntryId the primary key of the adaptive media image entry
+	 * @return the adaptive media image entry that was removed
+	 * @throws NoSuchAdaptiveMediaImageEntryException if a adaptive media image entry with the primary key could not be found
 	 */
 	@Override
 	public AdaptiveMediaImageEntry remove(long adaptiveMediaImageEntryId)
@@ -4655,11 +4684,11 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Removes the adaptive media image with the primary key from the database. Also notifies the appropriate model listeners.
+	 * Removes the adaptive media image entry with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param primaryKey the primary key of the adaptive media image
-	 * @return the adaptive media image that was removed
-	 * @throws NoSuchAdaptiveMediaImageEntryException if a adaptive media image with the primary key could not be found
+	 * @param primaryKey the primary key of the adaptive media image entry
+	 * @return the adaptive media image entry that was removed
+	 * @throws NoSuchAdaptiveMediaImageEntryException if a adaptive media image entry with the primary key could not be found
 	 */
 	@Override
 	public AdaptiveMediaImageEntry remove(Serializable primaryKey)
@@ -4728,7 +4757,8 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	@Override
-	public AdaptiveMediaImageEntry updateImpl(AdaptiveMediaImageEntry adaptiveMediaImageEntry) {
+	public AdaptiveMediaImageEntry updateImpl(
+		AdaptiveMediaImageEntry adaptiveMediaImageEntry) {
 		adaptiveMediaImageEntry = toUnwrappedModel(adaptiveMediaImageEntry);
 
 		boolean isNew = adaptiveMediaImageEntry.isNew();
@@ -4769,7 +4799,9 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 		}
 		else
 		 if (isNew) {
-			Object[] args = new Object[] { adaptiveMediaImageEntryModelImpl.getUuid() };
+			Object[] args = new Object[] {
+					adaptiveMediaImageEntryModelImpl.getUuid()
+				};
 
 			finderCache.removeResult(FINDER_PATH_COUNT_BY_UUID, args);
 			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_UUID,
@@ -4805,7 +4837,9 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CONFIGURATIONUUID,
 				args);
 
-			args = new Object[] { adaptiveMediaImageEntryModelImpl.getFileVersionId() };
+			args = new Object[] {
+					adaptiveMediaImageEntryModelImpl.getFileVersionId()
+				};
 
 			finderCache.removeResult(FINDER_PATH_COUNT_BY_FILEVERSIONID, args);
 			finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_FILEVERSIONID,
@@ -4874,7 +4908,9 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
 					args);
 
-				args = new Object[] { adaptiveMediaImageEntryModelImpl.getGroupId() };
+				args = new Object[] {
+						adaptiveMediaImageEntryModelImpl.getGroupId()
+					};
 
 				finderCache.removeResult(FINDER_PATH_COUNT_BY_GROUPID, args);
 				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_GROUPID,
@@ -4891,7 +4927,9 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
 					args);
 
-				args = new Object[] { adaptiveMediaImageEntryModelImpl.getCompanyId() };
+				args = new Object[] {
+						adaptiveMediaImageEntryModelImpl.getCompanyId()
+					};
 
 				finderCache.removeResult(FINDER_PATH_COUNT_BY_COMPANYID, args);
 				finderCache.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_COMPANYID,
@@ -4963,8 +5001,9 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 		}
 
 		entityCache.putResult(AdaptiveMediaImageEntryModelImpl.ENTITY_CACHE_ENABLED,
-			AdaptiveMediaImageEntryImpl.class, adaptiveMediaImageEntry.getPrimaryKey(),
-			adaptiveMediaImageEntry, false);
+			AdaptiveMediaImageEntryImpl.class,
+			adaptiveMediaImageEntry.getPrimaryKey(), adaptiveMediaImageEntry,
+			false);
 
 		clearUniqueFindersCache(adaptiveMediaImageEntryModelImpl, false);
 		cacheUniqueFindersCache(adaptiveMediaImageEntryModelImpl);
@@ -5001,11 +5040,11 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the adaptive media image with the primary key or throws a {@link com.liferay.portal.kernel.exception.NoSuchModelException} if it could not be found.
+	 * Returns the adaptive media image entry with the primary key or throws a {@link com.liferay.portal.kernel.exception.NoSuchModelException} if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the adaptive media image
-	 * @return the adaptive media image
-	 * @throws NoSuchAdaptiveMediaImageEntryException if a adaptive media image with the primary key could not be found
+	 * @param primaryKey the primary key of the adaptive media image entry
+	 * @return the adaptive media image entry
+	 * @throws NoSuchAdaptiveMediaImageEntryException if a adaptive media image entry with the primary key could not be found
 	 */
 	@Override
 	public AdaptiveMediaImageEntry findByPrimaryKey(Serializable primaryKey)
@@ -5025,23 +5064,24 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the adaptive media image with the primary key or throws a {@link NoSuchAdaptiveMediaImageEntryException} if it could not be found.
+	 * Returns the adaptive media image entry with the primary key or throws a {@link NoSuchAdaptiveMediaImageEntryException} if it could not be found.
 	 *
-	 * @param adaptiveMediaImageEntryId the primary key of the adaptive media image
-	 * @return the adaptive media image
-	 * @throws NoSuchAdaptiveMediaImageEntryException if a adaptive media image with the primary key could not be found
+	 * @param adaptiveMediaImageEntryId the primary key of the adaptive media image entry
+	 * @return the adaptive media image entry
+	 * @throws NoSuchAdaptiveMediaImageEntryException if a adaptive media image entry with the primary key could not be found
 	 */
 	@Override
-	public AdaptiveMediaImageEntry findByPrimaryKey(long adaptiveMediaImageEntryId)
+	public AdaptiveMediaImageEntry findByPrimaryKey(
+		long adaptiveMediaImageEntryId)
 		throws NoSuchAdaptiveMediaImageEntryException {
 		return findByPrimaryKey((Serializable)adaptiveMediaImageEntryId);
 	}
 
 	/**
-	 * Returns the adaptive media image with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the adaptive media image entry with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param primaryKey the primary key of the adaptive media image
-	 * @return the adaptive media image, or <code>null</code> if a adaptive media image with the primary key could not be found
+	 * @param primaryKey the primary key of the adaptive media image entry
+	 * @return the adaptive media image entry, or <code>null</code> if a adaptive media image entry with the primary key could not be found
 	 */
 	@Override
 	public AdaptiveMediaImageEntry fetchByPrimaryKey(Serializable primaryKey) {
@@ -5086,13 +5126,14 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the adaptive media image with the primary key or returns <code>null</code> if it could not be found.
+	 * Returns the adaptive media image entry with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param adaptiveMediaImageEntryId the primary key of the adaptive media image
-	 * @return the adaptive media image, or <code>null</code> if a adaptive media image with the primary key could not be found
+	 * @param adaptiveMediaImageEntryId the primary key of the adaptive media image entry
+	 * @return the adaptive media image entry, or <code>null</code> if a adaptive media image entry with the primary key could not be found
 	 */
 	@Override
-	public AdaptiveMediaImageEntry fetchByPrimaryKey(long adaptiveMediaImageEntryId) {
+	public AdaptiveMediaImageEntry fetchByPrimaryKey(
+		long adaptiveMediaImageEntryId) {
 		return fetchByPrimaryKey((Serializable)adaptiveMediaImageEntryId);
 	}
 
@@ -5146,7 +5187,7 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 		StringBundler query = new StringBundler((uncachedPrimaryKeys.size() * 2) +
 				1);
 
-		query.append(_SQL_SELECT_AdaptiveMediaImageEntry_WHERE_PKS_IN);
+		query.append(_SQL_SELECT_ADAPTIVEMEDIAIMAGEENTRY_WHERE_PKS_IN);
 
 		for (Serializable primaryKey : uncachedPrimaryKeys) {
 			query.append(String.valueOf(primaryKey));
@@ -5192,9 +5233,9 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns all the adaptive media images.
+	 * Returns all the adaptive media image entries.
 	 *
-	 * @return the adaptive media images
+	 * @return the adaptive media image entries
 	 */
 	@Override
 	public List<AdaptiveMediaImageEntry> findAll() {
@@ -5202,15 +5243,15 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns a range of all the adaptive media images.
+	 * Returns a range of all the adaptive media image entries.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AdaptiveMediaImageEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of adaptive media images
-	 * @param end the upper bound of the range of adaptive media images (not inclusive)
-	 * @return the range of adaptive media images
+	 * @param start the lower bound of the range of adaptive media image entries
+	 * @param end the upper bound of the range of adaptive media image entries (not inclusive)
+	 * @return the range of adaptive media image entries
 	 */
 	@Override
 	public List<AdaptiveMediaImageEntry> findAll(int start, int end) {
@@ -5218,16 +5259,16 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns an ordered range of all the adaptive media images.
+	 * Returns an ordered range of all the adaptive media image entries.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AdaptiveMediaImageEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of adaptive media images
-	 * @param end the upper bound of the range of adaptive media images (not inclusive)
+	 * @param start the lower bound of the range of adaptive media image entries
+	 * @param end the upper bound of the range of adaptive media image entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
-	 * @return the ordered range of adaptive media images
+	 * @return the ordered range of adaptive media image entries
 	 */
 	@Override
 	public List<AdaptiveMediaImageEntry> findAll(int start, int end,
@@ -5236,17 +5277,17 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns an ordered range of all the adaptive media images.
+	 * Returns an ordered range of all the adaptive media image entries.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link AdaptiveMediaImageEntryModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
 	 * </p>
 	 *
-	 * @param start the lower bound of the range of adaptive media images
-	 * @param end the upper bound of the range of adaptive media images (not inclusive)
+	 * @param start the lower bound of the range of adaptive media image entries
+	 * @param end the upper bound of the range of adaptive media image entries (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @param retrieveFromCache whether to retrieve from the finder cache
-	 * @return the ordered range of adaptive media images
+	 * @return the ordered range of adaptive media image entries
 	 */
 	@Override
 	public List<AdaptiveMediaImageEntry> findAll(int start, int end,
@@ -5282,7 +5323,7 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 				query = new StringBundler(2 +
 						(orderByComparator.getOrderByFields().length * 2));
 
-				query.append(_SQL_SELECT_AdaptiveMediaImageEntry);
+				query.append(_SQL_SELECT_ADAPTIVEMEDIAIMAGEENTRY);
 
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
 					orderByComparator);
@@ -5290,7 +5331,7 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 				sql = query.toString();
 			}
 			else {
-				sql = _SQL_SELECT_AdaptiveMediaImageEntry;
+				sql = _SQL_SELECT_ADAPTIVEMEDIAIMAGEENTRY;
 
 				if (pagination) {
 					sql = sql.concat(AdaptiveMediaImageEntryModelImpl.ORDER_BY_JPQL);
@@ -5335,7 +5376,7 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Removes all the adaptive media images from the database.
+	 * Removes all the adaptive media image entries from the database.
 	 *
 	 */
 	@Override
@@ -5346,9 +5387,9 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Returns the number of adaptive media images.
+	 * Returns the number of adaptive media image entries.
 	 *
-	 * @return the number of adaptive media images
+	 * @return the number of adaptive media image entries
 	 */
 	@Override
 	public int countAll() {
@@ -5361,7 +5402,7 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 			try {
 				session = openSession();
 
-				Query q = session.createQuery(_SQL_COUNT_AdaptiveMediaImageEntry);
+				Query q = session.createQuery(_SQL_COUNT_ADAPTIVEMEDIAIMAGEENTRY);
 
 				count = (Long)q.uniqueResult();
 
@@ -5393,7 +5434,7 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	}
 
 	/**
-	 * Initializes the adaptive media image persistence.
+	 * Initializes the adaptive media image entry persistence.
 	 */
 	public void afterPropertiesSet() {
 	}
@@ -5411,11 +5452,12 @@ public class AdaptiveMediaImageEntryPersistenceImpl extends BasePersistenceImpl<
 	protected EntityCache entityCache;
 	@ServiceReference(type = FinderCache.class)
 	protected FinderCache finderCache;
-	private static final String _SQL_SELECT_AdaptiveMediaImageEntry = "SELECT adaptiveMediaImageEntry FROM AdaptiveMediaImageEntry adaptiveMediaImageEntry";
-	private static final String _SQL_SELECT_AdaptiveMediaImageEntry_WHERE_PKS_IN = "SELECT adaptiveMediaImageEntry FROM AdaptiveMediaImageEntry adaptiveMediaImageEntry WHERE adaptiveMediaImageEntryId IN (";
-	private static final String _SQL_SELECT_AdaptiveMediaImageEntry_WHERE = "SELECT adaptiveMediaImageEntry FROM AdaptiveMediaImageEntry adaptiveMediaImageEntry WHERE ";
-	private static final String _SQL_COUNT_AdaptiveMediaImageEntry = "SELECT COUNT(adaptiveMediaImageEntry) FROM AdaptiveMediaImageEntry adaptiveMediaImageEntry";
-	private static final String _SQL_COUNT_AdaptiveMediaImageEntry_WHERE = "SELECT COUNT(adaptiveMediaImageEntry) FROM AdaptiveMediaImageEntry adaptiveMediaImageEntry WHERE ";
+	private static final String _SQL_SELECT_ADAPTIVEMEDIAIMAGEENTRY = "SELECT adaptiveMediaImageEntry FROM AdaptiveMediaImageEntry adaptiveMediaImageEntry";
+	private static final String _SQL_SELECT_ADAPTIVEMEDIAIMAGEENTRY_WHERE_PKS_IN =
+		"SELECT adaptiveMediaImageEntry FROM AdaptiveMediaImageEntry adaptiveMediaImageEntry WHERE adaptiveMediaImageEntryId IN (";
+	private static final String _SQL_SELECT_ADAPTIVEMEDIAIMAGEENTRY_WHERE = "SELECT adaptiveMediaImageEntry FROM AdaptiveMediaImageEntry adaptiveMediaImageEntry WHERE ";
+	private static final String _SQL_COUNT_ADAPTIVEMEDIAIMAGEENTRY = "SELECT COUNT(adaptiveMediaImageEntry) FROM AdaptiveMediaImageEntry adaptiveMediaImageEntry";
+	private static final String _SQL_COUNT_ADAPTIVEMEDIAIMAGEENTRY_WHERE = "SELECT COUNT(adaptiveMediaImageEntry) FROM AdaptiveMediaImageEntry adaptiveMediaImageEntry WHERE ";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "adaptiveMediaImageEntry.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No AdaptiveMediaImageEntry exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No AdaptiveMediaImageEntry exists with the key {";

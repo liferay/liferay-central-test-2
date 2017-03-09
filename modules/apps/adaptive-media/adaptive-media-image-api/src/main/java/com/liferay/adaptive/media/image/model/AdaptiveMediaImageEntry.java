@@ -38,7 +38,7 @@ public interface AdaptiveMediaImageEntry extends AdaptiveMediaImageEntryModel,
 	 *
 	 * Never modify this interface directly. Add methods to {@link com.liferay.adaptive.media.image.model.impl.AdaptiveMediaImageEntryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<AdaptiveMediaImageEntry, Long> ADAPTIVE_MEDIA_IMAGE_ID_ACCESSOR =
+	public static final Accessor<AdaptiveMediaImageEntry, Long> ADAPTIVE_MEDIA_IMAGE_ENTRY_ID_ACCESSOR =
 		new Accessor<AdaptiveMediaImageEntry, Long>() {
 			@Override
 			public Long get(AdaptiveMediaImageEntry adaptiveMediaImageEntry) {

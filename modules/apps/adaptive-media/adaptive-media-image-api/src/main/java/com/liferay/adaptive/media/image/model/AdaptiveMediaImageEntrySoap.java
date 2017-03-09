@@ -30,7 +30,8 @@ import java.util.List;
  */
 @ProviderType
 public class AdaptiveMediaImageEntrySoap implements Serializable {
-	public static AdaptiveMediaImageEntrySoap toSoapModel(AdaptiveMediaImageEntry model) {
+	public static AdaptiveMediaImageEntrySoap toSoapModel(
+		AdaptiveMediaImageEntry model) {
 		AdaptiveMediaImageEntrySoap soapModel = new AdaptiveMediaImageEntrySoap();
 
 		soapModel.setUuid(model.getUuid());

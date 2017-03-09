@@ -145,7 +145,8 @@ public class AdaptiveMediaImageEntryPersistenceTest {
 
 		newAdaptiveMediaImageEntry.setSize(RandomTestUtil.nextLong());
 
-		_adaptiveMediaImageEntries.add(_persistence.update(newAdaptiveMediaImageEntry));
+		_adaptiveMediaImageEntries.add(_persistence.update(
+				newAdaptiveMediaImageEntry));
 
 		AdaptiveMediaImageEntry existingAdaptiveMediaImageEntry = _persistence.findByPrimaryKey(newAdaptiveMediaImageEntry.getPrimaryKey());
 
@@ -255,7 +256,8 @@ public class AdaptiveMediaImageEntryPersistenceTest {
 
 		AdaptiveMediaImageEntry existingAdaptiveMediaImageEntry = _persistence.findByPrimaryKey(newAdaptiveMediaImageEntry.getPrimaryKey());
 
-		Assert.assertEquals(existingAdaptiveMediaImageEntry, newAdaptiveMediaImageEntry);
+		Assert.assertEquals(existingAdaptiveMediaImageEntry,
+			newAdaptiveMediaImageEntry);
 	}
 
 	@Test(expected = NoSuchAdaptiveMediaImageEntryException.class)
@@ -285,7 +287,8 @@ public class AdaptiveMediaImageEntryPersistenceTest {
 
 		AdaptiveMediaImageEntry existingAdaptiveMediaImageEntry = _persistence.fetchByPrimaryKey(newAdaptiveMediaImageEntry.getPrimaryKey());
 
-		Assert.assertEquals(existingAdaptiveMediaImageEntry, newAdaptiveMediaImageEntry);
+		Assert.assertEquals(existingAdaptiveMediaImageEntry,
+			newAdaptiveMediaImageEntry);
 	}
 
 	@Test
@@ -312,9 +315,11 @@ public class AdaptiveMediaImageEntryPersistenceTest {
 
 		Assert.assertEquals(2, adaptiveMediaImageEntries.size());
 		Assert.assertEquals(newAdaptiveMediaImageEntry1,
-			adaptiveMediaImageEntries.get(newAdaptiveMediaImageEntry1.getPrimaryKey()));
+			adaptiveMediaImageEntries.get(
+				newAdaptiveMediaImageEntry1.getPrimaryKey()));
 		Assert.assertEquals(newAdaptiveMediaImageEntry2,
-			adaptiveMediaImageEntries.get(newAdaptiveMediaImageEntry2.getPrimaryKey()));
+			adaptiveMediaImageEntries.get(
+				newAdaptiveMediaImageEntry2.getPrimaryKey()));
 	}
 
 	@Test
@@ -350,7 +355,8 @@ public class AdaptiveMediaImageEntryPersistenceTest {
 
 		Assert.assertEquals(1, adaptiveMediaImageEntries.size());
 		Assert.assertEquals(newAdaptiveMediaImageEntry,
-			adaptiveMediaImageEntries.get(newAdaptiveMediaImageEntry.getPrimaryKey()));
+			adaptiveMediaImageEntries.get(
+				newAdaptiveMediaImageEntry.getPrimaryKey()));
 	}
 
 	@Test
@@ -376,7 +382,8 @@ public class AdaptiveMediaImageEntryPersistenceTest {
 
 		Assert.assertEquals(1, adaptiveMediaImageEntries.size());
 		Assert.assertEquals(newAdaptiveMediaImageEntry,
-			adaptiveMediaImageEntries.get(newAdaptiveMediaImageEntry.getPrimaryKey()));
+			adaptiveMediaImageEntries.get(
+				newAdaptiveMediaImageEntry.getPrimaryKey()));
 	}
 
 	@Test
@@ -387,7 +394,8 @@ public class AdaptiveMediaImageEntryPersistenceTest {
 
 		actionableDynamicQuery.setPerformActionMethod(new ActionableDynamicQuery.PerformActionMethod<AdaptiveMediaImageEntry>() {
 				@Override
-				public void performAction(AdaptiveMediaImageEntry adaptiveMediaImageEntry) {
+				public void performAction(
+					AdaptiveMediaImageEntry adaptiveMediaImageEntry) {
 					Assert.assertNotNull(adaptiveMediaImageEntry);
 
 					count.increment();
@@ -407,7 +415,8 @@ public class AdaptiveMediaImageEntryPersistenceTest {
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(AdaptiveMediaImageEntry.class,
 				_dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("adaptiveMediaImageEntryId",
+		dynamicQuery.add(RestrictionsFactoryUtil.eq(
+				"adaptiveMediaImageEntryId",
 				newAdaptiveMediaImageEntry.getAdaptiveMediaImageEntryId()));
 
 		List<AdaptiveMediaImageEntry> result = _persistence.findWithDynamicQuery(dynamicQuery);
@@ -416,7 +425,8 @@ public class AdaptiveMediaImageEntryPersistenceTest {
 
 		AdaptiveMediaImageEntry existingAdaptiveMediaImageEntry = result.get(0);
 
-		Assert.assertEquals(existingAdaptiveMediaImageEntry, newAdaptiveMediaImageEntry);
+		Assert.assertEquals(existingAdaptiveMediaImageEntry,
+			newAdaptiveMediaImageEntry);
 	}
 
 	@Test
@@ -424,8 +434,8 @@ public class AdaptiveMediaImageEntryPersistenceTest {
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(AdaptiveMediaImageEntry.class,
 				_dynamicQueryClassLoader);
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("adaptiveMediaImageEntryId",
-				RandomTestUtil.nextLong()));
+		dynamicQuery.add(RestrictionsFactoryUtil.eq(
+				"adaptiveMediaImageEntryId", RandomTestUtil.nextLong()));
 
 		List<AdaptiveMediaImageEntry> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -445,7 +455,8 @@ public class AdaptiveMediaImageEntryPersistenceTest {
 
 		Object newAdaptiveMediaImageEntryId = newAdaptiveMediaImageEntry.getAdaptiveMediaImageEntryId();
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("adaptiveMediaImageEntryId",
+		dynamicQuery.add(RestrictionsFactoryUtil.in(
+				"adaptiveMediaImageEntryId",
 				new Object[] { newAdaptiveMediaImageEntryId }));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
@@ -466,7 +477,8 @@ public class AdaptiveMediaImageEntryPersistenceTest {
 		dynamicQuery.setProjection(ProjectionFactoryUtil.property(
 				"adaptiveMediaImageEntryId"));
 
-		dynamicQuery.add(RestrictionsFactoryUtil.in("adaptiveMediaImageEntryId",
+		dynamicQuery.add(RestrictionsFactoryUtil.in(
+				"adaptiveMediaImageEntryId",
 				new Object[] { RandomTestUtil.nextLong() }));
 
 		List<Object> result = _persistence.findWithDynamicQuery(dynamicQuery);
@@ -482,7 +494,8 @@ public class AdaptiveMediaImageEntryPersistenceTest {
 
 		AdaptiveMediaImageEntry existingAdaptiveMediaImageEntry = _persistence.findByPrimaryKey(newAdaptiveMediaImageEntry.getPrimaryKey());
 
-		Assert.assertTrue(Objects.equals(existingAdaptiveMediaImageEntry.getUuid(),
+		Assert.assertTrue(Objects.equals(
+				existingAdaptiveMediaImageEntry.getUuid(),
 				ReflectionTestUtil.invoke(existingAdaptiveMediaImageEntry,
 					"getOriginalUuid", new Class<?>[0])));
 		Assert.assertEquals(Long.valueOf(
@@ -526,7 +539,8 @@ public class AdaptiveMediaImageEntryPersistenceTest {
 
 		adaptiveMediaImageEntry.setSize(RandomTestUtil.nextLong());
 
-		_adaptiveMediaImageEntries.add(_persistence.update(adaptiveMediaImageEntry));
+		_adaptiveMediaImageEntries.add(_persistence.update(
+				adaptiveMediaImageEntry));
 
 		return adaptiveMediaImageEntry;
 	}
