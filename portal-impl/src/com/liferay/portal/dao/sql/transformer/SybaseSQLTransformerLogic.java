@@ -34,8 +34,8 @@ public class SybaseSQLTransformerLogic extends BaseSQLTransformerLogic {
 			getBitwiseCheckFunction(), getBooleanFunction(),
 			getCastClobTextFunction(), getCastLongFunction(),
 			getCastTextFunction(), _getCrossJoinFunction(), _getInStrFunction(),
-			getIntegerDivisionFunction(), getNullDateFunction(),
-			_getSubstrFunction(), _getModFunction(), _getReplaceFunction());
+			getIntegerDivisionFunction(), getModFunction(),
+			getNullDateFunction(), _getSubstrFunction(), _getReplaceFunction());
 	}
 
 	@Override
@@ -60,16 +60,6 @@ public class SybaseSQLTransformerLogic extends BaseSQLTransformerLogic {
 			Matcher matcher = pattern.matcher(sql);
 
 			return matcher.replaceAll("CHARINDEX($2, $1)");
-		};
-	}
-
-	private Function<String, String> _getModFunction() {
-		Pattern pattern = getModPattern();
-
-		return (String sql) -> {
-			Matcher matcher = pattern.matcher(sql);
-
-			return matcher.replaceAll("$1 % $2");
 		};
 	}
 

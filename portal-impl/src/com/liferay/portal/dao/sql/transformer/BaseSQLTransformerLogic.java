@@ -103,6 +103,16 @@ public abstract class BaseSQLTransformerLogic implements SQLTransformerLogic {
 			Pattern.CASE_INSENSITIVE);
 	}
 
+	protected Function<String, String> getModFunction() {
+		Pattern pattern = getModPattern();
+
+		return (String sql) -> {
+			Matcher matcher = pattern.matcher(sql);
+
+			return matcher.replaceAll("$1 % $2");
+		};
+	}
+
 	protected Pattern getModPattern() {
 		return Pattern.compile(
 			"MOD\\(\\s*(.+?)\\s*,\\s*(.+?)\\s*\\)", Pattern.CASE_INSENSITIVE);
