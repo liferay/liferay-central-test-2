@@ -39,44 +39,36 @@ public class MySQLSQLTransformerLogicTest
 
 	@Test
 	public void testReplaceLower() {
-		String sql = "select lower(foo) from Foo";
-
-		String transformedSql = sqlTransformer.transform(sql);
-
-		Assert.assertEquals("select foo from Foo", transformedSql);
+		Assert.assertEquals(
+			"select foo from Foo",
+			sqlTransformer.transform("select lower(foo) from Foo"));
 	}
 
 	@Test
 	public void testReplaceLowerMultiple() {
-		String sql = "select lower(foo), bar, lower(baaz) from Foo";
-
-		String transformedSql = sqlTransformer.transform(sql);
-
-		Assert.assertEquals("select foo, bar, baaz from Foo", transformedSql);
+		Assert.assertEquals(
+			"select foo, bar, baaz from Foo",
+			sqlTransformer.transform(
+				"select lower(foo), bar, lower(baaz) from Foo"));
 	}
 
 	@Test
 	public void testReplaceLowerRecursive() {
-		String sql = "select lower(lower(foo)) from Foo";
-
-		String transformedSql = sqlTransformer.transform(sql);
-
-		Assert.assertEquals("select lower(foo) from Foo", transformedSql);
+		Assert.assertEquals(
+			"select lower(foo) from Foo",
+			sqlTransformer.transform("select lower(lower(foo)) from Foo"));
 	}
 
 	@Test
 	public void testReplaceLowerWithoutClosing() {
 		String sql = "select lower(foo from Foo";
 
-		String transformedSql = sqlTransformer.transform(sql);
-
-		Assert.assertEquals(sql, transformedSql);
+		Assert.assertEquals(
+			sql, sqlTransformer.transform(sql));
 	}
 
 	@Test
 	public void testReplaceSupportsStringCaseSensitiveQuery() {
-		String sql = "select * from foo";
-
 		MySQLDB mySQLDB = new MySQLDB(5, 7);
 
 		mySQLDB.setSupportsStringCaseSensitiveQuery(true);
@@ -84,15 +76,13 @@ public class MySQLSQLTransformerLogicTest
 		SQLTransformer sqlTransformer = SQLTransformerFactory.getSQLTransformer(
 			mySQLDB);
 
-		String transformedSql = sqlTransformer.transform(sql);
+		String sql = "select * from foo";
 
-		Assert.assertEquals("select * from foo", transformedSql);
+		Assert.assertEquals(sql, sqlTransformer.transform(sql));
 
 		sql = "select lower(foo) from Foo";
 
-		transformedSql = sqlTransformer.transform(sql);
-
-		Assert.assertEquals(sql, transformedSql);
+		Assert.assertEquals(sql, sqlTransformer.transform(sql));
 	}
 
 	@Override
