@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 
 import java.util.function.Function;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * @author Manuel de la Peña
