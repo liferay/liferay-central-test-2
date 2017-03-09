@@ -36,6 +36,10 @@ AUI.add(
 					initializer: function() {
 						var instance = this;
 
+						instance._eventHandlers = [
+							A.on('keypress', A.bind('_onNumericFieldKeyPress', instance))
+						];
+
 						instance.evaluate = A.debounce(
 							function() {
 								NumericField.superclass.evaluate.apply(instance, arguments);
@@ -58,6 +62,14 @@ AUI.add(
 						var inputGroup = container.one('.input-group-container');
 
 						inputGroup.insert(container.one('.help-block'), 'after');
+					},
+
+					_onNumericFieldKeyPress: function(event) {
+						if ((event.keyCode >= 48 && event.keyCode <= 57) || event.keyCode === 46) {
+							return true;
+						}
+						event.preventDefault();
+						return false;
 					}
 				}
 			}
