@@ -93,6 +93,6 @@ public class StagingProductNavigationControlMenuEntry
 	}
 
 	private static final String _SHOW =
-		StagingProductNavigationControlMenuEntry.class + "._SHOW";
+		StagingProductNavigationControlMenuEntry.class + "#_SHOW";
 
 }
