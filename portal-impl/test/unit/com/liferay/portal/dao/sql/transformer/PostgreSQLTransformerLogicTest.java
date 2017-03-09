@@ -38,7 +38,7 @@ public class PostgreSQLTransformerLogicTest
 	}
 
 	@Test
-	public void testTransformReplaceNegativeComparison() {
+	public void testReplaceNegativeComparison() {
 		String sql = "select * from Foo where foo != -1";
 
 		String transformedSql = sqlTransformer.transform(sql);
