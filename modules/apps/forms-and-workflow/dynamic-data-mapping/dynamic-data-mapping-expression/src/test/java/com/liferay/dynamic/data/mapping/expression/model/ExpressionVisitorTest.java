@@ -14,8 +14,6 @@
 
 package com.liferay.dynamic.data.mapping.expression.model;
 
-import com.liferay.portal.kernel.util.StringBundler;
-
 import java.util.Arrays;
 
 import org.junit.Assert;
@@ -31,8 +29,7 @@ public class ExpressionVisitorTest {
 		Expression expression = new AndExpression(
 			new Term("true"), new Term("false"));
 
-		Assert.assertEquals(
-			"true and false", expression.accept(_printExpressionVisitor));
+		Assert.assertEquals("true and false", expression.toString());
 	}
 
 	@Test
@@ -40,8 +37,7 @@ public class ExpressionVisitorTest {
 		Expression expression = new ArithmeticExpression(
 			"+", new Term("1"), new Term("1"));
 
-		Assert.assertEquals(
-			"1 + 1", expression.accept(_printExpressionVisitor));
+		Assert.assertEquals("1 + 1", expression.toString());
 	}
 
 	@Test
@@ -49,8 +45,7 @@ public class ExpressionVisitorTest {
 		Expression expression = new ComparisonExpression(
 			">", new Term("2"), new Term("1"));
 
-		Assert.assertEquals(
-			"2 > 1", expression.accept(_printExpressionVisitor));
+		Assert.assertEquals("2 > 1", expression.toString());
 	}
 
 	@Test
@@ -58,23 +53,23 @@ public class ExpressionVisitorTest {
 		Expression expression = new FunctionCallExpression(
 			"sum", Arrays.<Expression>asList(new Term("1"), new Term("2")));
 
-		Assert.assertEquals(
-			"sum(1, 2)", expression.accept(_printExpressionVisitor));
+		Assert.assertEquals("sum(1, 2)", expression.toString());
 	}
 
 	@Test
 	public void testMinusExpression() {
-		Expression expression = new MinusExpression(new Term("1"));
+		Expression parentesisExpression = new Parenthesis(new Term("1"));
 
-		Assert.assertEquals("-(1)", expression.accept(_printExpressionVisitor));
+		Expression minusExpression = new MinusExpression(parentesisExpression);
+
+		Assert.assertEquals("-(1)", minusExpression.toString());
 	}
 
 	@Test
 	public void testNotExpression1() {
 		Expression expression = new NotExpression(new Term("false"));
 
-		Assert.assertEquals(
-			"not(false)", expression.accept(_printExpressionVisitor));
+		Assert.assertEquals("not(false)", expression.toString());
 	}
 
 	@Test
@@ -105,101 +100,7 @@ public class ExpressionVisitorTest {
 
 		Expression expression = new Parenthesis(arithmeticExpression3);
 
-		Assert.assertEquals(
-			"((1 + 3) * (2 - 4))", expression.accept(_printExpressionVisitor));
-	}
-
-	private final ExpressionVisitor<String> _printExpressionVisitor =
-		new PrintExpressionVisitor();
-
-	private static class PrintExpressionVisitor
-		extends ExpressionVisitor<String> {
-
-		@Override
-		public String visit(AndExpression andExpression) {
-			return formatBinaryExpression(
-				andExpression.getOperator(),
-				andExpression.getLeftOperandExpression(),
-				andExpression.getRightOperandExpression());
-		}
-
-		@Override
-		public String visit(ArithmeticExpression arithmeticExpression) {
-			return formatBinaryExpression(
-				arithmeticExpression.getOperator(),
-				arithmeticExpression.getLeftOperandExpression(),
-				arithmeticExpression.getRightOperandExpression());
-		}
-
-		@Override
-		public String visit(ComparisonExpression comparisonExpression) {
-			return formatBinaryExpression(
-				comparisonExpression.getOperator(),
-				comparisonExpression.getLeftOperandExpression(),
-				comparisonExpression.getRightOperandExpression());
-		}
-
-		@Override
-		public String visit(FunctionCallExpression functionCallExpression) {
-			StringBundler sb = new StringBundler();
-
-			for (Expression parameter :
-					functionCallExpression.getParameterExpressions()) {
-
-				sb.append(visit(parameter));
-				sb.append(", ");
-			}
-
-			sb.setIndex(sb.index() - 1);
-
-			return String.format(
-				"%s(%s)", functionCallExpression.getFunctionName(),
-				sb.toString());
-		}
-
-		@Override
-		public String visit(MinusExpression minusExpression) {
-			return String.format(
-				"-(%s)", visit(minusExpression.getOperandExpression()));
-		}
-
-		@Override
-		public String visit(NotExpression notExpression) {
-			return String.format(
-				"not(%s)", visit(notExpression.getOperandExpression()));
-		}
-
-		@Override
-		public String visit(OrExpression orExpression) {
-			return formatBinaryExpression(
-				orExpression.getOperator(),
-				orExpression.getLeftOperandExpression(),
-				orExpression.getRightOperandExpression());
-		}
-
-		@Override
-		public String visit(Parenthesis parenthesis) {
-			return String.format("(%s)", parenthesis.getOperandExpression());
-		}
-
-		@Override
-		public String visit(Term term) {
-			return term.getValue();
-		}
-
-		protected String formatBinaryExpression(
-			String operator, Expression leftExpression,
-			Expression rightExpression) {
-
-			return String.format(
-				"%s %s %s", leftExpression.accept(this), operator,
-				rightExpression.accept(this));
-		}
-
-		protected String visit(Expression expression) {
-			return expression.accept(this);
-		}
-
+		Assert.assertEquals("((1 + 3) * (2 - 4))", expression.toString());
 	}
 
 }
