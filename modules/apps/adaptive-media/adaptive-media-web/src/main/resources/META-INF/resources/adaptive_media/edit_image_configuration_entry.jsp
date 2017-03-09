@@ -37,7 +37,7 @@ if (configurationEntry != null) {
 %>
 
 <div class="container-fluid-1280">
-	<liferay-ui:error exception="<%= ImageAdaptiveMediaConfigurationException.DuplicateImageAdaptiveMediaConfigurationEntryException.class %>" message="there-is-already-a-configuration-with-the-same-id" />
+	<liferay-ui:error exception="<%= ImageAdaptiveMediaConfigurationException.DuplicateImageAdaptiveMediaConfigurationException.class %>" message="there-is-already-a-configuration-with-the-same-id" />
 	<liferay-ui:error exception="<%= ImageAdaptiveMediaConfigurationException.InvalidHeightException.class %>" message="please-enter-a-max-height-value-larger-than-0" />
 	<liferay-ui:error exception="<%= ImageAdaptiveMediaConfigurationException.InvalidWidthException.class %>" message="please-enter-a-max-width-value-larger-than-0" />
 

@@ -17,7 +17,7 @@ package com.liferay.adaptive.media.image.configuration;
 import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.adaptive.media.ImageAdaptiveMediaConfigurationException;
-import com.liferay.adaptive.media.ImageAdaptiveMediaConfigurationException.InvalidStateImageAdaptiveMediaConfigurationEntryException;
+import com.liferay.adaptive.media.ImageAdaptiveMediaConfigurationException.InvalidStateImageAdaptiveMediaConfigurationException;
 
 import java.io.IOException;
 
@@ -40,7 +40,7 @@ public interface ImageAdaptiveMediaConfigurationHelper {
 
 	public void deleteImageAdaptiveMediaConfigurationEntry(
 			long companyId, String uuid)
-		throws InvalidStateImageAdaptiveMediaConfigurationEntryException,
+		throws InvalidStateImageAdaptiveMediaConfigurationException,
 			IOException;
 
 	public void disableImageAdaptiveMediaConfigurationEntry(

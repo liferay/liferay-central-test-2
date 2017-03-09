@@ -16,7 +16,7 @@ package com.liferay.adaptive.media.image.internal.configuration;
 
 import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
 import com.liferay.adaptive.media.ImageAdaptiveMediaConfigurationException;
-import com.liferay.adaptive.media.ImageAdaptiveMediaConfigurationException.InvalidStateImageAdaptiveMediaConfigurationEntryException;
+import com.liferay.adaptive.media.ImageAdaptiveMediaConfigurationException.InvalidStateImageAdaptiveMediaConfigurationException;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
 import com.liferay.portal.kernel.settings.CompanyServiceSettingsLocator;
@@ -92,7 +92,7 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 	@Override
 	public void deleteImageAdaptiveMediaConfigurationEntry(
 			long companyId, String uuid)
-		throws InvalidStateImageAdaptiveMediaConfigurationEntryException,
+		throws InvalidStateImageAdaptiveMediaConfigurationException,
 			IOException {
 
 		Optional<ImageAdaptiveMediaConfigurationEntry>
@@ -107,8 +107,7 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 			configurationEntryOptional.get();
 
 		if (configurationEntry.isEnabled()) {
-			throw new
-				InvalidStateImageAdaptiveMediaConfigurationEntryException();
+			throw new InvalidStateImageAdaptiveMediaConfigurationException();
 		}
 
 		forceDeleteImageAdaptiveMediaConfigurationEntry(companyId, uuid);
@@ -328,7 +327,7 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 
 		if (!oldConfigurationEntryOptional.isPresent()) {
 			throw new ImageAdaptiveMediaConfigurationException.
-				NoSuchImageAdaptiveMediaConfigurationEntryException(
+				NoSuchImageAdaptiveMediaConfigurationException(
 					"{uuid=" + oldUuid + "}");
 		}
 
@@ -378,7 +377,7 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 
 		if (duplicateConfigurationEntryOptional.isPresent()) {
 			throw new ImageAdaptiveMediaConfigurationException.
-				DuplicateImageAdaptiveMediaConfigurationEntryException();
+				DuplicateImageAdaptiveMediaConfigurationException();
 		}
 	}
 

@@ -40,25 +40,23 @@ public class ImageAdaptiveMediaConfigurationException extends Exception {
 	 * This exception is raised when a configuration with the same uuid already exists.
 	 */
 	public static final class
-		DuplicateImageAdaptiveMediaConfigurationEntryException
+		DuplicateImageAdaptiveMediaConfigurationException
 			extends ImageAdaptiveMediaConfigurationException {
 
-		public DuplicateImageAdaptiveMediaConfigurationEntryException() {
+		public DuplicateImageAdaptiveMediaConfigurationException() {
 		}
 
-		public DuplicateImageAdaptiveMediaConfigurationEntryException(
-			String s) {
-
+		public DuplicateImageAdaptiveMediaConfigurationException(String s) {
 			super(s);
 		}
 
-		public DuplicateImageAdaptiveMediaConfigurationEntryException(
+		public DuplicateImageAdaptiveMediaConfigurationException(
 			String s, Throwable throwable) {
 
 			super(s, throwable);
 		}
 
-		public DuplicateImageAdaptiveMediaConfigurationEntryException(
+		public DuplicateImageAdaptiveMediaConfigurationException(
 			Throwable throwable) {
 
 			super(throwable);
@@ -90,25 +88,23 @@ public class ImageAdaptiveMediaConfigurationException extends Exception {
 	}
 
 	public static final class
-		InvalidStateImageAdaptiveMediaConfigurationEntryException
+		InvalidStateImageAdaptiveMediaConfigurationException
 			extends ImageAdaptiveMediaConfigurationException {
 
-		public InvalidStateImageAdaptiveMediaConfigurationEntryException() {
+		public InvalidStateImageAdaptiveMediaConfigurationException() {
 		}
 
-		public InvalidStateImageAdaptiveMediaConfigurationEntryException(
-			String s) {
-
+		public InvalidStateImageAdaptiveMediaConfigurationException(String s) {
 			super(s);
 		}
 
-		public InvalidStateImageAdaptiveMediaConfigurationEntryException(
+		public InvalidStateImageAdaptiveMediaConfigurationException(
 			String s, Throwable throwable) {
 
 			super(s, throwable);
 		}
 
-		public InvalidStateImageAdaptiveMediaConfigurationEntryException(
+		public InvalidStateImageAdaptiveMediaConfigurationException(
 			Throwable throwable) {
 
 			super(throwable);
@@ -145,23 +141,23 @@ public class ImageAdaptiveMediaConfigurationException extends Exception {
 	 * @review
 	 */
 	public static final class
-		NoSuchImageAdaptiveMediaConfigurationEntryException
+		NoSuchImageAdaptiveMediaConfigurationException
 			extends ImageAdaptiveMediaConfigurationException {
 
-		public NoSuchImageAdaptiveMediaConfigurationEntryException() {
+		public NoSuchImageAdaptiveMediaConfigurationException() {
 		}
 
-		public NoSuchImageAdaptiveMediaConfigurationEntryException(String s) {
+		public NoSuchImageAdaptiveMediaConfigurationException(String s) {
 			super(s);
 		}
 
-		public NoSuchImageAdaptiveMediaConfigurationEntryException(
+		public NoSuchImageAdaptiveMediaConfigurationException(
 			String s, Throwable throwable) {
 
 			super(s, throwable);
 		}
 
-		public NoSuchImageAdaptiveMediaConfigurationEntryException(
+		public NoSuchImageAdaptiveMediaConfigurationException(
 			Throwable throwable) {
 
 			super(throwable);

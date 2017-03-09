@@ -14,7 +14,7 @@
 
 package com.liferay.adaptive.media.image.internal.test;
 
-import com.liferay.adaptive.media.ImageAdaptiveMediaConfigurationException.InvalidStateImageAdaptiveMediaConfigurationEntryException;
+import com.liferay.adaptive.media.ImageAdaptiveMediaConfigurationException.InvalidStateImageAdaptiveMediaConfigurationException;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
@@ -197,10 +197,7 @@ public class ImageAdaptiveMediaDeleteConfigurationTest
 		Assert.assertFalse(configurationEntryOptional.isPresent());
 	}
 
-	@Test(
-		expected =
-			InvalidStateImageAdaptiveMediaConfigurationEntryException.class
-	)
+	@Test(expected = InvalidStateImageAdaptiveMediaConfigurationException.class)
 	public void testDeleteEnabledConfigurationEntry() throws Exception {
 		ImageAdaptiveMediaConfigurationHelper configurationHelper =
 			serviceTracker.getService();

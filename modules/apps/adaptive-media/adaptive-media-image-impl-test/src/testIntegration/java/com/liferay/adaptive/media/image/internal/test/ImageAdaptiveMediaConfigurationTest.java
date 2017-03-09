@@ -290,7 +290,7 @@ public class ImageAdaptiveMediaConfigurationTest
 	}
 
 	@Test(
-		expected = ImageAdaptiveMediaConfigurationException.DuplicateImageAdaptiveMediaConfigurationEntryException.class
+		expected = ImageAdaptiveMediaConfigurationException.DuplicateImageAdaptiveMediaConfigurationException.class
 	)
 	public void testUpdateDuplicateConfiguration() throws Exception {
 		ImageAdaptiveMediaConfigurationHelper configurationHelper =

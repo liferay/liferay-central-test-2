@@ -102,7 +102,7 @@ public class ImageAdaptiveMediaUpdateConfigurationTest
 	}
 
 	@Test(
-		expected = ImageAdaptiveMediaConfigurationException.DuplicateImageAdaptiveMediaConfigurationEntryException.class
+		expected = ImageAdaptiveMediaConfigurationException.DuplicateImageAdaptiveMediaConfigurationException.class
 	)
 	public void testUpdateDuplicateConfiguration() throws Exception {
 		ImageAdaptiveMediaConfigurationHelper configurationHelper =
@@ -365,7 +365,7 @@ public class ImageAdaptiveMediaUpdateConfigurationTest
 	}
 
 	@Test(
-		expected = ImageAdaptiveMediaConfigurationException.NoSuchImageAdaptiveMediaConfigurationEntryException.class
+		expected = ImageAdaptiveMediaConfigurationException.NoSuchImageAdaptiveMediaConfigurationException.class
 	)
 	public void testUpdateNonExistingConfiguration() throws Exception {
 		ImageAdaptiveMediaConfigurationHelper configurationHelper =

@@ -15,7 +15,7 @@
 package com.liferay.adaptive.media.image.rest.internal.resource;
 
 import com.liferay.adaptive.media.ImageAdaptiveMediaConfigurationException;
-import com.liferay.adaptive.media.ImageAdaptiveMediaConfigurationException.InvalidStateImageAdaptiveMediaConfigurationEntryException;
+import com.liferay.adaptive.media.ImageAdaptiveMediaConfigurationException.InvalidStateImageAdaptiveMediaConfigurationException;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
 import com.liferay.adaptive.media.image.rest.internal.model.ImageAdaptiveMediaConfigurationEntryModel;
@@ -131,7 +131,7 @@ public class ImageAdaptiveMediaConfigResource {
 			_configurationHelper.deleteImageAdaptiveMediaConfigurationEntry(
 				_companyId, id);
 		}
-		catch (InvalidStateImageAdaptiveMediaConfigurationEntryException isiamcee) {
+		catch (InvalidStateImageAdaptiveMediaConfigurationException isiamce) {
 			throw new BadRequestException();
 		}
 		catch (IOException ioe) {
