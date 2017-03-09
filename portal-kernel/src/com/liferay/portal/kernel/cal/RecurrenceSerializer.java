@@ -164,10 +164,10 @@ public class RecurrenceSerializer {
 
 		calendar.set(Calendar.DAY_OF_WEEK, dayPos.getDayOfWeek());
 
-		Format dateFormat = FastDateFormatFactoryUtil.getSimpleDateFormat(
+		Format format = FastDateFormatFactoryUtil.getSimpleDateFormat(
 			"EEE", LocaleUtil.US);
 
-		return StringUtil.toUpperCase(dateFormat.format(calendar));
+		return StringUtil.toUpperCase(format.format(calendar));
 	}
 
 }
