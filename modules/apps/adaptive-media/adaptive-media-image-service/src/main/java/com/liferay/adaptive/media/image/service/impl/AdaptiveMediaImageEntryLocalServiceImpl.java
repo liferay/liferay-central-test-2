@@ -95,6 +95,17 @@ public class AdaptiveMediaImageEntryLocalServiceImpl
 	}
 
 	@Override
+	public void deleteAdaptiveMediaImageEntries(
+		long companyId,
+		AdaptiveMediaImageConfigurationEntry configurationEntry) {
+
+		adaptiveMediaImageEntryPersistence.removeByC_C(
+			companyId, configurationEntry.getUUID());
+
+		imageStorage.delete(companyId, configurationEntry.getUUID());
+	}
+
+	@Override
 	public void deleteAdaptiveMediaImageEntryFileVersion(long fileVersionId)
 		throws PortalException {
 

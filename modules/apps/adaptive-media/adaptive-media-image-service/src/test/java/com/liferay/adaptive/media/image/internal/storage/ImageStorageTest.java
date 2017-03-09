@@ -28,6 +28,17 @@ import org.mockito.Mockito;
 public class ImageStorageTest {
 
 	@Test
+	public void testGetConfigurationEntryPath() {
+		String configurationUuid = StringUtil.randomString();
+
+		String configurationEntryPath = _imageStorage.getConfigurationEntryPath(
+			configurationUuid);
+
+		Assert.assertEquals(
+			"adaptive/" + configurationUuid, configurationEntryPath);
+	}
+
+	@Test
 	public void testGetFileVersionPath() {
 		FileVersion fileVersion = Mockito.mock(FileVersion.class);
 

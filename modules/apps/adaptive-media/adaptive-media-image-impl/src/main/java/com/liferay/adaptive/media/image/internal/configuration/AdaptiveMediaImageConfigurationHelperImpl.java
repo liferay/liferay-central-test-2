@@ -19,6 +19,7 @@ import com.liferay.adaptive.media.AdaptiveMediaImageConfigurationException.Inval
 import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationHelper;
+import com.liferay.adaptive.media.image.service.AdaptiveMediaImageEntryLocalService;
 import com.liferay.portal.kernel.settings.CompanyServiceSettingsLocator;
 import com.liferay.portal.kernel.settings.ModifiableSettings;
 import com.liferay.portal.kernel.settings.PortletPreferencesSettings;
@@ -205,6 +206,11 @@ public class AdaptiveMediaImageConfigurationHelperImpl
 		if (!configurationEntryOptional.isPresent()) {
 			return;
 		}
+
+		configurationEntryOptional.ifPresent(
+			configurationEntry ->
+				_imageEntryLocalService.deleteAdaptiveMediaImageEntries(
+					companyId, configurationEntry));
 
 		Collection<AdaptiveMediaImageConfigurationEntry> configurationEntries =
 			getAdaptiveMediaImageConfigurationEntries(
@@ -479,5 +485,8 @@ public class AdaptiveMediaImageConfigurationHelperImpl
 
 	private AdaptiveMediaImageConfigurationEntryParser
 		_configurationEntryParser;
+
+	@Reference
+	private AdaptiveMediaImageEntryLocalService _imageEntryLocalService;
 
 }

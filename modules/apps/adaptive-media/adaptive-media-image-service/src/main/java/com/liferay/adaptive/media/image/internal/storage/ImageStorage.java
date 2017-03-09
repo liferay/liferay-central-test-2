@@ -39,6 +39,12 @@ public class ImageStorage {
 			fileVersionPath);
 	}
 
+	public void delete(long companyId, String configurationUuid) {
+		DLStoreUtil.deleteDirectory(
+			companyId, CompanyConstants.SYSTEM,
+			getConfigurationEntryPath(configurationUuid));
+	}
+
 	public InputStream getContentStream(
 		FileVersion fileVersion, String configurationUuid) {
 
@@ -68,6 +74,10 @@ public class ImageStorage {
 		catch (PortalException pe) {
 			throw new AdaptiveMediaRuntimeException.IOException(pe);
 		}
+	}
+
+	protected String getConfigurationEntryPath(String configurationUuid) {
+		return String.format("adaptive/%s", configurationUuid);
 	}
 
 	protected InputStream getFileAsStream(long companyId, String path)
