@@ -134,10 +134,10 @@ public class PanelCategoryHelper {
 		Group group, User user) {
 
 		int count =
-			_panelCategoryRegistry.countChildPanelCategoriesNotifications(
+			_panelCategoryRegistry.getChildPanelCategoriesNotificationsCount(
 				this, panelCategoryKey, permissionChecker, group, user);
 
-		count += _panelAppRegistry.countPanelAppsNotifications(
+		count += _panelAppRegistry.getPanelAppsNotificationsCount(
 			panelCategoryKey, permissionChecker, group, user);
 
 		return count;
