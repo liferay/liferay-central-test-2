@@ -215,4 +215,12 @@ public class KaleoTaskAssignmentInstanceLocalServiceImpl
 			findBykaleoTaskInstanceTokenId(kaleoTaskInstanceTokenId);
 	}
 
+	@Override
+	public int getKaleoTaskAssignmentInstancesCount(
+		long kaleoTaskInstanceTokenId) {
+
+		return kaleoTaskAssignmentInstancePersistence.
+			countBykaleoTaskInstanceTokenId(kaleoTaskInstanceTokenId);
+	}
+
 }
