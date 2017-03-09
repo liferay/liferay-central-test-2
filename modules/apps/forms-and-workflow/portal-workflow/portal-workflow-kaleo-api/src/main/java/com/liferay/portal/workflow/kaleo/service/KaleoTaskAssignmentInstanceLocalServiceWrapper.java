@@ -189,6 +189,12 @@ public class KaleoTaskAssignmentInstanceLocalServiceWrapper
 		return _kaleoTaskAssignmentInstanceLocalService.getKaleoTaskAssignmentInstancesCount();
 	}
 
+	@Override
+	public int getKaleoTaskAssignmentInstancesCount(
+		long kaleoTaskInstanceTokenId) {
+		return _kaleoTaskAssignmentInstanceLocalService.getKaleoTaskAssignmentInstancesCount(kaleoTaskInstanceTokenId);
+	}
+
 	/**
 	* Returns the OSGi service identifier.
 	*
@@ -286,6 +292,14 @@ public class KaleoTaskAssignmentInstanceLocalServiceWrapper
 	public java.util.List<com.liferay.portal.workflow.kaleo.model.KaleoTaskAssignmentInstance> getKaleoTaskAssignmentInstances(
 		long kaleoTaskInstanceTokenId) {
 		return _kaleoTaskAssignmentInstanceLocalService.getKaleoTaskAssignmentInstances(kaleoTaskInstanceTokenId);
+	}
+
+	@Override
+	public java.util.List<com.liferay.portal.workflow.kaleo.model.KaleoTaskAssignmentInstance> getKaleoTaskAssignmentInstances(
+		long kaleoTaskInstanceTokenId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.workflow.kaleo.model.KaleoTaskAssignmentInstance> orderByComparator) {
+		return _kaleoTaskAssignmentInstanceLocalService.getKaleoTaskAssignmentInstances(kaleoTaskInstanceTokenId,
+			start, end, orderByComparator);
 	}
 
 	/**
