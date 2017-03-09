@@ -49,6 +49,8 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.apache.commons.lang.math.NumberUtils;
+
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.component.annotations.ReferenceCardinality;
@@ -337,6 +339,13 @@ public class DDMFormValuesValidatorImpl implements DDMFormValuesValidator {
 
 			if ((ddmFormField.isLocalizable() && !value.isLocalized()) ||
 				(!ddmFormField.isLocalizable() && value.isLocalized())) {
+
+				throw new MustSetValidValue(ddmFormField.getName());
+			}
+
+			if (!isNull(value) &&
+				FieldConstants.isNumericType(ddmFormField.getDataType()) &&
+				!NumberUtils.isNumber(value.getString(defaultLocale))) {
 
 				throw new MustSetValidValue(ddmFormField.getName());
 			}
