@@ -70,11 +70,25 @@ public class ExpressionVisitorTest {
 	}
 
 	@Test
-	public void testNotExpression() {
+	public void testNotExpression1() {
 		Expression expression = new NotExpression(new Term("false"));
 
 		Assert.assertEquals(
 			"not(false)", expression.accept(_printExpressionVisitor));
+	}
+
+	@Test
+	public void testNotExpression2() {
+		Expression getValueExpression = new FunctionCallExpression(
+			"getValue", Arrays.asList(new StringTerm("Field1")));
+
+		Expression equalsExpression = new FunctionCallExpression(
+			"equals", Arrays.asList(getValueExpression, new StringTerm("Joe")));
+
+		Expression expression = new NotExpression(equalsExpression);
+
+		Assert.assertEquals(
+			"not(equals(getValue('Field1'), 'Joe'))", expression.toString());
 	}
 
 	@Test
