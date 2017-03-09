@@ -40,6 +40,7 @@ import com.liferay.portal.workflow.kaleo.model.KaleoInstanceToken;
 import com.liferay.portal.workflow.kaleo.model.KaleoLog;
 import com.liferay.portal.workflow.kaleo.model.KaleoTaskAssignmentInstance;
 import com.liferay.portal.workflow.kaleo.model.KaleoTaskInstanceToken;
+import com.liferay.portal.workflow.kaleo.runtime.integration.impl.internal.util.LazyWorkflowTaskAssigneeArrayList;
 import com.liferay.portal.workflow.kaleo.runtime.util.WorkflowContextUtil;
 import com.liferay.portal.workflow.kaleo.service.KaleoDefinitionLocalService;
 import com.liferay.portal.workflow.kaleo.service.KaleoDefinitionVersionLocalService;
@@ -320,7 +321,7 @@ public class KaleoWorkflowModelConverterImpl
 			kaleoInstance.getKaleoInstanceId());
 
 		List<WorkflowTaskAssignee> workflowTaskAssignees =
-			getWorkflowTaskAssignees(kaleoTaskInstanceToken);
+			new LazyWorkflowTaskAssigneeArrayList(kaleoTaskInstanceToken, this);
 
 		defaultWorkflowTask.setWorkflowTaskAssignees(workflowTaskAssignees);
 
