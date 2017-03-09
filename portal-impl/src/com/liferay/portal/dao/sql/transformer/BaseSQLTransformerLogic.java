@@ -106,11 +106,7 @@ public abstract class BaseSQLTransformerLogic implements SQLTransformerLogic {
 	protected Function<String, String> getModFunction() {
 		Pattern pattern = getModPattern();
 
-		return (String sql) -> {
-			Matcher matcher = pattern.matcher(sql);
-
-			return matcher.replaceAll("$1 % $2");
-		};
+		return (String sql) -> replaceMod(pattern.matcher(sql));
 	}
 
 	protected Pattern getModPattern() {
@@ -146,6 +142,10 @@ public abstract class BaseSQLTransformerLogic implements SQLTransformerLogic {
 
 	protected String replaceIntegerDivision(Matcher matcher) {
 		return matcher.replaceAll("$1 / $2");
+	}
+
+	protected String replaceMod(Matcher matcher) {
+		return matcher.replaceAll("$1 % $2");
 	}
 
 	protected void setFunctions(Function... functions) {
