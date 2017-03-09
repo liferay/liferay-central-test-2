@@ -84,7 +84,7 @@ public class Differ {
 				// If checksumsByteChannelReader is an instance of
 				// SeekableByteChannel, we can significantly reduce heap memory
 				// usage and maintain performance by reading the strong
-				// checksums as needed.
+				// checksums as needed
 
 				_checksumsByteChannelReader.skip(16);
 
