@@ -6,8 +6,10 @@ Export-Package:\
 	com.liferay.adaptive.media.image.constants,\
 	com.liferay.adaptive.media.image.counter,\
 	com.liferay.adaptive.media.image.exception,\
+	com.liferay.adaptive.media.image.finder,\
 	com.liferay.adaptive.media.image.model,\
 	com.liferay.adaptive.media.image.optimizer,\
+	com.liferay.adaptive.media.image.processor,\
 	com.liferay.adaptive.media.image.service,\
 	com.liferay.adaptive.media.image.service.persistence
 Liferay-Releng-Module-Group-Description:
