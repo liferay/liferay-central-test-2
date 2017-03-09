@@ -91,6 +91,20 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 	<%
 	int optimizeImagesAllConfigurationsBackgroundTasksCount = BackgroundTaskManagerUtil.getBackgroundTasksCount(CompanyConstants.SYSTEM, OptimizeImagesAllConfigurationsBackgroundTaskExecutor.class.getName(), false);
+
+	List<BackgroundTask> reindexSingleBackgroundTasks = BackgroundTaskManagerUtil.getBackgroundTasks(CompanyConstants.SYSTEM, OptimizeImagesSingleConfigurationBackgroundTaskExecutor.class.getName(), BackgroundTaskConstants.STATUS_IN_PROGRESS);
+
+	List<String> currentBackgroundTasks = new ArrayList<>();
+
+	if (!reindexSingleBackgroundTasks.isEmpty()) {
+		for (BackgroundTask reindexSingleBackgroundTask : reindexSingleBackgroundTasks) {
+			Map<String, Serializable> taskContextMap = reindexSingleBackgroundTask.getTaskContextMap();
+
+			String configurationEntryUuid = (String)taskContextMap.get("configurationEntryUuid");
+
+			currentBackgroundTasks.add(configurationEntryUuid);
+		}
+	}
 	%>
 
 	<aui:form action="<%= deleteImageConfigurationEntryURL.toString() %>" method="post" name="fm">
@@ -167,7 +181,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 							)
 						);
 
-						<c:if test="<%= optimizeImagesAllConfigurationsBackgroundTasksCount > 0 %>">
+						<c:if test="<%= optimizeImagesAllConfigurationsBackgroundTasksCount > 0 || currentBackgroundTasks.contains(uuid) %>">
 							component.startProgress();
 						</c:if>
 					</aui:script>
