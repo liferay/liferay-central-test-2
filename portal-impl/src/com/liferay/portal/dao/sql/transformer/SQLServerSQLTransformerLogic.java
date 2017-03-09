@@ -32,8 +32,8 @@ public class SQLServerSQLTransformerLogic extends BaseSQLTransformerLogic {
 			getBitwiseCheckFunction(), getBooleanFunction(),
 			getCastClobTextFunction(), getCastLongFunction(),
 			getCastTextFunction(), _getInStrFunction(),
-			getIntegerDivisionFunction(), getNullDateFunction(),
-			_getSubstrFunction(), _getModFunction());
+			getIntegerDivisionFunction(), getModFunction(),
+			getNullDateFunction(), _getSubstrFunction());
 	}
 
 	@Override
@@ -48,16 +48,6 @@ public class SQLServerSQLTransformerLogic extends BaseSQLTransformerLogic {
 			Matcher matcher = pattern.matcher(sql);
 
 			return matcher.replaceAll("CHARINDEX($2, $1)");
-		};
-	}
-
-	private Function<String, String> _getModFunction() {
-		Pattern pattern = getModPattern();
-
-		return (String sql) -> {
-			Matcher matcher = pattern.matcher(sql);
-
-			return matcher.replaceAll("$1 % $2");
 		};
 	}
 
