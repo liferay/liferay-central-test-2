@@ -30,10 +30,15 @@ public class OracleSQLTransformerLogic extends BaseSQLTransformerLogic {
 		super(db);
 
 		setFunctions(
-			getBooleanFunction(), _getCastClobTextFunction(),
+			getBooleanFunction(), getCastClobTextFunction(),
 			getCastLongFunction(), getCastTextFunction(),
 			getIntegerDivisionFunction(), getNullDateFunction(),
 			_getEscapeFunction(), _getNotEqualsBlankStringFunction());
+	}
+
+	@Override
+	protected String replaceCastClobText(Matcher matcher) {
+		return matcher.replaceAll("DBMS_LOB.SUBSTR($1, 4000, 1)");
 	}
 
 	@Override
@@ -44,16 +49,6 @@ public class OracleSQLTransformerLogic extends BaseSQLTransformerLogic {
 	@Override
 	protected String replaceIntegerDivision(Matcher matcher) {
 		return matcher.replaceAll("TRUNC($1 / $2)");
-	}
-
-	private Function<String, String> _getCastClobTextFunction() {
-		Pattern pattern = getCastClobTextPattern();
-
-		return (String sql) -> {
-			Matcher matcher = pattern.matcher(sql);
-
-			return matcher.replaceAll("DBMS_LOB.SUBSTR($1, 4000, 1)");
-		};
 	}
 
 	private Function<String, String> _getEscapeFunction() {

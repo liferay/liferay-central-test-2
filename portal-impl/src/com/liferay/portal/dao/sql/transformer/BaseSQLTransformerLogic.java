@@ -56,7 +56,7 @@ public abstract class BaseSQLTransformerLogic implements SQLTransformerLogic {
 	protected Function<String, String> getCastClobTextFunction() {
 		Pattern pattern = getCastClobTextPattern();
 
-		return (String sql) -> replaceCastText(pattern.matcher(sql));
+		return (String sql) -> replaceCastClobText(pattern.matcher(sql));
 	}
 
 	protected Pattern getCastClobTextPattern() {
@@ -120,6 +120,10 @@ public abstract class BaseSQLTransformerLogic implements SQLTransformerLogic {
 
 	protected String replaceBitwiseCheck(Matcher matcher) {
 		return matcher.replaceAll("($1 & $2)");
+	}
+
+	protected String replaceCastClobText(Matcher matcher) {
+		return replaceCastText(matcher);
 	}
 
 	protected String replaceCastLong(Matcher matcher) {
