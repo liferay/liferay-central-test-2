@@ -71,6 +71,7 @@ import com.liferay.portal.kernel.search.SearchResultUtil;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.service.LayoutLocalServiceUtil;
 import com.liferay.portal.kernel.service.WorkflowDefinitionLinkLocalServiceUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -570,6 +571,27 @@ public class JournalDisplayContext {
 		}
 
 		return orderColumns;
+	}
+
+	public JSONObject getPagesJSON(
+			boolean privateLayout, String selectedLayoutUuid)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		JSONArray jsonArray = _getPagesJSONArray(
+			themeDisplay.getScopeGroupId(), privateLayout, 0,
+			selectedLayoutUuid);
+
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+
+		jsonObject.put("children", jsonArray);
+		jsonObject.put("expanded", true);
+		jsonObject.put("icon", "home");
+		jsonObject.put("name", themeDisplay.getScopeGroupName());
+
+		return jsonObject;
 	}
 
 	public PortletURL getPortletURL() throws PortalException {
@@ -1253,6 +1275,50 @@ public class JournalDisplayContext {
 			jsonObject.put("icon", "folder");
 			jsonObject.put("id", folder.getFolderId());
 			jsonObject.put("name", folder.getName());
+
+			jsonArray.put(jsonObject);
+		}
+
+		return jsonArray;
+	}
+
+	private JSONArray _getPagesJSONArray(
+			long groupId, boolean privateLayout, long parentLayoutId,
+			String selectedLayoutUuid)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
+			groupId, privateLayout, parentLayoutId);
+
+		for (Layout layout : layouts) {
+			JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+
+			jsonObject.put("icon", "page");
+			jsonObject.put("id", layout.getUuid());
+			jsonObject.put("name", layout.getName(themeDisplay.getLocale()));
+			jsonObject.put("value", getLayoutBreadcrumb(layout));
+
+			if (layout.getUuid().equals(selectedLayoutUuid)) {
+				jsonObject.put("expanded", true);
+				jsonObject.put("selected", true);
+			}
+
+			if (!layout.isContentDisplayPage()) {
+				jsonObject.put("disabled", true);
+			}
+
+			JSONArray childrenJSONArray = _getPagesJSONArray(
+				groupId, privateLayout, layout.getLayoutId(),
+				selectedLayoutUuid);
+
+			if (childrenJSONArray.length() > 0) {
+				jsonObject.put("children", childrenJSONArray);
+			}
 
 			jsonArray.put(jsonObject);
 		}
