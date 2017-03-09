@@ -31,7 +31,7 @@ public class MySQLSQLTransformerLogicTest
 
 	@Override
 	@Test
-	public void testReplaceModWithWhitespacesSurroundingCommas() {
+	public void testReplaceModWithExtraWhitespace() {
 		Assert.assertEquals(
 			getModTransformedSQL(),
 			sqlTransformer.transform(getModOriginalSQL()));

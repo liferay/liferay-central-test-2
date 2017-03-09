@@ -41,11 +41,11 @@ public abstract class BaseSQLTransformerLogicTestCase {
 	}
 
 	@Test
-	public void testReplaceBitwiseCheckWithWhitespacesSurroundingCommas() {
+	public void testReplaceBitwiseCheckWithExtraWhitespace() {
 		Assert.assertEquals(
 			getBitwiseCheckTransformedSQL(),
 			sqlTransformer.transform(
-				_addWhitespacesFunction.apply(getBitwiseCheckOriginalSQL())));
+				_addExtraWhitespaceFunction.apply(getBitwiseCheckOriginalSQL())));
 	}
 
 	@Test
@@ -77,11 +77,11 @@ public abstract class BaseSQLTransformerLogicTestCase {
 	}
 
 	@Test
-	public void testReplaceInstrWithWhitespacesSurroundingCommas() {
+	public void testReplaceInstrWithExtraWhitespace() {
 		Assert.assertEquals(
 			getInstrTransformedSQL(),
 			sqlTransformer.transform(
-				_addWhitespacesFunction.apply(getInstrOriginalSQL())));
+				_addExtraWhitespaceFunction.apply(getInstrOriginalSQL())));
 	}
 
 	@Test
@@ -92,11 +92,11 @@ public abstract class BaseSQLTransformerLogicTestCase {
 	}
 
 	@Test
-	public void testReplaceIntegerDivisionWithWhitespacesSurroundingCommas() {
+	public void testReplaceIntegerDivisionWithExtraWhitespace() {
 		Assert.assertEquals(
 			getIntegerDivisionTransformedSQL(),
 			sqlTransformer.transform(
-				_addWhitespacesFunction.apply(getIntegerDivisionOriginalSQL())));
+				_addExtraWhitespaceFunction.apply(getIntegerDivisionOriginalSQL())));
 	}
 
 	@Test
@@ -107,11 +107,11 @@ public abstract class BaseSQLTransformerLogicTestCase {
 	}
 
 	@Test
-	public void testReplaceModWithWhitespacesSurroundingCommas() {
+	public void testReplaceModWithExtraWhitespace() {
 		Assert.assertEquals(
 			getModTransformedSQL(),
 			sqlTransformer.transform(
-				_addWhitespacesFunction.apply(getModOriginalSQL())));
+				_addExtraWhitespaceFunction.apply(getModOriginalSQL())));
 	}
 
 	@Test
@@ -136,11 +136,11 @@ public abstract class BaseSQLTransformerLogicTestCase {
 	}
 
 	@Test
-	public void testReplaceSubstWithWhitespacesSurroundingCommas() {
+	public void testReplaceSubstWithExtraWhitespace() {
 		Assert.assertEquals(
 			getSubstTransformedSQL(),
 			sqlTransformer.transform(
-				_addWhitespacesFunction.apply(getSubstOriginalSQL())));
+				_addExtraWhitespaceFunction.apply(getSubstOriginalSQL())));
 	}
 
 	@Test
@@ -232,7 +232,7 @@ public abstract class BaseSQLTransformerLogicTestCase {
 
 	protected SQLTransformer sqlTransformer;
 
-	private final Function<String, String> _addWhitespacesFunction =
+	private final Function<String, String> _addExtraWhitespaceFunction =
 		(String sql) -> StringUtil.replace(sql, CharPool.COMMA, "   ,   ");
 
 }
