@@ -107,20 +107,6 @@ boolean changeStructure = GetterUtil.getBoolean(request.getAttribute("edit_artic
 
 		<%
 		String eventName = liferayPortletResponse.getNamespace() + "selectDisplayPage";
-
-		ItemSelector itemSelector = (ItemSelector)request.getAttribute(JournalWebKeys.ITEM_SELECTOR);
-
-		LayoutItemSelectorCriterion layoutItemSelectorCriterion = new LayoutItemSelectorCriterion();
-
-		layoutItemSelectorCriterion.setCheckDisplayPage(true);
-
-		List<ItemSelectorReturnType> desiredItemSelectorReturnTypes = new ArrayList<ItemSelectorReturnType>();
-
-		desiredItemSelectorReturnTypes.add(new UUIDItemSelectorReturnType());
-
-		layoutItemSelectorCriterion.setDesiredItemSelectorReturnTypes(desiredItemSelectorReturnTypes);
-
-		PortletURL itemSelectorURL = itemSelector.getItemSelectorURL(RequestBackedPortletURLFactoryUtil.create(liferayPortletRequest), eventName, layoutItemSelectorCriterion);
 		%>
 
 		<aui:script use="liferay-item-selector-dialog">
@@ -132,17 +118,19 @@ boolean changeStructure = GetterUtil.getBoolean(request.getAttribute("edit_artic
 			$('#<portlet:namespace />chooseDisplayPage').on(
 				'click',
 				function(event) {
+					event.preventDefault();
+
 					var itemSelectorDialog = new A.LiferayItemSelectorDialog(
 						{
-							eventName: '<%= eventName %>',
+							eventName: '<portlet:namespace />selectDisplayPage',
 							on: {
 								selectedItemChange: function(event) {
 									var selectedItem = event.newVal;
 
 									if (selectedItem) {
-										pagesContainerInput.val(selectedItem.value);
+										pagesContainerInput.val(selectedItem.id);
 
-										displayPageNameInput.html(selectedItem.layoutpath);
+										displayPageNameInput.html(selectedItem.name);
 
 										displayPageItemRemove.removeClass('hide');
 									}
@@ -150,22 +138,18 @@ boolean changeStructure = GetterUtil.getBoolean(request.getAttribute("edit_artic
 							},
 							'strings.add': '<liferay-ui:message key="done" />',
 							title: '<liferay-ui:message key="select-page" />',
-							url: '<%= itemSelectorURL.toString() %>'
+
+							<portlet:renderURL var="selectPageURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
+								<portlet:param name="mvcPath" value="/select_page.jsp" />
+								<portlet:param name="eventName" value="<%= eventName %>" />
+								<portlet:param name="layoutUuid" value="<%= layoutUuid %>" />
+							</portlet:renderURL>
+
+							url: '<%= selectPageURL.toString() %>'
 						}
 					);
 
 					itemSelectorDialog.open();
-				}
-			);
-
-			displayPageItemRemove.on(
-				'click',
-				function(event) {
-					displayPageNameInput.html('<liferay-ui:message key="none" />');
-
-					pagesContainerInput.val('');
-
-					displayPageItemRemove.addClass('hide');
 				}
 			);
 		</aui:script>
