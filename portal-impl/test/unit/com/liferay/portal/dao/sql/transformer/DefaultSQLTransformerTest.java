@@ -27,14 +27,6 @@ import org.junit.Test;
 public class DefaultSQLTransformerTest {
 
 	@Test
-	public void testTransformWithOneFunction() {
-		SQLTransformer sqlTransformer = new DefaultSQLTransformer(
-			new Function[] {_dummyFunction});
-
-		Assert.assertNull(sqlTransformer.transform(null));
-	}
-
-	@Test
 	public void testTransformWithMultipleFunctions() {
 		SQLTransformer sqlTransformer = new DefaultSQLTransformer(
 			new Function[] {_toUpperCaseFunction, _trimFunction});
@@ -63,8 +55,15 @@ public class DefaultSQLTransformerTest {
 		Assert.assertEquals(sql, sqlTransformer.transform(sql));
 	}
 
-	private final Function<String, String> _dummyFunction =
-		(String sql) -> sql;
+	@Test
+	public void testTransformWithOneFunction() {
+		SQLTransformer sqlTransformer = new DefaultSQLTransformer(
+			new Function[] {_dummyFunction});
+
+		Assert.assertNull(sqlTransformer.transform(null));
+	}
+
+	private final Function<String, String> _dummyFunction = (String sql) -> sql;
 	private final Function<String, String> _toUpperCaseFunction =
 		(String sql) -> StringUtil.toUpperCase(sql);
 	private final Function<String, String> _trimFunction =
