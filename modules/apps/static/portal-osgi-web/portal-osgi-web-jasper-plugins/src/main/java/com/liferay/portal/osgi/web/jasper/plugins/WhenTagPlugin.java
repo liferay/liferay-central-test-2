@@ -25,29 +25,30 @@ import org.apache.jasper.compiler.tagplugin.TagPluginContext;
 public class WhenTagPlugin implements TagPlugin {
 
 	@Override
-	public void doTag(TagPluginContext context) {
-		TagPluginContext parentContext = context.getParentContext();
+	public void doTag(TagPluginContext tagPluginContext) {
+		TagPluginContext parentTagPluginContext =
+			tagPluginContext.getParentContext();
 
-		if (parentContext == null) {
-			context.dontUseTagPlugin();
+		if (parentTagPluginContext == null) {
+			tagPluginContext.dontUseTagPlugin();
 
 			return;
 		}
 
-		Object first = parentContext.getPluginAttribute("first");
+		Object first = parentTagPluginContext.getPluginAttribute("first");
 
 		if (first == null) {
-			context.generateJavaSource("if (");
+			tagPluginContext.generateJavaSource("if (");
 
-			parentContext.setPluginAttribute("first", "false");
+			parentTagPluginContext.setPluginAttribute("first", "false");
 		}
 		else {
-			context.generateJavaSource("}\nelse if (");
+			tagPluginContext.generateJavaSource("}\nelse if (");
 		}
 
-		context.generateAttribute("test");
-		context.generateJavaSource(") {");
-		context.generateBody();
+		tagPluginContext.generateAttribute("test");
+		tagPluginContext.generateJavaSource(") {");
+		tagPluginContext.generateBody();
 	}
 
 }

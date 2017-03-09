@@ -23,20 +23,21 @@ import org.apache.jasper.compiler.tagplugin.TagPluginContext;
 public class IfTagPlugin implements TagPlugin {
 
 	@Override
-	public void doTag(TagPluginContext context) {
-		if (context.isAttributeSpecified("var")) {
-			String variableName = context.getTemporaryVariableName();
+	public void doTag(TagPluginContext tagPluginContext) {
+		if (tagPluginContext.isAttributeSpecified("var")) {
+			String variableName = tagPluginContext.getTemporaryVariableName();
 
-			context.generateJavaSource("boolean ");
-			context.generateJavaSource(variableName);
-			context.generateJavaSource(" = ");
-			context.generateAttribute("test");
-			context.generateJavaSource(";");
+			tagPluginContext.generateJavaSource("boolean ");
+			tagPluginContext.generateJavaSource(variableName);
+			tagPluginContext.generateJavaSource(" = ");
+			tagPluginContext.generateAttribute("test");
+			tagPluginContext.generateJavaSource(";");
 
 			String scope = "PageContext.PAGE_SCOPE";
 
-			if (context.isAttributeSpecified("scope")) {
-				String scopeAttribute = context.getConstantAttribute("scope");
+			if (tagPluginContext.isAttributeSpecified("scope")) {
+				String scopeAttribute = tagPluginContext.getConstantAttribute(
+					"scope");
 
 				if (scopeAttribute != null) {
 					scopeAttribute = scopeAttribute.toLowerCase();
@@ -53,27 +54,26 @@ public class IfTagPlugin implements TagPlugin {
 				}
 			}
 
-			context.generateJavaSource("_jspx_page_context.setAttribute(");
-			context.generateAttribute("var");
-			context.generateJavaSource(", ");
-			context.generateJavaSource(variableName);
-			context.generateJavaSource(", ");
-			context.generateJavaSource(scope);
-			context.generateJavaSource(");");
+			tagPluginContext.generateJavaSource(
+				"_jspx_page_tagPluginContext.setAttribute(");
+			tagPluginContext.generateAttribute("var");
+			tagPluginContext.generateJavaSource(", ");
+			tagPluginContext.generateJavaSource(variableName);
+			tagPluginContext.generateJavaSource(", ");
+			tagPluginContext.generateJavaSource(scope);
+			tagPluginContext.generateJavaSource(");");
 
-			context.generateJavaSource("if (");
-			context.generateJavaSource(variableName);
+			tagPluginContext.generateJavaSource("if (");
+			tagPluginContext.generateJavaSource(variableName);
 		}
 		else {
-			context.generateJavaSource("if (");
-			context.generateAttribute("test");
+			tagPluginContext.generateJavaSource("if (");
+			tagPluginContext.generateAttribute("test");
 		}
 
-		context.generateJavaSource(") {");
-
-		context.generateBody();
-
-		context.generateJavaSource("}");
+		tagPluginContext.generateJavaSource(") {");
+		tagPluginContext.generateBody();
+		tagPluginContext.generateJavaSource("}");
 	}
 
 }

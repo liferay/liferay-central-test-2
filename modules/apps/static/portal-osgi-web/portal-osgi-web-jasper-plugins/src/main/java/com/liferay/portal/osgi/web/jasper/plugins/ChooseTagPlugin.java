@@ -25,9 +25,9 @@ import org.apache.jasper.compiler.tagplugin.TagPluginContext;
 public class ChooseTagPlugin implements TagPlugin {
 
 	@Override
-	public void doTag(TagPluginContext context) {
-		context.generateBody();
-		context.generateJavaSource("}");
+	public void doTag(TagPluginContext tagPluginContext) {
+		tagPluginContext.generateBody();
+		tagPluginContext.generateJavaSource("}");
 	}
 
 }
