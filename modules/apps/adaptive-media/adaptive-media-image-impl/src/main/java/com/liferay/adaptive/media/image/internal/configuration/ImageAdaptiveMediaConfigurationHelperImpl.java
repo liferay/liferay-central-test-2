@@ -245,8 +245,12 @@ public class ImageAdaptiveMediaConfigurationHelperImpl
 		Comparator<ImageAdaptiveMediaConfigurationEntry> comparator =
 			Comparator.comparing(ImageAdaptiveMediaConfigurationEntry::getName);
 
-		return configurationEntryStream.filter(
-			predicate).sorted(comparator).collect(Collectors.toList());
+		Stream<ImageAdaptiveMediaConfigurationEntry>
+			imageAdaptiveMediaConfigurationEntryStream =
+				configurationEntryStream.filter(predicate);
+
+		return imageAdaptiveMediaConfigurationEntryStream.sorted(comparator).
+			collect(Collectors.toList());
 	}
 
 	@Override
