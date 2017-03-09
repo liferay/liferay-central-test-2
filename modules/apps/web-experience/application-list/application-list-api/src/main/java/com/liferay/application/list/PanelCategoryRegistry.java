@@ -49,33 +49,6 @@ import org.osgi.service.component.annotations.Deactivate;
 @Component(immediate = true, service = PanelCategoryRegistry.class)
 public class PanelCategoryRegistry {
 
-	public int getChildPanelCategoriesNotificationsCount(
-		PanelCategoryHelper panelCategoryHelper, String panelCategoryKey,
-		PermissionChecker permissionChecker, Group group, User user) {
-
-		int count = 0;
-
-		for (PanelCategory panelCategory :
-				getChildPanelCategories(panelCategoryKey)) {
-
-			int notificationsCount = panelCategory.getNotificationsCount(
-				panelCategoryHelper, permissionChecker, group, user);
-
-			try {
-				if ((notificationsCount > 0) &&
-					panelCategory.isShow(permissionChecker, group)) {
-
-					count += notificationsCount;
-				}
-			}
-			catch (PortalException pe) {
-				_log.error(pe, pe);
-			}
-		}
-
-		return count;
-	}
-
 	public List<PanelCategory> getChildPanelCategories(
 		PanelCategory panelCategory) {
 
@@ -131,6 +104,33 @@ public class PanelCategoryRegistry {
 				}
 
 			});
+	}
+
+	public int getChildPanelCategoriesNotificationsCount(
+		PanelCategoryHelper panelCategoryHelper, String panelCategoryKey,
+		PermissionChecker permissionChecker, Group group, User user) {
+
+		int count = 0;
+
+		for (PanelCategory panelCategory :
+				getChildPanelCategories(panelCategoryKey)) {
+
+			int notificationsCount = panelCategory.getNotificationsCount(
+				panelCategoryHelper, permissionChecker, group, user);
+
+			try {
+				if ((notificationsCount > 0) &&
+					panelCategory.isShow(permissionChecker, group)) {
+
+					count += notificationsCount;
+				}
+			}
+			catch (PortalException pe) {
+				_log.error(pe, pe);
+			}
+		}
+
+		return count;
 	}
 
 	public PanelCategory getFirstChildPanelCategory(
