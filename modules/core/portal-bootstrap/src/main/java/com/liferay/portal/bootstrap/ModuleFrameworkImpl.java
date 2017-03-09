@@ -1153,9 +1153,11 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 
 			});
 
-		for (String staticJarName : PropsValues.MODULE_FRAMEWORK_STATIC_JARS) {
+		for (String staticJarFileName :
+				PropsValues.MODULE_FRAMEWORK_STATIC_JARS) {
+
 			File staticJarFile = new File(
-				PropsValues.LIFERAY_LIB_PORTAL_DIR, staticJarName);
+				PropsValues.LIFERAY_LIB_PORTAL_DIR, staticJarFileName);
 
 			if (staticJarFile.exists()) {
 				jarPaths.add(staticJarFile.toPath());
