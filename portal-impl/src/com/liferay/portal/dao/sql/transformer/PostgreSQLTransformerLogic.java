@@ -32,8 +32,8 @@ public class PostgreSQLTransformerLogic extends BaseSQLTransformerLogic {
 		setFunctions(
 			getBitwiseCheckFunction(), getBooleanFunction(),
 			getCastClobTextFunction(), getCastLongFunction(),
-			getCastTextFunction(), getIntegerDivisionFunction(),
-			_getInStrFunction(), _getNegativeComparisonFunction(),
+			getCastTextFunction(), getInstrFunction(),
+			getIntegerDivisionFunction(), _getNegativeComparisonFunction(),
 			_getNullDateFunction());
 	}
 
@@ -42,14 +42,9 @@ public class PostgreSQLTransformerLogic extends BaseSQLTransformerLogic {
 		return matcher.replaceAll("CAST($1 AS TEXT)");
 	}
 
-	private Function<String, String> _getInStrFunction() {
-		Pattern instrPattern = getInstrPattern();
-
-		return (String sql) -> {
-			Matcher matcher = instrPattern.matcher(sql);
-
-			return matcher.replaceAll("POSITION($2 in $1)");
-		};
+	@Override
+	protected String replaceInstr(Matcher matcher) {
+		return matcher.replaceAll("POSITION($2 in $1)");
 	}
 
 	private Function<String, String> _getNegativeComparisonFunction() {

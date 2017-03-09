@@ -33,9 +33,9 @@ public class SybaseSQLTransformerLogic extends BaseSQLTransformerLogic {
 		setFunctions(
 			getBitwiseCheckFunction(), getBooleanFunction(),
 			getCastClobTextFunction(), getCastLongFunction(),
-			getCastTextFunction(), _getCrossJoinFunction(),
+			getCastTextFunction(), getInstrFunction(),
 			getIntegerDivisionFunction(), getModFunction(),
-			getNullDateFunction(), _getInStrFunction(), _getSubstrFunction(),
+			getNullDateFunction(), getSubstrFunction(), _getCrossJoinFunction(),
 			_getReplaceFunction());
 	}
 
@@ -54,28 +54,8 @@ public class SybaseSQLTransformerLogic extends BaseSQLTransformerLogic {
 			sql, "CROSS JOIN", StringPool.COMMA);
 	}
 
-	private Function<String, String> _getInStrFunction() {
-		Pattern pattern = getInstrPattern();
-
-		return (String sql) -> {
-			Matcher matcher = pattern.matcher(sql);
-
-			return matcher.replaceAll("CHARINDEX($2, $1)");
-		};
-	}
-
 	private Function<String, String> _getReplaceFunction() {
 		return (String sql) -> sql.replaceAll("(?i)replace\\(", "str_replace(");
-	}
-
-	private Function<String, String> _getSubstrFunction() {
-		Pattern pattern = getSubstrPattern();
-
-		return (String sql) -> {
-			Matcher matcher = pattern.matcher(sql);
-
-			return matcher.replaceAll("SUBSTRING($1, $2, $3)");
-		};
 	}
 
 }
