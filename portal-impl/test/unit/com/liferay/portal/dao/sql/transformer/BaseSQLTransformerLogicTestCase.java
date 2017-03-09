@@ -45,7 +45,8 @@ public abstract class BaseSQLTransformerLogicTestCase {
 		Assert.assertEquals(
 			getBitwiseCheckTransformedSQL(),
 			sqlTransformer.transform(
-				_addExtraWhitespaceFunction.apply(getBitwiseCheckOriginalSQL())));
+				_addExtraWhitespaceFunction.apply(
+					getBitwiseCheckOriginalSQL())));
 	}
 
 	@Test
@@ -96,7 +97,8 @@ public abstract class BaseSQLTransformerLogicTestCase {
 		Assert.assertEquals(
 			getIntegerDivisionTransformedSQL(),
 			sqlTransformer.transform(
-				_addExtraWhitespaceFunction.apply(getIntegerDivisionOriginalSQL())));
+				_addExtraWhitespaceFunction.apply(
+					getIntegerDivisionOriginalSQL())));
 	}
 
 	@Test
