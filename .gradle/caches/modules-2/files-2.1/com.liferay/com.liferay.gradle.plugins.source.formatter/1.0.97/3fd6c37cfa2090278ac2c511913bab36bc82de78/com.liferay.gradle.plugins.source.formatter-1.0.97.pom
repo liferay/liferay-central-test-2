@@ -3,9 +3,9 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.liferay</groupId>
-  <artifactId>com.liferay.gradle.plugins.gulp</artifactId>
-  <version>2.0.10</version>
-  <description>Liferay Gradle Plugins Gulp</description>
+  <artifactId>com.liferay.gradle.plugins.source.formatter</artifactId>
+  <version>1.0.97</version>
+  <description>Liferay Gradle Plugins Source Formatter</description>
   <licenses>
     <license>
       <name>LGPL 2.1</name>
@@ -27,9 +27,15 @@
   <dependencies>
     <dependency>
       <groupId>com.liferay</groupId>
-      <artifactId>com.liferay.gradle.plugins.node</artifactId>
-      <version>2.0.0</version>
+      <artifactId>com.liferay.gradle.util</artifactId>
+      <version>1.0.26</version>
       <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.liferay</groupId>
+      <artifactId>com.liferay.source.formatter</artifactId>
+      <version>1.0.364</version>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
 </project>
