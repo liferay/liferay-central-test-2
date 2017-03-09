@@ -33,38 +33,6 @@ import org.osgi.service.component.annotations.Component;
 @Component(immediate = true, service = ImageStorage.class)
 public class ImageStorage {
 
-	public void copy(
-		FileVersion sourceFileVersion, FileVersion destinationFileVersion) {
-
-		try {
-			String destinationBasePath = getFileVersionPath(
-				destinationFileVersion);
-
-			String sourceBasePath = getFileVersionPath(sourceFileVersion);
-
-			String[] sourceFileNames = DLStoreUtil.getFileNames(
-				sourceFileVersion.getCompanyId(), CompanyConstants.SYSTEM,
-				sourceBasePath);
-
-			for (String sourceFileName : sourceFileNames) {
-				try (InputStream inputStream = getFileAsStream(
-						sourceFileVersion.getCompanyId(), sourceFileName)) {
-
-					String destinationPath =
-						destinationBasePath + sourceFileName;
-
-					DLStoreUtil.addFile(
-						sourceFileVersion.getCompanyId(),
-						CompanyConstants.SYSTEM, destinationPath, false,
-						inputStream);
-				}
-			}
-		}
-		catch (IOException | PortalException e) {
-			throw new AdaptiveMediaRuntimeException.IOException(e);
-		}
-	}
-
 	public void delete(FileVersion fileVersion) {
 		String fileVersionPath = getFileVersionPath(fileVersion);
 
@@ -105,10 +73,6 @@ public class ImageStorage {
 		catch (PortalException pe) {
 			throw new AdaptiveMediaRuntimeException.IOException(pe);
 		}
-	}
-
-	protected File getFile(long companyId, String path) throws PortalException {
-		return DLStoreUtil.getFile(companyId, CompanyConstants.SYSTEM, path);
 	}
 
 	protected InputStream getFileAsStream(long companyId, String path)
