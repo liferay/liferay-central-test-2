@@ -232,7 +232,7 @@
 			<var name="eventType" value="All Day" />
 			<var name="pageName" value="Calendar Page" />
 			<var name="site" value="${siteName}" />
-			<var name="user" value="Test Test" />
+			<var name="userFullName" value="Test Test (You)" />
 		</execute>
 
 		<execute macro="Navigator#gotoPage">
@@ -245,7 +245,7 @@
 			<var name="eventTitle" value="Calendar Event All Day Title" />
 			<var name="eventType" value="All Day" />
 			<var name="site" value="${siteName}" />
-			<var name="user" value="Test Test" />
+			<var name="userFullName" value="Test Test (You)" />
 		</execute>
 	</command>
 
@@ -711,7 +711,7 @@
 			<var name="eventType" value="Regular" />
 			<var name="pageName" value="Calendar Page" />
 			<var name="site" value="${siteName}" />
-			<var name="user" value="Test Test" />
+			<var name="userFullName" value="Test Test (You)" />
 		</execute>
 
 		<execute macro="Navigator#gotoPage">
@@ -724,7 +724,7 @@
 			<var name="eventTitle" value="Calendar Event Regular Title" />
 			<var name="eventType" value="Regular" />
 			<var name="site" value="${siteName}" />
-			<var name="user" value="Test Test" />
+			<var name="userFullName" value="Test Test (You)" />
 		</execute>
 	</command>
 
@@ -1004,7 +1004,7 @@
 			<var name="numberOfOccurrences" value="1" />
 			<var name="pageName" value="Calendar Page" />
 			<var name="site" value="${siteName}" />
-			<var name="user" value="Test Test" />
+			<var name="userFullName" value="Test Test (You)" />
 		</execute>
 
 		<execute macro="Navigator#gotoPage">
@@ -1017,7 +1017,7 @@
 			<var name="eventTitle" value="Calendar Event Repeating Title" />
 			<var name="eventType" value="Repeating" />
 			<var name="site" value="${siteName}" />
-			<var name="user" value="Test Test" />
+			<var name="userFullName" value="Test Test (You)" />
 		</execute>
 	</command>
 
@@ -3669,7 +3669,7 @@
 			<var name="eventType" value="Regular" />
 			<var name="pageName" value="Calendar Page" />
 			<var name="site" value="${siteName}" />
-			<var name="user" value="Test Test" />
+			<var name="userFullName" value="Test Test (You)" />
 		</execute>
 
 		<execute macro="Navigator#gotoPage">
@@ -3682,7 +3682,7 @@
 			<var name="eventTitle" value="Calendar Event Regular Title" />
 			<var name="eventType" value="Regular" />
 			<var name="site" value="${siteName}" />
-			<var name="user" value="Test Test" />
+			<var name="userFullName" value="Test Test (You)" />
 		</execute>
 
 		<execute macro="Navigator#gotoPage">
@@ -3724,7 +3724,7 @@
 			<var name="eventComment" value="Calendar Event Regular Comment" />
 			<var name="eventTitle" value="Calendar Event Regular Title" />
 			<var name="eventType" value="Regular" />
-			<var name="user" value="Test Test" />
+			<var name="userFullName" value="Test Test (You)" />
 		</execute>
 	</command>
 
