@@ -14,7 +14,7 @@
 
 package com.liferay.adaptive.media.blogs.editor.configuration.internal;
 
-import com.liferay.adaptive.media.image.item.selector.ImageAdaptiveMediaURLItemSelectorReturnType;
+import com.liferay.adaptive.media.image.item.selector.ImageAdaptiveMediaFileEntryItemSelectorReturnType;
 import com.liferay.blogs.item.selector.criterion.BlogsItemSelectorCriterion;
 import com.liferay.blogs.web.constants.BlogsPortletKeys;
 import com.liferay.item.selector.ItemSelector;
@@ -40,7 +40,7 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 /**
- * @author Alejandro Tardín
+ * @author Sergio González
  */
 @Component(
 	property = {
@@ -51,7 +51,7 @@ import org.osgi.service.component.annotations.Reference;
 	},
 	service = EditorConfigContributor.class
 )
-public class AdaptiveMediaBlogsEditorConfigContributor
+public class DynamicAdaptiveMediaBlogsEditorConfigContributor
 	extends BaseEditorConfigContributor {
 
 	@Override
@@ -59,6 +59,17 @@ public class AdaptiveMediaBlogsEditorConfigContributor
 		JSONObject jsonObject, Map<String, Object> inputEditorTaglibAttributes,
 		ThemeDisplay themeDisplay,
 		RequestBackedPortletURLFactory requestBackedPortletURLFactory) {
+
+		String allowedContent = jsonObject.getString("allowedContent");
+
+		if (Validator.isNotNull(allowedContent)) {
+			allowedContent += StringPool.SPACE + _IMG_TAG_RULE;
+		}
+		else {
+			allowedContent = _IMG_TAG_RULE;
+		}
+
+		jsonObject.put("allowedContent", allowedContent);
 
 		String itemSelectorURL = jsonObject.getString(
 			"filebrowserImageBrowseLinkUrl");
@@ -79,7 +90,7 @@ public class AdaptiveMediaBlogsEditorConfigContributor
 				itemSelectorCriterion instanceof FileItemSelectorCriterion ||
 				itemSelectorCriterion instanceof ImageItemSelectorCriterion) {
 
-				addImageAdaptiveMediaURLItemSelectorReturnType(
+				addImageAdaptiveMediaFileEntryItemSelectorReturnType(
 					itemSelectorCriterion);
 
 				imageAdaptiveMediaURLItemSelectorReturnTypeAdded = true;
@@ -89,6 +100,17 @@ public class AdaptiveMediaBlogsEditorConfigContributor
 		if (!imageAdaptiveMediaURLItemSelectorReturnTypeAdded) {
 			return;
 		}
+
+		String extraPlugins = jsonObject.getString("extraPlugins");
+
+		if (Validator.isNotNull(extraPlugins)) {
+			extraPlugins = extraPlugins + ",adaptivemedia";
+		}
+		else {
+			extraPlugins = "adaptivemedia";
+		}
+
+		jsonObject.put("extraPlugins", extraPlugins);
 
 		String itemSelectedEventName = _itemSelector.getItemSelectedEventName(
 			itemSelectorURL);
@@ -102,8 +124,6 @@ public class AdaptiveMediaBlogsEditorConfigContributor
 			"filebrowserImageBrowseLinkUrl", itemSelectorPortletURL.toString());
 		jsonObject.put(
 			"filebrowserImageBrowseUrl", itemSelectorPortletURL.toString());
-
-		_allowPictureTag(jsonObject);
 	}
 
 	@Reference(unbind = "-")
@@ -111,14 +131,14 @@ public class AdaptiveMediaBlogsEditorConfigContributor
 		_itemSelector = itemSelector;
 	}
 
-	protected void addImageAdaptiveMediaURLItemSelectorReturnType(
+	protected void addImageAdaptiveMediaFileEntryItemSelectorReturnType(
 		ItemSelectorCriterion itemSelectorCriterion) {
 
 		List<ItemSelectorReturnType> desiredItemSelectorReturnTypes =
 			new ArrayList<>();
 
 		desiredItemSelectorReturnTypes.add(
-			new ImageAdaptiveMediaURLItemSelectorReturnType());
+			new ImageAdaptiveMediaFileEntryItemSelectorReturnType());
 		desiredItemSelectorReturnTypes.addAll(
 			itemSelectorCriterion.getDesiredItemSelectorReturnTypes());
 
@@ -126,21 +146,7 @@ public class AdaptiveMediaBlogsEditorConfigContributor
 			desiredItemSelectorReturnTypes);
 	}
 
-	private void _allowPictureTag(JSONObject jsonObject) {
-		String allowedContent = jsonObject.getString("allowedContent");
-
-		if (Validator.isNotNull(allowedContent)) {
-			allowedContent += StringPool.SPACE + _PICTURE_TAG_RULE;
-		}
-		else {
-			allowedContent = _PICTURE_TAG_RULE;
-		}
-
-		jsonObject.put("allowedContent", allowedContent);
-	}
-
-	private static final String _PICTURE_TAG_RULE =
-		"picture[*](*); source[*](*);";
+	private static final String _IMG_TAG_RULE = "img[*](*);";
 
 	private ItemSelector _itemSelector;
 

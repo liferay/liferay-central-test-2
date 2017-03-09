@@ -52,7 +52,7 @@ import org.skyscreamer.jsonassert.JSONAssert;
  * @author Alejandro Tardín
  */
 @RunWith(MockitoJUnitRunner.class)
-public class AdaptiveMediaBlogsEditorConfigContributorTest {
+public class StaticAdaptiveMediaBlogsEditorConfigContributorTest {
 
 	@Before
 	public void setUp() {
@@ -68,10 +68,10 @@ public class AdaptiveMediaBlogsEditorConfigContributorTest {
 			_eventName
 		);
 
-		_adaptiveMediaBlogsEditorConfigContributor =
-			new AdaptiveMediaBlogsEditorConfigContributor();
+		_staticAdaptiveMediaBlogsEditorConfigContributor =
+			new StaticAdaptiveMediaBlogsEditorConfigContributor();
 
-		_adaptiveMediaBlogsEditorConfigContributor.setItemSelector(
+		_staticAdaptiveMediaBlogsEditorConfigContributor.setItemSelector(
 			_itemSelector);
 	}
 
@@ -86,7 +86,7 @@ public class AdaptiveMediaBlogsEditorConfigContributorTest {
 			Collections.<ItemSelectorReturnType>singletonList(
 				new URLItemSelectorReturnType()));
 
-		_adaptiveMediaBlogsEditorConfigContributor.
+		_staticAdaptiveMediaBlogsEditorConfigContributor.
 			addImageAdaptiveMediaURLItemSelectorReturnType(
 				blogsItemSelectorCriterion);
 
@@ -150,9 +150,53 @@ public class AdaptiveMediaBlogsEditorConfigContributorTest {
 			Collections.<ItemSelectorCriterion>emptyList()
 		);
 
-		_adaptiveMediaBlogsEditorConfigContributor.populateConfigJSONObject(
-			jsonObject, _inputEditorTaglibAttributes, _themeDisplay,
-			_requestBackedPortletURLFactory);
+		_staticAdaptiveMediaBlogsEditorConfigContributor.
+			populateConfigJSONObject(
+				jsonObject, _inputEditorTaglibAttributes, _themeDisplay,
+				_requestBackedPortletURLFactory);
+
+		JSONAssert.assertEquals(
+			expectedJSONObject.toJSONString(), jsonObject.toJSONString(), true);
+	}
+
+	@Test
+	public void testDoesNothingIfTheAdaptiveMediaPluginHasAlreadyBeenAdded()
+		throws Exception {
+
+		ItemSelectorCriterion itemSelectorCriterion = _getItemSelectorCriterion(
+			BlogsItemSelectorCriterion.class);
+
+		Mockito.when(
+			_itemSelector.getItemSelectorCriteria(_itemSelectorURL)
+		).thenReturn(
+			Arrays.asList(itemSelectorCriterion)
+		);
+
+		Mockito.when(
+			_itemSelector.getItemSelectorURL(
+				_requestBackedPortletURLFactory, _eventName,
+				itemSelectorCriterion)
+		).thenReturn(
+			_itemSelectorPortletURL
+		);
+
+		JSONObject originalJSONObject = new JSONObjectImpl();
+
+		originalJSONObject.put("allowedContent", "a[*](*); div(*);");
+		originalJSONObject.put("extraPlugins", "adaptivemedia");
+		originalJSONObject.put(
+			"filebrowserImageBrowseLinkUrl", _itemSelectorURL);
+
+		JSONObject jsonObject = new JSONObjectImpl(
+			originalJSONObject.toJSONString());
+
+		JSONObject expectedJSONObject = new JSONObjectImpl(
+			originalJSONObject.toJSONString());
+
+		_staticAdaptiveMediaBlogsEditorConfigContributor.
+			populateConfigJSONObject(
+				jsonObject, _inputEditorTaglibAttributes, _themeDisplay,
+				_requestBackedPortletURLFactory);
 
 		JSONAssert.assertEquals(
 			expectedJSONObject.toJSONString(), jsonObject.toJSONString(), true);
@@ -172,9 +216,10 @@ public class AdaptiveMediaBlogsEditorConfigContributorTest {
 		JSONObject expectedJSONObject = new JSONObjectImpl(
 			originalJSONObject.toJSONString());
 
-		_adaptiveMediaBlogsEditorConfigContributor.populateConfigJSONObject(
-			jsonObject, _inputEditorTaglibAttributes, _themeDisplay,
-			_requestBackedPortletURLFactory);
+		_staticAdaptiveMediaBlogsEditorConfigContributor.
+			populateConfigJSONObject(
+				jsonObject, _inputEditorTaglibAttributes, _themeDisplay,
+				_requestBackedPortletURLFactory);
 
 		JSONAssert.assertEquals(
 			expectedJSONObject.toJSONString(), jsonObject.toJSONString(), true);
@@ -249,15 +294,17 @@ public class AdaptiveMediaBlogsEditorConfigContributorTest {
 
 		expectedJSONObject.put(
 			"allowedContent", "a[*](*); div(*); picture[*](*); source[*](*);");
+		expectedJSONObject.put("extraPlugins", "adaptivemedia");
 		expectedJSONObject.put(
 			"filebrowserImageBrowseLinkUrl",
 			_itemSelectorPortletURL.toString());
 		expectedJSONObject.put(
 			"filebrowserImageBrowseUrl", _itemSelectorPortletURL.toString());
 
-		_adaptiveMediaBlogsEditorConfigContributor.populateConfigJSONObject(
-			jsonObject, _inputEditorTaglibAttributes, _themeDisplay,
-			_requestBackedPortletURLFactory);
+		_staticAdaptiveMediaBlogsEditorConfigContributor.
+			populateConfigJSONObject(
+				jsonObject, _inputEditorTaglibAttributes, _themeDisplay,
+				_requestBackedPortletURLFactory);
 
 		JSONAssert.assertEquals(
 			expectedJSONObject.toJSONString(), jsonObject.toJSONString(), true);
@@ -289,14 +336,16 @@ public class AdaptiveMediaBlogsEditorConfigContributorTest {
 		JSONObject jsonObject = new JSONObjectImpl(
 			originalJSONObject.toJSONString());
 
-		_adaptiveMediaBlogsEditorConfigContributor.populateConfigJSONObject(
-			jsonObject, _inputEditorTaglibAttributes, _themeDisplay,
-			_requestBackedPortletURLFactory);
+		_staticAdaptiveMediaBlogsEditorConfigContributor.
+			populateConfigJSONObject(
+				jsonObject, _inputEditorTaglibAttributes, _themeDisplay,
+				_requestBackedPortletURLFactory);
 
 		JSONObject expectedJSONObject = new JSONObjectImpl();
 
 		expectedJSONObject.put(
 			"allowedContent", "picture[*](*); source[*](*);");
+		expectedJSONObject.put("extraPlugins", "adaptivemedia");
 		expectedJSONObject.put(
 			"filebrowserImageBrowseLinkUrl",
 			_itemSelectorPortletURL.toString());
@@ -310,8 +359,6 @@ public class AdaptiveMediaBlogsEditorConfigContributorTest {
 	private static final String _eventName = "selectedEventName";
 	private static final String _itemSelectorURL = "itemSelectorURL";
 
-	private AdaptiveMediaBlogsEditorConfigContributor
-		_adaptiveMediaBlogsEditorConfigContributor;
 	private final Map<String, Object> _inputEditorTaglibAttributes =
 		new HashMap<>();
 
@@ -323,6 +370,9 @@ public class AdaptiveMediaBlogsEditorConfigContributorTest {
 
 	@Mock
 	private RequestBackedPortletURLFactory _requestBackedPortletURLFactory;
+
+	private StaticAdaptiveMediaBlogsEditorConfigContributor
+		_staticAdaptiveMediaBlogsEditorConfigContributor;
 
 	@Mock
 	private ThemeDisplay _themeDisplay;
