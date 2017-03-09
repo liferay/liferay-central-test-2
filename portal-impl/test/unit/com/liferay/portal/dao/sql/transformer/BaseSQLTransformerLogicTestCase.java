@@ -131,18 +131,18 @@ public abstract class BaseSQLTransformerLogicTestCase {
 	}
 
 	@Test
-	public void testReplaceSubst() {
+	public void testReplaceSubstr() {
 		Assert.assertEquals(
-			getSubstTransformedSQL(),
-			sqlTransformer.transform(getSubstOriginalSQL()));
+			getSubstrTransformedSQL(),
+			sqlTransformer.transform(getSubstrOriginalSQL()));
 	}
 
 	@Test
-	public void testReplaceSubstWithExtraWhitespace() {
+	public void testReplaceSubstrWithExtraWhitespace() {
 		Assert.assertEquals(
-			getSubstTransformedSQL(),
+			getSubstrTransformedSQL(),
 			sqlTransformer.transform(
-				_addExtraWhitespaceFunction.apply(getSubstOriginalSQL())));
+				_addExtraWhitespaceFunction.apply(getSubstrOriginalSQL())));
 	}
 
 	@Test
@@ -224,12 +224,12 @@ public abstract class BaseSQLTransformerLogicTestCase {
 		return getReplaceOriginalSQL();
 	}
 
-	protected String getSubstOriginalSQL() {
+	protected String getSubstrOriginalSQL() {
 		return "select foo from Foo";
 	}
 
-	protected String getSubstTransformedSQL() {
-		return getSubstOriginalSQL();
+	protected String getSubstrTransformedSQL() {
+		return getSubstrOriginalSQL();
 	}
 
 	protected SQLTransformer sqlTransformer;
