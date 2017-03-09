@@ -16,13 +16,13 @@ package com.liferay.adaptive.media.image.service.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry;
 import com.liferay.adaptive.media.image.counter.AdaptiveMediaImageCounter;
 import com.liferay.adaptive.media.image.exception.DuplicateAdaptiveMediaImageEntryException;
 import com.liferay.adaptive.media.image.internal.storage.ImageStorage;
 import com.liferay.adaptive.media.image.model.AdaptiveMediaImageEntry;
 import com.liferay.adaptive.media.image.service.base.AdaptiveMediaImageEntryLocalServiceBaseImpl;
-import com.liferay.document.library.kernel.exception.NoSuchFileVersionException;
 import com.liferay.document.library.kernel.service.DLAppLocalService;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMap;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMapFactory;
@@ -74,7 +74,8 @@ public class AdaptiveMediaImageEntryLocalServiceImpl
 		imageEntry.setSize(size);
 		imageEntry.setConfigurationUuid(configurationEntry.getUUID());
 
-		imageStorage.save(fileVersion, configurationEntry, inputStream);
+		imageStorage.save(
+			fileVersion, configurationEntry.getUUID(), inputStream);
 
 		return adaptiveMediaImageEntryPersistence.update(imageEntry);
 	}
@@ -97,23 +98,22 @@ public class AdaptiveMediaImageEntryLocalServiceImpl
 	public void deleteAdaptiveMediaImageEntryFileVersion(long fileVersionId)
 		throws PortalException {
 
+		FileVersion fileVersion = dlAppLocalService.getFileVersion(
+			fileVersionId);
+
 		List<AdaptiveMediaImageEntry> imageEntries =
 			adaptiveMediaImageEntryPersistence.findByFileVersionId(
 				fileVersionId);
 
 		for (AdaptiveMediaImageEntry imageEntry : imageEntries) {
-			adaptiveMediaImageEntryPersistence.remove(imageEntry);
-		}
+			try {
+				adaptiveMediaImageEntryPersistence.remove(imageEntry);
 
-		try {
-			FileVersion fileVersion = dlAppLocalService.getFileVersion(
-				fileVersionId);
-
-			imageStorage.delete(fileVersion);
-		}
-		catch (NoSuchFileVersionException nsfve) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("Deleted stale AdaptiveMediaImageEntry", nsfve);
+				imageStorage.delete(
+					fileVersion, imageEntry.getConfigurationUuid());
+			}
+			catch (AdaptiveMediaRuntimeException.IOException amreioe) {
+				_log.error(amreioe);
 			}
 		}
 	}
@@ -146,7 +146,8 @@ public class AdaptiveMediaImageEntryLocalServiceImpl
 		AdaptiveMediaImageConfigurationEntry configurationEntry,
 		FileVersion fileVersion) {
 
-		return imageStorage.getContentStream(fileVersion, configurationEntry);
+		return imageStorage.getContentStream(
+			fileVersion, configurationEntry.getUUID());
 	}
 
 	@Override

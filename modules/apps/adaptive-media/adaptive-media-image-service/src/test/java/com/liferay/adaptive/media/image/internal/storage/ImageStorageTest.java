@@ -14,12 +14,8 @@
 
 package com.liferay.adaptive.media.image.internal.storage;
 
-import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry;
-import com.liferay.adaptive.media.image.internal.configuration.AdaptiveMediaImageConfigurationEntryImpl;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.util.StringUtil;
-
-import java.util.Collections;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -59,47 +55,13 @@ public class ImageStorageTest {
 			4L
 		);
 
-		String fileVersionPath = _imageStorage.getFileVersionPath(fileVersion);
+		String configurationUuid = StringUtil.randomString();
 
-		Assert.assertEquals("adaptive/1/2/3/4/", fileVersionPath);
-	}
+		String fileVersionPath = _imageStorage.getFileVersionPath(
+			fileVersion, configurationUuid);
 
-	@Test
-	public void testGetFileVersionVariantPath() {
-		FileVersion fileVersion = Mockito.mock(FileVersion.class);
-
-		Mockito.when(
-			fileVersion.getGroupId()
-		).thenReturn(
-			1L
-		);
-
-		Mockito.when(
-			fileVersion.getRepositoryId()
-		).thenReturn(
-			2L
-		);
-
-		Mockito.when(
-			fileVersion.getFileEntryId()
-		).thenReturn(
-			3L
-		);
-
-		Mockito.when(
-			fileVersion.getFileVersionId()
-		).thenReturn(
-			4L
-		);
-
-		AdaptiveMediaImageConfigurationEntry configurationEntry =
-			new AdaptiveMediaImageConfigurationEntryImpl(
-				StringUtil.randomString(), "xyz", Collections.emptyMap());
-
-		String fileVersionVariantPath = _imageStorage.getFileVersionVariantPath(
-			fileVersion, configurationEntry);
-
-		Assert.assertEquals("adaptive/1/2/3/4/xyz", fileVersionVariantPath);
+		Assert.assertEquals(
+			"adaptive/" + configurationUuid + "/1/2/3/4/", fileVersionPath);
 	}
 
 	private final ImageStorage _imageStorage = new ImageStorage();
