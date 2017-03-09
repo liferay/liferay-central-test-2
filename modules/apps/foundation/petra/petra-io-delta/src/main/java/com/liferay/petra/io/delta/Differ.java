@@ -71,7 +71,7 @@ public class Differ {
 			_weakChecksums = new TIntIntHashMap(_blocksCount, 0.5f, -1, -1);
 		}
 		else {
-			_blockDatas = new TIntObjectHashMap<>(_blocksCount);
+			_blockBytesMap = new TIntObjectHashMap<>(_blocksCount);
 		}
 
 		for (int blockNumber = 0; blockNumber < _blocksCount; blockNumber++) {
@@ -106,7 +106,7 @@ public class Differ {
 				byteBuffer.put(strongChecksum);
 				byteBuffer.putInt(blockNumber);
 
-				_blockDatas.put(weakChecksum, byteBuffer.array());
+				_blockBytesMap.put(weakChecksum, byteBuffer.array());
 			}
 		}
 	}
@@ -167,11 +167,11 @@ public class Differ {
 				}
 			}
 			else {
-				byte[] blockDataBytes = _blockDatas.get(
+				byte[] blockBytes = _blockBytesMap.get(
 					_rollingChecksum.weakChecksum());
 
-				if (blockDataBytes != null) {
-					ByteBuffer byteBuffer = ByteBuffer.wrap(blockDataBytes);
+				if (blockBytes != null) {
+					ByteBuffer byteBuffer = ByteBuffer.wrap(blockBytes);
 
 					strongChecksum = new byte[16];
 
@@ -260,7 +260,7 @@ public class Differ {
 		_lastBlockNumber = -1;
 	}
 
-	private TIntObjectHashMap<byte[]> _blockDatas;
+	private TIntObjectHashMap<byte[]> _blockBytesMap;
 	private int _blockLength;
 	private int _blocksCount;
 	private ByteBuffer _checksumsByteBuffer;
