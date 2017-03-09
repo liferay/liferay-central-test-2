@@ -61,6 +61,24 @@ public class KaleoWorkflowModelConverterImpl
 	implements KaleoWorkflowModelConverter {
 
 	@Override
+	public WorkflowTaskAssignee getFirstWorkflowTaskAssignee(
+		KaleoTaskInstanceToken kaleoTaskInstanceToken) {
+
+		List<KaleoTaskAssignmentInstance> kaleoTaskAssignmentInstances =
+			kaleoTaskInstanceToken.getKaleoTaskAssignmentInstances();
+
+		for (KaleoTaskAssignmentInstance kaleoTaskAssignmentInstance :
+				kaleoTaskAssignmentInstances) {
+
+			return new WorkflowTaskAssignee(
+				kaleoTaskAssignmentInstance.getAssigneeClassName(),
+				kaleoTaskAssignmentInstance.getAssigneeClassPK());
+		}
+
+		return null;
+	}
+
+	@Override
 	public List<WorkflowTaskAssignee> getWorkflowTaskAssignees(
 		KaleoTaskInstanceToken kaleoTaskInstanceToken) {
 

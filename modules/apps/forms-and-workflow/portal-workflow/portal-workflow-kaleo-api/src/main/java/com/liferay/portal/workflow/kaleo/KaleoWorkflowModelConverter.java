@@ -38,6 +38,15 @@ import java.util.Map;
  */
 public interface KaleoWorkflowModelConverter {
 
+	public default WorkflowTaskAssignee getFirstWorkflowTaskAssignee(
+		KaleoTaskInstanceToken kaleoTaskInstanceToken) {
+
+		List<WorkflowTaskAssignee> workflowTaskAssignees =
+			getWorkflowTaskAssignees(kaleoTaskInstanceToken);
+
+		return workflowTaskAssignees.get(0);
+	}
+
 	public List<WorkflowTaskAssignee> getWorkflowTaskAssignees(
 		KaleoTaskInstanceToken kaleoTaskInstanceToken);
 
