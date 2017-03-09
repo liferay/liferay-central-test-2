@@ -240,7 +240,9 @@ public class DDMExpressionModelVisitor
 		Expression expression = visitChild(context, 1);
 
 		if (expression instanceof Parenthesis) {
-			expression = ((Parenthesis)expression).getOperandExpression();
+			Parenthesis parenthesis = (Parenthesis)expression;
+
+			expression = parenthesis.getOperandExpression();
 		}
 
 		return new NotExpression(expression);
