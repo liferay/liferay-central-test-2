@@ -27,7 +27,7 @@ import org.junit.Test;
 public class DefaultSQLTransformerTest {
 
 	@Test
-	public void testTransformNullSql() {
+	public void testTransformWithOneFunction() {
 		SQLTransformer sqlTransformer = new DefaultSQLTransformer(
 			new Function[] {_dummyFunction});
 
@@ -55,7 +55,7 @@ public class DefaultSQLTransformerTest {
 	}
 
 	@Test
-	public void testTransformWithNullFunctions() {
+	public void testTransformWithNullFunction() {
 		SQLTransformer sqlTransformer = new DefaultSQLTransformer(null);
 
 		String sql = "select * from Foo";
