@@ -25,9 +25,9 @@ import org.apache.jasper.compiler.tagplugin.TagPluginContext;
 public class OtherwiseTagPlugin implements TagPlugin {
 
 	@Override
-	public void doTag(TagPluginContext context) {
-		context.generateJavaSource("}\nelse {");
-		context.generateBody();
+	public void doTag(TagPluginContext tagPluginContext) {
+		tagPluginContext.generateJavaSource("}\nelse {");
+		tagPluginContext.generateBody();
 	}
 
 }
