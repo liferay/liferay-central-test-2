@@ -178,8 +178,7 @@ public class CustomizationSettingsProductNavigationControlMenuEntry
 	}
 
 	private static final String _SHOW =
-		CustomizationSettingsProductNavigationControlMenuEntry.class +
-			"#_SHOW";
+		CustomizationSettingsProductNavigationControlMenuEntry.class + "#_SHOW";
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CustomizationSettingsProductNavigationControlMenuEntry.class);
