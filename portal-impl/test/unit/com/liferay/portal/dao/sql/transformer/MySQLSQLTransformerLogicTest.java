@@ -38,7 +38,7 @@ public class MySQLSQLTransformerLogicTest
 	}
 
 	@Test
-	public void testTransformLower() {
+	public void testReplaceLower() {
 		String sql = "select lower(foo) from Foo";
 
 		String transformedSql = sqlTransformer.transform(sql);
@@ -47,7 +47,7 @@ public class MySQLSQLTransformerLogicTest
 	}
 
 	@Test
-	public void testTransformLowerMultiple() {
+	public void testReplaceLowerMultiple() {
 		String sql = "select lower(foo), bar, lower(baaz) from Foo";
 
 		String transformedSql = sqlTransformer.transform(sql);
@@ -56,7 +56,7 @@ public class MySQLSQLTransformerLogicTest
 	}
 
 	@Test
-	public void testTransformLowerRecursive() {
+	public void testReplaceLowerRecursive() {
 		String sql = "select lower(lower(foo)) from Foo";
 
 		String transformedSql = sqlTransformer.transform(sql);
@@ -65,7 +65,7 @@ public class MySQLSQLTransformerLogicTest
 	}
 
 	@Test
-	public void testTransformLowerWithoutClosing() {
+	public void testReplaceLowerWithoutClosing() {
 		String sql = "select lower(foo from Foo";
 
 		String transformedSql = sqlTransformer.transform(sql);
@@ -74,7 +74,7 @@ public class MySQLSQLTransformerLogicTest
 	}
 
 	@Test
-	public void testTransformSupportsStringCaseSensitiveQuery() {
+	public void testReplaceSupportsStringCaseSensitiveQuery() {
 		String sql = "select * from foo";
 
 		MySQLDB mySQLDB = new MySQLDB(5, 7);
