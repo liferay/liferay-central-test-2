@@ -2,9 +2,9 @@
 <!DOCTYPE suppressions PUBLIC "-//Puppy Crawl//DTD Check Suppressions 1.1//EN" "http://www.puppycrawl.com/dtds/suppressions_1_1.dtd">
 
 <suppressions>
-	<suppress checks="Chaining" files="adaptive-media-document-library-item-selector-web/src/main/java/com/liferay/adaptive/media/document/library/item/selector/web/internal/resolver/FileEntryImageAdaptiveMediaURLItemSelectorReturnTypeResolver\.java" />
+	<suppress checks="Chaining" files="adaptive-media-document-library-item-selector-web/src/main/java/com/liferay/adaptive/media/document/library/item/selector/web/internal/resolver/FileEntryAdaptiveMediaImageURLItemSelectorReturnTypeResolver\.java" />
 	<suppress checks="Chaining" files="adaptive-media-document-library-thumbnails/src/main/java/com/liferay/adaptive/media/document/library/thumbnails/internal/AdaptiveMediaImageEntryProcessor\.java" />
-	<suppress checks="Chaining" files="adaptive-media-image-impl/src/main/java/com/liferay/adaptive/media/image/internal/handler/ImageAdaptiveMediaRequestHandler\.java" />
-	<suppress checks="Chaining" files="adaptive-media-image-rest/src/main/java/com/liferay/adaptive/media/image/rest/internal/resource/ImageAdaptiveMediaFileVersionResource\.java" />
-	<suppress checks="Chaining" files="adaptive-media-image-rest/src/main/java/com/liferay/adaptive/media/image/rest/internal/resource/ImageAdaptiveMediaRootResource\.java" />
+	<suppress checks="Chaining" files="adaptive-media-image-impl/src/main/java/com/liferay/adaptive/media/image/internal/handler/AdaptiveMediaImageRequestHandler\.java" />
+	<suppress checks="Chaining" files="adaptive-media-image-rest/src/main/java/com/liferay/adaptive/media/image/rest/internal/resource/AdaptiveMediaImageFileVersionResource\.java" />
+	<suppress checks="Chaining" files="adaptive-media-image-rest/src/main/java/com/liferay/adaptive/media/image/rest/internal/resource/AdaptiveMediaImageRootResource\.java" />
 </suppressions>

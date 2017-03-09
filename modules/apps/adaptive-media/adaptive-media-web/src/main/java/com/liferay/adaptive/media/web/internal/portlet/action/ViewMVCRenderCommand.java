@@ -14,8 +14,8 @@
 
 package com.liferay.adaptive.media.web.internal.portlet.action;
 
-import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
-import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
+import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry;
+import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationHelper;
 import com.liferay.adaptive.media.web.constants.AdaptiveMediaPortletKeys;
 import com.liferay.adaptive.media.web.internal.constants.AdaptiveMediaWebKeys;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
@@ -51,11 +51,11 @@ public class ViewMVCRenderCommand implements MVCRenderCommand {
 	public String render(
 		RenderRequest renderRequest, RenderResponse renderResponse) {
 
-		Collection<ImageAdaptiveMediaConfigurationEntry>
+		Collection<AdaptiveMediaImageConfigurationEntry>
 			configurationEntriesCollection =
-				_getImageAdaptiveMediaConfigurationEntries(renderRequest);
+				_getAdaptiveMediaImageConfigurationEntries(renderRequest);
 
-		List<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
+		List<AdaptiveMediaImageConfigurationEntry> configurationEntries =
 			new ArrayList<>(configurationEntriesCollection);
 
 		renderRequest.setAttribute(
@@ -64,22 +64,22 @@ public class ViewMVCRenderCommand implements MVCRenderCommand {
 
 		renderRequest.setAttribute(
 			AdaptiveMediaWebKeys.IMAGE_ADAPTIVE_MEDIA_CONFIGURATION_HELPER,
-			_imageAdaptiveMediaConfigurationHelper);
+			_adaptiveMediaImageConfigurationHelper);
 
 		return "/adaptive_media/view.jsp";
 	}
 
 	@Reference(unbind = "-")
-	protected void setImageAdaptiveMediaConfigurationHelper(
-		ImageAdaptiveMediaConfigurationHelper
-			imageAdaptiveMediaConfigurationHelper) {
+	protected void setAdaptiveMediaImageConfigurationHelper(
+		AdaptiveMediaImageConfigurationHelper
+			adaptiveMediaImageConfigurationHelper) {
 
-		_imageAdaptiveMediaConfigurationHelper =
-			imageAdaptiveMediaConfigurationHelper;
+		_adaptiveMediaImageConfigurationHelper =
+			adaptiveMediaImageConfigurationHelper;
 	}
 
-	private Collection<ImageAdaptiveMediaConfigurationEntry>
-		_getImageAdaptiveMediaConfigurationEntries(
+	private Collection<AdaptiveMediaImageConfigurationEntry>
+		_getAdaptiveMediaImageConfigurationEntries(
 			RenderRequest renderRequest) {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
@@ -88,7 +88,7 @@ public class ViewMVCRenderCommand implements MVCRenderCommand {
 		String entriesNavigation = ParamUtil.getString(
 			renderRequest, "entriesNavigation", "all");
 
-		Predicate<ImageAdaptiveMediaConfigurationEntry> predicate = null;
+		Predicate<AdaptiveMediaImageConfigurationEntry> predicate = null;
 
 		if (entriesNavigation.equals("enabled")) {
 			predicate = configurationEntry -> configurationEntry.isEnabled();
@@ -100,12 +100,12 @@ public class ViewMVCRenderCommand implements MVCRenderCommand {
 			predicate = configurationEntry -> true;
 		}
 
-		return _imageAdaptiveMediaConfigurationHelper.
-			getImageAdaptiveMediaConfigurationEntries(
+		return _adaptiveMediaImageConfigurationHelper.
+			getAdaptiveMediaImageConfigurationEntries(
 				themeDisplay.getCompanyId(), predicate);
 	}
 
-	private ImageAdaptiveMediaConfigurationHelper
-		_imageAdaptiveMediaConfigurationHelper;
+	private AdaptiveMediaImageConfigurationHelper
+		_adaptiveMediaImageConfigurationHelper;
 
 }

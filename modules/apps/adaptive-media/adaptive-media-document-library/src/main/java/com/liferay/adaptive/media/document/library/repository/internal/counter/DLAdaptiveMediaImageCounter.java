@@ -14,7 +14,7 @@
 
 package com.liferay.adaptive.media.document.library.repository.internal.counter;
 
-import com.liferay.adaptive.media.image.constants.ImageAdaptiveMediaConstants;
+import com.liferay.adaptive.media.image.constants.AdaptiveMediaImageConstants;
 import com.liferay.adaptive.media.image.counter.AdaptiveMediaImageCounter;
 import com.liferay.document.library.kernel.service.DLFileEntryLocalService;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
@@ -51,7 +51,7 @@ public class DLAdaptiveMediaImageCounter implements AdaptiveMediaImageCounter {
 
 		dynamicQuery.add(
 			mimeTypeProperty.in(
-				ImageAdaptiveMediaConstants.getSupportedMimeTypes()));
+				AdaptiveMediaImageConstants.getSupportedMimeTypes()));
 
 		return (int)_dlFileEntryLocalService.dynamicQueryCount(dynamicQuery);
 	}

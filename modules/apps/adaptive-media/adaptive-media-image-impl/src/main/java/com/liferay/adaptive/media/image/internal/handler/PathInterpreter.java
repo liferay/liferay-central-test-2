@@ -16,8 +16,8 @@ package com.liferay.adaptive.media.image.internal.handler;
 
 import com.liferay.adaptive.media.AdaptiveMediaAttribute;
 import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
-import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
-import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
+import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry;
+import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationHelper;
 import com.liferay.adaptive.media.image.internal.util.Tuple;
 import com.liferay.document.library.kernel.service.DLAppLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -63,10 +63,10 @@ public class PathInterpreter {
 
 			String configurationEntryUUID = _getConfigurationEntryUUID(matcher);
 
-			Optional<ImageAdaptiveMediaConfigurationEntry>
+			Optional<AdaptiveMediaImageConfigurationEntry>
 				configurationEntryOptional =
 					_configurationHelper.
-						getImageAdaptiveMediaConfigurationEntry(
+						getAdaptiveMediaImageConfigurationEntry(
 							fileVersion.getCompanyId(), configurationEntryUUID);
 
 			Map<String, String> properties = configurationEntryOptional.map(
@@ -89,15 +89,15 @@ public class PathInterpreter {
 	}
 
 	@Reference(unbind = "-")
-	public void setDLAppLocalService(DLAppLocalService dlAppLocalService) {
-		_dlAppLocalService = dlAppLocalService;
+	public void setAdaptiveMediaImageConfigurationHelper(
+		AdaptiveMediaImageConfigurationHelper configurationHelper) {
+
+		_configurationHelper = configurationHelper;
 	}
 
 	@Reference(unbind = "-")
-	public void setImageAdaptiveMediaConfigurationHelper(
-		ImageAdaptiveMediaConfigurationHelper configurationHelper) {
-
-		_configurationHelper = configurationHelper;
+	public void setDLAppLocalService(DLAppLocalService dlAppLocalService) {
+		_dlAppLocalService = dlAppLocalService;
 	}
 
 	private String _getConfigurationEntryUUID(Matcher matcher) {
@@ -125,7 +125,7 @@ public class PathInterpreter {
 	private static final Pattern _URL_PATTERN = Pattern.compile(
 		"/image/(\\d+)(?:/(\\d+))?/([^/]+)/(?:[^/]+)");
 
-	private ImageAdaptiveMediaConfigurationHelper _configurationHelper;
+	private AdaptiveMediaImageConfigurationHelper _configurationHelper;
 	private DLAppLocalService _dlAppLocalService;
 
 }

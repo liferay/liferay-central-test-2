@@ -14,7 +14,7 @@
 
 package com.liferay.adaptive.media.image.rest.test.media.internal.activator;
 
-import com.liferay.adaptive.media.demo.data.creator.ImageAdaptiveMediaConfigurationDemoDataCreator;
+import com.liferay.adaptive.media.demo.data.creator.AdaptiveMediaImageConfigurationDemoDataCreator;
 import com.liferay.document.library.demo.data.creator.FileEntryDemoDataCreator;
 import com.liferay.document.library.demo.data.creator.RootFolderDemoDataCreator;
 import com.liferay.portal.kernel.messaging.Destination;
@@ -39,7 +39,7 @@ public class TestBundleActivator implements BundleActivator {
 	public void start(BundleContext bundleContext) throws Exception {
 		_adaptiveMediaDemoDataCreator = _getService(
 			bundleContext,
-			ImageAdaptiveMediaConfigurationDemoDataCreator.class);
+			AdaptiveMediaImageConfigurationDemoDataCreator.class);
 
 		_fileEntryDemoDataCreator = _getService(
 			bundleContext, FileEntryDemoDataCreator.class);
@@ -101,7 +101,7 @@ public class TestBundleActivator implements BundleActivator {
 		return bundleContext.getService(serviceReference);
 	}
 
-	private ImageAdaptiveMediaConfigurationDemoDataCreator
+	private AdaptiveMediaImageConfigurationDemoDataCreator
 		_adaptiveMediaDemoDataCreator;
 	private FileEntryDemoDataCreator _fileEntryDemoDataCreator;
 	private OmniAdminUserDemoDataCreator _omniAdminUserDemoDataCreator;

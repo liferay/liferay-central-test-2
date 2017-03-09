@@ -16,9 +16,9 @@ package com.liferay.adaptive.media.image.internal.finder;
 
 import com.liferay.adaptive.media.AdaptiveMedia;
 import com.liferay.adaptive.media.AdaptiveMediaAttribute;
-import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaAttributeMapping;
-import com.liferay.adaptive.media.image.internal.processor.ImageAdaptiveMedia;
-import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
+import com.liferay.adaptive.media.image.internal.configuration.AdaptiveMediaImageAttributeMapping;
+import com.liferay.adaptive.media.image.internal.processor.AdaptiveMediaImage;
+import com.liferay.adaptive.media.image.processor.AdaptiveMediaImageProcessor;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -35,7 +35,7 @@ public class AdaptiveMediaAttributeComparatorTest {
 
 	@Before
 	public void setUp() {
-		Map<AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, ?>, Boolean>
+		Map<AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, ?>, Boolean>
 			attributes = new HashMap<>();
 
 		attributes.put(AdaptiveMediaAttribute.contentLength(), true);
@@ -47,11 +47,11 @@ public class AdaptiveMediaAttributeComparatorTest {
 
 	@Test
 	public void testSortDifferentMediaByMultipleAttributes() {
-		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia1 =
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia1 =
 			_createMedia(
 				AdaptiveMediaAttribute.contentLength(), 10,
 				AdaptiveMediaAttribute.fileName(), "zzz");
-		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia2 =
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia2 =
 			_createMedia(
 				AdaptiveMediaAttribute.contentLength(), 10,
 				AdaptiveMediaAttribute.fileName(), "aaa");
@@ -64,11 +64,11 @@ public class AdaptiveMediaAttributeComparatorTest {
 
 	@Test
 	public void testSortDifferentMediaByMultipleAttributesInverse() {
-		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia1 =
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia1 =
 			_createMedia(
 				AdaptiveMediaAttribute.contentLength(), 10,
 				AdaptiveMediaAttribute.fileName(), "zzz");
-		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia2 =
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia2 =
 			_createMedia(
 				AdaptiveMediaAttribute.contentLength(), 10,
 				AdaptiveMediaAttribute.fileName(), "aaa");
@@ -81,9 +81,9 @@ public class AdaptiveMediaAttributeComparatorTest {
 
 	@Test
 	public void testSortDifferentMediaByOneAttribute() {
-		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia1 =
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia1 =
 			_createMedia(AdaptiveMediaAttribute.contentLength(), 10);
-		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia2 =
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia2 =
 			_createMedia(AdaptiveMediaAttribute.contentLength(), 20);
 
 		int result = _singleAttributeComparator.compare(
@@ -94,9 +94,9 @@ public class AdaptiveMediaAttributeComparatorTest {
 
 	@Test
 	public void testSortDifferentMediaByOneAttributeInverse() {
-		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia1 =
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia1 =
 			_createMedia(AdaptiveMediaAttribute.contentLength(), 10);
-		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia2 =
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia2 =
 			_createMedia(AdaptiveMediaAttribute.contentLength(), 20);
 
 		int result = _singleAttributeComparator.compare(
@@ -107,11 +107,11 @@ public class AdaptiveMediaAttributeComparatorTest {
 
 	@Test
 	public void testSortEqualMediaByMultipleAttributes() {
-		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia1 =
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia1 =
 			_createMedia(
 				AdaptiveMediaAttribute.contentLength(), 10,
 				AdaptiveMediaAttribute.fileName(), "aaa");
-		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia2 =
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia2 =
 			_createMedia(
 				AdaptiveMediaAttribute.contentLength(), 10,
 				AdaptiveMediaAttribute.fileName(), "aaa");
@@ -124,9 +124,9 @@ public class AdaptiveMediaAttributeComparatorTest {
 
 	@Test
 	public void testSortEqualMediaByOneAttribute() {
-		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia1 =
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia1 =
 			_createMedia(AdaptiveMediaAttribute.contentLength(), 10);
-		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia2 =
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia2 =
 			_createMedia(AdaptiveMediaAttribute.contentLength(), 10);
 
 		int result = _singleAttributeComparator.compare(
@@ -135,10 +135,10 @@ public class AdaptiveMediaAttributeComparatorTest {
 		Assert.assertEquals(0, result);
 	}
 
-	private <S, T> AdaptiveMedia<ImageAdaptiveMediaProcessor> _createMedia(
-		AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, S> attribute1,
+	private <S, T> AdaptiveMedia<AdaptiveMediaImageProcessor> _createMedia(
+		AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, S> attribute1,
 		S value1,
-		AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, T> attribute2,
+		AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, T> attribute2,
 		T value2) {
 
 		Map<String, String> properties = new HashMap<>();
@@ -146,22 +146,22 @@ public class AdaptiveMediaAttributeComparatorTest {
 		properties.put(attribute1.getName(), String.valueOf(value1));
 		properties.put(attribute2.getName(), String.valueOf(value2));
 
-		ImageAdaptiveMediaAttributeMapping attributeMapping =
-			ImageAdaptiveMediaAttributeMapping.fromProperties(properties);
+		AdaptiveMediaImageAttributeMapping attributeMapping =
+			AdaptiveMediaImageAttributeMapping.fromProperties(properties);
 
-		return new ImageAdaptiveMedia(() -> null, attributeMapping, null);
+		return new AdaptiveMediaImage(() -> null, attributeMapping, null);
 	}
 
-	private <T> AdaptiveMedia<ImageAdaptiveMediaProcessor> _createMedia(
-		AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, T> attribute,
+	private <T> AdaptiveMedia<AdaptiveMediaImageProcessor> _createMedia(
+		AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, T> attribute,
 		T value) {
 
-		ImageAdaptiveMediaAttributeMapping attributeMapping =
-			ImageAdaptiveMediaAttributeMapping.fromProperties(
+		AdaptiveMediaImageAttributeMapping attributeMapping =
+			AdaptiveMediaImageAttributeMapping.fromProperties(
 				Collections.singletonMap(
 					attribute.getName(), String.valueOf(value)));
 
-		return new ImageAdaptiveMedia(() -> null, attributeMapping, null);
+		return new AdaptiveMediaImage(() -> null, attributeMapping, null);
 	}
 
 	private AdaptiveMediaAttributeComparator _multiAttributeComparator;

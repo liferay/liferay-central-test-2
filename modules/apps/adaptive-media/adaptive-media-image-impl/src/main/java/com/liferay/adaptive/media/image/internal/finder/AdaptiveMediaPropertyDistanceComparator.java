@@ -16,7 +16,7 @@ package com.liferay.adaptive.media.image.internal.finder;
 
 import com.liferay.adaptive.media.AdaptiveMedia;
 import com.liferay.adaptive.media.AdaptiveMediaAttribute;
-import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
+import com.liferay.adaptive.media.image.processor.AdaptiveMediaImageProcessor;
 
 import java.util.Comparator;
 import java.util.Map;
@@ -26,10 +26,10 @@ import java.util.Optional;
  * @author Adolfo Pérez
  */
 public class AdaptiveMediaPropertyDistanceComparator
-	implements Comparator<AdaptiveMedia<ImageAdaptiveMediaProcessor>> {
+	implements Comparator<AdaptiveMedia<AdaptiveMediaImageProcessor>> {
 
 	public AdaptiveMediaPropertyDistanceComparator(
-		Map<AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, ?>, ?>
+		Map<AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, ?>, ?>
 			attributes) {
 
 		_attributes = attributes;
@@ -37,17 +37,17 @@ public class AdaptiveMediaPropertyDistanceComparator
 
 	@Override
 	public int compare(
-		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia1,
-		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia2) {
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia1,
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia2) {
 
 		for (Map.Entry
-				<AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, ?>, ?>
+				<AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, ?>, ?>
 					entry : _attributes.entrySet()) {
 
-			AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, Object>
+			AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, Object>
 				attribute =
 					(AdaptiveMediaAttribute
-						<ImageAdaptiveMediaProcessor, Object>)entry.getKey();
+						<AdaptiveMediaImageProcessor, Object>)entry.getKey();
 
 			Object requestedValue = entry.getValue();
 
@@ -77,7 +77,7 @@ public class AdaptiveMediaPropertyDistanceComparator
 		return 0;
 	}
 
-	private final Map<AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, ?>, ?>
+	private final Map<AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, ?>, ?>
 		_attributes;
 
 }

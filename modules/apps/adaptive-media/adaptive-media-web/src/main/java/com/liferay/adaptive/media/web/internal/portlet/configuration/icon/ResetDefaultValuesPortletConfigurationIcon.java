@@ -14,7 +14,7 @@
 
 package com.liferay.adaptive.media.web.internal.portlet.configuration.icon;
 
-import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
+import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationHelper;
 import com.liferay.adaptive.media.web.constants.AdaptiveMediaPortletKeys;
 import com.liferay.adaptive.media.web.internal.background.task.OptimizeImagesAllConfigurationsBackgroundTaskExecutor;
 import com.liferay.portal.kernel.backgroundtask.BackgroundTaskManager;
@@ -86,7 +86,7 @@ public class ResetDefaultValuesPortletConfigurationIcon
 			return false;
 		}
 
-		if (_imageAdaptiveMediaConfigurationHelper.isDefaultConfiguration(
+		if (_adaptiveMediaImageConfigurationHelper.isDefaultConfiguration(
 				themeDisplay.getCompanyId())) {
 
 			return false;
@@ -116,18 +116,18 @@ public class ResetDefaultValuesPortletConfigurationIcon
 	}
 
 	@Reference(unbind = "-")
-	protected void setImageAdaptiveMediaConfigurationHelper(
-		ImageAdaptiveMediaConfigurationHelper
-			imageAdaptiveMediaConfigurationHelper) {
+	protected void setAdaptiveMediaImageConfigurationHelper(
+		AdaptiveMediaImageConfigurationHelper
+			adaptiveMediaImageConfigurationHelper) {
 
-		_imageAdaptiveMediaConfigurationHelper =
-			imageAdaptiveMediaConfigurationHelper;
+		_adaptiveMediaImageConfigurationHelper =
+			adaptiveMediaImageConfigurationHelper;
 	}
+
+	private AdaptiveMediaImageConfigurationHelper
+		_adaptiveMediaImageConfigurationHelper;
 
 	@Reference
 	private BackgroundTaskManager _backgroundTaskManager;
-
-	private ImageAdaptiveMediaConfigurationHelper
-		_imageAdaptiveMediaConfigurationHelper;
 
 }

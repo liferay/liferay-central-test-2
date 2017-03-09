@@ -29,7 +29,7 @@
 </aui:nav-bar>
 
 <%
-List<ImageAdaptiveMediaConfigurationEntry> configurationEntries = (List)request.getAttribute(AdaptiveMediaWebKeys.CONFIGURATION_ENTRIES_LIST);
+List<AdaptiveMediaImageConfigurationEntry> configurationEntries = (List)request.getAttribute(AdaptiveMediaWebKeys.CONFIGURATION_ENTRIES_LIST);
 %>
 
 <liferay-frontend:management-bar
@@ -70,13 +70,13 @@ List<ImageAdaptiveMediaConfigurationEntry> configurationEntries = (List)request.
 </liferay-frontend:management-bar>
 
 <%
-ImageAdaptiveMediaConfigurationHelper imageAdaptiveMediaConfigurationHelper = (ImageAdaptiveMediaConfigurationHelper)request.getAttribute(AdaptiveMediaWebKeys.IMAGE_ADAPTIVE_MEDIA_CONFIGURATION_HELPER);
+AdaptiveMediaImageConfigurationHelper adaptiveMediaImageConfigurationHelper = (AdaptiveMediaImageConfigurationHelper)request.getAttribute(AdaptiveMediaWebKeys.IMAGE_ADAPTIVE_MEDIA_CONFIGURATION_HELPER);
 
 PortletURL portletURL = renderResponse.createRenderURL();
 %>
 
 <div class="container-fluid-1280">
-	<c:if test="<%= imageAdaptiveMediaConfigurationHelper.isDefaultConfiguration(themeDisplay.getCompanyId()) %>">
+	<c:if test="<%= adaptiveMediaImageConfigurationHelper.isDefaultConfiguration(themeDisplay.getCompanyId()) %>">
 		<div class="alert alert-info">
 			<liferay-ui:message key="this-configuration-was-not-saved-yet" />
 		</div>
@@ -101,7 +101,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 			/>
 
 			<liferay-ui:search-container-row
-				className="com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry"
+				className="com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry"
 				modelVar="configurationEntry"
 			>
 

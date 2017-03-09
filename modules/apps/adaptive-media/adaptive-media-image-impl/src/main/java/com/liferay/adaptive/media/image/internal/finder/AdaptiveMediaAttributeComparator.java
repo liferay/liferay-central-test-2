@@ -16,7 +16,7 @@ package com.liferay.adaptive.media.image.internal.finder;
 
 import com.liferay.adaptive.media.AdaptiveMedia;
 import com.liferay.adaptive.media.AdaptiveMediaAttribute;
-import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
+import com.liferay.adaptive.media.image.processor.AdaptiveMediaImageProcessor;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -27,23 +27,23 @@ import java.util.Optional;
  * @author Sergio González
  */
 public class AdaptiveMediaAttributeComparator
-	implements Comparator<AdaptiveMedia<ImageAdaptiveMediaProcessor>> {
+	implements Comparator<AdaptiveMedia<AdaptiveMediaImageProcessor>> {
 
 	public AdaptiveMediaAttributeComparator(
-		AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, ?> attribute) {
+		AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, ?> attribute) {
 
 		this(Collections.singletonMap(attribute, true));
 	}
 
 	public AdaptiveMediaAttributeComparator(
-		AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, ?> attribute,
+		AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, ?> attribute,
 		boolean ascending) {
 
 		this(Collections.singletonMap(attribute, ascending));
 	}
 
 	public AdaptiveMediaAttributeComparator(
-		Map<AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, ?>, Boolean>
+		Map<AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, ?>, Boolean>
 			sortCriteria) {
 
 		_sortCriteria = (Map)sortCriteria;
@@ -51,14 +51,14 @@ public class AdaptiveMediaAttributeComparator
 
 	@Override
 	public int compare(
-		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia1,
-		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia2) {
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia1,
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia2) {
 
 		for (Map.Entry
-				<AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, Object>,
+				<AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, Object>,
 					Boolean> sortCriterion : _sortCriteria.entrySet()) {
 
-			AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, Object>
+			AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, Object>
 				attribute = sortCriterion.getKey();
 
 			Optional<?> value1Optional = adaptiveMedia1.getAttributeValue(
@@ -83,7 +83,7 @@ public class AdaptiveMediaAttributeComparator
 	}
 
 	private final Map
-		<AdaptiveMediaAttribute<ImageAdaptiveMediaProcessor, Object>, Boolean>
+		<AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, Object>, Boolean>
 			_sortCriteria;
 
 }

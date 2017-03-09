@@ -14,7 +14,7 @@
 
 package com.liferay.adaptive.media.web.internal.portlet.action;
 
-import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
+import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationHelper;
 import com.liferay.adaptive.media.web.constants.AdaptiveMediaPortletKeys;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
@@ -49,30 +49,30 @@ public class DeleteImageConfigurationEntryMVCActionCommand
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		String[] deleteImageAdaptiveMediaConfigurationEntryUuids =
+		String[] deleteAdaptiveMediaImageConfigurationEntryUuids =
 			ParamUtil.getStringValues(
-				actionRequest, "rowIdsImageAdaptiveMediaConfigurationEntry");
+				actionRequest, "rowIdsAdaptiveMediaImageConfigurationEntry");
 
-		for (String deleteImageAdaptiveMediaConfigurationEntryUuid :
-				deleteImageAdaptiveMediaConfigurationEntryUuids) {
+		for (String deleteAdaptiveMediaImageConfigurationEntryUuid :
+				deleteAdaptiveMediaImageConfigurationEntryUuids) {
 
-			_imageAdaptiveMediaConfigurationHelper.
-				deleteImageAdaptiveMediaConfigurationEntry(
+			_adaptiveMediaImageConfigurationHelper.
+				deleteAdaptiveMediaImageConfigurationEntry(
 					themeDisplay.getCompanyId(),
-					deleteImageAdaptiveMediaConfigurationEntryUuid);
+					deleteAdaptiveMediaImageConfigurationEntryUuid);
 		}
 	}
 
 	@Reference(unbind = "-")
-	protected void setImageAdaptiveMediaConfigurationHelper(
-		ImageAdaptiveMediaConfigurationHelper
-			imageAdaptiveMediaConfigurationHelper) {
+	protected void setAdaptiveMediaImageConfigurationHelper(
+		AdaptiveMediaImageConfigurationHelper
+			adaptiveMediaImageConfigurationHelper) {
 
-		_imageAdaptiveMediaConfigurationHelper =
-			imageAdaptiveMediaConfigurationHelper;
+		_adaptiveMediaImageConfigurationHelper =
+			adaptiveMediaImageConfigurationHelper;
 	}
 
-	private ImageAdaptiveMediaConfigurationHelper
-		_imageAdaptiveMediaConfigurationHelper;
+	private AdaptiveMediaImageConfigurationHelper
+		_adaptiveMediaImageConfigurationHelper;
 
 }

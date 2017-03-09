@@ -15,9 +15,9 @@
 package com.liferay.adaptive.media.image.internal.handler;
 
 import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
-import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
-import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
-import com.liferay.adaptive.media.image.internal.configuration.ImageAdaptiveMediaConfigurationHelperImpl;
+import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry;
+import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationHelper;
+import com.liferay.adaptive.media.image.internal.configuration.AdaptiveMediaImageConfigurationHelperImpl;
 import com.liferay.adaptive.media.image.internal.util.Tuple;
 import com.liferay.document.library.kernel.service.DLAppLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -42,7 +42,7 @@ public class PathInterpreterTest {
 	@Before
 	public void setUp() {
 		_pathInterpreter.setDLAppLocalService(_dlAppLocalService);
-		_pathInterpreter.setImageAdaptiveMediaConfigurationHelper(
+		_pathInterpreter.setAdaptiveMediaImageConfigurationHelper(
 			_configurationHelper);
 	}
 
@@ -61,7 +61,7 @@ public class PathInterpreterTest {
 		);
 
 		Mockito.when(
-			_configurationHelper.getImageAdaptiveMediaConfigurationEntry(
+			_configurationHelper.getAdaptiveMediaImageConfigurationEntry(
 				Mockito.anyLong(), Mockito.eq("x"))
 		).thenReturn(
 			Optional.of(_configurationEntry)
@@ -112,7 +112,7 @@ public class PathInterpreterTest {
 		);
 
 		Mockito.when(
-			_configurationHelper.getImageAdaptiveMediaConfigurationEntry(
+			_configurationHelper.getAdaptiveMediaImageConfigurationEntry(
 				Mockito.anyLong(), Mockito.eq("x"))
 		).thenReturn(
 			Optional.of(_configurationEntry)
@@ -151,10 +151,10 @@ public class PathInterpreterTest {
 		_pathInterpreter.interpretPath(null);
 	}
 
-	private final ImageAdaptiveMediaConfigurationEntry _configurationEntry =
-		Mockito.mock(ImageAdaptiveMediaConfigurationEntry.class);
-	private final ImageAdaptiveMediaConfigurationHelper _configurationHelper =
-		Mockito.mock(ImageAdaptiveMediaConfigurationHelperImpl.class);
+	private final AdaptiveMediaImageConfigurationEntry _configurationEntry =
+		Mockito.mock(AdaptiveMediaImageConfigurationEntry.class);
+	private final AdaptiveMediaImageConfigurationHelper _configurationHelper =
+		Mockito.mock(AdaptiveMediaImageConfigurationHelperImpl.class);
 	private final DLAppLocalService _dlAppLocalService = Mockito.mock(
 		DLAppLocalService.class);
 	private final FileEntry _fileEntry = Mockito.mock(FileEntry.class);

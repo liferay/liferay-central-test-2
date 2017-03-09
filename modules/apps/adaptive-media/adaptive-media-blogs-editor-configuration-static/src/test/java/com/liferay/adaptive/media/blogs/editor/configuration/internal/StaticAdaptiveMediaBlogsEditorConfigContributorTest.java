@@ -14,7 +14,7 @@
 
 package com.liferay.adaptive.media.blogs.editor.configuration.internal;
 
-import com.liferay.adaptive.media.image.item.selector.ImageAdaptiveMediaURLItemSelectorReturnType;
+import com.liferay.adaptive.media.image.item.selector.AdaptiveMediaImageURLItemSelectorReturnType;
 import com.liferay.blogs.item.selector.criterion.BlogsItemSelectorCriterion;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.item.selector.ItemSelectorCriterion;
@@ -68,7 +68,7 @@ public class StaticAdaptiveMediaBlogsEditorConfigContributorTest
 	}
 
 	@Test
-	public void testAddImageAdaptiveMediaURLItemSelectorReturnType()
+	public void testAddAdaptiveMediaImageURLItemSelectorReturnType()
 		throws Exception {
 
 		BlogsItemSelectorCriterion blogsItemSelectorCriterion =
@@ -83,7 +83,7 @@ public class StaticAdaptiveMediaBlogsEditorConfigContributorTest
 				new StaticAdaptiveMediaBlogsEditorConfigContributor();
 
 		staticAdaptiveMediaBlogsEditorConfigContributor.
-			addImageAdaptiveMediaURLItemSelectorReturnType(
+			addAdaptiveMediaImageURLItemSelectorReturnType(
 				blogsItemSelectorCriterion);
 
 		List<ItemSelectorReturnType> desiredItemSelectorReturnTypes =
@@ -94,7 +94,7 @@ public class StaticAdaptiveMediaBlogsEditorConfigContributorTest
 			desiredItemSelectorReturnTypes.size());
 		Assert.assertTrue(
 			desiredItemSelectorReturnTypes.get(0) instanceof
-				ImageAdaptiveMediaURLItemSelectorReturnType);
+				AdaptiveMediaImageURLItemSelectorReturnType);
 		Assert.assertTrue(
 			desiredItemSelectorReturnTypes.get(1) instanceof
 				URLItemSelectorReturnType);

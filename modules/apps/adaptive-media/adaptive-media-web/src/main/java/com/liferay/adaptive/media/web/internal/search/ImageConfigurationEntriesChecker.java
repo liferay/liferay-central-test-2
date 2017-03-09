@@ -14,7 +14,7 @@
 
 package com.liferay.adaptive.media.web.internal.search;
 
-import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
+import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry;
 import com.liferay.portal.kernel.dao.search.EmptyOnClickRowChecker;
 import com.liferay.portal.kernel.dao.search.RowChecker;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
@@ -52,7 +52,7 @@ public class ImageConfigurationEntriesChecker extends EmptyOnClickRowChecker {
 		String primaryKey) {
 
 		String name =
-			ImageAdaptiveMediaConfigurationEntry.class.getSimpleName();
+			AdaptiveMediaImageConfigurationEntry.class.getSimpleName();
 
 		String checkBoxRowIds = getEntryRowIds();
 
@@ -69,7 +69,7 @@ public class ImageConfigurationEntriesChecker extends EmptyOnClickRowChecker {
 		sb.append("['");
 		sb.append(_liferayPortletResponse.getNamespace());
 		sb.append(RowChecker.ROW_IDS);
-		sb.append(ImageAdaptiveMediaConfigurationEntry.class.getSimpleName());
+		sb.append(AdaptiveMediaImageConfigurationEntry.class.getSimpleName());
 		sb.append("']");
 
 		return sb.toString();

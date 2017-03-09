@@ -14,7 +14,7 @@
 
 package com.liferay.adaptive.media.web.internal.portlet.action;
 
-import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
+import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationHelper;
 import com.liferay.adaptive.media.web.constants.AdaptiveMediaPortletKeys;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
@@ -47,20 +47,20 @@ public class ResetDefaultValuesMVCActionCommand extends BaseMVCActionCommand {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		_imageAdaptiveMediaConfigurationHelper.resetDefaultConfiguration(
+		_adaptiveMediaImageConfigurationHelper.resetDefaultConfiguration(
 			themeDisplay.getCompanyId());
 	}
 
 	@Reference(unbind = "-")
-	protected void setImageAdaptiveMediaConfigurationHelper(
-		ImageAdaptiveMediaConfigurationHelper
-			imageAdaptiveMediaConfigurationHelper) {
+	protected void setAdaptiveMediaImageConfigurationHelper(
+		AdaptiveMediaImageConfigurationHelper
+			adaptiveMediaImageConfigurationHelper) {
 
-		_imageAdaptiveMediaConfigurationHelper =
-			imageAdaptiveMediaConfigurationHelper;
+		_adaptiveMediaImageConfigurationHelper =
+			adaptiveMediaImageConfigurationHelper;
 	}
 
-	private ImageAdaptiveMediaConfigurationHelper
-		_imageAdaptiveMediaConfigurationHelper;
+	private AdaptiveMediaImageConfigurationHelper
+		_adaptiveMediaImageConfigurationHelper;
 
 }

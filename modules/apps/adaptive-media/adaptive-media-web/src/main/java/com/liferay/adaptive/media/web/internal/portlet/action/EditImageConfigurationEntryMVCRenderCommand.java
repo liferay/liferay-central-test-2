@@ -14,8 +14,8 @@
 
 package com.liferay.adaptive.media.web.internal.portlet.action;
 
-import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
-import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
+import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry;
+import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationHelper;
 import com.liferay.adaptive.media.image.service.AdaptiveMediaImageEntryLocalService;
 import com.liferay.adaptive.media.web.constants.AdaptiveMediaPortletKeys;
 import com.liferay.adaptive.media.web.internal.constants.AdaptiveMediaWebKeys;
@@ -55,16 +55,16 @@ public class EditImageConfigurationEntryMVCRenderCommand
 
 		String entryUuid = ParamUtil.getString(renderRequest, "entryUuid");
 
-		Optional<ImageAdaptiveMediaConfigurationEntry>
+		Optional<AdaptiveMediaImageConfigurationEntry>
 			configurationEntryOptional =
-				_imageAdaptiveMediaConfigurationHelper.
-					getImageAdaptiveMediaConfigurationEntry(
+				_adaptiveMediaImageConfigurationHelper.
+					getAdaptiveMediaImageConfigurationEntry(
 						themeDisplay.getCompanyId(), entryUuid);
 
 		boolean configurationEntryEditable = true;
 
 		if (configurationEntryOptional.isPresent()) {
-			ImageAdaptiveMediaConfigurationEntry configurationEntry =
+			AdaptiveMediaImageConfigurationEntry configurationEntry =
 				configurationEntryOptional.get();
 
 			int imageEntriesCount =
@@ -88,16 +88,16 @@ public class EditImageConfigurationEntryMVCRenderCommand
 	}
 
 	@Reference(unbind = "-")
-	protected void setImageAdaptiveMediaConfigurationHelper(
-		ImageAdaptiveMediaConfigurationHelper
-			imageAdaptiveMediaConfigurationHelper) {
+	protected void setAdaptiveMediaImageConfigurationHelper(
+		AdaptiveMediaImageConfigurationHelper
+			adaptiveMediaImageConfigurationHelper) {
 
-		_imageAdaptiveMediaConfigurationHelper =
-			imageAdaptiveMediaConfigurationHelper;
+		_adaptiveMediaImageConfigurationHelper =
+			adaptiveMediaImageConfigurationHelper;
 	}
 
-	private ImageAdaptiveMediaConfigurationHelper
-		_imageAdaptiveMediaConfigurationHelper;
+	private AdaptiveMediaImageConfigurationHelper
+		_adaptiveMediaImageConfigurationHelper;
 
 	@Reference
 	private AdaptiveMediaImageEntryLocalService _imageEntryLocalService;

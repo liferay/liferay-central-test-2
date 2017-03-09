@@ -16,9 +16,9 @@ package com.liferay.adaptive.media.document.library.thumbnails.internal.commands
 
 import com.liferay.adaptive.media.AdaptiveMedia;
 import com.liferay.adaptive.media.document.library.thumbnails.internal.test.util.DestinationReplacer;
-import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
-import com.liferay.adaptive.media.image.finder.ImageAdaptiveMediaFinder;
-import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
+import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationHelper;
+import com.liferay.adaptive.media.image.finder.AdaptiveMediaImageFinder;
+import com.liferay.adaptive.media.image.processor.AdaptiveMediaImageProcessor;
 import com.liferay.adaptive.media.image.service.AdaptiveMediaImageEntryLocalServiceUtil;
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.document.library.kernel.model.DLFolderConstants;
@@ -94,9 +94,9 @@ public class AdaptiveMediaThumbnailsOSGiCommandsTest {
 		Registry registry = RegistryUtil.getRegistry();
 
 		_configurationHelperServiceReference = registry.getServiceReference(
-			ImageAdaptiveMediaConfigurationHelper.class);
+			AdaptiveMediaImageConfigurationHelper.class);
 		_finderServiceReference = registry.getServiceReference(
-			ImageAdaptiveMediaFinder.class);
+			AdaptiveMediaImageFinder.class);
 
 		_configurationHelper = registry.getService(
 			_configurationHelperServiceReference);
@@ -132,7 +132,7 @@ public class AdaptiveMediaThumbnailsOSGiCommandsTest {
 		properties.put("max-height", "100");
 		properties.put("max-width", "100");
 
-		_configurationHelper.addImageAdaptiveMediaConfigurationEntry(
+		_configurationHelper.addAdaptiveMediaImageConfigurationEntry(
 			_company.getCompanyId(), _THUMBNAIL_CONFIGURATION,
 			_THUMBNAIL_CONFIGURATION, properties);
 
@@ -144,7 +144,7 @@ public class AdaptiveMediaThumbnailsOSGiCommandsTest {
 
 	@After
 	public void tearDown() throws Exception {
-		_configurationHelper.forceDeleteImageAdaptiveMediaConfigurationEntry(
+		_configurationHelper.forceDeleteAdaptiveMediaImageConfigurationEntry(
 			_company.getCompanyId(), _THUMBNAIL_CONFIGURATION);
 
 		FileVersion latestFileVersion = _pngFileEntry.getFileVersion();
@@ -307,7 +307,7 @@ public class AdaptiveMediaThumbnailsOSGiCommandsTest {
 	}
 
 	private long _getAdaptiveMediaCount(FileEntry fileEntry) throws Exception {
-		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream =
+		Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>> stream =
 			_finder.getAdaptiveMedia(
 				queryBuilder -> queryBuilder.forFileEntry(fileEntry).
 					forConfiguration(_THUMBNAIL_CONFIGURATION).done());
@@ -361,11 +361,11 @@ public class AdaptiveMediaThumbnailsOSGiCommandsTest {
 
 	private static final String _THUMBNAIL_CONFIGURATION = "thumbnail";
 
-	private static ImageAdaptiveMediaConfigurationHelper _configurationHelper;
-	private static ServiceReference<ImageAdaptiveMediaConfigurationHelper>
+	private static AdaptiveMediaImageConfigurationHelper _configurationHelper;
+	private static ServiceReference<AdaptiveMediaImageConfigurationHelper>
 		_configurationHelperServiceReference;
-	private static ImageAdaptiveMediaFinder _finder;
-	private static ServiceReference<ImageAdaptiveMediaFinder>
+	private static AdaptiveMediaImageFinder _finder;
+	private static ServiceReference<AdaptiveMediaImageFinder>
 		_finderServiceReference;
 
 	private Company _company;

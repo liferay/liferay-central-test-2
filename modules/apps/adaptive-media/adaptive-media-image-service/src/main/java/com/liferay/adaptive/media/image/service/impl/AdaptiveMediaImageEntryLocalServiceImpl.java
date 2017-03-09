@@ -16,7 +16,7 @@ package com.liferay.adaptive.media.image.service.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
+import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry;
 import com.liferay.adaptive.media.image.counter.AdaptiveMediaImageCounter;
 import com.liferay.adaptive.media.image.exception.DuplicateAdaptiveMediaImageEntryException;
 import com.liferay.adaptive.media.image.internal.storage.ImageStorage;
@@ -51,7 +51,7 @@ public class AdaptiveMediaImageEntryLocalServiceImpl
 
 	@Override
 	public AdaptiveMediaImageEntry addAdaptiveMediaImageEntry(
-			ImageAdaptiveMediaConfigurationEntry configurationEntry,
+			AdaptiveMediaImageConfigurationEntry configurationEntry,
 			FileVersion fileVersion, int width, int height,
 			InputStream inputStream, int size)
 		throws PortalException {
@@ -143,7 +143,7 @@ public class AdaptiveMediaImageEntryLocalServiceImpl
 
 	@Override
 	public InputStream getAdaptiveMediaImageEntryContentStream(
-		ImageAdaptiveMediaConfigurationEntry configurationEntry,
+		AdaptiveMediaImageConfigurationEntry configurationEntry,
 		FileVersion fileVersion) {
 
 		return imageStorage.getContentStream(fileVersion, configurationEntry);

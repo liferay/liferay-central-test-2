@@ -14,7 +14,7 @@
 
 package com.liferay.adaptive.media.blogs.editor.configuration.internal;
 
-import com.liferay.adaptive.media.image.item.selector.ImageAdaptiveMediaFileEntryItemSelectorReturnType;
+import com.liferay.adaptive.media.image.item.selector.AdaptiveMediaImageFileEntryItemSelectorReturnType;
 import com.liferay.blogs.item.selector.criterion.BlogsItemSelectorCriterion;
 import com.liferay.blogs.web.constants.BlogsPortletKeys;
 import com.liferay.item.selector.ItemSelector;
@@ -81,7 +81,7 @@ public class DynamicAdaptiveMediaBlogsEditorConfigContributor
 		List<ItemSelectorCriterion> itemSelectorCriteria =
 			_itemSelector.getItemSelectorCriteria(itemSelectorURL);
 
-		boolean imageAdaptiveMediaURLItemSelectorReturnTypeAdded = false;
+		boolean adaptiveMediaImageURLItemSelectorReturnTypeAdded = false;
 
 		for (ItemSelectorCriterion itemSelectorCriterion :
 				itemSelectorCriteria) {
@@ -90,14 +90,14 @@ public class DynamicAdaptiveMediaBlogsEditorConfigContributor
 				itemSelectorCriterion instanceof FileItemSelectorCriterion ||
 				itemSelectorCriterion instanceof ImageItemSelectorCriterion) {
 
-				addImageAdaptiveMediaFileEntryItemSelectorReturnType(
+				addAdaptiveMediaImageFileEntryItemSelectorReturnType(
 					itemSelectorCriterion);
 
-				imageAdaptiveMediaURLItemSelectorReturnTypeAdded = true;
+				adaptiveMediaImageURLItemSelectorReturnTypeAdded = true;
 			}
 		}
 
-		if (!imageAdaptiveMediaURLItemSelectorReturnTypeAdded) {
+		if (!adaptiveMediaImageURLItemSelectorReturnTypeAdded) {
 			return;
 		}
 
@@ -131,14 +131,14 @@ public class DynamicAdaptiveMediaBlogsEditorConfigContributor
 		_itemSelector = itemSelector;
 	}
 
-	protected void addImageAdaptiveMediaFileEntryItemSelectorReturnType(
+	protected void addAdaptiveMediaImageFileEntryItemSelectorReturnType(
 		ItemSelectorCriterion itemSelectorCriterion) {
 
 		List<ItemSelectorReturnType> desiredItemSelectorReturnTypes =
 			new ArrayList<>();
 
 		desiredItemSelectorReturnTypes.add(
-			new ImageAdaptiveMediaFileEntryItemSelectorReturnType());
+			new AdaptiveMediaImageFileEntryItemSelectorReturnType());
 		desiredItemSelectorReturnTypes.addAll(
 			itemSelectorCriterion.getDesiredItemSelectorReturnTypes());
 

@@ -15,8 +15,8 @@
 package com.liferay.adaptive.media.image.internal.util;
 
 import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
-import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
-import com.liferay.adaptive.media.image.constants.ImageAdaptiveMediaConstants;
+import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry;
+import com.liferay.adaptive.media.image.constants.AdaptiveMediaImageConstants;
 import com.liferay.adaptive.media.image.internal.processor.util.TiffOrientationTransformer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.image.ImageToolUtil;
@@ -41,14 +41,14 @@ public class ImageProcessor {
 
 	public boolean isMimeTypeSupported(String mimeType) {
 		Set<String> supportedMimeTypes =
-			ImageAdaptiveMediaConstants.getSupportedMimeTypes();
+			AdaptiveMediaImageConstants.getSupportedMimeTypes();
 
 		return supportedMimeTypes.contains(mimeType);
 	}
 
 	public RenderedImage scaleImage(
 		FileVersion fileVersion,
-		ImageAdaptiveMediaConfigurationEntry configurationEntry) {
+		AdaptiveMediaImageConfigurationEntry configurationEntry) {
 
 		try {
 			RenderedImage renderedImage = _tiffOrientationTransformer.transform(

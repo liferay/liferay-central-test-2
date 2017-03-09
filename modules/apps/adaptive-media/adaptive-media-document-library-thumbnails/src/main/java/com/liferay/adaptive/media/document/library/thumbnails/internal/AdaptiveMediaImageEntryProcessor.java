@@ -17,10 +17,10 @@ package com.liferay.adaptive.media.document.library.thumbnails.internal;
 import com.liferay.adaptive.media.AdaptiveMedia;
 import com.liferay.adaptive.media.AdaptiveMediaAttribute;
 import com.liferay.adaptive.media.AdaptiveMediaException;
-import com.liferay.adaptive.media.image.constants.ImageAdaptiveMediaConstants;
-import com.liferay.adaptive.media.image.finder.ImageAdaptiveMediaFinder;
-import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaAttribute;
-import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
+import com.liferay.adaptive.media.image.constants.AdaptiveMediaImageConstants;
+import com.liferay.adaptive.media.image.finder.AdaptiveMediaImageFinder;
+import com.liferay.adaptive.media.image.processor.AdaptiveMediaImageAttribute;
+import com.liferay.adaptive.media.image.processor.AdaptiveMediaImageProcessor;
 import com.liferay.document.library.kernel.model.DLProcessorConstants;
 import com.liferay.document.library.kernel.util.DLProcessor;
 import com.liferay.document.library.kernel.util.ImageProcessor;
@@ -83,7 +83,7 @@ public class AdaptiveMediaImageEntryProcessor
 
 	@Override
 	public Set<String> getImageMimeTypes() {
-		return ImageAdaptiveMediaConstants.getSupportedMimeTypes();
+		return AdaptiveMediaImageConstants.getSupportedMimeTypes();
 	}
 
 	@Override
@@ -107,7 +107,7 @@ public class AdaptiveMediaImageEntryProcessor
 	public InputStream getThumbnailAsStream(FileVersion fileVersion, int index)
 		throws Exception {
 
-		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream =
+		Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>> stream =
 			_getThumbnailAdaptiveMedia(fileVersion);
 
 		return stream.findFirst().map(AdaptiveMedia::getInputStream).orElse(
@@ -118,7 +118,7 @@ public class AdaptiveMediaImageEntryProcessor
 	public long getThumbnailFileSize(FileVersion fileVersion, int index)
 		throws Exception {
 
-		Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream =
+		Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>> stream =
 			_getThumbnailAdaptiveMedia(fileVersion);
 
 		return stream.findFirst().flatMap(mediaMedia ->
@@ -139,10 +139,10 @@ public class AdaptiveMediaImageEntryProcessor
 	@Override
 	public boolean hasImages(FileVersion fileVersion) {
 		try {
-			Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>> stream =
+			Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>> stream =
 				_getThumbnailAdaptiveMedia(fileVersion);
 
-			Optional<AdaptiveMedia<ImageAdaptiveMediaProcessor>>
+			Optional<AdaptiveMedia<AdaptiveMediaImageProcessor>>
 				adaptiveMediaOptional = stream.findFirst();
 
 			if (adaptiveMediaOptional.isPresent()) {
@@ -196,27 +196,27 @@ public class AdaptiveMediaImageEntryProcessor
 		FileVersion sourceFileVersion, FileVersion destinationFileVersion) {
 	}
 
-	private Stream<AdaptiveMedia<ImageAdaptiveMediaProcessor>>
+	private Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>>
 			_getThumbnailAdaptiveMedia(FileVersion fileVersion)
 		throws AdaptiveMediaException, PortalException {
 
-		return _imageAdaptiveMediaFinder.getAdaptiveMedia(queryBuilder ->
+		return _adaptiveMediaImageFinder.getAdaptiveMedia(queryBuilder ->
 			queryBuilder.forVersion(fileVersion).with(
-				ImageAdaptiveMediaAttribute.IMAGE_WIDTH,
+				AdaptiveMediaImageAttribute.IMAGE_WIDTH,
 				PropsValues.DL_FILE_ENTRY_THUMBNAIL_MAX_WIDTH).with(
-				ImageAdaptiveMediaAttribute.IMAGE_HEIGHT,
+				AdaptiveMediaImageAttribute.IMAGE_HEIGHT,
 				PropsValues.DL_FILE_ENTRY_THUMBNAIL_MAX_HEIGHT).done());
 	}
 
 	private boolean _isMimeTypeSupported(String mimeType) {
 		Set<String> supportedMimeTypes =
-			ImageAdaptiveMediaConstants.getSupportedMimeTypes();
+			AdaptiveMediaImageConstants.getSupportedMimeTypes();
 
 		return supportedMimeTypes.contains(mimeType);
 	}
 
 	@Reference
-	private ImageAdaptiveMediaFinder _imageAdaptiveMediaFinder;
+	private AdaptiveMediaImageFinder _adaptiveMediaImageFinder;
 
 	private final ImageProcessor _imageProcessor = new ImageProcessorImpl();
 

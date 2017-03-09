@@ -14,7 +14,7 @@
 
 package com.liferay.adaptive.media.blogs.editor.configuration.internal;
 
-import com.liferay.adaptive.media.image.item.selector.ImageAdaptiveMediaFileEntryItemSelectorReturnType;
+import com.liferay.adaptive.media.image.item.selector.AdaptiveMediaImageFileEntryItemSelectorReturnType;
 import com.liferay.blogs.item.selector.criterion.BlogsItemSelectorCriterion;
 import com.liferay.item.selector.ItemSelector;
 import com.liferay.item.selector.ItemSelectorCriterion;
@@ -183,7 +183,7 @@ public class DynamicAdaptiveMediaBlogsEditorConfigContributorTest
 	}
 
 	@Test
-	public void testAddImageAdaptiveMediaFileEntryItemSelectorReturnType()
+	public void testAddAdaptiveMediaImageFileEntryItemSelectorReturnType()
 		throws Exception {
 
 		DynamicAdaptiveMediaBlogsEditorConfigContributor
@@ -198,7 +198,7 @@ public class DynamicAdaptiveMediaBlogsEditorConfigContributorTest
 				new FileEntryItemSelectorReturnType()));
 
 		dynamicAdaptiveMediaBlogsEditorConfigContributor.
-			addImageAdaptiveMediaFileEntryItemSelectorReturnType(
+			addAdaptiveMediaImageFileEntryItemSelectorReturnType(
 				blogsItemSelectorCriterion);
 
 		List<ItemSelectorReturnType> desiredItemSelectorReturnTypes =
@@ -209,7 +209,7 @@ public class DynamicAdaptiveMediaBlogsEditorConfigContributorTest
 			desiredItemSelectorReturnTypes.size());
 		Assert.assertTrue(
 			desiredItemSelectorReturnTypes.get(0) instanceof
-				ImageAdaptiveMediaFileEntryItemSelectorReturnType);
+				AdaptiveMediaImageFileEntryItemSelectorReturnType);
 		Assert.assertTrue(
 			desiredItemSelectorReturnTypes.get(1) instanceof
 				FileEntryItemSelectorReturnType);

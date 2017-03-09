@@ -15,7 +15,7 @@
 package com.liferay.adaptive.media.image.internal.storage;
 
 import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
-import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
+import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry;
 import com.liferay.document.library.kernel.store.DLStoreUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.CompanyConstants;
@@ -75,7 +75,7 @@ public class ImageStorage {
 
 	public InputStream getContentStream(
 		FileVersion fileVersion,
-		ImageAdaptiveMediaConfigurationEntry configurationEntry) {
+		AdaptiveMediaImageConfigurationEntry configurationEntry) {
 
 		try {
 			String fileVersionVariantPath = getFileVersionVariantPath(
@@ -91,7 +91,7 @@ public class ImageStorage {
 
 	public void save(
 		FileVersion fileVersion,
-		ImageAdaptiveMediaConfigurationEntry configurationEntry,
+		AdaptiveMediaImageConfigurationEntry configurationEntry,
 		InputStream inputStream) {
 
 		try {
@@ -127,7 +127,7 @@ public class ImageStorage {
 
 	protected String getFileVersionVariantPath(
 		FileVersion fileVersion,
-		ImageAdaptiveMediaConfigurationEntry configurationEntry) {
+		AdaptiveMediaImageConfigurationEntry configurationEntry) {
 
 		String basePath = getFileVersionPath(fileVersion);
 

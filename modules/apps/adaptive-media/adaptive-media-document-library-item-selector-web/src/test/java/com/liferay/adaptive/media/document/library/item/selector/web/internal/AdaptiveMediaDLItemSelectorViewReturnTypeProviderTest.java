@@ -14,8 +14,8 @@
 
 package com.liferay.adaptive.media.document.library.item.selector.web.internal;
 
-import com.liferay.adaptive.media.image.item.selector.ImageAdaptiveMediaFileEntryItemSelectorReturnType;
-import com.liferay.adaptive.media.image.item.selector.ImageAdaptiveMediaURLItemSelectorReturnType;
+import com.liferay.adaptive.media.image.item.selector.AdaptiveMediaImageFileEntryItemSelectorReturnType;
+import com.liferay.adaptive.media.image.item.selector.AdaptiveMediaImageURLItemSelectorReturnType;
 import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.ItemSelectorViewReturnTypeProvider;
 import com.liferay.item.selector.criteria.FileEntryItemSelectorReturnType;
@@ -37,7 +37,7 @@ public class AdaptiveMediaDLItemSelectorViewReturnTypeProviderTest
 
 	@Test
 	public void
-			testAddImageAdaptiveMediaItemSelectorReturnTypesWithNonEmptyList()
+			testAddAdaptiveMediaImageItemSelectorReturnTypesWithNonEmptyList()
 		throws Exception {
 
 		List<ItemSelectorReturnType> supportedItemSelectorReturnTypes =
@@ -67,14 +67,14 @@ public class AdaptiveMediaDLItemSelectorViewReturnTypeProviderTest
 				URLItemSelectorReturnType);
 		Assert.assertTrue(
 			itemSelectorReturnTypes.get(2) instanceof
-				ImageAdaptiveMediaFileEntryItemSelectorReturnType);
+				AdaptiveMediaImageFileEntryItemSelectorReturnType);
 		Assert.assertTrue(
 			itemSelectorReturnTypes.get(3) instanceof
-				ImageAdaptiveMediaURLItemSelectorReturnType);
+				AdaptiveMediaImageURLItemSelectorReturnType);
 	}
 
 	@Test
-	public void testAddImageAdaptiveMediatemSelectorReturnTypesWithEmptyList()
+	public void testAddAdaptiveMediaImagetemSelectorReturnTypesWithEmptyList()
 		throws Exception {
 
 		List<ItemSelectorReturnType> supportedItemSelectorReturnTypes =
@@ -94,11 +94,11 @@ public class AdaptiveMediaDLItemSelectorViewReturnTypeProviderTest
 
 		Assert.assertTrue(
 			itemSelectorReturnTypes.get(0) instanceof
-				ImageAdaptiveMediaFileEntryItemSelectorReturnType);
+				AdaptiveMediaImageFileEntryItemSelectorReturnType);
 
 		Assert.assertTrue(
 			itemSelectorReturnTypes.get(1) instanceof
-				ImageAdaptiveMediaURLItemSelectorReturnType);
+				AdaptiveMediaImageURLItemSelectorReturnType);
 	}
 
 }

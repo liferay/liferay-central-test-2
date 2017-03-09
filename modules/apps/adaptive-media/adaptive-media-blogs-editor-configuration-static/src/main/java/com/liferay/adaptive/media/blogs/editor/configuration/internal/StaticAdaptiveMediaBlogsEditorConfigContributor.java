@@ -14,7 +14,7 @@
 
 package com.liferay.adaptive.media.blogs.editor.configuration.internal;
 
-import com.liferay.adaptive.media.image.item.selector.ImageAdaptiveMediaURLItemSelectorReturnType;
+import com.liferay.adaptive.media.image.item.selector.AdaptiveMediaImageURLItemSelectorReturnType;
 import com.liferay.blogs.item.selector.criterion.BlogsItemSelectorCriterion;
 import com.liferay.blogs.web.constants.BlogsPortletKeys;
 import com.liferay.item.selector.ItemSelector;
@@ -77,7 +77,7 @@ public class StaticAdaptiveMediaBlogsEditorConfigContributor
 		List<ItemSelectorCriterion> itemSelectorCriteria =
 			_itemSelector.getItemSelectorCriteria(itemSelectorURL);
 
-		boolean imageAdaptiveMediaURLItemSelectorReturnTypeAdded = false;
+		boolean adaptiveMediaImageURLItemSelectorReturnTypeAdded = false;
 
 		for (ItemSelectorCriterion itemSelectorCriterion :
 				itemSelectorCriteria) {
@@ -86,14 +86,14 @@ public class StaticAdaptiveMediaBlogsEditorConfigContributor
 				itemSelectorCriterion instanceof FileItemSelectorCriterion ||
 				itemSelectorCriterion instanceof ImageItemSelectorCriterion) {
 
-				addImageAdaptiveMediaURLItemSelectorReturnType(
+				addAdaptiveMediaImageURLItemSelectorReturnType(
 					itemSelectorCriterion);
 
-				imageAdaptiveMediaURLItemSelectorReturnTypeAdded = true;
+				adaptiveMediaImageURLItemSelectorReturnTypeAdded = true;
 			}
 		}
 
-		if (!imageAdaptiveMediaURLItemSelectorReturnTypeAdded) {
+		if (!adaptiveMediaImageURLItemSelectorReturnTypeAdded) {
 			return;
 		}
 
@@ -127,14 +127,14 @@ public class StaticAdaptiveMediaBlogsEditorConfigContributor
 		_itemSelector = itemSelector;
 	}
 
-	protected void addImageAdaptiveMediaURLItemSelectorReturnType(
+	protected void addAdaptiveMediaImageURLItemSelectorReturnType(
 		ItemSelectorCriterion itemSelectorCriterion) {
 
 		List<ItemSelectorReturnType> desiredItemSelectorReturnTypes =
 			new ArrayList<>();
 
 		desiredItemSelectorReturnTypes.add(
-			new ImageAdaptiveMediaURLItemSelectorReturnType());
+			new AdaptiveMediaImageURLItemSelectorReturnType());
 		desiredItemSelectorReturnTypes.addAll(
 			itemSelectorCriterion.getDesiredItemSelectorReturnTypes());
 

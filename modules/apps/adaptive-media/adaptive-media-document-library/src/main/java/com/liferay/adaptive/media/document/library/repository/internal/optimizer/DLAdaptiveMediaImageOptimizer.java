@@ -15,12 +15,12 @@
 package com.liferay.adaptive.media.document.library.repository.internal.optimizer;
 
 import com.liferay.adaptive.media.AdaptiveMediaException;
-import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
-import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationHelper;
-import com.liferay.adaptive.media.image.constants.ImageAdaptiveMediaConstants;
+import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry;
+import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationHelper;
+import com.liferay.adaptive.media.image.constants.AdaptiveMediaImageConstants;
 import com.liferay.adaptive.media.image.counter.AdaptiveMediaImageCounter;
 import com.liferay.adaptive.media.image.optimizer.AdaptiveMediaImageOptimizer;
-import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
+import com.liferay.adaptive.media.image.processor.AdaptiveMediaImageProcessor;
 import com.liferay.adaptive.media.web.constants.OptimizeImagesBackgroundTaskConstants;
 import com.liferay.document.library.kernel.model.DLFileEntry;
 import com.liferay.document.library.kernel.service.DLFileEntryLocalService;
@@ -57,8 +57,8 @@ public class DLAdaptiveMediaImageOptimizer
 
 	@Override
 	public void optimize(long companyId) {
-		Collection<ImageAdaptiveMediaConfigurationEntry> configurationEntries =
-			_configurationHelper.getImageAdaptiveMediaConfigurationEntries(
+		Collection<AdaptiveMediaImageConfigurationEntry> configurationEntries =
+			_configurationHelper.getAdaptiveMediaImageConfigurationEntries(
 				companyId);
 
 		int total =
@@ -67,7 +67,7 @@ public class DLAdaptiveMediaImageOptimizer
 
 		final AtomicInteger atomicCounter = new AtomicInteger(0);
 
-		for (ImageAdaptiveMediaConfigurationEntry configurationEntry :
+		for (AdaptiveMediaImageConfigurationEntry configurationEntry :
 				configurationEntries) {
 
 			_optimize(
@@ -114,7 +114,7 @@ public class DLAdaptiveMediaImageOptimizer
 
 					dynamicQuery.add(
 						mimeTypeProperty.in(
-							ImageAdaptiveMediaConstants.
+							AdaptiveMediaImageConstants.
 								getSupportedMimeTypes()));
 				}
 
@@ -185,7 +185,7 @@ public class DLAdaptiveMediaImageOptimizer
 	private ClassNameLocalService _classNameLocalService;
 
 	@Reference
-	private ImageAdaptiveMediaConfigurationHelper _configurationHelper;
+	private AdaptiveMediaImageConfigurationHelper _configurationHelper;
 
 	@Reference(target = "(adaptive.media.key=document-library)")
 	private AdaptiveMediaImageCounter _counter;
@@ -194,6 +194,6 @@ public class DLAdaptiveMediaImageOptimizer
 	private DLFileEntryLocalService _dlFileEntryLocalService;
 
 	@Reference
-	private ImageAdaptiveMediaProcessor _processor;
+	private AdaptiveMediaImageProcessor _processor;
 
 }

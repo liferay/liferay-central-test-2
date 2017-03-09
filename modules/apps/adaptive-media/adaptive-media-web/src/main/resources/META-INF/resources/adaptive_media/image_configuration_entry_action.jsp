@@ -19,7 +19,7 @@
 <%
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-ImageAdaptiveMediaConfigurationEntry configurationEntry = (ImageAdaptiveMediaConfigurationEntry)row.getObject();
+AdaptiveMediaImageConfigurationEntry configurationEntry = (AdaptiveMediaImageConfigurationEntry)row.getObject();
 
 boolean optimizeImagesEnabled = true;
 
@@ -57,7 +57,7 @@ if (!reindexSingleBackgroundTasks.isEmpty()) {
 			<c:when test="<%= configurationEntry.isEnabled() %>">
 				<portlet:actionURL name="/adaptive_media/disable_image_configuration_entry" var="disableImageConfigurationEntryURL">
 					<portlet:param name="redirect" value="<%= currentURL %>" />
-					<portlet:param name="imageAdaptiveMediaConfigurationEntryUuid" value="<%= String.valueOf(configurationEntry.getUUID()) %>" />
+					<portlet:param name="adaptiveMediaImageConfigurationEntryUuid" value="<%= String.valueOf(configurationEntry.getUUID()) %>" />
 				</portlet:actionURL>
 
 				<liferay-ui:icon
@@ -68,7 +68,7 @@ if (!reindexSingleBackgroundTasks.isEmpty()) {
 			<c:otherwise>
 				<portlet:actionURL name="/adaptive_media/enable_image_configuration_entry" var="enableImageConfigurationEntryURL">
 					<portlet:param name="redirect" value="<%= currentURL %>" />
-					<portlet:param name="imageAdaptiveMediaConfigurationEntryUuid" value="<%= String.valueOf(configurationEntry.getUUID()) %>" />
+					<portlet:param name="adaptiveMediaImageConfigurationEntryUuid" value="<%= String.valueOf(configurationEntry.getUUID()) %>" />
 				</portlet:actionURL>
 
 				<liferay-ui:icon
@@ -90,7 +90,7 @@ if (!reindexSingleBackgroundTasks.isEmpty()) {
 
 		<portlet:actionURL name="/adaptive_media/delete_image_configuration_entry" var="deleteImageConfigurationEntryURL">
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="rowIdsImageAdaptiveMediaConfigurationEntry" value="<%= String.valueOf(configurationEntry.getUUID()) %>" />
+			<portlet:param name="rowIdsAdaptiveMediaImageConfigurationEntry" value="<%= String.valueOf(configurationEntry.getUUID()) %>" />
 		</portlet:actionURL>
 
 		<c:choose>

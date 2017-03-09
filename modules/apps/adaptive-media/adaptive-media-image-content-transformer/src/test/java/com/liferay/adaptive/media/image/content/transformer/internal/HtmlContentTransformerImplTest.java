@@ -16,9 +16,9 @@ package com.liferay.adaptive.media.image.content.transformer.internal;
 
 import com.liferay.adaptive.media.AdaptiveMedia;
 import com.liferay.adaptive.media.AdaptiveMediaException;
-import com.liferay.adaptive.media.image.finder.ImageAdaptiveMediaFinder;
-import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaAttribute;
-import com.liferay.adaptive.media.image.processor.ImageAdaptiveMediaProcessor;
+import com.liferay.adaptive.media.image.finder.AdaptiveMediaImageFinder;
+import com.liferay.adaptive.media.image.processor.AdaptiveMediaImageAttribute;
+import com.liferay.adaptive.media.image.processor.AdaptiveMediaImageProcessor;
 import com.liferay.document.library.kernel.service.DLAppLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.CharPool;
@@ -49,14 +49,14 @@ public class HtmlContentTransformerImplTest {
 	@Before
 	public void setUp() throws AdaptiveMediaException, PortalException {
 		_htmlContentTransformer.setDlAppLocalService(_dlAppLocalService);
-		_htmlContentTransformer.setImageAdaptiveMediaFinder(_finder);
+		_htmlContentTransformer.setAdaptiveMediaImageFinder(_finder);
 	}
 
 	@Test
 	public void testAlsoReplacesSeveralImagesInAMultilineString()
 		throws Exception {
 
-		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia =
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia =
 			_createAdaptiveMedia(1989, "http://very.adaptive.com");
 
 		Mockito.when(
@@ -88,10 +88,10 @@ public class HtmlContentTransformerImplTest {
 
 	@Test
 	public void testAppliesSeveralMediaQueries() throws Exception {
-		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia1 =
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia1 =
 			_createAdaptiveMedia(1986, "http://small.very.adaptive.com");
 
-		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia2 =
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia2 =
 			_createAdaptiveMedia(1989, "http://very.adaptive.com");
 
 		Mockito.when(
@@ -121,7 +121,7 @@ public class HtmlContentTransformerImplTest {
 	public void testReplacesTheAdaptableImagesWithTheAdaptivePictureTag()
 		throws Exception {
 
-		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia =
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia =
 			_createAdaptiveMedia(1989, "http://very.adaptive.com");
 
 		Mockito.when(
@@ -152,7 +152,7 @@ public class HtmlContentTransformerImplTest {
 
 	@Test
 	public void testReplacesTwoConsecutiveImageTags() throws Exception {
-		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia =
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia =
 			_createAdaptiveMedia(1989, "http://very.adaptive.com");
 
 		Mockito.when(
@@ -214,7 +214,7 @@ public class HtmlContentTransformerImplTest {
 
 	@Test
 	public void testSupportsImageTagsWithNewLineCharacters() throws Exception {
-		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia =
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia =
 			_createAdaptiveMedia(1989, "http://very.adaptive.com");
 
 		Mockito.when(
@@ -245,7 +245,7 @@ public class HtmlContentTransformerImplTest {
 
 	@Test
 	public void testTheAttributeIsCaseInsensitive() throws Exception {
-		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia =
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia =
 			_createAdaptiveMedia(1989, "http://very.adaptive.com");
 
 		Mockito.when(
@@ -275,15 +275,15 @@ public class HtmlContentTransformerImplTest {
 				StringUtil.toLowerCase(originalSB.toString())));
 	}
 
-	private AdaptiveMedia<ImageAdaptiveMediaProcessor> _createAdaptiveMedia(
+	private AdaptiveMedia<AdaptiveMediaImageProcessor> _createAdaptiveMedia(
 		int imageWidth, String url) {
 
-		AdaptiveMedia<ImageAdaptiveMediaProcessor> adaptiveMedia = Mockito.mock(
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia = Mockito.mock(
 			AdaptiveMedia.class);
 
 		Mockito.when(
 			adaptiveMedia.getAttributeValue(
-				ImageAdaptiveMediaAttribute.IMAGE_WIDTH)
+				AdaptiveMediaImageAttribute.IMAGE_WIDTH)
 		).thenReturn(
 			Optional.of(imageWidth)
 		);
@@ -305,7 +305,7 @@ public class HtmlContentTransformerImplTest {
 	private DLAppLocalService _dlAppLocalService;
 
 	@Mock
-	private ImageAdaptiveMediaFinder _finder;
+	private AdaptiveMediaImageFinder _finder;
 
 	private final HtmlContentTransformerImpl _htmlContentTransformer =
 		new HtmlContentTransformerImpl();

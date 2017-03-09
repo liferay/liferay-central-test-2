@@ -23,7 +23,7 @@ portletDisplay.setShowBackIcon(true);
 portletDisplay.setURLBack(redirect);
 
 boolean configurationEntryEditable = GetterUtil.getBoolean(request.getAttribute(AdaptiveMediaWebKeys.CONFIGURATION_ENTRY_EDITABLE));
-ImageAdaptiveMediaConfigurationEntry configurationEntry = (ImageAdaptiveMediaConfigurationEntry)request.getAttribute(AdaptiveMediaWebKeys.CONFIGURATION_ENTRY);
+AdaptiveMediaImageConfigurationEntry configurationEntry = (AdaptiveMediaImageConfigurationEntry)request.getAttribute(AdaptiveMediaWebKeys.CONFIGURATION_ENTRY);
 
 String configurationEntryUuid = ParamUtil.getString(request, "uuid", (configurationEntry != null) ? configurationEntry.getUUID() : StringPool.BLANK);
 
@@ -37,9 +37,9 @@ if (configurationEntry != null) {
 %>
 
 <div class="container-fluid-1280">
-	<liferay-ui:error exception="<%= ImageAdaptiveMediaConfigurationException.DuplicateImageAdaptiveMediaConfigurationException.class %>" message="there-is-already-a-configuration-with-the-same-id" />
-	<liferay-ui:error exception="<%= ImageAdaptiveMediaConfigurationException.InvalidHeightException.class %>" message="please-enter-a-max-height-value-larger-than-0" />
-	<liferay-ui:error exception="<%= ImageAdaptiveMediaConfigurationException.InvalidWidthException.class %>" message="please-enter-a-max-width-value-larger-than-0" />
+	<liferay-ui:error exception="<%= AdaptiveMediaImageConfigurationException.DuplicateAdaptiveMediaImageConfigurationException.class %>" message="there-is-already-a-configuration-with-the-same-id" />
+	<liferay-ui:error exception="<%= AdaptiveMediaImageConfigurationException.InvalidHeightException.class %>" message="please-enter-a-max-height-value-larger-than-0" />
+	<liferay-ui:error exception="<%= AdaptiveMediaImageConfigurationException.InvalidWidthException.class %>" message="please-enter-a-max-width-value-larger-than-0" />
 
 	<portlet:actionURL name="/adaptive_media/edit_image_configuration_entry" var="editImageConfigurationEntryURL">
 		<portlet:param name="mvcRenderCommandName" value="/adaptive_media/edit_image_configuration_entry" />
