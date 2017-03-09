@@ -19,6 +19,7 @@ import com.liferay.sync.engine.document.library.event.Event;
 import com.liferay.sync.engine.document.library.util.BatchEventManager;
 import com.liferay.sync.engine.document.library.util.FileEventManager;
 import com.liferay.sync.engine.document.library.util.FileEventUtil;
+import com.liferay.sync.engine.document.library.util.comparator.SyncWatchEventComparator;
 import com.liferay.sync.engine.model.SyncAccount;
 import com.liferay.sync.engine.model.SyncFile;
 import com.liferay.sync.engine.model.SyncFileModelListener;
@@ -39,6 +40,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -485,15 +488,11 @@ public class SyncWatchEventProcessor implements Runnable {
 
 		_pendingTypePKSyncFileIds.clear();
 
-		List<SyncWatchEvent> syncWatchEvents = null;
+		List<SyncWatchEvent> syncWatchEvents =
+			SyncWatchEventService.findBySyncAccountId(_syncAccountId);
 
-		if (OSDetector.isApple()) {
-			syncWatchEvents = SyncWatchEventService.findBySyncAccountId(
-				_syncAccountId);
-		}
-		else {
-			syncWatchEvents = SyncWatchEventService.findBySyncAccountId(
-				_syncAccountId, "eventType", true);
+		if (OSDetector.isWindows()) {
+			Collections.sort(syncWatchEvents, _syncWatchEventComparator);
 		}
 
 		for (SyncWatchEvent syncWatchEvent : syncWatchEvents) {
@@ -726,19 +725,26 @@ public class SyncWatchEventProcessor implements Runnable {
 
 					Path filePath = Paths.get(filePathName);
 
-					Path realFilePath = filePath.toRealPath(
-						LinkOption.NOFOLLOW_LINKS);
+					if (FileUtil.exists(filePath)) {
+						Path realFilePath = filePath.toRealPath(
+							LinkOption.NOFOLLOW_LINKS);
 
-					if (!filePathName.equals(realFilePath.toString())) {
-						syncWatchEvent.setEventType(
-							SyncWatchEvent.EVENT_TYPE_RENAME);
-						syncWatchEvent.setFilePathName(realFilePath.toString());
-						syncWatchEvent.setPreviousFilePathName(filePathName);
+						if (!filePathName.equals(realFilePath.toString())) {
+							syncWatchEvent.setEventType(
+								SyncWatchEvent.EVENT_TYPE_RENAME);
+							syncWatchEvent.setFilePathName(
+								realFilePath.toString());
+							syncWatchEvent.setPreviousFilePathName(
+								filePathName);
 
-						renameFile(syncWatchEvent);
+							renameFile(syncWatchEvent);
+						}
+
+						if (fileType.equals(SyncFile.TYPE_FILE)) {
+							modifyFile(syncWatchEvent);
+						}
 					}
-
-					if (fileType.equals(SyncFile.TYPE_FILE)) {
+					else {
 						modifyFile(syncWatchEvent);
 					}
 				}
@@ -882,6 +888,8 @@ public class SyncWatchEventProcessor implements Runnable {
 
 	private static final ExecutorService _executorService =
 		SyncEngine.getExecutorService();
+	private static final Comparator<SyncWatchEvent> _syncWatchEventComparator =
+		new SyncWatchEventComparator();
 
 	private final Map<String, List<SyncWatchEvent>>
 		_dependentSyncWatchEventsMaps = new ConcurrentHashMap<>();
