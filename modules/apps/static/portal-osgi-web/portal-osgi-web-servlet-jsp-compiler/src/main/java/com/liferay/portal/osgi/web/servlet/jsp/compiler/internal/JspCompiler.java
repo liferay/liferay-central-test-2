@@ -360,8 +360,8 @@ public class JspCompiler extends Jsr199JavaCompiler {
 		String packageName = className.substring(
 			0, className.lastIndexOf(CharPool.PERIOD));
 
-		// The super impl's packageJavaFileObjects is plain HashMap which is not
-		// threadsafe, copy-swap it to be ConcurrentHashMap
+		// Swap the parent class's packageJavaFileObjects reference from a plain
+		// HashMap to a thread safe ConcurrentHashMap
 
 		Map<String, JavaFileObject> packageJavaFileObjects = packageMap.get(
 			packageName);
