@@ -32,9 +32,9 @@ public class PostgreSQLTransformerLogic extends BaseSQLTransformerLogic {
 		setFunctions(
 			getBitwiseCheckFunction(), getBooleanFunction(),
 			getCastClobTextFunction(), getCastLongFunction(),
-			getCastTextFunction(), _getInStrFunction(),
-			getIntegerDivisionFunction(), _getNullDateFunction(),
-			_getNegativeComparisonFunction());
+			getCastTextFunction(), getIntegerDivisionFunction(),
+			_getInStrFunction(), _getNegativeComparisonFunction(),
+			_getNullDateFunction());
 	}
 
 	@Override
