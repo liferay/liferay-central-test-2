@@ -45,7 +45,7 @@ public abstract class BaseSQLTransformerLogicTestCase {
 		Assert.assertEquals(
 			getBitwiseCheckTransformedSQL(),
 			sqlTransformer.transform(
-				addWhitespacesFunction.apply(getBitwiseCheckOriginalSQL())));
+				_addWhitespacesFunction.apply(getBitwiseCheckOriginalSQL())));
 	}
 
 	@Test
@@ -81,7 +81,7 @@ public abstract class BaseSQLTransformerLogicTestCase {
 		Assert.assertEquals(
 			getInstrTransformedSQL(),
 			sqlTransformer.transform(
-				addWhitespacesFunction.apply(getInstrOriginalSQL())));
+				_addWhitespacesFunction.apply(getInstrOriginalSQL())));
 	}
 
 	@Test
@@ -96,7 +96,7 @@ public abstract class BaseSQLTransformerLogicTestCase {
 		Assert.assertEquals(
 			getIntegerDivisionTransformedSQL(),
 			sqlTransformer.transform(
-				addWhitespacesFunction.apply(getIntegerDivisionOriginalSQL())));
+				_addWhitespacesFunction.apply(getIntegerDivisionOriginalSQL())));
 	}
 
 	@Test
@@ -111,7 +111,7 @@ public abstract class BaseSQLTransformerLogicTestCase {
 		Assert.assertEquals(
 			getModTransformedSQL(),
 			sqlTransformer.transform(
-				addWhitespacesFunction.apply(getModOriginalSQL())));
+				_addWhitespacesFunction.apply(getModOriginalSQL())));
 	}
 
 	@Test
@@ -140,7 +140,7 @@ public abstract class BaseSQLTransformerLogicTestCase {
 		Assert.assertEquals(
 			getSubstTransformedSQL(),
 			sqlTransformer.transform(
-				addWhitespacesFunction.apply(getSubstOriginalSQL())));
+				_addWhitespacesFunction.apply(getSubstOriginalSQL())));
 	}
 
 	@Test
@@ -230,8 +230,9 @@ public abstract class BaseSQLTransformerLogicTestCase {
 		return getSubstOriginalSQL();
 	}
 
-	protected final Function<String, String> addWhitespacesFunction =
-		(String sql) -> StringUtil.replace(sql, CharPool.COMMA, "   ,   ");
 	protected SQLTransformer sqlTransformer;
+
+	private final Function<String, String> _addWhitespacesFunction =
+		(String sql) -> StringUtil.replace(sql, CharPool.COMMA, "   ,   ");
 
 }
