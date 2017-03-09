@@ -161,9 +161,7 @@ public abstract class BaseJSONWebServiceClientHandler {
 			parameters.put(parametersArray[i], parametersArray[i + 1]);
 		}
 
-		String json = jsonWebServiceClient.doPost(url, parameters);
-
-		return updateJSON(json);
+		return updateJSON(jsonWebServiceClient.doPost(url, parameters));
 	}
 
 	protected String doPostAsJSON(String url, Object object)
