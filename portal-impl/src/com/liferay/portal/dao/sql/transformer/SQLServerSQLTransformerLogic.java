@@ -31,9 +31,9 @@ public class SQLServerSQLTransformerLogic extends BaseSQLTransformerLogic {
 		setFunctions(
 			getBitwiseCheckFunction(), getBooleanFunction(),
 			getCastClobTextFunction(), getCastLongFunction(),
-			getCastTextFunction(), _getInStrFunction(),
-			getIntegerDivisionFunction(), getModFunction(),
-			getNullDateFunction(), _getSubstrFunction());
+			getCastTextFunction(), getIntegerDivisionFunction(),
+			getModFunction(), getNullDateFunction(), _getInStrFunction(),
+			_getSubstrFunction());
 	}
 
 	@Override
