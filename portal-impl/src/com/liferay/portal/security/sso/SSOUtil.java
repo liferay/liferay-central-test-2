@@ -38,7 +38,7 @@ public class SSOUtil {
 		long companyId, String sessionExpirationRedirectURL) {
 
 		String ssoSessionExpirationRedirectURL =
-			_instance._getSessionExpirationRedirectUrl(companyId);
+			_instance._getSessionExpirationRedirectURL(companyId);
 
 		if (_instance._ssoMap.isEmpty() ||
 			Validator.isNull(ssoSessionExpirationRedirectURL)) {
@@ -54,7 +54,7 @@ public class SSOUtil {
 			return null;
 		}
 
-		return _instance._getSignInUrl(companyId, signInURL);
+		return _instance._getSignInURL(companyId, signInURL);
 	}
 
 	public static boolean isLoginRedirectRequired(long companyId) {
@@ -100,20 +100,20 @@ public class SSOUtil {
 		_serviceTracker.open();
 	}
 
-	private String _getSessionExpirationRedirectUrl(long companyId) {
+	private String _getSessionExpirationRedirectURL(long companyId) {
 		for (SSO sso : _ssoMap.values()) {
-			String sessionExpirationRedirectUrl =
+			String sessionExpirationRedirectURL =
 				sso.getSessionExpirationRedirectUrl(companyId);
 
-			if (sessionExpirationRedirectUrl != null) {
-				return sessionExpirationRedirectUrl;
+			if (sessionExpirationRedirectURL != null) {
+				return sessionExpirationRedirectURL;
 			}
 		}
 
 		return null;
 	}
 
-	private String _getSignInUrl(long companyId, String defaultSignInURL) {
+	private String _getSignInURL(long companyId, String defaultSignInURL) {
 		for (SSO sso : _ssoMap.values()) {
 			String signInURL = sso.getSignInURL(companyId, defaultSignInURL);
 
