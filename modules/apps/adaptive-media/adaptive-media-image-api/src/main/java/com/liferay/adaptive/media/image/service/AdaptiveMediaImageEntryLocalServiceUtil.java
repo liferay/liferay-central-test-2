@@ -42,7 +42,7 @@ public class AdaptiveMediaImageEntryLocalServiceUtil {
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.adaptive.media.image.service.impl.AdaptiveMediaImageEntryLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
 	public static com.liferay.adaptive.media.image.model.AdaptiveMediaImageEntry addAdaptiveMediaImageEntry(
-		com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry configurationEntry,
+		com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry configurationEntry,
 		com.liferay.portal.kernel.repository.model.FileVersion fileVersion,
 		int width, int height, java.io.InputStream inputStream, int size)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -215,7 +215,7 @@ public class AdaptiveMediaImageEntryLocalServiceUtil {
 	}
 
 	public static java.io.InputStream getAdaptiveMediaImageEntryContentStream(
-		com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry configurationEntry,
+		com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry configurationEntry,
 		com.liferay.portal.kernel.repository.model.FileVersion fileVersion) {
 		return getService()
 				   .getAdaptiveMediaImageEntryContentStream(configurationEntry,

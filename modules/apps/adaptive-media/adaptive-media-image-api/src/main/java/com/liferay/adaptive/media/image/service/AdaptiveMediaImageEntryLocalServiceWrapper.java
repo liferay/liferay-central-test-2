@@ -36,7 +36,7 @@ public class AdaptiveMediaImageEntryLocalServiceWrapper
 
 	@Override
 	public com.liferay.adaptive.media.image.model.AdaptiveMediaImageEntry addAdaptiveMediaImageEntry(
-		com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry configurationEntry,
+		com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry configurationEntry,
 		com.liferay.portal.kernel.repository.model.FileVersion fileVersion,
 		int width, int height, java.io.InputStream inputStream, int size)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -220,7 +220,7 @@ public class AdaptiveMediaImageEntryLocalServiceWrapper
 
 	@Override
 	public java.io.InputStream getAdaptiveMediaImageEntryContentStream(
-		com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry configurationEntry,
+		com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry configurationEntry,
 		com.liferay.portal.kernel.repository.model.FileVersion fileVersion) {
 		return _adaptiveMediaImageEntryLocalService.getAdaptiveMediaImageEntryContentStream(configurationEntry,
 			fileVersion);

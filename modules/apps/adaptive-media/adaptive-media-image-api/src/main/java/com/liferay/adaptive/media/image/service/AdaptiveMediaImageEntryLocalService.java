@@ -16,7 +16,7 @@ package com.liferay.adaptive.media.image.service;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.adaptive.media.image.configuration.ImageAdaptiveMediaConfigurationEntry;
+import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry;
 import com.liferay.adaptive.media.image.model.AdaptiveMediaImageEntry;
 
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
@@ -64,7 +64,7 @@ public interface AdaptiveMediaImageEntryLocalService extends BaseLocalService,
 	 * Never modify or reference this interface directly. Always use {@link AdaptiveMediaImageEntryLocalServiceUtil} to access the adaptive media image entry local service. Add custom service methods to {@link com.liferay.adaptive.media.image.service.impl.AdaptiveMediaImageEntryLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public AdaptiveMediaImageEntry addAdaptiveMediaImageEntry(
-		ImageAdaptiveMediaConfigurationEntry configurationEntry,
+		AdaptiveMediaImageConfigurationEntry configurationEntry,
 		FileVersion fileVersion, int width, int height,
 		InputStream inputStream, int size) throws PortalException;
 
@@ -197,7 +197,7 @@ public interface AdaptiveMediaImageEntryLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public InputStream getAdaptiveMediaImageEntryContentStream(
-		ImageAdaptiveMediaConfigurationEntry configurationEntry,
+		AdaptiveMediaImageConfigurationEntry configurationEntry,
 		FileVersion fileVersion);
 
 	/**
