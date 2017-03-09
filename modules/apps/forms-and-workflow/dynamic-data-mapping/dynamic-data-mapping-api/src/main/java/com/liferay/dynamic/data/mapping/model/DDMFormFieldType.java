@@ -43,6 +43,8 @@ public class DDMFormFieldType {
 
 	public static final String NUMBER = "ddm-number";
 
+	public static final String NUMERIC = "numeric";
+
 	public static final String RADIO = "radio";
 
 	public static final String SELECT = "select";
