@@ -53,19 +53,19 @@ public class PanelCategoryRegistry {
 		PanelCategoryHelper panelCategoryHelper, String panelCategoryKey,
 		PermissionChecker permissionChecker, Group group, User user) {
 
-		int totalCount = 0;
+		int count = 0;
 
 		for (PanelCategory panelCategory :
 				getChildPanelCategories(panelCategoryKey)) {
 
-			int count = panelCategory.getNotificationsCount(
+			int notificationsCount = panelCategory.getNotificationsCount(
 				panelCategoryHelper, permissionChecker, group, user);
 
 			try {
-				if ((count > 0) &&
+				if ((notificationsCount > 0) &&
 					panelCategory.isShow(permissionChecker, group)) {
 
-					totalCount += count;
+					count += notificationsCount;
 				}
 			}
 			catch (PortalException pe) {
@@ -73,7 +73,7 @@ public class PanelCategoryRegistry {
 			}
 		}
 
-		return totalCount;
+		return count;
 	}
 
 	public List<PanelCategory> getChildPanelCategories(

@@ -57,14 +57,16 @@ public class PanelAppRegistry {
 		String parentPanelCategoryKey, PermissionChecker permissionChecker,
 		Group group, User user) {
 
-		int totalCount = 0;
+		int count = 0;
 
 		for (PanelApp panelApp : getPanelApps(parentPanelCategoryKey)) {
-			int count = panelApp.getNotificationsCount(user);
+			int notificationsCount = panelApp.getNotificationsCount(user);
 
 			try {
-				if ((count > 0) && panelApp.isShow(permissionChecker, group)) {
-					totalCount += count;
+				if ((notificationsCount > 0) &&
+					panelApp.isShow(permissionChecker, group)) {
+
+					count += notificationsCount;
 				}
 			}
 			catch (PortalException pe) {
@@ -72,7 +74,7 @@ public class PanelAppRegistry {
 			}
 		}
 
-		return totalCount;
+		return count;
 	}
 
 	public PanelApp getFirstPanelApp(
