@@ -53,7 +53,7 @@ import org.osgi.service.component.annotations.Reference;
 @Component(immediate = true, service = PanelAppRegistry.class)
 public class PanelAppRegistry {
 
-	public int countPanelAppsNotifications(
+	public int getPanelAppsNotificationsCount(
 		String parentPanelCategoryKey, PermissionChecker permissionChecker,
 		Group group, User user) {
 

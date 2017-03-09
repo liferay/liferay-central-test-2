@@ -49,7 +49,7 @@ import org.osgi.service.component.annotations.Deactivate;
 @Component(immediate = true, service = PanelCategoryRegistry.class)
 public class PanelCategoryRegistry {
 
-	public int countChildPanelCategoriesNotifications(
+	public int getChildPanelCategoriesNotificationsCount(
 		PanelCategoryHelper panelCategoryHelper, String panelCategoryKey,
 		PermissionChecker permissionChecker, Group group, User user) {
 
