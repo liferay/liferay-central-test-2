@@ -15,6 +15,7 @@
 package com.liferay.portal.dao.sql.transformer;
 
 import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.function.Function;
@@ -28,20 +29,18 @@ public class MySQLSQLTransformerLogic extends BaseSQLTransformerLogic {
 	public MySQLSQLTransformerLogic(DB db) {
 		super(db);
 
+		Function[] functions = {
+			getBitwiseCheckFunction(), getBooleanFunction(),
+			getCastClobTextFunction(), getCastLongFunction(),
+			getCastTextFunction(), getIntegerDivisionFunction(),
+			getNullDateFunction()
+		};
+
 		if (!db.isSupportsStringCaseSensitiveQuery()) {
-			setFunctions(
-				getBitwiseCheckFunction(), getBooleanFunction(),
-				getCastClobTextFunction(), getCastLongFunction(),
-				getCastTextFunction(), getIntegerDivisionFunction(),
-				getNullDateFunction(), _getLowerFunction());
+			functions = ArrayUtil.append(functions, _getLowerFunction());
 		}
-		else {
-			setFunctions(
-				getBitwiseCheckFunction(), getBooleanFunction(),
-				getCastClobTextFunction(), getCastLongFunction(),
-				getCastTextFunction(), getIntegerDivisionFunction(),
-				getNullDateFunction());
-		}
+
+		setFunctions(functions);
 	}
 
 	@Override
