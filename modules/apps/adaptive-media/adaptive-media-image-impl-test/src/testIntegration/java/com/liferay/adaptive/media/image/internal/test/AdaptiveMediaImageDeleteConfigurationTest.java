@@ -17,11 +17,24 @@ package com.liferay.adaptive.media.image.internal.test;
 import com.liferay.adaptive.media.AdaptiveMediaImageConfigurationException.InvalidStateAdaptiveMediaImageConfigurationException;
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationHelper;
+import com.liferay.adaptive.media.image.internal.test.util.DestinationReplacer;
+import com.liferay.adaptive.media.image.service.AdaptiveMediaImageEntryLocalServiceUtil;
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
+import com.liferay.document.library.kernel.model.DLFolderConstants;
+import com.liferay.document.library.kernel.service.DLAppLocalServiceUtil;
+import com.liferay.portal.kernel.model.Group;
+import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.repository.model.FileVersion;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
+import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
 import com.liferay.portal.kernel.test.rule.Sync;
 import com.liferay.portal.kernel.test.rule.SynchronousDestinationTestRule;
+import com.liferay.portal.kernel.test.util.GroupTestUtil;
 import com.liferay.portal.kernel.test.util.TestPropsValues;
+import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 
 import java.util.HashMap;
@@ -29,6 +42,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
@@ -48,6 +62,13 @@ public class AdaptiveMediaImageDeleteConfigurationTest
 		new AggregateTestRule(
 			new LiferayIntegrationTestRule(),
 			SynchronousDestinationTestRule.INSTANCE);
+
+	@Before
+	public void setUp() throws Exception {
+		super.setUp();
+
+		_group = GroupTestUtil.addGroup();
+	}
 
 	@Test
 	public void testDeleteAllConfigurationEntries() throws Exception {
@@ -461,6 +482,44 @@ public class AdaptiveMediaImageDeleteConfigurationTest
 	}
 
 	@Test
+	public void testForceDeleteConfigurationEntryWithImages() throws Exception {
+		try (DestinationReplacer destinationReplacer = new DestinationReplacer(
+				"liferay/adaptive_media_processor")) {
+
+			AdaptiveMediaImageConfigurationHelper configurationHelper =
+				serviceTracker.getService();
+
+			Map<String, String> properties = new HashMap<>();
+
+			properties.put("max-height", "100");
+			properties.put("max-width", "100");
+
+			AdaptiveMediaImageConfigurationEntry configurationEntry =
+				configurationHelper.addAdaptiveMediaImageConfigurationEntry(
+					TestPropsValues.getCompanyId(), "one", "1", properties);
+
+			FileEntry fileEntry = _addFileEntry();
+
+			FileVersion fileVersion = fileEntry.getFileVersion();
+
+			Assert.assertNotNull(
+				AdaptiveMediaImageEntryLocalServiceUtil.
+					fetchAdaptiveMediaImageEntry(
+						configurationEntry.getUUID(),
+						fileVersion.getFileVersionId()));
+
+			configurationHelper.forceDeleteAdaptiveMediaImageConfigurationEntry(
+				TestPropsValues.getCompanyId(), configurationEntry.getUUID());
+
+			Assert.assertNull(
+				AdaptiveMediaImageEntryLocalServiceUtil.
+					fetchAdaptiveMediaImageEntry(
+						configurationEntry.getUUID(),
+						fileVersion.getFileVersionId()));
+		}
+	}
+
+	@Test
 	public void testForceDeleteDeletedConfigurationEntry() throws Exception {
 		AdaptiveMediaImageConfigurationHelper configurationHelper =
 			serviceTracker.getService();
@@ -630,5 +689,23 @@ public class AdaptiveMediaImageDeleteConfigurationTest
 
 		Assert.assertFalse(secondConfigurationEntryOptional.isPresent());
 	}
+
+	private FileEntry _addFileEntry() throws Exception {
+		return DLAppLocalServiceUtil.addFileEntry(
+			TestPropsValues.getUserId(), _group.getGroupId(),
+			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+			StringUtil.randomString() + ".jpg", ContentTypes.IMAGE_JPEG,
+			FileUtil.getBytes(
+				AdaptiveMediaImageDeleteConfigurationTest.class,
+				_PNG_IMAGE_FILE_PATH),
+			new ServiceContext());
+	}
+
+	private static final String _PNG_IMAGE_FILE_PATH =
+		"/com/liferay/adaptive/media/image/internal/test/dependencies" +
+			"/image.jpg";
+
+	@DeleteAfterTestRun
+	private Group _group;
 
 }
