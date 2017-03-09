@@ -49,7 +49,6 @@ public class OptimizedImagesPercentageMVCResourceCommand
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
 
-
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(
