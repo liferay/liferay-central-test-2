@@ -53,30 +53,6 @@ import org.osgi.service.component.annotations.Reference;
 @Component(immediate = true, service = PanelAppRegistry.class)
 public class PanelAppRegistry {
 
-	public int getPanelAppsNotificationsCount(
-		String parentPanelCategoryKey, PermissionChecker permissionChecker,
-		Group group, User user) {
-
-		int count = 0;
-
-		for (PanelApp panelApp : getPanelApps(parentPanelCategoryKey)) {
-			int notificationsCount = panelApp.getNotificationsCount(user);
-
-			try {
-				if ((notificationsCount > 0) &&
-					panelApp.isShow(permissionChecker, group)) {
-
-					count += notificationsCount;
-				}
-			}
-			catch (PortalException pe) {
-				_log.error(pe, pe);
-			}
-		}
-
-		return count;
-	}
-
 	public PanelApp getFirstPanelApp(
 		String parentPanelCategoryKey, PermissionChecker permissionChecker,
 		Group group) {
@@ -147,6 +123,30 @@ public class PanelAppRegistry {
 				}
 
 			});
+	}
+
+	public int getPanelAppsNotificationsCount(
+		String parentPanelCategoryKey, PermissionChecker permissionChecker,
+		Group group, User user) {
+
+		int count = 0;
+
+		for (PanelApp panelApp : getPanelApps(parentPanelCategoryKey)) {
+			int notificationsCount = panelApp.getNotificationsCount(user);
+
+			try {
+				if ((notificationsCount > 0) &&
+					panelApp.isShow(permissionChecker, group)) {
+
+					count += notificationsCount;
+				}
+			}
+			catch (PortalException pe) {
+				_log.error(pe, pe);
+			}
+		}
+
+		return count;
 	}
 
 	@Activate
