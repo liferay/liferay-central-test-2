@@ -4122,7 +4122,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		if (roleName.equals(RoleConstants.USER) ||
 			(roleName.equals(RoleConstants.ADMINISTRATOR) &&
-			 getRoleUsersCount(role.getRoleId()) <= 1)) {
+			 (getRoleUsersCount(role.getRoleId()) <= 1))) {
 
 			return;
 		}
