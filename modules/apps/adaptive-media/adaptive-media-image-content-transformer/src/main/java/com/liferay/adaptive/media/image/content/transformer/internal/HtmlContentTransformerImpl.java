@@ -52,17 +52,17 @@ public class HtmlContentTransformerImpl implements ContentTransformer<String> {
 		return ContentTransformerContentTypes.HTML;
 	}
 
-	@Reference(unbind = "-")
-	public void setDlAppLocalService(DLAppLocalService dlAppLocalService) {
-		_dlAppLocalService = dlAppLocalService;
-	}
-
 	@Reference(
 		target = "(model.class.name=com.liferay.portal.kernel.repository.model.FileVersion)",
 		unbind = "-"
 	)
 	public void setAdaptiveMediaImageFinder(AdaptiveMediaImageFinder finder) {
 		_finder = finder;
+	}
+
+	@Reference(unbind = "-")
+	public void setDlAppLocalService(DLAppLocalService dlAppLocalService) {
+		_dlAppLocalService = dlAppLocalService;
 	}
 
 	@Override
@@ -90,9 +90,8 @@ public class HtmlContentTransformerImpl implements ContentTransformer<String> {
 		FileEntry fileEntry = _dlAppLocalService.getFileEntry(fileEntryId);
 
 		return _finder.getAdaptiveMedia(
-			queryBuilder -> queryBuilder.allForFileEntry(
-				fileEntry).orderBy(
-					AdaptiveMediaImageAttribute.IMAGE_WIDTH, true).done());
+			queryBuilder -> queryBuilder.allForFileEntry(fileEntry).orderBy(
+				AdaptiveMediaImageAttribute.IMAGE_WIDTH, true).done());
 	}
 
 	private Optional<String> _getMediaQuery(
