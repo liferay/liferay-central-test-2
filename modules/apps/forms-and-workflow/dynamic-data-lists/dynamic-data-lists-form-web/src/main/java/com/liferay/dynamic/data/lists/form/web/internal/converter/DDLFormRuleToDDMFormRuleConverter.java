@@ -150,8 +150,10 @@ public class DDLFormRuleToDDMFormRuleConverter {
 		_operatorFunctionNameMap.put("belongs-to", "belongsTo");
 		_operatorFunctionNameMap.put("contains", "contains");
 		_operatorFunctionNameMap.put("equals-to", "equals");
+		_operatorFunctionNameMap.put("is-empty", "isEmpty");
 		_operatorFunctionNameMap.put("not-contains", "contains");
 		_operatorFunctionNameMap.put("not-equals-to", "equals");
+		_operatorFunctionNameMap.put("not-is-empty", "isEmpty");
 
 		_operatorMap.put("greater-than", ">");
 		_operatorMap.put("greater-than-equals", ">=");

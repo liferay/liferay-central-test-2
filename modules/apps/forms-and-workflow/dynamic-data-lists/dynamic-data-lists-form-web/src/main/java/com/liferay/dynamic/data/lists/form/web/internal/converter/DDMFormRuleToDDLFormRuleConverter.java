@@ -293,6 +293,7 @@ public class DDMFormRuleToDDLFormRuleConverter {
 			_functionNameOperatorMap.put("belongsTo", "belongs-to");
 			_functionNameOperatorMap.put("contains", "contains");
 			_functionNameOperatorMap.put("equals", "equals-to");
+			_functionNameOperatorMap.put("isEmpty", "is-empty");
 		}
 
 		private boolean _andOperator = true;
