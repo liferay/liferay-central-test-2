@@ -32,6 +32,10 @@ class AdaptiveMediaProgress extends PortletBase {
 	 * that has to be invoked.
 	 */
 	startProgress(backgroundTaskUrl) {
+		if (this.percentage >= 100) {
+			return;
+		}
+
 		if (backgroundTaskUrl) {
 			Ajax.request(backgroundTaskUrl);
 		}
