@@ -368,7 +368,7 @@ public class JournalDisplayContext {
 		return _folderId;
 	}
 
-	public String getFoldersJSON() {
+	public String getFoldersJSON() throws Exception {
 		ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
@@ -1244,7 +1244,9 @@ public class JournalDisplayContext {
 			portletURL.toString());
 	}
 
-	private JSONArray _getFoldersJSONArray(long groupId, long folderId) {
+	private JSONArray _getFoldersJSONArray(long groupId, long folderId)
+		throws Exception {
+
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		List<JournalFolder> folders = JournalFolderLocalServiceUtil.getFolders(
@@ -1263,6 +1265,10 @@ public class JournalDisplayContext {
 			jsonObject.put("icon", "folder");
 			jsonObject.put("id", folder.getFolderId());
 			jsonObject.put("name", folder.getName());
+
+			if (folder.getFolderId() == getFolderId()) {
+				jsonObject.put("selected", true);
+			}
 
 			jsonArray.put(jsonObject);
 		}
