@@ -157,6 +157,20 @@ public class DDLFormRuleToDDMFormRuleConverterTest
 	}
 
 	@Test
+	public void testIsEmptyCondition() throws Exception {
+		assertConversion(
+			"ddl-form-rules-is-empty-condition.json",
+			"ddm-form-rules-is-empty-condition.json");
+	}
+
+	@Test
+	public void testIsNotEmptyCondition() throws Exception {
+		assertConversion(
+			"ddl-form-rules-is-not-empty-condition.json",
+			"ddm-form-rules-is-not-empty-condition.json");
+	}
+
+	@Test
 	public void testJumpToPageActions() throws Exception {
 		assertConversion(
 			"ddl-form-rules-jump-to-page-actions.json",
