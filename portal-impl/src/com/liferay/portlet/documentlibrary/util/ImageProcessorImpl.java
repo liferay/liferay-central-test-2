@@ -411,8 +411,8 @@ public class ImageProcessorImpl
 			String previewFilePath = getPreviewFilePath(fileVersion, type);
 
 			if (!DLStoreUtil.hasFile(
-				fileVersion.getCompanyId(), REPOSITORY_ID,
-				previewFilePath)) {
+					fileVersion.getCompanyId(), REPOSITORY_ID,
+					previewFilePath)) {
 
 				return false;
 			}
