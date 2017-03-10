@@ -75,6 +75,7 @@ import com.liferay.portal.kernel.model.ResourceConstants;
 import com.liferay.portal.kernel.model.ResourcePermission;
 import com.liferay.portal.kernel.model.Role;
 import com.liferay.portal.kernel.model.RoleConstants;
+import com.liferay.portal.kernel.model.Team;
 import com.liferay.portal.kernel.model.Theme;
 import com.liferay.portal.kernel.model.Ticket;
 import com.liferay.portal.kernel.model.TicketConstants;
@@ -6030,6 +6031,7 @@ public class PortalImpl implements Portal {
 			"[$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.LAYOUT$]",
 			"[$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.ORGANIZATION$]",
 			"[$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.ROLE$]",
+			"[$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.TEAM$]",
 			"[$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.USER$]",
 			"[$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.USERGROUP$]",
 			"[$CLASS_NAME_ID_COM.LIFERAY.PORTLET.BLOGS.MODEL.BLOGSENTRY$]",
@@ -6062,11 +6064,11 @@ public class PortalImpl implements Portal {
 		Object[] customSqlValues = new Object[] {
 			getClassNameId(Group.class), getClassNameId(Layout.class),
 			getClassNameId(Organization.class), getClassNameId(Role.class),
-			getClassNameId(User.class), getClassNameId(UserGroup.class),
-			getClassNameId(BlogsEntry.class), getClassNameId(DLFileEntry.class),
-			getClassNameId(DLFolder.class), getClassNameId(MBMessage.class),
-			getClassNameId(MBThread.class), ResourceConstants.SCOPE_COMPANY,
-			ResourceConstants.SCOPE_GROUP,
+			getClassNameId(Team.class), getClassNameId(User.class),
+			getClassNameId(UserGroup.class), getClassNameId(BlogsEntry.class),
+			getClassNameId(DLFileEntry.class), getClassNameId(DLFolder.class),
+			getClassNameId(MBMessage.class), getClassNameId(MBThread.class),
+			ResourceConstants.SCOPE_COMPANY, ResourceConstants.SCOPE_GROUP,
 			ResourceConstants.SCOPE_GROUP_TEMPLATE,
 			ResourceConstants.SCOPE_INDIVIDUAL,
 			SocialRelationConstants.TYPE_BI_COWORKER,
