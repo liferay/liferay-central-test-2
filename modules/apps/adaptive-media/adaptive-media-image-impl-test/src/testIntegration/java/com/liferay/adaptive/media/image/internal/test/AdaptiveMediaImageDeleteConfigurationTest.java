@@ -177,6 +177,44 @@ public class AdaptiveMediaImageDeleteConfigurationTest
 	}
 
 	@Test
+	public void testDeleteConfigurationEntryWithImages() throws Exception {
+		try (DestinationReplacer destinationReplacer = new DestinationReplacer(
+				"liferay/adaptive_media_processor")) {
+
+			AdaptiveMediaImageConfigurationHelper configurationHelper =
+				serviceTracker.getService();
+
+			Map<String, String> properties = new HashMap<>();
+
+			properties.put("max-height", "100");
+			properties.put("max-width", "100");
+
+			AdaptiveMediaImageConfigurationEntry configurationEntry =
+				configurationHelper.addAdaptiveMediaImageConfigurationEntry(
+					TestPropsValues.getCompanyId(), "one", "1", properties);
+
+			FileEntry fileEntry = _addFileEntry();
+
+			FileVersion fileVersion = fileEntry.getFileVersion();
+
+			Assert.assertNotNull(
+				AdaptiveMediaImageEntryLocalServiceUtil.
+					fetchAdaptiveMediaImageEntry(
+						configurationEntry.getUUID(),
+						fileVersion.getFileVersionId()));
+
+			configurationHelper.deleteAdaptiveMediaImageConfigurationEntry(
+				TestPropsValues.getCompanyId(), configurationEntry.getUUID());
+
+			Assert.assertNull(
+				AdaptiveMediaImageEntryLocalServiceUtil.
+					fetchAdaptiveMediaImageEntry(
+						configurationEntry.getUUID(),
+						fileVersion.getFileVersionId()));
+		}
+	}
+
+	@Test
 	public void testDeleteDeletedConfigurationEntry() throws Exception {
 		AdaptiveMediaImageConfigurationHelper configurationHelper =
 			serviceTracker.getService();
