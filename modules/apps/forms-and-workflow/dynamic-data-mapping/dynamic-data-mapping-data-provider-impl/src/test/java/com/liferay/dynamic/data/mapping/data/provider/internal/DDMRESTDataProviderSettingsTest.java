@@ -64,13 +64,13 @@ public class DDMRESTDataProviderSettingsTest {
 		Assert.assertEquals(ddmFormFields.toString(), 11, ddmFormFields.size());
 
 		assertCacheable(ddmFormFields.get("cacheable"));
-		assertPaginationEndParameterName(
-			ddmFormFields.get("paginationEndParameterName"));
 		assertFilterable(ddmFormFields.get("filterable"));
 		assertFilterParameterName(ddmFormFields.get("filterParameterName"));
 		assertInputParameters(ddmFormFields.get("inputParameters"));
 		assertOutputParameters(ddmFormFields.get("outputParameters"));
 		assertPagination(ddmFormFields.get("pagination"));
+		assertPaginationEndParameterName(
+			ddmFormFields.get("paginationEndParameterName"));
 		assertPassword(ddmFormFields.get("password"));
 		assertStartPaginationParameterName(
 			ddmFormFields.get("paginationStartParameterName"));
