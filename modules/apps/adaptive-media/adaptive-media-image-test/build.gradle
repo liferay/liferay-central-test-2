@@ -14,7 +14,6 @@ dependencies {
 	testIntegrationCompile group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "2.0.0"
 	testIntegrationCompile project(":apps:adaptive-media:adaptive-media-api")
 	testIntegrationCompile project(":apps:adaptive-media:adaptive-media-image-api")
-	testIntegrationCompile project(":apps:adaptive-media:adaptive-media-image-impl")
 	testIntegrationCompile project(":apps:adaptive-media:adaptive-media-image-item-selector-api")
 }
 

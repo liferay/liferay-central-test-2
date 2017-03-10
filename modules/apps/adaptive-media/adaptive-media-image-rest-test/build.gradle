@@ -6,7 +6,6 @@ dependencies {
 	provided group: "com.liferay.portal", name: "com.liferay.portal.test", version: "1.0.0"
 	provided group: "org.osgi", name: "org.osgi.core", version: "5.0.0"
 	provided project(":apps:adaptive-media:adaptive-media-demo-data-creator-api")
-	provided project(":apps:adaptive-media:adaptive-media-image-impl")
 
 	runtimeLib group: "com.liferay", name: "com.liferay.document.library.demo.data.creator.api", version: "1.1.0"
 	runtimeLib group: "com.liferay", name: "com.liferay.document.library.demo.data.creator.impl", version: "1.0.4"

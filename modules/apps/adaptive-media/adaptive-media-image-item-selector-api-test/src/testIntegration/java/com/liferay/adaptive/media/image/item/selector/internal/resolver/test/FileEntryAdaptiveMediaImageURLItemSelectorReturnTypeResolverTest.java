@@ -64,7 +64,7 @@ import org.junit.runner.RunWith;
  */
 @RunWith(Arquillian.class)
 @Sync
-public class FileEntryAdaptiveImageMediaURLItemSelectorReturnTypeResolverTest {
+public class FileEntryAdaptiveMediaImageURLItemSelectorReturnTypeResolverTest {
 
 	@ClassRule
 	@Rule
