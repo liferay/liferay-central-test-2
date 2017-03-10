@@ -37,7 +37,7 @@ public class ContentTransformerHandler {
 		ContentTransformerContentType<T> contentType, T originalContent) {
 
 		List<ContentTransformer> contentTransformers = ListUtil.fromCollection(
-			_contentTransformersMap.getService(contentType));
+			_serviceTrackerMap.getService(contentType));
 
 		T transformedContent = originalContent;
 
@@ -56,7 +56,7 @@ public class ContentTransformerHandler {
 
 	@Activate
 	protected void activate(BundleContext bundleContext) {
-		_contentTransformersMap = ServiceTrackerMapFactory.openMultiValueMap(
+		_serviceTrackerMap = ServiceTrackerMapFactory.openMultiValueMap(
 			bundleContext, ContentTransformer.class, null,
 			(serviceReference, emitter) -> {
 				ContentTransformer contentTransformer =
@@ -70,7 +70,7 @@ public class ContentTransformerHandler {
 
 	@Deactivate
 	protected void deactivate() {
-		_contentTransformersMap.close();
+		_serviceTrackerMap.close();
 	}
 
 	protected final void setServiceTrackerMap(
@@ -78,7 +78,7 @@ public class ContentTransformerHandler {
 			<ContentTransformerContentType, List<ContentTransformer>>
 				serviceTrackerMap) {
 
-		_contentTransformersMap = serviceTrackerMap;
+		_serviceTrackerMap = serviceTrackerMap;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
@@ -86,6 +86,6 @@ public class ContentTransformerHandler {
 
 	private ServiceTrackerMap
 		<ContentTransformerContentType, List<ContentTransformer>>
-			_contentTransformersMap;
+			_serviceTrackerMap;
 
 }

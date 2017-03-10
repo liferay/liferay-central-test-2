@@ -97,14 +97,6 @@ public class StaticAdaptiveMediaBlogsEditorConfigContributor
 			return;
 		}
 
-		String itemSelectedEventName = _itemSelector.getItemSelectedEventName(
-			itemSelectorURL);
-
-		PortletURL itemSelectorPortletURL = _itemSelector.getItemSelectorURL(
-			requestBackedPortletURLFactory, itemSelectedEventName,
-			itemSelectorCriteria.toArray(
-				new ItemSelectorCriterion[itemSelectorCriteria.size()]));
-
 		if (Validator.isNotNull(extraPlugins)) {
 			extraPlugins = extraPlugins + ",adaptivemedia";
 		}
@@ -113,6 +105,14 @@ public class StaticAdaptiveMediaBlogsEditorConfigContributor
 		}
 
 		jsonObject.put("extraPlugins", extraPlugins);
+
+		String itemSelectedEventName = _itemSelector.getItemSelectedEventName(
+			itemSelectorURL);
+
+		PortletURL itemSelectorPortletURL = _itemSelector.getItemSelectorURL(
+			requestBackedPortletURLFactory, itemSelectedEventName,
+			itemSelectorCriteria.toArray(
+				new ItemSelectorCriterion[itemSelectorCriteria.size()]));
 
 		jsonObject.put(
 			"filebrowserImageBrowseLinkUrl", itemSelectorPortletURL.toString());
