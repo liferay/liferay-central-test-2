@@ -44,11 +44,12 @@ public class CalculateDDLFormRuleAction extends DefaultDDLFormRuleAction {
 			return false;
 		}
 
-		CalculateDDLFormRuleAction ddlFormRuleAction =
+		CalculateDDLFormRuleAction calculateDDLFormRuleAction =
 			(CalculateDDLFormRuleAction)obj;
 
 		if (super.equals(obj) &&
-			Objects.equals(_expression, ddlFormRuleAction._expression)) {
+			Objects.equals(
+				_expression, calculateDDLFormRuleAction._expression)) {
 
 			return true;
 		}

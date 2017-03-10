@@ -27,15 +27,19 @@ import java.util.List;
 public class CalculateDDLFormRuleActionFactory {
 
 	public static DDLFormRuleAction create(
-		List<Expression> expressions, ActionExpressionVisitor visitor) {
+		List<Expression> expressions,
+		ActionExpressionVisitor actionExpressionVisitor) {
 
-		String target = visitor.doVisit(expressions.get(0));
-		String expression = expressions.get(1).toString();
+		String target = actionExpressionVisitor.doVisit(expressions.get(0));
 
-		expression = expression.replaceAll(
+		Expression expression = expressions.get(1);
+
+		String expressionStr = expression.toString();
+
+		expressionStr = expressionStr.replaceAll(
 			"(getValue\\(\\'([^\\(]+)\\'\\))", "$2");
 
-		return new CalculateDDLFormRuleAction(target, expression);
+		return new CalculateDDLFormRuleAction(target, expressionStr);
 	}
 
 }
