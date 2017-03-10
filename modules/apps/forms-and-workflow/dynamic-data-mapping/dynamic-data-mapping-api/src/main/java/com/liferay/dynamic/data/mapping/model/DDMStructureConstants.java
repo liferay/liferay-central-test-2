@@ -26,7 +26,7 @@ public class DDMStructureConstants {
 
 	public static final int TYPE_DEFAULT = 0;
 
-	public static final int TYPE_FORMS_FIELD_LIBRARY = 2;
+	public static final int TYPE_FRAGMENT = 2;
 
 	public static final String VERSION_DEFAULT = "1.0";
 
