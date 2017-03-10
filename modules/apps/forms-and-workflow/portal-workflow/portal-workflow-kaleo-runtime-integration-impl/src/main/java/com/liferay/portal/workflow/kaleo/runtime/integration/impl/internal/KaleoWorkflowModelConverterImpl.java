@@ -35,15 +35,15 @@ import com.liferay.portal.workflow.kaleo.model.KaleoDefinition;
 import com.liferay.portal.workflow.kaleo.model.KaleoInstance;
 import com.liferay.portal.workflow.kaleo.model.KaleoInstanceToken;
 import com.liferay.portal.workflow.kaleo.model.KaleoLog;
-import com.liferay.portal.workflow.kaleo.model.KaleoTaskAssignmentInstance;
 import com.liferay.portal.workflow.kaleo.model.KaleoTaskInstanceToken;
 import com.liferay.portal.workflow.kaleo.runtime.integration.impl.internal.util.LazyWorkflowTaskAssigneeArrayList;
+import com.liferay.portal.workflow.kaleo.runtime.integration.impl.internal.util.WorkflowTaskAssigneesSupplier;
 import com.liferay.portal.workflow.kaleo.runtime.util.WorkflowContextUtil;
 import com.liferay.portal.workflow.kaleo.service.KaleoDefinitionLocalService;
+import com.liferay.portal.workflow.kaleo.service.KaleoTaskAssignmentInstanceLocalService;
 
 import java.io.Serializable;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -58,45 +58,13 @@ public class KaleoWorkflowModelConverterImpl
 	implements KaleoWorkflowModelConverter {
 
 	@Override
-	public WorkflowTaskAssignee getFirstWorkflowTaskAssignee(
-		KaleoTaskInstanceToken kaleoTaskInstanceToken) {
-
-		List<KaleoTaskAssignmentInstance> kaleoTaskAssignmentInstances =
-			kaleoTaskInstanceToken.getKaleoTaskAssignmentInstances();
-
-		for (KaleoTaskAssignmentInstance kaleoTaskAssignmentInstance :
-				kaleoTaskAssignmentInstances) {
-
-			return new WorkflowTaskAssignee(
-				kaleoTaskAssignmentInstance.getAssigneeClassName(),
-				kaleoTaskAssignmentInstance.getAssigneeClassPK());
-		}
-
-		return null;
-	}
-
-	@Override
 	public List<WorkflowTaskAssignee> getWorkflowTaskAssignees(
 		KaleoTaskInstanceToken kaleoTaskInstanceToken) {
 
-		List<KaleoTaskAssignmentInstance> kaleoTaskAssignmentInstances =
-			kaleoTaskInstanceToken.getKaleoTaskAssignmentInstances();
+		WorkflowTaskAssigneesSupplier workflowTaskAssigneesSupplier =
+			new WorkflowTaskAssigneesSupplier(kaleoTaskInstanceToken);
 
-		List<WorkflowTaskAssignee> workflowTaskAssignees = new ArrayList<>(
-			kaleoTaskAssignmentInstances.size());
-
-		for (KaleoTaskAssignmentInstance kaleoTaskAssignmentInstance :
-				kaleoTaskAssignmentInstances) {
-
-			WorkflowTaskAssignee workflowTaskAssignee =
-				new WorkflowTaskAssignee(
-					kaleoTaskAssignmentInstance.getAssigneeClassName(),
-					kaleoTaskAssignmentInstance.getAssigneeClassPK());
-
-			workflowTaskAssignees.add(workflowTaskAssignee);
-		}
-
-		return workflowTaskAssignees;
+		return workflowTaskAssigneesSupplier.get();
 	}
 
 	@Override
@@ -266,7 +234,9 @@ public class KaleoWorkflowModelConverterImpl
 			kaleoInstance.getKaleoInstanceId());
 
 		List<WorkflowTaskAssignee> workflowTaskAssignees =
-			new LazyWorkflowTaskAssigneeArrayList(kaleoTaskInstanceToken, this);
+			new LazyWorkflowTaskAssigneeArrayList(
+				kaleoTaskInstanceToken,
+				_kaleoTaskAssignmentInstanceLocalService);
 
 		defaultWorkflowTask.setWorkflowTaskAssignees(workflowTaskAssignees);
 
@@ -284,5 +254,9 @@ public class KaleoWorkflowModelConverterImpl
 
 	@Reference
 	private KaleoDefinitionLocalService _kaleoDefinitionLocalService;
+
+	@Reference
+	private KaleoTaskAssignmentInstanceLocalService
+		_kaleoTaskAssignmentInstanceLocalService;
 
 }
