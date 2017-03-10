@@ -22,8 +22,8 @@ import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.criteria.URLItemSelectorReturnType;
 import com.liferay.item.selector.criteria.file.criterion.FileItemSelectorCriterion;
 import com.liferay.item.selector.criteria.image.criterion.ImageItemSelectorCriterion;
-import com.liferay.portal.json.JSONObjectImpl;
-import com.liferay.portal.kernel.json.JSONException;
+import com.liferay.portal.json.JSONFactoryImpl;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.portlet.RequestBackedPortletURLFactory;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
@@ -40,39 +40,31 @@ import javax.portlet.PortletURL;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.MockitoAnnotations;
+
+import org.powermock.api.mockito.PowerMockito;
 
 import org.skyscreamer.jsonassert.JSONAssert;
 
 /**
  * @author Alejandro Tardín
  */
-@RunWith(MockitoJUnitRunner.class)
-public class StaticAdaptiveMediaBlogsEditorConfigContributorTest {
+public class StaticAdaptiveMediaBlogsEditorConfigContributorTest
+	extends PowerMockito {
 
 	@Before
 	public void setUp() {
-		Mockito.when(
-			_itemSelectorPortletURL.toString()
-		).thenReturn(
-			"itemSelectorPortletURL"
-		);
+		MockitoAnnotations.initMocks(this);
 
-		Mockito.when(
-			_itemSelector.getItemSelectedEventName(_itemSelectorURL)
-		).thenReturn(
-			_eventName
-		);
+		JSONFactoryUtil jsonFactoryUtil = new JSONFactoryUtil();
 
-		_staticAdaptiveMediaBlogsEditorConfigContributor =
-			new StaticAdaptiveMediaBlogsEditorConfigContributor();
+		jsonFactoryUtil.setJSONFactory(new JSONFactoryImpl());
 
-		_staticAdaptiveMediaBlogsEditorConfigContributor.setItemSelector(
-			_itemSelector);
+		_inputEditorTaglibAttributes.put(
+			"liferay-ui:input-editor:name", "testEditor");
 	}
 
 	@Test
@@ -86,7 +78,11 @@ public class StaticAdaptiveMediaBlogsEditorConfigContributorTest {
 			Collections.<ItemSelectorReturnType>singletonList(
 				new URLItemSelectorReturnType()));
 
-		_staticAdaptiveMediaBlogsEditorConfigContributor.
+		StaticAdaptiveMediaBlogsEditorConfigContributor
+			staticAdaptiveMediaBlogsEditorConfigContributor =
+				new StaticAdaptiveMediaBlogsEditorConfigContributor();
+
+		staticAdaptiveMediaBlogsEditorConfigContributor.
 			addImageAdaptiveMediaURLItemSelectorReturnType(
 				blogsItemSelectorCriterion);
 
@@ -132,25 +128,59 @@ public class StaticAdaptiveMediaBlogsEditorConfigContributorTest {
 	public void testDoesNothingForUnsupportedItemSelectorCriterion()
 		throws Exception {
 
-		JSONObject originalJSONObject = new JSONObjectImpl();
+		JSONObject originalJSONObject = JSONFactoryUtil.createJSONObject();
 
 		originalJSONObject.put("allowedContent", "a[*](*); div(*);");
 		originalJSONObject.put(
-			"filebrowserImageBrowseLinkUrl", _itemSelectorURL);
+			"filebrowserImageBrowseLinkUrl",
+			"blogsItemSelectorCriterionFileEntryItemSelectorReturnType");
 
-		JSONObject jsonObject = new JSONObjectImpl(
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
 			originalJSONObject.toJSONString());
 
-		JSONObject expectedJSONObject = new JSONObjectImpl(
+		JSONObject expectedJSONObject = JSONFactoryUtil.createJSONObject(
 			originalJSONObject.toJSONString());
 
-		Mockito.when(
-			_itemSelector.getItemSelectorCriteria(_itemSelectorURL)
+		PortletURL itemSelectorPortletURL = mock(PortletURL.class);
+
+		when(
+			itemSelectorPortletURL.toString()
+		).thenReturn(
+			"itemSelectorPortletURL"
+		);
+
+		when(
+			_itemSelector.getItemSelectorURL(
+				Mockito.any(RequestBackedPortletURLFactory.class),
+				Mockito.anyString(), Mockito.any(ItemSelectorCriterion.class))
+		).thenReturn(
+			itemSelectorPortletURL
+		);
+
+		when(
+			_itemSelector.getItemSelectedEventName(Mockito.anyString())
+		).thenReturn(
+			"selectedEventName"
+		);
+
+		ItemSelectorCriterion itemSelectorCriterion = _getItemSelectorCriterion(
+			BlogsItemSelectorCriterion.class);
+
+		when(
+			_itemSelector.getItemSelectorCriteria(
+				"blogsItemSelectorCriterionFileEntryItemSelectorReturnType")
 		).thenReturn(
 			Collections.<ItemSelectorCriterion>emptyList()
 		);
 
-		_staticAdaptiveMediaBlogsEditorConfigContributor.
+		StaticAdaptiveMediaBlogsEditorConfigContributor
+			staticAdaptiveMediaBlogsEditorConfigContributor =
+				new StaticAdaptiveMediaBlogsEditorConfigContributor();
+
+		staticAdaptiveMediaBlogsEditorConfigContributor.setItemSelector(
+			_itemSelector);
+
+		staticAdaptiveMediaBlogsEditorConfigContributor.
 			populateConfigJSONObject(
 				jsonObject, _inputEditorTaglibAttributes, _themeDisplay,
 				_requestBackedPortletURLFactory);
@@ -163,37 +193,60 @@ public class StaticAdaptiveMediaBlogsEditorConfigContributorTest {
 	public void testDoesNothingIfTheAdaptiveMediaPluginHasAlreadyBeenAdded()
 		throws Exception {
 
+		PortletURL itemSelectorPortletURL = mock(PortletURL.class);
+
+		when(
+			itemSelectorPortletURL.toString()
+		).thenReturn(
+			"itemSelectorPortletURL"
+		);
+
+		when(
+			_itemSelector.getItemSelectorURL(
+				Mockito.any(RequestBackedPortletURLFactory.class),
+				Mockito.anyString(), Mockito.any(ItemSelectorCriterion.class))
+		).thenReturn(
+			itemSelectorPortletURL
+		);
+
+		when(
+			_itemSelector.getItemSelectedEventName(Mockito.anyString())
+		).thenReturn(
+			"selectedEventName"
+		);
+
 		ItemSelectorCriterion itemSelectorCriterion = _getItemSelectorCriterion(
 			BlogsItemSelectorCriterion.class);
 
-		Mockito.when(
-			_itemSelector.getItemSelectorCriteria(_itemSelectorURL)
+		when(
+			_itemSelector.getItemSelectorCriteria(
+				"blogsItemSelectorCriterionFileEntryItemSelectorReturnType")
 		).thenReturn(
 			Arrays.asList(itemSelectorCriterion)
 		);
 
-		Mockito.when(
-			_itemSelector.getItemSelectorURL(
-				_requestBackedPortletURLFactory, _eventName,
-				itemSelectorCriterion)
-		).thenReturn(
-			_itemSelectorPortletURL
-		);
-
-		JSONObject originalJSONObject = new JSONObjectImpl();
+		JSONObject originalJSONObject = JSONFactoryUtil.createJSONObject();
 
 		originalJSONObject.put("allowedContent", "a[*](*); div(*);");
 		originalJSONObject.put("extraPlugins", "adaptivemedia");
 		originalJSONObject.put(
-			"filebrowserImageBrowseLinkUrl", _itemSelectorURL);
+			"filebrowserImageBrowseLinkUrl",
+			"blogsItemSelectorCriterionFileEntryItemSelectorReturnType");
 
-		JSONObject jsonObject = new JSONObjectImpl(
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
 			originalJSONObject.toJSONString());
 
-		JSONObject expectedJSONObject = new JSONObjectImpl(
+		JSONObject expectedJSONObject = JSONFactoryUtil.createJSONObject(
 			originalJSONObject.toJSONString());
 
-		_staticAdaptiveMediaBlogsEditorConfigContributor.
+		StaticAdaptiveMediaBlogsEditorConfigContributor
+			staticAdaptiveMediaBlogsEditorConfigContributor =
+				new StaticAdaptiveMediaBlogsEditorConfigContributor();
+
+		staticAdaptiveMediaBlogsEditorConfigContributor.setItemSelector(
+			_itemSelector);
+
+		staticAdaptiveMediaBlogsEditorConfigContributor.
 			populateConfigJSONObject(
 				jsonObject, _inputEditorTaglibAttributes, _themeDisplay,
 				_requestBackedPortletURLFactory);
@@ -206,17 +259,21 @@ public class StaticAdaptiveMediaBlogsEditorConfigContributorTest {
 	public void testDoesNothingIfThereIsNotFileBrowserImageBrowseLinkUrl()
 		throws Exception {
 
-		JSONObject originalJSONObject = new JSONObjectImpl();
+		JSONObject originalJSONObject = JSONFactoryUtil.createJSONObject();
 
 		originalJSONObject.put("allowedContent", "a[*](*); div(*);");
 
-		JSONObject jsonObject = new JSONObjectImpl(
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
 			originalJSONObject.toJSONString());
 
-		JSONObject expectedJSONObject = new JSONObjectImpl(
+		JSONObject expectedJSONObject = JSONFactoryUtil.createJSONObject(
 			originalJSONObject.toJSONString());
 
-		_staticAdaptiveMediaBlogsEditorConfigContributor.
+		StaticAdaptiveMediaBlogsEditorConfigContributor
+			staticAdaptiveMediaBlogsEditorConfigContributor =
+				new StaticAdaptiveMediaBlogsEditorConfigContributor();
+
+		staticAdaptiveMediaBlogsEditorConfigContributor.
 			populateConfigJSONObject(
 				jsonObject, _inputEditorTaglibAttributes, _themeDisplay,
 				_requestBackedPortletURLFactory);
@@ -264,44 +321,66 @@ public class StaticAdaptiveMediaBlogsEditorConfigContributorTest {
 
 	private void _testAddsPictureTagToAllowedContent(
 			ItemSelectorCriterion itemSelectorCriterion)
-		throws JSONException, org.json.JSONException {
+		throws Exception {
 
-		Mockito.when(
-			_itemSelector.getItemSelectorCriteria(_itemSelectorURL)
+		PortletURL itemSelectorPortletURL = mock(PortletURL.class);
+
+		when(
+			itemSelectorPortletURL.toString()
+		).thenReturn(
+			"itemSelectorPortletURL"
+		);
+
+		when(
+			_itemSelector.getItemSelectorURL(
+				Mockito.any(RequestBackedPortletURLFactory.class),
+				Mockito.anyString(), Mockito.any(ItemSelectorCriterion.class))
+		).thenReturn(
+			itemSelectorPortletURL
+		);
+
+		when(
+			_itemSelector.getItemSelectedEventName(Mockito.anyString())
+		).thenReturn(
+			"selectedEventName"
+		);
+
+		when(
+			_itemSelector.getItemSelectorCriteria(
+				"blogsItemSelectorCriterionFileEntryItemSelectorReturnType")
 		).thenReturn(
 			Arrays.asList(itemSelectorCriterion)
 		);
 
-		Mockito.when(
-			_itemSelector.getItemSelectorURL(
-				_requestBackedPortletURLFactory, _eventName,
-				itemSelectorCriterion)
-		).thenReturn(
-			_itemSelectorPortletURL
-		);
-
-		JSONObject originalJSONObject = new JSONObjectImpl();
+		JSONObject originalJSONObject = JSONFactoryUtil.createJSONObject();
 
 		originalJSONObject.put("allowedContent", "a[*](*); div(*);");
 		originalJSONObject.put(
-			"filebrowserImageBrowseLinkUrl", _itemSelectorURL);
+			"filebrowserImageBrowseLinkUrl",
+			"blogsItemSelectorCriterionFileEntryItemSelectorReturnType");
 
-		JSONObject jsonObject = new JSONObjectImpl(
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
 			originalJSONObject.toJSONString());
 
-		JSONObject expectedJSONObject = new JSONObjectImpl(
+		JSONObject expectedJSONObject = JSONFactoryUtil.createJSONObject(
 			originalJSONObject.toJSONString());
 
 		expectedJSONObject.put(
 			"allowedContent", "a[*](*); div(*); picture[*](*); source[*](*);");
 		expectedJSONObject.put("extraPlugins", "adaptivemedia");
 		expectedJSONObject.put(
-			"filebrowserImageBrowseLinkUrl",
-			_itemSelectorPortletURL.toString());
+			"filebrowserImageBrowseLinkUrl", itemSelectorPortletURL.toString());
 		expectedJSONObject.put(
-			"filebrowserImageBrowseUrl", _itemSelectorPortletURL.toString());
+			"filebrowserImageBrowseUrl", itemSelectorPortletURL.toString());
 
-		_staticAdaptiveMediaBlogsEditorConfigContributor.
+		StaticAdaptiveMediaBlogsEditorConfigContributor
+			staticAdaptiveMediaBlogsEditorConfigContributor =
+				new StaticAdaptiveMediaBlogsEditorConfigContributor();
+
+		staticAdaptiveMediaBlogsEditorConfigContributor.setItemSelector(
+			_itemSelector);
+
+		staticAdaptiveMediaBlogsEditorConfigContributor.
 			populateConfigJSONObject(
 				jsonObject, _inputEditorTaglibAttributes, _themeDisplay,
 				_requestBackedPortletURLFactory);
@@ -314,50 +393,69 @@ public class StaticAdaptiveMediaBlogsEditorConfigContributorTest {
 			ItemSelectorCriterion itemSelectorCriterion)
 		throws Exception {
 
-		Mockito.when(
-			_itemSelector.getItemSelectorCriteria(_itemSelectorURL)
+		PortletURL itemSelectorPortletURL = mock(PortletURL.class);
+
+		when(
+			itemSelectorPortletURL.toString()
+		).thenReturn(
+			"itemSelectorPortletURL"
+		);
+
+		when(
+			_itemSelector.getItemSelectorURL(
+				Mockito.any(RequestBackedPortletURLFactory.class),
+				Mockito.anyString(), Mockito.any(ItemSelectorCriterion.class))
+		).thenReturn(
+			itemSelectorPortletURL
+		);
+
+		when(
+			_itemSelector.getItemSelectedEventName(Mockito.anyString())
+		).thenReturn(
+			"selectedEventName"
+		);
+
+		when(
+			_itemSelector.getItemSelectorCriteria(
+				"blogsItemSelectorCriterionFileEntryItemSelectorReturnType")
 		).thenReturn(
 			Arrays.asList(itemSelectorCriterion)
 		);
 
-		Mockito.when(
-			_itemSelector.getItemSelectorURL(
-				_requestBackedPortletURLFactory, _eventName,
-				itemSelectorCriterion)
-		).thenReturn(
-			_itemSelectorPortletURL
-		);
-
-		JSONObject originalJSONObject = new JSONObjectImpl();
+		JSONObject originalJSONObject = JSONFactoryUtil.createJSONObject();
 
 		originalJSONObject.put(
-			"filebrowserImageBrowseLinkUrl", _itemSelectorURL);
+			"filebrowserImageBrowseLinkUrl",
+			"blogsItemSelectorCriterionFileEntryItemSelectorReturnType");
 
-		JSONObject jsonObject = new JSONObjectImpl(
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
 			originalJSONObject.toJSONString());
 
-		_staticAdaptiveMediaBlogsEditorConfigContributor.
-			populateConfigJSONObject(
-				jsonObject, _inputEditorTaglibAttributes, _themeDisplay,
-				_requestBackedPortletURLFactory);
-
-		JSONObject expectedJSONObject = new JSONObjectImpl();
+		JSONObject expectedJSONObject = JSONFactoryUtil.createJSONObject();
 
 		expectedJSONObject.put(
 			"allowedContent", "picture[*](*); source[*](*);");
 		expectedJSONObject.put("extraPlugins", "adaptivemedia");
 		expectedJSONObject.put(
-			"filebrowserImageBrowseLinkUrl",
-			_itemSelectorPortletURL.toString());
+			"filebrowserImageBrowseLinkUrl", itemSelectorPortletURL.toString());
 		expectedJSONObject.put(
-			"filebrowserImageBrowseUrl", _itemSelectorPortletURL.toString());
+			"filebrowserImageBrowseUrl", itemSelectorPortletURL.toString());
+
+		StaticAdaptiveMediaBlogsEditorConfigContributor
+			staticAdaptiveMediaBlogsEditorConfigContributor =
+				new StaticAdaptiveMediaBlogsEditorConfigContributor();
+
+		staticAdaptiveMediaBlogsEditorConfigContributor.setItemSelector(
+			_itemSelector);
+
+		staticAdaptiveMediaBlogsEditorConfigContributor.
+			populateConfigJSONObject(
+				jsonObject, _inputEditorTaglibAttributes, _themeDisplay,
+				_requestBackedPortletURLFactory);
 
 		JSONAssert.assertEquals(
 			expectedJSONObject.toJSONString(), jsonObject.toJSONString(), true);
 	}
-
-	private static final String _eventName = "selectedEventName";
-	private static final String _itemSelectorURL = "itemSelectorURL";
 
 	private final Map<String, Object> _inputEditorTaglibAttributes =
 		new HashMap<>();
@@ -366,13 +464,7 @@ public class StaticAdaptiveMediaBlogsEditorConfigContributorTest {
 	private ItemSelector _itemSelector;
 
 	@Mock
-	private PortletURL _itemSelectorPortletURL;
-
-	@Mock
 	private RequestBackedPortletURLFactory _requestBackedPortletURLFactory;
-
-	private StaticAdaptiveMediaBlogsEditorConfigContributor
-		_staticAdaptiveMediaBlogsEditorConfigContributor;
 
 	@Mock
 	private ThemeDisplay _themeDisplay;
