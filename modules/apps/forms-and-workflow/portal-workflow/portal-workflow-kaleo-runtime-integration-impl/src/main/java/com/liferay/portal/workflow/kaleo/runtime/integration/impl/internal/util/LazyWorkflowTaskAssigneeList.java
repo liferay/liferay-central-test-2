@@ -26,10 +26,10 @@ import java.util.Optional;
 /**
  * @author Inácio Nery
  */
-public class LazyWorkflowTaskAssigneeArrayList
+public class LazyWorkflowTaskAssigneeList
 	extends AbstractList<WorkflowTaskAssignee> {
 
-	public LazyWorkflowTaskAssigneeArrayList(
+	public LazyWorkflowTaskAssigneeList(
 		KaleoTaskInstanceToken kaleoTaskInstanceToken,
 		KaleoTaskAssignmentInstanceLocalService
 			kaleoTaskAssignmentInstanceLocalService) {
