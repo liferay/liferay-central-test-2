@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.wsrp.internal.servlet.filters;
+package com.liferay.wsrp.internal.servlet.filter;
 
 import com.liferay.portal.kernel.servlet.PortalClassLoaderFilter;
 import com.liferay.wsrp.internal.axis.WSRPHTTPSender;
