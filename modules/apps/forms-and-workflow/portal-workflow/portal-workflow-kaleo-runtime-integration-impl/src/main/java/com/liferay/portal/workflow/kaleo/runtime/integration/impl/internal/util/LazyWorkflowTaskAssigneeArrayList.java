@@ -15,56 +15,79 @@
 package com.liferay.portal.workflow.kaleo.runtime.integration.impl.internal.util;
 
 import com.liferay.portal.kernel.workflow.WorkflowTaskAssignee;
-import com.liferay.portal.workflow.kaleo.KaleoWorkflowModelConverter;
 import com.liferay.portal.workflow.kaleo.model.KaleoTaskInstanceToken;
-import com.liferay.portal.workflow.kaleo.service.KaleoTaskAssignmentInstanceLocalServiceUtil;
+import com.liferay.portal.workflow.kaleo.service.KaleoTaskAssignmentInstanceLocalService;
 
-import java.util.ArrayList;
+import java.util.AbstractList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Inácio Nery
  */
 public class LazyWorkflowTaskAssigneeArrayList
-	extends ArrayList<WorkflowTaskAssignee> {
+	extends AbstractList<WorkflowTaskAssignee> {
 
 	public LazyWorkflowTaskAssigneeArrayList(
 		KaleoTaskInstanceToken kaleoTaskInstanceToken,
-		KaleoWorkflowModelConverter kaleoWorkflowModelConverter) {
+		KaleoTaskAssignmentInstanceLocalService
+			kaleoTaskAssignmentInstanceLocalService) {
 
 		_kaleoTaskInstanceToken = kaleoTaskInstanceToken;
-		_kaleoWorkflowModelConverter = kaleoWorkflowModelConverter;
+		_kaleoTaskAssignmentInstanceLocalService =
+			kaleoTaskAssignmentInstanceLocalService;
+		_firstWorkflowTaskAssigneeSupplier =
+			new FirstWorkflowTaskAssigneeSupplier(kaleoTaskInstanceToken);
+		_workflowTaskAssigneesSupplier = new WorkflowTaskAssigneesSupplier(
+			kaleoTaskInstanceToken);
 	}
 
 	@Override
 	public WorkflowTaskAssignee get(int index) {
 		if (index == 0) {
-			return _kaleoWorkflowModelConverter.getFirstWorkflowTaskAssignee(
-				_kaleoTaskInstanceToken);
+			Optional<WorkflowTaskAssignee> workflowTaskAssigneeOptional =
+				_firstWorkflowTaskAssigneeSupplier.get();
+
+			return workflowTaskAssigneeOptional.orElseThrow(
+				IndexOutOfBoundsException::new);
 		}
 
-		if (_workflowTaskAssignee == null) {
-			_workflowTaskAssignee =
-				_kaleoWorkflowModelConverter.getWorkflowTaskAssignees(
-					_kaleoTaskInstanceToken);
-		}
+		initWorkflowTaskAssignees();
 
-		return _workflowTaskAssignee.get(index);
+		return _workflowTaskAssignees.get(index);
+	}
+
+	@Override
+	public Iterator<WorkflowTaskAssignee> iterator() {
+		initWorkflowTaskAssignees();
+
+		return _workflowTaskAssignees.iterator();
 	}
 
 	@Override
 	public int size() {
-		if (_workflowTaskAssignee == null) {
-			return KaleoTaskAssignmentInstanceLocalServiceUtil.
-				getKaleoTaskAssignmentInstancesCount(
-					_kaleoTaskInstanceToken.getKaleoInstanceTokenId());
+		if (_workflowTaskAssignees != null) {
+			return _workflowTaskAssignees.size();
 		}
 
-		return _workflowTaskAssignee.size();
+		return _kaleoTaskAssignmentInstanceLocalService.
+			getKaleoTaskAssignmentInstancesCount(
+				_kaleoTaskInstanceToken.getKaleoInstanceTokenId());
 	}
 
+	protected void initWorkflowTaskAssignees() {
+		if (_workflowTaskAssignees == null) {
+			_workflowTaskAssignees = _workflowTaskAssigneesSupplier.get();
+		}
+	}
+
+	private final FirstWorkflowTaskAssigneeSupplier
+		_firstWorkflowTaskAssigneeSupplier;
+	private final KaleoTaskAssignmentInstanceLocalService
+		_kaleoTaskAssignmentInstanceLocalService;
 	private final KaleoTaskInstanceToken _kaleoTaskInstanceToken;
-	private final KaleoWorkflowModelConverter _kaleoWorkflowModelConverter;
-	private List<WorkflowTaskAssignee> _workflowTaskAssignee;
+	private List<WorkflowTaskAssignee> _workflowTaskAssignees;
+	private final WorkflowTaskAssigneesSupplier _workflowTaskAssigneesSupplier;
 
 }
