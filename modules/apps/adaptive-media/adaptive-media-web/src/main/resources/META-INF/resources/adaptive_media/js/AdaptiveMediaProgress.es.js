@@ -8,7 +8,7 @@ import Soy from 'metal-soy';
 import templates from './AdaptiveMediaProgress.soy';
 
 /**
- * AdaptiveMediaProgress
+ * Handles the actions of the configuration entry's progressbar.
  *
  * @abstract
  * @extends {PortletBase}
@@ -24,6 +24,13 @@ class AdaptiveMediaProgress extends PortletBase {
 		this.updateProgressBar_(this.percentage);
 	}
 
+	/**
+	 * It starts checking the percentage of optimized images by
+	 * doing ajax request continously.
+	 *
+	 * @param  {String} backgroundTaskUrl The background task
+	 * that has to be invoked.
+	 */
 	startProgress(backgroundTaskUrl) {
 		if (backgroundTaskUrl) {
 			Ajax.request(backgroundTaskUrl);
@@ -39,12 +46,23 @@ class AdaptiveMediaProgress extends PortletBase {
 		this.showLoadingIndicator = true;
 	}
 
+	/**
+	 * Clears the interval to stop sending ajax requests.
+	 *
+	 * @protected
+	 */
 	clearInterval_() {
 		if (this.intervalId) {
 			clearInterval(this.intervalId);
 		}
 	}
 
+	/**
+	 * Sends an ajax request to obtain the percentage of
+	 * optimized images and updates the progressbar.
+	 *
+	 * @protected
+	 */
 	getOptimizedImagesPercentage_() {
 		Ajax.request(this.percentageUrl).then((xhr) => {
 			try {
@@ -63,11 +81,22 @@ class AdaptiveMediaProgress extends PortletBase {
 		});
 	}
 
+	/**
+	 * Stops sending ajax request and hides the loading icon.
+	 *
+	 * @protected
+	 */
 	onProgressBarComplete_() {
 		this.clearInterval_();
 		this.showLoadingIndicator = false;
 	}
 
+	/**
+	 * Updates the progressbar
+	 *
+	 * @param  {Number} progress progressbar value
+	 * @protected
+	 */
 	updateProgressBar_(progress) {
 		this.progressBarClass = (progress >= 100) ? 'progress-bar-success' : '';
 		this.progressBarLabel = progress + '%';
@@ -82,20 +111,50 @@ class AdaptiveMediaProgress extends PortletBase {
  * @type {!Object}
  */
 AdaptiveMediaProgress.STATE = {
+	/**
+	 * The interval (in milliseconds) on how often
+	 * we will check the percentage of optimized images.
+	 *
+	 * @instance
+	 * @memberof AdaptiveMediaProgress
+	 * @type {Number}
+	 */
 	intervalSpeed: {
 		validator: core.isNumber,
 		value: 1000
 	},
 
+	/**
+	 * Current percentage of optimized images.
+	 *
+	 * @instance
+	 * @memberof AdaptiveMediaProgress
+	 * @type {Number}
+	 */
 	percentage: {
 		validator: core.isNumber,
 		value: 0
 	},
 
+	/**
+	 * Url to the action that returns the percentage
+	 * of optimized images.
+	 *
+	 * @instance
+	 * @memberof AdaptiveMediaProgress
+	 * @type {String}
+	 */
 	percentageUrl: {
 		validator: core.isString
 	},
 
+	/**
+	 * Configuration entry's uuid.
+	 *
+	 * @instance
+	 * @memberof AdaptiveMediaProgress
+	 * @type {String}
+	 */
 	uuid: {
 		validator: core.isString
 	}
