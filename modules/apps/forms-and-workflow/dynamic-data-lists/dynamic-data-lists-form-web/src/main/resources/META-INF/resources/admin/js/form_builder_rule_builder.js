@@ -47,9 +47,11 @@ AUI.add(
 							emptyListText: Liferay.Language.get('there-are-no-rules-yet-click-on-plus-icon-below-to-add-the-first'),
 							'enable-field': Liferay.Language.get('enable-x'),
 							'equals-to': Liferay.Language.get('is-equal-to'),
+							'is-empty': Liferay.Language.get('is-empty'),
 							'jump-from-page-to-page': Liferay.Language.get('jump-from-x-to-x'),
 							'not-contains': Liferay.Language.get('does-not-contain'),
 							'not-equals-to': Liferay.Language.get('is-not-equal-to'),
+							'not-is-empty': Liferay.Language.get('is-not-empty'),
 							'require-field': Liferay.Language.get('require-x'),
 							ruleBuilder: Liferay.Language.get('rule-builder'),
 							'show-field': Liferay.Language.get('show-x')
