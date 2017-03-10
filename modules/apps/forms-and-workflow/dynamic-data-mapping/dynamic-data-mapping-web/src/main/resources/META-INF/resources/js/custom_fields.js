@@ -109,6 +109,88 @@ AUI.add(
 			);
 		};
 
+		var ColorCellEditor = A.Component.create(
+			{
+				EXTENDS: A.BaseCellEditor,
+
+				NAME: 'color-cell-editor',
+
+				prototype: {
+					ELEMENT_TEMPLATE: '<input type="text" />',
+
+					renderUI: function() {
+						var instance = this;
+
+						ColorCellEditor.superclass.renderUI.apply(instance, arguments);
+
+						var input = instance.get('boundingBox').one('input');
+
+						var colorPicker = new A.ColorPickerPopover(
+							{
+								trigger: input,
+								zIndex: 65535
+							}
+						).render();
+
+						colorPicker.on(
+							'select',
+							function(event) {
+								input.setStyle('color', event.color);
+								input.val(event.color);
+
+								instance.fire('save', {
+									newVal: instance.getValue(),
+									prevVal: event.color
+								});
+							}
+						);
+
+						instance.set('colorPicker', colorPicker);
+					},
+
+					_defSaveFn: function() {
+						var instance = this;
+
+						var colorPicker = instance.get('colorPicker');
+
+						var input = instance.get('boundingBox').one('input');
+
+						if (/\#[A-F\d]{6}/.test(input.val())) {
+							ColorCellEditor.superclass._defSaveFn.apply(instance, arguments);
+						}
+						else {
+							colorPicker.show();
+						}
+					},
+
+					getElementsValue: function() {
+						var instance = this;
+
+						var colorPicker = instance.get('colorPicker');
+
+						var input = instance.get('boundingBox').one('input');
+
+						if (/\#[A-F\d]{6}/.test(input.val())) {
+							return input.val();
+						}
+					},
+
+					_uiSetValue: function(val) {
+						var instance = this;
+
+						var input = instance.get('boundingBox').one('input');
+
+						input.setStyle('color', val);
+						input.val(val);
+
+						instance.elements.val(val);
+					}
+
+				}
+
+			}
+		);
+
 		var DLFileEntryCellEditor = A.Component.create(
 			{
 				EXTENDS: A.BaseCellEditor,
@@ -469,6 +551,7 @@ AUI.add(
 		Liferay.FormBuilder.CUSTOM_CELL_EDITORS = {};
 
 		var customCellEditors = [
+			ColorCellEditor,
 			DLFileEntryCellEditor,
 			LinkToPageCellEditor
 		];
@@ -1027,6 +1110,28 @@ AUI.add(
 				NAME: 'ddm-color',
 
 				prototype: {
+					getPropertyModel: function() {
+						var instance = this;
+
+						var model = DDMColorField.superclass.getPropertyModel.apply(instance, arguments);
+
+						model.forEach(
+							function(item, index, collection) {
+								var attributeName = item.attributeName;
+
+								if (attributeName === 'predefinedValue') {
+									collection[index] = {
+										attributeName: attributeName,
+										editor: new ColorCellEditor(),
+										name: Liferay.Language.get('predefined-value')
+									};
+								}
+							}
+						);
+
+						return model;
+					},
+
 					getHTML: function() {
 						return TPL_COLOR;
 					}
@@ -1583,6 +1688,6 @@ AUI.add(
 	},
 	'',
 	{
-		requires: ['liferay-item-selector-dialog', 'liferay-portlet-dynamic-data-mapping']
+		requires: ['aui-color-picker-popover', 'liferay-item-selector-dialog', 'liferay-portlet-dynamic-data-mapping']
 	}
 );
