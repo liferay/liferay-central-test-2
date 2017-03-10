@@ -892,8 +892,8 @@ public class CalEventImporter {
 			sb.append("userName, createDate, modifiedDate, title, ");
 			sb.append("description, location, startDate, endDate, ");
 			sb.append("durationHour, durationMinute, allDay, type_, ");
-			sb.append("repeating, recurrence, firstReminder, secondReminder ");
-			sb.append("from CalEvent where eventId = ?");
+			sb.append("repeating, recurrence, remindBy, firstReminder, ");
+			sb.append("secondReminder from CalEvent where eventId = ?");
 
 			try (PreparedStatement ps =
 					connection.prepareStatement(sb.toString())) {
@@ -921,6 +921,8 @@ public class CalEventImporter {
 					String type = rs.getString("type_");
 
 					String recurrence = rs.getString("recurrence");
+
+					int remindBy = rs.getInt("remindBy");
 					int firstReminder = rs.getInt("firstReminder");
 					int secondReminder = rs.getInt("secondReminder");
 
@@ -928,7 +930,7 @@ public class CalEventImporter {
 						uuid, eventId, groupId, companyId, userId, userName,
 						createDate, modifiedDate, title, description, location,
 						startDate, durationHour, durationMinute, allDay, type,
-						recurrence, firstReminder, secondReminder);
+						recurrence, remindBy, firstReminder, secondReminder);
 				}
 				else {
 					throw new NoSuchBookingException();
@@ -943,7 +945,7 @@ public class CalEventImporter {
 			Timestamp modifiedDate, String title, String description,
 			String location, Timestamp startDate, int durationHour,
 			int durationMinute, boolean allDay, String type, String recurrence,
-			int firstReminder, int secondReminder)
+			int remindBy, int firstReminder, int secondReminder)
 		throws Exception {
 
 		// Calendar booking
@@ -968,6 +970,12 @@ public class CalEventImporter {
 
 		if (allDay) {
 			endTime = endTime - 1;
+		}
+
+		if (remindBy == _REMIND_BY_NONE) {
+			firstReminder = 0;
+
+			secondReminder = 0;
 		}
 
 		calendarBooking = addCalendarBooking(
@@ -1021,8 +1029,8 @@ public class CalEventImporter {
 			sb.append("userName, createDate, modifiedDate, title, ");
 			sb.append("description, location, startDate, endDate, ");
 			sb.append("durationHour, durationMinute, allDay, type_, ");
-			sb.append("repeating, recurrence, firstReminder, secondReminder ");
-			sb.append("from CalEvent ");
+			sb.append("repeating, recurrence, remindBy, firstReminder, ");
+			sb.append("secondReminder from CalEvent");
 
 			try (PreparedStatement ps =
 					connection.prepareStatement(sb.toString())) {
@@ -1048,6 +1056,7 @@ public class CalEventImporter {
 					String type = rs.getString("type_");
 
 					String recurrence = rs.getString("recurrence");
+					int remindBy = rs.getInt("remindBy");
 					int firstReminder = rs.getInt("firstReminder");
 					int secondReminder = rs.getInt("secondReminder");
 
@@ -1055,7 +1064,7 @@ public class CalEventImporter {
 						uuid, eventId, groupId, companyId, userId, userName,
 						createDate, modifiedDate, title, description, location,
 						startDate, durationHour, durationMinute, allDay, type,
-						recurrence, firstReminder, secondReminder);
+						recurrence, remindBy, firstReminder, secondReminder);
 				}
 			}
 		}
@@ -1454,6 +1463,8 @@ public class CalEventImporter {
 
 	private static final String _CLASS_NAME =
 		"com.liferay.portlet.calendar.model.CalEvent";
+
+	private static final int _REMIND_BY_NONE = 0;
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CalEventImporter.class);
