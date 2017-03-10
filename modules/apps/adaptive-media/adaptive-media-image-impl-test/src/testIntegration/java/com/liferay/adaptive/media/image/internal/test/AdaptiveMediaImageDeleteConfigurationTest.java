@@ -476,8 +476,7 @@ public class AdaptiveMediaImageDeleteConfigurationTest
 	}
 
 	@Test
-	public void
-			testForceDeleteConfigurationEntryWithExistingDisabledConfiguration()
+	public void testForceDeleteConfigurationEntryWithExistingDisabledConfiguration()
 		throws Exception {
 
 		AdaptiveMediaImageConfigurationHelper configurationHelper =

@@ -983,8 +983,7 @@ public class AdaptiveMediaImageFinderImplTest {
 	}
 
 	@Test
-	public void
-			testGetMediaQueryWithConfigurationStatusAttributeForConfiguration()
+	public void testGetMediaQueryWithConfigurationStatusAttributeForConfiguration()
 		throws Exception {
 
 		AdaptiveMediaImageConfigurationEntry configurationEntry1 =

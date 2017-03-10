@@ -36,8 +36,7 @@ public class AdaptiveMediaDLItemSelectorViewReturnTypeProviderTest
 	extends PowerMockito {
 
 	@Test
-	public void
-			testAddAdaptiveMediaImageItemSelectorReturnTypesWithNonEmptyList()
+	public void testAddAdaptiveMediaImageItemSelectorReturnTypesWithNonEmptyList()
 		throws Exception {
 
 		List<ItemSelectorReturnType> supportedItemSelectorReturnTypes =

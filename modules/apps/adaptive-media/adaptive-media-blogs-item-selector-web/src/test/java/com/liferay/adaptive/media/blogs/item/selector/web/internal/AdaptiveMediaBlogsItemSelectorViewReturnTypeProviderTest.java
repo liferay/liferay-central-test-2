@@ -36,8 +36,7 @@ public class AdaptiveMediaBlogsItemSelectorViewReturnTypeProviderTest
 	extends PowerMockito {
 
 	@Test
-	public void
-			testAddAdaptiveMediaImageURLItemSelectorReturnTypeWithEmptyList()
+	public void testAddAdaptiveMediaImageURLItemSelectorReturnTypeWithEmptyList()
 		throws Exception {
 
 		List<ItemSelectorReturnType> supportedItemSelectorReturnTypes =
@@ -65,8 +64,7 @@ public class AdaptiveMediaBlogsItemSelectorViewReturnTypeProviderTest
 	}
 
 	@Test
-	public void
-			testAddAdaptiveMediaImageURLItemSelectorReturnTypeWithNonEmptyList()
+	public void testAddAdaptiveMediaImageURLItemSelectorReturnTypeWithNonEmptyList()
 		throws Exception {
 
 		List<ItemSelectorReturnType> supportedItemSelectorReturnTypes =

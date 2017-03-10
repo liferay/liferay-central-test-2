@@ -176,8 +176,7 @@ public class AdaptiveMediaImageConfigurationTest
 	}
 
 	@Test
-	public void
-			testGetConfigurationEntriesWithFilterReturnsDisabledConfigurations()
+	public void testGetConfigurationEntriesWithFilterReturnsDisabledConfigurations()
 		throws Exception {
 
 		AdaptiveMediaImageConfigurationHelper configurationHelper =

@@ -130,8 +130,7 @@ public class AdaptiveMediaImageProcessorImplTest {
 	}
 
 	@Test
-	public void
-			testProcessConfigurationWhenAdaptiveMediaImageEntryAlreadyExists()
+	public void testProcessConfigurationWhenAdaptiveMediaImageEntryAlreadyExists()
 		throws Exception {
 
 		Mockito.when(
@@ -211,8 +210,7 @@ public class AdaptiveMediaImageProcessorImplTest {
 	}
 
 	@Test(expected = AdaptiveMediaRuntimeException.IOException.class)
-	public void
-			testProcessDuplicateAdaptiveMediaImageEntryExceptionInImageService()
+	public void testProcessDuplicateAdaptiveMediaImageEntryExceptionInImageService()
 		throws Exception {
 
 		Mockito.when(
