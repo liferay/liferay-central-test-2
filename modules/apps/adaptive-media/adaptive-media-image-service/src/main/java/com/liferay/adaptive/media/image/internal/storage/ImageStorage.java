@@ -31,12 +31,9 @@ import org.osgi.service.component.annotations.Component;
 public class ImageStorage {
 
 	public void delete(FileVersion fileVersion, String configurationUuid) {
-		String fileVersionPath = getFileVersionPath(
-			fileVersion, configurationUuid);
-
 		DLStoreUtil.deleteDirectory(
 			fileVersion.getCompanyId(), CompanyConstants.SYSTEM,
-			fileVersionPath);
+			getFileVersionPath(fileVersion, configurationUuid));
 	}
 
 	public void delete(long companyId, String configurationUuid) {
