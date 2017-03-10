@@ -163,9 +163,6 @@ public class StaticAdaptiveMediaBlogsEditorConfigContributorTest
 			"selectedEventName"
 		);
 
-		ItemSelectorCriterion itemSelectorCriterion = _getItemSelectorCriterion(
-			BlogsItemSelectorCriterion.class);
-
 		when(
 			_itemSelector.getItemSelectorCriteria(
 				"blogsItemSelectorCriterionFileEntryItemSelectorReturnType")
