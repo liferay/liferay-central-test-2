@@ -158,10 +158,11 @@ PortletURL portletURL = renderResponse.createRenderURL();
 				>
 
 					<%
+					String rowId = row.getRowId();
 					String uuid = String.valueOf(configurationEntry.getUUID());
 					%>
 
-					<div id="<portlet:namespace />OptimizeRemaining_<%= uuid %>"></div>
+					<div id="<portlet:namespace />OptimizeRemaining_<%= rowId %>"></div>
 
 					<portlet:resourceURL id="/adaptive_media/optimized_images_percentage" var="calculateOptimizedPercentageURL">
 						<portlet:param name="entryUuid" value="<%= uuid %>" />
@@ -177,7 +178,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 									percentageUrl: '<%= calculateOptimizedPercentageURL.toString() %>',
 									uuid: '<%= uuid %>'
 								},
-								<portlet:namespace />OptimizeRemaining_<%= uuid %>
+								<portlet:namespace />OptimizeRemaining_<%= rowId %>
 							)
 						);
 
