@@ -17,6 +17,7 @@ package com.liferay.portal.workflow.kaleo.service.impl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.workflow.WorkflowException;
 import com.liferay.portal.workflow.kaleo.model.KaleoInstance;
 import com.liferay.portal.workflow.kaleo.model.KaleoTaskAssignment;
@@ -213,6 +214,16 @@ public class KaleoTaskAssignmentInstanceLocalServiceImpl
 
 		return kaleoTaskAssignmentInstancePersistence.
 			findBykaleoTaskInstanceTokenId(kaleoTaskInstanceTokenId);
+	}
+
+	@Override
+	public List<KaleoTaskAssignmentInstance> getKaleoTaskAssignmentInstances(
+		long kaleoTaskInstanceTokenId, int start, int end,
+		OrderByComparator<KaleoTaskAssignmentInstance> orderByComparator) {
+
+		return kaleoTaskAssignmentInstancePersistence.
+			findBykaleoTaskInstanceTokenId(
+				kaleoTaskInstanceTokenId, start, end, orderByComparator);
 	}
 
 	@Override

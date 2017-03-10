@@ -33,6 +33,20 @@ public class KaleoTaskInstanceTokenImpl extends KaleoTaskInstanceTokenBaseImpl {
 	}
 
 	@Override
+	public KaleoTaskAssignmentInstance getFirstKaleoTaskAssignmentInstance() {
+		List<KaleoTaskAssignmentInstance> kaleoTaskAssignmentInstances =
+			KaleoTaskAssignmentInstanceLocalServiceUtil.
+				getKaleoTaskAssignmentInstances(
+					getKaleoTaskInstanceTokenId(), 0, 1, null);
+
+		if (kaleoTaskAssignmentInstances.isEmpty()) {
+			return null;
+		}
+
+		return kaleoTaskAssignmentInstances.get(0);
+	}
+
+	@Override
 	public KaleoInstanceToken getKaleoInstanceToken() throws PortalException {
 		return KaleoInstanceTokenLocalServiceUtil.getKaleoInstanceToken(
 			getKaleoInstanceTokenId());
