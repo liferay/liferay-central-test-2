@@ -182,7 +182,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 							)
 						);
 
-						<c:if test="<%= optimizeImagesAllConfigurationsBackgroundTasksCount > 0 || currentBackgroundTasks.contains(uuid) %>">
+						<c:if test="<%= (optimizeImagesAllConfigurationsBackgroundTasksCount > 0) || currentBackgroundTasks.contains(uuid) %>">
 							component.startProgress();
 						</c:if>
 					</aui:script>

@@ -14,7 +14,7 @@
 
 package com.liferay.adaptive.media.web.internal.portlet.action;
 
-import com.liferay.adaptive.media.image.service.AdaptiveMediaImageLocalServiceUtil;
+import com.liferay.adaptive.media.image.service.AdaptiveMediaImageLocalService;
 import com.liferay.adaptive.media.web.constants.AdaptiveMediaPortletKeys;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
@@ -29,6 +29,7 @@ import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Ambrín Chaudhary
@@ -56,7 +57,7 @@ public class OptimizedImagesPercentageMVCResourceCommand
 
 		String entryUuid = ParamUtil.getString(resourceRequest, "entryUuid");
 
-		int percentage = AdaptiveMediaImageLocalServiceUtil.getPercentage(
+		int percentage = _adaptiveMediaImageLocalService.getPercentage(
 			themeDisplay.getCompanyId(), entryUuid);
 
 		jsonObject.put("percentage", String.valueOf(percentage));
@@ -64,5 +65,14 @@ public class OptimizedImagesPercentageMVCResourceCommand
 		JSONPortletResponseUtil.writeJSON(
 			resourceRequest, resourceResponse, jsonObject);
 	}
+
+	@Reference(unbind = "-")
+	protected void setAdaptiveMediaImageLocalService(
+		AdaptiveMediaImageLocalService adaptiveMediaImageLocalService) {
+
+		_adaptiveMediaImageLocalService = adaptiveMediaImageLocalService;
+	}
+
+	private AdaptiveMediaImageLocalService _adaptiveMediaImageLocalService;
 
 }
