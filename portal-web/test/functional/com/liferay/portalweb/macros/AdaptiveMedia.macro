@@ -20,7 +20,7 @@
 
 		<execute function="AssertTextEquals" locator1="AdaptiveMediaTable#MAX_WIDTH" value1="${maxWidth}" />
 
-		<execute function="AssertTextEquals" locator1="AdaptiveMediaTable#MAX_HEIGHT" value1="${maxHeight}" />	
+		<execute function="AssertTextEquals" locator1="AdaptiveMediaTable#MAX_HEIGHT" value1="${maxHeight}" />
 	</command>
 
 	<command name="viewImageVariantURL">
