@@ -2292,6 +2292,8 @@ public interface PropsKeys {
 
 	public static final String USERS_IMAGE_CHECK_TOKEN = "users.image.check.token";
 
+	public static final String USERS_IMAGE_DEFAULT_USE_INITIALS = "users.image.default.use.initials";
+
 	public static final String USERS_IMAGE_MAX_HEIGHT = "users.image.max.height";
 
 	public static final String USERS_IMAGE_MAX_SIZE = "users.image.max.size";

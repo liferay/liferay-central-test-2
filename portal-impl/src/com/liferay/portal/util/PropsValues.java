@@ -1583,6 +1583,8 @@ public class PropsValues {
 
 	public static final boolean USERS_IMAGE_CHECK_TOKEN = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.USERS_IMAGE_CHECK_TOKEN));
 
+	public static final boolean USERS_IMAGE_DEFAULT_USE_INITIALS = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.USERS_IMAGE_DEFAULT_USE_INITIALS));
+
 	public static int USERS_IMAGE_MAX_HEIGHT = GetterUtil.getInteger(PropsUtil.get(PropsKeys.USERS_IMAGE_MAX_HEIGHT));
 
 	public static int USERS_IMAGE_MAX_WIDTH = GetterUtil.getInteger(PropsUtil.get(PropsKeys.USERS_IMAGE_MAX_WIDTH));
