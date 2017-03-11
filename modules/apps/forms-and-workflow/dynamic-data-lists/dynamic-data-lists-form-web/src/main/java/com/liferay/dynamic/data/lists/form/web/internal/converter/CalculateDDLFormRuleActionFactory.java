@@ -34,12 +34,12 @@ public class CalculateDDLFormRuleActionFactory {
 
 		Expression expression = expressions.get(1);
 
-		String expressionStr = expression.toString();
+		String expressionString = expression.toString();
 
-		expressionStr = expressionStr.replaceAll(
+		expressionString = expressionString.replaceAll(
 			"(getValue\\(\\'([^\\(]+)\\'\\))", "$2");
 
-		return new CalculateDDLFormRuleAction(target, expressionStr);
+		return new CalculateDDLFormRuleAction(target, expressionString);
 	}
 
 }
