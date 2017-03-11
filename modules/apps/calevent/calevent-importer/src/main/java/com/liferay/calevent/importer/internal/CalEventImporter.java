@@ -931,9 +931,7 @@ public class CalEventImporter {
 					int durationMinute = rs.getInt("durationMinute");
 					boolean allDay = rs.getBoolean("allDay");
 					String type = rs.getString("type_");
-
 					String recurrence = rs.getString("recurrence");
-
 					int remindBy = rs.getInt("remindBy");
 					int firstReminder = rs.getInt("firstReminder");
 					int secondReminder = rs.getInt("secondReminder");
@@ -986,7 +984,6 @@ public class CalEventImporter {
 
 		if (remindBy == _REMIND_BY_NONE) {
 			firstReminder = 0;
-
 			secondReminder = 0;
 		}
 
@@ -1066,7 +1063,6 @@ public class CalEventImporter {
 					int durationMinute = rs.getInt("durationMinute");
 					boolean allDay = rs.getBoolean("allDay");
 					String type = rs.getString("type_");
-
 					String recurrence = rs.getString("recurrence");
 					int remindBy = rs.getInt("remindBy");
 					int firstReminder = rs.getInt("firstReminder");
