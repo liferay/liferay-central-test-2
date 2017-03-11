@@ -125,7 +125,7 @@ public class UserPortraitTag extends IncludeTag {
 				portraitURL = user.getPortraitURL(themeDisplay);
 			}
 			catch (PortalException pe) {
-				_log.error(pe);
+				_log.error(pe, pe);
 			}
 		}
 		else {
