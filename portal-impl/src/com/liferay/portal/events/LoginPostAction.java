@@ -104,8 +104,6 @@ public class LoginPostAction extends Action {
 				UserLocalServiceUtil.addDefaultUserGroups(userId);
 			}
 
-			// Password Expiration
-
 			if (UserLocalServiceUtil.isPasswordExpiringSoon(
 					PortalUtil.getUser(request))) {
 
