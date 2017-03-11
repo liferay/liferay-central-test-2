@@ -581,6 +581,10 @@ public class JournalConverterImpl implements JournalConverter {
 				dynamicContentElement.getText());
 		}
 		else if (DDMImpl.TYPE_DDM_IMAGE.equals(type)) {
+			if (!dynamicContentElement.hasContent()) {
+				return StringPool.BLANK;
+			}
+
 			JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
 			jsonObject.put("alt", dynamicContentElement.attributeValue("alt"));
