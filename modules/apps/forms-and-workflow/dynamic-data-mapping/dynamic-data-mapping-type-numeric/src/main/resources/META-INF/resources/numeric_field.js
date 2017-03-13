@@ -18,6 +18,10 @@ AUI.add(
 		var NumericField = A.Component.create(
 			{
 				ATTRS: {
+					dataType: {
+						value: 'integer'
+					},
+
 					placeholder: {
 						state: true,
 						value: ''
@@ -36,9 +40,7 @@ AUI.add(
 					initializer: function() {
 						var instance = this;
 
-						instance._eventHandlers = [
-							A.on('keypress', A.bind('_onNumericFieldKeyPress', instance))
-						];
+						instance.bindInputEvent('keypress', A.bind('_onNumericFieldKeyPress', instance));
 
 						instance.evaluate = A.debounce(
 							function() {
@@ -68,7 +70,9 @@ AUI.add(
 						if ((event.keyCode >= 48 && event.keyCode <= 57) || event.keyCode === 46) {
 							return true;
 						}
+
 						event.preventDefault();
+
 						return false;
 					}
 				}
