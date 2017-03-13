@@ -12,34 +12,48 @@
  * details.
  */
 
-package com.liferay.adaptive.media.blogs.web.internal.attachment;
+package com.liferay.adaptive.media.blogs.editor.configuration.internal;
 
+import com.liferay.adaptive.media.image.html.AdaptiveMediaImageHTMLTagFactory;
 import com.liferay.blogs.util.BlogsEntryAttachmentContentUpdater;
-import com.liferay.portal.kernel.portletfilerepository.PortletFileRepositoryUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
-import com.liferay.portal.kernel.util.StringPool;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Alejandro Tardín
  */
 @Component(
-	property = "service.ranking:Integer=2",
+	property = "service.ranking:Integer=1",
 	service = BlogsEntryAttachmentContentUpdater.class
 )
-public class AdaptiveMediaBlogsEntryAttachmentContentUpdater
+public class StaticAdaptiveMediaBlogsEntryAttachmentContentUpdater
 	extends BlogsEntryAttachmentContentUpdater {
 
 	@Override
 	protected String getBlogsEntryAttachmentFileEntryImgTag(
 		FileEntry blogsEntryAttachmentFileEntry) {
 
-		String fileEntryURL = PortletFileRepositoryUtil.getPortletFileEntryURL(
-			null, blogsEntryAttachmentFileEntry, StringPool.BLANK);
+		try {
+			String imgTag = super.getBlogsEntryAttachmentFileEntryImgTag(
+				blogsEntryAttachmentFileEntry);
 
-		return "<img src=\"" + fileEntryURL + "\" data-fileEntryId=\"" +
-			blogsEntryAttachmentFileEntry.getFileEntryId() + "\"/>";
+			return _adaptiveMediaImageHTMLTagFactory.create(
+				imgTag, blogsEntryAttachmentFileEntry);
+		}
+		catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
+
+	@Reference(unbind = "-")
+	protected void setAdaptiveMediaImageHTMLTagFactory(
+		AdaptiveMediaImageHTMLTagFactory adaptiveMediaImageHTMLTagFactory) {
+
+		_adaptiveMediaImageHTMLTagFactory = adaptiveMediaImageHTMLTagFactory;
+	}
+
+	private AdaptiveMediaImageHTMLTagFactory _adaptiveMediaImageHTMLTagFactory;
 
 }
