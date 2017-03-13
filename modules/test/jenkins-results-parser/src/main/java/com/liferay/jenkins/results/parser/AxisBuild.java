@@ -99,29 +99,31 @@ public class AxisBuild extends BaseBuild {
 		for (TestResult testResult : getTestResults(null)) {
 			String displayName = testResult.getDisplayName();
 
-			if (!displayName.contains("JenkinsLogAsserterTest")) {
-				Element listItemElement = Dom4JUtil.getNewElement(
-					"li", unorderedListElement);
-
-				Dom4JUtil.getNewElement("strong", listItemElement, displayName);
-
-				Element reportLinksUnorderedListElement =
-					Dom4JUtil.getNewElement("ul", listItemElement);
-
-				Element poshiReportListItemElement = Dom4JUtil.getNewElement(
-					"li", reportLinksUnorderedListElement);
-
-				Dom4JUtil.getNewAnchorElement(
-					testResult.getPoshiReportURL(), poshiReportListItemElement,
-					"Poshi Report");
-
-				Element poshiSummaryListItemElement = Dom4JUtil.getNewElement(
-					"li", reportLinksUnorderedListElement);
-
-				Dom4JUtil.getNewAnchorElement(
-					testResult.getPoshiSummaryURL(),
-					poshiSummaryListItemElement, "Poshi Summary");
+			if (displayName.contains("JenkinsLogAsserterTest")) {
+				continue;
 			}
+
+			Element listItemElement = Dom4JUtil.getNewElement(
+				"li", unorderedListElement);
+
+			Dom4JUtil.getNewElement("strong", listItemElement, displayName);
+
+			Element reportLinksUnorderedListElement = Dom4JUtil.getNewElement(
+				"ul", listItemElement);
+
+			Element poshiReportListItemElement = Dom4JUtil.getNewElement(
+				"li", reportLinksUnorderedListElement);
+
+			Dom4JUtil.getNewAnchorElement(
+				testResult.getPoshiReportURL(), poshiReportListItemElement,
+				"Poshi Report");
+
+			Element poshiSummaryListItemElement = Dom4JUtil.getNewElement(
+				"li", reportLinksUnorderedListElement);
+
+			Dom4JUtil.getNewAnchorElement(
+				testResult.getPoshiSummaryURL(), poshiSummaryListItemElement,
+				"Poshi Summary");
 		}
 
 		Dom4JUtil.addToElement(
