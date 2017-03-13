@@ -17,7 +17,6 @@ package com.liferay.adaptive.media.image.internal.finder;
 import com.liferay.adaptive.media.AdaptiveMedia;
 import com.liferay.adaptive.media.AdaptiveMediaAttribute;
 import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
-import com.liferay.adaptive.media.AdaptiveMediaURIResolver;
 import com.liferay.adaptive.media.finder.AdaptiveMediaQuery;
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationHelper;
@@ -28,6 +27,7 @@ import com.liferay.adaptive.media.image.model.AdaptiveMediaImageEntry;
 import com.liferay.adaptive.media.image.processor.AdaptiveMediaImageAttribute;
 import com.liferay.adaptive.media.image.processor.AdaptiveMediaImageProcessor;
 import com.liferay.adaptive.media.image.service.AdaptiveMediaImageEntryLocalService;
+import com.liferay.adaptive.media.image.url.AdaptiveMediaImageURLFactory;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
@@ -58,7 +58,7 @@ public class AdaptiveMediaImageFinderImplTest {
 
 	@Before
 	public void setUp() {
-		_finder.setAdaptiveMediaURIResolver(_uriResolver);
+		_finder.setAdaptiveMediaImageURLFactory(_adaptiveMediaImageURLFactory);
 		_finder.setAdaptiveMediaImageConfigurationHelper(_configurationHelper);
 		_finder.setImageProcessor(_imageProcessor);
 		_finder.setAdaptiveMediaImageEntryLocalService(_imageEntryLocalService);
@@ -1471,6 +1471,8 @@ public class AdaptiveMediaImageFinderImplTest {
 		return imageEntry;
 	}
 
+	private final AdaptiveMediaImageURLFactory _adaptiveMediaImageURLFactory =
+		Mockito.mock(AdaptiveMediaImageURLFactory.class);
 	private final AdaptiveMediaImageConfigurationHelper _configurationHelper =
 		Mockito.mock(AdaptiveMediaImageConfigurationHelper.class);
 	private final FileEntry _fileEntry = Mockito.mock(FileEntry.class);
@@ -1481,7 +1483,5 @@ public class AdaptiveMediaImageFinderImplTest {
 		Mockito.mock(AdaptiveMediaImageEntryLocalService.class);
 	private final ImageProcessor _imageProcessor = Mockito.mock(
 		ImageProcessor.class);
-	private final AdaptiveMediaURIResolver _uriResolver = Mockito.mock(
-		AdaptiveMediaURIResolver.class);
 
 }

@@ -17,7 +17,6 @@ package com.liferay.adaptive.media.image.internal.finder;
 import com.liferay.adaptive.media.AdaptiveMedia;
 import com.liferay.adaptive.media.AdaptiveMediaAttribute;
 import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
-import com.liferay.adaptive.media.AdaptiveMediaURIResolver;
 import com.liferay.adaptive.media.finder.AdaptiveMediaFinder;
 import com.liferay.adaptive.media.finder.AdaptiveMediaQuery;
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry;
@@ -31,6 +30,7 @@ import com.liferay.adaptive.media.image.model.AdaptiveMediaImageEntry;
 import com.liferay.adaptive.media.image.processor.AdaptiveMediaImageAttribute;
 import com.liferay.adaptive.media.image.processor.AdaptiveMediaImageProcessor;
 import com.liferay.adaptive.media.image.service.AdaptiveMediaImageEntryLocalService;
+import com.liferay.adaptive.media.image.url.AdaptiveMediaImageURLFactory;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 
@@ -126,38 +126,15 @@ public class AdaptiveMediaImageFinderImpl implements AdaptiveMediaImageFinder {
 	}
 
 	@Reference(unbind = "-")
-	public void setAdaptiveMediaURIResolver(
-		AdaptiveMediaURIResolver adaptiveMediaURIResolver) {
+	public void setAdaptiveMediaImageURLFactory(
+		AdaptiveMediaImageURLFactory adaptiveMediaImageURLFactory) {
 
-		_uriResolver = adaptiveMediaURIResolver;
+		_adaptiveMediaImageURLFactory = adaptiveMediaImageURLFactory;
 	}
 
 	@Reference(unbind = "-")
 	public void setImageProcessor(ImageProcessor imageProcessor) {
 		_imageProcessor = imageProcessor;
-	}
-
-	private URI _createFileEntryURL(
-		FileVersion fileVersion,
-		AdaptiveMediaImageConfigurationEntry configurationEntry) {
-
-		String relativeURI = String.format(
-			"image/%d/%s/%s", fileVersion.getFileEntryId(),
-			configurationEntry.getUUID(), _encode(fileVersion.getFileName()));
-
-		return _uriResolver.resolveURI(URI.create(relativeURI));
-	}
-
-	private URI _createFileVersionURL(
-		FileVersion fileVersion,
-		AdaptiveMediaImageConfigurationEntry configurationEntry) {
-
-		String relativeURI = String.format(
-			"image/%d/%d/%s/%s", fileVersion.getFileEntryId(),
-			fileVersion.getFileVersionId(), configurationEntry.getUUID(),
-			_encode(fileVersion.getFileName()));
-
-		return _uriResolver.resolveURI(URI.create(relativeURI));
 	}
 
 	private AdaptiveMedia<AdaptiveMediaImageProcessor> _createMedia(
@@ -237,10 +214,10 @@ public class AdaptiveMediaImageFinderImpl implements AdaptiveMediaImageFinder {
 		_getURIFactory(AdaptiveMediaImageQueryBuilderImpl queryBuilder) {
 
 		if (queryBuilder.hasFileVersion()) {
-			return this::_createFileVersionURL;
+			return _adaptiveMediaImageURLFactory::createFileVersionURL;
 		}
 
-		return this::_createFileEntryURL;
+		return _adaptiveMediaImageURLFactory::createFileEntryURL;
 	}
 
 	private boolean _hasAdaptiveMedia(
@@ -258,9 +235,9 @@ public class AdaptiveMediaImageFinderImpl implements AdaptiveMediaImageFinder {
 		return true;
 	}
 
+	private AdaptiveMediaImageURLFactory _adaptiveMediaImageURLFactory;
 	private AdaptiveMediaImageConfigurationHelper _configurationHelper;
 	private AdaptiveMediaImageEntryLocalService _imageEntryLocalService;
 	private ImageProcessor _imageProcessor;
-	private AdaptiveMediaURIResolver _uriResolver;
 
 }
