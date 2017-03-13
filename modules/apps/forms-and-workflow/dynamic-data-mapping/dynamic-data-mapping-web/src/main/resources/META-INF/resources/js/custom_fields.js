@@ -1073,11 +1073,23 @@ AUI.add(
 
 													var value = STR_BLANK;
 
-													if (val && val.length) {
+													if (Array.isArray(val)) {
 														value = instance.formatDate(val[0]);
 													}
 
 													return value;
+												},
+
+												outputFormatter: function(val) {
+													var instance = this;
+
+													if (Array.isArray(val)) {
+														var formattedValue = A.DataType.Date.parse(instance.get('dateFormat'), val[0]);
+
+														return [formattedValue];
+													}
+
+													return val;
 												}
 											}
 										),
