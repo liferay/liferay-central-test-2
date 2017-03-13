@@ -23,19 +23,17 @@ AdaptiveMediaImageConfigurationEntry configurationEntry = (AdaptiveMediaImageCon
 
 boolean optimizeImagesEnabled = true;
 
-List<BackgroundTask> reindexSingleBackgroundTasks = BackgroundTaskManagerUtil.getBackgroundTasks(CompanyConstants.SYSTEM, OptimizeImagesSingleConfigurationBackgroundTaskExecutor.class.getName(), BackgroundTaskConstants.STATUS_IN_PROGRESS);
+List<BackgroundTask> optimizeImageSigleBackgroundTasks = (List<BackgroundTask>)request.getAttribute("view.jsp-optimizeImageSigleBackgroundTasks");
 
-if (!reindexSingleBackgroundTasks.isEmpty()) {
-	for (BackgroundTask reindexSingleBackgroundTask : reindexSingleBackgroundTasks) {
-		Map<String, Serializable> taskContextMap = reindexSingleBackgroundTask.getTaskContextMap();
+for (BackgroundTask optimizeImageSigleBackgroundTask : optimizeImageSigleBackgroundTasks) {
+	Map<String, Serializable> taskContextMap = optimizeImageSigleBackgroundTask.getTaskContextMap();
 
-		String configurationEntryUuid = (String)taskContextMap.get("configurationEntryUuid");
+	String configurationEntryUuid = (String)taskContextMap.get("configurationEntryUuid");
 
-		if (configurationEntryUuid.equals(configurationEntry.getUUID())) {
-			optimizeImagesEnabled = false;
+	if (configurationEntryUuid.equals(configurationEntry.getUUID())) {
+		optimizeImagesEnabled = false;
 
-			break;
-		}
+		break;
 	}
 }
 %>

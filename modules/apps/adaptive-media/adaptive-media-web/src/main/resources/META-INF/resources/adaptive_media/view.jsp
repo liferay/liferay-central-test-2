@@ -87,18 +87,18 @@ PortletURL portletURL = renderResponse.createRenderURL();
 	<%
 	int optimizeImagesAllConfigurationsBackgroundTasksCount = BackgroundTaskManagerUtil.getBackgroundTasksCount(CompanyConstants.SYSTEM, OptimizeImagesAllConfigurationsBackgroundTaskExecutor.class.getName(), false);
 
-	List<BackgroundTask> reindexSingleBackgroundTasks = BackgroundTaskManagerUtil.getBackgroundTasks(CompanyConstants.SYSTEM, OptimizeImagesSingleConfigurationBackgroundTaskExecutor.class.getName(), BackgroundTaskConstants.STATUS_IN_PROGRESS);
+	List<BackgroundTask> optimizeImageSigleBackgroundTasks = BackgroundTaskManagerUtil.getBackgroundTasks(CompanyConstants.SYSTEM, OptimizeImagesSingleConfigurationBackgroundTaskExecutor.class.getName(), BackgroundTaskConstants.STATUS_IN_PROGRESS);
+
+	request.setAttribute("view.jsp-optimizeImageSigleBackgroundTasks", optimizeImageSigleBackgroundTasks);
 
 	List<String> currentBackgroundTasks = new ArrayList<>();
 
-	if (!reindexSingleBackgroundTasks.isEmpty()) {
-		for (BackgroundTask reindexSingleBackgroundTask : reindexSingleBackgroundTasks) {
-			Map<String, Serializable> taskContextMap = reindexSingleBackgroundTask.getTaskContextMap();
+	for (BackgroundTask optimizeImageSigleBackgroundTask : optimizeImageSigleBackgroundTasks) {
+		Map<String, Serializable> taskContextMap = optimizeImageSigleBackgroundTask.getTaskContextMap();
 
-			String configurationEntryUuid = (String)taskContextMap.get("configurationEntryUuid");
+		String configurationEntryUuid = (String)taskContextMap.get("configurationEntryUuid");
 
-			currentBackgroundTasks.add(configurationEntryUuid);
-		}
+		currentBackgroundTasks.add(configurationEntryUuid);
 	}
 	%>
 
