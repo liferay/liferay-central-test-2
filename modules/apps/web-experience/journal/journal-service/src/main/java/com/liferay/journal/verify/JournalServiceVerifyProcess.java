@@ -18,6 +18,9 @@ import com.liferay.asset.kernel.model.AssetEntry;
 import com.liferay.asset.kernel.service.AssetEntryLocalService;
 import com.liferay.document.library.kernel.service.DLAppLocalService;
 import com.liferay.dynamic.data.mapping.exception.NoSuchStructureException;
+import com.liferay.dynamic.data.mapping.model.DDMStructure;
+import com.liferay.dynamic.data.mapping.service.DDMStructureLocalService;
+import com.liferay.dynamic.data.mapping.storage.Fields;
 import com.liferay.journal.configuration.JournalServiceConfiguration;
 import com.liferay.journal.internal.verify.model.JournalArticleResourceVerifiableModel;
 import com.liferay.journal.internal.verify.model.JournalArticleVerifiableModel;
@@ -33,6 +36,7 @@ import com.liferay.journal.service.JournalArticleLocalService;
 import com.liferay.journal.service.JournalArticleResourceLocalService;
 import com.liferay.journal.service.JournalContentSearchLocalService;
 import com.liferay.journal.service.JournalFolderLocalService;
+import com.liferay.journal.util.JournalConverter;
 import com.liferay.journal.util.comparator.ArticleVersionComparator;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBManagerUtil;
@@ -45,10 +49,12 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProviderUtil;
 import com.liferay.portal.kernel.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
+import com.liferay.portal.kernel.service.CompanyLocalService;
 import com.liferay.portal.kernel.service.ResourceLocalService;
 import com.liferay.portal.kernel.service.SystemEventLocalService;
 import com.liferay.portal.kernel.util.CharPool;
@@ -56,10 +62,13 @@ import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.LocaleThreadLocal;
 import com.liferay.portal.kernel.util.LoggingTimer;
+import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
@@ -78,6 +87,7 @@ import java.sql.Timestamp;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.portlet.PortletPreferences;
 
@@ -132,6 +142,28 @@ public class JournalServiceVerifyProcess extends VerifyLayout {
 		_assetEntryLocalService = assetEntryLocalService;
 	}
 
+	/**
+	 * @deprecated As of 3.10.0
+	 */
+	@Deprecated
+	@Reference(unbind = "-")
+	protected void setCompanyLocalService(
+		CompanyLocalService companyLocalService) {
+
+		_companyLocalService = companyLocalService;
+	}
+
+	/**
+	 * @deprecated As of 3.10.0
+	 */
+	@Deprecated
+	@Reference(unbind = "-")
+	protected void setDDMStructureLocalService(
+		DDMStructureLocalService ddmStructureLocalService) {
+
+		_ddmStructureLocalService = ddmStructureLocalService;
+	}
+
 	@Reference(unbind = "-")
 	protected void setDLAppLocalService(DLAppLocalService dlAppLocalService) {
 		_dlAppLocalService = dlAppLocalService;
@@ -164,6 +196,15 @@ public class JournalServiceVerifyProcess extends VerifyLayout {
 		JournalContentSearchLocalService journalContentSearchLocalService) {
 
 		_journalContentSearchLocalService = journalContentSearchLocalService;
+	}
+
+	/**
+	 * @deprecated As of 3.10.0
+	 */
+	@Deprecated
+	@Reference(unbind = "-")
+	protected void setJournalConverter(JournalConverter journalConverter) {
+		_journalConverter = journalConverter;
 	}
 
 	@Reference(unbind = "-")
@@ -314,6 +355,53 @@ public class JournalServiceVerifyProcess extends VerifyLayout {
 			if (_log.isDebugEnabled()) {
 				_log.debug(pe, pe);
 			}
+		}
+	}
+
+	/**
+	 * @deprecated As of 3.10.0
+	 */
+	@Deprecated
+	protected void updateDynamicElements(JournalArticle article)
+		throws Exception {
+
+		if (Validator.isNull(article.getDDMStructureKey())) {
+			return;
+		}
+
+		DDMStructure ddmStructure = _ddmStructureLocalService.getStructure(
+			article.getGroupId(),
+			PortalUtil.getClassNameId(JournalArticle.class),
+			article.getDDMStructureKey(), true);
+
+		Locale originalefaultLocale = LocaleThreadLocal.getDefaultLocale();
+		Locale originalSiteDefaultLocale =
+			LocaleThreadLocal.getSiteDefaultLocale();
+
+		try {
+			Company company = _companyLocalService.getCompany(
+				article.getCompanyId());
+
+			LocaleThreadLocal.setDefaultLocale(company.getLocale());
+
+			LocaleThreadLocal.setSiteDefaultLocale(
+				PortalUtil.getSiteDefaultLocale(article.getGroupId()));
+
+			Fields ddmFields = _journalConverter.getDDMFields(
+				ddmStructure, article.getContent());
+
+			String content = _journalConverter.getContent(
+				ddmStructure, ddmFields);
+
+			if (!content.equals(article.getContent())) {
+				article.setContent(content);
+
+				_journalArticleLocalService.updateJournalArticle(article);
+			}
+		}
+		finally {
+			LocaleThreadLocal.setDefaultLocale(originalefaultLocale);
+			LocaleThreadLocal.setSiteDefaultLocale(originalSiteDefaultLocale);
 		}
 	}
 
@@ -936,12 +1024,15 @@ public class JournalServiceVerifyProcess extends VerifyLayout {
 		JournalServiceVerifyProcess.class);
 
 	private AssetEntryLocalService _assetEntryLocalService;
+	private CompanyLocalService _companyLocalService;
+	private DDMStructureLocalService _ddmStructureLocalService;
 	private DLAppLocalService _dlAppLocalService;
 	private JournalArticleImageLocalService _journalArticleImageLocalService;
 	private JournalArticleLocalService _journalArticleLocalService;
 	private JournalArticleResourceLocalService
 		_journalArticleResourceLocalService;
 	private JournalContentSearchLocalService _journalContentSearchLocalService;
+	private JournalConverter _journalConverter;
 	private JournalFolderLocalService _journalFolderLocalService;
 	private ResourceLocalService _resourceLocalService;
 	private SystemEventLocalService _systemEventLocalService;
