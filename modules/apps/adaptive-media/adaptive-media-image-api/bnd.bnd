@@ -7,6 +7,7 @@ Export-Package:\
 	com.liferay.adaptive.media.image.counter,\
 	com.liferay.adaptive.media.image.exception,\
 	com.liferay.adaptive.media.image.finder,\
+	com.liferay.adaptive.media.image.html,\
 	com.liferay.adaptive.media.image.model,\
 	com.liferay.adaptive.media.image.optimizer,\
 	com.liferay.adaptive.media.image.processor,\
