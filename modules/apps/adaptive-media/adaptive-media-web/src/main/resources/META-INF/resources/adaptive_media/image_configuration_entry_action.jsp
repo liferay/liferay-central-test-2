@@ -89,7 +89,7 @@ if (!reindexSingleBackgroundTasks.isEmpty()) {
 
 		String onClick = renderResponse.getNamespace() + "optimizeRemaining('" + uuid + "', '" + backgroundTaskUrl + "');";
 
-		int percentage = AdaptiveMediaImageLocalServiceUtil.getPercentage(themeDisplay.getCompanyId(), configurationEntry.getUUID());
+		int percentage = AdaptiveMediaImageEntryLocalServiceUtil.getPercentage(themeDisplay.getCompanyId(), configurationEntry.getUUID());
 
 		String cssClass = (!configurationEntry.isEnabled() || percentage == 100) ? "disabled" : "";
 		%>
