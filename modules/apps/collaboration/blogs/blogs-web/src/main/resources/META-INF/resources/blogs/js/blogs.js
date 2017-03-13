@@ -100,9 +100,18 @@ AUI.add(
 							description = instance._shorten(text);
 						}
 
-						window[instance.ns('descriptionEditor')].setHTML(description);
+						instance.one('#description').val(description);
 
-						instance._syncDescriptionEditorUI();
+						instance._setDescriptionReadOnly(instance._shortenDescription);
+
+						var form = Liferay.Form.get(instance.ns('fm'));
+
+						if (!instance._shortenDescription) {
+							form.addRule(instance.ns('description'), 'required');
+						}
+						else {
+							form.removeRule(instance.ns('description'), 'required');
+						}
 					},
 
 					_bindUI: function() {
@@ -172,23 +181,12 @@ AUI.add(
 						instance._shortenDescription = target.val() === 'false';
 
 						if (instance._shortenDescription) {
-							instance._customDescription = window[instance.ns('descriptionEditor')].getHTML();
+							instance._customDescription = instance.one('#description').val();
 
 							description = window[instance.ns('contentEditor')].getText();
 						}
 
-						instance._setDescriptionReadOnly(instance._shortenDescription);
-
 						instance.setDescription(description);
-
-						var form = Liferay.Form.get(instance.ns('fm'));
-
-						if (!instance._shortenDescription) {
-							form.addRule(instance.ns('descriptionEditor'), 'required');
-						}
-						else {
-							form.removeRule(instance.ns('descriptionEditor'), 'required');
-						}
 					},
 
 					_getPrincipalForm: function(formName) {
@@ -250,7 +248,6 @@ AUI.add(
 
 						var content = window[instance.ns('contentEditor')].getHTML();
 						var coverImageCaption = window[instance.ns('coverImageCaptionEditor')].getHTML();
-						var description = window[instance.ns('descriptionEditor')].getHTML();
 						var subtitle = window[instance.ns('subtitleEditor')].getHTML();
 						var title = window[instance.ns('titleEditor')].getText();
 
@@ -373,7 +370,6 @@ AUI.add(
 
 							instance.one('#content').val(content);
 							instance.one('#coverImageCaption').val(coverImageCaption);
-							instance.one('#description').val(description);
 							instance.one('#subtitle').val(subtitle);
 							instance.one('#title').val(title);
 							instance.one('#workflowAction').val(draft ? constants.ACTION_SAVE_DRAFT : constants.ACTION_PUBLISH);
@@ -385,10 +381,14 @@ AUI.add(
 					_setDescriptionReadOnly: function(readOnly) {
 						var instance = this;
 
-						var descriptionEditorNode = instance.one('#descriptionEditor');
+						var descriptionNode = instance.one('#description');
 
-						descriptionEditorNode.attr('contenteditable', !readOnly);
-						descriptionEditorNode.toggleClass('readonly', readOnly);
+						if (!readOnly) {
+							descriptionNode.removeAttribute('readonly');
+						}
+						else {
+							descriptionNode.attr('readonly', readOnly);
+						}
 					},
 
 					_shorten: function(text) {
@@ -416,24 +416,6 @@ AUI.add(
 
 						if (captionNode) {
 							captionNode.removeClass(CSS_INVISIBLE);
-						}
-					},
-
-					_syncDescriptionEditorUI: function() {
-						var instance = this;
-
-						var liferayDescriptionEditor = window[instance.ns('descriptionEditor')];
-
-						if (liferayDescriptionEditor.instanceReady) {
-							var nativeDescriptionEditor = liferayDescriptionEditor.getNativeEditor().get('nativeEditor');
-
-							if (nativeDescriptionEditor && nativeDescriptionEditor.plugins && nativeDescriptionEditor.plugins.ae_placeholder) {
-								var editorEvent = {
-									editor: nativeDescriptionEditor
-								};
-
-								nativeDescriptionEditor.plugins.ae_placeholder._checkEmptyData(editorEvent);
-							}
 						}
 					},
 
