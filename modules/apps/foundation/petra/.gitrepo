@@ -4,8 +4,8 @@
 [subrepo]
 	autopull = false
 	cmdver = liferay
-	commit = f4b922d52ab4176f90bd79ed7bfb3ab1c9934efe
+	commit = e8512b0c2e6231869dea8d188136340a5aba800d
 	mergebuttonmergecommits = false
 	mode = push
-	parent = 42b27997380a7989824bab137987e5d94d4aaa8b
+	parent = 6632bff72a9c550dc0e96f2f2cecfaa841188511
 	remote = git@github.com:liferay/com-liferay-petra.git
