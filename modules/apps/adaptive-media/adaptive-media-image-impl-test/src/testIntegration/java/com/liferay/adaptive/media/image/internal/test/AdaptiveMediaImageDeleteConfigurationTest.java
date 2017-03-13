@@ -203,6 +203,9 @@ public class AdaptiveMediaImageDeleteConfigurationTest
 						configurationEntry.getUUID(),
 						fileVersion.getFileVersionId()));
 
+			configurationHelper.disableAdaptiveMediaImageConfigurationEntry(
+				TestPropsValues.getCompanyId(), configurationEntry.getUUID());
+
 			configurationHelper.deleteAdaptiveMediaImageConfigurationEntry(
 				TestPropsValues.getCompanyId(), configurationEntry.getUUID());
 
