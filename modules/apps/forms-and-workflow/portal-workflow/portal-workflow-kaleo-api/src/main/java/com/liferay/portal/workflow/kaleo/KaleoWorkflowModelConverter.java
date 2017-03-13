@@ -26,6 +26,7 @@ import com.liferay.portal.workflow.kaleo.model.KaleoInstance;
 import com.liferay.portal.workflow.kaleo.model.KaleoInstanceToken;
 import com.liferay.portal.workflow.kaleo.model.KaleoLog;
 import com.liferay.portal.workflow.kaleo.model.KaleoTaskInstanceToken;
+import com.liferay.portal.workflow.kaleo.service.KaleoDefinitionLocalServiceUtil;
 
 import java.io.Serializable;
 
@@ -43,8 +44,15 @@ public interface KaleoWorkflowModelConverter {
 	public WorkflowDefinition toWorkflowDefinition(
 		KaleoDefinition kaleoDefinition);
 
-	public WorkflowDefinition toWorkflowDefinition(
-		KaleoDefinitionVersion kaleoDefinitionVersion);
+	public default WorkflowDefinition toWorkflowDefinition(
+		KaleoDefinitionVersion kaleoDefinitionVersion) {
+
+		KaleoDefinition kaleoDefinition =
+			KaleoDefinitionLocalServiceUtil.fetchKaleoDefinition(
+				kaleoDefinitionVersion.getKaleoDefinitionId());
+
+		return toWorkflowDefinition(kaleoDefinition);
+	}
 
 	public WorkflowInstance toWorkflowInstance(
 			KaleoInstance kaleoInstance, KaleoInstanceToken kaleoInstanceToken)
