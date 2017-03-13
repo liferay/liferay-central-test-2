@@ -73,7 +73,7 @@ public class LazyWorkflowTaskAssigneeList
 
 		return _kaleoTaskAssignmentInstanceLocalService.
 			getKaleoTaskAssignmentInstancesCount(
-				_kaleoTaskInstanceToken.getKaleoInstanceTokenId());
+				_kaleoTaskInstanceToken.getKaleoTaskInstanceTokenId());
 	}
 
 	protected void initWorkflowTaskAssignees() {
