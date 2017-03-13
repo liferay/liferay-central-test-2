@@ -11,6 +11,7 @@ Export-Package:\
 	com.liferay.adaptive.media.image.optimizer,\
 	com.liferay.adaptive.media.image.processor,\
 	com.liferay.adaptive.media.image.service,\
-	com.liferay.adaptive.media.image.service.persistence
+	com.liferay.adaptive.media.image.service.persistence,\
+	com.liferay.adaptive.media.image.url
 Liferay-Releng-Module-Group-Description:
 Liferay-Releng-Module-Group-Title: Adaptive Media
