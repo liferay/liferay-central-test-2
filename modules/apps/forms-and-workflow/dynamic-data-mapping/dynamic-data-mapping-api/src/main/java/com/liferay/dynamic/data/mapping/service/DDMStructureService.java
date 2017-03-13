@@ -355,6 +355,25 @@ public interface DDMStructureService extends BaseService {
 		java.lang.String keywords, int status);
 
 	/**
+	* Returns the number of structures matching the groups and class name IDs,
+	* and matching the keywords in the structure names and descriptions.
+	*
+	* @param companyId the primary key of the structure's company
+	* @param groupIds the primary keys of the groups
+	* @param classNameId the primary key of the class name of the model the
+	structure is related to
+	* @param keywords the keywords (space separated), which may occur in the
+	structure's name or description (optionally <code>null</code>)
+	* @param type the structure's type. For more information, see {@link
+	com.liferay.dynamic.data.mapping.model.DDMStructureConstants}.
+	* @param status the workflow's status.
+	* @return the number of matching structures
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int searchCount(long companyId, long[] groupIds, long classNameId,
+		java.lang.String keywords, int type, int status);
+
+	/**
 	* Returns the number of structures matching the groups, class name IDs,
 	* name keyword, description keyword, storage type, and type
 	*
@@ -425,6 +444,41 @@ public interface DDMStructureService extends BaseService {
 	public List<DDMStructure> search(long companyId, long[] groupIds,
 		long classNameId, java.lang.String keywords, int status, int start,
 		int end, OrderByComparator<DDMStructure> orderByComparator);
+
+	/**
+	* Returns an ordered range of all the structures matching the groups and
+	* class name IDs, and matching the keywords in the structure names and
+	* descriptions.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end -
+	* start</code> instances. <code>start</code> and <code>end</code> are not
+	* primary keys, they are indexes in the result set. Thus, <code>0</code>
+	* refers to the first result in the set. Setting both <code>start</code>
+	* and <code>end</code> to {@link QueryUtil#ALL_POS} will return the full
+	* result set.
+	* </p>
+	*
+	* @param companyId the primary key of the structure's company
+	* @param groupIds the primary keys of the groups
+	* @param classNameId the primary key of the class name of the model the
+	structure is related to
+	* @param keywords the keywords (space separated), which may occur in the
+	structure's name or description (optionally <code>null</code>)
+	* @param type the structure's type. For more information, see {@link
+	com.liferay.dynamic.data.mapping.model.DDMStructureConstants}.
+	* @param status the workflow's status.
+	* @param start the lower bound of the range of structures to return
+	* @param end the upper bound of the range of structures to return (not
+	inclusive)
+	* @param orderByComparator the comparator to order the structures
+	(optionally <code>null</code>)
+	* @return the range of matching structures ordered by the comparator
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<DDMStructure> search(long companyId, long[] groupIds,
+		long classNameId, java.lang.String keywords, int type, int status,
+		int start, int end, OrderByComparator<DDMStructure> orderByComparator);
 
 	/**
 	* Returns an ordered range of all the structures matching the groups, class
