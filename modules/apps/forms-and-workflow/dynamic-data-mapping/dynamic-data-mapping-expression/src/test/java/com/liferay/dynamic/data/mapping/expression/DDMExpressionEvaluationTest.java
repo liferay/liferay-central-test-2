@@ -198,7 +198,7 @@ public class DDMExpressionEvaluationTest {
 			_ddmExpressionFactory.createFloatDDMExpression(
 				"var1 + var2 + var3");
 
-		float var1 = 5.5f;
+		float var1 = 5.5F;
 
 		ddmExpression.setFloatVariableValue("var1", var1);
 

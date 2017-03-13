@@ -91,13 +91,13 @@ public class DDMFormInstanceFactoryTest {
 			DDMFormValuesTestUtil.createUnlocalizedDDMFormFieldValue(
 				"boolean", Boolean.toString(expectedBooleanValue)));
 
-		double expectedDoubleValue = 2.5d;
+		double expectedDoubleValue = 2.5D;
 
 		ddmFormValues.addDDMFormFieldValue(
 			DDMFormValuesTestUtil.createUnlocalizedDDMFormFieldValue(
 				"double", Double.toString(expectedDoubleValue)));
 
-		float expectedFloatValue = 3.5f;
+		float expectedFloatValue = 3.5F;
 
 		ddmFormValues.addDDMFormFieldValue(
 			DDMFormValuesTestUtil.createUnlocalizedDDMFormFieldValue(
