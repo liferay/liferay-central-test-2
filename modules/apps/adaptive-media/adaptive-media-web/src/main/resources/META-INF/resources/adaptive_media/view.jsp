@@ -91,14 +91,14 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 	request.setAttribute("view.jsp-optimizeImageSigleBackgroundTasks", optimizeImageSigleBackgroundTasks);
 
-	List<String> currentBackgroundTasks = new ArrayList<>();
+	List<String> currentBackgroundTaskConfigurationEntryUuids = new ArrayList<>();
 
 	for (BackgroundTask optimizeImageSigleBackgroundTask : optimizeImageSigleBackgroundTasks) {
 		Map<String, Serializable> taskContextMap = optimizeImageSigleBackgroundTask.getTaskContextMap();
 
 		String configurationEntryUuid = (String)taskContextMap.get("configurationEntryUuid");
 
-		currentBackgroundTasks.add(configurationEntryUuid);
+		currentBackgroundTaskConfigurationEntryUuids.add(configurationEntryUuid);
 	}
 	%>
 
@@ -159,7 +159,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 					<div id="<portlet:namespace />OptimizeRemaining_<%= rowId %>"></div>
 
-					<portlet:resourceURL id="/adaptive_media/optimized_images_percentage" var="calculateOptimizedPercentageURL">
+					<portlet:resourceURL id="/adaptive_media/optimized_images_percentage" var="optimizedImagesPercentageURL">
 						<portlet:param name="entryUuid" value="<%= uuid %>" />
 					</portlet:resourceURL>
 
@@ -170,14 +170,14 @@ PortletURL portletURL = renderResponse.createRenderURL();
 								{
 									namespace: '<portlet:namespace />',
 									percentage: <%= percentage %>,
-									percentageUrl: '<%= calculateOptimizedPercentageURL.toString() %>',
+									percentageUrl: '<%= optimizedImagesPercentageURL.toString() %>',
 									uuid: '<%= uuid %>'
 								},
 								<portlet:namespace />OptimizeRemaining_<%= rowId %>
 							)
 						);
 
-						<c:if test="<%= (optimizeImagesAllConfigurationsBackgroundTasksCount > 0) || currentBackgroundTasks.contains(uuid) %>">
+						<c:if test="<%= (optimizeImagesAllConfigurationsBackgroundTasksCount > 0) || currentBackgroundTaskConfigurationEntryUuids.contains(uuid) %>">
 							component.startProgress();
 						</c:if>
 					</aui:script>
