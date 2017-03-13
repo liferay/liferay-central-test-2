@@ -84,10 +84,7 @@ if (!reindexSingleBackgroundTasks.isEmpty()) {
 		</portlet:actionURL>
 
 		<%
-		String backgroundTaskUrl = optimizeImagesURL.toString();
-		String uuid = String.valueOf(configurationEntry.getUUID());
-
-		String onClick = renderResponse.getNamespace() + "optimizeRemaining('" + uuid + "', '" + backgroundTaskUrl + "');";
+		String onClick = renderResponse.getNamespace() + "optimizeRemaining('" + configurationEntry.getUUID() + "', '" + optimizeImagesURL.toString() + "');";
 
 		int percentage = AdaptiveMediaImageEntryLocalServiceUtil.getPercentage(themeDisplay.getCompanyId(), configurationEntry.getUUID());
 
