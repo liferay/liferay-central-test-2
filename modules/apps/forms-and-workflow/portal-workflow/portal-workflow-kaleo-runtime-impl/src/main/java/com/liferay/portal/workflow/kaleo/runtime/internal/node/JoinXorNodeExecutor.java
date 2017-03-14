@@ -15,6 +15,7 @@
 package com.liferay.portal.workflow.kaleo.runtime.internal.node;
 
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.workflow.kaleo.model.KaleoInstanceToken;
 import com.liferay.portal.workflow.kaleo.model.KaleoNode;
 import com.liferay.portal.workflow.kaleo.model.KaleoTimer;
@@ -24,6 +25,9 @@ import com.liferay.portal.workflow.kaleo.runtime.graph.PathElement;
 import com.liferay.portal.workflow.kaleo.runtime.node.BaseNodeExecutor;
 import com.liferay.portal.workflow.kaleo.runtime.node.NodeExecutor;
 import com.liferay.portal.workflow.kaleo.service.KaleoInstanceTokenLocalService;
+import com.liferay.portal.workflow.kaleo.service.KaleoTaskAssignmentInstanceLocalService;
+import com.liferay.portal.workflow.kaleo.service.KaleoTaskInstanceTokenLocalService;
+import com.liferay.portal.workflow.kaleo.service.KaleoTaskLocalService;
 
 import java.util.List;
 
@@ -76,6 +80,46 @@ public class JoinXorNodeExecutor extends BaseNodeExecutor {
 
 			_kaleoInstanceTokenLocalService.completeKaleoInstanceToken(
 				childrenKaleoInstanceToken.getKaleoInstanceTokenId());
+
+			if (childrenKaleoInstanceToken.getKaleoInstanceTokenId() ==
+				kaleoInstanceToken.getKaleoInstanceTokenId()) {
+				continue;
+			}
+
+			KaleoNode childrenKaleoNode = childrenKaleoInstanceToken.getCurrentKaleoNode();
+
+			if (!childrenKaleoNode.getType().equals("TASK")) {
+				continue;
+			}
+
+			long kaleoNodeId =
+					childrenKaleoInstanceToken.getCurrentKaleoNode().
+						getKaleoNodeId();
+
+				long kaleoTaskId =
+					_kaleoTaskLocalService.getKaleoNodeKaleoTask(
+						kaleoNodeId).getKaleoTaskId();
+
+				long kaleoInstanceId =
+						childrenKaleoInstanceToken.getKaleoInstanceId();
+
+				long kaleoTaskInstanceTokenId =
+					_kaleoTaskInstanceTokenLocalService.
+						getKaleoTaskInstanceTokens(
+							kaleoInstanceId,
+							kaleoTaskId).getKaleoTaskInstanceTokenId();
+
+				ServiceContext serviceContext = executionContext.
+					getServiceContext();
+
+				_kaleoTaskAssignmentInstanceLocalService.
+					completeKaleoTaskInstanceToken(
+						kaleoTaskInstanceTokenId, serviceContext);
+
+				_kaleoTaskInstanceTokenLocalService.
+					completeKaleoTaskInstanceToken(
+						kaleoTaskInstanceTokenId, serviceContext);
+
 		}
 
 		return true;
@@ -133,4 +177,12 @@ public class JoinXorNodeExecutor extends BaseNodeExecutor {
 	@Reference
 	private KaleoInstanceTokenLocalService _kaleoInstanceTokenLocalService;
 
+	@Reference
+	private KaleoTaskLocalService _kaleoTaskLocalService;
+
+	@Reference
+	private KaleoTaskInstanceTokenLocalService _kaleoTaskInstanceTokenLocalService;
+
+	@Reference
+	private KaleoTaskAssignmentInstanceLocalService _kaleoTaskAssignmentInstanceLocalService;
 }
