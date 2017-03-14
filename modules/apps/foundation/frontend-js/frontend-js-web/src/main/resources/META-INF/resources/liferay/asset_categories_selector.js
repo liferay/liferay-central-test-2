@@ -687,8 +687,7 @@ AUI.add(
 
 						if (item.groupId == themeDisplay.getCompanyGroupId()) {
 							vocabularyTitle += ' (' + Liferay.Language.get('global') + ')';
-						}
-						else {
+						} else {
 							vocabularyTitle += ' (' + item.group.name + ')';
 						}
 
