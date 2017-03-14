@@ -18,7 +18,10 @@ import com.liferay.asset.kernel.model.AssetEntry;
 import com.liferay.asset.kernel.model.AssetRendererFactory;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.model.Role;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.service.ClassNameLocalService;
+import com.liferay.portal.kernel.service.RoleLocalService;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.service.WorkflowInstanceLinkLocalService;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -29,8 +32,10 @@ import com.liferay.portal.kernel.workflow.WorkflowInstance;
 import com.liferay.portal.kernel.workflow.WorkflowInstanceManager;
 import com.liferay.portal.kernel.workflow.WorkflowInstanceManagerUtil;
 import com.liferay.portal.kernel.workflow.WorkflowTask;
+import com.liferay.portal.kernel.workflow.WorkflowTaskAssignee;
 import com.liferay.portal.kernel.workflow.WorkflowTaskManager;
 import com.liferay.portal.workflow.rest.internal.model.WorkflowAssetModel;
+import com.liferay.portal.workflow.rest.internal.model.WorkflowAssigneeModel;
 import com.liferay.portal.workflow.rest.internal.model.WorkflowTaskModel;
 import com.liferay.portal.workflow.rest.internal.model.WorkflowTaskTransitionOperationModel;
 import com.liferay.portal.workflow.rest.internal.model.WorkflowUserModel;
@@ -84,7 +89,7 @@ public class WorkflowHelper {
 		WorkflowTask workflowTask = _workflowTaskManager.getWorkflowTask(
 			companyId, workflowTaskId);
 
-		WorkflowUserModel assignee = getWorkflowUserModel(workflowTask);
+		WorkflowAssigneeModel assignee = getWorkflowAssigneeModel(workflowTask);
 
 		WorkflowAssetModel workflowAssetModel = getWorkflowAssetModel(
 			companyId, workflowTaskId, locale);
@@ -144,6 +149,33 @@ public class WorkflowHelper {
 		return new WorkflowAssetModel(assetEntry, locale, creator);
 	}
 
+	protected WorkflowAssigneeModel getWorkflowAssigneeModel(
+			WorkflowTask workflowTask)
+		throws PortalException {
+
+		List<WorkflowTaskAssignee> workflowTaskAssignees =
+			workflowTask.getWorkflowTaskAssignees();
+
+		for (WorkflowTaskAssignee workflowTaskAssignee :
+				workflowTaskAssignees) {
+
+			if (isAssigneeUser(workflowTaskAssignee)) {
+				User user = _userLocalService.fetchUser(
+					workflowTaskAssignee.getAssigneeClassPK());
+
+				return new WorkflowAssigneeModel(user);
+			}
+			else if (isAssigneeRole(workflowTaskAssignee)) {
+				Role role = _roleLocalService.fetchRole(
+					workflowTaskAssignee.getAssigneeClassPK());
+
+				return new WorkflowAssigneeModel(role);
+			}
+		}
+
+		return null;
+	}
+
 	protected Map<String, Serializable> getWorkflowContext(
 			long companyId, long workflowTaskId)
 		throws PortalException {
@@ -177,11 +209,37 @@ public class WorkflowHelper {
 		return null;
 	}
 
-	protected WorkflowUserModel getWorkflowUserModel(WorkflowTask workflowTask)
-		throws PortalException {
+	protected boolean isAssigneeRole(
+		WorkflowTaskAssignee workflowTaskAssignee) {
 
-		return getWorkflowUserModel(workflowTask.getAssigneeUserId());
+		long classNameId = _classNameLocalService.getClassNameId(
+			workflowTaskAssignee.getAssigneeClassName());
+
+		if (classNameId == _classNameLocalService.getClassNameId(Role.class)) {
+			return true;
+		}
+
+		return false;
 	}
+
+	protected boolean isAssigneeUser(
+		WorkflowTaskAssignee workflowTaskAssignee) {
+
+		long classNameId = _classNameLocalService.getClassNameId(
+			workflowTaskAssignee.getAssigneeClassName());
+
+		if (classNameId == _classNameLocalService.getClassNameId(User.class)) {
+			return true;
+		}
+
+		return false;
+	}
+
+	@Reference
+	private ClassNameLocalService _classNameLocalService;
+
+	@Reference
+	private RoleLocalService _roleLocalService;
 
 	@Reference
 	private UserLocalService _userLocalService;

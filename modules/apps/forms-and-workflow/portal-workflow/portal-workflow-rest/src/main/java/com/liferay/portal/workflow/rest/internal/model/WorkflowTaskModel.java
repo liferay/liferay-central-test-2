@@ -40,7 +40,7 @@ public class WorkflowTaskModel {
 	}
 
 	public WorkflowTaskModel(
-		WorkflowTask workflowTask, WorkflowUserModel assignee,
+		WorkflowTask workflowTask, WorkflowAssigneeModel assignee,
 		WorkflowAssetModel workflowAssetModel, String state,
 		List<String> transitions) {
 
@@ -53,11 +53,6 @@ public class WorkflowTaskModel {
 		_state = state;
 		_transitions = transitions;
 		_workflowTaskId = workflowTask.getWorkflowTaskId();
-	}
-
-	@XmlElement(name = "assignee")
-	public WorkflowUserModel getAssignee() {
-		return _assignee;
 	}
 
 	@XmlElement
@@ -90,12 +85,17 @@ public class WorkflowTaskModel {
 		return _workflowAssetModel;
 	}
 
+	@XmlElement(name = "assignee")
+	public WorkflowAssigneeModel getWorkflowAssigneeModel() {
+		return _assignee;
+	}
+
 	@XmlElement(name = "id")
 	public long getWorkflowTaskId() {
 		return _workflowTaskId;
 	}
 
-	private final WorkflowUserModel _assignee;
+	private final WorkflowAssigneeModel _assignee;
 	private final String _description;
 	private final Date _dueDate;
 	private final String _name;
