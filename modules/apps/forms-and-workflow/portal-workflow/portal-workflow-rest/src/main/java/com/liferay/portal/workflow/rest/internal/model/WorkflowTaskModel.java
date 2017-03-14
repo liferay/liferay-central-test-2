@@ -80,17 +80,17 @@ public class WorkflowTaskModel {
 		return _transitions;
 	}
 
-	@XmlElement
+	@XmlElement(name = "asset")
 	public WorkflowAssetModel getWorkflowAssetModel() {
 		return _workflowAssetModel;
 	}
 
-	@XmlElement
+	@XmlElement(name = "id")
 	public long getWorkflowTaskId() {
 		return _workflowTaskId;
 	}
 
-	@XmlElement
+	@XmlElement(name = "user")
 	public WorkflowUserModel getWorkflowUserModel() {
 		return _workflowUserModel;
 	}

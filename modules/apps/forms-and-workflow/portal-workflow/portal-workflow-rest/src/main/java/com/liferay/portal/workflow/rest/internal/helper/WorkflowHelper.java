@@ -31,7 +31,6 @@ import com.liferay.portal.kernel.workflow.WorkflowInstanceManagerUtil;
 import com.liferay.portal.kernel.workflow.WorkflowTask;
 import com.liferay.portal.kernel.workflow.WorkflowTaskManager;
 import com.liferay.portal.workflow.rest.internal.model.WorkflowAssetModel;
-import com.liferay.portal.workflow.rest.internal.model.WorkflowListedTaskModel;
 import com.liferay.portal.workflow.rest.internal.model.WorkflowTaskModel;
 import com.liferay.portal.workflow.rest.internal.model.WorkflowTaskTransitionOperationModel;
 import com.liferay.portal.workflow.rest.internal.model.WorkflowUserModel;
@@ -64,19 +63,6 @@ public class WorkflowHelper {
 			companyId, userId, workflowTaskId,
 			workflowTaskTransitionOperationModel.getTransition(),
 			workflowTaskTransitionOperationModel.getComment(), workflowContext);
-	}
-
-	public WorkflowListedTaskModel getWorkflowListedTaskModel(
-			long companyId, WorkflowTask workflowTask, Locale locale)
-		throws PortalException {
-
-		WorkflowUserModel workflowUserModel = getWorkflowUserModel(
-			workflowTask);
-		String state = getState(
-			companyId, workflowTask.getWorkflowTaskId(), locale);
-
-		return new WorkflowListedTaskModel(
-			workflowTask, workflowUserModel, state);
 	}
 
 	public WorkflowTaskModel getWorkflowTaskModel(

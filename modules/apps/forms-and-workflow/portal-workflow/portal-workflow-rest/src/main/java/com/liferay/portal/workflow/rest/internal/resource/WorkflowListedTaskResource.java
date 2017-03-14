@@ -16,11 +16,12 @@ package com.liferay.portal.workflow.rest.internal.resource;
 
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.workflow.WorkflowTask;
 import com.liferay.portal.kernel.workflow.WorkflowTaskManager;
 import com.liferay.portal.workflow.rest.internal.helper.WorkflowHelper;
-import com.liferay.portal.workflow.rest.internal.model.WorkflowListedTaskModel;
+import com.liferay.portal.workflow.rest.internal.model.WorkflowTaskModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,12 +44,12 @@ public class WorkflowListedTaskResource {
 
 	@GET
 	@Produces("application/json")
-	public List<WorkflowListedTaskModel> getUserWorkflowTaskHeaders(
-			@Context User user, @Context Locale locale)
+	public List<WorkflowTaskModel> getUserWorkflowTaskHeaders(
+			@Context Company company, @Context User user,
+			@Context Locale locale)
 		throws PortalException {
 
-		List<WorkflowListedTaskModel> workflowListedTaskModels =
-			new ArrayList<>();
+		List<WorkflowTaskModel> workflowTaskModels = new ArrayList<>();
 
 		List<WorkflowTask> workflowTasks =
 			_workflowTaskManager.getWorkflowTasksByUser(
@@ -56,14 +57,15 @@ public class WorkflowListedTaskResource {
 				QueryUtil.ALL_POS, null);
 
 		for (WorkflowTask workflowTask : workflowTasks) {
-			WorkflowListedTaskModel workflowListedTaskModel =
-				_workflowHelper.getWorkflowListedTaskModel(
-					user.getCompanyId(), workflowTask, locale);
+			WorkflowTaskModel workflowListedTaskModel =
+				_workflowHelper.getWorkflowTaskModel(
+					company.getCompanyId(), user.getUserId(),
+					workflowTask.getWorkflowTaskId(), locale);
 
-			workflowListedTaskModels.add(workflowListedTaskModel);
+			workflowTaskModels.add(workflowListedTaskModel);
 		}
 
-		return workflowListedTaskModels;
+		return workflowTaskModels;
 	}
 
 	@Reference
