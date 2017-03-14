@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.workflow.WorkflowException;
+import com.liferay.portal.kernel.workflow.WorkflowTask;
 import com.liferay.portal.workflow.rest.internal.helper.WorkflowHelper;
 import com.liferay.portal.workflow.rest.internal.model.WorkflowOperationResultModel;
 import com.liferay.portal.workflow.rest.internal.model.WorkflowTaskModel;
@@ -64,17 +65,25 @@ public class WorkflowTaskResource {
 	@Produces("application/json")
 	public WorkflowOperationResultModel updateStatus(
 		@Context Company company, @Context User user,
-		@Context HttpServletResponse response,
+		@Context HttpServletResponse response, @Context Locale locale,
 		@PathParam("workflowTaskId") long workflowTaskId,
 		WorkflowTaskTransitionOperationModel
 			workflowTaskTransitionOperationModel) {
 
+		long companyId = company.getCompanyId();
+		long userId = user.getUserId();
+
 		try {
-			_workflowHelper.completeWorkflowTask(
-				company.getCompanyId(), user.getUserId(), workflowTaskId,
+			WorkflowTask workflowTask = _workflowHelper.completeWorkflowTask(
+				companyId, userId, workflowTaskId,
 				workflowTaskTransitionOperationModel);
 
-			return getSuccessWorkflowOperationResultModel();
+			WorkflowTaskModel workflowTaskModel =
+				_workflowHelper.getWorkflowTaskModel(
+					companyId, userId, workflowTask.getWorkflowTaskId(),
+					locale);
+
+			return getSuccessWorkflowOperationResultModel(workflowTaskModel);
 		}
 		catch (PortalException pe) {
 			return getFailureWorkflowOperationResultModel(response, pe);
@@ -97,10 +106,11 @@ public class WorkflowTaskResource {
 	}
 
 	protected WorkflowOperationResultModel
-		getSuccessWorkflowOperationResultModel() {
+		getSuccessWorkflowOperationResultModel(
+			WorkflowTaskModel workflowTaskModel) {
 
 		return new WorkflowOperationResultModel(
-			WorkflowOperationResultModel.STATUS_SUCCESS);
+			WorkflowOperationResultModel.STATUS_SUCCESS, workflowTaskModel);
 	}
 
 	@Reference
