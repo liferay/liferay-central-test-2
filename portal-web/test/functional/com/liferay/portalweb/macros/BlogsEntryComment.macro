@@ -101,8 +101,8 @@
 	<command name="signInToCommentPG">
 		<execute function="AssertElementNotPresent" locator1="Comments#COMMENT_FIELD" />
 
-		<var name="key_entryCommentType" value="${entryCommentType}" />
-		<execute function="AssertClick" locator1="Comments#SIGN_IN_TO_COMMENTS_LINK" value1="Please sign in to ${entryCommentType}." />
+		<var name="key_entryType" value="${entryType}" />
+		<execute function="AssertClick" locator1="Comments#SIGN_IN_TO_COMMENTS_LINK" value1="Please sign in to ${entryType}." />
 
 		<execute function="Type" locator1="TextInput#EMAIL_ADDRESS" value1="${userEmailAddress}" />
 		<execute function="Type" locator1="TextInput#PASSWORD" value1="test" />

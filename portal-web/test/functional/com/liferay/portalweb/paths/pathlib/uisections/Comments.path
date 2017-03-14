@@ -95,7 +95,7 @@
 </tr>
 <tr>
 	<td>SIGN_IN_TO_COMMENTS_LINK</td>
-	<td>//span//a[contains(@id,'portlet_BlogsPortlet')]//span[contains(.,'Please sign in to ${key_entryCommentType}.')]</td>
+	<td>//span//a[contains(@id,'portlet_BlogsPortlet')]//span[contains(.,'Please sign in to ${key_entryType}.')]</td>
 	<td></td>
 </tr>
 <tr>

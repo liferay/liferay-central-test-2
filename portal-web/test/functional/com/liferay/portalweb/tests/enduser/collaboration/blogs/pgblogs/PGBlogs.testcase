@@ -1167,7 +1167,7 @@
 
 		<execute macro="BlogsEntryComment#signInToCommentPG">
 			<var name="entryComment" value="Blogs Entry Comment" />
-			<var name="entryCommentType" value="comment" />
+			<var name="entryType" value="comment" />
 			<var name="userEmailAddress" value="userea@liferay.com" />
 		</execute>
 
@@ -1205,7 +1205,7 @@
 
 		<execute macro="BlogsEntryComment#signInToCommentPG">
 			<var name="entryComment" value="Reply Comment" />
-			<var name="entryCommentType" value="reply" />
+			<var name="entryType" value="reply" />
 			<var name="userEmailAddress" value="test@liferay.com" />
 		</execute>
 
