@@ -60,10 +60,10 @@ public class WorkflowTaskResource {
 	}
 
 	@Consumes("application/json")
-	@Path("/{workflowTaskId}")
+	@Path("/{workflowTaskId}/transition")
 	@POST
 	@Produces("application/json")
-	public WorkflowOperationResultModel updateStatus(
+	public WorkflowOperationResultModel transition(
 		@Context Company company, @Context User user,
 		@Context HttpServletResponse response, @Context Locale locale,
 		@PathParam("workflowTaskId") long workflowTaskId,

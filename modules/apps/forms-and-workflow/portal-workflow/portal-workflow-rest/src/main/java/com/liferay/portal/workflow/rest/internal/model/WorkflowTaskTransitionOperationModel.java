@@ -30,18 +30,18 @@ public class WorkflowTaskTransitionOperationModel {
 
 	@XmlElement
 	public String getTransition() {
-		return _transition;
+		return _transitionName;
 	}
 
 	public void setComment(String comment) {
 		_comment = comment;
 	}
 
-	public void setTransition(String transition) {
-		_transition = transition;
+	public void setTransitionName(String transitionName) {
+		_transitionName = transitionName;
 	}
 
 	private String _comment;
-	private String _transition;
+	private String _transitionName;
 
 }
