@@ -581,7 +581,7 @@ public class JournalConverterImpl implements JournalConverter {
 				dynamicContentElement.getText());
 		}
 		else if (DDMImpl.TYPE_DDM_IMAGE.equals(type)) {
-			if (!dynamicContentElement.hasContent()) {
+			if (Validator.isNull(dynamicContentElement.getText())) {
 				return StringPool.BLANK;
 			}
 
