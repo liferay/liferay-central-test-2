@@ -61,12 +61,8 @@ public class WorkflowTaskResource {
 			WorkflowTask workflowTask = _workflowHelper.assignWorkflowTask(
 				companyId, userId, workflowTaskId);
 
-			WorkflowTaskModel workflowTaskModel =
-				_workflowHelper.getWorkflowTaskModel(
-					companyId, userId, workflowTask.getWorkflowTaskId(),
-					locale);
-
-			return getSuccessWorkflowOperationResultModel(workflowTaskModel);
+			return getSuccessWorkflowOperationResultModel(
+				locale, companyId, userId, workflowTask);
 		}
 		catch (PortalException pe) {
 			return getFailureWorkflowOperationResultModel(response, pe);
@@ -105,12 +101,8 @@ public class WorkflowTaskResource {
 				companyId, userId, workflowTaskId,
 				workflowTaskTransitionOperationModel);
 
-			WorkflowTaskModel workflowTaskModel =
-				_workflowHelper.getWorkflowTaskModel(
-					companyId, userId, workflowTask.getWorkflowTaskId(),
-					locale);
-
-			return getSuccessWorkflowOperationResultModel(workflowTaskModel);
+			return getSuccessWorkflowOperationResultModel(
+				locale, companyId, userId, workflowTask);
 		}
 		catch (PortalException pe) {
 			return getFailureWorkflowOperationResultModel(response, pe);
@@ -132,9 +124,14 @@ public class WorkflowTaskResource {
 			WorkflowOperationResultModel.STATUS_ERROR, pe.getMessage());
 	}
 
-	protected WorkflowOperationResultModel
-		getSuccessWorkflowOperationResultModel(
-			WorkflowTaskModel workflowTaskModel) {
+	protected WorkflowOperationResultModel getSuccessWorkflowOperationResultModel(
+			Locale locale, long companyId, long userId,
+			WorkflowTask workflowTask)
+		throws PortalException {
+
+		WorkflowTaskModel workflowTaskModel =
+			_workflowHelper.getWorkflowTaskModel(
+				companyId, userId, workflowTask.getWorkflowTaskId(), locale);
 
 		return new WorkflowOperationResultModel(
 			WorkflowOperationResultModel.STATUS_SUCCESS, workflowTaskModel);

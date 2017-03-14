@@ -93,7 +93,9 @@ public class WorkflowHelper {
 
 		WorkflowAssetModel workflowAssetModel = getWorkflowAssetModel(
 			companyId, workflowTaskId, locale);
+
 		String state = getState(companyId, workflowTaskId, locale);
+
 		List<String> transitions = _workflowTaskManager.getNextTransitionNames(
 			companyId, userId, workflowTaskId);
 
