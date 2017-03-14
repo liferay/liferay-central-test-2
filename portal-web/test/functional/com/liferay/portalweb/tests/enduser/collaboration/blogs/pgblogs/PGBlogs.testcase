@@ -1551,6 +1551,59 @@
 		</execute>
 	</command>
 
+	<command name="ViewBlogsEntryPermissionsPagination" priority="4">
+		<description message="This is a use case for LPS-70269." />
+
+		<execute macro="Navigator#gotoPage">
+			<var name="pageName" value="Blogs Page" />
+		</execute>
+
+		<execute macro="Blogs#addEntry">
+			<var name="entryContent" value="Blogs Entry Content" />
+			<var name="entryTitle" value="Blogs Entry Title" />
+		</execute>
+
+		<execute macro="Navigator#gotoPage">
+			<var name="pageName" value="Blogs Page" />
+		</execute>
+
+		<execute macro="PermissionsInline#gotoBlogsEntryPG" />
+
+		<execute macro="PermissionsInline#viewPermissionsRemoved">
+			<var name="permissionDefinitionKey" value="CONFIGURATION_PERMISSIONS_ADD_DISCUSSION_CHECKBOX" />
+			<var name="roleName" value="Power User" />
+		</execute>
+
+		<execute macro="PermissionsInline#viewPermissionsChecked">
+			<var name="permissionDefinitionKey" value="CONFIGURATION_PERMISSIONS_ADD_DISCUSSION_CHECKBOX" />
+			<var name="roleName" value="Site Member" />
+		</execute>
+
+		<execute macro="PermissionsInline#viewPermissionsRemoved">
+			<var name="permissionDefinitionKey" value="CONFIGURATION_PERMISSIONS_ADD_DISCUSSION_CHECKBOX" />
+			<var name="roleName" value="User" />
+		</execute>
+
+		<execute macro="Pagination#changePagination">
+			<var name="itemsPerPage" value="30" />
+		</execute>
+
+		<execute macro="PermissionsInline#viewPermissionsRemoved">
+			<var name="permissionDefinitionKey" value="CONFIGURATION_PERMISSIONS_ADD_DISCUSSION_CHECKBOX" />
+			<var name="roleName" value="Power User" />
+		</execute>
+
+		<execute macro="PermissionsInline#viewPermissionsChecked">
+			<var name="permissionDefinitionKey" value="CONFIGURATION_PERMISSIONS_ADD_DISCUSSION_CHECKBOX" />
+			<var name="roleName" value="Site Member" />
+		</execute>
+
+		<execute macro="PermissionsInline#viewPermissionsRemoved">
+			<var name="permissionDefinitionKey" value="CONFIGURATION_PERMISSIONS_ADD_DISCUSSION_CHECKBOX" />
+			<var name="roleName" value="User" />
+		</execute>
+	</command>
+
 	<command name="ViewBlogsEntryRSS" priority="4">
 		<execute macro="TestCase#getSiteName">
 			<return from="siteName" name="siteName" />
