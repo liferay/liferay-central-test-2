@@ -51,10 +51,21 @@ public class WorkflowListedTaskResource {
 
 		List<WorkflowTaskModel> workflowTaskModels = new ArrayList<>();
 
-		List<WorkflowTask> workflowTasks =
+		List<WorkflowTask> workflowTasks = new ArrayList<>();
+
+		List<WorkflowTask> userWorkflowTasks =
 			_workflowTaskManager.getWorkflowTasksByUser(
 				user.getCompanyId(), user.getUserId(), false, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null);
+
+		workflowTasks.addAll(userWorkflowTasks);
+
+		List<WorkflowTask> roleWorkflowTasks =
+			_workflowTaskManager.getWorkflowTasksByUserRoles(
+				user.getCompanyId(), user.getUserId(), false, QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS, null);
+
+		workflowTasks.addAll(roleWorkflowTasks);
 
 		for (WorkflowTask workflowTask : workflowTasks) {
 			WorkflowTaskModel workflowListedTaskModel =
