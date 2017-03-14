@@ -181,7 +181,7 @@ describe(
 					}
 				);
 
-				xit(
+				it(
 					'should return string values for multiple selectField',
 					function(done) {
 						selectField = createSelectField(
@@ -237,7 +237,7 @@ describe(
 
 						selectField.set('value', '19');
 
-						assert.equal(selectField.getValueSelected().label, 'b');
+						assert.equal(selectField.getValueSelected()[0].label, 'b');
 
 						done();
 					}
@@ -259,7 +259,7 @@ describe(
 
 						assert.isFalse(divSelect.hasClass('active'));
 
-						divSelect.simulate('mousedown');
+						divSelect.simulate('click');
 
 						assert.isTrue(divSelect.hasClass('active'));
 
@@ -281,7 +281,7 @@ describe(
 
 						var divSelect = container.one('.form-builder-select-field');
 
-						divSelect.simulate('mousedown');
+						divSelect.simulate('click');
 
 						assert.isNull(container.one('.drop-chosen.hide'));
 
@@ -302,7 +302,7 @@ describe(
 
 						var divSelect = container.one('.form-builder-select-field');
 
-						divSelect.simulate('mousedown');
+						divSelect.simulate('click');
 
 						assert.isTrue(divSelect.hasClass('active'));
 
@@ -352,13 +352,49 @@ describe(
 
 						var container = selectField.get('container');
 
-						container.one('.form-builder-select-field').simulate('mousedown');
+						container.one('.form-builder-select-field').simulate('click');
 
 						var item = container.one('.form-builder-select-field').one('.drop-chosen ul li');
 
-						item.simulate('mousedown');
+						item.simulate('click');
 
 						assert.equal(selectField.getValue(), 'foo');
+					}
+				);
+			}
+		);
+
+		describe(
+			'.clickBadgeItem()',
+			function() {
+				it(
+					'should click in a badge item and return a empty array value',
+					function(done) {
+						selectField = createSelectField(
+							{
+								multiple: true,
+								options: [{label: 'foo', value: 'foo'}, {label: 'bar', value: 'bar'}]
+							}
+						);
+
+						var container = selectField.get('container');
+
+						container.one('.form-builder-select-field').simulate('click');
+
+						var item = container.one('.form-builder-select-field').one('.drop-chosen ul li');
+
+						item.simulate('click');
+
+						window.setTimeout(
+							function() {
+								container.one('.trigger-badge-item').simulate('click');
+
+								assert.equal(selectField.get('value').length, 0);
+
+								done();
+							},
+							600
+						);
 					}
 				);
 			}
