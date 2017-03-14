@@ -305,10 +305,6 @@ AUI.add(
 										'$childrenCount = /assetcategory/get-vocabulary-root-categories-count': {
 											'@groupId': '$vocabularies.groupId',
 											'@vocabularyId': '$vocabularies.vocabularyId'
-										},
-
-										'$group[name] = /group/get-group': {
-											'@groupId': '$vocabularies.groupId'
 										}
 									}
 								},
@@ -330,10 +326,6 @@ AUI.add(
 										'$childrenCount = /assetcategory/get-vocabulary-root-categories-count': {
 											'groupId': '$vocabularies.groupId',
 											'@vocabularyId': '$vocabularies.vocabularyId'
-										},
-
-										'$group[name] = /group/get-group': {
-											'@groupId': '$vocabularies.groupId'
 										}
 									}
 								},
@@ -687,8 +679,6 @@ AUI.add(
 
 						if (item.groupId == themeDisplay.getCompanyGroupId()) {
 							vocabularyTitle += ' (' + Liferay.Language.get('global') + ')';
-						} else {
-							vocabularyTitle += ' (' + item.group.name + ')';
 						}
 
 						var treeId = 'vocabulary' + vocabularyId;
