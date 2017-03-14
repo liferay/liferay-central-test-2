@@ -50,6 +50,18 @@ import org.osgi.service.component.annotations.Reference;
 @Component(immediate = true, service = WorkflowHelper.class)
 public class WorkflowHelper {
 
+	public WorkflowTask assignWorkflowTask(
+			long companyId, long userId, long workflowTaskId)
+		throws PortalException {
+
+		Map<String, Serializable> workflowContext = getWorkflowContext(
+			companyId, workflowTaskId);
+
+		return _workflowTaskManager.assignWorkflowTaskToUser(
+			companyId, userId, workflowTaskId, userId, null, null,
+			workflowContext);
+	}
+
 	public WorkflowTask completeWorkflowTask(
 			long companyId, long userId, long workflowTaskId,
 			WorkflowTaskTransitionOperationModel

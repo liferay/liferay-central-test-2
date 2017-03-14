@@ -46,6 +46,33 @@ import org.osgi.service.component.annotations.Reference;
 @Path("/task")
 public class WorkflowTaskResource {
 
+	@Path("/{workflowTaskId}/assign-to-me")
+	@POST
+	@Produces("application/json")
+	public WorkflowOperationResultModel assignToMe(
+		@Context Company company, @Context User user,
+		@Context HttpServletResponse response, @Context Locale locale,
+		@PathParam("workflowTaskId") long workflowTaskId) {
+
+		long companyId = company.getCompanyId();
+		long userId = user.getUserId();
+
+		try {
+			WorkflowTask workflowTask = _workflowHelper.assignWorkflowTask(
+				companyId, userId, workflowTaskId);
+
+			WorkflowTaskModel workflowTaskModel =
+				_workflowHelper.getWorkflowTaskModel(
+					companyId, userId, workflowTask.getWorkflowTaskId(),
+					locale);
+
+			return getSuccessWorkflowOperationResultModel(workflowTaskModel);
+		}
+		catch (PortalException pe) {
+			return getFailureWorkflowOperationResultModel(response, pe);
+		}
+	}
+
 	@GET
 	@Path("/{workflowTaskId}")
 	@Produces("application/json")
