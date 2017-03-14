@@ -82,44 +82,41 @@ public class JoinXorNodeExecutor extends BaseNodeExecutor {
 				childrenKaleoInstanceToken.getKaleoInstanceTokenId());
 
 			if (childrenKaleoInstanceToken.getKaleoInstanceTokenId() ==
-				kaleoInstanceToken.getKaleoInstanceTokenId()) {
+					kaleoInstanceToken.getKaleoInstanceTokenId()) {
+
 				continue;
 			}
 
-			KaleoNode childrenKaleoNode = childrenKaleoInstanceToken.getCurrentKaleoNode();
+			KaleoNode childrenKaleoNode =
+				childrenKaleoInstanceToken.getCurrentKaleoNode();
 
 			if (!childrenKaleoNode.getType().equals("TASK")) {
 				continue;
 			}
 
 			long kaleoNodeId =
-					childrenKaleoInstanceToken.getCurrentKaleoNode().
-						getKaleoNodeId();
+				childrenKaleoInstanceToken.getCurrentKaleoNode().
+					getKaleoNodeId();
 
-				long kaleoTaskId =
-					_kaleoTaskLocalService.getKaleoNodeKaleoTask(
-						kaleoNodeId).getKaleoTaskId();
+			long kaleoTaskId = _kaleoTaskLocalService.getKaleoNodeKaleoTask(
+				kaleoNodeId).getKaleoTaskId();
 
-				long kaleoInstanceId =
-						childrenKaleoInstanceToken.getKaleoInstanceId();
+			long kaleoInstanceId =
+				childrenKaleoInstanceToken.getKaleoInstanceId();
 
-				long kaleoTaskInstanceTokenId =
-					_kaleoTaskInstanceTokenLocalService.
-						getKaleoTaskInstanceTokens(
-							kaleoInstanceId,
-							kaleoTaskId).getKaleoTaskInstanceTokenId();
+			long kaleoTaskInstanceTokenId =
+				_kaleoTaskInstanceTokenLocalService.getKaleoTaskInstanceTokens(
+					kaleoInstanceId, kaleoTaskId).getKaleoTaskInstanceTokenId();
 
-				ServiceContext serviceContext = executionContext.
-					getServiceContext();
+			ServiceContext serviceContext =
+				executionContext.getServiceContext();
 
-				_kaleoTaskAssignmentInstanceLocalService.
-					completeKaleoTaskInstanceToken(
-						kaleoTaskInstanceTokenId, serviceContext);
+			_kaleoTaskAssignmentInstanceLocalService.
+				completeKaleoTaskInstanceToken(
+					kaleoTaskInstanceTokenId, serviceContext);
 
-				_kaleoTaskInstanceTokenLocalService.
-					completeKaleoTaskInstanceToken(
-						kaleoTaskInstanceTokenId, serviceContext);
-
+			_kaleoTaskInstanceTokenLocalService.completeKaleoTaskInstanceToken(
+				kaleoTaskInstanceTokenId, serviceContext);
 		}
 
 		return true;
@@ -178,11 +175,14 @@ public class JoinXorNodeExecutor extends BaseNodeExecutor {
 	private KaleoInstanceTokenLocalService _kaleoInstanceTokenLocalService;
 
 	@Reference
+	private KaleoTaskAssignmentInstanceLocalService
+		_kaleoTaskAssignmentInstanceLocalService;
+
+	@Reference
+	private KaleoTaskInstanceTokenLocalService
+		_kaleoTaskInstanceTokenLocalService;
+
+	@Reference
 	private KaleoTaskLocalService _kaleoTaskLocalService;
 
-	@Reference
-	private KaleoTaskInstanceTokenLocalService _kaleoTaskInstanceTokenLocalService;
-
-	@Reference
-	private KaleoTaskAssignmentInstanceLocalService _kaleoTaskAssignmentInstanceLocalService;
 }
