@@ -129,7 +129,7 @@ MBThread thread = (MBThread)request.getAttribute("edit_message.jsp-thread");
 						</span>
 					</c:if>
 
-					<c:if test="<%= (messageUser != null) && (user.getUserId() != messageUser.getUserId()) && !PortalUtil.isGroupAdmin(messageUser, scopeGroupId) && MBPermission.contains(permissionChecker, scopeGroupId, ActionKeys.BAN_USER) %>">
+					<c:if test="<%= (messageUser != null) && (user.getUserId() != messageUser.getUserId()) && MBPermission.contains(permissionChecker, scopeGroupId, ActionKeys.BAN_USER) && !PortalUtil.isGroupAdmin(messageUser, scopeGroupId) %>">
 						<br />
 
 						<c:choose>
