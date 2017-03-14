@@ -1,7 +1,11 @@
 AUI.add(
 	'liferay-ddm-form-field-select',
 	function(A) {
-		var CSS_SELECT_TRIGGER_ACTION = 'form-builder-select-field';
+		var CSS_SELECT_BADGE_ITEM = A.getClassName('trigger', 'badge', 'item');
+
+		var CSS_SELECT_OPTION_ITEM = A.getClassName('select', 'option', 'item');
+
+		var CSS_SELECT_TRIGGER_ACTION = A.getClassName('form', 'builder', 'select', 'field');
 
 		var Lang = A.Lang;
 
@@ -30,6 +34,7 @@ AUI.add(
 					strings: {
 						value: {
 							chooseAnOption: Liferay.Language.get('choose-an-option'),
+							chooseOptions: Liferay.Language.get('choose-options'),
 							dynamicallyLoadedData: Liferay.Language.get('dynamically-loaded-data')
 						}
 					},
@@ -57,8 +62,9 @@ AUI.add(
 
 						instance._eventHandlers.push(
 							A.one('doc').after('click', A.bind(instance._afterClickOutside, instance)),
-							instance.bindContainerEvent('mousedown', instance._afterClickSelectTrigger, '.' + CSS_SELECT_TRIGGER_ACTION),
-							instance.bindContainerEvent('mousedown', instance._onClickItem, 'li')
+							instance.bindContainerEvent('click', instance._afterClickSelectTrigger, '.' + CSS_SELECT_TRIGGER_ACTION),
+							instance.bindContainerEvent('click', instance._onClickItem, '.' + CSS_SELECT_OPTION_ITEM),
+							instance.bindContainerEvent('click', instance._onClickBadgeItem, '.' + CSS_SELECT_BADGE_ITEM)
 						);
 					},
 
@@ -92,6 +98,7 @@ AUI.add(
 						return A.merge(
 							SelectField.superclass.getTemplateContext.apply(instance, arguments),
 							{
+								badgeCloseIcon: Liferay.Util.getLexiconIconTpl('times', 'icon-monospaced'),
 								options: instance.get('options'),
 								selectCaretDoubleIcon: Liferay.Util.getLexiconIconTpl('caret-double-l', 'icon-monospaced'),
 								selectSearchIcon: Liferay.Util.getLexiconIconTpl('search', 'icon-monospaced'),
@@ -106,24 +113,17 @@ AUI.add(
 
 						var inputNode = instance.getInputNode();
 
-						var value;
+						var value = [];
 
-						if (instance.get('multiple')) {
-							value = [];
-
-							inputNode.all('option').each(
-								function(optionNode) {
-									if (optionNode.attr('selected')) {
-										value.push(optionNode.val());
-									}
+						inputNode.all('option').each(
+							function(optionNode) {
+								if (optionNode.attr('selected')) {
+									value.push(optionNode.val());
 								}
-							);
+							}
+						);
 
-							value = value.join();
-						}
-						else {
-							value = inputNode.val();
-						}
+						value = value.join();
 
 						if (!value) {
 							var contextValue = instance._getContextValue();
@@ -148,10 +148,6 @@ AUI.add(
 						}
 
 						var values = instance._getOptionsSelected(value);
-
-						if (!instance.get('multiple')) {
-							values = values[0];
-						}
 
 						return values;
 					},
@@ -194,17 +190,9 @@ AUI.add(
 					setValue: function(value) {
 						var instance = this;
 
-						var inputNode = instance.getInputNode();
-
 						if (!Lang.isArray(value)) {
 							value = [value];
 						}
-
-						inputNode.all('option').each(
-							function(optionNode) {
-								instance._setSelectNodeOptions(optionNode, value);
-							}
-						);
 
 						instance.set('value', value);
 
@@ -239,7 +227,7 @@ AUI.add(
 						if (!instance.get('readOnly')) {
 							var target = event.target;
 
-							if (target.ancestor('.search-chosen')) {
+							if (target.ancestor('.search-chosen') || target.ancestor('.trigger-badge-item')) {
 								return;
 							}
 
@@ -330,9 +318,13 @@ AUI.add(
 					_isClickingOutSide: function(event) {
 						var instance = this;
 
-						var ancestor = event.target.ancestor('.' + CSS_SELECT_TRIGGER_ACTION);
+						var container = instance.get('container');
 
-						return !ancestor || ancestor !== instance._getSelectTriggerAction();
+						if (container.contains(event.target)) {
+							return false;
+						}
+
+						return true;
 					},
 
 					_isListOpen: function() {
@@ -349,46 +341,43 @@ AUI.add(
 						return !openList;
 					},
 
+					_onClickBadgeItem: function(event) {
+						event.stopPropagation();
+
+						var instance = this;
+
+						var values = instance.get('value');
+
+						var value = event.currentTarget.getAttribute('data-badge-value');
+
+						var index = values.indexOf(value);
+
+						if (index >= 0) {
+							values.splice(index, 1);
+						}
+
+						instance.setValue(values);
+					},
+
 					_onClickItem: function(event) {
+						event.stopPropagation();
+
 						var instance = this;
 
-						var value = event.target.getAttribute('data-option-value');
-
-						instance.setValue(value);
-					},
-
-					_selectDOMOption: function(optionNode, value) {
-						var selected = false;
-
-						if (Lang.isArray(value)) {
-							value = value[0];
-						}
-
-						if (value) {
-							if (optionNode.val()) {
-								selected = value.indexOf(optionNode.val()) > -1;
-							}
-
-							if (selected) {
-								optionNode.attr('selected', selected);
-							}
-							else {
-								optionNode.removeAttribute('selected');
-							}
-						}
-					},
-
-					_setSelectNodeOptions: function(optionNode, value) {
-						var instance = this;
+						var value;
 
 						if (instance.get('multiple')) {
-							for (var i = 0; i < value.length; i++) {
-								instance._selectDOMOption(optionNode, value[i]);
+							value = instance.get('value');
+
+							if (!event.target.getAttribute('data-option-selected')) {
+								value.push(event.target.getAttribute('data-option-value'));
 							}
 						}
 						else {
-							instance._selectDOMOption(optionNode, value);
+							value = event.target.getAttribute('data-option-value');
 						}
+
+						instance.setValue(value);
 					}
 				}
 			}
