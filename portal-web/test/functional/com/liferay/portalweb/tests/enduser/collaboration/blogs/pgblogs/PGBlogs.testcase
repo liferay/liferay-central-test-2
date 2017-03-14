@@ -1122,7 +1122,7 @@
 		</for>
 	</command>
 
-	<command name="SignInToAddAndReplyBlogsEntryComment" priority="4">
+	<command name="SignInToAddAndReplyToBlogsEntryComment" priority="4">
 		<property name="portal.release" value="false" />
 
 		<execute macro="Navigator#gotoPage">
