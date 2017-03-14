@@ -37,7 +37,11 @@ import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.Node;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.kernel.xml.XPath;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -118,32 +122,21 @@ public class JournalArticleExportImportContentProcessor
 			return content;
 		}
 
-		StringBuilder sb = new StringBuilder(content);
+		Document document = SAXReaderUtil.read(content);
 
-		int beginPos = 0;
-		int endPos = 0;
+		XPath xPath = SAXReaderUtil.createXPath(
+			"//dynamic-element[@type='ddm-journal-article']");
 
-		while (true) {
-			beginPos = sb.indexOf(_DDM_JOURNAL_ARTICLE_TYPE, endPos);
+		List<Node> ddmJournalArticleNodes = xPath.selectNodes(document);
 
-			if (beginPos == -1) {
-				break;
-			}
+		for (Node ddmJournalArticleNode : ddmJournalArticleNodes) {
+			Element ddmJournalArticleElement = (Element)ddmJournalArticleNode;
 
-			endPos = beginPos;
+			List<Element> dynamicContentElements =
+				ddmJournalArticleElement.elements("dynamic-content");
 
-			while (true) {
-				beginPos = sb.indexOf(_CDATA_BEGIN, endPos);
-
-				if (beginPos == -1) {
-					break;
-				}
-
-				beginPos += _CDATA_BEGIN.length();
-
-				endPos = sb.indexOf(_CDATA_END, beginPos);
-
-				String jsonData = sb.substring(beginPos, endPos);
+			for (Element dynamicContentElement : dynamicContentElements) {
+				String jsonData = dynamicContentElement.getStringValue();
 
 				JSONObject jsonObject = _jsonFactory.createJSONObject(jsonData);
 
@@ -180,9 +173,9 @@ public class JournalArticleExportImportContentProcessor
 							journalArticleReference);
 				}
 
-				sb.replace(beginPos, endPos, journalArticleReference);
+				dynamicContentElement.clearContent();
 
-				endPos = beginPos + journalArticleReference.length();
+				dynamicContentElement.addCDATA(journalArticleReference);
 
 				if (exportReferencedContent) {
 					StagedModelDataHandlerUtil.exportReferenceStagedModel(
@@ -200,7 +193,7 @@ public class JournalArticleExportImportContentProcessor
 			}
 		}
 
-		return sb.toString();
+		return document.asXML();
 	}
 
 	protected String replaceImportJournalArticleReferences(
