@@ -307,7 +307,7 @@ AUI.add(
 											'@vocabularyId': '$vocabularies.vocabularyId'
 										},
 
-										'$group[descriptiveName] = /group/get-group': {
+										'$group[name] = /group/get-group': {
 											'@groupId': '$vocabularies.groupId'
 										}
 									}
@@ -332,7 +332,7 @@ AUI.add(
 											'@vocabularyId': '$vocabularies.vocabularyId'
 										},
 
-										'$group[descriptiveName] = /group/get-group': {
+										'$group[name] = /group/get-group': {
 											'@groupId': '$vocabularies.groupId'
 										}
 									}
@@ -689,7 +689,7 @@ AUI.add(
 							vocabularyTitle += ' (' + Liferay.Language.get('global') + ')';
 						}
 						else {
-							vocabularyTitle += ' (' + item.group.descriptiveName + ')';
+							vocabularyTitle += ' (' + item.group.name + ')';
 						}
 
 						var treeId = 'vocabulary' + vocabularyId;
