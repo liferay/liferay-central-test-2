@@ -35,7 +35,7 @@ public class SumFunctionTest {
 	public void testEvaluateArray2() throws Exception {
 		SumFunction sumFunction = new SumFunction();
 
-		Object parameters = new Double[] {3.8, 5d, 7d};
+		Object parameters = new Double[] {3.8, 5D, 7D};
 
 		Assert.assertEquals(15.8, sumFunction.evaluate(parameters));
 	}
