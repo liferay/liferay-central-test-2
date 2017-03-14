@@ -70,16 +70,8 @@ public class WorkflowOperationResultModel {
 		return _workflowTaskModel;
 	}
 
-	public void setMessage(String message) {
-		_message = message;
-	}
-
-	public void setStatus(String status) {
-		_status = status;
-	}
-
-	private String _message;
-	private String _status;
+	private final String _message;
+	private final String _status;
 	private final WorkflowTaskModel _workflowTaskModel;
 
 }
