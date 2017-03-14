@@ -80,6 +80,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>CONFIGURATION_PERMISSIONS_ADD_DISCUSSION_CHECKBOX</td>
+	<td>//input[contains(@id,'${key_roleName}') and contains(@id,'ADD_DISCUSSION')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td></td>
 	<td></td>
 	<td></td>
