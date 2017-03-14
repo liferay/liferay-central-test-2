@@ -327,7 +327,7 @@ public class JournalArticleExportImportContentProcessor
 		if (!throwables.isEmpty()) {
 			throw new PortalException(
 				new BulkException(
-					"Unable to validate jounral article references",
+					"Unable to validate journal article references",
 					throwables));
 		}
 	}
