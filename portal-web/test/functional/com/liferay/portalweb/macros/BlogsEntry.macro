@@ -60,7 +60,7 @@
 	<command name="addCustomAbstract">
 		<execute function="Click" locator1="Radio#CUSTOM_ABSTRACT" />
 
-		<execute function="Type#typeEditor" locator1="AlloyEditor#DESCRIPTION_FIELD" value1="${entryAbstractDescription}" />
+		<execute function="Type" locator1="TextInput#DESCRIPTION" value1="${entryAbstractDescription}" />
 	</command>
 
 	<command name="addEntryContent">
