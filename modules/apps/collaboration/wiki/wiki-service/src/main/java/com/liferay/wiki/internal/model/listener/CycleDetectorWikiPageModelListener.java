@@ -34,8 +34,8 @@ public class CycleDetectorWikiPageModelListener
 	public void onBeforeCreate(WikiPage model) throws ModelListenerException {
 		if (isCycleDetectedInWikiPagesGraph(model)) {
 			throw new ModelListenerException(
-				"Unable to create WikiPage " + model.getTitle() +
-					". Cycle detected.");
+				"Unable to create wiki page " + model.getTitle() +
+					" because a cycle was detected");
 		}
 
 		super.onBeforeCreate(model);
@@ -45,8 +45,8 @@ public class CycleDetectorWikiPageModelListener
 	public void onBeforeUpdate(WikiPage model) throws ModelListenerException {
 		if (isCycleDetectedInWikiPagesGraph(model)) {
 			throw new ModelListenerException(
-				"Unable to update WikiPage " + model.getTitle() +
-					". Cycle detected.");
+				"Unable to update wiki page " + model.getTitle() +
+					" because a cycle was detected");
 		}
 
 		super.onBeforeUpdate(model);
