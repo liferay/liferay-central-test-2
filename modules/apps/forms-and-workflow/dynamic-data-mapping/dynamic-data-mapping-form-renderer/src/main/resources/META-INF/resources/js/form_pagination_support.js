@@ -105,18 +105,18 @@ AUI.add(
 
 				var page;
 
-				var nextPage = pagination.get('page');
+				var pageIndex = pagination.get('page');
 
 				instance.validatePage(
-					instance.getPageNode(nextPage),
+					instance.getPageNode(pageIndex),
 					function(hasErrors) {
 						if (!hasErrors) {
 							do {
-								page = pages[nextPage];
-								nextPage++;
+								page = pages[pageIndex];
+								pageIndex++;
 							} while (!page.enabled);
 
-							pagination.set('page', nextPage);
+							pagination.set('page', pageIndex);
 						}
 					}
 				);
