@@ -777,8 +777,6 @@
 	</command>
 
 	<command name="AddWebContentRemoveGuestViewPermission" priority="4">
-		<property name="portlet.properties.com.liferay.journal.service" value="journal.article.view.permission.check.enabled=true" />
-
 		<execute macro="Navigator#openURL" />
 
 		<execute macro="ProductMenu#gotoSitesContent">
