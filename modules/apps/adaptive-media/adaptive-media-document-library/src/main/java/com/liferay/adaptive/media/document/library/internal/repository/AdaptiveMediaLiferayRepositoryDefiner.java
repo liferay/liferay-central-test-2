@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.adaptive.media.document.library.repository.internal;
+package com.liferay.adaptive.media.document.library.internal.repository;
 
 import com.liferay.portal.kernel.repository.registry.RepositoryDefiner;
 
@@ -21,10 +21,10 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
 
 /**
- * @author Sergio González
+ * @author Adolfo Pérez
  */
 @Component(immediate = true, service = RepositoryDefiner.class)
-public class AdaptiveMediaPortletRepositoryDefiner
+public class AdaptiveMediaLiferayRepositoryDefiner
 	extends BaseOverridingRepositoryDefiner {
 
 	@Activate
@@ -38,6 +38,6 @@ public class AdaptiveMediaPortletRepositoryDefiner
 	}
 
 	private static final String _CLASS_NAME =
-		"com.liferay.portal.repository.portletrepository.PortletRepository";
+		"com.liferay.portal.repository.liferayrepository.LiferayRepository";
 
 }

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.adaptive.media.document.library.repository.internal.optimizer;
+package com.liferay.adaptive.media.document.library.internal.repository.optimizer;
 
 import com.liferay.adaptive.media.AdaptiveMediaException;
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry;

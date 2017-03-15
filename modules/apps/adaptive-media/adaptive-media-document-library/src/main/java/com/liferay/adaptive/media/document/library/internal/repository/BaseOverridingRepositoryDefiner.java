@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.adaptive.media.document.library.repository.internal;
+package com.liferay.adaptive.media.document.library.internal.repository;
 
 import com.liferay.adaptive.media.AdaptiveMediaException;
 import com.liferay.adaptive.media.processor.AdaptiveMediaAsyncProcessor;
