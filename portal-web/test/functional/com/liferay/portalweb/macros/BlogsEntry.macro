@@ -1126,6 +1126,8 @@
 
 		<execute function="AssertClick" locator1="BlogsEntry#TITLE_LINK" value1="${entryTitle}" />
 
+		<execute function="AssertElementPresent#pauseAssertVisible" locator1="Comments#SUBSCRIBE_TO_COMMENTS_LINK" />
+
 		<execute macro="Navigator#gotoPage">
 			<var name="pageName" value="${pageName}" />
 		</execute>
