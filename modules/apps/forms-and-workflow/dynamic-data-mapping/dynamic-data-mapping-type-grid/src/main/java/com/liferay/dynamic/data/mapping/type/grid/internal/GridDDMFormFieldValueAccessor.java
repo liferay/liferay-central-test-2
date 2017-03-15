@@ -74,8 +74,7 @@ public class GridDDMFormFieldValueAccessor
 
 		Stream<String> stream = optionsValues.stream();
 
-		return stream.anyMatch(
-			rowValue -> !keyValues.contains(rowValue));
+		return stream.anyMatch(rowValue -> !keyValues.contains(rowValue));
 	}
 
 	protected JSONObject createJSONObject(String json) {
