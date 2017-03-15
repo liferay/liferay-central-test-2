@@ -91,7 +91,7 @@ public class CycleDetectorWikiPageModelListenerTest {
 			String message = re.getMessage();
 
 			Assert.assertEquals(
-				"Unable to update WikiPage Title3. Cycle detected.", message);
+				"Unable to update wiki page Title3 because a cycle was detected", message);
 		}
 
 		try {
@@ -107,7 +107,7 @@ public class CycleDetectorWikiPageModelListenerTest {
 			String message = re.getMessage();
 
 			Assert.assertEquals(
-				"Unable to update WikiPage Other. Cycle detected.", message);
+				"Unable to update wiki page Other because a cycle was detected", message);
 		}
 	}
 
@@ -130,7 +130,7 @@ public class CycleDetectorWikiPageModelListenerTest {
 			String message = re.getMessage();
 
 			Assert.assertEquals(
-				"Unable to create WikiPage " + title + ". Cycle detected.",
+				"Unable to create wiki page " + title + " because a cycle was detected",
 				message);
 		}
 	}
@@ -152,7 +152,7 @@ public class CycleDetectorWikiPageModelListenerTest {
 			String message = re.getMessage();
 
 			Assert.assertEquals(
-				"Unable to update WikiPage Title. Cycle detected.", message);
+				"Unable to update wiki page Title because a cycle was detected", message);
 		}
 
 		try {
@@ -170,7 +170,7 @@ public class CycleDetectorWikiPageModelListenerTest {
 			String message = re.getMessage();
 
 			Assert.assertEquals(
-				"Unable to update WikiPage Other Title. Cycle detected.",
+				"Unable to update wiki page Other Title because a cycle was detected",
 				message);
 		}
 	}
