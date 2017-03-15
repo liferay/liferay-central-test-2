@@ -162,21 +162,27 @@ public class AdaptiveMediaImageEntryLocalServiceImpl
 	}
 
 	@Override
-	public int getPercentage(final long companyId, String configurationUuid) {
+	public int getExpectedAdaptiveMediaImageEntriesCount(long companyId) {
 		Collection<AdaptiveMediaImageCounter> imageCounters =
 			_serviceTrackerMap.values();
 
-		int expectedImageEntries = imageCounters.stream().mapToInt(
+		return imageCounters.stream().mapToInt(
 			adaptiveMediaImageCounter ->
 				adaptiveMediaImageCounter.
 					countExpectedAdaptiveMediaImageEntries(companyId)).sum();
+	}
 
-		int actualImageEntries = adaptiveMediaImageEntryPersistence.countByC_C(
-			companyId, configurationUuid);
+	@Override
+	public int getPercentage(final long companyId, String configurationUuid) {
+		int expectedImageEntries = getExpectedAdaptiveMediaImageEntriesCount(
+			companyId);
 
 		if (expectedImageEntries == 0) {
 			return 0;
 		}
+
+		int actualImageEntries = getAdaptiveMediaImageEntriesCount(
+			companyId, configurationUuid);
 
 		return Math.min(actualImageEntries * 100 / expectedImageEntries, 100);
 	}
