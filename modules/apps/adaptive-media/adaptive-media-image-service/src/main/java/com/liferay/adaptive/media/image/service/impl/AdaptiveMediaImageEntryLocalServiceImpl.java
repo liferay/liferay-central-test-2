@@ -173,7 +173,7 @@ public class AdaptiveMediaImageEntryLocalServiceImpl
 	}
 
 	@Override
-	public int getPercentage(final long companyId, String configurationUuid) {
+	public int getPercentage(long companyId, String configurationUuid) {
 		int expectedImageEntries = getExpectedAdaptiveMediaImageEntriesCount(
 			companyId);
 
