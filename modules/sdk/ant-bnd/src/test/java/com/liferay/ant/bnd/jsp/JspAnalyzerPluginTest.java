@@ -82,11 +82,11 @@ public class JspAnalyzerPluginTest {
 
 		String content = IO.collect(inputStream);
 
-		Set<String> taglibURIs = new HashSet<>();
-
 		Builder builder = new Builder();
 
 		builder.build();
+
+		Set<String> taglibURIs = new HashSet<>();
 
 		jspAnalyzerPlugin.addTaglibRequirements(builder, content, taglibURIs);
 
