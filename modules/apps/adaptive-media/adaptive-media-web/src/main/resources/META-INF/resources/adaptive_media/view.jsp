@@ -69,8 +69,6 @@ List<AdaptiveMediaImageConfigurationEntry> configurationEntries = (List)request.
 			icon="info-circle"
 			label="info"
 		/>
-
-		<liferay-frontend:management-bar-button disabled="<%= configurationEntries.size() <= 0 %>" href='<%= "javascript:" + renderResponse.getNamespace() + "deleteImageConfigurationEntries();" %>' icon="times" label="delete" />
 	</liferay-frontend:management-bar-action-buttons>
 </liferay-frontend:management-bar>
 
