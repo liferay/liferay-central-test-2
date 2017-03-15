@@ -908,7 +908,6 @@ AUI.add(
 			{
 				EXTENDS: Field,
 
-
 				prototype: {
 					initializer: function() {
 						var instance = this;
@@ -923,9 +922,7 @@ AUI.add(
 								trigger: selectorInput,
 								zIndex: 65535
 							}
-						);
-
-						colorPicker.render();
+						).render();
 
 						colorPicker.on(
 							'select',

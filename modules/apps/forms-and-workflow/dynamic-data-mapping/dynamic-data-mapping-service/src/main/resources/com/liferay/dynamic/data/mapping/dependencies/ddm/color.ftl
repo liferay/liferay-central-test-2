@@ -9,9 +9,11 @@
 		<@liferay_aui.input
 			cssClass="selector-input"
 			helpMessage=escape(fieldStructure.tip)
-			inlineField=true label=escape(label)
+			inlineField=true
+			label=escape(label)
 			name="${namespacedFieldName}Color"
-			readonly="readonly" type="text"
+			readonly="readonly"
+			type="text"
 			value=escape(fieldStructure.tip)
 		/>
 

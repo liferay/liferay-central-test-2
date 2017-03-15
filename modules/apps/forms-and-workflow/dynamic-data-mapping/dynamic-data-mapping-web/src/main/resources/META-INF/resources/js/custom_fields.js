@@ -118,6 +118,18 @@ AUI.add(
 				prototype: {
 					ELEMENT_TEMPLATE: '<input type="text" />',
 
+					getElementsValue: function() {
+						var instance = this;
+
+						var colorPicker = instance.get('colorPicker');
+
+						var input = instance.get('boundingBox').one('input');
+
+						if (/\#[A-F\d]{6}/.test(input.val())) {
+							return input.val();
+						}
+					},
+
 					renderUI: function() {
 						var instance = this;
 
@@ -160,18 +172,6 @@ AUI.add(
 						}
 						else {
 							colorPicker.show();
-						}
-					},
-
-					getElementsValue: function() {
-						var instance = this;
-
-						var colorPicker = instance.get('colorPicker');
-
-						var input = instance.get('boundingBox').one('input');
-
-						if (/\#[A-F\d]{6}/.test(input.val())) {
-							return input.val();
 						}
 					},
 
