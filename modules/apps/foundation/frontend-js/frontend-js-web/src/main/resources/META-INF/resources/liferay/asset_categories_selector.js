@@ -57,6 +57,7 @@ AUI.add(
 		 * maxEntries {Number}: The maximum number of entries that will be loaded. The default value is -1, which will load all categories.
 		 * moreResultsLabel {String}: The localized label for link "Load more results".
 		 * portalModelResource {boolean}: Whether the asset model is on the portal level.
+		 * vocabularyGroupDescriptiveNames (string): The groupDescriptiveNames of the vocabularies.
 		 */
 
 		var AssetCategoriesSelector = A.Component.create(
@@ -121,6 +122,19 @@ AUI.add(
 					},
 
 					vocabularyGroupIds: {
+						setter: function(value) {
+							var instance = this;
+
+							if (Lang.isString(value) && value) {
+								value = value.split(',');
+							}
+
+							return value;
+						},
+						value: []
+					},
+
+					vocabularyGroupDescriptiveNames: {
 						setter: function(value) {
 							var instance = this;
 
@@ -673,12 +687,22 @@ AUI.add(
 					_vocabulariesIterator: function(item, index) {
 						var instance = this;
 
+						var groupDescriptiveNames = instance.get('vocabularyGroupDescriptiveNames');
 						var popup = instance._popup;
 						var vocabularyId = item.vocabularyId;
 						var vocabularyTitle = LString.escapeHTML(item.titleCurrentValue);
 
 						if (item.groupId == themeDisplay.getCompanyGroupId()) {
 							vocabularyTitle += ' (' + Liferay.Language.get('global') + ')';
+						}
+						else if (groupDescriptiveNames.length > 0) {
+							var vocabularyGroupIds = instance.get('vocabularyGroupIds');
+							var groupIdIndex = vocabularyGroupIds.indexOf(item.groupId);
+							var groupDescriptiveName = groupDescriptiveNames[groupIdIndex];
+
+							if (groupDescriptiveName) {
+								vocabularyTitle += ' (' + groupDescriptiveName + ')';
+							}
 						}
 
 						var treeId = 'vocabulary' + vocabularyId;

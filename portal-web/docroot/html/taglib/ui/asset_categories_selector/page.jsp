@@ -38,6 +38,23 @@ else {
 	groupIds = PortalUtil.getCurrentAndAncestorSiteGroupIds(groupIds);
 }
 
+List<Group> groups = GroupLocalServiceUtil.getGroups(groupIds);
+List<String> groupDescriptiveNames = new ArrayList<String>(groupIds.length);
+
+for (Long groupId : groupIds) {
+	String groupDescriptiveName = StringPool.BLANK;
+
+	for (Group group : groups) {
+		if (group.getGroupId() == groupId) {
+			groupDescriptiveName = group.getDescriptiveName(locale);
+
+			break;
+		}
+	}
+
+	groupDescriptiveNames.add(groupDescriptiveName);
+}
+
 List<AssetVocabulary> vocabularies = AssetVocabularyServiceUtil.getGroupVocabularies(groupIds);
 
 if (Validator.isNotNull(className)) {
@@ -112,6 +129,7 @@ if (Validator.isNotNull(className)) {
 					singleSelect: <%= !vocabulary.isMultiValued() %>,
 					title: '<%= UnicodeLanguageUtil.format(request, "select-x", vocabulary.getTitle(locale), false) %>',
 					vocabularyGroupIds: '<%= StringUtil.merge(groupIds) %>',
+					vocabularyGroupDescriptiveNames: '<%= StringUtil.merge(groupDescriptiveNames) %>',
 					vocabularyIds: '<%= String.valueOf(vocabulary.getVocabularyId()) %>'
 				}
 			).render();
@@ -149,6 +167,7 @@ else {
 				moreResultsLabel: '<%= UnicodeLanguageUtil.get(resourceBundle, "load-more-results") %>',
 				portalModelResource: <%= Validator.isNotNull(className) && (ResourceActionsUtil.isPortalModelResource(className) || className.equals(Group.class.getName())) %>,
 				vocabularyGroupIds: '<%= StringUtil.merge(groupIds) %>',
+				vocabularyGroupDescriptiveNames: '<%= StringUtil.merge(groupDescriptiveNames) %>',
 				vocabularyIds: '<%= ListUtil.toString(vocabularies, "vocabularyId") %>'
 			}
 		).render();
