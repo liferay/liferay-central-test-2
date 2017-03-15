@@ -341,13 +341,6 @@ public class DDMFormValuesValidatorImpl implements DDMFormValuesValidator {
 				throw new MustSetValidValue(ddmFormField.getName());
 			}
 
-			if ((value != null) &&
-				FieldConstants.isNumericType(ddmFormField.getDataType()) &&
-				!Validator.isNumber(value.getString(defaultLocale))) {
-
-				throw new MustSetValidValue(ddmFormField.getName());
-			}
-
 			validateDDMFormFieldValueLocales(
 				ddmFormField, availableLocales, defaultLocale, value);
 
