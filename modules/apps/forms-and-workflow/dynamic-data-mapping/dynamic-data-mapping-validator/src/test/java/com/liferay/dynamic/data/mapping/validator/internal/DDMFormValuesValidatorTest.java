@@ -133,33 +133,6 @@ public class DDMFormValuesValidatorTest extends PowerMockito {
 	}
 
 	@Test(expected = MustSetValidValue.class)
-	public void testValidationWithInvalidNumber() throws Exception {
-		DDMForm ddmForm = DDMFormTestUtil.createDDMForm(
-			DDMFormTestUtil.createAvailableLocales(LocaleUtil.US),
-			LocaleUtil.US);
-
-		DDMFormField ddmFormField = DDMFormTestUtil.createDDMFormField(
-			"age", "Age", "number", "integer", true, false, false);
-
-		DDMFormTestUtil.addDDMFormFields(ddmForm, ddmFormField);
-
-		DDMFormValues ddmFormValues = DDMFormValuesTestUtil.createDDMFormValues(
-			ddmForm);
-
-		LocalizedValue localizedValue = new LocalizedValue(LocaleUtil.US);
-
-		localizedValue.addString(LocaleUtil.US, "invalid number");
-
-		DDMFormFieldValue ddmFormFieldValue =
-			DDMFormValuesTestUtil.createDDMFormFieldValue(
-				"age", localizedValue);
-
-		ddmFormValues.addDDMFormFieldValue(ddmFormFieldValue);
-
-		_ddmFormValuesValidatorImpl.validate(ddmFormValues);
-	}
-
-	@Test(expected = MustSetValidValue.class)
 	public void testValidationWithLocalizableField() throws Exception {
 		DDMForm ddmForm = DDMFormTestUtil.createDDMForm();
 
