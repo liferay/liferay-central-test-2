@@ -193,6 +193,9 @@ public interface AdaptiveMediaImageEntryLocalService extends BaseLocalService,
 		java.lang.String configurationUuid);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getExpectedAdaptiveMediaImageEntriesCount(long companyId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getPercentage(long companyId, java.lang.String configurationUuid);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

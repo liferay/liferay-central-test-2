@@ -213,6 +213,11 @@ public class AdaptiveMediaImageEntryLocalServiceWrapper
 	}
 
 	@Override
+	public int getExpectedAdaptiveMediaImageEntriesCount(long companyId) {
+		return _adaptiveMediaImageEntryLocalService.getExpectedAdaptiveMediaImageEntriesCount(companyId);
+	}
+
+	@Override
 	public int getPercentage(long companyId, java.lang.String configurationUuid) {
 		return _adaptiveMediaImageEntryLocalService.getPercentage(companyId,
 			configurationUuid);

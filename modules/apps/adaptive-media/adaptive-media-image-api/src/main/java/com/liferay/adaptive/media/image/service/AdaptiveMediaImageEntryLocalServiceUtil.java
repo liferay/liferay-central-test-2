@@ -209,6 +209,10 @@ public class AdaptiveMediaImageEntryLocalServiceUtil {
 			configurationUuid);
 	}
 
+	public static int getExpectedAdaptiveMediaImageEntriesCount(long companyId) {
+		return getService().getExpectedAdaptiveMediaImageEntriesCount(companyId);
+	}
+
 	public static int getPercentage(long companyId,
 		java.lang.String configurationUuid) {
 		return getService().getPercentage(companyId, configurationUuid);
