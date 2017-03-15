@@ -60,7 +60,7 @@ public class RadioDDMFormFieldTemplateContextContributor
 		String predefinedValue = getPredefinedValue(
 			ddmFormField, ddmFormFieldRenderingContext);
 
-		if (Validator.isNotNull(predefinedValue)) {
+		if (predefinedValue != null) {
 			parameters.put("predefinedValue", predefinedValue);
 		}
 
