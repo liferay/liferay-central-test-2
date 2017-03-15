@@ -19,21 +19,30 @@
 <%
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-AdaptiveMediaImageConfigurationEntry configurationEntry = (AdaptiveMediaImageConfigurationEntry)row.getObject();
+AdaptiveMediaImageConfigurationEntry configurationEntry = null;
+
+if (row != null) {
+	configurationEntry = (AdaptiveMediaImageConfigurationEntry)row.getObject();
+}
+else {
+	configurationEntry = (AdaptiveMediaImageConfigurationEntry)request.getAttribute("info_panel.jsp-configurationEntry");
+}
 
 boolean optimizeImagesEnabled = true;
 
 List<BackgroundTask> optimizeImageSigleBackgroundTasks = (List<BackgroundTask>)request.getAttribute("view.jsp-optimizeImageSigleBackgroundTasks");
 
-for (BackgroundTask optimizeImageSigleBackgroundTask : optimizeImageSigleBackgroundTasks) {
-	Map<String, Serializable> taskContextMap = optimizeImageSigleBackgroundTask.getTaskContextMap();
+if (optimizeImageSigleBackgroundTasks != null) {
+	for (BackgroundTask optimizeImageSigleBackgroundTask : optimizeImageSigleBackgroundTasks) {
+		Map<String, Serializable> taskContextMap = optimizeImageSigleBackgroundTask.getTaskContextMap();
 
-	String configurationEntryUuid = (String)taskContextMap.get("configurationEntryUuid");
+		String configurationEntryUuid = (String)taskContextMap.get("configurationEntryUuid");
 
-	if (configurationEntryUuid.equals(configurationEntry.getUUID())) {
-		optimizeImagesEnabled = false;
+		if (configurationEntryUuid.equals(configurationEntry.getUUID())) {
+			optimizeImagesEnabled = false;
 
-		break;
+			break;
+		}
 	}
 }
 %>
@@ -82,7 +91,7 @@ for (BackgroundTask optimizeImageSigleBackgroundTask : optimizeImageSigleBackgro
 		</portlet:actionURL>
 
 		<%
-		String onClick = renderResponse.getNamespace() + "optimizeRemaining('" + configurationEntry.getUUID() + "', '" + optimizeImagesURL.toString() + "');";
+		String onClick = liferayPortletResponse.getNamespace() + "optimizeRemaining('" + configurationEntry.getUUID() + "', '" + optimizeImagesURL.toString() + "');";
 
 		int percentage = AdaptiveMediaImageEntryLocalServiceUtil.getPercentage(themeDisplay.getCompanyId(), configurationEntry.getUUID());
 
