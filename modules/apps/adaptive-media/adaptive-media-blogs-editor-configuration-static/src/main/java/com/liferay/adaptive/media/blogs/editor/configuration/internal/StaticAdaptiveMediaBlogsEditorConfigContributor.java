@@ -22,6 +22,7 @@ import com.liferay.item.selector.ItemSelectorCriterion;
 import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.criteria.file.criterion.FileItemSelectorCriterion;
 import com.liferay.item.selector.criteria.image.criterion.ImageItemSelectorCriterion;
+import com.liferay.item.selector.criteria.upload.criterion.UploadItemSelectorCriterion;
 import com.liferay.portal.kernel.editor.configuration.BaseEditorConfigContributor;
 import com.liferay.portal.kernel.editor.configuration.EditorConfigContributor;
 import com.liferay.portal.kernel.json.JSONObject;
@@ -84,7 +85,8 @@ public class StaticAdaptiveMediaBlogsEditorConfigContributor
 
 			if (itemSelectorCriterion instanceof BlogsItemSelectorCriterion ||
 				itemSelectorCriterion instanceof FileItemSelectorCriterion ||
-				itemSelectorCriterion instanceof ImageItemSelectorCriterion) {
+				itemSelectorCriterion instanceof ImageItemSelectorCriterion ||
+				itemSelectorCriterion instanceof UploadItemSelectorCriterion) {
 
 				addAdaptiveMediaImageURLItemSelectorReturnType(
 					itemSelectorCriterion);

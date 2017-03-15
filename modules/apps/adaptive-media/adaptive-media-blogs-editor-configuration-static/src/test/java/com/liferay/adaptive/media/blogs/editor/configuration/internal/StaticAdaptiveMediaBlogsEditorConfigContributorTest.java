@@ -22,6 +22,7 @@ import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.criteria.URLItemSelectorReturnType;
 import com.liferay.item.selector.criteria.file.criterion.FileItemSelectorCriterion;
 import com.liferay.item.selector.criteria.image.criterion.ImageItemSelectorCriterion;
+import com.liferay.item.selector.criteria.upload.criterion.UploadItemSelectorCriterion;
 import com.liferay.portal.json.JSONFactoryImpl;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
@@ -122,6 +123,14 @@ public class StaticAdaptiveMediaBlogsEditorConfigContributorTest
 
 		_testAddsPictureAndImgTagToAllowedContent(
 			_getItemSelectorCriterion(FileItemSelectorCriterion.class));
+	}
+
+	@Test
+	public void testAddsPictureAndSourceAreAddedToAllowedContentForUpload()
+		throws Exception {
+
+		_testSetsPictureAndImgTagToAllowedContent(
+			_getItemSelectorCriterion(UploadItemSelectorCriterion.class));
 	}
 
 	@Test
@@ -301,6 +310,14 @@ public class StaticAdaptiveMediaBlogsEditorConfigContributorTest
 
 		_testSetsPictureAndImgTagToAllowedContent(
 			_getItemSelectorCriterion(ImageItemSelectorCriterion.class));
+	}
+
+	@Test
+	public void testSetsPictureAndSourceAreAddedToAllowedContentForUpload()
+		throws Exception {
+
+		_testSetsPictureAndImgTagToAllowedContent(
+			_getItemSelectorCriterion(UploadItemSelectorCriterion.class));
 	}
 
 	private ItemSelectorCriterion _getItemSelectorCriterion(
