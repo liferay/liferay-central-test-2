@@ -107,12 +107,19 @@ AUI.add(
 
 				var nextPage = pagination.get('page');
 
-				do {
-					page = pages[nextPage];
-					nextPage++;
-				} while (!page.enabled);
+				instance.validatePage(
+					instance.getPageNode(nextPage),
+					function(hasErrors) {
+						if (!hasErrors) {
+							do {
+								page = pages[nextPage];
+								nextPage++;
+							} while (!page.enabled);
 
-				pagination.set('page', nextPage);
+							pagination.set('page', nextPage);
+						}
+					}
+				);
 			},
 
 			prevPage: function() {
