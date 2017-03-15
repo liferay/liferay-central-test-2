@@ -487,6 +487,10 @@
 			<var name="kfProcessName" value="Kaleo Forms Process" />
 		</execute>
 
+		<execute macro="KaleoFormsAdmin#editProcessDetails">
+			<var name="kfProcessNameEdit" value="Edited Kaleo Forms Process" />
+		</execute>
+
 		<execute macro="KaleoFormsAdmin#gotoProgressStep">
 			<var name="kfProgressName" value="Workflow" />
 		</execute>
@@ -529,7 +533,7 @@
 		</execute>
 
 		<execute macro="KaleoFormsAdmin#saveProcess">
-			<var name="kfProcessName" value="Kaleo Forms Process" />
+			<var name="kfProcessName" value="Edited Kaleo Forms Process" />
 		</execute>
 
 		<execute macro="ProductMenu#gotoSitesContent">
@@ -537,7 +541,7 @@
 		</execute>
 
 		<execute macro="KaleoFormsAdmin#viewProcess">
-			<var name="kfProcessName" value="Kaleo Forms Process" />
+			<var name="kfProcessName" value="Edited Kaleo Forms Process" />
 		</execute>
 
 		<execute macro="Page#gotoMyAccount">
@@ -551,7 +555,7 @@
 		</execute>
 
 		<execute macro="KaleoFormsAdmin#submitNewProcess">
-			<var name="kfProcessName" value="Kaleo Forms Process" />
+			<var name="kfProcessName" value="Edited Kaleo Forms Process" />
 		</execute>
 
 		<execute macro="KaleoFormsAdmin#populateFieldText">
@@ -566,14 +570,14 @@
 		</execute>
 
 		<execute macro="Workflow#assignToMeTaskByActions">
-			<var name="workflowAssetTitle" value="Kaleo Forms Process" />
+			<var name="workflowAssetTitle" value="Edited Kaleo Forms Process" />
 			<var name="workflowAssetType" value="${workflowAssetType}" />
 			<var name="workflowTask" value="Review" />
 		</execute>
 
 		<execute macro="Workflow#approveTaskByActions">
 			<var name="workflowActivityComment" value="Process is approved" />
-			<var name="workflowAssetTitle" value="Kaleo Forms Process" />
+			<var name="workflowAssetTitle" value="Edited Kaleo Forms Process" />
 			<var name="workflowAssetType" value="${workflowAssetType}" />
 			<var name="workflowTask" value="Review" />
 		</execute>
