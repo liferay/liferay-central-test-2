@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.service.GroupLocalServiceUtil;
 import com.liferay.portal.kernel.service.ResourceBlockLocalService;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Tomas Polesovsky
@@ -59,6 +60,11 @@ public class StagingPermissionChecker implements PermissionChecker {
 	@Override
 	public long getOwnerRoleId() {
 		return _permissionChecker.getOwnerRoleId();
+	}
+
+	@Override
+	public Map<Object, Object> getPermissionsCache() {
+		return _permissionChecker.getPermissionsCache();
 	}
 
 	@Override
