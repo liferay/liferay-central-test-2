@@ -43,12 +43,48 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
 
 /**
+ * Provides the local service for accessing, adding, deleting adaptive media
+ * image entries.
+ *
+ * <p>
+ * This service is responsible of adding adaptive media images both in the
+ * database as adaptive media image entries as well as in the file store. Same
+ * applies when deleting adaptive media images, it will remove the adaptive
+ * media image entry and the bytes from the file store.
+ * </p>
+ *
+ * <p>
+ * This service is a low level API and, in general, it should not be used by
+ * third party developers as the entry point for adaptive media images.
+ * </p>
+ *
  * @author Sergio González
+ *
+ * @review
  */
 @ProviderType
 public class AdaptiveMediaImageEntryLocalServiceImpl
 	extends AdaptiveMediaImageEntryLocalServiceBaseImpl {
 
+	/**
+	 * Adds an adaptive media image entry in the database and store the image
+	 * bytes in the file store.
+	 *
+	 * @param  configurationEntry the configuration used to create the adaptive
+	 *         media image
+	 * @param  fileVersion the file version used to create the adaptive media
+	 *         image
+	 * @param  width the width of the adaptive media image
+	 * @param  height the height of the adaptive media image
+	 * @param  inputStream the input stream of the adaptive media image that
+	 *         will be stored in the file store
+	 * @param  size the size of the adaptive media image
+	 * @return the adaptive media image
+	 * @throws PortalException if an adaptive media image already exists for the
+	 *         file version and configuration
+	 *
+	 * @review
+	 */
 	@Override
 	public AdaptiveMediaImageEntry addAdaptiveMediaImageEntry(
 			AdaptiveMediaImageConfigurationEntry configurationEntry,
@@ -94,6 +130,21 @@ public class AdaptiveMediaImageEntryLocalServiceImpl
 			"adaptive.media.key");
 	}
 
+	/**
+	 * Deletes all the adaptive media images generated for the configuration in
+	 * the company.
+	 *
+	 * <p>
+	 * This method deletes the adaptive media image entry from the database and
+	 * it also deletes the bytes from the file store.
+	 * </p>
+	 *
+	 * @param  companyId the primary key of the company
+	 * @param  configurationEntry the configuration used to create the adaptive
+	 *         media image
+	 *
+	 * @review
+	 */
 	@Override
 	public void deleteAdaptiveMediaImageEntries(
 		long companyId,
@@ -105,6 +156,19 @@ public class AdaptiveMediaImageEntryLocalServiceImpl
 		imageStorage.delete(companyId, configurationEntry.getUUID());
 	}
 
+	/**
+	 * Deletes all the adaptive media images generated for a file version.
+	 *
+	 * <p>
+	 * This method deletes the adaptive media image entry from the database and
+	 * it also deletes the bytes from the file store.
+	 * </p>
+	 *
+	 * @param  fileVersionId the primary key of the file version
+	 * @throws PortalException if the file version cannot be found
+	 *
+	 * @review
+	 */
 	@Override
 	public void deleteAdaptiveMediaImageEntryFileVersion(long fileVersionId)
 		throws PortalException {
@@ -136,6 +200,18 @@ public class AdaptiveMediaImageEntryLocalServiceImpl
 		_serviceTrackerMap.close();
 	}
 
+	/**
+	 * Returns the adaptive media image entry generated for the configuration
+	 * and file version.
+	 *
+	 * @param  configurationUuid the uuid of the configuration used to create
+	 *         the adaptive media image
+	 * @param  fileVersionId the primary key of the file version
+	 * @return the matching adaptive media image entry, or <code>null</code> if
+	 *         a matching adaptive media image entry could not be found
+	 *
+	 * @review
+	 */
 	@Override
 	public AdaptiveMediaImageEntry fetchAdaptiveMediaImageEntry(
 		String configurationUuid, long fileVersionId) {
@@ -144,6 +220,18 @@ public class AdaptiveMediaImageEntryLocalServiceImpl
 			configurationUuid, fileVersionId);
 	}
 
+	/**
+	 * Returns the number of adaptive media image entries generated for the
+	 * configuration in the company.
+	 *
+	 * @param  companyId the primary key of the company
+	 * @param  configurationUuid the uuid of the configuration used to create
+	 *         the adaptive media image
+	 * @return the number of adaptive media image entries in the company for the
+	 *         configuration
+	 *
+	 * @review
+	 */
 	@Override
 	public int getAdaptiveMediaImageEntriesCount(
 		long companyId, String configurationUuid) {
@@ -152,6 +240,19 @@ public class AdaptiveMediaImageEntryLocalServiceImpl
 			companyId, configurationUuid);
 	}
 
+	/**
+	 * Returns the input stream of the adaptive media image generated for a file
+	 * version and configuration.
+	 *
+	 * @param  configurationEntry the configuration used to create the adaptive
+	 *         media image
+	 * @param  fileVersion the file version used to create the adaptive media
+	 *         image
+	 * @return the input stream of the adaptive media image generated for a file
+	 *         version and configuration
+	 *
+	 * @review
+	 */
 	@Override
 	public InputStream getAdaptiveMediaImageEntryContentStream(
 		AdaptiveMediaImageConfigurationEntry configurationEntry,
@@ -161,6 +262,21 @@ public class AdaptiveMediaImageEntryLocalServiceImpl
 			fileVersion, configurationEntry.getUUID());
 	}
 
+	/**
+	 * Returns the number of adaptive media images that are expected to be in a
+	 * company if all the images that support adaptive media already have an
+	 * adaptive media image generated.
+	 *
+	 * <p>
+	 * The number of the actual adaptive media images could be less if there are
+	 * some images that haven't generated the adaptive media image yet.
+	 * </p>
+	 *
+	 * @param  companyId the primary key of the company
+	 * @return the number of expected adaptive media images for a company
+	 *
+	 * @review
+	 */
 	@Override
 	public int getExpectedAdaptiveMediaImageEntriesCount(long companyId) {
 		Collection<AdaptiveMediaImageCounter> imageCounters =
@@ -172,6 +288,19 @@ public class AdaptiveMediaImageEntryLocalServiceImpl
 					countExpectedAdaptiveMediaImageEntries(companyId)).sum();
 	}
 
+	/**
+	 * Returns the percentage of images that have an adaptive media image
+	 * generated based on the expected number of adaptive media images for a
+	 * configuration in a company.
+	 *
+	 * @param  companyId the primary key of the company
+	 * @param  configurationUuid the uuid of the configuration used to create
+	 *         the adaptive media image
+	 * @return the percentage of images that have an adaptive media image out of
+	 *         the expected adaptive media images
+	 *
+	 * @review
+	 */
 	@Override
 	public int getPercentage(long companyId, String configurationUuid) {
 		int expectedImageEntries = getExpectedAdaptiveMediaImageEntriesCount(
