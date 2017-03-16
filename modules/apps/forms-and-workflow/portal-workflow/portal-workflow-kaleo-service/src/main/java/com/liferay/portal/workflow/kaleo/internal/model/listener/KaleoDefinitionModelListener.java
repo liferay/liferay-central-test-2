@@ -20,9 +20,12 @@ import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.model.BaseModelListener;
 import com.liferay.portal.kernel.model.ModelListener;
 import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
+import com.liferay.portal.kernel.workflow.WorkflowDefinition;
+import com.liferay.portal.workflow.kaleo.KaleoWorkflowModelConverter;
 import com.liferay.portal.workflow.kaleo.model.KaleoDefinition;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Kenneth Chang
@@ -30,6 +33,31 @@ import org.osgi.service.component.annotations.Component;
 @Component(immediate = true, service = ModelListener.class)
 public class KaleoDefinitionModelListener
 	extends BaseModelListener<KaleoDefinition> {
+
+	@Override
+	public void onAfterCreate(KaleoDefinition kaleoDefinition)
+		throws ModelListenerException {
+
+		try {
+			Message message = new Message();
+
+			message.put("command", "create");
+			message.put(
+				"serviceContext",
+				ServiceContextThreadLocal.getServiceContext());
+
+			WorkflowDefinition workflowDefinition =
+				_kaleoWorkflowModelConverter.toWorkflowDefinition(
+					kaleoDefinition);
+
+			message.setPayload(workflowDefinition);
+
+			MessageBusUtil.sendMessage("liferay/kaleo_definition", message);
+		}
+		catch (Exception e) {
+			throw new ModelListenerException(e);
+		}
+	}
 
 	@Override
 	public void onAfterRemove(KaleoDefinition kaleoDefinition)
@@ -51,5 +79,8 @@ public class KaleoDefinitionModelListener
 			throw new ModelListenerException(e);
 		}
 	}
+
+	@Reference
+	private KaleoWorkflowModelConverter _kaleoWorkflowModelConverter;
 
 }
