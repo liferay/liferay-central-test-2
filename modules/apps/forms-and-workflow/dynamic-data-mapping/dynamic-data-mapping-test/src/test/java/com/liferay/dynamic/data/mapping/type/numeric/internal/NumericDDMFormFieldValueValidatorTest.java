@@ -49,7 +49,7 @@ public class NumericDDMFormFieldValueValidatorTest {
 
 		DDMFormFieldValue ddmFormFieldValue =
 			DDMFormValuesTestUtil.createDDMFormFieldValue(
-				"number", localizedValue);
+				"integer", localizedValue);
 
 		_numericDDMFormFieldValueValidator.validate(
 			ddmFormField, ddmFormFieldValue);
@@ -66,7 +66,7 @@ public class NumericDDMFormFieldValueValidatorTest {
 
 		DDMFormFieldValue ddmFormFieldValue =
 			DDMFormValuesTestUtil.createDDMFormFieldValue(
-				"number", localizedValue);
+				"integer", localizedValue);
 
 		_numericDDMFormFieldValueValidator.validate(
 			ddmFormField, ddmFormFieldValue);
@@ -75,15 +75,15 @@ public class NumericDDMFormFieldValueValidatorTest {
 	@Test
 	public void testValidationWithValidDouble() throws Exception {
 		DDMFormField ddmFormField = DDMFormTestUtil.createDDMFormField(
-			"integer", "integer", "numeric", "double", true, false, false);
+			"double", "double", "numeric", "double", true, false, false);
 
 		LocalizedValue localizedValue = new LocalizedValue(LocaleUtil.US);
 
-		localizedValue.addString(LocaleUtil.US, "2.5");
+		localizedValue.addString(LocaleUtil.US, "2");
 
 		DDMFormFieldValue ddmFormFieldValue =
 			DDMFormValuesTestUtil.createDDMFormFieldValue(
-				"number", localizedValue);
+				"double", localizedValue);
 
 		_numericDDMFormFieldValueValidator.validate(
 			ddmFormField, ddmFormFieldValue);
@@ -101,7 +101,7 @@ public class NumericDDMFormFieldValueValidatorTest {
 
 		DDMFormFieldValue ddmFormFieldValue =
 			DDMFormValuesTestUtil.createDDMFormFieldValue(
-				"number", localizedValue);
+				"integer", localizedValue);
 
 		_numericDDMFormFieldValueValidator.validate(
 			ddmFormField, ddmFormFieldValue);

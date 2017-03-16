@@ -50,7 +50,9 @@ public class NumericDDMFormFieldValueValidator
 
 			if (!isNumber(ddmFormField.getDataType(), valueString)) {
 				throw new DDMFormFieldValueValidationException(
-					String.format("\"%s\" is not a number", valueString));
+					String.format(
+						"\"%s\" is not a %s", valueString,
+						ddmFormField.getDataType()));
 			}
 		}
 	}
