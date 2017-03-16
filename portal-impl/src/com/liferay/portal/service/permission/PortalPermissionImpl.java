@@ -42,18 +42,18 @@ public class PortalPermissionImpl implements PortalPermission {
 	public boolean contains(
 		PermissionChecker permissionChecker, String actionId) {
 
-		Map<Object, Object> permissionsCache =
-			permissionChecker.getPermissionsCache();
+		Map<Object, Object> permissionChecksMap =
+			permissionChecker.getPermissionChecksMap();
 
 		CacheKey cacheKey = new CacheKey(actionId);
 
-		Boolean contains = (Boolean)permissionsCache.get(cacheKey);
+		Boolean contains = (Boolean)permissionChecksMap.get(cacheKey);
 
 		if (contains == null) {
 			contains = permissionChecker.hasPermission(
 				null, PortletKeys.PORTAL, PortletKeys.PORTAL, actionId);
 
-			permissionsCache.put(cacheKey, contains);
+			permissionChecksMap.put(cacheKey, contains);
 		}
 
 		return contains;

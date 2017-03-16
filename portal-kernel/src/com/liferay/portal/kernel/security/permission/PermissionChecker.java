@@ -50,7 +50,7 @@ public interface PermissionChecker extends Cloneable {
 	 */
 	public long getOwnerRoleId();
 
-	public Map<Object, Object> getPermissionsCache();
+	public Map<Object, Object> getPermissionChecksMap();
 
 	public List<Long> getResourceBlockIds(
 		long companyId, long groupId, long userId, String name,
