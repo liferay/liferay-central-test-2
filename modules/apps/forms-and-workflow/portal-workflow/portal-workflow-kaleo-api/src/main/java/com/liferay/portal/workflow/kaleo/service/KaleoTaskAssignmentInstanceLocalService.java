@@ -139,6 +139,11 @@ public interface KaleoTaskAssignmentInstanceLocalService
 		long kaleoTaskAssignmentInstanceId) throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public KaleoTaskAssignmentInstance fetchFirstKaleoTaskAssignmentInstance(
+		long kaleoTaskInstanceTokenId,
+		OrderByComparator<KaleoTaskAssignmentInstance> orderByComparator);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public KaleoTaskAssignmentInstance fetchKaleoTaskAssignmentInstance(
 		long kaleoTaskAssignmentInstanceId);
 
@@ -245,11 +250,6 @@ public interface KaleoTaskAssignmentInstanceLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<KaleoTaskAssignmentInstance> getKaleoTaskAssignmentInstances(
 		long kaleoTaskInstanceTokenId);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<KaleoTaskAssignmentInstance> getKaleoTaskAssignmentInstances(
-		long kaleoTaskInstanceTokenId, int start, int end,
-		OrderByComparator<KaleoTaskAssignmentInstance> orderByComparator);
 
 	/**
 	* Returns the number of rows matching the dynamic query.

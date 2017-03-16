@@ -149,6 +149,14 @@ public class KaleoTaskAssignmentInstanceLocalServiceUtil {
 				   .deleteKaleoTaskAssignmentInstance(kaleoTaskAssignmentInstanceId);
 	}
 
+	public static com.liferay.portal.workflow.kaleo.model.KaleoTaskAssignmentInstance fetchFirstKaleoTaskAssignmentInstance(
+		long kaleoTaskInstanceTokenId,
+		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.workflow.kaleo.model.KaleoTaskAssignmentInstance> orderByComparator) {
+		return getService()
+				   .fetchFirstKaleoTaskAssignmentInstance(kaleoTaskInstanceTokenId,
+			orderByComparator);
+	}
+
 	public static com.liferay.portal.workflow.kaleo.model.KaleoTaskAssignmentInstance fetchKaleoTaskAssignmentInstance(
 		long kaleoTaskAssignmentInstanceId) {
 		return getService()
@@ -286,14 +294,6 @@ public class KaleoTaskAssignmentInstanceLocalServiceUtil {
 		long kaleoTaskInstanceTokenId) {
 		return getService()
 				   .getKaleoTaskAssignmentInstances(kaleoTaskInstanceTokenId);
-	}
-
-	public static java.util.List<com.liferay.portal.workflow.kaleo.model.KaleoTaskAssignmentInstance> getKaleoTaskAssignmentInstances(
-		long kaleoTaskInstanceTokenId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator<com.liferay.portal.workflow.kaleo.model.KaleoTaskAssignmentInstance> orderByComparator) {
-		return getService()
-				   .getKaleoTaskAssignmentInstances(kaleoTaskInstanceTokenId,
-			start, end, orderByComparator);
 	}
 
 	/**
