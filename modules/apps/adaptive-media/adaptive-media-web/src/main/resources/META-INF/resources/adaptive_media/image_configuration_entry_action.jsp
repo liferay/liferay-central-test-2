@@ -30,11 +30,11 @@ else {
 
 boolean optimizeImagesEnabled = true;
 
-List<BackgroundTask> optimizeImageSigleBackgroundTasks = (List<BackgroundTask>)request.getAttribute("view.jsp-optimizeImageSigleBackgroundTasks");
+List<BackgroundTask> optimizeImageSingleBackgroundTasks = (List<BackgroundTask>)request.getAttribute("view.jsp-optimizeImageSingleBackgroundTasks");
 
-if (optimizeImageSigleBackgroundTasks != null) {
-	for (BackgroundTask optimizeImageSigleBackgroundTask : optimizeImageSigleBackgroundTasks) {
-		Map<String, Serializable> taskContextMap = optimizeImageSigleBackgroundTask.getTaskContextMap();
+if (optimizeImageSingleBackgroundTasks != null) {
+	for (BackgroundTask optimizeImageSingleBackgroundTask : optimizeImageSingleBackgroundTasks) {
+		Map<String, Serializable> taskContextMap = optimizeImageSingleBackgroundTask.getTaskContextMap();
 
 		String configurationEntryUuid = (String)taskContextMap.get("configurationEntryUuid");
 

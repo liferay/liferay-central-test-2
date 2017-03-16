@@ -100,14 +100,14 @@ PortletURL portletURL = renderResponse.createRenderURL();
 		<%
 		int optimizeImagesAllConfigurationsBackgroundTasksCount = BackgroundTaskManagerUtil.getBackgroundTasksCount(CompanyConstants.SYSTEM, OptimizeImagesAllConfigurationsBackgroundTaskExecutor.class.getName(), false);
 
-		List<BackgroundTask> optimizeImageSigleBackgroundTasks = BackgroundTaskManagerUtil.getBackgroundTasks(CompanyConstants.SYSTEM, OptimizeImagesSingleConfigurationBackgroundTaskExecutor.class.getName(), BackgroundTaskConstants.STATUS_IN_PROGRESS);
+		List<BackgroundTask> optimizeImageSingleBackgroundTasks = BackgroundTaskManagerUtil.getBackgroundTasks(CompanyConstants.SYSTEM, OptimizeImagesSingleConfigurationBackgroundTaskExecutor.class.getName(), BackgroundTaskConstants.STATUS_IN_PROGRESS);
 
-		request.setAttribute("view.jsp-optimizeImageSigleBackgroundTasks", optimizeImageSigleBackgroundTasks);
+		request.setAttribute("view.jsp-optimizeImageSingleBackgroundTasks", optimizeImageSingleBackgroundTasks);
 
 		List<String> currentBackgroundTaskConfigurationEntryUuids = new ArrayList<>();
 
-		for (BackgroundTask optimizeImageSigleBackgroundTask : optimizeImageSigleBackgroundTasks) {
-			Map<String, Serializable> taskContextMap = optimizeImageSigleBackgroundTask.getTaskContextMap();
+		for (BackgroundTask optimizeImageSingleBackgroundTask : optimizeImageSingleBackgroundTasks) {
+			Map<String, Serializable> taskContextMap = optimizeImageSingleBackgroundTask.getTaskContextMap();
 
 			String configurationEntryUuid = (String)taskContextMap.get("configurationEntryUuid");
 
