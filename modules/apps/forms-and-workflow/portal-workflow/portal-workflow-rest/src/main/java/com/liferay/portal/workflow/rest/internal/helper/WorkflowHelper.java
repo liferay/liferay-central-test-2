@@ -89,7 +89,8 @@ public class WorkflowHelper {
 		WorkflowTask workflowTask = _workflowTaskManager.getWorkflowTask(
 			companyId, workflowTaskId);
 
-		WorkflowAssigneeModel assignee = getWorkflowAssigneeModel(workflowTask);
+		WorkflowAssigneeModel workflowAssigneeModel = getWorkflowAssigneeModel(
+			workflowTask);
 
 		WorkflowAssetModel workflowAssetModel = getWorkflowAssetModel(
 			companyId, workflowTaskId, locale);
@@ -100,7 +101,8 @@ public class WorkflowHelper {
 			companyId, userId, workflowTaskId);
 
 		return new WorkflowTaskModel(
-			workflowTask, assignee, workflowAssetModel, state, transitions);
+			workflowTask, workflowAssigneeModel, workflowAssetModel, state,
+			transitions);
 	}
 
 	protected String getState(
@@ -145,10 +147,10 @@ public class WorkflowHelper {
 		AssetEntry assetEntry = assetRendererFactory.getAssetEntry(
 			className, classPK);
 
-		WorkflowUserModel creator = getWorkflowUserModel(
+		WorkflowUserModel workflowUserModel = getWorkflowUserModel(
 			assetEntry.getUserId());
 
-		return new WorkflowAssetModel(assetEntry, locale, creator);
+		return new WorkflowAssetModel(assetEntry, locale, workflowUserModel);
 	}
 
 	protected WorkflowAssigneeModel getWorkflowAssigneeModel(
@@ -161,13 +163,17 @@ public class WorkflowHelper {
 		for (WorkflowTaskAssignee workflowTaskAssignee :
 				workflowTaskAssignees) {
 
-			if (isAssigneeUser(workflowTaskAssignee)) {
+			if (workflowTaskAssignee.getAssigneeClassName().equals(
+					User.class.getName())) {
+
 				User user = _userLocalService.fetchUser(
 					workflowTaskAssignee.getAssigneeClassPK());
 
 				return new WorkflowAssigneeModel(user);
 			}
-			else if (isAssigneeRole(workflowTaskAssignee)) {
+			else if (workflowTaskAssignee.getAssigneeClassName().equals(
+						Role.class.getName())) {
+
 				Role role = _roleLocalService.fetchRole(
 					workflowTaskAssignee.getAssigneeClassPK());
 
@@ -209,32 +215,6 @@ public class WorkflowHelper {
 		}
 
 		return null;
-	}
-
-	protected boolean isAssigneeRole(
-		WorkflowTaskAssignee workflowTaskAssignee) {
-
-		long classNameId = _classNameLocalService.getClassNameId(
-			workflowTaskAssignee.getAssigneeClassName());
-
-		if (classNameId == _classNameLocalService.getClassNameId(Role.class)) {
-			return true;
-		}
-
-		return false;
-	}
-
-	protected boolean isAssigneeUser(
-		WorkflowTaskAssignee workflowTaskAssignee) {
-
-		long classNameId = _classNameLocalService.getClassNameId(
-			workflowTaskAssignee.getAssigneeClassName());
-
-		if (classNameId == _classNameLocalService.getClassNameId(User.class)) {
-			return true;
-		}
-
-		return false;
 	}
 
 	@Reference

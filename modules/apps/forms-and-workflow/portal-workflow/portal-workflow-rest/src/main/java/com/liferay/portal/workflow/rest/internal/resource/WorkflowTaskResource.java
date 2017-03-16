@@ -54,10 +54,10 @@ public class WorkflowTaskResource {
 		@Context HttpServletResponse response, @Context Locale locale,
 		@PathParam("workflowTaskId") long workflowTaskId) {
 
-		long companyId = company.getCompanyId();
-		long userId = user.getUserId();
-
 		try {
+			long companyId = company.getCompanyId();
+			long userId = user.getUserId();
+
 			WorkflowTask workflowTask = _workflowHelper.assignWorkflowTask(
 				companyId, userId, workflowTaskId);
 
@@ -93,10 +93,10 @@ public class WorkflowTaskResource {
 		WorkflowTaskTransitionOperationModel
 			workflowTaskTransitionOperationModel) {
 
-		long companyId = company.getCompanyId();
-		long userId = user.getUserId();
-
 		try {
+			long companyId = company.getCompanyId();
+			long userId = user.getUserId();
+
 			WorkflowTask workflowTask = _workflowHelper.completeWorkflowTask(
 				companyId, userId, workflowTaskId,
 				workflowTaskTransitionOperationModel);

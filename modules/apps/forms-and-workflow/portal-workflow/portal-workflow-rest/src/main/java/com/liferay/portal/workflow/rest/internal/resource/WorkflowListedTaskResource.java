@@ -51,23 +51,32 @@ public class WorkflowListedTaskResource {
 
 		List<WorkflowTaskModel> workflowTaskModels = new ArrayList<>();
 
-		List<WorkflowTask> workflowTasks = new ArrayList<>();
-
 		List<WorkflowTask> userWorkflowTasks =
 			_workflowTaskManager.getWorkflowTasksByUser(
 				user.getCompanyId(), user.getUserId(), false, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null);
 
-		workflowTasks.addAll(userWorkflowTasks);
+		populateWorkflowTaskModels(
+			company, user, locale, userWorkflowTasks, workflowTaskModels);
 
 		List<WorkflowTask> roleWorkflowTasks =
 			_workflowTaskManager.getWorkflowTasksByUserRoles(
 				user.getCompanyId(), user.getUserId(), false, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null);
 
-		workflowTasks.addAll(roleWorkflowTasks);
+		populateWorkflowTaskModels(
+			company, user, locale, roleWorkflowTasks, workflowTaskModels);
 
-		for (WorkflowTask workflowTask : workflowTasks) {
+		return workflowTaskModels;
+	}
+
+	protected void populateWorkflowTaskModels(
+			Company company, User user, Locale locale,
+			List<WorkflowTask> userWorkflowTasks,
+			List<WorkflowTaskModel> workflowTaskModels)
+		throws PortalException {
+
+		for (WorkflowTask workflowTask : userWorkflowTasks) {
 			WorkflowTaskModel workflowListedTaskModel =
 				_workflowHelper.getWorkflowTaskModel(
 					company.getCompanyId(), user.getUserId(),
@@ -75,8 +84,6 @@ public class WorkflowListedTaskResource {
 
 			workflowTaskModels.add(workflowListedTaskModel);
 		}
-
-		return workflowTaskModels;
 	}
 
 	@Reference
