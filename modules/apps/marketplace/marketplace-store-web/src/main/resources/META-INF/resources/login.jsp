@@ -31,7 +31,7 @@
 
 	<%
 	Map<String, Object> data = new HashMap<String, Object>();
-	
+
 	data.put("senna-off", "true");
 	%>
 
