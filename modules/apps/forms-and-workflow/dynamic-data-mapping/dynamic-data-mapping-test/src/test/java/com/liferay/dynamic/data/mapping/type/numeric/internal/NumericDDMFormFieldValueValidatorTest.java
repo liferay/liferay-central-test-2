@@ -22,6 +22,7 @@ import com.liferay.dynamic.data.mapping.test.util.DDMFormTestUtil;
 import com.liferay.dynamic.data.mapping.test.util.DDMFormValuesTestUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -29,10 +30,18 @@ import org.junit.Test;
  */
 public class NumericDDMFormFieldValueValidatorTest {
 
+	@Before
+	public void setUp() {
+		_numericDDMFormFieldValueValidator =
+			new NumericDDMFormFieldValueValidator();
+
+		_numericDDMFormFieldValueValidator.activate();
+	}
+
 	@Test(expected = DDMFormFieldValueValidationException.class)
 	public void testValidationWithInvalidNumber() throws Exception {
 		DDMFormField ddmFormField = DDMFormTestUtil.createDDMFormField(
-			"number", "number", "numeric", "integer", true, false, false);
+			"integer", "integer", "numeric", "integer", true, false, false);
 
 		LocalizedValue localizedValue = new LocalizedValue(LocaleUtil.US);
 
@@ -46,10 +55,44 @@ public class NumericDDMFormFieldValueValidatorTest {
 			ddmFormField, ddmFormFieldValue);
 	}
 
-	@Test
-	public void testValidationWithValidNumber() throws Exception {
+	@Test(expected = DDMFormFieldValueValidationException.class)
+	public void testValidationWithInvalidValidInteger() throws Exception {
 		DDMFormField ddmFormField = DDMFormTestUtil.createDDMFormField(
-			"number", "number", "numeric", "integer", true, false, false);
+			"integer", "integer", "numeric", "integer", true, false, false);
+
+		LocalizedValue localizedValue = new LocalizedValue(LocaleUtil.US);
+
+		localizedValue.addString(LocaleUtil.US, "2.5");
+
+		DDMFormFieldValue ddmFormFieldValue =
+			DDMFormValuesTestUtil.createDDMFormFieldValue(
+				"number", localizedValue);
+
+		_numericDDMFormFieldValueValidator.validate(
+			ddmFormField, ddmFormFieldValue);
+	}
+
+	@Test
+	public void testValidationWithValidDouble() throws Exception {
+		DDMFormField ddmFormField = DDMFormTestUtil.createDDMFormField(
+			"integer", "integer", "numeric", "double", true, false, false);
+
+		LocalizedValue localizedValue = new LocalizedValue(LocaleUtil.US);
+
+		localizedValue.addString(LocaleUtil.US, "2.5");
+
+		DDMFormFieldValue ddmFormFieldValue =
+			DDMFormValuesTestUtil.createDDMFormFieldValue(
+				"number", localizedValue);
+
+		_numericDDMFormFieldValueValidator.validate(
+			ddmFormField, ddmFormFieldValue);
+	}
+
+	@Test
+	public void testValidationWithValidInteger() throws Exception {
+		DDMFormField ddmFormField = DDMFormTestUtil.createDDMFormField(
+			"integer", "integer", "numeric", "integer", true, false, false);
 
 		LocalizedValue localizedValue = new LocalizedValue(LocaleUtil.US);
 
@@ -64,8 +107,7 @@ public class NumericDDMFormFieldValueValidatorTest {
 			ddmFormField, ddmFormFieldValue);
 	}
 
-	private final NumericDDMFormFieldValueValidator
-		_numericDDMFormFieldValueValidator =
-			new NumericDDMFormFieldValueValidator();
+	private NumericDDMFormFieldValueValidator
+		_numericDDMFormFieldValueValidator;
 
 }
