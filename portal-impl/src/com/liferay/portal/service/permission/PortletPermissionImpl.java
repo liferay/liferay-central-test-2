@@ -271,21 +271,21 @@ public class PortletPermissionImpl implements PortletPermission {
 			layoutMvccVersion = layout.getMvccVersion();
 		}
 
-		Map<Object, Object> permissionsCache =
-			permissionChecker.getPermissionsCache();
+		Map<Object, Object> permissionChecksMap =
+			permissionChecker.getPermissionChecksMap();
 
 		CacheKey cacheKey = new CacheKey(
 			groupId, plid, layoutMvccVersion, portlet.getPortletId(),
 			portlet.getMvccVersion(), actionId, strict, checkStagingPermission);
 
-		Boolean contains = (Boolean)permissionsCache.get(cacheKey);
+		Boolean contains = (Boolean)permissionChecksMap.get(cacheKey);
 
 		if (contains == null) {
 			contains = _contains(
 				permissionChecker, groupId, layout, portlet, actionId, strict,
 				checkStagingPermission);
 
-			permissionsCache.put(cacheKey, contains);
+			permissionChecksMap.put(cacheKey, contains);
 		}
 
 		return contains;

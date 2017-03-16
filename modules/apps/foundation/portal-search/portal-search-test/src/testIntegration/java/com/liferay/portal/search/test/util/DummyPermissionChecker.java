@@ -51,8 +51,8 @@ public class DummyPermissionChecker implements PermissionChecker {
 	}
 
 	@Override
-	public Map<Object, Object> getPermissionsCache() {
-		return _permissionsCache;
+	public Map<Object, Object> getPermissionChecksMap() {
+		return _permissionChecksMap;
 	}
 
 	@Override
@@ -186,6 +186,6 @@ public class DummyPermissionChecker implements PermissionChecker {
 		return false;
 	}
 
-	private final Map<Object, Object> _permissionsCache = new HashMap<>();
+	private final Map<Object, Object> _permissionChecksMap = new HashMap<>();
 
 }

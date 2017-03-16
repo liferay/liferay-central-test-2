@@ -66,8 +66,8 @@ public class StagingPermissionChecker implements PermissionChecker {
 	}
 
 	@Override
-	public Map<Object, Object> getPermissionsCache() {
-		return _permissionChecker.getPermissionsCache();
+	public Map<Object, Object> getPermissionChecksMap() {
+		return _permissionChecker.getPermissionChecksMap();
 	}
 
 	@Override

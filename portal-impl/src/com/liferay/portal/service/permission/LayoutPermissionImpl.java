@@ -131,20 +131,20 @@ public class LayoutPermissionImpl
 			boolean checkViewableGroup, String actionId)
 		throws PortalException {
 
-		Map<Object, Object> permissionsCache =
-			permissionChecker.getPermissionsCache();
+		Map<Object, Object> permissionChecksMap =
+			permissionChecker.getPermissionChecksMap();
 
 		CacheKey cacheKey = new CacheKey(
 			layout.getPlid(), layout.getMvccVersion(), checkViewableGroup,
 			actionId);
 
-		Boolean contains = (Boolean)permissionsCache.get(cacheKey);
+		Boolean contains = (Boolean)permissionChecksMap.get(cacheKey);
 
 		if (contains == null) {
 			contains = _contains(
 				permissionChecker, layout, checkViewableGroup, actionId);
 
-			permissionsCache.put(cacheKey, contains);
+			permissionChecksMap.put(cacheKey, contains);
 		}
 
 		return contains;

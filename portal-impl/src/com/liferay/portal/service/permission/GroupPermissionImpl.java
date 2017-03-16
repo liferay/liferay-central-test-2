@@ -91,18 +91,18 @@ public class GroupPermissionImpl
 			PermissionChecker permissionChecker, Group group, String actionId)
 		throws PortalException {
 
-		Map<Object, Object> permissionsCache =
-			permissionChecker.getPermissionsCache();
+		Map<Object, Object> permissionChecksMap =
+			permissionChecker.getPermissionChecksMap();
 
 		CacheKey cacheKey = new CacheKey(
 			group.getGroupId(), group.getMvccVersion(), actionId);
 
-		Boolean contains = (Boolean)permissionsCache.get(cacheKey);
+		Boolean contains = (Boolean)permissionChecksMap.get(cacheKey);
 
 		if (contains == null) {
 			contains = _contains(permissionChecker, group, actionId);
 
-			permissionsCache.put(cacheKey, contains);
+			permissionChecksMap.put(cacheKey, contains);
 		}
 
 		return contains;

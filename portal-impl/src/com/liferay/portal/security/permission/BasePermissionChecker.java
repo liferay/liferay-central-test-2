@@ -58,8 +58,8 @@ public abstract class BasePermissionChecker implements PermissionChecker {
 	}
 
 	@Override
-	public Map<Object, Object> getPermissionsCache() {
-		return _permissionsCache;
+	public Map<Object, Object> getPermissionChecksMap() {
+		return _permissionChecksMap;
 	}
 
 	@Override
@@ -176,6 +176,6 @@ public abstract class BasePermissionChecker implements PermissionChecker {
 	private static final Log _log = LogFactoryUtil.getLog(
 		BasePermissionChecker.class);
 
-	private final Map<Object, Object> _permissionsCache = new HashMap<>();
+	private final Map<Object, Object> _permissionChecksMap = new HashMap<>();
 
 }
