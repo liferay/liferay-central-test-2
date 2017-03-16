@@ -57,8 +57,6 @@ boolean hasOtherAssignees = workflowTaskDisplayContext.hasOtherAssignees(workflo
 
 <aui:script use="aui-base,aui-io-request">
 	A.one('#<portlet:namespace/>done').on('click', function(event) {
-		var A = AUI();
-
 		A.io.request(
 			'<%= assignURL.toString() %>',
 			{
@@ -66,8 +64,7 @@ boolean hasOtherAssignees = workflowTaskDisplayContext.hasOtherAssignees(workflo
 				form: {id: '<portlet:namespace/>assignFm'},
 				on: {
 					success: function() {
-						Liferay.Util.getOpener().refreshPortlet();
-						Liferay.Util.getOpener().closePopup('assignToDialog');
+						Liferay.Util.getWindow('<portlet:namespace />assignToDialog').destroy();
 					}
 				}
 			}

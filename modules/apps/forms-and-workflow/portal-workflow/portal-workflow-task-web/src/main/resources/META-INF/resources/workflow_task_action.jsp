@@ -158,35 +158,21 @@ redirectURL.setParameter("mvcPath", "/view.jsp");
 			Liferay.Util.openWindow(
 				{
 					dialog: {
+						destroyOnHide: true,
 						height: 290,
+						on: {
+							destroy: function() {
+								Liferay.Portlet.refresh('#p_p_id<portlet:namespace />');
+							}
+						},
 						width: 720
 					},
-					id: 'assignToDialog',
+					id: '<portlet:namespace />assignToDialog',
 					title: '<liferay-ui:message key="assign-to-..." />',
 					uri: uri
 				}
 			);
 		},
 		['liferay-util']
-	);
-
-	Liferay.provide(
-		window,
-		'refreshPortlet',
-		function() {
-			var curPortlet = '#p_p_id<portlet:namespace/>';
-
-			Liferay.Portlet.refresh(curPortlet);
-		},
-		['aui-dialog','aui-dialog-iframe']
-	);
-
-	Liferay.provide(
-		window,
-		'closePopup',
-		function(dialogId) {
-			Liferay.Util.Window.getById(dialogId).destroy();
-		},
-		['liferay-util-window']
 	);
 </aui:script>
