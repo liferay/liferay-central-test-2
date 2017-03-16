@@ -124,9 +124,10 @@ public class WorkflowTaskResource {
 			WorkflowOperationResultModel.STATUS_ERROR, pe.getMessage());
 	}
 
-	protected WorkflowOperationResultModel getSuccessWorkflowOperationResultModel(
-			Locale locale, long companyId, long userId,
-			WorkflowTask workflowTask)
+	protected WorkflowOperationResultModel
+			getSuccessWorkflowOperationResultModel(
+				Locale locale, long companyId, long userId,
+				WorkflowTask workflowTask)
 		throws PortalException {
 
 		WorkflowTaskModel workflowTaskModel =
