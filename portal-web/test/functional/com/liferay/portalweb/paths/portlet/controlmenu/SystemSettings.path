@@ -23,6 +23,12 @@
 	<td>//ul[@role='menubar']//a[@role='menuitem' and contains(.,'${key_category}')]</td>
 	<td></td>
 </tr>
+<!--WEB_CONTENT-->
+<tr>
+	<td>ARTICLE_VIEW_PERMISSIONS_CHECK_ENABLED_CHECKBOX</td>
+	<td>//input[contains(@id,'articleViewPermissionsCheckEnabled') and @type='checkbox']</td>
+	<td></td>
+</tr>
 </tbody>
 </table>
 </body>
