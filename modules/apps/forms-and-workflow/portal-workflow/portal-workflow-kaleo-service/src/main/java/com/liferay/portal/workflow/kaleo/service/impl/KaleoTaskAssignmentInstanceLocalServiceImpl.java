@@ -209,21 +209,21 @@ public class KaleoTaskAssignmentInstanceLocalServiceImpl
 	}
 
 	@Override
+	public KaleoTaskAssignmentInstance fetchFirstKaleoTaskAssignmentInstance(
+		long kaleoTaskInstanceTokenId,
+		OrderByComparator<KaleoTaskAssignmentInstance> orderByComparator) {
+
+		return kaleoTaskAssignmentInstancePersistence.
+			fetchBykaleoTaskInstanceTokenId_First(
+				kaleoTaskInstanceTokenId, orderByComparator);
+	}
+
+	@Override
 	public List<KaleoTaskAssignmentInstance> getKaleoTaskAssignmentInstances(
 		long kaleoTaskInstanceTokenId) {
 
 		return kaleoTaskAssignmentInstancePersistence.
 			findBykaleoTaskInstanceTokenId(kaleoTaskInstanceTokenId);
-	}
-
-	@Override
-	public List<KaleoTaskAssignmentInstance> getKaleoTaskAssignmentInstances(
-		long kaleoTaskInstanceTokenId, int start, int end,
-		OrderByComparator<KaleoTaskAssignmentInstance> orderByComparator) {
-
-		return kaleoTaskAssignmentInstancePersistence.
-			findBykaleoTaskInstanceTokenId(
-				kaleoTaskInstanceTokenId, start, end, orderByComparator);
 	}
 
 	@Override
