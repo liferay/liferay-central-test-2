@@ -2324,6 +2324,12 @@ public interface PropsKeys {
 	 * @deprecated As of 7.0.0, with no direct replacement
 	 */
 	@Deprecated
+	public static final String USERS_IMAGE_DEFAULT_USE_INITIALS = "users.image.default.use.initials";
+
+	/**
+	 * @deprecated As of 7.0.0, with no direct replacement
+	 */
+	@Deprecated
 	public static final String USERS_IMAGE_MAX_HEIGHT = "users.image.max.height";
 
 	/**
