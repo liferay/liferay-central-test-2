@@ -98,6 +98,11 @@ public class PortletURLImpl
 		this(request, portletId, null, layout, lifecycle);
 	}
 
+	/**
+	 * @deprecated As of 7.0.0, replaced by {@link
+	 *             #PortletURLImpl(HttpServletRequest, String, Layout, String)}
+	 */
+	@Deprecated
 	public PortletURLImpl(
 		HttpServletRequest request, String portletId, long plid,
 		String lifecycle) {
@@ -114,6 +119,11 @@ public class PortletURLImpl
 			portletRequest, layout, lifecycle);
 	}
 
+	/**
+	 * @deprecated As of 7.0.0, replaced by {@link
+	 *             #PortletURLImpl(PortletRequest, String, Layout, String)}
+	 */
+	@Deprecated
 	public PortletURLImpl(
 		PortletRequest portletRequest, String portletId, long plid,
 		String lifecycle) {
@@ -737,6 +747,11 @@ public class PortletURLImpl
 		writer.write(toString);
 	}
 
+	/**
+	 * @deprecated As of 7.0.0, replaced by {@link
+	 *             #PortletURLImpl(PortletRequest, String, PortletRequest, Layout, String)}
+	 */
+	@Deprecated
 	protected PortletURLImpl(
 		HttpServletRequest request, String portletId,
 		PortletRequest portletRequest, long plid, String lifecycle) {
