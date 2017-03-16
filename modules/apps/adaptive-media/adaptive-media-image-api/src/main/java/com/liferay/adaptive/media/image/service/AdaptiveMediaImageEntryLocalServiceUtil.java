@@ -456,6 +456,14 @@ public class AdaptiveMediaImageEntryLocalServiceUtil {
 			.deleteAdaptiveMediaImageEntries(companyId, configurationEntry);
 	}
 
+	public static void deleteAdaptiveMediaImageEntryFileVersion(
+		java.lang.String configurationUuid, long fileVersionId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		getService()
+			.deleteAdaptiveMediaImageEntryFileVersion(configurationUuid,
+			fileVersionId);
+	}
+
 	/**
 	* Deletes all the adaptive media images generated for a file version.
 	*
