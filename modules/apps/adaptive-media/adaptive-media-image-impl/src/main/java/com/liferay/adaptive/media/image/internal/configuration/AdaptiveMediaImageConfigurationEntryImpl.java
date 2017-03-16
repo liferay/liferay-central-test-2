@@ -44,6 +44,25 @@ public class AdaptiveMediaImageConfigurationEntryImpl
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof AdaptiveMediaImageConfigurationEntryImpl)) {
+			return false;
+		}
+
+		AdaptiveMediaImageConfigurationEntryImpl other =
+			(AdaptiveMediaImageConfigurationEntryImpl)obj;
+
+		if (_name.equals(other._name) && _uuid.equals(other._uuid) &&
+			(_enabled == other._enabled) &&
+			_properties.equals(other._properties)) {
+
+			return true;
+		}
+
+		return false;
+	}
+
+	@Override
 	public String getDescription() {
 		return _description;
 	}
@@ -61,6 +80,18 @@ public class AdaptiveMediaImageConfigurationEntryImpl
 	@Override
 	public String getUUID() {
 		return _uuid;
+	}
+
+	@Override
+	public int hashCode() {
+		int hash =
+			_name.hashCode() ^ _uuid.hashCode() ^ Boolean.hashCode(_enabled);
+
+		for (Map.Entry<String, String> entry : _properties.entrySet()) {
+			hash ^= entry.hashCode();
+		}
+
+		return hash;
 	}
 
 	@Override
