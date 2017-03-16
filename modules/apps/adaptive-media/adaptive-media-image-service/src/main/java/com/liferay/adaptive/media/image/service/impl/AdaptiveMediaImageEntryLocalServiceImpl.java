@@ -192,6 +192,23 @@ public class AdaptiveMediaImageEntryLocalServiceImpl
 	}
 
 	@Override
+	public void deleteAdaptiveMediaImageEntryFileVersion(
+			String configurationUuid, long fileVersionId)
+		throws PortalException {
+
+		FileVersion fileVersion = dlAppLocalService.getFileVersion(
+			fileVersionId);
+
+		AdaptiveMediaImageEntry imageEntry =
+			adaptiveMediaImageEntryPersistence.findByC_F(
+				configurationUuid, fileVersionId);
+
+		adaptiveMediaImageEntryPersistence.remove(imageEntry);
+
+		imageStorage.delete(fileVersion, imageEntry.getConfigurationUuid());
+	}
+
+	@Override
 	public void destroy() {
 		super.destroy();
 
