@@ -203,13 +203,13 @@ PortletURL portletURL = renderResponse.createRenderURL();
 					<liferay-ui:search-container-column-text
 						name="max-width"
 						orderable="<%= false %>"
-						value='<%= properties.get("max-width") %>'
+						value='<%= properties.get("max-width") + "px" %>'
 					/>
 
 					<liferay-ui:search-container-column-text
 						name="max-height"
 						orderable="<%= false %>"
-						value='<%= properties.get("max-height") %>'
+						value='<%= properties.get("max-height") + "px" %>'
 					/>
 
 					<c:if test="<%= optimizeImagesAllConfigurationsBackgroundTasksCount == 0 %>">

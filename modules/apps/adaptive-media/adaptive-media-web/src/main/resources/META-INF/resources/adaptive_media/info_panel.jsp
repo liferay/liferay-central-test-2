@@ -94,19 +94,19 @@ if (ListUtil.isNotEmpty(selectedConfigurationEntries)) {
 							<liferay-ui:message key="max-width" />
 						</dt>
 						<dd class="h6 sidebar-caption">
-							<%= HtmlUtil.escape(properties.get("max-width")) %>
+							<%= HtmlUtil.escape(properties.get("max-width") + "px") %>
 						</dd>
 						<dt class="h5">
 							<liferay-ui:message key="max-height" />
 						</dt>
 						<dd class="h6 sidebar-caption">
-							<%= HtmlUtil.escape(properties.get("max-height") + " px") %>
+							<%= HtmlUtil.escape(properties.get("max-height") + "px") %>
 						</dd>
 						<dt class="h5">
 							<liferay-ui:message key="id" />
 						</dt>
 						<dd class="h6 sidebar-caption">
-							<%= HtmlUtil.escape(configurationEntry.getUUID() + " px") %>
+							<%= HtmlUtil.escape(configurationEntry.getUUID()) %>
 						</dd>
 					</c:when>
 					<c:when test="<%= (selectedConfigurationEntriesSize > 1) %>">
