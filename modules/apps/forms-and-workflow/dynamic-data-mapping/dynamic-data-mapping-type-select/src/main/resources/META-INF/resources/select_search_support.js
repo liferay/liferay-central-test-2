@@ -72,8 +72,6 @@ AUI.add(
 			},
 
 			_applyFilterStyleOnItem: function(term, item) {
-				var instance = this;
-
 				var content = item.one('span').getContent();
 
 				item.one('span').setContent(AHighlight.all(content, term));
