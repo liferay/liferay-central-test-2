@@ -254,7 +254,7 @@ public class UpgradeJournal extends UpgradeProcess {
 
 		dynamicElementElement.addAttribute("name", "content");
 		dynamicElementElement.addAttribute("type", "text_area");
-		dynamicElementElement.addAttribute("index-type", "keyword");
+		dynamicElementElement.addAttribute("index-type", "text");
 		dynamicElementElement.addAttribute("index", String.valueOf(0));
 
 		newRootElement.add(dynamicElementElement);
