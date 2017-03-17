@@ -26,6 +26,7 @@ import com.liferay.document.library.kernel.service.DLAppLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,6 +82,38 @@ public class HtmlContentTransformerImpl implements ContentTransformer<String> {
 		matcher.appendTail(sb);
 
 		return sb.toString();
+	}
+
+	private AdaptiveMedia<AdaptiveMediaImageProcessor> _findHDAdaptiveMedia(
+		AdaptiveMedia<AdaptiveMediaImageProcessor> originalAdaptiveMedia,
+		List<AdaptiveMedia<AdaptiveMediaImageProcessor>> adaptiveMediaList) {
+
+		Optional<Integer> originalWidthOptional =
+			originalAdaptiveMedia.getAttributeValue(
+				AdaptiveMediaImageAttribute.IMAGE_WIDTH);
+
+		Optional<Integer> originalHeightOptional =
+			originalAdaptiveMedia.getAttributeValue(
+				AdaptiveMediaImageAttribute.IMAGE_HEIGHT);
+
+		for (AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia :
+				adaptiveMediaList) {
+
+			Optional<Integer> widthOptional = adaptiveMedia.getAttributeValue(
+				AdaptiveMediaImageAttribute.IMAGE_WIDTH);
+
+			Optional<Integer> heightOptional = adaptiveMedia.getAttributeValue(
+				AdaptiveMediaImageAttribute.IMAGE_HEIGHT);
+
+			if (widthOptional.isPresent() && heightOptional.isPresent() &&
+				(originalWidthOptional.get() == (widthOptional.get() / 2)) &&
+				(originalHeightOptional.get() == (heightOptional.get() / 2))) {
+
+				return adaptiveMedia;
+			}
+		}
+
+		return null;
 	}
 
 	private Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>>
@@ -141,7 +174,8 @@ public class HtmlContentTransformerImpl implements ContentTransformer<String> {
 
 	private String _getSourceElement(
 		AdaptiveMedia<AdaptiveMediaImageProcessor> previousAdaptiveMedia,
-		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia) {
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia,
+		AdaptiveMedia<AdaptiveMediaImageProcessor> hdAdaptiveMedia) {
 
 		StringBundler sb = new StringBundler(8);
 
@@ -155,7 +189,16 @@ public class HtmlContentTransformerImpl implements ContentTransformer<String> {
 			});
 
 		sb.append(" srcset=\"");
-		sb.append(adaptiveMedia.getURI());
+
+		String src = adaptiveMedia.getURI().toString();
+
+		if (Validator.isNotNull(hdAdaptiveMedia)) {
+			src =
+				adaptiveMedia.getURI() + ", " + hdAdaptiveMedia.getURI() +
+					" 2x";
+		}
+
+		sb.append(src);
 		sb.append("\"");
 		sb.append("/>");
 
@@ -173,8 +216,12 @@ public class HtmlContentTransformerImpl implements ContentTransformer<String> {
 		for (AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia :
 				adaptiveMedias) {
 
+			AdaptiveMedia hdAdaptiveMedia = _findHDAdaptiveMedia(
+				adaptiveMedia, adaptiveMedias);
+
 			sourceElements.add(
-				_getSourceElement(previousAdaptiveMedia, adaptiveMedia));
+				_getSourceElement(
+					previousAdaptiveMedia, adaptiveMedia, hdAdaptiveMedia));
 
 			previousAdaptiveMedia = adaptiveMedia;
 		}
