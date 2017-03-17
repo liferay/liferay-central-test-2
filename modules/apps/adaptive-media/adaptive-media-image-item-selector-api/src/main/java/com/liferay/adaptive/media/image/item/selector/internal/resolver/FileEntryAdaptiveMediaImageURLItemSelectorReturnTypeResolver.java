@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.List;
 import java.util.Optional;
@@ -90,8 +91,11 @@ public class FileEntryAdaptiveMediaImageURLItemSelectorReturnTypeResolver
 		for (AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia :
 				adaptiveMediaList) {
 
+			AdaptiveMedia hdAdaptiveMedia = _findHDAdaptiveMedia(
+				adaptiveMedia, adaptiveMediaList);
+
 			JSONObject sourceJSONObject = _getSourceJSONObject(
-				adaptiveMedia, previousAdaptiveMedia);
+				adaptiveMedia, hdAdaptiveMedia, previousAdaptiveMedia);
 
 			sourcesArray.put(sourceJSONObject);
 
@@ -103,8 +107,41 @@ public class FileEntryAdaptiveMediaImageURLItemSelectorReturnTypeResolver
 		return fileEntryJSONObject.toString();
 	}
 
+	private AdaptiveMedia<AdaptiveMediaImageProcessor> _findHDAdaptiveMedia(
+		AdaptiveMedia<AdaptiveMediaImageProcessor> originalAdaptiveMedia,
+		List<AdaptiveMedia<AdaptiveMediaImageProcessor>> adaptiveMediaList) {
+
+		Optional<Integer> originalWidthOptional =
+			originalAdaptiveMedia.getAttributeValue(
+				AdaptiveMediaImageAttribute.IMAGE_WIDTH);
+
+		Optional<Integer> originalHeightOptional =
+			originalAdaptiveMedia.getAttributeValue(
+				AdaptiveMediaImageAttribute.IMAGE_HEIGHT);
+
+		for (AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia :
+				adaptiveMediaList) {
+
+			Optional<Integer> widthOptional = adaptiveMedia.getAttributeValue(
+				AdaptiveMediaImageAttribute.IMAGE_WIDTH);
+
+			Optional<Integer> heightOptional = adaptiveMedia.getAttributeValue(
+				AdaptiveMediaImageAttribute.IMAGE_HEIGHT);
+
+			if (widthOptional.isPresent() && heightOptional.isPresent() &&
+				(originalWidthOptional.get() == (widthOptional.get() / 2)) &&
+				(originalHeightOptional.get() == (heightOptional.get() / 2))) {
+
+				return adaptiveMedia;
+			}
+		}
+
+		return null;
+	}
+
 	private JSONObject _getSourceJSONObject(
 		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia,
+		AdaptiveMedia<AdaptiveMediaImageProcessor> hdAdaptiveMedia,
 		AdaptiveMedia<AdaptiveMediaImageProcessor> previousAdaptiveMedia) {
 
 		Optional<Integer> widthOptional = adaptiveMedia.getAttributeValue(
@@ -112,7 +149,15 @@ public class FileEntryAdaptiveMediaImageURLItemSelectorReturnTypeResolver
 
 		JSONObject sourceJSONObject = JSONFactoryUtil.createJSONObject();
 
-		sourceJSONObject.put("src", adaptiveMedia.getURI());
+		String src = adaptiveMedia.getURI().toString();
+
+		if (Validator.isNotNull(hdAdaptiveMedia)) {
+			src =
+				adaptiveMedia.getURI() + ", " + hdAdaptiveMedia.getURI() +
+					" 2x";
+		}
+
+		sourceJSONObject.put("src", src);
 
 		JSONObject attributesJSONObject = JSONFactoryUtil.createJSONObject();
 
