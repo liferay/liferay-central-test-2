@@ -591,8 +591,8 @@
 		</execute>
 
 		<execute macro="ServerAdministration#configureMailServerSettings">
-			<var method="TestPropsUtil#get('email.address.1')" name="userName" />
-			<var method="TestPropsUtil#get('email.password.1')" name="userPassword" />
+			<var name="userName" property-value="email.address.1" />
+			<var name="userPassword" property-value="email.password.1" />
 		</execute>
 
 		<execute macro="Navigator#openURL" />
@@ -611,7 +611,7 @@
 		</execute>
 
 		<execute macro="ReportsAdmin#addReportEntry">
-			<var method="TestPropsUtil#get('email.address.2')" name="emailNotificationsAddress" />
+			<var name="emailNotificationsAddress" property-value="email.address.2" />
 			<var name="emailRecipientAddress" value="test@liferay.com" />
 			<var name="reportFormat" value="pdf" />
 			<var name="reportName" value="Custom Report Name" />
@@ -621,8 +621,8 @@
 		<execute function="Pause" locator1="30000" />
 
 		<execute macro="Gmail#login">
-			<var method="TestPropsUtil#get('email.address.2')" name="userEmailAddress" />
-			<var method="TestPropsUtil#get('email.password.2')" name="userPassword" />
+			<var name="userEmailAddress" property-value="email.address.2" />
+			<var name="userPassword" property-value="email.password.2" />
 		</execute>
 
 		<execute macro="Gmail#gotoHtmlMode" />
@@ -668,8 +668,8 @@
 		</execute>
 
 		<execute macro="ServerAdministration#configureMailServerSettings">
-			<var method="TestPropsUtil#get('email.address.1')" name="userName" />
-			<var method="TestPropsUtil#get('email.password.1')" name="userPassword" />
+			<var name="userName" property-value="email.address.1" />
+			<var name="userPassword" property-value="email.password.1" />
 		</execute>
 
 		<execute macro="Navigator#openURL" />
@@ -689,7 +689,7 @@
 
 		<execute macro="ReportsAdmin#addReportEntry">
 			<var name="emailNotificationsAddress" value="test@liferay.com" />
-			<var method="TestPropsUtil#get('email.address.4')" name="emailRecipientAddress" />
+			<var name="emailRecipientAddress" property-value="email.address.4" />
 			<var name="reportFormat" value="pdf" />
 			<var name="reportsDefinitionName" value="Reports Definition Name" />
 		</execute>
@@ -697,8 +697,8 @@
 		<execute function="Pause" locator1="30000" />
 
 		<execute macro="Gmail#login">
-			<var method="TestPropsUtil#get('email.address.4')" name="userEmailAddress" />
-			<var method="TestPropsUtil#get('email.password.4')" name="userPassword" />
+			<var name="userEmailAddress" property-value="email.address.4" />
+			<var name="userEmailAddress" property-value="email.password.4" />
 		</execute>
 
 		<execute macro="Gmail#gotoHtmlMode" />
