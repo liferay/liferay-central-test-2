@@ -378,6 +378,7 @@ if (ListUtil.isEmpty(folders) && ListUtil.isEmpty(fileEntries) && ListUtil.isEmp
 
 							<%
 							DLFileEntry dlFileEntry = (DLFileEntry)fileEntry.getModel();
+
 							DLFileEntryType dlFileEntryType = dlFileEntry.getDLFileEntryType();
 							%>
 
