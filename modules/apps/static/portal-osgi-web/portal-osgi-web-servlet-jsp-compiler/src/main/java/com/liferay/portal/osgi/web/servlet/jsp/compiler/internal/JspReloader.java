@@ -42,7 +42,9 @@ public class JspReloader {
 			new BundleTrackerCustomizer<Void>() {
 
 				@Override
-				public Void addingBundle(Bundle bundle, BundleEvent event) {
+				public Void addingBundle(
+					Bundle bundle, BundleEvent bundleEvent) {
+
 					File file = new File(
 						_WORK_DIR,
 						bundle.getSymbolicName() + StringPool.DASH +
@@ -59,12 +61,12 @@ public class JspReloader {
 
 				@Override
 				public void modifiedBundle(
-					Bundle bundle, BundleEvent event, Void object) {
+					Bundle bundle, BundleEvent bundleEvent, Void object) {
 				}
 
 				@Override
 				public void removedBundle(
-					Bundle bundle, BundleEvent event, Void object) {
+					Bundle bundle, BundleEvent bundleEvent, Void object) {
 				}
 
 			});
