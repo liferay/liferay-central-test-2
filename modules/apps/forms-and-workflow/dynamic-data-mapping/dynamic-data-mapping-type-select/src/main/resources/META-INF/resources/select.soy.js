@@ -50,7 +50,7 @@ ddm.select = function(opt_data, opt_ignored) {
       }
     }
   }
-  output += '</div>' + ((! opt_data.readOnly) ? '<div class="drop-chosen ' + soy.$$escapeHtmlAttribute(opt_data.multiple && opt_data.value.length > 0 ? '' : 'hide') + '"><div class="search-chosen"><div class="select-search-container">' + ((opt_data.selectSearchIcon) ? '<a class="" href="javascript:;">' + soy.$$filterNoAutoescape(opt_data.selectSearchIcon) + '</a>' : '') + '</div><input autocomplete="off" class="drop-chosen-search" placeholder="Search" type="text"></div><ul class="results-chosen">' + ddm.select_options(opt_data) + '</ul></div>' : '') + '</div>' + ((opt_data.childElementsHTML) ? soy.$$filterNoAutoescape(opt_data.childElementsHTML) : '') + '</div></div>';
+  output += '</div>' + ((! opt_data.readOnly) ? '<div class="drop-chosen ' + soy.$$escapeHtmlAttribute(opt_data.open ? '' : 'hide') + '"><div class="search-chosen"><div class="select-search-container">' + ((opt_data.selectSearchIcon) ? '<a class="" href="javascript:;">' + soy.$$filterNoAutoescape(opt_data.selectSearchIcon) + '</a>' : '') + '</div><input autocomplete="off" class="drop-chosen-search" placeholder="Search" type="text"></div><ul class="results-chosen">' + ddm.select_options(opt_data) + '</ul></div>' : '') + '</div>' + ((opt_data.childElementsHTML) ? soy.$$filterNoAutoescape(opt_data.childElementsHTML) : '') + '</div></div>';
   return output;
 };
 if (goog.DEBUG) {
@@ -59,7 +59,7 @@ if (goog.DEBUG) {
 
 
 ddm.badge_item = function(opt_data, opt_ignored) {
-  return '<li><span class="badge badge-default badge-sm multiple-badge">' + soy.$$escapeHtml(opt_data.label) + '<a class="trigger-badge-item" data-badge-value="' + soy.$$escapeHtmlAttribute(opt_data.value) + '" href="javascript:void(0)">' + soy.$$filterNoAutoescape(opt_data.badgeCloseIcon) + '</a></span></li>';
+  return '<li><span class="badge badge-default badge-sm multiple-badge">' + soy.$$escapeHtml(opt_data.label) + '<a class="trigger-badge-item-close" data-badge-value="' + soy.$$escapeHtmlAttribute(opt_data.value) + '" href="javascript:void(0)">' + soy.$$filterNoAutoescape(opt_data.badgeCloseIcon) + '</a></span></li>';
 };
 if (goog.DEBUG) {
   ddm.badge_item.soyTemplateName = 'ddm.badge_item';
@@ -76,11 +76,11 @@ if (goog.DEBUG) {
 
 ddm.hidden_select = function(opt_data, opt_ignored) {
   var output = '<select class="form-control hide" dir="' + soy.$$escapeHtmlAttribute(opt_data.dir) + '" id="' + soy.$$escapeHtmlAttribute(opt_data.name) + '" name="' + soy.$$escapeHtmlAttribute(opt_data.name) + '" ' + ((opt_data.multiple) ? 'multiple size="' + soy.$$escapeHtmlAttribute(opt_data.options.length) + '"' : '') + '>' + ((! opt_data.readOnly) ? '<option dir="' + soy.$$escapeHtmlAttribute(opt_data.dir) + '" disabled ' + ((opt_data.value.length == 0) ? 'selected' : '') + ' value="">' + soy.$$escapeHtml(opt_data.strings.chooseAnOption) + '</option>' : '');
-  var optionList146 = opt_data.options;
-  var optionListLen146 = optionList146.length;
-  for (var optionIndex146 = 0; optionIndex146 < optionListLen146; optionIndex146++) {
-    var optionData146 = optionList146[optionIndex146];
-    output += (opt_data.multiple) ? ddm.select_multiple_selection({dir: opt_data.dir, option: optionData146, values: opt_data.value}) : ddm.select_single_selection({dir: opt_data.dir, option: optionData146, value: opt_data.value});
+  var optionList139 = opt_data.options;
+  var optionListLen139 = optionList139.length;
+  for (var optionIndex139 = 0; optionIndex139 < optionListLen139; optionIndex139++) {
+    var optionData139 = optionList139[optionIndex139];
+    output += ddm.select_hidden_options({dir: opt_data.dir, option: optionData139, values: opt_data.value});
   }
   output += '</select>';
   return output;
@@ -90,60 +90,41 @@ if (goog.DEBUG) {
 }
 
 
-ddm.select_single_selection = function(opt_data, opt_ignored) {
+ddm.select_hidden_options = function(opt_data, opt_ignored) {
   var output = '';
-  var selected__soy150 = '';
-  if (opt_data.value) {
-    var currentValueList156 = opt_data.value;
-    var currentValueListLen156 = currentValueList156.length;
-    for (var currentValueIndex156 = 0; currentValueIndex156 < currentValueListLen156; currentValueIndex156++) {
-      var currentValueData156 = currentValueList156[currentValueIndex156];
-      selected__soy150 += (currentValueData156.value == opt_data.option.value) ? 'selected' : '';
-    }
-  }
-  output += '<option dir="' + soy.$$escapeHtmlAttribute(opt_data.dir) + '" ' + soy.$$filterHtmlAttributes(selected__soy150) + ' value="' + soy.$$escapeHtmlAttribute(opt_data.option.value) + '">' + soy.$$escapeHtml(opt_data.option.label) + '</option>';
-  return output;
-};
-if (goog.DEBUG) {
-  ddm.select_single_selection.soyTemplateName = 'ddm.select_single_selection';
-}
-
-
-ddm.select_multiple_selection = function(opt_data, opt_ignored) {
-  var output = '';
-  var selected__soy168 = '';
+  var selected__soy143 = '';
   if (opt_data.values) {
-    var currentValueList174 = opt_data.values;
-    var currentValueListLen174 = currentValueList174.length;
-    for (var currentValueIndex174 = 0; currentValueIndex174 < currentValueListLen174; currentValueIndex174++) {
-      var currentValueData174 = currentValueList174[currentValueIndex174];
-      selected__soy168 += (currentValueData174.value == opt_data.option.value) ? 'selected' : '';
+    var currentValueList149 = opt_data.values;
+    var currentValueListLen149 = currentValueList149.length;
+    for (var currentValueIndex149 = 0; currentValueIndex149 < currentValueListLen149; currentValueIndex149++) {
+      var currentValueData149 = currentValueList149[currentValueIndex149];
+      selected__soy143 += (currentValueData149.value == opt_data.option.value) ? 'selected' : '';
     }
   }
-  output += '<option dir="' + soy.$$escapeHtmlAttribute(opt_data.dir) + '" ' + soy.$$filterHtmlAttributes(selected__soy168) + ' value="' + soy.$$escapeHtmlAttribute(opt_data.option.value) + '">' + soy.$$escapeHtml(opt_data.option.label) + '</option>';
+  output += '<option dir="' + soy.$$escapeHtmlAttribute(opt_data.dir) + '" ' + soy.$$filterHtmlAttributes(selected__soy143) + ' value="' + soy.$$escapeHtmlAttribute(opt_data.option.value) + '">' + soy.$$escapeHtml(opt_data.option.label) + '</option>';
   return output;
 };
 if (goog.DEBUG) {
-  ddm.select_multiple_selection.soyTemplateName = 'ddm.select_multiple_selection';
+  ddm.select_hidden_options.soyTemplateName = 'ddm.select_hidden_options';
 }
 
 
 ddm.select_options = function(opt_data, opt_ignored) {
   var output = '';
-  var optionList223 = opt_data.options;
-  var optionListLen223 = optionList223.length;
-  for (var optionIndex223 = 0; optionIndex223 < optionListLen223; optionIndex223++) {
-    var optionData223 = optionList223[optionIndex223];
-    var selected__soy186 = '';
+  var optionList192 = opt_data.options;
+  var optionListLen192 = optionList192.length;
+  for (var optionIndex192 = 0; optionIndex192 < optionListLen192; optionIndex192++) {
+    var optionData192 = optionList192[optionIndex192];
+    var selected__soy161 = '';
     if (opt_data.value) {
-      var currentValueList192 = opt_data.value;
-      var currentValueListLen192 = currentValueList192.length;
-      for (var currentValueIndex192 = 0; currentValueIndex192 < currentValueListLen192; currentValueIndex192++) {
-        var currentValueData192 = currentValueList192[currentValueIndex192];
-        selected__soy186 += (currentValueData192.value == optionData223.value) ? 'selected' : '';
+      var currentValueList167 = opt_data.value;
+      var currentValueListLen167 = currentValueList167.length;
+      for (var currentValueIndex167 = 0; currentValueIndex167 < currentValueListLen167; currentValueIndex167++) {
+        var currentValueData167 = currentValueList167[currentValueIndex167];
+        selected__soy161 += (currentValueData167.value == optionData192.value) ? 'selected' : '';
       }
     }
-    output += '<li class="select-option-item ' + ((selected__soy186) ? 'option-selected' : '') + '" data-option-index="' + soy.$$escapeHtmlAttribute(optionIndex223) + '" data-option-selected="' + ((selected__soy186) ? 'true' : '') + '" data-option-value="' + soy.$$escapeHtmlAttribute(optionData223.value) + '">' + ((opt_data.multiple) ? '<input type="checkbox" value="" ' + ((selected__soy186) ? 'checked' : '') + '>' : '') + '<span data-option-selected="' + ((selected__soy186) ? 'true' : '') + '" data-option-value="' + soy.$$escapeHtmlAttribute(optionData223.value) + '">' + soy.$$escapeHtml(optionData223.label) + '</span></li>';
+    output += '<li class="select-option-item ' + ((selected__soy161) ? 'option-selected' : '') + '" data-option-index="' + soy.$$escapeHtmlAttribute(optionIndex192) + '" data-option-selected="' + ((selected__soy161) ? 'true' : '') + '" data-option-value="' + soy.$$escapeHtmlAttribute(optionData192.value) + '">' + ((opt_data.multiple) ? '<input type="checkbox" value="" ' + ((selected__soy161) ? 'checked' : '') + '>' : '') + '<span>' + soy.$$escapeHtml(optionData192.label) + '</span></li>';
   }
   return output;
 };
