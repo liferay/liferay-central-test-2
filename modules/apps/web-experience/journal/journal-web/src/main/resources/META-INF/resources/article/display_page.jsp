@@ -51,7 +51,7 @@ boolean changeStructure = GetterUtil.getBoolean(request.getAttribute("edit_artic
 			}
 
 			if (selLayout != null) {
-				layoutBreadcrumb = journalDisplayContext.getLayoutBreadcrumb(selLayout);
+				layoutBreadcrumb = _getLayoutBreadcrumb(request, selLayout, locale);
 			}
 		}
 		%>
@@ -107,6 +107,22 @@ boolean changeStructure = GetterUtil.getBoolean(request.getAttribute("edit_artic
 
 		<%
 		String eventName = liferayPortletResponse.getNamespace() + "selectDisplayPage";
+
+		ItemSelector itemSelector = (ItemSelector)request.getAttribute(JournalWebKeys.ITEM_SELECTOR);
+
+		LayoutItemSelectorCriterion layoutItemSelectorCriterion = new LayoutItemSelectorCriterion();
+
+		layoutItemSelectorCriterion.setCheckDisplayPage(true);
+
+		List<ItemSelectorReturnType> desiredItemSelectorReturnTypes = new ArrayList<ItemSelectorReturnType>();
+
+		desiredItemSelectorReturnTypes.add(new UUIDItemSelectorReturnType());
+
+		layoutItemSelectorCriterion.setDesiredItemSelectorReturnTypes(desiredItemSelectorReturnTypes);
+
+		PortletURL itemSelectorURL = itemSelector.getItemSelectorURL(RequestBackedPortletURLFactoryUtil.create(liferayPortletRequest), eventName, layoutItemSelectorCriterion);
+
+		itemSelectorURL.setParameter("layoutUuid", layoutUuid);
 		%>
 
 		<aui:script use="liferay-item-selector-dialog">
@@ -118,11 +134,9 @@ boolean changeStructure = GetterUtil.getBoolean(request.getAttribute("edit_artic
 			$('#<portlet:namespace />chooseDisplayPage').on(
 				'click',
 				function(event) {
-					event.preventDefault();
-
 					var itemSelectorDialog = new A.LiferayItemSelectorDialog(
 						{
-							eventName: '<portlet:namespace />selectDisplayPage',
+							eventName: '<%= eventName %>',
 							on: {
 								selectedItemChange: function(event) {
 									var selectedItem = event.newVal;
@@ -138,20 +152,56 @@ boolean changeStructure = GetterUtil.getBoolean(request.getAttribute("edit_artic
 							},
 							'strings.add': '<liferay-ui:message key="done" />',
 							title: '<liferay-ui:message key="select-page" />',
-
-							<portlet:renderURL var="selectPageURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
-								<portlet:param name="mvcPath" value="/select_page.jsp" />
-								<portlet:param name="eventName" value="<%= eventName %>" />
-								<portlet:param name="layoutUuid" value="<%= layoutUuid %>" />
-							</portlet:renderURL>
-
-							url: '<%= selectPageURL.toString() %>'
+							url: '<%= itemSelectorURL.toString() %>'
 						}
 					);
 
 					itemSelectorDialog.open();
 				}
 			);
+
+			displayPageItemRemove.on(
+				'click',
+				function(event) {
+					displayPageNameInput.html('<liferay-ui:message key="none" />');
+
+					pagesContainerInput.val('');
+
+					displayPageItemRemove.addClass('hide');
+				}
+			);
 		</aui:script>
 	</c:otherwise>
 </c:choose>
+
+<%!
+private String _getLayoutBreadcrumb(HttpServletRequest request, Layout layout, Locale locale) throws Exception {
+	List<Layout> ancestors = layout.getAncestors();
+
+	StringBundler sb = new StringBundler(4 * ancestors.size() + 5);
+
+	if (layout.isPrivateLayout()) {
+		sb.append(LanguageUtil.get(request, "private-pages"));
+	}
+	else {
+		sb.append(LanguageUtil.get(request, "public-pages"));
+	}
+
+	sb.append(StringPool.SPACE);
+	sb.append(StringPool.GREATER_THAN);
+	sb.append(StringPool.SPACE);
+
+	Collections.reverse(ancestors);
+
+	for (Layout ancestor : ancestors) {
+		sb.append(HtmlUtil.escape(ancestor.getName(locale)));
+		sb.append(StringPool.SPACE);
+		sb.append(StringPool.GREATER_THAN);
+		sb.append(StringPool.SPACE);
+	}
+
+	sb.append(HtmlUtil.escape(layout.getName(locale)));
+
+	return sb.toString();
+}
+%>
