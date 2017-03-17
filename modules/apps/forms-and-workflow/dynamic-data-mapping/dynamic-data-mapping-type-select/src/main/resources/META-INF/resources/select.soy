@@ -16,6 +16,7 @@
  * @param label
  * @param multiple
  * @param name
+ * @param open
  * @param options
  * @param readOnly
  * @param required
@@ -79,7 +80,7 @@
 				</div>
 
 				{if not $readOnly}
-					<div class="drop-chosen {$multiple and length($value) > 0 ? '' : 'hide'}">
+					<div class="drop-chosen {$open ? '' : 'hide'}">
 						<div class="search-chosen">
 							<div class="select-search-container">
 								{if $selectSearchIcon}
@@ -93,7 +94,6 @@
 						</ul>
 					</div>
 				{/if}
-
 			</div>
 
 			{if $childElementsHTML}
@@ -104,7 +104,7 @@
 {/template}
 
 /**
- * Prints the badge item to multiple select.
+ * Prints the badge item.
  *
  * @param badgeCloseIcon
  * @param label
@@ -114,7 +114,7 @@
 	<li>
 		<span class="badge badge-default badge-sm multiple-badge">
 			{$label}
-			<a class="trigger-badge-item" data-badge-value="{$value}" href="javascript:void(0)">{$badgeCloseIcon|noAutoescape}</a>
+			<a class="trigger-badge-item-close" data-badge-value="{$value}" href="javascript:void(0)">{$badgeCloseIcon|noAutoescape}</a>
 		</span>
 	</li>
 {/template}
@@ -159,52 +159,23 @@
 		{/if}
 
 		{foreach $option in $options}
-			{if $multiple}
-				{call ddm.select_multiple_selection}
-					{param dir: $dir /}
-					{param option: $option /}
-					{param values: $value /}
-				{/call}
-			{else}
-				{call ddm.select_single_selection}
-					{param dir: $dir /}
-					{param option: $option /}
-					{param value: $value /}
-				{/call}
-			{/if}
+			{call ddm.select_hidden_options}
+				{param dir: $dir /}
+				{param option: $option /}
+				{param values: $value /}
+			{/call}
 		{/foreach}
 	</select>
 {/template}
 
 /**
- * Prints the DDM form hidden select single options.
- *
- * @param dir
- * @param option
- * @param value
- */
-{template .select_single_selection autoescape="deprecated-contextual"}
-	{let $selected}
-		{if $value}
-			{foreach $currentValue in $value}
-				{if $currentValue.value == $option.value}
-					selected
-				{/if}
-			{/foreach}
-		{/if}
-	{/let}
-
-	<option dir="{$dir}" {$selected} value="{$option.value}">{$option.label}</option>
-{/template}
-
-/**
- * Prints the DDM form hidden select multiple options.
+ * Prints the DDM form hidden select options.
  *
  * @param dir
  * @param option
  * @param values
  */
-{template .select_multiple_selection autoescape="deprecated-contextual"}
+{template .select_hidden_options autoescape="deprecated-contextual"}
 	{let $selected}
 		{if $values}
 			{foreach $currentValue in $values}
@@ -241,7 +212,7 @@
 			{if $multiple}
 				<input type="checkbox" value="" {if $selected}checked{/if}>
 			{/if}
-			<span data-option-selected="{if $selected}true{/if}" data-option-value="{$option.value}">
+			<span>
 				{$option.label}
 			</span>
 		</li>
