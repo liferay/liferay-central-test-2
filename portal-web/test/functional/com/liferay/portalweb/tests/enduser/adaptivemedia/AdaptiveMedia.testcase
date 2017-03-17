@@ -1,6 +1,6 @@
 <definition component-name="portal-collaboration">
 	<property name="portal.release" value="false" />
-	<property name="portal.upstream" value="true" />
+	<property name="portal.upstream" value="false" />
 	<property name="custom.properties" value="default.layout.template.id=1_column" />
 	<property name="testray.main.component.name" value="Adaptive Media" />
 
@@ -15,8 +15,6 @@
 	</tear-down>
 
 	<command name="AddImageVariantsForBlogEntry" priority="5">
-		<property name="portal.acceptance" value="quarantine" />
-
 		<execute macro="ProductMenu#gotoControlPanelConfiguration">
 			<var name="portlet" value="Adaptive Media" />
 		</execute>
