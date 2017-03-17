@@ -771,7 +771,6 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 				_log.debug(message, new IllegalArgumentException(message));
 			}
 		}
-
 		else if ((groupId > 0) &&
 				 ResourceActionsUtil.isRootModelResource(name)) {
 
@@ -788,7 +787,6 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 				_log.debug(message, new IllegalArgumentException(message));
 			}
 		}
-
 		else if (primKey.equals("0") ||
 				 primKey.equals(
 					 String.valueOf(ResourceConstants.PRIMKEY_DNE)) ||
