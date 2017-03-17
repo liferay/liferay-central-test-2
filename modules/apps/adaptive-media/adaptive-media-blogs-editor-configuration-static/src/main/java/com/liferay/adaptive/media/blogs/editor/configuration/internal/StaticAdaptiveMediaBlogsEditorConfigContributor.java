@@ -119,7 +119,8 @@ public class StaticAdaptiveMediaBlogsEditorConfigContributor
 		jsonObject.put(
 			"filebrowserImageBrowseUrl", itemSelectorPortletURL.toString());
 
-		_allowPictureTag(jsonObject);
+		_allowTagRule(jsonObject, _PICTURE_TAG_RULE);
+		_allowTagRule(jsonObject, _IMG_TAG_RULE);
 	}
 
 	@Reference(unbind = "-")
@@ -142,18 +143,20 @@ public class StaticAdaptiveMediaBlogsEditorConfigContributor
 			desiredItemSelectorReturnTypes);
 	}
 
-	private void _allowPictureTag(JSONObject jsonObject) {
+	private void _allowTagRule(JSONObject jsonObject, String tagRule) {
 		String allowedContent = jsonObject.getString("allowedContent");
 
 		if (Validator.isNotNull(allowedContent)) {
-			allowedContent += StringPool.SPACE + _PICTURE_TAG_RULE;
+			allowedContent += StringPool.SPACE + tagRule;
 		}
 		else {
-			allowedContent = _PICTURE_TAG_RULE;
+			allowedContent = tagRule;
 		}
 
 		jsonObject.put("allowedContent", allowedContent);
 	}
+
+	private static final String _IMG_TAG_RULE = "img[*](*);";
 
 	private static final String _PICTURE_TAG_RULE =
 		"picture[*](*); source[*](*);";
