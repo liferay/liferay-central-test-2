@@ -255,13 +255,13 @@ describe(
 
 						var container = selectField.get('container');
 
-						var divSelect = container.one('.form-builder-select-field');
+						var trigger = container.one('.select-field-trigger');
 
-						assert.isFalse(divSelect.hasClass('active'));
+						assert.isFalse(trigger.hasClass('active'));
 
-						divSelect.simulate('click');
+						trigger.simulate('click');
 
-						assert.isTrue(divSelect.hasClass('active'));
+						assert.isTrue(trigger.hasClass('active'));
 
 						done();
 					}
@@ -279,9 +279,9 @@ describe(
 
 						var container = selectField.get('container');
 
-						var divSelect = container.one('.form-builder-select-field');
+						var trigger = container.one('.select-field-trigger');
 
-						divSelect.simulate('click');
+						trigger.simulate('click');
 
 						assert.isNull(container.one('.drop-chosen.hide'));
 
@@ -300,15 +300,15 @@ describe(
 
 						var container = selectField.get('container');
 
-						var divSelect = container.one('.form-builder-select-field');
+						var trigger = container.one('.select-field-trigger');
 
-						divSelect.simulate('click');
+						trigger.simulate('click');
 
-						assert.isTrue(divSelect.hasClass('active'));
+						assert.isTrue(trigger.hasClass('active'));
 
 						A.one(document).simulate('click');
 
-						assert.isFalse(divSelect.hasClass('active'));
+						assert.isFalse(trigger.hasClass('active'));
 
 						done();
 					}
@@ -368,7 +368,7 @@ describe(
 			'.clickBadgeItem()',
 			function() {
 				it(
-					'should click in a badge item and return a empty array value',
+					'should be an empty array in the value attribute when the last badge is removed',
 					function(done) {
 						selectField = createSelectField(
 							{
@@ -387,7 +387,7 @@ describe(
 
 						window.setTimeout(
 							function() {
-								container.one('.trigger-badge-item').simulate('click');
+								container.one('.trigger-badge-item-close').simulate('click');
 
 								assert.equal(selectField.get('value').length, 0);
 
