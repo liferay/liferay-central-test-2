@@ -80,8 +80,7 @@ public class JspReloader {
 	}
 
 	private static final String _WORK_DIR =
-		PropsUtil.get(PropsKeys.LIFERAY_HOME) + File.separator + "work" +
-			File.separator;
+		PropsValues.LIFERAY_HOME + File.separator + "work" + File.separator;
 
 	private BundleTracker<Void> _bundleTracker;
 
