@@ -98,6 +98,11 @@ public class PortletURLImpl
 		this(request, portlet, null, layout, lifecycle);
 	}
 
+	/**
+	 * @deprecated As of 7.0.0, replaced by {@link
+	 *             #PortletURLImpl(HttpServletRequest, Portlet, Layout, String)}
+	 */
+	@Deprecated
 	public PortletURLImpl(
 		HttpServletRequest request, String portletId, Layout layout,
 		String lifecycle) {
@@ -126,6 +131,11 @@ public class PortletURLImpl
 			portletRequest, layout, lifecycle);
 	}
 
+	/**
+	 * @deprecated As of 7.0.0, replaced by {@link
+	 *             #PortletURLImpl(PortletRequest, Portlet, Layout, String)}
+	 */
+	@Deprecated
 	public PortletURLImpl(
 		PortletRequest portletRequest, String portletId, Layout layout,
 		String lifecycle) {
