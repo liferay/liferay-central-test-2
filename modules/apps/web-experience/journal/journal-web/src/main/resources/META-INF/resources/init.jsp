@@ -154,7 +154,6 @@ page import="com.liferay.portal.kernel.util.OrderByComparator" %><%@
 page import="com.liferay.portal.kernel.util.ParamUtil" %><%@
 page import="com.liferay.portal.kernel.util.PortalUtil" %><%@
 page import="com.liferay.portal.kernel.util.PropsKeys" %><%@
-page import="com.liferay.portal.kernel.util.StringBundler" %><%@
 page import="com.liferay.portal.kernel.util.StringPool" %><%@
 page import="com.liferay.portal.kernel.util.StringUtil" %><%@
 page import="com.liferay.portal.kernel.util.TextFormatter" %><%@
@@ -180,7 +179,6 @@ page import="com.liferay.trash.kernel.util.TrashUtil" %>
 <%@ page import="java.text.Format" %>
 
 <%@ page import="java.util.ArrayList" %><%@
-page import="java.util.Collections" %><%@
 page import="java.util.Date" %><%@
 page import="java.util.HashMap" %><%@
 page import="java.util.List" %><%@

@@ -51,7 +51,7 @@ boolean changeStructure = GetterUtil.getBoolean(request.getAttribute("edit_artic
 			}
 
 			if (selLayout != null) {
-				layoutBreadcrumb = _getLayoutBreadcrumb(request, selLayout, locale);
+				layoutBreadcrumb = journalDisplayContext.getLayoutBreadcrumb(selLayout);
 			}
 		}
 		%>
@@ -173,35 +173,3 @@ boolean changeStructure = GetterUtil.getBoolean(request.getAttribute("edit_artic
 		</aui:script>
 	</c:otherwise>
 </c:choose>
-
-<%!
-private String _getLayoutBreadcrumb(HttpServletRequest request, Layout layout, Locale locale) throws Exception {
-	List<Layout> ancestors = layout.getAncestors();
-
-	StringBundler sb = new StringBundler(4 * ancestors.size() + 5);
-
-	if (layout.isPrivateLayout()) {
-		sb.append(LanguageUtil.get(request, "private-pages"));
-	}
-	else {
-		sb.append(LanguageUtil.get(request, "public-pages"));
-	}
-
-	sb.append(StringPool.SPACE);
-	sb.append(StringPool.GREATER_THAN);
-	sb.append(StringPool.SPACE);
-
-	Collections.reverse(ancestors);
-
-	for (Layout ancestor : ancestors) {
-		sb.append(HtmlUtil.escape(ancestor.getName(locale)));
-		sb.append(StringPool.SPACE);
-		sb.append(StringPool.GREATER_THAN);
-		sb.append(StringPool.SPACE);
-	}
-
-	sb.append(HtmlUtil.escape(layout.getName(locale)));
-
-	return sb.toString();
-}
-%>
