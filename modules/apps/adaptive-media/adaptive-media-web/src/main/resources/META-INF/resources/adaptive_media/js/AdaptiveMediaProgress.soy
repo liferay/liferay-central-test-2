@@ -3,6 +3,7 @@
 /**
  * It renders a progressbar and a loading icon.
  *
+ * @param disabled
  * @param progressBarClass
  * @param progressBarLabel
  * @param progressBarValue
@@ -11,7 +12,7 @@
  */
 {template .render}
 	<div id="{$id}">
-		<div class="progress-container">
+		<div class="progress-container {$disabled ? 'disabled' : ''}">
 			{call ProgressBar.render}
 				{param barClass: $progressBarClass /}
 				{param label: $progressBarLabel /}

@@ -181,6 +181,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 								'<portlet:namespace />OptimizeRemaining<%= uuid %>',
 								new adaptiveMediaWebAdaptive_mediaJsAdaptiveMediaProgressEs.default(
 									{
+										disabled: <%= !configurationEntry.isEnabled() %>,
 										namespace: '<portlet:namespace />',
 										percentage: <%= percentage %>,
 										percentageUrl: '<%= optimizedImagesPercentageURL.toString() %>',
