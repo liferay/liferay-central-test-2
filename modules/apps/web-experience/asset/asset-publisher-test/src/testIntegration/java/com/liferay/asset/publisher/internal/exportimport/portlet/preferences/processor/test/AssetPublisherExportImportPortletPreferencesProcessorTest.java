@@ -78,10 +78,10 @@ public class AssetPublisherExportImportPortletPreferencesProcessorTest {
 
 		StringBundler sb = new StringBundler(5);
 
-		sb.append("(&(objectClass=");
-		sb.append(ExportImportPortletPreferencesProcessor.class.getName());
-		sb.append(")(javax.portlet.name=");
+		sb.append("(&(javax.portlet.name=");
 		sb.append(AssetPublisherPortletKeys.ASSET_PUBLISHER);
+		sb.append(")(objectClass=");
+		sb.append(ExportImportPortletPreferencesProcessor.class.getName());
 		sb.append("))");
 
 		Filter filter = registry.getFilter(sb.toString());
