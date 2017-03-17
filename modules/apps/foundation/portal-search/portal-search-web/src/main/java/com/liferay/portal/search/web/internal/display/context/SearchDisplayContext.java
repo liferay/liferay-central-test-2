@@ -85,7 +85,7 @@ public class SearchDisplayContext {
 			Language language, FacetedSearcherManager facetedSearcherManager,
 			IndexSearchPropsValues indexSearchPropsValues,
 			PortletURLFactory portletURLFactory)
-		throws Exception {
+		throws PortletException {
 
 		_renderRequest = renderRequest;
 		_renderResponse = renderResponse;
