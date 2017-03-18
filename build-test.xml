@@ -4912,7 +4912,7 @@ go]]></replacevalue>
 								</not>
 							</and>
 							<then>
-								<echo>Copying ${project.dir}/plugins/marketplace/${app.file.name} to ${liferay.home}/osgi/marketplace/${app.file.name}</echo>
+								<echo>Copying ${project.dir}/plugins/marketplace/${app.file.name} to ${liferay.home}/osgi/marketplace/${app.file.name}.</echo>
 
 								<delete file="${liferay.home}/osgi/marketplace/${app.file.name}" />
 
@@ -4927,7 +4927,7 @@ go]]></replacevalue>
 						<if>
 							<available file="${project.dir}/plugins/marketplace/@{app.file.name}" />
 							<then>
-								<echo>Copying ${project.dir}/plugins/marketplace/@{app.file.name} to ${liferay.home}/osgi/marketplace/@{app.file.name}</echo>
+								<echo>Copying ${project.dir}/plugins/marketplace/@{app.file.name} to ${liferay.home}/osgi/marketplace/@{app.file.name}.</echo>
 
 								<delete failonerror="false" file="${liferay.home}/osgi/marketplace/@{app.file.name}" />
 
