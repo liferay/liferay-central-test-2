@@ -257,6 +257,8 @@ AUI.add(
 
 						instance.appendChild(field);
 
+						field.render();
+
 						instance._syncRequiredFieldsWarning();
 
 						var row = instance.getFieldRow(field);
