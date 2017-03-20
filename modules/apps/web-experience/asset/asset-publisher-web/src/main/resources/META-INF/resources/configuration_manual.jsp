@@ -185,6 +185,7 @@ String eventName = "_" + HtmlUtil.escapeJS(assetPublisherDisplayContext.getPortl
 											}
 											else {
 												ClassTypeReader classTypeReader = curRendererFactory.getClassTypeReader();
+
 												List<ClassType> assetAvailableClassTypes = classTypeReader.getAvailableClassTypes(PortalUtil.getCurrentAndAncestorSiteGroupIds(groupId), locale);
 
 												for (ClassType assetAvailableClassType : assetAvailableClassTypes) {
