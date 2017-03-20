@@ -83,8 +83,7 @@ AUI.add(
 					);
 
 					instance._eventHandlers.push(
-						instance.pagination.after('pageChange', A.bind('_afterPaginationPageChange', instance)),
-						instance.pagination.on('changeRequest', A.bind('_onPaginationChangeRequest', instance))
+						instance.pagination.after('pageChange', A.bind('_afterPaginationPageChange', instance))
 					);
 				}
 
@@ -249,34 +248,6 @@ AUI.add(
 				}
 				else if (currentTarget.hasClass('lfr-ddm-form-pagination-next')) {
 					instance.nextPage();
-				}
-			},
-
-			_onPaginationChangeRequest: function(event) {
-				var instance = this;
-
-				var currentPage = instance.getCurrentPage();
-
-				var nextPage = event.state.page;
-
-				var pagination = instance.getPagination();
-
-				if (nextPage > currentPage) {
-					event.preventDefault();
-
-					var pages = instance._getPaginationNodes();
-
-					instance.validatePage(
-						pages.item(currentPage - 1),
-						function(hasErrors) {
-							if (!hasErrors) {
-								pagination.set('page', nextPage);
-							}
-						}
-					);
-				}
-				else {
-					pagination.set('page', nextPage);
 				}
 			},
 
