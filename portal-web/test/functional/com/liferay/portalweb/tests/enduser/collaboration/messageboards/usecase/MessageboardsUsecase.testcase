@@ -1110,7 +1110,7 @@
 		</execute>
 
 		<execute macro="MessageboardsPortlet#configureMessageEmailFromCP">
-			<var name="userEmailAddress" property-value="email.address.2" />
+			<var name="emailFromAddress" property-value="email.address.2" />
 		</execute>
 
 		<execute macro="Navigator#openURL" />
