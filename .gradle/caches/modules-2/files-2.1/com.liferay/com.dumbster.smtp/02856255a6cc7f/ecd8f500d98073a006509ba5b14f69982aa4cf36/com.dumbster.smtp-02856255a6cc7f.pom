@@ -3,7 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.liferay</groupId>
-  <artifactId>dumbster</artifactId>
+  <artifactId>com.dumbster.smtp</artifactId>
   <version>02856255a6cc7f</version>
   <description>POM was created by Sonatype Nexus</description>
 </project>
