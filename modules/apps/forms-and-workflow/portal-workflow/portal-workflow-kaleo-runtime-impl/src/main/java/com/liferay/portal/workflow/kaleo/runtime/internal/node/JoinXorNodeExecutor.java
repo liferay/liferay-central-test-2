@@ -18,6 +18,8 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.workflow.kaleo.model.KaleoInstanceToken;
 import com.liferay.portal.workflow.kaleo.model.KaleoNode;
+import com.liferay.portal.workflow.kaleo.model.KaleoTask;
+import com.liferay.portal.workflow.kaleo.model.KaleoTaskInstanceToken;
 import com.liferay.portal.workflow.kaleo.model.KaleoTimer;
 import com.liferay.portal.workflow.kaleo.model.KaleoTransition;
 import com.liferay.portal.workflow.kaleo.runtime.ExecutionContext;
@@ -145,46 +147,59 @@ public class JoinXorNodeExecutor extends BaseNodeExecutor {
 	}
 
 	private boolean _completeAllChildrenTasks(
-			KaleoInstanceToken currKaleoInstanceToken, long stopNodeId,
+			KaleoInstanceToken currentKaleoInstanceToken, long stopNodeId,
 			ServiceContext serviceContext)
 		throws PortalException {
 
-		if (currKaleoInstanceToken.getCurrentKaleoNodeId() == stopNodeId) {
+		if (currentKaleoInstanceToken.getCurrentKaleoNodeId() == stopNodeId) {
 			return true;
 		}
 
-		KaleoNode currKaleoNode = currKaleoInstanceToken.getCurrentKaleoNode();
+		KaleoNode currentKaleoNode =
+			currentKaleoInstanceToken.getCurrentKaleoNode();
 
-		if (currKaleoNode.isTerminal()) {
+		if (currentKaleoNode.isTerminal()) {
 			return false;
 		}
 
 		boolean needSetting = false;
 
 		for (KaleoInstanceToken childKaleoInstanceToken :
-				currKaleoInstanceToken.getChildrenKaleoInstanceTokens()) {
-			needSetting |= _completeAllChildrenTasks(
-				childKaleoInstanceToken, stopNodeId, serviceContext);
+				currentKaleoInstanceToken.getChildrenKaleoInstanceTokens()) {
+
+			if (_completeAllChildrenTasks(
+					childKaleoInstanceToken, stopNodeId, serviceContext)) {
+
+				needSetting = true;
+			}
 		}
 
-		if ((currKaleoInstanceToken.getChildrenKaleoInstanceTokens().size() >
-				0) &&
-			!needSetting) {
+		List<KaleoInstanceToken> childrenKaleoInstanceTokens =
+			currentKaleoInstanceToken.getChildrenKaleoInstanceTokens();
 
+		if (!childrenKaleoInstanceTokens.isEmpty() && !needSetting) {
 			return false;
 		}
 
-		if (currKaleoNode.getType().equals("TASK")) {
-			long kaleoNodeId = currKaleoNode.getKaleoNodeId();
+		String type = currentKaleoNode.getType();
 
-			long kaleoTaskId = _kaleoTaskLocalService.getKaleoNodeKaleoTask(
-				kaleoNodeId).getKaleoTaskId();
+		if (type.equals("TASK")) {
+			long kaleoNodeId = currentKaleoNode.getKaleoNodeId();
 
-			long kaleoInstanceId = currKaleoInstanceToken.getKaleoInstanceId();
+			KaleoTask kaleoTask = _kaleoTaskLocalService.getKaleoNodeKaleoTask(
+				kaleoNodeId);
+
+			long kaleoTaskId = kaleoTask.getKaleoTaskId();
+
+			long kaleoInstanceId =
+				currentKaleoInstanceToken.getKaleoInstanceId();
+
+			KaleoTaskInstanceToken kaleoTaskInstanceToken =
+				_kaleoTaskInstanceTokenLocalService.getKaleoTaskInstanceTokens(
+					kaleoInstanceId, kaleoTaskId);
 
 			long kaleoTaskInstanceTokenId =
-				_kaleoTaskInstanceTokenLocalService.getKaleoTaskInstanceTokens(
-					kaleoInstanceId, kaleoTaskId).getKaleoTaskInstanceTokenId();
+				kaleoTaskInstanceToken.getKaleoTaskInstanceTokenId();
 
 			_kaleoTaskAssignmentInstanceLocalService.
 				completeKaleoTaskInstanceToken(
@@ -195,7 +210,6 @@ public class JoinXorNodeExecutor extends BaseNodeExecutor {
 		}
 
 		return true;
-
 	}
 
 	@Reference
