@@ -26,8 +26,8 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.util.List;
 import java.util.Optional;
@@ -149,12 +149,17 @@ public class FileEntryAdaptiveMediaImageURLItemSelectorReturnTypeResolver
 
 		JSONObject sourceJSONObject = JSONFactoryUtil.createJSONObject();
 
-		String src = adaptiveMedia.getURI().toString();
+		String src = adaptiveMedia.getURI();
 
-		if (Validator.isNotNull(hdAdaptiveMedia)) {
-			src =
-				adaptiveMedia.getURI() + ", " + hdAdaptiveMedia.getURI() +
-					" 2x";
+		if (hdAdaptiveMedia != null) {
+			StringBundler sb = new StringBundler(4);
+
+			sb.append(adaptiveMedia.getURI());
+			sb.append(", ");
+			sb.append(hdAdaptiveMedia.getURI());
+			sb.append(" 2x");
+
+			src = sb.toString();
 		}
 
 		sourceJSONObject.put("src", src);

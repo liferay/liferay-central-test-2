@@ -26,7 +26,6 @@ import com.liferay.document.library.kernel.service.DLAppLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -177,7 +176,7 @@ public class HtmlContentTransformerImpl implements ContentTransformer<String> {
 		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia,
 		AdaptiveMedia<AdaptiveMediaImageProcessor> hdAdaptiveMedia) {
 
-		StringBundler sb = new StringBundler(8);
+		StringBundler sb = new StringBundler(11);
 
 		sb.append("<source");
 
@@ -189,16 +188,14 @@ public class HtmlContentTransformerImpl implements ContentTransformer<String> {
 			});
 
 		sb.append(" srcset=\"");
+		sb.append(adaptiveMedia.getURI());
 
-		String src = adaptiveMedia.getURI().toString();
-
-		if (Validator.isNotNull(hdAdaptiveMedia)) {
-			src =
-				adaptiveMedia.getURI() + ", " + hdAdaptiveMedia.getURI() +
-					" 2x";
+		if (hdAdaptiveMedia != null) {
+			sb.append(", ");
+			sb.append(hdAdaptiveMedia.getURI());
+			sb.append(" 2x");
 		}
 
-		sb.append(src);
 		sb.append("\"");
 		sb.append("/>");
 
