@@ -143,25 +143,29 @@ public class FileEntryAdaptiveMediaImageURLItemSelectorReturnTypeResolverTest {
 
 			JSONArray sourcesJSONArray = jsonObject.getJSONArray("sources");
 
-			Assert.assertEquals(4, sourcesJSONArray.length());
+			Assert.assertEquals(5, sourcesJSONArray.length());
 
 			_assertSrcSource(
 				sourcesJSONArray.getJSONObject(0), fileEntry.getFileEntryId(),
-				"uuid0");
+				"uuid0", fileEntry.getTitle());
 			_assertSrcSource(
 				sourcesJSONArray.getJSONObject(1), fileEntry.getFileEntryId(),
-				"uuid2");
+				"uuid4", fileEntry.getTitle());
 			_assertSrcSource(
 				sourcesJSONArray.getJSONObject(2), fileEntry.getFileEntryId(),
-				"uuid1");
+				"uuid2", fileEntry.getTitle());
 			_assertSrcSource(
 				sourcesJSONArray.getJSONObject(3), fileEntry.getFileEntryId(),
-				"uuid3");
+				"uuid1", fileEntry.getTitle());
+			_assertSrcSource(
+				sourcesJSONArray.getJSONObject(4), fileEntry.getFileEntryId(),
+				"uuid3", fileEntry.getTitle());
 
 			_assertAttibutes(sourcesJSONArray.getJSONObject(0), 50, 0);
-			_assertAttibutes(sourcesJSONArray.getJSONObject(1), 200, 50);
-			_assertAttibutes(sourcesJSONArray.getJSONObject(2), 280, 200);
-			_assertAttibutes(sourcesJSONArray.getJSONObject(3), 330, 280);
+			_assertAttibutes(sourcesJSONArray.getJSONObject(1), 100, 50);
+			_assertAttibutes(sourcesJSONArray.getJSONObject(2), 200, 100);
+			_assertAttibutes(sourcesJSONArray.getJSONObject(3), 280, 200);
+			_assertAttibutes(sourcesJSONArray.getJSONObject(4), 330, 280);
 		}
 	}
 
@@ -233,6 +237,14 @@ public class FileEntryAdaptiveMediaImageURLItemSelectorReturnTypeResolverTest {
 
 		_configurationHelper.addAdaptiveMediaImageConfigurationEntry(
 			TestPropsValues.getCompanyId(), "extra", "uuid3", properties);
+
+		properties = new HashMap<>();
+
+		properties.put("max-height", "100");
+		properties.put("max-width", "100");
+
+		_configurationHelper.addAdaptiveMediaImageConfigurationEntry(
+			TestPropsValues.getCompanyId(), "small.hd", "uuid4", properties);
 	}
 
 	private void _assertAttibutes(
@@ -280,14 +292,14 @@ public class FileEntryAdaptiveMediaImageURLItemSelectorReturnTypeResolverTest {
 
 	private void _assertSrcSource(
 		JSONObject sourceJSONObject, long fileEntryId,
-		String configurationEntryUuid) {
+		String configurationEntryUuid, String title) {
 
 		String srcSource = sourceJSONObject.getString("src");
 
 		Assert.assertTrue(
 			srcSource.startsWith(
 				"/o/adaptive-media/image/" + fileEntryId + "/" +
-					configurationEntryUuid + "/"));
+					configurationEntryUuid + "/" + title));
 	}
 
 	private byte[] _getImageBytes() throws Exception {
