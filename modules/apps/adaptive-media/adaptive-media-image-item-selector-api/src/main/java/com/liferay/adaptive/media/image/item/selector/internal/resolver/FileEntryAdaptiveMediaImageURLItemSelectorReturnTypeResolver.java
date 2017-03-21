@@ -83,19 +83,20 @@ public class FileEntryAdaptiveMediaImageURLItemSelectorReturnTypeResolver
 					queryBuilder.allForFileEntry(fileEntry).orderBy(
 						AdaptiveMediaImageAttribute.IMAGE_WIDTH, true).done());
 
-		List<AdaptiveMedia<AdaptiveMediaImageProcessor>> adaptiveMediaList =
+		List<AdaptiveMedia<AdaptiveMediaImageProcessor>> adaptiveMedias =
 			stream.collect(Collectors.toList());
 
 		AdaptiveMedia previousAdaptiveMedia = null;
 
 		for (AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia :
-				adaptiveMediaList) {
+				adaptiveMedias) {
 
-			AdaptiveMedia hdAdaptiveMedia = _findHDAdaptiveMedia(
-				adaptiveMedia, adaptiveMediaList);
+			Optional<AdaptiveMedia<AdaptiveMediaImageProcessor>>
+				hdAdaptiveMediaOptional = _getHDAdaptiveMedia(
+					adaptiveMedia, adaptiveMedias);
 
 			JSONObject sourceJSONObject = _getSourceJSONObject(
-				adaptiveMedia, hdAdaptiveMedia, previousAdaptiveMedia);
+				adaptiveMedia, previousAdaptiveMedia, hdAdaptiveMediaOptional);
 
 			sourcesArray.put(sourceJSONObject);
 
@@ -107,9 +108,10 @@ public class FileEntryAdaptiveMediaImageURLItemSelectorReturnTypeResolver
 		return fileEntryJSONObject.toString();
 	}
 
-	private AdaptiveMedia<AdaptiveMediaImageProcessor> _findHDAdaptiveMedia(
-		AdaptiveMedia<AdaptiveMediaImageProcessor> originalAdaptiveMedia,
-		List<AdaptiveMedia<AdaptiveMediaImageProcessor>> adaptiveMediaList) {
+	private Optional<AdaptiveMedia<AdaptiveMediaImageProcessor>>
+		_getHDAdaptiveMedia(
+			AdaptiveMedia<AdaptiveMediaImageProcessor> originalAdaptiveMedia,
+			List<AdaptiveMedia<AdaptiveMediaImageProcessor>> adaptiveMedias) {
 
 		Optional<Integer> originalWidthOptional =
 			originalAdaptiveMedia.getAttributeValue(
@@ -119,8 +121,14 @@ public class FileEntryAdaptiveMediaImageURLItemSelectorReturnTypeResolver
 			originalAdaptiveMedia.getAttributeValue(
 				AdaptiveMediaImageAttribute.IMAGE_HEIGHT);
 
+		if (!originalWidthOptional.isPresent() ||
+			!originalHeightOptional.isPresent()) {
+
+			return Optional.empty();
+		}
+
 		for (AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia :
-				adaptiveMediaList) {
+				adaptiveMedias) {
 
 			Optional<Integer> widthOptional = adaptiveMedia.getAttributeValue(
 				AdaptiveMediaImageAttribute.IMAGE_WIDTH);
@@ -132,37 +140,36 @@ public class FileEntryAdaptiveMediaImageURLItemSelectorReturnTypeResolver
 				(originalWidthOptional.get() == (widthOptional.get() / 2)) &&
 				(originalHeightOptional.get() == (heightOptional.get() / 2))) {
 
-				return adaptiveMedia;
+				return Optional.of(adaptiveMedia);
 			}
 		}
 
-		return null;
+		return Optional.empty();
 	}
 
 	private JSONObject _getSourceJSONObject(
 		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia,
-		AdaptiveMedia<AdaptiveMediaImageProcessor> hdAdaptiveMedia,
-		AdaptiveMedia<AdaptiveMediaImageProcessor> previousAdaptiveMedia) {
+		AdaptiveMedia<AdaptiveMediaImageProcessor> previousAdaptiveMedia,
+		Optional<AdaptiveMedia<AdaptiveMediaImageProcessor>>
+			hdAdaptiveMediaOptional) {
 
 		Optional<Integer> widthOptional = adaptiveMedia.getAttributeValue(
 			AdaptiveMediaImageAttribute.IMAGE_WIDTH);
 
 		JSONObject sourceJSONObject = JSONFactoryUtil.createJSONObject();
 
-		String src = adaptiveMedia.getURI();
+		StringBundler sb = new StringBundler(4);
 
-		if (hdAdaptiveMedia != null) {
-			StringBundler sb = new StringBundler(4);
+		sb.append(adaptiveMedia.getURI());
 
-			sb.append(adaptiveMedia.getURI());
-			sb.append(", ");
-			sb.append(hdAdaptiveMedia.getURI());
-			sb.append(" 2x");
+		hdAdaptiveMediaOptional.ifPresent(
+			hdAdaptiveMedia -> {
+				sb.append(", ");
+				sb.append(hdAdaptiveMedia.getURI());
+				sb.append(" 2x");
+			});
 
-			src = sb.toString();
-		}
-
-		sourceJSONObject.put("src", src);
+		sourceJSONObject.put("src", sb.toString());
 
 		JSONObject attributesJSONObject = JSONFactoryUtil.createJSONObject();
 

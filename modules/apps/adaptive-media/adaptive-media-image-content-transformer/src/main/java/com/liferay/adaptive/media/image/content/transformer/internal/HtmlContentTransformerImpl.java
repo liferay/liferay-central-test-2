@@ -83,9 +83,21 @@ public class HtmlContentTransformerImpl implements ContentTransformer<String> {
 		return sb.toString();
 	}
 
-	private AdaptiveMedia<AdaptiveMediaImageProcessor> _findHDAdaptiveMedia(
-		AdaptiveMedia<AdaptiveMediaImageProcessor> originalAdaptiveMedia,
-		List<AdaptiveMedia<AdaptiveMediaImageProcessor>> adaptiveMediaList) {
+	private Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>>
+			_getAdaptiveMedias(long fileEntryId)
+		throws AdaptiveMediaException, PortalException {
+
+		FileEntry fileEntry = _dlAppLocalService.getFileEntry(fileEntryId);
+
+		return _finder.getAdaptiveMedia(
+			queryBuilder -> queryBuilder.allForFileEntry(fileEntry).orderBy(
+				AdaptiveMediaImageAttribute.IMAGE_WIDTH, true).done());
+	}
+
+	private Optional<AdaptiveMedia<AdaptiveMediaImageProcessor>>
+		_getHDAdaptiveMedia(
+			AdaptiveMedia<AdaptiveMediaImageProcessor> originalAdaptiveMedia,
+			List<AdaptiveMedia<AdaptiveMediaImageProcessor>> adaptiveMedias) {
 
 		Optional<Integer> originalWidthOptional =
 			originalAdaptiveMedia.getAttributeValue(
@@ -95,8 +107,14 @@ public class HtmlContentTransformerImpl implements ContentTransformer<String> {
 			originalAdaptiveMedia.getAttributeValue(
 				AdaptiveMediaImageAttribute.IMAGE_HEIGHT);
 
+		if (!originalWidthOptional.isPresent() ||
+			!originalHeightOptional.isPresent()) {
+
+			return Optional.empty();
+		}
+
 		for (AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia :
-				adaptiveMediaList) {
+				adaptiveMedias) {
 
 			Optional<Integer> widthOptional = adaptiveMedia.getAttributeValue(
 				AdaptiveMediaImageAttribute.IMAGE_WIDTH);
@@ -108,22 +126,11 @@ public class HtmlContentTransformerImpl implements ContentTransformer<String> {
 				(originalWidthOptional.get() == (widthOptional.get() / 2)) &&
 				(originalHeightOptional.get() == (heightOptional.get() / 2))) {
 
-				return adaptiveMedia;
+				return Optional.of(adaptiveMedia);
 			}
 		}
 
-		return null;
-	}
-
-	private Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>>
-			_getAdaptiveMedias(long fileEntryId)
-		throws AdaptiveMediaException, PortalException {
-
-		FileEntry fileEntry = _dlAppLocalService.getFileEntry(fileEntryId);
-
-		return _finder.getAdaptiveMedia(
-			queryBuilder -> queryBuilder.allForFileEntry(fileEntry).orderBy(
-				AdaptiveMediaImageAttribute.IMAGE_WIDTH, true).done());
+		return Optional.empty();
 	}
 
 	private Optional<String> _getMediaQuery(
@@ -174,7 +181,8 @@ public class HtmlContentTransformerImpl implements ContentTransformer<String> {
 	private String _getSourceElement(
 		AdaptiveMedia<AdaptiveMediaImageProcessor> previousAdaptiveMedia,
 		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia,
-		AdaptiveMedia<AdaptiveMediaImageProcessor> hdAdaptiveMedia) {
+		Optional<AdaptiveMedia<AdaptiveMediaImageProcessor>>
+			hdAdaptiveMediaOptional) {
 
 		StringBundler sb = new StringBundler(11);
 
@@ -190,11 +198,12 @@ public class HtmlContentTransformerImpl implements ContentTransformer<String> {
 		sb.append(" srcset=\"");
 		sb.append(adaptiveMedia.getURI());
 
-		if (hdAdaptiveMedia != null) {
-			sb.append(", ");
-			sb.append(hdAdaptiveMedia.getURI());
-			sb.append(" 2x");
-		}
+		hdAdaptiveMediaOptional.ifPresent(
+			hdAdaptiveMedia -> {
+				sb.append(", ");
+				sb.append(hdAdaptiveMedia.getURI());
+				sb.append(" 2x");
+			});
 
 		sb.append("\"");
 		sb.append("/>");
@@ -213,12 +222,14 @@ public class HtmlContentTransformerImpl implements ContentTransformer<String> {
 		for (AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia :
 				adaptiveMedias) {
 
-			AdaptiveMedia hdAdaptiveMedia = _findHDAdaptiveMedia(
-				adaptiveMedia, adaptiveMedias);
+			Optional<AdaptiveMedia<AdaptiveMediaImageProcessor>>
+				hdAdaptiveMediaOptional = _getHDAdaptiveMedia(
+					adaptiveMedia, adaptiveMedias);
 
 			sourceElements.add(
 				_getSourceElement(
-					previousAdaptiveMedia, adaptiveMedia, hdAdaptiveMedia));
+					previousAdaptiveMedia, adaptiveMedia,
+					hdAdaptiveMediaOptional));
 
 			previousAdaptiveMedia = adaptiveMedia;
 		}
