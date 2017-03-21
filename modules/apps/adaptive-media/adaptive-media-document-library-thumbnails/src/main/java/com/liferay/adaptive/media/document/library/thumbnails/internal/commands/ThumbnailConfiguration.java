@@ -17,9 +17,12 @@ package com.liferay.adaptive.media.document.library.thumbnails.internal.commands
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry;
 import com.liferay.portal.kernel.util.GetterUtil;
 
+import java.util.Collection;
 import java.util.Map;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 /**
  * @author Adolfo Pérez
@@ -42,7 +45,18 @@ public class ThumbnailConfiguration {
 		return Long.parseLong(matcher.group(1));
 	}
 
-	public boolean matches(
+	public Optional<AdaptiveMediaImageConfigurationEntry>
+		selectMatchingConfigurationEntry(
+			Collection<AdaptiveMediaImageConfigurationEntry>
+				configurationEntries) {
+
+		Stream<AdaptiveMediaImageConfigurationEntry> stream =
+			configurationEntries.stream();
+
+		return stream.filter(this::_matches).findFirst();
+	}
+
+	private boolean _matches(
 		AdaptiveMediaImageConfigurationEntry configurationEntry) {
 
 		Map<String, String> properties = configurationEntry.getProperties();

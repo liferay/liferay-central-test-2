@@ -42,6 +42,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -158,20 +159,19 @@ public class AdaptiveMediaThumbnailsOSGiCommands {
 					_configurationHelper.
 						getAdaptiveMediaImageConfigurationEntries(companyId);
 
-			for (AdaptiveMediaImageConfigurationEntry configurationEntry :
-					configurationEntries) {
+			for (ThumbnailConfiguration thumbnailConfiguration :
+					_thumbnailConfigurations) {
 
-				for (ThumbnailConfiguration thumbnailConfiguration :
-						_thumbnailConfigurations) {
+				Optional<AdaptiveMediaImageConfigurationEntry>
+					configurationEntryOptional =
+						thumbnailConfiguration.selectMatchingConfigurationEntry(
+							configurationEntries);
 
-					if (thumbnailConfiguration.matches(configurationEntry)) {
+				configurationEntryOptional.ifPresent(
+					configurationEntry ->
 						_migrate(
 							companyId, configurationEntry,
-							thumbnailConfiguration);
-
-						break;
-					}
-				}
+							thumbnailConfiguration));
 			}
 		}
 	}
