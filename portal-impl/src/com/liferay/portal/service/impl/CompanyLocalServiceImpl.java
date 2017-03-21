@@ -995,6 +995,87 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		updateDisplayGroupNames(companyId);
 	}
 
+	@Async
+	public void updateDisplayGroupNames(long companyId) throws PortalException {
+		User user = userLocalService.getDefaultUser(companyId);
+
+		Locale locale = user.getLocale();
+
+		if (locale.equals(LocaleUtil.getDefault())) {
+			return;
+		}
+
+		ActionableDynamicQuery groupActionableDynamicQuery =
+			groupLocalService.getActionableDynamicQuery();
+
+		groupActionableDynamicQuery.setAddCriteriaMethod(
+			new ActionableDynamicQuery.AddCriteriaMethod() {
+
+				@Override
+				public void addCriteria(DynamicQuery dynamicQuery) {
+					Property activeProperty = PropertyFactoryUtil.forName(
+						"active");
+
+					dynamicQuery.add(activeProperty.eq(Boolean.TRUE));
+
+					Property nameProperty = PropertyFactoryUtil.forName("name");
+
+					dynamicQuery.add(nameProperty.isNotNull());
+
+					Property typeProperty = PropertyFactoryUtil.forName("type");
+
+					dynamicQuery.add(
+						typeProperty.ne(GroupConstants.TYPE_SITE_SYSTEM));
+				}
+
+			});
+		groupActionableDynamicQuery.setCompanyId(user.getCompanyId());
+		groupActionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod<Group>() {
+
+				@Override
+				public void performAction(Group group) {
+					Map<Locale, String> nameMap = group.getNameMap();
+
+					if (MapUtil.isEmpty(nameMap)) {
+						return;
+					}
+
+					Locale locale = user.getLocale();
+
+					String groupDefaultName = nameMap.get(locale);
+
+					if (Validator.isNotNull(groupDefaultName)) {
+						return;
+					}
+
+					String oldGroupDefaultName = nameMap.get(
+						LocaleUtil.getDefault());
+
+					if (_log.isWarnEnabled()) {
+						StringBundler sb = new StringBundler(5);
+
+						sb.append("No name was found for locale ");
+						sb.append(locale);
+						sb.append(". Using \"");
+						sb.append(oldGroupDefaultName);
+						sb.append("\" as the name instead.");
+
+						_log.warn(sb.toString());
+					}
+
+					nameMap.put(locale, oldGroupDefaultName);
+
+					group.setNameMap(nameMap);
+
+					groupLocalService.updateGroup(group);
+				}
+
+			});
+
+		groupActionableDynamicQuery.performActions();
+	}
+
 	/**
 	 * Updates the company's logo.
 	 *
@@ -1618,87 +1699,6 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 				}
 			}
 		}
-	}
-
-	@Async
-	public void updateDisplayGroupNames(long companyId) throws PortalException {
-		User user = userLocalService.getDefaultUser(companyId);
-
-		Locale locale = user.getLocale();
-
-		if (locale.equals(LocaleUtil.getDefault())) {
-			return;
-		}
-
-		ActionableDynamicQuery groupActionableDynamicQuery =
-			groupLocalService.getActionableDynamicQuery();
-
-		groupActionableDynamicQuery.setAddCriteriaMethod(
-			new ActionableDynamicQuery.AddCriteriaMethod() {
-
-				@Override
-				public void addCriteria(DynamicQuery dynamicQuery) {
-					Property activeProperty = PropertyFactoryUtil.forName(
-						"active");
-
-					dynamicQuery.add(activeProperty.eq(Boolean.TRUE));
-
-					Property nameProperty = PropertyFactoryUtil.forName("name");
-
-					dynamicQuery.add(nameProperty.isNotNull());
-
-					Property typeProperty = PropertyFactoryUtil.forName("type");
-
-					dynamicQuery.add(
-						typeProperty.ne(GroupConstants.TYPE_SITE_SYSTEM));
-				}
-
-			});
-		groupActionableDynamicQuery.setCompanyId(user.getCompanyId());
-		groupActionableDynamicQuery.setPerformActionMethod(
-			new ActionableDynamicQuery.PerformActionMethod<Group>() {
-
-				@Override
-				public void performAction(Group group) {
-					Map<Locale, String> nameMap = group.getNameMap();
-
-					if (MapUtil.isEmpty(nameMap)) {
-						return;
-					}
-
-					Locale locale = user.getLocale();
-
-					String groupDefaultName = nameMap.get(locale);
-
-					if (Validator.isNotNull(groupDefaultName)) {
-						return;
-					}
-
-					String oldGroupDefaultName = nameMap.get(
-						LocaleUtil.getDefault());
-
-					if (_log.isWarnEnabled()) {
-						StringBundler sb = new StringBundler(5);
-
-						sb.append("No name was found for locale ");
-						sb.append(locale);
-						sb.append(". Using \"");
-						sb.append(oldGroupDefaultName);
-						sb.append("\" as the name instead.");
-
-						_log.warn(sb.toString());
-					}
-
-					nameMap.put(locale, oldGroupDefaultName);
-
-					group.setNameMap(nameMap);
-
-					groupLocalService.updateGroup(group);
-				}
-
-			});
-
-		groupActionableDynamicQuery.performActions();
 	}
 
 	protected class DeleteGroupActionableDynamicQuery {
