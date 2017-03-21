@@ -24,7 +24,6 @@ import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigur
 import com.liferay.adaptive.media.image.finder.AdaptiveMediaImageFinder;
 import com.liferay.adaptive.media.image.internal.configuration.AdaptiveMediaImageAttributeMapping;
 import com.liferay.adaptive.media.image.internal.util.Tuple;
-import com.liferay.adaptive.media.image.processor.AdaptiveMediaImageAttribute;
 import com.liferay.adaptive.media.image.processor.AdaptiveMediaImageProcessor;
 import com.liferay.adaptive.media.processor.AdaptiveMediaAsyncProcessor;
 import com.liferay.adaptive.media.processor.AdaptiveMediaAsyncProcessorLocator;
@@ -32,7 +31,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.model.FileVersion;
-import com.liferay.portal.kernel.util.GetterUtil;
 
 import java.io.IOException;
 
@@ -117,15 +115,10 @@ public class AdaptiveMediaImageRequestHandler
 			AdaptiveMediaImageConfigurationEntry configurationEntry =
 				configurationEntryOptional.get();
 
-			Map<String, String> properties = configurationEntry.getProperties();
-
 			return _finder.getAdaptiveMedia(
-				queryBuilder -> queryBuilder.forVersion(fileVersion).with(
-					AdaptiveMediaImageAttribute.IMAGE_HEIGHT,
-					GetterUtil.getInteger(properties.get("max-height"))).with(
-						AdaptiveMediaImageAttribute.IMAGE_WIDTH,
-						GetterUtil.getInteger(properties.get("max-width"))).
-						done()).findFirst();
+				queryBuilder -> queryBuilder.forVersion(fileVersion).
+					forConfiguration(configurationEntry.getUUID()).done()).
+					findFirst();
 		}
 		catch (AdaptiveMediaException | PortalException e) {
 			throw new AdaptiveMediaRuntimeException(e);
