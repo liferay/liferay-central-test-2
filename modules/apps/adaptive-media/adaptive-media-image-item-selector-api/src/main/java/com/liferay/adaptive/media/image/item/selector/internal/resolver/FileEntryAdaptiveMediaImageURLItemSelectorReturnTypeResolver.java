@@ -14,11 +14,10 @@
 
 package com.liferay.adaptive.media.image.item.selector.internal.resolver;
 
-import com.liferay.adaptive.media.AdaptiveMedia;
-import com.liferay.adaptive.media.image.finder.AdaptiveMediaImageFinder;
 import com.liferay.adaptive.media.image.item.selector.AdaptiveMediaImageURLItemSelectorReturnType;
-import com.liferay.adaptive.media.image.processor.AdaptiveMediaImageAttribute;
-import com.liferay.adaptive.media.image.processor.AdaptiveMediaImageProcessor;
+import com.liferay.adaptive.media.image.mediaquery.Condition;
+import com.liferay.adaptive.media.image.mediaquery.MediaQuery;
+import com.liferay.adaptive.media.image.mediaquery.MediaQueryProvider;
 import com.liferay.document.library.kernel.util.DLUtil;
 import com.liferay.item.selector.ItemSelectorReturnTypeResolver;
 import com.liferay.portal.kernel.json.JSONArray;
@@ -26,13 +25,8 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import org.osgi.service.component.annotations.Component;
@@ -78,140 +72,38 @@ public class FileEntryAdaptiveMediaImageURLItemSelectorReturnTypeResolver
 
 		JSONArray sourcesArray = JSONFactoryUtil.createJSONArray();
 
-		Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>> stream =
-			_finder.getAdaptiveMedia(
-				queryBuilder ->
-					queryBuilder.allForFileEntry(fileEntry).orderBy(
-						AdaptiveMediaImageAttribute.IMAGE_WIDTH, true).done());
+		Stream<MediaQuery> mediaQueries = _mediaQueryProvider.getMediaQueries(
+			fileEntry).stream();
 
-		List<AdaptiveMedia<AdaptiveMediaImageProcessor>> adaptiveMedias =
-			stream.collect(Collectors.toList());
-
-		AdaptiveMedia previousAdaptiveMedia = null;
-
-		for (AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia :
-				adaptiveMedias) {
-
-			Optional<AdaptiveMedia<AdaptiveMediaImageProcessor>>
-				hdAdaptiveMediaOptional = _getHDAdaptiveMedia(
-					adaptiveMedia, adaptiveMedias);
-
-			JSONObject sourceJSONObject = _getSourceJSONObject(
-				adaptiveMedia, previousAdaptiveMedia, hdAdaptiveMediaOptional);
-
-			sourcesArray.put(sourceJSONObject);
-
-			previousAdaptiveMedia = adaptiveMedia;
-		}
+		mediaQueries.map(this::_getSourceJSONObject).forEach(sourcesArray::put);
 
 		fileEntryJSONObject.put("sources", sourcesArray);
 
 		return fileEntryJSONObject.toString();
 	}
 
-	private Optional<AdaptiveMedia<AdaptiveMediaImageProcessor>>
-		_getHDAdaptiveMedia(
-			AdaptiveMedia<AdaptiveMediaImageProcessor> originalAdaptiveMedia,
-			List<AdaptiveMedia<AdaptiveMediaImageProcessor>> adaptiveMedias) {
+	@Reference(unbind = "-")
+	protected void setMediaQueryProvider(
+		MediaQueryProvider mediaQueryProvider) {
 
-		Optional<Integer> originalWidthOptional =
-			originalAdaptiveMedia.getAttributeValue(
-				AdaptiveMediaImageAttribute.IMAGE_WIDTH);
-
-		Optional<Integer> originalHeightOptional =
-			originalAdaptiveMedia.getAttributeValue(
-				AdaptiveMediaImageAttribute.IMAGE_HEIGHT);
-
-		if (!originalWidthOptional.isPresent() ||
-			!originalHeightOptional.isPresent()) {
-
-			return Optional.empty();
-		}
-
-		for (AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia :
-				adaptiveMedias) {
-
-			Optional<Integer> widthOptional = adaptiveMedia.getAttributeValue(
-				AdaptiveMediaImageAttribute.IMAGE_WIDTH);
-
-			Optional<Integer> heightOptional = adaptiveMedia.getAttributeValue(
-				AdaptiveMediaImageAttribute.IMAGE_HEIGHT);
-
-			if (!widthOptional.isPresent() || !heightOptional.isPresent()) {
-				continue;
-			}
-
-			int originalWidth = originalWidthOptional.get() * 2;
-			int originalHeight = originalHeightOptional.get() * 2;
-
-			IntStream widthIntStream = IntStream.range(
-				originalWidth - 1, originalWidth + 2);
-
-			boolean widthMatch = widthIntStream.anyMatch(
-				value -> value == widthOptional.get());
-
-			IntStream heightIntStream = IntStream.range(
-				originalHeight - 1, originalHeight + 2);
-
-			boolean heightMatch = heightIntStream.anyMatch(
-				value -> value == heightOptional.get());
-
-			if (widthMatch && heightMatch) {
-				return Optional.of(adaptiveMedia);
-			}
-		}
-
-		return Optional.empty();
+		_mediaQueryProvider = mediaQueryProvider;
 	}
 
-	private JSONObject _getSourceJSONObject(
-		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia,
-		AdaptiveMedia<AdaptiveMediaImageProcessor> previousAdaptiveMedia,
-		Optional<AdaptiveMedia<AdaptiveMediaImageProcessor>>
-			hdAdaptiveMediaOptional) {
-
-		Optional<Integer> widthOptional = adaptiveMedia.getAttributeValue(
-			AdaptiveMediaImageAttribute.IMAGE_WIDTH);
-
+	private JSONObject _getSourceJSONObject(MediaQuery mediaQuery) {
 		JSONObject sourceJSONObject = JSONFactoryUtil.createJSONObject();
 
-		StringBundler sb = new StringBundler(4);
-
-		sb.append(adaptiveMedia.getURI());
-
-		hdAdaptiveMediaOptional.ifPresent(
-			hdAdaptiveMedia -> {
-				sb.append(", ");
-				sb.append(hdAdaptiveMedia.getURI());
-				sb.append(" 2x");
-			});
-
-		sourceJSONObject.put("src", sb.toString());
+		sourceJSONObject.put("src", mediaQuery.getSrc());
 
 		JSONObject attributesJSONObject = JSONFactoryUtil.createJSONObject();
 
-		widthOptional.ifPresent(
-			maxWidth -> {
-				attributesJSONObject.put("max-width", maxWidth + "px");
-
-				if (previousAdaptiveMedia != null) {
-					Optional<Integer> previousWidthOptional =
-						previousAdaptiveMedia.getAttributeValue(
-							AdaptiveMediaImageAttribute.IMAGE_WIDTH);
-
-					previousWidthOptional.ifPresent(
-						previousMaxWidth ->
-							attributesJSONObject.put(
-								"min-width", previousMaxWidth + "px"));
-				}
-			});
+		for (Condition condition : mediaQuery.getConditions()) {
+			attributesJSONObject.put(
+				condition.getAttribute(), condition.getValue());
+		}
 
 		return sourceJSONObject.put("attributes", attributesJSONObject);
 	}
 
-	@Reference(
-		target = "(model.class.name=com.liferay.portal.kernel.repository.model.FileVersion)"
-	)
-	private AdaptiveMediaImageFinder _finder;
+	private MediaQueryProvider _mediaQueryProvider;
 
 }
