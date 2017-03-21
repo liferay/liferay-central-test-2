@@ -143,7 +143,7 @@ AUI.add(
 								if (key) {
 									values.push(
 										{
-											label: item.getValue(),
+											label: item.get('value'),
 											value: key
 										}
 									);
@@ -268,6 +268,37 @@ AUI.add(
 						mainOption.set('errorMessage', event.newVal);
 					},
 
+					_afterOptionNormalizeKey: function(key, option) {
+						var instance = this;
+
+						var name = key;
+
+						if (key) {
+							var valueInItem = function(value, item) {
+								return item.value === value && item.value !== option.get('key');
+							};
+
+							var optionsValues = instance.getValue();
+
+							var hasOptionWithName = function() {
+								return optionsValues.filter(A.bind(valueInItem, null, name)).length > 0;
+							};
+
+							var counter = 0;
+
+							do {
+								if (counter > 0) {
+									name = key + counter;
+								}
+
+								counter++;
+							}
+							while (hasOptionWithName());
+						}
+
+						return new A.Do.AlterReturn(null, name);
+					},
+
 					_afterOptionValueChange: function(event) {
 						var instance = this;
 
@@ -355,6 +386,8 @@ AUI.add(
 
 					_bindOptionUI: function(option) {
 						var instance = this;
+
+						option.after(A.rbind('_afterOptionNormalizeKey', instance, option), option, 'normalizeKey');
 
 						option.bindContainerEvent('click', A.bind('_onOptionClickClose', instance, option), '.close');
 					},
