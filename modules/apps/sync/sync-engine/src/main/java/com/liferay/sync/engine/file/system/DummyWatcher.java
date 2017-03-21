@@ -22,7 +22,7 @@ import java.nio.file.Path;
 public class DummyWatcher extends Watcher {
 
 	public DummyWatcher() {
-		super(null, null);
+		super(0, null);
 	}
 
 	@Override
