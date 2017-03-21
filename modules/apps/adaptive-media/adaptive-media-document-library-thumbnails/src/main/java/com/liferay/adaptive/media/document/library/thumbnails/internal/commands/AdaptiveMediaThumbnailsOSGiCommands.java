@@ -159,19 +159,48 @@ public class AdaptiveMediaThumbnailsOSGiCommands {
 					_configurationHelper.
 						getAdaptiveMediaImageConfigurationEntries(companyId);
 
-			for (ThumbnailConfiguration thumbnailConfiguration :
-					_thumbnailConfigurations) {
+			try {
+				String[] fileNames = DLStoreUtil.getFileNames(
+					companyId, DLPreviewableProcessor.REPOSITORY_ID,
+					DLPreviewableProcessor.THUMBNAIL_PATH);
 
-				Optional<AdaptiveMediaImageConfigurationEntry>
-					configurationEntryOptional =
-						thumbnailConfiguration.selectMatchingConfigurationEntry(
-							configurationEntries);
+				for (String fileName : fileNames) {
 
-				configurationEntryOptional.ifPresent(
-					configurationEntry ->
-						_migrate(
-							companyId, configurationEntry,
-							thumbnailConfiguration));
+					// See LPS-70788
+
+					String actualFileName = StringUtil.replace(
+						fileName, "//", StringPool.SLASH);
+
+					for (ThumbnailConfiguration thumbnailConfiguration :
+							_thumbnailConfigurations) {
+
+						Optional<AdaptiveMediaImageConfigurationEntry>
+							configurationEntryOptional =
+								thumbnailConfiguration.
+									selectMatchingConfigurationEntry(
+										configurationEntries);
+
+						if (!configurationEntryOptional.isPresent()) {
+							continue;
+						}
+
+						AdaptiveMediaImageConfigurationEntry
+							configurationEntry =
+								configurationEntryOptional.get();
+
+						try {
+							_migrate(
+								actualFileName, configurationEntry,
+								thumbnailConfiguration);
+						}
+						catch (IOException ioe) {
+							_log.error(ioe);
+						}
+					}
+				}
+			}
+			catch (PortalException pe) {
+				_log.error(pe);
 			}
 		}
 	}
@@ -216,54 +245,38 @@ public class AdaptiveMediaThumbnailsOSGiCommands {
 	}
 
 	private void _migrate(
-		long companyId, AdaptiveMediaImageConfigurationEntry configurationEntry,
-		ThumbnailConfiguration thumbnailConfiguration) {
+			String fileName,
+			AdaptiveMediaImageConfigurationEntry configurationEntry,
+			ThumbnailConfiguration thumbnailConfiguration)
+		throws IOException, PortalException {
 
-		try {
-			String[] fileNames = DLStoreUtil.getFileNames(
-				companyId, DLPreviewableProcessor.REPOSITORY_ID,
-				DLPreviewableProcessor.THUMBNAIL_PATH);
+		FileVersion fileVersion = _getFileVersion(
+			thumbnailConfiguration.getFileVersionId(fileName));
 
-			for (String fileName : fileNames) {
-
-				// See LPS-70788
-
-				String actualFileName = StringUtil.replace(
-					fileName, "//", StringPool.SLASH);
-
-				FileVersion fileVersion = _getFileVersion(
-					thumbnailConfiguration.getFileVersionId(actualFileName));
-
-				if (fileVersion == null) {
-					continue;
-				}
-
-				AdaptiveMediaImageEntry imageEntry =
-					_imageEntryLocalService.fetchAdaptiveMediaImageEntry(
-						configurationEntry.getUUID(),
-						fileVersion.getFileVersionId());
-
-				if (imageEntry != null) {
-					continue;
-				}
-
-				byte[] bytes = DLStoreUtil.getFileAsBytes(
-					fileVersion.getCompanyId(),
-					DLPreviewableProcessor.REPOSITORY_ID, actualFileName);
-
-				ImageBag imageBag = ImageToolUtil.read(bytes);
-
-				RenderedImage renderedImage = imageBag.getRenderedImage();
-
-				_imageEntryLocalService.addAdaptiveMediaImageEntry(
-					configurationEntry, fileVersion, renderedImage.getWidth(),
-					renderedImage.getHeight(),
-					new UnsyncByteArrayInputStream(bytes), bytes.length);
-			}
+		if (fileVersion == null) {
+			return;
 		}
-		catch (IOException | PortalException e) {
-			_log.error(e);
+
+		AdaptiveMediaImageEntry imageEntry =
+			_imageEntryLocalService.fetchAdaptiveMediaImageEntry(
+				configurationEntry.getUUID(), fileVersion.getFileVersionId());
+
+		if (imageEntry != null) {
+			return;
 		}
+
+		byte[] bytes = DLStoreUtil.getFileAsBytes(
+			fileVersion.getCompanyId(), DLPreviewableProcessor.REPOSITORY_ID,
+			fileName);
+
+		ImageBag imageBag = ImageToolUtil.read(bytes);
+
+		RenderedImage renderedImage = imageBag.getRenderedImage();
+
+		_imageEntryLocalService.addAdaptiveMediaImageEntry(
+			configurationEntry, fileVersion, renderedImage.getWidth(),
+			renderedImage.getHeight(), new UnsyncByteArrayInputStream(bytes),
+			bytes.length);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
