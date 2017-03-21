@@ -4,8 +4,8 @@
 [subrepo]
 	autopull = false
 	cmdver = liferay
-	commit = cfca2c0cff306580826503ca9ab8ab090bf343af
+	commit = 458f99e2a4101b2f887b1d822105c4cd1eb8de0f
 	mergebuttonmergecommits = false
 	mode = push
-	parent = 96797b61eabeacd80f5badd700c1e2edabddbcd9
+	parent = 619041a5d2d613c824947f4f98c04bee200cd64c
 	remote = git@github.com:liferay/com-liferay-screens.git
