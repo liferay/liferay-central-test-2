@@ -57,7 +57,7 @@ public class HtmlContentTransformerImplTest {
 		throws Exception {
 
 		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia =
-			_createAdaptiveMedia(1989, "http://very.adaptive.com");
+			_createAdaptiveMedia(450, 1989, "http://very.adaptive.com");
 
 		Mockito.when(
 			_finder.getAdaptiveMedia(Mockito.any())
@@ -89,10 +89,10 @@ public class HtmlContentTransformerImplTest {
 	@Test
 	public void testAppliesSeveralMediaQueries() throws Exception {
 		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia1 =
-			_createAdaptiveMedia(1986, "http://small.very.adaptive.com");
+			_createAdaptiveMedia(450, 1986, "http://small.very.adaptive.com");
 
 		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia2 =
-			_createAdaptiveMedia(1989, "http://very.adaptive.com");
+			_createAdaptiveMedia(450, 1989, "http://very.adaptive.com");
 
 		Mockito.when(
 			_finder.getAdaptiveMedia(Mockito.any())
@@ -122,7 +122,7 @@ public class HtmlContentTransformerImplTest {
 		throws Exception {
 
 		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia =
-			_createAdaptiveMedia(1989, "http://very.adaptive.com");
+			_createAdaptiveMedia(450, 1989, "http://very.adaptive.com");
 
 		Mockito.when(
 			_finder.getAdaptiveMedia(Mockito.any())
@@ -153,7 +153,7 @@ public class HtmlContentTransformerImplTest {
 	@Test
 	public void testReplacesTwoConsecutiveImageTags() throws Exception {
 		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia =
-			_createAdaptiveMedia(1989, "http://very.adaptive.com");
+			_createAdaptiveMedia(450, 1989, "http://very.adaptive.com");
 
 		Mockito.when(
 			_finder.getAdaptiveMedia(Mockito.any())
@@ -215,7 +215,7 @@ public class HtmlContentTransformerImplTest {
 	@Test
 	public void testSupportsImageTagsWithNewLineCharacters() throws Exception {
 		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia =
-			_createAdaptiveMedia(1989, "http://very.adaptive.com");
+			_createAdaptiveMedia(450, 1989, "http://very.adaptive.com");
 
 		Mockito.when(
 			_finder.getAdaptiveMedia(Mockito.any())
@@ -246,7 +246,7 @@ public class HtmlContentTransformerImplTest {
 	@Test
 	public void testTheAttributeIsCaseInsensitive() throws Exception {
 		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia =
-			_createAdaptiveMedia(1989, "http://very.adaptive.com");
+			_createAdaptiveMedia(450, 1989, "http://very.adaptive.com");
 
 		Mockito.when(
 			_finder.getAdaptiveMedia(Mockito.any())
@@ -276,10 +276,17 @@ public class HtmlContentTransformerImplTest {
 	}
 
 	private AdaptiveMedia<AdaptiveMediaImageProcessor> _createAdaptiveMedia(
-		int imageWidth, String url) {
+		int imageHeight, int imageWidth, String url) {
 
 		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia = Mockito.mock(
 			AdaptiveMedia.class);
+
+		Mockito.when(
+			adaptiveMedia.getAttributeValue(
+				AdaptiveMediaImageAttribute.IMAGE_HEIGHT)
+		).thenReturn(
+			Optional.of(imageHeight)
+		);
 
 		Mockito.when(
 			adaptiveMedia.getAttributeValue(
