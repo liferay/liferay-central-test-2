@@ -92,13 +92,9 @@ public class AdaptiveMediaThumbnailsOSGiCommands {
 							thumbnailConfiguration.getFileVersionId(
 								actualFileName));
 
-						if (fileVersion == null) {
-							continue;
+						if (fileVersion != null) {
+							companyTotal += 1;
 						}
-
-						companyTotal += 1;
-
-						break;
 					}
 				}
 
@@ -135,15 +131,11 @@ public class AdaptiveMediaThumbnailsOSGiCommands {
 							thumbnailConfiguration.getFileVersionId(
 								actualFileName));
 
-						if (fileVersion == null) {
-							continue;
+						if (fileVersion != null) {
+							DLStoreUtil.deleteFile(
+								companyId, DLPreviewableProcessor.REPOSITORY_ID,
+								actualFileName);
 						}
-
-						DLStoreUtil.deleteFile(
-							companyId, DLPreviewableProcessor.REPOSITORY_ID,
-							actualFileName);
-
-						break;
 					}
 				}
 			}
