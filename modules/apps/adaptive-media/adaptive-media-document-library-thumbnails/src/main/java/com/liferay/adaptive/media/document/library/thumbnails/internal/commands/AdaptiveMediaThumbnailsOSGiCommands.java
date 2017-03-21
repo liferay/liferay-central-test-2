@@ -211,6 +211,10 @@ public class AdaptiveMediaThumbnailsOSGiCommands {
 		throws PortalException {
 
 		try {
+			if (fileVersionId == 0) {
+				return null;
+			}
+
 			FileVersion fileVersion = _dlAppLocalService.getFileVersion(
 				fileVersionId);
 
