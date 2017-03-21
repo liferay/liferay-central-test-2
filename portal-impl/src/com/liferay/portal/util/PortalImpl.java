@@ -5230,10 +5230,9 @@ public class PortalImpl implements Portal {
 
 		if ((parameterMap == null) || !parameterMap.containsKey("browserId")) {
 			sb.append("?browserId=");
+			sb.append(BrowserSnifferUtil.getBrowserId(request));
 
 			firstParam = false;
-
-			sb.append(BrowserSnifferUtil.getBrowserId(request));
 		}
 
 		// Theme and color scheme
@@ -5307,7 +5306,6 @@ public class PortalImpl implements Portal {
 			if (queryString.charAt(0) == CharPool.AMPERSAND) {
 				if (firstParam) {
 					sb.append(StringPool.QUESTION);
-
 					sb.append(queryString.substring(1));
 				}
 				else {
@@ -5316,12 +5314,10 @@ public class PortalImpl implements Portal {
 			}
 			else if (firstParam) {
 				sb.append(StringPool.QUESTION);
-
 				sb.append(queryString);
 			}
 			else {
 				sb.append(StringPool.AMPERSAND);
-
 				sb.append(queryString);
 			}
 
