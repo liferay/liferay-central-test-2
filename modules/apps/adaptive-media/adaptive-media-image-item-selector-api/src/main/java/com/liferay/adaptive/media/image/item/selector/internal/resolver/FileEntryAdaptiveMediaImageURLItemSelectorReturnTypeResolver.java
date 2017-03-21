@@ -144,12 +144,17 @@ public class FileEntryAdaptiveMediaImageURLItemSelectorReturnTypeResolver
 			int originalWidth = originalWidthOptional.get() * 2;
 			int originalHeight = originalHeightOptional.get() * 2;
 
-			boolean widthMatch = IntStream.range(
-				originalWidth - 1, originalWidth + 2).anyMatch(
-					value -> value == widthOptional.get());
-			boolean heightMatch = IntStream.range(
-				originalHeight - 1, originalHeight + 2).anyMatch(
-					value -> value == heightOptional.get());
+			IntStream widthIntStream = IntStream.range(
+				originalWidth - 1, originalWidth + 2);
+
+			boolean widthMatch = widthIntStream.anyMatch(
+				value -> value == widthOptional.get());
+
+			IntStream heightIntStream = IntStream.range(
+				originalHeight - 1, originalHeight + 2);
+
+			boolean heightMatch = heightIntStream.anyMatch(
+				value -> value == heightOptional.get());
 
 			if (widthMatch && heightMatch) {
 				return Optional.of(adaptiveMedia);
