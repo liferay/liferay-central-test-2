@@ -42,6 +42,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 /**
  * @author Alejandro Tardín
+ * @author Sergio González
  */
 @RunWith(MockitoJUnitRunner.class)
 public class HtmlContentTransformerImplTest {
@@ -87,7 +88,38 @@ public class HtmlContentTransformerImplTest {
 	}
 
 	@Test
-	public void testAppliesHDMediaQueries() throws Exception {
+	public void testAppliesSeveralMediaQueries() throws Exception {
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia1 =
+			_createAdaptiveMedia(450, 1986, "http://small.very.adaptive.com");
+
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia2 =
+			_createAdaptiveMedia(450, 1989, "http://very.adaptive.com");
+
+		Mockito.when(
+			_finder.getAdaptiveMedia(Mockito.any())
+		).thenReturn(
+			Stream.of(adaptiveMedia1, adaptiveMedia2)
+		);
+
+		StringBundler expectedSB = new StringBundler(8);
+
+		expectedSB.append("<picture>");
+		expectedSB.append("<source media=\"(max-width:1986px)\" ");
+		expectedSB.append("srcset=\"http://small.very.adaptive.com\"/>");
+		expectedSB.append("<source media=\"(max-width:1989px) and ");
+		expectedSB.append("(min-width:1986px)\" ");
+		expectedSB.append("srcset=\"http://very.adaptive.com\"/>");
+		expectedSB.append("<img src=\"adaptable\"/>");
+		expectedSB.append("</picture>");
+
+		Assert.assertEquals(
+			expectedSB.toString(),
+			_htmlContentTransformer.transform(
+				"<img data-fileEntryId=\"1989\" src=\"adaptable\"/>"));
+	}
+
+	@Test
+	public void testHDMediaQueriesApplies() throws Exception {
 		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia1 =
 			_createAdaptiveMedia(450, 800, "http://small.adaptive.com");
 
@@ -125,12 +157,14 @@ public class HtmlContentTransformerImplTest {
 	}
 
 	@Test
-	public void testAppliesSeveralMediaQueries() throws Exception {
+	public void testHDMediaQueryAppliesWhenHeightHas1PXLessThanExpected()
+		throws Exception {
+
 		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia1 =
-			_createAdaptiveMedia(450, 1986, "http://small.very.adaptive.com");
+			_createAdaptiveMedia(450, 800, "http://small.adaptive.com");
 
 		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia2 =
-			_createAdaptiveMedia(450, 1989, "http://very.adaptive.com");
+			_createAdaptiveMedia(899, 1600, "http://small.hd.adaptive.com");
 
 		Mockito.when(
 			_finder.getAdaptiveMedia(Mockito.any())
@@ -141,11 +175,246 @@ public class HtmlContentTransformerImplTest {
 		StringBundler expectedSB = new StringBundler(8);
 
 		expectedSB.append("<picture>");
-		expectedSB.append("<source media=\"(max-width:1986px)\" ");
-		expectedSB.append("srcset=\"http://small.very.adaptive.com\"/>");
-		expectedSB.append("<source media=\"(max-width:1989px) and ");
-		expectedSB.append("(min-width:1986px)\" ");
-		expectedSB.append("srcset=\"http://very.adaptive.com\"/>");
+		expectedSB.append("<source media=\"(max-width:800px)\" ");
+		expectedSB.append("srcset=\"http://small.adaptive.com, ");
+		expectedSB.append("http://small.hd.adaptive.com 2x\"/>");
+		expectedSB.append("<source media=\"(max-width:1600px) and ");
+		expectedSB.append("(min-width:800px)\" ");
+		expectedSB.append("srcset=\"http://small.hd.adaptive.com\"/>");
+		expectedSB.append("<img src=\"adaptable\"/>");
+		expectedSB.append("</picture>");
+
+		Assert.assertEquals(
+			expectedSB.toString(),
+			_htmlContentTransformer.transform(
+				"<img data-fileEntryId=\"1989\" src=\"adaptable\"/>"));
+	}
+
+	@Test
+	public void testHDMediaQueryAppliesWhenHeightHas1PXMoreThanExpected()
+		throws Exception {
+
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia1 =
+			_createAdaptiveMedia(450, 800, "http://small.adaptive.com");
+
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia2 =
+			_createAdaptiveMedia(901, 1600, "http://small.hd.adaptive.com");
+
+		Mockito.when(
+			_finder.getAdaptiveMedia(Mockito.any())
+		).thenReturn(
+			Stream.of(adaptiveMedia1, adaptiveMedia2)
+		);
+
+		StringBundler expectedSB = new StringBundler(8);
+
+		expectedSB.append("<picture>");
+		expectedSB.append("<source media=\"(max-width:800px)\" ");
+		expectedSB.append("srcset=\"http://small.adaptive.com, ");
+		expectedSB.append("http://small.hd.adaptive.com 2x\"/>");
+		expectedSB.append("<source media=\"(max-width:1600px) and ");
+		expectedSB.append("(min-width:800px)\" ");
+		expectedSB.append("srcset=\"http://small.hd.adaptive.com\"/>");
+		expectedSB.append("<img src=\"adaptable\"/>");
+		expectedSB.append("</picture>");
+
+		Assert.assertEquals(
+			expectedSB.toString(),
+			_htmlContentTransformer.transform(
+				"<img data-fileEntryId=\"1989\" src=\"adaptable\"/>"));
+	}
+
+	@Test
+	public void testHDMediaQueryAppliesWhenWidthHas1PXLessThanExpected()
+		throws Exception {
+
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia1 =
+			_createAdaptiveMedia(450, 800, "http://small.adaptive.com");
+
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia2 =
+			_createAdaptiveMedia(900, 1599, "http://small.hd.adaptive.com");
+
+		Mockito.when(
+			_finder.getAdaptiveMedia(Mockito.any())
+		).thenReturn(
+			Stream.of(adaptiveMedia1, adaptiveMedia2)
+		);
+
+		StringBundler expectedSB = new StringBundler(8);
+
+		expectedSB.append("<picture>");
+		expectedSB.append("<source media=\"(max-width:800px)\" ");
+		expectedSB.append("srcset=\"http://small.adaptive.com, ");
+		expectedSB.append("http://small.hd.adaptive.com 2x\"/>");
+		expectedSB.append("<source media=\"(max-width:1599px) and ");
+		expectedSB.append("(min-width:800px)\" ");
+		expectedSB.append("srcset=\"http://small.hd.adaptive.com\"/>");
+		expectedSB.append("<img src=\"adaptable\"/>");
+		expectedSB.append("</picture>");
+
+		Assert.assertEquals(
+			expectedSB.toString(),
+			_htmlContentTransformer.transform(
+				"<img data-fileEntryId=\"1989\" src=\"adaptable\"/>"));
+	}
+
+	@Test
+	public void testHDMediaQueryAppliesWhenWidthHas1PXMoreThanExpected()
+		throws Exception {
+
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia1 =
+			_createAdaptiveMedia(450, 800, "http://small.adaptive.com");
+
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia2 =
+			_createAdaptiveMedia(900, 1601, "http://small.hd.adaptive.com");
+
+		Mockito.when(
+			_finder.getAdaptiveMedia(Mockito.any())
+		).thenReturn(
+			Stream.of(adaptiveMedia1, adaptiveMedia2)
+		);
+
+		StringBundler expectedSB = new StringBundler(8);
+
+		expectedSB.append("<picture>");
+		expectedSB.append("<source media=\"(max-width:800px)\" ");
+		expectedSB.append("srcset=\"http://small.adaptive.com, ");
+		expectedSB.append("http://small.hd.adaptive.com 2x\"/>");
+		expectedSB.append("<source media=\"(max-width:1601px) and ");
+		expectedSB.append("(min-width:800px)\" ");
+		expectedSB.append("srcset=\"http://small.hd.adaptive.com\"/>");
+		expectedSB.append("<img src=\"adaptable\"/>");
+		expectedSB.append("</picture>");
+
+		Assert.assertEquals(
+			expectedSB.toString(),
+			_htmlContentTransformer.transform(
+				"<img data-fileEntryId=\"1989\" src=\"adaptable\"/>"));
+	}
+
+	@Test
+	public void testHDMediaQueryNotAppliesWhenHeightHas2PXLessThanExpected()
+		throws Exception {
+
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia1 =
+			_createAdaptiveMedia(450, 800, "http://small.adaptive.com");
+
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia2 =
+			_createAdaptiveMedia(898, 1600, "http://small.hd.adaptive.com");
+
+		Mockito.when(
+			_finder.getAdaptiveMedia(Mockito.any())
+		).thenReturn(
+			Stream.of(adaptiveMedia1, adaptiveMedia2)
+		);
+
+		StringBundler expectedSB = new StringBundler(8);
+
+		expectedSB.append("<picture>");
+		expectedSB.append("<source media=\"(max-width:800px)\" ");
+		expectedSB.append("srcset=\"http://small.adaptive.com\"/>");
+		expectedSB.append("<source media=\"(max-width:1600px) and ");
+		expectedSB.append("(min-width:800px)\" ");
+		expectedSB.append("srcset=\"http://small.hd.adaptive.com\"/>");
+		expectedSB.append("<img src=\"adaptable\"/>");
+		expectedSB.append("</picture>");
+
+		Assert.assertEquals(
+			expectedSB.toString(),
+			_htmlContentTransformer.transform(
+				"<img data-fileEntryId=\"1989\" src=\"adaptable\"/>"));
+	}
+
+	@Test
+	public void testHDMediaQueryNotAppliesWhenHeightHas2PXMoreThanExpected()
+		throws Exception {
+
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia1 =
+			_createAdaptiveMedia(450, 800, "http://small.adaptive.com");
+
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia2 =
+			_createAdaptiveMedia(902, 1600, "http://small.hd.adaptive.com");
+
+		Mockito.when(
+			_finder.getAdaptiveMedia(Mockito.any())
+		).thenReturn(
+			Stream.of(adaptiveMedia1, adaptiveMedia2)
+		);
+
+		StringBundler expectedSB = new StringBundler(8);
+
+		expectedSB.append("<picture>");
+		expectedSB.append("<source media=\"(max-width:800px)\" ");
+		expectedSB.append("srcset=\"http://small.adaptive.com\"/>");
+		expectedSB.append("<source media=\"(max-width:1600px) and ");
+		expectedSB.append("(min-width:800px)\" ");
+		expectedSB.append("srcset=\"http://small.hd.adaptive.com\"/>");
+		expectedSB.append("<img src=\"adaptable\"/>");
+		expectedSB.append("</picture>");
+
+		Assert.assertEquals(
+			expectedSB.toString(),
+			_htmlContentTransformer.transform(
+				"<img data-fileEntryId=\"1989\" src=\"adaptable\"/>"));
+	}
+
+	@Test
+	public void testHDMediaQueryNotAppliesWhenWidthHas2PXLessThanExpected()
+		throws Exception {
+
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia1 =
+			_createAdaptiveMedia(450, 800, "http://small.adaptive.com");
+
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia2 =
+			_createAdaptiveMedia(900, 1598, "http://small.hd.adaptive.com");
+
+		Mockito.when(
+			_finder.getAdaptiveMedia(Mockito.any())
+		).thenReturn(
+			Stream.of(adaptiveMedia1, adaptiveMedia2)
+		);
+
+		StringBundler expectedSB = new StringBundler(8);
+
+		expectedSB.append("<picture>");
+		expectedSB.append("<source media=\"(max-width:800px)\" ");
+		expectedSB.append("srcset=\"http://small.adaptive.com\"/>");
+		expectedSB.append("<source media=\"(max-width:1598px) and ");
+		expectedSB.append("(min-width:800px)\" ");
+		expectedSB.append("srcset=\"http://small.hd.adaptive.com\"/>");
+		expectedSB.append("<img src=\"adaptable\"/>");
+		expectedSB.append("</picture>");
+
+		Assert.assertEquals(
+			expectedSB.toString(),
+			_htmlContentTransformer.transform(
+				"<img data-fileEntryId=\"1989\" src=\"adaptable\"/>"));
+	}
+
+	@Test
+	public void testHDMediaQueryNotAppliesWhenWidthHas2PXMoreThanExpected()
+		throws Exception {
+
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia1 =
+			_createAdaptiveMedia(450, 800, "http://small.adaptive.com");
+
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia2 =
+			_createAdaptiveMedia(900, 1602, "http://small.hd.adaptive.com");
+
+		Mockito.when(
+			_finder.getAdaptiveMedia(Mockito.any())
+		).thenReturn(
+			Stream.of(adaptiveMedia1, adaptiveMedia2)
+		);
+
+		StringBundler expectedSB = new StringBundler(8);
+
+		expectedSB.append("<picture>");
+		expectedSB.append("<source media=\"(max-width:800px)\" ");
+		expectedSB.append("srcset=\"http://small.adaptive.com\"/>");
+		expectedSB.append("<source media=\"(max-width:1602px) and ");
+		expectedSB.append("(min-width:800px)\" ");
+		expectedSB.append("srcset=\"http://small.hd.adaptive.com\"/>");
 		expectedSB.append("<img src=\"adaptable\"/>");
 		expectedSB.append("</picture>");
 

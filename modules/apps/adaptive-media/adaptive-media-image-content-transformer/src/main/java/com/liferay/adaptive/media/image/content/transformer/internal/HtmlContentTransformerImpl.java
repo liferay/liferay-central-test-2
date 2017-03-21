@@ -33,6 +33,7 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import org.osgi.service.component.annotations.Component;
@@ -122,10 +123,26 @@ public class HtmlContentTransformerImpl implements ContentTransformer<String> {
 			Optional<Integer> heightOptional = adaptiveMedia.getAttributeValue(
 				AdaptiveMediaImageAttribute.IMAGE_HEIGHT);
 
-			if (widthOptional.isPresent() && heightOptional.isPresent() &&
-				(originalWidthOptional.get() == (widthOptional.get() / 2)) &&
-				(originalHeightOptional.get() == (heightOptional.get() / 2))) {
+			if (!widthOptional.isPresent() || !heightOptional.isPresent()) {
+				continue;
+			}
 
+			int originalWidth = originalWidthOptional.get() * 2;
+			int originalHeight = originalHeightOptional.get() * 2;
+
+			IntStream widthIntStream = IntStream.range(
+				originalWidth - 1, originalWidth + 2);
+
+			boolean widthMatch = widthIntStream.anyMatch(
+				value -> value == widthOptional.get());
+
+			IntStream heightIntStream = IntStream.range(
+				originalHeight - 1, originalHeight + 2);
+
+			boolean heightMatch = heightIntStream.anyMatch(
+				value -> value == heightOptional.get());
+
+			if (widthMatch && heightMatch) {
 				return Optional.of(adaptiveMedia);
 			}
 		}
