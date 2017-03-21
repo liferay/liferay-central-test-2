@@ -494,7 +494,19 @@ if (Validator.isNotNull(keywords)) {
 			rootNode: '#<%= randomNamespace %>ItemSelectorContainer'
 
 			<c:if test="<%= uploadURL != null %>">
-				, uploadItemReturnType: '<%= ItemSelectorRepositoryEntryBrowserUtil.getItemSelectorReturnTypeClassName(itemSelectorReturnTypeResolver, existingFileEntryReturnType) %>',
+
+				<%
+				String returnType =
+					ItemSelectorRepositoryEntryBrowserUtil.
+						getItemSelectorReturnTypeClassName(
+							itemSelectorReturnTypeResolver,
+							existingFileEntryReturnType);
+
+				uploadURL.setParameter("source", "itemselector");
+				uploadURL.setParameter("returnType", returnType);
+				%>
+
+				, uploadItemReturnType: '<%= HtmlUtil.escapeAttribute(returnType) %>',
 				uploadItemURL: '<%= uploadURL.toString() %>'
 			</c:if>
 		}
