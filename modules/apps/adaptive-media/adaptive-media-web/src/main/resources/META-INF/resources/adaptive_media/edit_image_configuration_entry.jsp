@@ -54,11 +54,16 @@ if (configurationEntry != null) {
 
 		<aui:fieldset-group markupView="lexicon">
 			<aui:fieldset>
-				<c:if test="<%= !configurationEntryEditable %>">
-					<div class="alert alert-info">
-						<liferay-ui:message key="this-resolution-has-already-optimized-images" />
-					</div>
-				</c:if>
+				<div class="alert alert-info">
+					<c:choose>
+						<c:when test="<%= configurationEntryEditable %>">
+							<liferay-ui:message key="at-least-one-dimension-value-is-required" />
+						</c:when>
+						<c:otherwise>
+							<liferay-ui:message key="this-resolution-has-already-optimized-images" />
+						</c:otherwise>
+					</c:choose>
+				</div>
 
 				<div class="row">
 					<div class="col-md-6">
