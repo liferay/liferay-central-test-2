@@ -132,17 +132,6 @@ import org.apache.commons.lang.time.StopWatch;
 public class ServicePreAction extends Action {
 
 	public ServicePreAction() {
-		_mainPath = PortalUtil.getPathMain();
-
-		String pathProxy = PortalUtil.getPathProxy();
-
-		if (Validator.isBlank(pathProxy)) {
-			_pathProxy = null;
-		}
-		else {
-			_pathProxy = pathProxy;
-		}
-
 		initImportLARFiles();
 	}
 
@@ -185,7 +174,7 @@ public class ServicePreAction extends Action {
 		String friendlyURLPublicPath = PortalUtil.getPathFriendlyURLPublic();
 		String imagePath = dynamicResourcesCDNHost.concat(
 			PortalUtil.getPathImage());
-		String mainPath = _mainPath;
+		String mainPath = _PATH_MAIN;
 
 		String i18nPath = (String)request.getAttribute(WebKeys.I18N_PATH);
 
@@ -1676,15 +1665,15 @@ public class ServicePreAction extends Action {
 	protected boolean isLoginRequest(HttpServletRequest request) {
 		String requestURI = request.getRequestURI();
 
-		String mainPath = _mainPath;
+		String mainPath = _PATH_MAIN;
 
-		if (_pathProxy != null) {
-			if (!requestURI.startsWith(_pathProxy)) {
-				requestURI = _pathProxy.concat(requestURI);
+		if (_PATH_PROXY != null) {
+			if (!requestURI.startsWith(_PATH_PROXY)) {
+				requestURI = _PATH_PROXY.concat(requestURI);
 			}
 
-			if (!mainPath.startsWith(_pathProxy)) {
-				mainPath = _pathProxy.concat(mainPath);
+			if (!mainPath.startsWith(_PATH_PROXY)) {
+				mainPath = _PATH_PROXY.concat(mainPath);
 			}
 		}
 
@@ -2046,7 +2035,19 @@ public class ServicePreAction extends Action {
 	private static final Map<String, String> _portalDomains =
 		new ConcurrentHashMap<>();
 
-	private final String _mainPath;
-	private final String _pathProxy;
+	private static final String _PATH_PROXY;
+
+	static {
+		String pathProxy = PortalUtil.getPathProxy();
+
+		if (Validator.isBlank(pathProxy)) {
+			_PATH_PROXY = null;
+		}
+		else {
+			_PATH_PROXY = pathProxy;
+		}
+	}
+
+	private static final String _PATH_MAIN = PortalUtil.getPathMain();
 
 }
