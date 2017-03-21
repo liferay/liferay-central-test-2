@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import org.osgi.service.component.annotations.Component;
@@ -136,10 +137,21 @@ public class FileEntryAdaptiveMediaImageURLItemSelectorReturnTypeResolver
 			Optional<Integer> heightOptional = adaptiveMedia.getAttributeValue(
 				AdaptiveMediaImageAttribute.IMAGE_HEIGHT);
 
-			if (widthOptional.isPresent() && heightOptional.isPresent() &&
-				(originalWidthOptional.get() == (widthOptional.get() / 2)) &&
-				(originalHeightOptional.get() == (heightOptional.get() / 2))) {
+			if (!widthOptional.isPresent() || !heightOptional.isPresent()) {
+				continue;
+			}
 
+			int originalWidth = originalWidthOptional.get() * 2;
+			int originalHeight = originalHeightOptional.get() * 2;
+
+			boolean widthMatch = IntStream.range(
+				originalWidth - 1, originalWidth + 2).anyMatch(
+					value -> value == widthOptional.get());
+			boolean heightMatch = IntStream.range(
+				originalHeight - 1, originalHeight + 2).anyMatch(
+					value -> value == heightOptional.get());
+
+			if (widthMatch && heightMatch) {
 				return Optional.of(adaptiveMedia);
 			}
 		}

@@ -216,6 +216,358 @@ public class FileEntryAdaptiveMediaImageURLItemSelectorReturnTypeResolverTest {
 		}
 	}
 
+	@Test
+	public void testHDMediaQueryAppliesWhenHeightHas1PXLessThanExpected()
+		throws Exception {
+
+		try (DestinationReplacer destinationReplacer = new DestinationReplacer(
+				"liferay/adaptive_media_processor")) {
+
+			_addTestVariant("small", "uuid0", 50, 50);
+			_addTestVariant("small.hd", "uuid1", 99, 200);
+
+			ServiceContext serviceContext =
+				ServiceContextTestUtil.getServiceContext(
+					_group, TestPropsValues.getUserId());
+
+			final FileEntry fileEntry = _addImageFileEntry(serviceContext);
+
+			String value = _resolver.getValue(fileEntry, null);
+
+			JSONObject jsonObject = JSONFactoryUtil.createJSONObject(value);
+
+			String defaultSource = jsonObject.getString("defaultSource");
+
+			Assert.assertEquals(
+				DLUtil.getPreviewURL(
+					fileEntry, fileEntry.getFileVersion(), null,
+					StringPool.BLANK, false, false),
+				defaultSource);
+
+			JSONArray sourcesJSONArray = jsonObject.getJSONArray("sources");
+
+			Assert.assertEquals(2, sourcesJSONArray.length());
+
+			_assertHDSrcSource(
+				sourcesJSONArray.getJSONObject(0), fileEntry.getFileEntryId(),
+				"uuid0", "uuid1", fileEntry.getTitle());
+			_assertSrcSource(
+				sourcesJSONArray.getJSONObject(1), fileEntry.getFileEntryId(),
+				"uuid1", fileEntry.getTitle());
+
+			_assertAttibutes(sourcesJSONArray.getJSONObject(0), 50, 0);
+			_assertAttibutes(sourcesJSONArray.getJSONObject(1), 99, 50);
+		}
+	}
+
+	@Test
+	public void testHDMediaQueryAppliesWhenHeightHas1PXMoreThanExpected()
+		throws Exception {
+
+		try (DestinationReplacer destinationReplacer = new DestinationReplacer(
+				"liferay/adaptive_media_processor")) {
+
+			_addTestVariant("small", "uuid0", 50, 50);
+			_addTestVariant("small.hd", "uuid1", 101, 200);
+
+			ServiceContext serviceContext =
+				ServiceContextTestUtil.getServiceContext(
+					_group, TestPropsValues.getUserId());
+
+			final FileEntry fileEntry = _addImageFileEntry(serviceContext);
+
+			String value = _resolver.getValue(fileEntry, null);
+
+			JSONObject jsonObject = JSONFactoryUtil.createJSONObject(value);
+
+			String defaultSource = jsonObject.getString("defaultSource");
+
+			Assert.assertEquals(
+				DLUtil.getPreviewURL(
+					fileEntry, fileEntry.getFileVersion(), null,
+					StringPool.BLANK, false, false),
+				defaultSource);
+
+			JSONArray sourcesJSONArray = jsonObject.getJSONArray("sources");
+
+			Assert.assertEquals(2, sourcesJSONArray.length());
+
+			_assertHDSrcSource(
+				sourcesJSONArray.getJSONObject(0), fileEntry.getFileEntryId(),
+				"uuid0", "uuid1", fileEntry.getTitle());
+			_assertSrcSource(
+				sourcesJSONArray.getJSONObject(1), fileEntry.getFileEntryId(),
+				"uuid1", fileEntry.getTitle());
+
+			_assertAttibutes(sourcesJSONArray.getJSONObject(0), 50, 0);
+			_assertAttibutes(sourcesJSONArray.getJSONObject(1), 101, 50);
+		}
+	}
+
+	@Test
+	public void testHDMediaQueryAppliesWhenWidthHas1PXLessThanExpected()
+		throws Exception {
+
+		try (DestinationReplacer destinationReplacer = new DestinationReplacer(
+				"liferay/adaptive_media_processor")) {
+
+			_addTestVariant("small", "uuid0", 50, 50);
+			_addTestVariant("small.hd", "uuid1", 200, 99);
+
+			ServiceContext serviceContext =
+				ServiceContextTestUtil.getServiceContext(
+					_group, TestPropsValues.getUserId());
+
+			final FileEntry fileEntry = _addImageFileEntry(serviceContext);
+
+			String value = _resolver.getValue(fileEntry, null);
+
+			JSONObject jsonObject = JSONFactoryUtil.createJSONObject(value);
+
+			String defaultSource = jsonObject.getString("defaultSource");
+
+			Assert.assertEquals(
+				DLUtil.getPreviewURL(
+					fileEntry, fileEntry.getFileVersion(), null,
+					StringPool.BLANK, false, false),
+				defaultSource);
+
+			JSONArray sourcesJSONArray = jsonObject.getJSONArray("sources");
+
+			Assert.assertEquals(2, sourcesJSONArray.length());
+
+			_assertHDSrcSource(
+				sourcesJSONArray.getJSONObject(0), fileEntry.getFileEntryId(),
+				"uuid0", "uuid1", fileEntry.getTitle());
+			_assertSrcSource(
+				sourcesJSONArray.getJSONObject(1), fileEntry.getFileEntryId(),
+				"uuid1", fileEntry.getTitle());
+
+			_assertAttibutes(sourcesJSONArray.getJSONObject(0), 50, 0);
+			_assertAttibutes(sourcesJSONArray.getJSONObject(1), 99, 50);
+		}
+	}
+
+	@Test
+	public void testHDMediaQueryAppliesWhenWidthHas1PXMoreThanExpected()
+		throws Exception {
+
+		try (DestinationReplacer destinationReplacer = new DestinationReplacer(
+				"liferay/adaptive_media_processor")) {
+
+			_addTestVariant("small", "uuid0", 50, 50);
+			_addTestVariant("small.hd", "uuid1", 200, 101);
+
+			ServiceContext serviceContext =
+				ServiceContextTestUtil.getServiceContext(
+					_group, TestPropsValues.getUserId());
+
+			final FileEntry fileEntry = _addImageFileEntry(serviceContext);
+
+			String value = _resolver.getValue(fileEntry, null);
+
+			JSONObject jsonObject = JSONFactoryUtil.createJSONObject(value);
+
+			String defaultSource = jsonObject.getString("defaultSource");
+
+			Assert.assertEquals(
+				DLUtil.getPreviewURL(
+					fileEntry, fileEntry.getFileVersion(), null,
+					StringPool.BLANK, false, false),
+				defaultSource);
+
+			JSONArray sourcesJSONArray = jsonObject.getJSONArray("sources");
+
+			Assert.assertEquals(2, sourcesJSONArray.length());
+
+			_assertHDSrcSource(
+				sourcesJSONArray.getJSONObject(0), fileEntry.getFileEntryId(),
+				"uuid0", "uuid1", fileEntry.getTitle());
+			_assertSrcSource(
+				sourcesJSONArray.getJSONObject(1), fileEntry.getFileEntryId(),
+				"uuid1", fileEntry.getTitle());
+
+			_assertAttibutes(sourcesJSONArray.getJSONObject(0), 50, 0);
+			_assertAttibutes(sourcesJSONArray.getJSONObject(1), 101, 50);
+		}
+	}
+
+	@Test
+	public void testHDMediaQueryNotAppliesWhenHeightHas2PXLessThanExpected()
+		throws Exception {
+
+		try (DestinationReplacer destinationReplacer = new DestinationReplacer(
+				"liferay/adaptive_media_processor")) {
+
+			_addTestVariant("small", "uuid0", 50, 50);
+			_addTestVariant("small.hd", "uuid1", 98, 200);
+
+			ServiceContext serviceContext =
+				ServiceContextTestUtil.getServiceContext(
+					_group, TestPropsValues.getUserId());
+
+			final FileEntry fileEntry = _addImageFileEntry(serviceContext);
+
+			String value = _resolver.getValue(fileEntry, null);
+
+			JSONObject jsonObject = JSONFactoryUtil.createJSONObject(value);
+
+			String defaultSource = jsonObject.getString("defaultSource");
+
+			Assert.assertEquals(
+				DLUtil.getPreviewURL(
+					fileEntry, fileEntry.getFileVersion(), null,
+					StringPool.BLANK, false, false),
+				defaultSource);
+
+			JSONArray sourcesJSONArray = jsonObject.getJSONArray("sources");
+
+			Assert.assertEquals(2, sourcesJSONArray.length());
+
+			_assertSrcSource(
+				sourcesJSONArray.getJSONObject(0), fileEntry.getFileEntryId(),
+				"uuid0", fileEntry.getTitle());
+			_assertSrcSource(
+				sourcesJSONArray.getJSONObject(1), fileEntry.getFileEntryId(),
+				"uuid1", fileEntry.getTitle());
+
+			_assertAttibutes(sourcesJSONArray.getJSONObject(0), 50, 0);
+			_assertAttibutes(sourcesJSONArray.getJSONObject(1), 98, 50);
+		}
+	}
+
+	@Test
+	public void testHDMediaQueryNotAppliesWhenHeightHas2PXMoreThanExpected()
+		throws Exception {
+
+		try (DestinationReplacer destinationReplacer = new DestinationReplacer(
+				"liferay/adaptive_media_processor")) {
+
+			_addTestVariant("small", "uuid0", 50, 50);
+			_addTestVariant("small.hd", "uuid1", 102, 200);
+
+			ServiceContext serviceContext =
+				ServiceContextTestUtil.getServiceContext(
+					_group, TestPropsValues.getUserId());
+
+			final FileEntry fileEntry = _addImageFileEntry(serviceContext);
+
+			String value = _resolver.getValue(fileEntry, null);
+
+			JSONObject jsonObject = JSONFactoryUtil.createJSONObject(value);
+
+			String defaultSource = jsonObject.getString("defaultSource");
+
+			Assert.assertEquals(
+				DLUtil.getPreviewURL(
+					fileEntry, fileEntry.getFileVersion(), null,
+					StringPool.BLANK, false, false),
+				defaultSource);
+
+			JSONArray sourcesJSONArray = jsonObject.getJSONArray("sources");
+
+			Assert.assertEquals(2, sourcesJSONArray.length());
+
+			_assertSrcSource(
+				sourcesJSONArray.getJSONObject(0), fileEntry.getFileEntryId(),
+				"uuid0", fileEntry.getTitle());
+			_assertSrcSource(
+				sourcesJSONArray.getJSONObject(1), fileEntry.getFileEntryId(),
+				"uuid1", fileEntry.getTitle());
+
+			_assertAttibutes(sourcesJSONArray.getJSONObject(0), 50, 0);
+			_assertAttibutes(sourcesJSONArray.getJSONObject(1), 102, 50);
+		}
+	}
+
+	@Test
+	public void testHDMediaQueryNotAppliesWhenWidthHas2PXLessThanExpected()
+		throws Exception {
+
+		try (DestinationReplacer destinationReplacer = new DestinationReplacer(
+				"liferay/adaptive_media_processor")) {
+
+			_addTestVariant("small", "uuid0", 50, 50);
+			_addTestVariant("small.hd", "uuid1", 200, 98);
+
+			ServiceContext serviceContext =
+				ServiceContextTestUtil.getServiceContext(
+					_group, TestPropsValues.getUserId());
+
+			final FileEntry fileEntry = _addImageFileEntry(serviceContext);
+
+			String value = _resolver.getValue(fileEntry, null);
+
+			JSONObject jsonObject = JSONFactoryUtil.createJSONObject(value);
+
+			String defaultSource = jsonObject.getString("defaultSource");
+
+			Assert.assertEquals(
+				DLUtil.getPreviewURL(
+					fileEntry, fileEntry.getFileVersion(), null,
+					StringPool.BLANK, false, false),
+				defaultSource);
+
+			JSONArray sourcesJSONArray = jsonObject.getJSONArray("sources");
+
+			Assert.assertEquals(2, sourcesJSONArray.length());
+
+			_assertSrcSource(
+				sourcesJSONArray.getJSONObject(0), fileEntry.getFileEntryId(),
+				"uuid0", fileEntry.getTitle());
+			_assertSrcSource(
+				sourcesJSONArray.getJSONObject(1), fileEntry.getFileEntryId(),
+				"uuid1", fileEntry.getTitle());
+
+			_assertAttibutes(sourcesJSONArray.getJSONObject(0), 50, 0);
+			_assertAttibutes(sourcesJSONArray.getJSONObject(1), 98, 50);
+		}
+	}
+
+	@Test
+	public void testHDMediaQueryNotAppliesWhenWidthHas2PXMoreThanExpected()
+		throws Exception {
+
+		try (DestinationReplacer destinationReplacer = new DestinationReplacer(
+				"liferay/adaptive_media_processor")) {
+
+			_addTestVariant("small", "uuid0", 50, 50);
+			_addTestVariant("small.hd", "uuid1", 200, 102);
+
+			ServiceContext serviceContext =
+				ServiceContextTestUtil.getServiceContext(
+					_group, TestPropsValues.getUserId());
+
+			final FileEntry fileEntry = _addImageFileEntry(serviceContext);
+
+			String value = _resolver.getValue(fileEntry, null);
+
+			JSONObject jsonObject = JSONFactoryUtil.createJSONObject(value);
+
+			String defaultSource = jsonObject.getString("defaultSource");
+
+			Assert.assertEquals(
+				DLUtil.getPreviewURL(
+					fileEntry, fileEntry.getFileVersion(), null,
+					StringPool.BLANK, false, false),
+				defaultSource);
+
+			JSONArray sourcesJSONArray = jsonObject.getJSONArray("sources");
+
+			Assert.assertEquals(2, sourcesJSONArray.length());
+
+			_assertSrcSource(
+				sourcesJSONArray.getJSONObject(0), fileEntry.getFileEntryId(),
+				"uuid0", fileEntry.getTitle());
+			_assertSrcSource(
+				sourcesJSONArray.getJSONObject(1), fileEntry.getFileEntryId(),
+				"uuid1", fileEntry.getTitle());
+
+			_assertAttibutes(sourcesJSONArray.getJSONObject(0), 50, 0);
+			_assertAttibutes(sourcesJSONArray.getJSONObject(1), 102, 50);
+		}
+	}
+
 	public class DestinationReplacer implements AutoCloseable {
 
 		public DestinationReplacer(String destinationName) {
