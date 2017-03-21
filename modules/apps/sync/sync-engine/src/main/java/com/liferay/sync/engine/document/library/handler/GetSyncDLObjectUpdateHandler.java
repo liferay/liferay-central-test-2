@@ -605,6 +605,10 @@ public class GetSyncDLObjectUpdateHandler extends BaseSyncDLObjectHandler {
 			targetFilePath, targetSyncFile.getParentFolderId(), sourceSyncFile);
 
 		if (FileUtil.exists(sourceFilePath)) {
+			Watcher watcher = WatcherManager.getWatcher(getSyncAccountId());
+
+			watcher.addMovedFilePathName(targetSyncFile.getFilePathName());
+
 			FileUtil.moveFile(sourceFilePath, targetFilePath);
 
 			sourceSyncFile.setState(SyncFile.STATE_SYNCED);
