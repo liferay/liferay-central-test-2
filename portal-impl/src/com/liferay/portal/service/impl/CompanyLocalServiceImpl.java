@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.instance.lifecycle.PortalInstanceLifecycleManag
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.messaging.async.Async;
 import com.liferay.portal.kernel.model.Account;
 import com.liferay.portal.kernel.model.Company;
 import com.liferay.portal.kernel.model.CompanyConstants;
@@ -991,13 +992,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		userPersistence.update(user);
 
-		Locale locale = user.getLocale();
-
-		if (locale.equals(LocaleUtil.getDefault())) {
-			return;
-		}
-
-		verifyGroupsNameMap(user);
+		updateDisplayGroupNames(companyId);
 	}
 
 	/**
@@ -1625,7 +1620,16 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		}
 	}
 
-	protected void verifyGroupsNameMap(User user) throws PortalException {
+	@Async
+	public void updateDisplayGroupNames(long companyId) throws PortalException {
+		User user = userLocalService.getDefaultUser(companyId);
+
+		Locale locale = user.getLocale();
+
+		if (locale.equals(LocaleUtil.getDefault())) {
+			return;
+		}
+
 		ActionableDynamicQuery groupActionableDynamicQuery =
 			groupLocalService.getActionableDynamicQuery();
 
