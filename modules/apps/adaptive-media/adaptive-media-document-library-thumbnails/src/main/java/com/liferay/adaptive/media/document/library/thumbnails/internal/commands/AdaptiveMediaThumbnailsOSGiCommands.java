@@ -90,9 +90,7 @@ public class AdaptiveMediaThumbnailsOSGiCommands {
 							thumbnailConfiguration.getFileVersionId(
 								actualFileName));
 
-						if ((fileVersion == null) ||
-							!_isMimeTypeSupported(fileVersion)) {
-
+						if (fileVersion == null) {
 							continue;
 						}
 
@@ -135,9 +133,7 @@ public class AdaptiveMediaThumbnailsOSGiCommands {
 							thumbnailConfiguration.getFileVersionId(
 								actualFileName));
 
-						if ((fileVersion == null) ||
-							!_isMimeTypeSupported(fileVersion)) {
-
+						if (fileVersion == null) {
 							continue;
 						}
 
