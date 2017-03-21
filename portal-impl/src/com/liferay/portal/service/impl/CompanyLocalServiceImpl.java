@@ -1678,9 +1678,9 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 						sb.append("No name was found for locale ");
 						sb.append(locale);
-						sb.append(". Using name ");
+						sb.append(". Using \"");
 						sb.append(oldGroupDefaultName);
-						sb.append(" instead.");
+						sb.append("\" as the name instead.");
 
 						_log.warn(sb.toString());
 					}
