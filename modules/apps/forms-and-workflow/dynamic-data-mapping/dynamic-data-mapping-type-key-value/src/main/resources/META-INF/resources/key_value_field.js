@@ -184,9 +184,7 @@ AUI.add(
 
 						var value = inputNode.val();
 
-						if (value === '') {
-							instance._updateInputValue(inputNode, instance.normalizeKey(value));
-						}
+						instance._updateInputValue(inputNode, instance.normalizeKey(value));
 					},
 
 					_onKeyUpKeyInput: function(event) {
