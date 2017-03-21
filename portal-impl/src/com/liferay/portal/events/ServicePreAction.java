@@ -2025,19 +2025,21 @@ public class ServicePreAction extends Action {
 		return portalDomain;
 	}
 
+	private static final String _PATH_MAIN = PortalUtil.getPathMain();
+
 	private static final String _PATH_PORTAL_LAYOUT = "/portal/layout";
 
 	private static final String _PATH_PORTAL_LOGIN = "/portal/login";
 
 	private static final String _PATH_PORTAL_LOGOUT = "/portal/logout";
 
+	private static final String _PATH_PROXY;
+
 	private static final Log _log = LogFactoryUtil.getLog(
 		ServicePreAction.class);
 
 	private static final Map<String, String> _portalDomains =
 		new ConcurrentHashMap<>();
-
-	private static final String _PATH_PROXY;
 
 	static {
 		String pathProxy = PortalUtil.getPathProxy();
@@ -2049,7 +2051,5 @@ public class ServicePreAction extends Action {
 			_PATH_PROXY = pathProxy;
 		}
 	}
-
-	private static final String _PATH_MAIN = PortalUtil.getPathMain();
 
 }
