@@ -51,6 +51,7 @@ import com.liferay.dynamic.data.mapping.util.DDMFormFieldValueTransformer;
 import com.liferay.dynamic.data.mapping.util.DDMFormValuesTransformer;
 import com.liferay.dynamic.data.mapping.util.impl.DDMFieldsCounter;
 import com.liferay.dynamic.data.mapping.util.impl.DDMImpl;
+import com.liferay.dynamic.data.mapping.validator.DDMFormValidationException.MustNotDuplicateFieldName;
 import com.liferay.expando.kernel.model.ExpandoColumn;
 import com.liferay.expando.kernel.model.ExpandoRow;
 import com.liferay.expando.kernel.model.ExpandoValue;
@@ -303,6 +304,13 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 					else {
 						ddmForm = _ddmFormJSONDeserializer.deserialize(
 							definition);
+					}
+
+					try {
+						validateDDMFormFieldNames(ddmForm);
+					}
+					catch (MustNotDuplicateFieldName mndfn) {
+						throw new UpgradeException(mndfn);
 					}
 
 					if (parentStructureId > 0) {
@@ -1445,6 +1453,37 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 
 			updateStructureStorageType();
 			updateStructureVersionStorageType();
+		}
+	}
+
+	protected void validateDDMFormFieldName(
+			DDMFormField ddmFormField, Set<String> ddmFormFieldNames)
+		throws MustNotDuplicateFieldName {
+
+		if (ddmFormFieldNames.contains(
+				StringUtil.toLowerCase(ddmFormField.getName()))) {
+
+			throw new MustNotDuplicateFieldName(ddmFormField.getName());
+		}
+
+		ddmFormFieldNames.add(StringUtil.toLowerCase(ddmFormField.getName()));
+
+		for (DDMFormField nestedDDMFormField :
+				ddmFormField.getNestedDDMFormFields()) {
+
+			validateDDMFormFieldName(nestedDDMFormField, ddmFormFieldNames);
+		}
+	}
+
+	protected void validateDDMFormFieldNames(DDMForm ddmForm)
+		throws MustNotDuplicateFieldName {
+
+		List<DDMFormField> ddmFormFields = ddmForm.getDDMFormFields();
+
+		Set<String> ddmFormFieldNames = new HashSet<>();
+
+		for (DDMFormField ddmFormField : ddmFormFields) {
+			validateDDMFormFieldName(ddmFormField, ddmFormFieldNames);
 		}
 	}
 
