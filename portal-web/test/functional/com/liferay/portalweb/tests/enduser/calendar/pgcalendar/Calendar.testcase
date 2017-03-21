@@ -513,9 +513,7 @@
 		</execute>
 	</command>
 
-	<command name="AddEventRegular" priority="5">
-		<property name="portal.acceptance" value="true" />
-
+	<command name="AddEventRegular" priority="4">
 		<execute macro="Navigator#gotoPage">
 			<var name="pageName" value="Calendar Page" />
 		</execute>

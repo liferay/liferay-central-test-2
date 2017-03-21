@@ -3132,9 +3132,7 @@
 		</execute>
 	</command>
 
-	<command name="SubmitFormWithTextField" priority="5">
-		<property name="portal.acceptance" value="true" />
-
+	<command name="SubmitFormWithTextField" priority="4">
 		<execute macro="Navigator#openURL" />
 
 		<execute macro="ProductMenu#gotoSitesContent">
