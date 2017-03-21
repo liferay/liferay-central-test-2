@@ -92,6 +92,13 @@ public class PortletURLImpl
 	implements LiferayPortletURL, PortletURL, ResourceURL, Serializable {
 
 	public PortletURLImpl(
+		HttpServletRequest request, Portlet portlet, Layout layout,
+		String lifecycle) {
+
+		this(request, portlet, null, layout, lifecycle);
+	}
+
+	public PortletURLImpl(
 		HttpServletRequest request, String portletId, Layout layout,
 		String lifecycle) {
 
@@ -108,6 +115,15 @@ public class PortletURLImpl
 		String lifecycle) {
 
 		this(request, portletId, null, plid, lifecycle);
+	}
+
+	public PortletURLImpl(
+		PortletRequest portletRequest, Portlet portlet, Layout layout,
+		String lifecycle) {
+
+		this(
+			PortalUtil.getHttpServletRequest(portletRequest), portlet,
+			portletRequest, layout, lifecycle);
 	}
 
 	public PortletURLImpl(
@@ -1341,11 +1357,11 @@ public class PortletURLImpl
 	}
 
 	private PortletURLImpl(
-		HttpServletRequest request, String portletId,
+		HttpServletRequest request, Portlet portlet,
 		PortletRequest portletRequest, Layout layout, String lifecycle) {
 
 		_request = request;
-		_portletId = portletId;
+		_portlet = portlet;
 		_portletRequest = portletRequest;
 		_layout = layout;
 		_lifecycle = lifecycle;
@@ -1355,9 +1371,9 @@ public class PortletURLImpl
 		_secure = PortalUtil.isSecure(request);
 		_wsrp = ParamUtil.getBoolean(request, "wsrp");
 
-		Portlet portlet = getPortlet();
-
 		if (portlet != null) {
+			_portletId = portlet.getPortletId();
+
 			Set<String> autopropagatedParameters =
 				portlet.getAutopropagatedParameters();
 
@@ -1384,6 +1400,17 @@ public class PortletURLImpl
 		if (layout != null) {
 			_plid = layout.getPlid();
 		}
+	}
+
+	private PortletURLImpl(
+		HttpServletRequest request, String portletId,
+		PortletRequest portletRequest, Layout layout, String lifecycle) {
+
+		this(
+			request,
+			PortletLocalServiceUtil.fetchPortletById(
+				PortalUtil.getCompanyId(request), portletId),
+			portletRequest, layout, lifecycle);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(PortletURLImpl.class);
