@@ -45,18 +45,7 @@ public class ThumbnailConfiguration {
 		return Long.parseLong(matcher.group(1));
 	}
 
-	public Optional<AdaptiveMediaImageConfigurationEntry>
-		selectMatchingConfigurationEntry(
-			Collection<AdaptiveMediaImageConfigurationEntry>
-				configurationEntries) {
-
-		Stream<AdaptiveMediaImageConfigurationEntry> stream =
-			configurationEntries.stream();
-
-		return stream.filter(this::_matches).findFirst();
-	}
-
-	private boolean _matches(
+	public boolean matches(
 		AdaptiveMediaImageConfigurationEntry configurationEntry) {
 
 		Map<String, String> properties = configurationEntry.getProperties();
@@ -71,6 +60,17 @@ public class ThumbnailConfiguration {
 		}
 
 		return false;
+	}
+
+	public Optional<AdaptiveMediaImageConfigurationEntry>
+		selectMatchingConfigurationEntry(
+			Collection<AdaptiveMediaImageConfigurationEntry>
+				configurationEntries) {
+
+		Stream<AdaptiveMediaImageConfigurationEntry> stream =
+			configurationEntries.stream();
+
+		return stream.filter(this::matches).findFirst();
 	}
 
 	private final int _height;

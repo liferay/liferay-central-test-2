@@ -46,6 +46,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -159,6 +160,14 @@ public class AdaptiveMediaThumbnailsOSGiCommands {
 					_configurationHelper.
 						getAdaptiveMediaImageConfigurationEntries(companyId);
 
+			if (!_isValidConfigurationEntries(configurationEntries)) {
+				System.out.println(
+					"No valid Adaptive Media configuration found. Please " +
+						"refer to the upgrade documentation for the details.");
+
+				return;
+			}
+
 			try {
 				String[] fileNames = DLStoreUtil.getFileNames(
 					companyId, DLPreviewableProcessor.REPOSITORY_ID,
@@ -242,6 +251,18 @@ public class AdaptiveMediaThumbnailsOSGiCommands {
 			AdaptiveMediaImageConstants.getSupportedMimeTypes();
 
 		return supportedMimeTypes.contains(fileVersion.getMimeType());
+	}
+
+	private boolean _isValidConfigurationEntries(
+		Collection<AdaptiveMediaImageConfigurationEntry> configurationEntries) {
+
+		Stream<ThumbnailConfiguration> stream = Arrays.stream(
+			_thumbnailConfigurations);
+
+		return stream.anyMatch(
+			thumbnailConfiguration ->
+				configurationEntries.stream().anyMatch(
+					thumbnailConfiguration::matches));
 	}
 
 	private void _migrate(
