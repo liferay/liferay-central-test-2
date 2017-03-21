@@ -311,7 +311,11 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 						validateDDMFormFieldNames(ddmForm);
 					}
 					catch (MustNotDuplicateFieldName mndfn) {
-						throw new UpgradeException(mndfn);
+						throw new UpgradeException(
+							String.format(
+								"The field name '%s' from structure ID %d " +
+									"cannot be defined more than once.",
+								mndfn.getFieldName(), structureId));
 					}
 
 					if (parentStructureId > 0) {
