@@ -25,15 +25,38 @@ public class UploadItemSelectorCriterion extends BaseItemSelectorCriterion {
 	public UploadItemSelectorCriterion() {
 	}
 
+	/**
+	 * @deprecated As of 2.0.0, replaced by {@link #UploadItemSelectorCriterion(String, String, String)}
+	 */
+	@Deprecated
 	public UploadItemSelectorCriterion(String url, String repositoryName) {
 		this(
-			url, repositoryName,
+			null, url, repositoryName,
+			PropsValues.UPLOAD_SERVLET_REQUEST_IMPL_MAX_SIZE);
+	}
+
+	/**
+	 * @deprecated As of 2.0.0, replaced by {@link #UploadItemSelectorCriterion(String, String, String, long)}
+	 */
+	@Deprecated
+	public UploadItemSelectorCriterion(
+		String url, String repositoryName, long maxFileSize) {
+
+		this(null, url, repositoryName, maxFileSize);
+	}
+
+	public UploadItemSelectorCriterion(
+		String portletId, String url, String repositoryName) {
+
+		this(
+			portletId, url, repositoryName,
 			PropsValues.UPLOAD_SERVLET_REQUEST_IMPL_MAX_SIZE);
 	}
 
 	public UploadItemSelectorCriterion(
-		String url, String repositoryName, long maxFileSize) {
+		String portletId, String url, String repositoryName, long maxFileSize) {
 
+		_portletId = portletId;
 		_url = url;
 		_repositoryName = repositoryName;
 		_maxFileSize = maxFileSize;
@@ -41,6 +64,10 @@ public class UploadItemSelectorCriterion extends BaseItemSelectorCriterion {
 
 	public long getMaxFileSize() {
 		return _maxFileSize;
+	}
+
+	public String getPortletId() {
+		return _portletId;
 	}
 
 	public String getRepositoryName() {
@@ -55,6 +82,10 @@ public class UploadItemSelectorCriterion extends BaseItemSelectorCriterion {
 		_maxFileSize = maxFileSize;
 	}
 
+	public void setPortletId(String portletId) {
+		_portletId = portletId;
+	}
+
 	public void setRepositoryName(String repositoryName) {
 		_repositoryName = repositoryName;
 	}
@@ -64,6 +95,7 @@ public class UploadItemSelectorCriterion extends BaseItemSelectorCriterion {
 	}
 
 	private long _maxFileSize;
+	private String _portletId;
 	private String _repositoryName;
 	private String _url;
 
