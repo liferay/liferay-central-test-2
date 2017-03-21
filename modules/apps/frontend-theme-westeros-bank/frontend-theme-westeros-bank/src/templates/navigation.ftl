@@ -12,8 +12,8 @@
 			<#assign preferencesMap = {"displayDepth": "1", "portletSetupPortletDecoratorId": "barebone"} />
 
 			<@liferay.navigation_menu
-				instance_id="header_navigation_menu"
 				default_preferences=freeMarkerPortletPreferences.getPreferences(preferencesMap)
+				instance_id="header_navigation_menu"
 			/>
 		</ul>
 	</nav>
@@ -22,8 +22,8 @@
 		<#assign preferencesMap = {"displayStyle": "ddmTemplate_NAVBAR-BLANK-JUSTIFIED-FTL", "portletSetupPortletDecoratorId": "barebone", "rootLayoutType": "relative"} />
 
 		<@liferay.navigation_menu
-			instance_id="main_navigation_menu"
 			default_preferences=freeMarkerPortletPreferences.getPreferences(preferencesMap)
+			instance_id="main_navigation_menu"
 		/>
 	</nav>
 </div>
