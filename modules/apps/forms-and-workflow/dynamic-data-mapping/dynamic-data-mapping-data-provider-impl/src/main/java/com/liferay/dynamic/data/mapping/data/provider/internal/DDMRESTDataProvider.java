@@ -260,9 +260,6 @@ public class DDMRESTDataProvider implements DDMDataProvider {
 		DDMRESTDataProviderSettings ddmRESTDataProviderSettings,
 		HttpRequest httpRequest) {
 
-		DDMDataProviderContext ddmDataProviderContext =
-			ddmDataProviderRequest.getDDMDataProviderContext();
-
 		if (ddmRESTDataProviderSettings.filterable()) {
 			httpRequest.query(
 				ddmRESTDataProviderSettings.filterParameterName(),
@@ -278,7 +275,7 @@ public class DDMRESTDataProvider implements DDMDataProvider {
 				ddmDataProviderRequest.getParameter("paginationEnd"));
 		}
 
-		httpRequest.query(ddmDataProviderContext.getParameters());
+		httpRequest.query(ddmDataProviderRequest.getParameters());
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
