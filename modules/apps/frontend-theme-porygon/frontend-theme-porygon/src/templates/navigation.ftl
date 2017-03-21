@@ -1,6 +1,6 @@
 <div aria-expanded="true" class="collapse navbar-collapse" id="navigationCollapse">
 	<nav class="navbar-nav site-navigation" id="navigation" role="navigation">
-		<#assign preferencesMap = {"displayDepth":"1", "portletSetupPortletDecoratorId":"barebone"} />
+		<#assign preferencesMap = {"displayDepth": "1", "portletSetupPortletDecoratorId": "barebone"} />
 
 		<@liferay.navigation_menu
 			instance_id="main_navigation_menu"

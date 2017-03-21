@@ -9,7 +9,7 @@
 
 	<nav class="nav-header-global row" role="navigation">
 		<ul class="nav navbar-nav">
-			<#assign preferencesMap = {"displayDepth":"1", "portletSetupPortletDecoratorId":"barebone"} />
+			<#assign preferencesMap = {"displayDepth": "1", "portletSetupPortletDecoratorId": "barebone"} />
 
 			<@liferay.navigation_menu
 				instance_id="header_navigation_menu"
@@ -19,7 +19,7 @@
 	</nav>
 
 	<nav class="navbar-nav site-navigation" id="navigation" role="navigation">
-		<#assign preferencesMap = {"displayStyle":"ddmTemplate_NAVBAR-BLANK-JUSTIFIED-FTL", "portletSetupPortletDecoratorId":"barebone", "rootLayoutType":"relative"} />
+		<#assign preferencesMap = {"displayStyle": "ddmTemplate_NAVBAR-BLANK-JUSTIFIED-FTL", "portletSetupPortletDecoratorId": "barebone", "rootLayoutType": "relative"} />
 
 		<@liferay.navigation_menu
 			instance_id="main_navigation_menu"
