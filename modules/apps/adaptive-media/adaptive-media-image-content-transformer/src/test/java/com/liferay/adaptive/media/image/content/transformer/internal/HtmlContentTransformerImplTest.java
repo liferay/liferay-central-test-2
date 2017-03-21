@@ -87,6 +87,44 @@ public class HtmlContentTransformerImplTest {
 	}
 
 	@Test
+	public void testAppliesHDMediaQueries() throws Exception {
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia1 =
+			_createAdaptiveMedia(450, 800, "http://small.adaptive.com");
+
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia2 =
+			_createAdaptiveMedia(900, 1600, "http://small.hd.adaptive.com");
+
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia3 =
+			_createAdaptiveMedia(1900, 2500, "http://big.adaptive.com");
+
+		Mockito.when(
+			_finder.getAdaptiveMedia(Mockito.any())
+		).thenReturn(
+			Stream.of(adaptiveMedia1, adaptiveMedia2, adaptiveMedia3)
+		);
+
+		StringBundler expectedSB = new StringBundler(8);
+
+		expectedSB.append("<picture>");
+		expectedSB.append("<source media=\"(max-width:800px)\" ");
+		expectedSB.append("srcset=\"http://small.adaptive.com, ");
+		expectedSB.append("http://small.hd.adaptive.com 2x\"/>");
+		expectedSB.append("<source media=\"(max-width:1600px) and ");
+		expectedSB.append("(min-width:800px)\" ");
+		expectedSB.append("srcset=\"http://small.hd.adaptive.com\"/>");
+		expectedSB.append("<source media=\"(max-width:2500px) and ");
+		expectedSB.append("(min-width:1600px)\" ");
+		expectedSB.append("srcset=\"http://big.adaptive.com\"/>");
+		expectedSB.append("<img src=\"adaptable\"/>");
+		expectedSB.append("</picture>");
+
+		Assert.assertEquals(
+			expectedSB.toString(),
+			_htmlContentTransformer.transform(
+				"<img data-fileEntryId=\"1989\" src=\"adaptable\"/>"));
+	}
+
+	@Test
 	public void testAppliesSeveralMediaQueries() throws Exception {
 		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia1 =
 			_createAdaptiveMedia(450, 1986, "http://small.very.adaptive.com");
