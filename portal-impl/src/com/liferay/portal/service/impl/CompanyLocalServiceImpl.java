@@ -1629,8 +1629,6 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		ActionableDynamicQuery groupActionableDynamicQuery =
 			groupLocalService.getActionableDynamicQuery();
 
-		groupActionableDynamicQuery.setCompanyId(user.getCompanyId());
-
 		groupActionableDynamicQuery.setAddCriteriaMethod(
 			new ActionableDynamicQuery.AddCriteriaMethod() {
 
@@ -1652,7 +1650,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 				}
 
 			});
-
+		groupActionableDynamicQuery.setCompanyId(user.getCompanyId());
 		groupActionableDynamicQuery.setPerformActionMethod(
 			new ActionableDynamicQuery.PerformActionMethod<Group>() {
 
