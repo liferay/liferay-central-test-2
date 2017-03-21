@@ -98,8 +98,6 @@ public class FileEntryAdaptiveMediaImageURLItemSelectorReturnTypeResolverTest {
 					TestPropsValues.getCompanyId(),
 					configurationEntry.getUUID());
 		}
-
-		_addTestVariant();
 	}
 
 	@After
@@ -122,6 +120,12 @@ public class FileEntryAdaptiveMediaImageURLItemSelectorReturnTypeResolverTest {
 	public void testAddingFileEntryWithImageCreatesMedia() throws Exception {
 		try (DestinationReplacer destinationReplacer = new DestinationReplacer(
 				"liferay/adaptive_media_processor")) {
+
+			_addTestVariant("small", "uuid0", 50, 50);
+			_addTestVariant("big", "uuid1", 400, 280);
+			_addTestVariant("medium", "uuid2", 300, 200);
+			_addTestVariant("extra", "uuid3", 500, 330);
+			_addTestVariant("small.hd", "uuid4", 100, 100);
 
 			ServiceContext serviceContext =
 				ServiceContextTestUtil.getServiceContext(
@@ -205,46 +209,17 @@ public class FileEntryAdaptiveMediaImageURLItemSelectorReturnTypeResolverTest {
 			_getImageBytes(), serviceContext);
 	}
 
-	private void _addTestVariant() throws Exception {
+	private void _addTestVariant(
+			String name, String uuid, int height, int width)
+		throws Exception {
+
 		Map<String, String> properties = new HashMap<>();
 
-		properties.put("max-height", "50");
-		properties.put("max-width", "50");
+		properties.put("max-height", String.valueOf(height));
+		properties.put("max-width", String.valueOf(width));
 
 		_configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "small", "uuid0", properties);
-
-		properties = new HashMap<>();
-
-		properties.put("max-height", "400");
-		properties.put("max-width", "280");
-
-		_configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "big", "uuid1", properties);
-
-		properties = new HashMap<>();
-
-		properties.put("max-height", "300");
-		properties.put("max-width", "200");
-
-		_configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "medium", "uuid2", properties);
-
-		properties = new HashMap<>();
-
-		properties.put("max-height", "500");
-		properties.put("max-width", "330");
-
-		_configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "extra", "uuid3", properties);
-
-		properties = new HashMap<>();
-
-		properties.put("max-height", "100");
-		properties.put("max-width", "100");
-
-		_configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "small.hd", "uuid4", properties);
+			TestPropsValues.getCompanyId(), name, uuid, properties);
 	}
 
 	private void _assertAttibutes(
