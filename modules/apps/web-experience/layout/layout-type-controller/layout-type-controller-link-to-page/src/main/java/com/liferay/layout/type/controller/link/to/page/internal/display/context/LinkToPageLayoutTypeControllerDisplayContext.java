@@ -66,8 +66,6 @@ public class LinkToPageLayoutTypeControllerDisplayContext {
 	}
 
 	public String getItemSelectorURL() throws Exception {
-		long selPlid = ParamUtil.getLong(_liferayPortletRequest, "selPlid");
-
 		ItemSelector itemSelector =
 			(ItemSelector)_liferayPortletRequest.getAttribute(
 				LinkToPageLayoutTypeControllerWebKeys.ITEM_SELECTOR);
@@ -91,6 +89,9 @@ public class LinkToPageLayoutTypeControllerDisplayContext {
 			getEventName(), layoutItemSelectorCriterion);
 
 		itemSelectorURL.setParameter("layoutUuid", getLinkToLayoutUuid());
+
+		long selPlid = ParamUtil.getLong(_liferayPortletRequest, "selPlid");
+
 		itemSelectorURL.setParameter("selPlid", String.valueOf(selPlid));
 
 		return itemSelectorURL.toString();
