@@ -101,27 +101,27 @@ public class StaticAdaptiveMediaBlogsEditorConfigContributorTest
 	}
 
 	@Test
-	public void testAddsPictureAndSourceAreAddedToAllowedContentForBlogs()
+	public void testAddsPictureAndSourceAndImageAreAddedToAllowedContentForBlogs()
 		throws Exception {
 
-		_testAddsPictureTagToAllowedContent(
+		_testAddsPictureAndImgTagToAllowedContent(
 			_getItemSelectorCriterion(BlogsItemSelectorCriterion.class));
 	}
 
 	@Test
-	public void testAddsPictureAndSourceAreAddedToAllowedContentForFile()
+	public void testAddsPictureAndSourceAndImageAreAddedToAllowedContentForImage()
 		throws Exception {
 
-		_testAddsPictureTagToAllowedContent(
-			_getItemSelectorCriterion(FileItemSelectorCriterion.class));
+		_testAddsPictureAndImgTagToAllowedContent(
+			_getItemSelectorCriterion(ImageItemSelectorCriterion.class));
 	}
 
 	@Test
-	public void testAddsPictureAndSourceAreAddedToAllowedContentForImage()
+	public void testAddsPictureAndSourceAndImgAreAddedToAllowedContentForFile()
 		throws Exception {
 
-		_testAddsPictureTagToAllowedContent(
-			_getItemSelectorCriterion(ImageItemSelectorCriterion.class));
+		_testAddsPictureAndImgTagToAllowedContent(
+			_getItemSelectorCriterion(FileItemSelectorCriterion.class));
 	}
 
 	@Test
@@ -280,26 +280,26 @@ public class StaticAdaptiveMediaBlogsEditorConfigContributorTest
 	}
 
 	@Test
-	public void testSetsPictureAndSourceAreAddedToAllowedContentForBlogs()
+	public void testSetsPictureAndSourceAndImgAreAddedToAllowedContentForBlogs()
 		throws Exception {
 
-		_testSetsPictureTagToAllowedContent(
+		_testSetsPictureAndImgTagToAllowedContent(
 			_getItemSelectorCriterion(BlogsItemSelectorCriterion.class));
 	}
 
 	@Test
-	public void testSetsPictureAndSourceAreAddedToAllowedContentForFile()
+	public void testSetsPictureAndSourceAndImgAreAddedToAllowedContentForFile()
 		throws Exception {
 
-		_testSetsPictureTagToAllowedContent(
+		_testSetsPictureAndImgTagToAllowedContent(
 			_getItemSelectorCriterion(FileItemSelectorCriterion.class));
 	}
 
 	@Test
-	public void testSetsPictureAndSourceAreAddedToAllowedContentForImage()
+	public void testSetsPictureAndSourceAndImgAreAddedToAllowedContentForImage()
 		throws Exception {
 
-		_testSetsPictureTagToAllowedContent(
+		_testSetsPictureAndImgTagToAllowedContent(
 			_getItemSelectorCriterion(ImageItemSelectorCriterion.class));
 	}
 
@@ -316,7 +316,7 @@ public class StaticAdaptiveMediaBlogsEditorConfigContributorTest
 		return itemSelectorCriterion;
 	}
 
-	private void _testAddsPictureTagToAllowedContent(
+	private void _testAddsPictureAndImgTagToAllowedContent(
 			ItemSelectorCriterion itemSelectorCriterion)
 		throws Exception {
 
@@ -363,7 +363,8 @@ public class StaticAdaptiveMediaBlogsEditorConfigContributorTest
 			originalJSONObject.toJSONString());
 
 		expectedJSONObject.put(
-			"allowedContent", "a[*](*); div(*); picture[*](*); source[*](*);");
+			"allowedContent",
+			"a[*](*); div(*); picture[*](*); source[*](*); img[*](*);");
 		expectedJSONObject.put("extraPlugins", "adaptivemedia");
 		expectedJSONObject.put(
 			"filebrowserImageBrowseLinkUrl", itemSelectorPortletURL.toString());
@@ -386,7 +387,7 @@ public class StaticAdaptiveMediaBlogsEditorConfigContributorTest
 			expectedJSONObject.toJSONString(), jsonObject.toJSONString(), true);
 	}
 
-	private void _testSetsPictureTagToAllowedContent(
+	private void _testSetsPictureAndImgTagToAllowedContent(
 			ItemSelectorCriterion itemSelectorCriterion)
 		throws Exception {
 
@@ -431,7 +432,7 @@ public class StaticAdaptiveMediaBlogsEditorConfigContributorTest
 		JSONObject expectedJSONObject = JSONFactoryUtil.createJSONObject();
 
 		expectedJSONObject.put(
-			"allowedContent", "picture[*](*); source[*](*);");
+			"allowedContent", "picture[*](*); source[*](*); img[*](*);");
 		expectedJSONObject.put("extraPlugins", "adaptivemedia");
 		expectedJSONObject.put(
 			"filebrowserImageBrowseLinkUrl", itemSelectorPortletURL.toString());
