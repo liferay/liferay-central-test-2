@@ -1117,6 +1117,12 @@ public class PortalUtil {
 		return getPortal().getLayoutFriendlyURL(layout, themeDisplay, locale);
 	}
 
+	public static String getLayoutFriendlyURL(ThemeDisplay themeDisplay)
+		throws PortalException {
+
+		return getPortal().getLayoutFriendlyURL(themeDisplay);
+	}
+
 	public static LayoutFriendlyURLComposite getLayoutFriendlyURLComposite(
 			long groupId, boolean privateLayout, String friendlyURL,
 			Map<String, String[]> params, Map<String, Object> requestContext)
