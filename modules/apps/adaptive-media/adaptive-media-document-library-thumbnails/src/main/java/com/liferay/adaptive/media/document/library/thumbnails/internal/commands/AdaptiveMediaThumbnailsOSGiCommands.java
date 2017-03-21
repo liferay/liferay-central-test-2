@@ -189,22 +189,11 @@ public class AdaptiveMediaThumbnailsOSGiCommands {
 									selectMatchingConfigurationEntry(
 										configurationEntries);
 
-						if (!configurationEntryOptional.isPresent()) {
-							continue;
-						}
-
-						AdaptiveMediaImageConfigurationEntry
-							configurationEntry =
-								configurationEntryOptional.get();
-
-						try {
-							_migrate(
-								actualFileName, configurationEntry,
-								thumbnailConfiguration);
-						}
-						catch (IOException ioe) {
-							_log.error(ioe);
-						}
+						configurationEntryOptional.ifPresent(
+							configurationEntry ->
+								_migrate(
+									actualFileName, configurationEntry,
+									thumbnailConfiguration));
 					}
 				}
 			}
@@ -266,38 +255,43 @@ public class AdaptiveMediaThumbnailsOSGiCommands {
 	}
 
 	private void _migrate(
-			String fileName,
-			AdaptiveMediaImageConfigurationEntry configurationEntry,
-			ThumbnailConfiguration thumbnailConfiguration)
-		throws IOException, PortalException {
+		String fileName,
+		AdaptiveMediaImageConfigurationEntry configurationEntry,
+		ThumbnailConfiguration thumbnailConfiguration) {
 
-		FileVersion fileVersion = _getFileVersion(
-			thumbnailConfiguration.getFileVersionId(fileName));
+		try {
+			FileVersion fileVersion = _getFileVersion(
+				thumbnailConfiguration.getFileVersionId(fileName));
 
-		if (fileVersion == null) {
-			return;
+			if (fileVersion == null) {
+				return;
+			}
+
+			AdaptiveMediaImageEntry imageEntry =
+				_imageEntryLocalService.fetchAdaptiveMediaImageEntry(
+					configurationEntry.getUUID(),
+					fileVersion.getFileVersionId());
+
+			if (imageEntry != null) {
+				return;
+			}
+
+			byte[] bytes = DLStoreUtil.getFileAsBytes(
+				fileVersion.getCompanyId(),
+				DLPreviewableProcessor.REPOSITORY_ID, fileName);
+
+			ImageBag imageBag = ImageToolUtil.read(bytes);
+
+			RenderedImage renderedImage = imageBag.getRenderedImage();
+
+			_imageEntryLocalService.addAdaptiveMediaImageEntry(
+				configurationEntry, fileVersion, renderedImage.getWidth(),
+				renderedImage.getHeight(),
+				new UnsyncByteArrayInputStream(bytes), bytes.length);
 		}
-
-		AdaptiveMediaImageEntry imageEntry =
-			_imageEntryLocalService.fetchAdaptiveMediaImageEntry(
-				configurationEntry.getUUID(), fileVersion.getFileVersionId());
-
-		if (imageEntry != null) {
-			return;
+		catch (IOException | PortalException e) {
+			_log.error(e);
 		}
-
-		byte[] bytes = DLStoreUtil.getFileAsBytes(
-			fileVersion.getCompanyId(), DLPreviewableProcessor.REPOSITORY_ID,
-			fileName);
-
-		ImageBag imageBag = ImageToolUtil.read(bytes);
-
-		RenderedImage renderedImage = imageBag.getRenderedImage();
-
-		_imageEntryLocalService.addAdaptiveMediaImageEntry(
-			configurationEntry, fileVersion, renderedImage.getWidth(),
-			renderedImage.getHeight(), new UnsyncByteArrayInputStream(bytes),
-			bytes.length);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
