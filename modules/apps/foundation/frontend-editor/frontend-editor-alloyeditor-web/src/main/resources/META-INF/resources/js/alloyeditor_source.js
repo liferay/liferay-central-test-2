@@ -243,6 +243,12 @@ AUI.add(
 						);
 					},
 
+					_refreshTooltip: function() {
+						if (Liferay.Data.LFR_PORTAL_TOOLTIP) {
+							Liferay.Data.LFR_PORTAL_TOOLTIP.getTooltip().renderUI();
+						}
+					},
+
 					_switchMode: function(event) {
 						var instance = this;
 
@@ -275,6 +281,8 @@ AUI.add(
 						var instance = this;
 
 						instance._sourceEditor.switchTheme();
+
+						instance._refreshTooltip();
 					},
 
 					_toggleEditorModeUI: function() {
@@ -294,6 +302,8 @@ AUI.add(
 						instance._isVisible = editorWrapper.hasClass(CSS_SHOW_SOURCE);
 
 						editorSwitch.one('.lexicon-icon').replace(instance._getEditorStateLexiconIcon());
+
+						instance._refreshTooltip();
 
 						instance._toggleSourceSwitchFn(
 							{
