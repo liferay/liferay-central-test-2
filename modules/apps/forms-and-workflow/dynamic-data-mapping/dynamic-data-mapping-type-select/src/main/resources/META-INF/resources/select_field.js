@@ -15,6 +15,8 @@ AUI.add(
 
 		var CSS_SEARCH_CHOSEN = A.getClassName('search', 'chosen');
 
+		var CSS_SELECT_ARROW_DOWN = A.getClassName('select', 'arrow', 'down', 'container');
+
 		var CSS_SELECT_BADGE_ITEM_CLOSE = A.getClassName('trigger', 'badge', 'item', 'close');
 
 		var CSS_SELECT_OPTION_ITEM = A.getClassName('select', 'option', 'item');
@@ -106,6 +108,16 @@ AUI.add(
 
 							instance.fire('closeList');
 						}
+					},
+
+					focus: function() {
+						var instance = this;
+
+						var container = instance.get('container');
+
+						var arrowSelect = container.one('.' + CSS_SELECT_ARROW_DOWN);
+
+						arrowSelect.focus();
 					},
 
 					getTemplateContext: function() {
@@ -382,6 +394,8 @@ AUI.add(
 						}
 
 						instance.setValue(value);
+
+						instance.focus();
 					},
 
 					_handleSelectTriggerClick: function(event) {
