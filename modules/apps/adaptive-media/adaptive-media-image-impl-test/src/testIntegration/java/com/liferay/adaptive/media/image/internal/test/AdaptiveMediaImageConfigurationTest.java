@@ -131,6 +131,56 @@ public class AdaptiveMediaImageConfigurationTest
 		Assert.assertEquals("2", configurationEntry.getUUID());
 	}
 
+	@Test(
+		expected = AdaptiveMediaImageConfigurationException.DuplicateAdaptiveMediaImageConfigurationNameException.class
+	)
+	public void testAddDuplicateConfigurationEntryName() throws Exception {
+		AdaptiveMediaImageConfigurationHelper configurationHelper =
+			serviceTracker.getService();
+
+		Map<String, String> properties = new HashMap<>();
+
+		properties.put("max-height", "100");
+		properties.put("max-width", "100");
+
+		AdaptiveMediaImageConfigurationEntry configurationEntry1 =
+			configurationHelper.addAdaptiveMediaImageConfigurationEntry(
+				TestPropsValues.getCompanyId(), "one", "1", properties);
+
+		properties = new HashMap<>();
+
+		properties.put("max-height", "200");
+		properties.put("max-width", "200");
+
+		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
+			TestPropsValues.getCompanyId(), "one", "2", properties);
+	}
+
+	@Test(
+		expected = AdaptiveMediaImageConfigurationException.DuplicateAdaptiveMediaImageConfigurationUuidException.class
+	)
+	public void testAddDuplicateConfigurationEntryUuid() throws Exception {
+		AdaptiveMediaImageConfigurationHelper configurationHelper =
+			serviceTracker.getService();
+
+		Map<String, String> properties = new HashMap<>();
+
+		properties.put("max-height", "100");
+		properties.put("max-width", "100");
+
+		AdaptiveMediaImageConfigurationEntry configurationEntry1 =
+			configurationHelper.addAdaptiveMediaImageConfigurationEntry(
+				TestPropsValues.getCompanyId(), "one", "1", properties);
+
+		properties = new HashMap<>();
+
+		properties.put("max-height", "200");
+		properties.put("max-width", "200");
+
+		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
+			TestPropsValues.getCompanyId(), "two", "1", properties);
+	}
+
 	@Test
 	public void testEmptyConfiguration() throws Exception {
 		AdaptiveMediaImageConfigurationHelper configurationHelper =

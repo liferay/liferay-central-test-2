@@ -75,7 +75,7 @@ public class AdaptiveMediaImageConfigurationHelperImpl
 			getAdaptiveMediaImageConfigurationEntries(
 				companyId, configurationEntry -> true);
 
-		_checkDuplicates(configurationEntries, normalizedUuid);
+		_checkDuplicates(configurationEntries, name, normalizedUuid);
 
 		List<AdaptiveMediaImageConfigurationEntry> updatedConfigurationEntries =
 			configurationEntries.stream().filter(
@@ -350,7 +350,7 @@ public class AdaptiveMediaImageConfigurationHelperImpl
 			oldConfigurationEntryOptional.get();
 
 		if (!oldUuid.equals(normalizedUuid)) {
-			_checkDuplicates(configurationEntries, normalizedUuid);
+			_checkDuplicates(configurationEntries, name, normalizedUuid);
 		}
 
 		List<AdaptiveMediaImageConfigurationEntry> updatedConfigurationEntries =
@@ -381,18 +381,29 @@ public class AdaptiveMediaImageConfigurationHelperImpl
 	private void _checkDuplicates(
 			Collection<AdaptiveMediaImageConfigurationEntry>
 				configurationEntries,
-			String uuid)
+			String name, String uuid)
 		throws AdaptiveMediaImageConfigurationException {
 
 		Optional<AdaptiveMediaImageConfigurationEntry>
-			duplicateConfigurationEntryOptional =
+			duplicateNameConfigurationEntryOptional =
+				configurationEntries.stream().filter(
+					configurationEntry -> configurationEntry.getName().equals(
+						name)).findFirst();
+
+		if (duplicateNameConfigurationEntryOptional.isPresent()) {
+			throw new AdaptiveMediaImageConfigurationException.
+				DuplicateAdaptiveMediaImageConfigurationNameException();
+		}
+
+		Optional<AdaptiveMediaImageConfigurationEntry>
+			duplicateUuidConfigurationEntryOptional =
 				configurationEntries.stream().filter(
 					configurationEntry -> configurationEntry.getUUID().equals(
 						uuid)).findFirst();
 
-		if (duplicateConfigurationEntryOptional.isPresent()) {
+		if (duplicateUuidConfigurationEntryOptional.isPresent()) {
 			throw new AdaptiveMediaImageConfigurationException.
-				DuplicateAdaptiveMediaImageConfigurationException();
+				DuplicateAdaptiveMediaImageConfigurationUuidException();
 		}
 	}
 

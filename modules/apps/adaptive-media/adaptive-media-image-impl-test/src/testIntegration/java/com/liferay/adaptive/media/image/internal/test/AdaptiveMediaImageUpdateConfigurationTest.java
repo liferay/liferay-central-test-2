@@ -155,9 +155,38 @@ public class AdaptiveMediaImageUpdateConfigurationTest
 	}
 
 	@Test(
-		expected = AdaptiveMediaImageConfigurationException.DuplicateAdaptiveMediaImageConfigurationException.class
+		expected = AdaptiveMediaImageConfigurationException.DuplicateAdaptiveMediaImageConfigurationNameException.class
 	)
-	public void testUpdateDuplicateConfiguration() throws Exception {
+	public void testUpdateDuplicateConfigurationEntryName() throws Exception {
+		AdaptiveMediaImageConfigurationHelper configurationHelper =
+			serviceTracker.getService();
+
+		Map<String, String> properties = new HashMap<>();
+
+		properties.put("max-height", "100");
+		properties.put("max-width", "100");
+
+		AdaptiveMediaImageConfigurationEntry configurationEntry1 =
+			configurationHelper.addAdaptiveMediaImageConfigurationEntry(
+				TestPropsValues.getCompanyId(), "one", "1", properties);
+
+		properties = new HashMap<>();
+
+		properties.put("max-height", "200");
+		properties.put("max-width", "200");
+
+		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
+			TestPropsValues.getCompanyId(), "two", "2", properties);
+
+		configurationHelper.updateAdaptiveMediaImageConfigurationEntry(
+			TestPropsValues.getCompanyId(), "1", "two", "1",
+			configurationEntry1.getProperties());
+	}
+
+	@Test(
+		expected = AdaptiveMediaImageConfigurationException.DuplicateAdaptiveMediaImageConfigurationUuidException.class
+	)
+	public void testUpdateDuplicateConfigurationEntryUuid() throws Exception {
 		AdaptiveMediaImageConfigurationHelper configurationHelper =
 			serviceTracker.getService();
 

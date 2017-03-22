@@ -37,26 +37,54 @@ public class AdaptiveMediaImageConfigurationException extends Exception {
 	}
 
 	/**
-	 * This exception is raised when a configuration with the same uuid already exists.
+	 * This exception is raised when a configuration with the same name already exists.
 	 */
 	public static final class
-		DuplicateAdaptiveMediaImageConfigurationException
+		DuplicateAdaptiveMediaImageConfigurationNameException
 			extends AdaptiveMediaImageConfigurationException {
 
-		public DuplicateAdaptiveMediaImageConfigurationException() {
+		public DuplicateAdaptiveMediaImageConfigurationNameException() {
 		}
 
-		public DuplicateAdaptiveMediaImageConfigurationException(String s) {
+		public DuplicateAdaptiveMediaImageConfigurationNameException(String s) {
 			super(s);
 		}
 
-		public DuplicateAdaptiveMediaImageConfigurationException(
+		public DuplicateAdaptiveMediaImageConfigurationNameException(
 			String s, Throwable throwable) {
 
 			super(s, throwable);
 		}
 
-		public DuplicateAdaptiveMediaImageConfigurationException(
+		public DuplicateAdaptiveMediaImageConfigurationNameException(
+			Throwable throwable) {
+
+			super(throwable);
+		}
+
+	}
+
+	/**
+	 * This exception is raised when a configuration with the same uuid already exists.
+	 */
+	public static final class
+		DuplicateAdaptiveMediaImageConfigurationUuidException
+			extends AdaptiveMediaImageConfigurationException {
+
+		public DuplicateAdaptiveMediaImageConfigurationUuidException() {
+		}
+
+		public DuplicateAdaptiveMediaImageConfigurationUuidException(String s) {
+			super(s);
+		}
+
+		public DuplicateAdaptiveMediaImageConfigurationUuidException(
+			String s, Throwable throwable) {
+
+			super(s, throwable);
+		}
+
+		public DuplicateAdaptiveMediaImageConfigurationUuidException(
 			Throwable throwable) {
 
 			super(throwable);
