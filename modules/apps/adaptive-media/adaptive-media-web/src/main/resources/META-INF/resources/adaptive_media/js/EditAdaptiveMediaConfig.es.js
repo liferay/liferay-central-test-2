@@ -95,15 +95,23 @@ class EditAdaptiveMediaConfig extends PortletBase {
 	 * if the "Automatic" option is selected
 	 */
 	updateUuid() {
-		var newUuidInput = this.newUuidInput;
+		let newUuidInput = this.newUuidInput;
 
-		var uuidEmpty = !newUuidInput.value;
+		let uuidEmpty = !newUuidInput.value;
 
 		if (this.isAutomaticUuid_() && (uuidEmpty || this._originalUuidChanged)) {
 			newUuidInput.value = Liferay.Util.normalizeFriendlyURL(this.nameInput.value);
 		}
 
 		this._originalUuidChanged = true;
+	}
+
+	/**
+	 * Returns if the "Automatic" check is selected
+	 * @return {Boolean} whether the "Automatic" radiobutton is checked or not.
+	 */
+	isAutomaticUuid_() {
+		return this.one('input:checked', '#idOptions').value === 'true';
 	}
 
 	/**
@@ -127,14 +135,6 @@ class EditAdaptiveMediaConfig extends PortletBase {
 
 			newUuidInput.removeAttribute('disabled');
 		}
-	}
-
-	/**
-	 * Returns if the "Automatic" check is selected
-	 * @return {Boolean} whether the "Automatic" radiobutton is checked or not.
-	 */
-	isAutomaticUuid_() {
-		return this.one('input:checked', '#idOptions').value === 'true';
 	}
 
 	/**
