@@ -323,9 +323,12 @@ public class AdaptiveMediaImageConfigurationHelperImpl
 				Map<String, String> properties)
 		throws AdaptiveMediaImageConfigurationException, IOException {
 
+		_checkName(name);
+		_checkProperties(properties);
+
 		String normalizedUuid = FriendlyURLNormalizerUtil.normalize(newUuid);
 
-		_checkProperties(properties);
+		_checkUuid(normalizedUuid);
 
 		Collection<AdaptiveMediaImageConfigurationEntry> configurationEntries =
 			getAdaptiveMediaImageConfigurationEntries(
