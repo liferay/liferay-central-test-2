@@ -30,22 +30,12 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 <c:if test="<%= articleDisplay.isPaginate() %>">
 
 	<%
-	String pageRedirect = ParamUtil.getString(request, "redirect");
-
-	if (Validator.isNull(pageRedirect)) {
-		pageRedirect = currentURL;
-	}
-
-	int cur = ParamUtil.getInteger(request, "cur");
-
 	PortletURL articlePageURL = renderResponse.createRenderURL();
 
-	articlePageURL.setParameter("mvcPath", "/view_content.jsp");
-	articlePageURL.setParameter("cur", String.valueOf(cur));
-	articlePageURL.setParameter("redirect", pageRedirect);
-	articlePageURL.setParameter("type", assetRendererFactory.getType());
-	articlePageURL.setParameter("groupId", String.valueOf(articleDisplay.getGroupId()));
-	articlePageURL.setParameter("urlTitle", articleDisplay.getUrlTitle());
+	articlePageURL.setParameter("mvcPath", "/preview.jsp");
+	articlePageURL.setParameter("classNameId", String.valueOf(assetRendererFactory.getClassNameId()));
+	articlePageURL.setParameter("classPK", String.valueOf(JournalArticleAssetRenderer.getClassPK(article)));
+	articlePageURL.setWindowState(LiferayWindowState.POP_UP);
 	%>
 
 	<br />
