@@ -218,29 +218,21 @@ AUI.add(
 					removeOption: function(option) {
 						var instance = this;
 
+						var options = instance.getOptions();
+
+						var index = options.indexOf(option);
+
 						var value = instance.getValue();
 
-						if (value.length == 1) {
-							option.set('value', '');
-							option.setValue('');
+						value.splice(index, 1);
+
+						instance.setValue(value);
+
+						if (index > 0 && value.length > 0) {
+							options[index - 1].focus();
 						}
 						else {
-							var options = instance.getOptions();
-
-							var index = options.indexOf(option);
-
-							value.splice(index, 1);
-
-							instance.setValue(value);
-
-							if (value.length > 0) {
-								if (index > 0) {
-									options[index - 1].focus();
-								}
-								else {
-									options[index + 1].focus();
-								}
-							}
+							instance.getLastOption().focus();
 						}
 					},
 
@@ -306,9 +298,9 @@ AUI.add(
 					_afterOptionNormalizeKey: function(key, option) {
 						var instance = this;
 
-						var name = key;
+						var name = A.Do.originalRetVal;
 
-						if (key) {
+						if (name) {
 							var valueInItem = function(value, item) {
 								return item.value === value && item.value !== option.get('key');
 							};
@@ -323,7 +315,7 @@ AUI.add(
 
 							do {
 								if (counter > 0) {
-									name = key + counter;
+									name = A.Do.originalRetVal + counter;
 								}
 
 								counter++;
