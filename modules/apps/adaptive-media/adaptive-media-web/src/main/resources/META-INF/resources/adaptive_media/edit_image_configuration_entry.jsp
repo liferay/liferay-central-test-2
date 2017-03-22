@@ -73,11 +73,15 @@ if (configurationEntry != null) {
 
 				<div class="row">
 					<div class="col-md-3">
-						<aui:input disabled="<%= !configurationEntryEditable %>" label="max-width-px" name="maxWidth" value='<%= (properties != null) ? properties.get("max-width") : StringPool.BLANK %>' />
+						<aui:input disabled="<%= !configurationEntryEditable %>" label="max-width-px" name="maxWidth" value='<%= (properties != null) ? properties.get("max-width") : StringPool.BLANK %>' >
+							<aui:validator name="number" />
+						</aui:input>
 					</div>
 
 					<div class="col-md-3">
-						<aui:input disabled="<%= !configurationEntryEditable %>" label="max-height-px" name="maxHeight" value='<%= (properties != null) ? properties.get("max-height") : StringPool.BLANK %>' />
+						<aui:input disabled="<%= !configurationEntryEditable %>" label="max-height-px" name="maxHeight" value='<%= (properties != null) ? properties.get("max-height") : StringPool.BLANK %>' >
+							<aui:validator name="number" />
+						</aui:input>
 					</div>
 				</div>
 
