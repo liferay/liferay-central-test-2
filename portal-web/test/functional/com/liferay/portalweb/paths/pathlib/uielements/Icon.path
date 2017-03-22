@@ -145,7 +145,7 @@
 </tr>
 <tr>
 	<td>FACEBOOK</td>
-	<td>//i[contains(@class,'icon-facebook')]</td>
+	<td>//span[contains(.,'Facebook')]</td>
 	<td></td>
 </tr>
 <tr>
