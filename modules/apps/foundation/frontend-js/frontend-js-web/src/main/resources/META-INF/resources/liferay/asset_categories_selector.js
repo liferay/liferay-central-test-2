@@ -121,7 +121,7 @@ AUI.add(
 						value: Liferay.Language.get('select-categories')
 					},
 
-					vocabularyGroupIds: {
+					vocabularyGroupDescriptiveNames: {
 						setter: function(value) {
 							var instance = this;
 
@@ -134,7 +134,7 @@ AUI.add(
 						value: []
 					},
 
-					vocabularyGroupDescriptiveNames: {
+					vocabularyGroupIds: {
 						setter: function(value) {
 							var instance = this;
 
@@ -697,8 +697,8 @@ AUI.add(
 						}
 						else if (groupDescriptiveNames.length > 0) {
 							var vocabularyGroupIds = instance.get('vocabularyGroupIds');
-							var groupIdIndex = vocabularyGroupIds.indexOf(item.groupId);
-							var groupDescriptiveName = groupDescriptiveNames[groupIdIndex];
+
+							var groupDescriptiveName = groupDescriptiveNames[vocabularyGroupIds.indexOf(item.groupId)];
 
 							if (groupDescriptiveName) {
 								vocabularyTitle += ' (' + groupDescriptiveName + ')';
