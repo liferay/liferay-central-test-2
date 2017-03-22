@@ -185,6 +185,8 @@ AUI.add(
 						var value = inputNode.val();
 
 						instance._updateInputValue(inputNode, instance.normalizeKey(value));
+
+						instance.fire('blur', instance._getEventPayload(event));
 					},
 
 					_onKeyUpKeyInput: function(event) {

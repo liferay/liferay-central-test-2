@@ -2,6 +2,8 @@
 
 var A = AUI();
 
+chai.config.truncateThreshold = 0;
+
 var createOptionsField = function(config) {
 	return new Liferay.DDM.Field.Options(
 		A.merge(
@@ -13,6 +15,24 @@ var createOptionsField = function(config) {
 			config || {}
 		)
 	).render(document.body);
+};
+
+var getContainers = function(field) {
+	return field.get('container').all('.options > .lfr-ddm-form-field-container');
+};
+
+var getOption = function(field, optionContainer) {
+	var option;
+
+	field.eachOption(
+		function(currentOption) {
+			if (currentOption.get('container') === optionContainer) {
+				option = currentOption;
+			}
+		}
+	);
+
+	return option;
 };
 
 describe(
@@ -113,6 +133,112 @@ describe(
 		);
 
 		describe(
+			'.moveOption(oldIndex, newIndex)',
+			function() {
+				it(
+					'should make the value refect the moved option',
+					function(done) {
+						optionsField = createOptionsField(
+							{
+								allowEmptyOptions: true
+							}
+						);
+
+						optionsField.getLastOption().set('value', 'One');
+						optionsField.getLastOption().set('value', 'Two');
+						optionsField.getLastOption().set('value', 'Three');
+						optionsField.getLastOption().set('value', 'Four');
+						optionsField.getLastOption().set('value', 'Five');
+
+						optionsField.moveOption(2, 4);
+
+						var value = optionsField.getValue();
+
+						assert.deepEqual(
+							[
+								{
+									label: 'One',
+									value: 'One'
+								},
+								{
+									label: 'Two',
+									value: 'Two'
+								},
+								{
+									label: 'Four',
+									value: 'Four'
+								},
+								{
+									label: 'Five',
+									value: 'Five'
+								},
+								{
+									label: 'Three',
+									value: 'Three'
+								}
+							],
+							value
+						);
+
+						done();
+					}
+				);
+
+				it(
+					'should render in correct order after moving an option',
+					function(done) {
+						optionsField = createOptionsField(
+							{
+								allowEmptyOptions: true,
+								value: [
+									{
+										label: 'One',
+										value: 'One'
+									},
+									{
+										label: 'Two',
+										value: 'Two'
+									},
+									{
+										label: 'Three',
+										value: 'Three'
+									},
+									{
+										label: 'Four',
+										value: 'Four'
+									},
+									{
+										label: 'Five',
+										value: 'Five'
+									}
+								]
+							}
+						);
+
+						optionsField.moveOption(2, 4);
+
+						var containers = getContainers(optionsField);
+
+						containers.each(
+							function(container, index) {
+								var optionInDOM = getOption(optionsField, container);
+
+								assert.ok(optionInDOM, 'Could not find option in DOM with index ' + index);
+
+								var optionInField = optionsField.getOption(index);
+
+								assert.equal(optionInDOM.get('key'), optionInField.get('key'));
+								assert.equal(optionInDOM.get('value'), optionInField.get('value'));
+							}
+						);
+
+						done();
+					}
+				);
+			}
+		);
+
+		describe(
 			'LPS-70570',
 			function() {
 				it(
@@ -200,9 +326,50 @@ describe(
 
 						optionsField.getOption(2).get('container').one('button.close').simulate('click');
 
-						var containers = optionsField.get('container').all('.liferay-ddm-form-field-key-value');
+						var containers = getContainers(optionsField);
 
 						assert.strictEqual(5, containers.size());
+
+						done();
+					}
+				);
+
+				it(
+					'should allow generation of keys after changing the value',
+					function(done) {
+						optionsField = createOptionsField();
+
+						optionsField.set(
+							'value',
+							[
+								{
+									label: 'Test',
+									value: 'Test'
+								}
+							]
+						);
+
+						assert.isFalse(optionsField.getOption(0).get('generationLocked'));
+
+						done();
+					}
+				);
+
+				it(
+					'should lock the generation of keys after changing the value with items with labels different than the value',
+					function(done) {
+						optionsField = createOptionsField();
+
+						optionsField.setValue(
+							[
+								{
+									label: 'Test',
+									value: 'manuallychanged'
+								}
+							]
+						);
+
+						assert.isTrue(optionsField.getOption(0).get('generationLocked'));
 
 						done();
 					}

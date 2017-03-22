@@ -1,8 +1,6 @@
 AUI.add(
 	'liferay-ddm-form-field-options',
 	function(A) {
-		var AArray = A.Array;
-
 		var Renderer = Liferay.DDM.Renderer;
 
 		var Util = Renderer.Util;
@@ -100,9 +98,7 @@ AUI.add(
 					eachOption: function(fn) {
 						var instance = this;
 
-						var mainOption = instance._mainOption;
-
-						mainOption.getRepeatedSiblings().forEach(fn, instance);
+						instance.getOptions().forEach(fn, instance);
 					},
 
 					empty: function() {
@@ -110,7 +106,7 @@ AUI.add(
 
 						var mainOption = instance._mainOption;
 
-						var options = mainOption.getRepeatedSiblings();
+						var options = instance.getOptions();
 
 						while (options.length > 1) {
 							var option = options[options.length - 1];
@@ -126,17 +122,23 @@ AUI.add(
 					getLastOption: function() {
 						var instance = this;
 
-						var repetitions = instance._mainOption.getRepeatedSiblings();
+						var options = instance.getOptions();
 
-						return instance.getOption(repetitions.length - 1);
+						return instance.getOption(options.length - 1);
 					},
 
 					getOption: function(index) {
 						var instance = this;
 
-						var repetitions = instance._mainOption.getRepeatedSiblings();
+						var options = instance.getOptions();
 
-						return repetitions[index];
+						return options[index];
+					},
+
+					getOptions: function() {
+						var instance = this;
+
+						return instance._mainOption.getRepeatedSiblings();
 					},
 
 					getValue: function() {
@@ -190,20 +192,14 @@ AUI.add(
 						);
 					},
 
-					moveOption: function(option, oldIndex, newIndex) {
+					moveOption: function(oldIndex, newIndex) {
 						var instance = this;
 
-						var repetitions = option.getRepeatedSiblings();
+						var value = instance.getValue();
 
-						var value = instance.get('value');
+						value.splice(newIndex, 0, value.splice(oldIndex, 1)[0]);
 
-						instance._reorderOptions(repetitions, newIndex, oldIndex);
-
-						repetitions.forEach(A.bind('_syncRepeatableField', option));
-
-						instance._reorderOptions(value, newIndex, oldIndex);
-
-						instance.set('value', value);
+						instance.setValue(value);
 					},
 
 					processEvaluationContext: function(context) {
@@ -212,8 +208,8 @@ AUI.add(
 						var value = instance.getValue();
 
 						if (value.length === 0 && instance.get('required')) {
-							context.valid = false;
 							context.errorMessage = Liferay.Language.get('please-add-at-least-one-option');
+							context.valid = false;
 						}
 
 						return context;
@@ -229,9 +225,9 @@ AUI.add(
 							option.setValue('');
 						}
 						else {
-							var repetitions = option.getRepeatedSiblings();
+							var options = instance.getOptions();
 
-							var index = repetitions.indexOf(option);
+							var index = options.indexOf(option);
 
 							value.splice(index, 1);
 
@@ -239,10 +235,10 @@ AUI.add(
 
 							if (value.length > 0) {
 								if (index > 0) {
-									repetitions[index - 1].focus();
+									options[index - 1].focus();
 								}
 								else {
-									repetitions[index + 1].focus();
+									options[index + 1].focus();
 								}
 							}
 						}
@@ -293,8 +289,10 @@ AUI.add(
 						var value = instance.getValue();
 
 						if (value.length === 0 || value.length === 1 && value[0].label === '') {
-							instance.setValue([]);
+							value = [];
 						}
+
+						instance.set('value', value);
 					},
 
 					_afterErrorMessageChange: function(event) {
@@ -343,11 +341,7 @@ AUI.add(
 							return;
 						}
 
-						var option = event.target;
-
-						var repetitions = option.getRepeatedSiblings();
-
-						if (option.get('repeatedIndex') === repetitions.length - 1) {
+						if (event.target === instance.getLastOption()) {
 							instance.addOption();
 						}
 
@@ -371,23 +365,16 @@ AUI.add(
 					_afterSortableListDragEnd: function(event) {
 						var instance = this;
 
-						var dragNode = event.target.get('node');
-
-						var dragEndIndex = instance._getNodeIndex(dragNode);
+						var dragEndIndex = instance._getNodeIndex(event.target.get('node'));
 
 						var dragStartIndex = instance._dragStartIndex;
 
 						if (dragEndIndex !== dragStartIndex) {
-							var mainOption = instance._mainOption;
 
-							var option = AArray.find(
-								mainOption.getRepeatedSiblings(),
-								function(item) {
-									return item.get('container') === dragNode;
-								}
-							);
+							// Drag doesn't like that we are removing the node right after
+							// drag:end. So we postpone it to the next clock cycle.
 
-							instance.moveOption(option, dragStartIndex, dragEndIndex);
+							A.later(0, instance, instance.moveOption, [dragStartIndex, dragEndIndex]);
 						}
 					},
 
@@ -543,10 +530,6 @@ AUI.add(
 						container.append(TPL_DRAG_HANDLE + TPL_REMOVE_BUTTON);
 					},
 
-					_reorderOptions: function(options, newIndex, oldIndex) {
-						options.splice(newIndex, 0, options.splice(oldIndex, 1)[0]);
-					},
-
 					_restoreOption: function(option, contextValue) {
 						var instance = this;
 
@@ -554,6 +537,14 @@ AUI.add(
 						option.set('value', contextValue.label);
 						option.set('key', contextValue.value);
 						option.setValue(contextValue.label);
+
+						if (option.normalizeKey(contextValue.label) !== contextValue.value) {
+							option.set('generationLocked', true);
+						}
+						else {
+							option.set('generationLocked', false);
+						}
+
 						instance._skipOptionValueChange = false;
 					},
 
