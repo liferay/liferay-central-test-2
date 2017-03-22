@@ -14,7 +14,9 @@
 
 package com.liferay.adaptive.media.document.library.thumbnails.internal.test.util;
 
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.ReflectionUtil;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 
 import java.lang.reflect.Field;
@@ -25,21 +27,33 @@ import java.lang.reflect.Field;
 public class PropsValuesReplacer implements AutoCloseable {
 
 	public PropsValuesReplacer(String name, Object value) throws Exception {
-		_field = ReflectionUtil.getDeclaredField(PropsValues.class, name);
+		Field propsKeysField = ReflectionUtil.getDeclaredField(
+			PropsKeys.class, name);
 
-		_oldValue = _field.get(null);
+		_propsKeysName = (String)propsKeysField.get(null);
 
-		_field.set(null, value);
+		_propsKeysOldValue = PropsUtil.get(_propsKeysName);
+
+		PropsUtil.set(_propsKeysName, String.valueOf(value));
+
+		_propsValuesField = ReflectionUtil.getDeclaredField(
+			PropsValues.class, name);
+
+		_propsValuesOldValue = _propsValuesField.get(null);
+
+		_propsValuesField.set(null, value);
 	}
 
 	@Override
 	public void close() throws Exception {
-		_field.set(null, _oldValue);
+		PropsUtil.set(_propsKeysName, _propsKeysOldValue);
 
-		ReflectionUtil.unfinalField(_field);
+		_propsValuesField.set(null, _propsValuesOldValue);
 	}
 
-	private final Field _field;
-	private final Object _oldValue;
+	private final String _propsKeysName;
+	private final String _propsKeysOldValue;
+	private final Field _propsValuesField;
+	private final Object _propsValuesOldValue;
 
 }
