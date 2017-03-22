@@ -57,8 +57,8 @@ AUI.add(
 						instance._eventHandlers.push(
 							instance.on('liferay-ddm-form-field-key-value:destroy', instance._onDestroyOption),
 							instance.after('liferay-ddm-form-field-key-value:render', instance._afterRenderOption),
-							instance.after('liferay-ddm-form-field-key-value:valueChange', instance._afterOptionValueChange),
 							instance.after('liferay-ddm-form-field-key-value:blur', instance._afterBlur),
+							instance.after('liferay-ddm-form-field-key-value:valueChange', instance._afterOptionValueChange),
 							sortableList.after('drag:end', A.bind('_afterSortableListDragEnd', instance)),
 							sortableList.after('drag:start', A.bind('_afterSortableListDragStart', instance))
 						);
@@ -128,7 +128,15 @@ AUI.add(
 
 						var repetitions = instance._mainOption.getRepeatedSiblings();
 
-						return repetitions[repetitions.length - 1];
+						return instance.getOption(repetitions.length - 1);
+					},
+
+					getOption: function(index) {
+						var instance = this;
+
+						var repetitions = instance._mainOption.getRepeatedSiblings();
+
+						return repetitions[index];
 					},
 
 					getValue: function() {
@@ -209,6 +217,35 @@ AUI.add(
 						}
 
 						return context;
+					},
+
+					removeOption: function(option) {
+						var instance = this;
+
+						var value = instance.getValue();
+
+						if (value.length == 1) {
+							option.set('value', '');
+							option.setValue('');
+						}
+						else {
+							var repetitions = option.getRepeatedSiblings();
+
+							var index = repetitions.indexOf(option);
+
+							value.splice(index, 1);
+
+							instance.setValue(value);
+
+							if (value.length > 0) {
+								if (index > 0) {
+									repetitions[index - 1].focus();
+								}
+								else {
+									repetitions[index + 1].focus();
+								}
+							}
+						}
 					},
 
 					render: function() {
@@ -302,6 +339,10 @@ AUI.add(
 					_afterOptionValueChange: function(event) {
 						var instance = this;
 
+						if (instance._skipOptionValueChange) {
+							return;
+						}
+
 						var option = event.target;
 
 						var repetitions = option.getRepeatedSiblings();
@@ -316,8 +357,6 @@ AUI.add(
 							instance.set('errorMessage', '');
 							instance.set('valid', true);
 						}
-
-						instance.set('value', value);
 					},
 
 					_afterRenderOption: function(event) {
@@ -462,19 +501,7 @@ AUI.add(
 					_onOptionClickClose: function(option) {
 						var instance = this;
 
-						if (option === instance._mainOption) {
-							var repetitions = option.getRepeatedSiblings();
-
-							var index = repetitions.indexOf(option);
-
-							instance._mainOption = repetitions[index + 1];
-						}
-
-						option.remove();
-
-						instance.set('value', instance.getValue());
-
-						instance.render();
+						instance.removeOption(option);
 					},
 
 					_renderOptions: function(optionsValues) {
@@ -503,7 +530,7 @@ AUI.add(
 							}
 						);
 
-						if (optionsValues.length) {
+						if (optionsValues.length && optionsValues[optionsValues.length - 1].value) {
 							instance.addOption();
 						}
 					},
@@ -521,24 +548,25 @@ AUI.add(
 					},
 
 					_restoreOption: function(option, contextValue) {
-						option.setValue(contextValue.label);
+						var instance = this;
+
+						instance._skipOptionValueChange = true;
+						option.set('value', contextValue.label);
 						option.set('key', contextValue.value);
+						option.setValue(contextValue.label);
+						instance._skipOptionValueChange = false;
 					},
 
 					_setValue: function(val) {
 						var instance = this;
 
-						if (!instance.get('allowEmptyOptions')) {
-
-							if (val.length === 0) {
-
-								return [
-									{
-										label: 'Option',
-										value: 'Option'
-									}
-								];
-							}
+						if (!instance.get('allowEmptyOptions') && val.length === 0) {
+							return [
+								{
+									label: 'Option',
+									value: 'Option'
+								}
+							];
 						}
 
 						return val;
