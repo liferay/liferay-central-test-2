@@ -902,10 +902,6 @@ public class JournalArticleLocalServiceImpl
 			id, groupId, oldArticle.getDDMStructureKey(),
 			oldArticle.getDDMTemplateKey(), true);
 
-		assetEntryLocalService.updateEntry(
-			JournalArticle.class.getName(), newArticle.getResourcePrimKey(),
-			oldAssetEntry.getPublishDate(), oldAssetEntry.getVisible());
-
 		return newArticle;
 	}
 
@@ -5784,6 +5780,12 @@ public class JournalArticleLocalServiceImpl
 				article.getLayoutUuid(), 0, 0, priority);
 		}
 		else {
+			Date publishDate = null;
+
+			if (article.isApproved()) {
+				publishDate = article.getDisplayDate();
+			}
+
 			JournalArticleResource journalArticleResource =
 				journalArticleResourceLocalService.getArticleResource(
 					article.getResourcePrimKey());
@@ -5794,7 +5796,7 @@ public class JournalArticleLocalServiceImpl
 				journalArticleResource.getResourcePrimKey(),
 				journalArticleResource.getUuid(), getClassTypeId(article),
 				assetCategoryIds, assetTagNames, isListable(article), visible,
-				null, null, null, null, ContentTypes.TEXT_HTML, title,
+				null, null, publishDate, null, ContentTypes.TEXT_HTML, title,
 				description, description, null, article.getLayoutUuid(), 0, 0,
 				priority);
 		}
