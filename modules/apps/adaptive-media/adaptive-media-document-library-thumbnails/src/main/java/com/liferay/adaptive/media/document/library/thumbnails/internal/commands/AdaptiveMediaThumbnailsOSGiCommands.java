@@ -145,7 +145,7 @@ public class AdaptiveMediaThumbnailsOSGiCommands {
 		}
 	}
 
-	public void migrate(String... companyIds) {
+	public void migrate(String... companyIds) throws PortalException {
 		for (long companyId : _getCompanyIds(companyIds)) {
 			Collection<AdaptiveMediaImageConfigurationEntry>
 				configurationEntries =
@@ -153,11 +153,9 @@ public class AdaptiveMediaThumbnailsOSGiCommands {
 						getAdaptiveMediaImageConfigurationEntries(companyId);
 
 			if (!_isValidConfigurationEntries(configurationEntries)) {
-				System.out.println(
+				throw new PortalException(
 					"No valid Adaptive Media configuration found. Please " +
 						"refer to the upgrade documentation for the details.");
-
-				return;
 			}
 
 			try {
