@@ -21,14 +21,11 @@ import com.liferay.calendar.service.permission.CalendarPermission;
 import com.liferay.calendar.service.permission.CalendarResourcePermission;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringBundler;
 
 import java.util.Iterator;
 import java.util.List;
@@ -87,24 +84,8 @@ public class CalendarServiceImpl extends CalendarServiceBaseImpl {
 			return null;
 		}
 
-		try {
-			CalendarPermission.check(
-				getPermissionChecker(), calendar, ActionKeys.VIEW);
-		}
-		catch (PrincipalException pe) {
-			if (_log.isInfoEnabled()) {
-				StringBundler message = new StringBundler();
-
-				message.append("No ");
-				message.append(ActionKeys.VIEW);
-				message.append(" permission for user ");
-				message.append(getPermissionChecker().getUserId());
-
-				_log.info(message.toString(), pe);
-			}
-
-			return null;
-		}
+		CalendarPermission.check(
+			getPermissionChecker(), calendar, ActionKeys.VIEW);
 
 		return calendar;
 	}
@@ -345,8 +326,5 @@ public class CalendarServiceImpl extends CalendarServiceBaseImpl {
 
 		return calendars;
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		CalendarServiceImpl.class.getName());
 
 }
