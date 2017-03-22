@@ -434,18 +434,12 @@ public class AdaptiveMediaImageConfigurationHelperImpl
 
 		long maxHeight = GetterUtil.getLong(properties.get("max-height"));
 
-		if (maxHeight <= 0) {
-			throw new
-				AdaptiveMediaImageConfigurationException.
-					InvalidHeightException();
-		}
-
 		long maxWidth = GetterUtil.getLong(properties.get("max-width"));
 
-		if (maxWidth <= 0) {
+		if (maxHeight <= 0 && maxWidth <= 0) {
 			throw new
 				AdaptiveMediaImageConfigurationException.
-					InvalidWidthException();
+					InvalidWidthOrHeightException();
 		}
 	}
 
