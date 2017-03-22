@@ -29,6 +29,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Optional;
 
 import org.junit.Assert;
 import org.junit.ClassRule;
@@ -128,6 +129,147 @@ public class AdaptiveMediaImageAddConfigurationTest
 		configurationEntry = iterator.next();
 
 		Assert.assertEquals("2", configurationEntry.getUUID());
+	}
+
+	@Test
+	public void testAddConfigurationEntryWithMaxHeightOnly() throws Exception {
+		AdaptiveMediaImageConfigurationHelper configurationHelper =
+			serviceTracker.getService();
+
+		Map<String, String> properties = new HashMap<>();
+
+		properties.put("max-height", "100");
+
+		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
+			TestPropsValues.getCompanyId(), "one", "1", properties);
+
+		Optional<AdaptiveMediaImageConfigurationEntry>
+			configurationEntryOptional =
+				configurationHelper.getAdaptiveMediaImageConfigurationEntry(
+					TestPropsValues.getCompanyId(), "1");
+
+		Assert.assertTrue(configurationEntryOptional.isPresent());
+
+		AdaptiveMediaImageConfigurationEntry configurationEntry =
+			configurationEntryOptional.get();
+
+		Map<String, String> actualProperties =
+			configurationEntry.getProperties();
+
+		Assert.assertEquals("100", actualProperties.get("max-height"));
+		Assert.assertNull(actualProperties.get("max-width"));
+	}
+
+	@Test
+	public void testAddConfigurationEntryWithMaxWidthOnly() throws Exception {
+		AdaptiveMediaImageConfigurationHelper configurationHelper =
+			serviceTracker.getService();
+
+		Map<String, String> properties = new HashMap<>();
+
+		properties.put("max-width", "100");
+
+		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
+			TestPropsValues.getCompanyId(), "one", "1", properties);
+
+		Optional<AdaptiveMediaImageConfigurationEntry>
+			configurationEntryOptional =
+				configurationHelper.getAdaptiveMediaImageConfigurationEntry(
+					TestPropsValues.getCompanyId(), "1");
+
+		Assert.assertTrue(configurationEntryOptional.isPresent());
+
+		AdaptiveMediaImageConfigurationEntry configurationEntry =
+			configurationEntryOptional.get();
+
+		Map<String, String> actualProperties =
+			configurationEntry.getProperties();
+
+		Assert.assertNull(actualProperties.get("max-height"));
+		Assert.assertEquals("100", actualProperties.get("max-width"));
+	}
+
+	@Test(
+		expected = AdaptiveMediaImageConfigurationException.InvalidHeightException.class
+	)
+	public void testAddConfigurationEntryWithNegativeNumberMaxHeight()
+		throws Exception {
+
+		AdaptiveMediaImageConfigurationHelper configurationHelper =
+			serviceTracker.getService();
+
+		Map<String, String> properties = new HashMap<>();
+
+		properties.put("max-height", "-10");
+
+		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
+			TestPropsValues.getCompanyId(), "one", "1", properties);
+	}
+
+	@Test(
+		expected = AdaptiveMediaImageConfigurationException.InvalidWidthException.class
+	)
+	public void testAddConfigurationEntryWithNegativeNumberMaxWidth()
+		throws Exception {
+
+		AdaptiveMediaImageConfigurationHelper configurationHelper =
+			serviceTracker.getService();
+
+		Map<String, String> properties = new HashMap<>();
+
+		properties.put("max-width", "-10");
+
+		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
+			TestPropsValues.getCompanyId(), "one", "1", properties);
+	}
+
+	@Test(
+		expected = AdaptiveMediaImageConfigurationException.InvalidHeightException.class
+	)
+	public void testAddConfigurationEntryWithNotNumberMaxHeight()
+		throws Exception {
+
+		AdaptiveMediaImageConfigurationHelper configurationHelper =
+			serviceTracker.getService();
+
+		Map<String, String> properties = new HashMap<>();
+
+		properties.put("max-height", "Invalid");
+
+		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
+			TestPropsValues.getCompanyId(), "one", "1", properties);
+	}
+
+	@Test(
+		expected = AdaptiveMediaImageConfigurationException.InvalidWidthException.class
+	)
+	public void testAddConfigurationEntryWithNotNumberMaxWidth()
+		throws Exception {
+
+		AdaptiveMediaImageConfigurationHelper configurationHelper =
+			serviceTracker.getService();
+
+		Map<String, String> properties = new HashMap<>();
+
+		properties.put("max-width", "Invalid");
+
+		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
+			TestPropsValues.getCompanyId(), "one", "1", properties);
+	}
+
+	@Test(
+		expected = AdaptiveMediaImageConfigurationException.RequiredWidthOrHeightException.class
+	)
+	public void testAddConfigurationEntryWithoutMaxHeightNorMaxWidth()
+		throws Exception {
+
+		AdaptiveMediaImageConfigurationHelper configurationHelper =
+			serviceTracker.getService();
+
+		Map<String, String> properties = new HashMap<>();
+
+		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
+			TestPropsValues.getCompanyId(), "one", "1", properties);
 	}
 
 	@Test(
