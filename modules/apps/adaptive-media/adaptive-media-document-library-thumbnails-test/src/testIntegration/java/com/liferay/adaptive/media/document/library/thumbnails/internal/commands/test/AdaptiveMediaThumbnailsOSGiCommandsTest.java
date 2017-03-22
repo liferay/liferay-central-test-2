@@ -16,6 +16,8 @@ package com.liferay.adaptive.media.document.library.thumbnails.internal.commands
 
 import com.liferay.adaptive.media.AdaptiveMedia;
 import com.liferay.adaptive.media.document.library.thumbnails.internal.test.util.DestinationReplacer;
+import com.liferay.adaptive.media.document.library.thumbnails.internal.test.util.PropsUtilReplacer;
+import com.liferay.adaptive.media.document.library.thumbnails.internal.test.util.PropsValuesReplacer;
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationHelper;
 import com.liferay.adaptive.media.image.finder.AdaptiveMediaImageFinder;
 import com.liferay.adaptive.media.image.processor.AdaptiveMediaImageProcessor;
@@ -46,6 +48,7 @@ import com.liferay.portal.kernel.test.util.TestPropsValues;
 import com.liferay.portal.kernel.test.util.UserTestUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.service.test.ServiceTestUtil;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
@@ -221,7 +224,15 @@ public class AdaptiveMediaThumbnailsOSGiCommandsTest {
 	public void testMigrateOnlyProcessesImages() throws Exception {
 		try (DestinationReplacer destinationReplacer = new DestinationReplacer(
 				DestinationNames.DOCUMENT_LIBRARY_IMAGE_PROCESSOR,
-				_ADAPTIVE_MEDIA_PROCESSOR)) {
+				_ADAPTIVE_MEDIA_PROCESSOR);
+			PropsValuesReplacer propsValuesReplacer1 = new PropsValuesReplacer(
+				"DL_FILE_ENTRY_THUMBNAIL_CUSTOM_1_MAX_HEIGHT", 100);
+			PropsValuesReplacer propsValuesReplacer2 = new PropsValuesReplacer(
+				"DL_FILE_ENTRY_THUMBNAIL_CUSTOM_1_MAX_WIDTH", 100);
+			PropsUtilReplacer propsUtilReplacer1 = new PropsUtilReplacer(
+				PropsKeys.DL_FILE_ENTRY_THUMBNAIL_CUSTOM_1_MAX_HEIGHT, "100");
+			PropsUtilReplacer propsUtilReplacer2 = new PropsUtilReplacer(
+				PropsKeys.DL_FILE_ENTRY_THUMBNAIL_CUSTOM_1_MAX_WIDTH, "100")) {
 
 			FileEntry pdfFileEntry = _addPDFFileEntry();
 			FileEntry pngFileEntry = _addPNGFileEntry();

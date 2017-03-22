@@ -86,7 +86,7 @@ public class AdaptiveMediaThumbnailsOSGiCommands {
 						fileName, "//", StringPool.SLASH);
 
 					for (ThumbnailConfiguration thumbnailConfiguration :
-							_thumbnailConfigurations) {
+							_getThumbnailConfigurations()) {
 
 						FileVersion fileVersion = _getFileVersion(
 							thumbnailConfiguration.getFileVersionId(
@@ -125,7 +125,7 @@ public class AdaptiveMediaThumbnailsOSGiCommands {
 						fileName, "//", StringPool.SLASH);
 
 					for (ThumbnailConfiguration thumbnailConfiguration :
-							_thumbnailConfigurations) {
+							_getThumbnailConfigurations()) {
 
 						FileVersion fileVersion = _getFileVersion(
 							thumbnailConfiguration.getFileVersionId(
@@ -171,7 +171,7 @@ public class AdaptiveMediaThumbnailsOSGiCommands {
 						fileName, "//", StringPool.SLASH);
 
 					for (ThumbnailConfiguration thumbnailConfiguration :
-							_thumbnailConfigurations) {
+							_getThumbnailConfigurations()) {
 
 						Optional<AdaptiveMediaImageConfigurationEntry>
 							configurationEntryOptional =
@@ -229,6 +229,29 @@ public class AdaptiveMediaThumbnailsOSGiCommands {
 		}
 	}
 
+	private ThumbnailConfiguration[] _getThumbnailConfigurations() {
+		return new ThumbnailConfiguration[] {
+			new ThumbnailConfiguration(
+				PropsValues.DL_FILE_ENTRY_THUMBNAIL_MAX_WIDTH,
+				PropsValues.DL_FILE_ENTRY_THUMBNAIL_MAX_HEIGHT,
+				Pattern.compile(
+					DLPreviewableProcessor.THUMBNAIL_PATH +
+						"\\d+/\\d+/\\d+(?:/(\\d+))?(?:\\..+)?$")),
+			new ThumbnailConfiguration(
+				PropsValues.DL_FILE_ENTRY_THUMBNAIL_CUSTOM_1_MAX_WIDTH,
+				PropsValues.DL_FILE_ENTRY_THUMBNAIL_CUSTOM_1_MAX_HEIGHT,
+				Pattern.compile(
+					DLPreviewableProcessor.THUMBNAIL_PATH +
+						"\\d+/\\d+/\\d+(?:/(\\d+))?-1(?:\\..+)?$")),
+			new ThumbnailConfiguration(
+				PropsValues.DL_FILE_ENTRY_THUMBNAIL_CUSTOM_2_MAX_WIDTH,
+				PropsValues.DL_FILE_ENTRY_THUMBNAIL_CUSTOM_2_MAX_HEIGHT,
+				Pattern.compile(
+					DLPreviewableProcessor.THUMBNAIL_PATH +
+						"\\d+/\\d+/\\d+(?:/(\\d+))?-2(?:\\..+)?$"))
+		};
+	}
+
 	private boolean _isMimeTypeSupported(FileVersion fileVersion) {
 		Set<String> supportedMimeTypes =
 			AdaptiveMediaImageConstants.getSupportedMimeTypes();
@@ -240,7 +263,7 @@ public class AdaptiveMediaThumbnailsOSGiCommands {
 		Collection<AdaptiveMediaImageConfigurationEntry> configurationEntries) {
 
 		Stream<ThumbnailConfiguration> stream = Arrays.stream(
-			_thumbnailConfigurations);
+			_getThumbnailConfigurations());
 
 		return stream.anyMatch(
 			thumbnailConfiguration ->
@@ -290,27 +313,6 @@ public class AdaptiveMediaThumbnailsOSGiCommands {
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		AdaptiveMediaThumbnailsOSGiCommands.class);
-
-	private static final ThumbnailConfiguration[] _thumbnailConfigurations = {
-		new ThumbnailConfiguration(
-			PropsValues.DL_FILE_ENTRY_THUMBNAIL_MAX_WIDTH,
-			PropsValues.DL_FILE_ENTRY_THUMBNAIL_MAX_HEIGHT,
-			Pattern.compile(
-				DLPreviewableProcessor.THUMBNAIL_PATH +
-					"\\d+/\\d+/\\d+(?:/(\\d+))?(?:\\..+)?$")),
-		new ThumbnailConfiguration(
-			PropsValues.DL_FILE_ENTRY_THUMBNAIL_CUSTOM_1_MAX_WIDTH,
-			PropsValues.DL_FILE_ENTRY_THUMBNAIL_CUSTOM_1_MAX_HEIGHT,
-			Pattern.compile(
-				DLPreviewableProcessor.THUMBNAIL_PATH +
-					"\\d+/\\d+/\\d+(?:/(\\d+))?-1(?:\\..+)?$")),
-		new ThumbnailConfiguration(
-			PropsValues.DL_FILE_ENTRY_THUMBNAIL_CUSTOM_2_MAX_WIDTH,
-			PropsValues.DL_FILE_ENTRY_THUMBNAIL_CUSTOM_2_MAX_HEIGHT,
-			Pattern.compile(
-				DLPreviewableProcessor.THUMBNAIL_PATH +
-					"\\d+/\\d+/\\d+(?:/(\\d+))?-2(?:\\..+)?$"))
-	};
 
 	@Reference
 	private CompanyLocalService _companyLocalService;
