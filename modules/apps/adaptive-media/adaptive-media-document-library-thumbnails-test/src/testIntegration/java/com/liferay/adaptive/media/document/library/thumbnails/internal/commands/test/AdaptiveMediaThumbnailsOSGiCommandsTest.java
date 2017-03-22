@@ -70,6 +70,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import org.osgi.framework.Bundle;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.BundleException;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.service.component.runtime.ServiceComponentRuntime;
 import org.osgi.service.component.runtime.dto.ComponentDescriptionDTO;
@@ -103,6 +105,7 @@ public class AdaptiveMediaThumbnailsOSGiCommandsTest {
 		_finder = registry.getService(_finderServiceReference);
 
 		_disableAdaptiveMediaThumbnails();
+		_disableDocumentLibraryAdaptiveMedia();
 	}
 
 	@AfterClass
@@ -112,6 +115,7 @@ public class AdaptiveMediaThumbnailsOSGiCommandsTest {
 		registry.ungetService(_configurationHelperServiceReference);
 		registry.ungetService(_finderServiceReference);
 
+		_enableDocumentLibraryAdaptiveMedia();
 		_enableAdaptiveMediaThumbnails();
 	}
 
@@ -257,6 +261,25 @@ public class AdaptiveMediaThumbnailsOSGiCommandsTest {
 		promise.getValue();
 	}
 
+	private static void _disableDocumentLibraryAdaptiveMedia()
+		throws BundleException {
+
+		Bundle bundle = FrameworkUtil.getBundle(
+			AdaptiveMediaThumbnailsOSGiCommandsTest.class);
+
+		BundleContext bundleContext = bundle.getBundleContext();
+
+		for (Bundle curBundle : bundleContext.getBundles()) {
+			if (_BUNDLE_SYMBOLIC_NAME.equals(curBundle.getSymbolicName())) {
+				if (curBundle.getState() == Bundle.ACTIVE) {
+					curBundle.stop();
+				}
+
+				break;
+			}
+		}
+	}
+
 	private static void _enableAdaptiveMediaThumbnails() throws Exception {
 		Registry registry = RegistryUtil.getRegistry();
 
@@ -279,6 +302,25 @@ public class AdaptiveMediaThumbnailsOSGiCommandsTest {
 			componentDescriptionDTO);
 
 		promise.getValue();
+	}
+
+	private static void _enableDocumentLibraryAdaptiveMedia()
+		throws BundleException {
+
+		Bundle bundle = FrameworkUtil.getBundle(
+			AdaptiveMediaThumbnailsOSGiCommandsTest.class);
+
+		BundleContext bundleContext = bundle.getBundleContext();
+
+		for (Bundle curBundle : bundleContext.getBundles()) {
+			if (_BUNDLE_SYMBOLIC_NAME.equals(curBundle.getSymbolicName())) {
+				if (curBundle.getState() != Bundle.ACTIVE) {
+					curBundle.start();
+				}
+
+				break;
+			}
+		}
 	}
 
 	private void _addConfiguration(int width, int height) throws Exception {
@@ -357,6 +399,9 @@ public class AdaptiveMediaThumbnailsOSGiCommandsTest {
 
 	private static final String _ADAPTIVE_MEDIA_PROCESSOR =
 		"liferay/adaptive_media_processor";
+
+	private static final String _BUNDLE_SYMBOLIC_NAME =
+		"com.liferay.adaptive.media.document.library";
 
 	private static final String _COMMAND_CLASS_NAME =
 		"com.liferay.adaptive.media.document.library.thumbnails.internal." +
