@@ -69,7 +69,7 @@ public class AdaptiveMediaImageConfigurationTest
 	}
 
 	@Test(
-		expected = AdaptiveMediaImageConfigurationException.InvalidNameException.class
+		expected = AdaptiveMediaImageConfigurationException.InvalidUuidException.class
 	)
 	public void testAddConfigurationEntryWithBlankUuid() throws Exception {
 		AdaptiveMediaImageConfigurationHelper configurationHelper =
