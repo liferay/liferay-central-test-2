@@ -471,6 +471,20 @@ public class AdaptiveMediaImageEntryLocalServiceWrapper
 			configurationEntry);
 	}
 
+	/**
+	* Deletes adaptive media images generated for a file version under a
+	* particular configuration.
+	*
+	* <p>
+	* This method deletes the adaptive media image entry from the database and
+	* it also deletes the bytes from the file store.
+	* </p>
+	*
+	* @param configurationUuid the configuration UUID
+	* @param fileVersionId the primary key of the file version
+	* @throws PortalException if the file version cannot be found
+	* @review
+	*/
 	@Override
 	public void deleteAdaptiveMediaImageEntryFileVersion(
 		java.lang.String configurationUuid, long fileVersionId)
