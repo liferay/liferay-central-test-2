@@ -33,11 +33,8 @@ if (followRedirect && (redirectPage != null)) {
 }
 
 String title = wikiPage.getTitle();
-
 String parentTitle = wikiPage.getParentTitle();
-
 List<WikiPage> childPages = wikiPage.getViewableChildPages();
-
 int attachmentsFileEntriesCount = wikiPage.getAttachmentsFileEntriesCount();
 
 boolean preview = false;
