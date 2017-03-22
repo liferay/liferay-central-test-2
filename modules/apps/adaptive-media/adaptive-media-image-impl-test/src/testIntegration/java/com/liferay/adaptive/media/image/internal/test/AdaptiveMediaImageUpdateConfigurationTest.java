@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.Sync;
 import com.liferay.portal.kernel.test.rule.SynchronousDestinationTestRule;
 import com.liferay.portal.kernel.test.util.TestPropsValues;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 
 import java.util.HashMap;
@@ -48,6 +49,58 @@ public class AdaptiveMediaImageUpdateConfigurationTest
 		new AggregateTestRule(
 			new LiferayIntegrationTestRule(),
 			SynchronousDestinationTestRule.INSTANCE);
+
+	@Test(
+		expected = AdaptiveMediaImageConfigurationException.InvalidNameException.class
+	)
+	public void testUpdateConfigurationWithEmptyName() throws Exception {
+		AdaptiveMediaImageConfigurationHelper configurationHelper =
+			serviceTracker.getService();
+
+		Map<String, String> properties = new HashMap<>();
+
+		properties.put("max-height", "100");
+		properties.put("max-width", "100");
+
+		AdaptiveMediaImageConfigurationEntry configurationEntry1 =
+			configurationHelper.addAdaptiveMediaImageConfigurationEntry(
+				TestPropsValues.getCompanyId(), "one", "1", properties);
+
+		properties = new HashMap<>();
+
+		properties.put("max-height", "200");
+		properties.put("max-width", "200");
+
+		configurationHelper.updateAdaptiveMediaImageConfigurationEntry(
+			TestPropsValues.getCompanyId(), "1", StringPool.BLANK, "1",
+			configurationEntry1.getProperties());
+	}
+
+	@Test(
+		expected = AdaptiveMediaImageConfigurationException.InvalidUuidException.class
+	)
+	public void testUpdateConfigurationWithEmptyUuid() throws Exception {
+		AdaptiveMediaImageConfigurationHelper configurationHelper =
+			serviceTracker.getService();
+
+		Map<String, String> properties = new HashMap<>();
+
+		properties.put("max-height", "100");
+		properties.put("max-width", "100");
+
+		AdaptiveMediaImageConfigurationEntry configurationEntry1 =
+			configurationHelper.addAdaptiveMediaImageConfigurationEntry(
+				TestPropsValues.getCompanyId(), "one", "1", properties);
+
+		properties = new HashMap<>();
+
+		properties.put("max-height", "200");
+		properties.put("max-width", "200");
+
+		configurationHelper.updateAdaptiveMediaImageConfigurationEntry(
+			TestPropsValues.getCompanyId(), "1", "two", StringPool.BLANK,
+			configurationEntry1.getProperties());
+	}
 
 	@Test
 	public void testUpdateDisabledConfigurationEntry() throws Exception {
