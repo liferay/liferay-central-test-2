@@ -902,6 +902,10 @@ public class JournalArticleLocalServiceImpl
 			id, groupId, oldArticle.getDDMStructureKey(),
 			oldArticle.getDDMTemplateKey(), true);
 
+		assetEntryLocalService.updateEntry(
+			JournalArticle.class.getName(), newArticle.getResourcePrimKey(),
+			oldAssetEntry.getPublishDate(), oldAssetEntry.getVisible());
+
 		return newArticle;
 	}
 
