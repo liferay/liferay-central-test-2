@@ -127,14 +127,8 @@ public class AdaptiveMediaThumbnailsOSGiCommandsTest {
 			_company.getCompanyId(), _user.getUserId(),
 			GroupConstants.DEFAULT_PARENT_GROUP_ID);
 
-		Map<String, String> properties = new HashMap<>();
-
-		properties.put("max-height", "100");
-		properties.put("max-width", "100");
-
-		_configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			_company.getCompanyId(), _THUMBNAIL_CONFIGURATION,
-			_THUMBNAIL_CONFIGURATION, properties);
+		_addConfiguration(100, 100);
+		_addConfiguration(300, 300);
 
 		_serviceContext = ServiceContextTestUtil.getServiceContext(
 			_group, _user.getUserId());
@@ -145,7 +139,10 @@ public class AdaptiveMediaThumbnailsOSGiCommandsTest {
 	@After
 	public void tearDown() throws Exception {
 		_configurationHelper.forceDeleteAdaptiveMediaImageConfigurationEntry(
-			_company.getCompanyId(), _THUMBNAIL_CONFIGURATION);
+			_company.getCompanyId(), _THUMBNAIL_CONFIGURATION + 100);
+
+		_configurationHelper.forceDeleteAdaptiveMediaImageConfigurationEntry(
+			_company.getCompanyId(), _THUMBNAIL_CONFIGURATION + 300);
 
 		FileVersion latestFileVersion = _pngFileEntry.getFileVersion();
 
@@ -228,7 +225,7 @@ public class AdaptiveMediaThumbnailsOSGiCommandsTest {
 			_migrate();
 
 			Assert.assertEquals(0, _getAdaptiveMediaCount(pdfFileEntry));
-			Assert.assertEquals(1, _getAdaptiveMediaCount(pngFileEntry));
+			Assert.assertEquals(2, _getAdaptiveMediaCount(pngFileEntry));
 		}
 	}
 
@@ -284,6 +281,17 @@ public class AdaptiveMediaThumbnailsOSGiCommandsTest {
 		promise.getValue();
 	}
 
+	private void _addConfiguration(int width, int height) throws Exception {
+		Map<String, String> properties = new HashMap<>();
+
+		properties.put("max-height", String.valueOf(height));
+		properties.put("max-width", String.valueOf(width));
+
+		_configurationHelper.addAdaptiveMediaImageConfigurationEntry(
+			_company.getCompanyId(), _THUMBNAIL_CONFIGURATION + width,
+			_THUMBNAIL_CONFIGURATION + width, properties);
+	}
+
 	private FileEntry _addPDFFileEntry() throws Exception {
 		return DLAppLocalServiceUtil.addFileEntry(
 			_user.getUserId(), _group.getGroupId(),
@@ -309,8 +317,7 @@ public class AdaptiveMediaThumbnailsOSGiCommandsTest {
 	private long _getAdaptiveMediaCount(FileEntry fileEntry) throws Exception {
 		Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>> stream =
 			_finder.getAdaptiveMedia(
-				queryBuilder -> queryBuilder.forFileEntry(fileEntry).
-					forConfiguration(_THUMBNAIL_CONFIGURATION).done());
+				queryBuilder -> queryBuilder.allForFileEntry(fileEntry).done());
 
 		return stream.count();
 	}
