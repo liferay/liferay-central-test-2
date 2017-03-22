@@ -236,19 +236,19 @@ public class AdaptiveMediaThumbnailsOSGiCommands {
 				PropsValues.DL_FILE_ENTRY_THUMBNAIL_MAX_HEIGHT,
 				Pattern.compile(
 					DLPreviewableProcessor.THUMBNAIL_PATH +
-						"\\d+/\\d+/\\d+(?:/(\\d+))?(?:\\..+)?$")),
+						"\\d+/\\d+(?:/\\d+)+/(\\d+)(?:\\..+)?$")),
 			new ThumbnailConfiguration(
 				PropsValues.DL_FILE_ENTRY_THUMBNAIL_CUSTOM_1_MAX_WIDTH,
 				PropsValues.DL_FILE_ENTRY_THUMBNAIL_CUSTOM_1_MAX_HEIGHT,
 				Pattern.compile(
 					DLPreviewableProcessor.THUMBNAIL_PATH +
-						"\\d+/\\d+/\\d+(?:/(\\d+))?-1(?:\\..+)?$")),
+						"\\d+/\\d+(?:/\\d+)+/(\\d+)-1(?:\\..+)?$")),
 			new ThumbnailConfiguration(
 				PropsValues.DL_FILE_ENTRY_THUMBNAIL_CUSTOM_2_MAX_WIDTH,
 				PropsValues.DL_FILE_ENTRY_THUMBNAIL_CUSTOM_2_MAX_HEIGHT,
 				Pattern.compile(
 					DLPreviewableProcessor.THUMBNAIL_PATH +
-						"\\d+/\\d+/\\d+(?:/(\\d+))?-2(?:\\..+)?$"))
+						"\\d+/\\d+(?:/\\d+)+/(\\d+)-2(?:\\..+)?$"))
 		};
 	}
 
