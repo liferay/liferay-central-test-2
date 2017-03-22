@@ -92,6 +92,8 @@ if (configurationEntry != null) {
 					else {
 						automaticUuid = configurationEntryUuid.equals(FriendlyURLNormalizerUtil.normalize(configurationEntry.getName()));
 					}
+
+					automaticUuid = ParamUtil.getBoolean(request, "automaticUuid", automaticUuid);
 					%>
 
 					<h4>
