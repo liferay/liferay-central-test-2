@@ -14,7 +14,6 @@
 
 package com.liferay.adaptive.media.image.internal.test;
 
-import com.liferay.adaptive.media.AdaptiveMediaImageConfigurationException;
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationHelper;
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
@@ -286,30 +285,6 @@ public class AdaptiveMediaImageConfigurationTest
 					TestPropsValues.getCompanyId(), "0");
 
 		Assert.assertFalse(configurationEntryOptional.isPresent());
-	}
-
-	@Test(
-		expected = AdaptiveMediaImageConfigurationException.DuplicateAdaptiveMediaImageConfigurationException.class
-	)
-	public void testUpdateDuplicateConfiguration() throws Exception {
-		AdaptiveMediaImageConfigurationHelper configurationHelper =
-			serviceTracker.getService();
-
-		Map<String, String> properties = new HashMap<>();
-
-		properties.put("max-height", "100");
-		properties.put("max-width", "100");
-
-		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "one", "1", properties);
-
-		properties = new HashMap<>();
-
-		properties.put("max-height", "200");
-		properties.put("max-width", "200");
-
-		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "two", "1", properties);
 	}
 
 }
