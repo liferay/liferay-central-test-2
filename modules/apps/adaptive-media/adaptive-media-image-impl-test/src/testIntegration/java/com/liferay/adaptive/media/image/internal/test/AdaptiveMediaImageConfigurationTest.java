@@ -14,6 +14,7 @@
 
 package com.liferay.adaptive.media.image.internal.test;
 
+import com.liferay.adaptive.media.AdaptiveMediaImageConfigurationException;
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationHelper;
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
@@ -21,6 +22,7 @@ import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.Sync;
 import com.liferay.portal.kernel.test.rule.SynchronousDestinationTestRule;
 import com.liferay.portal.kernel.test.util.TestPropsValues;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 
 import java.util.Collection;
@@ -49,6 +51,39 @@ public class AdaptiveMediaImageConfigurationTest
 		new AggregateTestRule(
 			new LiferayIntegrationTestRule(),
 			SynchronousDestinationTestRule.INSTANCE);
+
+	@Test(
+		expected = AdaptiveMediaImageConfigurationException.InvalidNameException.class
+	)
+	public void testAddConfigurationEntryWithBlankName() throws Exception {
+		AdaptiveMediaImageConfigurationHelper configurationHelper =
+			serviceTracker.getService();
+
+		Map<String, String> properties = new HashMap<>();
+
+		properties.put("max-height", "100");
+		properties.put("max-width", "100");
+
+		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
+			TestPropsValues.getCompanyId(), StringPool.BLANK, "1", properties);
+	}
+
+	@Test(
+		expected = AdaptiveMediaImageConfigurationException.InvalidNameException.class
+	)
+	public void testAddConfigurationEntryWithBlankUuid() throws Exception {
+		AdaptiveMediaImageConfigurationHelper configurationHelper =
+			serviceTracker.getService();
+
+		Map<String, String> properties = new HashMap<>();
+
+		properties.put("max-height", "100");
+		properties.put("max-width", "100");
+
+		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
+			TestPropsValues.getCompanyId(), "one", StringPool.BLANK,
+			properties);
+	}
 
 	@Test
 	public void testAddConfigurationEntryWithExistingDisabledConfiguration()

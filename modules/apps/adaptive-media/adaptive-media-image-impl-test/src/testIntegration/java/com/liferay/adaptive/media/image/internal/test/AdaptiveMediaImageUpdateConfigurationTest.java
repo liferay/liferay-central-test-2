@@ -53,7 +53,7 @@ public class AdaptiveMediaImageUpdateConfigurationTest
 	@Test(
 		expected = AdaptiveMediaImageConfigurationException.InvalidNameException.class
 	)
-	public void testUpdateConfigurationWithEmptyName() throws Exception {
+	public void testUpdateConfigurationEntryWithBlankName() throws Exception {
 		AdaptiveMediaImageConfigurationHelper configurationHelper =
 			serviceTracker.getService();
 
@@ -79,7 +79,7 @@ public class AdaptiveMediaImageUpdateConfigurationTest
 	@Test(
 		expected = AdaptiveMediaImageConfigurationException.InvalidUuidException.class
 	)
-	public void testUpdateConfigurationWithEmptyUuid() throws Exception {
+	public void testUpdateConfigurationEntryWithBlankUuid() throws Exception {
 		AdaptiveMediaImageConfigurationHelper configurationHelper =
 			serviceTracker.getService();
 
