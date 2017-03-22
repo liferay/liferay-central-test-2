@@ -187,23 +187,23 @@ public class AdaptiveMediaImageConfigurationException extends Exception {
 	}
 
 	/**
-	 * This exception is raised when the width or height value is not valid.
+	 * This exception is raised when the height value is not valid.
 	 */
-	public static final class InvalidWidthOrHeightException
+	public static final class InvalidWidthException
 		extends AdaptiveMediaImageConfigurationException {
 
-		public InvalidWidthOrHeightException() {
+		public InvalidWidthException() {
 		}
 
-		public InvalidWidthOrHeightException(String s) {
+		public InvalidWidthException(String s) {
 			super(s);
 		}
 
-		public InvalidWidthOrHeightException(String s, Throwable throwable) {
+		public InvalidWidthException(String s, Throwable throwable) {
 			super(s, throwable);
 		}
 
-		public InvalidWidthOrHeightException(Throwable throwable) {
+		public InvalidWidthException(Throwable throwable) {
 			super(throwable);
 		}
 
@@ -234,6 +234,30 @@ public class AdaptiveMediaImageConfigurationException extends Exception {
 		public NoSuchAdaptiveMediaImageConfigurationException(
 			Throwable throwable) {
 
+			super(throwable);
+		}
+
+	}
+
+	/**
+	 * This exception is raised when the configuration does not contain either a
+	 * valid height value nor a valid width value.
+	 */
+	public static final class RequiredWidthOrHeightException
+		extends AdaptiveMediaImageConfigurationException {
+
+		public RequiredWidthOrHeightException() {
+		}
+
+		public RequiredWidthOrHeightException(String s) {
+			super(s);
+		}
+
+		public RequiredWidthOrHeightException(String s, Throwable throwable) {
+			super(s, throwable);
+		}
+
+		public RequiredWidthOrHeightException(Throwable throwable) {
 			super(throwable);
 		}
 

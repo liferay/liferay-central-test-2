@@ -432,14 +432,47 @@ public class AdaptiveMediaImageConfigurationHelperImpl
 	private void _checkProperties(Map<String, String> properties)
 		throws AdaptiveMediaImageConfigurationException {
 
+		String maxHeightString = properties.get("max-height");
 		long maxHeight = GetterUtil.getLong(properties.get("max-height"));
 
+		if (Validator.isNotNull(maxHeightString)) {
+			if (!Validator.isNumber(maxHeightString)) {
+				throw new
+					AdaptiveMediaImageConfigurationException.
+						InvalidHeightException();
+			}
+
+			if (maxHeight < 0) {
+				throw new
+					AdaptiveMediaImageConfigurationException.
+						InvalidHeightException();
+			}
+		}
+
+		String maxWidthString = properties.get("max-width");
 		long maxWidth = GetterUtil.getLong(properties.get("max-width"));
 
-		if (maxHeight <= 0 && maxWidth <= 0) {
+		if (Validator.isNotNull(maxWidthString)) {
+			if (!Validator.isNumber(maxWidthString)) {
+				throw new
+					AdaptiveMediaImageConfigurationException.
+						InvalidWidthException();
+			}
+
+			if (maxWidth < 0) {
+				throw new
+					AdaptiveMediaImageConfigurationException.
+						InvalidWidthException();
+			}
+		}
+
+		if ((Validator.isNull(maxHeightString) &&
+			 Validator.isNull(maxWidthString)) ||
+			((maxHeight <= 0) && (maxWidth <= 0))) {
+
 			throw new
 				AdaptiveMediaImageConfigurationException.
-					InvalidWidthOrHeightException();
+					RequiredWidthOrHeightException();
 		}
 	}
 
