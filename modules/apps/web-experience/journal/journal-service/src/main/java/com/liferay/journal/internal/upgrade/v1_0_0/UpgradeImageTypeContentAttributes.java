@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.journal.internal.upgrade.v1_0_1;
+package com.liferay.journal.internal.upgrade.v1_0_0;
 
 import com.liferay.portal.kernel.dao.jdbc.AutoBatchPreparedStatementUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;

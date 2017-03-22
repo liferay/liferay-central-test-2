@@ -31,7 +31,7 @@ import com.liferay.journal.internal.upgrade.v0_0_5.UpgradeJournalDisplayPreferen
 import com.liferay.journal.internal.upgrade.v0_0_5.UpgradeLastPublishDate;
 import com.liferay.journal.internal.upgrade.v0_0_5.UpgradePortletSettings;
 import com.liferay.journal.internal.upgrade.v1_0_0.UpgradeJournalArticleImage;
-import com.liferay.journal.internal.upgrade.v1_0_1.UpgradeImageTypeContentAttributes;
+import com.liferay.journal.internal.upgrade.v1_0_0.UpgradeImageTypeContentAttributes;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBManagerUtil;
 import com.liferay.portal.kernel.dao.db.DBProcessContext;
@@ -111,10 +111,7 @@ public class JournalServiceUpgrade implements UpgradeStepRegistrator {
 
 		registry.register(
 			"com.liferay.journal.service", "0.0.5", "1.0.0",
-			new UpgradeJournalArticleImage());
-
-		registry.register(
-			"com.liferay.journal.service", "1.0.0", "1.0.1",
+			new UpgradeJournalArticleImage(),
 			new UpgradeImageTypeContentAttributes());
 	}
 
