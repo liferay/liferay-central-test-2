@@ -387,9 +387,8 @@ public class PortletURLImpl
 
 		QName qName = publicRenderParameter.getQName();
 
-		_removePublicRenderParameters.put(
-			PortletQNameUtil.getRemovePublicRenderParameterName(qName),
-			new String[] {"1"});
+		_removePublicRenderParameters.add(
+			PortletQNameUtil.getRemovePublicRenderParameterName(qName));
 	}
 
 	@Override
@@ -931,9 +930,7 @@ public class PortletURLImpl
 			sb.append(StringPool.AMPERSAND);
 		}
 
-		for (Map.Entry<String, String[]> entry :
-				_removePublicRenderParameters.entrySet()) {
-
+		if (!_removePublicRenderParameters.isEmpty()) {
 			String lastString = sb.stringAt(sb.index() - 1);
 
 			if (lastString.charAt(lastString.length() - 1) !=
@@ -942,10 +939,16 @@ public class PortletURLImpl
 				sb.append(StringPool.AMPERSAND);
 			}
 
-			sb.append(HttpUtil.encodeURL(entry.getKey()));
-			sb.append(StringPool.EQUAL);
-			sb.append(processValue(key, entry.getValue()[0]));
-			sb.append(StringPool.AMPERSAND);
+			String removeValue = processValue(key, "1");
+
+			for (String removedPublicParameter :
+					_removePublicRenderParameters) {
+
+				sb.append(HttpUtil.encodeURL(removedPublicParameter));
+				sb.append(StringPool.EQUAL);
+				sb.append(removeValue);
+				sb.append(StringPool.AMPERSAND);
+			}
 		}
 
 		if (_copyCurrentRenderParameters) {
@@ -1295,7 +1298,7 @@ public class PortletURLImpl
 		_lifecycle = lifecycle;
 		_parametersIncludedInPath = Collections.emptySet();
 		_params = new LinkedHashMap<>();
-		_removePublicRenderParameters = new LinkedHashMap<>();
+		_removePublicRenderParameters = new LinkedHashSet<>();
 		_secure = PortalUtil.isSecure(request);
 		_wsrp = ParamUtil.getBoolean(request, "wsrp");
 
@@ -1427,7 +1430,7 @@ public class PortletURLImpl
 	private long _refererGroupId;
 	private long _refererPlid;
 	private Set<String> _removedParameterNames;
-	private final Map<String, String[]> _removePublicRenderParameters;
+	private final Set<String> _removePublicRenderParameters;
 	private final HttpServletRequest _request;
 	private Map<String, String> _reservedParameters;
 	private String _resourceID;
