@@ -23,7 +23,7 @@ AUI.add(
 					getFunctionsURL: {
 						value: ''
 					},
-					
+
 					getRoles: {
 						value: []
 					},
