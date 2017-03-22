@@ -42,9 +42,7 @@ if (configurationEntry != null) {
 	<liferay-ui:error exception="<%= AdaptiveMediaImageConfigurationException.InvalidHeightException.class %>" message="please-enter-a-max-height-value-larger-than-0" />
 	<liferay-ui:error exception="<%= AdaptiveMediaImageConfigurationException.InvalidNameException.class %>" message="please-enter-a-valid-name" />
 	<liferay-ui:error exception="<%= AdaptiveMediaImageConfigurationException.InvalidUuidException.class %>" message="please-enter-a-valid-identifier" />
-	<liferay-ui:error exception="<%= AdaptiveMediaImageConfigurationException.InvalidWidthException.class %>" message="please-enter-a-max-width-value-larger-than-0" />
 	<liferay-ui:error exception="<%= AdaptiveMediaImageConfigurationException.InvalidWidthOrHeightException.class %>" message="please-enter-a-max-width-or-max-height-value-larger-than-0" />
-
 	<portlet:actionURL name="/adaptive_media/edit_image_configuration_entry" var="editImageConfigurationEntryURL">
 		<portlet:param name="mvcRenderCommandName" value="/adaptive_media/edit_image_configuration_entry" />
 	</portlet:actionURL>
@@ -105,8 +103,6 @@ if (configurationEntry != null) {
 					else {
 						automaticUuid = configurationEntryUuid.equals(FriendlyURLNormalizerUtil.normalize(configurationEntry.getName()));
 					}
-
-					automaticUuid = ParamUtil.getBoolean(request, "automaticUuid", automaticUuid);
 					%>
 
 					<h4>
