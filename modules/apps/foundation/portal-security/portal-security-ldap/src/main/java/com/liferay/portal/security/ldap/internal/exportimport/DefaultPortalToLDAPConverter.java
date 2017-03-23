@@ -532,10 +532,11 @@ public class DefaultPortalToLDAPConverter implements PortalToLDAPConverter {
 	}
 
 	protected boolean hasLegacyPasswordEncryptionAlgorithm() {
-		String legacyPasswordEncryptionAlgorithm = GetterUtil.getString(
-			_props.get(PropsKeys.PASSWORDS_ENCRYPTION_ALGORITHM_LEGACY));
+		if (Validator.isNotNull(
+				GetterUtil.getString(
+					_props.get(
+						PropsKeys.PASSWORDS_ENCRYPTION_ALGORITHM_LEGACY)))) {
 
-		if (Validator.isNotNull(legacyPasswordEncryptionAlgorithm)) {
 			return true;
 		}
 
