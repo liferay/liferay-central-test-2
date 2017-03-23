@@ -352,7 +352,8 @@ public class WabProcessorTest {
 
 			Assert.assertTrue(
 				importedPackages.containsKey(
-					"com.liferay.portal.kernel.resiliency.spi.agent.annotation"));
+					"com.liferay.portal.kernel.resiliency.spi.agent." +
+						"annotation"));
 			Assert.assertTrue(
 				importedPackages.containsKey("com.liferay.portal.kernel.util"));
 
