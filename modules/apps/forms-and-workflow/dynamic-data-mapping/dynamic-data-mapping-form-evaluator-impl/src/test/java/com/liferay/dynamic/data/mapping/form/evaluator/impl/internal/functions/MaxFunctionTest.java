@@ -17,8 +17,6 @@ package com.liferay.dynamic.data.mapping.form.evaluator.impl.internal.functions;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.liferay.dynamic.data.mapping.form.evaluator.impl.internal.functions.MaxFunction;
-
 /**
  * @author Leonardo Barros
  */
