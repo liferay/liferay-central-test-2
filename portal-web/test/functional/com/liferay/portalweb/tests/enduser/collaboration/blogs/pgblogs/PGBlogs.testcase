@@ -1585,7 +1585,7 @@
 		</execute>
 
 		<execute macro="Pagination#changePagination">
-			<var name="itemsPerPage" value="30" />
+			<var name="itemsPerPage" value="5" />
 		</execute>
 
 		<execute macro="PermissionsInline#viewPermissionsRemoved">
@@ -1597,6 +1597,8 @@
 			<var name="permissionDefinitionKey" value="CONFIGURATION_PERMISSIONS_ADD_DISCUSSION_CHECKBOX" />
 			<var name="roleName" value="Site Member" />
 		</execute>
+
+		<execute macro="Pagination#clickNextPage" />
 
 		<execute macro="PermissionsInline#viewPermissionsRemoved">
 			<var name="permissionDefinitionKey" value="CONFIGURATION_PERMISSIONS_ADD_DISCUSSION_CHECKBOX" />
