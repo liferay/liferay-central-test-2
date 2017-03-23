@@ -1162,23 +1162,20 @@ public class WabProcessor {
 			PropsUtil.get(
 				"module.framework.web.generator.autodeployed.wars.store"));
 
-	private static final Log _log = LogFactoryUtil.getLog(WabProcessor.class);
-
-	private static final String[] _knownProperties =
-		new String[] {"jdbc.driverClassName"};
-	private static final Attrs _optional = new Attrs();
 	private static final String _XPATH_HBM = StringUtil.merge(
 		new String[] {
 			"//class/@name", "//id/@access", "//import/@class",
 			"//property/@type"
 		},
 		"|");
+
 	private static final String _XPATH_HOOK = StringUtil.merge(
 		new String[] {
 			"//indexer-post-processor-impl", "//service-impl",
 			"//servlet-filter-impl", "//struts-action-impl"
 		},
 		"|");
+
 	private static final String _XPATH_JAVAEE = StringUtil.merge(
 		new String[] {
 			"//j2ee:filter-class", "//j2ee:listener-class",
@@ -1186,6 +1183,7 @@ public class WabProcessor {
 			"//javaee:listener-class", "//javaee:servlet-class"
 		},
 		"|");
+
 	private static final String _XPATH_LIFERAY = StringUtil.merge(
 		new String[] {
 			"//asset-renderer-factory", "//atom-collection-adapter",
@@ -1200,12 +1198,14 @@ public class WabProcessor {
 			"//xml-rpc-method-class"
 		},
 		"|");
+
 	private static final String _XPATH_PORTLET = StringUtil.merge(
 		new String[] {
 			"//portlet2:filter-class", "//portlet2:listener-class",
 			"//portlet2:portlet-class", "//portlet2:resource-bundle"
 		},
 		"|");
+
 	private static final String _XPATH_SPRING = StringUtil.merge(
 		new String[] {
 			"//beans:bean/@class", "//beans:*/@value-type",
@@ -1220,6 +1220,12 @@ public class WabProcessor {
 			"//util:map/@map-class", "//webflow-config:*/@class"
 		},
 		"|");
+
+	private static final Log _log = LogFactoryUtil.getLog(WabProcessor.class);
+
+	private static final String[] _knownProperties =
+		new String[] {"jdbc.driverClassName"};
+	private static final Attrs _optional = new Attrs();
 	private static final Map<String, String> _xsds = new ConcurrentHashMap<>();
 
 	static {
