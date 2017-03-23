@@ -224,13 +224,13 @@ public class ExtHotDeployListener extends BaseHotDeployListener {
 		String pluginWebDir = WebDirDetector.getRootDir(portletClassLoader);
 
 		if (ServerDetector.isTomcat()) {
-			portalLibDir = globalLibDir.concat("/portal");
-
-			FileUtil.mkdirs(portalLibDir);
-
 			globalLibDir = globalLibDir.concat("/global");
 
 			FileUtil.mkdirs(globalLibDir);
+
+			portalLibDir = globalLibDir.concat("/portal");
+
+			FileUtil.mkdirs(portalLibDir);
 		}
 
 		copyJar(servletContext, globalLibDir, "ext-kernel");
