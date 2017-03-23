@@ -30,7 +30,7 @@
 </tr>
 <tr>
 	<td>PROGRESS</td>
-	<td>//a[contains(.,'${key_imageName}')]/../..//div[@class='progress']/div</td>
+	<td>//td[contains(.,'${key_imageName}')]/../..//div[contains(@class,'progress')]/div[@aria-valuenow='${key_percentOptimized}']</td>
 	<td></td>
 </tr>
 <tr>
