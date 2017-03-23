@@ -20,7 +20,7 @@ soy.$$registerDelegateFn(soy.$$getDelTemplateId('ddm.field'), 'select', 0, ddm._
 
 
 ddm.select = function(opt_data, opt_ignored) {
-  var output = '<div class="form-group' + soy.$$escapeHtmlAttribute(opt_data.visible ? '' : ' hide') + '" data-fieldname="' + soy.$$escapeHtmlAttribute(opt_data.name) + '"><div class="input-select-wrapper">' + ((opt_data.showLabel) ? ddm.select_label(opt_data) : '') + '<div class="form-builder-select-field input-group-container">' + ((! opt_data.readOnly) ? ddm.hidden_select(opt_data) : '') + '<div class="form-control select-field-trigger" dir="' + soy.$$escapeHtmlAttribute(opt_data.dir) + '" id="' + soy.$$escapeHtmlAttribute(opt_data.name) + '" name="' + soy.$$escapeHtmlAttribute(opt_data.name) + '">' + ((opt_data.selectCaretDoubleIcon) ? '<a class="select-arrow-down-container" href="javascript:;">' + soy.$$filterNoAutoescape(opt_data.selectCaretDoubleIcon) + '</a>' : '');
+  var output = '<div class="form-group' + soy.$$escapeHtmlAttribute(opt_data.visible ? '' : ' hide') + '" data-fieldname="' + soy.$$escapeHtmlAttribute(opt_data.name) + '"><div class="input-select-wrapper">' + ((opt_data.showLabel) ? ddm.select_label(opt_data) : '') + '<div class="form-builder-select-field input-group-container">' + ((! opt_data.readOnly) ? ddm.hidden_select(opt_data) : '') + '<div class="form-control select-field-trigger" dir="' + soy.$$escapeHtmlAttribute(opt_data.dir) + '" id="' + soy.$$escapeHtmlAttribute(opt_data.name) + '" name="' + soy.$$escapeHtmlAttribute(opt_data.name) + '"><a class="select-arrow-down-container" href="javascript:;">' + ((opt_data.selectCaretDoubleIcon) ? soy.$$filterNoAutoescape(opt_data.selectCaretDoubleIcon) : '') + '</a>';
   if (opt_data.readOnly) {
     output += '<span class="option-selected option-selected-placeholder">' + soy.$$escapeHtml(opt_data.multiple ? opt_data.strings.chooseOptions : opt_data.strings.chooseAnOption) + '</span>';
   } else {
@@ -29,21 +29,21 @@ ddm.select = function(opt_data, opt_ignored) {
         output += '<span class="option-selected option-selected-placeholder">' + soy.$$escapeHtml(opt_data.strings.chooseOptions) + '</span>';
       } else {
         output += '<ul class="multiple-badge-list">';
-        var currentValueList49 = opt_data.value;
-        var currentValueListLen49 = currentValueList49.length;
-        for (var currentValueIndex49 = 0; currentValueIndex49 < currentValueListLen49; currentValueIndex49++) {
-          var currentValueData49 = currentValueList49[currentValueIndex49];
-          output += ddm.badge_item({badgeCloseIcon: opt_data.badgeCloseIcon, value: currentValueData49.value, label: currentValueData49.label});
+        var currentValueList48 = opt_data.value;
+        var currentValueListLen48 = currentValueList48.length;
+        for (var currentValueIndex48 = 0; currentValueIndex48 < currentValueListLen48; currentValueIndex48++) {
+          var currentValueData48 = currentValueList48[currentValueIndex48];
+          output += ddm.badge_item({badgeCloseIcon: opt_data.badgeCloseIcon, value: currentValueData48.value, label: currentValueData48.label});
         }
         output += '</ul>';
       }
     } else {
       if (opt_data.value && opt_data.value.length > 0) {
-        var currentValueList60 = opt_data.value;
-        var currentValueListLen60 = currentValueList60.length;
-        for (var currentValueIndex60 = 0; currentValueIndex60 < currentValueListLen60; currentValueIndex60++) {
-          var currentValueData60 = currentValueList60[currentValueIndex60];
-          output += (currentValueData60 && currentValueData60.label) ? '<span class="option-selected">' + soy.$$escapeHtml(currentValueData60.label) + '</span>' : '';
+        var currentValueList59 = opt_data.value;
+        var currentValueListLen59 = currentValueList59.length;
+        for (var currentValueIndex59 = 0; currentValueIndex59 < currentValueListLen59; currentValueIndex59++) {
+          var currentValueData59 = currentValueList59[currentValueIndex59];
+          output += (currentValueData59 && currentValueData59.label) ? '<span class="option-selected">' + soy.$$escapeHtml(currentValueData59.label) + '</span>' : '';
         }
       } else {
         output += '<span class="option-selected option-selected-placeholder">' + soy.$$escapeHtml(opt_data.strings.chooseAnOption) + '</span>';
@@ -76,11 +76,11 @@ if (goog.DEBUG) {
 
 ddm.hidden_select = function(opt_data, opt_ignored) {
   var output = '<select class="form-control hide" dir="' + soy.$$escapeHtmlAttribute(opt_data.dir) + '" id="' + soy.$$escapeHtmlAttribute(opt_data.name) + '" name="' + soy.$$escapeHtmlAttribute(opt_data.name) + '" ' + ((opt_data.multiple) ? 'multiple size="' + soy.$$escapeHtmlAttribute(opt_data.options.length) + '"' : '') + '>' + ((! opt_data.readOnly) ? '<option dir="' + soy.$$escapeHtmlAttribute(opt_data.dir) + '" disabled ' + ((opt_data.value.length == 0) ? 'selected' : '') + ' value="">' + soy.$$escapeHtml(opt_data.strings.chooseAnOption) + '</option>' : '');
-  var optionList139 = opt_data.options;
-  var optionListLen139 = optionList139.length;
-  for (var optionIndex139 = 0; optionIndex139 < optionListLen139; optionIndex139++) {
-    var optionData139 = optionList139[optionIndex139];
-    output += ddm.select_hidden_options({dir: opt_data.dir, option: optionData139, values: opt_data.value});
+  var optionList138 = opt_data.options;
+  var optionListLen138 = optionList138.length;
+  for (var optionIndex138 = 0; optionIndex138 < optionListLen138; optionIndex138++) {
+    var optionData138 = optionList138[optionIndex138];
+    output += ddm.select_hidden_options({dir: opt_data.dir, option: optionData138, values: opt_data.value});
   }
   output += '</select>';
   return output;
@@ -92,16 +92,16 @@ if (goog.DEBUG) {
 
 ddm.select_hidden_options = function(opt_data, opt_ignored) {
   var output = '';
-  var selected__soy143 = '';
+  var selected__soy142 = '';
   if (opt_data.values) {
-    var currentValueList149 = opt_data.values;
-    var currentValueListLen149 = currentValueList149.length;
-    for (var currentValueIndex149 = 0; currentValueIndex149 < currentValueListLen149; currentValueIndex149++) {
-      var currentValueData149 = currentValueList149[currentValueIndex149];
-      selected__soy143 += (currentValueData149.value == opt_data.option.value) ? 'selected' : '';
+    var currentValueList148 = opt_data.values;
+    var currentValueListLen148 = currentValueList148.length;
+    for (var currentValueIndex148 = 0; currentValueIndex148 < currentValueListLen148; currentValueIndex148++) {
+      var currentValueData148 = currentValueList148[currentValueIndex148];
+      selected__soy142 += (currentValueData148.value == opt_data.option.value) ? 'selected' : '';
     }
   }
-  output += '<option dir="' + soy.$$escapeHtmlAttribute(opt_data.dir) + '" ' + soy.$$filterHtmlAttributes(selected__soy143) + ' value="' + soy.$$escapeHtmlAttribute(opt_data.option.value) + '">' + soy.$$escapeHtml(opt_data.option.label) + '</option>';
+  output += '<option dir="' + soy.$$escapeHtmlAttribute(opt_data.dir) + '" ' + soy.$$filterHtmlAttributes(selected__soy142) + ' value="' + soy.$$escapeHtmlAttribute(opt_data.option.value) + '">' + soy.$$escapeHtml(opt_data.option.label) + '</option>';
   return output;
 };
 if (goog.DEBUG) {
@@ -111,20 +111,20 @@ if (goog.DEBUG) {
 
 ddm.select_options = function(opt_data, opt_ignored) {
   var output = '';
-  var optionList192 = opt_data.options;
-  var optionListLen192 = optionList192.length;
-  for (var optionIndex192 = 0; optionIndex192 < optionListLen192; optionIndex192++) {
-    var optionData192 = optionList192[optionIndex192];
-    var selected__soy161 = '';
+  var optionList191 = opt_data.options;
+  var optionListLen191 = optionList191.length;
+  for (var optionIndex191 = 0; optionIndex191 < optionListLen191; optionIndex191++) {
+    var optionData191 = optionList191[optionIndex191];
+    var selected__soy160 = '';
     if (opt_data.value) {
-      var currentValueList167 = opt_data.value;
-      var currentValueListLen167 = currentValueList167.length;
-      for (var currentValueIndex167 = 0; currentValueIndex167 < currentValueListLen167; currentValueIndex167++) {
-        var currentValueData167 = currentValueList167[currentValueIndex167];
-        selected__soy161 += (currentValueData167.value == optionData192.value) ? 'selected' : '';
+      var currentValueList166 = opt_data.value;
+      var currentValueListLen166 = currentValueList166.length;
+      for (var currentValueIndex166 = 0; currentValueIndex166 < currentValueListLen166; currentValueIndex166++) {
+        var currentValueData166 = currentValueList166[currentValueIndex166];
+        selected__soy160 += (currentValueData166.value == optionData191.value) ? 'selected' : '';
       }
     }
-    output += '<li class="select-option-item ' + ((selected__soy161) ? 'option-selected' : '') + '" data-option-index="' + soy.$$escapeHtmlAttribute(optionIndex192) + '" data-option-selected="' + ((selected__soy161) ? 'true' : '') + '" data-option-value="' + soy.$$escapeHtmlAttribute(optionData192.value) + '">' + ((opt_data.multiple) ? '<input type="checkbox" value="" ' + ((selected__soy161) ? 'checked' : '') + '>' : '') + '<span>' + soy.$$escapeHtml(optionData192.label) + '</span></li>';
+    output += '<li class="select-option-item ' + ((selected__soy160) ? 'option-selected' : '') + '" data-option-index="' + soy.$$escapeHtmlAttribute(optionIndex191) + '" data-option-selected="' + ((selected__soy160) ? 'true' : '') + '" data-option-value="' + soy.$$escapeHtmlAttribute(optionData191.value) + '">' + ((opt_data.multiple) ? '<input type="checkbox" value="" ' + ((selected__soy160) ? 'checked' : '') + '>' : '') + '<span>' + soy.$$escapeHtml(optionData191.label) + '</span></li>';
   }
   return output;
 };
