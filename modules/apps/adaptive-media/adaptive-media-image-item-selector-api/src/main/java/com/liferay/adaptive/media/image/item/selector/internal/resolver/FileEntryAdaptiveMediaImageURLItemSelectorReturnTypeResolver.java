@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.StringPool;
 
+import java.util.List;
 import java.util.stream.Stream;
 
 import org.osgi.service.component.annotations.Component;
@@ -72,10 +73,12 @@ public class FileEntryAdaptiveMediaImageURLItemSelectorReturnTypeResolver
 
 		JSONArray sourcesArray = JSONFactoryUtil.createJSONArray();
 
-		Stream<MediaQuery> mediaQueries = _mediaQueryProvider.getMediaQueries(
-			fileEntry).stream();
+		List<MediaQuery> mediaQueries = _mediaQueryProvider.getMediaQueries(
+			fileEntry);
 
-		mediaQueries.map(this::_getSourceJSONObject).forEach(sourcesArray::put);
+		Stream<MediaQuery> stream = mediaQueries.stream();
+
+		stream.map(this::_getSourceJSONObject).forEach(sourcesArray::put);
 
 		fileEntryJSONObject.put("sources", sourcesArray);
 

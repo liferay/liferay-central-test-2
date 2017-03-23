@@ -22,9 +22,11 @@ import com.liferay.adaptive.media.image.mediaquery.MediaQueryProvider;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -52,8 +54,13 @@ public class AdaptiveMediaImageHTMLTagFactoryImpl
 		StringBundler sb = new StringBundler(3 + sourceElements.size());
 
 		sb.append("<picture>");
+
 		sourceElements.forEach(sb::append);
-		sb.append(_ATTR_PATTERN.matcher(originalImgTag).replaceAll(""));
+
+		Matcher matcher = _ATTR_PATTERN.matcher(originalImgTag);
+
+		sb.append(matcher.replaceAll(""));
+
 		sb.append("</picture>");
 
 		return sb.toString();
@@ -80,11 +87,11 @@ public class AdaptiveMediaImageHTMLTagFactoryImpl
 
 			StringBundler sb = new StringBundler(5);
 
-			sb.append("(");
+			sb.append(StringPool.OPEN_PARENTHESIS);
 			sb.append(condition.getAttribute());
-			sb.append(":");
+			sb.append(StringPool.COLON);
 			sb.append(condition.getValue());
-			sb.append(")");
+			sb.append(StringPool.CLOSE_PARENTHESIS);
 
 			conditionStrings[i] = sb.toString();
 		}
@@ -97,7 +104,10 @@ public class AdaptiveMediaImageHTMLTagFactoryImpl
 
 		sb.append("<source");
 
-		_getMediaQueryString(mediaQuery).ifPresent(
+		Optional<String> mediaQueryStringOptional = _getMediaQueryString(
+			mediaQuery);
+
+		mediaQueryStringOptional.ifPresent(
 			mediaQueryString -> {
 				sb.append(" media=\"");
 				sb.append(mediaQueryString);
@@ -115,11 +125,12 @@ public class AdaptiveMediaImageHTMLTagFactoryImpl
 	private List<String> _getSourceElements(FileEntry fileEntry)
 		throws AdaptiveMediaException, PortalException {
 
-		Stream<MediaQuery> mediaQueries = _mediaQueryProvider.getMediaQueries(
-			fileEntry).stream();
+		List<MediaQuery> mediaQueries = _mediaQueryProvider.getMediaQueries(
+			fileEntry);
 
-		return mediaQueries.map(
-			this::_getSourceElement).collect(Collectors.toList());
+		Stream<MediaQuery> stream = mediaQueries.stream();
+
+		return stream.map(this::_getSourceElement).collect(Collectors.toList());
 	}
 
 	private static final Pattern _ATTR_PATTERN = Pattern.compile(

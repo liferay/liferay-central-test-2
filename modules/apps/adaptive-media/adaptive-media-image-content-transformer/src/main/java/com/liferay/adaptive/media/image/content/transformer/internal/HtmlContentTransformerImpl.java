@@ -48,13 +48,15 @@ public class HtmlContentTransformerImpl implements ContentTransformer<String> {
 		throws AdaptiveMediaException, PortalException {
 
 		StringBuffer sb = new StringBuffer(html.length());
+
 		Matcher matcher = _IMG_PATTERN.matcher(html);
 
 		while (matcher.find()) {
-			String imgTag = matcher.group(0);
 			Long fileEntryId = Long.valueOf(matcher.group(1));
 
 			FileEntry fileEntry = _dlAppLocalService.getFileEntry(fileEntryId);
+
+			String imgTag = matcher.group(0);
 
 			String adaptiveTag = _adaptiveMediaImageHTMLTagFactory.create(
 				imgTag, fileEntry);

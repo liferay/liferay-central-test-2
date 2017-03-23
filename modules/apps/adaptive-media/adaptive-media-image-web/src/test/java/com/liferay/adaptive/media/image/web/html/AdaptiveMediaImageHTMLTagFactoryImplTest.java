@@ -50,8 +50,6 @@ public class AdaptiveMediaImageHTMLTagFactoryImplTest {
 	public void testCreatesAPictureTag() throws Exception {
 		_addMediaQueries(_createMediaQuery(1989, "adaptiveURL"));
 
-		String originalImgTag =
-			"<img src=\"originalURL\" data-fileEntryId=\"1234\"/>";
 		StringBundler expectedSB = new StringBundler(5);
 
 		expectedSB.append("<picture>");
@@ -59,6 +57,9 @@ public class AdaptiveMediaImageHTMLTagFactoryImplTest {
 		expectedSB.append("srcset=\"adaptiveURL\"/>");
 		expectedSB.append("<img src=\"originalURL\"/>");
 		expectedSB.append("</picture>");
+
+		String originalImgTag =
+			"<img src=\"originalURL\" data-fileEntryId=\"1234\"/>";
 
 		String pictureTag = _adaptiveMediaImageHTMLTagFactory.create(
 			originalImgTag, _fileEntry);
@@ -74,8 +75,6 @@ public class AdaptiveMediaImageHTMLTagFactoryImplTest {
 			_createMediaQuery(1986, "adaptiveURL1"),
 			_createMediaQuery(1989, "adaptiveURL2"));
 
-		String originalImgTag =
-			"<img src=\"originalURL\" data-fileEntryId=\"1234\"/>";
 		StringBundler expectedSB = new StringBundler(8);
 
 		expectedSB.append("<picture>");
@@ -85,6 +84,9 @@ public class AdaptiveMediaImageHTMLTagFactoryImplTest {
 		expectedSB.append("srcset=\"adaptiveURL2\"/>");
 		expectedSB.append("<img src=\"originalURL\"/>");
 		expectedSB.append("</picture>");
+
+		String originalImgTag =
+			"<img src=\"originalURL\" data-fileEntryId=\"1234\"/>";
 
 		String pictureTag = _adaptiveMediaImageHTMLTagFactory.create(
 			originalImgTag, _fileEntry);
@@ -136,8 +138,6 @@ public class AdaptiveMediaImageHTMLTagFactoryImplTest {
 	public void testTheAttributeIsCaseInsensitive() throws Exception {
 		_addMediaQueries(_createMediaQuery(1989, "adaptiveURL"));
 
-		String originalImgTag =
-			"<img src=\"originalURL\" datA-fileENTryID=\"1234\"/>";
 		StringBundler expectedSB = new StringBundler(5);
 
 		expectedSB.append("<picture>");
@@ -145,6 +145,9 @@ public class AdaptiveMediaImageHTMLTagFactoryImplTest {
 		expectedSB.append("srcset=\"adaptiveURL\"/>");
 		expectedSB.append("<img src=\"originalURL\"/>");
 		expectedSB.append("</picture>");
+
+		String originalImgTag =
+			"<img src=\"originalURL\" datA-fileENTryID=\"1234\"/>";
 
 		String pictureTag = _adaptiveMediaImageHTMLTagFactory.create(
 			originalImgTag, _fileEntry);
