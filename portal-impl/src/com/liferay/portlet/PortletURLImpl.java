@@ -972,10 +972,9 @@ public class PortletURLImpl
 				name = publicRenderParameterName;
 			}
 
-			name = HttpUtil.encodeURL(prependNamespace(name));
-
 			for (String value : values) {
-				sb.append(name);
+				_appendNamespaceAndEncode(sb, name);
+
 				sb.append(StringPool.EQUAL);
 				sb.append(processValue(key, value));
 				sb.append(StringPool.AMPERSAND);
@@ -1140,10 +1139,9 @@ public class PortletURLImpl
 				name = publicRenderParameterName;
 			}
 
-			name = HttpUtil.encodeURL(prependNamespace(name));
-
 			for (String value : values) {
-				parameterSb.append(name);
+				_appendNamespaceAndEncode(parameterSb, name);
+
 				parameterSb.append(StringPool.EQUAL);
 				parameterSb.append(HttpUtil.encodeURL(value));
 				parameterSb.append(StringPool.AMPERSAND);
@@ -1253,6 +1251,10 @@ public class PortletURLImpl
 		}
 	}
 
+	/**
+	 * @deprecated As of 7.0.0, with no direct replacement
+	 */
+	@Deprecated
 	protected String prependNamespace(String name) {
 		String namespace = getNamespace();
 
@@ -1265,6 +1267,25 @@ public class PortletURLImpl
 
 		return name;
 	}
+
+	private void _appendNamespaceAndEncode(StringBundler sb, String name) {
+		String namespace = getNamespace();
+
+		if (!name.startsWith(PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE) &&
+			!name.startsWith(namespace) &&
+			!PortalUtil.isReservedParameter(name)) {
+
+			if (_encodedNamespace == null) {
+				_encodedNamespace = HttpUtil.encodeURL(namespace);
+			}
+
+			sb.append(_encodedNamespace);
+		}
+
+		sb.append(HttpUtil.encodeURL(name));
+	}
+
+	private String _encodedNamespace;
 
 	protected String processValue(Key key, int value) {
 		return processValue(key, String.valueOf(value));
