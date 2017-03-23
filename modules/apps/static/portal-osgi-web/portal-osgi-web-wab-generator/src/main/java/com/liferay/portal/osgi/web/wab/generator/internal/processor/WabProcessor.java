@@ -727,15 +727,15 @@ public class WabProcessor {
 			}
 
 			for (String key : knownPropertyKeys) {
-				String text = properties.getProperty(key);
+				String value = properties.getProperty(key);
 
-				if (text == null) {
+				if (value == null) {
 					continue;
 				}
 
-				text = text.trim();
+				value = value.trim();
 
-				processClass(analyzer, text);
+				processClass(analyzer, value);
 			}
 		}
 		catch (Exception e) {
