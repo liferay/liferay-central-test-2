@@ -480,18 +480,18 @@ public class WabProcessor {
 			Parameters defaultPackage = new Parameters(value);
 
 			for (String packageName : defaultPackage.keySet()) {
-				if (_importPackages.containsKey(packageName)) {
+				if (_importPackageParameters.containsKey(packageName)) {
 					continue;
 				}
 
-				_importPackages.add(packageName, _optionalAttrs);
+				_importPackageParameters.add(packageName, _optionalAttrs);
 			}
 		}
 	}
 
 	protected void processExportPackageNames(Analyzer analyzer) {
 		analyzer.setProperty(
-			Constants.EXPORT_CONTENTS, _exportPackages.toString());
+			Constants.EXPORT_CONTENTS, _exportPackageParameters.toString());
 	}
 
 	protected void processExtraHeaders(Analyzer analyzer) {
@@ -527,10 +527,10 @@ public class WabProcessor {
 				Parameters parameters = new Parameters(value);
 
 				if (processedKey.equals(Constants.EXPORT_PACKAGE)) {
-					_exportPackages.mergeWith(parameters, true);
+					_exportPackageParameters.mergeWith(parameters, true);
 				}
 				else if (processedKey.equals(Constants.IMPORT_PACKAGE)) {
-					_importPackages.mergeWith(parameters, true);
+					_importPackageParameters.mergeWith(parameters, true);
 				}
 
 				analyzer.setProperty(processedKey, parameters.toString());
@@ -543,9 +543,9 @@ public class WabProcessor {
 
 		attrs.put("x-liferay-compatibility:", "spring");
 
-		_importPackages.add("org.eclipse.core.runtime", attrs);
+		_importPackageParameters.add("org.eclipse.core.runtime", attrs);
 
-		_importPackages.add("!junit.*", new Attrs());
+		_importPackageParameters.add("!junit.*", new Attrs());
 	}
 
 	protected void processFiles(Map<String, File> classPath, Analyzer analyzer)
@@ -575,7 +575,7 @@ public class WabProcessor {
 
 				if ((path.endsWith("-service.jar") &&
 					 !path.endsWith(_context.concat("-service.jar"))) ||
-					_ignoredResources.contains(path)) {
+					_ignoredResourcePaths.contains(path)) {
 
 					iterator.remove();
 
@@ -591,7 +591,7 @@ public class WabProcessor {
 					}
 				}
 			}
-			else if (_ignoredResources.contains(path)) {
+			else if (_ignoredResourcePaths.contains(path)) {
 				iterator.remove();
 			}
 		}
@@ -606,9 +606,9 @@ public class WabProcessor {
 		}
 		else {
 			StringBundler sb = new StringBundler(
-				(_importPackages.size() * 4) + 1);
+				(_importPackageParameters.size() * 4) + 1);
 
-			for (Entry<String, Attrs> entry : _importPackages.entrySet()) {
+			for (Entry<String, Attrs> entry : _importPackageParameters.entrySet()) {
 				String importPackageName = entry.getKey();
 				Attrs attrs = entry.getValue();
 
@@ -693,7 +693,7 @@ public class WabProcessor {
 		if (Validator.isNotNull(exportPackage)) {
 			Parameters parameters = new Parameters(exportPackage);
 
-			_exportPackages.mergeWith(parameters, true);
+			_exportPackageParameters.mergeWith(parameters, true);
 
 			pluginPackageProperties.remove(Constants.EXPORT_PACKAGE);
 		}
@@ -704,7 +704,7 @@ public class WabProcessor {
 		if (Validator.isNotNull(importPackage)) {
 			Parameters parameters = new Parameters(importPackage);
 
-			_importPackages.mergeWith(parameters, true);
+			_importPackageParameters.mergeWith(parameters, true);
 
 			pluginPackageProperties.remove(Constants.IMPORT_PACKAGE);
 		}
@@ -823,11 +823,11 @@ public class WabProcessor {
 				Parameters parameters = new Parameters(
 					getVersionedServicePackageName(partialPackageName));
 
-				_exportPackages.mergeWith(parameters, false);
-				_importPackages.mergeWith(parameters, false);
+				_exportPackageParameters.mergeWith(parameters, false);
+				_importPackageParameters.mergeWith(parameters, false);
 			}
 
-			_importPackages.add(
+			_importPackageParameters.add(
 				"com.liferay.portal.osgi.web.wab.generator", _optionalAttrs);
 		}
 		catch (Exception e) {
@@ -1263,11 +1263,11 @@ public class WabProcessor {
 
 	private String _bundleVersion;
 	private String _context;
-	private final Parameters _exportPackages = new Parameters();
+	private final Parameters _exportPackageParameters = new Parameters();
 	private final File _file;
-	private final Set<String> _ignoredResources = SetUtil.fromArray(
+	private final Set<String> _ignoredResourcePaths = SetUtil.fromArray(
 		PropsValues.MODULE_FRAMEWORK_WEB_GENERATOR_EXCLUDED_PATHS);
-	private final Parameters _importPackages = new Parameters();
+	private final Parameters _importPackageParameters = new Parameters();
 	private final Map<String, String[]> _parameters;
 	private File _pluginDir;
 	private PluginPackage _pluginPackage;
