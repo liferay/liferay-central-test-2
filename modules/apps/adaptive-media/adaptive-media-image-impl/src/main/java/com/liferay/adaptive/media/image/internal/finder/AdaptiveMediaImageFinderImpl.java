@@ -16,7 +16,6 @@ package com.liferay.adaptive.media.image.internal.finder;
 
 import com.liferay.adaptive.media.AdaptiveMedia;
 import com.liferay.adaptive.media.AdaptiveMediaAttribute;
-import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
 import com.liferay.adaptive.media.finder.AdaptiveMediaFinder;
 import com.liferay.adaptive.media.finder.AdaptiveMediaQuery;
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry;
@@ -34,12 +33,7 @@ import com.liferay.adaptive.media.image.url.AdaptiveMediaImageURLFactory;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 
-import java.io.UnsupportedEncodingException;
-
 import java.net.URI;
-import java.net.URLEncoder;
-
-import java.nio.charset.StandardCharsets;
 
 import java.util.Collection;
 import java.util.Map;
@@ -198,16 +192,6 @@ public class AdaptiveMediaImageFinderImpl implements AdaptiveMediaImageFinder {
 					configurationEntry, fileVersion),
 			attributeMapping,
 			uriFactory.apply(fileVersion, configurationEntry));
-	}
-
-	private String _encode(String s) {
-		try {
-			return URLEncoder.encode(s, StandardCharsets.UTF_8.name());
-		}
-		catch (UnsupportedEncodingException uee) {
-			throw new AdaptiveMediaRuntimeException.
-				UnsupportedEncodingException(uee);
-		}
 	}
 
 	private BiFunction<FileVersion, AdaptiveMediaImageConfigurationEntry, URI>
