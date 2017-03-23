@@ -16,9 +16,14 @@
 
 		<execute function="AssertTextEquals" locator1="AdaptiveMediaTable#NAME" value1="${imageName}" />
 
-		<execute function="AssertTextEquals" locator1="AdaptiveMediaTable#PROGRESS" value1="${percentOptimized}" />
+		<var name="key_percentOptimized" value="${percentOptimized}" />
 
-		<execute function="AssertTextEquals" locator1="AdaptiveMediaTable#MAX_WIDTH" value1="${maxWidth}" />
+		<if>
+			<isset var="percentOptimized" />
+			<then>
+				<execute function="AssertTextEquals#assertPartialText" locator1="AdaptiveMediaTable#PROGRESS" value1="${percentOptimized}" />
+			</then>
+		</if>
 
 		<execute function="AssertTextEquals" locator1="AdaptiveMediaTable#MAX_HEIGHT" value1="${maxHeight}" />
 	</command>
