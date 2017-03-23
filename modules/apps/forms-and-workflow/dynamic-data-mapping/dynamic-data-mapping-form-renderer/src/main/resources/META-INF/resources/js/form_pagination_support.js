@@ -9,7 +9,7 @@ AUI.add(
 		FormPaginationSupport.ATTRS = {
 			pagesState: {
 				setter: '_setPagesSate',
-				value: []
+				valueFn: '_valuePagesState'
 			}
 		};
 
@@ -313,6 +313,12 @@ AUI.add(
 
 					wizard.activate(currentPage - 1);
 				}
+			},
+
+			_valuePagesState: function() {
+				var instance = this;
+
+				return instance.get('layout').pages;
 			}
 		};
 
