@@ -284,9 +284,8 @@ public class AdaptiveMediaImageAddConfigurationTest
 		properties.put("max-height", "100");
 		properties.put("max-width", "100");
 
-		AdaptiveMediaImageConfigurationEntry configurationEntry1 =
-			configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-				TestPropsValues.getCompanyId(), "one", "1", properties);
+		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
+			TestPropsValues.getCompanyId(), "one", "1", properties);
 
 		properties = new HashMap<>();
 
@@ -309,9 +308,8 @@ public class AdaptiveMediaImageAddConfigurationTest
 		properties.put("max-height", "100");
 		properties.put("max-width", "100");
 
-		AdaptiveMediaImageConfigurationEntry configurationEntry1 =
-			configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-				TestPropsValues.getCompanyId(), "one", "1", properties);
+		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
+			TestPropsValues.getCompanyId(), "one", "1", properties);
 
 		properties = new HashMap<>();
 
