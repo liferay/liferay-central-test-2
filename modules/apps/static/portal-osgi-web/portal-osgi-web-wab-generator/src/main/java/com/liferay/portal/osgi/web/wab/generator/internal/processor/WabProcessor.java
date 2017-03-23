@@ -608,7 +608,9 @@ public class WabProcessor {
 			StringBundler sb = new StringBundler(
 				(_importPackageParameters.size() * 4) + 1);
 
-			for (Entry<String, Attrs> entry : _importPackageParameters.entrySet()) {
+			for (Entry<String, Attrs> entry :
+					_importPackageParameters.entrySet()) {
+
 				String importPackageName = entry.getKey();
 				Attrs attrs = entry.getValue();
 
