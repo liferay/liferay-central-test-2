@@ -569,8 +569,8 @@ public class WabProcessor {
 			}
 			else if (path.startsWith("WEB-INF/lib/")) {
 
-				// Remove any other "-service.jar" so they use real imports
-				// Also remove if in the ignore list
+				// Remove any other "-service.jar" or ignored jar so that real
+				// imports are used
 
 				if ((path.endsWith("-service.jar") &&
 					 !path.endsWith(_context.concat("-service.jar"))) ||
