@@ -457,18 +457,18 @@ public class WabProcessor {
 		Path pluginPath = _pluginDir.toPath();
 
 		processXMLDependencies(
-			analyzer, "WEB-INF/liferay-hook.xml", _xPath_hook);
+			analyzer, "WEB-INF/liferay-hook.xml", _XPATH_HOOK);
 		processXMLDependencies(
-			analyzer, "WEB-INF/liferay-portlet.xml", _xPath_liferay);
-		processXMLDependencies(analyzer, "WEB-INF/portlet.xml", _xPath_portlet);
-		processXMLDependencies(analyzer, "WEB-INF/web.xml", _xPath_javaee);
+			analyzer, "WEB-INF/liferay-portlet.xml", _XPATH_LIFERAY);
+		processXMLDependencies(analyzer, "WEB-INF/portlet.xml", _XPATH_PORTLET);
+		processXMLDependencies(analyzer, "WEB-INF/web.xml", _XPATH_JAVAEE);
 
 		Path classes = pluginPath.resolve("WEB-INF/classes/");
 
 		processPropertiesDependencies(
 			analyzer, classes, ".properties", _knownProperties);
-		processXMLDependencies(analyzer, classes, ".xml", _xPath_hbm);
-		processXMLDependencies(analyzer, classes, ".xml", _xPath_spring);
+		processXMLDependencies(analyzer, classes, ".xml", _XPATH_HBM);
+		processXMLDependencies(analyzer, classes, ".xml", _XPATH_SPRING);
 	}
 
 	protected void processDefaultServletPackages() {
@@ -975,7 +975,7 @@ public class WabProcessor {
 				String pathString = entry.getPath();
 
 				if (pathString.endsWith(suffix)) {
-					processXMLDependencies(analyzer, entry, _xPath_spring);
+					processXMLDependencies(analyzer, entry, _XPATH_SPRING);
 				}
 			});
 	}
@@ -1167,26 +1167,26 @@ public class WabProcessor {
 	private static final String[] _knownProperties =
 		new String[] {"jdbc.driverClassName"};
 	private static final Attrs _optional = new Attrs();
-	private static final String _xPath_hbm = StringUtil.merge(
+	private static final String _XPATH_HBM = StringUtil.merge(
 		new String[] {
 			"//class/@name", "//id/@access", "//import/@class",
 			"//property/@type"
 		},
 		"|");
-	private static final String _xPath_hook = StringUtil.merge(
+	private static final String _XPATH_HOOK = StringUtil.merge(
 		new String[] {
 			"//indexer-post-processor-impl", "//service-impl",
 			"//servlet-filter-impl", "//struts-action-impl"
 		},
 		"|");
-	private static final String _xPath_javaee = StringUtil.merge(
+	private static final String _XPATH_JAVAEE = StringUtil.merge(
 		new String[] {
 			"//j2ee:filter-class", "//j2ee:listener-class",
 			"//j2ee:servlet-class", "//javaee:filter-class",
 			"//javaee:listener-class", "//javaee:servlet-class"
 		},
 		"|");
-	private static final String _xPath_liferay = StringUtil.merge(
+	private static final String _XPATH_LIFERAY = StringUtil.merge(
 		new String[] {
 			"//asset-renderer-factory", "//atom-collection-adapter",
 			"//configuration-action-class", "//control-panel-entry-class",
@@ -1200,13 +1200,13 @@ public class WabProcessor {
 			"//xml-rpc-method-class"
 		},
 		"|");
-	private static final String _xPath_portlet = StringUtil.merge(
+	private static final String _XPATH_PORTLET = StringUtil.merge(
 		new String[] {
 			"//portlet2:filter-class", "//portlet2:listener-class",
 			"//portlet2:portlet-class", "//portlet2:resource-bundle"
 		},
 		"|");
-	private static final String _xPath_spring = StringUtil.merge(
+	private static final String _XPATH_SPRING = StringUtil.merge(
 		new String[] {
 			"//beans:bean/@class", "//beans:*/@value-type",
 			"//aop:*/@implement-interface", "//aop:*/@default-impl",
