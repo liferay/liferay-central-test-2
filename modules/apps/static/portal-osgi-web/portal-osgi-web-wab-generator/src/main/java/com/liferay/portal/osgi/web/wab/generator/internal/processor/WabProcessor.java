@@ -1092,7 +1092,7 @@ public class WabProcessor {
 			jar.write(new File(dir, sb.toString()));
 		}
 		catch (Exception e) {
-			_log.error("Couldn't write jar file for " + pluginDir, e);
+			_log.error("Unable to write JAR file for " + pluginDir, e);
 		}
 	}
 
