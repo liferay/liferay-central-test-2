@@ -83,7 +83,7 @@ public class HtmlContentTransformerImpl implements ContentTransformer<String> {
 	}
 
 	private static final Pattern _IMG_PATTERN = Pattern.compile(
-		"<img .*?(?i)\\s*data-fileEntryId=\"([0-9]*)\".*?/>",
+		"<img .*?\\s*data-fileEntryId=\"(\\d+)\".*?/>",
 		Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
 
 	private AdaptiveMediaImageHTMLTagFactory _adaptiveMediaImageHTMLTagFactory;

@@ -134,7 +134,7 @@ public class AdaptiveMediaImageHTMLTagFactoryImpl
 	}
 
 	private static final Pattern _ATTR_PATTERN = Pattern.compile(
-		"(?i)\\s*data-fileEntryId=\"([0-9]*)\"");
+		"\\s*data-fileEntryId=\"(\\d+)\"", Pattern.CASE_INSENSITIVE);
 
 	private MediaQueryProvider _mediaQueryProvider;
 
