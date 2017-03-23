@@ -14,6 +14,8 @@
 
 package com.liferay.adaptive.media.web.internal.portlet.configuration.icon;
 
+import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry;
+import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationHelper;
 import com.liferay.adaptive.media.web.constants.AdaptiveMediaPortletKeys;
 import com.liferay.adaptive.media.web.internal.background.task.OptimizeImagesAllConfigurationsBackgroundTaskExecutor;
 import com.liferay.portal.kernel.backgroundtask.BackgroundTaskManager;
@@ -28,6 +30,7 @@ import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
+import java.util.Collection;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -113,11 +116,22 @@ public class OptimizeImagesPortletConfigurationIcon
 			return false;
 		}
 
+		Collection<AdaptiveMediaImageConfigurationEntry> configurationEntries =
+			_configurationHelper.getAdaptiveMediaImageConfigurationEntries(
+				themeDisplay.getCompanyId());
+
+		if (configurationEntries.isEmpty()) {
+			return false;
+		}
+
 		return true;
 	}
 
 	@Reference
 	private BackgroundTaskManager _backgroundTaskManager;
+
+	@Reference
+	private AdaptiveMediaImageConfigurationHelper _configurationHelper;
 
 	@Reference
 	private Portal _portal;
