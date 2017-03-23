@@ -59,6 +59,23 @@ public class DDLXLSExporter extends BaseDDLExporter {
 		return "xls";
 	}
 
+	protected CellStyle createCellStyle(
+		Workbook workbook, boolean bold, String fontName,
+		short heightInPoints) {
+
+		Font font = workbook.createFont();
+
+		font.setBold(bold);
+		font.setFontHeightInPoints(heightInPoints);
+		font.setFontName(fontName);
+
+		CellStyle style = workbook.createCellStyle();
+
+		style.setFont(font);
+
+		return style;
+	}
+
 	protected void createDataRow(
 		int rowIndex, Sheet sheet, String status, CellStyle style,
 		List<DDMFormFieldRenderedValue> values) {
@@ -87,15 +104,8 @@ public class DDLXLSExporter extends BaseDDLExporter {
 
 		Row row = sheet.createRow(0);
 
-		Font font = workbook.createFont();
-
-		font.setBold(true);
-		font.setFontHeightInPoints((short)14);
-		font.setFontName("Courier New");
-
-		CellStyle style = workbook.createCellStyle();
-
-		style.setFont(font);
+		CellStyle cellStyle = createCellStyle(
+			workbook, true, "Courier New", (short)14);
 
 		int cellIndex = 0;
 
@@ -106,13 +116,13 @@ public class DDLXLSExporter extends BaseDDLExporter {
 
 			cell = row.createCell(cellIndex++, CellType.STRING);
 
-			cell.setCellStyle(style);
+			cell.setCellStyle(cellStyle);
 			cell.setCellValue(label.getString(getLocale()));
 		}
 
 		cell = row.createCell(cellIndex++, CellType.STRING);
 
-		cell.setCellStyle(style);
+		cell.setCellStyle(cellStyle);
 		cell.setCellValue(LanguageUtil.get(getLocale(), "status"));
 	}
 
@@ -143,14 +153,8 @@ public class DDLXLSExporter extends BaseDDLExporter {
 
 			int rowIndex = 1;
 
-			Font font = workbook.createFont();
-
-			font.setFontHeightInPoints((short)12);
-			font.setFontName("Courier New");
-
-			CellStyle style = workbook.createCellStyle();
-
-			style.setFont(font);
+			CellStyle cellStyle = createCellStyle(
+				workbook, false, "Courier New", (short)12);
 
 			while (iterator.hasNext()) {
 				DDLRecord record = iterator.next();
@@ -164,10 +168,10 @@ public class DDLXLSExporter extends BaseDDLExporter {
 					recordSet.getScope(), ddmFormFields, ddmFormValues,
 					ddmStructure);
 
-				String statusString = getStatusMessage(
-					recordVersion.getStatus());
-
-				createDataRow(rowIndex++, sheet, statusString, style, values);
+				createDataRow(
+					rowIndex++, sheet,
+					getStatusMessage(recordVersion.getStatus()), cellStyle,
+					values);
 			}
 
 			workbook.write(byteArrayOutputStream);
