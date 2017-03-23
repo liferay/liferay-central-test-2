@@ -484,7 +484,7 @@ public class WabProcessor {
 					continue;
 				}
 
-				_importPackages.add(packageName, _optional);
+				_importPackages.add(packageName, _optionalAttrs);
 			}
 		}
 	}
@@ -539,7 +539,7 @@ public class WabProcessor {
 	}
 
 	protected void processExtraRequirements() {
-		Attrs attrs = new Attrs(_optional);
+		Attrs attrs = new Attrs(_optionalAttrs);
 
 		attrs.put("x-liferay-compatibility:", "spring");
 
@@ -828,7 +828,7 @@ public class WabProcessor {
 			}
 
 			_importPackages.add(
-				"com.liferay.portal.osgi.web.wab.generator", _optional);
+				"com.liferay.portal.osgi.web.wab.generator", _optionalAttrs);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -1227,11 +1227,11 @@ public class WabProcessor {
 
 	private static final Log _log = LogFactoryUtil.getLog(WabProcessor.class);
 
-	private static final Attrs _optional = new Attrs();
+	private static final Attrs _optionalAttrs = new Attrs();
 	private static final Map<String, String> _xsds = new ConcurrentHashMap<>();
 
 	static {
-		_optional.put("resolution:", "optional");
+		_optionalAttrs.put("resolution:", "optional");
 
 		_xsds.put("aop", "http://www.springframework.org/schema/aop");
 		_xsds.put("beans", "http://www.springframework.org/schema/beans");
