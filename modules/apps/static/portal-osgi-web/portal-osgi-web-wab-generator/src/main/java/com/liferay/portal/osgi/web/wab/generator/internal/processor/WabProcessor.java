@@ -466,7 +466,7 @@ public class WabProcessor {
 		Path classes = pluginPath.resolve("WEB-INF/classes/");
 
 		processPropertiesDependencies(
-			analyzer, classes, ".properties", _knownProperties);
+			analyzer, classes, ".properties", _KNOWN_PROPERTY_KEYS);
 		processXMLDependencies(analyzer, classes, ".xml", _XPATHS_HBM);
 		processXMLDependencies(analyzer, classes, ".xml", _XPATHS_SPRING);
 	}
@@ -710,7 +710,7 @@ public class WabProcessor {
 	}
 
 	protected void processPropertiesDependencies(
-		Analyzer analyzer, File file, String[] knownProperties) {
+		Analyzer analyzer, File file, String[] knownPropertyKeys) {
 
 		if (!file.exists()) {
 			return;
@@ -725,7 +725,7 @@ public class WabProcessor {
 				return;
 			}
 
-			for (String key : knownProperties) {
+			for (String key : knownPropertyKeys) {
 				String text = properties.getProperty(key);
 
 				if (text == null) {
@@ -746,7 +746,7 @@ public class WabProcessor {
 
 	protected void processPropertiesDependencies(
 			Analyzer analyzer, Path path, String suffix,
-			String[] knownProperties)
+			String[] knownPropertyKeys)
 		throws IOException {
 
 		File file = path.toFile();
@@ -765,7 +765,7 @@ public class WabProcessor {
 
 				if (pathString.endsWith(suffix)) {
 					processPropertiesDependencies(
-						analyzer, entry, knownProperties);
+						analyzer, entry, knownPropertyKeys);
 				}
 			});
 	}
@@ -1223,8 +1223,8 @@ public class WabProcessor {
 
 	private static final Log _log = LogFactoryUtil.getLog(WabProcessor.class);
 
-	private static final String[] _knownProperties =
-		new String[] {"jdbc.driverClassName"};
+	private static final String[] _KNOWN_PROPERTY_KEYS =
+		{"jdbc.driverClassName"};
 	private static final Attrs _optional = new Attrs();
 	private static final Map<String, String> _xsds = new ConcurrentHashMap<>();
 
