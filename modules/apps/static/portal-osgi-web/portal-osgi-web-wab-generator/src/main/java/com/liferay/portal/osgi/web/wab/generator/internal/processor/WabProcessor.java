@@ -458,12 +458,10 @@ public class WabProcessor {
 
 		processXMLDependencies(
 			analyzer, "WEB-INF/liferay-hook.xml", _xPath_hook);
-		processXMLDependencies(analyzer, "WEB-INF/web.xml", _xPath_javaee);
-
 		processXMLDependencies(
 			analyzer, "WEB-INF/liferay-portlet.xml", _xPath_liferay);
-
 		processXMLDependencies(analyzer, "WEB-INF/portlet.xml", _xPath_portlet);
+		processXMLDependencies(analyzer, "WEB-INF/web.xml", _xPath_javaee);
 
 		Path classes = pluginPath.resolve("WEB-INF/classes/");
 
