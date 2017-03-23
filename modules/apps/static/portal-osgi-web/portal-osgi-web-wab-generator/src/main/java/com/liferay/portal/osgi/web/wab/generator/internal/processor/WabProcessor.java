@@ -460,7 +460,8 @@ public class WabProcessor {
 			analyzer, "WEB-INF/liferay-hook.xml", _XPATHS_HOOK);
 		processXMLDependencies(
 			analyzer, "WEB-INF/liferay-portlet.xml", _XPATHS_LIFERAY);
-		processXMLDependencies(analyzer, "WEB-INF/portlet.xml", _XPATHS_PORTLET);
+		processXMLDependencies(
+			analyzer, "WEB-INF/portlet.xml", _XPATHS_PORTLET);
 		processXMLDependencies(analyzer, "WEB-INF/web.xml", _XPATHS_JAVAEE);
 
 		Path classes = pluginPath.resolve("WEB-INF/classes/");
@@ -1162,6 +1163,9 @@ public class WabProcessor {
 			PropsUtil.get(
 				"module.framework.web.generator.autodeployed.wars.store"));
 
+	private static final String[] _KNOWN_PROPERTY_KEYS =
+		{"jdbc.driverClassName"};
+
 	private static final String _XPATHS_HBM = StringUtil.merge(
 		new String[] {
 			"//class/@name", "//id/@access", "//import/@class",
@@ -1223,8 +1227,6 @@ public class WabProcessor {
 
 	private static final Log _log = LogFactoryUtil.getLog(WabProcessor.class);
 
-	private static final String[] _KNOWN_PROPERTY_KEYS =
-		{"jdbc.driverClassName"};
 	private static final Attrs _optional = new Attrs();
 	private static final Map<String, String> _xsds = new ConcurrentHashMap<>();
 
