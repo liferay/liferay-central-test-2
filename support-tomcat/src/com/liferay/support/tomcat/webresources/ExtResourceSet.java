@@ -74,11 +74,11 @@ public class ExtResourceSet extends AbstractFileResourceSet {
 			return EMPTY_STRING_ARRAY;
 		}
 
-		String[] extFiles = extBaseFile.list();
+		String[] extFileNames = extBaseFile.list();
 
-		Arrays.sort(extFiles);
+		Arrays.sort(extFileNames);
 
-		return extFiles;
+		return extFileNames;
 	}
 
 	@Override
@@ -125,7 +125,7 @@ public class ExtResourceSet extends AbstractFileResourceSet {
 	@Override
 	protected void checkType(File file) {
 		if (file.exists() && !file.isDirectory()) {
-			throw new IllegalArgumentException(file + " is not a dirtectory");
+			throw new IllegalArgumentException(file + " is not a directory");
 		}
 	}
 
