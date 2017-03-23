@@ -103,6 +103,13 @@ public class TextDDMFormFieldTypeSettingsTest
 		Assert.assertNotNull(tooltipDDMFormField);
 		Assert.assertEquals(
 			"FALSE", tooltipDDMFormField.getVisibilityExpression());
+
+		DDMFormField validationDDMFormField = ddmFormFieldsMap.get(
+			"validation");
+
+		Assert.assertNotNull(validationDDMFormField);
+		Assert.assertEquals(
+			"text", validationDDMFormField.getProperty("selectedType"));
 	}
 
 }
