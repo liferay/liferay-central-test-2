@@ -43,9 +43,11 @@
 				{/if}
 
 				<div class="form-control select-field-trigger" dir="{$dir}" id="{$name}" name="{$name}">
-					{if $selectCaretDoubleIcon}
-						<a class="select-arrow-down-container" href="javascript:;">{$selectCaretDoubleIcon|noAutoescape}</a>
-					{/if}
+					<a class="select-arrow-down-container" href="javascript:;">
+						{if $selectCaretDoubleIcon}
+							{$selectCaretDoubleIcon|noAutoescape}
+						{/if}
+					</a>
 
 					{if $readOnly}
 						<span class="option-selected option-selected-placeholder">{$multiple ? $strings.chooseOptions : $strings.chooseAnOption}</span>
