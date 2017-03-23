@@ -83,7 +83,8 @@ AUI.add(
 					);
 
 					instance._eventHandlers.push(
-						instance.pagination.after('pageChange', A.bind('_afterPaginationPageChange', instance))
+						instance.pagination.after('pageChange', A.bind('_afterPaginationPageChange', instance)),
+						instance.pagination.on('changeRequest', A.bind('_onPaginationChangeRequest', instance))
 					);
 				}
 
@@ -96,11 +97,6 @@ AUI.add(
 				var pagination = instance.getPagination();
 
 				var pages = instance.get('pagesState');
-
-				if (!pages.length) {
-					pagination.next();
-					return;
-				}
 
 				var page;
 
@@ -251,13 +247,39 @@ AUI.add(
 				}
 			},
 
+			_onPaginationChangeRequest: function(event) {
+				var instance = this;
+
+				var currentPage = instance.getCurrentPage();
+
+				var nextPage = event.state.page;
+
+				var pagination = instance.getPagination();
+
+				if (nextPage > currentPage) {
+					event.preventDefault();
+
+					pagination.set('page', nextPage);
+				}
+				else {
+					pagination.set('page', nextPage);
+				}
+			},
+
 			_setPagesSate: function(pages) {
 				var pagesState = [];
 
 				for (var i = 0; i < pages.length; i++) {
-					pagesState[i] = {
-						enabled: pages[i].enabled
-					};
+					if (pages[i].enabled === undefined) {
+						pagesState[i] = {
+							enabled: true
+						};
+					}
+					else {
+						pagesState[i] = {
+							enabled: pages[i].enabled
+						};
+					}
 				}
 
 				return pagesState;
