@@ -165,6 +165,7 @@ public class PortalImplTest {
 		mockHttpServletRequest.setParameter(
 			"_TestAlwaysAllowDoAsUser_struts_action",
 			TestAlwaysAllowDoAsUser.STRUTS_ACTION);
+		mockHttpServletRequest.setParameter("doAsUserId", "0");
 		mockHttpServletRequest.setParameter(
 			"p_p_id", "TestAlwaysAllowDoAsUser");
 
