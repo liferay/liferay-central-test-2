@@ -89,6 +89,7 @@ import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 /**
  * @author Raymond Augé
@@ -756,9 +757,15 @@ public class WabProcessor {
 			return;
 		}
 
-		Files.walk(path).map(Path::toFile).forEach(
+		Stream<Path> pathStream = Files.walk(path);
+
+		Stream<File> fileStream = pathStream.map(Path::toFile);
+
+		fileStream.forEach(
 			entry -> {
-				if (entry.getPath().endsWith(suffix)) {
+				String pathString = entry.getPath();
+
+				if (pathString.endsWith(suffix)) {
 					processPropertiesDependencies(
 						analyzer, entry, knownProperties);
 				}
@@ -961,9 +968,15 @@ public class WabProcessor {
 			return;
 		}
 
-		Files.walk(path).map(Path::toFile).forEach(
+		Stream<Path> pathStream = Files.walk(path);
+
+		Stream<File> fileStream = pathStream.map(Path::toFile);
+
+		fileStream.forEach(
 			entry -> {
-				if (entry.getPath().endsWith(suffix)) {
+				String pathString = entry.getPath();
+
+				if (pathString.endsWith(suffix)) {
 					processXMLDependencies(analyzer, entry, _xPath_spring);
 				}
 			});
