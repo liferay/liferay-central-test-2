@@ -23,6 +23,7 @@ import com.liferay.dynamic.data.mapping.form.evaluator.DDMFormEvaluationExceptio
 import com.liferay.dynamic.data.mapping.form.evaluator.DDMFormEvaluationResult;
 import com.liferay.dynamic.data.mapping.form.evaluator.DDMFormEvaluatorContext;
 import com.liferay.dynamic.data.mapping.form.evaluator.DDMFormFieldEvaluationResult;
+import com.liferay.dynamic.data.mapping.form.evaluator.impl.internal.functions.AllFunction;
 import com.liferay.dynamic.data.mapping.form.evaluator.impl.internal.functions.BelongsToRoleFunction;
 import com.liferay.dynamic.data.mapping.form.evaluator.impl.internal.functions.CallFunction;
 import com.liferay.dynamic.data.mapping.form.evaluator.impl.internal.functions.GetPropertyFunction;
@@ -374,6 +375,10 @@ public class DDMFormEvaluatorHelper {
 	}
 
 	protected void registerDDMExpressionCustomFunctions() {
+		_ddmExpressionFunctionRegister.registerDDMExpressionFunction(
+			"all",
+			new AllFunction(
+				_ddmExpressionFactory, _ddmExpressionFunctionRegister));
 		_ddmExpressionFunctionRegister.registerDDMExpressionFunction(
 			"belongsTo",
 			new BelongsToRoleFunction(_request, _userLocalService));
