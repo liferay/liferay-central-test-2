@@ -207,7 +207,7 @@ public class WabProcessor {
 			}
 		}
 
-		if (_autodeployed_wars_store) {
+		if (_AUTODEPLOYED_WARS_STORE) {
 			writeAutoDeployedWar(deployDir);
 		}
 
@@ -1156,15 +1156,15 @@ public class WabProcessor {
 		analyzer.setProperty("-jsp", value);
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(WabProcessor.class);
-
 	/**
-	 * Purposely undocumented property used purely for diagnostic testing.
+	 * Used diagnostic testing.
 	 */
-	private static final boolean _autodeployed_wars_store =
+	private static final boolean _AUTODEPLOYED_WARS_STORE =
 		GetterUtil.getBoolean(
 			PropsUtil.get(
 				"module.framework.web.generator.autodeployed.wars.store"));
+
+	private static final Log _log = LogFactoryUtil.getLog(WabProcessor.class);
 
 	private static final String[] _knownProperties =
 		new String[] {"jdbc.driverClassName"};
