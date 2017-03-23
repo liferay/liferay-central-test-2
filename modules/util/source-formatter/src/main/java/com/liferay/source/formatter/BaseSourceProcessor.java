@@ -969,7 +969,7 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 			new String[] {
 				"ArquillianResource", "Autowired", "BeanReference", "Captor",
 				"Inject", "Mock", "Parameter", "Reference", "ServiceReference",
-				"SuppressWarnings"
+				"SuppressWarnings", "Value"
 			});
 
 		return _annotationsExclusions;
