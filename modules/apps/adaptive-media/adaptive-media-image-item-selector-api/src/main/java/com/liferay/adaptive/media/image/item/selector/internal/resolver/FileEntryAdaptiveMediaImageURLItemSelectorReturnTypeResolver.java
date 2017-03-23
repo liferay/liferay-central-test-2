@@ -85,13 +85,6 @@ public class FileEntryAdaptiveMediaImageURLItemSelectorReturnTypeResolver
 		return fileEntryJSONObject.toString();
 	}
 
-	@Reference(unbind = "-")
-	protected void setMediaQueryProvider(
-		MediaQueryProvider mediaQueryProvider) {
-
-		_mediaQueryProvider = mediaQueryProvider;
-	}
-
 	private JSONObject _getSourceJSONObject(MediaQuery mediaQuery) {
 		JSONObject sourceJSONObject = JSONFactoryUtil.createJSONObject();
 
@@ -107,6 +100,7 @@ public class FileEntryAdaptiveMediaImageURLItemSelectorReturnTypeResolver
 		return sourceJSONObject.put("attributes", attributesJSONObject);
 	}
 
+	@Reference
 	private MediaQueryProvider _mediaQueryProvider;
 
 }
