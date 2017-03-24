@@ -1,5 +1,5 @@
 configJSModules {
-	enabled = false
+	includes = ["**/*.es.js*"]
 }
 
 apply plugin: "com.liferay.gulp"
