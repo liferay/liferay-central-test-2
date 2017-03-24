@@ -25,6 +25,14 @@ task createTempDir(type: Exec) {
 	commandLine 'mkdir', '-m', '777', '-p', "${rootDir}/build/tmpdir"
 }
 
+task copyJacocoAgent(type: Copy) {
+	configurations.jacocoAgent.asFileTree.each {
+		from(zipTree(it))
+	}
+
+	into "${rootDir}/build/jacoco"
+}
+
 import java.nio.charset.Charset
 import java.nio.file.Files
 
@@ -151,6 +159,7 @@ task runDocker(type: Exec) {
 	dependsOn createTempDir
 	dependsOn loginDocker
 	dependsOn rmDocker
+	dependsOn copyJacocoAgent
 
 	def javaOpts = project.getProperty('javaOpts');
 
@@ -168,6 +177,7 @@ task runDocker(type: Exec) {
 		'-v', "${rootDir}/../bundles/deploy:/liferay/deploy",
 		'-v', "${rootDir}/docker/portal-ext.properties:/liferay/portal-ext.properties",
 		'-v', "${rootDir}/build/tmpdir:${rootDir}/build/tmpdir",
+		'-v', "${rootDir}/build/jacoco:/jacoco",
 		'-d',
 		'--name', "com-liferay-adaptive-media",
 		'liferay/liferay-de:20170228072932334161125-db'
