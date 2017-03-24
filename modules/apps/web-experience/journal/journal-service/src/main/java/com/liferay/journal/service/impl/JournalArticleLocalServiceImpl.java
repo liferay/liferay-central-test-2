@@ -850,13 +850,57 @@ public class JournalArticleLocalServiceImpl
 		ExpandoBridgeUtil.copyExpandoBridgeAttributes(
 			oldArticle.getExpandoBridge(), newArticle.getExpandoBridge());
 
+		int copyNumber = 1;
+
+		String copyUrlTitle = JournalUtil.getUrlTitle(
+			id, oldArticle.getTitleCurrentValue());
+
+		for (;; copyNumber++) {
+			JournalArticle article = fetchArticleByUrlTitle(
+				groupId, copyUrlTitle);
+
+			if ((article == null) ||
+				newArticleId.equals(article.getArticleId())) {
+
+				copyNumber--;
+
+				break;
+			}
+			else {
+				String suffix = StringPool.DASH + copyNumber;
+
+				String prefix = copyUrlTitle;
+
+				if (copyUrlTitle.length() > suffix.length()) {
+					prefix = copyUrlTitle.substring(
+						0, copyUrlTitle.length() - suffix.length());
+				}
+
+				copyUrlTitle = prefix + suffix;
+			}
+		}
+
 		journalArticlePersistence.update(newArticle);
 
 		// Article localization
 
+		Map<Locale, String> copyTitleMap = oldArticle.getTitleMap();
+
+		for (Locale locale : copyTitleMap.keySet()) {
+			StringBundler sb = new StringBundler(5);
+
+			sb.append(copyTitleMap.get(locale));
+			sb.append(StringPool.SPACE);
+			sb.append(LanguageUtil.get(locale, "duplicate"));
+			sb.append(StringPool.SPACE);
+			sb.append(copyNumber);
+
+			copyTitleMap.put(locale, sb.toString());
+		}
+
 		_addArticleLocalizedFields(
-			newArticle.getCompanyId(), newArticle.getId(),
-			oldArticle.getTitleMap(), oldArticle.getDescriptionMap());
+			newArticle.getCompanyId(), newArticle.getId(), copyTitleMap,
+			oldArticle.getDescriptionMap());
 
 		// Resources
 
