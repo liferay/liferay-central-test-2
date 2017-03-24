@@ -121,15 +121,15 @@ public class RoleFinderTest {
 
 			long actionIds = resourcePermission.getActionIds();
 
-			List<String> actionIdList = new ArrayList<>();
+			List<String> actionIdsList = new ArrayList<>();
 
 			for (ResourceAction resourceAction : resourceActions) {
 				if ((resourceAction.getBitwiseValue() & actionIds) != 0) {
-					actionIdList.add(resourceAction.getActionId());
+					actionIdsList.add(resourceAction.getActionId());
 				}
 			}
 
-			expectedResourceRoles.put(role.getName(), actionIdList);
+			expectedResourceRoles.put(role.getName(), actionIdsList);
 		}
 
 		Assert.assertEquals(
