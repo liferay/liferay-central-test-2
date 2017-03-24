@@ -163,6 +163,8 @@ task runDocker(type: Exec) {
 
 	def javaOpts = project.getProperty('javaOpts');
 
+	javaOpts += ' ' + project.getProperty('jacocoOpts')
+
 	if (project.hasProperty('debug')) {
 		javaOpts += ' ' + project.getProperty('debugOpts');
 	}
