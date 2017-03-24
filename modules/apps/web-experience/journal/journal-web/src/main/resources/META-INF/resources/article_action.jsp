@@ -124,9 +124,17 @@ else {
 				<portlet:param name="version" value="<%= String.valueOf(article.getVersion()) %>" />
 			</portlet:renderURL>
 
+			<portlet:actionURL name="copyArticle" var="copyArticleURL">
+				<portlet:param name="redirect" value="<%= currentURL %>" />
+				<portlet:param name="groupId" value="<%= String.valueOf(article.getGroupId()) %>" />
+				<portlet:param name="oldArticleId" value="<%= article.getArticleId() %>" />
+				<portlet:param name="version" value="<%= String.valueOf(article.getVersion()) %>" />
+				<portlet:param name="autoArticleId" value="<%= String.valueOf(true) %>" />
+			</portlet:actionURL>
+
 			<liferay-ui:icon
 				message="copy"
-				url="<%= copyURL.toString() %>"
+				url="<%= journalWebConfiguration.journalFeedForceAutogenerateId() ? copyArticleURL.toString() : copyURL.toString() %>"
 			/>
 		</c:if>
 	</c:if>
