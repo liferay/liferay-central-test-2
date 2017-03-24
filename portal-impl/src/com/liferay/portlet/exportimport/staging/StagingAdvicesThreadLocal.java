@@ -31,6 +31,6 @@ public class StagingAdvicesThreadLocal {
 
 	private static final ThreadLocal<Boolean> _enabled =
 		new AutoResetThreadLocal<>(
-			StagingAdvicesThreadLocal.class + "._enabled", true);
+			StagingAdvicesThreadLocal.class + "._enabled", () -> Boolean.TRUE);
 
 }
