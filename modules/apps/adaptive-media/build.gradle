@@ -187,6 +187,24 @@ task runDocker(type: Exec) {
 	finalizedBy checkDocker
 }
 
+task startJacocoRecording() {
+	doLast {
+		def file = new File("${rootDir}/build/jacoco/testIntegration.exec");
+
+		if (file.exists()) {
+			file.deleteOnExit();
+		}
+
+		file.getParentFile().mkdirs();
+
+		file.createNewFile();
+	}
+}
+
+task stopJacocoRecording(type: Exec) {
+	commandLine 'docker', 'exec', '-d', 'com-liferay-adaptive-media', 'env', 'JAVA_OPTS=', '/liferay/tomcat-8.0.32/bin/shutdown.sh'
+}
+
 allprojects {
 	apply plugin: "jacoco"
 
