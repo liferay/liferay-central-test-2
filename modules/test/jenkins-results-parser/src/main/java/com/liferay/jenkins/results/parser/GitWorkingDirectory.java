@@ -431,25 +431,8 @@ public class GitWorkingDirectory {
 		}
 		catch (IOException ioe) {
 			throw new RuntimeException(
-				"Could not get current branch name from repository", ioe);
+				"Unable to get current branch name from repository", ioe);
 		}
-	}
-
-	public String getDependentRepositoryName() {
-		if (_repositoryName.equals("liferay-plugins")) {
-			return "liferay-portal";
-		}
-		else if (_repositoryName.equals("liferay-plugins-ee")) {
-			return "liferay-portal-ee";
-		}
-		else if (_repositoryName.equals("liferay-portal")) {
-			return "liferay-plugins";
-		}
-		else if (_repositoryName.equals("liferay-portal-ee")) {
-			return "liferay-plugins-ee";
-		}
-
-		return null;
 	}
 
 	public Git getGit() {
@@ -678,7 +661,8 @@ public class GitWorkingDirectory {
 						System.out.println(
 							JenkinsResultsParserUtil.combine(
 								"Unable to push ", localBranchName, " to ",
-								getRemoteURL(remoteConfig), "\nPush response: ",
+								getRemoteURL(remoteConfig),
+								".\nPush response: ",
 								remoteRefUpdate.toString()));
 
 						return false;
@@ -752,7 +736,7 @@ public class GitWorkingDirectory {
 			if (!remoteExists(remoteConfig.getName())) {
 				throw new RuntimeException(
 					JenkinsResultsParserUtil.combine(
-						"Unable to remove Remote ", remoteConfig.getName(),
+						"Unable to remove remote ", remoteConfig.getName(),
 						" because it does not exist"));
 			}
 
@@ -840,7 +824,7 @@ public class GitWorkingDirectory {
 			storedConfig.save();
 		}
 		catch (IOException ioe) {
-			throw new RuntimeException("Unable to save configuration change.");
+			throw new RuntimeException("Unable to save configuration change");
 		}
 	}
 
