@@ -1268,25 +1268,6 @@ public class PortletURLImpl
 		return name;
 	}
 
-	private void _appendNamespaceAndEncode(StringBundler sb, String name) {
-		String namespace = getNamespace();
-
-		if (!name.startsWith(PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE) &&
-			!name.startsWith(namespace) &&
-			!PortalUtil.isReservedParameter(name)) {
-
-			if (_encodedNamespace == null) {
-				_encodedNamespace = HttpUtil.encodeURL(namespace);
-			}
-
-			sb.append(_encodedNamespace);
-		}
-
-		sb.append(HttpUtil.encodeURL(name));
-	}
-
-	private String _encodedNamespace;
-
 	protected String processValue(Key key, int value) {
 		return processValue(key, String.valueOf(value));
 	}
@@ -1371,6 +1352,23 @@ public class PortletURLImpl
 			portletRequest, layout, lifecycle);
 	}
 
+	private void _appendNamespaceAndEncode(StringBundler sb, String name) {
+		String namespace = getNamespace();
+
+		if (!name.startsWith(PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE) &&
+			!name.startsWith(namespace) &&
+			!PortalUtil.isReservedParameter(name)) {
+
+			if (_encodedNamespace == null) {
+				_encodedNamespace = HttpUtil.encodeURL(namespace);
+			}
+
+			sb.append(_encodedNamespace);
+		}
+
+		sb.append(HttpUtil.encodeURL(name));
+	}
+
 	private Map<String, String> _getReservedParameterMap() {
 		if (_reservedParameters != null) {
 			return _reservedParameters;
@@ -1441,6 +1439,7 @@ public class PortletURLImpl
 	private long _doAsGroupId;
 	private long _doAsUserId;
 	private String _doAsUserLanguageId;
+	private String _encodedNamespace;
 	private boolean _encrypt;
 	private boolean _escapeXml = PropsValues.PORTLET_URL_ESCAPE_XML;
 	private Layout _layout;
