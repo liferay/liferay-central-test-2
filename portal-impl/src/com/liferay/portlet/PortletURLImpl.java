@@ -313,68 +313,6 @@ public class PortletURLImpl
 		return Collections.unmodifiableMap(_getReservedParameterMap());
 	}
 
-	private Map<String, String> _getReservedParameterMap() {
-		if (_reservedParameters != null) {
-			return _reservedParameters;
-		}
-
-		_reservedParameters = new LinkedHashMap<>();
-
-		_reservedParameters.put("p_p_id", _portletId);
-
-		if (_lifecycle.equals(PortletRequest.ACTION_PHASE)) {
-			_reservedParameters.put("p_p_lifecycle", "1");
-		}
-		else if (_lifecycle.equals(PortletRequest.RENDER_PHASE)) {
-			_reservedParameters.put("p_p_lifecycle", "0");
-		}
-		else if (_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
-			_reservedParameters.put("p_p_lifecycle", "2");
-		}
-
-		if (_windowStateString != null) {
-			_reservedParameters.put("p_p_state", _windowStateString);
-		}
-
-		if (_windowStateRestoreCurrentView) {
-			_reservedParameters.put("p_p_state_rcv", "1");
-		}
-
-		if (_portletModeString != null) {
-			_reservedParameters.put("p_p_mode", _portletModeString);
-		}
-
-		if (_resourceID != null) {
-			_reservedParameters.put("p_p_resource_id", _resourceID);
-		}
-
-		if (_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
-			_reservedParameters.put("p_p_cacheability", _cacheability);
-		}
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
-
-		if (Validator.isNotNull(portletDisplay.getColumnId())) {
-			_reservedParameters.put("p_p_col_id", portletDisplay.getColumnId());
-		}
-
-		if (portletDisplay.getColumnPos() > 0) {
-			_reservedParameters.put(
-				"p_p_col_pos", String.valueOf(portletDisplay.getColumnPos()));
-		}
-
-		if (portletDisplay.getColumnCount() > 0) {
-			_reservedParameters.put(
-				"p_p_col_count",
-				String.valueOf(portletDisplay.getColumnCount()));
-		}
-
-		return _reservedParameters;
-	}
-
 	@Override
 	public String getResourceID() {
 		return _resourceID;
@@ -1417,6 +1355,68 @@ public class PortletURLImpl
 			PortletLocalServiceUtil.fetchPortletById(
 				PortalUtil.getCompanyId(request), portletId),
 			portletRequest, layout, lifecycle);
+	}
+
+	private Map<String, String> _getReservedParameterMap() {
+		if (_reservedParameters != null) {
+			return _reservedParameters;
+		}
+
+		_reservedParameters = new LinkedHashMap<>();
+
+		_reservedParameters.put("p_p_id", _portletId);
+
+		if (_lifecycle.equals(PortletRequest.ACTION_PHASE)) {
+			_reservedParameters.put("p_p_lifecycle", "1");
+		}
+		else if (_lifecycle.equals(PortletRequest.RENDER_PHASE)) {
+			_reservedParameters.put("p_p_lifecycle", "0");
+		}
+		else if (_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+			_reservedParameters.put("p_p_lifecycle", "2");
+		}
+
+		if (_windowStateString != null) {
+			_reservedParameters.put("p_p_state", _windowStateString);
+		}
+
+		if (_windowStateRestoreCurrentView) {
+			_reservedParameters.put("p_p_state_rcv", "1");
+		}
+
+		if (_portletModeString != null) {
+			_reservedParameters.put("p_p_mode", _portletModeString);
+		}
+
+		if (_resourceID != null) {
+			_reservedParameters.put("p_p_resource_id", _resourceID);
+		}
+
+		if (_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+			_reservedParameters.put("p_p_cacheability", _cacheability);
+		}
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
+
+		if (Validator.isNotNull(portletDisplay.getColumnId())) {
+			_reservedParameters.put("p_p_col_id", portletDisplay.getColumnId());
+		}
+
+		if (portletDisplay.getColumnPos() > 0) {
+			_reservedParameters.put(
+				"p_p_col_pos", String.valueOf(portletDisplay.getColumnPos()));
+		}
+
+		if (portletDisplay.getColumnCount() > 0) {
+			_reservedParameters.put(
+				"p_p_col_count",
+				String.valueOf(portletDisplay.getColumnCount()));
+		}
+
+		return _reservedParameters;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(PortletURLImpl.class);
