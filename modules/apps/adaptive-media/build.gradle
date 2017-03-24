@@ -187,9 +187,24 @@ task runDocker(type: Exec) {
 	finalizedBy checkDocker
 }
 
+allprojects {
+	apply plugin: "jacoco"
+
+	jacoco {
+		toolVersion = "0.7.8"
+	}
+
+	repositories {
+		mavenLocal()
+
+		maven {
+			url "https://cdn.lfrs.sl/repository.liferay.com/nexus/content/groups/public"
+		}
+	}
+}
+
 configure(subprojects.findAll {!it.childProjects}) {
 	apply plugin: "com.liferay.defaults.plugin"
-	apply plugin: "jacoco"
 
 	configurations {
 		runtimeLib {
@@ -253,7 +268,7 @@ repositories {
 task coverageReport(type: org.gradle.testing.jacoco.tasks.JacocoReport) {
 	additionalSourceDirs = files(subprojects.findAll{!it.childProjects}.sourceSets.main.allSource.srcDirs)
 	classDirectories = files(subprojects.findAll{!it.childProjects}.sourceSets.main.output)
-	executionData = files(subprojects.findAll{!it.childProjects}.jacocoTestReport.executionData)
+	executionData = files(subprojects.findAll{!it.childProjects}.jacocoTestReport.executionData, "${rootDir}/build/jacoco/testIntegration.exec")
 	sourceDirectories = files(subprojects.findAll{!it.childProjects}.sourceSets.main.allSource.srcDirs)
 
 	reports {
