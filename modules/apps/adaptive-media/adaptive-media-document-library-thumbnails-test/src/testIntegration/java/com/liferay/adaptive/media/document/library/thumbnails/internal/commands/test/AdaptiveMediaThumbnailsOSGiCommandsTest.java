@@ -54,6 +54,7 @@ import com.liferay.registry.Registry;
 import com.liferay.registry.RegistryUtil;
 import com.liferay.registry.ServiceReference;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import java.util.HashMap;
@@ -235,6 +236,24 @@ public class AdaptiveMediaThumbnailsOSGiCommandsTest {
 
 			Assert.assertEquals(0, _getAdaptiveMediaCount(pdfFileEntry));
 			Assert.assertEquals(2, _getAdaptiveMediaCount(pngFileEntry));
+		}
+	}
+
+	@Test(expected = InvocationTargetException.class)
+	public void testMigrateThrowsExceptionWhenNoValidConfiguration()
+		throws Exception {
+
+		try (DestinationReplacer destinationReplacer = new DestinationReplacer(
+				DestinationNames.DOCUMENT_LIBRARY_IMAGE_PROCESSOR,
+				_ADAPTIVE_MEDIA_PROCESSOR);
+			PropsValuesReplacer propsValuesReplacer1 = new PropsValuesReplacer(
+				"DL_FILE_ENTRY_THUMBNAIL_MAX_HEIGHT", 999);
+			PropsValuesReplacer propsValuesReplacer2 = new PropsValuesReplacer(
+				"DL_FILE_ENTRY_THUMBNAIL_MAX_HEIGHT", 999)) {
+
+			_addPNGFileEntry();
+
+			_migrate();
 		}
 	}
 
