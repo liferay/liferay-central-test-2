@@ -75,8 +75,7 @@ public class NumericDDMFormFieldTypeSettingsTest
 			"validation");
 
 		Assert.assertNotNull(validationDDMFormField);
-		Assert.assertEquals(
-			"numeric", validationDDMFormField.getProperty("selectedType"));
+		Assert.assertEquals("number", validationDDMFormField.getDataType());
 	}
 
 }

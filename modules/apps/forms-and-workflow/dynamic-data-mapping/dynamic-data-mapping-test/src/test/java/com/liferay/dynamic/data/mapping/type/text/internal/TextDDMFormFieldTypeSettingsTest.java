@@ -108,8 +108,7 @@ public class TextDDMFormFieldTypeSettingsTest
 			"validation");
 
 		Assert.assertNotNull(validationDDMFormField);
-		Assert.assertEquals(
-			"text", validationDDMFormField.getProperty("selectedType"));
+		Assert.assertEquals("string", validationDDMFormField.getDataType());
 	}
 
 }
