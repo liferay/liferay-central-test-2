@@ -212,6 +212,29 @@ AUI.add(
 						instance.setDescription(description);
 					},
 
+					_getContentImages: function(content) {
+						var contentDom = document.createElement('div');
+
+						contentDom.innerHTML = content;
+
+						var contentImages = contentDom.getElementsByTagName('img');
+
+						var finalImages = [];
+
+						for (var i = 0; i < contentImages.length; i++) {
+							var currentImage = contentImages[i];
+
+							if (currentImage.parentElement.tagName.toLowerCase() === 'picture') {
+								finalImages.push(currentImage.parentElement);
+							}
+							else {
+								finalImages.push(currentImage);
+							}
+						}
+
+						return finalImages;
+					},
+
 					_getPrincipalForm: function(formName) {
 						var instance = this;
 
@@ -351,7 +374,10 @@ AUI.add(
 														instance.one('#redirect').val(message.redirect);
 													}
 
-													if (message.blogsEntryAttachmentReferences) {
+													if (message.content) {
+														instance._updateContentImages(message.content);
+													}
+													else if (message.blogsEntryAttachmentReferences) {
 														instance._updateImages(message.blogsEntryAttachmentReferences);
 													}
 
@@ -426,6 +452,47 @@ AUI.add(
 
 						if (captionNode) {
 							captionNode.removeClass(CSS_INVISIBLE);
+						}
+					},
+
+					_updateContentImages: function(finalContent) {
+						var instance = this;
+
+						var originalContent = window[instance.ns('contentEditor')].getHTML();
+
+						var originalContentImages = instance._getContentImages(originalContent);
+
+						var finalContentImages = instance._getContentImages(finalContent);
+
+						if (originalContentImages.length != finalContentImages.length) {
+							return;
+						}
+
+						for (var i = 0; i < originalContentImages.length; i++) {
+							var image = originalContentImages[i];
+
+							var tempImageId = image.getAttribute('data-image-id');
+
+							if (tempImageId) {
+								var el = instance.one('img[data-image-id="' + tempImageId + '"]');
+
+								if (el) {
+									var finalImage = finalContentImages[i];
+
+									if (el.get('tagName') === finalImage.tagName) {
+										for (var j = 0; j < finalImage.attributes.length; j++) {
+											var attr = finalImage.attributes[j];
+
+											el.attr(attr.name, attr.value);
+										}
+
+										el.removeAttribute('data-image-id');
+									}
+									else {
+										el.replace(finalContentImages[i]);
+									}
+								}
+							}
 						}
 					},
 
