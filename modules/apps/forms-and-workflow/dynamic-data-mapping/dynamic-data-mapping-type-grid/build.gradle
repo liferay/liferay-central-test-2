@@ -1,8 +1,8 @@
-sourceCompatibility = "1.8"
-targetCompatibility = "1.8"
-
 apply plugin: "com.liferay.gulp"
 apply plugin: "com.liferay.lang.merger"
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
 
 configJSModules {
 	includes = ["**/*.es.js*"]
