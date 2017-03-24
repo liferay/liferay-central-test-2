@@ -53,7 +53,7 @@ public class ValidatorEqualsCheck extends BaseFileCheck {
 			addMessage(
 				sourceFormatterMessages, fileName,
 				"Use Objects.equals(Object, Object) instead of " +
-					"Validator.equals(Object, Object), see LPS-65135",
+					"Objects.equals(Object, Object), see LPS-65135",
 				getLineCount(content, matcher.start()));
 		}
 	}
