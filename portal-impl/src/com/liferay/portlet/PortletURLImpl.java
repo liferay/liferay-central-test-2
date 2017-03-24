@@ -1120,7 +1120,7 @@ public class PortletURLImpl
 			mergeRenderParameters();
 		}
 
-		StringBundler parameterSb = new StringBundler();
+		StringBundler parameterSB = new StringBundler();
 
 		int previousSbIndex = sb.index();
 
@@ -1140,11 +1140,11 @@ public class PortletURLImpl
 			}
 
 			for (String value : values) {
-				_appendNamespaceAndEncode(parameterSb, name);
+				_appendNamespaceAndEncode(parameterSB, name);
 
-				parameterSb.append(StringPool.EQUAL);
-				parameterSb.append(HttpUtil.encodeURL(value));
-				parameterSb.append(StringPool.AMPERSAND);
+				parameterSB.append(StringPool.EQUAL);
+				parameterSB.append(HttpUtil.encodeURL(value));
+				parameterSB.append(StringPool.AMPERSAND);
 			}
 		}
 
@@ -1157,7 +1157,7 @@ public class PortletURLImpl
 		byte[] parameterBytes = null;
 
 		try {
-			String parameterString = parameterSb.toString();
+			String parameterString = parameterSB.toString();
 
 			parameterBytes = parameterString.getBytes(StringPool.UTF8);
 		}
