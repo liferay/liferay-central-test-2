@@ -105,7 +105,7 @@ public class RoleFinderTest {
 		int scope = _resourcePermission.getScope();
 		String primKey = _resourcePermission.getPrimKey();
 
-		Map<String, List<String>> expectedResourceRoles = new HashMap<>();
+		Map<String, List<String>> actionIdsLists = new HashMap<>();
 
 		List<ResourcePermission> resourcePermissions =
 			ResourcePermissionLocalServiceUtil.getResourcePermissions(
@@ -129,11 +129,11 @@ public class RoleFinderTest {
 				}
 			}
 
-			expectedResourceRoles.put(role.getName(), actionIdsList);
+			actionIdsLists.put(role.getName(), actionIdsList);
 		}
 
 		Assert.assertEquals(
-			expectedResourceRoles,
+			actionIdsLists,
 			RoleFinderUtil.findByC_N_S_P(companyId, name, scope, primKey));
 	}
 
