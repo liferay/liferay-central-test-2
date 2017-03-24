@@ -19,9 +19,12 @@ cache:
 
 before_script:
   - ./gradlew runDocker -Pdocker
+  - ./gradlew startJacocoRecording
 
 script:
   - ./gradlew test testIntegration -Pdocker
 
 after_success:
+  - ./gradlew stopJacocoRecording
+  - sleep 20
   - ./gradlew coveralls
