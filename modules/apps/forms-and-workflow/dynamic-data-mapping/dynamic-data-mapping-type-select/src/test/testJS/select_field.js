@@ -361,6 +361,48 @@ describe(
 						assert.equal(selectField.getValue(), 'foo');
 					}
 				);
+
+				it(
+					'should remove badge item if click in an item already selected',
+					function(done) {
+						selectField = createSelectField(
+							{
+								multiple: true,
+								options: [{label: 'foo', value: 'foo'}, {label: 'bar', value: 'bar'}]
+							}
+						);
+
+						var container = selectField.get('container');
+
+						container.one('.form-builder-select-field').simulate('click');
+
+						var item = container.one('.form-builder-select-field').one('.drop-chosen ul li');
+
+						assert.isNull(container.one('.trigger-badge-item-close'));
+
+						item.simulate('click');
+
+						window.setTimeout(
+							function() {
+								assert.isNotNull(container.one('.trigger-badge-item-close'));
+
+								item = container.one('.form-builder-select-field').one('.drop-chosen ul li');
+
+								item.simulate('click');
+
+								window.setTimeout(
+									function() {
+										assert.isNull(container.one('.trigger-badge-item-close'));
+
+										done();
+									},
+									600
+								);
+							},
+							600
+						);
+					}
+				);
 			}
 		);
 
@@ -387,6 +429,8 @@ describe(
 
 						window.setTimeout(
 							function() {
+								assert.equal(selectField.get('value').length, 1);
+
 								container.one('.trigger-badge-item-close').simulate('click');
 
 								assert.equal(selectField.get('value').length, 0);
