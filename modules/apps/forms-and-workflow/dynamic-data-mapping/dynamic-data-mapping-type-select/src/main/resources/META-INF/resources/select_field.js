@@ -336,15 +336,9 @@ AUI.add(
 					_handleBadgeItemCloseClick: function(target) {
 						var instance = this;
 
-						var values = instance.get('value');
-
 						var value = target.getAttribute('data-badge-value');
 
-						var index = values.indexOf(value);
-
-						if (index >= 0) {
-							values.splice(index, 1);
-						}
+						var values = instance._removeBadge(value);
 
 						instance.setValue(values);
 					},
@@ -383,8 +377,13 @@ AUI.add(
 
 							instance._open = true;
 
-							if (!currentTarget.getAttribute('data-option-selected')) {
-								value.push(currentTarget.getAttribute('data-option-value'));
+							var itemValue = currentTarget.getAttribute('data-option-value');
+
+							if (currentTarget.getAttribute('data-option-selected')) {
+								instance._removeBadge(itemValue);
+							}
+							else {
+								value.push(itemValue);
 							}
 						}
 						else {
@@ -446,6 +445,20 @@ AUI.add(
 						var openList = container.one('.' + CSS_DROP_CHOSEN).hasClass(CSS_HIDE);
 
 						return !openList;
+					},
+
+					_removeBadge: function(value) {
+						var instance = this;
+
+						var values = instance.get('value');
+
+						var index = values.indexOf(value);
+
+						if (index >= 0) {
+							values.splice(index, 1);
+						}
+
+						return values;
 					},
 
 					_selectDOMOption: function(optionNode, value) {
