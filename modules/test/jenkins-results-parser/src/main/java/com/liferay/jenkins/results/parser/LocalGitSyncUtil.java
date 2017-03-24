@@ -184,10 +184,10 @@ public class LocalGitSyncUtil {
 			GitWorkingDirectory gitWorkingDirectory)
 		throws IOException {
 
-		File gitDirectory = gitWorkingDirectory.getGitDirectory();
+		File gitDir = gitWorkingDirectory.getGitDirectory();
 
-		File headsDir = new File(gitDirectory, "refs/heads");
-		File upstreamDir = new File(gitDirectory, "refs/remotes/upstream-temp");
+		File headsDir = new File(gitDir, "refs/heads");
+		File upstreamDir = new File(gitDir, "refs/remotes/upstream-temp");
 
 		for (File file : upstreamDir.listFiles()) {
 			System.out.println(
@@ -455,7 +455,7 @@ public class LocalGitSyncUtil {
 			buildProperties = JenkinsResultsParserUtil.getBuildProperties();
 		}
 		catch (IOException ioe) {
-			throw new RuntimeException("Unable to get build properties.");
+			throw new RuntimeException("Unable to get build properties");
 		}
 
 		String gitCacheHostnamesPropertyValue = buildProperties.getProperty(
@@ -742,7 +742,7 @@ public class LocalGitSyncUtil {
 			}
 
 			System.out.println(
-				"Synchronization with local git completed in " +
+				"Synchronization with local Git completed in " +
 					JenkinsResultsParserUtil.toDurationString(
 						System.currentTimeMillis() - start));
 		}

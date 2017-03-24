@@ -93,7 +93,7 @@ public class JenkinsResultsParserUtil {
 		try {
 			if (!source.exists()) {
 				throw new FileNotFoundException(
-					source.getPath() + " doesn't exist");
+					source.getPath() + " does not exist");
 			}
 
 			if (target.exists()) {
