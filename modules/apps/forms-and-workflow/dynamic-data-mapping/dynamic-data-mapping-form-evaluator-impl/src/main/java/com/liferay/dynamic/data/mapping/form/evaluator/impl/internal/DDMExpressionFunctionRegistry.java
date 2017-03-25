@@ -23,7 +23,7 @@ import java.util.Map;
 /**
  * @author Leonardo Barros
  */
-public class DDMExpressionFunctionRegister {
+public class DDMExpressionFunctionRegistry {
 
 	public void applyDDMExpressionFunctions(DDMExpression<?> ddmExpression) {
 		for (Map.Entry<String, DDMExpressionFunction> entry :
