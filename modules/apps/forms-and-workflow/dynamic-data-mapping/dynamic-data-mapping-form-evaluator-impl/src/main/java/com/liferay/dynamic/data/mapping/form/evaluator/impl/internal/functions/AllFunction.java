@@ -18,7 +18,7 @@ import com.liferay.dynamic.data.mapping.expression.DDMExpression;
 import com.liferay.dynamic.data.mapping.expression.DDMExpressionException;
 import com.liferay.dynamic.data.mapping.expression.DDMExpressionFactory;
 import com.liferay.dynamic.data.mapping.expression.DDMExpressionFunction;
-import com.liferay.dynamic.data.mapping.form.evaluator.impl.internal.DDMExpressionFunctionRegister;
+import com.liferay.dynamic.data.mapping.form.evaluator.impl.internal.DDMExpressionFunctionRegistry;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
@@ -31,10 +31,10 @@ public class AllFunction implements DDMExpressionFunction {
 
 	public AllFunction(
 		DDMExpressionFactory ddmExpressionFactory,
-		DDMExpressionFunctionRegister ddmExpressionFunctionRegister) {
+		DDMExpressionFunctionRegistry ddmExpressionFunctionRegistry) {
 
 		_ddmExpressionFactory = ddmExpressionFactory;
-		_ddmExpressionFunctionRegister = ddmExpressionFunctionRegister;
+		_ddmExpressionFunctionRegistry = ddmExpressionFunctionRegistry;
 	}
 
 	@Override
@@ -79,7 +79,7 @@ public class AllFunction implements DDMExpressionFunction {
 			DDMExpression<Boolean> ddmExpression =
 				_ddmExpressionFactory.createBooleanDDMExpression(expression);
 
-			_ddmExpressionFunctionRegister.applyDDMExpressionFunctions(
+			_ddmExpressionFunctionRegistry.applyDDMExpressionFunctions(
 				ddmExpression);
 
 			return ddmExpression.evaluate();
@@ -102,6 +102,6 @@ public class AllFunction implements DDMExpressionFunction {
 	private static final Log _log = LogFactoryUtil.getLog(AllFunction.class);
 
 	private final DDMExpressionFactory _ddmExpressionFactory;
-	private final DDMExpressionFunctionRegister _ddmExpressionFunctionRegister;
+	private final DDMExpressionFunctionRegistry _ddmExpressionFunctionRegistry;
 
 }

@@ -17,7 +17,7 @@ package com.liferay.dynamic.data.mapping.form.evaluator.impl.internal.functions;
 import com.liferay.dynamic.data.mapping.expression.DDMExpressionFactory;
 import com.liferay.dynamic.data.mapping.expression.DDMExpressionFunction;
 import com.liferay.dynamic.data.mapping.expression.internal.DDMExpressionFactoryImpl;
-import com.liferay.dynamic.data.mapping.form.evaluator.impl.internal.DDMExpressionFunctionRegister;
+import com.liferay.dynamic.data.mapping.form.evaluator.impl.internal.DDMExpressionFunctionRegistry;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -36,7 +36,7 @@ public class AllFunctionTest extends PowerMockito {
 	@Test
 	public void testEvaluateFalse() throws Exception {
 		AllFunction allFunction = new AllFunction(
-			_ddmExpressionFactory, _ddmExpressionFunctionRegister);
+			_ddmExpressionFactory, _ddmExpressionFunctionRegistry);
 
 		Boolean result = (Boolean)allFunction.evaluate("#value# > 10");
 
@@ -46,7 +46,7 @@ public class AllFunctionTest extends PowerMockito {
 	@Test
 	public void testEvaluateFalse2() throws Exception {
 		AllFunction allFunction = new AllFunction(
-			_ddmExpressionFactory, _ddmExpressionFunctionRegister);
+			_ddmExpressionFactory, _ddmExpressionFunctionRegistry);
 
 		Object parameters = new Integer[] {1, 2, 4};
 
@@ -59,7 +59,7 @@ public class AllFunctionTest extends PowerMockito {
 	@Test
 	public void testEvaluateFalse3() throws Exception {
 		AllFunction allFunction = new AllFunction(
-			_ddmExpressionFactory, _ddmExpressionFunctionRegister);
+			_ddmExpressionFactory, _ddmExpressionFunctionRegistry);
 
 		Object parameters = new Integer[] {1, 2, 4};
 
@@ -71,11 +71,11 @@ public class AllFunctionTest extends PowerMockito {
 
 	@Test
 	public void testEvaluateTrue() throws Exception {
-		_ddmExpressionFunctionRegister.registerDDMExpressionFunction(
+		_ddmExpressionFunctionRegistry.registerDDMExpressionFunction(
 			"eval", new EvalFunction());
 
 		AllFunction allFunction = new AllFunction(
-			_ddmExpressionFactory, _ddmExpressionFunctionRegister);
+			_ddmExpressionFactory, _ddmExpressionFunctionRegistry);
 
 		Object parameters = new Double[] {1D, 2D, 4.5D};
 
@@ -88,7 +88,7 @@ public class AllFunctionTest extends PowerMockito {
 	@Test(expected = IllegalArgumentException.class)
 	public void testIllegalArgument() throws Exception {
 		AllFunction allFunction = new AllFunction(
-			_ddmExpressionFactory, _ddmExpressionFunctionRegister);
+			_ddmExpressionFactory, _ddmExpressionFunctionRegistry);
 
 		allFunction.evaluate();
 	}
@@ -96,15 +96,15 @@ public class AllFunctionTest extends PowerMockito {
 	@Test(expected = IllegalArgumentException.class)
 	public void testIllegalArgument2() throws Exception {
 		AllFunction allFunction = new AllFunction(
-			_ddmExpressionFactory, _ddmExpressionFunctionRegister);
+			_ddmExpressionFactory, _ddmExpressionFunctionRegistry);
 
 		allFunction.evaluate(null);
 	}
 
 	private final DDMExpressionFactory _ddmExpressionFactory =
 		new DDMExpressionFactoryImpl();
-	private final DDMExpressionFunctionRegister _ddmExpressionFunctionRegister =
-		new DDMExpressionFunctionRegister();
+	private final DDMExpressionFunctionRegistry _ddmExpressionFunctionRegistry =
+		new DDMExpressionFunctionRegistry();
 
 	private static class EvalFunction implements DDMExpressionFunction {
 

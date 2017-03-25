@@ -37,16 +37,16 @@ public class DDMFormRuleEvaluatorTest {
 
 		ddmFormRule.setEnabled(false);
 
-		DDMExpressionFunctionRegister ddmExpressionFunctionRegister =
-			new DDMExpressionFunctionRegister();
+		DDMExpressionFunctionRegistry ddmExpressionFunctionRegistry =
+			new DDMExpressionFunctionRegistry();
 
 		EvalFunction evalFunction = new EvalFunction();
 
-		ddmExpressionFunctionRegister.registerDDMExpressionFunction(
+		ddmExpressionFunctionRegistry.registerDDMExpressionFunction(
 			"eval", evalFunction);
 
 		DDMFormRuleEvaluator ddmFormRuleEvaluator = new DDMFormRuleEvaluator(
-			ddmFormRule, _ddmExpressionFactory, ddmExpressionFunctionRegister);
+			ddmFormRule, _ddmExpressionFactory, ddmExpressionFunctionRegistry);
 
 		ddmFormRuleEvaluator.evaluate();
 
@@ -57,16 +57,16 @@ public class DDMFormRuleEvaluatorTest {
 	public void testEnableRuleShouldRunConditionEvaluation() throws Exception {
 		DDMFormRule ddmFormRule = new DDMFormRule("eval()", asList("true"));
 
-		DDMExpressionFunctionRegister ddmExpressionFunctionRegister =
-			new DDMExpressionFunctionRegister();
+		DDMExpressionFunctionRegistry ddmExpressionFunctionRegistry =
+			new DDMExpressionFunctionRegistry();
 
 		EvalFunction evalFunction = new EvalFunction();
 
-		ddmExpressionFunctionRegister.registerDDMExpressionFunction(
+		ddmExpressionFunctionRegistry.registerDDMExpressionFunction(
 			"eval", evalFunction);
 
 		DDMFormRuleEvaluator ddmFormRuleEvaluator = new DDMFormRuleEvaluator(
-			ddmFormRule, _ddmExpressionFactory, ddmExpressionFunctionRegister);
+			ddmFormRule, _ddmExpressionFactory, ddmExpressionFunctionRegistry);
 
 		ddmFormRuleEvaluator.evaluate();
 
@@ -79,16 +79,16 @@ public class DDMFormRuleEvaluatorTest {
 
 		DDMFormRule ddmFormRule = new DDMFormRule("false", asList("eval()"));
 
-		DDMExpressionFunctionRegister ddmExpressionFunctionRegister =
-			new DDMExpressionFunctionRegister();
+		DDMExpressionFunctionRegistry ddmExpressionFunctionRegistry =
+			new DDMExpressionFunctionRegistry();
 
 		EvalFunction evalFunction = new EvalFunction();
 
-		ddmExpressionFunctionRegister.registerDDMExpressionFunction(
+		ddmExpressionFunctionRegistry.registerDDMExpressionFunction(
 			"eval", evalFunction);
 
 		DDMFormRuleEvaluator ddmFormRuleEvaluator = new DDMFormRuleEvaluator(
-			ddmFormRule, _ddmExpressionFactory, ddmExpressionFunctionRegister);
+			ddmFormRule, _ddmExpressionFactory, ddmExpressionFunctionRegistry);
 
 		ddmFormRuleEvaluator.evaluate();
 
@@ -99,16 +99,16 @@ public class DDMFormRuleEvaluatorTest {
 	public void testTrueConditionShouldRunActionEvaluation() throws Exception {
 		DDMFormRule ddmFormRule = new DDMFormRule("true", asList("eval()"));
 
-		DDMExpressionFunctionRegister ddmExpressionFunctionRegister =
-			new DDMExpressionFunctionRegister();
+		DDMExpressionFunctionRegistry ddmExpressionFunctionRegistry =
+			new DDMExpressionFunctionRegistry();
 
 		EvalFunction evalFunction = new EvalFunction();
 
-		ddmExpressionFunctionRegister.registerDDMExpressionFunction(
+		ddmExpressionFunctionRegistry.registerDDMExpressionFunction(
 			"eval", evalFunction);
 
 		DDMFormRuleEvaluator ddmFormRuleEvaluator = new DDMFormRuleEvaluator(
-			ddmFormRule, _ddmExpressionFactory, ddmExpressionFunctionRegister);
+			ddmFormRule, _ddmExpressionFactory, ddmExpressionFunctionRegistry);
 
 		ddmFormRuleEvaluator.evaluate();
 

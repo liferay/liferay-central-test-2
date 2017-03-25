@@ -28,11 +28,11 @@ public class DDMFormRuleEvaluator {
 
 	public DDMFormRuleEvaluator(
 		DDMFormRule ddmFormRule, DDMExpressionFactory ddmExpressionFactory,
-		DDMExpressionFunctionRegister ddmExpressionFunctionRegister) {
+		DDMExpressionFunctionRegistry ddmExpressionFunctionRegistry) {
 
 		_ddmFormRule = ddmFormRule;
 		_ddmExpressionFactory = ddmExpressionFactory;
-		_ddmExpressionFunctionRegister = ddmExpressionFunctionRegister;
+		_ddmExpressionFunctionRegistry = ddmExpressionFunctionRegistry;
 	}
 
 	public void evaluate() {
@@ -72,7 +72,7 @@ public class DDMFormRuleEvaluator {
 			_ddmExpressionFactory.createBooleanDDMExpression(
 				ddmExpressionString);
 
-		_ddmExpressionFunctionRegister.applyDDMExpressionFunctions(
+		_ddmExpressionFunctionRegistry.applyDDMExpressionFunctions(
 			ddmExpression);
 
 		return ddmExpression.evaluate();
@@ -93,7 +93,7 @@ public class DDMFormRuleEvaluator {
 		DDMFormRuleEvaluator.class);
 
 	private final DDMExpressionFactory _ddmExpressionFactory;
-	private final DDMExpressionFunctionRegister _ddmExpressionFunctionRegister;
+	private final DDMExpressionFunctionRegistry _ddmExpressionFunctionRegistry;
 	private final DDMFormRule _ddmFormRule;
 
 }
