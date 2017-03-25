@@ -80,7 +80,7 @@ public class AllFunctionTest extends PowerMockito {
 		Object parameters = new Double[] {1D, 2D, 4.5D};
 
 		Boolean result = (Boolean)allFunction.evaluate(
-			"eval(#value#,1,10)", parameters);
+			"eval(#value#, 1, 10)", parameters);
 
 		Assert.assertTrue(result);
 	}
