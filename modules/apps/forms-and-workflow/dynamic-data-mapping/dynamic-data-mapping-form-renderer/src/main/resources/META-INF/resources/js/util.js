@@ -71,6 +71,13 @@ AUI.add(
 					parameterMessage: '',
 					regex: /^isEmailAddress\((\w+)\)$/,
 					template: 'isEmailAddress({name})'
+				},
+				{
+					label: Liferay.Language.get('regular-expression'),
+					name: 'regularExpression',
+					parameterMessage: Liferay.Language.get('this-text'),
+					regex: /^match\((\w+), "(.*)"\)$/,
+					template: 'match({name}, "{parameter}")'
 				}
 			]
 		};
