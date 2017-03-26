@@ -15,7 +15,9 @@
 package com.liferay.dynamic.data.mapping.form.evaluator.impl.internal.functions;
 
 import com.liferay.dynamic.data.mapping.form.evaluator.DDMFormFieldEvaluationResult;
+import com.liferay.portal.kernel.util.KeyValuePair;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -47,13 +49,11 @@ public class CallFunctionTest {
 		CallFunction callFunction = new CallFunction(
 			null, null, ddmFormFieldEvaluationResults, null, null);
 
-		Map<Object, Object> dataMap = new HashMap<>();
+		List<KeyValuePair> keyValuePairs = new ArrayList<>();
 
-		dataMap.put("key", "key_1");
-		dataMap.put("value", "value_1");
+		keyValuePairs.add(new KeyValuePair("key_1", "value_1"));
 
-		callFunction.setDDMFormFieldOptions(
-			Arrays.asList(dataMap), "field0", "key", "value");
+		callFunction.setDDMFormFieldOptions("field0", keyValuePairs);
 
 		Assert.assertEquals("value_1", ddmFormFieldEvaluationResult.getValue());
 	}
@@ -72,18 +72,12 @@ public class CallFunctionTest {
 		CallFunction callFunction = new CallFunction(
 			null, null, ddmFormFieldEvaluationResults, null, null);
 
-		Map<Object, Object> dataMap1 = new HashMap<>();
+		List<KeyValuePair> keyValuePairs = new ArrayList<>();
 
-		dataMap1.put("key", "key_1");
-		dataMap1.put("value", "value_1");
+		keyValuePairs.add(new KeyValuePair("key_1", "value_1"));
+		keyValuePairs.add(new KeyValuePair("key_2", "value_2"));
 
-		Map<Object, Object> dataMap2 = new HashMap<>();
-
-		dataMap2.put("key", "key_2");
-		dataMap2.put("value", "value_2");
-
-		callFunction.setDDMFormFieldOptions(
-			Arrays.asList(dataMap1, dataMap2), "field0", "key", "value");
+		callFunction.setDDMFormFieldOptions("field0", keyValuePairs);
 
 		Assert.assertNull(ddmFormFieldEvaluationResult.getValue());
 	}
