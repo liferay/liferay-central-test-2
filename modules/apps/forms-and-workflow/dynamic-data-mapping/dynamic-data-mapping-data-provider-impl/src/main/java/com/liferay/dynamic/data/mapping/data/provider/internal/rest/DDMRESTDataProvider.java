@@ -23,6 +23,7 @@ import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderException;
 import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderOutputParametersSettings;
 import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderRequest;
 import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderResponse;
+import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderResponseOutput;
 import com.liferay.portal.kernel.cache.MultiVMPool;
 import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -33,17 +34,16 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Set;
 
 import jodd.http.HttpRequest;
@@ -70,16 +70,11 @@ public class DDMRESTDataProvider implements DDMDataProvider {
 			DDMDataProviderResponse ddmDataProviderResponse = doGetData(
 				ddmDataProviderRequest);
 
-			List<KeyValuePair> results = new ArrayList<>();
+			DDMDataProviderResponseOutput ddmDataProviderResponseOutput =
+				ddmDataProviderResponse.get("Default-Output");
 
-			for (Map<Object, Object> map : ddmDataProviderResponse.getData()) {
-				for (Entry<Object, Object> entry : map.entrySet()) {
-					results.add(
-						new KeyValuePair(
-							String.valueOf(entry.getKey()),
-							String.valueOf(entry.getValue())));
-				}
-			}
+			List<KeyValuePair> results = ddmDataProviderResponseOutput.getValue(
+				List.class);
 
 			return results;
 		}
@@ -111,36 +106,87 @@ public class DDMRESTDataProvider implements DDMDataProvider {
 		DDMDataProviderRequest ddmDataProviderRequest,
 		DDMRESTDataProviderSettings ddmRESTDataProviderSettings) {
 
-		DDMDataProviderContext ddmDataProviderContext =
-			ddmDataProviderRequest.getDDMDataProviderContext();
+		DDMDataProviderOutputParametersSettings[] outputParameterSettingsArray =
+			ddmRESTDataProviderSettings.outputParameters();
 
-		List<Map<Object, Object>> data = new ArrayList<>();
+		if ((outputParameterSettingsArray == null) ||
+			(outputParameterSettingsArray.length == 0)) {
 
-		Set<String> outputParameterPaths = getOutputParameterPaths(
-			ddmDataProviderContext);
-
-		for (String outputParameterPath : outputParameterPaths) {
-			Map<Object, Object> map = new HashMap<>();
-
-			data.add(map);
-
-			map.put(
-				outputParameterPath, documentContext.read(outputParameterPath));
+			return DDMDataProviderResponse.of();
 		}
 
-		if (ddmRESTDataProviderSettings.pagination()) {
-			int start = Integer.valueOf(
-				ddmDataProviderRequest.getParameter("paginationStart"));
+		List<DDMDataProviderResponseOutput> ddmDataProviderResponseOutputs =
+			new ArrayList<>();
 
-			int end = Integer.valueOf(
-				ddmDataProviderRequest.getParameter("paginationEnd"));
+		for (DDMDataProviderOutputParametersSettings outputParameterSettings :
+				outputParameterSettingsArray) {
 
-			if (data.size() > (end - start)) {
-				data = ListUtil.subList(data, start, end);
+			String name = outputParameterSettings.outputParameterName();
+			String type = outputParameterSettings.outputParameterType();
+			String path = outputParameterSettings.outputParameterPath();
+
+			if (Objects.equals(type, "[\"text\"]")) {
+				String nomalizedPath = normalizePath(path);
+
+				ddmDataProviderResponseOutputs.add(
+					DDMDataProviderResponseOutput.of(
+						name, "text", documentContext.read(nomalizedPath)));
+			}
+			else if (Objects.equals(type, "[\"number\"]")) {
+				String nomalizedPath = normalizePath(path);
+
+				ddmDataProviderResponseOutputs.add(
+					DDMDataProviderResponseOutput.of(
+						name, "number", documentContext.read(nomalizedPath)));
+			}
+			else if (Objects.equals(type, "[\"list\"]")) {
+				String[] paths = StringUtil.split(path, CharPool.SEMICOLON);
+
+				String normalizedValuePath = normalizePath(paths[0]);
+
+				String normalizedKeyPath = normalizedValuePath;
+
+				List<String> values = documentContext.read(normalizedValuePath);
+
+				List<String> keys = new ArrayList<>(values);
+
+				if (paths.length >= 2) {
+					normalizedKeyPath = normalizePath(paths[1]);
+
+					keys = documentContext.read(normalizedKeyPath);
+				}
+
+				List<KeyValuePair> keyValuePairs = new ArrayList<>();
+
+				for (int i = 0; i < values.size(); i++) {
+					keyValuePairs.add(
+						new KeyValuePair(keys.get(i), values.get(i)));
+				}
+
+				if (ddmRESTDataProviderSettings.pagination()) {
+					int start = Integer.valueOf(
+						ddmDataProviderRequest.getParameter("paginationStart"));
+
+					int end = Integer.valueOf(
+						ddmDataProviderRequest.getParameter("paginationEnd"));
+
+					if (keyValuePairs.size() > (end - start)) {
+						keyValuePairs = ListUtil.subList(
+							keyValuePairs, start, end);
+					}
+				}
+
+				ddmDataProviderResponseOutputs.add(
+					DDMDataProviderResponseOutput.of(
+						name, "list", keyValuePairs));
 			}
 		}
 
-		return new DDMDataProviderResponse(data);
+		int size = ddmDataProviderResponseOutputs.size();
+
+		return DDMDataProviderResponse.of(
+			ddmDataProviderResponseOutputs.toArray(
+				new DDMDataProviderResponseOutput[size]));
 	}
 
 	protected DDMDataProviderResponse doGetData(
@@ -221,6 +267,16 @@ public class DDMRESTDataProvider implements DDMDataProvider {
 		}
 
 		return outputParameterPaths;
+	}
+
+	protected String normalizePath(String path) {
+		if (StringUtil.startsWith(path, StringPool.PERIOD) ||
+			StringUtil.startsWith(path, StringPool.DOLLAR)) {
+
+			return path;
+		}
+
+		return StringPool.PERIOD.concat(path);
 	}
 
 	@Reference(unbind = "-")
