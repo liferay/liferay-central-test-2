@@ -14,6 +14,9 @@
 
 package com.liferay.dynamic.data.mapping.data.provider.internal.rest;
 
+import com.jayway.jsonpath.DocumentContext;
+import com.jayway.jsonpath.JsonPath;
+
 import com.liferay.dynamic.data.mapping.data.provider.DDMDataProvider;
 import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderContext;
 import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderException;
@@ -23,10 +26,8 @@ import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderResponse;
 import com.liferay.portal.kernel.cache.MultiVMPool;
 import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactory;
-import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.CharPool;
@@ -106,7 +107,8 @@ public class DDMRESTDataProvider implements DDMDataProvider {
 	}
 
 	protected DDMDataProviderResponse createDDMDataProviderResponse(
-		JSONArray jsonArray, DDMDataProviderRequest ddmDataProviderRequest,
+		DocumentContext documentContext,
+		DDMDataProviderRequest ddmDataProviderRequest,
 		DDMRESTDataProviderSettings ddmRESTDataProviderSettings) {
 
 		DDMDataProviderContext ddmDataProviderContext =
@@ -117,16 +119,13 @@ public class DDMRESTDataProvider implements DDMDataProvider {
 		Set<String> outputParameterPaths = getOutputParameterPaths(
 			ddmDataProviderContext);
 
-		for (int i = 0; i < jsonArray.length(); i++) {
-			JSONObject jsonObject = jsonArray.getJSONObject(i);
-
+		for (String outputParameterPath : outputParameterPaths) {
 			Map<Object, Object> map = new HashMap<>();
 
 			data.add(map);
 
-			for (String path : outputParameterPaths) {
-				map.put(path, jsonObject.get(path));
-			}
+			map.put(
+				outputParameterPath, documentContext.read(outputParameterPath));
 		}
 
 		if (ddmRESTDataProviderSettings.pagination()) {
@@ -180,11 +179,12 @@ public class DDMRESTDataProvider implements DDMDataProvider {
 
 		HttpResponse httpResponse = httpRequest.send();
 
-		JSONArray jsonArray = getValue(httpResponse.body());
+		DocumentContext documentContext = JsonPath.parse(httpResponse.body());
 
 		DDMDataProviderResponse ddmDataProviderResponse =
 			createDDMDataProviderResponse(
-				jsonArray, ddmDataProviderRequest, ddmRESTDataProviderSettings);
+				documentContext, ddmDataProviderRequest,
+				ddmRESTDataProviderSettings);
 
 		if (ddmRESTDataProviderSettings.cacheable()) {
 			_portalCache.put(
@@ -221,26 +221,6 @@ public class DDMRESTDataProvider implements DDMDataProvider {
 		}
 
 		return outputParameterPaths;
-	}
-
-	protected JSONArray getValue(String valueString) throws JSONException {
-		try {
-			return _jsonFactory.createJSONArray(valueString);
-		}
-		catch (JSONException jsone) {
-
-			// LPS-52675
-
-			if (_log.isDebugEnabled()) {
-				_log.debug(jsone, jsone);
-			}
-
-			JSONArray jsonArray = _jsonFactory.createJSONArray();
-
-			jsonArray.put(_jsonFactory.createJSONObject(valueString));
-
-			return jsonArray;
-		}
 	}
 
 	@Reference(unbind = "-")
