@@ -475,9 +475,6 @@ AUI.add(
 													if (message.content) {
 														instance._updateContentImages(message.content, message.attributeDataImageId);
 													}
-													else if (message.blogsEntryAttachmentReferences) {
-														instance._updateImages(message.blogsEntryAttachmentReferences);
-													}
 
 													var tabs1BackButton = instance.one('#tabs1TabsBack');
 
@@ -592,22 +589,6 @@ AUI.add(
 								}
 							}
 						}
-					},
-
-					_updateImages: function(persistentImages) {
-						var instance = this;
-
-						persistentImages.forEach(
-							function(item, index) {
-								var el = instance.one('img[' + item.attributeDataImageId + '="' + item.fileEntryId + '"]');
-
-								if (el) {
-									el.attr('src', item.fileEntryUrl);
-
-									el.removeAttribute(item.attributeDataImageId);
-								}
-							}
-						);
 					},
 
 					_updateStatus: function(text) {
