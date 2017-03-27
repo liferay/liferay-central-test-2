@@ -60,14 +60,14 @@ public class CalendarDisplayContext {
 			}
 			catch (PrincipalException pe) {
 				if (_log.isInfoEnabled()) {
-					StringBundler message = new StringBundler();
+					StringBundler sb = new StringBundler();
 
-					message.append("No ");
-					message.append(ActionKeys.VIEW);
-					message.append(" permission for user ");
-					message.append(user.getUserId());
+					sb.append("No ");
+					sb.append(ActionKeys.VIEW);
+					sb.append(" permission for user ");
+					sb.append(user.getUserId());
 
-					_log.info(message.toString(), pe);
+					_log.info(sb.toString(), pe);
 				}
 
 				continue;
