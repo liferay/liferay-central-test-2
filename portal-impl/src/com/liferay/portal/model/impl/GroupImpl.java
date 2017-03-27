@@ -112,7 +112,7 @@ public class GroupImpl extends GroupBaseImpl {
 	}
 
 	@Override
-	public List<Group> getAncestors()  {
+	public List<Group> getAncestors() {
 		Group group = null;
 
 		if (isStagingGroup()) {
