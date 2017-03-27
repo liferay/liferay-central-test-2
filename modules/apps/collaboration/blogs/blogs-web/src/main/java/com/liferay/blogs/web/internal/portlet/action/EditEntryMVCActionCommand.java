@@ -288,6 +288,9 @@ public class EditEntryMVCActionCommand extends BaseMVCActionCommand {
 					jsonArray.put(blogsEntryFileEntryReferencesJSONObject);
 				}
 
+				jsonObject.put(
+					"attributeDataImageId",
+					EditorConstants.ATTRIBUTE_DATA_IMAGE_ID);
 				jsonObject.put("blogsEntryAttachmentReferences", jsonArray);
 				jsonObject.put("content", entry.getContent());
 				jsonObject.put(

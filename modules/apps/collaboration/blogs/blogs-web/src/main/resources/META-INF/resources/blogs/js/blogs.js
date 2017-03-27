@@ -375,7 +375,7 @@ AUI.add(
 													}
 
 													if (message.content) {
-														instance._updateContentImages(message.content);
+														instance._updateContentImages(message.content, message.attributeDataImageId);
 													}
 													else if (message.blogsEntryAttachmentReferences) {
 														instance._updateImages(message.blogsEntryAttachmentReferences);
@@ -455,7 +455,7 @@ AUI.add(
 						}
 					},
 
-					_updateContentImages: function(finalContent) {
+					_updateContentImages: function(finalContent, attributeDataImageId) {
 						var instance = this;
 
 						var originalContent = window[instance.ns('contentEditor')].getHTML();
@@ -471,10 +471,10 @@ AUI.add(
 						for (var i = 0; i < originalContentImages.length; i++) {
 							var image = originalContentImages[i];
 
-							var tempImageId = image.getAttribute('data-image-id');
+							var tempImageId = image.getAttribute(attributeDataImageId);
 
 							if (tempImageId) {
-								var el = instance.one('img[data-image-id="' + tempImageId + '"]');
+								var el = instance.one('img[' + attributeDataImageId + '"=' + tempImageId + '"]');
 
 								if (el) {
 									var finalImage = finalContentImages[i];
@@ -486,7 +486,7 @@ AUI.add(
 											el.attr(attr.name, attr.value);
 										}
 
-										el.removeAttribute('data-image-id');
+										el.removeAttribute(attributeDataImageId);
 									}
 									else {
 										el.replace(finalContentImages[i]);
