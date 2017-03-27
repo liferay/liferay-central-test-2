@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.dynamic.data.mapping.form.evaluator.impl.internal;
+package com.liferay.dynamic.data.mapping.form.evaluator.internal;
 
 import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderContextFactory;
 import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderInvoker;
@@ -23,14 +23,14 @@ import com.liferay.dynamic.data.mapping.form.evaluator.DDMFormEvaluationExceptio
 import com.liferay.dynamic.data.mapping.form.evaluator.DDMFormEvaluationResult;
 import com.liferay.dynamic.data.mapping.form.evaluator.DDMFormEvaluatorContext;
 import com.liferay.dynamic.data.mapping.form.evaluator.DDMFormFieldEvaluationResult;
-import com.liferay.dynamic.data.mapping.form.evaluator.impl.internal.functions.AllFunction;
-import com.liferay.dynamic.data.mapping.form.evaluator.impl.internal.functions.BelongsToRoleFunction;
-import com.liferay.dynamic.data.mapping.form.evaluator.impl.internal.functions.CallFunction;
-import com.liferay.dynamic.data.mapping.form.evaluator.impl.internal.functions.GetPropertyFunction;
-import com.liferay.dynamic.data.mapping.form.evaluator.impl.internal.functions.JumpPageFunction;
-import com.liferay.dynamic.data.mapping.form.evaluator.impl.internal.functions.SetEnabledFunction;
-import com.liferay.dynamic.data.mapping.form.evaluator.impl.internal.functions.SetInvalidFunction;
-import com.liferay.dynamic.data.mapping.form.evaluator.impl.internal.functions.SetPropertyFunction;
+import com.liferay.dynamic.data.mapping.form.evaluator.internal.functions.AllFunction;
+import com.liferay.dynamic.data.mapping.form.evaluator.internal.functions.BelongsToRoleFunction;
+import com.liferay.dynamic.data.mapping.form.evaluator.internal.functions.CallFunction;
+import com.liferay.dynamic.data.mapping.form.evaluator.internal.functions.GetPropertyFunction;
+import com.liferay.dynamic.data.mapping.form.evaluator.internal.functions.JumpPageFunction;
+import com.liferay.dynamic.data.mapping.form.evaluator.internal.functions.SetEnabledFunction;
+import com.liferay.dynamic.data.mapping.form.evaluator.internal.functions.SetInvalidFunction;
+import com.liferay.dynamic.data.mapping.form.evaluator.internal.functions.SetPropertyFunction;
 import com.liferay.dynamic.data.mapping.model.DDMForm;
 import com.liferay.dynamic.data.mapping.model.DDMFormField;
 import com.liferay.dynamic.data.mapping.model.DDMFormFieldValidation;
