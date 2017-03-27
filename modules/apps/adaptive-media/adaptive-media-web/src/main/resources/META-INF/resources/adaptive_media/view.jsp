@@ -201,16 +201,24 @@ PortletURL portletURL = renderResponse.createRenderURL();
 					Map<String, String> properties = configurationEntry.getProperties();
 					%>
 
+					<%
+					String maxWidth = properties.get("max-width");
+					%>
+
 					<liferay-ui:search-container-column-text
 						name="max-width"
 						orderable="<%= false %>"
-						value='<%= properties.get("max-width") + "px" %>'
+						value='<%= maxWidth.equals("0") ? LanguageUtil.get(request, "auto") : maxWidth + "px" %>'
 					/>
+
+					<%
+					String maxHeight = properties.get("max-height");
+					%>
 
 					<liferay-ui:search-container-column-text
 						name="max-height"
 						orderable="<%= false %>"
-						value='<%= properties.get("max-height") + "px" %>'
+						value='<%= maxHeight.equals("0") ? LanguageUtil.get(request, "auto") : maxHeight + "px" %>'
 					/>
 
 					<c:if test="<%= optimizeImagesAllConfigurationsBackgroundTasksCount == 0 %>">

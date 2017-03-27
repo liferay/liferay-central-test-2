@@ -100,13 +100,23 @@ if (ListUtil.isNotEmpty(selectedConfigurationEntries)) {
 							<liferay-ui:message key="max-width" />
 						</dt>
 						<dd class="h6 sidebar-caption">
-							<%= HtmlUtil.escape(properties.get("max-width") + "px") %>
+
+							<%
+							String maxWidth = properties.get("max-width");
+							%>
+
+							<%= maxWidth.equals("0") ? LanguageUtil.get(request, "auto") : HtmlUtil.escape(maxWidth + "px") %>
 						</dd>
 						<dt class="h5">
 							<liferay-ui:message key="max-height" />
 						</dt>
 						<dd class="h6 sidebar-caption">
-							<%= HtmlUtil.escape(properties.get("max-height") + "px") %>
+
+							<%
+							String maxHeight = properties.get("max-height");
+							%>
+
+							<%= maxHeight.equals("0") ? LanguageUtil.get(request, "auto") : HtmlUtil.escape(maxHeight + "px") %>
 						</dd>
 						<dt class="h5">
 							<liferay-ui:message key="id" />
