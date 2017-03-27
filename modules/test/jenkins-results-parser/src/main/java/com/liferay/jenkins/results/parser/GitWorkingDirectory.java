@@ -372,7 +372,6 @@ public class GitWorkingDirectory {
 		fetchCommand.setTimeout(360);
 
 		int retries = 0;
-
 		long start = 0;
 
 		while (true) {
