@@ -23,13 +23,13 @@ public interface DDMDataProviderParameterSettings {
 
 	@DDMFormField(
 		label = "%inputs",
-		properties = "nestedFieldNames=inputParameterName,inputParameterPath,inputParameterType,inputParameterRequired"
+		properties = "nestedFieldNames=inputParameterLabel,inputParameterName,inputParameterType,inputParameterRequired"
 	)
 	public DDMDataProviderInputParametersSettings[] inputParameters();
 
 	@DDMFormField(
 		label = "%outputs",
-		properties = "nestedFieldNames=outputParameterName,outputParameterPath,outputParameterType"
+		properties = "nestedFieldNames=outputParameterLabel,outputParameterName,outputParameterPath,outputParameterType"
 	)
 	public DDMDataProviderOutputParametersSettings[] outputParameters();
 
