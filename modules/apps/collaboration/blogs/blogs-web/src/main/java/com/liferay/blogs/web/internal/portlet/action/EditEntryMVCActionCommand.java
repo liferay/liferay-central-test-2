@@ -32,7 +32,6 @@ import com.liferay.blogs.web.constants.BlogsPortletKeys;
 import com.liferay.document.library.kernel.exception.FileSizeException;
 import com.liferay.portal.kernel.editor.EditorConstants;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
@@ -260,38 +259,9 @@ public class EditEntryMVCActionCommand extends BaseMVCActionCommand {
 			if (ajax) {
 				JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-				JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
-
-				for (BlogsEntryAttachmentFileEntryReference
-						blogsEntryAttachmentFileEntryReference :
-							blogsEntryAttachmentFileEntryReferences) {
-
-					JSONObject blogsEntryFileEntryReferencesJSONObject =
-						JSONFactoryUtil.createJSONObject();
-
-					blogsEntryFileEntryReferencesJSONObject.put(
-						"attributeDataImageId",
-						EditorConstants.ATTRIBUTE_DATA_IMAGE_ID);
-					blogsEntryFileEntryReferencesJSONObject.put(
-						"fileEntryId",
-						String.valueOf(
-							blogsEntryAttachmentFileEntryReference.
-								getTempBlogsEntryAttachmentFileEntryId()));
-					blogsEntryFileEntryReferencesJSONObject.put(
-						"fileEntryUrl",
-						PortletFileRepositoryUtil.getPortletFileEntryURL(
-							null,
-							blogsEntryAttachmentFileEntryReference.
-								getBlogsEntryAttachmentFileEntry(),
-							StringPool.BLANK));
-
-					jsonArray.put(blogsEntryFileEntryReferencesJSONObject);
-				}
-
 				jsonObject.put(
 					"attributeDataImageId",
 					EditorConstants.ATTRIBUTE_DATA_IMAGE_ID);
-				jsonObject.put("blogsEntryAttachmentReferences", jsonArray);
 				jsonObject.put("content", entry.getContent());
 				jsonObject.put(
 					"coverImageFileEntryId", entry.getCoverImageFileEntryId());
