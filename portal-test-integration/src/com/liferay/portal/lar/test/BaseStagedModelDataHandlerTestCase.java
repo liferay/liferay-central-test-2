@@ -190,7 +190,7 @@ public abstract class BaseStagedModelDataHandlerTestCase {
 		StagedModelDataHandlerUtil.importStagedModel(
 			portletDataContext, exportedStagedModel);
 
-		// Import again for more robustness - ie.: filters name problems
+		// Import again for more robustness (i.e. filter name issues)
 
 		StagedModelDataHandlerUtil.importStagedModel(
 			portletDataContext, exportedStagedModel);
