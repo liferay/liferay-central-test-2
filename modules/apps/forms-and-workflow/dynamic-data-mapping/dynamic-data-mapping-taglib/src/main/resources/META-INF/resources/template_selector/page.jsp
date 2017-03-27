@@ -24,12 +24,6 @@ ResourceBundle resourceBundle = (ResourceBundle)request.getAttribute("liferay-dd
 long ddmTemplateGroupId = PortletDisplayTemplateUtil.getDDMTemplateGroupId(themeDisplay.getScopeGroupId());
 
 Group ddmTemplateGroup = GroupLocalServiceUtil.getGroup(ddmTemplateGroupId);
-
-if (ddmTemplateGroup.isLayoutPrototype()) {
-	ddmTemplateGroup = GroupLocalServiceUtil.getCompanyGroup(ddmTemplateGroup.getCompanyId());
-
-	ddmTemplateGroupId = ddmTemplateGroup.getGroupId();
-}
 %>
 
 <aui:input id="displayStyleGroupId" name="preferences--displayStyleGroupId--" type="hidden" value="<%= String.valueOf(displayStyleGroupId) %>" />
