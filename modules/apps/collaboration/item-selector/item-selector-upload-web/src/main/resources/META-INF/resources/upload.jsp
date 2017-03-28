@@ -51,7 +51,6 @@ ItemSelectorUploadViewDisplayContext itemSelectorUploadViewDisplayContext = (Ite
 	String namespace = itemSelectorUploadViewDisplayContext.getNamespace();
 
 	if (Validator.isNotNull(namespace)) {
-		uploadURL = HttpUtil.addParameter(uploadURL, namespace + "source", "itemselector");
 		uploadURL = HttpUtil.addParameter(uploadURL, namespace + "returnType", itemSelectorReturnTypeClassName);
 	}
 	%>
