@@ -400,7 +400,7 @@ if (portletTitleBasedNavigation) {
 			Liferay.detach('destroyPortlet', clearSaveDraftHandle);
 		}
 	};
-	
+
 	Liferay.on('destroyPortlet', clearSaveDraftHandle);
 </aui:script>
 
