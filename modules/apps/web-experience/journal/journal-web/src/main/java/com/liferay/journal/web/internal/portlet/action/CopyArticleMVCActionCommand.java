@@ -70,10 +70,6 @@ public class CopyArticleMVCActionCommand extends BaseMVCActionCommand {
 		JournalArticle newArticle = _journalArticleService.copyArticle(
 			groupId, oldArticleId, newArticleId, autoArticleId, version);
 
-		PortletURL redirectURL = PortletProviderUtil.getPortletURL(
-			actionRequest, JournalArticle.class.getName(),
-			PortletProvider.Action.EDIT);
-
 		String redirect = ParamUtil.getString(actionRequest, WebKeys.REDIRECT);
 
 		if (!Validator.isBlank(redirect)) {
@@ -86,6 +82,10 @@ public class CopyArticleMVCActionCommand extends BaseMVCActionCommand {
 
 			redirect = listURL.toString();
 		}
+
+		PortletURL redirectURL = PortletProviderUtil.getPortletURL(
+			actionRequest, JournalArticle.class.getName(),
+			PortletProvider.Action.EDIT);
 
 		redirectURL.setParameter("articleId", newArticle.getArticleId());
 		redirectURL.setParameter("groupId", String.valueOf(groupId));
