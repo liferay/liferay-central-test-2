@@ -628,8 +628,8 @@
 		</execute>
 
 		<execute macro="ServerAdministration#configureMailServerSettings">
-			<var name="userName" property-value="email.address.1" />
-			<var name="userPassword" property-value="email.password.1" />
+			<var name="userName" property-value="email.address.2" />
+			<var name="userPassword" property-value="email.password.2" />
 		</execute>
 
 		<execute macro="Navigator#openSpecificURL">
@@ -643,15 +643,15 @@
 		<execute macro="User#logoutPG" />
 
 		<execute macro="User#addCreateAccountPG">
-			<var name="userEmailAddress" property-value="email.address.2" />
+			<var name="userEmailAddress" property-value="email.address.3" />
 			<var name="userFirstName" value="userfn" />
 			<var name="userLastName" value="userln" />
 			<var name="userScreenName" value="usersn" />
 		</execute>
 
 		<execute macro="Gmail#login">
-			<var name="userEmailAddress" property-value="email.address.2" />
-			<var name="userPassword" property-value="email.password.2" />
+			<var name="userEmailAddress" property-value="email.address.3" />
+			<var name="userPassword" property-value="email.password.3" />
 		</execute>
 
 		<execute macro="Gmail#gotoHtmlMode" />
@@ -687,7 +687,7 @@
 		<execute macro="User#signInPG">
 			<var name="emailPassword" value="${emailPassword}" />
 			<var name="emailVerification" value="${emailVerification}" />
-			<var name="userEmailAddress" property-value="email.address.2" />
+			<var name="userEmailAddress" property-value="email.address.3" />
 		</execute>
 
 		<execute macro="User#firstLoginPG">
@@ -708,12 +708,12 @@
 		</execute>
 
 		<execute macro="User#editEmailViaMyAccount">
-			<var name="userEmailAddress" property-value="email.address.3" />
+			<var name="userEmailAddress" property-value="email.address.4" />
 		</execute>
 
 		<execute macro="Gmail#logoutAndLogin">
-			<var name="userEmailAddress" property-value="email.address.3" />
-			<var name="userPassword" property-value="email.password.3" />
+			<var name="userEmailAddress" property-value="email.address.4" />
+			<var name="userPassword" property-value="email.password.4" />
 		</execute>
 
 		<execute macro="Gmail#gotoHtmlMode" />

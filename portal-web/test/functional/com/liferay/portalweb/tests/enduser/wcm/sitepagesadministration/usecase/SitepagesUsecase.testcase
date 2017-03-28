@@ -436,8 +436,8 @@
 		</execute>
 
 		<execute macro="ServerAdministration#configureMailServerSettings">
-			<var name="userName" property-value="email.address.1" />
-			<var name="userPassword" property-value="email.password.1" />
+			<var name="userName" property-value="email.address.2" />
+			<var name="userPassword" property-value="email.password.2" />
 		</execute>
 
 		<execute macro="ProductMenu#gotoControlPanelConfiguration">
@@ -649,8 +649,8 @@
 		</execute>
 
 		<execute macro="ServerAdministration#configureMailServerSettings">
-			<var name="userName" property-value="email.address.1" />
-			<var name="userPassword" property-value="email.password.1" />
+			<var name="userName" property-value="email.address.2" />
+			<var name="userPassword" property-value="email.password.2" />
 		</execute>
 
 		<execute macro="ProductMenu#gotoControlPanelUsers">
@@ -900,8 +900,8 @@
 		</execute>
 
 		<execute macro="ServerAdministration#configureMailServerSettings">
-			<var name="userName" property-value="email.address.1" />
-			<var name="userPassword" property-value="email.password.1" />
+			<var name="userName" property-value="email.address.2" />
+			<var name="userPassword" property-value="email.password.2" />
 		</execute>
 
 		<execute macro="ProductMenu#gotoControlPanelUsers">

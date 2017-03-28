@@ -591,8 +591,8 @@
 		</execute>
 
 		<execute macro="ServerAdministration#configureMailServerSettings">
-			<var name="userName" property-value="email.address.1" />
-			<var name="userPassword" property-value="email.password.1" />
+			<var name="userName" property-value="email.address.2" />
+			<var name="userPassword" property-value="email.password.2" />
 		</execute>
 
 		<execute macro="Navigator#openURL" />
@@ -611,7 +611,7 @@
 		</execute>
 
 		<execute macro="ReportsAdmin#addReportEntry">
-			<var name="emailNotificationsAddress" property-value="email.address.2" />
+			<var name="emailNotificationsAddress" property-value="email.address.3" />
 			<var name="emailRecipientAddress" value="test@liferay.com" />
 			<var name="reportFormat" value="pdf" />
 			<var name="reportName" value="Custom Report Name" />
@@ -621,8 +621,8 @@
 		<execute function="Pause" locator1="30000" />
 
 		<execute macro="Gmail#login">
-			<var name="userEmailAddress" property-value="email.address.2" />
-			<var name="userPassword" property-value="email.password.2" />
+			<var name="userEmailAddress" property-value="email.address.3" />
+			<var name="userPassword" property-value="email.password.3" />
 		</execute>
 
 		<execute macro="Gmail#gotoHtmlMode" />
@@ -668,8 +668,8 @@
 		</execute>
 
 		<execute macro="ServerAdministration#configureMailServerSettings">
-			<var name="userName" property-value="email.address.1" />
-			<var name="userPassword" property-value="email.password.1" />
+			<var name="userName" property-value="email.address.2" />
+			<var name="userPassword" property-value="email.password.2" />
 		</execute>
 
 		<execute macro="Navigator#openURL" />

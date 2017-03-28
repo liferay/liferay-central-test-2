@@ -135,8 +135,8 @@
 		</execute>
 
 		<execute macro="ServerAdministration#configureMailServerSettings">
-			<var name="userName" property-value="email.address.1" />
-			<var name="userPassword" property-value="email.password.1" />
+			<var name="userName" property-value="email.address.2" />
+			<var name="userPassword" property-value="email.password.2" />
 		</execute>
 
 		<execute macro="Navigator#openURL" />
@@ -148,7 +148,7 @@
 		<execute macro="ReportsAdmin#gotoConfiguration" />
 
 		<execute macro="ReportsAdmin#configureEmailFrom">
-			<var name="emailFromAddress" property-value="email.address.1" />
+			<var name="emailFromAddress" property-value="email.address.2" />
 			<var name="emailFromName" value="Liferay QA" />
 		</execute>
 
@@ -201,7 +201,7 @@ Thanks,<br/>
 
 		<execute macro="ReportsAdmin#addReportEntry">
 			<var name="emailNotificationsAddress" property-value="email.address.4" />
-			<var name="emailRecipientAddress" property-value="email.address.2" />
+			<var name="emailRecipientAddress" property-value="email.address.3" />
 			<var name="reportFormat" value="pdf" />
 			<var name="reportsDefinitionName" value="Reports Definition Name" />
 		</execute>
@@ -229,8 +229,8 @@ Thanks,<br/>
 		</execute>
 
 		<execute macro="Gmail#logoutAndLogin">
-			<var name="userEmailAddress" property-value="email.address.2" />
-			<var name="userPassword" property-value="email.password.2" />
+			<var name="userEmailAddress" property-value="email.address.3" />
+			<var name="userPassword" property-value="email.password.3" />
 		</execute>
 
 		<execute macro="Gmail#gotoHtmlMode" />
