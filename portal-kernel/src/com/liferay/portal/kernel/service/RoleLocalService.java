@@ -633,7 +633,7 @@ public interface RoleLocalService extends BaseLocalService,
 	* @return the team roles in the company
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<Role> getTeamRolesByTeamIds(long companyId, long[] teamIds)
+	public List<Role> getTeamsRoles(long companyId, long[] teamIds)
 		throws PortalException;
 
 	/**

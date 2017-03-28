@@ -721,10 +721,10 @@ public class RoleLocalServiceUtil {
 	* @param teamIds the primary keys of the teams
 	* @return the team roles in the company
 	*/
-	public static java.util.List<com.liferay.portal.kernel.model.Role> getTeamRolesByTeamIds(
+	public static java.util.List<com.liferay.portal.kernel.model.Role> getTeamsRoles(
 		long companyId, long[] teamIds)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return getService().getTeamRolesByTeamIds(companyId, teamIds);
+		return getService().getTeamsRoles(companyId, teamIds);
 	}
 
 	/**

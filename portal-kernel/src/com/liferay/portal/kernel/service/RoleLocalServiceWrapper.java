@@ -769,10 +769,10 @@ public class RoleLocalServiceWrapper implements RoleLocalService,
 	* @return the team roles in the company
 	*/
 	@Override
-	public java.util.List<com.liferay.portal.kernel.model.Role> getTeamRolesByTeamIds(
+	public java.util.List<com.liferay.portal.kernel.model.Role> getTeamsRoles(
 		long companyId, long[] teamIds)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		return _roleLocalService.getTeamRolesByTeamIds(companyId, teamIds);
+		return _roleLocalService.getTeamsRoles(companyId, teamIds);
 	}
 
 	/**
