@@ -30,6 +30,7 @@ AUI.add(
 				instance.after(instance._toggleShowRemoveButton, instance, '_addCondition');
 
 				instance.on('logicOperatorChange', A.bind(instance._onLogicOperatorChange, instance));
+
 				instance.after('*:valueChange', A.bind(instance._handleConditionFieldsChange, instance));
 			},
 
