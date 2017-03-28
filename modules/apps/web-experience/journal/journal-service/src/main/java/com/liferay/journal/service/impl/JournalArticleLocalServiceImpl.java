@@ -850,56 +850,31 @@ public class JournalArticleLocalServiceImpl
 		ExpandoBridgeUtil.copyExpandoBridgeAttributes(
 			oldArticle.getExpandoBridge(), newArticle.getExpandoBridge());
 
-		int copyNumber = 1;
-
-		String copyUrlTitle = JournalUtil.getUrlTitle(
-			id, oldArticle.getTitleCurrentValue());
-
-		for (;; copyNumber++) {
-			JournalArticle article = fetchArticleByUrlTitle(
-				groupId, copyUrlTitle);
-
-			if ((article == null) ||
-				newArticleId.equals(article.getArticleId())) {
-
-				copyNumber--;
-
-				break;
-			}
-			else {
-				String suffix = StringPool.DASH + copyNumber;
-
-				String prefix = copyUrlTitle;
-
-				if (copyUrlTitle.length() > suffix.length()) {
-					prefix = copyUrlTitle.substring(
-						0, copyUrlTitle.length() - suffix.length());
-				}
-
-				copyUrlTitle = prefix + suffix;
-			}
-		}
-
 		journalArticlePersistence.update(newArticle);
 
 		// Article localization
 
-		Map<Locale, String> copyTitleMap = oldArticle.getTitleMap();
+		String urlTitle = JournalUtil.getUrlTitle(id, oldArticle.getUrlTitle());
 
-		for (Locale locale : copyTitleMap.keySet()) {
+		int uniqueUrlTitleCount = _getUniqueUrlTitleCount(
+			groupId, newArticleId, urlTitle);
+
+		Map<Locale, String> newTitleMap = oldArticle.getTitleMap();
+
+		for (Locale locale : newTitleMap.keySet()) {
 			StringBundler sb = new StringBundler(5);
 
-			sb.append(copyTitleMap.get(locale));
+			sb.append(newTitleMap.get(locale));
 			sb.append(StringPool.SPACE);
 			sb.append(LanguageUtil.get(locale, "duplicate"));
 			sb.append(StringPool.SPACE);
-			sb.append(copyNumber);
+			sb.append(uniqueUrlTitleCount);
 
-			copyTitleMap.put(locale, sb.toString());
+			newTitleMap.put(locale, sb.toString());
 		}
 
 		_addArticleLocalizedFields(
-			newArticle.getCompanyId(), newArticle.getId(), copyTitleMap,
+			newArticle.getCompanyId(), newArticle.getId(), newTitleMap,
 			oldArticle.getDescriptionMap());
 
 		// Resources
@@ -8302,6 +8277,33 @@ public class JournalArticleLocalServiceImpl
 				JournalServiceConfiguration.class, companyId);
 
 		return journalServiceConfiguration.checkInterval();
+	}
+
+	private int _getUniqueUrlTitleCount(
+			long groupId, String articleId, String urlTitle)
+		throws PortalException {
+
+		for (int i = 1;; i++) {
+			JournalArticle article = fetchArticleByUrlTitle(groupId, urlTitle);
+
+			if ((article == null) ||
+				Objects.equals(articleId, article.getArticleId())) {
+
+				return i - 1;
+			}
+			else {
+				String suffix = StringPool.DASH + i;
+
+				String prefix = urlTitle;
+
+				if (urlTitle.length() > suffix.length()) {
+					prefix = urlTitle.substring(
+						0, urlTitle.length() - suffix.length());
+				}
+
+				urlTitle = prefix + suffix;
+			}
+		}
 	}
 
 	private List<JournalArticleLocalization> _updateArticleLocalizedFields(
