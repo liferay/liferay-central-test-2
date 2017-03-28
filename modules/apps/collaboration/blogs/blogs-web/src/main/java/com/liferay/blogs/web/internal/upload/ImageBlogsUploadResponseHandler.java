@@ -16,54 +16,36 @@ package com.liferay.blogs.web.internal.upload;
 
 import com.liferay.blogs.kernel.exception.EntryImageNameException;
 import com.liferay.blogs.kernel.exception.EntryImageSizeException;
+import com.liferay.item.selector.ItemSelectorUploadResponseHandler;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
-import com.liferay.portal.kernel.security.auth.PrincipalException;
-import com.liferay.portal.kernel.security.permission.ActionKeys;
-import com.liferay.portal.kernel.security.permission.PermissionChecker;
-import com.liferay.portal.kernel.security.permission.ResourcePermissionCheckerUtil;
+import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.servlet.ServletResponseConstants;
-import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
-import com.liferay.portal.util.PropsValues;
-import com.liferay.portlet.blogs.service.permission.BlogsPermission;
+import com.liferay.upload.UploadResponseHandler;
 
 import javax.portlet.PortletRequest;
-import javax.portlet.PortletResponse;
+
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
- * @author Sergio González
- * @author Adolfo Pérez
+ * @author Alejandro Tardín
  */
-public abstract class BaseBlogsUploadFileEntryHandler
-	implements UploadFileEntryHandler {
+@Component(service = ImageBlogsUploadResponseHandler.class)
+public class ImageBlogsUploadResponseHandler implements UploadResponseHandler {
 
 	@Override
-	public void checkPermission(
-			long groupId, long folderId, PermissionChecker permissionChecker)
+	public JSONObject onFailure(
+			PortletRequest portletRequest, PortalException pe)
 		throws PortalException {
 
-		boolean containsResourcePermission =
-			ResourcePermissionCheckerUtil.containsResourcePermission(
-				permissionChecker, BlogsPermission.RESOURCE_NAME, groupId,
-				ActionKeys.ADD_ENTRY);
-
-		if (!containsResourcePermission) {
-			throw new PrincipalException.MustHavePermission(
-				permissionChecker, BlogsPermission.RESOURCE_NAME, groupId,
-				ActionKeys.ADD_ENTRY);
-		}
-	}
-
-	@Override
-	public void doHandleUploadException(
-			PortletRequest portletRequest, PortletResponse portletResponse,
-			PortalException pe, JSONObject jsonObject)
-		throws PortalException {
+		JSONObject jsonObject = _itemSelectorUploadResponseHandler.onFailure(
+			portletRequest, pe);
 
 		if (pe instanceof EntryImageNameException ||
 			pe instanceof EntryImageSizeException) {
@@ -91,45 +73,21 @@ public abstract class BaseBlogsUploadFileEntryHandler
 
 			jsonObject.put("error", errorJSONObject);
 		}
-		else {
-			throw pe;
-		}
+
+		return jsonObject;
 	}
 
 	@Override
-	public String getParameterName() {
-		return "imageSelectorFileName";
-	}
-
-	@Override
-	public void validateFile(String fileName, String contentType, long size)
+	public JSONObject onSuccess(
+			PortletRequest portletRequest, FileEntry fileEntry)
 		throws PortalException {
 
-		long maxSize = getMaxFileSize();
-
-		if ((maxSize > 0) && (size > maxSize)) {
-			throw new EntryImageSizeException();
-		}
-
-		String extension = FileUtil.getExtension(fileName);
-
-		String[] imageExtensions = PrefsPropsUtil.getStringArray(
-			PropsKeys.BLOGS_IMAGE_EXTENSIONS, StringPool.COMMA);
-
-		for (String imageExtension : imageExtensions) {
-			if (StringPool.STAR.equals(imageExtension) ||
-				imageExtension.equals(StringPool.PERIOD + extension)) {
-
-				return;
-			}
-		}
-
-		throw new EntryImageNameException(
-			"Invalid image for file name " + fileName);
+		return _itemSelectorUploadResponseHandler.onSuccess(
+			portletRequest, fileEntry);
 	}
 
-	protected long getMaxFileSize() {
-		return PropsValues.BLOGS_IMAGE_MAX_SIZE;
-	}
+	@Reference
+	private ItemSelectorUploadResponseHandler
+		_itemSelectorUploadResponseHandler;
 
 }
