@@ -44,6 +44,10 @@
 			<finder-column name="recordSetId" />
 			<finder-column name="userId" />
 		</finder>
+		<finder name="R_R" return-type="Collection">
+			<finder-column name="recordSetId" />
+			<finder-column name="recordSetVersion" />
+		</finder>
 
 		<!-- References -->
 
@@ -183,6 +187,10 @@
 
 		<finder name="RecordId" return-type="Collection">
 			<finder-column name="recordId" />
+		</finder>
+		<finder name="R_R" return-type="Collection">
+			<finder-column name="recordSetId" />
+			<finder-column name="recordSetVersion" />
 		</finder>
 		<finder name="R_V" return-type="DDLRecordVersion" unique="true">
 			<finder-column name="recordId" />
