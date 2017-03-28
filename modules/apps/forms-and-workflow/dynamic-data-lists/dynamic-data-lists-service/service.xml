@@ -27,6 +27,7 @@
 
 		<column name="DDMStorageId" type="long" />
 		<column name="recordSetId" type="long" />
+		<column name="recordSetVersion" type="String" />
 		<column name="version" type="String" />
 		<column name="displayIndex" type="int" />
 		<column name="lastPublishDate" type="Date" />
@@ -169,6 +170,7 @@
 
 		<column name="DDMStorageId" type="long" />
 		<column name="recordSetId" type="long" />
+		<column name="recordSetVersion" type="String" />
 		<column name="recordId" type="long" />
 		<column name="version" type="String" />
 		<column name="displayIndex" type="int" />
