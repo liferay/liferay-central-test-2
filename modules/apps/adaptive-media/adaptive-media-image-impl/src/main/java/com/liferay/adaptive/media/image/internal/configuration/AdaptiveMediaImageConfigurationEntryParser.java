@@ -16,6 +16,7 @@ package com.liferay.adaptive.media.image.internal.configuration;
 
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -77,7 +78,7 @@ public class AdaptiveMediaImageConfigurationEntryParser {
 
 		StringBundler sb = new StringBundler();
 
-		sb.append(configurationEntry.getName());
+		sb.append(HttpUtil.encodeURL(configurationEntry.getName()));
 		sb.append(StringPool.COLON);
 		sb.append(configurationEntry.getUUID());
 		sb.append(StringPool.COLON);
@@ -130,6 +131,9 @@ public class AdaptiveMediaImageConfigurationEntryParser {
 		}
 
 		String name = fields[0];
+
+		name = HttpUtil.decodeURL(name);
+
 		String uuid = fields[1];
 
 		if (Validator.isNull(name) || Validator.isNull(uuid)) {
