@@ -526,8 +526,8 @@ public class DDMTemplateLocalServiceImpl
 	 */
 	@Override
 	public DDMTemplate fetchTemplate(
-			long groupId, long classNameId, String templateKey,
-			boolean includeAncestorTemplates) {
+		long groupId, long classNameId, String templateKey,
+		boolean includeAncestorTemplates) {
 
 		templateKey = StringUtil.toUpperCase(StringUtil.trim(templateKey));
 

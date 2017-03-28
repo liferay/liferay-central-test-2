@@ -676,8 +676,8 @@ public class DDMStructureLocalServiceImpl
 	 */
 	@Override
 	public DDMStructure fetchStructure(
-			long groupId, long classNameId, String structureKey,
-			boolean includeAncestorStructures) {
+		long groupId, long classNameId, String structureKey,
+		boolean includeAncestorStructures) {
 
 		structureKey = getStructureKey(structureKey);
 
