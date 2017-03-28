@@ -143,10 +143,10 @@ public class AnnouncementsUtil {
 		long companyId = user.getCompanyId();
 
 		if (teamIds.length > 0) {
-			List<Role> teamRoles = RoleLocalServiceUtil.getTeamRolesByTeamIds(
+			List<Role> teamsRoles = RoleLocalServiceUtil.getTeamsRoles(
 				companyId, teamIds);
 
-			for (Role teamRole : teamRoles) {
+			for (Role teamRole : teamsRoles) {
 				roleIds.add(teamRole.getRoleId());
 			}
 		}

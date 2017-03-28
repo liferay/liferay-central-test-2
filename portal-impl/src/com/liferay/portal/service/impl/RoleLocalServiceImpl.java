@@ -961,7 +961,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	 * @return the team roles in the company
 	 */
 	@Override
-	public List<Role> getTeamRolesByTeamIds(long companyId, long[] teamIds)
+	public List<Role> getTeamsRoles(long companyId, long[] teamIds)
 		throws PortalException {
 
 		long classNameId = classNameLocalService.getClassNameId(Team.class);
