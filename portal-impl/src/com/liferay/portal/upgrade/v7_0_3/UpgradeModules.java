@@ -31,9 +31,15 @@ public class UpgradeModules
 	}
 
 	private static final String[] _BUNDLE_SYMBOLIC_NAMES = {
+		"com.liferay.portal.reports.engine.console.web",
 		"com.liferay.portal.workflow.kaleo.forms.web"
 	};
 
-	private static final String[][] _CONVERTED_LEGACY_MODULES = {};
+	private static final String[][] _CONVERTED_LEGACY_MODULES = {
+		{
+			"reports-portlet",
+			"com.liferay.portal.reports.engine.console.service", "Reports"
+		}
+	};
 
 }
