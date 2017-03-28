@@ -14,19 +14,52 @@
 
 package com.liferay.adaptive.media.image.internal.configuration;
 
+import static org.powermock.api.mockito.PowerMockito.mockStatic;
+import static org.powermock.api.mockito.PowerMockito.when;
+
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry;
+import com.liferay.portal.kernel.util.HttpUtil;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 /**
  * @author Adolfo Pérez
  */
+@PrepareForTest(HttpUtil.class)
+@RunWith(PowerMockRunner.class)
 public class AdaptiveMediaImageConfigurationEntryParserTest {
+
+	@Before
+	public void setUp() {
+		MockitoAnnotations.initMocks(this);
+
+		mockStatic(HttpUtil.class);
+
+		when(
+			HttpUtil.encodeURL(Mockito.eq("test"))
+		).thenReturn(
+			"test"
+		);
+
+		when(
+			HttpUtil.decodeURL(Mockito.eq("test"))
+		).thenReturn(
+			"test"
+		);
+	}
 
 	@Test
 	public void testDisabledValidString() {
@@ -63,6 +96,34 @@ public class AdaptiveMediaImageConfigurationEntryParserTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void testEmptyUUID() {
 		_configurationEntryParser.parse("test::max-height=100;max-width=200");
+	}
+
+	@Test
+	public void testEncodedName() {
+		when(
+			HttpUtil.encodeURL(Mockito.eq("test:;"))
+		).thenReturn(
+			"test%3A%3B"
+		);
+
+		when(
+			HttpUtil.decodeURL(Mockito.eq("test%3A%3B"))
+		).thenReturn(
+			"test:;"
+		);
+
+		AdaptiveMediaImageConfigurationEntry configurationEntry =
+			_configurationEntryParser.parse(
+				"test%3A%3B:12345:max-height=100;max-width=200");
+
+		Assert.assertEquals("test:;", configurationEntry.getName());
+		Assert.assertEquals("12345", configurationEntry.getUUID());
+
+		Map<String, String> properties = configurationEntry.getProperties();
+
+		Assert.assertEquals("100", properties.get("max-height"));
+		Assert.assertEquals("200", properties.get("max-width"));
+		Assert.assertEquals(properties.toString(), 2, properties.size());
 	}
 
 	@Test

@@ -103,6 +103,37 @@ public class AdaptiveMediaImageUpdateConfigurationTest
 	}
 
 	@Test
+	public void testUpdateConfigurationEntryWithColonSemicolonName()
+		throws Exception {
+
+		AdaptiveMediaImageConfigurationHelper configurationHelper =
+			serviceTracker.getService();
+
+		Map<String, String> properties = new HashMap<>();
+
+		properties.put("max-height", "100");
+		properties.put("max-width", "100");
+
+		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
+			TestPropsValues.getCompanyId(), "one", "1", properties);
+
+		configurationHelper.updateAdaptiveMediaImageConfigurationEntry(
+			TestPropsValues.getCompanyId(), "1", "one:;one", "1", properties);
+
+		Optional<AdaptiveMediaImageConfigurationEntry>
+			configurationEntryOptional =
+				configurationHelper.getAdaptiveMediaImageConfigurationEntry(
+					TestPropsValues.getCompanyId(), "1");
+
+		Assert.assertTrue(configurationEntryOptional.isPresent());
+
+		AdaptiveMediaImageConfigurationEntry configurationEntry =
+			configurationEntryOptional.get();
+
+		Assert.assertEquals("one:;one", configurationEntry.getName());
+	}
+
+	@Test
 	public void testUpdateConfigurationEntryWithMaxHeightOnly()
 		throws Exception {
 
