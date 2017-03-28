@@ -134,7 +134,7 @@ else {
 
 			<liferay-ui:icon
 				message="copy"
-				url="<%= journalWebConfiguration.journalFeedForceAutogenerateId() ? copyArticleURL.toString() : copyURL.toString() %>"
+				url="<%= journalWebConfiguration.journalArticleForceAutogenerateId() ? copyArticleURL.toString() : copyURL.toString() %>"
 			/>
 		</c:if>
 	</c:if>
