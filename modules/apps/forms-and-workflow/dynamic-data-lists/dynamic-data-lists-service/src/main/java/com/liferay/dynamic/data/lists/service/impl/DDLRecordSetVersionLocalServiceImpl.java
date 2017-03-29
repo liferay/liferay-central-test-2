@@ -38,7 +38,7 @@ public class DDLRecordSetVersionLocalServiceImpl
 	extends DDLRecordSetVersionLocalServiceBaseImpl {
 
 	@Override
-	public void deleteByRecordSetId(long recordSetId) {
+	public void deleteByRecordSetId(long recordSetId) throws PortalException {
 		ddlRecordSetVersionPersistence.removeByRecordSetId(recordSetId);
 	}
 
