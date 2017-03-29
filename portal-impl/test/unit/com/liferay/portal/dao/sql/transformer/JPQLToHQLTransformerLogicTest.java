@@ -35,21 +35,21 @@ public class JPQLToHQLTransformerLogicTest {
 	}
 
 	@Test
-	public void testReplaceCountNotMatching() {
+	public void testReplaceCountWithNoCount() {
+		String sql = "SELECT * FROM Foo where foo != 1";
+
 		Function<String, String> function =
 			JPQLToHQLTransformerLogic.getCountFunction();
-
-		String sql = "SELECT * FROM Foo where foo != 1";
 
 		Assert.assertEquals(sql, function.apply(sql));
 	}
 
 	@Test
-	public void testReplaceCountWithAliasDifferentThanFieldCount() {
+	public void testReplaceCountWithIncorrectAlias() {
+		String sql = "SELECT COUNT(bar) FROM Foo foo";
+
 		Function<String, String> function =
 			JPQLToHQLTransformerLogic.getCountFunction();
-
-		String sql = "SELECT COUNT(bar) FROM Foo foo";
 
 		Assert.assertEquals(sql, function.apply(sql));
 	}
