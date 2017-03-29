@@ -65,6 +65,7 @@ public class EditImageConfigurationEntryMVCActionCommand
 			WebKeys.THEME_DISPLAY);
 
 		String name = ParamUtil.getString(actionRequest, "name");
+		String description = ParamUtil.getString(actionRequest, "description");
 		String uuid = ParamUtil.getString(actionRequest, "uuid");
 		String maxHeight = ParamUtil.getString(actionRequest, "maxHeight");
 		String maxWidth = ParamUtil.getString(actionRequest, "maxWidth");
@@ -108,15 +109,15 @@ public class EditImageConfigurationEntryMVCActionCommand
 
 				_adaptiveMediaImageConfigurationHelper.
 					updateAdaptiveMediaImageConfigurationEntry(
-						themeDisplay.getCompanyId(), uuid, name, newUuid,
-						properties);
+						themeDisplay.getCompanyId(), uuid, name, description,
+						newUuid, properties);
 			}
 			else {
 				AdaptiveMediaImageConfigurationEntry configurationEntry =
 					_adaptiveMediaImageConfigurationHelper.
 						addAdaptiveMediaImageConfigurationEntry(
-							themeDisplay.getCompanyId(), name, newUuid,
-							properties);
+							themeDisplay.getCompanyId(), name, description,
+							newUuid, properties);
 
 				boolean addHighResolution = ParamUtil.getBoolean(
 					actionRequest, "addHighResolution");
@@ -157,11 +158,13 @@ public class EditImageConfigurationEntryMVCActionCommand
 		properties.put("max-width", String.valueOf(doubleMaxWidth));
 
 		String name = configurationEntry.getName();
+		String description = configurationEntry.getDescription();
 		String uuid = configurationEntry.getUUID();
 
 		_adaptiveMediaImageConfigurationHelper.
 			addAdaptiveMediaImageConfigurationEntry(
-				companyId, name.concat("-2x"), uuid.concat("-2x"), properties);
+				companyId, name.concat("-2x"), "2x " + description,
+				uuid.concat("-2x"), properties);
 	}
 
 	private String _getAutomaticUuid(long companyId, String name) {

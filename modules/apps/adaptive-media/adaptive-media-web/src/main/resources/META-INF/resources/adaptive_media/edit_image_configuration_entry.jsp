@@ -69,6 +69,8 @@ if (configurationEntry != null) {
 				<div class="row">
 					<div class="col-md-6">
 						<aui:input autoFocus="<%= windowState.equals(WindowState.MAXIMIZED) %>" name="name" required="<%= true %>" value="<%= (configurationEntry != null) ? configurationEntry.getName() : StringPool.BLANK %>" />
+
+						<aui:input name="description" type="textarea" value="<%= (configurationEntry != null) ? configurationEntry.getDescription() : StringPool.BLANK %>" />
 					</div>
 				</div>
 

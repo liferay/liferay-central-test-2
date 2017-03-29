@@ -47,6 +47,7 @@ import com.liferay.portal.kernel.test.util.TestPropsValues;
 import com.liferay.portal.kernel.test.util.UserTestUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.service.test.ServiceTestUtil;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
@@ -355,7 +356,7 @@ public class AdaptiveMediaThumbnailsOSGiCommandsTest {
 
 		_configurationHelper.addAdaptiveMediaImageConfigurationEntry(
 			_company.getCompanyId(), _THUMBNAIL_CONFIGURATION + width,
-			_THUMBNAIL_CONFIGURATION + width, properties);
+			StringPool.BLANK, _THUMBNAIL_CONFIGURATION + width, properties);
 	}
 
 	private FileEntry _addPDFFileEntry() throws Exception {

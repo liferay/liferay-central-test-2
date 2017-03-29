@@ -614,7 +614,8 @@ public class FileEntryAdaptiveMediaImageURLItemSelectorReturnTypeResolverTest {
 		properties.put("max-width", String.valueOf(width));
 
 		_configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), name, uuid, properties);
+			TestPropsValues.getCompanyId(), name, StringPool.BLANK, uuid,
+			properties);
 	}
 
 	private void _assertAttibutes(

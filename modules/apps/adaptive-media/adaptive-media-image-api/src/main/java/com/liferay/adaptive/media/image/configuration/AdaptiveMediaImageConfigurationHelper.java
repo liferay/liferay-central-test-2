@@ -34,7 +34,7 @@ public interface AdaptiveMediaImageConfigurationHelper {
 
 	public AdaptiveMediaImageConfigurationEntry
 			addAdaptiveMediaImageConfigurationEntry(
-				long companyId, String name, String uuid,
+				long companyId, String name, String description, String uuid,
 				Map<String, String> properties)
 		throws AdaptiveMediaImageConfigurationException, IOException;
 
@@ -73,8 +73,8 @@ public interface AdaptiveMediaImageConfigurationHelper {
 
 	public AdaptiveMediaImageConfigurationEntry
 			updateAdaptiveMediaImageConfigurationEntry(
-				long companyId, String oldUuid, String name, String newUuid,
-				Map<String, String> properties)
+				long companyId, String oldUuid, String name, String description,
+				String newUuid, Map<String, String> properties)
 		throws AdaptiveMediaImageConfigurationException, IOException;
 
 }

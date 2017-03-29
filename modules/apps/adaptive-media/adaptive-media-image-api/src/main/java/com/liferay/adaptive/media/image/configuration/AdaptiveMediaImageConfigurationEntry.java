@@ -21,6 +21,8 @@ import java.util.Map;
  */
 public interface AdaptiveMediaImageConfigurationEntry {
 
+	public String getDescription();
+
 	public String getName();
 
 	public Map<String, String> getProperties();

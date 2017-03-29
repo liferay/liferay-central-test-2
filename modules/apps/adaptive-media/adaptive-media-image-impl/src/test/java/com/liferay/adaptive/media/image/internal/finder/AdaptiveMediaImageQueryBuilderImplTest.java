@@ -68,8 +68,8 @@ public class AdaptiveMediaImageQueryBuilderImplTest {
 
 		AdaptiveMediaImageConfigurationEntry configurationEntry =
 			new AdaptiveMediaImageConfigurationEntryImpl(
-				StringUtil.randomString(), "small", Collections.emptyMap(),
-				true);
+				StringUtil.randomString(), StringUtil.randomString(), "small",
+				Collections.emptyMap(), true);
 
 		Predicate<AdaptiveMediaImageConfigurationEntry> filter =
 			_queryBuilder.getConfigurationEntryFilter();
@@ -86,7 +86,7 @@ public class AdaptiveMediaImageQueryBuilderImplTest {
 		AdaptiveMediaImageConfigurationEntry configurationEntry =
 			new AdaptiveMediaImageConfigurationEntryImpl(
 				StringUtil.randomString(), StringUtil.randomString(),
-				Collections.emptyMap(), true);
+				StringUtil.randomString(), Collections.emptyMap(), true);
 
 		Predicate<AdaptiveMediaImageConfigurationEntry> filter =
 			_queryBuilder.getConfigurationEntryFilter();

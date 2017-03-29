@@ -65,9 +65,10 @@ public class AdaptiveMediaImageConfigurationEntryParserTest {
 	public void testDisabledValidString() {
 		AdaptiveMediaImageConfigurationEntry configurationEntry =
 			_configurationEntryParser.parse(
-				"test:12345:max-height=100;max-width=200:enabled=false");
+				"test:desc:12345:max-height=100;max-width=200:enabled=false");
 
 		Assert.assertEquals("test", configurationEntry.getName());
+		Assert.assertEquals("desc", configurationEntry.getDescription());
 		Assert.assertEquals("12345", configurationEntry.getUUID());
 		Assert.assertFalse(configurationEntry.isEnabled());
 
@@ -80,12 +81,19 @@ public class AdaptiveMediaImageConfigurationEntryParserTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testEmptyAttributes() {
-		_configurationEntryParser.parse("test:12345:");
+		_configurationEntryParser.parse("test:desc:12345:");
+	}
+
+	@Test
+	public void testEmptyDescription() {
+		_configurationEntryParser.parse(
+			"test::12345:max-height=100;max-width=200");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testEmptyName() {
-		_configurationEntryParser.parse(":12345:max-height=100;max-width=200");
+		_configurationEntryParser.parse(
+			":desc:12345:max-height=100;max-width=200");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -95,7 +103,37 @@ public class AdaptiveMediaImageConfigurationEntryParserTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testEmptyUUID() {
-		_configurationEntryParser.parse("test::max-height=100;max-width=200");
+		_configurationEntryParser.parse(
+			"test:desc::max-height=100;max-width=200");
+	}
+
+	@Test
+	public void testEncodedDescription() {
+		when(
+			HttpUtil.encodeURL(Mockito.eq("desc:;"))
+		).thenReturn(
+			"desc%3A%3B"
+		);
+
+		when(
+			HttpUtil.decodeURL(Mockito.eq("desc%3A%3B"))
+		).thenReturn(
+			"desc:;"
+		);
+
+		AdaptiveMediaImageConfigurationEntry configurationEntry =
+			_configurationEntryParser.parse(
+				"test:desc%3A%3B:12345:max-height=100;max-width=200");
+
+		Assert.assertEquals("test", configurationEntry.getName());
+		Assert.assertEquals("desc:;", configurationEntry.getDescription());
+		Assert.assertEquals("12345", configurationEntry.getUUID());
+
+		Map<String, String> properties = configurationEntry.getProperties();
+
+		Assert.assertEquals("100", properties.get("max-height"));
+		Assert.assertEquals("200", properties.get("max-width"));
+		Assert.assertEquals(properties.toString(), 2, properties.size());
 	}
 
 	@Test
@@ -114,9 +152,10 @@ public class AdaptiveMediaImageConfigurationEntryParserTest {
 
 		AdaptiveMediaImageConfigurationEntry configurationEntry =
 			_configurationEntryParser.parse(
-				"test%3A%3B:12345:max-height=100;max-width=200");
+				"test%3A%3B:desc:12345:max-height=100;max-width=200");
 
 		Assert.assertEquals("test:;", configurationEntry.getName());
+		Assert.assertEquals("desc", configurationEntry.getDescription());
 		Assert.assertEquals("12345", configurationEntry.getUUID());
 
 		Map<String, String> properties = configurationEntry.getProperties();
@@ -134,14 +173,14 @@ public class AdaptiveMediaImageConfigurationEntryParserTest {
 
 		AdaptiveMediaImageConfigurationEntry configurationEntry =
 			new AdaptiveMediaImageConfigurationEntryImpl(
-				"test", "12345", properties);
+				"test", "desc", "12345", properties, true);
 
 		String configurationString =
 			_configurationEntryParser.getConfigurationString(
 				configurationEntry);
 
 		Assert.assertEquals(
-			"test:12345:max-height=100:enabled=true", configurationString);
+			"test:desc:12345:max-height=100:enabled=true", configurationString);
 	}
 
 	@Test
@@ -153,14 +192,14 @@ public class AdaptiveMediaImageConfigurationEntryParserTest {
 
 		AdaptiveMediaImageConfigurationEntry configurationEntry =
 			new AdaptiveMediaImageConfigurationEntryImpl(
-				"test", "12345", properties);
+				"test", "desc", "12345", properties, true);
 
 		String configurationString =
 			_configurationEntryParser.getConfigurationString(
 				configurationEntry);
 
 		Assert.assertEquals(
-			"test:12345:max-height=100;max-width=200:enabled=true",
+			"test:desc:12345:max-height=100;max-width=200:enabled=true",
 			configurationString);
 	}
 
@@ -172,27 +211,28 @@ public class AdaptiveMediaImageConfigurationEntryParserTest {
 
 		AdaptiveMediaImageConfigurationEntry configurationEntry =
 			new AdaptiveMediaImageConfigurationEntryImpl(
-				"test", "12345", properties);
+				"test", "desc", "12345", properties, true);
 
 		String configurationString =
 			_configurationEntryParser.getConfigurationString(
 				configurationEntry);
 
 		Assert.assertEquals(
-			"test:12345:max-width=200:enabled=true", configurationString);
+			"test:desc:12345:max-width=200:enabled=true", configurationString);
 	}
 
 	@Test
 	public void testGetConfigurationStringWithNoProperties() {
 		AdaptiveMediaImageConfigurationEntry configurationEntry =
 			new AdaptiveMediaImageConfigurationEntryImpl(
-				"test", "12345", Collections.emptyMap());
+				"test", "desc", "12345", Collections.emptyMap(), true);
 
 		String configurationString =
 			_configurationEntryParser.getConfigurationString(
 				configurationEntry);
 
-		Assert.assertEquals("test:12345::enabled=true", configurationString);
+		Assert.assertEquals(
+			"test:desc:12345::enabled=true", configurationString);
 	}
 
 	@Test
@@ -203,14 +243,15 @@ public class AdaptiveMediaImageConfigurationEntryParserTest {
 
 		AdaptiveMediaImageConfigurationEntry configurationEntry =
 			new AdaptiveMediaImageConfigurationEntryImpl(
-				"test", "12345", properties, false);
+				"test", "desc", "12345", properties, false);
 
 		String configurationString =
 			_configurationEntryParser.getConfigurationString(
 				configurationEntry);
 
 		Assert.assertEquals(
-			"test:12345:max-height=100:enabled=false", configurationString);
+			"test:desc:12345:max-height=100:enabled=false",
+			configurationString);
 	}
 
 	@Test
@@ -222,14 +263,14 @@ public class AdaptiveMediaImageConfigurationEntryParserTest {
 
 		AdaptiveMediaImageConfigurationEntry configurationEntry =
 			new AdaptiveMediaImageConfigurationEntryImpl(
-				"test", "12345", properties, false);
+				"test", "desc", "12345", properties, false);
 
 		String configurationString =
 			_configurationEntryParser.getConfigurationString(
 				configurationEntry);
 
 		Assert.assertEquals(
-			"test:12345:max-height=100;max-width=200:enabled=false",
+			"test:desc:12345:max-height=100;max-width=200:enabled=false",
 			configurationString);
 	}
 
@@ -241,35 +282,41 @@ public class AdaptiveMediaImageConfigurationEntryParserTest {
 
 		AdaptiveMediaImageConfigurationEntry configurationEntry =
 			new AdaptiveMediaImageConfigurationEntryImpl(
-				"test", "12345", properties, false);
+				"test", "desc", "12345", properties, false);
 
 		String configurationString =
 			_configurationEntryParser.getConfigurationString(
 				configurationEntry);
 
 		Assert.assertEquals(
-			"test:12345:max-width=200:enabled=false", configurationString);
+			"test:desc:12345:max-width=200:enabled=false", configurationString);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testInvalidEnabledAttribute() {
 		_configurationEntryParser.parse(
-			"test:12345:max-height=100;max-width=200:disabled=true");
+			"test:desc:12345:max-height=100;max-width=200:disabled=true");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testMissingAttributesField() {
-		_configurationEntryParser.parse("test:12345");
+		_configurationEntryParser.parse("test:desc:12345");
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testMissingDescription() {
+		_configurationEntryParser.parse("12345:max-height=100;max-width=200");
 	}
 
 	@Test
 	public void testMissingEnabledAttributeDefaultsEnabled() {
 		AdaptiveMediaImageConfigurationEntry configurationEntry =
 			_configurationEntryParser.parse(
-				"test:12345:max-height=100;max-width=200");
+				"test:desc:12345:max-height=100;max-width=200");
 
 		Assert.assertEquals("test", configurationEntry.getName());
 		Assert.assertEquals("12345", configurationEntry.getUUID());
+		Assert.assertEquals("desc", configurationEntry.getDescription());
 		Assert.assertTrue(configurationEntry.isEnabled());
 
 		Map<String, String> properties = configurationEntry.getProperties();
@@ -281,12 +328,14 @@ public class AdaptiveMediaImageConfigurationEntryParserTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testMissingName() {
-		_configurationEntryParser.parse("12345:max-height=100;max-width=200");
+		_configurationEntryParser.parse(
+			"12345:desc:max-height=100;max-width=200");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testMissingUUID() {
-		_configurationEntryParser.parse("test:max-height=100;max-width=200");
+		_configurationEntryParser.parse(
+			"test:desc:max-height=100;max-width=200");
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -298,9 +347,10 @@ public class AdaptiveMediaImageConfigurationEntryParserTest {
 	public void testValidString() {
 		AdaptiveMediaImageConfigurationEntry configurationEntry =
 			_configurationEntryParser.parse(
-				"test:12345:max-height=100;max-width=200:enabled=true");
+				"test:desc:12345:max-height=100;max-width=200:enabled=true");
 
 		Assert.assertEquals("test", configurationEntry.getName());
+		Assert.assertEquals("desc", configurationEntry.getDescription());
 		Assert.assertEquals("12345", configurationEntry.getUUID());
 		Assert.assertTrue(configurationEntry.isEnabled());
 

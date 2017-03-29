@@ -22,6 +22,7 @@ import com.liferay.adaptive.media.image.mediaquery.MediaQuery;
 import com.liferay.adaptive.media.image.url.AdaptiveMediaImageURLFactory;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.util.StringPool;
 
 import java.net.URI;
 
@@ -552,6 +553,11 @@ public class MediaQueryProviderImplTest {
 
 		AdaptiveMediaImageConfigurationEntry configurationEntry =
 			new AdaptiveMediaImageConfigurationEntry() {
+
+				@Override
+				public String getDescription() {
+					return StringPool.BLANK;
+				}
 
 				@Override
 				public String getName() {

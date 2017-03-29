@@ -74,6 +74,12 @@ if (ListUtil.isNotEmpty(selectedConfigurationEntries)) {
 							<%= HtmlUtil.escape(configurationEntry.getName()) %>
 						</dd>
 						<dt class="h5">
+							<liferay-ui:message key="description" />
+						</dt>
+						<dd class="h6 sidebar-caption">
+							<%= HtmlUtil.escape(configurationEntry.getDescription()) %>
+						</dd>
+						<dt class="h5">
 							<liferay-ui:message key="state" />
 						</dt>
 						<dd class="h6 sidebar-caption">

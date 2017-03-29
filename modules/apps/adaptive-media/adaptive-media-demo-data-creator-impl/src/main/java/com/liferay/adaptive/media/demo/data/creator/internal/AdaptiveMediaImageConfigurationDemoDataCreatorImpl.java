@@ -74,6 +74,7 @@ public class AdaptiveMediaImageConfigurationDemoDataCreatorImpl
 			configurationEntry =
 				_configurationHelper.addAdaptiveMediaImageConfigurationEntry(
 					companyId, configurationVariant.getName(),
+					configurationVariant.getDescription(),
 					configurationVariant.getUuid(),
 					configurationVariant.getProperties());
 

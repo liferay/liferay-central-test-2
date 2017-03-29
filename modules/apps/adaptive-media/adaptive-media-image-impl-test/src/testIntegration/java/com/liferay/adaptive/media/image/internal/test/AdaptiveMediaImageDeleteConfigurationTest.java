@@ -81,7 +81,7 @@ public class AdaptiveMediaImageDeleteConfigurationTest
 		properties.put("max-width", "100");
 
 		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "one", "1", properties);
+			TestPropsValues.getCompanyId(), "one", "onedesc", "1", properties);
 
 		properties = new HashMap<>();
 
@@ -89,7 +89,7 @@ public class AdaptiveMediaImageDeleteConfigurationTest
 		properties.put("max-width", "200");
 
 		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "two", "2", properties);
+			TestPropsValues.getCompanyId(), "two", "twodesc", "2", properties);
 
 		Optional<AdaptiveMediaImageConfigurationEntry>
 			firstConfigurationEntryOptional =
@@ -143,7 +143,7 @@ public class AdaptiveMediaImageDeleteConfigurationTest
 		properties.put("max-width", "100");
 
 		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "one", "1", properties);
+			TestPropsValues.getCompanyId(), "one", "onedesc", "1", properties);
 
 		configurationHelper.disableAdaptiveMediaImageConfigurationEntry(
 			TestPropsValues.getCompanyId(), "1");
@@ -154,7 +154,7 @@ public class AdaptiveMediaImageDeleteConfigurationTest
 		properties.put("max-width", "200");
 
 		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "two", "2", properties);
+			TestPropsValues.getCompanyId(), "two", "twodesc", "2", properties);
 
 		configurationHelper.disableAdaptiveMediaImageConfigurationEntry(
 			TestPropsValues.getCompanyId(), "2");
@@ -191,7 +191,8 @@ public class AdaptiveMediaImageDeleteConfigurationTest
 
 			AdaptiveMediaImageConfigurationEntry configurationEntry =
 				configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-					TestPropsValues.getCompanyId(), "one", "1", properties);
+					TestPropsValues.getCompanyId(), "one", "desc", "1",
+					properties);
 
 			FileEntry fileEntry = _addFileEntry();
 
@@ -228,7 +229,7 @@ public class AdaptiveMediaImageDeleteConfigurationTest
 		properties.put("max-width", "100");
 
 		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "one", "1", properties);
+			TestPropsValues.getCompanyId(), "one", "desc", "1", properties);
 
 		Optional<AdaptiveMediaImageConfigurationEntry>
 			configurationEntryOptional =
@@ -270,7 +271,7 @@ public class AdaptiveMediaImageDeleteConfigurationTest
 		properties.put("max-width", "100");
 
 		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "one", "1", properties);
+			TestPropsValues.getCompanyId(), "one", "desc", "1", properties);
 
 		Optional<AdaptiveMediaImageConfigurationEntry>
 			configurationEntryOptional =
@@ -294,7 +295,7 @@ public class AdaptiveMediaImageDeleteConfigurationTest
 		properties.put("max-width", "100");
 
 		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "one", "1", properties);
+			TestPropsValues.getCompanyId(), "one", "onedesc", "1", properties);
 
 		properties = new HashMap<>();
 
@@ -302,7 +303,7 @@ public class AdaptiveMediaImageDeleteConfigurationTest
 		properties.put("max-width", "200");
 
 		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "two", "2", properties);
+			TestPropsValues.getCompanyId(), "two", "twodesc", "2", properties);
 
 		Optional<AdaptiveMediaImageConfigurationEntry>
 			firstConfigurationEntryOptional =
@@ -348,7 +349,7 @@ public class AdaptiveMediaImageDeleteConfigurationTest
 		properties.put("max-width", "100");
 
 		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "one", "1", properties);
+			TestPropsValues.getCompanyId(), "one", "onedesc", "1", properties);
 
 		properties = new HashMap<>();
 
@@ -356,7 +357,7 @@ public class AdaptiveMediaImageDeleteConfigurationTest
 		properties.put("max-width", "200");
 
 		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "two", "2", properties);
+			TestPropsValues.getCompanyId(), "two", "twodesc", "2", properties);
 
 		Optional<AdaptiveMediaImageConfigurationEntry>
 			firstConfigurationEntryOptional =
@@ -402,7 +403,7 @@ public class AdaptiveMediaImageDeleteConfigurationTest
 		properties.put("max-width", "100");
 
 		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "one", "1", properties);
+			TestPropsValues.getCompanyId(), "one", "desc", "1", properties);
 
 		Optional<AdaptiveMediaImageConfigurationEntry>
 			configurationEntryOptional =
@@ -435,7 +436,7 @@ public class AdaptiveMediaImageDeleteConfigurationTest
 		properties.put("max-width", "100");
 
 		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "one", "1", properties);
+			TestPropsValues.getCompanyId(), "one", "onedesc", "1", properties);
 
 		properties = new HashMap<>();
 
@@ -443,7 +444,7 @@ public class AdaptiveMediaImageDeleteConfigurationTest
 		properties.put("max-width", "200");
 
 		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "two", "2", properties);
+			TestPropsValues.getCompanyId(), "two", "twodesc", "2", properties);
 
 		Optional<AdaptiveMediaImageConfigurationEntry>
 			firstConfigurationEntryOptional =
@@ -491,7 +492,7 @@ public class AdaptiveMediaImageDeleteConfigurationTest
 		properties.put("max-width", "100");
 
 		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "one", "1", properties);
+			TestPropsValues.getCompanyId(), "one", "onedesc", "1", properties);
 
 		configurationHelper.disableAdaptiveMediaImageConfigurationEntry(
 			TestPropsValues.getCompanyId(), "1");
@@ -502,7 +503,7 @@ public class AdaptiveMediaImageDeleteConfigurationTest
 		properties.put("max-width", "200");
 
 		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "two", "2", properties);
+			TestPropsValues.getCompanyId(), "two", "twodesc", "2", properties);
 
 		configurationHelper.forceDeleteAdaptiveMediaImageConfigurationEntry(
 			TestPropsValues.getCompanyId(), "2");
@@ -536,7 +537,8 @@ public class AdaptiveMediaImageDeleteConfigurationTest
 
 			AdaptiveMediaImageConfigurationEntry configurationEntry =
 				configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-					TestPropsValues.getCompanyId(), "one", "1", properties);
+					TestPropsValues.getCompanyId(), "one", "desc", "1",
+					properties);
 
 			FileEntry fileEntry = _addFileEntry();
 
@@ -570,7 +572,7 @@ public class AdaptiveMediaImageDeleteConfigurationTest
 		properties.put("max-width", "100");
 
 		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "one", "1", properties);
+			TestPropsValues.getCompanyId(), "one", "desc", "1", properties);
 
 		Optional<AdaptiveMediaImageConfigurationEntry>
 			configurationEntryOptional =
@@ -609,7 +611,7 @@ public class AdaptiveMediaImageDeleteConfigurationTest
 		properties.put("max-width", "100");
 
 		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "one", "1", properties);
+			TestPropsValues.getCompanyId(), "one", "desc", "1", properties);
 
 		Optional<AdaptiveMediaImageConfigurationEntry>
 			configurationEntryOptional =
@@ -639,7 +641,7 @@ public class AdaptiveMediaImageDeleteConfigurationTest
 		properties.put("max-width", "100");
 
 		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "one", "1", properties);
+			TestPropsValues.getCompanyId(), "one", "onedesc", "1", properties);
 
 		properties = new HashMap<>();
 
@@ -647,7 +649,7 @@ public class AdaptiveMediaImageDeleteConfigurationTest
 		properties.put("max-width", "200");
 
 		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "two", "2", properties);
+			TestPropsValues.getCompanyId(), "two", "twodesc", "2", properties);
 
 		Optional<AdaptiveMediaImageConfigurationEntry>
 			firstConfigurationEntryOptional =
@@ -690,7 +692,7 @@ public class AdaptiveMediaImageDeleteConfigurationTest
 		properties.put("max-width", "100");
 
 		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "one", "1", properties);
+			TestPropsValues.getCompanyId(), "one", "onedesc", "1", properties);
 
 		properties = new HashMap<>();
 
@@ -698,7 +700,7 @@ public class AdaptiveMediaImageDeleteConfigurationTest
 		properties.put("max-width", "200");
 
 		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "two", "2", properties);
+			TestPropsValues.getCompanyId(), "two", "twodesc", "2", properties);
 
 		Optional<AdaptiveMediaImageConfigurationEntry>
 			firstConfigurationEntryOptional =

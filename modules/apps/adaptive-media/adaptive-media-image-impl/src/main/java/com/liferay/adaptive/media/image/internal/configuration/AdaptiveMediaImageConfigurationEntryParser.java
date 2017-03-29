@@ -46,7 +46,10 @@ import org.osgi.service.component.annotations.Component;
  *
  * <ul>
  * <li>
- * <code>name</code> is an arbitrary {@link String}
+ * <code>name</code> is an arbitrary encoded {@link String}
+ * </li>
+ * <li>
+ * <code>description</code> is an arbitrary encoded {@link String}
  * </li>
  * <li>
  * <code>uuid</code> is a unique identifier. No two configuration entries should
@@ -79,6 +82,8 @@ public class AdaptiveMediaImageConfigurationEntryParser {
 		StringBundler sb = new StringBundler();
 
 		sb.append(HttpUtil.encodeURL(configurationEntry.getName()));
+		sb.append(StringPool.COLON);
+		sb.append(HttpUtil.encodeURL(configurationEntry.getDescription()));
 		sb.append(StringPool.COLON);
 		sb.append(configurationEntry.getUUID());
 		sb.append(StringPool.COLON);
@@ -125,7 +130,7 @@ public class AdaptiveMediaImageConfigurationEntryParser {
 
 		String[] fields = _FIELD_SEPARATOR_PATTERN.split(s);
 
-		if ((fields.length != 3) && (fields.length != 4)) {
+		if ((fields.length != 4) && (fields.length != 5)) {
 			throw new IllegalArgumentException(
 				"Invalid image adaptive media configuration: " + s);
 		}
@@ -134,14 +139,18 @@ public class AdaptiveMediaImageConfigurationEntryParser {
 
 		name = HttpUtil.decodeURL(name);
 
-		String uuid = fields[1];
+		String description = fields[1];
+
+		description = HttpUtil.decodeURL(description);
+
+		String uuid = fields[2];
 
 		if (Validator.isNull(name) || Validator.isNull(uuid)) {
 			throw new IllegalArgumentException(
 				"Invalid image adaptive media configuration: " + s);
 		}
 
-		String[] attributes = _ATTRIBUTE_SEPARATOR_PATTERN.split(fields[2]);
+		String[] attributes = _ATTRIBUTE_SEPARATOR_PATTERN.split(fields[3]);
 
 		Map<String, String> properties = new HashMap<>();
 
@@ -154,8 +163,8 @@ public class AdaptiveMediaImageConfigurationEntryParser {
 
 		boolean enabled = true;
 
-		if (fields.length == 4) {
-			String disabledAttribute = fields[3];
+		if (fields.length == 5) {
+			String disabledAttribute = fields[4];
 
 			Matcher matcher = _DISABLED_SEPARATOR_PATTERN.matcher(
 				disabledAttribute);
@@ -169,7 +178,7 @@ public class AdaptiveMediaImageConfigurationEntryParser {
 		}
 
 		return new AdaptiveMediaImageConfigurationEntryImpl(
-			name, uuid, properties, enabled);
+			name, description, uuid, properties, enabled);
 	}
 
 	private static final Pattern _ATTRIBUTE_SEPARATOR_PATTERN = Pattern.compile(

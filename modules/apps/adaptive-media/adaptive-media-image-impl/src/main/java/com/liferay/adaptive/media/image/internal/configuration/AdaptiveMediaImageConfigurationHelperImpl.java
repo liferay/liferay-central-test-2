@@ -60,7 +60,7 @@ public class AdaptiveMediaImageConfigurationHelperImpl
 	@Override
 	public AdaptiveMediaImageConfigurationEntry
 			addAdaptiveMediaImageConfigurationEntry(
-				long companyId, String name, String uuid,
+				long companyId, String name, String description, String uuid,
 				Map<String, String> properties)
 		throws AdaptiveMediaImageConfigurationException, IOException {
 
@@ -87,7 +87,7 @@ public class AdaptiveMediaImageConfigurationHelperImpl
 
 		AdaptiveMediaImageConfigurationEntry configurationEntry =
 			new AdaptiveMediaImageConfigurationEntryImpl(
-				name, normalizedUuid, properties, true);
+				name, description, normalizedUuid, properties, true);
 
 		updatedConfigurationEntries.add(configurationEntry);
 
@@ -152,7 +152,9 @@ public class AdaptiveMediaImageConfigurationHelperImpl
 
 		AdaptiveMediaImageConfigurationEntry newConfigurationEntry =
 			new AdaptiveMediaImageConfigurationEntryImpl(
-				configurationEntry.getName(), configurationEntry.getUUID(),
+				configurationEntry.getName(),
+				configurationEntry.getDescription(),
+				configurationEntry.getUUID(),
 				configurationEntry.getProperties(), false);
 
 		updatedConfigurationEntries.add(newConfigurationEntry);
@@ -192,7 +194,9 @@ public class AdaptiveMediaImageConfigurationHelperImpl
 
 		AdaptiveMediaImageConfigurationEntry newConfigurationEntry =
 			new AdaptiveMediaImageConfigurationEntryImpl(
-				configurationEntry.getName(), configurationEntry.getUUID(),
+				configurationEntry.getName(),
+				configurationEntry.getDescription(),
+				configurationEntry.getUUID(),
 				configurationEntry.getProperties(), true);
 
 		updatedConfigurationEntries.add(newConfigurationEntry);
@@ -321,8 +325,8 @@ public class AdaptiveMediaImageConfigurationHelperImpl
 	@Override
 	public AdaptiveMediaImageConfigurationEntry
 			updateAdaptiveMediaImageConfigurationEntry(
-				long companyId, String oldUuid, String name, String newUuid,
-				Map<String, String> properties)
+				long companyId, String oldUuid, String name, String description,
+				String newUuid, Map<String, String> properties)
 		throws AdaptiveMediaImageConfigurationException, IOException {
 
 		_checkName(name);
@@ -367,7 +371,7 @@ public class AdaptiveMediaImageConfigurationHelperImpl
 
 		AdaptiveMediaImageConfigurationEntry configurationEntry =
 			new AdaptiveMediaImageConfigurationEntryImpl(
-				name, normalizedUuid, properties,
+				name, description, normalizedUuid, properties,
 				oldConfigurationEntry.isEnabled());
 
 		updatedConfigurationEntries.add(configurationEntry);

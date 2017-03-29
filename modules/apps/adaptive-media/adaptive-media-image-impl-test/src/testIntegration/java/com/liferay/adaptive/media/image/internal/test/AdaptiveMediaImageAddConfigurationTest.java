@@ -52,6 +52,36 @@ public class AdaptiveMediaImageAddConfigurationTest
 			new LiferayIntegrationTestRule(),
 			SynchronousDestinationTestRule.INSTANCE);
 
+	@Test
+	public void testAddConfigurationEntryWithBlankDescription()
+		throws Exception {
+
+		AdaptiveMediaImageConfigurationHelper configurationHelper =
+			serviceTracker.getService();
+
+		Map<String, String> properties = new HashMap<>();
+
+		properties.put("max-height", "100");
+		properties.put("max-width", "100");
+
+		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
+			TestPropsValues.getCompanyId(), "one", StringPool.BLANK, "1",
+			properties);
+
+		Optional<AdaptiveMediaImageConfigurationEntry>
+			configurationEntryOptional =
+				configurationHelper.getAdaptiveMediaImageConfigurationEntry(
+					TestPropsValues.getCompanyId(), "1");
+
+		Assert.assertTrue(configurationEntryOptional.isPresent());
+
+		AdaptiveMediaImageConfigurationEntry configurationEntry =
+			configurationEntryOptional.get();
+
+		Assert.assertEquals(
+			StringPool.BLANK, configurationEntry.getDescription());
+	}
+
 	@Test(
 		expected = AdaptiveMediaImageConfigurationException.InvalidNameException.class
 	)
@@ -65,7 +95,8 @@ public class AdaptiveMediaImageAddConfigurationTest
 		properties.put("max-width", "100");
 
 		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), StringPool.BLANK, "1", properties);
+			TestPropsValues.getCompanyId(), StringPool.BLANK, "desc", "1",
+			properties);
 	}
 
 	@Test(
@@ -81,8 +112,36 @@ public class AdaptiveMediaImageAddConfigurationTest
 		properties.put("max-width", "100");
 
 		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "one", StringPool.BLANK,
+			TestPropsValues.getCompanyId(), "one", "desc", StringPool.BLANK,
 			properties);
+	}
+
+	@Test
+	public void testAddConfigurationEntryWithColonSemicolonDescription()
+		throws Exception {
+
+		AdaptiveMediaImageConfigurationHelper configurationHelper =
+			serviceTracker.getService();
+
+		Map<String, String> properties = new HashMap<>();
+
+		properties.put("max-height", "100");
+
+		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
+			TestPropsValues.getCompanyId(), "one", "desc:;desc", "1",
+			properties);
+
+		Optional<AdaptiveMediaImageConfigurationEntry>
+			configurationEntryOptional =
+				configurationHelper.getAdaptiveMediaImageConfigurationEntry(
+					TestPropsValues.getCompanyId(), "1");
+
+		Assert.assertTrue(configurationEntryOptional.isPresent());
+
+		AdaptiveMediaImageConfigurationEntry configurationEntry =
+			configurationEntryOptional.get();
+
+		Assert.assertEquals("desc:;desc", configurationEntry.getDescription());
 	}
 
 	@Test
@@ -97,7 +156,8 @@ public class AdaptiveMediaImageAddConfigurationTest
 		properties.put("max-height", "100");
 
 		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "one:;one", "1", properties);
+			TestPropsValues.getCompanyId(), "one:;one", "desc", "1",
+			properties);
 
 		Optional<AdaptiveMediaImageConfigurationEntry>
 			configurationEntryOptional =
@@ -125,7 +185,7 @@ public class AdaptiveMediaImageAddConfigurationTest
 		properties.put("max-width", "100");
 
 		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "one", "1", properties);
+			TestPropsValues.getCompanyId(), "one", "onedesc", "1", properties);
 
 		configurationHelper.disableAdaptiveMediaImageConfigurationEntry(
 			TestPropsValues.getCompanyId(), "1");
@@ -136,7 +196,7 @@ public class AdaptiveMediaImageAddConfigurationTest
 		properties.put("max-width", "200");
 
 		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "two", "2", properties);
+			TestPropsValues.getCompanyId(), "two", "twodesc", "2", properties);
 
 		Collection<AdaptiveMediaImageConfigurationEntry> configurationEntries =
 			configurationHelper.getAdaptiveMediaImageConfigurationEntries(
@@ -168,7 +228,7 @@ public class AdaptiveMediaImageAddConfigurationTest
 		properties.put("max-height", "100");
 
 		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "one", "1", properties);
+			TestPropsValues.getCompanyId(), "one", "desc", "1", properties);
 
 		Optional<AdaptiveMediaImageConfigurationEntry>
 			configurationEntryOptional =
@@ -197,7 +257,7 @@ public class AdaptiveMediaImageAddConfigurationTest
 		properties.put("max-width", "100");
 
 		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "one", "1", properties);
+			TestPropsValues.getCompanyId(), "one", "desc", "1", properties);
 
 		Optional<AdaptiveMediaImageConfigurationEntry>
 			configurationEntryOptional =
@@ -230,7 +290,7 @@ public class AdaptiveMediaImageAddConfigurationTest
 		properties.put("max-height", "-10");
 
 		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "one", "1", properties);
+			TestPropsValues.getCompanyId(), "one", "desc", "1", properties);
 	}
 
 	@Test(
@@ -247,7 +307,7 @@ public class AdaptiveMediaImageAddConfigurationTest
 		properties.put("max-width", "-10");
 
 		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "one", "1", properties);
+			TestPropsValues.getCompanyId(), "one", "desc", "1", properties);
 	}
 
 	@Test(
@@ -264,7 +324,7 @@ public class AdaptiveMediaImageAddConfigurationTest
 		properties.put("max-height", "Invalid");
 
 		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "one", "1", properties);
+			TestPropsValues.getCompanyId(), "one", "desc", "1", properties);
 	}
 
 	@Test(
@@ -281,7 +341,7 @@ public class AdaptiveMediaImageAddConfigurationTest
 		properties.put("max-width", "Invalid");
 
 		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "one", "1", properties);
+			TestPropsValues.getCompanyId(), "one", "desc", "1", properties);
 	}
 
 	@Test(
@@ -296,7 +356,7 @@ public class AdaptiveMediaImageAddConfigurationTest
 		Map<String, String> properties = new HashMap<>();
 
 		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "one", "1", properties);
+			TestPropsValues.getCompanyId(), "one", "desc", "1", properties);
 	}
 
 	@Test(
@@ -312,7 +372,7 @@ public class AdaptiveMediaImageAddConfigurationTest
 		properties.put("max-width", "100");
 
 		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "one", "1", properties);
+			TestPropsValues.getCompanyId(), "one", "onedesc", "1", properties);
 
 		properties = new HashMap<>();
 
@@ -320,7 +380,7 @@ public class AdaptiveMediaImageAddConfigurationTest
 		properties.put("max-width", "200");
 
 		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "one", "2", properties);
+			TestPropsValues.getCompanyId(), "one", "onedesc", "2", properties);
 	}
 
 	@Test(
@@ -336,7 +396,7 @@ public class AdaptiveMediaImageAddConfigurationTest
 		properties.put("max-width", "100");
 
 		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "one", "1", properties);
+			TestPropsValues.getCompanyId(), "one", "onedesc", "1", properties);
 
 		properties = new HashMap<>();
 
@@ -344,7 +404,7 @@ public class AdaptiveMediaImageAddConfigurationTest
 		properties.put("max-width", "200");
 
 		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "two", "1", properties);
+			TestPropsValues.getCompanyId(), "two", "twodesc", "1", properties);
 	}
 
 }

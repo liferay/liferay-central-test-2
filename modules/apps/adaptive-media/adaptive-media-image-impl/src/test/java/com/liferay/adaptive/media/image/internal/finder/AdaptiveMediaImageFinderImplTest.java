@@ -993,7 +993,7 @@ public class AdaptiveMediaImageFinderImplTest {
 
 		AdaptiveMediaImageConfigurationEntry configurationEntry2 =
 			new AdaptiveMediaImageConfigurationEntryImpl(
-				StringUtil.randomString(), "medium",
+				StringUtil.randomString(), StringUtil.randomString(), "medium",
 				MapUtil.fromArray("max-height", "200", "max-width", "200"),
 				false);
 
@@ -1127,7 +1127,7 @@ public class AdaptiveMediaImageFinderImplTest {
 
 		AdaptiveMediaImageConfigurationEntry configurationEntry2 =
 			new AdaptiveMediaImageConfigurationEntryImpl(
-				StringUtil.randomString(), "2",
+				StringUtil.randomString(), StringUtil.randomString(), "2",
 				MapUtil.fromArray("max-height", "200"), false);
 
 		AdaptiveMediaImageQueryBuilder.ConfigurationStatus

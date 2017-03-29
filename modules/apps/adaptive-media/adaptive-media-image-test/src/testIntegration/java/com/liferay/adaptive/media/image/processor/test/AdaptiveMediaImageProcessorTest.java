@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
 import com.liferay.portal.kernel.test.util.TestPropsValues;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.service.test.ServiceTestUtil;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
@@ -243,7 +244,8 @@ public class AdaptiveMediaImageProcessorTest {
 		properties.put("max-width", "100");
 
 		_configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "small", "0", properties);
+			TestPropsValues.getCompanyId(), "small", StringPool.BLANK, "0",
+			properties);
 	}
 
 	private byte[] _getImageBytes() throws Exception {
