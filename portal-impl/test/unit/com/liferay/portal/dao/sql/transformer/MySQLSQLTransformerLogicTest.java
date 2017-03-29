@@ -68,14 +68,14 @@ public class MySQLSQLTransformerLogicTest
 
 	@Test
 	public void testReplaceSupportsStringCaseSensitiveQuery() {
+		String sql = "select * from foo";
+
 		MySQLDB mySQLDB = new MySQLDB(5, 7);
 
 		mySQLDB.setSupportsStringCaseSensitiveQuery(true);
 
 		SQLTransformer sqlTransformer = SQLTransformerFactory.getSQLTransformer(
 			mySQLDB);
-
-		String sql = "select * from foo";
 
 		Assert.assertEquals(sql, sqlTransformer.transform(sql));
 

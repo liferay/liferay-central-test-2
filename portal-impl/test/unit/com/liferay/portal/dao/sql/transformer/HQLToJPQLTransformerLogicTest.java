@@ -46,30 +46,30 @@ public class HQLToJPQLTransformerLogicTest {
 
 	@Test
 	public void testTransformWithMultipleQuestions() {
-		String sql = "select * from Foo where";
+		String originalSQL = "select * from Foo where";
 
-		String expectedSql = new String(sql);
+		String transformedSQL = new String(originalSQL);
 
 		for (int i = 1; i <= 100; i++) {
 			String positionalParameter = " and foo" + i + " = ?";
 
-			sql += positionalParameter;
-			expectedSql += positionalParameter + i;
+			originalSQL += positionalParameter;
+			transformedSQL += positionalParameter + i;
 		}
 
 		Function<String, String> positionalParameterFunction =
 			HQLToJPQLTransformerLogic.getPositionalParameterFunction();
 
 		Assert.assertEquals(
-			expectedSql, positionalParameterFunction.apply(sql));
+			transformedSQL, positionalParameterFunction.apply(originalSQL));
 	}
 
 	@Test
 	public void testTransformWithOneQuestion() {
-		String sql = "select * from Foo where foo = ?";
-
 		Function<String, String> positionalParameterFunction =
 			HQLToJPQLTransformerLogic.getPositionalParameterFunction();
+
+		String sql = "select * from Foo where foo = ?";
 
 		Assert.assertEquals(
 			"select * from Foo where foo = ?1",
@@ -77,7 +77,7 @@ public class HQLToJPQLTransformerLogicTest {
 	}
 
 	@Test
-	public void testTransformWithZeroQuestions() {
+	public void testTransformWithNoQuestions() {
 		String sql = "select * from Foo";
 
 		Function<String, String> positionalParameterFunction =
