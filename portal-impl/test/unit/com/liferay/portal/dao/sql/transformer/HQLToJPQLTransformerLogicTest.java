@@ -65,6 +65,16 @@ public class HQLToJPQLTransformerLogicTest {
 	}
 
 	@Test
+	public void testTransformWithNoQuestions() {
+		String sql = "select * from Foo";
+
+		Function<String, String> positionalParameterFunction =
+			HQLToJPQLTransformerLogic.getPositionalParameterFunction();
+
+		Assert.assertEquals(sql, positionalParameterFunction.apply(sql));
+	}
+
+	@Test
 	public void testTransformWithOneQuestion() {
 		Function<String, String> positionalParameterFunction =
 			HQLToJPQLTransformerLogic.getPositionalParameterFunction();
@@ -74,16 +84,6 @@ public class HQLToJPQLTransformerLogicTest {
 		Assert.assertEquals(
 			"select * from Foo where foo = ?1",
 			positionalParameterFunction.apply(sql));
-	}
-
-	@Test
-	public void testTransformWithNoQuestions() {
-		String sql = "select * from Foo";
-
-		Function<String, String> positionalParameterFunction =
-			HQLToJPQLTransformerLogic.getPositionalParameterFunction();
-
-		Assert.assertEquals(sql, positionalParameterFunction.apply(sql));
 	}
 
 }
