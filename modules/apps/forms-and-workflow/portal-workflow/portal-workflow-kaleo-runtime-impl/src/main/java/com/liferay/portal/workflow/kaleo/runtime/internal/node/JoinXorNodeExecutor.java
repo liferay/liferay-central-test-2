@@ -86,8 +86,8 @@ public class JoinXorNodeExecutor extends BaseNodeExecutor {
 				childrenKaleoInstanceToken.getKaleoInstanceTokenId());
 		}
 
-		_completeAllChildrenTasks(
-			parentKaleoInstanceToken, currentKaleoNode.getKaleoNodeId(),
+		_completeChildrenKaleoTaskInstanceTokens(
+			parentKaleoInstanceToken, currentKaleoNode,
 			executionContext.getServiceContext());
 
 		return true;
@@ -142,14 +142,14 @@ public class JoinXorNodeExecutor extends BaseNodeExecutor {
 		List<PathElement> remainingPathElements) {
 	}
 
-	private void _completeAllChildrenTasks(
-			KaleoInstanceToken currentKaleoInstanceToken, long stopNodeId,
+	private void _completeChildrenKaleoTaskInstanceTokens(
+			KaleoInstanceToken kaleoInstanceToken, KaleoNode stopKaleoNode,
 			ServiceContext serviceContext)
 		throws PortalException {
 
 		List<KaleoTaskInstanceToken> kaleoTaskInstanceTokens =
 			_getChildrentKaleoTaskInstanceTokens(
-				currentKaleoInstanceToken, stopNodeId, serviceContext);
+				kaleoInstanceToken, stopKaleoNode, serviceContext);
 
 		for (KaleoTaskInstanceToken kaleoTaskInstanceToken :
 				kaleoTaskInstanceTokens) {
@@ -174,29 +174,14 @@ public class JoinXorNodeExecutor extends BaseNodeExecutor {
 			kaleoTaskInstanceTokenId, serviceContext);
 	}
 
-	private KaleoTaskInstanceToken _getKaleoTaksInstanceToken(
-			KaleoNode kaleoNode, KaleoInstanceToken kaleoInstanceToken)
-		throws PortalException {
-
-		long kaleoNodeId = kaleoNode.getKaleoNodeId();
-
-		KaleoTask kaleoTask = _kaleoTaskLocalService.getKaleoNodeKaleoTask(
-			kaleoNodeId);
-
-		long kaleoTaskId = kaleoTask.getKaleoTaskId();
-
-		long kaleoInstanceId = kaleoInstanceToken.getKaleoInstanceId();
-
-		return _kaleoTaskInstanceTokenLocalService.getKaleoTaskInstanceTokens(
-			kaleoInstanceId, kaleoTaskId);
-	}
-
 	private List<KaleoTaskInstanceToken> _getChildrentKaleoTaskInstanceTokens(
-			KaleoInstanceToken currentKaleoInstanceToken, long stopNodeId,
-			ServiceContext serviceContext)
+			KaleoInstanceToken currentKaleoInstanceToken,
+			KaleoNode stopKaleoNode, ServiceContext serviceContext)
 		throws PortalException {
 
-		if (_isFinalKaleoInstanceToken(currentKaleoInstanceToken, stopNodeId)) {
+		if (_isFinalKaleoInstanceToken(
+				currentKaleoInstanceToken, stopKaleoNode)) {
+
 			return Collections.emptyList();
 		}
 
@@ -221,17 +206,36 @@ public class JoinXorNodeExecutor extends BaseNodeExecutor {
 
 			kaleoTaskInstanceTokens.addAll(
 				_getChildrentKaleoTaskInstanceTokens(
-					childKaleoInstanceToken, stopNodeId, serviceContext));
+					childKaleoInstanceToken, stopKaleoNode, serviceContext));
 		}
 
 		return kaleoTaskInstanceTokens;
 	}
 
-	private boolean _isFinalKaleoInstanceToken(
-			KaleoInstanceToken kaleoInstanceToken, long stopNodeId)
+	private KaleoTaskInstanceToken _getKaleoTaksInstanceToken(
+			KaleoNode kaleoNode, KaleoInstanceToken kaleoInstanceToken)
 		throws PortalException {
 
-		if (kaleoInstanceToken.getCurrentKaleoNodeId() == stopNodeId) {
+		long kaleoNodeId = kaleoNode.getKaleoNodeId();
+
+		KaleoTask kaleoTask = _kaleoTaskLocalService.getKaleoNodeKaleoTask(
+			kaleoNodeId);
+
+		long kaleoTaskId = kaleoTask.getKaleoTaskId();
+
+		long kaleoInstanceId = kaleoInstanceToken.getKaleoInstanceId();
+
+		return _kaleoTaskInstanceTokenLocalService.getKaleoTaskInstanceTokens(
+			kaleoInstanceId, kaleoTaskId);
+	}
+
+	private boolean _isFinalKaleoInstanceToken(
+			KaleoInstanceToken kaleoInstanceToken, KaleoNode stopKaleoNode)
+		throws PortalException {
+
+		if (kaleoInstanceToken.getCurrentKaleoNodeId() ==
+				stopKaleoNode.getKaleoNodeId()) {
+
 			return true;
 		}
 
