@@ -24,12 +24,14 @@ import com.liferay.journal.constants.JournalPortletKeys;
 import com.liferay.journal.constants.JournalWebKeys;
 import com.liferay.journal.model.JournalArticle;
 import com.liferay.journal.model.JournalArticleConstants;
+import com.liferay.journal.model.JournalArticleDisplay;
 import com.liferay.journal.model.JournalFolder;
 import com.liferay.journal.model.JournalFolderConstants;
 import com.liferay.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.journal.service.JournalArticleServiceUtil;
 import com.liferay.journal.service.JournalFolderLocalServiceUtil;
 import com.liferay.journal.service.JournalFolderServiceUtil;
+import com.liferay.journal.util.JournalContent;
 import com.liferay.journal.util.JournalConverter;
 import com.liferay.journal.util.comparator.FolderArticleArticleIdComparator;
 import com.liferay.journal.util.comparator.FolderArticleDisplayDateComparator;
@@ -50,12 +52,15 @@ import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProviderUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.PortalPreferences;
 import com.liferay.portal.kernel.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.portal.kernel.portlet.PortletRequestModel;
 import com.liferay.portal.kernel.portlet.PortletURLUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
@@ -154,6 +159,49 @@ public class JournalDisplayContext {
 		_article = ActionUtil.getArticle(_request);
 
 		return _article;
+	}
+
+	public JournalArticleDisplay getArticleDisplay() throws Exception {
+		if (_articleDisplay != null) {
+			return _articleDisplay;
+		}
+
+		JournalArticle article = getArticle();
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)_liferayPortletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
+		int page = ParamUtil.getInteger(_liferayPortletRequest, "page");
+
+		if (article.isApproved()) {
+			JournalContent journalContent =
+				(JournalContent)_liferayPortletRequest.getAttribute(
+					JournalWebKeys.JOURNAL_CONTENT);
+
+			_articleDisplay = journalContent.getDisplay(
+				article.getGroupId(), article.getArticleId(),
+				article.getVersion(), null, null, themeDisplay.getLanguageId(),
+				page,
+				new PortletRequestModel(
+					_liferayPortletRequest, _liferayPortletResponse),
+				themeDisplay);
+		}
+		else {
+			try {
+				_articleDisplay =
+					JournalArticleLocalServiceUtil.getArticleDisplay(
+						article, null, null, themeDisplay.getLanguageId(), page,
+						new PortletRequestModel(
+							_liferayPortletRequest, _liferayPortletResponse),
+						themeDisplay);
+			}
+			catch (PortalException pe) {
+				_log.error(pe, pe);
+			}
+		}
+
+		return _articleDisplay;
 	}
 
 	public String[] getCharactersBlacklist() throws PortalException {
@@ -1266,8 +1314,12 @@ public class JournalDisplayContext {
 		return jsonArray;
 	}
 
+	private static final Log _log = LogFactoryUtil.getLog(
+		JournalDisplayContext.class);
+
 	private String[] _addMenuFavItems;
 	private JournalArticle _article;
+	private JournalArticleDisplay _articleDisplay;
 	private SearchContainer _articleSearchContainer;
 	private DDMFormValues _ddmFormValues;
 	private String _ddmStructureKey;
