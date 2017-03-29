@@ -95,6 +95,38 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 	}
 
 	@Test
+	public void testExportContentWithMultipleStaticReferences()
+		throws Exception {
+
+		String prefix = StringUtil.randomString();
+		String infix = StringUtil.randomString();
+		String suffix = StringUtil.randomString();
+
+		String content =
+			prefix + "<picture data-fileentryid=\"1\"></picture>" + infix +
+			"<picture data-fileentryid=\"2\"></picture>" + suffix;
+
+		_makeOverridenProcessorReturn(content);
+
+		_defineFileEntryToExport(1, _fileEntry1);
+		_defineFileEntryToExport(2, _fileEntry2);
+
+		String replacedContent =
+			_blogsExportImportContentProcessor.replaceExportContentReferences(
+				_portletDataContext, _blogsEntry, content, false, false);
+
+		StringBundler sb = new StringBundler();
+
+		sb.append(prefix);
+		sb.append("PLACEHOLDER_1");
+		sb.append(infix);
+		sb.append("PLACEHOLDER_2");
+		sb.append(suffix);
+
+		Assert.assertEquals(sb.toString(), replacedContent);
+	}
+
+	@Test
 	public void testExportContentWithNoReferences() throws Exception {
 		String content = StringUtil.randomString();
 
@@ -143,6 +175,25 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 	}
 
 	@Test
+	public void testExportContentWithStaticReference() throws Exception {
+		String prefix = StringUtil.randomString();
+		String suffix = StringUtil.randomString();
+
+		String content =
+			prefix + "<picture data-fileentryid=\"1\"></picture>" + suffix;
+
+		_makeOverridenProcessorReturn(content);
+
+		_defineFileEntryToExport(1, _fileEntry1);
+
+		String replacedContent =
+			_blogsExportImportContentProcessor.replaceExportContentReferences(
+				_portletDataContext, _blogsEntry, content, false, false);
+
+		Assert.assertEquals(prefix + "PLACEHOLDER_1" + suffix, replacedContent);
+	}
+
+	@Test
 	public void testExportContentWithDynamicReferenceDoesNotEscape()
 		throws Exception {
 
@@ -160,10 +211,52 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 	}
 
 	@Test
+	public void testExportContentWithStaticReferenceDoesNotEscape()
+		throws Exception {
+
+		String content = "&<picture data-fileentryid=\"1\"></picture>&";
+
+		_makeOverridenProcessorReturn(content);
+
+		_defineFileEntryToExport(1, _fileEntry1);
+
+		Assert.assertEquals(
+			_blogsExportImportContentProcessor.replaceExportContentReferences(
+				_portletDataContext, _blogsEntry, content, false, false),
+			_blogsExportImportContentProcessor.replaceExportContentReferences(
+				_portletDataContext, _blogsEntry, content, false, true));
+	}
+
+	@Test
 	public void testImportContentIgnoresInvalidDynamicReferences()
 		throws Exception {
 
 		String content = "[$adaptive-media-dynamic-media path=\"PATH_1\"$]";
+
+		_makeOverridenProcessorReturn(content);
+
+		_defineFileEntryToImport(1, _fileEntry1);
+
+		Mockito.doThrow(
+			PortalException.class
+		).when(
+			_dlAppLocalService
+		).getFileEntry(
+			Mockito.anyLong()
+		);
+
+		String replacedContent =
+			_blogsExportImportContentProcessor.replaceImportContentReferences(
+				_portletDataContext, _blogsEntry, content);
+
+		Assert.assertEquals(content, replacedContent);
+	}
+
+	@Test
+	public void testImportContentIgnoresInvalidStaticReferences()
+		throws Exception {
+
+		String content = "[$adaptive-media-static-media path=\"PATH_1\"$]";
 
 		_makeOverridenProcessorReturn(content);
 
@@ -212,6 +305,33 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 	}
 
 	@Test
+	public void testImportContentWithMultipleStaticReferences()
+		throws Exception {
+
+		String prefix = StringUtil.randomString();
+		String infix = StringUtil.randomString();
+		String suffix = StringUtil.randomString();
+
+		String content =
+			prefix + "[$adaptive-media-static-media path=\"PATH_1\"$]" +
+			infix + "[$adaptive-media-static-media path=\"PATH_2\"$]" +
+			suffix;
+
+		_makeOverridenProcessorReturn(content);
+
+		_defineFileEntryToImport(1, _fileEntry1);
+		_defineFileEntryToImport(2, _fileEntry2);
+
+		String replacedContent =
+			_blogsExportImportContentProcessor.replaceImportContentReferences(
+				_portletDataContext, _blogsEntry, content);
+
+		Assert.assertEquals(
+			prefix + "PLACEHOLDER_1" + infix + "PLACEHOLDER_2" + suffix,
+			replacedContent);
+	}
+
+	@Test
 	public void testImportContentWithNoReferences() throws Exception {
 		String content = StringUtil.randomString();
 
@@ -244,11 +364,49 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 		Assert.assertEquals(prefix + "PLACEHOLDER_1" + suffix, replacedContent);
 	}
 
+	@Test
+	public void testImportContentWithStaticReference() throws Exception {
+		String prefix = StringUtil.randomString();
+		String suffix = StringUtil.randomString();
+
+		String content =
+			prefix + "[$adaptive-media-static-media path=\"PATH_1\"$]" +
+			suffix;
+
+		_makeOverridenProcessorReturn(content);
+
+		_defineFileEntryToImport(1, _fileEntry1);
+
+		String replacedContent =
+			_blogsExportImportContentProcessor.replaceImportContentReferences(
+				_portletDataContext, _blogsEntry, content);
+
+		Assert.assertEquals(prefix + "PLACEHOLDER_1" + suffix, replacedContent);
+	}
+
 	@Test(expected = NoSuchFileEntryException.class)
 	public void testValidateContentFailsWhenInvalidDynamicReferences()
 		throws Exception {
 
 		String content = "<img data-fileentryid=\"1\" src=\"PATH_1\" />";
+
+		Mockito.doThrow(
+			NoSuchFileEntryException.class
+		).when(
+			_dlAppLocalService
+		).getFileEntry(
+			Mockito.anyLong()
+		);
+
+		_blogsExportImportContentProcessor.validateContentReferences(
+			1, content);
+	}
+
+	@Test(expected = NoSuchFileEntryException.class)
+	public void testValidateContentFailsWhenInvalidStaticReferences()
+		throws Exception {
+
+		String content = "<picture data-fileentryid=\"1\"></picture>";
 
 		Mockito.doThrow(
 			NoSuchFileEntryException.class
@@ -298,6 +456,24 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 			1, content);
 	}
 
+	@Test
+	public void testValidateContentSucceedsWhenAllStaticReferencesAreValid()
+		throws Exception {
+
+		String content = "<picture data-fileentryid=\"1\"></picture>";
+
+		Mockito.doReturn(
+			_fileEntry1
+		).when(
+			_dlAppLocalService
+		).getFileEntry(
+			Mockito.anyLong()
+		);
+
+		_blogsExportImportContentProcessor.validateContentReferences(
+			1, content);
+	}
+
 	private void _defineFileEntryToExport(long fileEntryId, FileEntry fileEntry)
 		throws PortalException {
 
@@ -314,6 +490,14 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 		).when(
 			_adaptiveMediaExportImportPlaceholderFactory
 		).createDynamicPlaceholder(
+			fileEntry
+		);
+
+		Mockito.doReturn(
+			"PLACEHOLDER_" + fileEntryId
+		).when(
+			_adaptiveMediaExportImportPlaceholderFactory
+		).createStaticPlaceholder(
 			fileEntry
 		);
 	}
@@ -342,6 +526,14 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 		).when(
 			_adaptiveMediaTagFactory
 		).createDynamicTag(
+			fileEntry
+		);
+
+		Mockito.doReturn(
+			"PLACEHOLDER_" + fileEntryId
+		).when(
+			_adaptiveMediaTagFactory
+		).createStaticTag(
 			fileEntry
 		);
 
