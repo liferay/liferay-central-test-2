@@ -762,13 +762,13 @@ public class StagingImpl implements Staging {
 		else if (e instanceof LARFileException) {
 			LARFileException lfe = (LARFileException)e;
 
-			if (lfe.getType() == LARFileException.TYPE_MISSING_MANIFEST) {
-				errorMessage = LanguageUtil.get(
-					resourceBundle, "missing-manifest.xml");
-			}
-			else if (lfe.getType() == LARFileException.TYPE_INVALID_MANIFEST) {
+			if (lfe.getType() == LARFileException.TYPE_INVALID_MANIFEST) {
 				errorMessage = LanguageUtil.format(
 					resourceBundle, "invalid-manifest.xml-x", lfe.getMessage());
+			}
+			else if (lfe.getType() == LARFileException.TYPE_MISSING_MANIFEST) {
+				errorMessage = LanguageUtil.get(
+					resourceBundle, "missing-manifest.xml");
 			}
 			else {
 				errorMessage = LanguageUtil.get(
