@@ -17,13 +17,11 @@ package com.liferay.adaptive.media.blogs.internal.exportimport.content.processor
 import com.liferay.document.library.kernel.service.DLAppLocalService;
 import com.liferay.exportimport.content.processor.ExportImportContentProcessor;
 import com.liferay.exportimport.kernel.lar.PortletDataContext;
-import com.liferay.exportimport.kernel.lar.StagedModelDataHandlerUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.StagedModel;
 import com.liferay.portal.kernel.repository.model.FileEntry;
-import com.liferay.portal.kernel.xml.Element;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -56,6 +54,10 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessor
 				portletDataContext, stagedModel, content,
 				exportReferencedContent, escapeContent);
 
+		AdaptiveMediaReferenceExporter referenceExporter =
+			new AdaptiveMediaReferenceExporter(
+				portletDataContext, stagedModel, exportReferencedContent);
+
 		StringBuffer sb = new StringBuffer();
 
 		Matcher matcher = _DYNAMIC_TAG_REGEXP.matcher(replacedContent);
@@ -71,19 +73,7 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessor
 					_exportImportPlaceholderFactory.createDynamicPlaceholder(
 						fileEntry)));
 
-			if (exportReferencedContent) {
-				StagedModelDataHandlerUtil.exportReferenceStagedModel(
-					portletDataContext, stagedModel, fileEntry,
-					PortletDataContext.REFERENCE_TYPE_DEPENDENCY);
-			}
-			else {
-				Element element = portletDataContext.getExportDataElement(
-					stagedModel);
-
-				portletDataContext.addReferenceElement(
-					stagedModel, element, fileEntry,
-					PortletDataContext.REFERENCE_TYPE_DEPENDENCY, true);
-			}
+			referenceExporter.exportReference(fileEntry);
 		}
 
 		matcher.appendTail(sb);
