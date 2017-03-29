@@ -668,10 +668,6 @@ public class DDLRecordSetVersionUtil {
 		return getPersistence().countAll();
 	}
 
-	public static java.util.Set<java.lang.String> getBadColumnNames() {
-		return getPersistence().getBadColumnNames();
-	}
-
 	public static DDLRecordSetVersionPersistence getPersistence() {
 		return _serviceTracker.getService();
 	}

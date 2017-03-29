@@ -68,7 +68,6 @@ public class DDLRecordSetVersionWrapper implements DDLRecordSetVersion,
 		attributes.put("DDMStructureVersionId", getDDMStructureVersionId());
 		attributes.put("name", getName());
 		attributes.put("description", getDescription());
-		attributes.put("settings", getSettings());
 		attributes.put("version", getVersion());
 		attributes.put("status", getStatus());
 		attributes.put("statusByUserId", getStatusByUserId());
@@ -139,12 +138,6 @@ public class DDLRecordSetVersionWrapper implements DDLRecordSetVersion,
 
 		if (description != null) {
 			setDescription(description);
-		}
-
-		String settings = (String)attributes.get("settings");
-
-		if (settings != null) {
-			setSettings(settings);
 		}
 
 		String version = (String)attributes.get("version");
@@ -473,16 +466,6 @@ public class DDLRecordSetVersionWrapper implements DDLRecordSetVersion,
 	@Override
 	public java.lang.String getNameCurrentValue() {
 		return _ddlRecordSetVersion.getNameCurrentValue();
-	}
-
-	/**
-	* Returns the settings of this ddl record set version.
-	*
-	* @return the settings of this ddl record set version
-	*/
-	@Override
-	public java.lang.String getSettings() {
-		return _ddlRecordSetVersion.getSettings();
 	}
 
 	/**
@@ -912,16 +895,6 @@ public class DDLRecordSetVersionWrapper implements DDLRecordSetVersion,
 	@Override
 	public void setRecordSetVersionId(long recordSetVersionId) {
 		_ddlRecordSetVersion.setRecordSetVersionId(recordSetVersionId);
-	}
-
-	/**
-	* Sets the settings of this ddl record set version.
-	*
-	* @param settings the settings of this ddl record set version
-	*/
-	@Override
-	public void setSettings(java.lang.String settings) {
-		_ddlRecordSetVersion.setSettings(settings);
 	}
 
 	/**

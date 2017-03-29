@@ -44,7 +44,6 @@ public class DDLRecordSetVersionSoap implements Serializable {
 		soapModel.setDDMStructureVersionId(model.getDDMStructureVersionId());
 		soapModel.setName(model.getName());
 		soapModel.setDescription(model.getDescription());
-		soapModel.setSettings(model.getSettings());
 		soapModel.setVersion(model.getVersion());
 		soapModel.setStatus(model.getStatus());
 		soapModel.setStatusByUserId(model.getStatusByUserId());
@@ -185,14 +184,6 @@ public class DDLRecordSetVersionSoap implements Serializable {
 		_description = description;
 	}
 
-	public String getSettings() {
-		return _settings;
-	}
-
-	public void setSettings(String settings) {
-		_settings = settings;
-	}
-
 	public String getVersion() {
 		return _version;
 	}
@@ -243,7 +234,6 @@ public class DDLRecordSetVersionSoap implements Serializable {
 	private long _DDMStructureVersionId;
 	private String _name;
 	private String _description;
-	private String _settings;
 	private String _version;
 	private int _status;
 	private long _statusByUserId;

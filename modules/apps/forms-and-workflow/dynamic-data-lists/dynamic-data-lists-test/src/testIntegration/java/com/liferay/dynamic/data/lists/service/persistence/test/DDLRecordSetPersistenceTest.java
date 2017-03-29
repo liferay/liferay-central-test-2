@@ -135,10 +135,6 @@ public class DDLRecordSetPersistenceTest {
 
 		newDDLRecordSet.setUserName(RandomTestUtil.randomString());
 
-		newDDLRecordSet.setVersionUserId(RandomTestUtil.nextLong());
-
-		newDDLRecordSet.setVersionUserName(RandomTestUtil.randomString());
-
 		newDDLRecordSet.setCreateDate(RandomTestUtil.nextDate());
 
 		newDDLRecordSet.setModifiedDate(RandomTestUtil.nextDate());
@@ -146,8 +142,6 @@ public class DDLRecordSetPersistenceTest {
 		newDDLRecordSet.setDDMStructureId(RandomTestUtil.nextLong());
 
 		newDDLRecordSet.setRecordSetKey(RandomTestUtil.randomString());
-
-		newDDLRecordSet.setVersion(RandomTestUtil.randomString());
 
 		newDDLRecordSet.setName(RandomTestUtil.randomString());
 
@@ -177,10 +171,6 @@ public class DDLRecordSetPersistenceTest {
 			newDDLRecordSet.getUserId());
 		Assert.assertEquals(existingDDLRecordSet.getUserName(),
 			newDDLRecordSet.getUserName());
-		Assert.assertEquals(existingDDLRecordSet.getVersionUserId(),
-			newDDLRecordSet.getVersionUserId());
-		Assert.assertEquals(existingDDLRecordSet.getVersionUserName(),
-			newDDLRecordSet.getVersionUserName());
 		Assert.assertEquals(Time.getShortTimestamp(
 				existingDDLRecordSet.getCreateDate()),
 			Time.getShortTimestamp(newDDLRecordSet.getCreateDate()));
@@ -191,8 +181,6 @@ public class DDLRecordSetPersistenceTest {
 			newDDLRecordSet.getDDMStructureId());
 		Assert.assertEquals(existingDDLRecordSet.getRecordSetKey(),
 			newDDLRecordSet.getRecordSetKey());
-		Assert.assertEquals(existingDDLRecordSet.getVersion(),
-			newDDLRecordSet.getVersion());
 		Assert.assertEquals(existingDDLRecordSet.getName(),
 			newDDLRecordSet.getName());
 		Assert.assertEquals(existingDDLRecordSet.getDescription(),
@@ -287,9 +275,8 @@ public class DDLRecordSetPersistenceTest {
 	protected OrderByComparator<DDLRecordSet> getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create("DDLRecordSet", "uuid",
 			true, "recordSetId", true, "groupId", true, "companyId", true,
-			"userId", true, "userName", true, "versionUserId", true,
-			"versionUserName", true, "createDate", true, "modifiedDate", true,
-			"DDMStructureId", true, "recordSetKey", true, "version", true,
+			"userId", true, "userName", true, "createDate", true,
+			"modifiedDate", true, "DDMStructureId", true, "recordSetKey", true,
 			"name", true, "description", true, "minDisplayRows", true, "scope",
 			true, "lastPublishDate", true);
 	}
@@ -525,10 +512,6 @@ public class DDLRecordSetPersistenceTest {
 
 		ddlRecordSet.setUserName(RandomTestUtil.randomString());
 
-		ddlRecordSet.setVersionUserId(RandomTestUtil.nextLong());
-
-		ddlRecordSet.setVersionUserName(RandomTestUtil.randomString());
-
 		ddlRecordSet.setCreateDate(RandomTestUtil.nextDate());
 
 		ddlRecordSet.setModifiedDate(RandomTestUtil.nextDate());
@@ -536,8 +519,6 @@ public class DDLRecordSetPersistenceTest {
 		ddlRecordSet.setDDMStructureId(RandomTestUtil.nextLong());
 
 		ddlRecordSet.setRecordSetKey(RandomTestUtil.randomString());
-
-		ddlRecordSet.setVersion(RandomTestUtil.randomString());
 
 		ddlRecordSet.setName(RandomTestUtil.randomString());
 

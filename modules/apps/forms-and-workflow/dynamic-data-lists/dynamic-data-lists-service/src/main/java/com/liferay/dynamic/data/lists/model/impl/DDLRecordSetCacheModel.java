@@ -66,7 +66,7 @@ public class DDLRecordSetCacheModel implements CacheModel<DDLRecordSet>,
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(39);
+		StringBundler sb = new StringBundler(33);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -80,10 +80,6 @@ public class DDLRecordSetCacheModel implements CacheModel<DDLRecordSet>,
 		sb.append(userId);
 		sb.append(", userName=");
 		sb.append(userName);
-		sb.append(", versionUserId=");
-		sb.append(versionUserId);
-		sb.append(", versionUserName=");
-		sb.append(versionUserName);
 		sb.append(", createDate=");
 		sb.append(createDate);
 		sb.append(", modifiedDate=");
@@ -92,8 +88,6 @@ public class DDLRecordSetCacheModel implements CacheModel<DDLRecordSet>,
 		sb.append(DDMStructureId);
 		sb.append(", recordSetKey=");
 		sb.append(recordSetKey);
-		sb.append(", version=");
-		sb.append(version);
 		sb.append(", name=");
 		sb.append(name);
 		sb.append(", description=");
@@ -134,15 +128,6 @@ public class DDLRecordSetCacheModel implements CacheModel<DDLRecordSet>,
 			ddlRecordSetImpl.setUserName(userName);
 		}
 
-		ddlRecordSetImpl.setVersionUserId(versionUserId);
-
-		if (versionUserName == null) {
-			ddlRecordSetImpl.setVersionUserName(StringPool.BLANK);
-		}
-		else {
-			ddlRecordSetImpl.setVersionUserName(versionUserName);
-		}
-
 		if (createDate == Long.MIN_VALUE) {
 			ddlRecordSetImpl.setCreateDate(null);
 		}
@@ -164,13 +149,6 @@ public class DDLRecordSetCacheModel implements CacheModel<DDLRecordSet>,
 		}
 		else {
 			ddlRecordSetImpl.setRecordSetKey(recordSetKey);
-		}
-
-		if (version == null) {
-			ddlRecordSetImpl.setVersion(StringPool.BLANK);
-		}
-		else {
-			ddlRecordSetImpl.setVersion(version);
 		}
 
 		if (name == null) {
@@ -224,15 +202,11 @@ public class DDLRecordSetCacheModel implements CacheModel<DDLRecordSet>,
 
 		userId = objectInput.readLong();
 		userName = objectInput.readUTF();
-
-		versionUserId = objectInput.readLong();
-		versionUserName = objectInput.readUTF();
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
 
 		DDMStructureId = objectInput.readLong();
 		recordSetKey = objectInput.readUTF();
-		version = objectInput.readUTF();
 		name = objectInput.readUTF();
 		description = objectInput.readUTF();
 
@@ -270,15 +244,6 @@ public class DDLRecordSetCacheModel implements CacheModel<DDLRecordSet>,
 			objectOutput.writeUTF(userName);
 		}
 
-		objectOutput.writeLong(versionUserId);
-
-		if (versionUserName == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(versionUserName);
-		}
-
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
 
@@ -289,13 +254,6 @@ public class DDLRecordSetCacheModel implements CacheModel<DDLRecordSet>,
 		}
 		else {
 			objectOutput.writeUTF(recordSetKey);
-		}
-
-		if (version == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(version);
 		}
 
 		if (name == null) {
@@ -334,13 +292,10 @@ public class DDLRecordSetCacheModel implements CacheModel<DDLRecordSet>,
 	public long companyId;
 	public long userId;
 	public String userName;
-	public long versionUserId;
-	public String versionUserName;
 	public long createDate;
 	public long modifiedDate;
 	public long DDMStructureId;
 	public String recordSetKey;
-	public String version;
 	public String name;
 	public String description;
 	public int minDisplayRows;
