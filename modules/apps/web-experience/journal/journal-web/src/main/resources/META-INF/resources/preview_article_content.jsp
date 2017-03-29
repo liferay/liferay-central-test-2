@@ -18,7 +18,6 @@
 
 <%
 JournalArticleDisplay articleDisplay = journalDisplayContext.getArticleDisplay();
-JournalArticle article = journalDisplayContext.getArticle();
 %>
 
 <div class="journal-article-preview">
@@ -26,6 +25,11 @@ JournalArticle article = journalDisplayContext.getArticle();
 </div>
 
 <c:if test="<%= articleDisplay.isPaginate() %>">
+
+	<%
+	JournalArticle article = journalDisplayContext.getArticle();
+	%>
+
 	<liferay-portlet:renderURL plid="<%= JournalUtil.getPreviewPlid(article, themeDisplay) %>" varImpl="previewArticleContentURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
 		<portlet:param name="mvcPath" value="/preview_article_content.jsp" />
 		<portlet:param name="groupId" value="<%= String.valueOf(article.getGroupId()) %>" />

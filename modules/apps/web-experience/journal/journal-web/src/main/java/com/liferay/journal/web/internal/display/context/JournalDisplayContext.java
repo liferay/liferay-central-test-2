@@ -31,7 +31,6 @@ import com.liferay.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.journal.service.JournalArticleServiceUtil;
 import com.liferay.journal.service.JournalFolderLocalServiceUtil;
 import com.liferay.journal.service.JournalFolderServiceUtil;
-import com.liferay.journal.util.JournalContent;
 import com.liferay.journal.util.JournalConverter;
 import com.liferay.journal.util.comparator.FolderArticleArticleIdComparator;
 import com.liferay.journal.util.comparator.FolderArticleDisplayDateComparator;
@@ -166,40 +165,16 @@ public class JournalDisplayContext {
 			return _articleDisplay;
 		}
 
-		JournalArticle article = getArticle();
-
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)_liferayPortletRequest.getAttribute(
-				WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		int page = ParamUtil.getInteger(_liferayPortletRequest, "page");
 
-		if (article.isApproved()) {
-			JournalContent journalContent =
-				(JournalContent)_liferayPortletRequest.getAttribute(
-					JournalWebKeys.JOURNAL_CONTENT);
-
-			_articleDisplay = journalContent.getDisplay(
-				article.getGroupId(), article.getArticleId(),
-				article.getVersion(), null, null, themeDisplay.getLanguageId(),
-				page,
-				new PortletRequestModel(
-					_liferayPortletRequest, _liferayPortletResponse),
-				themeDisplay);
-		}
-		else {
-			try {
-				_articleDisplay =
-					JournalArticleLocalServiceUtil.getArticleDisplay(
-						article, null, null, themeDisplay.getLanguageId(), page,
-						new PortletRequestModel(
-							_liferayPortletRequest, _liferayPortletResponse),
-						themeDisplay);
-			}
-			catch (PortalException pe) {
-				_log.error(pe, pe);
-			}
-		}
+		_articleDisplay = JournalArticleLocalServiceUtil.getArticleDisplay(
+			getArticle(), null, null, themeDisplay.getLanguageId(), page,
+			new PortletRequestModel(
+				_liferayPortletRequest, _liferayPortletResponse),
+			themeDisplay);
 
 		return _articleDisplay;
 	}
