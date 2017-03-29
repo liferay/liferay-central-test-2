@@ -14,6 +14,7 @@
 
 package com.liferay.adaptive.media.blogs.internal.exportimport.content.processor;
 
+import com.liferay.adaptive.media.blogs.internal.util.CheckedFunction;
 import com.liferay.document.library.kernel.service.DLAppLocalService;
 import com.liferay.exportimport.content.processor.ExportImportContentProcessor;
 import com.liferay.exportimport.kernel.lar.PortletDataContext;
@@ -23,6 +24,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.StagedModel;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 
+import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -58,27 +60,9 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessor
 			new AdaptiveMediaReferenceExporter(
 				portletDataContext, stagedModel, exportReferencedContent);
 
-		StringBuffer sb = new StringBuffer();
-
-		Matcher matcher = _DYNAMIC_TAG_REGEXP.matcher(replacedContent);
-
-		while (matcher.find()) {
-			long fileEntryId = Long.parseLong(matcher.group(1));
-
-			FileEntry fileEntry = _dlAppLocalService.getFileEntry(fileEntryId);
-
-			matcher.appendReplacement(
-				sb,
-				Matcher.quoteReplacement(
-					_exportImportPlaceholderFactory.createDynamicPlaceholder(
-						fileEntry)));
-
-			referenceExporter.exportReference(fileEntry);
-		}
-
-		matcher.appendTail(sb);
-
-		return sb.toString();
+		return _replace(
+			replacedContent, _DYNAMIC_TAG_REGEXP, referenceExporter,
+			_exportImportPlaceholderFactory::createDynamicPlaceholder);
 	}
 
 	@Override
@@ -95,31 +79,9 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessor
 			_exportImportContentProcessor.replaceImportContentReferences(
 				portletDataContext, stagedModel, content);
 
-		StringBuffer sb = new StringBuffer();
-
-		Matcher matcher = _DYNAMIC_PLACEHOLDER_REGEXP.matcher(replacedContent);
-
-		while (matcher.find()) {
-			String path = matcher.group(1);
-
-			if (embeddedReferenceSet.containsReference(path)) {
-				long fileEntryId = embeddedReferenceSet.importReference(path);
-
-				FileEntry fileEntry = _getFileEntry(fileEntryId);
-
-				if (fileEntry != null) {
-					matcher.appendReplacement(
-						sb,
-						Matcher.quoteReplacement(
-							_adaptiveMediaTagFactory.createDynamicTag(
-								fileEntry)));
-				}
-			}
-		}
-
-		matcher.appendTail(sb);
-
-		return sb.toString();
+		return _replace(
+			replacedContent, _DYNAMIC_PLACEHOLDER_REGEXP, embeddedReferenceSet,
+			_adaptiveMediaTagFactory::createDynamicTag);
 	}
 
 	@Reference(unbind = "-")
@@ -185,6 +147,64 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessor
 
 			return null;
 		}
+	}
+
+	private String _replace(
+			String content, Pattern regexp,
+			AdaptiveMediaReferenceExporter referenceExporter,
+			Function<FileEntry, String> placeholderFactory)
+		throws PortalException {
+
+		StringBuffer sb = new StringBuffer();
+
+		Matcher matcher = regexp.matcher(content);
+
+		while (matcher.find()) {
+			long fileEntryId = Long.parseLong(matcher.group(1));
+
+			FileEntry fileEntry = _dlAppLocalService.getFileEntry(fileEntryId);
+
+			matcher.appendReplacement(
+				sb,
+				Matcher.quoteReplacement(placeholderFactory.apply(fileEntry)));
+
+			referenceExporter.exportReference(fileEntry);
+		}
+
+		matcher.appendTail(sb);
+
+		return sb.toString();
+	}
+
+	private String _replace(
+			String content, Pattern regexp,
+			EmbeddedReferenceSet embeddedReferenceSet,
+			CheckedFunction<FileEntry, String, PortalException> tagFactory)
+		throws PortalException {
+
+		StringBuffer sb = new StringBuffer();
+
+		Matcher matcher = regexp.matcher(content);
+
+		while (matcher.find()) {
+			String path = matcher.group(1);
+
+			if (embeddedReferenceSet.containsReference(path)) {
+				long fileEntryId = embeddedReferenceSet.importReference(path);
+
+				FileEntry fileEntry = _getFileEntry(fileEntryId);
+
+				if (fileEntry != null) {
+					matcher.appendReplacement(
+						sb,
+						Matcher.quoteReplacement(tagFactory.apply(fileEntry)));
+				}
+			}
+		}
+
+		matcher.appendTail(sb);
+
+		return sb.toString();
 	}
 
 	private static final Pattern _DYNAMIC_PLACEHOLDER_REGEXP = Pattern.compile(
