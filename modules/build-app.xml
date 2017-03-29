@@ -30,7 +30,7 @@
 	<target depends="dist-module-artifacts,update-app-marketplace-verson,write-app-change-log" name="build-app">
 		<delete file="${dist.dir}/ticket.list.tmp" />
 
-		<antcall target="git-finalize" />
+		<antcall target="git-clean-up" />
 	</target>
 
 	<target name="build-app-all">
@@ -46,7 +46,7 @@
 			<sequential>
 				<antcall inheritall="false" target="build-app">
 					<param name="app.name" value="@{app.name}" />
-					<param name="git.finalize" value="true" />
+					<param name="git.clean.up" value="true" />
 				</antcall>
 			</sequential>
 		</for>
@@ -295,7 +295,7 @@
 		</pathconvert>
 	</target>
 
-	<target if="git.finalize" name="git-finalize">
+	<target if="git.clean.up" name="git-clean-up">
 		<exec dir="${modules.dir}" executable="git" failonerror="true">
 			<arg value="reset" />
 		</exec>
