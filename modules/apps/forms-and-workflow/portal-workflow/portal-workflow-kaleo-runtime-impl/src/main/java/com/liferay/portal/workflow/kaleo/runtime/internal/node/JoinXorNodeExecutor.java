@@ -84,17 +84,11 @@ public class JoinXorNodeExecutor extends BaseNodeExecutor {
 
 			_kaleoInstanceTokenLocalService.completeKaleoInstanceToken(
 				childrenKaleoInstanceToken.getKaleoInstanceTokenId());
-
-			if (childrenKaleoInstanceToken.getKaleoInstanceTokenId() ==
-					kaleoInstanceToken.getKaleoInstanceTokenId()) {
-
-				continue;
-			}
-
-			_completeAllChildrenTasks(
-				childrenKaleoInstanceToken, currentKaleoNode.getKaleoNodeId(),
-				executionContext.getServiceContext());
 		}
+
+		_completeAllChildrenTasks(
+			parentKaleoInstanceToken, currentKaleoNode.getKaleoNodeId(),
+			executionContext.getServiceContext());
 
 		return true;
 	}
