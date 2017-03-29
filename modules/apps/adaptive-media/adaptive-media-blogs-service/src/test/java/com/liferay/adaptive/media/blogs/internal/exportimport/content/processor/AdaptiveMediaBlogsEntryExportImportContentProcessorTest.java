@@ -63,7 +63,9 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 	}
 
 	@Test
-	public void testExportContentWithMultipleReferences() throws Exception {
+	public void testExportContentWithMultipleDynamicReferences()
+		throws Exception {
+
 		String prefix = StringUtil.randomString();
 		String infix = StringUtil.randomString();
 		String suffix = StringUtil.randomString();
@@ -122,7 +124,7 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 	}
 
 	@Test
-	public void testExportContentWithReference() throws Exception {
+	public void testExportContentWithDynamicReference() throws Exception {
 		String prefix = StringUtil.randomString();
 		String suffix = StringUtil.randomString();
 
@@ -141,7 +143,9 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 	}
 
 	@Test
-	public void testExportContentWithReferenceDoesNotEscape() throws Exception {
+	public void testExportContentWithDynamicReferenceDoesNotEscape()
+		throws Exception {
+
 		String content = "&<img data-fileentryid=\"1\" src=\"url\" />&";
 
 		_makeOverridenProcessorReturn(content);
@@ -156,7 +160,9 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 	}
 
 	@Test
-	public void testImportContentIgnoresInvalidReferences() throws Exception {
+	public void testImportContentIgnoresInvalidDynamicReferences()
+		throws Exception {
+
 		String content = "[$adaptive-media-dynamic-media path=\"PATH_1\"$]";
 
 		_makeOverridenProcessorReturn(content);
@@ -179,7 +185,9 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 	}
 
 	@Test
-	public void testImportContentWithMultipleReferences() throws Exception {
+	public void testImportContentWithMultipleDynamicReferences()
+		throws Exception {
+
 		String prefix = StringUtil.randomString();
 		String infix = StringUtil.randomString();
 		String suffix = StringUtil.randomString();
@@ -217,7 +225,7 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 	}
 
 	@Test
-	public void testImportContentWithReference() throws Exception {
+	public void testImportContentWithDynamicReference() throws Exception {
 		String prefix = StringUtil.randomString();
 		String suffix = StringUtil.randomString();
 
@@ -237,7 +245,7 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 	}
 
 	@Test(expected = NoSuchFileEntryException.class)
-	public void testValidateContentFailsWhenInvalidReferences()
+	public void testValidateContentFailsWhenInvalidDynamicReferences()
 		throws Exception {
 
 		String content = "<img data-fileentryid=\"1\" src=\"PATH_1\" />";
@@ -273,7 +281,7 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 	}
 
 	@Test
-	public void testValidateContentSucceedsWhenAllReferencesAreValid()
+	public void testValidateContentSucceedsWhenAllDynamicReferencesAreValid()
 		throws Exception {
 
 		String content = "<img data-fileentryid=\"1\" src=\"PATH_1\" />";
