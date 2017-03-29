@@ -35,8 +35,8 @@ public class JPQLToHQLTransformerLogicTest {
 	}
 
 	@Test
-	public void testReplaceCountWithNoCount() {
-		String sql = "SELECT * FROM Foo where foo != 1";
+	public void testReplaceCountWithIncorrectAlias() {
+		String sql = "SELECT COUNT(bar) FROM Foo foo";
 
 		Function<String, String> function =
 			JPQLToHQLTransformerLogic.getCountFunction();
@@ -45,8 +45,8 @@ public class JPQLToHQLTransformerLogicTest {
 	}
 
 	@Test
-	public void testReplaceCountWithIncorrectAlias() {
-		String sql = "SELECT COUNT(bar) FROM Foo foo";
+	public void testReplaceCountWithNoCount() {
+		String sql = "SELECT * FROM Foo where foo != 1";
 
 		Function<String, String> function =
 			JPQLToHQLTransformerLogic.getCountFunction();
