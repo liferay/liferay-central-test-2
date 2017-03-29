@@ -65,6 +65,8 @@ public class FileEntryAdaptiveMediaImageURLItemSelectorReturnTypeResolver
 
 		JSONObject fileEntryJSONObject = JSONFactoryUtil.createJSONObject();
 
+		fileEntryJSONObject.put("fileEntryId", fileEntry.getFileEntryId());
+
 		String previewURL = DLUtil.getPreviewURL(
 			fileEntry, fileEntry.getFileVersion(), themeDisplay,
 			StringPool.BLANK, false, false);

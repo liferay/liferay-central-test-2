@@ -5,7 +5,7 @@
 
 	var STR_ADAPTIVE_MEDIA_FILE_ENTRY_RETURN_TYPE = 'com.liferay.adaptive.media.image.item.selector.AdaptiveMediaImageFileEntryItemSelectorReturnType';
 
-	var TPL_PICTURE_TAG = '<picture>{sources}<img src="{defaultSrc}"></picture>';
+	var TPL_PICTURE_TAG = '<picture data-fileEntryId="{fileEntryId}">{sources}<img src="{defaultSrc}"></picture>';
 
 	var TPL_SOURCE_TAG = '<source srcset="{srcset}" media="{media}">';
 
@@ -78,6 +78,7 @@
 						TPL_PICTURE_TAG,
 						{
 							defaultSrc: itemValue.defaultSource,
+							fileEntryId: itemValue.fileEntryId,
 							sources: sources
 						}
 					);

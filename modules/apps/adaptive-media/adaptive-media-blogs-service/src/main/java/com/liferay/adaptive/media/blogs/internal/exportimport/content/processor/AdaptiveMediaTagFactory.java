@@ -14,12 +14,15 @@
 
 package com.liferay.adaptive.media.blogs.internal.exportimport.content.processor;
 
+import com.liferay.adaptive.media.AdaptiveMediaException;
+import com.liferay.adaptive.media.image.html.AdaptiveMediaImageHTMLTagFactory;
 import com.liferay.document.library.kernel.util.DLUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.util.StringPool;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Adolfo Pérez
@@ -35,5 +38,23 @@ public class AdaptiveMediaTagFactory {
 			"<img data-fileentryid=\"%d\" src=\"%s\" />",
 			fileEntry.getFileEntryId(), previewURL);
 	}
+
+	public String createStaticTag(FileEntry fileEntry) throws PortalException {
+		try {
+			String previewURL = DLUtil.getPreviewURL(
+				fileEntry, fileEntry.getFileVersion(), null, null);
+
+			String fallbackTag = String.format(
+				"<img src=\"%s\" />", previewURL);
+
+			return _htmlTagFactory.create(fallbackTag, fileEntry);
+		}
+		catch (AdaptiveMediaException ame) {
+			throw new PortalException(ame);
+		}
+	}
+
+	@Reference
+	private AdaptiveMediaImageHTMLTagFactory _htmlTagFactory;
 
 }

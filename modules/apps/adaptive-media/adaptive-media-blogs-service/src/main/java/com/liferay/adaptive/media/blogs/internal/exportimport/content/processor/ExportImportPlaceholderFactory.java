@@ -26,10 +26,17 @@ import org.osgi.service.component.annotations.Component;
 public class ExportImportPlaceholderFactory {
 
 	public String createDynamicPlaceholder(FileEntry fileEntry) {
+		return _format(fileEntry, "adaptive-media-dynamic-media");
+	}
+
+	public String createStaticPlaceholder(FileEntry fileEntry) {
+		return _format(fileEntry, "adaptive-media-static-media");
+	}
+
+	private String _format(FileEntry fileEntry, String tagName) {
 		String path = ExportImportPathUtil.getModelPath(fileEntry);
 
-		return String.format(
-			"[$adaptive-media-dynamic-media path=\"%s\"$]", path);
+		return String.format("[$%s path=\"%s\"$]", tagName, path);
 	}
 
 }

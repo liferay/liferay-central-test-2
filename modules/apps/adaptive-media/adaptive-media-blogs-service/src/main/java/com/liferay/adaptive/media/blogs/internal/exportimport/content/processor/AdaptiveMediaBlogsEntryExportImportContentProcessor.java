@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.StagedModel;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 
+import java.util.Arrays;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -60,9 +61,13 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessor
 			new AdaptiveMediaReferenceExporter(
 				portletDataContext, stagedModel, exportReferencedContent);
 
-		return _replace(
+		replacedContent = _replace(
 			replacedContent, _DYNAMIC_TAG_REGEXP, referenceExporter,
 			_exportImportPlaceholderFactory::createDynamicPlaceholder);
+
+		return _replace(
+			replacedContent, _STATIC_TAG_REGEXP, referenceExporter,
+			_exportImportPlaceholderFactory::createStaticPlaceholder);
 	}
 
 	@Override
@@ -79,9 +84,13 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessor
 			_exportImportContentProcessor.replaceImportContentReferences(
 				portletDataContext, stagedModel, content);
 
-		return _replace(
+		replacedContent = _replace(
 			replacedContent, _DYNAMIC_PLACEHOLDER_REGEXP, embeddedReferenceSet,
 			_adaptiveMediaTagFactory::createDynamicTag);
+
+		return _replace(
+			replacedContent, _STATIC_PLACEHOLDER_REGEXP, embeddedReferenceSet,
+			_adaptiveMediaTagFactory::createStaticTag);
 	}
 
 	@Reference(unbind = "-")
@@ -127,12 +136,16 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessor
 		_exportImportContentProcessor.validateContentReferences(
 			groupId, content);
 
-		Matcher matcher = _DYNAMIC_TAG_REGEXP.matcher(content);
+		for (Pattern pattern : Arrays.asList(
+				_DYNAMIC_TAG_REGEXP, _STATIC_TAG_REGEXP)) {
 
-		while (matcher.find()) {
-			long fileEntryId = Long.parseLong(matcher.group(1));
+			Matcher matcher = pattern.matcher(content);
 
-			_dlAppLocalService.getFileEntry(fileEntryId);
+			while (matcher.find()) {
+				long fileEntryId = Long.parseLong(matcher.group(1));
+
+				_dlAppLocalService.getFileEntry(fileEntryId);
+			}
 		}
 	}
 
@@ -214,6 +227,14 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessor
 	private static final Pattern _DYNAMIC_TAG_REGEXP = Pattern.compile(
 		"<img data-fileentryid=\"(\\d+)\" src=\"[^\"]+\" />",
 		Pattern.CASE_INSENSITIVE);
+
+	private static final Pattern _STATIC_PLACEHOLDER_REGEXP = Pattern.compile(
+		"\\[\\$adaptive-media-static-media path=\"([^\"]+)\"\\$]",
+		Pattern.CASE_INSENSITIVE);
+
+	private static final Pattern _STATIC_TAG_REGEXP = Pattern.compile(
+		"<picture data-fileentryid=\"(\\d+)\">(?:\\s*.*?)*?</picture>",
+		Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		AdaptiveMediaBlogsEntryExportImportContentProcessor.class);
