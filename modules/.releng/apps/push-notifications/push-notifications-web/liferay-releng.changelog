@@ -22,3 +22,8 @@
 # Bundle Version 1.0.5
 #
 38f7ac8dcbc1de30e001434b43bb70a189fa2484^..4ce4ca41890ec00d73bd84b04078dc4fa026bf5d=CLDSVCS-2437
+
+#
+# Bundle Version 1.0.6
+#
+4ce4ca41890ec00d73bd84b04078dc4fa026bf5d^..1ea3424c94c7be549aba4a8df827163beb81fd5e=LPS-67102
