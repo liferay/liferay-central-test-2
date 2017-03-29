@@ -22,8 +22,11 @@ import org.osgi.service.component.annotations.Component;
 /**
  * @author Adolfo Pérez
  */
-@Component(immediate = true, service = ExportImportPlaceholderFactory.class)
-public class ExportImportPlaceholderFactory {
+@Component(
+	immediate = true,
+	service = AdaptiveMediaExportImportPlaceholderFactory.class
+)
+public class AdaptiveMediaExportImportPlaceholderFactory {
 
 	public String createDynamicPlaceholder(FileEntry fileEntry) {
 		return _format(fileEntry, "adaptive-media-dynamic-media");

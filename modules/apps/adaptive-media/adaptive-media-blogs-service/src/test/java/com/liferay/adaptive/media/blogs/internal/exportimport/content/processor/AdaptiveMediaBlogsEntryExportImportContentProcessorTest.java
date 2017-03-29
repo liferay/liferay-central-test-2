@@ -43,17 +43,19 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 			_dlAppLocalService);
 		_blogsExportImportContentProcessor.setExportImportContentProcessor(
 			_exportImportContentProcessor);
-		_blogsExportImportContentProcessor.setExportImportPlaceholderFactory(
-			_exportImportPlaceholderFactory);
+		_blogsExportImportContentProcessor.
+			setAdaptiveMediaExportImportPlaceholderFactory(
+				_adaptiveMediaExportImportPlaceholderFactory);
 		_blogsExportImportContentProcessor.setAdaptiveMediaTagFactory(
 			_adaptiveMediaTagFactory);
-		_blogsExportImportContentProcessor.setEmbeddedReferenceSetFactory(
-			_embeddedReferenceSetFactory);
+		_blogsExportImportContentProcessor.
+			setAdaptiveMediaEmbeddedReferenceSetFactory(
+				_adaptiveMediaEmbeddedReferenceSetFactory);
 
 		Mockito.doReturn(
-			_embeddedReferenceSet
+			_adaptiveMediaEmbeddedReferenceSet
 		).when(
-			_embeddedReferenceSetFactory
+			_adaptiveMediaEmbeddedReferenceSetFactory
 		).create(
 			Mockito.any(PortletDataContext.class),
 			Mockito.any(StagedModel.class)
@@ -302,7 +304,7 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 		Mockito.doReturn(
 			"PLACEHOLDER_" + fileEntryId
 		).when(
-			_exportImportPlaceholderFactory
+			_adaptiveMediaExportImportPlaceholderFactory
 		).createDynamicPlaceholder(
 			fileEntry
 		);
@@ -314,7 +316,7 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 		Mockito.doReturn(
 			true
 		).when(
-			_embeddedReferenceSet
+			_adaptiveMediaEmbeddedReferenceSet
 		).containsReference(
 			"PATH_" + fileEntryId
 		);
@@ -322,7 +324,7 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 		Mockito.doReturn(
 			fileEntryId
 		).when(
-			_embeddedReferenceSet
+			_adaptiveMediaEmbeddedReferenceSet
 		).importReference(
 			"PATH_" + fileEntryId
 		);
@@ -367,15 +369,24 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 		);
 
 		Mockito.doReturn(
-			_embeddedReferenceSet
+			_adaptiveMediaEmbeddedReferenceSet
 		).when(
-			_embeddedReferenceSetFactory
+			_adaptiveMediaEmbeddedReferenceSetFactory
 		).create(
 			Mockito.any(PortletDataContext.class),
 			Mockito.any(StagedModel.class)
 		);
 	}
 
+	private final AdaptiveMediaEmbeddedReferenceSet
+		_adaptiveMediaEmbeddedReferenceSet = Mockito.mock(
+			AdaptiveMediaEmbeddedReferenceSet.class);
+	private AdaptiveMediaEmbeddedReferenceSetFactory
+		_adaptiveMediaEmbeddedReferenceSetFactory = Mockito.mock(
+			AdaptiveMediaEmbeddedReferenceSetFactory.class);
+	private final AdaptiveMediaExportImportPlaceholderFactory
+		_adaptiveMediaExportImportPlaceholderFactory = Mockito.mock(
+			AdaptiveMediaExportImportPlaceholderFactory.class);
 	private final AdaptiveMediaTagFactory _adaptiveMediaTagFactory =
 		Mockito.mock(AdaptiveMediaTagFactory.class);
 	private final BlogsEntry _blogsEntry = Mockito.mock(BlogsEntry.class);
@@ -384,16 +395,9 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 			new AdaptiveMediaBlogsEntryExportImportContentProcessor();
 	private final DLAppLocalService _dlAppLocalService = Mockito.mock(
 		DLAppLocalService.class);
-	private final EmbeddedReferenceSet _embeddedReferenceSet = Mockito.mock(
-		EmbeddedReferenceSet.class);
-	private EmbeddedReferenceSetFactory _embeddedReferenceSetFactory =
-		Mockito.mock(EmbeddedReferenceSetFactory.class);
 	private final ExportImportContentProcessor<String>
 		_exportImportContentProcessor = Mockito.mock(
 			ExportImportContentProcessor.class);
-	private final ExportImportPlaceholderFactory
-		_exportImportPlaceholderFactory = Mockito.mock(
-			ExportImportPlaceholderFactory.class);
 	private final FileEntry _fileEntry1 = Mockito.mock(FileEntry.class);
 	private final FileEntry _fileEntry2 = Mockito.mock(FileEntry.class);
 	private final PortletDataContext _portletDataContext = Mockito.mock(

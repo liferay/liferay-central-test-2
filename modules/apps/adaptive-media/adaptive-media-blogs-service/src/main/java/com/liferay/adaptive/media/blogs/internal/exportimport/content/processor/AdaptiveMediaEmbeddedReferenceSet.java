@@ -26,9 +26,9 @@ import java.util.Map;
 /**
  * @author Adolfo Pérez
  */
-public class EmbeddedReferenceSet {
+public class AdaptiveMediaEmbeddedReferenceSet {
 
-	public EmbeddedReferenceSet(
+	public AdaptiveMediaEmbeddedReferenceSet(
 		PortletDataContext portletDataContext, StagedModel stagedModel,
 		Map<String, Long> embeddedReferences) {
 

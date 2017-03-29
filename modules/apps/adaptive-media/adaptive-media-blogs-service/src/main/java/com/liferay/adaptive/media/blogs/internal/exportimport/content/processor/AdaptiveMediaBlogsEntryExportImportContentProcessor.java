@@ -63,11 +63,13 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessor
 
 		replacedContent = _replace(
 			replacedContent, _DYNAMIC_TAG_REGEXP, referenceExporter,
-			_exportImportPlaceholderFactory::createDynamicPlaceholder);
+			_adaptiveMediaExportImportPlaceholderFactory::
+				createDynamicPlaceholder);
 
 		return _replace(
 			replacedContent, _STATIC_TAG_REGEXP, referenceExporter,
-			_exportImportPlaceholderFactory::createStaticPlaceholder);
+			_adaptiveMediaExportImportPlaceholderFactory::
+				createStaticPlaceholder);
 	}
 
 	@Override
@@ -76,8 +78,8 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessor
 			String content)
 		throws Exception {
 
-		EmbeddedReferenceSet embeddedReferenceSet =
-			_embeddedReferenceSetFactory.create(
+		AdaptiveMediaEmbeddedReferenceSet adaptiveMediaEmbeddedReferenceSet =
+			_adaptiveMediaEmbeddedReferenceSetFactory.create(
 				portletDataContext, stagedModel);
 
 		String replacedContent =
@@ -85,12 +87,32 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessor
 				portletDataContext, stagedModel, content);
 
 		replacedContent = _replace(
-			replacedContent, _DYNAMIC_PLACEHOLDER_REGEXP, embeddedReferenceSet,
+			replacedContent, _DYNAMIC_PLACEHOLDER_REGEXP,
+			adaptiveMediaEmbeddedReferenceSet,
 			_adaptiveMediaTagFactory::createDynamicTag);
 
 		return _replace(
-			replacedContent, _STATIC_PLACEHOLDER_REGEXP, embeddedReferenceSet,
+			replacedContent, _STATIC_PLACEHOLDER_REGEXP,
+			adaptiveMediaEmbeddedReferenceSet,
 			_adaptiveMediaTagFactory::createStaticTag);
+	}
+
+	@Reference(unbind = "-")
+	public void setAdaptiveMediaEmbeddedReferenceSetFactory(
+		AdaptiveMediaEmbeddedReferenceSetFactory
+			adaptiveMediaEmbeddedReferenceSetFactory) {
+
+		_adaptiveMediaEmbeddedReferenceSetFactory =
+			adaptiveMediaEmbeddedReferenceSetFactory;
+	}
+
+	@Reference(unbind = "-")
+	public void setAdaptiveMediaExportImportPlaceholderFactory(
+		AdaptiveMediaExportImportPlaceholderFactory
+			adaptiveMediaExportImportPlaceholderFactory) {
+
+		_adaptiveMediaExportImportPlaceholderFactory =
+			adaptiveMediaExportImportPlaceholderFactory;
 	}
 
 	@Reference(unbind = "-")
@@ -105,13 +127,6 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessor
 		_dlAppLocalService = dlAppLocalService;
 	}
 
-	@Reference(unbind = "-")
-	public void setEmbeddedReferenceSetFactory(
-		EmbeddedReferenceSetFactory embeddedReferenceSetFactory) {
-
-		_embeddedReferenceSetFactory = embeddedReferenceSetFactory;
-	}
-
 	@Reference(
 		target = "(objectClass=com.liferay.blogs.internal.exportimport.content.processor.BlogsEntryExportImportContentProcessor)",
 		unbind = "-"
@@ -120,13 +135,6 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessor
 		ExportImportContentProcessor<String> exportImportContentProcessor) {
 
 		_exportImportContentProcessor = exportImportContentProcessor;
-	}
-
-	@Reference(unbind = "-")
-	public void setExportImportPlaceholderFactory(
-		ExportImportPlaceholderFactory exportImportPlaceholderFactory) {
-
-		_exportImportPlaceholderFactory = exportImportPlaceholderFactory;
 	}
 
 	@Override
@@ -164,6 +172,38 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessor
 
 	private String _replace(
 			String content, Pattern regexp,
+			AdaptiveMediaEmbeddedReferenceSet adaptiveMediaEmbeddedReferenceSet,
+			CheckedFunction<FileEntry, String, PortalException> tagFactory)
+		throws PortalException {
+
+		StringBuffer sb = new StringBuffer();
+
+		Matcher matcher = regexp.matcher(content);
+
+		while (matcher.find()) {
+			String path = matcher.group(1);
+
+			if (adaptiveMediaEmbeddedReferenceSet.containsReference(path)) {
+				long fileEntryId =
+					adaptiveMediaEmbeddedReferenceSet.importReference(path);
+
+				FileEntry fileEntry = _getFileEntry(fileEntryId);
+
+				if (fileEntry != null) {
+					matcher.appendReplacement(
+						sb,
+						Matcher.quoteReplacement(tagFactory.apply(fileEntry)));
+				}
+			}
+		}
+
+		matcher.appendTail(sb);
+
+		return sb.toString();
+	}
+
+	private String _replace(
+			String content, Pattern regexp,
 			AdaptiveMediaReferenceExporter referenceExporter,
 			Function<FileEntry, String> placeholderFactory)
 		throws PortalException {
@@ -182,37 +222,6 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessor
 				Matcher.quoteReplacement(placeholderFactory.apply(fileEntry)));
 
 			referenceExporter.exportReference(fileEntry);
-		}
-
-		matcher.appendTail(sb);
-
-		return sb.toString();
-	}
-
-	private String _replace(
-			String content, Pattern regexp,
-			EmbeddedReferenceSet embeddedReferenceSet,
-			CheckedFunction<FileEntry, String, PortalException> tagFactory)
-		throws PortalException {
-
-		StringBuffer sb = new StringBuffer();
-
-		Matcher matcher = regexp.matcher(content);
-
-		while (matcher.find()) {
-			String path = matcher.group(1);
-
-			if (embeddedReferenceSet.containsReference(path)) {
-				long fileEntryId = embeddedReferenceSet.importReference(path);
-
-				FileEntry fileEntry = _getFileEntry(fileEntryId);
-
-				if (fileEntry != null) {
-					matcher.appendReplacement(
-						sb,
-						Matcher.quoteReplacement(tagFactory.apply(fileEntry)));
-				}
-			}
 		}
 
 		matcher.appendTail(sb);
@@ -239,10 +248,12 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessor
 	private static final Log _log = LogFactoryUtil.getLog(
 		AdaptiveMediaBlogsEntryExportImportContentProcessor.class);
 
+	private AdaptiveMediaEmbeddedReferenceSetFactory
+		_adaptiveMediaEmbeddedReferenceSetFactory;
+	private AdaptiveMediaExportImportPlaceholderFactory
+		_adaptiveMediaExportImportPlaceholderFactory;
 	private AdaptiveMediaTagFactory _adaptiveMediaTagFactory;
 	private DLAppLocalService _dlAppLocalService;
-	private EmbeddedReferenceSetFactory _embeddedReferenceSetFactory;
 	private ExportImportContentProcessor<String> _exportImportContentProcessor;
-	private ExportImportPlaceholderFactory _exportImportPlaceholderFactory;
 
 }
