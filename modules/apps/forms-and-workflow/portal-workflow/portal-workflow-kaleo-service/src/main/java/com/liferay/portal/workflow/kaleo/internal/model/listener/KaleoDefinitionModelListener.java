@@ -65,6 +65,10 @@ public class KaleoDefinitionModelListener
 	public void onAfterRemove(final KaleoDefinition kaleoDefinition)
 		throws ModelListenerException {
 
+		if (kaleoDefinition == null) {
+			return;
+		}
+
 		TransactionCommitCallbackUtil.registerCallback(
 			new Callable<Void>() {
 
