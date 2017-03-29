@@ -171,14 +171,14 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessor
 	}
 
 	private String _replace(
-			String content, Pattern regexp,
+			String content, Pattern pattern,
 			AdaptiveMediaEmbeddedReferenceSet adaptiveMediaEmbeddedReferenceSet,
 			CheckedFunction<FileEntry, String, PortalException> tagFactory)
 		throws PortalException {
 
 		StringBuffer sb = new StringBuffer();
 
-		Matcher matcher = regexp.matcher(content);
+		Matcher matcher = pattern.matcher(content);
 
 		while (matcher.find()) {
 			String path = matcher.group(1);
@@ -203,14 +203,14 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessor
 	}
 
 	private String _replace(
-			String content, Pattern regexp,
+			String content, Pattern pattern,
 			AdaptiveMediaReferenceExporter referenceExporter,
 			Function<FileEntry, String> placeholderFactory)
 		throws PortalException {
 
 		StringBuffer sb = new StringBuffer();
 
-		Matcher matcher = regexp.matcher(content);
+		Matcher matcher = pattern.matcher(content);
 
 		while (matcher.find()) {
 			long fileEntryId = Long.parseLong(matcher.group(1));

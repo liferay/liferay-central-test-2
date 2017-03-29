@@ -63,6 +63,42 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 	}
 
 	@Test
+	public void testExportContentWithDynamicReference() throws Exception {
+		String prefix = StringUtil.randomString();
+		String suffix = StringUtil.randomString();
+
+		String content =
+			prefix + "<img data-fileentryid=\"1\" src=\"url\" />" + suffix;
+
+		_makeOverridenProcessorReturn(content);
+
+		_defineFileEntryToExport(1, _fileEntry1);
+
+		String replacedContent =
+			_blogsExportImportContentProcessor.replaceExportContentReferences(
+				_portletDataContext, _blogsEntry, content, false, false);
+
+		Assert.assertEquals(prefix + "PLACEHOLDER_1" + suffix, replacedContent);
+	}
+
+	@Test
+	public void testExportContentWithDynamicReferenceDoesNotEscape()
+		throws Exception {
+
+		String content = "&<img data-fileentryid=\"1\" src=\"url\" />&";
+
+		_makeOverridenProcessorReturn(content);
+
+		_defineFileEntryToExport(1, _fileEntry1);
+
+		Assert.assertEquals(
+			_blogsExportImportContentProcessor.replaceExportContentReferences(
+				_portletDataContext, _blogsEntry, content, false, false),
+			_blogsExportImportContentProcessor.replaceExportContentReferences(
+				_portletDataContext, _blogsEntry, content, false, true));
+	}
+
+	@Test
 	public void testExportContentWithMultipleDynamicReferences()
 		throws Exception {
 
@@ -104,7 +140,7 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 
 		String content =
 			prefix + "<picture data-fileentryid=\"1\"></picture>" + infix +
-			"<picture data-fileentryid=\"2\"></picture>" + suffix;
+				"<picture data-fileentryid=\"2\"></picture>" + suffix;
 
 		_makeOverridenProcessorReturn(content);
 
@@ -156,25 +192,6 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 	}
 
 	@Test
-	public void testExportContentWithDynamicReference() throws Exception {
-		String prefix = StringUtil.randomString();
-		String suffix = StringUtil.randomString();
-
-		String content =
-			prefix + "<img data-fileentryid=\"1\" src=\"url\" />" + suffix;
-
-		_makeOverridenProcessorReturn(content);
-
-		_defineFileEntryToExport(1, _fileEntry1);
-
-		String replacedContent =
-			_blogsExportImportContentProcessor.replaceExportContentReferences(
-				_portletDataContext, _blogsEntry, content, false, false);
-
-		Assert.assertEquals(prefix + "PLACEHOLDER_1" + suffix, replacedContent);
-	}
-
-	@Test
 	public void testExportContentWithStaticReference() throws Exception {
 		String prefix = StringUtil.randomString();
 		String suffix = StringUtil.randomString();
@@ -191,23 +208,6 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 				_portletDataContext, _blogsEntry, content, false, false);
 
 		Assert.assertEquals(prefix + "PLACEHOLDER_1" + suffix, replacedContent);
-	}
-
-	@Test
-	public void testExportContentWithDynamicReferenceDoesNotEscape()
-		throws Exception {
-
-		String content = "&<img data-fileentryid=\"1\" src=\"url\" />&";
-
-		_makeOverridenProcessorReturn(content);
-
-		_defineFileEntryToExport(1, _fileEntry1);
-
-		Assert.assertEquals(
-			_blogsExportImportContentProcessor.replaceExportContentReferences(
-				_portletDataContext, _blogsEntry, content, false, false),
-			_blogsExportImportContentProcessor.replaceExportContentReferences(
-				_portletDataContext, _blogsEntry, content, false, true));
 	}
 
 	@Test
@@ -278,6 +278,26 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 	}
 
 	@Test
+	public void testImportContentWithDynamicReference() throws Exception {
+		String prefix = StringUtil.randomString();
+		String suffix = StringUtil.randomString();
+
+		String content =
+			prefix + "[$adaptive-media-dynamic-media path=\"PATH_1\"$]" +
+				suffix;
+
+		_makeOverridenProcessorReturn(content);
+
+		_defineFileEntryToImport(1, _fileEntry1);
+
+		String replacedContent =
+			_blogsExportImportContentProcessor.replaceImportContentReferences(
+				_portletDataContext, _blogsEntry, content);
+
+		Assert.assertEquals(prefix + "PLACEHOLDER_1" + suffix, replacedContent);
+	}
+
+	@Test
 	public void testImportContentWithMultipleDynamicReferences()
 		throws Exception {
 
@@ -313,9 +333,8 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 		String suffix = StringUtil.randomString();
 
 		String content =
-			prefix + "[$adaptive-media-static-media path=\"PATH_1\"$]" +
-			infix + "[$adaptive-media-static-media path=\"PATH_2\"$]" +
-			suffix;
+			prefix + "[$adaptive-media-static-media path=\"PATH_1\"$]" + infix +
+				"[$adaptive-media-static-media path=\"PATH_2\"$]" + suffix;
 
 		_makeOverridenProcessorReturn(content);
 
@@ -345,33 +364,12 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 	}
 
 	@Test
-	public void testImportContentWithDynamicReference() throws Exception {
-		String prefix = StringUtil.randomString();
-		String suffix = StringUtil.randomString();
-
-		String content =
-			prefix + "[$adaptive-media-dynamic-media path=\"PATH_1\"$]" +
-				suffix;
-
-		_makeOverridenProcessorReturn(content);
-
-		_defineFileEntryToImport(1, _fileEntry1);
-
-		String replacedContent =
-			_blogsExportImportContentProcessor.replaceImportContentReferences(
-				_portletDataContext, _blogsEntry, content);
-
-		Assert.assertEquals(prefix + "PLACEHOLDER_1" + suffix, replacedContent);
-	}
-
-	@Test
 	public void testImportContentWithStaticReference() throws Exception {
 		String prefix = StringUtil.randomString();
 		String suffix = StringUtil.randomString();
 
 		String content =
-			prefix + "[$adaptive-media-static-media path=\"PATH_1\"$]" +
-			suffix;
+			prefix + "[$adaptive-media-static-media path=\"PATH_1\"$]" + suffix;
 
 		_makeOverridenProcessorReturn(content);
 
