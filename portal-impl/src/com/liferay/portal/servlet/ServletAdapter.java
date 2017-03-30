@@ -28,10 +28,9 @@ import com.liferay.registry.ServiceTrackerCustomizer;
 
 import java.io.IOException;
 
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Map;
-import java.util.Set;
-import java.util.Vector;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
@@ -122,11 +121,7 @@ public class ServletAdapter extends HttpServlet {
 
 				@Override
 				public Enumeration<String> getInitParameterNames() {
-					Set<String> keys = properties.keySet();
-
-					Vector<String> keyNames = new Vector<>(keys);
-
-					return keyNames.elements();
+					return Collections.enumeration(properties.keySet());
 				}
 
 				@Override
