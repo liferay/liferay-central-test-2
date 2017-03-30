@@ -7,12 +7,6 @@
 	</set-up>
 
 	<tear-down>
-		<execute macro="ProductMenu#gotoSite">
-			<var name="portletName" value="Sites" />
-		</execute>
-
-		<execute macro="Site#tearDownCP" />
-
 		<execute macro="BlogsEntry#tearDownCP" />
 
 		<execute macro="BookmarksFolder#tearDownCP" />
