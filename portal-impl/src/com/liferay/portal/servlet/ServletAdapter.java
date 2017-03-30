@@ -132,10 +132,8 @@ public class ServletAdapter extends HttpServlet {
 
 				@Override
 				public String getServletName() {
-					String servletName = GetterUtil.getString(
+					return GetterUtil.getString(
 						properties.get("osgi.http.whiteboard.servlet.name"));
-
-					return servletName;
 				}
 
 			};
