@@ -62,10 +62,6 @@ public class ViewMVCRenderCommand implements MVCRenderCommand {
 			AdaptiveMediaWebKeys.CONFIGURATION_ENTRIES_LIST,
 			configurationEntries);
 
-		renderRequest.setAttribute(
-			AdaptiveMediaWebKeys.IMAGE_ADAPTIVE_MEDIA_CONFIGURATION_HELPER,
-			_adaptiveMediaImageConfigurationHelper);
-
 		return "/adaptive_media/view.jsp";
 	}
 
