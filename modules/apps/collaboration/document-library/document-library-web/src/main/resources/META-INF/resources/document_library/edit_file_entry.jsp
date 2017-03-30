@@ -119,24 +119,6 @@ else {
 	dlEditFileEntryDisplayContext = dlDisplayContextProvider.getDLEditFileEntryDisplayContext(request, response, fileEntry);
 }
 
-String headerTitle = LanguageUtil.get(request, "new-document");
-
-if (fileVersion != null) {
-	headerTitle = fileVersion.getTitle();
-}
-else if ((dlFileEntryType != null) && (fileEntryTypeId != 0)) {
-	headerTitle = LanguageUtil.format(request, "new-x", dlFileEntryType.getName(locale), false);
-}
-
-boolean portletTitleBasedNavigation = GetterUtil.getBoolean(portletConfig.getInitParameter("portlet-title-based-navigation"));
-
-if (portletTitleBasedNavigation) {
-	portletDisplay.setShowBackIcon(true);
-	portletDisplay.setURLBack(redirect);
-
-	renderResponse.setTitle(headerTitle);
-}
-
 String defaultLanguageId = themeDisplay.getLanguageId();
 
 Locale[] availableLocales = new Locale[] {LocaleUtil.fromLanguageId(defaultLanguageId)};
@@ -160,6 +142,24 @@ if (fileEntryTypeId > 0) {
 			_log.error(pe, pe);
 		}
 	}
+}
+
+String headerTitle = LanguageUtil.get(request, "new-document");
+
+if (fileVersion != null) {
+	headerTitle = fileVersion.getTitle();
+}
+else if ((dlFileEntryType != null) && (fileEntryTypeId != 0)) {
+	headerTitle = LanguageUtil.format(request, "new-x", dlFileEntryType.getName(locale), false);
+}
+
+boolean portletTitleBasedNavigation = GetterUtil.getBoolean(portletConfig.getInitParameter("portlet-title-based-navigation"));
+
+if (portletTitleBasedNavigation) {
+	portletDisplay.setShowBackIcon(true);
+	portletDisplay.setURLBack(redirect);
+
+	renderResponse.setTitle(headerTitle);
 }
 %>
 
