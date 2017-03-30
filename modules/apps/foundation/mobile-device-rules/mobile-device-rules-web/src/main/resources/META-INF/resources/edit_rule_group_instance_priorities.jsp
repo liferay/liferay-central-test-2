@@ -77,6 +77,7 @@ List<MDRRuleGroupInstance> ruleGroupInstances = MDRRuleGroupInstanceServiceUtil.
 <aui:script>
 	function <portlet:namespace />saveRuleGroupInstancesPriorities(event) {
 		var $ = AUI.$;
+
 		event.preventDefault();
 
 		var ruleGroupInstances = $('#<portlet:namespace />ruleGroupInstancesPriorities [data-rule-group-instance-id]').map(
