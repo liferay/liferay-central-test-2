@@ -1,3 +1,17 @@
+/**
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+
 package com.liferay.dynamic.data.mapping.type.text.localizable;
 
 import com.liferay.dynamic.data.mapping.form.field.type.DDMFormFieldTemplateContextContributor;
@@ -41,26 +55,6 @@ import org.osgi.service.component.annotations.Reference;
 public class TextLocalizableDDMFormFieldTemplateContextContributor
 	implements DDMFormFieldTemplateContextContributor {
 
-	public JSONArray createAvailableLocalesMetadata(ThemeDisplay themeDisplay) {
-		JSONArray jsonArray = _jsonFactory.createJSONArray();
-
-		Locale siteDefaultLocale = themeDisplay.getSiteDefaultLocale();
-
-		jsonArray.put(createLocaleMetadata(siteDefaultLocale, themeDisplay));
-
-		Set<Locale> availableLocales = LanguageUtil.getAvailableLocales();
-
-		for (Locale locale : availableLocales) {
-			if (Objects.equals(locale, siteDefaultLocale)) {
-				continue;
-			}
-
-			jsonArray.put(createLocaleMetadata(locale, themeDisplay));
-		}
-
-		return jsonArray;
-	}
-
 	@Override
 	public Map<String, Object> getParameters(
 		DDMFormField ddmFormField,
@@ -76,7 +70,7 @@ public class TextLocalizableDDMFormFieldTemplateContextContributor
 
 		parameters.put(
 			"availableLocalesMetadata",
-			createAvailableLocalesMetadata(themeDisplay));
+			getAvailableLocalesMetadata(themeDisplay));
 
 		parameters.put(
 			"displayStyle",
@@ -98,7 +92,41 @@ public class TextLocalizableDDMFormFieldTemplateContextContributor
 		return parameters;
 	}
 
-	protected JSONObject createLocaleMetadata(
+	protected JSONArray getAvailableLocalesMetadata(ThemeDisplay themeDisplay) {
+		JSONArray jsonArray = _jsonFactory.createJSONArray();
+
+		Locale siteDefaultLocale = themeDisplay.getSiteDefaultLocale();
+
+		jsonArray.put(getLocaleMetadata(siteDefaultLocale, themeDisplay));
+
+		Set<Locale> availableLocales = LanguageUtil.getAvailableLocales();
+
+		for (Locale locale : availableLocales) {
+			if (Objects.equals(locale, siteDefaultLocale)) {
+				continue;
+			}
+
+			jsonArray.put(getLocaleMetadata(locale, themeDisplay));
+		}
+
+		return jsonArray;
+	}
+
+	protected String getLocaleIcon(Locale locale, ThemeDisplay themeDisplay) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(themeDisplay.getPathThemeImages());
+		sb.append("/lexicon/icons.svg");
+		sb.append(StringPool.POUND);
+		sb.append(
+			StringUtil.toLowerCase(StringUtil.replace(languageId, '_', '-')));
+
+		return sb.toString();
+	}
+
+	protected JSONObject getLocaleMetadata(
 		Locale locale, ThemeDisplay themeDisplay) {
 
 		Locale siteDefaultLocale = themeDisplay.getSiteDefaultLocale();
@@ -116,20 +144,6 @@ public class TextLocalizableDDMFormFieldTemplateContextContributor
 			"languageId", LocaleUtil.toLanguageId(locale));
 
 		return localeMetadataJSONObject;
-	}
-
-	protected String getLocaleIcon(Locale locale, ThemeDisplay themeDisplay) {
-		String languageId = LocaleUtil.toLanguageId(locale);
-
-		StringBuilder sb = new StringBuilder();
-
-		sb.append(themeDisplay.getPathThemeImages());
-		sb.append("/lexicon/icons.svg");
-		sb.append(StringPool.POUND);
-		sb.append(
-			StringUtil.toLowerCase(StringUtil.replace(languageId, '_', '-')));
-
-		return sb.toString();
 	}
 
 	protected String getValueString(Value value, Locale locale) {

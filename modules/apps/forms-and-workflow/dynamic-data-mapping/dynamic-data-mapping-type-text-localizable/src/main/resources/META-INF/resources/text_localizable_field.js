@@ -36,14 +36,10 @@ AUI.add(
 				NAME: 'liferay-ddm-form-field-text-localizable',
 
 				prototype: {
-					destructor: function() {
+					initializer: function() {
 						var instance = this;
 
 						Liferay.InputLocalized.unregister(instance.getQualifiedName());
-					},
-
-					initializer: function() {
-						var instance = this;
 
 						instance._eventHandlers.push(
 							instance.after('valueChange', instance._onTextFieldValueChange),
