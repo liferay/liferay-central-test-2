@@ -432,20 +432,6 @@ public class FriendlyURLServlet extends HttpServlet {
 
 	}
 
-	/**
-	 * @deprecated As of 1.0.0, with no direct replacement
-	 */
-	@Deprecated
-	protected String getFriendlyURL(String pathInfo) {
-		String friendlyURL = _friendlyURLPathPrefix;
-
-		if (Validator.isNotNull(pathInfo)) {
-			friendlyURL = friendlyURL.concat(pathInfo);
-		}
-
-		return friendlyURL;
-	}
-
 	protected LastPath getLastPath(
 		HttpServletRequest request, String pathInfo) {
 
@@ -471,20 +457,6 @@ public class FriendlyURLServlet extends HttpServlet {
 		}
 
 		return requestURI.substring(_pathInfoOffset, pos);
-	}
-
-	/**
-	 * @deprecated As of 1.0.0, with no direct replacement
-	 */
-	@Deprecated
-	protected Object[] getRedirect(
-			HttpServletRequest request, String path, String mainPath,
-			Map<String, String[]> params)
-		throws Exception {
-
-		Redirect redirect = getRedirect(request, path);
-
-		return new Object[] {redirect.getPath(), redirect.isForce()};
 	}
 
 	protected Locale setAlternativeLayoutFriendlyURL(
