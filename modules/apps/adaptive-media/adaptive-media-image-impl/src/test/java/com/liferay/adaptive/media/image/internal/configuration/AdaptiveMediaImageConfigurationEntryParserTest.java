@@ -49,6 +49,18 @@ public class AdaptiveMediaImageConfigurationEntryParserTest {
 		mockStatic(HttpUtil.class);
 
 		when(
+			HttpUtil.encodeURL(Mockito.eq("desc"))
+		).thenReturn(
+			"desc"
+		);
+
+		when(
+			HttpUtil.decodeURL(Mockito.eq("desc"))
+		).thenReturn(
+			"desc"
+		);
+
+		when(
 			HttpUtil.encodeURL(Mockito.eq("test"))
 		).thenReturn(
 			"test"
