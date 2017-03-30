@@ -14,12 +14,18 @@
 
 package com.liferay.adaptive.media.web.internal.portlet.action;
 
+import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationHelper;
 import com.liferay.adaptive.media.web.constants.AdaptiveMediaPortletKeys;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -53,14 +59,31 @@ public class DeleteImageConfigurationEntryMVCActionCommand
 			ParamUtil.getStringValues(
 				actionRequest, "rowIdsAdaptiveMediaImageConfigurationEntry");
 
+		List<AdaptiveMediaImageConfigurationEntry> deletedConfigurationEntries =
+			new ArrayList<>();
+
 		for (String deleteAdaptiveMediaImageConfigurationEntryUuid :
 				deleteAdaptiveMediaImageConfigurationEntryUuids) {
+
+			Optional<AdaptiveMediaImageConfigurationEntry>
+				configurationEntryOptional =
+					_adaptiveMediaImageConfigurationHelper.
+						getAdaptiveMediaImageConfigurationEntry(
+							themeDisplay.getCompanyId(),
+							deleteAdaptiveMediaImageConfigurationEntryUuid);
 
 			_adaptiveMediaImageConfigurationHelper.
 				deleteAdaptiveMediaImageConfigurationEntry(
 					themeDisplay.getCompanyId(),
 					deleteAdaptiveMediaImageConfigurationEntryUuid);
+
+			configurationEntryOptional.ifPresent(
+				deletedConfigurationEntries::add);
 		}
+
+		SessionMessages.add(
+			actionRequest, "configurationEntriesDeleted",
+			deletedConfigurationEntries);
 	}
 
 	@Reference(unbind = "-")

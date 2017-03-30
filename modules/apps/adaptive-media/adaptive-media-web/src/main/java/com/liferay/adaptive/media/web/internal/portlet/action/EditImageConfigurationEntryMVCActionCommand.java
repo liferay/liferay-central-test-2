@@ -21,6 +21,7 @@ import com.liferay.adaptive.media.image.service.AdaptiveMediaImageEntryLocalServ
 import com.liferay.adaptive.media.web.constants.AdaptiveMediaPortletKeys;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -86,8 +87,17 @@ public class EditImageConfigurationEntryMVCActionCommand
 
 		String newUuid = null;
 
+		boolean autoModifiedUuid = false;
+
 		if (automaticUuid) {
-			newUuid = _getAutomaticUuid(themeDisplay.getCompanyId(), name);
+			String normalizedName = FriendlyURLNormalizerUtil.normalize(name);
+
+			newUuid = _getAutomaticUuid(
+				themeDisplay.getCompanyId(), normalizedName);
+
+			if (!newUuid.equals(normalizedName)) {
+				autoModifiedUuid = true;
+			}
 		}
 		else {
 			newUuid = ParamUtil.getString(actionRequest, "newUuid");
@@ -105,12 +115,26 @@ public class EditImageConfigurationEntryMVCActionCommand
 					newUuid = configurationEntry.getUUID();
 
 					properties = configurationEntry.getProperties();
+
+					autoModifiedUuid = false;
 				}
 
-				_adaptiveMediaImageConfigurationHelper.
-					updateAdaptiveMediaImageConfigurationEntry(
-						themeDisplay.getCompanyId(), uuid, name, description,
-						newUuid, properties);
+				configurationEntry =
+					_adaptiveMediaImageConfigurationHelper.
+						updateAdaptiveMediaImageConfigurationEntry(
+							themeDisplay.getCompanyId(), uuid, name,
+							description, newUuid, properties);
+
+				if (autoModifiedUuid) {
+					SessionMessages.add(
+						actionRequest, "configurationEntryUpdatedAndIDRenamed",
+						configurationEntry);
+				}
+				else {
+					SessionMessages.add(
+						actionRequest, "configurationEntryUpdated",
+						configurationEntry);
+				}
 			}
 			else {
 				AdaptiveMediaImageConfigurationEntry configurationEntry =
@@ -122,9 +146,32 @@ public class EditImageConfigurationEntryMVCActionCommand
 				boolean addHighResolution = ParamUtil.getBoolean(
 					actionRequest, "addHighResolution");
 
+				AdaptiveMediaImageConfigurationEntry
+					highResolutionConfigurationEntry = null;
+
 				if (addHighResolution) {
-					_addHighResolutionConfigurationEntry(
-						themeDisplay.getCompanyId(), configurationEntry);
+					highResolutionConfigurationEntry =
+						_addHighResolutionConfigurationEntry(
+							themeDisplay.getCompanyId(), configurationEntry);
+
+					SessionMessages.add(
+						actionRequest, "highResolutionConfigurationEntryAdded",
+						new AdaptiveMediaImageConfigurationEntry[] {
+							configurationEntry, highResolutionConfigurationEntry
+						});
+				}
+				else {
+					if (autoModifiedUuid) {
+						SessionMessages.add(
+							actionRequest,
+							"configurationEntryAddedAndIDRenamed",
+							configurationEntry);
+					}
+					else {
+						SessionMessages.add(
+							actionRequest, "configurationEntryAdded",
+							configurationEntry);
+					}
 				}
 			}
 		}
@@ -142,9 +189,10 @@ public class EditImageConfigurationEntryMVCActionCommand
 			adaptiveMediaImageConfigurationHelper;
 	}
 
-	private void _addHighResolutionConfigurationEntry(
-			long companyId,
-			AdaptiveMediaImageConfigurationEntry configurationEntry)
+	private AdaptiveMediaImageConfigurationEntry
+			_addHighResolutionConfigurationEntry(
+				long companyId,
+				AdaptiveMediaImageConfigurationEntry configurationEntry)
 		throws AdaptiveMediaImageConfigurationException, IOException {
 
 		Map<String, String> properties = configurationEntry.getProperties();
@@ -161,15 +209,13 @@ public class EditImageConfigurationEntryMVCActionCommand
 		String description = configurationEntry.getDescription();
 		String uuid = configurationEntry.getUUID();
 
-		_adaptiveMediaImageConfigurationHelper.
+		return _adaptiveMediaImageConfigurationHelper.
 			addAdaptiveMediaImageConfigurationEntry(
 				companyId, name.concat("-2x"), "2x " + description,
 				uuid.concat("-2x"), properties);
 	}
 
-	private String _getAutomaticUuid(long companyId, String name) {
-		String normalizedName = FriendlyURLNormalizerUtil.normalize(name);
-
+	private String _getAutomaticUuid(long companyId, String normalizedName) {
 		String curUuid = normalizedName;
 
 		for (int i = 1;; i++) {

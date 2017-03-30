@@ -14,12 +14,16 @@
 
 package com.liferay.adaptive.media.web.internal.portlet.action;
 
+import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationHelper;
 import com.liferay.adaptive.media.web.constants.AdaptiveMediaPortletKeys;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
+
+import java.util.Optional;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -56,6 +60,20 @@ public class EnableImageConfigurationEntryMVCActionCommand
 			enableAdaptiveMediaImageConfigurationEntry(
 				themeDisplay.getCompanyId(),
 				adaptiveMediaImageConfigurationEntryUuid);
+
+		Optional<AdaptiveMediaImageConfigurationEntry>
+			configurationEntryOptional =
+				_adaptiveMediaImageConfigurationHelper.
+					getAdaptiveMediaImageConfigurationEntry(
+						themeDisplay.getCompanyId(),
+						adaptiveMediaImageConfigurationEntryUuid);
+
+		configurationEntryOptional.ifPresent(
+			configurationEntry -> {
+				SessionMessages.add(
+					actionRequest, "configurationEntryEnabled",
+					configurationEntry);
+			});
 	}
 
 	@Reference(unbind = "-")

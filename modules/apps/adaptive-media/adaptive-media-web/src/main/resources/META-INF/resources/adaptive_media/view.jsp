@@ -95,6 +95,21 @@ PortletURL portletURL = renderResponse.createRenderURL();
 			</div>
 		</c:if>
 
+		<liferay-util:include page="/adaptive_media/success_messages.jsp" servletContext="<%= application %>" />
+
+		<c:choose>
+			<c:when test='<%= SessionMessages.contains(request, "configurationEntryUpdated") %>'>
+
+				<%
+				AdaptiveMediaImageConfigurationEntry configurationEntry = (AdaptiveMediaImageConfigurationEntry)SessionMessages.get(request, "configurationEntryUpdated");
+				%>
+
+				<div class="alert alert-success">
+					<liferay-ui:message arguments="<%= configurationEntry.getName() %>" key="x-saved-successfully" translateArguments="<%= false %>" />
+				</div>
+			</c:when>
+		</c:choose>
+
 		<portlet:actionURL name="/adaptive_media/delete_image_configuration_entry" var="deleteImageConfigurationEntryURL" />
 
 		<%
