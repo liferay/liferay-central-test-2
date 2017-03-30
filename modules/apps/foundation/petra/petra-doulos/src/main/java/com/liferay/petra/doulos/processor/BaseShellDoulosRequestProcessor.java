@@ -88,7 +88,7 @@ public abstract class BaseShellDoulosRequestProcessor
 			}
 
 			responseJSONObject.put(
-				"queueSize", new ArrayList<String>(_shellStatuses.keySet()));
+				"queue", new ArrayList<String>(_shellStatuses.keySet()));
 
 			return;
 		}
