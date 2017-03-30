@@ -26,6 +26,8 @@ import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.osgi.service.component.annotations.Component;
 
 /**
@@ -40,37 +42,29 @@ public class JournalFormNavigatorContextProvider
 
 	@Override
 	public String getContext(JournalArticle article) {
-		if (Validator.isNotNull(_getLanguageId())) {
+		ServiceContext serviceContext =
+			ServiceContextThreadLocal.getServiceContext();
+
+		ThemeDisplay themeDisplay = serviceContext.getThemeDisplay();
+
+		HttpServletRequest request = themeDisplay.getRequest();
+
+		String toLanguageId = ParamUtil.getString(request, "toLanguageId");
+
+		long classNameId = BeanParamUtil.getLong(
+			article, request, "classNameId");
+
+		if (Validator.isNotNull(toLanguageId)) {
 			return "translate";
 		}
 		else if ((article != null) && (article.getId() > 0)) {
 			return "update";
 		}
-		else if (_getClassNameId(article) >
-					JournalArticleConstants.CLASSNAME_ID_DEFAULT) {
-
+		else if (classNameId > JournalArticleConstants.CLASSNAME_ID_DEFAULT) {
 			return "default.values";
 		}
-		else {
-			return "add";
-		}
-	}
 
-	private double _getClassNameId(JournalArticle article) {
-		return BeanParamUtil.getLong(
-			article, _getThemeDisplay().getRequest(), "classNameId");
-	}
-
-	private String _getLanguageId() {
-		return ParamUtil.getString(
-			_getThemeDisplay().getRequest(), "toLanguageId");
-	}
-
-	private ThemeDisplay _getThemeDisplay() {
-		ServiceContext serviceContext =
-			ServiceContextThreadLocal.getServiceContext();
-
-		return serviceContext.getThemeDisplay();
+		return "add";
 	}
 
 }
