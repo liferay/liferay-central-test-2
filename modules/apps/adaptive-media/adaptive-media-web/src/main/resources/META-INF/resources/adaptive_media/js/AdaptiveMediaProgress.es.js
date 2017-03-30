@@ -4,6 +4,7 @@ import core from 'metal';
 import PortletBase from 'frontend-js-web/liferay/PortletBase.es';
 import ProgressBar from 'metal-progressbar';
 import Soy from 'metal-soy';
+import Tooltip from 'metal-tooltip';
 
 import templates from './AdaptiveMediaProgress.soy';
 
@@ -21,7 +22,7 @@ class AdaptiveMediaProgress extends PortletBase {
 	created() {
 		this.id = this.namespace + 'OptimizeRemaining' + this.uuid + 'Progress';
 
-		this.updateProgressBar_(this.percentage);
+		this.updateProgressBar_(this.percentage, this.tooltip);
 	}
 
 	/**
@@ -74,7 +75,7 @@ class AdaptiveMediaProgress extends PortletBase {
 
 				let percentage = parseInt(json.percentage);
 
-				this.updateProgressBar_(percentage);
+				this.updateProgressBar_(percentage, '');
 
 				if (percentage >= 100) {
 					this.onProgressBarComplete_();
@@ -101,10 +102,11 @@ class AdaptiveMediaProgress extends PortletBase {
 	 * @param  {Number} progress progressbar value
 	 * @protected
 	 */
-	updateProgressBar_(progress) {
+	updateProgressBar_(progress, tooltip) {
 		this.progressBarClass = (progress >= 100) ? 'progress-bar-success' : '';
 		this.progressBarLabel = progress + '%';
 		this.progressBarValue = progress;
+		this.progressBarTooltip = tooltip;
 	}
 }
 
@@ -149,6 +151,17 @@ AdaptiveMediaProgress.STATE = {
 	 * @type {String}
 	 */
 	percentageUrl: {
+		validator: core.isString
+	},
+
+	/**
+	 * The tooltip text to show in the progress bar.
+	 *
+	 * @instance
+	 * @memberof AdaptiveMediaProgress
+	 * @type {String}
+	 */
+	tooltip: {
 		validator: core.isString
 	},
 

@@ -7,11 +7,19 @@
  * @param progressBarClass
  * @param progressBarLabel
  * @param progressBarValue
+ * @param progressBarTooltip
  * @param? id
  * @param showLoadingIndicator
  */
 {template .render}
 	<div id="{$id}">
+		{call Tooltip.render}
+			{param elementClasses: 'fade' /}
+			{param position: 'top' /}
+			{param selector: '#' + $id /}
+			{param title: $progressBarTooltip /}
+			{param visible: false /}
+		{/call}
 		<div class="progress-container {$disabled ? 'disabled' : ''}">
 			{call ProgressBar.render}
 				{param barClass: $progressBarClass /}

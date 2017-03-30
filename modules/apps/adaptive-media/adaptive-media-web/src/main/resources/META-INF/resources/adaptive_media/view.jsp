@@ -175,6 +175,8 @@ PortletURL portletURL = renderResponse.createRenderURL();
 						<%
 						String rowId = row.getRowId();
 						String uuid = String.valueOf(configurationEntry.getUUID());
+
+						String progressTooltip =  AdaptiveMediaImageEntryLocalServiceUtil.getAdaptiveMediaImageEntriesCount(themeDisplay.getCompanyId(), configurationEntry.getUUID()) + "/" + AdaptiveMediaImageEntryLocalServiceUtil.getExpectedAdaptiveMediaImageEntriesCount(themeDisplay.getCompanyId());
 						%>
 
 						<div id="<portlet:namespace />OptimizeRemaining_<%= rowId %>"></div>
@@ -192,6 +194,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 										namespace: '<portlet:namespace />',
 										percentage: <%= percentage %>,
 										percentageUrl: '<%= optimizedImagesPercentageURL.toString() %>',
+										tooltip: '<%= progressTooltip %>',
 										uuid: '<%= uuid %>'
 									},
 									<portlet:namespace />OptimizeRemaining_<%= rowId %>
