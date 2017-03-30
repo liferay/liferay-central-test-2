@@ -46,7 +46,7 @@ public class TextLocalizableDDMFormFieldRenderer
 
 	@Override
 	public String getTemplateNamespace() {
-		return "ddm.text.localizable";
+		return "ddm.text_localizable";
 	}
 
 	@Override
