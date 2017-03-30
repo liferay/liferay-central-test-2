@@ -39,6 +39,7 @@ import org.osgi.service.component.annotations.Reference;
 		"com.liferay.portlet.use-default-template=true",
 		"javax.portlet.display-name=Adaptive Media",
 		"javax.portlet.expiration-cache=0",
+		"javax.portlet.init-param.always-send-redirect=true",
 		"javax.portlet.init-param.mvc-command-names-default-views=/adaptive_media/view",
 		"javax.portlet.init-param.template-path=/",
 		"javax.portlet.name=" + AdaptiveMediaPortletKeys.ADAPTIVE_MEDIA,
