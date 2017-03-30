@@ -25,7 +25,7 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	immediate = true,
 	property = {
-		"ddm.form.field.type.js.class.name=Liferay.DDM.Field.Text.Localizable",
+		"ddm.form.field.type.js.class.name=Liferay.DDM.Field.TextLocalizable",
 		"ddm.form.field.type.js.module=liferay-ddm-form-field-text-localizable",
 		"ddm.form.field.type.name=text_localizable",
 		"ddm.form.field.type.system=true"
