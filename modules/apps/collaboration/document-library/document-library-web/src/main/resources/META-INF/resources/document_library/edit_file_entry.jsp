@@ -154,6 +154,8 @@ if (fileEntryTypeId > 0) {
 					Set<Locale> availableLocalesSet = ddmFormValues.getAvailableLocales();
 
 					availableLocales = availableLocalesSet.toArray(new Locale[availableLocalesSet.size()]);
+
+					break;
 				}
 			}
 			catch (Exception e) {
