@@ -237,7 +237,8 @@ public class EditImageConfigurationEntryMVCActionCommand
 
 			String suffix = StringPool.DASH + i;
 
-			curUuid = normalizedName + suffix;
+			curUuid = FriendlyURLNormalizerUtil.normalize(
+				normalizedName + suffix);
 		}
 
 		return curUuid;
