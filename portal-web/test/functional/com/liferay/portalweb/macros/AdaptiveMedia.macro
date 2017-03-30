@@ -8,6 +8,13 @@
 
 		<execute function="Type" locator1="TextInput#MAX_HEIGHT" value1="${maxHeight}" />
 
+		<if>
+			<isset var="addHighDensityDisplay" />
+			<then>
+				<execute function="Check" locator1="Checkbox#ADD_HIGH_DENSITY_DISPLAY" />
+			</then>
+		</if>
+
 		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
 	</command>
 
