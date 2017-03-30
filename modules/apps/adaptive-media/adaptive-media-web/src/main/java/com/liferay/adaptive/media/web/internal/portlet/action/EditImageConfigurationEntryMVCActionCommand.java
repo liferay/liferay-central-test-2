@@ -93,7 +93,7 @@ public class EditImageConfigurationEntryMVCActionCommand
 			String normalizedName = FriendlyURLNormalizerUtil.normalize(name);
 
 			newUuid = _getAutomaticUuid(
-				themeDisplay.getCompanyId(), normalizedName);
+				themeDisplay.getCompanyId(), normalizedName, uuid);
 
 			if (!newUuid.equals(normalizedName)) {
 				autoModifiedUuid = true;
@@ -215,10 +215,16 @@ public class EditImageConfigurationEntryMVCActionCommand
 				uuid.concat("-2x"), properties);
 	}
 
-	private String _getAutomaticUuid(long companyId, String normalizedName) {
+	private String _getAutomaticUuid(
+		long companyId, String normalizedName, String oldUuid) {
+
 		String curUuid = normalizedName;
 
 		for (int i = 1;; i++) {
+			if (curUuid.equals(oldUuid)) {
+				break;
+			}
+
 			Optional<AdaptiveMediaImageConfigurationEntry>
 				adaptiveMediaImageConfigurationEntryOptional =
 					_adaptiveMediaImageConfigurationHelper.
