@@ -14,10 +14,6 @@
 
 package com.liferay.dynamic.data.mapping.data.provider.internal;
 
-import static org.powermock.api.mockito.PowerMockito.mock;
-import static org.powermock.api.mockito.PowerMockito.mockStatic;
-import static org.powermock.api.mockito.PowerMockito.when;
-
 import com.liferay.dynamic.data.mapping.data.provider.internal.rest.DDMRESTDataProviderSettings;
 import com.liferay.dynamic.data.mapping.model.DDMForm;
 import com.liferay.dynamic.data.mapping.model.DDMFormField;
@@ -26,20 +22,21 @@ import com.liferay.dynamic.data.mapping.util.DDMFormFactory;
 import com.liferay.portal.kernel.language.Language;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Matchers;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import org.mockito.Matchers;
-
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
+import static org.powermock.api.mockito.PowerMockito.mock;
+import static org.powermock.api.mockito.PowerMockito.mockStatic;
+import static org.powermock.api.mockito.PowerMockito.when;
 
 /**
  * @author Leonardo Barros
@@ -202,26 +199,8 @@ public class DDMRESTDataProviderSettingsTest {
 			ddmFormField.getNestedDDMFormFieldsMap();
 
 		Assert.assertEquals(
-			nestedDDMFormFieldsMap.toString(), 4,
+			nestedDDMFormFieldsMap.toString(), 3,
 			nestedDDMFormFieldsMap.size());
-
-		// Label
-
-		DDMFormField outputParameterLabelDDMFormField =
-			nestedDDMFormFieldsMap.get("outputParameterLabel");
-
-		Assert.assertNotNull(outputParameterLabelDDMFormField);
-
-		Assert.assertEquals("text", outputParameterLabelDDMFormField.getType());
-		Assert.assertEquals(
-			"string", outputParameterLabelDDMFormField.getDataType());
-
-		Map<String, Object> outputParameterLabelDDMFormFieldProperties =
-			outputParameterLabelDDMFormField.getProperties();
-
-		Assert.assertTrue(
-			outputParameterLabelDDMFormFieldProperties.containsKey(
-				"placeholder"));
 
 		// Name
 
