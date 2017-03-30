@@ -99,6 +99,12 @@ public abstract class BaseShellDoulosRequestProcessor
 		}
 	}
 
+	protected void addShellStatus(String key, ShellStatus shellStatus) {
+		_shellStatuses.put(key, shellStatus);
+
+		_queue.add(shellStatus);
+	}
+
 	protected abstract ShellStatus createShellStatus(
 		JSONObject payloadJSONObject);
 
@@ -204,7 +210,7 @@ public abstract class BaseShellDoulosRequestProcessor
 
 			if (isRemoveFromQueue(payloadJSONObject)) {
 				if (shellStatus != null) {
-					_shellStatuses.remove(key);
+					removeShellStatus(key, shellStatus);
 				}
 
 				shellStatus = createShellStatus(payloadJSONObject);
@@ -220,7 +226,7 @@ public abstract class BaseShellDoulosRequestProcessor
 				if ((expiredTime > 0) &&
 					(shellStatus.time < getExpiredTime())) {
 
-					_shellStatuses.remove(key);
+					removeShellStatus(key, shellStatus);
 
 					shellStatus = null;
 				}
@@ -233,13 +239,17 @@ public abstract class BaseShellDoulosRequestProcessor
 
 				shellStatus = createShellStatus(payloadJSONObject);
 
-				_shellStatuses.put(key, shellStatus);
-
-				_queue.add(shellStatus);
+				addShellStatus(key, shellStatus);
 			}
 		}
 
 		return shellStatus;
+	}
+
+	protected void removeShellStatus(String key, ShellStatus shellStatus) {
+		_shellStatuses.remove(key);
+
+		_queue.remove(shellStatus);
 	}
 
 	protected class ShellStatus {
