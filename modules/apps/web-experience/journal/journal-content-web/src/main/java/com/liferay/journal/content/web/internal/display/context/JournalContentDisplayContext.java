@@ -563,7 +563,7 @@ public class JournalContentDisplayContext {
 
 			AssetRenderer<JournalArticle> latestArticleAssetRenderer =
 				assetRendererFactory.getAssetRenderer(
-					article.getResourcePrimKey());
+					article, AssetRendererFactory.TYPE_LATEST_APPROVED);
 
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)_portletRequest.getAttribute(
