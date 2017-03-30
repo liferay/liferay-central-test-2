@@ -67,10 +67,6 @@ public interface AdaptiveMediaImageConfigurationHelper {
 		getAdaptiveMediaImageConfigurationEntry(
 			long companyId, String configurationEntryUUID);
 
-	public boolean isDefaultConfiguration(long companyId);
-
-	public void resetDefaultConfiguration(long companyId);
-
 	public AdaptiveMediaImageConfigurationEntry
 			updateAdaptiveMediaImageConfigurationEntry(
 				long companyId, String oldUuid, String name, String description,

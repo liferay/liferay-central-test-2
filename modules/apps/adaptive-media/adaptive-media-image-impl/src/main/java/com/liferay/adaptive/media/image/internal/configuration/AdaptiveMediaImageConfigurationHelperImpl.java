@@ -281,48 +281,6 @@ public class AdaptiveMediaImageConfigurationHelperImpl
 	}
 
 	@Override
-	public boolean isDefaultConfiguration(long companyId) {
-		try {
-			Settings settings = SettingsFactoryUtil.getSettings(
-				new CompanyServiceSettingsLocator(
-					companyId,
-					AdaptiveMediaImageCompanyConfiguration.class.getName()));
-
-			String[] nullableImageVariants = _getNullableImageVariants(
-				settings);
-
-			if (nullableImageVariants != null) {
-				return false;
-			}
-
-			return true;
-		}
-		catch (SettingsException se) {
-			throw new AdaptiveMediaRuntimeException.InvalidConfiguration(se);
-		}
-	}
-
-	@Override
-	public void resetDefaultConfiguration(long companyId) {
-		try {
-			Settings settings = SettingsFactoryUtil.getSettings(
-				new CompanyServiceSettingsLocator(
-					companyId,
-					AdaptiveMediaImageCompanyConfiguration.class.getName()));
-
-			ModifiableSettings modifiableSettings =
-				settings.getModifiableSettings();
-
-			modifiableSettings.reset("imageVariants");
-
-			modifiableSettings.store();
-		}
-		catch (IOException | SettingsException | ValidatorException e) {
-			throw new AdaptiveMediaRuntimeException.InvalidConfiguration(e);
-		}
-	}
-
-	@Override
 	public AdaptiveMediaImageConfigurationEntry
 			updateAdaptiveMediaImageConfigurationEntry(
 				long companyId, String oldUuid, String name, String description,
