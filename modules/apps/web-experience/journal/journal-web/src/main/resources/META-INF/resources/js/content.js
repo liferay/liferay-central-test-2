@@ -169,9 +169,9 @@ AUI.add(
 						var translationManager = instance.get(STR_TRANSLATION_MANAGER);
 
 						if (translationManager) {
-                            eventHandles.push(
-                                translationManager.after('deleteAvailableLocale', instance._afterDeletingAvailableLocale, instance)
-                            );
+							eventHandles.push(
+								translationManager.after('deleteAvailableLocale', instance._afterDeletingAvailableLocale, instance)
+							);
 							eventHandles.push(
 								translationManager.on('editingLocaleChange', instance._afterEditingLocaleChange.bind(instance))
 							);
