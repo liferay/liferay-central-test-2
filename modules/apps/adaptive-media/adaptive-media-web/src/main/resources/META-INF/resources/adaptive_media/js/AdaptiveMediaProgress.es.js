@@ -22,7 +22,7 @@ class AdaptiveMediaProgress extends PortletBase {
 	created() {
 		this.id = this.namespace + 'OptimizeRemaining' + this.uuid + 'Progress';
 
-		this.updateProgressBar_(this.percentage, this.tooltip);
+		this.updateProgressBar_(this.optimizedImages, this.totalImages);
 	}
 
 	/**
@@ -73,11 +73,13 @@ class AdaptiveMediaProgress extends PortletBase {
 			try {
 				let json = JSON.parse(xhr.response);
 
-				let percentage = parseInt(json.percentage);
+				let optimizedImages = json.optimizedImages;
 
-				this.updateProgressBar_(percentage, '');
+				let totalImages = json.totalImages;
 
-				if (percentage >= 100) {
+				this.updateProgressBar_(optimizedImages, totalImages);
+
+				if (this.percentage >= 100) {
 					this.onProgressBarComplete_();
 				}
 			} catch(e) {
@@ -102,11 +104,14 @@ class AdaptiveMediaProgress extends PortletBase {
 	 * @param  {Number} progress progressbar value
 	 * @protected
 	 */
-	updateProgressBar_(progress, tooltip) {
-		this.progressBarClass = (progress >= 100) ? 'progress-bar-success' : '';
-		this.progressBarLabel = progress + '%';
-		this.progressBarValue = progress;
-		this.progressBarTooltip = tooltip;
+	updateProgressBar_(optimizedImages, totalImages) {
+		let percentage = Math.round(optimizedImages / totalImages * 100);
+
+		this.progressBarClass = (percentage >= 100) ? 'progress-bar-success' : '';
+		this.progressBarLabel = percentage + '%';
+		this.progressBarValue = percentage;
+		this.progressBarTooltip = this.tooltip ? this.tooltip : optimizedImages + "/" + totalImages;
+		this.percentage = percentage;
 	}
 }
 
@@ -131,15 +136,14 @@ AdaptiveMediaProgress.STATE = {
 	},
 
 	/**
-	 * Current percentage of optimized images.
+	 * Number of optimized images in the platform.
 	 *
 	 * @instance
 	 * @memberof AdaptiveMediaProgress
 	 * @type {Number}
 	 */
-	percentage: {
-		validator: core.isNumber,
-		value: 0
+	optimizedImages: {
+		validator: core.isNumber
 	},
 
 	/**
@@ -152,6 +156,17 @@ AdaptiveMediaProgress.STATE = {
 	 */
 	percentageUrl: {
 		validator: core.isString
+	},
+
+	/**
+	 * Number of images present in the platform.
+	 *
+	 * @instance
+	 * @memberof AdaptiveMediaProgress
+	 * @type {Number}
+	 */
+	totalImages: {
+		validator: core.isNumber
 	},
 
 	/**

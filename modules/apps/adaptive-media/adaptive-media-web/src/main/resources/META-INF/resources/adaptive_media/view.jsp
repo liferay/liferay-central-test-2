@@ -163,10 +163,6 @@ PortletURL portletURL = renderResponse.createRenderURL();
 						value='<%= LanguageUtil.get(request, configurationEntry.isEnabled() ? "enabled" : "disabled") %>'
 					/>
 
-					<%
-					int percentage = AdaptiveMediaImageEntryLocalServiceUtil.getPercentage(themeDisplay.getCompanyId(), configurationEntry.getUUID());
-					%>
-
 					<liferay-ui:search-container-column-text
 						cssClass="table-cell-content"
 						name="optimized-images"
@@ -176,7 +172,9 @@ PortletURL portletURL = renderResponse.createRenderURL();
 						String rowId = row.getRowId();
 						String uuid = String.valueOf(configurationEntry.getUUID());
 
-						String progressTooltip =  AdaptiveMediaImageEntryLocalServiceUtil.getAdaptiveMediaImageEntriesCount(themeDisplay.getCompanyId(), configurationEntry.getUUID()) + "/" + AdaptiveMediaImageEntryLocalServiceUtil.getExpectedAdaptiveMediaImageEntriesCount(themeDisplay.getCompanyId());
+						int optimizedImages = AdaptiveMediaImageEntryLocalServiceUtil.getAdaptiveMediaImageEntriesCount(themeDisplay.getCompanyId(), configurationEntry.getUUID());
+
+						int totalImages = AdaptiveMediaImageEntryLocalServiceUtil.getExpectedAdaptiveMediaImageEntriesCount(themeDisplay.getCompanyId());
 						%>
 
 						<div id="<portlet:namespace />OptimizeRemaining_<%= rowId %>"></div>
@@ -192,16 +190,16 @@ PortletURL portletURL = renderResponse.createRenderURL();
 									{
 										disabled: <%= !configurationEntry.isEnabled() %>,
 										namespace: '<portlet:namespace />',
-										percentage: <%= percentage %>,
+										optimizedImages: <%= optimizedImages %>,
 										percentageUrl: '<%= optimizedImagesPercentageURL.toString() %>',
-										tooltip: '<%= progressTooltip %>',
+										totalImages: <%= totalImages %>,
 										uuid: '<%= uuid %>'
 									},
 									<portlet:namespace />OptimizeRemaining_<%= rowId %>
 								)
 							);
 
-							<c:if test="<%= ((optimizeImagesAllConfigurationsBackgroundTasksCount > 0) && (percentage < 100) && configurationEntry.isEnabled()) || currentBackgroundTaskConfigurationEntryUuids.contains(uuid) %>">
+							<c:if test="<%= ((optimizeImagesAllConfigurationsBackgroundTasksCount > 0) && configurationEntry.isEnabled()) || currentBackgroundTaskConfigurationEntryUuids.contains(uuid) %>">
 								component.startProgress();
 							</c:if>
 						</aui:script>

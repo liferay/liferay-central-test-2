@@ -55,12 +55,21 @@ public class OptimizedImagesPercentageMVCResourceCommand
 		ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		long companyId = themeDisplay.getCompanyId();
+
 		String entryUuid = ParamUtil.getString(resourceRequest, "entryUuid");
 
-		int percentage = _imageEntryLocalService.getPercentage(
-			themeDisplay.getCompanyId(), entryUuid);
+		int optimizedImages =
+			_imageEntryLocalService.getAdaptiveMediaImageEntriesCount(
+				companyId, entryUuid);
 
-		jsonObject.put("percentage", String.valueOf(percentage));
+		int totalImages =
+			_imageEntryLocalService.getExpectedAdaptiveMediaImageEntriesCount(
+				companyId);
+
+		jsonObject.put("optimizedImages", String.valueOf(optimizedImages));
+
+		jsonObject.put("totalImages", String.valueOf(totalImages));
 
 		JSONPortletResponseUtil.writeJSON(
 			resourceRequest, resourceResponse, jsonObject);
