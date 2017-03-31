@@ -28,10 +28,10 @@ describe(
 					'should fire the press key',
 					function(done) {
 						var calculator = Liferay.DDL.FormBuilderCalculator();
-						
+
 						calculator.render();
 
-						calculator.on('clickedKey', function (event) {
+						calculator.on('clickedKey', function(event) {
 							console.log(event.key);
 							assert.isNotNull(event.key);
 							done();

@@ -68,7 +68,9 @@ AUI.add(
 									valueChange: A.bind(instance._afterSelectFieldChange, instance)
 								},
 								options: instance.get('options'),
-								triggers: instance.get('boundingBox').one('.' + CSS_CALCULATOR_ADD_FIELD)
+								triggers: [
+									instance.get('boundingBox').one('.' + CSS_CALCULATOR_ADD_FIELD)
+								]
 							}
 						);
 
