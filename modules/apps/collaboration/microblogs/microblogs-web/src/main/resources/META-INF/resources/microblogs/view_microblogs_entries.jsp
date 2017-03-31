@@ -54,14 +54,12 @@ if (microblogsEntries != null) {
 		String userFullName = HtmlUtil.escape(PortalUtil.getUserName(microblogsEntry));
 
 		User curUser = UserLocalServiceUtil.fetchUserById(microblogsEntry.getUserId());
-
-		String userPortraitClass = comment ? "user-icon-xs" : "";
 %>
 
 		<div class="microblogs-entry" id="<portlet:namespace />microblogsEntry<%= microblogsEntry.getMicroblogsEntryId() %>">
 			<span class="thumbnail">
 				<liferay-ui:user-portrait
-					cssClass="<%= userPortraitClass %>"
+					cssClass='<%= comment ? "user-icon-xs" : "" %>'
 					userId="<%= microblogsEntry.getUserId() %>"
 				/>
 			</span>
