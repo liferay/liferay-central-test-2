@@ -22,6 +22,8 @@ class AdaptiveMediaProgress extends PortletBase {
 	created() {
 		this.id = this.namespace + 'OptimizeRemaining' + this.uuid + 'Progress';
 
+		this.tooltipPosition = Tooltip.Align.Top;
+
 		this.updateProgressBar_(this.optimizedImages, this.totalImages);
 	}
 

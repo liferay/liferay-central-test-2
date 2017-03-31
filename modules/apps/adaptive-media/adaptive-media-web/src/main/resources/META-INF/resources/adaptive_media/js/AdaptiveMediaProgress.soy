@@ -10,13 +10,14 @@
  * @param progressBarTooltip
  * @param? id
  * @param showLoadingIndicator
+ * @param tooltipPosition
  */
 {template .render}
 	<div id="{$id}">
 		{call Tooltip.render}
 			{param elementClasses: 'fade' /}
-			{param position: 'top' /}
-			{param selector: '#' + $id /}
+			{param position: $tooltipPosition /}
+			{param selector: '#' + $id + ' .progress-container' /}
 			{param title: $progressBarTooltip /}
 			{param visible: false /}
 		{/call}
