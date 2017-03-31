@@ -134,6 +134,48 @@ public class StaticAdaptiveMediaBlogsEditorConfigContributorTest
 	}
 
 	@Test
+	public void testAnyExtraPluginsArePreserved() throws Exception {
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+
+		jsonObject.put("extraPlugins", "testPlugin");
+		jsonObject.put("filebrowserImageBrowseLinkUrl", "browseLinkUrl");
+
+		Mockito.doReturn(
+			Arrays.asList(
+				_getItemSelectorCriterion(ImageItemSelectorCriterion.class))
+		).when(
+			_itemSelector
+		).getItemSelectorCriteria(
+			Mockito.anyString()
+		);
+
+		PortletURL portletURL = Mockito.mock(PortletURL.class);
+
+		Mockito.doReturn(
+			portletURL
+		).when(
+			_itemSelector
+		).getItemSelectorURL(
+			Mockito.any(RequestBackedPortletURLFactory.class),
+			Mockito.anyString(), Mockito.any(ItemSelectorCriterion[].class));
+
+		StaticAdaptiveMediaBlogsEditorConfigContributor
+			staticAdaptiveMediaBlogsEditorConfigContributor =
+				new StaticAdaptiveMediaBlogsEditorConfigContributor();
+
+		staticAdaptiveMediaBlogsEditorConfigContributor.setItemSelector(
+			_itemSelector);
+
+		staticAdaptiveMediaBlogsEditorConfigContributor.
+			populateConfigJSONObject(
+				jsonObject, _inputEditorTaglibAttributes, _themeDisplay,
+				_requestBackedPortletURLFactory);
+
+		Assert.assertEquals(
+			"testPlugin,adaptivemedia", jsonObject.get("extraPlugins"));
+	}
+
+	@Test
 	public void testDoesNothingForUnsupportedItemSelectorCriterion()
 		throws Exception {
 
