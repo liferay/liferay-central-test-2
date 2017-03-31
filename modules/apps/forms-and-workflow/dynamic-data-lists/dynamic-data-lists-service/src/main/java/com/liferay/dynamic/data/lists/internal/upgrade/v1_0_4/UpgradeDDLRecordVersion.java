@@ -45,6 +45,7 @@ public class UpgradeDDLRecordVersion extends UpgradeProcess {
 			try (ResultSet rs = ps1.executeQuery()) {
 				while (rs.next()) {
 					long recordVersionId = rs.getLong(1);
+
 					String version = rs.getString(2);
 
 					ps2.setString(1, version);
