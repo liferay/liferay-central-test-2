@@ -440,7 +440,7 @@ public class ImageProcessorImpl
 			PropsValues.DL_FILE_ENTRY_PREVIEW_IMAGE_MIME_TYPES;
 
 		if (_DL_FILE_ENTRY_EXIF_METADATA_ROTATION_ENABLED &&
-			(ArrayUtil.contains(dlFileEntryPreviewImageMimeTypes, mimeType))) {
+			ArrayUtil.contains(dlFileEntryPreviewImageMimeTypes, mimeType)) {
 
 			String orientationValue = _getTiffOrientationValue(fileVersion);
 
