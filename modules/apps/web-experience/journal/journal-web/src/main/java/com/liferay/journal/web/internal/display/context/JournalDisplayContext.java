@@ -1069,7 +1069,6 @@ public class JournalDisplayContext {
 		}
 
 		searchContext.setAttribute("head", !showVersions);
-		searchContext.setAttribute("latestVersion", !showVersions);
 		searchContext.setAttribute("params", params);
 		searchContext.setEnd(end);
 		searchContext.setFolderIds(folderIds);
