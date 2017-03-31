@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.adaptive.media.document.library.internal.repository.optimizer;
+package com.liferay.adaptive.media.blogs.web.internal.optimizer;
 
 import com.liferay.adaptive.media.AdaptiveMediaException;
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry;
@@ -22,6 +22,7 @@ import com.liferay.adaptive.media.image.counter.AdaptiveMediaImageCounter;
 import com.liferay.adaptive.media.image.optimizer.AdaptiveMediaImageOptimizer;
 import com.liferay.adaptive.media.image.processor.AdaptiveMediaImageProcessor;
 import com.liferay.adaptive.media.web.constants.OptimizeImagesBackgroundTaskConstants;
+import com.liferay.blogs.kernel.model.BlogsEntry;
 import com.liferay.document.library.kernel.model.DLFileEntry;
 import com.liferay.document.library.kernel.service.DLFileEntryLocalService;
 import com.liferay.portal.kernel.backgroundtask.BackgroundTaskConstants;
@@ -49,10 +50,10 @@ import org.osgi.service.component.annotations.Reference;
  * @author Sergio González
  */
 @Component(
-	immediate = true, property = {"adaptive.media.key=document-library"},
+	immediate = true, property = {"adaptive.media.key=blogs"},
 	service = AdaptiveMediaImageOptimizer.class
 )
-public class DLAdaptiveMediaImageOptimizer
+public class BlogsAdaptiveMediaImageOptimizer
 	implements AdaptiveMediaImageOptimizer {
 
 	@Override
@@ -79,9 +80,9 @@ public class DLAdaptiveMediaImageOptimizer
 	public void optimize(long companyId, String configurationEntryUuid) {
 		int total = _counter.countExpectedAdaptiveMediaImageEntries(companyId);
 
-		final AtomicInteger atomiCounter = new AtomicInteger(0);
+		final AtomicInteger atomicCounter = new AtomicInteger(0);
 
-		_optimize(companyId, configurationEntryUuid, total, atomiCounter);
+		_optimize(companyId, configurationEntryUuid, total, atomicCounter);
 	}
 
 	private void _optimize(
@@ -90,6 +91,9 @@ public class DLAdaptiveMediaImageOptimizer
 
 		ActionableDynamicQuery actionableDynamicQuery =
 			_dlFileEntryLocalService.getActionableDynamicQuery();
+
+		long classNameId = _classNameLocalService.getClassNameId(
+			BlogsEntry.class.getName());
 
 		actionableDynamicQuery.setAddCriteriaMethod(
 			new ActionableDynamicQuery.AddCriteriaMethod() {
@@ -101,13 +105,10 @@ public class DLAdaptiveMediaImageOptimizer
 
 					dynamicQuery.add(companyIdProperty.eq(companyId));
 
-					Property groupIdProperty = PropertyFactoryUtil.forName(
-						"groupId");
-					Property repositoryIdProperty = PropertyFactoryUtil.forName(
-						"repositoryId");
+					Property classNameIdProperty = PropertyFactoryUtil.forName(
+						"classNameId");
 
-					dynamicQuery.add(
-						groupIdProperty.eqProperty(repositoryIdProperty));
+					dynamicQuery.add(classNameIdProperty.eq(classNameId));
 
 					Property mimeTypeProperty = PropertyFactoryUtil.forName(
 						"mimeType");
@@ -119,6 +120,7 @@ public class DLAdaptiveMediaImageOptimizer
 				}
 
 			});
+
 		actionableDynamicQuery.setPerformActionMethod(
 			new ActionableDynamicQuery.PerformActionMethod<DLFileEntry>() {
 
@@ -160,7 +162,7 @@ public class DLAdaptiveMediaImageOptimizer
 			BackgroundTaskConstants.BACKGROUND_TASK_ID,
 			BackgroundTaskThreadLocal.getBackgroundTaskId());
 
-		Class<? extends DLAdaptiveMediaImageOptimizer> clazz = getClass();
+		Class<? extends BlogsAdaptiveMediaImageOptimizer> clazz = getClass();
 
 		message.put(
 			OptimizeImagesBackgroundTaskConstants.CLASS_NAME, clazz.getName());
@@ -175,7 +177,7 @@ public class DLAdaptiveMediaImageOptimizer
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		DLAdaptiveMediaImageOptimizer.class);
+		BlogsAdaptiveMediaImageOptimizer.class);
 
 	@Reference
 	private BackgroundTaskStatusMessageSender
@@ -187,7 +189,7 @@ public class DLAdaptiveMediaImageOptimizer
 	@Reference
 	private AdaptiveMediaImageConfigurationHelper _configurationHelper;
 
-	@Reference(target = "(adaptive.media.key=document-library)")
+	@Reference(target = "(adaptive.media.key=blogs)")
 	private AdaptiveMediaImageCounter _counter;
 
 	@Reference

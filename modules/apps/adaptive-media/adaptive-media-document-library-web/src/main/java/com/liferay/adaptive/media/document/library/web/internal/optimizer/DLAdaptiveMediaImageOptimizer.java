@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.adaptive.media.document.library.internal.repository.optimizer;
+package com.liferay.adaptive.media.document.library.web.internal.optimizer;
 
 import com.liferay.adaptive.media.AdaptiveMediaException;
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry;
@@ -22,7 +22,6 @@ import com.liferay.adaptive.media.image.counter.AdaptiveMediaImageCounter;
 import com.liferay.adaptive.media.image.optimizer.AdaptiveMediaImageOptimizer;
 import com.liferay.adaptive.media.image.processor.AdaptiveMediaImageProcessor;
 import com.liferay.adaptive.media.web.constants.OptimizeImagesBackgroundTaskConstants;
-import com.liferay.blogs.kernel.model.BlogsEntry;
 import com.liferay.document.library.kernel.model.DLFileEntry;
 import com.liferay.document.library.kernel.service.DLFileEntryLocalService;
 import com.liferay.portal.kernel.backgroundtask.BackgroundTaskConstants;
@@ -50,10 +49,10 @@ import org.osgi.service.component.annotations.Reference;
  * @author Sergio González
  */
 @Component(
-	immediate = true, property = {"adaptive.media.key=blogs"},
+	immediate = true, property = {"adaptive.media.key=document-library"},
 	service = AdaptiveMediaImageOptimizer.class
 )
-public class BlogsAdaptiveMediaImageOptimizer
+public class DLAdaptiveMediaImageOptimizer
 	implements AdaptiveMediaImageOptimizer {
 
 	@Override
@@ -80,9 +79,9 @@ public class BlogsAdaptiveMediaImageOptimizer
 	public void optimize(long companyId, String configurationEntryUuid) {
 		int total = _counter.countExpectedAdaptiveMediaImageEntries(companyId);
 
-		final AtomicInteger atomicCounter = new AtomicInteger(0);
+		final AtomicInteger atomiCounter = new AtomicInteger(0);
 
-		_optimize(companyId, configurationEntryUuid, total, atomicCounter);
+		_optimize(companyId, configurationEntryUuid, total, atomiCounter);
 	}
 
 	private void _optimize(
@@ -91,9 +90,6 @@ public class BlogsAdaptiveMediaImageOptimizer
 
 		ActionableDynamicQuery actionableDynamicQuery =
 			_dlFileEntryLocalService.getActionableDynamicQuery();
-
-		long classNameId = _classNameLocalService.getClassNameId(
-			BlogsEntry.class.getName());
 
 		actionableDynamicQuery.setAddCriteriaMethod(
 			new ActionableDynamicQuery.AddCriteriaMethod() {
@@ -105,10 +101,13 @@ public class BlogsAdaptiveMediaImageOptimizer
 
 					dynamicQuery.add(companyIdProperty.eq(companyId));
 
-					Property classNameIdProperty = PropertyFactoryUtil.forName(
-						"classNameId");
+					Property groupIdProperty = PropertyFactoryUtil.forName(
+						"groupId");
+					Property repositoryIdProperty = PropertyFactoryUtil.forName(
+						"repositoryId");
 
-					dynamicQuery.add(classNameIdProperty.eq(classNameId));
+					dynamicQuery.add(
+						groupIdProperty.eqProperty(repositoryIdProperty));
 
 					Property mimeTypeProperty = PropertyFactoryUtil.forName(
 						"mimeType");
@@ -120,7 +119,6 @@ public class BlogsAdaptiveMediaImageOptimizer
 				}
 
 			});
-
 		actionableDynamicQuery.setPerformActionMethod(
 			new ActionableDynamicQuery.PerformActionMethod<DLFileEntry>() {
 
@@ -162,7 +160,7 @@ public class BlogsAdaptiveMediaImageOptimizer
 			BackgroundTaskConstants.BACKGROUND_TASK_ID,
 			BackgroundTaskThreadLocal.getBackgroundTaskId());
 
-		Class<? extends BlogsAdaptiveMediaImageOptimizer> clazz = getClass();
+		Class<? extends DLAdaptiveMediaImageOptimizer> clazz = getClass();
 
 		message.put(
 			OptimizeImagesBackgroundTaskConstants.CLASS_NAME, clazz.getName());
@@ -177,7 +175,7 @@ public class BlogsAdaptiveMediaImageOptimizer
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
-		BlogsAdaptiveMediaImageOptimizer.class);
+		DLAdaptiveMediaImageOptimizer.class);
 
 	@Reference
 	private BackgroundTaskStatusMessageSender
@@ -189,7 +187,7 @@ public class BlogsAdaptiveMediaImageOptimizer
 	@Reference
 	private AdaptiveMediaImageConfigurationHelper _configurationHelper;
 
-	@Reference(target = "(adaptive.media.key=blogs)")
+	@Reference(target = "(adaptive.media.key=document-library)")
 	private AdaptiveMediaImageCounter _counter;
 
 	@Reference

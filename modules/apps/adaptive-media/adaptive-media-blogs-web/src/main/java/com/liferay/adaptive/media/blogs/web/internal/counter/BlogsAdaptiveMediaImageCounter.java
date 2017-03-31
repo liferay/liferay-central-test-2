@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.adaptive.media.document.library.internal.repository.counter;
+package com.liferay.adaptive.media.blogs.web.internal.counter;
 
 import com.liferay.adaptive.media.image.constants.AdaptiveMediaImageConstants;
 import com.liferay.adaptive.media.image.counter.AdaptiveMediaImageCounter;
