@@ -299,6 +299,25 @@ task coverageReport(type: org.gradle.testing.jacoco.tasks.JacocoReport) {
 	doFirst {
 		executionData = files(executionData.findAll { it.exists() })
 	}
+
+	afterEvaluate {
+		classDirectories = files(classDirectories.files.collect {
+			fileTree(
+				dir: it,
+				exclude: [
+					'**/*Exception*',
+					'**/*ServiceUtil*',
+					'**/*ServiceWrapper*',
+					'**/constants/*',
+					'**/exception/*',
+					'**/model/*',
+					'**/model/impl/*',
+					'**/persistence/*',
+					'**/service/base/*',
+					'**/service/util/*'
+				])
+		})
+	}
 }
 
 tasks.coveralls {
