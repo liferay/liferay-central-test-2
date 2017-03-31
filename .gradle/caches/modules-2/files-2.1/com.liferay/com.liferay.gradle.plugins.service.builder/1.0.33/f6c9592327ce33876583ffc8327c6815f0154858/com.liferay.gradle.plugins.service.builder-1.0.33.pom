@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.liferay</groupId>
   <artifactId>com.liferay.gradle.plugins.service.builder</artifactId>
-  <version>1.0.32</version>
+  <version>1.0.33</version>
   <description>Liferay Gradle Plugins Service Builder</description>
   <licenses>
     <license>
