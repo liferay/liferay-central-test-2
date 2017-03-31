@@ -124,6 +124,11 @@ public class AdaptiveMediaImageQueryBuilderImplTest {
 	}
 
 	@Test(expected = IllegalArgumentException.class)
+	public void testNullConfigurationStatusFails() {
+		_queryBuilder.withConfigurationStatus(null);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
 	public void testNullConfigurationUUIDFailsWhenQueryingAttributes() {
 		FileVersion fileVersion = Mockito.mock(FileVersion.class);
 
