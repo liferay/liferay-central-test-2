@@ -21,12 +21,14 @@ import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.Sync;
 import com.liferay.portal.kernel.test.rule.SynchronousDestinationTestRule;
 import com.liferay.portal.kernel.test.util.TestPropsValues;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
+import org.junit.Assert;
 import org.junit.ClassRule;
 import org.junit.Rule;
 import org.junit.Test;
@@ -201,6 +203,24 @@ public class AdaptiveMediaImageDisableConfigurationTest
 					TestPropsValues.getCompanyId(), "2");
 
 		assertEnabled(secondConfigurationEntryOptional);
+	}
+
+	@Test
+	public void testDisableNonExistantConfigurationEntry() throws Exception {
+		AdaptiveMediaImageConfigurationHelper configurationHelper =
+			serviceTracker.getService();
+
+		String uuid = StringUtil.randomString();
+
+		configurationHelper.disableAdaptiveMediaImageConfigurationEntry(
+			TestPropsValues.getCompanyId(), uuid);
+
+		Optional<AdaptiveMediaImageConfigurationEntry>
+			configurationEntryOptional =
+				configurationHelper.getAdaptiveMediaImageConfigurationEntry(
+					TestPropsValues.getCompanyId(), uuid);
+
+		Assert.assertFalse(configurationEntryOptional.isPresent());
 	}
 
 	@Test
