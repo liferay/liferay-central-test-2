@@ -26,9 +26,7 @@ import com.liferay.portal.kernel.settings.PortletPreferencesSettings;
 import com.liferay.portal.kernel.settings.Settings;
 import com.liferay.portal.kernel.settings.SettingsException;
 import com.liferay.portal.kernel.settings.SettingsFactoryUtil;
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.io.IOException;
@@ -395,46 +393,28 @@ public class AdaptiveMediaImageConfigurationHelperImpl
 		throws AdaptiveMediaImageConfigurationException {
 
 		String maxHeightString = properties.get("max-height");
-		long maxHeight = GetterUtil.getLong(properties.get("max-height"));
 
-		if (Validator.isNotNull(maxHeightString)) {
-			if (!Validator.isNumber(maxHeightString)) {
-				throw new
-					AdaptiveMediaImageConfigurationException.
-						InvalidHeightException();
-			}
+		if (Validator.isNotNull(maxHeightString) &&
+			!Validator.isNumber(maxHeightString)) {
 
-			if (maxHeight < 0) {
-				throw new
-					AdaptiveMediaImageConfigurationException.
-						InvalidHeightException();
-			}
+			throw new AdaptiveMediaImageConfigurationException.
+				InvalidHeightException();
 		}
 
 		String maxWidthString = properties.get("max-width");
-		long maxWidth = GetterUtil.getLong(properties.get("max-width"));
 
-		if (Validator.isNotNull(maxWidthString)) {
-			if (!Validator.isNumber(maxWidthString)) {
-				throw new
-					AdaptiveMediaImageConfigurationException.
-						InvalidWidthException();
-			}
+		if (Validator.isNotNull(maxWidthString) &&
+			!Validator.isNumber(maxWidthString)) {
 
-			if (maxWidth < 0) {
-				throw new
-					AdaptiveMediaImageConfigurationException.
-						InvalidWidthException();
-			}
+			throw new AdaptiveMediaImageConfigurationException.
+				InvalidWidthException();
 		}
 
-		if ((Validator.isNull(maxHeightString) &&
-			 Validator.isNull(maxWidthString)) ||
-			((maxHeight <= 0) && (maxWidth <= 0))) {
+		if (Validator.isNull(maxHeightString) &&
+			Validator.isNull(maxWidthString)) {
 
-			throw new
-				AdaptiveMediaImageConfigurationException.
-					RequiredWidthOrHeightException();
+			throw new AdaptiveMediaImageConfigurationException.
+				RequiredWidthOrHeightException();
 		}
 	}
 
@@ -456,29 +436,21 @@ public class AdaptiveMediaImageConfigurationHelperImpl
 					companyId,
 					AdaptiveMediaImageCompanyConfiguration.class.getName()));
 
-			String[] nullableImageVariants = _getNullableImageVariants(
-				settings);
+			Optional<String[]> nullableImageVariants =
+				_getNullableImageVariants(settings);
 
-			if (nullableImageVariants != null) {
-				return Stream.of(nullableImageVariants).map(
-					_configurationEntryParser::parse);
-			}
+			String[] imageVariants = nullableImageVariants.orElseGet(
+				() -> settings.getValues("imageVariants", new String[0]));
 
-			String[] imageVariants = settings.getValues("imageVariants", null);
-
-			if (ArrayUtil.isEmpty(imageVariants)) {
-				return Stream.empty();
-			}
-
-			return
-				Stream.of(imageVariants).map(_configurationEntryParser::parse);
+			return Stream.of(imageVariants).map(
+				_configurationEntryParser::parse);
 		}
 		catch (SettingsException se) {
 			throw new AdaptiveMediaRuntimeException.InvalidConfiguration(se);
 		}
 	}
 
-	private String[] _getNullableImageVariants(Settings settings) {
+	private Optional<String[]> _getNullableImageVariants(Settings settings) {
 		PortletPreferencesSettings portletPreferencesSettings =
 			(PortletPreferencesSettings)settings;
 
@@ -487,7 +459,7 @@ public class AdaptiveMediaImageConfigurationHelperImpl
 
 		Map<String, String[]> map = portletPreferences.getMap();
 
-		return map.get("imageVariants");
+		return Optional.ofNullable(map.get("imageVariants"));
 	}
 
 	private void _updateConfiguration(
