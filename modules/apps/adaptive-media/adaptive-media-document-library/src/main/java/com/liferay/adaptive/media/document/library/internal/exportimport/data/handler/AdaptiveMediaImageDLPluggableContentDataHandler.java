@@ -73,7 +73,7 @@ public class AdaptiveMediaImageDLPluggableContentDataHandler
 			configurationEntry -> _exportConfigurationEntry(
 				portletDataContext, configurationEntry));
 
-		_exportGeneratedMedia(portletDataContext, fileEntry);
+		_exportMedia(portletDataContext, fileEntry);
 	}
 
 	@Override
@@ -100,10 +100,10 @@ public class AdaptiveMediaImageDLPluggableContentDataHandler
 
 		portletDataContext.addZipEntry(
 			_getConfigurationEntryBinPath(configurationEntry),
-			_configurationEntrySerializer.serialize(configurationEntry));
+			_imageConfigurationEntrySerializer.serialize(configurationEntry));
 	}
 
-	private void _exportGeneratedMedia(
+	private void _exportMedia(
 			PortletDataContext portletDataContext, FileEntry fileEntry)
 		throws AdaptiveMediaException, IOException, PortalException {
 
@@ -145,7 +145,7 @@ public class AdaptiveMediaImageDLPluggableContentDataHandler
 		}
 
 		portletDataContext.addZipEntry(
-			basePath + ".json", _adaptiveMediaImageSerializer.serialize(media));
+			basePath + ".json", _imageSerializer.serialize(media));
 	}
 
 	private String _getConfigurationEntryBinPath(
@@ -169,7 +169,7 @@ public class AdaptiveMediaImageDLPluggableContentDataHandler
 			return null;
 		}
 
-		return _adaptiveMediaImageSerializer.deserialize(
+		return _imageSerializer.deserialize(
 			serializedMedia,
 			() -> portletDataContext.getZipEntryAsInputStream(
 				basePath + ".bin"));
@@ -194,7 +194,7 @@ public class AdaptiveMediaImageDLPluggableContentDataHandler
 		}
 
 		AdaptiveMediaImageConfigurationEntry importedConfigurationEntry =
-			_configurationEntrySerializer.deserialize(configuration);
+			_imageConfigurationEntrySerializer.deserialize(configuration);
 
 		if (!importedConfigurationEntry.equals(configurationEntry)) {
 			return;
@@ -228,20 +228,19 @@ public class AdaptiveMediaImageDLPluggableContentDataHandler
 			}
 
 			AdaptiveMediaImageEntry imageEntry =
-				_adaptiveMediaImageEntryLocalService.
-					fetchAdaptiveMediaImageEntry(
-						configurationEntry.getUUID(),
-						fileVersion.getFileVersionId());
+				_imageEntryLocalService.fetchAdaptiveMediaImageEntry(
+					configurationEntry.getUUID(),
+					fileVersion.getFileVersionId());
 
 			if (imageEntry != null) {
-				_adaptiveMediaImageEntryLocalService.
+				_imageEntryLocalService.
 					deleteAdaptiveMediaImageEntryFileVersion(
 						configurationEntry.getUUID(),
 						fileVersion.getFileVersionId());
 			}
 
 			try (InputStream inputStream = media.getInputStream()) {
-				_adaptiveMediaImageEntryLocalService.addAdaptiveMediaImageEntry(
+				_imageEntryLocalService.addAdaptiveMediaImageEntry(
 					configurationEntry, fileVersion, widthOptional.get(),
 					heightOptional.get(), media.getInputStream(),
 					contentLengthOptional.get());
@@ -250,20 +249,19 @@ public class AdaptiveMediaImageDLPluggableContentDataHandler
 	}
 
 	@Reference
-	private AdaptiveMediaImageEntryLocalService
-		_adaptiveMediaImageEntryLocalService;
-
-	@Reference
-	private AdaptiveMediaImageSerializer _adaptiveMediaImageSerializer;
-
-	@Reference
-	private AdaptiveMediaImageConfigurationEntrySerializer
-		_configurationEntrySerializer;
-
-	@Reference
 	private AdaptiveMediaImageConfigurationHelper _configurationHelper;
 
 	@Reference
 	private AdaptiveMediaImageFinder _finder;
+
+	@Reference
+	private AdaptiveMediaImageConfigurationEntrySerializer
+		_imageConfigurationEntrySerializer;
+
+	@Reference
+	private AdaptiveMediaImageEntryLocalService _imageEntryLocalService;
+
+	@Reference
+	private AdaptiveMediaImageSerializer _imageSerializer;
 
 }
