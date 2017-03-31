@@ -22,8 +22,10 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringUtil;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -82,6 +84,26 @@ public class AdaptiveMediaImageHTMLTagFactoryImplTest {
 		expectedSB.append("srcset=\"adaptiveURL1\"/>");
 		expectedSB.append("<source media=\"(max-width:1989px)\" ");
 		expectedSB.append("srcset=\"adaptiveURL2\"/>");
+		expectedSB.append("<img src=\"originalURL\"/>");
+		expectedSB.append("</picture>");
+
+		String originalImgTag =
+			"<img src=\"originalURL\" data-fileEntryId=\"1234\"/>";
+
+		String pictureTag = _adaptiveMediaImageHTMLTagFactory.create(
+			originalImgTag, _fileEntry);
+
+		Assert.assertEquals(expectedSB.toString(), pictureTag);
+	}
+
+	@Test
+	public void testNoSourceIsCreatedIfNoConditionIsPresent() throws Exception {
+		_addMediaQueries(
+			new MediaQuery(Collections.emptyList(), StringUtil.randomString()));
+
+		StringBundler expectedSB = new StringBundler(8);
+
+		expectedSB.append("<picture>");
 		expectedSB.append("<img src=\"originalURL\"/>");
 		expectedSB.append("</picture>");
 
