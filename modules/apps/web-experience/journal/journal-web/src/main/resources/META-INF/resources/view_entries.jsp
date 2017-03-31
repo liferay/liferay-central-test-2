@@ -19,7 +19,7 @@
 <%
 String referringPortletResource = ParamUtil.getString(request, "referringPortletResource");
 
-SearchContainer articleSearchContainer = journalDisplayContext.getSearchContainer();
+SearchContainer articleSearchContainer = journalDisplayContext.getSearchContainer(false);
 
 String displayStyle = journalDisplayContext.getDisplayStyle();
 
