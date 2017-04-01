@@ -177,8 +177,8 @@ public class WebServerServlet extends HttpServlet {
 
 				_checkDirectoryIndexingEnabled(group);
 
-				long groupId = group.getGroupId();
 				long folderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
+				long groupId = group.getGroupId();
 
 				for (int i = 1; i < pathArray.length; i++) {
 					try {
@@ -855,8 +855,8 @@ public class WebServerServlet extends HttpServlet {
 
 		_checkDirectoryIndexingEnabled(group);
 
-		long groupId = group.getGroupId();
 		long folderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
+		long groupId = group.getGroupId();
 
 		for (int i = 1; i < pathArray.length; i++) {
 			String name = pathArray[i];
@@ -1333,18 +1333,15 @@ public class WebServerServlet extends HttpServlet {
 		}
 	}
 
-	private static void _checkDirectoryIndexingEnabled(
-			Group group)
+	private static void _checkDirectoryIndexingEnabled(Group group)
 		throws Exception {
 
 		UnicodeProperties typeSettingsProperties =
-				group.getTypeSettingsProperties();
+			group.getTypeSettingsProperties();
 
 		boolean directoryIndexingEnabled = GetterUtil.getBoolean(
-			typeSettingsProperties.getProperty(
-				"directoryIndexingEnabled"),
-			PropsValues.
-				WEB_SERVER_SERVLET_DIRECTORY_INDEXING_ENABLED);
+			typeSettingsProperties.getProperty("directoryIndexingEnabled"),
+			PropsValues.WEB_SERVER_SERVLET_DIRECTORY_INDEXING_ENABLED);
 
 		if (!directoryIndexingEnabled) {
 			throw new NoSuchFolderException();
@@ -1403,7 +1400,7 @@ public class WebServerServlet extends HttpServlet {
 	}
 
 	private static Group _getGroup(long companyId, String name)
-			throws Exception {
+		throws Exception {
 
 		Group group = GroupLocalServiceUtil.fetchFriendlyURLGroup(
 			companyId, StringPool.SLASH + name);
