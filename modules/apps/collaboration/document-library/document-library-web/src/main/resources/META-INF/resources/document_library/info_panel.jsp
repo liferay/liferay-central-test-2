@@ -138,6 +138,10 @@ if (ListUtil.isEmpty(folders) && ListUtil.isEmpty(fileEntries) && ListUtil.isEmp
 				<div class="sidebar-body">
 
 					<%
+					Map<String, Object> data = new HashMap<String, Object>();
+
+					data.put("senna-off", "true");
+
 					FileVersion fileVersion = null;
 
 					if ((user.getUserId() == fileEntry.getUserId()) || permissionChecker.isContentReviewer(user.getCompanyId(), scopeGroupId) || DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE)) {
@@ -155,7 +159,7 @@ if (ListUtil.isEmpty(folders) && ListUtil.isEmpty(fileEntries) && ListUtil.isEmp
 					</c:if>
 
 					<div class="btn-group">
-						<aui:button cssClass="btn-sm" href="<%= DLUtil.getDownloadURL(fileEntry, fileVersion, themeDisplay, StringPool.BLANK) %>" value="download" />
+						<aui:button cssClass="btn-sm" data="<%= data %>" href="<%= DLUtil.getDownloadURL(fileEntry, fileVersion, themeDisplay, StringPool.BLANK) %>" value="download" />
 					</div>
 
 					<aui:input name="url" type="resource" value="<%= DLUtil.getPreviewURL(fileEntry, fileEntry.getFileVersion(), themeDisplay, StringPool.BLANK, false, true) %>" />
