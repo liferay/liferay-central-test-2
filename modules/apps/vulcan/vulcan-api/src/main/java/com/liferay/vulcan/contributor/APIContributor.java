@@ -20,7 +20,7 @@ package com.liferay.vulcan.contributor;
  *
  * @author Alejandro Hernández
  */
-public interface ApiContributor {
+public interface APIContributor {
 
 	public String getPath();
 
