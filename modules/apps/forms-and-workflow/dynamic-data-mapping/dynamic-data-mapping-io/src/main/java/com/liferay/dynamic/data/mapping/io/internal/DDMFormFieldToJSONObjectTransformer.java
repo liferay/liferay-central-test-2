@@ -169,7 +169,9 @@ public class DDMFormFieldToJSONObjectTransformer {
 		else if (Objects.equals(dataType, "ddm-options")) {
 			return optionsToJSONArray((DDMFormFieldOptions)property);
 		}
-		else if (Objects.equals(dataType, "ddm-validation")) {
+		else if (Objects.equals(
+					ddmFormFieldTypeSetting.getType(), "validation")) {
+
 			return toJSONObject((DDMFormFieldValidation)property);
 		}
 		else {
