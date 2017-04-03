@@ -634,6 +634,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>OPTIMIZE_REMAINING</td>
+	<td>//span[contains(@class,'taglib-text-icon') and contains(.,'Optimize Remaining')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>ORGANIZATION</td>
 	<td>//ul[contains(@class,'dropdown-menu')]//a[contains(@id,'menuItem') and contains(.,'Organization')]</td>
 	<td></td>
@@ -1014,9 +1019,9 @@
 	<td></td>
 </tr>
 <tr>
- 	<td>WORKFLOW_DEFINITIONS</td>
- 	<td>//a[@role='menuitem' and contains(.,'Workflow Definitions')]</td>
- 	<td></td>
+	<td>WORKFLOW_DEFINITIONS</td>
+	<td>//a[@role='menuitem' and contains(.,'Workflow Definitions')]</td>
+	<td></td>
 </tr>
 <tr>
 	<td>VIEW_MEMBERSHIP_REQUESTS</td>
