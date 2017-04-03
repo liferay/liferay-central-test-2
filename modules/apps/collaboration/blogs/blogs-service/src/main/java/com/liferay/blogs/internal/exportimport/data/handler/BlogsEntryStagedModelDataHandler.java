@@ -14,11 +14,11 @@
 
 package com.liferay.blogs.internal.exportimport.data.handler;
 
-import com.liferay.blogs.internal.exportimport.content.processor.BlogsEntryExportImportContentProcessor;
 import com.liferay.blogs.kernel.model.BlogsEntry;
 import com.liferay.blogs.kernel.service.BlogsEntryLocalService;
 import com.liferay.document.library.kernel.exception.NoSuchFileException;
 import com.liferay.document.library.kernel.model.DLFileEntry;
+import com.liferay.exportimport.content.processor.ExportImportContentProcessor;
 import com.liferay.exportimport.kernel.lar.ExportImportPathUtil;
 import com.liferay.exportimport.kernel.lar.PortletDataContext;
 import com.liferay.exportimport.kernel.lar.StagedModelDataHandler;
@@ -55,6 +55,7 @@ import java.util.Map;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
+import org.osgi.service.component.annotations.ReferencePolicyOption;
 
 /**
  * @author Zsolt Berentey
@@ -173,12 +174,11 @@ public class BlogsEntryStagedModelDataHandler
 		}
 
 		String content =
-			_blogsEntryExportImportContentProcessor.
-				replaceExportContentReferences(
-					portletDataContext, entry, entry.getContent(),
-					portletDataContext.getBooleanParameter(
-						"blogs", "referenced-content"),
-					true);
+			_exportImportContentProcessor.replaceExportContentReferences(
+				portletDataContext, entry, entry.getContent(),
+				portletDataContext.getBooleanParameter(
+					"blogs", "referenced-content"),
+				true);
 
 		entry.setContent(content);
 
@@ -216,9 +216,8 @@ public class BlogsEntryStagedModelDataHandler
 			portletDataContext.getImportDataStagedModelElement(entry);
 
 		String content =
-			_blogsEntryExportImportContentProcessor.
-				replaceImportContentReferences(
-					portletDataContext, entry, entry.getContent());
+			_exportImportContentProcessor.replaceImportContentReferences(
+				portletDataContext, entry, entry.getContent());
 
 		entry.setContent(content);
 
@@ -425,19 +424,21 @@ public class BlogsEntryStagedModelDataHandler
 	}
 
 	@Reference(unbind = "-")
-	protected void setBlogsEntryExportImportContentProcessor(
-		BlogsEntryExportImportContentProcessor
-			blogsEntryExportImportContentProcessor) {
-
-		_blogsEntryExportImportContentProcessor =
-			blogsEntryExportImportContentProcessor;
-	}
-
-	@Reference(unbind = "-")
 	protected void setBlogsEntryLocalService(
 		BlogsEntryLocalService blogsEntryLocalService) {
 
 		_blogsEntryLocalService = blogsEntryLocalService;
+	}
+
+	@Reference(
+		policyOption = ReferencePolicyOption.GREEDY,
+		target = "(model.class.name=com.liferay.blogs.kernel.model.BlogsEntry)",
+		unbind = "-"
+	)
+	protected void setExportImportContentProcessor(
+		ExportImportContentProcessor<String> exportImportContentProcessor) {
+
+		_exportImportContentProcessor = exportImportContentProcessor;
 	}
 
 	@Reference(unbind = "-")
@@ -511,9 +512,8 @@ public class BlogsEntryStagedModelDataHandler
 	private static final Log _log = LogFactoryUtil.getLog(
 		BlogsEntryStagedModelDataHandler.class);
 
-	private BlogsEntryExportImportContentProcessor
-		_blogsEntryExportImportContentProcessor;
 	private BlogsEntryLocalService _blogsEntryLocalService;
+	private ExportImportContentProcessor<String> _exportImportContentProcessor;
 	private ImageLocalService _imageLocalService;
 
 }
