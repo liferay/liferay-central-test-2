@@ -1243,8 +1243,8 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		if (ListUtil.isEmpty(actions)) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"No portlet or model resource actions found for " + name +
-						", checking other resource actions ");
+					"Checking other resource actions because no model or " +
+						"portlet resource actions found for " + name);
 			}
 
 			List<ResourceAction> resourceActions =
