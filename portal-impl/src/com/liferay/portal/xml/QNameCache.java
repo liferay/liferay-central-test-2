@@ -33,7 +33,6 @@ public class QNameCache extends org.dom4j.tree.QNameCache {
 
 		namespaceCache = new ConcurrentReferenceKeyHashMap<>(
 			FinalizeManager.WEAK_REFERENCE_FACTORY);
-
 		noNamespaceCache = new ConcurrentReferenceKeyHashMap<>(
 			FinalizeManager.WEAK_REFERENCE_FACTORY);
 	}
