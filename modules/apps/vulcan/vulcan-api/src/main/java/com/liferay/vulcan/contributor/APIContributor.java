@@ -15,9 +15,6 @@
 package com.liferay.vulcan.contributor;
 
 /**
- * Classes implementing this interface will be treated as contributors of the
- * Liferay API.
- *
  * @author Alejandro Hernández
  */
 public interface APIContributor {
