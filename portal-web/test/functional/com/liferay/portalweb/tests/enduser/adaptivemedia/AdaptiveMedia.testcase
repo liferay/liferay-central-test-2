@@ -136,14 +136,14 @@
 			<var name="imageName" value="Small Image Variant" />
 			<var name="maxHeight" value="100" />
 			<var name="maxWidth" value="100" />
-			<var name="percentOptimized" value="0%" />
+			<var name="percentOptimized" value="0" />
 		</execute>
 
 		<execute macro="AdaptiveMedia#viewImageResolutionTableEntry">
 			<var name="imageName" value="Large Image Variant" />
 			<var name="maxHeight" value="1000" />
 			<var name="maxWidth" value="1000" />
-			<var name="percentOptimized" value="0%" />
+			<var name="percentOptimized" value="0" />
 		</execute>
 
 		<execute macro="ProductMenu#gotoSitesContent">
@@ -166,14 +166,14 @@
 			<var name="imageName" value="Small Image Variant" />
 			<var name="maxHeight" value="100" />
 			<var name="maxWidth" value="100" />
-			<var name="percentOptimized" value="100%" />
+			<var name="percentOptimized" value="100" />
 		</execute>
 
 		<execute macro="AdaptiveMedia#viewImageResolutionTableEntry">
 			<var name="imageName" value="Large Image Variant" />
 			<var name="maxHeight" value="1000" />
 			<var name="maxWidth" value="1000" />
-			<var name="percentOptimized" value="100%" />
+			<var name="percentOptimized" value="100" />
 		</execute>
 
 		<execute macro="ProductMenu#gotoSitesContent">
