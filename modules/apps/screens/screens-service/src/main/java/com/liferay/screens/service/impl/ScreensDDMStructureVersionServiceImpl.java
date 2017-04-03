@@ -33,11 +33,11 @@ public class ScreensDDMStructureVersionServiceImpl
 	public JSONObject getDDMStructureVersion(long structureId)
 		throws PortalException {
 
-		DDMStructureVersion ddmStructureVersion =
-			ddmStructureVersionService.getLatestStructureVersion(structureId);
-
 		JSONObject ddmStructureVersionJSONObject =
 			JSONFactoryUtil.createJSONObject();
+
+		DDMStructureVersion ddmStructureVersion =
+			ddmStructureVersionService.getLatestStructureVersion(structureId);
 
 		DDMFormLayout ddmFormLayout = ddmStructureVersion.getDDMFormLayout();
 
