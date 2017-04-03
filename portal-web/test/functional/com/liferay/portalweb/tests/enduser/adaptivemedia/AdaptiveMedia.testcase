@@ -26,8 +26,6 @@
 			<var name="maxWidth" value="320" />
 		</execute>
 
-		<execute macro="Alert#viewSuccessMessage" />
-
 		<execute macro="AdaptiveMedia#viewImageResolutionTableEntry">
 			<var name="imageName" value="Low Resolution" />
 			<var name="maxHeight" value="480" />
@@ -54,15 +52,11 @@
 			<var name="maxWidth" value="100" />
 		</execute>
 
-		<execute macro="Alert#viewSuccessMessage" />
-
 		<execute macro="AdaptiveMedia#addImageResolution">
 			<var name="imageName" value="Large Image Variant" />
 			<var name="maxHeight" value="1000" />
 			<var name="maxWidth" value="1000" />
 		</execute>
-
-		<execute macro="Alert#viewSuccessMessage" />
 
 		<execute macro="AdaptiveMedia#viewImageResolutionTableEntry">
 			<var name="imageName" value="Small Image Variant" />
@@ -150,8 +144,6 @@
 			<var name="maxWidth" value="100" />
 		</execute>
 
-		<execute macro="Alert#viewSuccessMessage" />
-
 		<execute macro="AdaptiveMedia#viewImageResolutionTableEntry">
 			<var name="imageName" value="Small Image Variant" />
 			<var name="maxHeight" value="100" />
@@ -195,8 +187,6 @@
 			<var name="maxHeight" value="100" />
 			<var name="maxWidth" value="100" />
 		</execute>
-
-		<execute macro="Alert#viewSuccessMessage" />
 
 		<execute macro="AdaptiveMedia#viewImageResolutionTableEntry">
 			<var name="imageName" value="Small Image Variant" />
