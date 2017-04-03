@@ -412,10 +412,10 @@ public interface AdaptiveMediaImageEntryLocalService extends BaseLocalService,
 	* it also deletes the bytes from the file store.
 	* </p>
 	*
-	* @param fileVersionId the primary key of the file version
+	* @param fileVersion the FileVersion
 	* @throws PortalException if the file version cannot be found
 	* @review
 	*/
-	public void deleteAdaptiveMediaImageEntryFileVersion(long fileVersionId)
-		throws PortalException;
+	public void deleteAdaptiveMediaImageEntryFileVersion(
+		FileVersion fileVersion) throws PortalException;
 }

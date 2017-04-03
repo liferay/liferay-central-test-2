@@ -464,14 +464,14 @@ public class AdaptiveMediaImageEntryLocalServiceUtil {
 	* it also deletes the bytes from the file store.
 	* </p>
 	*
-	* @param fileVersionId the primary key of the file version
+	* @param fileVersion the FileVersion
 	* @throws PortalException if the file version cannot be found
 	* @review
 	*/
 	public static void deleteAdaptiveMediaImageEntryFileVersion(
-		long fileVersionId)
+		com.liferay.portal.kernel.repository.model.FileVersion fileVersion)
 		throws com.liferay.portal.kernel.exception.PortalException {
-		getService().deleteAdaptiveMediaImageEntryFileVersion(fileVersionId);
+		getService().deleteAdaptiveMediaImageEntryFileVersion(fileVersion);
 	}
 
 	public static AdaptiveMediaImageEntryLocalService getService() {
