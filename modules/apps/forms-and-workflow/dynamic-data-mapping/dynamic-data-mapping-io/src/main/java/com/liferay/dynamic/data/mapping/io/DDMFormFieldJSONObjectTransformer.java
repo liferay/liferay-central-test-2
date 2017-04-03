@@ -14,6 +14,8 @@
 
 package com.liferay.dynamic.data.mapping.io;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.dynamic.data.mapping.model.DDMFormField;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONObject;
@@ -21,6 +23,7 @@ import com.liferay.portal.kernel.json.JSONObject;
 /**
  * @author Marcellus Tavares
  */
+@ProviderType
 public interface DDMFormFieldJSONObjectTransformer {
 
 	public JSONObject transform(DDMFormField ddmFormField);
