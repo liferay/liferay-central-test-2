@@ -14,7 +14,7 @@
 
 package com.liferay.vulcan.representation;
 
-import com.liferay.vulcan.builder.RepresentationBuilder;
+import com.liferay.vulcan.representation.builder.RepresentationBuilder;
 
 /**
  * @author Carlos Sierra Andrés

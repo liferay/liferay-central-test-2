@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.vulcan.builder;
+package com.liferay.vulcan.representation.builder;
 
 import java.util.Optional;
 import java.util.function.Function;
