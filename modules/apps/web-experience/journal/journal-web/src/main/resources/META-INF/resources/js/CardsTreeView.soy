@@ -52,10 +52,15 @@
 					"
 					data-treeitemid="{$node.id}"
 					data-treeitemname="{$node.name}"
-					data-treeitemvalue="{$node.value}"
+
+					{if $node.value}
+						data-treeitemvalue="{$node.value}"
+					{/if}
+
 					aria-expanded="{$node.expanded ? 'true' : 'false'}"
 					role="treeitem"
 				{/let}
+
 				<div {$nodeAttributes}>
 					{if $node.children}
 						<div
