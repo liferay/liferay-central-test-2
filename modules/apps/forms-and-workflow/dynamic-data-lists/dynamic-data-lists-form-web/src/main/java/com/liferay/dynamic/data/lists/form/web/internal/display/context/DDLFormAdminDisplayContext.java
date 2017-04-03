@@ -154,7 +154,7 @@ public class DDLFormAdminDisplayContext {
 			PortalUtil.getHttpServletRequest(_renderRequest),
 			PortalUtil.getHttpServletResponse(_renderResponse),
 			_ddlRecordLocalService, _ddmFormRenderer, _ddmFormValuesFactory,
-			_ddmFormValuesMerger, _ddmStructureLocalService);
+			_ddmFormValuesMerger);
 	}
 
 	public DDLFormViewRecordsDisplayContext
