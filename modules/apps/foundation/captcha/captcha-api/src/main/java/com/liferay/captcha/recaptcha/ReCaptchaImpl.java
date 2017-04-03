@@ -128,6 +128,8 @@ public class ReCaptchaImpl extends SimpleCaptchaImpl {
 
 		Http.Options options = new Http.Options();
 
+		options.setLocation(_captchaConfiguration.reCaptchaVerifyUrl());
+
 		try {
 			options.addPart(
 				"secret", _captchaConfiguration.reCaptchaPrivateKey());
@@ -138,7 +140,6 @@ public class ReCaptchaImpl extends SimpleCaptchaImpl {
 
 		options.addPart("remoteip", request.getRemoteAddr());
 		options.addPart("response", reCaptchaResponse);
-		options.setLocation(_captchaConfiguration.reCaptchaVerifyUrl());
 		options.setPost(true);
 
 		String content = null;
