@@ -41,6 +41,80 @@
 		</execute>
 	</command>
 
+	<command name="AddAndUpdateAMIWithImagesInDM" priority="5">
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="Adaptive Media" />
+		</execute>
+
+		<execute macro="AdaptiveMedia#addImageResolution">
+			<var name="imageName" value="Low Resolution" />
+			<var name="maxHeight" value="480" />
+			<var name="maxWidth" value="320" />
+		</execute>
+
+		<execute macro="AdaptiveMedia#viewImageResolutionTableEntry">
+			<var name="imageName" value="Low Resolution" />
+			<var name="maxHeight" value="480" />
+			<var name="maxWidth" value="320" />
+			<var name="percentOptimized" value="0" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Documents and Media" />
+		</execute>
+
+		<execute macro="DMDocument#addCP">
+			<var name="dmDocumentDescription" value="DM Document Description" />
+			<var name="dmDocumentFile" value="Document_1.jpg" />
+			<var name="dmDocumentTitle" value="Document_1.jpg" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="Adaptive Media" />
+		</execute>
+
+		<execute macro="AdaptiveMedia#optimizeRemainingImages">
+			<var name="imageName" value="Low Resolution" />
+			<var name="percentOptimized" value="100" />
+		</execute>
+
+		<execute macro="AdaptiveMedia#addImageResolution">
+			<var name="imageName" value="High Resolution" />
+			<var name="maxHeight" value="1280" />
+			<var name="maxWidth" value="1440" />
+		</execute>
+
+		<execute macro="AdaptiveMedia#viewImageResolutionTableEntry">
+			<var name="imageName" value="High Resolution" />
+			<var name="maxHeight" value="1280" />
+			<var name="maxWidth" value="1440" />
+			<var name="percentOptimized" value="0" />
+		</execute>
+
+		<execute macro="AdaptiveMedia#selectAdaptiveMediaImage">
+			<var name="imageName" value="High Resolution" />
+		</execute>
+
+		<execute macro="AdaptiveMedia#viewNumberOfOptimizedImages">
+			<var name="numberOfOptimizedImages" value="0/1" />
+		</execute>
+
+		<execute macro="AdaptiveMedia#editImageResolution">
+			<var name="imageName" value="High Resolution" />
+			<var name="imageNameEdit" value="High Resolution Edited" />
+			<var name="maxHeightEdit" value="1080" />
+			<var name="maxWidthEdit" value="1920" />
+		</execute>
+
+		<execute macro="AdaptiveMedia#selectAdaptiveMediaImage">
+			<var name="imageName" value="High Resolution Edited" />
+		</execute>
+
+		<execute macro="AdaptiveMedia#viewNumberOfOptimizedImages">
+			<var name="numberOfOptimizedImages" value="0/1" />
+		</execute>
+	</command>
+
 	<command name="AddImageVariantsForBlogEntry" priority="5">
 		<execute macro="ProductMenu#gotoControlPanelConfiguration">
 			<var name="portlet" value="Adaptive Media" />
