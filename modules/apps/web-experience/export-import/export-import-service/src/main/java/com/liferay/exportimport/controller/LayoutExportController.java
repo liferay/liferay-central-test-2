@@ -783,11 +783,14 @@ public class LayoutExportController implements ExportController {
 			layout);
 
 		if (layoutRevision != null) {
-			return true;
+			layoutRevision = _layoutRevisionLocalService.fetchLayoutRevision(
+				layoutSetBranchId, layoutRevision.getLayoutBranchId(), true,
+				layout.getPlid());
 		}
-
-		layoutRevision = _layoutRevisionLocalService.fetchLayoutRevision(
-			layoutSetBranchId, true, layout.getPlid());
+		else {
+			layoutRevision = _layoutRevisionLocalService.fetchLayoutRevision(
+				layoutSetBranchId, true, layout.getPlid());
+		}
 
 		if (layoutRevision == null) {
 			return false;
