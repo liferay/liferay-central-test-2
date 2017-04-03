@@ -20,7 +20,7 @@ import com.liferay.vulcan.builder.RepresentationBuilder;
  * @author Carlos Sierra Andrés
  * @author Alejandro Hernández
  */
-public interface SemanticRepresentation<T> {
+public interface Representation<T> {
 
 	public void buildRepresentation(
 		RepresentationBuilder<T> representationBuilder);
