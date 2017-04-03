@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.dynamic.data.lists.exporter.impl;
+package com.liferay.dynamic.data.lists.internal.exporter;
 
 import com.liferay.dynamic.data.lists.exporter.DDLExporter;
 import com.liferay.dynamic.data.lists.model.DDLRecord;
