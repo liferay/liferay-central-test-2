@@ -154,8 +154,7 @@ public class AdaptiveMediaThumbnailsOSGiCommandsTest {
 		FileVersion latestFileVersion = _pngFileEntry.getFileVersion();
 
 		AdaptiveMediaImageEntryLocalServiceUtil.
-			deleteAdaptiveMediaImageEntryFileVersion(
-				latestFileVersion.getFileVersionId());
+			deleteAdaptiveMediaImageEntryFileVersion(latestFileVersion);
 
 		GroupLocalServiceUtil.deleteGroup(_group);
 

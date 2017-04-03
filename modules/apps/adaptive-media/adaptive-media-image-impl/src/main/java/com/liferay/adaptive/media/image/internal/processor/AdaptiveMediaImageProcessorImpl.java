@@ -57,7 +57,7 @@ public final class AdaptiveMediaImageProcessorImpl
 			}
 
 			_imageEntryLocalService.deleteAdaptiveMediaImageEntryFileVersion(
-				fileVersion.getFileVersionId());
+				fileVersion);
 		}
 		catch (PortalException pe) {
 			throw new AdaptiveMediaRuntimeException.IOException(pe);

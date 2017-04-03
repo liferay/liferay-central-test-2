@@ -164,21 +164,19 @@ public class AdaptiveMediaImageEntryLocalServiceImpl
 	 * it also deletes the bytes from the file store.
 	 * </p>
 	 *
-	 * @param  fileVersionId the primary key of the file version
+	 * @param  fileVersion the FileVersion
 	 * @throws PortalException if the file version cannot be found
 	 *
 	 * @review
 	 */
 	@Override
-	public void deleteAdaptiveMediaImageEntryFileVersion(long fileVersionId)
+	public void deleteAdaptiveMediaImageEntryFileVersion(
+			FileVersion fileVersion)
 		throws PortalException {
-
-		FileVersion fileVersion = dlAppLocalService.getFileVersion(
-			fileVersionId);
 
 		List<AdaptiveMediaImageEntry> imageEntries =
 			adaptiveMediaImageEntryPersistence.findByFileVersionId(
-				fileVersionId);
+				fileVersion.getFileVersionId());
 
 		for (AdaptiveMediaImageEntry imageEntry : imageEntries) {
 			try {
