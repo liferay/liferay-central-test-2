@@ -289,6 +289,11 @@ CardsTreeview.STATE = {
 	selectedNodes: {
 		validator: core.isArray,
 		value: []
+	},
+
+	viewType: {
+		validator: core.isString,
+		value: 'tree'
 	}
 };
 

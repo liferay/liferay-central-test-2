@@ -39,6 +39,7 @@
  *
  * @param node
  * @param path
+ * @param? viewType
  */
 {template .node}
 	<li class="treeview-node" data-treeview-path="{$path}">
@@ -62,7 +63,7 @@
 				{/let}
 
 				<div {$nodeAttributes}>
-					{if $node.children}
+					{if $viewType == 'tree' and $node.children}
 						<div
 							class="treeview-node-toggler"
 							data-onclick="handleNodeTogglerClicked_">
@@ -76,7 +77,7 @@
 					{/call}
 				</div>
 
-				{if $node.expanded}
+				{if $viewType == 'tree' and $node.expanded}
 					{call .nodes data="all"}
 						{param nodes: $node.children /}
 						{param parentPath: $path /}
