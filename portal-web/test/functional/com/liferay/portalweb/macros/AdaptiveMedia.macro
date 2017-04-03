@@ -86,6 +86,29 @@
 		<execute macro="PortletEntry#save" />
 	</command>
 
+	<command name="optimizeRemainingImages">
+		<var name="key_imageName" value="${imageName}" />
+		<var name="key_percentOptimized" value="${percentOptimized}" />
+
+		<if>
+			<condition function="IsElementNotPresent" locator1="AdaptiveMediaTable#PROGRESS" />
+			<then>
+				<execute function="Click" locator1="AdaptiveMediaTable#IMAGE_RESOLUTION_OPTIONS" />
+
+				<execute function="AssertClick" locator1="MenuItem#OPTIMIZE_REMAINING" value1="Optimize Remaining" />
+			</then>
+		</if>
+
+		<execute function="AssertVisible" locator1="AdaptiveMediaTable#PROGRESS" />
+		<execute function="AssertTextEquals#assertPartialText" locator1="AdaptiveMediaTable#PROGRESS" value1="${percentOptimized}" />
+	</command>
+
+	<command name="selectAdaptiveMediaImage">
+		<var name="key_imageName" value="${imageName}" />
+
+		<execute function="Check" locator1="Checkbox#ADAPTIVE_MEDIA_IMAGE" />
+	</command>
+
 	<command name="viewImageResolutionTableEntry">
 		<var name="key_imageName" value="${imageName}" />
 
@@ -109,5 +132,13 @@
 		<var name="key_imageName" value="${imageName}" />
 
 		<execute function="AssertElementPresent" locator1="AdaptiveMedia#IMAGE_VARIANT_SOURCE_URL" />
+	</command>
+
+	<command name="viewNumberOfOptimizedImages">
+		<execute function="Click" locator1="AdaptiveMediaTable#INFO_ICON" />
+
+		<var name="key_numberOfOptimizedImages" value="${numberOfOptimizedImages}" />
+
+		<execute function="AssertTextEquals" locator1="AdaptiveMediaTable#IMAGE_INFO_DETAILS_OPTIMIZED_IMAGES" value1="${numberOfOptimizedImages}" />
 	</command>
 </definition>
