@@ -176,8 +176,8 @@ public class DLPortletInstanceSettingsHelper {
 		String portletResource = _dlRequestHelper.getPortletResource();
 
 		if (portletName.equals(DLPortletKeys.DOCUMENT_LIBRARY_ADMIN) ||
-			portletResource.equals(DLPortletKeys.DOCUMENT_LIBRARY_ADMIN) ||
 			portletName.equals(PortletKeys.MY_WORKFLOW_TASK) ||
+			portletResource.equals(DLPortletKeys.DOCUMENT_LIBRARY_ADMIN) ||
 			portletResource.equals(PortletKeys.MY_WORKFLOW_TASK)) {
 
 			return true;
