@@ -500,6 +500,28 @@ AUI.add(
 						return value.split(',');
 					},
 
+					_showError: function(message) {
+						var instance = this;
+
+						var contentBox = instance.get('contentBox');
+
+						var toolbar = instance.icons.get('contentBox');
+
+						contentBox.addClass('has-error');
+
+						var alertNode = toolbar.insertBefore(message, toolbar);
+
+						A.later(
+							5000,
+							instance,
+							function() {
+								alertNode.remove();
+
+								contentBox.removeClass('has-error');
+							}, {}, false
+						);
+					},
+
 					_showPopup: function(event) {
 						var instance = this;
 
