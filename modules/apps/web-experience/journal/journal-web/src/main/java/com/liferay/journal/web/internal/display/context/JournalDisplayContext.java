@@ -72,6 +72,7 @@ import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
@@ -85,14 +86,13 @@ import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import java.io.Serializable;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 
 import javax.portlet.PortletException;
 import javax.portlet.PortletPreferences;
@@ -129,18 +129,20 @@ public class JournalDisplayContext {
 		return _article;
 	}
 
-	public Set getAvailableArticleLocales() throws PortalException {
-		Set<Locale> availableLocalesSet = new HashSet<>();
-
+	public List<Locale> getAvailableArticleLocales() throws PortalException {
 		JournalArticle article = getArticle();
 
-		if (article != null) {
-			Map<Locale, String> titleMap = article.getTitleMap();
-
-			availableLocalesSet.addAll(titleMap.keySet());
+		if (article == null) {
+			return Collections.emptyList();
 		}
 
-		return availableLocalesSet;
+		List<Locale> availableLocales = new ArrayList<>();
+
+		for (String languageId : article.getAvailableLanguageIds()) {
+			availableLocales.add(LocaleUtil.fromLanguageId(languageId));
+		}
+
+		return availableLocales;
 	}
 
 	public JournalArticleDisplay getArticleDisplay() throws Exception {
