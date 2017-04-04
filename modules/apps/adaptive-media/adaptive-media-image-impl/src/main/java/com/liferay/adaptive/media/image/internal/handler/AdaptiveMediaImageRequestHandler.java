@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 
 import java.io.IOException;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -185,6 +186,12 @@ public class AdaptiveMediaImageRequestHandler
 
 		Map<String, String> properties = configurationEntry.getProperties();
 
+		final Integer configurationWidth = GetterUtil.getInteger(
+			properties.get("max-width"));
+
+		final Integer configurationHeight = GetterUtil.getInteger(
+			properties.get("max-height"));
+
 		try {
 			return _finder.getAdaptiveMedia(
 				queryBuilder -> {
@@ -194,14 +201,14 @@ public class AdaptiveMediaImageRequestHandler
 					AdaptiveMediaImageQueryBuilder.FuzzySortStep nextStep =
 						initialStep.with(
 							AdaptiveMediaImageAttribute.IMAGE_WIDTH,
-							GetterUtil.getInteger(properties.get("max-width")));
+							configurationWidth);
 
 					nextStep = nextStep.with(
 						AdaptiveMediaImageAttribute.IMAGE_HEIGHT,
-						GetterUtil.getInteger(properties.get("max-height")));
+						configurationHeight);
 
 					return nextStep.done();
-				}).findFirst();
+				}).sorted(_getComparator(configurationWidth)).findFirst();
 		}
 		catch (AdaptiveMediaException | PortalException e) {
 			throw new AdaptiveMediaRuntimeException(e);
@@ -218,6 +225,27 @@ public class AdaptiveMediaImageRequestHandler
 			queryBuilder -> queryBuilder.forVersion(fileVersion).
 				forConfiguration(configurationEntry.getUUID()).done()).
 				findFirst();
+	}
+
+	private Comparator<AdaptiveMedia<AdaptiveMediaImageProcessor>>
+		_getComparator(Integer configurationWidth) {
+
+		return (adaptiveMedia1, adaptiveMedia2) ->
+			_getDiff(configurationWidth, adaptiveMedia1) -
+				_getDiff(configurationWidth, adaptiveMedia2);
+	}
+
+	private Integer _getDiff(
+		int width, AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia) {
+
+		Optional<Integer> widthOptional = adaptiveMedia.getAttributeValue(
+			AdaptiveMediaImageAttribute.IMAGE_WIDTH);
+
+		if (widthOptional.isPresent()) {
+			return Math.abs(widthOptional.get() - width);
+		}
+
+		return Integer.MAX_VALUE;
 	}
 
 	private Optional<Tuple<FileVersion, AdaptiveMediaImageAttributeMapping>>

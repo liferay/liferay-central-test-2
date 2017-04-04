@@ -23,8 +23,10 @@ import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigur
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationHelper;
 import com.liferay.adaptive.media.image.finder.AdaptiveMediaImageFinder;
 import com.liferay.adaptive.media.image.finder.AdaptiveMediaImageQueryBuilder;
+import com.liferay.adaptive.media.image.internal.configuration.AdaptiveMediaImageAttributeMapping;
 import com.liferay.adaptive.media.image.internal.configuration.AdaptiveMediaImageConfigurationEntryImpl;
 import com.liferay.adaptive.media.image.internal.finder.AdaptiveMediaImageQueryBuilderImpl;
+import com.liferay.adaptive.media.image.internal.processor.AdaptiveMediaImage;
 import com.liferay.adaptive.media.image.internal.util.Tuple;
 import com.liferay.adaptive.media.image.processor.AdaptiveMediaImageAttribute;
 import com.liferay.adaptive.media.image.processor.AdaptiveMediaImageProcessor;
@@ -36,7 +38,9 @@ import com.liferay.portal.kernel.util.GetterUtil;
 
 import java.io.InputStream;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
@@ -149,7 +153,7 @@ public class AdaptiveMediaImageRequestHandlerTest {
 	}
 
 	@Test
-	public void testReturnsTheClosestMatchIfNoExactMatchPresentAndRunsTheProcess()
+	public void testReturnsTheClosestMatchByWidthIfNoExactMatchPresentAndRunsTheProcess()
 		throws Exception {
 
 		AdaptiveMediaImageConfigurationEntry configurationEntry =
@@ -160,16 +164,35 @@ public class AdaptiveMediaImageRequestHandlerTest {
 			_createAdaptiveMediaImageConfigurationEntry(
 				_fileVersion.getCompanyId(), 201, 501);
 
-		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia =
-			_createAdaptiveMedia(closestConfigurationEntry);
+		AdaptiveMediaImageConfigurationEntry fartherConfigurationEntry =
+			_createAdaptiveMediaImageConfigurationEntry(
+				_fileVersion.getCompanyId(), 301, 501);
 
-		_mockClosestMatch(_fileVersion, configurationEntry, adaptiveMedia);
+		AdaptiveMediaImageConfigurationEntry farthestConfigurationEntry =
+			_createAdaptiveMediaImageConfigurationEntry(
+				_fileVersion.getCompanyId(), 401, 501);
+
+		AdaptiveMedia<AdaptiveMediaImageProcessor> closestAdaptiveMedia =
+			_createAdaptiveMedia(_fileVersion, closestConfigurationEntry);
+
+		AdaptiveMedia<AdaptiveMediaImageProcessor> fartherAdaptiveMedia =
+			_createAdaptiveMedia(_fileVersion, fartherConfigurationEntry);
+
+		AdaptiveMedia<AdaptiveMediaImageProcessor> farthestAdaptiveMedia =
+			_createAdaptiveMedia(_fileVersion, farthestConfigurationEntry);
+
+		_mockClosestMatch(
+			_fileVersion, configurationEntry,
+			Arrays.asList(
+				farthestAdaptiveMedia, closestAdaptiveMedia,
+				fartherAdaptiveMedia));
 
 		HttpServletRequest request = _createRequestFor(
 			_fileVersion, configurationEntry);
 
 		Assert.assertEquals(
-			Optional.of(adaptiveMedia), _requestHandler.handleRequest(request));
+			Optional.of(closestAdaptiveMedia),
+			_requestHandler.handleRequest(request));
 
 		Mockito.verify(_asyncProcessor).triggerProcess(
 			_fileVersion, String.valueOf(_fileVersion.getFileVersionId()));
@@ -184,7 +207,7 @@ public class AdaptiveMediaImageRequestHandlerTest {
 				_fileVersion.getCompanyId(), 200, 500);
 
 		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia =
-			_createAdaptiveMedia(configurationEntry);
+			_createAdaptiveMedia(_fileVersion, configurationEntry);
 
 		_mockExactMatch(_fileVersion, configurationEntry, adaptiveMedia);
 
@@ -246,21 +269,43 @@ public class AdaptiveMediaImageRequestHandlerTest {
 	}
 
 	private AdaptiveMedia<AdaptiveMediaImageProcessor> _createAdaptiveMedia(
+			FileVersion fileVersion,
 			AdaptiveMediaImageConfigurationEntry configurationEntry)
 		throws Exception {
 
-		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia = Mockito.mock(
-			AdaptiveMedia.class);
+		Map<String, String> properties = new HashMap<>();
 
-		Mockito.doReturn(
-			Optional.of(configurationEntry.getUUID())
-		).when(
-			adaptiveMedia
-		).getAttributeValue(
-			AdaptiveMediaAttribute.configurationUuid()
-		);
+		properties.put(
+			AdaptiveMediaAttribute.configurationUuid().getName(),
+			configurationEntry.getUUID());
+		properties.put(
+			AdaptiveMediaAttribute.fileName().getName(),
+			fileVersion.getFileName());
+		properties.put(
+			AdaptiveMediaAttribute.contentType().getName(),
+			fileVersion.getMimeType());
+		properties.put(
+			AdaptiveMediaAttribute.contentLength().getName(),
+			String.valueOf(fileVersion.getSize()));
 
-		return adaptiveMedia;
+		properties.put(
+			AdaptiveMediaImageAttribute.IMAGE_WIDTH.getName(),
+			configurationEntry.getProperties().get("max-width"));
+		properties.put(
+			AdaptiveMediaImageAttribute.IMAGE_HEIGHT.getName(),
+			configurationEntry.getProperties().get("max-height"));
+
+		return new AdaptiveMediaImage(
+			() -> {
+				try {
+					return fileVersion.getContentStream(false);
+				}
+				catch (PortalException pe) {
+					throw new RuntimeException(pe);
+				}
+			},
+			AdaptiveMediaImageAttributeMapping.fromProperties(properties),
+			null);
 	}
 
 	private AdaptiveMediaImageConfigurationEntry
@@ -272,8 +317,8 @@ public class AdaptiveMediaImageRequestHandlerTest {
 		final Map<String, String> properties = new HashMap<>();
 
 		properties.put("configuration-uuid", uuid);
-		properties.put("max-height", String.valueOf(width));
-		properties.put("max-width", String.valueOf(height));
+		properties.put("max-height", String.valueOf(height));
+		properties.put("max-width", String.valueOf(width));
 
 		AdaptiveMediaImageConfigurationEntryImpl
 			adaptiveMediaImageConfigurationEntry =
@@ -350,7 +395,7 @@ public class AdaptiveMediaImageRequestHandlerTest {
 	private void _mockClosestMatch(
 			FileVersion fileVersion,
 			AdaptiveMediaImageConfigurationEntry configurationEntry,
-			AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia)
+			List<AdaptiveMedia<AdaptiveMediaImageProcessor>> adaptiveMedias)
 		throws Exception {
 
 		Mockito.when(
@@ -383,7 +428,7 @@ public class AdaptiveMediaImageRequestHandlerTest {
 					queryBuilderWidth.equals(configurationWidth) &&
 					queryBuilderHeight.equals(configurationHeight)) {
 
-					return Stream.of(adaptiveMedia);
+					return adaptiveMedias.stream();
 				}
 
 				return Stream.empty();
