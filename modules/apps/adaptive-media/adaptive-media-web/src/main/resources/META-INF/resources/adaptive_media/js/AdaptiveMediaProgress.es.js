@@ -35,7 +35,7 @@ class AdaptiveMediaProgress extends PortletBase {
 	 * that has to be invoked.
 	 */
 	startProgress(backgroundTaskUrl) {
-		if (this.percentage >= 100) {
+		if (this.percentage >= 100 || this.totalImages === 0) {
 			return;
 		}
 
@@ -107,7 +107,7 @@ class AdaptiveMediaProgress extends PortletBase {
 	 * @protected
 	 */
 	updateProgressBar_(optimizedImages, totalImages) {
-		let percentage = Math.round(optimizedImages / totalImages * 100);
+		let percentage = Math.round(optimizedImages / totalImages * 100) || 0;
 
 		this.progressBarClass = (percentage >= 100) ? 'progress-bar-success' : '';
 		this.progressBarLabel = percentage + '%';
