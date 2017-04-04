@@ -147,8 +147,6 @@
 
 						Locale curLocale = LocaleUtil.fromLanguageId(curLanguageId);
 
-						String title = HtmlUtil.escapeAttribute(curLocale.getDisplayName(LocaleUtil.fromLanguageId(LanguageUtil.getLanguageId(request)))) + " " + LanguageUtil.get(LocaleUtil.getDefault(), "translation");
-
 						if (errorLocales.contains(curLocale) || ((index == 0) && errorLocales.isEmpty())) {
 							itemCssClass += " palette-item-selected";
 						}
@@ -160,6 +158,8 @@
 						if (languageIds.contains(curLanguageId)) {
 							itemCssClass += " lfr-input-localized";
 						}
+
+						String title = HtmlUtil.escapeAttribute(curLocale.getDisplayName(LocaleUtil.fromLanguageId(LanguageUtil.getLanguageId(request)))) + " " + LanguageUtil.get(LocaleUtil.getDefault(), "translation");
 
 						Map<String, Object> data = new HashMap<String, Object>();
 
