@@ -309,11 +309,13 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 
 				@Override
 				public boolean filter(DDMStructure structure) {
+					if (structure.getStructureId() == getStructureId()) {
+						return false;
+					}
+
 					String name = structure.getName(locale);
 
-					if (name.equals(getName(locale)) &&
-						(structure.getStructureId() != getStructureId())) {
-
+					if (name.equals(getName(locale))) {
 						return true;
 					}
 
