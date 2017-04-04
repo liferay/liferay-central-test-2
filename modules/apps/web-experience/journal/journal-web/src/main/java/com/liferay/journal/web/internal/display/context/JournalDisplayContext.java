@@ -86,10 +86,13 @@ import java.io.Serializable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.portlet.PortletException;
 import javax.portlet.PortletPreferences;
@@ -124,6 +127,20 @@ public class JournalDisplayContext {
 		_article = ActionUtil.getArticle(_request);
 
 		return _article;
+	}
+
+	public Set getAvailableArticleLocales() throws PortalException {
+		Set<Locale> availableLocalesSet = new HashSet<>();
+
+		JournalArticle article = getArticle();
+
+		if (article != null) {
+			Map<Locale, String> titleMap = article.getTitleMap();
+
+			availableLocalesSet.addAll(titleMap.keySet());
+		}
+
+		return availableLocalesSet;
 	}
 
 	public JournalArticleDisplay getArticleDisplay() throws Exception {
