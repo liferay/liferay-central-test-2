@@ -225,7 +225,7 @@ public class GitWorkingDirectory {
 
 				timeout++;
 
-				if (timeout >= 24) {
+				if (timeout >= 59) {
 					throw new RuntimeException(
 						"Unable to checkout branch " + branchName);
 				}
