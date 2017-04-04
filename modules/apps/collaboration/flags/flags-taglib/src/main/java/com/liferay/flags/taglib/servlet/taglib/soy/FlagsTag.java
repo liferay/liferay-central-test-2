@@ -68,9 +68,7 @@ public class FlagsTag extends TemplateRendererTag {
 			putValue("cssClass", _getCssClass(randomNamespace, inTrash));
 
 			putValue("data", _getDataJSONObject(context, className, classPK));
-
 			putValue("flagsEnabled", _isFlagsEnabled(themeDisplay));
-
 			putValue("id", randomNamespace + "id");
 
 			putValue("inTrash", inTrash);
@@ -97,7 +95,7 @@ public class FlagsTag extends TemplateRendererTag {
 
 			putValue("title", title);
 
-			putValue("uri", _getUri());
+			putValue("uri", _getURI());
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -190,7 +188,7 @@ public class FlagsTag extends TemplateRendererTag {
 		return dataJSONObject;
 	}
 
-	private String _getUri() throws WindowStateException {
+	private String _getURI() throws WindowStateException {
 		PortletURL portletURL = PortletURLFactoryUtil.create(
 			request, PortletKeys.FLAGS, PortletRequest.RENDER_PHASE);
 
