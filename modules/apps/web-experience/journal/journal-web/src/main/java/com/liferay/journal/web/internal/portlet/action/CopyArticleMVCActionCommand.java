@@ -18,7 +18,6 @@ import com.liferay.journal.constants.JournalPortletKeys;
 import com.liferay.journal.exception.ArticleIdException;
 import com.liferay.journal.exception.DuplicateArticleIdException;
 import com.liferay.journal.exception.NoSuchArticleException;
-import com.liferay.journal.model.JournalArticle;
 import com.liferay.journal.service.JournalArticleService;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
@@ -59,7 +58,7 @@ public class CopyArticleMVCActionCommand extends BaseMVCActionCommand {
 			actionRequest, "autoArticleId");
 		double version = ParamUtil.getDouble(actionRequest, "version");
 
-		JournalArticle newArticle = _journalArticleService.copyArticle(
+		_journalArticleService.copyArticle(
 			groupId, oldArticleId, newArticleId, autoArticleId, version);
 	}
 
