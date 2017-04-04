@@ -151,6 +151,10 @@ public class AdaptiveMediaImageQueryBuilderImpl
 		return AdaptiveMediaImageQueryBuilder.ConfigurationStatus.ENABLED;
 	}
 
+	public String getConfigurationUuid() {
+		return _configurationUuid;
+	}
+
 	public FileVersion getFileVersion() throws PortalException {
 		if (_fileVersion != null) {
 			return _fileVersion;

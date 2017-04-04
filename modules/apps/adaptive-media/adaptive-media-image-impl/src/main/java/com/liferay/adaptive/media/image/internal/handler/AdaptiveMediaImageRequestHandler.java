@@ -22,8 +22,11 @@ import com.liferay.adaptive.media.handler.AdaptiveMediaRequestHandler;
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationHelper;
 import com.liferay.adaptive.media.image.finder.AdaptiveMediaImageFinder;
+import com.liferay.adaptive.media.image.finder.AdaptiveMediaImageQueryBuilder;
 import com.liferay.adaptive.media.image.internal.configuration.AdaptiveMediaImageAttributeMapping;
+import com.liferay.adaptive.media.image.internal.processor.AdaptiveMediaImage;
 import com.liferay.adaptive.media.image.internal.util.Tuple;
+import com.liferay.adaptive.media.image.processor.AdaptiveMediaImageAttribute;
 import com.liferay.adaptive.media.image.processor.AdaptiveMediaImageProcessor;
 import com.liferay.adaptive.media.processor.AdaptiveMediaAsyncProcessor;
 import com.liferay.adaptive.media.processor.AdaptiveMediaAsyncProcessorLocator;
@@ -31,9 +34,11 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.model.FileVersion;
+import com.liferay.portal.kernel.util.GetterUtil;
 
 import java.io.IOException;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -45,6 +50,7 @@ import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Adolfo Pérez
+ * @author Alejandro Tardín
  */
 @Component(
 	immediate = true, property = "adaptive.media.handler.pattern=image",
@@ -89,8 +95,44 @@ public class AdaptiveMediaImageRequestHandler
 	}
 
 	@Reference(unbind = "-")
+	public void setAsyncProcessorLocator(
+		AdaptiveMediaAsyncProcessorLocator asyncProcessorLocator) {
+
+		_asyncProcessorLocator = asyncProcessorLocator;
+	}
+
+	@Reference(unbind = "-")
 	public void setPathInterpreter(PathInterpreter pathInterpreter) {
 		_pathInterpreter = pathInterpreter;
+	}
+
+	private AdaptiveMedia<AdaptiveMediaImageProcessor>
+			_createRawAdaptiveMedia(FileVersion fileVersion)
+		throws AdaptiveMediaException, PortalException {
+
+		Map<String, String> properties = new HashMap<>();
+
+		properties.put(
+			AdaptiveMediaAttribute.fileName().getName(),
+			fileVersion.getFileName());
+		properties.put(
+			AdaptiveMediaAttribute.contentType().getName(),
+			fileVersion.getMimeType());
+		properties.put(
+			AdaptiveMediaAttribute.contentLength().getName(),
+			String.valueOf(fileVersion.getSize()));
+
+		return new AdaptiveMediaImage(
+			() -> {
+				try {
+					return fileVersion.getContentStream(false);
+				}
+				catch (PortalException pe) {
+					throw new RuntimeException(pe);
+				}
+			},
+			AdaptiveMediaImageAttributeMapping.fromProperties(properties),
+			null);
 	}
 
 	private Optional<AdaptiveMedia<AdaptiveMediaImageProcessor>>
@@ -115,14 +157,67 @@ public class AdaptiveMediaImageRequestHandler
 			AdaptiveMediaImageConfigurationEntry configurationEntry =
 				configurationEntryOptional.get();
 
-			return _finder.getAdaptiveMedia(
-				queryBuilder -> queryBuilder.forVersion(fileVersion).
-					forConfiguration(configurationEntry.getUUID()).done()).
-					findFirst();
+			Optional<AdaptiveMedia<AdaptiveMediaImageProcessor>>
+				adaptiveMediaOptional = _findExactAdaptiveMedia(
+					fileVersion, configurationEntry);
+
+			if (!adaptiveMediaOptional.isPresent()) {
+				adaptiveMediaOptional = _findClosestAdaptiveMedia(
+					fileVersion, configurationEntry);
+
+				if (!adaptiveMediaOptional.isPresent()) {
+					adaptiveMediaOptional = Optional.of(
+						_createRawAdaptiveMedia(fileVersion));
+				}
+			}
+
+			return adaptiveMediaOptional;
 		}
 		catch (AdaptiveMediaException | PortalException e) {
 			throw new AdaptiveMediaRuntimeException(e);
 		}
+	}
+
+	private Optional<AdaptiveMedia<AdaptiveMediaImageProcessor>>
+		_findClosestAdaptiveMedia(
+			FileVersion fileVersion,
+			AdaptiveMediaImageConfigurationEntry configurationEntry) {
+
+		Map<String, String> properties = configurationEntry.getProperties();
+
+		try {
+			return _finder.getAdaptiveMedia(
+				queryBuilder -> {
+					AdaptiveMediaImageQueryBuilder.InitialStep initialStep =
+						queryBuilder.forVersion(fileVersion);
+
+					AdaptiveMediaImageQueryBuilder.FuzzySortStep nextStep =
+						initialStep.with(
+							AdaptiveMediaImageAttribute.IMAGE_WIDTH,
+							GetterUtil.getInteger(properties.get("max-width")));
+
+					nextStep = nextStep.with(
+						AdaptiveMediaImageAttribute.IMAGE_HEIGHT,
+						GetterUtil.getInteger(properties.get("max-height")));
+
+					return nextStep.done();
+				}).findFirst();
+		}
+		catch (AdaptiveMediaException | PortalException e) {
+			throw new AdaptiveMediaRuntimeException(e);
+		}
+	}
+
+	private Optional<AdaptiveMedia<AdaptiveMediaImageProcessor>>
+			_findExactAdaptiveMedia(
+				FileVersion fileVersion,
+				AdaptiveMediaImageConfigurationEntry configurationEntry)
+		throws AdaptiveMediaException, PortalException {
+
+		return _finder.getAdaptiveMedia(
+			queryBuilder -> queryBuilder.forVersion(fileVersion).
+				forConfiguration(configurationEntry.getUUID()).done()).
+				findFirst();
 	}
 
 	private Optional<Tuple<FileVersion, AdaptiveMediaImageAttributeMapping>>
@@ -211,9 +306,7 @@ public class AdaptiveMediaImageRequestHandler
 	private static final Log _log = LogFactoryUtil.getLog(
 		AdaptiveMediaImageRequestHandler.class);
 
-	@Reference(unbind = "-")
 	private AdaptiveMediaAsyncProcessorLocator _asyncProcessorLocator;
-
 	private AdaptiveMediaImageConfigurationHelper _configurationHelper;
 	private AdaptiveMediaImageFinder _finder;
 	private PathInterpreter _pathInterpreter;
