@@ -1,9 +1,9 @@
 AUI.add(
 	'liferay-ddl-form-builder-calculator',
 	function(A) {
-		var CSS_CALCULATOR_BUTTON = A.getClassName('calculator', 'button');
-
 		var CSS_CALCULATOR_ADD_FIELD = A.getClassName('calculator', 'add', 'field', 'button');
+
+		var CSS_CALCULATOR_BUTTON = A.getClassName('calculator', 'button');
 
 		var CSS_CALCULATOR_ADD_FIELD_CONTANIER = A.getClassName('calculator', 'add', 'field', 'button', 'container');
 
