@@ -245,8 +245,6 @@ public class AxisBuild extends BaseBuild {
 		}
 
 		if (result.equals("UNSTABLE")) {
-			String jobVariant = getParameterValue("JOB_VARIANT");
-
 			Element downstreamBuildOrderedListElement = Dom4JUtil.getNewElement(
 				"ol", messageElement);
 
