@@ -134,24 +134,29 @@ data.put("qa-id", "navigation");
 								type="tabs nav-tabs-default"
 							/>
 
-							<c:if test='<%= Objects.equals(journalDisplayContext.getTabs1(), "web-content") %>'>
-								<liferay-util:include page="/view_entries.jsp" servletContext="<%= application %>">
-									<liferay-util:param name="searchContainerId" value="articles" />
-								</liferay-util:include>
-							</c:if>
-
-							<c:if test='<%= Objects.equals(journalDisplayContext.getTabs1(), "versions") %>'>
-								<liferay-util:include page="/view_versions.jsp" servletContext="<%= application %>">
-									<liferay-util:param name="searchContainerId" value="versions" />
-									<liferay-util:param name="showEditActions" value="false" />
-								</liferay-util:include>
-							</c:if>
-
-							<c:if test='<%= Objects.equals(journalDisplayContext.getTabs1(), "comments") %>'>
-								<liferay-util:include page="/view_comments.jsp" servletContext="<%= application %>">
-									<liferay-util:param name="searchContainerId" value="comments" />
-								</liferay-util:include>
-							</c:if>
+							<c:choose>
+								<c:when test='<%= Objects.equals(journalDisplayContext.getTabs1(), "web-content") || (journalDisplayContext.hasResults() && Validator.isNull(journalDisplayContext.getTabs1())) %>'>
+									<liferay-util:include page="/view_entries.jsp" servletContext="<%= application %>">
+										<liferay-util:param name="searchContainerId" value="articles" />
+									</liferay-util:include>
+								</c:when>
+								<c:when test='<%= Objects.equals(journalDisplayContext.getTabs1(), "versions") || (journalDisplayContext.hasVersionsResults() && Validator.isNull(journalDisplayContext.getTabs1())) %>'>
+									<liferay-util:include page="/view_versions.jsp" servletContext="<%= application %>">
+										<liferay-util:param name="searchContainerId" value="versions" />
+										<liferay-util:param name="showEditActions" value="false" />
+									</liferay-util:include>
+								</c:when>
+								<c:when test='<%= Objects.equals(journalDisplayContext.getTabs1(), "comments") || (journalDisplayContext.hasCommentsResults() && Validator.isNull(journalDisplayContext.getTabs1())) %>'>
+									<liferay-util:include page="/view_comments.jsp" servletContext="<%= application %>">
+										<liferay-util:param name="searchContainerId" value="comments" />
+									</liferay-util:include>
+								</c:when>
+								<c:otherwise>
+									<liferay-util:include page="/view_entries.jsp" servletContext="<%= application %>">
+										<liferay-util:param name="searchContainerId" value="articles" />
+									</liferay-util:include>
+								</c:otherwise>
+							</c:choose>
 						</c:otherwise>
 					</c:choose>
 				</div>
