@@ -147,6 +147,7 @@ public class CalendarBookingIndexerTest {
 		titleMap.put(LocaleUtil.getDefault(), title);
 
 		long startTime = DateUtil.newTime() + RandomTestUtil.randomInt();
+
 		long endTime = startTime + Time.HOUR;
 
 		HashMap<Locale, String> hashMap = new HashMap<>();
@@ -168,7 +169,7 @@ public class CalendarBookingIndexerTest {
 
 		Hits hits = indexer.search(_searchContext);
 
-		Assert.assertEquals(expectedLength, hits.getLength());
+		Assert.assertEquals(hits.toString(), expectedLength, hits.getLength());
 	}
 
 	protected void setUpPermissionThreadLocal() throws Exception {
