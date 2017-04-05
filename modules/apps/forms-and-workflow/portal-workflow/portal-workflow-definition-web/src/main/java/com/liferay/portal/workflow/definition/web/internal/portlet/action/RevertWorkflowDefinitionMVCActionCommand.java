@@ -16,16 +16,11 @@ package com.liferay.portal.workflow.definition.web.internal.portlet.action;
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortletKeys;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.portal.kernel.workflow.WorkflowDefinitionFileException;
+import com.liferay.portal.kernel.workflow.WorkflowDefinition;
 import com.liferay.portal.kernel.workflow.WorkflowDefinitionManagerUtil;
-
-import java.util.Locale;
-import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -33,17 +28,17 @@ import javax.portlet.ActionResponse;
 import org.osgi.service.component.annotations.Component;
 
 /**
- * @author Leonardo Barros
+ * @author Inácio Nery
  */
 @Component(
 	immediate = true,
 	property = {
 		"javax.portlet.name=" + PortletKeys.WORKFLOW_DEFINITION,
-		"mvc.command.name=addWorkflowDefinition"
+		"mvc.command.name=revertWorkflowDefinition"
 	},
 	service = MVCActionCommand.class
 )
-public class AddWorkflowDefinitionMVCActionCommand
+public class RevertWorkflowDefinitionMVCActionCommand
 	extends UpdateWorkflowDefinitionMVCActionCommand {
 
 	@Override
@@ -56,19 +51,16 @@ public class AddWorkflowDefinitionMVCActionCommand
 
 		long companyId = themeDisplay.getCompanyId();
 
-		String content = ParamUtil.getString(actionRequest, "content");
-		Map<Locale, String> titleMap = LocalizationUtil.getLocalizationMap(
-			actionRequest, "title");
+		String name = ParamUtil.getString(actionRequest, "name");
+		int version = ParamUtil.getInteger(actionRequest, "version");
 
-		if (Validator.isNull(content)) {
-			throw new WorkflowDefinitionFileException();
-		}
+		WorkflowDefinition workflowDefinition =
+			WorkflowDefinitionManagerUtil.getWorkflowDefinition(
+				companyId, name, version);
 
 		WorkflowDefinitionManagerUtil.deployWorkflowDefinition(
-			companyId, themeDisplay.getUserId(), getTitle(titleMap),
-			content.getBytes());
-
-		sendRedirect(actionRequest, actionResponse);
+			companyId, themeDisplay.getUserId(), workflowDefinition.getTitle(),
+			workflowDefinition.getContent().getBytes());
 	}
 
 }

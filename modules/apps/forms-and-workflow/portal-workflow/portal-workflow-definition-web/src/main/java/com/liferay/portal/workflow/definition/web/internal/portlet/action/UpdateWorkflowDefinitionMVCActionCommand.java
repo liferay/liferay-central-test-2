@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.util.PortletKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.kernel.workflow.WorkflowDefinition;
 import com.liferay.portal.kernel.workflow.WorkflowDefinitionFileException;
 import com.liferay.portal.kernel.workflow.WorkflowDefinitionManagerUtil;
 
@@ -47,7 +48,7 @@ import org.osgi.service.component.annotations.Component;
 	},
 	service = MVCActionCommand.class
 )
-public class UpdateWorkflowDefitionMVCActionCommand
+public class UpdateWorkflowDefinitionMVCActionCommand
 	extends BaseMVCActionCommand {
 
 	@Override
@@ -58,18 +59,32 @@ public class UpdateWorkflowDefitionMVCActionCommand
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		Map<Locale, String> titleMap = LocalizationUtil.getLocalizationMap(
-			actionRequest, "title");
+		long companyId = themeDisplay.getCompanyId();
 
 		String content = ParamUtil.getString(actionRequest, "content");
+		String name = ParamUtil.getString(actionRequest, "name");
+		Map<Locale, String> titleMap = LocalizationUtil.getLocalizationMap(
+			actionRequest, "title");
+		int version = ParamUtil.getInteger(actionRequest, "version");
 
 		if (Validator.isNull(content)) {
 			throw new WorkflowDefinitionFileException();
 		}
 
-		WorkflowDefinitionManagerUtil.deployWorkflowDefinition(
-			themeDisplay.getCompanyId(), themeDisplay.getUserId(),
-			getTitle(titleMap), content.getBytes());
+		WorkflowDefinition workflowDefinition =
+			WorkflowDefinitionManagerUtil.getWorkflowDefinition(
+				companyId, name, version);
+
+		if (workflowDefinition.getContent().equals(content)) {
+			WorkflowDefinitionManagerUtil.updateTitle(
+				companyId, themeDisplay.getUserId(), name, version,
+				getTitle(titleMap));
+		}
+		else {
+			WorkflowDefinitionManagerUtil.deployWorkflowDefinition(
+				companyId, themeDisplay.getUserId(), getTitle(titleMap),
+				content.getBytes());
+		}
 
 		sendRedirect(actionRequest, actionResponse);
 	}
