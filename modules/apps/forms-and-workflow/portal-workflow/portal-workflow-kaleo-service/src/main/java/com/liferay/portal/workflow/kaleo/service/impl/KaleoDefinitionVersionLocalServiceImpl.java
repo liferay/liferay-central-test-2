@@ -36,29 +36,11 @@ public class KaleoDefinitionVersionLocalServiceImpl
 
 	@Override
 	public KaleoDefinitionVersion getKaleoDefinitionVersion(
-			long kaleoDefinitionId, String version)
-		throws PortalException {
-
-		return kaleoDefinitionVersionPersistence.findByD_V(
-			kaleoDefinitionId, version);
-	}
-
-	@Override
-	public KaleoDefinitionVersion getKaleoDefinitionVersion(
 			long companyId, String name, String version)
 		throws PortalException {
 
 		return kaleoDefinitionVersionPersistence.findByC_N_V(
 			companyId, name, version);
-	}
-
-	@Override
-	public List<KaleoDefinitionVersion> getKaleoDefinitionVersions(
-		long companyId, boolean active, int start, int end,
-		OrderByComparator<KaleoDefinitionVersion> orderByComparator) {
-
-		return kaleoDefinitionVersionPersistence.findByC_A(
-			companyId, active, start, end, orderByComparator);
 	}
 
 	@Override
@@ -80,15 +62,6 @@ public class KaleoDefinitionVersionLocalServiceImpl
 
 	@Override
 	public List<KaleoDefinitionVersion> getKaleoDefinitionVersions(
-		long companyId, String name, boolean active, int start, int end,
-		OrderByComparator<KaleoDefinitionVersion> orderByComparator) {
-
-		return kaleoDefinitionVersionPersistence.findByC_N_A(
-			companyId, name, active, start, end, orderByComparator);
-	}
-
-	@Override
-	public List<KaleoDefinitionVersion> getKaleoDefinitionVersions(
 		long companyId, String name, int start, int end,
 		OrderByComparator<KaleoDefinitionVersion> orderByComparator) {
 
@@ -102,43 +75,8 @@ public class KaleoDefinitionVersionLocalServiceImpl
 	}
 
 	@Override
-	public int getKaleoDefinitionVersionsCount(long companyId, boolean active) {
-		return kaleoDefinitionVersionPersistence.countByC_A(companyId, active);
-	}
-
-	@Override
 	public int getKaleoDefinitionVersionsCount(long companyId, String name) {
 		return kaleoDefinitionVersionPersistence.countByC_N(companyId, name);
-	}
-
-	@Override
-	public int getKaleoDefinitionVersionsCount(
-		long companyId, String name, boolean active) {
-
-		return kaleoDefinitionVersionPersistence.countByC_N_A(
-			companyId, name, active);
-	}
-
-	@Override
-	public KaleoDefinitionVersion getLatestKaleoDefinitionVersion(
-			long kaleoDefinitionId)
-		throws PortalException {
-
-		List<KaleoDefinitionVersion> kaleoDefinitionVersions =
-			kaleoDefinitionVersionPersistence.findByKaleoDefinitionId(
-				kaleoDefinitionId);
-
-		if (kaleoDefinitionVersions.isEmpty()) {
-			throw new NoSuchDefinitionVersionException();
-		}
-
-		kaleoDefinitionVersions = ListUtil.copy(kaleoDefinitionVersions);
-
-		Collections.sort(
-			kaleoDefinitionVersions,
-			new KaleoDefinitionVersionVersionComparator());
-
-		return kaleoDefinitionVersions.get(0);
 	}
 
 }
