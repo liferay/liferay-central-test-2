@@ -1510,12 +1510,10 @@ public class WebServerServlet extends HttpServlet {
 							writeImage(image, request, response);
 						}
 						else {
-							String absolutePath =
-								request.getServletPath() + StringPool.SLASH +
-									path;
-
 							sendDocumentLibrary(
-								request, response, user, absolutePath,
+								request, response, user,
+								request.getServletPath() + StringPool.SLASH +
+									path,
 								pathArray);
 						}
 					}
