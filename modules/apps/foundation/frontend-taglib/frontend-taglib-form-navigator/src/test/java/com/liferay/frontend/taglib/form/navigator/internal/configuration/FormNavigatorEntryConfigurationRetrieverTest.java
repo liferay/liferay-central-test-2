@@ -76,7 +76,7 @@ public class FormNavigatorEntryConfigurationRetrieverTest {
 	}
 
 	public static class WhenAConfigurationEntryHasOneLineWithNoKeys
-		extends FormNavigatorEntryConfigurationRetrieverBaseTestCase {
+		extends BaseFormNavigatorEntryConfigurationRetrieverTestCase {
 
 		@Override
 		public void setUp() throws Exception {
@@ -97,7 +97,7 @@ public class FormNavigatorEntryConfigurationRetrieverTest {
 	}
 
 	public static class WhenAConfigurationEntryHasSeveralLines
-		extends FormNavigatorEntryConfigurationRetrieverBaseTestCase {
+		extends BaseFormNavigatorEntryConfigurationRetrieverTestCase {
 
 		@Override
 		public void setUp() throws Exception {
@@ -162,7 +162,7 @@ public class FormNavigatorEntryConfigurationRetrieverTest {
 	}
 
 	public static class WhenAKeyHasLeadingOrTrailingSpaces
-		extends FormNavigatorEntryConfigurationRetrieverBaseTestCase {
+		extends BaseFormNavigatorEntryConfigurationRetrieverTestCase {
 
 		@Override
 		public void setUp() throws Exception {
@@ -197,7 +197,7 @@ public class FormNavigatorEntryConfigurationRetrieverTest {
 	}
 
 	public static class WhenNoContextIsSet
-		extends FormNavigatorEntryConfigurationRetrieverBaseTestCase {
+		extends BaseFormNavigatorEntryConfigurationRetrieverTestCase {
 
 		@Override
 		public void setUp() throws Exception {
@@ -248,7 +248,7 @@ public class FormNavigatorEntryConfigurationRetrieverTest {
 	}
 
 	public static class WhenThereAreConfigurationsFormSeveralForms
-		extends FormNavigatorEntryConfigurationRetrieverBaseTestCase {
+		extends BaseFormNavigatorEntryConfigurationRetrieverTestCase {
 
 		@Override
 		public void setUp() throws Exception {
@@ -322,7 +322,7 @@ public class FormNavigatorEntryConfigurationRetrieverTest {
 	}
 
 	public static class WhenThereAreSeveralConfigurations
-		extends FormNavigatorEntryConfigurationRetrieverBaseTestCase {
+		extends BaseFormNavigatorEntryConfigurationRetrieverTestCase {
 
 		@Override
 		public void setUp() throws Exception {
@@ -415,7 +415,7 @@ public class FormNavigatorEntryConfigurationRetrieverTest {
 	}
 
 	public static class WhenThereIsNoConfigAtAll
-		extends FormNavigatorEntryConfigurationRetrieverBaseTestCase {
+		extends BaseFormNavigatorEntryConfigurationRetrieverTestCase {
 
 		@Test
 		public void testReturnsEmptyOptional() {
@@ -429,7 +429,7 @@ public class FormNavigatorEntryConfigurationRetrieverTest {
 	}
 
 	public static class WhenThereIsOneConfigurationWithTwoLinesForSameContext
-		extends FormNavigatorEntryConfigurationRetrieverBaseTestCase {
+		extends BaseFormNavigatorEntryConfigurationRetrieverTestCase {
 
 		@Override
 		public void setUp() throws Exception {
