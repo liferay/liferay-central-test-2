@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
@@ -66,9 +67,6 @@ public class KaleoDefinitionVersionLocalServiceImpl
 		kaleoDefinitionVersion.setCompanyId(user.getCompanyId());
 		kaleoDefinitionVersion.setUserId(user.getUserId());
 		kaleoDefinitionVersion.setUserName(user.getFullName());
-		kaleoDefinitionVersion.setStatusByUserId(user.getUserId());
-		kaleoDefinitionVersion.setStatusByUserName(user.getFullName());
-		kaleoDefinitionVersion.setStatusDate(now);
 		kaleoDefinitionVersion.setCreateDate(now);
 		kaleoDefinitionVersion.setModifiedDate(now);
 		kaleoDefinitionVersion.setName(name);
@@ -76,7 +74,16 @@ public class KaleoDefinitionVersionLocalServiceImpl
 		kaleoDefinitionVersion.setDescription(description);
 		kaleoDefinitionVersion.setContent(content);
 		kaleoDefinitionVersion.setVersion(version);
-		kaleoDefinitionVersion.setStatus(WorkflowConstants.STATUS_DRAFT);
+
+		int status = GetterUtil.getInteger(
+			serviceContext.getAttribute("status"),
+			WorkflowConstants.STATUS_APPROVED);
+
+		kaleoDefinitionVersion.setStatus(status);
+
+		kaleoDefinitionVersion.setStatusByUserId(user.getUserId());
+		kaleoDefinitionVersion.setStatusByUserName(user.getFullName());
+		kaleoDefinitionVersion.setStatusDate(now);
 
 		kaleoDefinitionVersionPersistence.update(kaleoDefinitionVersion);
 
@@ -204,6 +211,20 @@ public class KaleoDefinitionVersionLocalServiceImpl
 			companyId, keywords);
 
 		return kaleoDefinitionVersionIds.size();
+	}
+
+	@Override
+	public void updateKaleoDefinitionVersionTitle(
+			long companyId, String name, String version, String title)
+		throws PortalException {
+
+		KaleoDefinitionVersion kaleoDefinitionVersion =
+			kaleoDefinitionVersionLocalService.getKaleoDefinitionVersion(
+				companyId, name, version);
+
+		kaleoDefinitionVersion.setTitle(title);
+
+		kaleoDefinitionVersionPersistence.update(kaleoDefinitionVersion);
 	}
 
 	protected void addKeywordsCriterion(
