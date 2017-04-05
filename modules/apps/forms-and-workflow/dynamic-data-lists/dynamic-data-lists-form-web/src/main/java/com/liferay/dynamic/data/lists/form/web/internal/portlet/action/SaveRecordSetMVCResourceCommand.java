@@ -71,8 +71,6 @@ public class SaveRecordSetMVCResourceCommand extends BaseMVCResourceCommand {
 		ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		Locale locale = themeDisplay.getLocale();
-
 		try {
 			DDLRecordSet recordSet = saveRecordSetInTransaction(
 				resourceRequest, resourceResponse);
@@ -80,7 +78,8 @@ public class SaveRecordSetMVCResourceCommand extends BaseMVCResourceCommand {
 			response.put("ddmStructureId", recordSet.getDDMStructureId());
 			response.put(
 				"modifiedDate",
-				formatDate(recordSet.getModifiedDate(), locale));
+				formatDate(
+					recordSet.getModifiedDate(), themeDisplay.getLocale()));
 			response.put("recordSetId", recordSet.getRecordSetId());
 		}
 		catch (Throwable t) {
