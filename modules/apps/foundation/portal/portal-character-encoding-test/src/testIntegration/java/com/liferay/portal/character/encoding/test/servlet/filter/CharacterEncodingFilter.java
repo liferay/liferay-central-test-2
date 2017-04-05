@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.character.encoding.test.filter;
+package com.liferay.portal.character.encoding.test.servlet.filter;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
