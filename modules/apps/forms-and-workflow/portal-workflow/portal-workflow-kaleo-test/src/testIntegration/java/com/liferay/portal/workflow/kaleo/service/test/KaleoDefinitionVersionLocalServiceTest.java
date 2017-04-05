@@ -21,13 +21,15 @@ import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.Sync;
 import com.liferay.portal.kernel.test.rule.SynchronousDestinationTestRule;
 import com.liferay.portal.kernel.test.util.TestPropsValues;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.workflow.WorkflowException;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import com.liferay.portal.workflow.kaleo.definition.Definition;
-import com.liferay.portal.workflow.kaleo.exception.NoSuchDefinitionException;
+import com.liferay.portal.workflow.kaleo.exception.NoSuchDefinitionVersionException;
 import com.liferay.portal.workflow.kaleo.model.KaleoDefinition;
+import com.liferay.portal.workflow.kaleo.model.KaleoDefinitionVersion;
 import com.liferay.portal.workflow.kaleo.service.KaleoDefinitionLocalServiceUtil;
+import com.liferay.portal.workflow.kaleo.service.KaleoDefinitionVersionLocalServiceUtil;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -44,7 +46,7 @@ import org.junit.runner.RunWith;
  */
 @RunWith(Arquillian.class)
 @Sync
-public class KaleoDefinitionLocalServiceTest {
+public class KaleoDefinitionVersionLocalServiceTest {
 
 	@ClassRule
 	@Rule
@@ -59,38 +61,30 @@ public class KaleoDefinitionLocalServiceTest {
 	}
 
 	@Test
-	public void testAddKaleoDefinition() throws Exception {
+	public void testAddKaleoDefinitionShouldCreateVersion() throws Exception {
 		KaleoDefinition kaleoDefinition = addKaleoDefinition();
 
-		Assert.assertEquals(1, kaleoDefinition.getVersion());
+		KaleoDefinitionVersion kaleoDefinitionVersion =
+			KaleoDefinitionVersionLocalServiceUtil.getKaleoDefinitionVersion(
+				kaleoDefinition.getCompanyId(), kaleoDefinition.getName(),
+				getVersion(kaleoDefinition.getVersion()));
+
+		Assert.assertEquals("1.0", kaleoDefinitionVersion.getVersion());
 	}
 
-	@Test
-	public void testDeactivateKaleoDefinition() throws Exception {
-		KaleoDefinition kaleoDefinition = addKaleoDefinition();
+	@Test(expected = NoSuchDefinitionVersionException.class)
+	public void testDeleteKaleoDefinitionShouldDeleteVersion()
+		throws Exception {
 
-		deactivateKaleoDefinition(kaleoDefinition);
-
-		Assert.assertFalse(kaleoDefinition.getActive());
-	}
-
-	@Test(expected = WorkflowException.class)
-	public void testDeleteKaleoDefinition1() throws Exception {
-		KaleoDefinition kaleoDefinition = addKaleoDefinition();
-
-		deleteKaleoDefinition(kaleoDefinition);
-	}
-
-	@Test(expected = NoSuchDefinitionException.class)
-	public void testDeleteKaleoDefinition2() throws Exception {
 		KaleoDefinition kaleoDefinition = addKaleoDefinition();
 
 		deactivateKaleoDefinition(kaleoDefinition);
 
 		deleteKaleoDefinition(kaleoDefinition);
 
-		KaleoDefinitionLocalServiceUtil.getKaleoDefinition(
-			kaleoDefinition.getKaleoDefinitionId());
+		KaleoDefinitionVersionLocalServiceUtil.getKaleoDefinitionVersion(
+			kaleoDefinition.getCompanyId(), kaleoDefinition.getName(),
+			getVersion(kaleoDefinition.getVersion()));
 	}
 
 	@Test
@@ -101,7 +95,12 @@ public class KaleoDefinitionLocalServiceTest {
 
 		kaleoDefinition = updateKaleoDefinition(kaleoDefinition);
 
-		Assert.assertEquals(2, kaleoDefinition.getVersion());
+		KaleoDefinitionVersion kaleoDefinitionVersion =
+			KaleoDefinitionVersionLocalServiceUtil.getKaleoDefinitionVersion(
+				kaleoDefinition.getCompanyId(), kaleoDefinition.getName(),
+				getVersion(kaleoDefinition.getVersion()));
+
+		Assert.assertEquals("2.0", kaleoDefinitionVersion.getVersion());
 	}
 
 	@Test
@@ -118,7 +117,12 @@ public class KaleoDefinitionLocalServiceTest {
 
 		kaleoDefinition = updateKaleoDefinition(kaleoDefinition);
 
-		Assert.assertEquals(3, kaleoDefinition.getVersion());
+		KaleoDefinitionVersion kaleoDefinitionVersion =
+			KaleoDefinitionVersionLocalServiceUtil.getKaleoDefinitionVersion(
+				kaleoDefinition.getCompanyId(), kaleoDefinition.getName(),
+				getVersion(kaleoDefinition.getVersion()));
+
+		Assert.assertEquals("3.0", kaleoDefinitionVersion.getVersion());
 	}
 
 	protected KaleoDefinition addKaleoDefinition()
@@ -152,9 +156,13 @@ public class KaleoDefinitionLocalServiceTest {
 			_serviceContext);
 	}
 
+	protected String getVersion(int version) {
+		return version + StringPool.PERIOD + 0;
+	}
+
 	protected String read(String name) throws IOException {
 		ClassLoader classLoader =
-			KaleoDefinitionLocalServiceTest.class.getClassLoader();
+			KaleoDefinitionVersionLocalServiceTest.class.getClassLoader();
 
 		try (InputStream inputStream = classLoader.getResourceAsStream(
 				"com/liferay/portal/workflow/kaleo/dependencies/" + name)) {
