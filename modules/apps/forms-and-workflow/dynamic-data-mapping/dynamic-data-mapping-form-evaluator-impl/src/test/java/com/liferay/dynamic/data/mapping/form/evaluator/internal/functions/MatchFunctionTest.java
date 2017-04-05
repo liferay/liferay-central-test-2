@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.dynamic.data.mapping.form.evaluator.impl.internal.functions;
+package com.liferay.dynamic.data.mapping.form.evaluator.internal.functions;
 
 import org.junit.Assert;
 import org.junit.Test;
