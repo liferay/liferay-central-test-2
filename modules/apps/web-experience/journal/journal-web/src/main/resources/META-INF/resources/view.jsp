@@ -103,29 +103,34 @@ data.put("qa-id", "navigation");
 
 							<%
 							String[] tabsNames = new String[0];
+							String[] tabsValues = new String[0];
 
 							if (journalDisplayContext.hasResults()) {
 								String tabName = StringUtil.appendParentheticalSuffix(LanguageUtil.get(request, "web-content"), journalDisplayContext.getTotal());
 
 								tabsNames = ArrayUtil.append(tabsNames, tabName);
+								tabsValues = ArrayUtil.append(tabsValues, "web-content");
 							}
 
 							if (journalDisplayContext.hasVersionsResults()) {
 								String tabName = StringUtil.appendParentheticalSuffix(LanguageUtil.get(request, "versions"), journalDisplayContext.getVersionsTotal());
 
 								tabsNames = ArrayUtil.append(tabsNames, tabName);
+								tabsValues = ArrayUtil.append(tabsValues, "versions");
 							}
 
 							if (journalDisplayContext.hasCommentsResults()) {
 								String tabName = StringUtil.appendParentheticalSuffix(LanguageUtil.get(request, "comments"), journalDisplayContext.getCommentsTotal());
 
 								tabsNames = ArrayUtil.append(tabsNames, tabName);
+								tabsValues = ArrayUtil.append(tabsValues, "comments");
 							}
 							%>
 
 							<liferay-ui:tabs
 								names="<%= StringUtil.merge(tabsNames) %>"
 								portletURL="<%= portletURL %>"
+								tabsValues="<%= StringUtil.merge(tabsValues) %>"
 								type="tabs nav-tabs-default"
 							>
 								<c:if test="<%= journalDisplayContext.hasResults() %>">
