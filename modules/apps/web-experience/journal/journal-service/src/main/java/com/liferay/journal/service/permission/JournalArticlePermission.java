@@ -30,8 +30,11 @@ import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.BaseModelPermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.workflow.permission.WorkflowPermissionUtil;
 import com.liferay.portal.util.PropsValues;
+import java.util.Map;
+import java.util.Objects;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -111,6 +114,105 @@ public class JournalArticlePermission implements BaseModelPermissionChecker {
 	}
 
 	public static boolean contains(
+			PermissionChecker permissionChecker, JournalArticle article,
+			String actionId)
+		throws PortalException {
+
+		Map<Object, Object> permissionChecksMap =
+			permissionChecker.getPermissionChecksMap();
+
+		CacheKey cacheKey = new CacheKey(
+			article.getGroupId(), article.getArticleId(), actionId);
+
+		Boolean contains = (Boolean)permissionChecksMap.get(cacheKey);
+
+		if (contains == null) {
+			contains = _contains(permissionChecker, article, actionId);
+
+			permissionChecksMap.put(cacheKey, contains);
+		}
+
+		return contains;
+	}
+
+	public static boolean contains(
+			PermissionChecker permissionChecker, long classPK, String actionId)
+		throws PortalException {
+
+		JournalArticle article = _journalArticleLocalService.fetchLatestArticle(
+			classPK);
+
+		if (article == null) {
+			article = _journalArticleLocalService.getArticle(classPK);
+		}
+
+		return contains(permissionChecker, article, actionId);
+	}
+
+	public static boolean contains(
+			PermissionChecker permissionChecker, long groupId, String articleId,
+			double version, String actionId)
+		throws PortalException {
+
+		JournalArticle article = _journalArticleLocalService.getArticle(
+			groupId, articleId, version);
+
+		return contains(permissionChecker, article, actionId);
+	}
+
+	public static boolean contains(
+			PermissionChecker permissionChecker, long groupId, String articleId,
+			int status, String actionId)
+		throws PortalException {
+
+		JournalArticle article = _journalArticleLocalService.getLatestArticle(
+			groupId, articleId, status);
+
+		return contains(permissionChecker, article, actionId);
+	}
+
+	public static boolean contains(
+			PermissionChecker permissionChecker, long groupId, String articleId,
+			String actionId)
+		throws PortalException {
+
+		JournalArticle article = _journalArticleLocalService.getArticle(
+			groupId, articleId);
+
+		return contains(permissionChecker, article, actionId);
+	}
+
+	@Override
+	public void checkBaseModel(
+			PermissionChecker permissionChecker, long groupId, long primaryKey,
+			String actionId)
+		throws PortalException {
+
+		check(permissionChecker, primaryKey, actionId);
+	}
+
+	@Reference(unbind = "-")
+	protected void setConfigurationProvider(
+		ConfigurationProvider configurationProvider) {
+
+		_configurationProvider = configurationProvider;
+	}
+
+	@Reference(unbind = "-")
+	protected void setJournalArticleLocalService(
+		JournalArticleLocalService journalArticleLocalService) {
+
+		_journalArticleLocalService = journalArticleLocalService;
+	}
+
+	@Reference(unbind = "-")
+	protected void setJournalFolderLocalService(
+		JournalFolderLocalService journalFolderLocalService) {
+
+		_journalFolderLocalService = journalFolderLocalService;
+	}
+
+	private static boolean _contains(
 			PermissionChecker permissionChecker, JournalArticle article,
 			String actionId)
 		throws PortalException {
@@ -201,85 +303,53 @@ public class JournalArticlePermission implements BaseModelPermissionChecker {
 			article.getResourcePrimKey(), actionId);
 	}
 
-	public static boolean contains(
-			PermissionChecker permissionChecker, long classPK, String actionId)
-		throws PortalException {
-
-		JournalArticle article = _journalArticleLocalService.fetchLatestArticle(
-			classPK);
-
-		if (article == null) {
-			article = _journalArticleLocalService.getArticle(classPK);
-		}
-
-		return contains(permissionChecker, article, actionId);
-	}
-
-	public static boolean contains(
-			PermissionChecker permissionChecker, long groupId, String articleId,
-			double version, String actionId)
-		throws PortalException {
-
-		JournalArticle article = _journalArticleLocalService.getArticle(
-			groupId, articleId, version);
-
-		return contains(permissionChecker, article, actionId);
-	}
-
-	public static boolean contains(
-			PermissionChecker permissionChecker, long groupId, String articleId,
-			int status, String actionId)
-		throws PortalException {
-
-		JournalArticle article = _journalArticleLocalService.getLatestArticle(
-			groupId, articleId, status);
-
-		return contains(permissionChecker, article, actionId);
-	}
-
-	public static boolean contains(
-			PermissionChecker permissionChecker, long groupId, String articleId,
-			String actionId)
-		throws PortalException {
-
-		JournalArticle article = _journalArticleLocalService.getArticle(
-			groupId, articleId);
-
-		return contains(permissionChecker, article, actionId);
-	}
-
-	@Override
-	public void checkBaseModel(
-			PermissionChecker permissionChecker, long groupId, long primaryKey,
-			String actionId)
-		throws PortalException {
-
-		check(permissionChecker, primaryKey, actionId);
-	}
-
-	@Reference(unbind = "-")
-	protected void setConfigurationProvider(
-		ConfigurationProvider configurationProvider) {
-
-		_configurationProvider = configurationProvider;
-	}
-
-	@Reference(unbind = "-")
-	protected void setJournalArticleLocalService(
-		JournalArticleLocalService journalArticleLocalService) {
-
-		_journalArticleLocalService = journalArticleLocalService;
-	}
-
-	@Reference(unbind = "-")
-	protected void setJournalFolderLocalService(
-		JournalFolderLocalService journalFolderLocalService) {
-
-		_journalFolderLocalService = journalFolderLocalService;
-	}
-
 	private static ConfigurationProvider _configurationProvider;
 	private static JournalArticleLocalService _journalArticleLocalService;
 	private static JournalFolderLocalService _journalFolderLocalService;
+
+	private static class CacheKey {
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj) {
+				return true;
+			}
+
+			if (!(obj instanceof CacheKey)) {
+				return false;
+			}
+
+			CacheKey cacheKey = (CacheKey)obj;
+
+			if ((_groupId == cacheKey._groupId) &&
+				Objects.equals(_articleId, cacheKey._articleId) &&
+				Objects.equals(_actionId, cacheKey._actionId)) {
+
+				return true;
+			}
+
+			return false;
+		}
+
+		@Override
+		public int hashCode() {
+			int hash = HashUtil.hash(0, _groupId);
+
+			hash = HashUtil.hash(hash, _articleId);
+
+			return HashUtil.hash(hash, _actionId);
+		}
+
+		private CacheKey(long groupId, String articleId, String actionId) {
+			_groupId = groupId;
+			_articleId = articleId;
+			_actionId = actionId;
+		}
+
+		private final String _actionId;
+		private final String _articleId;
+		private final long _groupId;
+
+	}
 
 }
