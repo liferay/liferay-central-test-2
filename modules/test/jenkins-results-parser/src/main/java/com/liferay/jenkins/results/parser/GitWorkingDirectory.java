@@ -165,13 +165,13 @@ public class GitWorkingDirectory {
 		String currentBranchName = getCurrentBranch();
 
 		if (currentBranchName.equals(branchName)) {
-			System.out.println(branchName + " is already checked out.");
+			System.out.println(branchName + " is already checked out");
 		}
 
 		System.out.println(
 			JenkinsResultsParserUtil.combine(
 				"The current branch is ", currentBranchName,
-				". Checking out branch ", branchName));
+				". Checking out branch ", branchName, "."));
 
 		waitForIndexLock();
 
