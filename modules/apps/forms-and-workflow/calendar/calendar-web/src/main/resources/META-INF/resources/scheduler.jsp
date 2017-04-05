@@ -165,7 +165,7 @@ String viewCalendarBookingURL = ParamUtil.getString(request, "viewCalendarBookin
 
 			date: new Date(<%= dateYear %>, <%= dateMonth %>, <%= dateDay %>),
 
-			<c:if test="<%= !themeDisplay.isSignedIn() %>">
+			<c:if test="<%= !themeDisplay.isSignedIn() || ((defaultCalendar != null) && !CalendarPermission.contains(themeDisplay.getPermissionChecker(), defaultCalendar, CalendarActionKeys.MANAGE_BOOKINGS)) %>">
 				disabled: true,
 			</c:if>
 
