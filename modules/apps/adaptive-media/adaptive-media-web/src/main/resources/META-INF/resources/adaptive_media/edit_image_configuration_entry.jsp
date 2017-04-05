@@ -89,7 +89,7 @@ if (configurationEntry != null) {
 						}
 						%>
 
-						<aui:input disabled="<%= !configurationEntryEditable %>" label="max-width-px" name="maxWidth" type="number" value="<%= maxWidth %>">
+						<aui:input disabled="<%= !configurationEntryEditable %>" label="max-width-px" min="0" name="maxWidth" type="number" value="<%= maxWidth %>">
 							<aui:validator name="number" />
 						</aui:input>
 					</div>
@@ -108,7 +108,7 @@ if (configurationEntry != null) {
 						}
 						%>
 
-						<aui:input disabled="<%= !configurationEntryEditable %>" label="max-height-px" name="maxHeight" type="number" value="<%= maxHeight %>">
+						<aui:input disabled="<%= !configurationEntryEditable %>" label="max-height-px" min="0" name="maxHeight" type="number" value="<%= maxHeight %>">
 							<aui:validator name="number" />
 						</aui:input>
 					</div>
