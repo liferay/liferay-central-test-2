@@ -40,11 +40,22 @@ public class SearchDisplayContextFactoryImpl
 			PortletPreferences portletPreferences)
 		throws PortletException {
 
-		return new SearchDisplayContext(
-			renderRequest, renderResponse, portletPreferences,
-			PortalUtil.getPortal(), HtmlUtil.getHtml(),
-			LanguageUtil.getLanguage(), _facetedSearcherManager,
-			new IndexSearchPropsValuesImpl(), new PortletURLFactoryImpl());
+		try {
+			return new SearchDisplayContext(
+				renderRequest, renderResponse, portletPreferences,
+				PortalUtil.getPortal(), HtmlUtil.getHtml(),
+				LanguageUtil.getLanguage(), _facetedSearcherManager,
+				new IndexSearchPropsValuesImpl(), new PortletURLFactoryImpl());
+		}
+		catch (PortletException pe) {
+			throw pe;
+		}
+		catch (RuntimeException re) {
+			throw re;
+		}
+		catch (Exception e) {
+			throw new PortletException(e);
+		}
 	}
 
 	@Reference
