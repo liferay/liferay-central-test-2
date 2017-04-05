@@ -94,7 +94,7 @@ data.put("qa-id", "navigation");
 
 				<div class="journal-container" id="<portlet:namespace />entriesContainer">
 					<c:choose>
-						<c:when test="<%= !journalDisplayContext.isSearch() || (!journalDisplayContext.hasResults() && !journalDisplayContext.hasCommentsResults()) %>">
+						<c:when test="<%= !journalDisplayContext.isSearch() || (!journalDisplayContext.hasResults() && !journalDisplayContext.hasCommentsResults() && !journalDisplayContext.hasVersionsResults()) %>">
 							<liferay-util:include page="/view_entries.jsp" servletContext="<%= application %>">
 								<liferay-util:param name="searchContainerId" value="articles" />
 							</liferay-util:include>
