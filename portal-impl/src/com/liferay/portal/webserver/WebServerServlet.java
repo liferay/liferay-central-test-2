@@ -178,6 +178,7 @@ public class WebServerServlet extends HttpServlet {
 				_checkDirectoryIndexingEnabled(group);
 
 				long groupId = group.getGroupId();
+
 				long folderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 
 				for (int i = 1; i < pathArray.length; i++) {
@@ -856,6 +857,7 @@ public class WebServerServlet extends HttpServlet {
 		_checkDirectoryIndexingEnabled(group);
 
 		long groupId = group.getGroupId();
+
 		long folderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 
 		for (int i = 1; i < pathArray.length; i++) {
