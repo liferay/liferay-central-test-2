@@ -1341,7 +1341,7 @@ public class WebServerServlet extends HttpServlet {
 		if (!_isDirectoryIndexingEnabled(group)) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Directory Indexing is not enabled for groupId: " +
+					"Directory indexing is not enabled for group " +
 						group.getGroupId());
 			}
 
