@@ -60,6 +60,9 @@ public class FriendlyURLNormalizerUtil {
 			friendlyURL);
 	}
 
+	/**
+	 * @deprecated As of 7.0.0, with no direct replacement
+	 */
 	@Deprecated
 	public void setFriendlyURLNormalizer(
 		FriendlyURLNormalizer friendlyURLNormalizer) {
@@ -70,7 +73,6 @@ public class FriendlyURLNormalizerUtil {
 	}
 
 	private static FriendlyURLNormalizer _friendlyURLNormalizer;
-
 	private static ServiceTracker<FriendlyURLNormalizer, FriendlyURLNormalizer>
 		_serviceTracker;
 
