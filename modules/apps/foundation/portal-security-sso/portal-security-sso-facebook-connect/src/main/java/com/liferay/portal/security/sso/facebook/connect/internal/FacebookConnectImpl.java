@@ -90,11 +90,13 @@ public class FacebookConnectImpl implements FacebookConnect {
 		try {
 			String content = HttpUtil.URLtoString(options);
 
-			String access_token = (String)JSONFactoryUtil.createJSONObject(
-				content).get("access_token");
+			JSONObject contentJSONObject = JSONFactoryUtil.createJSONObject(
+				content);
 
-			if (Validator.isNotNull(access_token)) {
-				return access_token;
+			String accessToken = contentJSONObject.getString("access_token");
+
+			if (Validator.isNotNull(accessToken)) {
+				return accessToken;
 			}
 		}
 		catch (Exception e) {
