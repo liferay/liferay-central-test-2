@@ -677,8 +677,7 @@ public class JournalContentDisplayContext {
 					WebKeys.THEME_DISPLAY);
 
 			_hasViewPermission = JournalArticlePermission.contains(
-				themeDisplay.getPermissionChecker(), article.getGroupId(),
-				article.getArticleId(), ActionKeys.VIEW);
+				themeDisplay.getPermissionChecker(), article, ActionKeys.VIEW);
 		}
 
 		return _hasViewPermission;
@@ -830,8 +829,8 @@ public class JournalContentDisplayContext {
 
 		try {
 			_showEditArticleIcon = JournalArticlePermission.contains(
-				themeDisplay.getPermissionChecker(), latestArticle.getGroupId(),
-				latestArticle.getArticleId(), ActionKeys.UPDATE);
+				themeDisplay.getPermissionChecker(), latestArticle,
+				ActionKeys.UPDATE);
 		}
 		catch (PortalException pe) {
 			_log.error(
