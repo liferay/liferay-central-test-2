@@ -111,8 +111,8 @@
 	<command name="GoogleSSOSmoke" priority="4">
 		<var name="googleClientID" property-value="google.client.id" />
 		<var name="googleClientSecret" property-value="google.client.secret" />
-		<var name="userEmailAddress" property-value="email.address.1" />
-		<var name="userPassword" property-value="email.password.1" />
+		<var name="userEmailAddress" property-value="email.address.2" />
+		<var name="userPassword" property-value="email.password.2" />
 
 		<execute macro="User#firstLoginPG" />
 
