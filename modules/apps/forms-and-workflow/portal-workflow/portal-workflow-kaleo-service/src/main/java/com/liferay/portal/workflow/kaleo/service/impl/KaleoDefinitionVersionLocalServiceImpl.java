@@ -16,15 +16,28 @@ package com.liferay.portal.workflow.kaleo.service.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.portal.dao.orm.custom.sql.CustomSQLUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.Junction;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionList;
+import com.liferay.portal.kernel.dao.orm.Property;
+import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.workflow.kaleo.exception.NoSuchDefinitionVersionException;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.workflow.kaleo.model.KaleoDefinitionVersion;
 import com.liferay.portal.workflow.kaleo.service.base.KaleoDefinitionVersionLocalServiceBaseImpl;
-import com.liferay.portal.workflow.kaleo.util.comparator.KaleoDefinitionVersionVersionComparator;
+import com.liferay.portal.workflow.kaleo.util.comparator.KaleoDefinitionVersionIdComparator;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,6 +46,64 @@ import java.util.List;
 @ProviderType
 public class KaleoDefinitionVersionLocalServiceImpl
 	extends KaleoDefinitionVersionLocalServiceBaseImpl {
+
+	public KaleoDefinitionVersion addKaleoDefinitionVersion(
+			String name, String title, String description, String content,
+			String version, ServiceContext serviceContext)
+		throws PortalException {
+
+		// Kaleo definition version
+
+		User user = userLocalService.getUser(serviceContext.getGuestOrUserId());
+		Date now = new Date();
+
+		long kaleoDefinitionVersionId = counterLocalService.increment();
+
+		KaleoDefinitionVersion kaleoDefinitionVersion =
+			kaleoDefinitionVersionPersistence.create(kaleoDefinitionVersionId);
+
+		kaleoDefinitionVersion.setGroupId(user.getGroupId());
+		kaleoDefinitionVersion.setCompanyId(user.getCompanyId());
+		kaleoDefinitionVersion.setUserId(user.getUserId());
+		kaleoDefinitionVersion.setUserName(user.getFullName());
+		kaleoDefinitionVersion.setStatusByUserId(user.getUserId());
+		kaleoDefinitionVersion.setStatusByUserName(user.getFullName());
+		kaleoDefinitionVersion.setStatusDate(now);
+		kaleoDefinitionVersion.setCreateDate(now);
+		kaleoDefinitionVersion.setModifiedDate(now);
+		kaleoDefinitionVersion.setName(name);
+		kaleoDefinitionVersion.setTitle(title);
+		kaleoDefinitionVersion.setDescription(description);
+		kaleoDefinitionVersion.setContent(content);
+		kaleoDefinitionVersion.setVersion(version);
+		kaleoDefinitionVersion.setStatus(WorkflowConstants.STATUS_DRAFT);
+
+		kaleoDefinitionVersionPersistence.update(kaleoDefinitionVersion);
+
+		return kaleoDefinitionVersion;
+	}
+
+	@Override
+	public KaleoDefinitionVersion deleteKaleoDefinitionVersion(
+			long companyId, String name, String version)
+		throws PortalException {
+
+		return kaleoDefinitionVersionPersistence.removeByC_N_V(
+			companyId, name, version);
+	}
+
+	@Override
+	public KaleoDefinitionVersion fetchLatestKaleoDefinitionVersion(
+			long companyId, String name,
+			OrderByComparator<KaleoDefinitionVersion> orderByComparator)
+		throws PortalException {
+
+		KaleoDefinitionVersion kaleoDefinitionVersion =
+			kaleoDefinitionVersionPersistence.fetchByC_N_Last(
+				companyId, name, orderByComparator);
+
+		return kaleoDefinitionVersion;
+	}
 
 	@Override
 	public KaleoDefinitionVersion getKaleoDefinitionVersion(
@@ -77,6 +148,110 @@ public class KaleoDefinitionVersionLocalServiceImpl
 	@Override
 	public int getKaleoDefinitionVersionsCount(long companyId, String name) {
 		return kaleoDefinitionVersionPersistence.countByC_N(companyId, name);
+	}
+
+	@Override
+	public KaleoDefinitionVersion[] getKaleoDefinitionVersionsPrevAndNext(
+			long companyId, String name, String version)
+		throws PortalException {
+
+		KaleoDefinitionVersion kaleoDefinitionVersion =
+			kaleoDefinitionVersionPersistence.findByC_N_V(
+				companyId, name, version);
+
+		return kaleoDefinitionVersionPersistence.findByC_N_PrevAndNext(
+			kaleoDefinitionVersion.getKaleoDefinitionVersionId(), companyId,
+			name, new KaleoDefinitionVersionIdComparator(true));
+	}
+
+	@Override
+	public KaleoDefinitionVersion getLatestKaleoDefinitionVersion(
+			long companyId, String name)
+		throws PortalException {
+
+		return kaleoDefinitionVersionPersistence.findByC_N_Last(
+			companyId, name, null);
+	}
+
+	@Override
+	public List<KaleoDefinitionVersion> getLatestKaleoDefinitionVersions(
+		long companyId, String keywords, int start, int end,
+		OrderByComparator<KaleoDefinitionVersion> orderByComparator) {
+
+		List<Long> kaleoDefinitionVersionIds = getKaleoDefinitionVersionIds(
+			companyId, keywords);
+
+		if (kaleoDefinitionVersionIds.isEmpty()) {
+			return Collections.emptyList();
+		}
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			KaleoDefinitionVersion.class, getClassLoader());
+
+		Property property = PropertyFactoryUtil.forName(
+			"kaleoDefinitionVersionId");
+
+		dynamicQuery.add(property.in(kaleoDefinitionVersionIds));
+
+		return dynamicQuery(dynamicQuery, start, end, orderByComparator);
+	}
+
+	@Override
+	public int getLatestKaleoDefinitionVersionsCount(
+		long companyId, String keywords) {
+
+		List<Long> kaleoDefinitionVersionIds = getKaleoDefinitionVersionIds(
+			companyId, keywords);
+
+		return kaleoDefinitionVersionIds.size();
+	}
+
+	protected void addKeywordsCriterion(
+		DynamicQuery dynamicQuery, String keywords) {
+
+		if (Validator.isNull(keywords)) {
+			return;
+		}
+
+		Junction junction = RestrictionsFactoryUtil.disjunction();
+
+		for (String keyword : CustomSQLUtil.keywords(keywords)) {
+			junction.add(RestrictionsFactoryUtil.ilike("name", keyword));
+			junction.add(RestrictionsFactoryUtil.ilike("title", keyword));
+		}
+
+		dynamicQuery.add(junction);
+	}
+
+	protected List<Long> getKaleoDefinitionVersionIds(
+		long companyId, String keywords) {
+
+		List<Long> kaleoDefinitionVersionIds = new ArrayList<>();
+
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			KaleoDefinitionVersion.class, getClassLoader());
+
+		Property companyIdProperty = PropertyFactoryUtil.forName("companyId");
+
+		dynamicQuery.add(companyIdProperty.eq(companyId));
+
+		addKeywordsCriterion(dynamicQuery, keywords);
+
+		ProjectionList projectionList = ProjectionFactoryUtil.projectionList();
+
+		projectionList.add(
+			ProjectionFactoryUtil.max("kaleoDefinitionVersionId"));
+		projectionList.add(ProjectionFactoryUtil.groupProperty("name"));
+
+		dynamicQuery.setProjection(projectionList);
+
+		List<Object[]> results = dynamicQuery(dynamicQuery);
+
+		for (Object[] result : results) {
+			kaleoDefinitionVersionIds.add((Long)result[0]);
+		}
+
+		return kaleoDefinitionVersionIds;
 	}
 
 }
