@@ -19,9 +19,11 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
-WorkflowDefinition workflowDefinition = (WorkflowDefinition)request.getAttribute(WebKeys.WORKFLOW_DEFINITION);
+WorkflowDefinition currentWorkflowDefinition = (WorkflowDefinition)request.getAttribute(WebKeys.WORKFLOW_DEFINITION);
 
-WorkflowDefinition workflowDefinitionVersion = (WorkflowDefinition)request.getAttribute("WORKFLOW_DEFINITION_VERSION");
+ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
+
+WorkflowDefinition workflowDefinition = (WorkflowDefinition)row.getObject();
 %>
 
 <liferay-ui:icon-menu direction="left-side" icon="<%= StringPool.BLANK %>" markupView="lexicon" message="<%= StringPool.BLANK %>" showWhenSingleIcon="<%= true %>">
@@ -37,13 +39,12 @@ WorkflowDefinition workflowDefinitionVersion = (WorkflowDefinition)request.getAt
 		url="<%= viewURL %>"
 	/>
 
-	<c:if test="<%= workflowDefinition.getVersion() != workflowDefinitionVersion.getVersion() %>">
-		<portlet:renderURL var="revertURL">
-			<portlet:param name="mvcPath" value="/edit_workflow_definition.jsp" />
+	<c:if test="<%= currentWorkflowDefinition.getVersion() != workflowDefinition.getVersion() %>">
+		<liferay-portlet:actionURL name="revertWorkflowDefinition" var="revertURL">
 			<portlet:param name="redirect" value="<%= redirect %>" />
-			<portlet:param name="name" value="<%= workflowDefinitionVersion.getName() %>" />
-			<portlet:param name="version" value="<%= String.valueOf(workflowDefinitionVersion.getVersion()) %>" />
-		</portlet:renderURL>
+			<portlet:param name="name" value="<%= workflowDefinition.getName() %>" />
+			<portlet:param name="version" value="<%= String.valueOf(workflowDefinition.getVersion()) %>" />
+		</liferay-portlet:actionURL>
 
 		<liferay-ui:icon
 			message="revert"
