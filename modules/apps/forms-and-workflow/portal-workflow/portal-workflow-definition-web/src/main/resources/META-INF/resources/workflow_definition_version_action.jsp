@@ -25,6 +25,18 @@ WorkflowDefinition workflowDefinitionVersion = (WorkflowDefinition)request.getAt
 %>
 
 <liferay-ui:icon-menu direction="left-side" icon="<%= StringPool.BLANK %>" markupView="lexicon" message="<%= StringPool.BLANK %>" showWhenSingleIcon="<%= true %>">
+	<portlet:renderURL var="viewURL">
+		<portlet:param name="mvcPath" value="/view_workflow_definition.jsp" />
+		<portlet:param name="redirect" value="<%= currentURL %>" />
+		<portlet:param name="name" value="<%= workflowDefinition.getName() %>" />
+		<portlet:param name="version" value="<%= String.valueOf(workflowDefinition.getVersion()) %>" />
+	</portlet:renderURL>
+
+	<liferay-ui:icon
+		message="view"
+		url="<%= viewURL %>"
+	/>
+
 	<c:if test="<%= workflowDefinition.getVersion() != workflowDefinitionVersion.getVersion() %>">
 		<portlet:renderURL var="revertURL">
 			<portlet:param name="mvcPath" value="/edit_workflow_definition.jsp" />
