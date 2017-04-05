@@ -534,6 +534,12 @@ public class JournalDisplayContext {
 				"showEditActions", String.valueOf(isShowEditActions()));
 		}
 
+		String tabs1 = getTabs1();
+
+		if (Validator.isNotNull(tabs1)) {
+			portletURL.setParameter("tabs1", tabs1);
+		}
+
 		return portletURL;
 	}
 
@@ -846,6 +852,16 @@ public class JournalDisplayContext {
 		_status = ParamUtil.getInteger(_request, "status", defaultStatus);
 
 		return _status;
+	}
+
+	public String getTabs1() {
+		if (_tabs1 != null) {
+			return _tabs1;
+		}
+
+		_tabs1 = ParamUtil.getString(_request, "tabs1");
+
+		return _tabs1;
 	}
 
 	public int getTotal() throws PortalException {
@@ -1164,5 +1180,6 @@ public class JournalDisplayContext {
 	private Integer _restrictionType;
 	private Boolean _showEditActions;
 	private Integer _status;
+	private String _tabs1;
 
 }
