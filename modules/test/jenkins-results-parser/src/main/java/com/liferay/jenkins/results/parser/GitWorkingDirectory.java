@@ -259,7 +259,7 @@ public class GitWorkingDirectory {
 
 			String remoteName = branchName.substring(0, i);
 
-			expectedContent = getRemoteBranchSha(
+			expectedContent = getRemoteBranchSHA(
 				remoteBranchName, getRemoteConfig(remoteName));
 		}
 
@@ -520,7 +520,7 @@ public class GitWorkingDirectory {
 		return _gitDirectory;
 	}
 
-	public String getGitHubBranchSha(
+	public String getGitHubBranchSHA(
 		String branchName, RemoteConfig remoteConfig) {
 
 		String command = JenkinsResultsParserUtil.combine(
@@ -588,14 +588,14 @@ public class GitWorkingDirectory {
 		return remoteBranchNames;
 	}
 
-	public String getRemoteBranchSha(
+	public String getRemoteBranchSHA(
 			String branchName, RemoteConfig remoteConfig)
 		throws GitAPIException {
 
 		String remoteURL = getRemoteURL(remoteConfig);
 
 		if (remoteURL.contains("git@github.com")) {
-			return getGitHubBranchSha(branchName, remoteConfig);
+			return getGitHubBranchSHA(branchName, remoteConfig);
 		}
 
 		LsRemoteCommand lsRemoteCommand = Git.lsRemoteRepository();
