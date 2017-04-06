@@ -57,7 +57,9 @@ public class FormNavigatorEntryConfigurationParser {
 			formNavigatorEntryKeys = _formNavigatorEntryKeysMap.get(context);
 		}
 
-		if ((formNavigatorEntryKeys == null) && Validator.isNotNull(categoryKey)) {
+		if ((formNavigatorEntryKeys == null) &&
+			Validator.isNotNull(categoryKey)) {
+
 			formNavigatorEntryKeys = _formNavigatorEntryKeysMap.get(
 				categoryKey);
 		}
