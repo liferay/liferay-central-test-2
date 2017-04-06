@@ -200,10 +200,10 @@ public class CalendarBookingIndexer extends BaseIndexer<CalendarBooking> {
 		Document document, Locale locale, String snippet,
 		PortletRequest portletRequest, PortletResponse portletResponse) {
 
+		Locale snippetLocale = getSnippetLocale(document, locale);
+
 		Locale defaultLocale = LocaleUtil.fromLanguageId(
 			document.get("defaultLanguageId"));
-
-		Locale snippetLocale = getSnippetLocale(document, locale);
 
 		String localizedTitleName = DocumentImpl.getLocalizedName(
 			locale, Field.TITLE);
