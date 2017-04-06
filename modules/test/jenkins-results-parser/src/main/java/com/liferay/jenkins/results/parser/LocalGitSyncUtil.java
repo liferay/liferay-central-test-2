@@ -612,7 +612,7 @@ public class LocalGitSyncUtil {
 			JenkinsResultsParserUtil.combine(
 				"Starting synchronization with local-git. Current repository ",
 				"directory is ", repositoryDirectory.getPath(), ". Current",
-				"branch is ", originalBranchName));
+				"branch is ", originalBranchName, "."));
 
 		RemoteConfig senderRemoteConfig = null;
 		RemoteConfig upstreamRemoteConfig = null;
