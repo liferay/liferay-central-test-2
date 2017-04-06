@@ -71,8 +71,8 @@ if (!ignoreRequestValue) {
 				input: '#<%= id %>assetTagNames',
 			</c:if>
 
-			maxLength: <%= ModelHintsConstants.TEXT_MAX_LENGTH %>,
 			instanceVar: '<%= namespace + id %>',
+			maxLength: <%= ModelHintsConstants.TEXT_MAX_LENGTH %>,
 			portalModelResource: <%= Validator.isNotNull(className) && (ResourceActionsUtil.isPortalModelResource(className) || className.equals(Group.class.getName())) %>
 		}
 	).render();
