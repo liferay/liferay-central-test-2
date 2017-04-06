@@ -16,6 +16,7 @@ package com.liferay.portal.workflow.kaleo.service.impl;
 
 import aQute.bnd.annotation.ProviderType;
 
+import com.liferay.exportimport.kernel.staging.StagingUtil;
 import com.liferay.portal.dao.orm.custom.sql.CustomSQLUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
@@ -63,7 +64,11 @@ public class KaleoDefinitionVersionLocalServiceImpl
 		KaleoDefinitionVersion kaleoDefinitionVersion =
 			kaleoDefinitionVersionPersistence.create(kaleoDefinitionVersionId);
 
-		kaleoDefinitionVersion.setGroupId(user.getGroupId());
+		long groupId = StagingUtil.getLiveGroupId(
+			serviceContext.getScopeGroupId());
+
+		kaleoDefinitionVersion.setGroupId(groupId);
+
 		kaleoDefinitionVersion.setCompanyId(user.getCompanyId());
 		kaleoDefinitionVersion.setUserId(user.getUserId());
 		kaleoDefinitionVersion.setUserName(user.getFullName());

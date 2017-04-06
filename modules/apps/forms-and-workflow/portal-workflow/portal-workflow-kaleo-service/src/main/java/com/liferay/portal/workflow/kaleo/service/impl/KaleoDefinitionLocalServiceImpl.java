@@ -14,6 +14,7 @@
 
 package com.liferay.portal.workflow.kaleo.service.impl;
 
+import com.liferay.exportimport.kernel.staging.StagingUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -106,6 +107,11 @@ public class KaleoDefinitionLocalServiceImpl
 
 		KaleoDefinition kaleoDefinition = kaleoDefinitionPersistence.create(
 			kaleoDefinitionId);
+
+		long groupId = StagingUtil.getLiveGroupId(
+			serviceContext.getScopeGroupId());
+
+		kaleoDefinition.setGroupId(groupId);
 
 		kaleoDefinition.setCompanyId(user.getCompanyId());
 		kaleoDefinition.setUserId(user.getUserId());
