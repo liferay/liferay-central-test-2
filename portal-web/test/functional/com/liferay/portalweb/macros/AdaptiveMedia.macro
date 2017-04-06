@@ -114,6 +114,15 @@
 
 		<execute function="AssertTextEquals" locator1="AdaptiveMediaTable#NAME" value1="${imageName}" />
 
+		<var name="key_imageState" value="${imageState}" />
+
+		<if>
+			<isset var="imageState" />
+			<then>
+				<execute function="AssertTextEquals" locator1="AdaptiveMediaTable#STATE" value1="${imageState}" />
+			</then>
+		</if>
+
 		<var name="key_percentOptimized" value="${percentOptimized}" />
 
 		<if>
