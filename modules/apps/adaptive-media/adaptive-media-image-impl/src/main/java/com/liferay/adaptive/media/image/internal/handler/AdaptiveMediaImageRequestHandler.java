@@ -129,7 +129,7 @@ public class AdaptiveMediaImageRequestHandler
 					return fileVersion.getContentStream(false);
 				}
 				catch (PortalException pe) {
-					throw new RuntimeException(pe);
+					throw new AdaptiveMediaRuntimeException(pe);
 				}
 			},
 			AdaptiveMediaImageAttributeMapping.fromProperties(properties),
