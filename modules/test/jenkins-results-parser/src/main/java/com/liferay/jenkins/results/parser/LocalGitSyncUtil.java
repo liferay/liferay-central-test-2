@@ -41,8 +41,8 @@ public class LocalGitSyncUtil {
 	public static void deleteCacheBranch(
 			GitWorkingDirectory gitWorkingDirectory, String receiverUsername,
 			String senderBranchName, String senderUsername,
-			String senderBranchSha, String upstreamBranchName,
-			String upstreamBranchSha)
+			String senderBranchSHA, String upstreamBranchName,
+			String upstreamBranchSHA)
 		throws GitAPIException {
 
 		List<RemoteConfig> localGitRemoteConfigs = null;
@@ -53,8 +53,8 @@ public class LocalGitSyncUtil {
 
 			deleteCacheBranch(
 				getCacheBranchName(
-					receiverUsername, senderUsername, senderBranchSha,
-					upstreamBranchSha),
+					receiverUsername, senderUsername, senderBranchSHA,
+					upstreamBranchSHA),
 				gitWorkingDirectory, localGitRemoteConfigs);
 		}
 		finally {
@@ -104,14 +104,14 @@ public class LocalGitSyncUtil {
 	public static String synchronizeToLocalGit(
 			GitWorkingDirectory gitWorkingDirectory, String receiverUsername,
 			String senderBranchName, String senderUsername,
-			String senderBranchSha, String upstreamBranchName,
-			String upstreamBranchSha)
+			String senderBranchSHA, String upstreamBranchName,
+			String upstreamBranchSHA)
 		throws GitAPIException, IOException {
 
 		return synchronizeToLocalGit(
 			gitWorkingDirectory, receiverUsername, 0, senderBranchName,
-			senderUsername, senderBranchSha, upstreamBranchName,
-			upstreamBranchSha);
+			senderUsername, senderBranchSHA, upstreamBranchName,
+			upstreamBranchSHA);
 	}
 
 	protected static void cacheBranch(
@@ -598,8 +598,8 @@ public class LocalGitSyncUtil {
 	protected static String synchronizeToLocalGit(
 			GitWorkingDirectory gitWorkingDirectory, String receiverUsername,
 			int retryCount, String senderBranchName, String senderUsername,
-			String senderBranchSha, String upstreamBranchName,
-			String upstreamBranchSha)
+			String senderBranchSHA, String upstreamBranchName,
+			String upstreamBranchSHA)
 		throws GitAPIException, IOException {
 
 		long start = System.currentTimeMillis();
@@ -625,11 +625,11 @@ public class LocalGitSyncUtil {
 			upstreamRemoteConfig = gitWorkingDirectory.getRemoteConfig(
 				"upstream");
 
-			boolean pullRequest = !upstreamBranchSha.equals(senderBranchSha);
+			boolean pullRequest = !upstreamBranchSHA.equals(senderBranchSHA);
 
 			String cacheBranchName = getCacheBranchName(
-				receiverUsername, senderUsername, senderBranchSha,
-				upstreamBranchSha);
+				receiverUsername, senderUsername, senderBranchSHA,
+				upstreamBranchSHA);
 
 			List<RemoteConfig> localGitRemoteConfigs = null;
 
@@ -680,11 +680,11 @@ public class LocalGitSyncUtil {
 					cacheBranchName, senderBranchName, senderRemoteConfig);
 
 				gitWorkingDirectory.createLocalBranch(
-					cacheBranchName, true, senderBranchSha);
+					cacheBranchName, true, senderBranchSHA);
 
 				if (pullRequest) {
 					if (!gitWorkingDirectory.rebase(
-							true, upstreamBranchSha, cacheBranchName)) {
+							true, upstreamBranchSHA, cacheBranchName)) {
 
 						throw new RuntimeException("Rebase failed.");
 					}
@@ -706,8 +706,8 @@ public class LocalGitSyncUtil {
 				try {
 					deleteCacheBranch(
 						gitWorkingDirectory, receiverUsername, senderBranchName,
-						senderUsername, senderBranchSha, upstreamBranchName,
-						upstreamBranchSha);
+						senderUsername, senderBranchSHA, upstreamBranchName,
+						upstreamBranchSHA);
 				}
 				catch (Exception e2) {
 					e2.printStackTrace();
@@ -725,8 +725,8 @@ public class LocalGitSyncUtil {
 
 				return synchronizeToLocalGit(
 					gitWorkingDirectory, receiverUsername, retryCount + 1,
-					senderBranchName, senderUsername, senderBranchSha,
-					upstreamBranchName, upstreamBranchSha);
+					senderBranchName, senderUsername, senderBranchSHA,
+					upstreamBranchName, upstreamBranchSHA);
 			}
 			finally {
 				if (localGitRemoteConfigs != null) {
@@ -827,7 +827,7 @@ public class LocalGitSyncUtil {
 
 					gitWorkingDirectory.createLocalBranch(
 						newTimestampBranchName, true,
-						gitWorkingDirectory.getRemoteBranchSha(
+						gitWorkingDirectory.getRemoteBranchSHA(
 							remoteCacheBranchName, localGitRemoteConfig));
 
 					try {
@@ -864,7 +864,7 @@ public class LocalGitSyncUtil {
 			RemoteConfig upstreamRemoteConfig)
 		throws GitAPIException {
 
-		String upstreamBranchSha = gitWorkingDirectory.getRemoteBranchSha(
+		String upstreamBranchSHA = gitWorkingDirectory.getRemoteBranchSHA(
 			upstreamBranchName, upstreamRemoteConfig);
 
 		gitWorkingDirectory.rebaseAbort();
@@ -879,14 +879,14 @@ public class LocalGitSyncUtil {
 
 		try {
 			gitWorkingDirectory.createLocalBranch(
-				tempBranchName, true, upstreamBranchSha);
+				tempBranchName, true, upstreamBranchSHA);
 
 			gitWorkingDirectory.checkoutBranch(tempBranchName, "-f");
 
 			gitWorkingDirectory.deleteLocalBranch(upstreamBranchName);
 
 			gitWorkingDirectory.createLocalBranch(
-				upstreamBranchName, true, upstreamBranchSha);
+				upstreamBranchName, true, upstreamBranchSHA);
 
 			gitWorkingDirectory.checkoutBranch(upstreamBranchName);
 		}
