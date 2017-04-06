@@ -162,17 +162,18 @@ public class AdaptiveMediaImageRequestHandler
 				adaptiveMediaOptional = _findExactAdaptiveMedia(
 					fileVersion, configurationEntry);
 
-			if (!adaptiveMediaOptional.isPresent()) {
-				adaptiveMediaOptional = _findClosestAdaptiveMedia(
-					fileVersion, configurationEntry);
-
-				if (!adaptiveMediaOptional.isPresent()) {
-					adaptiveMediaOptional = Optional.of(
-						_createRawAdaptiveMedia(fileVersion));
-				}
+			if (adaptiveMediaOptional.isPresent()) {
+				return adaptiveMediaOptional;
 			}
 
-			return adaptiveMediaOptional;
+			adaptiveMediaOptional = _findClosestAdaptiveMedia(
+				fileVersion, configurationEntry);
+
+			if (adaptiveMediaOptional.isPresent()) {
+				return adaptiveMediaOptional;
+			}
+
+			return Optional.of(_createRawAdaptiveMedia(fileVersion));
 		}
 		catch (AdaptiveMediaException | PortalException e) {
 			throw new AdaptiveMediaRuntimeException(e);
