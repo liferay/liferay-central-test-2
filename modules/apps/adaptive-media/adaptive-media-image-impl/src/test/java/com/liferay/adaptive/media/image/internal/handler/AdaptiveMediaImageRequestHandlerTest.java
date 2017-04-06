@@ -44,6 +44,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 import javax.servlet.http.HttpServletRequest;
@@ -194,8 +195,11 @@ public class AdaptiveMediaImageRequestHandlerTest {
 			Optional.of(closestAdaptiveMedia),
 			_requestHandler.handleRequest(request));
 
-		Mockito.verify(_asyncProcessor).triggerProcess(
-			_fileVersion, String.valueOf(_fileVersion.getFileVersionId()));
+		Mockito.verify(
+			_asyncProcessor
+		).triggerProcess(
+			_fileVersion, String.valueOf(_fileVersion.getFileVersionId())
+		);
 	}
 
 	@Test
@@ -217,8 +221,11 @@ public class AdaptiveMediaImageRequestHandlerTest {
 		Assert.assertEquals(
 			Optional.of(adaptiveMedia), _requestHandler.handleRequest(request));
 
-		Mockito.verify(_asyncProcessor, Mockito.never()).triggerProcess(
-			_fileVersion, String.valueOf(_fileVersion.getFileVersionId()));
+		Mockito.verify(
+			_asyncProcessor, Mockito.never()
+		).triggerProcess(
+			_fileVersion, String.valueOf(_fileVersion.getFileVersionId())
+		);
 	}
 
 	@Test
@@ -259,13 +266,17 @@ public class AdaptiveMediaImageRequestHandlerTest {
 			adaptiveMedia.getAttributeValue(
 				AdaptiveMediaAttribute.contentType()));
 
-		Assert.assertEquals(
-			_fileVersion.getSize(),
-			(long)adaptiveMedia.getAttributeValue(
-				AdaptiveMediaAttribute.contentLength()).get());
+		Optional<Integer> contentLength = adaptiveMedia.getAttributeValue(
+			AdaptiveMediaAttribute.contentLength());
 
-		Mockito.verify(_asyncProcessor).triggerProcess(
-			_fileVersion, String.valueOf(_fileVersion.getFileVersionId()));
+		Assert.assertEquals(
+			_fileVersion.getSize(), (long)contentLength.get());
+
+		Mockito.verify(
+			_asyncProcessor
+		).triggerProcess(
+			_fileVersion, String.valueOf(_fileVersion.getFileVersionId())
+		);
 	}
 
 	private AdaptiveMedia<AdaptiveMediaImageProcessor> _createAdaptiveMedia(
@@ -275,25 +286,37 @@ public class AdaptiveMediaImageRequestHandlerTest {
 
 		Map<String, String> properties = new HashMap<>();
 
+		AdaptiveMediaAttribute<Object, String> configurationUuid =
+			AdaptiveMediaAttribute.configurationUuid();
+
 		properties.put(
-			AdaptiveMediaAttribute.configurationUuid().getName(),
-			configurationEntry.getUUID());
+			configurationUuid.getName(), configurationEntry.getUUID());
+
+		AdaptiveMediaAttribute<Object, String> fileName =
+			AdaptiveMediaAttribute.fileName();
+
+		properties.put(fileName.getName(), fileVersion.getFileName());
+
+		AdaptiveMediaAttribute<Object, String> contentType =
+			AdaptiveMediaAttribute.contentType();
+
+		properties.put(contentType.getName(), fileVersion.getMimeType());
+
+		AdaptiveMediaAttribute<Object, Integer> contentLength =
+			AdaptiveMediaAttribute.contentLength();
+
 		properties.put(
-			AdaptiveMediaAttribute.fileName().getName(),
-			fileVersion.getFileName());
-		properties.put(
-			AdaptiveMediaAttribute.contentType().getName(),
-			fileVersion.getMimeType());
-		properties.put(
-			AdaptiveMediaAttribute.contentLength().getName(),
-			String.valueOf(fileVersion.getSize()));
+			contentLength.getName(), String.valueOf(fileVersion.getSize()));
+
+		Map<String, String> configurationEntryProperties =
+			configurationEntry.getProperties();
 
 		properties.put(
 			AdaptiveMediaImageAttribute.IMAGE_WIDTH.getName(),
-			configurationEntry.getProperties().get("max-width"));
+			configurationEntryProperties.get("max-width"));
 		properties.put(
 			AdaptiveMediaImageAttribute.IMAGE_HEIGHT.getName(),
-			configurationEntry.getProperties().get("max-height"));
+			configurationEntryProperties.get("max-height"));
 
 		return new AdaptiveMediaImage(
 			() -> {
@@ -369,26 +392,31 @@ public class AdaptiveMediaImageRequestHandlerTest {
 		).thenReturn(
 			1234L
 		);
+
 		Mockito.when(
 			fileVersion.getContentStream(false)
 		).thenReturn(
 			Mockito.mock(InputStream.class)
 		);
+
 		Mockito.when(
 			fileVersion.getMimeType()
 		).thenReturn(
 			"image/jpg"
 		);
+
 		Mockito.when(
 			fileVersion.getFileName()
 		).thenReturn(
 			"fileName"
 		);
+
 		Mockito.when(
 			fileVersion.getSize()
 		).thenReturn(
 			2048L
 		);
+
 		return fileVersion;
 	}
 
@@ -402,28 +430,35 @@ public class AdaptiveMediaImageRequestHandlerTest {
 			_finder.getAdaptiveMedia(Mockito.any(Function.class))
 		).thenAnswer(
 			invocation -> {
-				Function<AdaptiveMediaImageQueryBuilder, AdaptiveMediaQuery> f =
-					invocation.getArgumentAt(0, Function.class);
+				Function<AdaptiveMediaImageQueryBuilder, AdaptiveMediaQuery>
+					function = invocation.getArgumentAt(0, Function.class);
 
 				AdaptiveMediaImageQueryBuilderImpl queryBuilder =
 					new AdaptiveMediaImageQueryBuilderImpl();
 
-				AdaptiveMediaQuery query = f.apply(queryBuilder);
+				AdaptiveMediaQuery query = function.apply(queryBuilder);
 
-				Object queryBuilderWidth = queryBuilder.getAttributes().get(
+				Map<AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, ?>,
+					Object>
+						attributes = queryBuilder.getAttributes();
+
+				Object queryBuilderWidth = attributes.get(
 					AdaptiveMediaImageAttribute.IMAGE_WIDTH);
 
-				Object queryBuilderHeight = queryBuilder.getAttributes().get(
+				Object queryBuilderHeight = attributes.get(
 					AdaptiveMediaImageAttribute.IMAGE_HEIGHT);
 
+				Map<String, String> properties =
+					configurationEntry.getProperties();
+
 				int configurationWidth = GetterUtil.getInteger(
-					configurationEntry.getProperties().get("max-width"));
+					properties.get("max-width"));
 
 				int configurationHeight = GetterUtil.getInteger(
-					configurationEntry.getProperties().get("max-height"));
+					properties.get("max-height"));
 
 				if (AdaptiveMediaImageQueryBuilderImpl.QUERY.equals(query) &&
-					queryBuilder.getFileVersion().equals(fileVersion) &&
+					fileVersion.equals(queryBuilder.getFileVersion()) &&
 					(queryBuilder.getConfigurationUuid() == null) &&
 					queryBuilderWidth.equals(configurationWidth) &&
 					queryBuilderHeight.equals(configurationHeight)) {
@@ -446,23 +481,26 @@ public class AdaptiveMediaImageRequestHandlerTest {
 			_finder.getAdaptiveMedia(Mockito.any(Function.class))
 		).thenAnswer(
 			invocation -> {
-				Function<AdaptiveMediaImageQueryBuilder, AdaptiveMediaQuery> f =
-					invocation.getArgumentAt(0, Function.class);
+				Function<AdaptiveMediaImageQueryBuilder, AdaptiveMediaQuery>
+					function = invocation.getArgumentAt(0, Function.class);
 
 				AdaptiveMediaImageQueryBuilderImpl queryBuilder =
 					new AdaptiveMediaImageQueryBuilderImpl();
 
-				AdaptiveMediaQuery query = f.apply(queryBuilder);
+				AdaptiveMediaQuery query = function.apply(queryBuilder);
 
 				if (!AdaptiveMediaImageQueryBuilderImpl.QUERY.equals(query)) {
 					return Stream.empty();
 				}
 
-				if (queryBuilder.getFileVersion().equals(fileVersion) &&
-					queryBuilder.getConfigurationEntryFilter().test(
-						configurationEntry)) {
+				if (fileVersion.equals(queryBuilder.getFileVersion())) {
+					Predicate<AdaptiveMediaImageConfigurationEntry>
+						configurationEntryFilter =
+							queryBuilder.getConfigurationEntryFilter();
 
-					return Stream.of(adaptiveMedia);
+					if (configurationEntryFilter.test(configurationEntry)) {
+						return Stream.of(adaptiveMedia);
+					}
 				}
 
 				return Stream.empty();

@@ -113,15 +113,21 @@ public class AdaptiveMediaImageRequestHandler
 
 		Map<String, String> properties = new HashMap<>();
 
+		AdaptiveMediaAttribute<Object, String> fileName =
+			AdaptiveMediaAttribute.fileName();
+
+		properties.put(fileName.getName(), fileVersion.getFileName());
+
+		AdaptiveMediaAttribute<Object, String> contentType =
+			AdaptiveMediaAttribute.contentType();
+
+		properties.put(contentType.getName(), fileVersion.getMimeType());
+
+		AdaptiveMediaAttribute<Object, Integer> contentLength =
+			AdaptiveMediaAttribute.contentLength();
+
 		properties.put(
-			AdaptiveMediaAttribute.fileName().getName(),
-			fileVersion.getFileName());
-		properties.put(
-			AdaptiveMediaAttribute.contentType().getName(),
-			fileVersion.getMimeType());
-		properties.put(
-			AdaptiveMediaAttribute.contentLength().getName(),
-			String.valueOf(fileVersion.getSize()));
+			contentLength.getName(), String.valueOf(fileVersion.getSize()));
 
 		return new AdaptiveMediaImage(
 			() -> {
