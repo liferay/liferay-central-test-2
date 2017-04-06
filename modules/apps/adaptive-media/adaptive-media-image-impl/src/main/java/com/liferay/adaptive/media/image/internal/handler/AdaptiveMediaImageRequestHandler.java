@@ -231,22 +231,20 @@ public class AdaptiveMediaImageRequestHandler
 	private Comparator<AdaptiveMedia<AdaptiveMediaImageProcessor>>
 		_getComparator(Integer configurationWidth) {
 
-		return (adaptiveMedia1, adaptiveMedia2) ->
-			_getDiff(configurationWidth, adaptiveMedia1) -
-				_getDiff(configurationWidth, adaptiveMedia2);
+		return Comparator.comparingInt(
+			adaptiveMedia -> _getDistance(configurationWidth, adaptiveMedia));
 	}
 
-	private Integer _getDiff(
+	private Integer _getDistance(
 		int width, AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia) {
 
-		Optional<Integer> widthOptional = adaptiveMedia.getAttributeValue(
+		Optional<Integer> imageWidthOptional = adaptiveMedia.getAttributeValue(
 			AdaptiveMediaImageAttribute.IMAGE_WIDTH);
 
-		if (widthOptional.isPresent()) {
-			return Math.abs(widthOptional.get() - width);
-		}
+		Optional<Integer> distanceOptional =
+			imageWidthOptional.map(imageWidth -> Math.abs(imageWidth - width));
 
-		return Integer.MAX_VALUE;
+		return distanceOptional.orElse(Integer.MAX_VALUE);
 	}
 
 	private Optional<Tuple<FileVersion, AdaptiveMediaImageAttributeMapping>>
