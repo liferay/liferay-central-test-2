@@ -1289,10 +1289,10 @@ public class DDLRecordLocalServiceImpl extends DDLRecordLocalServiceBaseImpl {
 				}
 			}
 			else {
-				field.addValue(locale, String.valueOf(value));
+				field.addValue(locale, value);
 
 				if (!locale.equals(defaultLocale)) {
-					field.addValue(defaultLocale, String.valueOf(value));
+					field.addValue(defaultLocale, value);
 				}
 			}
 
