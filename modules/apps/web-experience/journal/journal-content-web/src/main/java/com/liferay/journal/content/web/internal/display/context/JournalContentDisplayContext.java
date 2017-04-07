@@ -87,7 +87,7 @@ public class JournalContentDisplayContext {
 
 	public static JournalContentDisplayContext create(
 			PortletRequest portletRequest, PortletResponse portletResponse,
-			PortletDisplay portletDisplay)
+			PortletDisplay portletDisplay, long ddmStructureClassNameId)
 		throws PortalException {
 
 		JournalContentDisplayContext journalContentDisplayContext =
@@ -102,7 +102,8 @@ public class JournalContentDisplayContext {
 
 			journalContentDisplayContext = new JournalContentDisplayContext(
 				portletRequest, portletResponse,
-				journalContentPortletInstanceConfiguration);
+				journalContentPortletInstanceConfiguration,
+				ddmStructureClassNameId);
 
 			portletRequest.setAttribute(
 				JournalContentDisplayContext.class.getName(),
@@ -295,8 +296,7 @@ public class JournalContentDisplayContext {
 
 		try {
 			_ddmTemplate = DDMTemplateLocalServiceUtil.fetchTemplate(
-				articleDisplay.getGroupId(),
-				PortalUtil.getClassNameId(DDMStructure.class),
+				articleDisplay.getGroupId(), _ddmStructureClassNameId,
 				getDDMTemplateKey(), true);
 		}
 		catch (PortalException pe) {
@@ -896,13 +896,15 @@ public class JournalContentDisplayContext {
 	private JournalContentDisplayContext(
 			PortletRequest portletRequest, PortletResponse portletResponse,
 			JournalContentPortletInstanceConfiguration
-				journalContentPortletInstanceConfiguration)
+				journalContentPortletInstanceConfiguration,
+			long ddmStructureClassNameId)
 		throws PortalException {
 
 		_portletRequest = portletRequest;
 		_portletResponse = portletResponse;
 		_journalContentPortletInstanceConfiguration =
 			journalContentPortletInstanceConfiguration;
+		_ddmStructureClassNameId = ddmStructureClassNameId;
 
 		if (Validator.isNull(getPortletResource()) && !isShowArticle()) {
 			portletRequest.setAttribute(
@@ -942,6 +944,7 @@ public class JournalContentDisplayContext {
 	private String _articleId;
 	private List<ContentMetadataAssetAddonEntry>
 		_contentMetadataAssetAddonEntries;
+	private final long _ddmStructureClassNameId;
 	private DDMTemplate _ddmTemplate;
 	private String _ddmTemplateKey;
 	private List<DDMTemplate> _ddmTemplates;
