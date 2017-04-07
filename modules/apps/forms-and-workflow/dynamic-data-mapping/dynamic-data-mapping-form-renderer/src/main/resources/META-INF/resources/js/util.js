@@ -52,7 +52,7 @@ AUI.add(
 					template: 'contains({name}, "{parameter}")'
 				},
 				{
-					label: Liferay.Language.get('does-not-contain'),
+					label: Liferay.Language.get('not-contains'),
 					name: 'notContains',
 					parameterMessage: Liferay.Language.get('this-text'),
 					regex: /^NOT\(contains\((\w+), "(\w+)"\)\)$/,
