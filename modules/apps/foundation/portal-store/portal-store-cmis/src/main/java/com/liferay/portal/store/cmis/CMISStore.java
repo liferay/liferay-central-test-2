@@ -475,9 +475,10 @@ public class CMISStore extends BaseStore {
 		if (_log.isWarnEnabled()) {
 			StringBundler sb = new StringBundler(3);
 
-			sb.append("Liferay is configured to use CMISStore as store. ");
-			sb.append("CMIS store is a deprecated feature and is not ");
-			sb.append("recommended.");
+			sb.append("Liferay is configured via the portal property ");
+			sb.append("\"dl.store.impl\" to use CMIS to persist documents. ");
+			sb.append("CMIS is deprecated and will not be suported in a ");
+			sb.append("future release.");
 
 			_log.warn(sb);
 		}
