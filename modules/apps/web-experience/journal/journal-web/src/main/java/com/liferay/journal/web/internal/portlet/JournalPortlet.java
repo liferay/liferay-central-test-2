@@ -683,7 +683,7 @@ public class JournalPortlet extends MVCPortlet {
 		int expirationDateAmPm = ParamUtil.getInteger(
 			uploadPortletRequest, "expirationDateAmPm");
 		boolean neverExpire = ParamUtil.getBoolean(
-			uploadPortletRequest, "neverExpire");
+			uploadPortletRequest, "neverExpire", true);
 
 		if (expirationDateAmPm == Calendar.PM) {
 			expirationDateHour += 12;
@@ -702,7 +702,7 @@ public class JournalPortlet extends MVCPortlet {
 		int reviewDateAmPm = ParamUtil.getInteger(
 			uploadPortletRequest, "reviewDateAmPm");
 		boolean neverReview = ParamUtil.getBoolean(
-			uploadPortletRequest, "neverReview");
+			uploadPortletRequest, "neverReview", true);
 
 		if (reviewDateAmPm == Calendar.PM) {
 			reviewDateHour += 12;
