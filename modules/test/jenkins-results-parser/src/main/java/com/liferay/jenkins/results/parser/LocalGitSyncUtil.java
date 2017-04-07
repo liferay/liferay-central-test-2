@@ -808,7 +808,7 @@ public class LocalGitSyncUtil {
 
 					System.out.println(
 						JenkinsResultsParserUtil.combine(
-							"\nUpdating cache branch timestamp ", " from ",
+							"\nUpdating cache branch timestamp from ",
 							remoteCacheBranchName, "to ",
 							newTimestampBranchName));
 
