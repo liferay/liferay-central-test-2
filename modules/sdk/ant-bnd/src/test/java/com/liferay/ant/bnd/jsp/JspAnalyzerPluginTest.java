@@ -78,7 +78,7 @@ public class JspAnalyzerPluginTest {
 		JspAnalyzerPlugin jspAnalyzerPlugin = new JspAnalyzerPlugin();
 
 		URL url = getResource(
-			"dependencies/imports_without_mutlipackagesAndStatics.jsp");
+			"dependencies/imports_without_mutlipackages_and_statics.jsp");
 
 		InputStream inputStream = url.openStream();
 
