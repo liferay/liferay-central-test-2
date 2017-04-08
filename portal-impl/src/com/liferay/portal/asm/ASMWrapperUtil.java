@@ -184,12 +184,10 @@ public class ASMWrapperUtil {
 			classWriter, _equalsMethod, asmWrapperClassBinaryName, "_delegate",
 			delegateObjectClassDescriptor,
 			_getClassBinaryName(delegateObjectClass));
-
 		_generateMethod(
 			classWriter, _hashCodeMethod, asmWrapperClassBinaryName,
 			"_delegate", delegateObjectClassDescriptor,
 			_getClassBinaryName(delegateObjectClass));
-
 		_generateMethod(
 			classWriter, _toStringMethod, asmWrapperClassBinaryName,
 			"_delegate", delegateObjectClassDescriptor,
@@ -267,13 +265,10 @@ public class ASMWrapperUtil {
 			_defineClassMethod = ReflectionUtil.getDeclaredMethod(
 				ClassLoader.class, "defineClass", String.class, byte[].class,
 				int.class, int.class);
-
 			_equalsMethod = ReflectionUtil.getDeclaredMethod(
 				Object.class, "equals", Object.class);
-
 			_hashCodeMethod = ReflectionUtil.getDeclaredMethod(
 				Object.class, "hashCode");
-
 			_toStringMethod = ReflectionUtil.getDeclaredMethod(
 				Object.class, "toString");
 		}
