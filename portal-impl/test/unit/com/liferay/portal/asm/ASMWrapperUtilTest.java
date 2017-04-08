@@ -133,9 +133,11 @@ public class ASMWrapperUtilTest {
 			expectedMethods.length + 3, actualMethods.length);
 
 		for (int i = 0, j = 0; i < expectedMethods.length; i++, j++) {
-			if (actualMethods[j].getName().equals("equals") ||
-				actualMethods[j].getName().equals("hashCode") ||
-				actualMethods[j].getName().equals("toString")) {
+			String actualMethodName = actualMethods[j].getName();
+
+			if (actualMethodName.equals("equals") ||
+				actualMethodName.equals("hashCode") ||
+				actualMethodName.equals("toString")) {
 
 				j++;
 			}
