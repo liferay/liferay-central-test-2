@@ -90,17 +90,19 @@ public class JspAnalyzerPluginTest {
 
 		jspAnalyzerPlugin.addApiUses(builder, content);
 
-		Packages referred = builder.getReferred();
+		Packages referredPackages = builder.getReferred();
 
-		Assert.assertTrue(referred.containsFQN("java.io"));
-		Assert.assertTrue(referred.containsFQN("java.util"));
-		Assert.assertTrue(referred.containsFQN("java.util.logging"));
-		Assert.assertTrue(referred.containsFQN("javax.portlet"));
-		Assert.assertTrue(referred.containsFQN("javax.portlet.filter"));
-		Assert.assertTrue(referred.containsFQN("javax.portlet.tck.beans"));
-		Assert.assertTrue(referred.containsFQN("javax.portlet.tck.constants"));
-		Assert.assertTrue(referred.containsFQN("javax.servlet"));
-		Assert.assertTrue(referred.containsFQN("javax.servlet.http"));
+		Assert.assertTrue(referredPackages.containsFQN("java.io"));
+		Assert.assertTrue(referredPackages.containsFQN("java.util"));
+		Assert.assertTrue(referredPackages.containsFQN("java.util.logging"));
+		Assert.assertTrue(referredPackages.containsFQN("javax.portlet"));
+		Assert.assertTrue(referredPackages.containsFQN("javax.portlet.filter"));
+		Assert.assertTrue(
+			referredPackages.containsFQN("javax.portlet.tck.beans"));
+		Assert.assertTrue(
+			referredPackages.containsFQN("javax.portlet.tck.constants"));
+		Assert.assertTrue(referredPackages.containsFQN("javax.servlet"));
+		Assert.assertTrue(referredPackages.containsFQN("javax.servlet.http"));
 	}
 
 	@Test
