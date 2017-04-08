@@ -141,7 +141,8 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 				for (String packageFragment : packageFragments) {
 					int index = packageFragment.lastIndexOf('.');
 
-					Matcher matcher = _staticImport.matcher(packageFragment);
+					Matcher matcher = _staticImportPattern.matcher(
+						packageFragment);
 
 					if (matcher.matches()) {
 						packageFragment = matcher.group("package");
@@ -525,7 +526,7 @@ public class JspAnalyzerPlugin implements AnalyzerPlugin {
 	private static final Pattern _packagePattern = Pattern.compile(
 		"[_A-Za-z$][_A-Za-z0-9$]*(\\.[_A-Za-z$][_A-Za-z0-9$]*)*");
 
-	private static final Pattern _staticImport = Pattern.compile(
+	private static final Pattern _staticImportPattern = Pattern.compile(
 		"\\s*static\\s+((?<package>(\\p{javaJavaIdentifierStart}" +
 			"\\p{javaJavaIdentifierPart}*\\.)+)(\\p{javaJavaIdentifierStart}" +
 				"\\p{javaJavaIdentifierPart}*\\.)" +
