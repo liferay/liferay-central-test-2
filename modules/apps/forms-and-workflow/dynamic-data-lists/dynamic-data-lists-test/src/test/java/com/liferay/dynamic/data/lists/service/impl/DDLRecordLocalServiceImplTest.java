@@ -139,8 +139,7 @@ public class DDLRecordLocalServiceImplTest {
 
 	@Test
 	public void testToFieldWithStringArray() throws Exception {
-		String[] fieldValues =
-			new String[] {randomString(), randomString(), randomString()};
+		String[] fieldValues = {randomString(), randomString(), randomString()};
 
 		Field field = toField(fieldValues);
 
