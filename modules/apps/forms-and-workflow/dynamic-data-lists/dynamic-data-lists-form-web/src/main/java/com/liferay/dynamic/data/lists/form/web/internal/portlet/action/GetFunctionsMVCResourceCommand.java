@@ -80,7 +80,7 @@ public class GetFunctionsMVCResourceCommand extends BaseMVCResourceCommand {
 			String functionName = MapUtil.getString(
 				properties, "ddm.form.evaluator.function.name");
 
-			_ddmExpressionFunctionMap.putIfAbsent(
+			_ddmExpressionFunctions.putIfAbsent(
 				functionName, ddmExpressionFunction);
 		}
 	}
@@ -94,7 +94,7 @@ public class GetFunctionsMVCResourceCommand extends BaseMVCResourceCommand {
 			WebKeys.THEME_DISPLAY);
 
 		Set<Map.Entry<String, DDMExpressionFunction>> entries =
-			_ddmExpressionFunctionMap.entrySet();
+			_ddmExpressionFunctions.entrySet();
 
 		JSONPortletResponseUtil.writeJSON(
 			resourceRequest, resourceResponse,
@@ -109,7 +109,7 @@ public class GetFunctionsMVCResourceCommand extends BaseMVCResourceCommand {
 			String functionName = MapUtil.getString(
 				properties, "ddm.form.evaluator.function.name");
 
-			_ddmExpressionFunctionMap.remove(functionName);
+			_ddmExpressionFunctions.remove(functionName);
 		}
 	}
 
@@ -132,21 +132,20 @@ public class GetFunctionsMVCResourceCommand extends BaseMVCResourceCommand {
 
 		String key = entry.getKey();
 
-		String labelLanguageProperty = key + CharPool.UNDERLINE + "function";
-		String tooltipLanguageProperty = key + CharPool.UNDERLINE + "tooltip";
+		String labelLanguageKey = key + CharPool.UNDERLINE + "function";
 
-		jsonObject.put(
-			"label", LanguageUtil.get(locale, labelLanguageProperty));
+		jsonObject.put("label", LanguageUtil.get(locale, labelLanguageKey));
 
 		jsonObject.put("name", key);
 
-		jsonObject.put(
-			"tooltip", LanguageUtil.get(locale, tooltipLanguageProperty));
+		String tooltipLanguageKey = key + CharPool.UNDERLINE + "tooltip";
+
+		jsonObject.put("tooltip", LanguageUtil.get(locale, tooltipLanguageKey));
 
 		return jsonObject;
 	}
 
-	private final Map<String, DDMExpressionFunction> _ddmExpressionFunctionMap =
+	private final Map<String, DDMExpressionFunction> _ddmExpressionFunctions =
 		new ConcurrentHashMap<>();
 
 	@Reference
