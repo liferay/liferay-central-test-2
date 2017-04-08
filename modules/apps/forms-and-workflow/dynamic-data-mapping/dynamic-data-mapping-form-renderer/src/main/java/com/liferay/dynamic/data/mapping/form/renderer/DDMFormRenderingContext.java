@@ -16,11 +16,12 @@ package com.liferay.dynamic.data.mapping.form.renderer;
 
 import com.liferay.dynamic.data.mapping.storage.DDMFormValues;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Marcellus Tavares
@@ -39,7 +40,9 @@ public class DDMFormRenderingContext {
 		return _ddmFormValues;
 	}
 
-	public long getGroupId() { return _groupId; }
+	public long getGroupId() {
+		return _groupId;
+	}
 
 	public HttpServletRequest getHttpServletRequest() {
 		return _httpServletRequest;
@@ -85,7 +88,9 @@ public class DDMFormRenderingContext {
 		_ddmFormValues = ddmFormValues;
 	}
 
-	public void setGroupId(long groupId) { _groupId = groupId; }
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+	}
 
 	public void setHttpServletRequest(HttpServletRequest httpServletRequest) {
 		_httpServletRequest = httpServletRequest;

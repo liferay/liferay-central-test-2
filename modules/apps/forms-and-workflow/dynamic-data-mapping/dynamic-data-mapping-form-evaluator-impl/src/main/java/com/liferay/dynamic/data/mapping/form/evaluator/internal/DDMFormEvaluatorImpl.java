@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.service.RoleLocalService;
 import com.liferay.portal.kernel.service.UserGroupRoleLocalService;
 import com.liferay.portal.kernel.service.UserLocalService;
+
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -46,7 +47,8 @@ public class DDMFormEvaluatorImpl implements DDMFormEvaluator {
 				new DDMFormEvaluatorHelper(
 					_ddmDataProviderContextFactory, _ddmDataProviderInvoker,
 					_ddmExpressionFactory, ddmFormEvaluatorContext,
-					_jsonFactory, _groupLocalService, _roleLocalService, _userGroupRoleLocalService, _userLocalService);
+					_jsonFactory, _groupLocalService, _roleLocalService,
+					_userGroupRoleLocalService, _userLocalService);
 
 			return ddmFormRuleEvaluatorHelper.evaluate();
 		}

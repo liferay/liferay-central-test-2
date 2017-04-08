@@ -890,8 +890,8 @@ public class DDMFormEvaluatorHelperTest {
 
 		DDMFormEvaluatorHelper ddmFormEvaluatorHelper =
 			new DDMFormEvaluatorHelper(
-				null, null, _ddmExpressionFactory, ddmFormEvaluatorContext
-				, _jsonFactory, null, null, null, null);
+				null, null, _ddmExpressionFactory, ddmFormEvaluatorContext,
+				_jsonFactory, null, null, null, null);
 
 		DDMFormEvaluationResult ddmFormEvaluationResult =
 			ddmFormEvaluatorHelper.evaluate();

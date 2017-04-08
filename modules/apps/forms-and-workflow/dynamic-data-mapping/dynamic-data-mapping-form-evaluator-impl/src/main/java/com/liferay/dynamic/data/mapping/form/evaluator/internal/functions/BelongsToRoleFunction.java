@@ -37,7 +37,10 @@ import javax.servlet.http.HttpServletRequest;
 public class BelongsToRoleFunction implements DDMExpressionFunction {
 
 	public BelongsToRoleFunction(
-		HttpServletRequest request, long groupId, GroupLocalService groupLocalService, RoleLocalService roleLocalService, UserGroupRoleLocalService userGroupRoleLocalService, UserLocalService userLocalService) {
+		HttpServletRequest request, long groupId,
+		GroupLocalService groupLocalService, RoleLocalService roleLocalService,
+		UserGroupRoleLocalService userGroupRoleLocalService,
+		UserLocalService userLocalService) {
 
 		_request = request;
 		_groupId = groupId;
@@ -64,7 +67,9 @@ public class BelongsToRoleFunction implements DDMExpressionFunction {
 
 			for (Object parameter : parameters) {
 				String roleName = String.valueOf(parameter);
-				Role role = _roleLocalService.fetchRole(company.getCompanyId(), roleName);
+
+				Role role = _roleLocalService.fetchRole(
+					company.getCompanyId(), roleName);
 
 				if (role == null) {
 					return false;
@@ -77,20 +82,28 @@ public class BelongsToRoleFunction implements DDMExpressionFunction {
 				if (role.getType() == RoleConstants.TYPE_REGULAR) {
 					belongsTo = _userLocalService.hasRoleUser(
 						company.getCompanyId(), roleName, userId, true);
-				} else if (role.getType() == RoleConstants.TYPE_SITE){
-					belongsTo = _userGroupRoleLocalService.hasUserGroupRole(userId, _groupId, roleName, true);
-				} else if (role.getType() == RoleConstants.TYPE_ORGANIZATION) {
-					long[] organizationIds = _groupLocalService.getOrganizationPrimaryKeys(_groupId);
+				}
+				else if (role.getType() == RoleConstants.TYPE_SITE) {
+					belongsTo = _userGroupRoleLocalService.hasUserGroupRole(
+						userId, _groupId, roleName, true);
+				}
+				else if (role.getType() == RoleConstants.TYPE_ORGANIZATION) {
+					long[] organizationIds =
+						_groupLocalService.getOrganizationPrimaryKeys(_groupId);
 
-					for(long organizationId : organizationIds) {
-						Group group = _groupLocalService.getOrganizationGroup(company.getCompanyId(), organizationId);
-						belongsTo = _userGroupRoleLocalService.hasUserGroupRole(userId, group.getGroupId(), roleName, true);
+					for (long organizationId : organizationIds) {
+						Group group = _groupLocalService.getOrganizationGroup(
+							company.getCompanyId(), organizationId);
 
-						if (belongsTo == true) {
-							break;
+						belongsTo = _userGroupRoleLocalService.hasUserGroupRole(
+							userId, group.getGroupId(), roleName, true);
+
+						if (belongsTo) {
+							return true;
 						}
 					}
-				} else {
+				}
+				else {
 					return false;
 				}
 
@@ -111,9 +124,9 @@ public class BelongsToRoleFunction implements DDMExpressionFunction {
 	private static final Log _log = LogFactoryUtil.getLog(
 		BelongsToRoleFunction.class);
 
-	private long _groupId;
-	private final HttpServletRequest _request;
+	private final long _groupId;
 	private final GroupLocalService _groupLocalService;
+	private final HttpServletRequest _request;
 	private final RoleLocalService _roleLocalService;
 	private final UserGroupRoleLocalService _userGroupRoleLocalService;
 	private final UserLocalService _userLocalService;
