@@ -56,9 +56,10 @@ public class ServletContextDelegate {
 	}
 
 	private ServletContextDelegate(ServletContext servletContext) {
+		_servletContext = servletContext;
+
 		_contextPath = servletContext.getContextPath();
 		_servletContextName = servletContext.getServletContextName();
-		_servletContext = servletContext;
 	}
 
 	private final String _contextPath;
