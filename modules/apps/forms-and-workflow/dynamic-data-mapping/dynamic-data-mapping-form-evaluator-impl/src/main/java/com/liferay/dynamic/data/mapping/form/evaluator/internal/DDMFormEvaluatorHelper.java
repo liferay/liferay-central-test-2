@@ -45,6 +45,9 @@ import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.service.GroupLocalService;
+import com.liferay.portal.kernel.service.RoleLocalService;
+import com.liferay.portal.kernel.service.UserGroupRoleLocalService;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.AggregateResourceBundle;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -56,6 +59,7 @@ import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -67,8 +71,6 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.Set;
 
-import javax.servlet.http.HttpServletRequest;
-
 /**
  * @author Leonardo Barros
  */
@@ -79,7 +81,10 @@ public class DDMFormEvaluatorHelper {
 		DDMDataProviderInvoker ddmDataProviderInvoker,
 		DDMExpressionFactory ddmExpressionFactory,
 		DDMFormEvaluatorContext ddmFormEvaluatorContext,
-		JSONFactory jsonFactory, UserLocalService userLocalService) {
+		JSONFactory jsonFactory, GroupLocalService groupLocalService,
+		RoleLocalService roleLocalService,
+		UserGroupRoleLocalService userGroupRoleLocalService,
+		UserLocalService userLocalService) {
 
 		_ddmDataProviderContextFactory = ddmDataProviderContextFactory;
 		_ddmDataProviderInvoker = ddmDataProviderInvoker;
@@ -90,10 +95,15 @@ public class DDMFormEvaluatorHelper {
 		_ddmFormFieldsMap = _ddmForm.getDDMFormFieldsMap(true);
 
 		_jsonFactory = jsonFactory;
-		_userLocalService = userLocalService;
 		_locale = ddmFormEvaluatorContext.getLocale();
 
+		_groupLocalService = groupLocalService;
+		_roleLocalService = roleLocalService;
+		_userLocalService = userLocalService;
+		_userGroupRoleLocalService = userGroupRoleLocalService;
+
 		_request = ddmFormEvaluatorContext.getProperty("request");
+		_groupId = ddmFormEvaluatorContext.getProperty("groupId");
 
 		createDDMFormFieldValues(ddmFormEvaluatorContext.getDDMFormValues());
 
@@ -424,7 +434,7 @@ public class DDMFormEvaluatorHelper {
 				_ddmExpressionFactory, _ddmExpressionFunctionRegistry));
 		_ddmExpressionFunctionRegistry.registerDDMExpressionFunction(
 			"belongsTo",
-			new BelongsToRoleFunction(_request, _userLocalService));
+			new BelongsToRoleFunction(_request, _groupId, _groupLocalService, _roleLocalService, _userGroupRoleLocalService, _userLocalService));
 		_ddmExpressionFunctionRegistry.registerDDMExpressionFunction(
 			"calculate",
 			new SetPropertyFunction(
@@ -668,7 +678,11 @@ public class DDMFormEvaluatorHelper {
 	private final Locale _locale;
 	private final Map<Integer, Integer> _pageFlow = new HashMap<>();
 	private final HttpServletRequest _request;
+	private final GroupLocalService _groupLocalService;
 	private final ResourceBundle _resourceBundle;
+	private final RoleLocalService _roleLocalService;
+	private final UserGroupRoleLocalService _userGroupRoleLocalService;
 	private final UserLocalService _userLocalService;
+	private final long _groupId;
 
 }
