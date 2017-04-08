@@ -403,7 +403,9 @@ public class PrivateMessagingPortlet extends MVCPortlet {
 		throws Exception {
 
 		_dlValidator.validateFileSize(fileName, inputStream);
+
 		_dlValidator.validateFileName(fileName);
+
 		_dlValidator.validateFileExtension(fileName);
 	}
 
