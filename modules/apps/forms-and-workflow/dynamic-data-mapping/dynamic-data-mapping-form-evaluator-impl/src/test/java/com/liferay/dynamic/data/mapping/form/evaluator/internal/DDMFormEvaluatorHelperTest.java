@@ -35,7 +35,12 @@ import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.language.Language;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.model.Company;
+import com.liferay.portal.kernel.model.Role;
+import com.liferay.portal.kernel.model.RoleConstants;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.service.GroupLocalService;
+import com.liferay.portal.kernel.service.RoleLocalService;
+import com.liferay.portal.kernel.service.UserGroupRoleLocalService;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -129,10 +134,12 @@ public class DDMFormEvaluatorHelperTest {
 		DDMFormEvaluatorContext ddmFormEvaluatorContext =
 			new DDMFormEvaluatorContext(ddmForm, ddmFormValues, LocaleUtil.US);
 
+		ddmFormEvaluatorContext.addProperty("groupId", 1L);
+
 		DDMFormEvaluatorHelper ddmFormEvaluatorHelper =
 			new DDMFormEvaluatorHelper(
 				null, null, _ddmExpressionFactory, ddmFormEvaluatorContext,
-				_jsonFactory, _userLocalService);
+				_jsonFactory, null, null, null, _userLocalService);
 
 		DDMFormEvaluationResult ddmFormEvaluationResult =
 			ddmFormEvaluatorHelper.evaluate();
@@ -180,10 +187,25 @@ public class DDMFormEvaluatorHelperTest {
 			new DDMFormEvaluatorContext(ddmForm, ddmFormValues, LocaleUtil.US);
 
 		ddmFormEvaluatorContext.addProperty("request", _request);
+		ddmFormEvaluatorContext.addProperty("groupId", 1L);
+
+		when(
+			_roleLocalService.fetchRole(
+				Matchers.anyLong(), Matchers.anyString())
+		).thenReturn(
+			_role
+		);
+
+		when(
+			_role.getType()
+		).thenReturn(
+			RoleConstants.TYPE_REGULAR
+		);
 
 		when(
 			_userLocalService.hasRoleUser(
-				_company.getCompanyId(), "Role1", _user.getUserId(), true)
+				Matchers.anyLong(), Matchers.eq("Role1"), Matchers.anyLong(),
+				Matchers.eq(true))
 		).thenReturn(
 			true
 		);
@@ -191,7 +213,8 @@ public class DDMFormEvaluatorHelperTest {
 		DDMFormEvaluatorHelper ddmFormEvaluatorHelper =
 			new DDMFormEvaluatorHelper(
 				null, null, _ddmExpressionFactory, ddmFormEvaluatorContext,
-				_jsonFactory, _userLocalService);
+				_jsonFactory, _groupLocalService, _roleLocalService,
+				_userGroupRoleLocalService, _userLocalService);
 
 		DDMFormEvaluationResult ddmFormEvaluationResult =
 			ddmFormEvaluatorHelper.evaluate();
@@ -235,12 +258,15 @@ public class DDMFormEvaluatorHelperTest {
 
 		ddmForm.addDDMFormRule(ddmFormRule);
 
+		DDMFormEvaluatorContext ddmFormEvaluatorContext =
+			new DDMFormEvaluatorContext(ddmForm, ddmFormValues, LocaleUtil.US);
+
+		ddmFormEvaluatorContext.addProperty("groupId", 1L);
+
 		DDMFormEvaluatorHelper ddmFormEvaluatorHelper =
 			new DDMFormEvaluatorHelper(
-				null, null, _ddmExpressionFactory,
-				new DDMFormEvaluatorContext(
-					ddmForm, ddmFormValues, LocaleUtil.US),
-				_jsonFactory, null);
+				null, null, _ddmExpressionFactory, ddmFormEvaluatorContext,
+				_jsonFactory, null, null, null, null);
 
 		DDMFormEvaluationResult ddmFormEvaluationResult =
 			ddmFormEvaluatorHelper.evaluate();
@@ -293,10 +319,12 @@ public class DDMFormEvaluatorHelperTest {
 		DDMFormEvaluatorContext ddmFormEvaluatorContext =
 			new DDMFormEvaluatorContext(ddmForm, ddmFormValues, LocaleUtil.US);
 
+		ddmFormEvaluatorContext.addProperty("groupId", 1L);
+
 		DDMFormEvaluatorHelper ddmFormEvaluatorHelper =
 			new DDMFormEvaluatorHelper(
 				null, null, _ddmExpressionFactory, ddmFormEvaluatorContext,
-				_jsonFactory, _userLocalService);
+				_jsonFactory, null, null, null, _userLocalService);
 
 		DDMFormEvaluationResult ddmFormEvaluationResult =
 			ddmFormEvaluatorHelper.evaluate();
@@ -344,6 +372,7 @@ public class DDMFormEvaluatorHelperTest {
 			new DDMFormEvaluatorContext(ddmForm, ddmFormValues, LocaleUtil.US);
 
 		ddmFormEvaluatorContext.addProperty("request", _request);
+		ddmFormEvaluatorContext.addProperty("groupId", 1L);
 
 		when(
 			_userLocalService.hasRoleUser(
@@ -355,7 +384,8 @@ public class DDMFormEvaluatorHelperTest {
 		DDMFormEvaluatorHelper ddmFormEvaluatorHelper =
 			new DDMFormEvaluatorHelper(
 				null, null, _ddmExpressionFactory, ddmFormEvaluatorContext,
-				_jsonFactory, _userLocalService);
+				_jsonFactory, _groupLocalService, _roleLocalService,
+				_userGroupRoleLocalService, _userLocalService);
 
 		DDMFormEvaluationResult ddmFormEvaluationResult =
 			ddmFormEvaluatorHelper.evaluate();
@@ -399,12 +429,15 @@ public class DDMFormEvaluatorHelperTest {
 
 		ddmForm.addDDMFormRule(ddmFormRule);
 
+		DDMFormEvaluatorContext ddmFormEvaluatorContext =
+			new DDMFormEvaluatorContext(ddmForm, ddmFormValues, LocaleUtil.US);
+
+		ddmFormEvaluatorContext.addProperty("groupId", 1L);
+
 		DDMFormEvaluatorHelper ddmFormEvaluatorHelper =
 			new DDMFormEvaluatorHelper(
-				null, null, _ddmExpressionFactory,
-				new DDMFormEvaluatorContext(
-					ddmForm, ddmFormValues, LocaleUtil.US),
-				_jsonFactory, null);
+				null, null, _ddmExpressionFactory, ddmFormEvaluatorContext,
+				_jsonFactory, null, null, null, null);
 
 		DDMFormEvaluationResult ddmFormEvaluationResult =
 			ddmFormEvaluatorHelper.evaluate();
@@ -432,12 +465,15 @@ public class DDMFormEvaluatorHelperTest {
 			DDMFormValuesTestUtil.createDDMFormFieldValue(
 				"field0_instanceId", "field0", new UnlocalizedValue("false")));
 
+		DDMFormEvaluatorContext ddmFormEvaluatorContext =
+			new DDMFormEvaluatorContext(ddmForm, ddmFormValues, LocaleUtil.US);
+
+		ddmFormEvaluatorContext.addProperty("groupId", 1L);
+
 		DDMFormEvaluatorHelper ddmFormEvaluatorHelper =
 			new DDMFormEvaluatorHelper(
-				null, null, _ddmExpressionFactory,
-				new DDMFormEvaluatorContext(
-					ddmForm, ddmFormValues, LocaleUtil.US),
-				_jsonFactory, null);
+				null, null, _ddmExpressionFactory, ddmFormEvaluatorContext,
+				_jsonFactory, null, null, null, null);
 
 		DDMFormEvaluationResult ddmFormEvaluationResult =
 			ddmFormEvaluatorHelper.evaluate();
@@ -486,12 +522,15 @@ public class DDMFormEvaluatorHelperTest {
 			DDMFormValuesTestUtil.createDDMFormFieldValue(
 				"field1_instanceId", "field1", new UnlocalizedValue("")));
 
+		DDMFormEvaluatorContext ddmFormEvaluatorContext =
+			new DDMFormEvaluatorContext(ddmForm, ddmFormValues, LocaleUtil.US);
+
+		ddmFormEvaluatorContext.addProperty("groupId", 1L);
+
 		DDMFormEvaluatorHelper ddmFormEvaluatorHelper =
 			new DDMFormEvaluatorHelper(
-				null, null, _ddmExpressionFactory,
-				new DDMFormEvaluatorContext(
-					ddmForm, ddmFormValues, LocaleUtil.US),
-				_jsonFactory, null);
+				null, null, _ddmExpressionFactory, ddmFormEvaluatorContext,
+				_jsonFactory, null, null, null, null);
 
 		DDMFormEvaluationResult ddmFormEvaluationResult =
 			ddmFormEvaluatorHelper.evaluate();
@@ -546,12 +585,15 @@ public class DDMFormEvaluatorHelperTest {
 			DDMFormValuesTestUtil.createDDMFormFieldValue(
 				"field1_instanceId", "field1", new UnlocalizedValue("")));
 
+		DDMFormEvaluatorContext ddmFormEvaluatorContext =
+			new DDMFormEvaluatorContext(ddmForm, ddmFormValues, LocaleUtil.US);
+
+		ddmFormEvaluatorContext.addProperty("groupId", 1L);
+
 		DDMFormEvaluatorHelper ddmFormEvaluatorHelper =
 			new DDMFormEvaluatorHelper(
-				null, null, _ddmExpressionFactory,
-				new DDMFormEvaluatorContext(
-					ddmForm, ddmFormValues, LocaleUtil.US),
-				_jsonFactory, null);
+				null, null, _ddmExpressionFactory, ddmFormEvaluatorContext,
+				_jsonFactory, null, null, null, null);
 
 		DDMFormEvaluationResult ddmFormEvaluationResult =
 			ddmFormEvaluatorHelper.evaluate();
@@ -591,12 +633,15 @@ public class DDMFormEvaluatorHelperTest {
 			DDMFormValuesTestUtil.createDDMFormFieldValue(
 				"field0_instanceId", "field0", new UnlocalizedValue("\n")));
 
+		DDMFormEvaluatorContext ddmFormEvaluatorContext =
+			new DDMFormEvaluatorContext(ddmForm, ddmFormValues, LocaleUtil.US);
+
+		ddmFormEvaluatorContext.addProperty("groupId", 1L);
+
 		DDMFormEvaluatorHelper ddmFormEvaluatorHelper =
 			new DDMFormEvaluatorHelper(
-				null, null, _ddmExpressionFactory,
-				new DDMFormEvaluatorContext(
-					ddmForm, ddmFormValues, LocaleUtil.US),
-				_jsonFactory, null);
+				null, null, _ddmExpressionFactory, ddmFormEvaluatorContext,
+				_jsonFactory, null, null, null, null);
 
 		DDMFormEvaluationResult ddmFormEvaluationResult =
 			ddmFormEvaluatorHelper.evaluate();
@@ -657,12 +702,15 @@ public class DDMFormEvaluatorHelperTest {
 
 		ddmForm.addDDMFormRule(ddmFormRule);
 
+		DDMFormEvaluatorContext ddmFormEvaluatorContext =
+			new DDMFormEvaluatorContext(ddmForm, ddmFormValues, LocaleUtil.US);
+
+		ddmFormEvaluatorContext.addProperty("groupId", 1L);
+
 		DDMFormEvaluatorHelper ddmFormEvaluatorHelper =
 			new DDMFormEvaluatorHelper(
-				null, null, _ddmExpressionFactory,
-				new DDMFormEvaluatorContext(
-					ddmForm, ddmFormValues, LocaleUtil.US),
-				_jsonFactory, null);
+				null, null, _ddmExpressionFactory, ddmFormEvaluatorContext,
+				_jsonFactory, null, null, null, null);
 
 		DDMFormEvaluationResult ddmFormEvaluationResult =
 			ddmFormEvaluatorHelper.evaluate();
@@ -754,12 +802,15 @@ public class DDMFormEvaluatorHelperTest {
 
 		ddmForm.addDDMFormRule(ddmFormRule);
 
+		DDMFormEvaluatorContext ddmFormEvaluatorContext =
+			new DDMFormEvaluatorContext(ddmForm, ddmFormValues, LocaleUtil.US);
+
+		ddmFormEvaluatorContext.addProperty("groupId", 1L);
+
 		DDMFormEvaluatorHelper ddmFormEvaluatorHelper =
 			new DDMFormEvaluatorHelper(
-				null, null, _ddmExpressionFactory,
-				new DDMFormEvaluatorContext(
-					ddmForm, ddmFormValues, LocaleUtil.US),
-				_jsonFactory, null);
+				null, null, _ddmExpressionFactory, ddmFormEvaluatorContext,
+				_jsonFactory, null, null, null, null);
 
 		DDMFormEvaluationResult ddmFormEvaluationResult =
 			ddmFormEvaluatorHelper.evaluate();
@@ -832,12 +883,15 @@ public class DDMFormEvaluatorHelperTest {
 			DDMFormValuesTestUtil.createDDMFormFieldValue(
 				"field0_instanceId", "field0", new UnlocalizedValue("1")));
 
+		DDMFormEvaluatorContext ddmFormEvaluatorContext =
+			new DDMFormEvaluatorContext(ddmForm, ddmFormValues, LocaleUtil.US);
+
+		ddmFormEvaluatorContext.addProperty("groupId", 1L);
+
 		DDMFormEvaluatorHelper ddmFormEvaluatorHelper =
 			new DDMFormEvaluatorHelper(
-				null, null, _ddmExpressionFactory,
-				new DDMFormEvaluatorContext(
-					ddmForm, ddmFormValues, LocaleUtil.US),
-				_jsonFactory, null);
+				null, null, _ddmExpressionFactory, ddmFormEvaluatorContext
+				, _jsonFactory, null, null, null, null);
 
 		DDMFormEvaluationResult ddmFormEvaluationResult =
 			ddmFormEvaluatorHelper.evaluate();
@@ -882,12 +936,15 @@ public class DDMFormEvaluatorHelperTest {
 			DDMFormValuesTestUtil.createDDMFormFieldValue(
 				"field_instanceId", "field", new UnlocalizedValue("1")));
 
+		DDMFormEvaluatorContext ddmFormEvaluatorContext =
+			new DDMFormEvaluatorContext(ddmForm, ddmFormValues, LocaleUtil.US);
+
+		ddmFormEvaluatorContext.addProperty("groupId", 1L);
+
 		DDMFormEvaluatorHelper ddmFormEvaluatorHelper =
 			new DDMFormEvaluatorHelper(
-				null, null, _ddmExpressionFactory,
-				new DDMFormEvaluatorContext(
-					ddmForm, ddmFormValues, LocaleUtil.US),
-				_jsonFactory, null);
+				null, null, _ddmExpressionFactory, ddmFormEvaluatorContext,
+				_jsonFactory, null, null, null, null);
 
 		DDMFormEvaluationResult ddmFormEvaluationResult =
 			ddmFormEvaluatorHelper.evaluate();
@@ -933,12 +990,15 @@ public class DDMFormEvaluatorHelperTest {
 
 		ddmForm.addDDMFormRule(ddmFormRule);
 
+		DDMFormEvaluatorContext ddmFormEvaluatorContext =
+			new DDMFormEvaluatorContext(ddmForm, ddmFormValues, LocaleUtil.US);
+
+		ddmFormEvaluatorContext.addProperty("groupId", 1L);
+
 		DDMFormEvaluatorHelper ddmFormEvaluatorHelper =
 			new DDMFormEvaluatorHelper(
-				null, null, _ddmExpressionFactory,
-				new DDMFormEvaluatorContext(
-					ddmForm, ddmFormValues, LocaleUtil.US),
-				_jsonFactory, null);
+				null, null, _ddmExpressionFactory, ddmFormEvaluatorContext,
+				_jsonFactory, null, null, null, null);
 
 		DDMFormEvaluationResult ddmFormEvaluationResult =
 			ddmFormEvaluatorHelper.evaluate();
@@ -986,12 +1046,15 @@ public class DDMFormEvaluatorHelperTest {
 			DDMFormValuesTestUtil.createDDMFormFieldValue(
 				"field1_instanceId", "field1", new UnlocalizedValue("")));
 
+		DDMFormEvaluatorContext ddmFormEvaluatorContext =
+			new DDMFormEvaluatorContext(ddmForm, ddmFormValues, LocaleUtil.US);
+
+		ddmFormEvaluatorContext.addProperty("groupId", 1L);
+
 		DDMFormEvaluatorHelper ddmFormEvaluatorHelper =
 			new DDMFormEvaluatorHelper(
-				null, null, _ddmExpressionFactory,
-				new DDMFormEvaluatorContext(
-					ddmForm, ddmFormValues, LocaleUtil.US),
-				_jsonFactory, null);
+				null, null, _ddmExpressionFactory, ddmFormEvaluatorContext,
+				_jsonFactory, null, null, null, null);
 
 		DDMFormEvaluationResult ddmFormEvaluationResult =
 			ddmFormEvaluatorHelper.evaluate();
@@ -1131,6 +1194,10 @@ public class DDMFormEvaluatorHelperTest {
 
 	private final DDMExpressionFactory _ddmExpressionFactory =
 		new DDMExpressionFactoryImpl();
+
+	@Mock
+	private GroupLocalService _groupLocalService;
+
 	private final JSONFactory _jsonFactory = new JSONFactoryImpl();
 	private Language _language;
 
@@ -1138,7 +1205,16 @@ public class DDMFormEvaluatorHelperTest {
 	private HttpServletRequest _request;
 
 	@Mock
+	private Role _role;
+
+	@Mock
+	private RoleLocalService _roleLocalService;
+
+	@Mock
 	private User _user;
+
+	@Mock
+	private UserGroupRoleLocalService _userGroupRoleLocalService;
 
 	@Mock
 	private UserLocalService _userLocalService;
