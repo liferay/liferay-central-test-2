@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.osgi.framework.BundleContext;
 import org.osgi.service.component.annotations.Activate;
@@ -92,8 +93,13 @@ public class FormNavigatorOSGiCommands {
 	}
 
 	private Set<String> _getAllFormNavigatorIds() {
-		return _formNavigatorEntriesList.stream().map(
-			FormNavigatorEntry::getFormNavigatorId).collect(Collectors.toSet());
+		Stream<FormNavigatorEntry> formNavigatorEntriesStream =
+			_formNavigatorEntriesList.stream();
+
+		Stream<String> formNavigatorIdsStream = formNavigatorEntriesStream.map(
+			FormNavigatorEntry::getFormNavigatorId);
+
+		return formNavigatorIdsStream.collect(Collectors.toSet());
 	}
 
 	private String _getCategoryLine(
@@ -107,8 +113,14 @@ public class FormNavigatorOSGiCommands {
 			return StringPool.BLANK;
 		}
 
-		String formNavigatorEntryKeysCSV = formNavigatorEntries.stream().map(
-			FormNavigatorEntry::getKey).collect(_collectorCSV);
+		Stream<FormNavigatorEntry> formNavigatorEntriesStream =
+			_formNavigatorEntriesList.stream();
+
+		Stream<String> formNavigatorKeysStream = formNavigatorEntriesStream.map(
+			FormNavigatorEntry::getKey);
+
+		String formNavigatorEntryKeysCSV = formNavigatorKeysStream.collect(
+			_collectorCSV);
 
 		StringBundler sb = new StringBundler(4);
 
