@@ -365,7 +365,7 @@ String selectStyle = (String)request.getAttribute("configuration.jsp-selectStyle
 						<aui:fieldset collapsed="<%= true %>" collapsible="<%= true %>" id='<%= "assetPublisherPanelContainerSection_" + assetEntryQueryProcessor.getKey() %>' label="<%= assetEntryQueryProcessor.getTitle(locale) %>">
 
 							<%
-							assetEntryQueryProcessor.include(request, new PipingServletResponse(pageContext));
+							assetEntryQueryProcessor.include(request, PipingServletResponse.createPipingServletResponse(pageContext));
 							%>
 
 						</aui:fieldset>
