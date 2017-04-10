@@ -347,8 +347,11 @@ public class PortletRequestModel implements Serializable {
 				"server-name", _themeDisplayModel.getServerName());
 			themeDisplayModelMap.put(
 				"server-port", _themeDisplayModel.getServerPort());
-			themeDisplayModelMap.put(
-				"time-zone", _themeDisplayModel.getTimeZone().getID());
+
+			TimeZone timeZone = _themeDisplayModel.getTimeZone();
+
+			themeDisplayModelMap.put("time-zone", timeZone.getID());
+
 			themeDisplayModelMap.put(
 				"url-portal", _themeDisplayModel.getURLPortal());
 			themeDisplayModelMap.put("user-id", _themeDisplayModel.getUserId());
@@ -510,8 +513,11 @@ public class PortletRequestModel implements Serializable {
 				"server-name", _themeDisplayModel.getServerName());
 			themeDisplayElement.addElement(
 				"server-port", _themeDisplayModel.getServerPort());
-			themeDisplayElement.addElement(
-				"time-zone", _themeDisplayModel.getTimeZone().getID());
+
+			TimeZone timeZone = _themeDisplayModel.getTimeZone();
+
+			themeDisplayElement.addElement("time-zone", timeZone.getID());
+
 			themeDisplayElement.addElement(
 				"url-portal", _themeDisplayModel.getURLPortal());
 			themeDisplayElement.addElement(
@@ -541,7 +547,9 @@ public class PortletRequestModel implements Serializable {
 
 		Element parametersElement = requestElement.addElement("parameters");
 
-		for (Map.Entry<String, String[]> entry : getParameters().entrySet()) {
+		Map<String, String[]> parameters = getParameters();
+
+		for (Map.Entry<String, String[]> entry : parameters.entrySet()) {
 			Element parameterElement = parametersElement.addElement(
 				"parameter");
 
@@ -554,7 +562,9 @@ public class PortletRequestModel implements Serializable {
 
 		Element attributesElement = requestElement.addElement("attributes");
 
-		for (Map.Entry<String, Object> entry : getAttributes().entrySet()) {
+		Map<String, Object> attributes = getAttributes();
+
+		for (Map.Entry<String, Object> entry : attributes.entrySet()) {
 			String name = entry.getKey();
 
 			if (!_isValidAttributeName(name)) {
@@ -580,8 +590,11 @@ public class PortletRequestModel implements Serializable {
 		attributesElement = portletSessionElement.addElement(
 			"portlet-attributes");
 
+		Map<String, Object> portletScopeSessioAttributes =
+			getPortletScopeSessioAttributes();
+
 		for (Map.Entry<String, Object> entry :
-				getPortletScopeSessioAttributes().entrySet()) {
+				portletScopeSessioAttributes.entrySet()) {
 
 			String name = entry.getKey();
 
@@ -605,8 +618,11 @@ public class PortletRequestModel implements Serializable {
 		attributesElement = portletSessionElement.addElement(
 			"application-attributes");
 
+		Map<String, Object> applicationScopeSessioAttributes =
+			getApplicationScopeSessionAttributes();
+
 		for (Map.Entry<String, Object> entry :
-				getApplicationScopeSessionAttributes().entrySet()) {
+				applicationScopeSessionAttributes.entrySet()) {
 
 			String name = entry.getKey();
 
