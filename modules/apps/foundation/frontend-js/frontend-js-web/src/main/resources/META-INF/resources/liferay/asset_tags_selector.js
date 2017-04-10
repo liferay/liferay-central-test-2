@@ -54,6 +54,8 @@ AUI.add(
 
 		var TPL_LOADING = '<div class="loading-animation" />';
 
+		var TPL_MAX_LENGTH_ALERT = '<div class="help-block">{message}</div>';
+
 		var TPL_SEARCH_FORM = '<form action="javascript:;" class="form-search lfr-tag-selector-search">' +
 				'<input class="form-control lfr-tag-selector-input search-query" placeholder="{0}" type="text" />' +
 			'</form>';
@@ -190,6 +192,8 @@ AUI.add(
 
 						entries.after('add', instance._updateHiddenInput, instance);
 						entries.after('remove', instance._updateHiddenInput, instance);
+
+						A.Do.before(instance._checkMaxLengthTag, instance.entries, 'add', instance);
 					},
 
 					syncUI: function() {
@@ -211,8 +215,6 @@ AUI.add(
 					_addEntries: function() {
 						var instance = this;
 
-						var maxLength = instance.get('maxLength');
-
 						var text = LString.escapeHTML(instance.inputNode.val());
 
 						if (text) {
@@ -221,16 +223,12 @@ AUI.add(
 
 								items.forEach(
 									function(item, index) {
-										if (item.length <= maxLength) {
-											instance.entries.add(item, {});
-										}
+										instance.entries.add(item, {});
 									}
 								);
 							}
 							else {
-								if (text.length <= maxLength) {
-									instance.entries.add(text, {});
-								}
+								instance.entries.add(text, {});
 							}
 						}
 
@@ -245,6 +243,29 @@ AUI.add(
 						instance._submitFormListener = A.Do.before(instance._addEntries, form, 'submit', instance);
 
 						instance.get('boundingBox').on('keypress', instance._onKeyPress, instance);
+					},
+
+					_checkMaxLengthTag: function(object) {
+						var instance = this;
+
+						var tag = !object.value ? object : object.value;
+
+						var maxLength = instance.get('maxLength');
+
+						if (!tag.length || (tag.length <= maxLength)) {
+							return;
+						}
+
+						var message = Lang.sub(
+							TPL_MAX_LENGTH_ALERT,
+							{
+								message: Lang.sub(Liferay.Language.get('please-enter-no-more-than-x-characters'), [maxLength])
+							}
+						);
+
+						instance._showError(message);
+
+						return new A.Do.Halt();
 					},
 
 					_getEntries: function(callback) {
