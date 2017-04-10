@@ -31,7 +31,7 @@ public class FriendlyURLNormalizerUtil {
 			_serviceTracker.getService();
 
 		if (friendlyURLNormalizer == null) {
-			return _defaultFriendlyURLNormalizer;
+			return _friendlyURLNormalizer;
 		}
 
 		return friendlyURLNormalizer;
@@ -68,10 +68,10 @@ public class FriendlyURLNormalizerUtil {
 	public void setFriendlyURLNormalizer(
 		FriendlyURLNormalizer friendlyURLNormalizer) {
 
-		_defaultFriendlyURLNormalizer = friendlyURLNormalizer;
+		_friendlyURLNormalizer = friendlyURLNormalizer;
 	}
 
-	private static FriendlyURLNormalizer _defaultFriendlyURLNormalizer;
+	private static FriendlyURLNormalizer _friendlyURLNormalizer;
 	private static final
 		ServiceTracker<FriendlyURLNormalizer, FriendlyURLNormalizer>
 			_serviceTracker;
