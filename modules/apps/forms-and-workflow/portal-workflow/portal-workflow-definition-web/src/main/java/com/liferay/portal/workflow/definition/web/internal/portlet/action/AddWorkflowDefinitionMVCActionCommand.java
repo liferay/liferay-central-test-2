@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.util.PortletKeys;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.workflow.WorkflowDefinitionFileException;
-import com.liferay.portal.kernel.workflow.WorkflowDefinitionManagerUtil;
 
 import java.util.Locale;
 import java.util.Map;
@@ -64,7 +63,7 @@ public class AddWorkflowDefinitionMVCActionCommand
 			throw new WorkflowDefinitionFileException();
 		}
 
-		WorkflowDefinitionManagerUtil.deployWorkflowDefinition(
+		workflowDefinitionManager.deployWorkflowDefinition(
 			companyId, themeDisplay.getUserId(), getTitle(titleMap),
 			content.getBytes());
 

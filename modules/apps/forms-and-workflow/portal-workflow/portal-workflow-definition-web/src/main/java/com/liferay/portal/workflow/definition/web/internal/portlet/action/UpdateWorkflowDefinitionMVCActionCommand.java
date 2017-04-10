@@ -27,15 +27,17 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.workflow.WorkflowDefinition;
 import com.liferay.portal.kernel.workflow.WorkflowDefinitionFileException;
-import com.liferay.portal.kernel.workflow.WorkflowDefinitionManagerUtil;
+import com.liferay.portal.kernel.workflow.WorkflowDefinitionManager;
 
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Leonardo Barros
@@ -72,16 +74,16 @@ public class UpdateWorkflowDefinitionMVCActionCommand
 		}
 
 		WorkflowDefinition workflowDefinition =
-			WorkflowDefinitionManagerUtil.getWorkflowDefinition(
+			workflowDefinitionManager.getWorkflowDefinition(
 				companyId, name, version);
 
-		if (workflowDefinition.getContent().equals(content)) {
-			WorkflowDefinitionManagerUtil.updateTitle(
+		if (Objects.equals(workflowDefinition.getContent(), content)) {
+			workflowDefinitionManager.updateTitle(
 				companyId, themeDisplay.getUserId(), name, version,
 				getTitle(titleMap));
 		}
 		else {
-			WorkflowDefinitionManagerUtil.deployWorkflowDefinition(
+			workflowDefinitionManager.deployWorkflowDefinition(
 				companyId, themeDisplay.getUserId(), getTitle(titleMap),
 				content.getBytes());
 		}
@@ -112,5 +114,8 @@ public class UpdateWorkflowDefinitionMVCActionCommand
 
 		return value;
 	}
+
+	@Reference
+	protected WorkflowDefinitionManager workflowDefinitionManager;
 
 }
