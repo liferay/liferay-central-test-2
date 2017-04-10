@@ -144,24 +144,6 @@ public class SearchDisplayContext {
 		_searchContainer = searchContainer;
 	}
 
-	public String checkViewURL(String viewURL, String currentURL) {
-		ThemeDisplay themeDisplay = getThemeDisplay();
-
-		if (Validator.isNotNull(viewURL) &&
-			viewURL.startsWith(themeDisplay.getURLPortal())) {
-
-			viewURL = HttpUtil.setParameter(
-				viewURL, "inheritRedirect", isViewInContext());
-
-			if (!isViewInContext()) {
-				viewURL = HttpUtil.setParameter(
-					viewURL, "redirect", currentURL);
-			}
-		}
-
-		return viewURL;
-	}
-
 	public int getCollatedSpellCheckResultDisplayThreshold() {
 		if (_collatedSpellCheckResultDisplayThreshold != null) {
 			return _collatedSpellCheckResultDisplayThreshold;

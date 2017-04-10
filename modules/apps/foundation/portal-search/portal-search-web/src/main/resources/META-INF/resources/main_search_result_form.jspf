@@ -15,8 +15,6 @@
 --%>
 
 <%
-viewURL = searchDisplayContext.checkViewURL(viewURL, currentURL);
-
 summary.setHighlight(searchDisplayContext.isHighlightEnabled());
 summary.setQueryTerms(searchDisplayContext.getQueryTerms());
 
