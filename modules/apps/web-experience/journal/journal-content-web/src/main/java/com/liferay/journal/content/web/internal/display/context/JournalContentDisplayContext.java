@@ -180,9 +180,9 @@ public class JournalContentDisplayContext {
 					JournalWebKeys.JOURNAL_CONTENT);
 
 			_articleDisplay = journalContent.getDisplay(
-				article.getGroupId(), article.getArticleId(), null, null,
-				themeDisplay.getLanguageId(), 1,
-				new PortletRequestModel(_portletRequest, _portletResponse),
+				article.getGroupId(), article.getArticleId(),
+				article.getVersion(), null, null, themeDisplay.getLanguageId(),
+				1, new PortletRequestModel(_portletRequest, _portletResponse),
 				themeDisplay);
 		}
 		else {
