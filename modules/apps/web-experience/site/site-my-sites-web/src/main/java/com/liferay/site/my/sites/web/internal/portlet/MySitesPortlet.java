@@ -18,7 +18,7 @@ import com.liferay.portal.kernel.exception.MembershipRequestCommentsException;
 import com.liferay.portal.kernel.model.Release;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
-import com.liferay.portal.kernel.service.MembershipRequestService;
+import com.liferay.portal.kernel.service.MembershipRequestLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.service.UserLocalService;
@@ -79,8 +79,10 @@ public class MySitesPortlet extends MVCPortlet {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			actionRequest);
 
-		_membershipRequestService.addMembershipRequest(
-			groupId, comments, serviceContext);
+		long userId = serviceContext.getUserId();
+
+		_membershipRequestLocalService.addMembershipRequest(
+			userId, groupId, comments, serviceContext);
 
 		SessionMessages.add(actionRequest, "membershipRequestSent");
 
@@ -162,10 +164,10 @@ public class MySitesPortlet extends MVCPortlet {
 	}
 
 	@Reference(unbind = "-")
-	protected void setMembershipRequestService(
-		MembershipRequestService membershipRequestService) {
+	protected void setMembershipRequestLocalService(
+		MembershipRequestLocalService membershipRequestLocalService) {
 
-		_membershipRequestService = membershipRequestService;
+		_membershipRequestLocalService = membershipRequestLocalService;
 	}
 
 	@Reference(
@@ -185,7 +187,7 @@ public class MySitesPortlet extends MVCPortlet {
 		_userService = userService;
 	}
 
-	private MembershipRequestService _membershipRequestService;
+	private MembershipRequestLocalService _membershipRequestLocalService;
 	private UserLocalService _userLocalService;
 	private UserService _userService;
 
