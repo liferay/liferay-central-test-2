@@ -33,6 +33,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.MimeResponse;
@@ -618,7 +619,7 @@ public class PortletRequestModel implements Serializable {
 		attributesElement = portletSessionElement.addElement(
 			"application-attributes");
 
-		Map<String, Object> applicationScopeSessioAttributes =
+		Map<String, Object> applicationScopeSessionAttributes =
 			getApplicationScopeSessionAttributes();
 
 		for (Map.Entry<String, Object> entry :
