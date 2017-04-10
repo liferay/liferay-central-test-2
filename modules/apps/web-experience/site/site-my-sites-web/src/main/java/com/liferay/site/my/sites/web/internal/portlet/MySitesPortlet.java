@@ -15,6 +15,7 @@
 package com.liferay.site.my.sites.web.internal.portlet;
 
 import com.liferay.portal.kernel.exception.MembershipRequestCommentsException;
+import com.liferay.portal.kernel.model.MembershipRequestConstants;
 import com.liferay.portal.kernel.model.Release;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
@@ -23,6 +24,7 @@ import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.service.UserService;
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -81,12 +83,19 @@ public class MySitesPortlet extends MVCPortlet {
 
 		long userId = serviceContext.getUserId();
 
-		_membershipRequestLocalService.addMembershipRequest(
-			userId, groupId, comments, serviceContext);
+		if (_membershipRequestLocalService.hasMembershipRequest(
+				userId, groupId, MembershipRequestConstants.STATUS_PENDING)) {
 
-		SessionMessages.add(actionRequest, "membershipRequestSent");
+			SessionErrors.add(actionRequest, "membershipAlreadyRequested");
+		}
+		else {
+			_membershipRequestLocalService.addMembershipRequest(
+				userId, groupId, comments, serviceContext);
 
-		addSuccessMessage(actionRequest, actionResponse);
+			SessionMessages.add(actionRequest, "membershipRequestSent");
+
+			addSuccessMessage(actionRequest, actionResponse);
+		}
 
 		sendRedirect(actionRequest, actionResponse);
 	}
