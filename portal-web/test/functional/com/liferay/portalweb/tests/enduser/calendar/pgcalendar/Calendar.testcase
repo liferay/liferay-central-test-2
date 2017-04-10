@@ -5245,7 +5245,7 @@
 		</execute>
 	</command>
 
-	<command ignore="true" name="ViewShowMoreLocalization" priority="3">
+	<command name="ViewShowMoreLocalization" priority="3">
 		<description message="This is a use case for LPS-54786." />
 
 		<execute macro="Navigator#gotoPage">
