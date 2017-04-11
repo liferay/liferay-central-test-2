@@ -100,13 +100,13 @@ public class AssetPublisherDisplayContext {
 		PortletPreferences portletPreferences) {
 
 		_assetPublisherCustomizer = assetPublisherCustomizer;
-		_assetPublisherWebConfiguration =
-			(AssetPublisherWebConfiguration)portletRequest.getAttribute(
-				AssetPublisherWebKeys.ASSET_PUBLISHER_WEB_CONFIGURATION);
 		_portletRequest = portletRequest;
 		_portletResponse = portletResponse;
 		_portletPreferences = portletPreferences;
 
+		_assetPublisherWebConfiguration =
+			(AssetPublisherWebConfiguration)portletRequest.getAttribute(
+				AssetPublisherWebKeys.ASSET_PUBLISHER_WEB_CONFIGURATION);
 		_request = PortalUtil.getHttpServletRequest(portletRequest);
 	}
 
