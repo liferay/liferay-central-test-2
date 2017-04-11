@@ -244,7 +244,7 @@ public class FormNavigatorEntryConfigurationRetrieverTest {
 		}
 
 		@Test
-		public void testDoesNotContainValuesForANonEmptyCategory() {
+		public void testDoesNotContainValuesForANonemptyCategory() {
 			Optional<List<String>> formNavigatorEntryKeys =
 				formNavigatorEntryConfigurationRetriever.
 					getFormNavigatorEntryKeys("form1", "general", null);
