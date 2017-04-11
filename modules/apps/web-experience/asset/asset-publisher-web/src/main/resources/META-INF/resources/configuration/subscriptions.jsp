@@ -20,10 +20,10 @@
 String emailFromName = ParamUtil.getString(request, "preferences--emailFromName--", AssetPublisherUtil.getEmailFromName(portletPreferences, company.getCompanyId()));
 String emailFromAddress = ParamUtil.getString(request, "preferences--emailFromAddress--", AssetPublisherUtil.getEmailFromAddress(portletPreferences, company.getCompanyId()));
 
+boolean emailAssetEntryAddedEnabled = ParamUtil.getBoolean(request, "preferences--emailAssetEntryAddedEnabled--", AssetPublisherUtil.getEmailAssetEntryAddedEnabled(portletPreferences));
+
 LocalizedValuesMap emailAssetEntryAddedBodyMap = assetPublisherWebConfiguration.emailAssetEntryAddedBody();
 LocalizedValuesMap emailAssetEntryAddedSubjectMap = assetPublisherWebConfiguration.emailAssetEntryAddedSubject();
-
-boolean emailAssetEntryAddedEnabled = ParamUtil.getBoolean(request, "preferences--emailAssetEntryAddedEnabled--", AssetPublisherUtil.getEmailAssetEntryAddedEnabled(portletPreferences));
 %>
 
 <liferay-ui:error key="emailAssetEntryAddedBody" message="please-enter-a-valid-body" />
