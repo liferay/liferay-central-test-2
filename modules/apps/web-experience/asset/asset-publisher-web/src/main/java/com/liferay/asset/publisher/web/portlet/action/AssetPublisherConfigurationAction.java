@@ -141,16 +141,17 @@ public class AssetPublisherConfigurationAction
 
 		String languageId = LocaleUtil.toLanguageId(
 			LocaleUtil.getSiteDefault());
-
 		LocalizedValuesMap emailAssetEntryAddedBodyMap =
 			assetPublisherWebConfiguration.emailAssetEntryAddedBody();
-		LocalizedValuesMap emailAssetEntryAddedSubjectMap =
-			assetPublisherWebConfiguration.emailAssetEntryAddedSubject();
 
 		removeDefaultValue(
 			portletRequest, portletPreferences,
 			"emailAssetEntryAddedBody_" + languageId,
 			emailAssetEntryAddedBodyMap.get(LocaleUtil.getSiteDefault()));
+
+		LocalizedValuesMap emailAssetEntryAddedSubjectMap =
+			assetPublisherWebConfiguration.emailAssetEntryAddedSubject();
+
 		removeDefaultValue(
 			portletRequest, portletPreferences,
 			"emailAssetEntryAddedSubject_" + languageId,
