@@ -166,6 +166,9 @@ public class ScopeFacetedSearcherTest extends BaseFacetedSearcherTestCase {
 
 		searchContext.addFacet(facet);
 
+		searchContext.setAttribute(
+			"groupId", String.valueOf(group1.getGroupId()));
+
 		BooleanClause booleanClause = new BooleanClauseImpl(
 			new TermQueryImpl(
 				Field.GROUP_ID, String.valueOf(group1.getGroupId())),
@@ -173,8 +176,6 @@ public class ScopeFacetedSearcherTest extends BaseFacetedSearcherTestCase {
 
 		searchContext.setBooleanClauses(new BooleanClause[] {booleanClause});
 
-		searchContext.setAttribute(
-			"groupId", String.valueOf(group1.getGroupId()));
 		searchContext.setGroupIds(new long[] {group2.getGroupId()});
 
 		Hits hits = search(searchContext);
