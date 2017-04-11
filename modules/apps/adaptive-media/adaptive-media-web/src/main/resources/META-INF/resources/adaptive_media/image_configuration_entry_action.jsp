@@ -47,83 +47,83 @@ if (optimizeImageSingleBackgroundTasks != null) {
 }
 %>
 
-<c:if test="<%= optimizeImagesEnabled %>">
-	<liferay-ui:icon-menu direction="left-side" icon="<%= StringPool.BLANK %>" markupView="lexicon" message="<%= StringPool.BLANK %>" showWhenSingleIcon="<%= true %>">
-		<liferay-portlet:renderURL var="editImageConfigurationEntryURL">
-			<portlet:param name="mvcRenderCommandName" value="/adaptive_media/edit_image_configuration_entry" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="entryUuid" value="<%= String.valueOf(configurationEntry.getUUID()) %>" />
-		</liferay-portlet:renderURL>
+<liferay-ui:icon-menu direction="left-side" icon="<%= StringPool.BLANK %>" markupView="lexicon" message="<%= StringPool.BLANK %>" showWhenSingleIcon="<%= true %>">
+	<liferay-portlet:renderURL var="editImageConfigurationEntryURL">
+		<portlet:param name="mvcRenderCommandName" value="/adaptive_media/edit_image_configuration_entry" />
+		<portlet:param name="redirect" value="<%= currentURL %>" />
+		<portlet:param name="entryUuid" value="<%= entryUuid %>" />
+	</liferay-portlet:renderURL>
 
-		<liferay-ui:icon
-			message="edit"
-			url="<%= editImageConfigurationEntryURL %>"
-		/>
+	<liferay-ui:icon
+		message="edit"
+		url="<%= editImageConfigurationEntryURL %>"
+	/>
 
-		<c:choose>
-			<c:when test="<%= configurationEntry.isEnabled() %>">
-				<portlet:actionURL name="/adaptive_media/disable_image_configuration_entry" var="disableImageConfigurationEntryURL">
-					<portlet:param name="redirect" value="<%= currentURL %>" />
-					<portlet:param name="adaptiveMediaImageConfigurationEntryUuid" value="<%= String.valueOf(configurationEntry.getUUID()) %>" />
-				</portlet:actionURL>
+	<c:choose>
+		<c:when test="<%= configurationEntry.isEnabled() %>">
+			<portlet:actionURL name="/adaptive_media/disable_image_configuration_entry" var="disableImageConfigurationEntryURL">
+				<portlet:param name="redirect" value="<%= currentURL %>" />
+				<portlet:param name="adaptiveMediaImageConfigurationEntryUuid" value="<%= entryUuid %>" />
+			</portlet:actionURL>
 
-				<liferay-ui:icon
-					message="disable"
-					url="<%= disableImageConfigurationEntryURL %>"
-				/>
-			</c:when>
-			<c:otherwise>
-				<portlet:actionURL name="/adaptive_media/enable_image_configuration_entry" var="enableImageConfigurationEntryURL">
-					<portlet:param name="redirect" value="<%= currentURL %>" />
-					<portlet:param name="adaptiveMediaImageConfigurationEntryUuid" value="<%= String.valueOf(configurationEntry.getUUID()) %>" />
-				</portlet:actionURL>
+			<liferay-ui:icon
+				id='<%= "icon-disable-" + entryUuid %>'
+				message="disable"
+				url="<%= disableImageConfigurationEntryURL %>"
+			/>
+		</c:when>
+		<c:otherwise>
+			<portlet:actionURL name="/adaptive_media/enable_image_configuration_entry" var="enableImageConfigurationEntryURL">
+				<portlet:param name="redirect" value="<%= currentURL %>" />
+				<portlet:param name="adaptiveMediaImageConfigurationEntryUuid" value="<%= entryUuid %>" />
+			</portlet:actionURL>
 
-				<liferay-ui:icon
-					message="enable"
-					url="<%= enableImageConfigurationEntryURL %>"
-				/>
-			</c:otherwise>
-		</c:choose>
+			<liferay-ui:icon
+				message="enable"
+				url="<%= enableImageConfigurationEntryURL %>"
+			/>
+		</c:otherwise>
+	</c:choose>
 
-		<portlet:actionURL name="/adaptive_media/optimize_images" var="optimizeImagesURL">
-			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="entryUuid" value="<%= String.valueOf(configurationEntry.getUUID()) %>" />
-		</portlet:actionURL>
+	<portlet:actionURL name="/adaptive_media/optimize_images" var="optimizeImagesURL">
+		<portlet:param name="redirect" value="<%= currentURL %>" />
+		<portlet:param name="entryUuid" value="<%= entryUuid %>" />
+	</portlet:actionURL>
 
-		<%
-		String onClick = liferayPortletResponse.getNamespace() + "optimizeRemaining('" + configurationEntry.getUUID() + "', '" + optimizeImagesURL.toString() + "');";
+	<%
+	String onClick = liferayPortletResponse.getNamespace() + "optimizeRemaining('" + entryUuid + "', '" + optimizeImagesURL.toString() + "');";
 
-		int percentage = AdaptiveMediaImageEntryLocalServiceUtil.getPercentage(themeDisplay.getCompanyId(), configurationEntry.getUUID());
+	int percentage = AdaptiveMediaImageEntryLocalServiceUtil.getPercentage(themeDisplay.getCompanyId(), entryUuid);
 
-		String cssClass = (!configurationEntry.isEnabled() || percentage == 100) ? "disabled" : "";
-		%>
+	String cssClass = (!configurationEntry.isEnabled() || percentage == 100) ? "disabled" : "";
+	%>
 
-		<liferay-ui:icon
-			cssClass="<%= cssClass %>"
-			message="optimize-remaining"
-			onClick="<%= onClick %>"
-			url="javascript:;"
-		/>
+	<liferay-ui:icon
+		cssClass="<%= cssClass %>"
+		id='<%= "icon-optimize-" + entryUuid %>'
+		message="optimize-remaining"
+		onClick="<%= onClick %>"
+		url="javascript:;"
+	/>
 
-		<portlet:actionURL name="/adaptive_media/delete_image_configuration_entry" var="deleteImageConfigurationEntryURL">
-			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="rowIdsAdaptiveMediaImageConfigurationEntry" value="<%= String.valueOf(configurationEntry.getUUID()) %>" />
-		</portlet:actionURL>
+	<portlet:actionURL name="/adaptive_media/delete_image_configuration_entry" var="deleteImageConfigurationEntryURL">
+		<portlet:param name="redirect" value="<%= currentURL %>" />
+		<portlet:param name="rowIdsAdaptiveMediaImageConfigurationEntry" value="<%= entryUuid %>" />
+	</portlet:actionURL>
 
-		<c:choose>
-			<c:when test="<%= configurationEntry.isEnabled() %>">
-				<liferay-ui:icon
-					cssClass="disabled"
-					message="delete"
-					url="javascript:;"
-				/>
-			</c:when>
-			<c:otherwise>
-				<liferay-ui:icon-delete
-					trash="<%= false %>"
-					url="<%= deleteImageConfigurationEntryURL %>"
-				/>
-			</c:otherwise>
-		</c:choose>
-	</liferay-ui:icon-menu>
-</c:if>
+	<c:choose>
+		<c:when test="<%= configurationEntry.isEnabled() %>">
+			<liferay-ui:icon
+				cssClass="disabled"
+				message="delete"
+				url="javascript:;"
+			/>
+		</c:when>
+		<c:otherwise>
+			<liferay-ui:icon-delete
+				trash="<%= false %>"
+				url="<%= deleteImageConfigurationEntryURL %>"
+			/>
+		</c:otherwise>
+	</c:choose>
+</liferay-ui:icon-menu>
