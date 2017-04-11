@@ -1146,14 +1146,14 @@ public class AssetPublisherExportImportTest
 		mockHttpServletRequest.setAttribute(
 			JavaConstants.JAVAX_PORTLET_REQUEST, mockPortletRequest);
 
-		DefaultAssetPublisherCustomizer assetPublisherCustomizer =
+		DefaultAssetPublisherCustomizer defaultAssetPublisherCustomizer =
 			new DefaultAssetPublisherCustomizer();
 
-		assetPublisherCustomizer.activate(new HashMap<String, Object>());
+		defaultAssetPublisherCustomizer.activate(new HashMap<String, Object>());
 
 		AssetPublisherDisplayContext assetPublisherDisplayContext =
 			new AssetPublisherDisplayContext(
-				assetPublisherCustomizer, mockPortletRequest,
+				defaultAssetPublisherCustomizer, mockPortletRequest,
 				new MockPortletResponse(), portletPreferences);
 
 		SearchContainer<AssetEntry> searchContainer = new SearchContainer<>();
