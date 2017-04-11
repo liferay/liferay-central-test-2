@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.dao.jdbc.AutoBatchPreparedStatementUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.LoggingTimer;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.Node;
@@ -52,13 +53,20 @@ public class UpgradeImageTypeContentAttributes extends UpgradeProcess {
 			List<Element> dynamicContentEls = imageEl.elements(
 				"dynamic-content");
 
+			String id = null;
+
 			for (Element dynamicContentEl : dynamicContentEls) {
-				String id = dynamicContentEl.attributeValue("id");
+				id = dynamicContentEl.attributeValue("id");
 
 				dynamicContentEl.addAttribute("alt", StringPool.BLANK);
 				dynamicContentEl.addAttribute("name", id);
 				dynamicContentEl.addAttribute("title", id);
 				dynamicContentEl.addAttribute("type", "journal");
+			}
+
+			if (Validator.isNotNull(id)) {
+				imageEl.addAttribute(
+					"instance-id", getImageInstanceId(Long.valueOf(id)));
 			}
 		}
 
@@ -68,6 +76,24 @@ public class UpgradeImageTypeContentAttributes extends UpgradeProcess {
 	@Override
 	protected void doUpgrade() throws Exception {
 		updateContentImages();
+	}
+
+	protected String getImageInstanceId(long articleImageId) throws Exception {
+		try (PreparedStatement ps = connection.prepareStatement(
+				"select elInstanceId from JournalArticleImage where " +
+					"articleImageId = ?")) {
+
+			ps.setLong(1, articleImageId);
+
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				return rs.getString(1);
+			}
+			else {
+				return StringPool.BLANK;
+			}
+		}
 	}
 
 	protected void updateContentImages() throws Exception {
