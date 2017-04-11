@@ -49,6 +49,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.URLCodec;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.xml.QName;
@@ -944,7 +945,7 @@ public class PortletURLImpl
 			for (String removedPublicParameter :
 					_removePublicRenderParameters) {
 
-				sb.append(HttpUtil.encodeURL(removedPublicParameter));
+				sb.append(URLCodec.encodeURL(removedPublicParameter));
 				sb.append(StringPool.EQUAL);
 				sb.append(removeValue);
 				sb.append(StringPool.AMPERSAND);
@@ -1010,7 +1011,7 @@ public class PortletURLImpl
 				}
 
 				sb.append("#p_");
-				sb.append(HttpUtil.encodeURL(_portletId));
+				sb.append(URLCodec.encodeURL(_portletId));
 			}
 		}
 
@@ -1067,38 +1068,38 @@ public class PortletURLImpl
 		StringBundler sb = new StringBundler("wsrp_rewrite?wsrp-urlType=");
 
 		if (_lifecycle.equals(PortletRequest.ACTION_PHASE)) {
-			sb.append(HttpUtil.encodeURL("blockingAction"));
+			sb.append(URLCodec.encodeURL("blockingAction"));
 		}
 		else if (_lifecycle.equals(PortletRequest.RENDER_PHASE)) {
-			sb.append(HttpUtil.encodeURL("render"));
+			sb.append(URLCodec.encodeURL("render"));
 		}
 		else if (_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
-			sb.append(HttpUtil.encodeURL("resource"));
+			sb.append(URLCodec.encodeURL("resource"));
 		}
 
 		sb.append(StringPool.AMPERSAND);
 
 		if (_windowStateString != null) {
 			sb.append("wsrp-windowState=");
-			sb.append(HttpUtil.encodeURL("wsrp:" + _windowStateString));
+			sb.append(URLCodec.encodeURL("wsrp:" + _windowStateString));
 			sb.append(StringPool.AMPERSAND);
 		}
 
 		if (_portletModeString != null) {
 			sb.append("wsrp-mode=");
-			sb.append(HttpUtil.encodeURL("wsrp:" + _portletModeString));
+			sb.append(URLCodec.encodeURL("wsrp:" + _portletModeString));
 			sb.append(StringPool.AMPERSAND);
 		}
 
 		if (_resourceID != null) {
 			sb.append("wsrp-resourceID=");
-			sb.append(HttpUtil.encodeURL(_resourceID));
+			sb.append(URLCodec.encodeURL(_resourceID));
 			sb.append(StringPool.AMPERSAND);
 		}
 
 		if (_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 			sb.append("wsrp-resourceCacheability=");
-			sb.append(HttpUtil.encodeURL(_cacheability));
+			sb.append(URLCodec.encodeURL(_cacheability));
 			sb.append(StringPool.AMPERSAND);
 		}
 
@@ -1111,7 +1112,7 @@ public class PortletURLImpl
 					LiferayWindowState.POP_UP.toString())) {
 
 				sb.append("wsrp-fragmentID=#p_");
-				sb.append(HttpUtil.encodeURL(_portletId));
+				sb.append(URLCodec.encodeURL(_portletId));
 				sb.append(StringPool.AMPERSAND);
 			}
 		}
@@ -1143,7 +1144,7 @@ public class PortletURLImpl
 				_appendNamespaceAndEncode(parameterSB, name);
 
 				parameterSB.append(StringPool.EQUAL);
-				parameterSB.append(HttpUtil.encodeURL(value));
+				parameterSB.append(URLCodec.encodeURL(value));
 				parameterSB.append(StringPool.AMPERSAND);
 			}
 		}
@@ -1276,11 +1277,11 @@ public class PortletURLImpl
 
 	protected String processValue(Key key, String value) {
 		if (key == null) {
-			return HttpUtil.encodeURL(value);
+			return URLCodec.encodeURL(value);
 		}
 
 		try {
-			return HttpUtil.encodeURL(Encryptor.encrypt(key, value));
+			return URLCodec.encodeURL(Encryptor.encrypt(key, value));
 		}
 		catch (EncryptorException ee) {
 			return value;
@@ -1358,13 +1359,13 @@ public class PortletURLImpl
 			!PortalUtil.isReservedParameter(name)) {
 
 			if (_encodedNamespace == null) {
-				_encodedNamespace = HttpUtil.encodeURL(namespace);
+				_encodedNamespace = URLCodec.encodeURL(namespace);
 			}
 
 			sb.append(_encodedNamespace);
 		}
 
-		sb.append(HttpUtil.encodeURL(name));
+		sb.append(URLCodec.encodeURL(name));
 	}
 
 	private Map<String, String> _getReservedParameterMap() {
