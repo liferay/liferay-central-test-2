@@ -1109,6 +1109,11 @@ public class AssetPublisherExportImportTest
 				ServiceContextTestUtil.getServiceContext());
 		}
 
+		DefaultAssetPublisherCustomizer defaultAssetPublisherCustomizer =
+			new DefaultAssetPublisherCustomizer();
+
+		defaultAssetPublisherCustomizer.activate(new HashMap<String, Object>());
+
 		MockPortletRequest mockPortletRequest = new MockPortletRequest();
 
 		MockHttpServletRequest mockHttpServletRequest =
@@ -1145,11 +1150,6 @@ public class AssetPublisherExportImportTest
 
 		mockHttpServletRequest.setAttribute(
 			JavaConstants.JAVAX_PORTLET_REQUEST, mockPortletRequest);
-
-		DefaultAssetPublisherCustomizer defaultAssetPublisherCustomizer =
-			new DefaultAssetPublisherCustomizer();
-
-		defaultAssetPublisherCustomizer.activate(new HashMap<String, Object>());
 
 		AssetPublisherDisplayContext assetPublisherDisplayContext =
 			new AssetPublisherDisplayContext(
