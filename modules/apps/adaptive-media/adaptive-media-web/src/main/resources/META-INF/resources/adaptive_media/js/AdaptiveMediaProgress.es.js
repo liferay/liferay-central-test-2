@@ -35,7 +35,8 @@ class AdaptiveMediaProgress extends PortletBase {
 	 * that has to be invoked.
 	 */
 	startProgress(backgroundTaskUrl) {
-		if (this.percentage >= 100 || this.totalImages === 0) {
+		if (this.percentage >= 100 || this.totalImages === 0
+			|| this.disabled) {
 			return;
 		}
 
