@@ -51,7 +51,25 @@ Layout selLayout = layoutsAdminDisplayContext.getSelLayout();
 		</c:if>
 	</p>
 
-	<liferay-util:include page="/html/portal/layout/edit/portlet_applications.jsp" />
+	<aui:select label="copy-from-page" name="copyLayoutId">
+
+		<%
+		List<LayoutDescription> layoutDescriptions = (List<LayoutDescription>)request.getAttribute(WebKeys.LAYOUT_DESCRIPTIONS);
+
+		for (LayoutDescription layoutDescription : layoutDescriptions) {
+			Layout layoutDescriptionLayout = LayoutLocalServiceUtil.fetchLayout(layoutDescription.getPlid());
+
+			if (layoutDescriptionLayout != null) {
+		%>
+
+				<aui:option disabled="<%= (selLayout != null) && selLayout.getPlid() == layoutDescriptionLayout.getPlid() %>" label="<%= layoutDescription.getDisplayName() %>" value="<%= layoutDescriptionLayout.getLayoutId() %>" />
+
+		<%
+			}
+		}
+		%>
+
+	</aui:select>
 
 	<aui:button-row>
 		<aui:button name="copySubmitButton" value="copy" />
