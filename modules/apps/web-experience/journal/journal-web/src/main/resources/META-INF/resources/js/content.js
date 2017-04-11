@@ -170,7 +170,7 @@ AUI.add(
 
 						if (translationManager) {
 							eventHandles.push(
-								translationManager.after('deleteAvailableLocale', instance._afterDeletingAvailableLocale, instance)
+								translationManager.on('deleteAvailableLocale', instance._afterDeletingAvailableLocale.bind(instance))
 							);
 							eventHandles.push(
 								translationManager.on('editingLocaleChange', instance._afterEditingLocaleChange.bind(instance))
