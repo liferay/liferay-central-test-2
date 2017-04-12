@@ -150,8 +150,6 @@
 
 		<execute macro="Button#clickSave" />
 
-		<execute function="AssertVisible" locator1="Message#GENERIC" />
-
 		<execute macro="Navigator#openURL" />
 	</command>
 
