@@ -1155,7 +1155,7 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 					if (_log.isWarnEnabled()) {
 						_log.warn(
 							"Override static jar " + fileName +
-								" has invalid name and will be ignored.");
+								" has an invalid name and will be ignored");
 					}
 
 					return FileVisitResult.CONTINUE;
