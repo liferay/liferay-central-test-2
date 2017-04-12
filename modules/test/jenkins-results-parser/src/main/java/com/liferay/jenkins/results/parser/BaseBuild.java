@@ -381,7 +381,7 @@ public abstract class BaseBuild implements Build {
 				throw new RuntimeException(
 					JenkinsResultsParserUtil.combine(
 						"Unable to create build anchor element. The process ",
-						"timed out while waiting for build result for ",
+						"timed out while waiting for a build result for ",
 						getBuildURL(), "."));
 			}
 
