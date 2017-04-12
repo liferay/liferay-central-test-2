@@ -542,6 +542,8 @@ public class AssetCategoriesDisplayContext {
 
 		if (AssetCategoriesPermission.contains(
 				themeDisplay.getPermissionChecker(),
+				AssetCategoriesPermission.RESOURCE_NAME,
+				AssetCategoriesAdminPortletKeys.ASSET_CATEGORIES_ADMIN,
 				themeDisplay.getSiteGroupId(), ActionKeys.ADD_CATEGORY)) {
 
 			return true;
@@ -571,6 +573,8 @@ public class AssetCategoriesDisplayContext {
 
 		if (AssetCategoriesPermission.contains(
 				themeDisplay.getPermissionChecker(),
+				AssetCategoriesPermission.RESOURCE_NAME,
+				AssetCategoriesAdminPortletKeys.ASSET_CATEGORIES_ADMIN,
 				themeDisplay.getSiteGroupId(), ActionKeys.ADD_VOCABULARY)) {
 
 			return true;
