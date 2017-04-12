@@ -28,19 +28,6 @@ import java.util.Collection;
 public interface AdaptiveMediaImageConfigurationDemoDataCreator {
 
 	/**
-	 * Creates a {@link AdaptiveMediaImageConfigurationEntry} for a company
-	 *
-	 * @param companyId ID of the company where the configuration will be
-	 * created
-	 * @param configurationVariant the configuration to create
-	 * @return the configuration
-	 */
-	public AdaptiveMediaImageConfigurationEntry create(
-			long companyId,
-			DemoAdaptiveMediaImageConfigurationVariant configurationVariant)
-		throws IOException;
-
-	/**
 	  * Creates a collection of {@link AdaptiveMediaImageConfigurationEntry}
 	  * configurations based on the
 	  * {@link DemoAdaptiveMediaImageConfigurationVariant} enum
@@ -51,6 +38,19 @@ public interface AdaptiveMediaImageConfigurationDemoDataCreator {
 	  */
 	public Collection<AdaptiveMediaImageConfigurationEntry> create(
 			long companyId)
+		throws IOException;
+
+	/**
+	 * Creates a {@link AdaptiveMediaImageConfigurationEntry} for a company
+	 *
+	 * @param companyId ID of the company where the configuration will be
+	 * created
+	 * @param configurationVariant the configuration to create
+	 * @return the configuration
+	 */
+	public AdaptiveMediaImageConfigurationEntry create(
+			long companyId,
+			DemoAdaptiveMediaImageConfigurationVariant configurationVariant)
 		throws IOException;
 
 	/**

@@ -247,8 +247,8 @@ public class AdaptiveMediaImageRequestHandler
 		Optional<Integer> imageWidthOptional = adaptiveMedia.getAttributeValue(
 			AdaptiveMediaImageAttribute.IMAGE_WIDTH);
 
-		Optional<Integer> distanceOptional =
-			imageWidthOptional.map(imageWidth -> Math.abs(imageWidth - width));
+		Optional<Integer> distanceOptional = imageWidthOptional.map(
+			imageWidth -> Math.abs(imageWidth - width));
 
 		return distanceOptional.orElse(Integer.MAX_VALUE);
 	}

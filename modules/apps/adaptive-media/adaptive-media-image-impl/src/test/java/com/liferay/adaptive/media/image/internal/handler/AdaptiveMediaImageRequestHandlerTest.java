@@ -269,8 +269,7 @@ public class AdaptiveMediaImageRequestHandlerTest {
 		Optional<Integer> contentLength = adaptiveMedia.getAttributeValue(
 			AdaptiveMediaAttribute.contentLength());
 
-		Assert.assertEquals(
-			_fileVersion.getSize(), (long)contentLength.get());
+		Assert.assertEquals(_fileVersion.getSize(), (long)contentLength.get());
 
 		Mockito.verify(
 			_asyncProcessor
@@ -439,8 +438,7 @@ public class AdaptiveMediaImageRequestHandlerTest {
 				AdaptiveMediaQuery query = function.apply(queryBuilder);
 
 				Map<AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, ?>,
-					Object>
-						attributes = queryBuilder.getAttributes();
+					Object> attributes = queryBuilder.getAttributes();
 
 				Object queryBuilderWidth = attributes.get(
 					AdaptiveMediaImageAttribute.IMAGE_WIDTH);
