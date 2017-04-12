@@ -515,7 +515,7 @@ public class DefaultLPKGDeployer implements LPKGDeployer {
 						if (_log.isWarnEnabled()) {
 							_log.warn(
 								"Override file " + path +
-									" has invalid name and will be ignored.");
+									" has an invalid name and will be ignored");
 						}
 
 						continue;
