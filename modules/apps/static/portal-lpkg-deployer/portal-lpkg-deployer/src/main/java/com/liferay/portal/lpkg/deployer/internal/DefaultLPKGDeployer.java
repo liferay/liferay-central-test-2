@@ -487,7 +487,8 @@ public class DefaultLPKGDeployer implements LPKGDeployer {
 		}
 	}
 
-	private List<File> _scanFiles(Path dirPath, String extension, boolean check)
+	private List<File> _scanFiles(
+			Path dirPath, String extension, boolean checkFileName)
 		throws IOException {
 
 		if (Files.notExists(dirPath)) {
@@ -507,7 +508,7 @@ public class DefaultLPKGDeployer implements LPKGDeployer {
 					continue;
 				}
 
-				if (check) {
+				if (checkFileName) {
 					Matcher matcher = _pattern.matcher(pathName);
 
 					if (matcher.matches()) {
