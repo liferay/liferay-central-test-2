@@ -47,7 +47,7 @@
 	AdaptiveMediaImageConfigurationEntry configurationEntry = (AdaptiveMediaImageConfigurationEntry)SessionMessages.get(renderRequest, "configurationEntryAddedAndIDRenamed");
 	%>
 
-	<liferay-ui:message arguments="<%= new String[] {configurationEntry.getName(), configurationEntry.getUUID()} %>" key="x-was-saved-success-ully.-the-id-was-duplicated-and-it-was-renamed-to-x" translateArguments="<%= false %>" />
+	<liferay-ui:message arguments="<%= new String[] {configurationEntry.getName(), configurationEntry.getUUID()} %>" key="x-was-saved-successfully.-the-id-was-duplicated-and-renamed-to-x" translateArguments="<%= false %>" />
 </liferay-ui:success>
 
 <liferay-ui:success key="configurationEntryEnabled">
@@ -83,7 +83,7 @@
 	AdaptiveMediaImageConfigurationEntry configurationEntry = (AdaptiveMediaImageConfigurationEntry)SessionMessages.get(renderRequest, "configurationEntryUpdatedAndIDRenamed");
 	%>
 
-	<liferay-ui:message arguments="<%= new String[] {configurationEntry.getName(), configurationEntry.getUUID()} %>" key="x-was-saved-success-ully.-the-id-was-duplicated-and-it-was-renamed-to-x" translateArguments="<%= false %>" />
+	<liferay-ui:message arguments="<%= new String[] {configurationEntry.getName(), configurationEntry.getUUID()} %>" key="x-was-saved-successfully.-the-id-was-duplicated-and-renamed-to-x" translateArguments="<%= false %>" />
 </liferay-ui:success>
 
 <liferay-ui:success key="highResolutionConfigurationEntryAdded">
