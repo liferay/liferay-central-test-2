@@ -44,7 +44,13 @@ public class AdaptiveMediaJournalTransformerListener
 			ContentTransformerContentTypes.HTML, output);
 	}
 
-	@Reference
+	@Reference(unbind = "-")
+	protected void setContentTransformerHandler(
+		ContentTransformerHandler contentTransformerHandler) {
+
+		_contentTransformerHandler = contentTransformerHandler;
+	}
+
 	private ContentTransformerHandler _contentTransformerHandler;
 
 }
