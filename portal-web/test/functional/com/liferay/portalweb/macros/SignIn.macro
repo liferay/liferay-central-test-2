@@ -150,6 +150,11 @@
 
 		<execute macro="Button#clickSave" />
 
+		<var name="key_portalURL" value="${portalURL}" />
+
+		<execute function="AssertTextEquals" locator1="VirtualInstances#VIRTUAL_INSTANCES_TABLE_WEB_ID" value1="${portalURL}" />
+		<execute function="AssertTextEquals" locator1="VirtualInstances#VIRTUAL_INSTANCES_TABLE_VIRTUAL_HOST" value1="${portalURL}" />
+
 		<execute macro="Navigator#openURL" />
 	</command>
 
