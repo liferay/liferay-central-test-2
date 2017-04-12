@@ -35,8 +35,7 @@ class AdaptiveMediaProgress extends PortletBase {
 	 * that has to be invoked.
 	 */
 	startProgress(backgroundTaskUrl) {
-		if (this.percentage >= 100 || this.totalImages === 0
-			|| this.disabled) {
+		if (this.percentage >= 100 || this.totalImages === 0 || this.disabled) {
 			return;
 		}
 
@@ -52,6 +51,8 @@ class AdaptiveMediaProgress extends PortletBase {
 		);
 
 		this.showLoadingIndicator = true;
+
+		Liferay.fire('start_optimizing', {uuid: this.uuid});
 	}
 
 	/**
@@ -99,6 +100,8 @@ class AdaptiveMediaProgress extends PortletBase {
 	onProgressBarComplete_() {
 		this.clearInterval_();
 		this.showLoadingIndicator = false;
+
+		Liferay.fire('finish_optimizing', {uuid: this.uuid});
 	}
 
 	/**

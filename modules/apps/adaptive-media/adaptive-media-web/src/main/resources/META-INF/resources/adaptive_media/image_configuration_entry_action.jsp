@@ -45,6 +45,8 @@ if (optimizeImageSingleBackgroundTasks != null) {
 		}
 	}
 }
+
+String entryUuid = String.valueOf(configurationEntry.getUUID());
 %>
 
 <liferay-ui:icon-menu direction="left-side" icon="<%= StringPool.BLANK %>" markupView="lexicon" message="<%= StringPool.BLANK %>" showWhenSingleIcon="<%= true %>">
@@ -66,7 +68,12 @@ if (optimizeImageSingleBackgroundTasks != null) {
 				<portlet:param name="adaptiveMediaImageConfigurationEntryUuid" value="<%= entryUuid %>" />
 			</portlet:actionURL>
 
+			<%
+			String cssClass = (!optimizeImagesEnabled) ? "disabled" : "";
+			%>
+
 			<liferay-ui:icon
+				cssClass="<%= cssClass %>"
 				id='<%= "icon-disable-" + entryUuid %>'
 				message="disable"
 				url="<%= disableImageConfigurationEntryURL %>"
@@ -95,7 +102,7 @@ if (optimizeImageSingleBackgroundTasks != null) {
 
 	int percentage = AdaptiveMediaImageEntryLocalServiceUtil.getPercentage(themeDisplay.getCompanyId(), entryUuid);
 
-	String cssClass = (!configurationEntry.isEnabled() || percentage == 100) ? "disabled" : "";
+	String cssClass = (!configurationEntry.isEnabled() || percentage == 100 || !optimizeImagesEnabled) ? "disabled" : "";
 	%>
 
 	<liferay-ui:icon
