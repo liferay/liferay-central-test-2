@@ -685,7 +685,15 @@
 
 		<execute function="AssertClick" locator1="MenuItem#UPDATE_DUE_DATE" value1="Update Due Date" />
 
-		<execute function="Type" locator1="MyWorkflowTasks#DIALOG_BOX_DUE_DATE" value1="${workflowDueDate}" />
+		<execute function="Click" locator1="MyWorkflowTasks#DIALOG_BOX_DUE_DATE" />
+
+		<execute function="AssertElementPresent" locator1="Calendar#SMALL_CALENDAR_NEXT" />
+
+		<execute function="Click" locator1="Calendar#SMALL_CALENDAR_NEXT" value1="Next Month" />
+
+		<var name="key_dateNumber" value="15" />
+
+		<execute function="Click" locator1="Calendar#SMALL_CALENDAR_SPECIFIC_DAY" value1="15" />
 		<execute function="Type" locator1="MyWorkflowTasks#DIALOG_BOX_DUE_DATE_TIME" value1="${workflowDueDateTime}" />
 
 		<if>
@@ -727,7 +735,16 @@
 
 		<execute function="AssertClick" locator1="MenuItem#UPDATE_DUE_DATE" value1="Update Due Date" />
 
-		<execute function="Type" locator1="MyWorkflowTasks#DIALOG_BOX_DUE_DATE" value1="${workflowDueDate}" />
+		<execute function="Click" locator1="MyWorkflowTasks#DIALOG_BOX_DUE_DATE" />
+
+		<execute function="AssertElementPresent" locator1="Calendar#SMALL_CALENDAR_NEXT" />
+
+		<execute function="Click" locator1="Calendar#SMALL_CALENDAR_NEXT" value1="Next Month" />
+
+		<var name="key_dateNumber" value="15" />
+
+		<execute function="Click" locator1="Calendar#SMALL_CALENDAR_SPECIFIC_DAY" value1="15" />
+
 		<execute function="Type" locator1="MyWorkflowTasks#DIALOG_BOX_DUE_DATE_TIME" value1="${workflowDueDateTime}" />
 
 		<if>
