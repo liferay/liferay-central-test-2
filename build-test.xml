@@ -31,7 +31,7 @@
 
 	<propertycopy from="browser.${browser.type}.version" name="browser.version" />
 
-	<propertycopy from="java.jdk.${java.jdk.type}.version" name="java.jdk.version" />
+	<propertycopy from="java.jdk.${java.jdk.architecture}.version" name="java.jdk.version" />
 
 	<propertycopy from="liferay.portal.${liferay.portal.branch}.bundle" name="liferay.portal.bundle" />
 
@@ -388,7 +388,7 @@ jdbc.counter.connectionProperties=oracle.jdbc.ReadTimeout=0;oracle.net.CONNECT_T
 	<macrodef name="get-env-java-jdk">
 		<sequential>
 			<propertycopy
-				from="env.option.java.jdk.${java.jdk.type}.${java.jdk.version}"
+				from="env.option.java.jdk.${java.jdk.type}.${java.jdk.version}.${java.jdk.architecture}"
 				name="env.option.java.jdk"
 				override="true"
 			/>
@@ -1184,7 +1184,7 @@ jdbc.counter.connectionProperties=oracle.jdbc.ReadTimeout=0;oracle.net.CONNECT_T
 				replace="\1"
 			/>
 
-			<property name="testray.run.id" value="${app.server.type}-${app.server.major.version} ${database.type}-${database.major.version} ${browser.type}-${browser.major.version} ${operating.system.type}-${operating.system.version} jdk${java.jdk.version}-${java.jdk.type}" />
+			<property name="testray.run.id" value="${app.server.type}-${app.server.major.version} ${database.type}-${database.major.version} ${browser.type}-${browser.major.version} ${operating.system.type}-${operating.system.version} ${java.jdk.type}-jdk${java.jdk.version}-${java.jdk.architecture}" />
 		</sequential>
 	</macrodef>
 
@@ -4216,6 +4216,7 @@ go]]></replacevalue>
 					<property name="liferay.portal.branch" value="${liferay.portal.branch}" />
 					<property name="liferay.portal.bundle" value="${liferay.portal.bundle}" />
 					<property name="liferay.portal.git.id" value="${liferay.portal.git.id}" />
+					<property name="java.jdk.architecture" value="${java.jdk.architecture}" />
 					<property name="java.jdk.type" value="${java.jdk.type}" />
 					<property name="java.jdk.version" value="${java.jdk.version}" />
 					<property name="operating.system.type" value="${operating.system.type}" />
