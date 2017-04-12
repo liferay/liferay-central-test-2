@@ -1116,6 +1116,12 @@ public class ResourceActionsImpl implements ResourceActions {
 			}
 		}
 
+		if (groupDefaultsElement == null) {
+			return;
+		}
+
+		groupDefaultActions.clear();
+
 		groupDefaultActions.addAll(readActionKeys(groupDefaultsElement));
 	}
 
@@ -1124,6 +1130,12 @@ public class ResourceActionsImpl implements ResourceActions {
 
 		Element guestDefaultsElement = getPermissionsChildElement(
 			parentElement, "guest-defaults");
+
+		if (guestDefaultsElement == null) {
+			return;
+		}
+
+		guestDefaultActions.clear();
 
 		guestDefaultActions.addAll(readActionKeys(guestDefaultsElement));
 	}
@@ -1134,6 +1146,12 @@ public class ResourceActionsImpl implements ResourceActions {
 
 		Element guestUnsupportedElement = getPermissionsChildElement(
 			parentElement, "guest-unsupported");
+
+		if (guestUnsupportedElement == null) {
+			return;
+		}
+
+		guestUnsupportedActions.clear();
 
 		guestUnsupportedActions.addAll(readActionKeys(guestUnsupportedElement));
 
@@ -1148,12 +1166,15 @@ public class ResourceActionsImpl implements ResourceActions {
 		Element layoutManagerElement = getPermissionsChildElement(
 			parentElement, "layout-manager");
 
-		if (layoutManagerElement != null) {
-			layoutManagerActions.addAll(readActionKeys(layoutManagerElement));
-		}
-		else {
+		if (layoutManagerElement == null) {
 			layoutManagerActions.addAll(supportsActions);
+
+			return;
 		}
+
+		layoutManagerActions.clear();
+
+		layoutManagerActions.addAll(readActionKeys(layoutManagerElement));
 	}
 
 	protected String readModelResource(
