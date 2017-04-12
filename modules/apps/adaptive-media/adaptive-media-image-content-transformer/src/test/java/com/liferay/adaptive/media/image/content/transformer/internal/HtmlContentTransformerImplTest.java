@@ -128,6 +128,11 @@ public class HtmlContentTransformerImplTest {
 	}
 
 	@Test
+	public void testReturnsNullForNullContent() throws Exception {
+		Assert.assertNull(_htmlContentTransformer.transform(null));
+	}
+
+	@Test
 	public void testReturnsTheSameHTMLIfNoImagesArePresent() throws Exception {
 		Assert.assertEquals(
 			"<div><div>some <a>stuff</a></div></div>",

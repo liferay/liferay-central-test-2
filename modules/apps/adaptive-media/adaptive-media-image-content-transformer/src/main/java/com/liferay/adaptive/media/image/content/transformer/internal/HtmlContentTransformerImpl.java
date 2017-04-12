@@ -47,6 +47,10 @@ public class HtmlContentTransformerImpl implements ContentTransformer<String> {
 	public String transform(String html)
 		throws AdaptiveMediaException, PortalException {
 
+		if (html == null) {
+			return null;
+		}
+
 		StringBuffer sb = new StringBuffer(html.length());
 
 		Matcher matcher = _IMG_PATTERN.matcher(html);
