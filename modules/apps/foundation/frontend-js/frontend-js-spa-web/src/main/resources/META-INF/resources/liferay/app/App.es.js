@@ -29,8 +29,8 @@ class LiferayApp extends App {
 		this.on('endNavigate', this.onEndNavigate);
 		this.on('startNavigate', this.onStartNavigate);
 
-		Liferay.on('io:complete', this.onLiferayIOComplete, this);
 		Liferay.on('beforeScreenFlip', Utils.resetAllPortlets);
+		Liferay.on('io:complete', this.onLiferayIOComplete, this);
 
 		var body = document.body;
 
