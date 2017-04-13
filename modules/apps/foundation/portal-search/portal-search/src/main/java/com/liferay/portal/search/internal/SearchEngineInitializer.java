@@ -44,7 +44,6 @@ public class SearchEngineInitializer implements Runnable {
 
 		_companyId = companyId;
 		_portalExecutorManager = portalExecutorManager;
-		_usedSearchEngineIds = new HashSet<>();
 	}
 
 	public Set<String> getUsedSearchEngineIds() {
@@ -105,9 +104,8 @@ public class SearchEngineInitializer implements Runnable {
 
 			SearchEngineHelperUtil.initialize(_companyId);
 
-			Set<String> searchEngineIds = new HashSet<>();
-
 			List<FutureTask<Void>> futureTasks = new ArrayList<>();
+			Set<String> searchEngineIds = new HashSet<>();
 
 			for (Indexer<?> indexer : IndexerRegistryUtil.getIndexers()) {
 				String searchEngineId = indexer.getSearchEngineId();
@@ -182,6 +180,6 @@ public class SearchEngineInitializer implements Runnable {
 	private final long _companyId;
 	private boolean _finished;
 	private final PortalExecutorManager _portalExecutorManager;
-	private final Set<String> _usedSearchEngineIds;
+	private final Set<String> _usedSearchEngineIds = new HashSet<>();
 
 }
