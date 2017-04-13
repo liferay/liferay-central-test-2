@@ -178,6 +178,17 @@ AUI.add(
 						}
 					).render();
 				}
+
+				var paginatedNode = container.one('.lfr-ddm-form-paginated');
+
+				if (container.inDoc() && paginatedNode) {
+					instance.paginated = new Renderer.Paginated(
+						{
+							boundingBox: paginatedNode,
+							srcNode: paginatedNode.one('> ul')
+						}
+					).render();
+				}
 			},
 
 			_afterPaginationPageChange: function(event) {
@@ -193,6 +204,7 @@ AUI.add(
 				if (controls) {
 					instance._syncPaginationControlsUI();
 					instance._syncWizardUI(event.prevVal, event.newVal);
+					instance._syncPaginatedUI(event.prevVal, event.newVal);
 				}
 
 				var firstField = instance.getFirstPageField();
@@ -337,6 +349,23 @@ AUI.add(
 				}
 			},
 
+			_syncPaginatedUI: function(prevPage, currentPage) {
+				var instance = this;
+
+				var paginated = instance.paginated;
+
+				if (paginated) {
+					if (currentPage > prevPage) {
+						paginated.complete(prevPage - 1);
+					}
+					else {
+						paginated.clear(prevPage - 1);
+					}
+
+					paginated.activate(currentPage - 1);
+				}
+			},
+
 			_valuePagesState: function() {
 				var instance = this;
 
@@ -348,6 +377,6 @@ AUI.add(
 	},
 	'',
 	{
-		requires: ['aui-pagination', 'liferay-ddm-form-renderer-wizard']
+		requires: ['aui-pagination', 'liferay-ddm-form-renderer-paginated', 'liferay-ddm-form-renderer-wizard']
 	}
 );
