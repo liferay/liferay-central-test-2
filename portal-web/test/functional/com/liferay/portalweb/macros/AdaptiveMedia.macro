@@ -198,7 +198,6 @@
 	</command>
 
 	<command name="viewImageVariantURL">
-		<var name="key_dmDocumentTitle" value="${dmDocumentTitle}" />
 		<var name="key_imageName" value="${imageName}" />
 
 		<execute function="AssertElementPresent" locator1="AdaptiveMedia#IMAGE_VARIANT_SOURCE_URL" />
