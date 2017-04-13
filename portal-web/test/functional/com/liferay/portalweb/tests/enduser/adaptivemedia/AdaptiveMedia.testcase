@@ -190,6 +190,16 @@
 			<var name="portlet" value="Adaptive Media" />
 		</execute>
 
+		<execute macro="AdaptiveMedia#optimizeRemainingImages">
+			<var name="imageName" value="Small Image Variant" />
+			<var name="percentOptimized" value="100" />
+		</execute>
+
+		<execute macro="AdaptiveMedia#optimizeRemainingImages">
+			<var name="imageName" value="Large Image Variant" />
+			<var name="percentOptimized" value="100" />
+		</execute>
+
 		<execute macro="AdaptiveMedia#viewImageResolutionTableEntry">
 			<var name="imageName" value="Small Image Variant" />
 			<var name="maxHeight" value="100" />
