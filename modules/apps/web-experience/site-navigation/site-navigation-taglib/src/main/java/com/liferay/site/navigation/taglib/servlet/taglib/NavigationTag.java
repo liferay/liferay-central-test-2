@@ -169,12 +169,12 @@ public class NavigationTag extends IncludeTag {
 				new NavItem(request, themeDisplay, layout, null));
 		}
 
-		List<Layout> ancestors = layout.getAncestors();
+		List<Layout> ancestorLayouts = layout.getAncestors();
 
-		List<NavItem> navItems = new ArrayList<>(ancestors.size() + 1);
+		List<NavItem> navItems = new ArrayList<>(ancestorLayouts.size() + 1);
 
-		ListIterator<Layout> listIterator = ancestors.listIterator(
-			ancestors.size());
+		ListIterator<Layout> listIterator = ancestorLayouts.listIterator(
+			ancestorLayouts.size());
 
 		while (listIterator.hasPrevious()) {
 			Layout ancestorLayout = listIterator.previous();
