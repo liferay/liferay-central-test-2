@@ -34,7 +34,8 @@ public class PrimitiveWrapperInstantiationCheck extends BaseFileCheck {
 			new String[] {
 				"Boolean.valueOf(", "Byte.valueOf(", "Character.valueOf(",
 				"Double.valueOf(",
-				"Float.valueOf(", "Integer.valueOf(", "Long.valueOf(", "Short.valueOf("
+				"Float.valueOf(", "Integer.valueOf(", "Long.valueOf(",
+				"Short.valueOf("
 			},
 			new String[] {
 				"Boolean.valueOf(", "Byte.valueOf(", "Character.valueOf(",
