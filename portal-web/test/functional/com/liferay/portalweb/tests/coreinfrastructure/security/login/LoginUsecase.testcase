@@ -23,6 +23,21 @@
 		</if>
 	</tear-down>
 
+	<command name="LoginPortalWithSessionEnabled" priority="4">
+		<description message="This is a use case for LPS-48653." />
+		<property name="custom.properties" value="session.enable.url.with.session.id=true" />
+
+		<execute macro="Portlet#addPG">
+			<var name="portletName" value="Sign In" />
+		</execute>
+
+		<execute macro="User#logoutPG" />
+
+		<execute macro="SignIn#signIn" />
+
+		<execute macro="Smoke#viewWelcomePage" />
+	</command>
+
 	<command name="SessionTimeout" priority="4">
 		<property name="web.xml.timeout" value="2" />
 
