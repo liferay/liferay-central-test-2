@@ -17,7 +17,6 @@ package com.liferay.dynamic.data.mapping.storage.test;
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.document.library.kernel.model.DLFolderConstants;
 import com.liferay.document.library.kernel.service.DLAppLocalServiceUtil;
-import com.liferay.dynamic.data.mapping.form.evaluator.DDMFormFieldEvaluationResult;
 import com.liferay.dynamic.data.mapping.model.DDMForm;
 import com.liferay.dynamic.data.mapping.model.DDMFormField;
 import com.liferay.dynamic.data.mapping.model.DDMFormFieldValidation;
@@ -172,6 +171,7 @@ public class StorageAdapterTest extends BaseDDMServiceTestCase {
 		_jsonStorageAdapter.create(
 			TestPropsValues.getCompanyId(), structure.getStructureId(),
 			ddmFormValues,
+			ServiceContextTestUtil.getServiceContext(group.getGroupId()));
 	}
 
 	@Test(expected = DDMFormValuesValidationException.RequiredValue.class)
