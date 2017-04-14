@@ -81,6 +81,31 @@ public class FormTag extends BaseFormTag {
 
 	@Override
 	protected int processStartTag() throws Exception {
+		JspWriter jspWriter = pageContext.getOut();
+
+		jspWriter.write("<form action=\"");
+
+		String action = getAction();
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		if (themeDisplay.isAddSessionIdToURL()) {
+			action = PortalUtil.getURLWithSessionId(
+				action, themeDisplay.getSessionId());
+		}
+
+		jspWriter.write(HtmlUtil.escapeAttribute(action));
+
+		jspWriter.write("\" class=\"form ");
+		jspWriter.write(GetterUtil.getString(getCssClass()));
+
+		if (getInlineLabels()) {
+			jspWriter.write(" field-labels-inline");
+		}
+
+		jspWriter.write("\" data-fm-namespace=\"");
+
 		String namespace = null;
 
 		PortletRequest portletRequest = (PortletRequest)request.getAttribute(
@@ -98,48 +123,23 @@ public class FormTag extends BaseFormTag {
 			namespace = AUIUtil.getNamespace(request);
 		}
 
-		String action = getAction();
+		jspWriter.write(namespace);
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		if (themeDisplay.isAddSessionIdToURL()) {
-			action = PortalUtil.getURLWithSessionId(
-				action, themeDisplay.getSessionId());
-		}
-
-		JspWriter jspWriter = pageContext.getOut();
-
-		jspWriter.write("<form action=\"");
-		jspWriter.write(HtmlUtil.escapeAttribute(action));
-
-		jspWriter.write("\" class=\"form ");
-		jspWriter.write(GetterUtil.getString(getCssClass()));
-
-		if (getInlineLabels()) {
-			jspWriter.write(" field-labels-inline");
-		}
-
-		jspWriter.write("\" data-fm-namespace=\"");
+		jspWriter.write("\" id=\"");
 		jspWriter.write(namespace);
 
 		String escapedName = HtmlUtil.escapeAttribute(getName());
 
-		jspWriter.write("\" id=\"");
-		jspWriter.write(namespace);
 		jspWriter.write(escapedName);
 
 		jspWriter.write("\" method=\"");
 		jspWriter.write(getMethod());
-
 		jspWriter.write("\" name=\"");
 		jspWriter.write(namespace);
 		jspWriter.write(escapedName);
 		jspWriter.write("\" ");
-
 		jspWriter.write(
 			InlineUtil.buildDynamicAttributes(getDynamicAttributes()));
-
 		jspWriter.write(">");
 
 		if (Validator.isNotNull(getOnSubmit())) {
