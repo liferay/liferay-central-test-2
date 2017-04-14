@@ -164,6 +164,15 @@
 			<var name="kbFolderName" value="KB Folder" />
 		</execute>
 
+		<execute macro="Navigator#gotoPage">
+			<var name="pageName" value="Knowledge Base Page" />
+		</execute>
+
+		<execute macro="KBArticle#viewViaKBDisplayPG">
+			<var name="kbArticleContent" value="Article Content" />
+			<var name="kbArticleTitle" value="KB Article Inside Folder" />
+		</execute>
+
 		<execute macro="Navigator#openURL" />
 
 		<execute macro="ProductMenu#gotoSitesContent">
@@ -188,10 +197,7 @@
 			<var name="pageName" value="Knowledge Base Page" />
 		</execute>
 
-		<execute macro="KBArticle#viewViaKBDisplayPG">
-			<var name="kbArticleContent" value="Article Content" />
-			<var name="kbArticleTitle" value="KB Article Outside Folder" />
-		</execute>
+		<execute macro="KBArticle#viewDefaultViaKBDisplayPG" />
 	</command>
 
 	<command name="DeleteImportedArticles" priority="4">
