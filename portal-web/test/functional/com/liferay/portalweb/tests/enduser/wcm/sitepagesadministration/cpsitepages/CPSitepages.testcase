@@ -356,7 +356,7 @@
 		</execute>
 	</command>
 
-	<command name="CopyApplicationsFromPageToPage" priority="4">
+	<command ignore="true" name="CopyApplicationsFromPageToPage" priority="4">
 		<execute macro="ProductMenu#gotoControlPanelSites">
 			<var name="portlet" value="Sites" />
 		</execute>
