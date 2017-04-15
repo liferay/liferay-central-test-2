@@ -111,20 +111,24 @@ if (goog.DEBUG) {
 
 ddm.select_options = function(opt_data, opt_ignored) {
   var output = '';
-  var optionList191 = opt_data.options;
-  var optionListLen191 = optionList191.length;
-  for (var optionIndex191 = 0; optionIndex191 < optionListLen191; optionIndex191++) {
-    var optionData191 = optionList191[optionIndex191];
-    var selected__soy160 = '';
-    if (opt_data.value) {
-      var currentValueList166 = opt_data.value;
-      var currentValueListLen166 = currentValueList166.length;
-      for (var currentValueIndex166 = 0; currentValueIndex166 < currentValueListLen166; currentValueIndex166++) {
-        var currentValueData166 = currentValueList166[currentValueIndex166];
-        selected__soy160 += (currentValueData166.value == optionData191.value) ? 'selected' : '';
+  if (opt_data.options.length > 0) {
+    var optionList193 = opt_data.options;
+    var optionListLen193 = optionList193.length;
+    for (var optionIndex193 = 0; optionIndex193 < optionListLen193; optionIndex193++) {
+      var optionData193 = optionList193[optionIndex193];
+      var selected__soy162 = '';
+      if (opt_data.value) {
+        var currentValueList168 = opt_data.value;
+        var currentValueListLen168 = currentValueList168.length;
+        for (var currentValueIndex168 = 0; currentValueIndex168 < currentValueListLen168; currentValueIndex168++) {
+          var currentValueData168 = currentValueList168[currentValueIndex168];
+          selected__soy162 += (currentValueData168.value == optionData193.value) ? 'selected' : '';
+        }
       }
+      output += '<li class="select-option-item ' + ((selected__soy162) ? 'option-selected' : '') + '" data-option-index="' + soy.$$escapeHtmlAttribute(optionIndex193) + '" data-option-selected="' + ((selected__soy162) ? 'true' : '') + '" data-option-value="' + soy.$$escapeHtmlAttribute(optionData193.value) + '">' + ((opt_data.multiple) ? '<input type="checkbox" value="" ' + ((selected__soy162) ? 'checked' : '') + '>' : '') + '<span>' + soy.$$escapeHtml(optionData193.label) + '</span></li>';
     }
-    output += '<li class="select-option-item ' + ((selected__soy160) ? 'option-selected' : '') + '" data-option-index="' + soy.$$escapeHtmlAttribute(optionIndex191) + '" data-option-selected="' + ((selected__soy160) ? 'true' : '') + '" data-option-value="' + soy.$$escapeHtmlAttribute(optionData191.value) + '">' + ((opt_data.multiple) ? '<input type="checkbox" value="" ' + ((selected__soy160) ? 'checked' : '') + '>' : '') + '<span>' + soy.$$escapeHtml(optionData191.label) + '</span></li>';
+  } else {
+    output += '<li class="no-results-list"><span>' + soy.$$escapeHtml(opt_data.strings.emptyList) + '</span></li>';
   }
   return output;
 };
