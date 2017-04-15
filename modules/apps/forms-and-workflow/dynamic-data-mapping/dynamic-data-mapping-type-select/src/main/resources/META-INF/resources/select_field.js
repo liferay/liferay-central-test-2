@@ -51,7 +51,8 @@ AUI.add(
 						value: {
 							chooseAnOption: Liferay.Language.get('choose-an-option'),
 							chooseOptions: Liferay.Language.get('choose-options'),
-							dynamicallyLoadedData: Liferay.Language.get('dynamically-loaded-data')
+							dynamicallyLoadedData: Liferay.Language.get('dynamically-loaded-data'),
+							emptyList: Liferay.Language.get('empty-list')
 						}
 					},
 
