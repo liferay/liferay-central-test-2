@@ -32,16 +32,6 @@ public class FlagsEntryServiceWrapper implements FlagsEntryService,
 		_flagsEntryService = flagsEntryService;
 	}
 
-	/**
-	* Returns the OSGi service identifier.
-	*
-	* @return the OSGi service identifier
-	*/
-	@Override
-	public java.lang.String getOSGiServiceIdentifier() {
-		return _flagsEntryService.getOSGiServiceIdentifier();
-	}
-
 	@Override
 	public void addEntry(java.lang.String className, long classPK,
 		java.lang.String reporterEmailAddress, long reportedUserId,
