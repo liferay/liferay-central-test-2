@@ -2238,7 +2238,7 @@ public class DataFactory {
 
 		String[] assetPublisherQueryValues = null;
 
-		ObjectValuePair<String[], Integer> objectValuePair;
+		ObjectValuePair<String[], Integer> objectValuePair = null;
 
 		if (_assetPublisherQueryName.equals("assetCategories")) {
 			Map<Long, List<AssetCategoryModel>> assetCategoryModelsMap =
@@ -2779,7 +2779,6 @@ public class DataFactory {
 					}
 				}
 				catch (NoSuchMethodException nsme) {
-					continue;
 				}
 			}
 
@@ -2810,7 +2809,7 @@ public class DataFactory {
 		AssetCategoryModel assetCategoryModel3 = assetCategoryModels.get(
 			lastIndex);
 
-		return new ObjectValuePair<String[], Integer>(
+		return new ObjectValuePair<>(
 			new String[] {
 				String.valueOf(assetCategoryModel0.getCategoryId()),
 				String.valueOf(assetCategoryModel1.getCategoryId()),
@@ -2837,7 +2836,7 @@ public class DataFactory {
 
 		AssetTagModel assetTagModel3 = assetTagModels.get(lastIndex);
 
-		return new ObjectValuePair<String[], Integer>(
+		return new ObjectValuePair<>(
 			new String[] {
 				assetTagModel0.getName(), assetTagModel1.getName(),
 				assetTagModel2.getName(), assetTagModel3.getName()
