@@ -161,8 +161,6 @@ public class EditEntryMVCActionCommand extends BaseMVCActionCommand {
 
 		try {
 			BlogsEntry entry = null;
-			List<BlogsEntryAttachmentFileEntryReference>
-				blogsEntryAttachmentFileEntryReferences = null;
 
 			UploadException uploadException =
 				(UploadException)actionRequest.getAttribute(
@@ -188,16 +186,11 @@ public class EditEntryMVCActionCommand extends BaseMVCActionCommand {
 			else if (cmd.equals(Constants.ADD) ||
 					 cmd.equals(Constants.UPDATE)) {
 
-				Callable<Object[]> updateEntryCallable =
+				Callable<BlogsEntry> updateEntryCallable =
 					new UpdateEntryCallable(actionRequest);
 
-				Object[] returnValue = TransactionInvokerUtil.invoke(
+				entry = TransactionInvokerUtil.invoke(
 					_transactionConfig, updateEntryCallable);
-
-				entry = (BlogsEntry)returnValue[0];
-				blogsEntryAttachmentFileEntryReferences =
-					(List<BlogsEntryAttachmentFileEntryReference>)
-						returnValue[1];
 			}
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteEntries(actionRequest, false);
@@ -391,7 +384,7 @@ public class EditEntryMVCActionCommand extends BaseMVCActionCommand {
 		_blogsEntryService.unsubscribe(themeDisplay.getScopeGroupId());
 	}
 
-	protected Object[] updateEntry(ActionRequest actionRequest)
+	protected BlogsEntry updateEntry(ActionRequest actionRequest)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
@@ -490,9 +483,9 @@ public class EditEntryMVCActionCommand extends BaseMVCActionCommand {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			BlogsEntry.class.getName(), actionRequest);
 
-		BlogsEntry entry = null;
+		BlogsEntry entry;
 		List<BlogsEntryAttachmentFileEntryReference>
-			blogsEntryAttachmentFileEntryReferences = new ArrayList<>();
+			blogsEntryAttachmentFileEntryReferences;
 
 		if (entryId <= 0) {
 
@@ -607,7 +600,7 @@ public class EditEntryMVCActionCommand extends BaseMVCActionCommand {
 				smallImageFileEntryId);
 		}
 
-		return new Object[] {entry, blogsEntryAttachmentFileEntryReferences};
+		return entry;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
@@ -627,10 +620,10 @@ public class EditEntryMVCActionCommand extends BaseMVCActionCommand {
 
 	private TrashEntryService _trashEntryService;
 
-	private class UpdateEntryCallable implements Callable<Object[]> {
+	private class UpdateEntryCallable implements Callable<BlogsEntry> {
 
 		@Override
-		public Object[] call() throws Exception {
+		public BlogsEntry call() throws Exception {
 			return updateEntry(_actionRequest);
 		}
 
