@@ -547,8 +547,8 @@ public class ${entity.name}Clp extends BaseModelImpl<${entity.name}> implements 
 		/**
 		* @deprecated As of 7.0.0, with no direct replacement
 		*/
-		@Override
 		@Deprecated
+		@Override
 		public com.liferay.portal.kernel.trash.TrashHandler getTrashHandler() {
 			return com.liferay.portal.kernel.trash.TrashHandlerRegistryUtil.getTrashHandler(getModelClassName());
 		}
