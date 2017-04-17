@@ -65,6 +65,8 @@ public class BelongsToRoleFunction implements DDMExpressionFunction {
 				return false;
 			}
 
+			boolean belongsTo = false;
+
 			for (Object parameter : parameters) {
 				String roleName = String.valueOf(parameter);
 
@@ -72,39 +74,21 @@ public class BelongsToRoleFunction implements DDMExpressionFunction {
 					company.getCompanyId(), roleName);
 
 				if (role == null) {
-					return false;
+					continue;
 				}
-
-				boolean belongsTo = false;
-
-				long userId = user.getUserId();
 
 				if (role.getType() == RoleConstants.TYPE_REGULAR) {
 					belongsTo = _userLocalService.hasRoleUser(
-						company.getCompanyId(), roleName, userId, true);
+						company.getCompanyId(), roleName, user.getUserId(),
+						true);
 				}
 				else if (role.getType() == RoleConstants.TYPE_SITE) {
 					belongsTo = _userGroupRoleLocalService.hasUserGroupRole(
-						userId, _groupId, roleName, true);
+						user.getUserId(), _groupId, roleName, true);
 				}
 				else if (role.getType() == RoleConstants.TYPE_ORGANIZATION) {
-					long[] organizationIds =
-						_groupLocalService.getOrganizationPrimaryKeys(_groupId);
-
-					for (long organizationId : organizationIds) {
-						Group group = _groupLocalService.getOrganizationGroup(
-							company.getCompanyId(), organizationId);
-
-						belongsTo = _userGroupRoleLocalService.hasUserGroupRole(
-							userId, group.getGroupId(), roleName, true);
-
-						if (belongsTo) {
-							return true;
-						}
-					}
-				}
-				else {
-					return false;
+					belongsTo = hasUserGroupRole(
+						company, roleName, user.getUserId());
 				}
 
 				if (belongsTo) {
@@ -115,6 +99,27 @@ public class BelongsToRoleFunction implements DDMExpressionFunction {
 		catch (PortalException pe) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(pe);
+			}
+		}
+
+		return false;
+	}
+
+	protected boolean hasUserGroupRole(
+			Company company, String roleName, long userId)
+		throws PortalException {
+
+		long[] organizationIds = _groupLocalService.getOrganizationPrimaryKeys(
+			_groupId);
+
+		for (long organizationId : organizationIds) {
+			Group group = _groupLocalService.getOrganizationGroup(
+				company.getCompanyId(), organizationId);
+
+			if (_userGroupRoleLocalService.hasUserGroupRole(
+					userId, group.getGroupId(), roleName, true)) {
+
+				return true;
 			}
 		}
 
