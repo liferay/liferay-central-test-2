@@ -814,15 +814,13 @@ public class LDAPUserImporterImpl implements LDAPUserImporter, UserImporter {
 
 					if (type == GroupFriendlyURLException.DUPLICATE) {
 						_log.error(
-							"importing user " + searchResult +
+							"Importing user " + searchResult +
 								" duplicates a group friendly url",
 							gfurle);
 					}
 					else {
 						_log.error(
-							"Unable to import user " +
-								searchResult,
-							gfurle);
+							"Unable to import user " + searchResult, gfurle);
 					}
 				}
 				catch (Exception e) {
@@ -1235,7 +1233,7 @@ public class LDAPUserImporterImpl implements LDAPUserImporter, UserImporter {
 
 					if (type == GroupFriendlyURLException.DUPLICATE) {
 						_log.error(
-							"importing user " + userAttributes +
+							"Importing user " + userAttributes +
 								" duplicates a group friendly url",
 							gfurle);
 					}
