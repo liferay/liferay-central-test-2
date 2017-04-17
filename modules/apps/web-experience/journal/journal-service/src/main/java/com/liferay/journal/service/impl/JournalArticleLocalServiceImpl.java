@@ -2056,7 +2056,7 @@ public class JournalArticleLocalServiceImpl
 
 		Date displayDate = article.getDisplayDate();
 
-		if (displayDate.after(now)) {
+		if ((displayDate != null) && displayDate.after(now)) {
 			return null;
 		}
 
