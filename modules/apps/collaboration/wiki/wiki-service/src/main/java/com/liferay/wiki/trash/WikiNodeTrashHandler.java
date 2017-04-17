@@ -48,9 +48,10 @@ import org.osgi.service.component.annotations.Reference;
 /**
  * Implements trash handling for the wiki node entity.
  *
- * @author Eudaldo Alonso
- * @author Roberto Díaz
- * @deprecated As of 1.1.0
+ * @author     Eudaldo Alonso
+ * @author     Roberto Díaz
+ * @deprecated As of 1.1.0, moved to {@link
+ *             com.liferay.wiki.internal.trash.WikiNodeTrashHandler}
  */
 @Deprecated
 public class WikiNodeTrashHandler extends BaseWikiTrashHandler {
