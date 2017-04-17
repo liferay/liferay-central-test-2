@@ -207,12 +207,19 @@ public class DynamicAdaptiveMediaJournalEditorConfigContributorTest
 		Assert.assertEquals(
 			desiredItemSelectorReturnTypes.toString(), 2,
 			desiredItemSelectorReturnTypes.size());
+
+		ItemSelectorReturnType itemSelectorReturnType0 =
+			desiredItemSelectorReturnTypes.get(0);
+
 		Assert.assertTrue(
-			desiredItemSelectorReturnTypes.get(0) instanceof
+			itemSelectorReturnType0 instanceof
 				AdaptiveMediaImageFileEntryItemSelectorReturnType);
+
+		ItemSelectorReturnType itemSelectorReturnType1 =
+			desiredItemSelectorReturnTypes.get(1);
+
 		Assert.assertTrue(
-			desiredItemSelectorReturnTypes.get(1) instanceof
-				FileEntryItemSelectorReturnType);
+			itemSelectorReturnType1 instanceof FileEntryItemSelectorReturnType);
 	}
 
 	@Test
