@@ -65,8 +65,7 @@ public class UpgradeImageTypeContentAttributes extends UpgradeProcess {
 			}
 
 			if (Validator.isNotNull(id)) {
-				imageEl.addAttribute(
-					"instance-id", getImageInstanceId(Long.valueOf(id)));
+				imageEl.addAttribute("instance-id", getImageInstanceId(id));
 			}
 		}
 
@@ -78,21 +77,22 @@ public class UpgradeImageTypeContentAttributes extends UpgradeProcess {
 		updateContentImages();
 	}
 
-	protected String getImageInstanceId(long articleImageId) throws Exception {
+	protected String getImageInstanceId(String articleImageId)
+		throws Exception {
+
 		try (PreparedStatement ps = connection.prepareStatement(
 				"select elInstanceId from JournalArticleImage where " +
 					"articleImageId = ?")) {
 
-			ps.setLong(1, articleImageId);
+			ps.setString(1, articleImageId);
 
 			ResultSet rs = ps.executeQuery();
 
 			if (rs.next()) {
 				return rs.getString(1);
 			}
-			else {
-				return StringPool.BLANK;
-			}
+
+			return StringPool.BLANK;
 		}
 	}
 
