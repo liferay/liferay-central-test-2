@@ -161,8 +161,6 @@ public class EditEntryMVCActionCommand extends BaseMVCActionCommand {
 		try {
 			BlogsEntry entry = null;
 			String oldUrlTitle = StringPool.BLANK;
-			List<BlogsEntryAttachmentFileEntryReference>
-				blogsEntryAttachmentFileEntryReferences = null;
 
 			UploadException uploadException =
 				(UploadException)actionRequest.getAttribute(
@@ -196,9 +194,6 @@ public class EditEntryMVCActionCommand extends BaseMVCActionCommand {
 
 				entry = (BlogsEntry)returnValue[0];
 				oldUrlTitle = (String)returnValue[1];
-				blogsEntryAttachmentFileEntryReferences =
-					(List<BlogsEntryAttachmentFileEntryReference>)
-						returnValue[2];
 			}
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteEntries(actionRequest, false);
