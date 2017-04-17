@@ -10,8 +10,6 @@ AUI.add(
 				Liferay.Language.get('invited-users-will-be-notified') +
 			'</p>';
 
-		var CalendarUtil = Liferay.CalendarUtil;
-
 		Liferay.CalendarMessageUtil = {
 
 			confirm: function(message, yesButtonLabel, noButtonLabel, yesFn, noFn) {
@@ -200,7 +198,7 @@ AUI.add(
 				else {
 					var content = [
 						'<p class="calendar-portlet-confirmation-text">',
-						CalendarUtil.sub(
+						Lang.sub(
 							Liferay.Language.get('you-are-about-to-make-changes-that-will-only-affect-your-calendar-x'),
 							[LString.escapeHTML(data.calendarName)]
 						),
@@ -224,6 +222,6 @@ AUI.add(
 	},
 	'',
 	{
-		requires: ['aui-alert', 'liferay-calendar-util', 'liferay-util-window']
+		requires: ['aui-alert', 'liferay-util-window']
 	}
 );
