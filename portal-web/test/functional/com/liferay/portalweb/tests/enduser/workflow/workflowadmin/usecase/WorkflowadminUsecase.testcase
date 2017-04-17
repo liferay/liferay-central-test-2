@@ -1197,7 +1197,8 @@
 	</command>
 
 	<command name="ApproveWorkflowTaskAsSiteAdmin" priority="5">
-		<description message="This is a use case for LPS-66668. User notification is blocked by LPS-71915" />
+		<description message="This is a use case for LPS-66668." />
+
 		<property name="portal.acceptance" value="true" />
 		<property name="test.name.skip.portal.instance" value="WorkflowadminUsecase#ApproveWorkflowTaskAsSiteAdmin" />
 
