@@ -915,8 +915,8 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 		/**
 		* @deprecated As of 7.0.0, with no direct replacement
 		*/
-		@Override
 		@Deprecated
+		@Override
 		public com.liferay.portal.kernel.trash.TrashHandler getTrashHandler() {
 			return com.liferay.portal.kernel.trash.TrashHandlerRegistryUtil.getTrashHandler(getModelClassName());
 		}
