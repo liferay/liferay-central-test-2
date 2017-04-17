@@ -473,8 +473,8 @@ public class DLPortletDataHandler extends BasePortletDataHandler {
 						portletDataContext.getDateRangeCriteria(
 							"this.modifiedDate");
 
-					if ((modifiedDateCriterion != null) &&
-						(fileVersionStatusDateCriterion != null)) {
+					if ((fileVersionStatusDateCriterion != null) &&
+						(modifiedDateCriterion != null)) {
 
 						Disjunction disjunction =
 							RestrictionsFactoryUtil.disjunction();
