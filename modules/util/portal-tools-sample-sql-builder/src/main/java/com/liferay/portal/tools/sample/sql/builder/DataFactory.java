@@ -701,7 +701,7 @@ public class DataFactory {
 		return groupIds;
 	}
 
-	public long getNextClassNameIdForAsset(long groupId) {
+	public long getNextAssetClassNameId(long groupId) {
 		Integer counter = _assetClassIdIndexMap.get(groupId);
 
 		if (counter == null) {
@@ -809,8 +809,8 @@ public class DataFactory {
 				}
 			}
 
-			_assetVocabularyModelsArray[i - 1] = assetVocabularyModels;
 			_assetCategoryModelsArray[i - 1] = assetCategoryModels;
+			_assetVocabularyModelsArray[i - 1] = assetVocabularyModels;
 
 			Map<Long, List<AssetCategoryModel>> assetCategoryModelsMap =
 				new HashMap<>();
@@ -2299,7 +2299,7 @@ public class DataFactory {
 				_assetCategoryModelsMapArray[(int)groupId - 1];
 
 			List<AssetCategoryModel> assetCategoryModels =
-				assetCategoryModelsMap.get(getNextClassNameIdForAsset(groupId));
+				assetCategoryModelsMap.get(getNextAssetClassNameId(groupId));
 
 			if ((assetCategoryModels == null) ||
 				assetCategoryModels.isEmpty()) {
@@ -2316,7 +2316,7 @@ public class DataFactory {
 				_assetTagModelsMapArray[(int)groupId - 1];
 
 			List<AssetTagModel> assetTagModels = assetTagModelsMap.get(
-				getNextClassNameIdForAsset(groupId));
+				getNextAssetClassNameId(groupId));
 
 			if ((assetTagModels == null) || assetTagModels.isEmpty()) {
 				return newPortletPreferencesModel(
