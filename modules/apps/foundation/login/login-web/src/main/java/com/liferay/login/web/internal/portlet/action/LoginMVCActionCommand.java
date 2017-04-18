@@ -92,16 +92,16 @@ public class LoginMVCActionCommand extends BaseMVCActionCommand {
 
 		String portletNamespace = _portal.getPortletNamespace(portletId);
 
-		String passwordParamName = portletNamespace + "password";
-
-		if (urlParams.containsKey(passwordParamName)) {
+		if (urlParams.containsKey(portletNamespace + "password")) {
 			postProcessAuthFailure(actionRequest, actionResponse);
 
 			if (_log.isWarnEnabled()) {
+				String referer = request.getHeader(HttpHeaders.REFERER);
+
 				_log.warn(
-					"Login request rejected: password parameter found in " +
-						"URL. Referrer: " +
-							request.getHeader(HttpHeaders.REFERER));
+					"Ignoring login attempt because the password parameter " +
+						"was found for the request with the referer header: " +
+							referer);
 			}
 
 			return;

@@ -73,10 +73,12 @@ public class LoginAction extends Action {
 
 		if (urlParams.containsKey("password")) {
 			if (_log.isWarnEnabled()) {
+				String referer = request.getHeader(HttpHeaders.REFERER);
+
 				_log.warn(
-					"Login request rejected: password parameter found in " +
-						"URL. Referrer: " +
-							request.getHeader(HttpHeaders.REFERER));
+					"Ignoring login attempt because the password parameter " +
+						"was found for the request with the referer header: " +
+							referer);
 			}
 		}
 		else {
