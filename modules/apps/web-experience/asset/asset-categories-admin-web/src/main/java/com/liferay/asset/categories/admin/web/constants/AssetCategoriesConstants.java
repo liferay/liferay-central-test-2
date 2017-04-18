@@ -15,9 +15,6 @@
 package com.liferay.asset.categories.admin.web.constants;
 
 /**
- * Provides constants for the Asset Publisher portlet, panel category keys, and
- * the form navigator entry ID for the Asset Publisher configuration page.
- *
  * @author Eudaldo Alonso
  */
 public class AssetCategoriesConstants {
