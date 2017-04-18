@@ -6,6 +6,6 @@
 	cmdver = liferay
 	commit = fa5306e1bf0c1a7452436f1ba490206e03aa19fc
 	mergebuttonmergecommits = false
-	mode = push
+	mode = pull
 	parent = b266b5220aae71dd61fb07c36cf414197d73e392
 	remote = git@github.com:liferay/com-liferay-vulcan.git
