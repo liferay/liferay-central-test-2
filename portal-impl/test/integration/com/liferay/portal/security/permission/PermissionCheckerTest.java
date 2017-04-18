@@ -622,34 +622,35 @@ public class PermissionCheckerTest {
 	}
 
 	@Test
-	public void testIsGroupAdminForSubsiteWithManageSubgroupsPermission()
+	public void testIsGroupAdminForSubgroupWithManageSubgroupsPermission()
 		throws Exception {
 
-		Group parentSite = GroupTestUtil.addGroup();
+		Group parentGroup = GroupTestUtil.addGroup();
 
-		Group subsite = GroupTestUtil.addGroup(parentSite.getGroupId());
+		Group subgroup = GroupTestUtil.addGroup(parentGroup.getGroupId());
 
-		_groups.add(subsite);
+		_groups.add(subgroup);
 
-		_groups.add(parentSite);
+		_groups.add(parentGroup);
 
 		_role = RoleTestUtil.addRole(
 			RandomTestUtil.randomString(), RoleConstants.TYPE_SITE);
 
-		_user = UserTestUtil.addGroupUser(parentSite, _role.getName());
+		_user = UserTestUtil.addGroupUser(parentGroup, _role.getName());
 
 		PermissionChecker permissionChecker = _getPermissionChecker(_user);
 
 		Assert.assertFalse(
-			permissionChecker.isGroupAdmin(subsite.getGroupId()));
+			permissionChecker.isGroupAdmin(subgroup.getGroupId()));
 
 		ResourcePermissionLocalServiceUtil.addResourcePermission(
 			_user.getCompanyId(), Group.class.getName(),
 			ResourceConstants.SCOPE_GROUP,
-			String.valueOf(parentSite.getGroupId()), _role.getRoleId(),
+			String.valueOf(parentGroup.getGroupId()), _role.getRoleId(),
 			ActionKeys.MANAGE_SUBGROUPS);
 
-		Assert.assertTrue(permissionChecker.isGroupAdmin(subsite.getGroupId()));
+		Assert.assertTrue(permissionChecker.isGroupAdmin(
+			subgroup.getGroupId()));
 	}
 
 	@Test
