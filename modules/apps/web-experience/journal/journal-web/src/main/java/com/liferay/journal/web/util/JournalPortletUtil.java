@@ -29,22 +29,16 @@ import com.liferay.journal.util.impl.JournalUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Stack;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
@@ -230,51 +224,6 @@ public class JournalPortletUtil {
 		return orderByComparator;
 	}
 
-	public static String shortenWithHtml(String string, int length) {
-		String shortString = StringUtil.shorten(string, length, "");
-
-		Stack<String> tags = new Stack<>();
-
-		Matcher matcher = _pattern.matcher(shortString);
-
-		while (matcher.find()) {
-			String tag = matcher.group(1);
-
-			if (tag.charAt(0) == CharPool.SLASH) {
-				tags.pop();
-
-				continue;
-			}
-
-			if (!tag.endsWith(StringPool.SLASH)) {
-				tags.push(tag);
-			}
-		}
-
-		StringBundler sb = new StringBundler(tags.size() * 4 + 2);
-
-		sb.append(shortString);
-
-		if (tags.empty() && (shortString.length() < string.length())) {
-			sb.append(StringPool.TRIPLE_PERIOD);
-		}
-
-		while (!tags.empty()) {
-			String tag = tags.pop();
-
-			if (tags.empty()) {
-				sb.append(StringPool.TRIPLE_PERIOD);
-			}
-
-			sb.append(CharPool.LESS_THAN);
-			sb.append(CharPool.SLASH);
-			sb.append(tag);
-			sb.append(CharPool.GREATER_THAN);
-		}
-
-		return sb.toString();
-	}
-
 	protected static long getAddMenuFavItemFolderId(long folderId)
 		throws PortalException {
 
@@ -301,8 +250,5 @@ public class JournalPortletUtil {
 
 		return 0;
 	}
-
-	private static final Pattern _pattern = Pattern.compile(
-		"<(\\/?[^\\s].*?)>");
 
 }

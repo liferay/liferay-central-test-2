@@ -41,11 +41,9 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 <%
 String summary = articleDisplay.getDescription();
 
-summary = HtmlUtil.replaceNewLine(summary);
-
 if (Validator.isNull(summary)) {
-	summary = HtmlUtil.stripHtml(articleDisplay.getContent());
+	summary = articleDisplay.getContent();
 }
 %>
 
-<%= JournalPortletUtil.shortenWithHtml(summary, abstractLength) %>
+<%= HtmlUtil.stripHtml(StringUtil.shorten(summary, abstractLength)) %>
