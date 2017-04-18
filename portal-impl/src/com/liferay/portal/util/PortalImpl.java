@@ -7476,13 +7476,13 @@ public class PortalImpl implements Portal {
 			long groupId, boolean checkContentSharingWithChildrenEnabled)
 		throws PortalException {
 
-		Set<Group> groups = new LinkedHashSet<>();
-
 		Group siteGroup = _getSiteGroup(groupId);
 
 		if (siteGroup == null) {
-			return groups;
+			return Collections.emptySet();
 		}
+
+		Set<Group> groups = null;
 
 		for (Group group : siteGroup.getAncestors()) {
 			if (checkContentSharingWithChildrenEnabled &&
@@ -7491,13 +7491,30 @@ public class PortalImpl implements Portal {
 				continue;
 			}
 
+			if (groups == null) {
+				groups = new LinkedHashSet<>();
+			}
+
 			groups.add(group);
 		}
 
 		if (!siteGroup.isCompany()) {
-			groups.add(
-				GroupLocalServiceUtil.getCompanyGroup(
-					siteGroup.getCompanyId()));
+			Group companyGroup = GroupLocalServiceUtil.fetchCompanyGroup(
+				siteGroup.getCompanyId());
+
+			if (companyGroup != null) {
+				if (groups == null) {
+					return Collections.singleton(companyGroup);
+				}
+
+				groups.add(companyGroup);
+
+				return groups;
+			}
+		}
+
+		if (groups == null) {
+			return Collections.emptySet();
 		}
 
 		return groups;
