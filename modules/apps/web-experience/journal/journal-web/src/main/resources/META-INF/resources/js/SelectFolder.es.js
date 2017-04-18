@@ -15,31 +15,6 @@ import templates from './SelectFolder.soy';
 class SelectFolder extends Component {
 
 	/**
-	 * Searchs for nodes by name based on a filtering value
-	 *
-	 * @param {!Event} event
-	 * @protected
-	 */
-	searchNodes_(event) {
-		if (!this.originalNodes) {
-			this.originalNodes = this.nodes;
-		}
-		else {
-			this.nodes = this.originalNodes;
-		}
-
-		let filterValue = event.newVal.toLowerCase();
-
-		if (filterValue !== '') {
-			this.viewType = 'flat';
-			this.nodes = this.filterSiblingNodes_(this.nodes, filterValue);
-		}
-		else {
-			this.viewType = 'tree';
-		}
-	}
-
-	/**
 	 * Filters deep nested nodes based on a filtering value
 	 *
 	 * @type {Array.<Object>} nodes
@@ -62,6 +37,31 @@ class SelectFolder extends Component {
 		);
 
 		return filteredNodes;
+	}
+
+	/**
+	 * Searchs for nodes by name based on a filtering value
+	 *
+	 * @param {!Event} event
+	 * @protected
+	 */
+	searchNodes_(event) {
+		if (!this.originalNodes) {
+			this.originalNodes = this.nodes;
+		}
+		else {
+			this.nodes = this.originalNodes;
+		}
+
+		let filterValue = event.newVal.toLowerCase();
+
+		if (filterValue !== '') {
+			this.viewType = 'flat';
+			this.nodes = this.filterSiblingNodes_(this.nodes, filterValue);
+		}
+		else {
+			this.viewType = 'tree';
+		}
 	}
 
 	/**
