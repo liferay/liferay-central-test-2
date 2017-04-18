@@ -79,7 +79,7 @@ to = sb.toString() + to;
 				</label>
 
 				<%
-				long fileMaxSize = DLValidatorUtil.getMaxAllowableSize() / 1024;
+				long fileMaxSize = DLValidatorUtil.getMaxAllowableSize() / 1024; //
 				%>
 
 				<aui:field-wrapper>
