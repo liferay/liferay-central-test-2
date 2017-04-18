@@ -179,6 +179,7 @@ import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.PortletCategoryKeys;
 import com.liferay.portal.kernel.util.PortletKeys;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.ReflectionUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
@@ -5181,13 +5182,18 @@ public class PortalImpl implements Portal {
 
 	@Override
 	public long getSiteGroupId(long groupId) {
-		Group group = _getSiteGroup(groupId);
+		try {
+			Group group = _getSiteGroup(groupId);
 
-		if (group == null) {
-			return 0;
+			if (group == null) {
+				return 0;
+			}
+
+			return group.getGroupId();
 		}
-
-		return group.getGroupId();
+		catch (PortalException pe) {
+			return ReflectionUtil.throwException(pe);
+		}
 	}
 
 	@Override
@@ -8464,7 +8470,7 @@ public class PortalImpl implements Portal {
 		return portletTitle;
 	}
 
-	private Group _getSiteGroup(long groupId) {
+	private Group _getSiteGroup(long groupId) throws PortalException {
 		if (groupId <= 0) {
 			return null;
 		}
