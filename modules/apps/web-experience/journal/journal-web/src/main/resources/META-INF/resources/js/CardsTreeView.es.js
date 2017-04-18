@@ -286,11 +286,19 @@ CardsTreeview.STATE = {
 		value: false
 	},
 
+	/**
+	 * List of selected nodes
+	 * @type {Array.<Object>}
+	 */
 	selectedNodes: {
 		validator: core.isArray,
 		value: []
 	},
 
+	/**
+	 * Type of view to render. Accepted values are 'tree' and 'flat'
+	 * @type {String}
+	 */
 	viewType: {
 		validator: core.isString,
 		value: 'tree'

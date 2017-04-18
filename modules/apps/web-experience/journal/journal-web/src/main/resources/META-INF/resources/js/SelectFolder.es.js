@@ -9,8 +9,17 @@ import templates from './SelectFolder.soy';
 /**
  * SelectFolder
  *
+ * This component shows a list of available folders to move content in and
+ * allows to filter them by searching.
  */
 class SelectFolder extends Component {
+
+	/**
+	 * Searchs for nodes by name based on a filtering value
+	 *
+	 * @param {!Event} event
+	 * @protected
+	 */
 	searchNodes_(event) {
 		if (!this.originalNodes) {
 			this.originalNodes = this.nodes;
@@ -30,6 +39,13 @@ class SelectFolder extends Component {
 		}
 	}
 
+	/**
+	 * Filters deep nested nodes based on a filtering value
+	 *
+	 * @type {Array.<Object>} nodes
+	 * @type {String} filterVAlue
+	 * @protected
+	 */
 	filterSiblingNodes_(nodes, filterValue) {
 		let filteredNodes = [];
 
@@ -48,6 +64,12 @@ class SelectFolder extends Component {
 		return filteredNodes;
 	}
 
+	/**
+	 * Fires item selector save event on selected node change
+	 *
+	 * @param {!Event} event
+	 * @protected
+	 */
 	selectedNodeChange_(event) {
 		var node = event.newVal[0];
 
@@ -68,14 +90,26 @@ class SelectFolder extends Component {
 }
 
 SelectFolder.STATE = {
+	/**
+	 * Event name to fire on node selection
+	 * @type {String}
+	 */
 	itemSelectorSaveEvent: {
 		validator: core.isString
 	},
 
+	/**
+	 * List of nodes
+	 * @type {Array.<Object>}
+	 */
 	nodes: {
 		validator: core.isArray
 	},
 
+	/**
+	 * Type of view to render. Accepted values are 'tree' and 'flat'
+	 * @type {String}
+	 */
 	viewType: {
 		validator: core.isString,
 		value: 'tree'
