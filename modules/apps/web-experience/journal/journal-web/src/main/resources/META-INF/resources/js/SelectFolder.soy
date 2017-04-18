@@ -1,0 +1,43 @@
+{namespace SelectFolder}
+
+/**
+ * This renders the main element.
+ *
+ * @param? nodes
+ * @param? pathThemeImages
+ * @param? portletNamespace
+ * @param? viewType
+ *
+ * Function references
+ * @param? searchNodes_
+ * @param? selectedNodeChange_
+ */
+{template .render}
+	<div class="select-folder">
+		<nav class="collapse-basic-search navbar navbar-default navbar-no-collapse">
+			<div class="container-fluid-1280">
+				{call InputSearch.render}
+					{param events: [
+							'searchValueChanged': $searchNodes_
+						]/}
+					{param portletNamespace: $portletNamespace /}
+				{/call}
+			</div>
+		</nav>
+
+		<form class="container-fluid-1280" name="{$portletNamespace}selectFolderFm">
+			<fieldset class="panel-body">
+				<div class="portlet-journal-tree" id="{$portletNamespace}folderContainer">
+					{call CardsTreeview.render}
+						{param events: [
+							'selectedNodesChanged': $selectedNodeChange_
+						]/}
+						{param nodes: $nodes /}
+						{param pathThemeImages: $pathThemeImages /}
+						{param viewType: $viewType /}
+					{/call}
+				</div>
+			</fieldset>
+		</form>
+	</div>
+{/template}
