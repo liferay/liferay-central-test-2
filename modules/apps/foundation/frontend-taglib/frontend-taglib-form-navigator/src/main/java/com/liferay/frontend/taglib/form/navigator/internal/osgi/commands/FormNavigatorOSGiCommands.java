@@ -77,6 +77,8 @@ public class FormNavigatorOSGiCommands {
 
 	@Activate
 	protected void activate(BundleContext bundleContext) {
+		_formNavigatorEntries = ServiceTrackerListFactory.open(
+			bundleContext, FormNavigatorEntry.class);
 		_formNavigatorEntriesMap = ServiceTrackerMapFactory.openMultiValueMap(
 			bundleContext, FormNavigatorEntry.class, null,
 			(serviceReference, emitter) -> {
@@ -91,9 +93,6 @@ public class FormNavigatorOSGiCommands {
 
 				bundleContext.ungetService(serviceReference);
 			});
-
-		_formNavigatorEntries = ServiceTrackerListFactory.open(
-			bundleContext, FormNavigatorEntry.class);
 	}
 
 	private Set<String> _getAllFormNavigatorIds() {
