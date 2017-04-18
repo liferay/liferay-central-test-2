@@ -679,8 +679,6 @@ public class StagingImpl implements Staging {
 		else if (e instanceof FileSizeException ||
 				 e instanceof LARFileSizeException) {
 
-			long fileMaxSize = _dlValidator.getMaxAllowableSize();
-
 			if ((exportImportConfiguration != null) &&
 				((exportImportConfiguration.getType() ==
 					ExportImportConfigurationConstants.
@@ -702,7 +700,8 @@ public class StagingImpl implements Staging {
 					locale,
 					"please-enter-a-file-with-a-valid-file-size-no-larger-" +
 						"than-x",
-					TextFormatter.formatStorageSize(fileMaxSize, locale),
+					TextFormatter.formatStorageSize(
+						_dlValidator.getMaxAllowableSize(), locale),
 					false);
 			}
 
