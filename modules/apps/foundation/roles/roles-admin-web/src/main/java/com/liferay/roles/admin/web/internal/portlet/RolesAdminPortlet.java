@@ -223,12 +223,12 @@ public class RolesAdminPortlet extends MVCPortlet {
 				ThemeDisplay themeDisplay =
 					(ThemeDisplay)actionRequest.getAttribute(
 						WebKeys.THEME_DISPLAY);
-				boolean manageSubsites = ParamUtil.getBoolean(
-					actionRequest, "manageSubsites");
+				boolean manageSubgroups = ParamUtil.getBoolean(
+					actionRequest, "manageSubgroups");
 
 				updateAction(
 					role, themeDisplay.getScopeGroupId(), Group.class.getName(),
-					ActionKeys.MANAGE_SUBGROUPS, manageSubsites,
+					ActionKeys.MANAGE_SUBGROUPS, manageSubgroups,
 					ResourceConstants.SCOPE_GROUP_TEMPLATE, new String[0]);
 			}
 
