@@ -82,13 +82,13 @@ public class BelongsToRoleFunction implements DDMExpressionFunction {
 						company.getCompanyId(), roleName, user.getUserId(),
 						true);
 				}
-				else if (role.getType() == RoleConstants.TYPE_SITE) {
-					belongsTo = _userGroupRoleLocalService.hasUserGroupRole(
-						user.getUserId(), _groupId, roleName, true);
-				}
 				else if (role.getType() == RoleConstants.TYPE_ORGANIZATION) {
 					belongsTo = hasUserGroupRole(
 						company, roleName, user.getUserId());
+				}
+				else if (role.getType() == RoleConstants.TYPE_SITE) {
+					belongsTo = _userGroupRoleLocalService.hasUserGroupRole(
+						user.getUserId(), _groupId, roleName, true);
 				}
 
 				if (belongsTo) {
