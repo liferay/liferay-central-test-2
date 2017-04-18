@@ -61,8 +61,6 @@ public class UpdateWorkflowDefinitionMVCActionCommand
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long companyId = themeDisplay.getCompanyId();
-
 		String content = ParamUtil.getString(actionRequest, "content");
 		String name = ParamUtil.getString(actionRequest, "name");
 		Map<Locale, String> titleMap = LocalizationUtil.getLocalizationMap(
@@ -75,17 +73,17 @@ public class UpdateWorkflowDefinitionMVCActionCommand
 
 		WorkflowDefinition workflowDefinition =
 			workflowDefinitionManager.getWorkflowDefinition(
-				companyId, name, version);
+				themeDisplay.getCompanyId(), name, version);
 
 		if (Objects.equals(workflowDefinition.getContent(), content)) {
 			workflowDefinitionManager.updateTitle(
-				companyId, themeDisplay.getUserId(), name, version,
-				getTitle(titleMap));
+				themeDisplay.getCompanyId(), themeDisplay.getUserId(), name,
+				version, getTitle(titleMap));
 		}
 		else {
 			workflowDefinitionManager.deployWorkflowDefinition(
-				companyId, themeDisplay.getUserId(), getTitle(titleMap),
-				content.getBytes());
+				themeDisplay.getCompanyId(), themeDisplay.getUserId(),
+				getTitle(titleMap), content.getBytes());
 		}
 
 		sendRedirect(actionRequest, actionResponse);

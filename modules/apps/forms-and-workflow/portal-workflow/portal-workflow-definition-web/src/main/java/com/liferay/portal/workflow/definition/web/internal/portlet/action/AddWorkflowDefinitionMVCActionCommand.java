@@ -53,8 +53,6 @@ public class AddWorkflowDefinitionMVCActionCommand
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long companyId = themeDisplay.getCompanyId();
-
 		String content = ParamUtil.getString(actionRequest, "content");
 		Map<Locale, String> titleMap = LocalizationUtil.getLocalizationMap(
 			actionRequest, "title");
@@ -64,8 +62,8 @@ public class AddWorkflowDefinitionMVCActionCommand
 		}
 
 		workflowDefinitionManager.deployWorkflowDefinition(
-			companyId, themeDisplay.getUserId(), getTitle(titleMap),
-			content.getBytes());
+			themeDisplay.getCompanyId(), themeDisplay.getUserId(),
+			getTitle(titleMap), content.getBytes());
 
 		sendRedirect(actionRequest, actionResponse);
 	}
