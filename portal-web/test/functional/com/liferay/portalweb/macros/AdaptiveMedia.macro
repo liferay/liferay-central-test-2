@@ -112,6 +112,12 @@
 		<execute macro="PortletEntry#save" />
 	</command>
 
+	<command name="gotoImageVariantEntry">
+		<var name="key_imageName" value="${imageName}" />
+
+		<execute function="AssertClick" locator1="AdaptiveMediaTable#NAME" value1="${imageName}" />
+	</command>
+
 	<command name="optimizeRemainingImages">
 		<var name="key_imageName" value="${imageName}" />
 		<var name="key_percentOptimized" value="${percentOptimized}" />
