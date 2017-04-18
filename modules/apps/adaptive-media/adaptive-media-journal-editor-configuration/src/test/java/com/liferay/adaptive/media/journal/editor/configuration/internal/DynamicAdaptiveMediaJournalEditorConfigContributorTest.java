@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.adaptive.media.blogs.editor.configuration.internal;
+package com.liferay.adaptive.media.journal.editor.configuration.internal;
 
 import com.liferay.adaptive.media.image.item.selector.AdaptiveMediaImageFileEntryItemSelectorReturnType;
 import com.liferay.item.selector.ItemSelector;
