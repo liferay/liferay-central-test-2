@@ -207,6 +207,24 @@
 		<execute macro="Button#clickPublish" />
 	</command>
 
+	<command name="CannotAddNonNumericWidthOrHeight">
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="Adaptive Media" />
+		</execute>
+
+		<execute macro="AdaptiveMedia#addNonNumericImageResolution">
+			<var name="imageName" value="Small Image Variant" />
+			<var name="maxHeight" value="notallowed" />
+			<var name="maxWidth" value="notallowed" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="Adaptive Media" />
+		</execute>
+
+		<execute function="AssertElementPresent" locator1="Message#EMPTY_INFO" />
+	</command>
+
 	<command name="EditAndDeleteDisabledAMI">
 		<execute macro="ProductMenu#gotoControlPanelConfiguration">
 			<var name="portlet" value="Adaptive Media" />
