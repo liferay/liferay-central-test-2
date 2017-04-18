@@ -285,9 +285,9 @@ public class DDMFormPagesTemplateContextFactory {
 				new DDMFormEvaluatorContext(_ddmForm, _ddmFormValues, _locale);
 
 			ddmFormEvaluatorContext.addProperty(
-				"request", _ddmFormRenderingContext.getHttpServletRequest());
-			ddmFormEvaluatorContext.addProperty(
 				"groupId", _ddmFormRenderingContext.getGroupId());
+			ddmFormEvaluatorContext.addProperty(
+				"request", _ddmFormRenderingContext.getHttpServletRequest());
 
 			return _ddmFormEvaluator.evaluate(ddmFormEvaluatorContext);
 		}
