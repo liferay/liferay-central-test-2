@@ -89,22 +89,20 @@ public class DDMFormEvaluatorHelper {
 
 		_ddmDataProviderContextFactory = ddmDataProviderContextFactory;
 		_ddmDataProviderInvoker = ddmDataProviderInvoker;
-
 		_ddmExpressionFactory = ddmExpressionFactory;
-		_ddmForm = ddmFormEvaluatorContext.getDDMForm();
-
-		_ddmFormFieldsMap = _ddmForm.getDDMFormFieldsMap(true);
-
 		_jsonFactory = jsonFactory;
-		_locale = ddmFormEvaluatorContext.getLocale();
-
 		_groupLocalService = groupLocalService;
 		_roleLocalService = roleLocalService;
 		_userGroupRoleLocalService = userGroupRoleLocalService;
 		_userLocalService = userLocalService;
 
-		_request = ddmFormEvaluatorContext.getProperty("request");
+		_ddmForm = ddmFormEvaluatorContext.getDDMForm();
+
+		_ddmFormFieldsMap = _ddmForm.getDDMFormFieldsMap(true);
+
 		_groupId = ddmFormEvaluatorContext.getProperty("groupId");
+		_locale = ddmFormEvaluatorContext.getLocale();
+		_request = ddmFormEvaluatorContext.getProperty("request");
 
 		createDDMFormFieldValues(ddmFormEvaluatorContext.getDDMFormValues());
 
