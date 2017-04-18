@@ -66,8 +66,9 @@ public class AdaptiveMediaBlogsEntryAttachmentContentUpdaterTest {
 				getBlogsEntryAttachmentFileEntryImgTag(_fileEntry);
 
 		Assert.assertEquals(
-			"<img src=\"" + _FILE_ENTRY_IMAGE_URL + "\" data-fileEntryId=\"" +
-				_FILE_ENTRY_IMAGE_ID + "\"/>",
+			"<img data-fileEntryId=\"" + _FILE_ENTRY_IMAGE_ID + "\" src=\"" +
+				_FILE_ENTRY_IMAGE_URL +
+					"\" />",
 			imgTag);
 	}
 

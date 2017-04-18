@@ -38,8 +38,9 @@ public class AdaptiveMediaBlogsEntryAttachmentContentUpdater
 		String fileEntryURL = PortletFileRepositoryUtil.getPortletFileEntryURL(
 			null, blogsEntryAttachmentFileEntry, StringPool.BLANK);
 
-		return "<img src=\"" + fileEntryURL + "\" data-fileEntryId=\"" +
-			blogsEntryAttachmentFileEntry.getFileEntryId() + "\"/>";
+		return "<img data-fileEntryId=\"" +
+			blogsEntryAttachmentFileEntry.getFileEntryId() + "\" src=\"" +
+				fileEntryURL + "\" />";
 	}
 
 }
