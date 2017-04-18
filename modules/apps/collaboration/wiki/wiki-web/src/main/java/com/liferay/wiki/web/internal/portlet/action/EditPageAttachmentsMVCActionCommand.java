@@ -291,7 +291,6 @@ public class EditPageAttachmentsMVCActionCommand extends BaseMVCActionCommand {
 						TextFormatter.formatStorageSize(
 							_dlValidator.getMaxAllowableSize(),
 							themeDisplay.getLocale()));
-
 					errorType = ServletResponseConstants.SC_FILE_SIZE_EXCEPTION;
 				}
 
