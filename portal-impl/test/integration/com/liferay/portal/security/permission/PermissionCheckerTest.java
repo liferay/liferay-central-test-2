@@ -649,8 +649,8 @@ public class PermissionCheckerTest {
 			String.valueOf(parentGroup.getGroupId()), _role.getRoleId(),
 			ActionKeys.MANAGE_SUBGROUPS);
 
-		Assert.assertTrue(permissionChecker.isGroupAdmin(
-			subgroup.getGroupId()));
+		Assert.assertTrue(
+			permissionChecker.isGroupAdmin(subgroup.getGroupId()));
 	}
 
 	@Test
