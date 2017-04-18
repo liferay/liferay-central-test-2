@@ -20,9 +20,7 @@ class AdaptiveMediaProgress extends PortletBase {
 	 * @inheritDoc
 	 */
 	created() {
-		this.id = this.namespace + 'OptimizeRemaining' + this.uuid + 'Progress';
-
-		this.tooltipPosition = Tooltip.Align.Top;
+		this.id_ = this.namespace + 'OptimizeRemaining' + this.uuid + 'Progress';
 
 		this.updateProgressBar_(this.optimizedImages, this.totalImages);
 	}
@@ -35,7 +33,7 @@ class AdaptiveMediaProgress extends PortletBase {
 	 * that has to be invoked.
 	 */
 	startProgress(backgroundTaskUrl) {
-		if (this.percentage >= 100 || this.totalImages === 0 || this.disabled) {
+		if (this.percentage_ >= 100 || this.totalImages === 0 || this.disabled) {
 			return;
 		}
 
@@ -45,12 +43,12 @@ class AdaptiveMediaProgress extends PortletBase {
 
 		this.clearInterval_();
 
-		this.intervalId = setInterval(
+		this.intervalId_ = setInterval(
 			this.getOptimizedImagesPercentage_.bind(this),
 			this.intervalSpeed
 		);
 
-		this.showLoadingIndicator = true;
+		this.showLoadingIndicator_ = true;
 
 		Liferay.fire('start_optimizing', {uuid: this.uuid});
 	}
@@ -61,8 +59,8 @@ class AdaptiveMediaProgress extends PortletBase {
 	 * @protected
 	 */
 	clearInterval_() {
-		if (this.intervalId) {
-			clearInterval(this.intervalId);
+		if (this.intervalId_) {
+			clearInterval(this.intervalId_);
 		}
 	}
 
@@ -83,11 +81,11 @@ class AdaptiveMediaProgress extends PortletBase {
 
 				this.updateProgressBar_(optimizedImages, totalImages);
 
-				if (this.percentage >= 100) {
+				if (this.percentage_ >= 100) {
 					this.onProgressBarComplete_();
 				}
 			} catch(e) {
-				clearInterval(this._intervalId);
+				clearInterval(this.intervalId_);
 			}
 		});
 	}
@@ -99,7 +97,7 @@ class AdaptiveMediaProgress extends PortletBase {
 	 */
 	onProgressBarComplete_() {
 		this.clearInterval_();
-		this.showLoadingIndicator = false;
+		this.showLoadingIndicator_ = false;
 
 		Liferay.fire('finish_optimizing', {uuid: this.uuid});
 	}
@@ -113,11 +111,11 @@ class AdaptiveMediaProgress extends PortletBase {
 	updateProgressBar_(optimizedImages, totalImages) {
 		let percentage = Math.round(optimizedImages / totalImages * 100) || 0;
 
-		this.progressBarClass = (percentage >= 100) ? 'progress-bar-success' : '';
-		this.progressBarLabel = percentage + '%';
-		this.progressBarValue = percentage;
-		this.progressBarTooltip = this.tooltip ? this.tooltip : optimizedImages + "/" + totalImages;
-		this.percentage = percentage;
+		this.progressBarClass_ = (percentage >= 100) ? 'progress-bar-success' : '';
+		this.progressBarLabel_ = percentage + '%';
+		this.progressBarValue_ = percentage;
+		this.progressBarTooltip_ = this.tooltip ? this.tooltip : optimizedImages + "/" + totalImages;
+		this.percentage_ = percentage;
 	}
 }
 
@@ -128,6 +126,18 @@ class AdaptiveMediaProgress extends PortletBase {
  * @type {!Object}
  */
 AdaptiveMediaProgress.STATE = {
+	/**
+	 * Indicates if the entry is disabled or not.
+	 *
+	 * @instance
+	 * @memberof AdaptiveMediaProgress
+	 * @type {Boolean}
+	 */
+	disabled: {
+		validator: core.isBoolean,
+		value: false
+	},
+
 	/**
 	 * The interval (in milliseconds) on how often
 	 * we will check the percentage of optimized images.
@@ -153,6 +163,17 @@ AdaptiveMediaProgress.STATE = {
 	},
 
 	/**
+	 * Percentage of optimized images.
+	 *
+	 * @memberof AdaptiveMediaProgress
+	 * @protected
+	 * @type {Number}
+	 */
+	percentage_: {
+		validator: core.isNumber
+	},
+
+	/**
 	 * Url to the action that returns the percentage
 	 * of optimized images.
 	 *
@@ -162,6 +183,64 @@ AdaptiveMediaProgress.STATE = {
 	 */
 	percentageUrl: {
 		validator: core.isString
+	},
+
+	/**
+	 * The progress bar class.
+	 *
+	 * @memberof AdaptiveMediaProgress
+	 * @protected
+	 * @type {String}
+	 */
+	progressBarClass_: {
+		validator: core.isString
+	},
+
+	/**
+	 * The progress bar label.
+	 *
+	 * @memberof AdaptiveMediaProgress
+	 * @protected
+	 * @type {String}
+	 */
+	progressBarLabel_: {
+		validator: core.isString
+	},
+
+	/**
+	 * The progress bar value.
+	 *
+	 * @memberof AdaptiveMediaProgress
+	 * @protected
+	 * @type {Number}
+	 */
+	progressBarValue_: {
+		validator: core.isNumber
+	},
+
+	/**
+	 * The progress bar tooltip. If AdaptiveMediaProgress.tooltip
+	 * is defined, this will be used.
+	 *
+	 * @memberof AdaptiveMediaProgress
+	 * @protected
+	 * @type {String}
+	 */
+	progressBarTooltip_: {
+		validator: core.isString
+	},
+
+	/**
+	 * If the loading indicator has to be shown
+	 * near the progress bar.
+	 *
+	 * @memberof AdaptiveMediaProgress
+	 * @protected
+	 * @type {Boolean}
+	 */
+	showLoadingIndicator_: {
+		validator: core.isBoolean,
+		value: false
 	},
 
 	/**
@@ -183,7 +262,18 @@ AdaptiveMediaProgress.STATE = {
 	 * @type {String}
 	 */
 	tooltip: {
-		validator: core.isString
+		validator: core.isString,
+	},
+
+	/**
+	 * The tooltip position in the progress bar.
+	 *
+	 * @instance
+	 * @memberof AdaptiveMediaProgress
+	 * @type {Object}
+	 */
+	tooltipPosition: {
+		value: Tooltip.Align.Top
 	},
 
 	/**
