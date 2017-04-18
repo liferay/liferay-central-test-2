@@ -15,6 +15,15 @@
 			</then>
 		</if>
 
+		<if>
+			<isset var="customID" />
+			<then>
+				<execute function="Click" locator1="Radio#CUSTOM_ID" />
+
+				<execute function="Type" locator1="TextInput#IMAGE_ID" value1="${customID}" />
+			</then>
+		</if>
+
 		<execute function="AssertClick" locator1="Button#SAVE" value1="Save" />
 
 		<execute macro="Alert#viewSuccessMessage" />
