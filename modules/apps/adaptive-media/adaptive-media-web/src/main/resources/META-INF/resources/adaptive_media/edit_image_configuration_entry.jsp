@@ -37,8 +37,8 @@ if (configurationEntry != null) {
 %>
 
 <div class="container-fluid-1280">
-	<liferay-ui:error exception="<%= AdaptiveMediaImageConfigurationException.DuplicateAdaptiveMediaImageConfigurationNameException.class %>" message="there-is-already-a-configuration-with-the-same-name" />
-	<liferay-ui:error exception="<%= AdaptiveMediaImageConfigurationException.DuplicateAdaptiveMediaImageConfigurationUuidException.class %>" message="there-is-already-a-configuration-with-the-same-identifier" />
+	<liferay-ui:error exception="<%= AdaptiveMediaImageConfigurationException.DuplicateAdaptiveMediaImageConfigurationNameException.class %>" message="a-configuration-with-this-name-already-exists" />
+	<liferay-ui:error exception="<%= AdaptiveMediaImageConfigurationException.DuplicateAdaptiveMediaImageConfigurationUuidException.class %>" message="a-configuration-with-this-id-already-exists" />
 	<liferay-ui:error exception="<%= AdaptiveMediaImageConfigurationException.InvalidHeightException.class %>" message="please-enter-a-max-height-value-larger-than-0" />
 	<liferay-ui:error exception="<%= AdaptiveMediaImageConfigurationException.InvalidNameException.class %>" message="please-enter-a-valid-name" />
 	<liferay-ui:error exception="<%= AdaptiveMediaImageConfigurationException.InvalidUuidException.class %>" message="please-enter-a-valid-identifier" />
@@ -61,7 +61,7 @@ if (configurationEntry != null) {
 							<liferay-ui:message key="at-least-one-dimension-value-is-required" />
 						</c:when>
 						<c:otherwise>
-							<liferay-ui:message key="this-resolution-has-already-optimized-images" />
+							<liferay-ui:message key="the-images-for-this-resolution-are-already-optimized" />
 						</c:otherwise>
 					</c:choose>
 				</div>
@@ -142,7 +142,7 @@ if (configurationEntry != null) {
 					</h4>
 
 					<div class="form-group" id="<portlet:namespace />idOptions">
-						<aui:input checked="<%= automaticUuid %>" disabled="<%= !configurationEntryEditable %>" helpMessage="the-id-will-be-based-on-the-name-field" label="automatic" name="automaticUuid" type="radio" value="<%= true %>" />
+						<aui:input checked="<%= automaticUuid %>" disabled="<%= !configurationEntryEditable %>" helpMessage="the-id-is-based-on-the-name-field" label="automatic" name="automaticUuid" type="radio" value="<%= true %>" />
 
 						<aui:input checked="<%= !automaticUuid %>" disabled="<%= !configurationEntryEditable %>" label="custom" name="automaticUuid" type="radio" value="<%= false %>" />
 					</div>
