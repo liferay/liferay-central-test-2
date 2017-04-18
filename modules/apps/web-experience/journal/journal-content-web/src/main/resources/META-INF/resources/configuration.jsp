@@ -58,6 +58,8 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 	var articlePreview = A.one('#<portlet:namespace />articlePreview');
 
+	removeWebContentHandler();
+
 	articlePreview.plug(A.Plugin.ParseContent);
 
 	articlePreview.delegate(
@@ -100,6 +102,17 @@ String redirect = ParamUtil.getString(request, "redirect");
 		'.web-content-selector'
 	);
 
+	function removeWebContentHandler() {
+		articlePreview.delegate(
+			'click',
+			function(event) {
+				event.preventDefault();
+				retrieveWebContent('', 0);
+			},
+			'.selector-button'
+		);
+	}
+
 	function retrieveWebContent(entityId, assetClassPK) {
 		form.attr('<portlet:namespace/>assetEntryId').val(entityId);
 
@@ -124,6 +137,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 						var responseData = this.get('responseData');
 
 						articlePreview.setContent(responseData);
+						removeWebContentHandler();
 					}
 				}
 			}
