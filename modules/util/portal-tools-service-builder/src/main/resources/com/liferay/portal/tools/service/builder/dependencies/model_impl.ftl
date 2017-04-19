@@ -305,10 +305,10 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 
 			<#compress>
 				public static final Object[][] MAPPING_TABLE_${stringUtil.upperCase(column.mappingTable)}_COLUMNS = {
-					<#assign mappingEntitiesMap = serviceBuilder.getMappingEntitiesMap(column.mappingTable) />
+					<#assign mappingEntities = serviceBuilder.getMappingEntities(column.mappingTable) />
 
-					<#list mappingEntitiesMap?keys as mapEntityName>
-						<#list mappingEntitiesMap[mapEntityName] as mapColumn>
+					<#list mappingEntities?keys as mapEntityName>
+						<#list mappingEntities[mapEntityName] as mapColumn>
 							<#assign sqlType = serviceBuilder.getSqlType(mapEntityName, mapColumn.getName(), mapColumn.getType()) />
 
 							{"${mapColumn.DBName}", Types.${sqlType}}
