@@ -55,6 +55,9 @@ import com.liferay.portal.kernel.service.permission.PortletPermissionUtil;
 import com.liferay.portal.kernel.servlet.taglib.ui.AssetAddonEntry;
 import com.liferay.portal.kernel.theme.PortletDisplay;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.trash.TrashActionKeys;
+import com.liferay.portal.kernel.trash.TrashHandler;
+import com.liferay.portal.kernel.trash.TrashHandlerRegistryUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
@@ -67,6 +70,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.trash.kernel.model.TrashEntry;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -76,6 +80,7 @@ import java.util.List;
 import java.util.Objects;
 
 import javax.portlet.PortletMode;
+import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
@@ -358,6 +363,34 @@ public class JournalContentDisplayContext {
 		return _defaultDDMTemplate;
 	}
 
+	public JournalArticle getDeletedArticle() throws PortalException {
+		if (_deletedArticle != null) {
+			return _deletedArticle;
+		}
+
+		PortletPreferences portletPreferences =
+			_portletRequest.getPreferences();
+
+		String assetEntryId = portletPreferences.getValue(
+			"assetEntryId", StringPool.BLANK);
+
+		if ((_article != null) || Validator.isBlank(assetEntryId)) {
+			return _deletedArticle;
+		}
+
+		AssetEntry assetEntry = AssetEntryLocalServiceUtil.fetchAssetEntry(
+			Long.valueOf(assetEntryId));
+
+		if (assetEntry == null) {
+			return _deletedArticle;
+		}
+
+		_deletedArticle = JournalArticleLocalServiceUtil.fetchLatestArticle(
+			assetEntry.getClassPK());
+
+		return _deletedArticle;
+	}
+
 	public List<ContentMetadataAssetAddonEntry>
 		getEnabledContentMetadataAssetAddonEntries() {
 
@@ -545,6 +578,22 @@ public class JournalContentDisplayContext {
 		return _userToolAssetAddonEntries;
 	}
 
+	public TrashEntry getTrashEntry() throws PortalException {
+		if (_trashEntry != null) {
+			return _trashEntry;
+		}
+
+		JournalArticle journalArticle = getDeletedArticle();
+
+		if (journalArticle == null) {
+			return _trashEntry;
+		}
+
+		_trashEntry = journalArticle.getTrashEntry();
+
+		return _trashEntry;
+	}
+
 	public String getURLEdit() {
 		try {
 			AssetRendererFactory<JournalArticle> assetRendererFactory =
@@ -652,6 +701,35 @@ public class JournalContentDisplayContext {
 
 			return StringPool.BLANK;
 		}
+	}
+
+	public boolean hasRestorePermission() throws PortalException {
+		if (_hasRestorePermission != null) {
+			return _hasRestorePermission;
+		}
+
+		_hasRestorePermission = false;
+
+		TrashEntry trashEntry = getTrashEntry();
+
+		if (trashEntry != null) {
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)_portletRequest.getAttribute(
+					WebKeys.THEME_DISPLAY);
+
+			TrashHandler trashHandler =
+				TrashHandlerRegistryUtil.getTrashHandler(
+					trashEntry.getClassName());
+
+			if (trashHandler.hasTrashPermission(
+					themeDisplay.getPermissionChecker(), 0,
+					trashEntry.getClassPK(), TrashActionKeys.RESTORE)) {
+
+				_hasRestorePermission = true;
+			}
+		}
+
+		return _hasRestorePermission;
 	}
 
 	public boolean hasViewPermission() throws PortalException {
@@ -996,8 +1074,10 @@ public class JournalContentDisplayContext {
 	private String _ddmTemplateKey;
 	private List<DDMTemplate> _ddmTemplates;
 	private DDMTemplate _defaultDDMTemplate;
+	private JournalArticle _deletedArticle;
 	private Boolean _enableViewCountIncrement;
 	private Boolean _expired;
+	private Boolean _hasRestorePermission;
 	private Boolean _hasViewPermission;
 	private final JournalContentPortletInstanceConfiguration
 		_journalContentPortletInstanceConfiguration;
@@ -1012,6 +1092,7 @@ public class JournalContentDisplayContext {
 	private Boolean _showEditTemplateIcon;
 	private Boolean _showSelectArticleIcon;
 	private Boolean _showSelectArticleLink;
+	private TrashEntry _trashEntry;
 	private List<UserToolAssetAddonEntry> _userToolAssetAddonEntries;
 
 }
