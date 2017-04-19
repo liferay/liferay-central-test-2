@@ -72,14 +72,14 @@ public class ItemSelectorUploadResponseHandlerImpl
 
 		if (itemSelectorReturnTypeResolver != null) {
 			try {
+				JSONObject fileJSONObject = jsonObject.getJSONObject("file");
+
 				ThemeDisplay themeDisplay =
 					(ThemeDisplay)uploadPortletRequest.getAttribute(
 						WebKeys.THEME_DISPLAY);
 
 				String resolvedValue = itemSelectorReturnTypeResolver.getValue(
 					fileEntry, themeDisplay);
-
-				JSONObject fileJSONObject = jsonObject.getJSONObject("file");
 
 				fileJSONObject.put("resolvedValue", resolvedValue);
 			}
