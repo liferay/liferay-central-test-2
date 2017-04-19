@@ -697,16 +697,16 @@ public class DataFactory {
 	}
 
 	public long getNextAssetClassNameId(long groupId) {
-		Integer counter = _assetClassNameIdsIndexes.get(groupId);
+		Integer index = _assetClassNameIdsIndexes.get(groupId);
 
-		if (counter == null) {
-			counter = 0;
+		if (index == null) {
+			index = 0;
 		}
 
 		long classNameId =
-			_assetClassNameIds[counter % _assetClassNameIds.length];
+			_assetClassNameIds[index % _assetClassNameIds.length];
 
-		_assetClassNameIdsIndexes.put(groupId, ++counter);
+		_assetClassNameIdsIndexes.put(groupId, ++index);
 
 		return classNameId;
 	}
