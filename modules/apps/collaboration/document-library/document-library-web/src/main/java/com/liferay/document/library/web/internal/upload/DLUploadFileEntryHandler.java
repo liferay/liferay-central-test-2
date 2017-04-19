@@ -57,13 +57,11 @@ public class DLUploadFileEntryHandler implements UploadFileEntryHandler {
 
 		long folderId = ParamUtil.getLong(uploadPortletRequest, "folderId");
 
-
 		DLFolderPermission.check(
 			themeDisplay.getPermissionChecker(), themeDisplay.getScopeGroupId(),
 			folderId, ActionKeys.ADD_DOCUMENT);
 
-		String fileName = uploadPortletRequest.getFileName(
-			_PARAMETER_NAME);
+		String fileName = uploadPortletRequest.getFileName(_PARAMETER_NAME);
 		long size = uploadPortletRequest.getSize(_PARAMETER_NAME);
 
 		_dlValidator.validateFileSize(fileName, size);

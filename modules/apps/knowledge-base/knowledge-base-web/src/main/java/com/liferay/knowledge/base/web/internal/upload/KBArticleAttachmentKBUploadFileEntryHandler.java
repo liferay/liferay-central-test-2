@@ -62,8 +62,7 @@ public class KBArticleAttachmentKBUploadFileEntryHandler
 			themeDisplay.getPermissionChecker(), kbArticle,
 			KBActionKeys.UPDATE);
 
-		String fileName = uploadPortletRequest.getFileName(
-			_PARAMETER_NAME);
+		String fileName = uploadPortletRequest.getFileName(_PARAMETER_NAME);
 		String contentType = uploadPortletRequest.getContentType(
 			_PARAMETER_NAME);
 
