@@ -804,17 +804,15 @@ public class DataFactory {
 			Map<Long, List<AssetCategoryModel>> assetCategoryModelsMap =
 				new HashMap<>();
 
-			int totalAssetCategoryModelSize = assetCategoryModels.size();
-
-			int assetCategoryModelSizeForEachType =
-				totalAssetCategoryModelSize / _assetClassNameIds.length;
+			int pageSize =
+				assetCategoryModels.size() / _assetClassNameIds.length;
 
 			for (int j = 0; j < _assetClassNameIds.length; j++) {
-				int fromIndex = j * assetCategoryModelSizeForEachType;
-				int toIndex = (j + 1) * assetCategoryModelSizeForEachType;
+				int fromIndex = j * pageSize;
+				int toIndex = (j + 1) * pageSize;
 
 				if (j == (_assetClassNameIds.length - 1)) {
-					toIndex = totalAssetCategoryModelSize;
+					toIndex = assetCategoryModels.size();
 				}
 
 				assetCategoryModelsMap.put(
@@ -881,12 +879,12 @@ public class DataFactory {
 
 			int totalAssetTagModelSize = assetTagModels.size();
 
-			int assetTagModelSizeForEachType =
+			int pageSize =
 				totalAssetTagModelSize / _assetClassNameIds.length;
 
 			for (int j = 0; j < _assetClassNameIds.length; j++) {
-				int fromIndex = j * assetTagModelSizeForEachType;
-				int toIndex = (j + 1) * assetTagModelSizeForEachType;
+				int fromIndex = j * pageSize;
+				int toIndex = (j + 1) * pageSize;
 
 				if (j == (_assetClassNameIds.length - 1)) {
 					toIndex = totalAssetTagModelSize;
