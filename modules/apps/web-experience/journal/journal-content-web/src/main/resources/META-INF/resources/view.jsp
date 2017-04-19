@@ -44,8 +44,51 @@ AssetRendererFactory<JournalArticle> assetRendererFactory = AssetRendererFactory
 				</div>
 			</c:when>
 			<c:otherwise>
-				<div class="alert alert-danger">
-					<liferay-ui:message key="the-selected-web-content-no-longer-exists" />
+
+				<%
+				JournalArticle deletedArticle = journalContentDisplayContext.getDeletedArticle();
+				TrashEntry trashEntry = journalContentDisplayContext.getTrashEntry();
+				%>
+
+				<liferay-util:buffer var="articleSelectLink">
+					<aui:a href="javascript:;" onClick="<%= portletDisplay.getURLConfigurationJS() %>"><liferay-ui:message key="select-another" /></aui:a>
+				</liferay-util:buffer>
+
+				<div class="alert alert-warning text-center">
+					<c:choose>
+						<c:when test="<%= (deletedArticle != null) && (trashEntry != null) %>">
+							<liferay-util:buffer var="deletedArticleTitle">
+								<strong><em class="delete-entry-title"><%= HtmlUtil.escape(deletedArticle.getTitle(locale)) %></em></strong>
+							</liferay-util:buffer>
+
+							<liferay-ui:message arguments="<%= deletedArticleTitle %>" key="the-web-content-article-x-was-moved-to-the-recycle-bin" />
+						</c:when>
+						<c:otherwise>
+							<liferay-ui:message key="the-selected-web-content-no-longer-exists" />
+						</c:otherwise>
+					</c:choose>
+
+					<c:if test="<%= journalContentDisplayContext.isShowSelectArticleLink() %>">
+						<div>
+							<c:choose>
+								<c:when test="<%= journalContentDisplayContext.hasRestorePermission() %>">
+									<portlet:actionURL name="restoreTrashEntry" var="restoreTrashEntryURL">
+										<portlet:param name="trashEntryId" value="<%= String.valueOf(trashEntry.getEntryId()) %>" />
+										<portlet:param name="redirect" value="<%= currentURL %>" />
+									</portlet:actionURL>
+
+									<liferay-util:buffer var="restoreTrashEntryLink">
+										<aui:a href="<%= restoreTrashEntryURL.toString() %>"><liferay-ui:message key="undo" /></aui:a>
+									</liferay-util:buffer>
+
+									<liferay-ui:message arguments="<%= new String[] {restoreTrashEntryLink, articleSelectLink} %>" key="do-you-want-to-x-or-x-web-content" />
+								</c:when>
+								<c:otherwise>
+									<liferay-ui:message arguments="<%= articleSelectLink %>" key="do-you-want-to-x-web-content" />
+								</c:otherwise>
+							</c:choose>
+						</div>
+					</c:if>
 				</div>
 			</c:otherwise>
 		</c:choose>
