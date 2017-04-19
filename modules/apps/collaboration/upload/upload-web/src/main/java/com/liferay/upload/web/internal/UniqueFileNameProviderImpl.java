@@ -32,11 +32,11 @@ public class UniqueFileNameProviderImpl implements UniqueFileNameProvider {
 	public String provide(String fileName, Predicate<String> predicate)
 		throws PortalException {
 
-		String curFileName = fileName;
+		String uniqueFileName = fileName;
 
 		int tries = 1;
 
-		while (predicate.test(curFileName)) {
+		while (predicate.test(uniqueFileName)) {
 			if (tries >= _UNIQUE_FILE_NAME_TRIES) {
 				throw new PortalException(
 					"Unable to get a unique file name for " + fileName);
@@ -44,11 +44,11 @@ public class UniqueFileNameProviderImpl implements UniqueFileNameProvider {
 
 			tries++;
 
-			curFileName = FileUtil.appendParentheticalSuffix(
+			uniqueFileName = FileUtil.appendParentheticalSuffix(
 				fileName, String.valueOf(tries));
 		}
 
-		return curFileName;
+		return uniqueFileName;
 	}
 
 	private static final int _UNIQUE_FILE_NAME_TRIES = 50;
