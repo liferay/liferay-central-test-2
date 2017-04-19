@@ -328,7 +328,7 @@ public class DataFactory {
 			(PortletPreferencesImpl)_portletPreferencesFactory.fromDefaultXML(
 				defaultAssetPublisherPreference);
 
-		_assetClassNameIdsArray = new long[] {
+		_assetClassNameIds = new long[] {
 			getClassNameId(BlogsEntry.class),
 			getClassNameId(JournalArticle.class), getClassNameId(WikiPage.class)
 		};
@@ -709,7 +709,7 @@ public class DataFactory {
 		}
 
 		long classNameId =
-			_assetClassNameIdsArray[counter % _assetClassNameIdsArray.length];
+			_assetClassNameIds[counter % _assetClassNameIds.length];
 
 		_assetClassIdIndexMap.put(groupId, ++counter);
 
@@ -815,7 +815,7 @@ public class DataFactory {
 			Map<Long, List<AssetCategoryModel>> assetCategoryModelsMap =
 				new HashMap<>();
 
-			int assetEntryTypeCount = _assetClassNameIdsArray.length;
+			int assetEntryTypeCount = _assetClassNameIds.length;
 
 			int totalAssetCategoryModelSize = assetCategoryModels.size();
 
@@ -831,7 +831,7 @@ public class DataFactory {
 				}
 
 				assetCategoryModelsMap.put(
-					_assetClassNameIdsArray[j],
+					_assetClassNameIds[j],
 					assetCategoryModels.subList(fromIndex, toIndex));
 			}
 
@@ -892,7 +892,7 @@ public class DataFactory {
 
 			Map<Long, List<AssetTagModel>> assetTagModelsMap = new HashMap<>();
 
-			int assetEntryTypeCount = _assetClassNameIdsArray.length;
+			int assetEntryTypeCount = _assetClassNameIds.length;
 
 			int totalAssetTagModelSize = assetTagModels.size();
 
@@ -908,7 +908,7 @@ public class DataFactory {
 				}
 
 				assetTagModelsMap.put(
-					_assetClassNameIdsArray[j],
+					_assetClassNameIds[j],
 					assetTagModels.subList(fromIndex, toIndex));
 			}
 
@@ -3723,7 +3723,7 @@ public class DataFactory {
 	private List<AssetCategoryModel>[] _assetCategoryModelsArray;
 	private Map<Long, List<AssetCategoryModel>>[] _assetCategoryModelsArrayMap;
 	private final Map<Long, Integer> _assetClassIdIndexMap = new HashMap<>();
-	private final long[] _assetClassNameIdsArray;
+	private final long[] _assetClassNameIds;
 	private String _assetPublisherQueryName;
 	private final Map<Long, Integer> _assetPublisherQueryStartIndex =
 		new HashMap<>();
