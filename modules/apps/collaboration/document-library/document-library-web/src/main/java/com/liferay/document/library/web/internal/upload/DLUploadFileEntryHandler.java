@@ -78,7 +78,7 @@ public class DLUploadFileEntryHandler implements UploadFileEntryHandler {
 				originalFilename,
 				fileName ->
 					_exists(
-						fileName, themeDisplay.getScopeGroupId(), folderId));
+						themeDisplay.getScopeGroupId(), folderId, fileName));
 
 			ServiceContext serviceContext = ServiceContextFactory.getInstance(
 				DLFileEntry.class.getName(), uploadPortletRequest);
@@ -90,7 +90,7 @@ public class DLUploadFileEntryHandler implements UploadFileEntryHandler {
 		}
 	}
 
-	private boolean _exists(String fileName, long groupId, long folderId) {
+	private boolean _exists(long groupId, long folderId, String fileName) {
 		try {
 			if (_dlAppService.getFileEntry(groupId, folderId, fileName) !=
 					null) {
