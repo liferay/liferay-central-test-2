@@ -3706,9 +3706,9 @@ public class DataFactory {
 	private Map<Long, SimpleCounter>[] _assetCategoryCounters;
 	private List<AssetCategoryModel>[] _assetCategoryModelsArray;
 	private Map<Long, List<AssetCategoryModel>>[] _assetCategoryModelsMaps;
+	private final long[] _assetClassNameIds;
 	private final Map<Long, Integer> _assetClassNameIdsIndexes =
 		new HashMap<>();
-	private final long[] _assetClassNameIds;
 	private String _assetPublisherQueryName;
 	private final Map<Long, Integer> _assetPublisherQueryStartIndex =
 		new HashMap<>();
