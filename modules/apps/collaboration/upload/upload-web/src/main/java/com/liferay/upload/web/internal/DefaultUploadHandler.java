@@ -44,7 +44,7 @@ import org.osgi.service.component.annotations.Component;
  * @author Alejandro Tardín
  */
 @Component
-public class UploadHandlerImpl implements UploadHandler {
+public class DefaultUploadHandler implements UploadHandler {
 
 	@Override
 	public void upload(

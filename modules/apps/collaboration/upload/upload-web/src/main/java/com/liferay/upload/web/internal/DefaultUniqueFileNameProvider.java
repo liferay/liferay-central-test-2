@@ -26,7 +26,7 @@ import org.osgi.service.component.annotations.Component;
  * @author Alejandro Tardín
  */
 @Component
-public class UniqueFileNameProviderImpl implements UniqueFileNameProvider {
+public class DefaultUniqueFileNameProvider implements UniqueFileNameProvider {
 
 	@Override
 	public String provide(String fileName, Predicate<String> predicate)
