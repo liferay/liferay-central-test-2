@@ -43,10 +43,10 @@ public class PageAttachmentWikiUploadFileEntryHandler
 	public FileEntry upload(UploadPortletRequest uploadPortletRequest)
 		throws IOException, PortalException {
 
-		long classPK = ParamUtil.getLong(
+		long resourcePrimKey = ParamUtil.getLong(
 			uploadPortletRequest, "resourcePrimKey");
 
-		String filename = uploadPortletRequest.getFileName(_PARAMETER_NAME);
+		String fileName = uploadPortletRequest.getFileName(_PARAMETER_NAME);
 
 		String contentType = uploadPortletRequest.getContentType(
 			_PARAMETER_NAME);
@@ -55,7 +55,7 @@ public class PageAttachmentWikiUploadFileEntryHandler
 			(ThemeDisplay)uploadPortletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-		WikiPage page = _wikiPageService.getPage(classPK);
+		WikiPage page = _wikiPageService.getPage(resourcePrimKey);
 
 		WikiNodePermissionChecker.check(
 			themeDisplay.getPermissionChecker(), page.getNodeId(),
@@ -65,7 +65,7 @@ public class PageAttachmentWikiUploadFileEntryHandler
 				uploadPortletRequest.getFileAsStream(_PARAMETER_NAME)) {
 
 			return _wikiPageService.addPageAttachment(
-				page.getNodeId(), page.getTitle(), filename, inputStream,
+				page.getNodeId(), page.getTitle(), fileName, inputStream,
 				contentType);
 		}
 	}
