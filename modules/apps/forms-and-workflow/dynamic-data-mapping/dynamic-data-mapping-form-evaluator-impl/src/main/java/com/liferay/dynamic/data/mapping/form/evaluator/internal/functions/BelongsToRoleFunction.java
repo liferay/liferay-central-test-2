@@ -61,10 +61,6 @@ public class BelongsToRoleFunction implements DDMExpressionFunction {
 			Company company = PortalUtil.getCompany(_request);
 			User user = PortalUtil.getUser(_request);
 
-			if (user == null) {
-				return false;
-			}
-
 			boolean belongsTo = false;
 
 			for (Object parameter : parameters) {
@@ -74,6 +70,14 @@ public class BelongsToRoleFunction implements DDMExpressionFunction {
 					company.getCompanyId(), roleName);
 
 				if (role == null) {
+					continue;
+				}
+
+				if (user == null) {
+					if (parameter.equals("Guest")) {
+						return true;
+					}
+
 					continue;
 				}
 
