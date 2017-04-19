@@ -72,7 +72,7 @@ public class KBArticleAttachmentKBUploadFileEntryHandler
 
 			String uniqueFileName = _uniqueFileNameProvider.provide(
 				originalFileName,
-				fileName -> _fileExists(themeDisplay, kbArticle, fileName));
+				fileName -> _exists(themeDisplay, kbArticle, fileName));
 
 			return _kbArticleLocalService.addAttachment(
 				themeDisplay.getUserId(), resourcePrimKey, uniqueFileName,
@@ -80,7 +80,7 @@ public class KBArticleAttachmentKBUploadFileEntryHandler
 		}
 	}
 
-	private boolean _fileExists(
+	private boolean _exists(
 		ThemeDisplay themeDisplay, KBArticle kbArticle, String fileName) {
 
 		try {
