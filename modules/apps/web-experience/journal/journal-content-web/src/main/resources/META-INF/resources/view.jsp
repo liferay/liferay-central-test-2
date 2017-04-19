@@ -36,11 +36,7 @@ AssetRendererFactory<JournalArticle> assetRendererFactory = AssetRendererFactory
 						<liferay-ui:message key="this-application-is-not-visible-to-users-yet" />
 					</div>
 
-					<%
-					Group scopeGroup = themeDisplay.getScopeGroup();
-					%>
-
-					<c:if test="<%= !scopeGroup.isStaged() || scopeGroup.isStagingGroup() %>">
+					<c:if test="<%= journalContentDisplayContext.isShowSelectArticleLink() %>">
 						<div>
 							<aui:a href="javascript:;" onClick="<%= portletDisplay.getURLConfigurationJS() %>"><liferay-ui:message key="select-web-content-to-make-it-visible" /></aui:a>
 						</div>
