@@ -91,7 +91,7 @@ public class ItemSelectorUploadResponseHandlerImpl
 		return jsonObject;
 	}
 
-	@Reference(target = "(upload.handler.system.default=true)")
+	@Reference(target = "(upload.response.handler.system.default=true)")
 	private UploadResponseHandler _defaultUploadResponseHandler;
 
 	@Reference
