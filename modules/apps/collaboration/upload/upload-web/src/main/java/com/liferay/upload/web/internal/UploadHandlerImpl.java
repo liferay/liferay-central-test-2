@@ -54,7 +54,7 @@ public class UploadHandlerImpl implements UploadHandler {
 		throws PortalException {
 
 		try {
-			JSONObject responseJSONObject = _generateResponse(
+			JSONObject responseJSONObject = _getResponseJSONObject(
 				uploadFileEntryHandler, uploadResponseHandler, portletRequest);
 
 			JSONPortletResponseUtil.writeJSON(
@@ -65,7 +65,7 @@ public class UploadHandlerImpl implements UploadHandler {
 		}
 	}
 
-	private JSONObject _generateResponse(
+	private JSONObject _getResponseJSONObject(
 			UploadFileEntryHandler uploadFileEntryHandler,
 			UploadResponseHandler uploadResponseHandler,
 			PortletRequest portletRequest)
