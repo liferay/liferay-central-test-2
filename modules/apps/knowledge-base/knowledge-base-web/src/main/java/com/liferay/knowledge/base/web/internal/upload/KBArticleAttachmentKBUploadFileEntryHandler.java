@@ -62,7 +62,7 @@ public class KBArticleAttachmentKBUploadFileEntryHandler
 			themeDisplay.getPermissionChecker(), kbArticle,
 			KBActionKeys.UPDATE);
 
-		String originalFileName = uploadPortletRequest.getFileName(
+		String fileName = uploadPortletRequest.getFileName(
 			_PARAMETER_NAME);
 		String contentType = uploadPortletRequest.getContentType(
 			_PARAMETER_NAME);
@@ -71,8 +71,8 @@ public class KBArticleAttachmentKBUploadFileEntryHandler
 				uploadPortletRequest.getFileAsStream(_PARAMETER_NAME)) {
 
 			String uniqueFileName = _uniqueFileNameProvider.provide(
-				originalFileName,
-				fileName -> _exists(themeDisplay, kbArticle, fileName));
+				fileName,
+				curFileName -> _exists(themeDisplay, kbArticle, curFileName));
 
 			return _kbArticleLocalService.addAttachment(
 				themeDisplay.getUserId(), resourcePrimKey, uniqueFileName,

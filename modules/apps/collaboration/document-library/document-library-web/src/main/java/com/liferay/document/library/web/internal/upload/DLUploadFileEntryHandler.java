@@ -63,8 +63,7 @@ public class DLUploadFileEntryHandler implements UploadFileEntryHandler {
 			themeDisplay.getPermissionChecker(), themeDisplay.getScopeGroupId(),
 			folderId, ActionKeys.ADD_DOCUMENT);
 
-		String originalFilename = uploadPortletRequest.getFileName(
-			_PARAMETER_NAME);
+		String fileName = uploadPortletRequest.getFileName(_PARAMETER_NAME);
 		long size = uploadPortletRequest.getSize(_PARAMETER_NAME);
 
 		_validateFile(size);
@@ -76,10 +75,10 @@ public class DLUploadFileEntryHandler implements UploadFileEntryHandler {
 				uploadPortletRequest.getFileAsStream(_PARAMETER_NAME)) {
 
 			String uniqueFileName = _uniqueFileNameProvider.provide(
-				originalFilename,
-				fileName ->
+				fileName,
+				curFileName ->
 					_exists(
-						themeDisplay.getScopeGroupId(), folderId, fileName));
+						themeDisplay.getScopeGroupId(), folderId, curFileName));
 
 			ServiceContext serviceContext = ServiceContextFactory.getInstance(
 				DLFileEntry.class.getName(), uploadPortletRequest);
