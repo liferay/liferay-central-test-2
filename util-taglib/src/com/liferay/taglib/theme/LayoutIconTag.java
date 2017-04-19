@@ -60,9 +60,9 @@ public class LayoutIconTag
 				WebKeys.THEME_DISPLAY);
 
 			if (themeDisplay == null) {
-				ServletRequest request = pageContext.getRequest();
+				ServletRequest servletRequest = pageContext.getRequest();
 
-				themeDisplay = (ThemeDisplay)request.getAttribute(
+				themeDisplay = (ThemeDisplay)servletRequest.getAttribute(
 					WebKeys.THEME_DISPLAY);
 			}
 
