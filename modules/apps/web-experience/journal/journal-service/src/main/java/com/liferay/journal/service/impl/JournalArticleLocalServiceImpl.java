@@ -5029,6 +5029,22 @@ public class JournalArticleLocalServiceImpl
 
 	/**
 	 * Subscribes the user to changes in elements that belong to the web content
+	 * article.
+	 *
+	 * @param groupId the primary key of the folder's group
+	 * @param userId the primary key of the user to be subscribed
+	 * @param articleId the primary key of the article to subscribe to
+	 */
+	@Override
+	public void subscribe(long userId, long groupId, long articleId)
+		throws PortalException {
+
+		_subscriptionLocalService.addSubscription(
+			userId, groupId, JournalArticle.class.getName(), articleId);
+	}
+
+	/**
+	 * Subscribes the user to changes in elements that belong to the web content
 	 * article's DDM structure.
 	 *
 	 * @param groupId the primary key of the folder's group
@@ -5042,6 +5058,22 @@ public class JournalArticleLocalServiceImpl
 
 		_subscriptionLocalService.addSubscription(
 			userId, groupId, DDMStructure.class.getName(), ddmStructureId);
+	}
+
+	/**
+	 * Unsubscribes the user from changes in elements that belong to the web
+	 * content article.
+	 *
+	 * @param groupId the primary key of the folder's group
+	 * @param userId the primary key of the user to be subscribed
+	 * @param articleId the primary key of the article to unsubscribe from
+	 */
+	@Override
+	public void unsubscribe(long userId, long groupId, long articleId)
+		throws PortalException {
+
+		_subscriptionLocalService.deleteSubscription(
+			userId, JournalArticle.class.getName(), articleId);
 	}
 
 	/**
