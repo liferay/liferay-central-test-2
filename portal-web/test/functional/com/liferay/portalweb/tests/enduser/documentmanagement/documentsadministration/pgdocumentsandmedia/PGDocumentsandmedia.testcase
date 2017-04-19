@@ -1860,7 +1860,7 @@
 		<execute function="AssertTextEquals" locator1="Link#UNSUBSCRIBE" value1="Unsubscribe" />
 	</command>
 
-	<command name="UnlockFolderDocument" priority="4">
+	<command name="UnlockDocumentInFolder" priority="4">
 		<execute macro="Navigator#gotoPage">
 			<var name="pageName" value="Documents and Media Page" />
 		</execute>
