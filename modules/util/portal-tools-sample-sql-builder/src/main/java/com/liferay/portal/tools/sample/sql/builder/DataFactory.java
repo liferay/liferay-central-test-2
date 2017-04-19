@@ -877,17 +877,14 @@ public class DataFactory {
 
 			Map<Long, List<AssetTagModel>> assetTagModelsMap = new HashMap<>();
 
-			int totalAssetTagModelSize = assetTagModels.size();
-
-			int pageSize =
-				totalAssetTagModelSize / _assetClassNameIds.length;
+			int pageSize = assetTagModels.size() / _assetClassNameIds.length;
 
 			for (int j = 0; j < _assetClassNameIds.length; j++) {
 				int fromIndex = j * pageSize;
 				int toIndex = (j + 1) * pageSize;
 
 				if (j == (_assetClassNameIds.length - 1)) {
-					toIndex = totalAssetTagModelSize;
+					toIndex = assetTagModels.size();
 				}
 
 				assetTagModelsMap.put(
