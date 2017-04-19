@@ -2270,7 +2270,7 @@ public class DataFactory {
 				plid, portletId, PortletConstants.DEFAULT_PREFERENCES);
 		}
 
-		Integer startIndex = _assetPublisherQueryStartIndex.get(groupId);
+		Integer startIndex = _assetPublisherQueryStartIndexes.get(groupId);
 
 		if (startIndex == null) {
 			startIndex = 0;
@@ -2313,7 +2313,8 @@ public class DataFactory {
 
 		String[] assetPublisherQueryValues = objectValuePair.getKey();
 
-		_assetPublisherQueryStartIndex.put(groupId, objectValuePair.getValue());
+		_assetPublisherQueryStartIndexes.put(
+			groupId, objectValuePair.getValue());
 
 		PortletPreferences jxPortletPreferences =
 			(PortletPreferences)_defaultAssetPublisherPortletPreference.clone();
@@ -3710,7 +3711,7 @@ public class DataFactory {
 	private final Map<Long, Integer> _assetClassNameIdsIndexes =
 		new HashMap<>();
 	private String _assetPublisherQueryName;
-	private final Map<Long, Integer> _assetPublisherQueryStartIndex =
+	private final Map<Long, Integer> _assetPublisherQueryStartIndexes =
 		new HashMap<>();
 	private Map<Long, SimpleCounter>[] _assetTagCounters;
 	private List<AssetTagModel>[] _assetTagModelsArray;
