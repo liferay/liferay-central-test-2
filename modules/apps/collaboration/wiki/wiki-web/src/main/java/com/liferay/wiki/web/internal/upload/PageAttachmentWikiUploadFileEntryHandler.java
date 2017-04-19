@@ -43,17 +43,16 @@ public class PageAttachmentWikiUploadFileEntryHandler
 	public FileEntry upload(UploadPortletRequest uploadPortletRequest)
 		throws IOException, PortalException {
 
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)uploadPortletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
 		long resourcePrimKey = ParamUtil.getLong(
 			uploadPortletRequest, "resourcePrimKey");
 
 		String fileName = uploadPortletRequest.getFileName(_PARAMETER_NAME);
-
 		String contentType = uploadPortletRequest.getContentType(
 			_PARAMETER_NAME);
-
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)uploadPortletRequest.getAttribute(
-				WebKeys.THEME_DISPLAY);
 
 		WikiPage page = _wikiPageService.getPage(resourcePrimKey);
 
