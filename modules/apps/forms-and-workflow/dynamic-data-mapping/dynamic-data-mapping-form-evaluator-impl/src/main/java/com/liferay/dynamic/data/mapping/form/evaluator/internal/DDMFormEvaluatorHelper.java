@@ -45,7 +45,6 @@ import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.service.RoleLocalService;
 import com.liferay.portal.kernel.service.UserGroupRoleLocalService;
 import com.liferay.portal.kernel.service.UserLocalService;
@@ -82,8 +81,7 @@ public class DDMFormEvaluatorHelper {
 		DDMDataProviderInvoker ddmDataProviderInvoker,
 		DDMExpressionFactory ddmExpressionFactory,
 		DDMFormEvaluatorContext ddmFormEvaluatorContext,
-		JSONFactory jsonFactory, GroupLocalService groupLocalService,
-		RoleLocalService roleLocalService,
+		JSONFactory jsonFactory, RoleLocalService roleLocalService,
 		UserGroupRoleLocalService userGroupRoleLocalService,
 		UserLocalService userLocalService) {
 
@@ -91,7 +89,6 @@ public class DDMFormEvaluatorHelper {
 		_ddmDataProviderInvoker = ddmDataProviderInvoker;
 		_ddmExpressionFactory = ddmExpressionFactory;
 		_jsonFactory = jsonFactory;
-		_groupLocalService = groupLocalService;
 		_roleLocalService = roleLocalService;
 		_userGroupRoleLocalService = userGroupRoleLocalService;
 		_userLocalService = userLocalService;
@@ -434,7 +431,7 @@ public class DDMFormEvaluatorHelper {
 		_ddmExpressionFunctionRegistry.registerDDMExpressionFunction(
 			"belongsTo",
 			new BelongsToRoleFunction(
-				_request, _groupId, _groupLocalService, _roleLocalService,
+				_request, _groupId, _roleLocalService,
 				_userGroupRoleLocalService, _userLocalService));
 		_ddmExpressionFunctionRegistry.registerDDMExpressionFunction(
 			"calculate",
@@ -676,7 +673,6 @@ public class DDMFormEvaluatorHelper {
 	private final Map<String, List<DDMFormFieldValue>> _ddmFormFieldValuesMap =
 		new LinkedHashMap<>();
 	private final long _groupId;
-	private final GroupLocalService _groupLocalService;
 	private final JSONFactory _jsonFactory;
 	private final Locale _locale;
 	private final Map<Integer, Integer> _pageFlow = new HashMap<>();
