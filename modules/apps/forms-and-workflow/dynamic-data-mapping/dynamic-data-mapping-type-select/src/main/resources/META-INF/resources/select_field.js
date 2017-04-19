@@ -27,6 +27,16 @@ AUI.add(
 
 		var TPL_OPTION = '<option>{label}</option>';
 
+		new A.TooltipDelegate(
+			{
+				position: 'bottom',
+				trigger: '.multiple-badge-list .multiple-badge',
+				triggerHideEvent: ['blur', 'mouseleave'],
+				triggerShowEvent: ['focus', 'mouseover'],
+				visible: false
+			}
+		);
+
 		var SelectField = A.Component.create(
 			{
 				ATTRS: {

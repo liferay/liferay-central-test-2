@@ -114,7 +114,7 @@
  */
 {template .badge_item autoescape="deprecated-contextual"}
 	<li>
-		<span class="badge badge-default badge-sm multiple-badge">
+		<span class="badge badge-default badge-sm multiple-badge" data-original-title="{$label}" title="{$label}">
 			{$label}
 			<a class="trigger-badge-item-close" data-badge-value="{$value}" href="javascript:void(0)">{$badgeCloseIcon|noAutoescape}</a>
 		</span>
