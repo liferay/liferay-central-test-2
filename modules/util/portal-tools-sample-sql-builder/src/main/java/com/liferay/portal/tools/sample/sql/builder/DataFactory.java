@@ -696,7 +696,7 @@ public class DataFactory {
 	}
 
 	public long getNextAssetClassNameId(long groupId) {
-		Integer counter = _assetClassIdIndexMap.get(groupId);
+		Integer counter = _assetClassNameIdsIndexes.get(groupId);
 
 		if (counter == null) {
 			counter = 0;
@@ -705,7 +705,7 @@ public class DataFactory {
 		long classNameId =
 			_assetClassNameIds[counter % _assetClassNameIds.length];
 
-		_assetClassIdIndexMap.put(groupId, ++counter);
+		_assetClassNameIdsIndexes.put(groupId, ++counter);
 
 		return classNameId;
 	}
@@ -3663,7 +3663,8 @@ public class DataFactory {
 	private Map<Long, SimpleCounter>[] _assetCategoryCounters;
 	private List<AssetCategoryModel>[] _assetCategoryModelsArray;
 	private Map<Long, List<AssetCategoryModel>>[] _assetCategoryModelsArrayMap;
-	private final Map<Long, Integer> _assetClassIdIndexMap = new HashMap<>();
+	private final Map<Long, Integer> _assetClassNameIdsIndexes =
+		new HashMap<>();
 	private final long[] _assetClassNameIds;
 	private String _assetPublisherQueryName;
 	private final Map<Long, Integer> _assetPublisherQueryStartIndex =
