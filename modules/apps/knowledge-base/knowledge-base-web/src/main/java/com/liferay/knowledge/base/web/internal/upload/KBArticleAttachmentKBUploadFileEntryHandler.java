@@ -48,7 +48,7 @@ public class KBArticleAttachmentKBUploadFileEntryHandler
 	public FileEntry upload(UploadPortletRequest uploadPortletRequest)
 		throws IOException, PortalException {
 
-		final ThemeDisplay themeDisplay =
+		ThemeDisplay themeDisplay =
 			(ThemeDisplay)uploadPortletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
