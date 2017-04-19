@@ -60,7 +60,7 @@ public class KBArticleAttachmentKBUploadFileEntryHandler
 		String contentType = uploadPortletRequest.getContentType(
 			_PARAMETER_NAME);
 
-		final KBArticle kbArticle = _kbArticleLocalService.getLatestKBArticle(
+		KBArticle kbArticle = _kbArticleLocalService.getLatestKBArticle(
 			resourcePrimKey, WorkflowConstants.STATUS_APPROVED);
 
 		KBArticlePermission.check(
