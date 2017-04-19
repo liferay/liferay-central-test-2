@@ -2270,13 +2270,13 @@ public class DataFactory {
 				plid, portletId, PortletConstants.DEFAULT_PREFERENCES);
 		}
 
+		ObjectValuePair<String[], Integer> objectValuePair = null;
+
 		Integer startIndex = _assetPublisherQueryStartIndexes.get(groupId);
 
 		if (startIndex == null) {
 			startIndex = 0;
 		}
-
-		ObjectValuePair<String[], Integer> objectValuePair = null;
 
 		if (_assetPublisherQueryName.equals("assetCategories")) {
 			Map<Long, List<AssetCategoryModel>> assetCategoryModelsMap =
