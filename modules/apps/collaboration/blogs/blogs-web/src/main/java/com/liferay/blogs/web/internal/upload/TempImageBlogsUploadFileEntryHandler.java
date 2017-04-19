@@ -36,11 +36,11 @@ public class TempImageBlogsUploadFileEntryHandler
 			ThemeDisplay themeDisplay)
 		throws PortalException {
 
-		String uniqueFileName = TempFileEntryUtil.getTempFileName(fileName);
+		String tempFileName = TempFileEntryUtil.getTempFileName(fileName);
 
 		return TempFileEntryUtil.addTempFileEntry(
 			themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
-			_TEMP_FOLDER_NAME, uniqueFileName, inputStream, contentType);
+			_TEMP_FOLDER_NAME, tempFileName, inputStream, contentType);
 	}
 
 	private static final String _TEMP_FOLDER_NAME =
