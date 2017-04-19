@@ -272,6 +272,11 @@ public class DataFactory {
 			_classNameModels.put(model, classNameModel);
 		}
 
+		_assetClassNameIds = new long[] {
+			getClassNameId(BlogsEntry.class),
+			getClassNameId(JournalArticle.class), getClassNameId(WikiPage.class)
+		};
+
 		_accountId = _counter.get();
 		_companyId = _counter.get();
 		_defaultUserId = _counter.get();
@@ -321,11 +326,6 @@ public class DataFactory {
 		_defaultAssetPublisherPortletPreference =
 			(PortletPreferencesImpl)_portletPreferencesFactory.fromDefaultXML(
 				defaultAssetPublisherPreference);
-
-		_assetClassNameIds = new long[] {
-			getClassNameId(BlogsEntry.class),
-			getClassNameId(JournalArticle.class), getClassNameId(WikiPage.class)
-		};
 
 		initAssetCategoryModels();
 		initAssetTagModels();
