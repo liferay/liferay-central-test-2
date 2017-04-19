@@ -809,18 +809,16 @@ public class DataFactory {
 			Map<Long, List<AssetCategoryModel>> assetCategoryModelsMap =
 				new HashMap<>();
 
-			int assetEntryTypeCount = _assetClassNameIds.length;
-
 			int totalAssetCategoryModelSize = assetCategoryModels.size();
 
 			int assetCategoryModelSizeForEachType =
-				totalAssetCategoryModelSize / assetEntryTypeCount;
+				totalAssetCategoryModelSize / _assetClassNameIds.length;
 
-			for (int j = 0; j < assetEntryTypeCount; j++) {
+			for (int j = 0; j < _assetClassNameIds.length; j++) {
 				int fromIndex = j * assetCategoryModelSizeForEachType;
 				int toIndex = (j + 1) * assetCategoryModelSizeForEachType;
 
-				if (j == (assetEntryTypeCount - 1)) {
+				if (j == (_assetClassNameIds.length - 1)) {
 					toIndex = totalAssetCategoryModelSize;
 				}
 
@@ -886,18 +884,16 @@ public class DataFactory {
 
 			Map<Long, List<AssetTagModel>> assetTagModelsMap = new HashMap<>();
 
-			int assetEntryTypeCount = _assetClassNameIds.length;
-
 			int totalAssetTagModelSize = assetTagModels.size();
 
 			int assetTagModelSizeForEachType =
-				totalAssetTagModelSize / assetEntryTypeCount;
+				totalAssetTagModelSize / _assetClassNameIds.length;
 
-			for (int j = 0; j < assetEntryTypeCount; j++) {
+			for (int j = 0; j < _assetClassNameIds.length; j++) {
 				int fromIndex = j * assetTagModelSizeForEachType;
 				int toIndex = (j + 1) * assetTagModelSizeForEachType;
 
-				if (j == (assetEntryTypeCount - 1)) {
+				if (j == (_assetClassNameIds.length - 1)) {
 					toIndex = totalAssetTagModelSize;
 				}
 
