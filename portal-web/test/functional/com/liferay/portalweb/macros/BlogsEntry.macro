@@ -1111,6 +1111,8 @@
 	</command>
 
 	<command name="viewTitle">
+		<var name="key_entryTitle" value="${entryTitle}" />
+
 		<execute function="AssertTextEquals" locator1="BlogsEntry#TITLE" value1="${entryTitle}" />
 	</command>
 
