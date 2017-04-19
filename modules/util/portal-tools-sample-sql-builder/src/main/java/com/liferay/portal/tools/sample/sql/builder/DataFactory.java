@@ -2276,8 +2276,6 @@ public class DataFactory {
 			startIndex = 0;
 		}
 
-		String[] assetPublisherQueryValues = null;
-
 		ObjectValuePair<String[], Integer> objectValuePair = null;
 
 		if (_assetPublisherQueryName.equals("assetCategories")) {
@@ -2313,7 +2311,7 @@ public class DataFactory {
 				assetTagModels, startIndex);
 		}
 
-		assetPublisherQueryValues = objectValuePair.getKey();
+		String[] assetPublisherQueryValues = objectValuePair.getKey();
 
 		_assetPublisherQueryStartIndex.put(groupId, objectValuePair.getValue());
 
