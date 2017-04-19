@@ -1290,32 +1290,11 @@ public class ServiceBuilder {
 		return sb.toString();
 	}
 
-	public List<EntityColumn> getMappingEntities(String mappingTable)
-		throws Exception {
-
-		List<EntityColumn> mappingEntitiesPKList = new ArrayList<>();
-
-		EntityMapping entityMapping = _entityMappings.get(mappingTable);
-
-		for (int i = 0; i < 3; i++) {
-			Entity entity = getEntity(entityMapping.getEntity(i));
-
-			if (entity == null) {
-				return null;
-			}
-
-			mappingEntitiesPKList.addAll(entity.getPKList());
-		}
-
-		return mappingEntitiesPKList;
-	}
-
-	public LinkedHashMap<String, List<EntityColumn>> getMappingEntitiesMap(
+	public Map<String, List<EntityColumn>> getMappingEntities(
 			String mappingTable)
 		throws Exception {
 
-		LinkedHashMap<String, List<EntityColumn>> mappingEntitiesPKMap =
-			new LinkedHashMap<>();
+		Map<String, List<EntityColumn>> mappingEntities = new LinkedHashMap<>();
 
 		EntityMapping entityMapping = _entityMappings.get(mappingTable);
 
@@ -1326,10 +1305,10 @@ public class ServiceBuilder {
 				return null;
 			}
 
-			mappingEntitiesPKMap.put(entity.getName(), entity.getPKList());
+			mappingEntities.put(entity.getName(), entity.getPKList());
 		}
 
-		return mappingEntitiesPKMap;
+		return mappingEntities;
 	}
 
 	public int getMaxLength(String model, String field) {
