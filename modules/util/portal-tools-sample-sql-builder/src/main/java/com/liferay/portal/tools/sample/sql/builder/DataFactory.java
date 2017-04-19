@@ -366,10 +366,8 @@ public class DataFactory {
 	}
 
 	public List<Long> getAssetCategoryIds(AssetEntryModel assetEntryModel) {
-		long groupId = assetEntryModel.getGroupId();
-
 		Map<Long, List<AssetCategoryModel>> assetCategoryModelsMap =
-			_assetCategoryModelsArrayMap[(int)groupId - 1];
+			_assetCategoryModelsArrayMap[(int)assetEntryModel.getGroupId() - 1];
 
 		if ((assetCategoryModelsMap == null) ||
 			assetCategoryModelsMap.isEmpty()) {
@@ -392,7 +390,7 @@ public class DataFactory {
 		}
 
 		SimpleCounter counter = getSimpleCounter(
-			_assetCategoryCounters, groupId, classNameId);
+			_assetCategoryCounters, assetEntryModel.getGroupId(), classNameId);
 
 		List<Long> assetCategoryIds = new ArrayList<>(
 			_maxAssetEntryToAssetCategoryCount);
@@ -426,10 +424,8 @@ public class DataFactory {
 	}
 
 	public List<Long> getAssetTagIds(AssetEntryModel assetEntryModel) {
-		long groupId = assetEntryModel.getGroupId();
-
 		Map<Long, List<AssetTagModel>> assetTagModelsMap =
-			_assetTagModelsArrayMap[(int)groupId - 1];
+			_assetTagModelsArrayMap[(int)assetEntryModel.getGroupId() - 1];
 
 		if ((assetTagModelsMap == null) || assetTagModelsMap.isEmpty()) {
 			return Collections.emptyList();
@@ -449,7 +445,7 @@ public class DataFactory {
 		}
 
 		SimpleCounter counter = getSimpleCounter(
-			_assetTagCounters, groupId, classNameId);
+			_assetTagCounters, assetEntryModel.getGroupId(), classNameId);
 
 		List<Long> assetTagIds = new ArrayList<>(_maxAssetEntryToAssetTagCount);
 
