@@ -57,40 +57,41 @@ public class DLUploadFileEntryHandler implements UploadFileEntryHandler {
 			(ThemeDisplay)uploadPortletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-		long groupId = themeDisplay.getScopeGroupId();
-
 		long folderId = ParamUtil.getLong(uploadPortletRequest, "folderId");
+
+		DLFolderPermission.check(
+			themeDisplay.getPermissionChecker(), themeDisplay.getScopeGroupId(),
+			folderId, ActionKeys.ADD_DOCUMENT);
 
 		String originalFilename = uploadPortletRequest.getFileName(
 			_PARAMETER_NAME);
-		String contentType = uploadPortletRequest.getContentType(
-			_PARAMETER_NAME);
 		long size = uploadPortletRequest.getSize(_PARAMETER_NAME);
 
-		DLFolderPermission.check(
-			themeDisplay.getPermissionChecker(), groupId, folderId,
-			ActionKeys.ADD_DOCUMENT);
+		_validateFile(size);
 
-		_validateFile(originalFilename, size);
+		String contentType = uploadPortletRequest.getContentType(
+			_PARAMETER_NAME);
 
 		try (InputStream inputStream =
 				uploadPortletRequest.getFileAsStream(_PARAMETER_NAME)) {
 
 			String uniqueFileName = _uniqueFileNameProvider.provide(
 				originalFilename,
-				fileName -> _fileExists(fileName, groupId, folderId));
+				fileName ->
+					_exists(
+						fileName, themeDisplay.getScopeGroupId(), folderId));
 
 			ServiceContext serviceContext = ServiceContextFactory.getInstance(
 				DLFileEntry.class.getName(), uploadPortletRequest);
 
 			return _dlAppService.addFileEntry(
-				groupId, folderId, uniqueFileName, contentType, uniqueFileName,
-				StringPool.BLANK, StringPool.BLANK, inputStream, size,
-				serviceContext);
+				themeDisplay.getScopeGroupId(), folderId, uniqueFileName,
+				contentType, uniqueFileName, StringPool.BLANK, StringPool.BLANK,
+				inputStream, size, serviceContext);
 		}
 	}
 
-	private boolean _fileExists(String fileName, long groupId, long folderId) {
+	private boolean _exists(String fileName, long groupId, long folderId) {
 		try {
 			if (_dlAppService.getFileEntry(groupId, folderId, fileName) !=
 					null) {
@@ -109,9 +110,7 @@ public class DLUploadFileEntryHandler implements UploadFileEntryHandler {
 		}
 	}
 
-	private void _validateFile(String fileName, long size)
-		throws PortalException {
-
+	private void _validateFile(long size) throws PortalException {
 		long maxSize = PrefsPropsUtil.getLong(PropsKeys.DL_FILE_MAX_SIZE);
 
 		if ((maxSize > 0) && (size > maxSize)) {

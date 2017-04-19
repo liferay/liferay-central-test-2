@@ -50,15 +50,15 @@ public class PageAttachmentWikiUploadFileEntryHandler
 		long resourcePrimKey = ParamUtil.getLong(
 			uploadPortletRequest, "resourcePrimKey");
 
-		String fileName = uploadPortletRequest.getFileName(_PARAMETER_NAME);
-		String contentType = uploadPortletRequest.getContentType(
-			_PARAMETER_NAME);
-
 		WikiPage page = _wikiPageService.getPage(resourcePrimKey);
 
 		WikiNodePermissionChecker.check(
 			themeDisplay.getPermissionChecker(), page.getNodeId(),
 			ActionKeys.ADD_ATTACHMENT);
+
+		String fileName = uploadPortletRequest.getFileName(_PARAMETER_NAME);
+		String contentType = uploadPortletRequest.getContentType(
+			_PARAMETER_NAME);
 
 		try (InputStream inputStream =
 				uploadPortletRequest.getFileAsStream(_PARAMETER_NAME)) {
