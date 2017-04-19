@@ -55,17 +55,17 @@ public class KBArticleAttachmentKBUploadFileEntryHandler
 		long resourcePrimKey = ParamUtil.getLong(
 			uploadPortletRequest, "resourcePrimKey");
 
-		String originalFileName = uploadPortletRequest.getFileName(
-			_PARAMETER_NAME);
-		String contentType = uploadPortletRequest.getContentType(
-			_PARAMETER_NAME);
-
 		KBArticle kbArticle = _kbArticleLocalService.getLatestKBArticle(
 			resourcePrimKey, WorkflowConstants.STATUS_APPROVED);
 
 		KBArticlePermission.check(
 			themeDisplay.getPermissionChecker(), kbArticle,
 			KBActionKeys.UPDATE);
+
+		String originalFileName = uploadPortletRequest.getFileName(
+			_PARAMETER_NAME);
+		String contentType = uploadPortletRequest.getContentType(
+			_PARAMETER_NAME);
 
 		try (InputStream inputStream =
 				uploadPortletRequest.getFileAsStream(_PARAMETER_NAME)) {

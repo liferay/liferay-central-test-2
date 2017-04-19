@@ -59,13 +59,15 @@ public class ImageBlogsUploadFileEntryHandler
 			(ThemeDisplay)uploadPortletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
+		_checkPermission(themeDisplay);
+
 		String fileName = uploadPortletRequest.getFileName(_PARAMETER_NAME);
-		String contentType = uploadPortletRequest.getContentType(
-			_PARAMETER_NAME);
 		long size = uploadPortletRequest.getSize(_PARAMETER_NAME);
 
-		_checkPermission(themeDisplay);
 		_validateFile(fileName, size);
+
+		String contentType = uploadPortletRequest.getContentType(
+			_PARAMETER_NAME);
 
 		try (InputStream inputStream =
 				uploadPortletRequest.getFileAsStream(_PARAMETER_NAME)) {
@@ -80,18 +82,17 @@ public class ImageBlogsUploadFileEntryHandler
 			ThemeDisplay themeDisplay)
 		throws PortalException {
 
-		long userId = themeDisplay.getUserId();
-		long groupId = themeDisplay.getScopeGroupId();
-
-		Folder folder = blogsLocalService.addAttachmentsFolder(userId, groupId);
+		Folder folder = blogsLocalService.addAttachmentsFolder(
+			themeDisplay.getUserId(), themeDisplay.getScopeGroupId());
 
 		String uniqueFileName = PortletFileRepositoryUtil.getUniqueFileName(
-			groupId, folder.getFolderId(), fileName);
+			themeDisplay.getScopeGroupId(), folder.getFolderId(), fileName);
 
 		return PortletFileRepositoryUtil.addPortletFileEntry(
-			groupId, userId, BlogsEntry.class.getName(), 0,
-			BlogsConstants.SERVICE_NAME, folder.getFolderId(), inputStream,
-			uniqueFileName, contentType, true);
+			themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
+			BlogsEntry.class.getName(), 0, BlogsConstants.SERVICE_NAME,
+			folder.getFolderId(), inputStream, uniqueFileName, contentType,
+			true);
 	}
 
 	@Reference
@@ -103,12 +104,10 @@ public class ImageBlogsUploadFileEntryHandler
 		PermissionChecker permissionChecker =
 			themeDisplay.getPermissionChecker();
 
-		boolean containsResourcePermission =
-			ResourcePermissionCheckerUtil.containsResourcePermission(
+		if (!ResourcePermissionCheckerUtil.containsResourcePermission(
 				permissionChecker, BlogsPermission.RESOURCE_NAME,
-				themeDisplay.getScopeGroupId(), ActionKeys.ADD_ENTRY);
+				themeDisplay.getScopeGroupId(), ActionKeys.ADD_ENTRY)) {
 
-		if (!containsResourcePermission) {
 			throw new PrincipalException.MustHavePermission(
 				permissionChecker, BlogsPermission.RESOURCE_NAME,
 				themeDisplay.getScopeGroupId(), ActionKeys.ADD_ENTRY);
@@ -118,9 +117,9 @@ public class ImageBlogsUploadFileEntryHandler
 	private void _validateFile(String fileName, long size)
 		throws PortalException {
 
-		long maxSize = PropsValues.BLOGS_IMAGE_MAX_SIZE;
+		if ((PropsValues.BLOGS_IMAGE_MAX_SIZE > 0) &&
+			(size > PropsValues.BLOGS_IMAGE_MAX_SIZE)) {
 
-		if ((maxSize > 0) && (size > maxSize)) {
 			throw new EntryImageSizeException();
 		}
 

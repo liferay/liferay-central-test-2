@@ -45,26 +45,24 @@ public class TempImageMBUploadFileEntryHandler
 			(ThemeDisplay)uploadPortletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
+		long categoryId = ParamUtil.getLong(uploadPortletRequest, "categoryId");
+
+		MBCategoryPermission.check(
+			themeDisplay.getPermissionChecker(), themeDisplay.getScopeGroupId(),
+			categoryId, ActionKeys.ADD_FILE);
+
 		String fileName = uploadPortletRequest.getFileName(_PARAMETER_NAME);
 		String contentType = uploadPortletRequest.getContentType(
 			_PARAMETER_NAME);
 
-		long categoryId = ParamUtil.getLong(uploadPortletRequest, "categoryId");
-		long userId = themeDisplay.getUserId();
-		long groupId = themeDisplay.getScopeGroupId();
-
-		MBCategoryPermission.check(
-			themeDisplay.getPermissionChecker(), groupId, categoryId,
-			ActionKeys.ADD_FILE);
-
 		try (InputStream inputStream =
 				uploadPortletRequest.getFileAsStream(_PARAMETER_NAME)) {
 
-			String uniqueFileName = TempFileEntryUtil.getTempFileName(fileName);
+			String tempFileName = TempFileEntryUtil.getTempFileName(fileName);
 
 			return TempFileEntryUtil.addTempFileEntry(
-				groupId, userId, _TEMP_FOLDER_NAME, uniqueFileName, inputStream,
-				contentType);
+				themeDisplay.getScopeGroupId(), themeDisplay.getUserId(),
+				_TEMP_FOLDER_NAME, tempFileName, inputStream, contentType);
 		}
 	}
 
