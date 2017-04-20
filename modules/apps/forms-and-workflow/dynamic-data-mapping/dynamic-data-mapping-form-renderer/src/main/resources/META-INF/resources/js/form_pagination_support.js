@@ -168,17 +168,6 @@ AUI.add(
 
 				var container = instance.get('container');
 
-				var wizardNode = container.one('.lfr-ddm-form-wizard');
-
-				if (container.inDoc() && wizardNode) {
-					instance.wizard = new Renderer.Wizard(
-						{
-							boundingBox: wizardNode,
-							srcNode: wizardNode.one('> ul')
-						}
-					).render();
-				}
-
 				var paginatedNode = container.one('.lfr-ddm-form-paginated');
 
 				if (container.inDoc() && paginatedNode) {
@@ -186,6 +175,17 @@ AUI.add(
 						{
 							boundingBox: paginatedNode,
 							srcNode: paginatedNode.one('> ul')
+						}
+					).render();
+				}
+
+				var wizardNode = container.one('.lfr-ddm-form-wizard');
+
+				if (container.inDoc() && wizardNode) {
+					instance.wizard = new Renderer.Wizard(
+						{
+							boundingBox: wizardNode,
+							srcNode: wizardNode.one('> ul')
 						}
 					).render();
 				}
@@ -203,8 +203,9 @@ AUI.add(
 
 				if (controls) {
 					instance._syncPaginationControlsUI();
-					instance._syncWizardUI(event.prevVal, event.newVal);
+
 					instance._syncPaginatedUI(event.prevVal, event.newVal);
+					instance._syncWizardUI(event.prevVal, event.newVal);
 				}
 
 				var firstField = instance.getFirstPageField();
@@ -332,23 +333,6 @@ AUI.add(
 				}
 			},
 
-			_syncWizardUI: function(prevPage, currentPage) {
-				var instance = this;
-
-				var wizard = instance.wizard;
-
-				if (wizard) {
-					if (currentPage > prevPage) {
-						wizard.complete(prevPage - 1);
-					}
-					else {
-						wizard.clear(prevPage - 1);
-					}
-
-					wizard.activate(currentPage - 1);
-				}
-			},
-
 			_syncPaginatedUI: function(prevPage, currentPage) {
 				var instance = this;
 
@@ -363,6 +347,23 @@ AUI.add(
 					}
 
 					paginated.activate(currentPage - 1);
+				}
+			},
+
+			_syncWizardUI: function(prevPage, currentPage) {
+				var instance = this;
+
+				var wizard = instance.wizard;
+
+				if (wizard) {
+					if (currentPage > prevPage) {
+						wizard.complete(prevPage - 1);
+					}
+					else {
+						wizard.clear(prevPage - 1);
+					}
+
+					wizard.activate(currentPage - 1);
 				}
 			},
 
