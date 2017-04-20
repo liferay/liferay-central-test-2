@@ -161,11 +161,8 @@ public class JournalArticleTrashHandler extends JournalBaseTrashHandler {
 	}
 
 	@Override
-	public TrashEntry getTrashEntry(long classPK) throws PortalException {
-		JournalArticle article = _journalArticleLocalService.getLatestArticle(
-			classPK);
-
-		return article.getTrashEntry();
+	public TrashedModel getTrashedModel(long classPK) {
+		return _journalArticleLocalService.fetchLatestArticle(classPK);
 	}
 
 	@Override
@@ -194,22 +191,6 @@ public class JournalArticleTrashHandler extends JournalBaseTrashHandler {
 
 		return super.hasTrashPermission(
 			permissionChecker, groupId, classPK, trashActionId);
-	}
-
-	@Override
-	public boolean isInTrash(long classPK) throws PortalException {
-		JournalArticle article = _journalArticleLocalService.getLatestArticle(
-			classPK);
-
-		return article.isInTrash();
-	}
-
-	@Override
-	public boolean isInTrashContainer(long classPK) throws PortalException {
-		JournalArticle article = _journalArticleLocalService.getLatestArticle(
-			classPK);
-
-		return article.isInTrashContainer();
 	}
 
 	@Override

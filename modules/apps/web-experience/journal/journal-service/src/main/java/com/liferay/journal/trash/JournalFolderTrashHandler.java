@@ -24,6 +24,7 @@ import com.liferay.journal.service.permission.JournalFolderPermission;
 import com.liferay.journal.util.impl.JournalUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.ContainerModel;
+import com.liferay.portal.kernel.model.TrashedModel;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -135,10 +136,8 @@ public class JournalFolderTrashHandler extends JournalBaseTrashHandler {
 	}
 
 	@Override
-	public TrashEntry getTrashEntry(long classPK) throws PortalException {
-		JournalFolder folder = _journalFolderLocalService.getFolder(classPK);
-
-		return folder.getTrashEntry();
+	public TrashedModel getTrashedModel(long classPK) {
+		return _journalFolderLocalService.fetchFolder(classPK);
 	}
 
 	@Override
@@ -168,20 +167,6 @@ public class JournalFolderTrashHandler extends JournalBaseTrashHandler {
 	@Override
 	public boolean isContainerModel() {
 		return true;
-	}
-
-	@Override
-	public boolean isInTrash(long classPK) throws PortalException {
-		JournalFolder folder = _journalFolderLocalService.getFolder(classPK);
-
-		return folder.isInTrash();
-	}
-
-	@Override
-	public boolean isInTrashContainer(long classPK) throws PortalException {
-		JournalFolder folder = getJournalFolder(classPK);
-
-		return folder.isInTrashContainer();
 	}
 
 	@Override
