@@ -24,7 +24,7 @@ import com.liferay.portal.kernel.upload.LiferayFileItemException;
 import com.liferay.portal.kernel.upload.UploadException;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.upload.UploadRequestSizeException;
-import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.upload.UploadFileEntryHandler;
 import com.liferay.upload.UploadHandler;
@@ -36,6 +36,7 @@ import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Sergio González
@@ -91,7 +92,7 @@ public class DefaultUploadHandler implements UploadHandler {
 		throws PortalException {
 
 		UploadPortletRequest uploadPortletRequest =
-			PortalUtil.getUploadPortletRequest(portletRequest);
+			_portal.getUploadPortletRequest(portletRequest);
 
 		UploadException uploadException =
 			(UploadException)portletRequest.getAttribute(
@@ -117,5 +118,8 @@ public class DefaultUploadHandler implements UploadHandler {
 
 		return uploadPortletRequest;
 	}
+
+	@Reference
+	private Portal _portal;
 
 }
