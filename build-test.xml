@@ -2066,8 +2066,6 @@ tell application "Safari" to quit
 							<ant antfile="build-dist.xml" inheritAll="false" target="build-dist-tomcat" />
 
 							<setup-testable-tomcat />
-
-							<prepare-elasticsearch-configuration />
 						</else>
 					</if>
 				</else>
@@ -6039,6 +6037,10 @@ osb.lcs.portlet.oauth.consumer.secret=${osb.lcs.portlet.oauth.consumer.secret}</
 		<start-android-device />
 	</target>
 
+	<target name="prepare-osgi-module-configurations">
+		<prepare-elasticsearch-configuration />
+	</target>
+
 	<target name="prepare-portal-ext-properties">
 		<delete file="portal-impl/src/portal-ext.properties" />
 
@@ -9052,6 +9054,8 @@ jdbc.default.password=${database.mysql.password}</echo>
 				<delete failonerror="false" file="${app.server.classes.portal.dir}/system-ext.properties" />
 			</then>
 			<else>
+				<antcall target="prepare-osgi-module-configurations" />
+
 				<antcall target="prepare-portal-properties" />
 
 				<antcall target="prepare-portal-ext-properties" />
