@@ -297,6 +297,50 @@
 		</execute>
 	</command>
 
+	<command name="CKEditorSmoke" priority="5">
+		<property name="custom.properties" value="editor.wysiwyg.portal-web.docroot.html.portlet.blogs.edit_entry.jsp=ckeditor" />
+
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Blogs" />
+		</execute>
+
+		<execute macro="BlogsNavigator#gotoAddEntry" />
+
+		<execute macro="AlloyEditor#addTitle">
+			<var name="title" value="CKEditor Entry Title" />
+		</execute>
+
+		<execute macro="CKEditor#assertEditorPresent" />
+
+		<execute macro="CKEditor#addContent">
+			<var name="content" value="CKEditor Entry Content" />
+		</execute>
+
+		<execute macro="PortletEntry#publish" />
+
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Blogs" />
+		</execute>
+
+		<execute macro="BlogsNavigator#gotoEntryCP">
+			<var name="entryTitle" value="CKEditor Entry Title" />
+		</execute>
+
+		<execute macro="BlogsEntry#viewTitle">
+			<var name="entryTitle" value="CKEditor Entry Title" />
+		</execute>
+
+		<execute function="SelectFrame" locator1="CKEditor#BODY_FIELD_IFRAME" />
+
+		<execute macro="CKEditor#viewEntryContent">
+			<var name="content" value="CKEditor Entry Content" />
+		</execute>
+	</command>
+
 	<command name="DeleteBlogsEntries" priority="5">
 		<property name="portal.acceptance" value="quarantine" />
 
