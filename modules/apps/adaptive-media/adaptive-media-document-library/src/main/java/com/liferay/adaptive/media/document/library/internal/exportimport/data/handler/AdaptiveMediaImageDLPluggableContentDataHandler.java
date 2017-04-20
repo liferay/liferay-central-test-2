@@ -242,7 +242,7 @@ public class AdaptiveMediaImageDLPluggableContentDataHandler
 			try (InputStream inputStream = media.getInputStream()) {
 				_imageEntryLocalService.addAdaptiveMediaImageEntry(
 					configurationEntry, fileVersion, widthOptional.get(),
-					heightOptional.get(), media.getInputStream(),
+					heightOptional.get(), inputStream,
 					contentLengthOptional.get());
 			}
 		}
