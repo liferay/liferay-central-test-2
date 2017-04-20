@@ -508,7 +508,7 @@ public class GitWorkingDirectory {
 		fetch(refSpec, remoteConfig);
 	}
 
-	public List<String> getBranchesContainingSHA(String sha) {
+	public List<String> getBranchNamesContainingSHA(String sha) {
 		String command = "git branch --contains " + sha;
 
 		try {
@@ -855,10 +855,10 @@ public class GitWorkingDirectory {
 			int i = 0;
 
 			while (i < 10) {
-				List<String> branchesContainingSourceBranchSHA =
-					getBranchesContainingSHA(sourceBranchSHA);
+				List<String> branchNamesContainingSourceBranchSHA =
+					getBranchNamesContainingSHA(sourceBranchSHA);
 
-				if (!branchesContainingSourceBranchSHA.contains(
+				if (!branchNamesContainingSourceBranchSHA.contains(
 						targetBranchName)) {
 
 					i++;
