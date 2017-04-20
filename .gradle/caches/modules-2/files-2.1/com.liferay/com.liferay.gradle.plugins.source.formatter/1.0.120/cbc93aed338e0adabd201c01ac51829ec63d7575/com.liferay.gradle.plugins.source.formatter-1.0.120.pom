@@ -3,9 +3,9 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.liferay</groupId>
-  <artifactId>com.liferay.jasper.jspc</artifactId>
-  <version>1.0.9</version>
-  <description>Liferay Jasper JSPC</description>
+  <artifactId>com.liferay.gradle.plugins.source.formatter</artifactId>
+  <version>1.0.120</version>
+  <description>Liferay Gradle Plugins Source Formatter</description>
   <licenses>
     <license>
       <name>LGPL 2.1</name>
@@ -27,15 +27,15 @@
   <dependencies>
     <dependency>
       <groupId>com.liferay</groupId>
-      <artifactId>com.liferay.portal.servlet.jsp.compiler</artifactId>
-      <version>1.0.5</version>
+      <artifactId>com.liferay.gradle.util</artifactId>
+      <version>1.0.26</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>org.apache.ant</groupId>
-      <artifactId>ant</artifactId>
-      <version>1.9.4</version>
-      <scope>compile</scope>
+      <groupId>com.liferay</groupId>
+      <artifactId>com.liferay.source.formatter</artifactId>
+      <version>1.0.387</version>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
 </project>
