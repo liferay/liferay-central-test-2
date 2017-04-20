@@ -271,6 +271,12 @@ public class DDMStructureStagedModelDataHandler
 				DDMStructure.class + ".ddmStructureKey");
 
 		structureKeys.put(structureKey, existingStructure.getStructureKey());
+
+		Map<String, String> structureUuids =
+			(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
+				DDMStructure.class + ".ddmStructureUuid");
+
+		structureUuids.put(uuid, existingStructure.getUuid());
 	}
 
 	@Override
