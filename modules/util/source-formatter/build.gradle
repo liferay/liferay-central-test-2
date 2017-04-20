@@ -32,7 +32,6 @@ dependencies {
 }
 
 formatSource {
-	enabled false
 	mustRunAfter formatXML
 }
 
