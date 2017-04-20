@@ -77,7 +77,6 @@ public class DDMTemplateStagedModelDataHandlerTest
 			template.getUuid(), liveGroup);
 
 		Assert.assertNotNull(importedTemplate);
-
 		Assert.assertNotNull(importedStructure);
 		Assert.assertEquals(
 			importedStructure.getStructureId(), importedTemplate.getClassPK());
