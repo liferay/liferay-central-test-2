@@ -898,7 +898,7 @@ public class LocalGitSyncUtil {
 		catch (GitAPIException gapie) {
 			System.out.println(
 				JenkinsResultsParserUtil.combine(
-					"Unable to update cache branch timestamp on ", "branch ",
+					"Unable to update cache branch timestamp on branch ",
 					cacheBranchName));
 
 			gapie.printStackTrace();
