@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.journal.trash;
+package com.liferay.journal.internal.trash;
 
 import com.liferay.asset.kernel.AssetRendererFactoryRegistryUtil;
 import com.liferay.asset.kernel.model.AssetRendererFactory;
