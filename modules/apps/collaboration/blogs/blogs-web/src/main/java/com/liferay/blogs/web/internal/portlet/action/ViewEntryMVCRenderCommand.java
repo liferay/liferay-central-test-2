@@ -21,7 +21,7 @@ import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.util.PropsValues;
@@ -33,6 +33,7 @@ import javax.portlet.RenderResponse;
 import javax.servlet.http.HttpServletResponse;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Sergio González
@@ -70,11 +71,11 @@ public class ViewEntryMVCRenderCommand implements MVCRenderCommand {
 
 				if ((entry != null) && entry.isAllowPingbacks()) {
 					HttpServletResponse response =
-						PortalUtil.getHttpServletResponse(renderResponse);
+						_portal.getHttpServletResponse(renderResponse);
 
 					response.addHeader(
 						"X-Pingback",
-						PortalUtil.getPortalURL(renderRequest) +
+						_portal.getPortalURL(renderRequest) +
 							"/xmlrpc/pingback");
 				}
 			}
@@ -94,5 +95,8 @@ public class ViewEntryMVCRenderCommand implements MVCRenderCommand {
 
 		return "/blogs/view_entry.jsp";
 	}
+
+	@Reference
+	private Portal _portal;
 
 }

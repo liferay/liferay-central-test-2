@@ -56,7 +56,7 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.LoggingTimer;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
-import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -708,7 +708,7 @@ public class DLServiceVerifyProcess extends VerifyProcess {
 						Property classNameIdProperty =
 							PropertyFactoryUtil.forName("classNameId");
 
-						long classNameId = PortalUtil.getClassNameId(
+						long classNameId = _portal.getClassNameId(
 							DLFileEntry.class);
 
 						assetEntryDynamicQuery.add(
@@ -787,7 +787,7 @@ public class DLServiceVerifyProcess extends VerifyProcess {
 						Property classNameIdProperty =
 							PropertyFactoryUtil.forName("classNameId");
 
-						long classNameId = PortalUtil.getClassNameId(
+						long classNameId = _portal.getClassNameId(
 							DLFolder.class);
 
 						assetEntryDynamicQuery.add(
@@ -867,6 +867,9 @@ public class DLServiceVerifyProcess extends VerifyProcess {
 	private DLFileEntryTypeLocalService _dlFileEntryTypeLocalService;
 	private DLFileVersionLocalService _dlFileVersionLocalService;
 	private DLFolderLocalService _dlFolderLocalService;
+
+	@Reference
+	private Portal _portal;
 
 	@Reference
 	private PortalInstancesLocalService _portalInstancesLocalService;

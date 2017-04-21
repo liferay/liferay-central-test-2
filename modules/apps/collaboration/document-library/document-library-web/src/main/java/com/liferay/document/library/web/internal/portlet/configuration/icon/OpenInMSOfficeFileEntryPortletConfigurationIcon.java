@@ -25,7 +25,7 @@ import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.theme.PortletDisplay;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -39,6 +39,7 @@ import javax.portlet.PortletResponse;
 import javax.servlet.http.HttpServletRequest;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Roberto Díaz
@@ -108,7 +109,7 @@ public class OpenInMSOfficeFileEntryPortletConfigurationIcon
 	@Override
 	public boolean isShow(PortletRequest portletRequest) {
 		try {
-			HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			HttpServletRequest request = _portal.getHttpServletRequest(
 				portletRequest);
 
 			FileEntry fileEntry = ActionUtil.getFileEntry(portletRequest);
@@ -136,5 +137,8 @@ public class OpenInMSOfficeFileEntryPortletConfigurationIcon
 	public boolean isUseDialog() {
 		return true;
 	}
+
+	@Reference
+	private Portal _portal;
 
 }
