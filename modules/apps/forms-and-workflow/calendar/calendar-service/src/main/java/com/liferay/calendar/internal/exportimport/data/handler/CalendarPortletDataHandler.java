@@ -40,7 +40,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.util.MapUtil;
-import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.xml.Element;
 
 import java.util.List;
@@ -310,7 +310,7 @@ public class CalendarPortletDataHandler extends BasePortletDataHandler {
 		ActionableDynamicQuery calendarResourceActionableDynamicQuery =
 			getCalendarResourceActionableDynamicQuery(
 				portletDataContext,
-				PortalUtil.getClassNameId(CalendarResource.class));
+				_portal.getClassNameId(CalendarResource.class));
 
 		addSkipGuestCalendarResourceCriterion(
 			calendarResourceActionableDynamicQuery, portletDataContext);
@@ -327,7 +327,7 @@ public class CalendarPortletDataHandler extends BasePortletDataHandler {
 
 		exportActionableDynamicQuery.setStagedModelType(
 			new StagedModelType(
-				PortalUtil.getClassNameId(CalendarResource.class),
+				_portal.getClassNameId(CalendarResource.class),
 				referrerClassNameId));
 
 		return exportActionableDynamicQuery;
@@ -374,5 +374,8 @@ public class CalendarPortletDataHandler extends BasePortletDataHandler {
 		_calendarNotificationTemplateLocalService;
 	private CalendarResourceLocalService _calendarResourceLocalService;
 	private GroupLocalService _groupLocalService;
+
+	@Reference
+	private Portal _portal;
 
 }

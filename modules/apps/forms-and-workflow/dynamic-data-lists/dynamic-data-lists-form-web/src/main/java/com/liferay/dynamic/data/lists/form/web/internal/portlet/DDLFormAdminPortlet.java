@@ -54,7 +54,7 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.workflow.WorkflowDefinition;
@@ -173,9 +173,9 @@ public class DDLFormAdminPortlet extends MVCPortlet {
 			new DDMFormRenderingContext();
 
 		ddmFormRenderingContext.setHttpServletRequest(
-			PortalUtil.getHttpServletRequest(renderRequest));
+			_portal.getHttpServletRequest(renderRequest));
 		ddmFormRenderingContext.setHttpServletResponse(
-			PortalUtil.getHttpServletResponse(renderResponse));
+			_portal.getHttpServletResponse(renderResponse));
 		ddmFormRenderingContext.setContainerId("settings");
 		ddmFormRenderingContext.setLocale(
 			LocaleUtil.fromLanguageId(languageId));
@@ -494,6 +494,10 @@ public class DDLFormAdminPortlet extends MVCPortlet {
 	private DDMFormValuesMerger _ddmFormValuesMerger;
 	private DDMStructureLocalService _ddmStructureLocalService;
 	private JSONFactory _jsonFactory;
+
+	@Reference
+	private Portal _portal;
+
 	private StorageAdapterRegistry _storageAdapterRegistry;
 	private StorageEngine _storageEngine;
 	private WorkflowDefinitionManager _workflowDefinitionManager;
