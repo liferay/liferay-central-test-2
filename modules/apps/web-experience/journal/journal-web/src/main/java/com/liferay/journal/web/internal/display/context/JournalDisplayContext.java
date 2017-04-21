@@ -420,11 +420,11 @@ public class JournalDisplayContext {
 		jsonObject.put(
 			"name", LanguageUtil.get(themeDisplay.getLocale(), "home"));
 
-		JSONArray rootJsonArray = JSONFactoryUtil.createJSONArray();
+		JSONArray rootJSONArray = JSONFactoryUtil.createJSONArray();
 
-		rootJsonArray.put(jsonObject);
+		rootJSONArray.put(jsonObject);
 
-		return rootJsonArray;
+		return rootJSONArray;
 	}
 
 	public String getFolderTitle() throws PortalException {
