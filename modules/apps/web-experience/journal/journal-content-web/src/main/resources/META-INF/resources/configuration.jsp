@@ -107,6 +107,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			'click',
 			function(event) {
 				event.preventDefault();
+
 				retrieveWebContent('', 0);
 			},
 			'.selector-button'
@@ -137,6 +138,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 						var responseData = this.get('responseData');
 
 						articlePreview.setContent(responseData);
+
 						removeWebContentHandler();
 					}
 				}
