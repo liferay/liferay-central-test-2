@@ -23,7 +23,7 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.service.permission.OrganizationPermissionUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.users.admin.constants.UsersAdminPortletKeys;
@@ -34,6 +34,7 @@ import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Pei-Jung Lan
@@ -68,7 +69,7 @@ public class AssignUsersPortletConfigurationIcon
 				"mvcRenderCommandName",
 				"/users_admin/edit_organization_assignments");
 			portletURL.setParameter(
-				"redirect", PortalUtil.getCurrentURL(portletRequest));
+				"redirect", _portal.getCurrentURL(portletRequest));
 
 			Organization organization = ActionUtil.getOrganization(
 				portletRequest);
@@ -113,5 +114,8 @@ public class AssignUsersPortletConfigurationIcon
 
 		return false;
 	}
+
+	@Reference
+	private Portal _portal;
 
 }
