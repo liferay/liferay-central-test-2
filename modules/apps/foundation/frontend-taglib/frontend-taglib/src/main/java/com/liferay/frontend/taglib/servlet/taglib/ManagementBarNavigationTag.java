@@ -128,10 +128,15 @@ public class ManagementBarNavigationTag extends IncludeTag implements BodyTag {
 			for (String curNavigationKey : _navigationKeys) {
 				_portletURL.setParameter(_navigationParam, curNavigationKey);
 
+				boolean active = curNavigationKey.equals(navigationKey);
+
+				if (active && Validator.isNull(_label)) {
+					_label = curNavigationKey;
+				}
+
 				ManagementBarFilterItem managementBarFilterItem =
 					new ManagementBarFilterItem(
-						curNavigationKey.equals(navigationKey),
-						curNavigationKey, _portletURL.toString());
+						active, curNavigationKey, _portletURL.toString());
 
 				_managementBarFilterItems.add(managementBarFilterItem);
 			}
@@ -146,8 +151,7 @@ public class ManagementBarNavigationTag extends IncludeTag implements BodyTag {
 			ManagementBarFilterItem managementBarFilterItem =
 				_managementBarFilterItems.get(0);
 
-			_label = ParamUtil.getString(
-				request, _navigationParam, managementBarFilterItem.getLabel());
+			_label = managementBarFilterItem.getLabel();
 		}
 
 		request.setAttribute(
