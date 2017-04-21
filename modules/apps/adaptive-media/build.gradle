@@ -182,7 +182,7 @@ task runDocker(type: Exec) {
 		'-v', "${rootDir}/build/jacoco:/jacoco",
 		'-d',
 		'--name', "com-liferay-adaptive-media",
-		'liferay/liferay-de:20170228072932334161125-db'
+		'liferay/liferay-de:20170421073001106222642-db'
 
 	finalizedBy checkDocker
 }
