@@ -457,11 +457,6 @@ public class AssetPublisherExportImportPortletPreferencesProcessor
 					uuid, groupId);
 
 			if (ddmStructure == null) {
-
-				// If structure cannot be found, we need to assume this is a
-				// preloaded ddm structure and need to check again based on
-				// the uuid mapping
-
 				Map<String, String> structureUuids =
 					(Map<String, String>)
 						portletDataContext.getNewPrimaryKeysMap(
