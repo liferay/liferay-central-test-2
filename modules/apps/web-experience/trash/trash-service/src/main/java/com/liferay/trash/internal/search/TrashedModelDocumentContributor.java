@@ -81,7 +81,7 @@ public class TrashedModelDocumentContributor implements DocumentContributor {
 				catch (PortalException pe) {
 					if (_log.isDebugEnabled()) {
 						_log.debug(
-							"Unable to locate user: " +
+							"Unable to locate user " +
 								serviceContext.getUserId(),
 							pe);
 					}
