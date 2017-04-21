@@ -115,6 +115,23 @@ else {
 			/>
 		</c:if>
 
+		<c:if test="<%= JournalArticlePermission.contains(permissionChecker, article, ActionKeys.SUBSCRIBE) %>">
+
+			<%
+			boolean subscribed = JournalUtil.isSubscribedToArticle(article.getCompanyId(), scopeGroupId, themeDisplay.getUserId(), article.getResourcePrimKey());
+			%>
+
+			<portlet:actionURL name='<%= subscribed ? "unsubscribeArticle" : "subscribeArticle " %>' var="subscribeArticleURL">
+				<portlet:param name="redirect" value="<%= currentURL %>" />
+				<portlet:param name="articleId" value="<%= String.valueOf(article.getResourcePrimKey()) %>" />
+			</portlet:actionURL>
+
+			<liferay-ui:icon
+				message='<%= subscribed ? "unsubscribe" : "subscribe" %>'
+				url="<%= subscribeArticleURL.toString() %>"
+			/>
+		</c:if>
+
 		<c:if test="<%= JournalFolderPermission.contains(permissionChecker, scopeGroupId, article.getFolderId(), ActionKeys.ADD_ARTICLE) %>">
 			<c:choose>
 				<c:when test="<%= journalWebConfiguration.journalArticleForceAutogenerateId() %>">
