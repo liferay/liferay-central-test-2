@@ -96,10 +96,9 @@ public class XMLWorkflowModelParser implements WorkflowModelParser {
 
 		Element rootElement = document.getRootElement();
 
-		String name = rootElement.elementTextTrim("name");
-		String description = rootElement.elementTextTrim("description");
-		int version = GetterUtil.getInteger(
-			rootElement.elementTextTrim("version"));
+		String name = rootElement.elementText("name");
+		String description = rootElement.elementText("description");
+		int version = GetterUtil.getInteger(rootElement.elementText("version"));
 
 		Definition definition = new Definition(
 			name, description, document.formattedString(), version);
@@ -169,17 +168,16 @@ public class XMLWorkflowModelParser implements WorkflowModelParser {
 		Set<Action> actions = new HashSet<>(actionElements.size());
 
 		for (Element actionElement : actionElements) {
-			String name = actionElement.elementTextTrim("name");
-			String description = actionElement.elementTextTrim("description");
-			String executionType = actionElement.elementTextTrim(
-				"execution-type");
-			String script = actionElement.elementTextTrim("script");
-			String scriptLanguage = actionElement.elementTextTrim(
+			String name = actionElement.elementText("name");
+			String description = actionElement.elementText("description");
+			String executionType = actionElement.elementText("execution-type");
+			String script = actionElement.elementText("script");
+			String scriptLanguage = actionElement.elementText(
 				"script-language");
-			String scriptRequiredContexts = actionElement.elementTextTrim(
+			String scriptRequiredContexts = actionElement.elementText(
 				"script-required-contexts");
 			int priority = GetterUtil.getInteger(
-				actionElement.elementTextTrim("priority"));
+				actionElement.elementText("priority"));
 
 			Action action = new Action(
 				name, description, executionType, script, scriptLanguage,
@@ -221,7 +219,7 @@ public class XMLWorkflowModelParser implements WorkflowModelParser {
 				resourceActionsElement.elements("resource-action");
 
 			for (Element resourceActionElement : resourceActionElements) {
-				String actionId = resourceActionElement.getTextTrim();
+				String actionId = resourceActionElement.getText();
 
 				if (Validator.isNotNull(actionId)) {
 					ResourceActionAssignment resourceActionAssignment =
@@ -240,11 +238,11 @@ public class XMLWorkflowModelParser implements WorkflowModelParser {
 
 			for (Element roleAssignmentElement : roleAssignmentElements) {
 				long roleId = GetterUtil.getLong(
-					roleAssignmentElement.elementTextTrim("role-id"));
+					roleAssignmentElement.elementText("role-id"));
 				String roleType = GetterUtil.getString(
-					roleAssignmentElement.elementTextTrim("role-type"),
+					roleAssignmentElement.elementText("role-type"),
 					RoleConstants.TYPE_REGULAR_LABEL);
-				String name = roleAssignmentElement.elementTextTrim("name");
+				String name = roleAssignmentElement.elementText("name");
 
 				RoleAssignment roleAssignment = null;
 
@@ -252,8 +250,7 @@ public class XMLWorkflowModelParser implements WorkflowModelParser {
 					roleAssignment = new RoleAssignment(name, roleType);
 
 					boolean autoCreate = GetterUtil.getBoolean(
-						roleAssignmentElement.elementTextTrim("auto-create"),
-						true);
+						roleAssignmentElement.elementText("auto-create"), true);
 
 					roleAssignment.setAutoCreate(autoCreate);
 				}
@@ -269,11 +266,11 @@ public class XMLWorkflowModelParser implements WorkflowModelParser {
 			"scripted-assignment");
 
 		for (Element scriptedAssignmentElement : scriptedAssignmentElements) {
-			String script = scriptedAssignmentElement.elementTextTrim("script");
-			String scriptLanguage = scriptedAssignmentElement.elementTextTrim(
+			String script = scriptedAssignmentElement.elementText("script");
+			String scriptLanguage = scriptedAssignmentElement.elementText(
 				"script-language");
 			String scriptRequiredContexts =
-				scriptedAssignmentElement.elementTextTrim(
+				scriptedAssignmentElement.elementText(
 					"script-required-contexts");
 
 			ScriptAssignment scriptAssignment = new ScriptAssignment(
@@ -287,10 +284,10 @@ public class XMLWorkflowModelParser implements WorkflowModelParser {
 
 		for (Element userAssignmentElement : userAssignmentElements) {
 			long userId = GetterUtil.getLong(
-				userAssignmentElement.elementTextTrim("user-id"));
-			String screenName = userAssignmentElement.elementTextTrim(
+				userAssignmentElement.elementText("user-id"));
+			String screenName = userAssignmentElement.elementText(
 				"screen-name");
-			String emailAddress = userAssignmentElement.elementTextTrim(
+			String emailAddress = userAssignmentElement.elementText(
 				"email-address");
 
 			UserAssignment userAssignment = new UserAssignment(
@@ -303,18 +300,17 @@ public class XMLWorkflowModelParser implements WorkflowModelParser {
 	}
 
 	protected Condition parseCondition(Element conditionElement) {
-		String name = conditionElement.elementTextTrim("name");
-		String description = conditionElement.elementTextTrim("description");
-		String script = conditionElement.elementTextTrim("script");
-		String scriptLanguage = conditionElement.elementTextTrim(
-			"script-language");
-		String scriptRequiredContexts = conditionElement.elementTextTrim(
+		String name = conditionElement.elementText("name");
+		String description = conditionElement.elementText("description");
+		String script = conditionElement.elementText("script");
+		String scriptLanguage = conditionElement.elementText("script-language");
+		String scriptRequiredContexts = conditionElement.elementText(
 			"script-required-contexts");
 
 		Condition condition = new Condition(
 			name, description, script, scriptLanguage, scriptRequiredContexts);
 
-		String metadata = conditionElement.elementTextTrim("metadata");
+		String metadata = conditionElement.elementText("metadata");
 
 		condition.setMetadata(metadata);
 
@@ -335,20 +331,20 @@ public class XMLWorkflowModelParser implements WorkflowModelParser {
 		}
 
 		double duration = GetterUtil.getDouble(
-			delayElement.elementTextTrim("duration"));
+			delayElement.elementText("duration"));
 		DurationScale durationScale = DurationScale.valueOf(
-			StringUtil.toUpperCase(delayElement.elementTextTrim("scale")));
+			StringUtil.toUpperCase(delayElement.elementText("scale")));
 
 		return new DelayDuration(duration, durationScale);
 	}
 
 	protected Fork parseFork(Element forkElement) {
-		String name = forkElement.elementTextTrim("name");
-		String description = forkElement.elementTextTrim("description");
+		String name = forkElement.elementText("name");
+		String description = forkElement.elementText("description");
 
 		Fork fork = new Fork(name, description);
 
-		String metadata = forkElement.elementTextTrim("metadata");
+		String metadata = forkElement.elementText("metadata");
 
 		fork.setMetadata(metadata);
 
@@ -364,12 +360,12 @@ public class XMLWorkflowModelParser implements WorkflowModelParser {
 	}
 
 	protected Join parseJoin(Element joinElement) {
-		String name = joinElement.elementTextTrim("name");
-		String description = joinElement.elementTextTrim("description");
+		String name = joinElement.elementText("name");
+		String description = joinElement.elementText("description");
 
 		Join join = new Join(name, description);
 
-		String metadata = joinElement.elementTextTrim("metadata");
+		String metadata = joinElement.elementText("metadata");
 
 		join.setMetadata(metadata);
 
@@ -385,12 +381,12 @@ public class XMLWorkflowModelParser implements WorkflowModelParser {
 	}
 
 	protected JoinXor parseJoinXor(Element joinXorElement) {
-		String name = joinXorElement.elementTextTrim("name");
-		String description = joinXorElement.elementTextTrim("description");
+		String name = joinXorElement.elementText("name");
+		String description = joinXorElement.elementText("description");
 
 		JoinXor joinXor = new JoinXor(name, description);
 
-		String metadata = joinXorElement.elementTextTrim("metadata");
+		String metadata = joinXorElement.elementText("metadata");
 
 		joinXor.setMetadata(metadata);
 
@@ -417,13 +413,12 @@ public class XMLWorkflowModelParser implements WorkflowModelParser {
 			notificationElements.size());
 
 		for (Element notificationElement : notificationElements) {
-			String name = notificationElement.elementTextTrim("name");
-			String description = notificationElement.elementTextTrim(
-				"description");
-			String executionType = notificationElement.elementTextTrim(
+			String name = notificationElement.elementText("name");
+			String description = notificationElement.elementText("description");
+			String executionType = notificationElement.elementText(
 				"execution-type");
-			String template = notificationElement.elementTextTrim("template");
-			String templateLanguage = notificationElement.elementTextTrim(
+			String template = notificationElement.elementText("template");
+			String templateLanguage = notificationElement.elementText(
 				"template-language");
 
 			Notification notification = new Notification(
@@ -434,7 +429,7 @@ public class XMLWorkflowModelParser implements WorkflowModelParser {
 
 			for (Element notificationTypeElement : notificationTypeElements) {
 				notification.addNotificationType(
-					notificationTypeElement.getTextTrim());
+					notificationTypeElement.getText());
 			}
 
 			List<Element> recipientsElements = notificationElement.elements(
@@ -466,7 +461,7 @@ public class XMLWorkflowModelParser implements WorkflowModelParser {
 
 		for (Element addressRecipientElement : addressRecipientElements) {
 			AddressRecipient addressRecipient = new AddressRecipient(
-				addressRecipientElement.getTextTrim());
+				addressRecipientElement.getText());
 
 			addressRecipient.setNotificationReceptionType(
 				notificationReceptionType);
@@ -494,11 +489,11 @@ public class XMLWorkflowModelParser implements WorkflowModelParser {
 
 			for (Element roleReceipientElement : roleReceipientElements) {
 				long roleId = GetterUtil.getLong(
-					roleReceipientElement.elementTextTrim("role-id"));
+					roleReceipientElement.elementText("role-id"));
 				String roleType = GetterUtil.getString(
-					roleReceipientElement.elementTextTrim("role-type"),
+					roleReceipientElement.elementText("role-type"),
 					RoleConstants.TYPE_REGULAR_LABEL);
-				String name = roleReceipientElement.elementTextTrim("name");
+				String name = roleReceipientElement.elementText("name");
 
 				RoleRecipient roleRecipient = null;
 
@@ -509,8 +504,7 @@ public class XMLWorkflowModelParser implements WorkflowModelParser {
 					roleRecipient = new RoleRecipient(name, roleType);
 
 					boolean autoCreate = GetterUtil.getBoolean(
-						roleReceipientElement.elementTextTrim("auto-create"),
-						true);
+						roleReceipientElement.elementText("auto-create"), true);
 
 					roleRecipient.setAutoCreate(autoCreate);
 				}
@@ -526,11 +520,11 @@ public class XMLWorkflowModelParser implements WorkflowModelParser {
 			"scripted-recipient");
 
 		for (Element scriptedRecipientElement : scriptedRecipientElements) {
-			String script = scriptedRecipientElement.elementTextTrim("script");
-			String scriptLanguage = scriptedRecipientElement.elementTextTrim(
+			String script = scriptedRecipientElement.elementText("script");
+			String scriptLanguage = scriptedRecipientElement.elementText(
 				"script-language");
 			String scriptRequiredContexts =
-				scriptedRecipientElement.elementTextTrim(
+				scriptedRecipientElement.elementText(
 					"script-required-contexts");
 
 			ScriptRecipient scriptRecipient = new ScriptRecipient(
@@ -547,10 +541,9 @@ public class XMLWorkflowModelParser implements WorkflowModelParser {
 
 		for (Element userRecipientElement : userRecipientElements) {
 			long userId = GetterUtil.getLong(
-				userRecipientElement.elementTextTrim("user-id"));
-			String screenName = userRecipientElement.elementTextTrim(
-				"screen-name");
-			String emailAddress = userRecipientElement.elementTextTrim(
+				userRecipientElement.elementText("user-id"));
+			String screenName = userRecipientElement.elementText("screen-name");
+			String emailAddress = userRecipientElement.elementText(
 				"email-address");
 
 			UserRecipient userRecipient = new UserRecipient(
@@ -564,14 +557,14 @@ public class XMLWorkflowModelParser implements WorkflowModelParser {
 	}
 
 	protected State parseState(Element stateElement) {
-		String name = stateElement.elementTextTrim("name");
-		String description = stateElement.elementTextTrim("description");
+		String name = stateElement.elementText("name");
+		String description = stateElement.elementText("description");
 		boolean initial = GetterUtil.getBoolean(
-			stateElement.elementTextTrim("initial"));
+			stateElement.elementText("initial"));
 
 		State state = new State(name, description, initial);
 
-		String metadata = stateElement.elementTextTrim("metadata");
+		String metadata = stateElement.elementText("metadata");
 
 		state.setMetadata(metadata);
 
@@ -587,12 +580,12 @@ public class XMLWorkflowModelParser implements WorkflowModelParser {
 	}
 
 	protected Task parseTask(Element taskElement) {
-		String name = taskElement.elementTextTrim("name");
-		String description = taskElement.elementTextTrim("description");
+		String name = taskElement.elementText("name");
+		String description = taskElement.elementText("description");
 
 		Task task = new Task(name, description);
 
-		String metadata = taskElement.elementTextTrim("metadata");
+		String metadata = taskElement.elementText("metadata");
 
 		task.setMetadata(metadata);
 
@@ -666,10 +659,10 @@ public class XMLWorkflowModelParser implements WorkflowModelParser {
 	}
 
 	protected Timer parseTimerElement(Element timerElement, boolean taskTimer) {
-		String name = timerElement.elementTextTrim("name");
-		String description = timerElement.elementTextTrim("description");
+		String name = timerElement.elementText("name");
+		String description = timerElement.elementText("description");
 		boolean blocking = GetterUtil.getBoolean(
-			timerElement.elementTextTrim("blocking"), !taskTimer);
+			timerElement.elementText("blocking"), !taskTimer);
 
 		Timer timer = new Timer(name, description, blocking);
 
@@ -717,7 +710,7 @@ public class XMLWorkflowModelParser implements WorkflowModelParser {
 	}
 
 	protected void parseTransition(Definition definition, Element nodeElement) {
-		String sourceName = nodeElement.elementTextTrim("name");
+		String sourceName = nodeElement.elementText("name");
 
 		Node sourceNode = definition.getNode(sourceName);
 
@@ -731,14 +724,14 @@ public class XMLWorkflowModelParser implements WorkflowModelParser {
 			"transition");
 
 		for (Element transitionElement : transitionElements) {
-			String transitionName = transitionElement.elementTextTrim("name");
+			String transitionName = transitionElement.elementText("name");
 
-			String targetName = transitionElement.elementTextTrim("target");
+			String targetName = transitionElement.elementText("target");
 
 			Node targetNode = definition.getNode(targetName);
 
 			boolean defaultValue = GetterUtil.getBoolean(
-				transitionElement.elementTextTrim("default"), true);
+				transitionElement.elementText("default"), true);
 
 			Transition transition = new Transition(
 				transitionName, sourceNode, targetNode, defaultValue);
