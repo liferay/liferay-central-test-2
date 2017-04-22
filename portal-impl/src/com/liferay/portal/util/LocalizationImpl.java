@@ -848,6 +848,7 @@ public class LocalizationImpl implements Localization {
 				unsyncStringWriter);
 
 			xmlStreamWriter.writeStartDocument();
+
 			xmlStreamWriter.writeStartElement(_ROOT);
 
 			xmlStreamWriter.writeAttribute(
@@ -868,6 +869,7 @@ public class LocalizationImpl implements Localization {
 			}
 
 			xmlStreamWriter.writeEndElement();
+
 			xmlStreamWriter.writeEndDocument();
 
 			return unsyncStringWriter.toString();
