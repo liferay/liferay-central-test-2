@@ -482,6 +482,11 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 			}
 
 			@Override
+			public String get${column.methodName}MapAsXML() {
+				return LocalizationUtil.getXml(getLanguageIdTo${column.methodName}Map(), getDefaultLanguageId(), "${column.methodName}");
+			}
+
+			@Override
 			public Map<String, String> getLanguageIdTo${column.methodName}Map() {
 				Map<String, String> languageIdTo${column.methodName}Map = new HashMap<String, String>();
 
@@ -492,11 +497,6 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 				}
 
 				return languageIdTo${column.methodName}Map;
-			}
-
-			@Override
-			public String get${column.methodName}MapAsXML() {
-				return LocalizationUtil.getXml(getLanguageIdTo${column.methodName}Map(), getDefaultLanguageId(), "${column.methodName}");
 			}
 
 			private String _get${column.methodName}(String languageId) {
