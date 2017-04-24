@@ -1127,14 +1127,14 @@ public class GitWorkingDirectory {
 		}
 	}
 
-	private RemoteConfig _getPublicUpstreamRemoteConfig()
+	private RemoteConfig _getUpstreamPublicRemoteConfig()
 		throws GitAPIException {
 
-		RemoteConfig publicUpstreamRemoteConfig = _getRemoteConfig(
+		RemoteConfig upstreamPublicRemoteConfig = _getRemoteConfig(
 			"upstream-public");
 
-		if (publicUpstreamRemoteConfig != null) {
-			return publicUpstreamRemoteConfig;
+		if (upstreamPublicRemoteConfig != null) {
+			return upstreamPublicRemoteConfig;
 		}
 
 		String upstreamRemoteURL = getRemoteURL(_getRemoteConfig("upstream"));
@@ -1175,13 +1175,13 @@ public class GitWorkingDirectory {
 			!_upstreamBranchName.contains("ee-") &&
 			!_upstreamBranchName.contains("-private")) {
 
-			return _getPublicUpstreamRemoteConfig();
+			return _getUpstreamPublicRemoteConfig();
 		}
 
 		if (_repositoryName.contains("-private") &&
 			!_upstreamBranchName.contains("-private")) {
 
-			return _getPublicUpstreamRemoteConfig();
+			return _getUpstreamPublicRemoteConfig();
 		}
 
 		return _getRemoteConfig("upstream");
