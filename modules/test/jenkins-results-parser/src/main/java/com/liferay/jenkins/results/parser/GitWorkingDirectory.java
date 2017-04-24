@@ -1127,6 +1127,20 @@ public class GitWorkingDirectory {
 		}
 	}
 
+	private RemoteConfig _getRemoteConfig(String remoteName)
+		throws GitAPIException {
+
+		List<RemoteConfig> remoteConfigs = getRemoteConfigs();
+
+		for (RemoteConfig remoteConfig : remoteConfigs) {
+			if (remoteName.equals(remoteConfig.getName())) {
+				return remoteConfig;
+			}
+		}
+
+		return null;
+	}
+
 	private RemoteConfig _getUpstreamPublicRemoteConfig()
 		throws GitAPIException {
 
@@ -1143,20 +1157,6 @@ public class GitWorkingDirectory {
 		upstreamRemoteURL = upstreamRemoteURL.replace("-private", "");
 
 		return addRemote(true, "upstream-public", upstreamRemoteURL);
-	}
-
-	private RemoteConfig _getRemoteConfig(String remoteName)
-		throws GitAPIException {
-
-		List<RemoteConfig> remoteConfigs = getRemoteConfigs();
-
-		for (RemoteConfig remoteConfig : remoteConfigs) {
-			if (remoteName.equals(remoteConfig.getName())) {
-				return remoteConfig;
-			}
-		}
-
-		return null;
 	}
 
 	private RemoteConfig _getUpstreamRemoteConfig() throws GitAPIException {
