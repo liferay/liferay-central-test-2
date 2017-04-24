@@ -314,7 +314,7 @@ public class AggregateFilter extends IgnoreModuleRequestFilter {
 
 	protected String getCacheFileName(HttpServletRequest request) {
 		return _cacheFileNameGenerator.getCacheFileName(
-			AggregateFilter.class, request, _PARAMS_TO_REMOVE, null);
+			AggregateFilter.class, request, _REMOVE_PARAMETER_NAMES, null);
 	}
 
 	protected Object getContent(
@@ -586,7 +586,7 @@ public class AggregateFilter extends IgnoreModuleRequestFilter {
 
 	private static final String _JSP_EXTENSION = ".jsp";
 
-	private static final String[] _PARAMS_TO_REMOVE = {"zx"};
+	private static final String[] _REMOVE_PARAMETER_NAMES = {"zx"};
 
 	private static final String _TEMP_DIR = "aggregate";
 

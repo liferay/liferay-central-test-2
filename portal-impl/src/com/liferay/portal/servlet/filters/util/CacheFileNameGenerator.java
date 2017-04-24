@@ -30,8 +30,8 @@ import javax.servlet.http.HttpServletRequest;
 public class CacheFileNameGenerator {
 
 	public String getCacheFileName(
-		Class<?> clazz, HttpServletRequest request, String[] paramsToRemove,
-		String[] cacheKeyItems) {
+		Class<?> clazz, HttpServletRequest request,
+		String[] removeParameterNames, String[] cacheKeyKeys) {
 
 		CacheKeyGenerator cacheKeyGenerator =
 			CacheKeyGeneratorUtil.getCacheKeyGenerator(clazz.getName());
@@ -47,9 +47,10 @@ public class CacheFileNameGenerator {
 
 		String queryString = sb.toString();
 
-		if (paramsToRemove != null) {
-			for (String param : paramsToRemove) {
-				queryString = HttpUtil.removeParameter(queryString, param);
+		if (removeParameterNames != null) {
+			for (String removeParameterName : removeParameterNames) {
+				queryString = HttpUtil.removeParameter(
+					queryString, removeParameterName);
 			}
 		}
 
@@ -67,9 +68,9 @@ public class CacheFileNameGenerator {
 
 		cacheKeyGenerator.append(queryStringDigest);
 
-		if (cacheKeyItems != null) {
-			for (String cacheKeyItem : cacheKeyItems) {
-				cacheKeyGenerator.append(cacheKeyItem);
+		if (cacheKeyKeys != null) {
+			for (String cacheKeyKey : cacheKeyKeys) {
+				cacheKeyGenerator.append(cacheKeyKey);
 			}
 		}
 
