@@ -49,15 +49,17 @@ public class AssetRendererFactoryRegistryUtilTest {
 		List<AssetRendererFactory<?>> assetRendererFactories =
 			AssetRendererFactoryRegistryUtil.getAssetRendererFactories(1);
 
-		Stream<AssetRendererFactory<?>> assetRendererFactoryStream =
-			assetRendererFactories.stream().filter(
-				assetRendererFactory -> {
-					Class<?> clazz = assetRendererFactory.getClass();
+		Stream<AssetRendererFactory<?>> assetRendererFactoriesStream =
+			assetRendererFactories.stream();
 
-					return className.equals(clazz.getName());
-				});
+		assetRendererFactoriesStream = assetRendererFactoriesStream.filter(
+			assetRendererFactory -> {
+				Class<?> clazz = assetRendererFactory.getClass();
 
-		Assert.assertEquals(1, assetRendererFactoryStream.count());
+				return className.equals(clazz.getName());
+			});
+
+		Assert.assertEquals(1, assetRendererFactoriesStream.count());
 	}
 
 	@Test
