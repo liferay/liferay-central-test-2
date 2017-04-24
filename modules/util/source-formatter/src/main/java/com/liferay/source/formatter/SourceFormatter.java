@@ -390,7 +390,7 @@ public class SourceFormatter {
 			SourceFormatterUtil.filterFileNames(
 				_allFileNames,
 				excludesList.toArray(new String[excludesList.size()]),
-				new String[] {"**/modules/**/" + _PROPERTIES_FILE_NAME});
+				new String[] {"**/" + _PROPERTIES_FILE_NAME});
 
 		for (String modulePropertiesFileName : modulePropertiesFileNames) {
 			InputStream inputStream = new FileInputStream(
