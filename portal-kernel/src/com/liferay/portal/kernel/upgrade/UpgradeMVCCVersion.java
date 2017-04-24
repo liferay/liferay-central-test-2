@@ -153,7 +153,7 @@ public class UpgradeMVCCVersion extends UpgradeProcess {
 			ResultSet rs = ps.executeQuery()) {
 
 			if (rs.next()) {
-				return (String)rs.getObject("current_schema");
+				return rs.getString("current_schema");
 			}
 
 			return null;
