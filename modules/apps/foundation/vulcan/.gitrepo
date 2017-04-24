@@ -4,8 +4,8 @@
 [subrepo]
 	autopull = true
 	cmdver = liferay
-	commit = bf65b57f1a49755682cb829758d2c6ea2ccaab7a
+	commit = 736290c336bc8ab758bc4a6f5fe66aa6807ab3c2
 	mergebuttonmergecommits = false
 	mode = pull
-	parent = f8d0197a86089d9b507d9bbaf9ea1779cb834b44
+	parent = e2998f31605f451fcd018cd650c84b563bdbfd25
 	remote = git@github.com:liferay/com-liferay-vulcan.git
