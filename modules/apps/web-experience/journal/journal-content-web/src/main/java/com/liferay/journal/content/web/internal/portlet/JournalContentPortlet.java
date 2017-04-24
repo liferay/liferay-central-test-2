@@ -208,24 +208,24 @@ public class JournalContentPortlet extends MVCPortlet {
 		}
 	}
 
-	@Reference
+	@Reference(unbind = "-")
 	protected void setExportArticleUtil(ExportArticleUtil exportArticleUtil) {
 		_exportArticleUtil = exportArticleUtil;
 	}
 
-	@Reference
+	@Reference(unbind = "-")
 	protected void setJournalContent(JournalContent journalContent) {
 		_journalContent = journalContent;
 	}
 
-	@Reference
+	@Reference(unbind = "-")
 	protected void setJournalContentSearchLocal(
 		JournalArticleLocalService journalArticleLocalService) {
 
 		_journalArticleLocalService = journalArticleLocalService;
 	}
 
-	@Reference
+	@Reference(unbind = "-")
 	protected void setTrashEntryService(TrashEntryService trashEntryService) {
 		_trashEntryService = trashEntryService;
 	}
