@@ -1,5 +1,5 @@
 import Component from 'metal-component';
-import core from 'metal/src/core';
+import core from 'metal';
 import Soy from 'metal-soy';
 
 import templates from './InputSearch.soy';

@@ -1,6 +1,6 @@
-import core from 'metal/src/core';
-import dom from 'metal-dom/src/dom';
-import Soy from 'metal-soy/src/Soy';
+import core from 'metal';
+import dom from 'metal-dom';
+import Soy from 'metal-soy';
 import Treeview from 'metal-treeview';
 
 import templates from './CardsTreeView.soy';
