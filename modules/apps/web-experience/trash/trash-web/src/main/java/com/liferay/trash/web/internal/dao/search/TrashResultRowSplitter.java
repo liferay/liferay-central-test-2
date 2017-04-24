@@ -53,11 +53,11 @@ public class TrashResultRowSplitter implements ResultRowSplitter {
 		for (ResultRow resultRow : resultRows) {
 			TrashedModel trashedModel = (TrashedModel)resultRow.getObject();
 
-			String modelClassName =
-				((ClassedModel)trashedModel).getModelClassName();
+			ClassedModel classedModel = (ClassedModel)trashedModel;
 
 			TrashHandler trashHandler =
-				TrashHandlerRegistryUtil.getTrashHandler(modelClassName);
+				TrashHandlerRegistryUtil.getTrashHandler(
+					classedModel.getModelClassName());
 
 			if (Validator.isNull(containerModelName) &&
 				Validator.isNull(containedModelName)) {
