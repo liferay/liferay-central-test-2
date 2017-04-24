@@ -6740,12 +6740,12 @@ public class JournalArticleLocalServiceImpl
 				long oldImageId = 0;
 
 				if (incrementVersion) {
-					double oldVersion = getLatestVersion(groupId, articleId);
+					JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
+  						dynamicContent.getText());
 
-					oldImageId =
-						journalArticleImageLocalService.getArticleImageId(
-							groupId, articleId, oldVersion, elInstanceId,
-							elName, elLanguage);
+					oldImageId = GetterUtil.getLong(
+						HttpUtil.getParameter(
+							jsonObject.getString("data"), "img_id", false));
 				}
 
 				Image oldImage = null;
