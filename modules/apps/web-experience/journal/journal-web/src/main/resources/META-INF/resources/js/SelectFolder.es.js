@@ -24,7 +24,7 @@ class SelectFolder extends Component {
 	filterSiblingNodes_(nodes, filterValue) {
 		let filteredNodes = [];
 
-		nodes.filter(
+		nodes.forEach(
 			(node) => {
 				if (node.name.toLowerCase().indexOf(filterValue) !== -1) {
 					filteredNodes.push(node);
