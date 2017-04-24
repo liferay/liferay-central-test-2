@@ -21,20 +21,20 @@ import com.liferay.portal.kernel.exception.NoSuchModelException;
  * @author Supritha Sundaram
  */
 @ProviderType
-public class NoSuchWeDeployAuthAppException extends NoSuchModelException {
+public class NoSuchAppException extends NoSuchModelException {
 
-	public NoSuchWeDeployAuthAppException() {
+	public NoSuchAppException() {
 	}
 
-	public NoSuchWeDeployAuthAppException(String msg) {
+	public NoSuchAppException(String msg) {
 		super(msg);
 	}
 
-	public NoSuchWeDeployAuthAppException(String msg, Throwable cause) {
+	public NoSuchAppException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public NoSuchWeDeployAuthAppException(Throwable cause) {
+	public NoSuchAppException(Throwable cause) {
 		super(cause);
 	}
 
