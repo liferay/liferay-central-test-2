@@ -164,7 +164,6 @@ page import="com.liferay.portal.model.impl.*" %><%@
 page import="com.liferay.portal.service.*" %><%@
 page import="com.liferay.portal.upload.LiferayFileItem" %><%@
 page import="com.liferay.portal.util.PrefsPropsUtil" %><%@
-page import="com.liferay.portlet.asset.util.AssetUtil" %><%@
 page import="com.liferay.rss.util.RSSUtil" %><%@
 page import="com.liferay.taglib.search.ResultRow" %><%@
 page import="com.liferay.taglib.util.CustomAttributesUtil" %><%@
