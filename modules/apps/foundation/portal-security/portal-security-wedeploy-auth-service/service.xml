@@ -3,7 +3,7 @@
 
 <service-builder auto-namespace-tables="true" package-path="com.liferay.portal.security.wedeploy.auth">
 	<author>Supritha Sundaram</author>
-	<namespace>WedeployAuth</namespace>
+	<namespace>WeDeployAuth</namespace>
 	<entity local-service="true" name="WeDeployAuthApp" remote-service="true" uuid="false">
 
 		<!-- PK fields -->
