@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.service.ClassNameLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.Portal;
-import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -318,7 +317,7 @@ public class AssetVocabularyStagedModelDataHandler
 			titleMap = new HashMap<>();
 		}
 
-		titleMap.put(PortalUtil.getSiteDefaultLocale(groupId), name);
+		titleMap.put(_portal.getSiteDefaultLocale(groupId), name);
 
 		return titleMap;
 	}
