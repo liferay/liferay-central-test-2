@@ -1349,6 +1349,10 @@ public class PortletURLImpl
 			PortletLocalServiceUtil.fetchPortletById(
 				PortalUtil.getCompanyId(request), portletId),
 			portletRequest, layout, lifecycle);
+
+		if (_portlet == null) {
+			_portletId = portletId;
+		}
 	}
 
 	private void _appendNamespaceAndEncode(StringBundler sb, String name) {
