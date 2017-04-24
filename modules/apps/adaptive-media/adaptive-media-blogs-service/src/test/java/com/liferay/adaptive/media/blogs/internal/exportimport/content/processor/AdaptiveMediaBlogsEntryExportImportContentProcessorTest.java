@@ -579,7 +579,7 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 	private final AdaptiveMediaEmbeddedReferenceSet
 		_adaptiveMediaEmbeddedReferenceSet = Mockito.mock(
 			AdaptiveMediaEmbeddedReferenceSet.class);
-	private AdaptiveMediaEmbeddedReferenceSetFactory
+	private final AdaptiveMediaEmbeddedReferenceSetFactory
 		_adaptiveMediaEmbeddedReferenceSetFactory = Mockito.mock(
 			AdaptiveMediaEmbeddedReferenceSetFactory.class);
 	private final AdaptiveMediaExportImportPlaceholderFactory
