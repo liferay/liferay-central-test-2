@@ -625,7 +625,7 @@ public class DefaultExportImportContentProcessorTest {
 			}
 
 			Assert.assertTrue(
-				"Validator failed to flag " + layoutReference + " as invalid",
+				layoutReference + " was not flagged as invalid",
 				noSuchLayoutExceptionThrown);
 		}
 
