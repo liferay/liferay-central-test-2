@@ -456,6 +456,41 @@
 		</execute>
 	</command>
 
+	<command name="ViewImageResolutionAcrossSites" priority="4">
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="Adaptive Media" />
+		</execute>
+
+		<execute macro="AdaptiveMedia#addImageResolution">
+			<var name="imageName" value="This should appear on a new site" />
+			<var name="maxHeight" value="400" />
+			<var name="maxWidth" value="300" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoControlPanelSites">
+			<var name="portlet" value="Sites" />
+		</execute>
+
+		<execute macro="Site#addBlankCP">
+			<var name="siteName" value="New Site with AM" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="New Site with AM" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="Adaptive Media" />
+		</execute>
+
+		<execute macro="AdaptiveMedia#viewImageResolutionTableEntry">
+			<var name="imageName" value="This should appear on a new site" />
+			<var name="maxHeight" value="400" />
+			<var name="maxWidth" value="300" />
+			<var name="percentOptimized" value="0" />
+		</execute>
+	</command>
+
 	<command name="ViewNoImageResolutionInNewVirtualInstance" priority="4">
 		<execute macro="ProductMenu#gotoControlPanelConfiguration">
 			<var name="portlet" value="Virtual Instances" />
