@@ -69,14 +69,15 @@ public class DynamicCSSFilter extends IgnoreModuleRequestFilter {
 	}
 
 	protected String getCacheFileName(HttpServletRequest request) {
-		String[] cacheKeyItems = null;
+		String[] cacheKeyKeys = null;
 
 		if (PortalUtil.isRightToLeft(request)) {
-			cacheKeyItems = _CACHE_KEY_ITEM;
+			cacheKeyKeys = _CACHE_KEY_APPEND_KEYS;
 		}
 
 		return _cacheFileNameGenerator.getCacheFileName(
-			DynamicCSSFilter.class, request, _PARAMS_TO_REMOVE, cacheKeyItems);
+			DynamicCSSFilter.class, request, _REMOVE_PARAMETER_NAMES,
+			cacheKeyKeys);
 	}
 
 	protected Object getDynamicContent(
@@ -283,13 +284,13 @@ public class DynamicCSSFilter extends IgnoreModuleRequestFilter {
 		}
 	}
 
-	private static final String[] _CACHE_KEY_ITEM = {"_rtl"};
+	private static final String[] _CACHE_KEY_APPEND_KEYS = {"_rtl"};
 
 	private static final String _CSS_EXTENSION = ".css";
 
 	private static final String _JSP_EXTENSION = ".jsp";
 
-	private static final String[] _PARAMS_TO_REMOVE = {"zx"};
+	private static final String[] _REMOVE_PARAMETER_NAMES = {"zx"};
 
 	private static final String _TEMP_DIR = "css";
 
