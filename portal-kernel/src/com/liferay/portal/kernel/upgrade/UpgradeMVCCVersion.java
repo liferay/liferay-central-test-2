@@ -149,7 +149,7 @@ public class UpgradeMVCCVersion extends UpgradeProcess {
 
 	private String _getPostgreSQLSchema() throws Exception {
 		try (PreparedStatement ps = connection.prepareStatement(
-				"select current_schema();");
+				"select current_schema()");
 			ResultSet rs = ps.executeQuery()) {
 
 			if (rs.next()) {
