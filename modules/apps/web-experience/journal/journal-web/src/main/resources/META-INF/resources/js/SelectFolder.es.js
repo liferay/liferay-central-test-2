@@ -4,7 +4,6 @@ import PortletBase from 'frontend-js-web/liferay/PortletBase.es';
 import Soy from 'metal-soy';
 
 import CardsTreeView from './CardsTreeView.es';
-import InputSearch from './InputSearch.es';
 import templates from './SelectFolder.soy';
 
 /**
