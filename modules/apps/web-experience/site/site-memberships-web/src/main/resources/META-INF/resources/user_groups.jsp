@@ -17,10 +17,8 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String displayStyle = portalPreferences.getValue(SiteMembershipsPortletKeys.SITE_MEMBERSHIPS_ADMIN, "display-style", "icon");
 String navigation = ParamUtil.getString(request, "navigation", "all");
-String orderByCol = ParamUtil.getString(request, "orderByCol", "name");
-String orderByType = ParamUtil.getString(request, "orderByType", "asc");
+
 long roleId = ParamUtil.getLong(request, "roleId");
 
 Role role = null;
@@ -28,6 +26,10 @@ Role role = null;
 if (roleId > 0) {
 	role = RoleLocalServiceUtil.fetchRole(roleId);
 }
+
+String displayStyle = portalPreferences.getValue(SiteMembershipsPortletKeys.SITE_MEMBERSHIPS_ADMIN, "display-style", "icon");
+String orderByCol = ParamUtil.getString(request, "orderByCol", "name");
+String orderByType = ParamUtil.getString(request, "orderByType", "asc");
 
 PortletURL viewUserGroupsURL = renderResponse.createRenderURL();
 
