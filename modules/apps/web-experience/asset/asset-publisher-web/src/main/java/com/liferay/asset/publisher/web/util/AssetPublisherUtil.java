@@ -1183,6 +1183,14 @@ public class AssetPublisherUtil {
 			long ownerId, int ownerType, long plid, String portletId)
 		throws PortalException {
 
+		PortletInstance portletInstance =
+			PortletInstance.fromPortletInstanceKey(portletId);
+
+		if (portletInstance.hasUserId()) {
+			ownerId = portletInstance.getUserId();
+			ownerType = PortletKeys.PREFS_OWNER_TYPE_USER;
+		}
+
 		com.liferay.portal.kernel.model.PortletPreferences
 			portletPreferencesModel =
 				_portletPreferencesLocalService.getPortletPreferences(
