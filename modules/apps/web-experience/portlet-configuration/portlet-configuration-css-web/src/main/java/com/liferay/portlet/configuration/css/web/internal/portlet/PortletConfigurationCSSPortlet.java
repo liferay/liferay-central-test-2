@@ -358,7 +358,6 @@ public class PortletConfigurationCSSPortlet extends MVCPortlet {
 
 		cssJSONObject.put(
 			"advancedData", getAdvancedDataJSONObject(actionRequest));
-
 		cssJSONObject.put("bgData", getBgDataJSONObject(actionRequest));
 		cssJSONObject.put("borderData", getBorderDataJSONObject(actionRequest));
 		cssJSONObject.put(
