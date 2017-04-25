@@ -23,7 +23,7 @@ import com.liferay.portal.kernel.notifications.UserNotificationDeliveryType;
 import org.osgi.service.component.annotations.Component;
 
 /**
- * @author Eduardo Garcia
+ * @author Pavel Savinov
  */
 @Component(
 	immediate = true,
