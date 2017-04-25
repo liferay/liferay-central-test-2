@@ -4445,6 +4445,8 @@
 	</command>
 
 	<command name="ViewAvailableCalendars" priority="4">
+		<property name="test.name.skip.portal.instance" value="Calendar#ViewAvailableCalendars" />
+
 		<execute macro="ProductMenu#gotoControlPanelSites">
 			<var name="portlet" value="Sites" />
 		</execute>
@@ -4742,6 +4744,8 @@
 
 	<command name="ViewDisplayedSiteCalendarEventsAsGuest" priority="3">
 		<description message="This is a use case for LPS-59251." />
+
+		<property name="test.name.skip.portal.instance" value="Calendar#ViewDisplayedSiteCalendarEventsAsGuest" />
 
 		<execute macro="TestCase#getSiteName">
 			<return from="siteName" name="siteName" />

@@ -70,6 +70,8 @@
 	</command>
 
 	<command name="FacebookSSOSmoke" priority="4">
+		<property name="test.name.skip.portal.instance" value="Login#FacebookSSOSmoke" />
+
 		<var name="facebookApplicationID" property-value="facebook.application.id" />
 		<var name="facebookApplicationSecret" property-value="facebook.application.secret" />
 		<var name="facebookEmail" property-value="facebook.email" />
@@ -115,6 +117,8 @@
 	</command>
 
 	<command name="GoogleSSOSmoke" priority="4">
+		<property name="test.name.skip.portal.instance" value="Login#GoogleSSOSmoke" />
+
 		<var name="googleClientID" property-value="google.client.id" />
 		<var name="googleClientSecret" property-value="google.client.secret" />
 		<var name="userEmailAddress" property-value="email.address.2" />
@@ -159,6 +163,8 @@
 	</command>
 
 	<command name="Login" priority="4">
+		<property name="test.name.skip.portal.instance" value="Login#Login" />
+
 		<execute macro="User#firstLoginPG" />
 
 		<execute macro="User#logoutPG" />
@@ -177,6 +183,8 @@
 	</command>
 
 	<command name="OpenIDSmoke" priority="4">
+		<property name="test.name.skip.portal.instance" value="Login#OpenIDSmoke" />
+
 		<var method="TestPropsUtil#get('openid.password')" name="openIDPassword" />
 		<var method="TestPropsUtil#get('openid.username')" name="openIDUsername" />
 
@@ -214,6 +222,7 @@
 
 	<command name="OpenSSOSmoke" priority="5">
 		<property name="openam.enabled" value="true" />
+		<property name="test.name.skip.portal.instance" value="Login#OpenSSOSmoke" />
 
 		<execute macro="Navigator#openSpecificURL">
 			<var name="url" value="http://test.able.com:8080/openam" />
@@ -282,6 +291,8 @@
 	</command>
 
 	<command name="TokenBasedSSOSmoke" priority="5">
+		<property name="test.name.skip.portal.instance" value="Login#TokenBasedSSOSmoke" />
+
 		<execute macro="User#firstLoginPG" />
 
 		<execute macro="ProductMenu#gotoControlPanelConfiguration">
