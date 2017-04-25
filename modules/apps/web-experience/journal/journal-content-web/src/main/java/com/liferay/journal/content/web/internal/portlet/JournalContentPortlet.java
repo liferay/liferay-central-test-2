@@ -161,13 +161,14 @@ public class JournalContentPortlet extends MVCPortlet {
 		super.render(renderRequest, renderResponse);
 	}
 
-	public void restoreTrashEntry(
+	public void restoreJournalArticle(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		long trashEntryId = ParamUtil.getLong(actionRequest, "trashEntryId");
+		long classPK = ParamUtil.getLong(actionRequest, "classPK");
 
-		_trashEntryService.restoreEntry(trashEntryId);
+		_trashEntryService.restoreEntry(
+			JournalArticle.class.getName(), classPK);
 	}
 
 	@Override
