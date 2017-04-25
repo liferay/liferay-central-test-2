@@ -239,7 +239,7 @@
 		<execute macro="Button#clickPublish" />
 	</command>
 
-	<command name="CannotAddNonNumericWidthOrHeight">
+	<command name="CannotAddNonNumericWidthOrHeight" priority="5">
 		<execute macro="ProductMenu#gotoControlPanelConfiguration">
 			<var name="portlet" value="Adaptive Media" />
 		</execute>
@@ -257,7 +257,7 @@
 		<execute function="AssertElementPresent" locator1="Message#EMPTY_INFO" />
 	</command>
 
-	<command name="EditAndDeleteDisabledAMI">
+	<command name="EditAndDeleteDisabledAMI" priority="5">
 		<execute macro="ProductMenu#gotoControlPanelConfiguration">
 			<var name="portlet" value="Adaptive Media" />
 		</execute>
