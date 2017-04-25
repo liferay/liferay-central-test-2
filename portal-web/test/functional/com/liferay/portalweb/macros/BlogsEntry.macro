@@ -63,6 +63,12 @@
 		<execute function="Type" locator1="TextInput#DESCRIPTION" value1="${entryAbstractDescription}" />
 	</command>
 
+	<command name="addCustomURL">
+		<execute function="Click" locator1="Radio#CUSTOM_URL" />
+
+		<execute function="Type" locator1="TextInput#BLOGS_ENTRY_URL" value1="${customURL}" />
+	</command>
+
 	<command name="addEntryContent">
 		<execute macro="BlogsEntry#addTitle">
 			<var name="entryTitle" value="${entryTitle}" />
