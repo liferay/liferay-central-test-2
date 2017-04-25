@@ -21,7 +21,7 @@
 	</tear-down>
 
 	<command name="AddThemeSite" priority="5">
-		<property name="portal.acceptance" value="quarantine" />
+		<property name="portal.acceptance" value="true" />
 		<property name="test.name.skip.portal.instance" value="FjordTheme#AddThemeSite" />
 		<property name="theme.file.name" value="fjord-theme.war" />
 
