@@ -121,7 +121,6 @@ import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.security.auth.CompanyThreadLocal;
 import com.liferay.portal.kernel.service.ServiceContext;
-import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 import com.liferay.portal.kernel.service.ServiceContextUtil;
 import com.liferay.portal.kernel.settings.GroupServiceSettingsLocator;
 import com.liferay.portal.kernel.social.SocialActivityManagerUtil;
@@ -3781,17 +3780,6 @@ public class JournalArticleLocalServiceImpl
 			workflowInstanceLinkLocalService.deleteWorkflowInstanceLink(
 				article.getCompanyId(), article.getGroupId(),
 				JournalArticle.class.getName(), article.getId());
-		}
-
-		ServiceContext serviceContext =
-			ServiceContextThreadLocal.getServiceContext();
-
-		if (serviceContext == null) {
-			serviceContext = new ServiceContext();
-
-			serviceContext.setScopeGroupId(article.getGroupId());
-			serviceContext.setLanguageId(
-				LocaleUtil.toLanguageId(LocaleUtil.getSiteDefault()));
 		}
 
 		return article;
