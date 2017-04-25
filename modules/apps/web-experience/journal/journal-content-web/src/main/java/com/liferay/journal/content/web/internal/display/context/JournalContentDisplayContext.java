@@ -363,34 +363,6 @@ public class JournalContentDisplayContext {
 		return _defaultDDMTemplate;
 	}
 
-	public JournalArticle getDeletedArticle() throws PortalException {
-		if (_deletedArticle != null) {
-			return _deletedArticle;
-		}
-
-		PortletPreferences portletPreferences =
-			_portletRequest.getPreferences();
-
-		String assetEntryId = portletPreferences.getValue(
-			"assetEntryId", StringPool.BLANK);
-
-		if ((_article != null) || Validator.isBlank(assetEntryId)) {
-			return _deletedArticle;
-		}
-
-		AssetEntry assetEntry = AssetEntryLocalServiceUtil.fetchAssetEntry(
-			Long.valueOf(assetEntryId));
-
-		if (assetEntry == null) {
-			return _deletedArticle;
-		}
-
-		_deletedArticle = JournalArticleLocalServiceUtil.fetchLatestArticle(
-			assetEntry.getClassPK());
-
-		return _deletedArticle;
-	}
-
 	public List<ContentMetadataAssetAddonEntry>
 		getEnabledContentMetadataAssetAddonEntries() {
 
@@ -477,6 +449,19 @@ public class JournalContentDisplayContext {
 			_portletRequest, "portletResource");
 
 		return _portletResource;
+	}
+
+	public JournalArticle getSelectedArticle() throws PortalException {
+		PortletPreferences portletPreferences =
+			_portletRequest.getPreferences();
+
+		String articleId = portletPreferences.getValue(
+			"articleId", StringPool.BLANK);
+		long groupId = GetterUtil.getLong(
+			portletPreferences.getValue("groupId", StringPool.BLANK));
+
+		return JournalArticleLocalServiceUtil.fetchLatestArticle(
+			groupId, articleId, WorkflowConstants.STATUS_ANY);
 	}
 
 	public List<ContentMetadataAssetAddonEntry>
@@ -576,22 +561,6 @@ public class JournalContentDisplayContext {
 			WebKeys.JOURNAL_ARTICLE_DISPLAY, getArticleDisplay());
 
 		return _userToolAssetAddonEntries;
-	}
-
-	public TrashEntry getTrashEntry() throws PortalException {
-		if (_trashEntry != null) {
-			return _trashEntry;
-		}
-
-		JournalArticle journalArticle = getDeletedArticle();
-
-		if (journalArticle == null) {
-			return _trashEntry;
-		}
-
-		_trashEntry = journalArticle.getTrashEntry();
-
-		return _trashEntry;
 	}
 
 	public String getURLEdit() {
@@ -704,32 +673,23 @@ public class JournalContentDisplayContext {
 	}
 
 	public boolean hasRestorePermission() throws PortalException {
-		if (_hasRestorePermission != null) {
-			return _hasRestorePermission;
+		JournalArticle selectedArticle = getSelectedArticle();
+
+		if ((selectedArticle == null) || !selectedArticle.isInTrash()) {
+			return false;
 		}
 
-		_hasRestorePermission = false;
+		ThemeDisplay themeDisplay = (ThemeDisplay)_portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
-		TrashEntry trashEntry = getTrashEntry();
+		TrashHandler trashHandler = TrashHandlerRegistryUtil.getTrashHandler(
+			JournalArticle.class.getName());
 
-		if (trashEntry != null) {
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)_portletRequest.getAttribute(
-					WebKeys.THEME_DISPLAY);
+		TrashEntry trashEntry = selectedArticle.getTrashEntry();
 
-			TrashHandler trashHandler =
-				TrashHandlerRegistryUtil.getTrashHandler(
-					trashEntry.getClassName());
-
-			if (trashHandler.hasTrashPermission(
-					themeDisplay.getPermissionChecker(), 0,
-					trashEntry.getClassPK(), TrashActionKeys.RESTORE)) {
-
-				_hasRestorePermission = true;
-			}
-		}
-
-		return _hasRestorePermission;
+		return trashHandler.hasTrashPermission(
+			themeDisplay.getPermissionChecker(), 0, trashEntry.getClassPK(),
+			TrashActionKeys.RESTORE);
 	}
 
 	public boolean hasViewPermission() throws PortalException {
@@ -1074,10 +1034,8 @@ public class JournalContentDisplayContext {
 	private String _ddmTemplateKey;
 	private List<DDMTemplate> _ddmTemplates;
 	private DDMTemplate _defaultDDMTemplate;
-	private JournalArticle _deletedArticle;
 	private Boolean _enableViewCountIncrement;
 	private Boolean _expired;
-	private Boolean _hasRestorePermission;
 	private Boolean _hasViewPermission;
 	private final JournalContentPortletInstanceConfiguration
 		_journalContentPortletInstanceConfiguration;
@@ -1092,7 +1050,6 @@ public class JournalContentDisplayContext {
 	private Boolean _showEditTemplateIcon;
 	private Boolean _showSelectArticleIcon;
 	private Boolean _showSelectArticleLink;
-	private TrashEntry _trashEntry;
 	private List<UserToolAssetAddonEntry> _userToolAssetAddonEntries;
 
 }
