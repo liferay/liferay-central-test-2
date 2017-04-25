@@ -97,10 +97,26 @@ public class JournalUserNotificationHandler
 		}
 		else if (notificationType ==
 					JournalArticleConstants.
+						NOTIFICATION_TYPE_MOVE_ENTRY_FROM_TRASH) {
+
+			title = ResourceBundleUtil.getString(
+				resourceBundle, "x-restored-a-web-content-from-the-recycle-bin",
+				userFullName);
+		}
+		else if (notificationType ==
+					JournalArticleConstants.
 						NOTIFICATION_TYPE_MOVE_ENTRY_TO_FOLDER) {
 
 			title = ResourceBundleUtil.getString(
 				resourceBundle, "x-moved-a-web-content-to-a-folder",
+				userFullName);
+		}
+		else if (notificationType ==
+					JournalArticleConstants.
+						NOTIFICATION_TYPE_MOVE_ENTRY_TO_TRASH) {
+
+			title = ResourceBundleUtil.getString(
+				resourceBundle, "x-moved-a-web-content-to-the-recycle-bin",
 				userFullName);
 		}
 
