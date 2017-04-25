@@ -9,14 +9,14 @@
  */
 {template .render}
 	<div class="input-search">
-		<form class="basic-search input-group">
+		<div class="basic-search input-group">
 			<div class="input-group-input">
 				<div class="basic-search-slider">
 					<button class="basic-search-close btn btn-default" type="button"><span class="icon-remove"></span></button>
 
 					{let $inputAttributes kind="attributes"}
 						class="form-control"
-						data-onkeyup="setSearchValue_"
+						data-oninput="setSearchValue_"
 						name="{$portletNamespace}filterKeywords"
 						placeholder="Search"
 						type="text"
@@ -31,8 +31,8 @@
 			</div>
 
 			<div class="input-group-btn">
-				<button class="btn btn-default" type="submit"><span class="icon-search"></span></button>
+				<button class="btn btn-default" type="button"><span class="icon-search"></span></button>
 			</div>
-		</form>
+		</div>
 	</div>
 {/template}
