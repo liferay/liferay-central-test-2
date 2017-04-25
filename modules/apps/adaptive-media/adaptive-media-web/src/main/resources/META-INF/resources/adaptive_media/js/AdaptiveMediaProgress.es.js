@@ -50,7 +50,7 @@ class AdaptiveMediaProgress extends PortletBase {
 
 		this.showLoadingIndicator_ = true;
 
-		Liferay.fire('start_optimizing', {uuid: this.uuid});
+		this.emit('start_optimizing', {uuid: this.uuid});
 	}
 
 	/**
@@ -99,7 +99,7 @@ class AdaptiveMediaProgress extends PortletBase {
 		this.clearInterval_();
 		this.showLoadingIndicator_ = false;
 
-		Liferay.fire('finish_optimizing', {uuid: this.uuid});
+		this.emit('finish_optimizing', {uuid: this.uuid});
 	}
 
 	/**

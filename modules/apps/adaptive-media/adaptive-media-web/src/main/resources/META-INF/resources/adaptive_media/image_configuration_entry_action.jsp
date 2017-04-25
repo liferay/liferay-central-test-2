@@ -134,3 +134,15 @@ String entryUuid = String.valueOf(configurationEntry.getUUID());
 		</c:otherwise>
 	</c:choose>
 </liferay-ui:icon-menu>
+
+<aui:script require="adaptive-media-web/adaptive_media/js/AdaptiveMediaOptionsHandler.es">
+	var component = Liferay.component(
+		'<portlet:namespace />OptionsHandler<%= entryUuid %>',
+		new adaptiveMediaWebAdaptive_mediaJsAdaptiveMediaOptionsHandlerEs.default(
+			{
+				namespace: '<portlet:namespace />',
+				uuid: '<%= entryUuid %>'
+			}
+		)
+	);
+</aui:script>
