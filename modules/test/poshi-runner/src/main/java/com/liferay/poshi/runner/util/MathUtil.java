@@ -46,9 +46,9 @@ public class MathUtil {
 	}
 
 	public static int randomNumber(Integer maxValue) {
-		Random rand = new Random(System.nanoTime());
+		Random random = new Random(System.nanoTime());
 
-		return rand.nextInt(maxValue) + 1;
+		return random.nextInt(maxValue) + 1;
 	}
 
 	public static int sum(Integer value1, Integer value2) {

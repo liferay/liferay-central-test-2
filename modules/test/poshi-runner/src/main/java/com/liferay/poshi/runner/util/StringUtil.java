@@ -374,11 +374,11 @@ public class StringUtil {
 	}
 
 	public static String randomString(String length) {
-		int lengthInteger = Integer.parseInt(length);
+		int lengthInt = Integer.parseInt(length);
 
 		StringBuilder sb = new StringBuilder();
 
-		while (sb.length() < lengthInteger) {
+		while (sb.length() < lengthInt) {
 			UUID randomUUID = UUID.randomUUID();
 
 			String uuidString = randomUUID.toString();
@@ -386,7 +386,7 @@ public class StringUtil {
 			sb.append(uuidString.replace("-", ""));
 		}
 
-		return sb.substring(0, lengthInteger);
+		return sb.substring(0, lengthInt);
 	}
 
 	public static String replace(String s, String oldSub, String newSub) {
