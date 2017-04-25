@@ -3,9 +3,9 @@
 /**
  * This renders the main element.
  *
+ * @param? namespace
  * @param? nodes
  * @param? pathThemeImages
- * @param? portletNamespace
  * @param? viewType
  *
  * Function references
@@ -20,14 +20,14 @@
 					{param events: [
 							'searchValueChanged': $searchNodes_
 						]/}
-					{param portletNamespace: $portletNamespace /}
+					{param namespace: $namespace /}
 				{/call}
 			</div>
 		</nav>
 
-		<form class="container-fluid-1280" name="{$portletNamespace}selectFolderFm">
+		<form class="container-fluid-1280" name="{$namespace}selectFolderFm">
 			<fieldset class="panel-body">
-				<div class="portlet-journal-tree" id="{$portletNamespace}folderContainer">
+				<div class="portlet-journal-tree" id="{$namespace}folderContainer">
 					{call CardsTreeview.render}
 						{param events: [
 							'selectedNodesChanged': $selectedNodeChange_

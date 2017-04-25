@@ -1,5 +1,6 @@
 import Component from 'metal-component';
 import core from 'metal';
+import PortletBase from 'frontend-js-web/liferay/PortletBase.es';
 import Soy from 'metal-soy';
 
 import CardsTreeView from './CardsTreeView.es';
@@ -12,7 +13,7 @@ import templates from './SelectFolder.soy';
  * This component shows a list of available folders to move content in and
  * allows to filter them by searching.
  */
-class SelectFolder extends Component {
+class SelectFolder extends PortletBase {
 
 	/**
 	 * Filters deep nested nodes based on a filtering value
@@ -53,7 +54,7 @@ class SelectFolder extends Component {
 			this.nodes = this.originalNodes;
 		}
 
-		let filterValue = event.newVal.toLowerCase();
+		let filterValue = event.delegateTarget.value.toLowerCase();
 
 		if (filterValue !== '') {
 			this.viewType = 'flat';

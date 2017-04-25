@@ -1,5 +1,6 @@
 import Component from 'metal-component';
 import core from 'metal';
+import PortletBase from 'frontend-js-web/liferay/PortletBase.es';
 import Soy from 'metal-soy';
 
 import templates from './InputSearch.soy';
@@ -26,14 +27,6 @@ class InputSearch extends Component {
 }
 
 InputSearch.STATE = {
-	/**
-	 * Portlet Namespace
-	 * @type {String}
-	 */
-	portletNamespace: {
-		validator: core.isString
-	},
-
 	/**
 	 * Search input value
 	 * @type {String}

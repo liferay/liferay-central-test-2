@@ -3,8 +3,8 @@
 /**
  * This renders the main element.
  *
+ * @param? namespace
  * @param? searchValue
- * @param? portletNamespace
  *
  */
 {template .render}
@@ -17,7 +17,7 @@
 					{let $inputAttributes kind="attributes"}
 						class="form-control"
 						data-oninput="setSearchValue_"
-						name="{$portletNamespace}filterKeywords"
+						name="{$namespace}filterKeywords"
 						placeholder="Search"
 						type="text"
 
