@@ -386,7 +386,6 @@ public class PortletPreferencesLocalServiceImpl
 	public Map<String, javax.portlet.PortletPreferences> getStrictPreferences(
 		Layout layout, List<Portlet> portlets) {
 
-		long companyId = layout.getCompanyId();
 		long plid = layout.getPlid();
 
 		plid = _swapPlidForPreferences(plid);
@@ -436,7 +435,7 @@ public class PortletPreferencesLocalServiceImpl
 			portletPreferencesMap.put(
 				portletId,
 				PortletPreferencesFactoryUtil.strictFromXML(
-					companyId, ownerId, ownerType, plid, portletId,
+					layout.getCompanyId(), ownerId, ownerType, plid, portletId,
 					preferences));
 		}
 
