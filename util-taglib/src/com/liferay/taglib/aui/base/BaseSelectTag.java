@@ -179,8 +179,6 @@ public abstract class BaseSelectTag extends com.liferay.taglib.BaseValidatorTagS
 
 	public void setField(java.lang.String field) {
 		_field = field;
-
-		setScopedAttribute("field", field);
 	}
 
 	public void setFirst(boolean first) {
@@ -229,8 +227,6 @@ public abstract class BaseSelectTag extends com.liferay.taglib.BaseValidatorTagS
 
 	public void setModel(java.lang.Class<?> model) {
 		_model = model;
-
-		setScopedAttribute("model", model);
 	}
 
 	public void setMultiple(boolean multiple) {

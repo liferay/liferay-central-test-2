@@ -85,23 +85,31 @@ public abstract class BasePanelTag extends com.liferay.taglib.util.IncludeTag {
 	}
 
 	@Override
-	protected String getPage() {
-		return _PAGE;
+	protected String getEndPage() {
+		return _END_PAGE;
+	}
+
+	@Override
+	protected String getStartPage() {
+		return _START_PAGE;
 	}
 
 	@Override
 	protected void setAttributes(HttpServletRequest request) {
-		setNamespacedAttribute(request, "collapsed", _collapsed);
-		setNamespacedAttribute(request, "collapsible", _collapsible);
-		setNamespacedAttribute(request, "id", _id);
-		setNamespacedAttribute(request, "label", _label);
-		setNamespacedAttribute(request, "localizeLabel", _localizeLabel);
+		request.setAttribute("aui:panel:collapsed", String.valueOf(_collapsed));
+		request.setAttribute("aui:panel:collapsible", String.valueOf(_collapsible));
+		request.setAttribute("aui:panel:id", _id);
+		request.setAttribute("aui:panel:label", _label);
+		request.setAttribute("aui:panel:localizeLabel", String.valueOf(_localizeLabel));
 	}
 
 	protected static final String _ATTRIBUTE_NAMESPACE = "aui:panel:";
 
-	private static final String _PAGE =
-		"/html/taglib/aui/panel/page.jsp";
+	private static final String _END_PAGE =
+		"/html/taglib/aui/panel/end.jsp";
+
+	private static final String _START_PAGE =
+		"/html/taglib/aui/panel/start.jsp";
 
 	private boolean _collapsed = false;
 	private boolean _collapsible = false;
