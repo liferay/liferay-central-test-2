@@ -46,22 +46,13 @@ AssetRendererFactory<JournalArticle> assetRendererFactory = AssetRendererFactory
 			<c:otherwise>
 
 				<%
-				JournalArticle deletedArticle = journalContentDisplayContext.getDeletedArticle();
-				TrashEntry trashEntry = journalContentDisplayContext.getTrashEntry();
+				JournalArticle selectedArticle = journalContentDisplayContext.getSelectedArticle();
 				%>
-
-				<liferay-util:buffer var="articleSelectLink">
-					<aui:a href="javascript:;" onClick="<%= portletDisplay.getURLConfigurationJS() %>"><liferay-ui:message key="select-another" /></aui:a>
-				</liferay-util:buffer>
 
 				<div class="alert alert-warning text-center">
 					<c:choose>
-						<c:when test="<%= (deletedArticle != null) && (trashEntry != null) %>">
-							<liferay-util:buffer var="deletedArticleTitle">
-								<strong><em class="delete-entry-title"><%= HtmlUtil.escape(deletedArticle.getTitle(locale)) %></em></strong>
-							</liferay-util:buffer>
-
-							<liferay-ui:message arguments="<%= deletedArticleTitle %>" key="the-web-content-article-x-was-moved-to-the-recycle-bin" />
+						<c:when test="<%= (selectedArticle != null) && selectedArticle.isInTrash() %>">
+							<liferay-ui:message arguments="<%= HtmlUtil.escape(selectedArticle.getTitle(locale)) %>" key="the-web-content-article-x-was-moved-to-the-recycle-bin" />
 						</c:when>
 						<c:otherwise>
 							<liferay-ui:message key="the-selected-web-content-no-longer-exists" />
@@ -69,22 +60,26 @@ AssetRendererFactory<JournalArticle> assetRendererFactory = AssetRendererFactory
 					</c:choose>
 
 					<c:if test="<%= journalContentDisplayContext.isShowSelectArticleLink() %>">
+						<liferay-util:buffer var="selectJournalArticleLink">
+							<aui:a href="javascript:;" label="select-another" onClick="<%= portletDisplay.getURLConfigurationJS() %>" />
+						</liferay-util:buffer>
+
 						<div>
 							<c:choose>
 								<c:when test="<%= journalContentDisplayContext.hasRestorePermission() %>">
-									<portlet:actionURL name="restoreTrashEntry" var="restoreTrashEntryURL">
-										<portlet:param name="trashEntryId" value="<%= String.valueOf(trashEntry.getEntryId()) %>" />
+									<portlet:actionURL name="restoreJournalArticle" var="restoreJournalArticleURL">
+										<portlet:param name="classPK" value="<%= String.valueOf(JournalArticleAssetRenderer.getClassPK(selectedArticle)) %>" />
 										<portlet:param name="redirect" value="<%= currentURL %>" />
 									</portlet:actionURL>
 
-									<liferay-util:buffer var="restoreTrashEntryLink">
-										<aui:a href="<%= restoreTrashEntryURL.toString() %>"><liferay-ui:message key="undo" /></aui:a>
+									<liferay-util:buffer var="restoreJournalArticleLink">
+										<aui:a href="<%= restoreJournalArticleURL %>" label="undo" />
 									</liferay-util:buffer>
 
-									<liferay-ui:message arguments="<%= new String[] {restoreTrashEntryLink, articleSelectLink} %>" key="do-you-want-to-x-or-x-web-content" />
+									<liferay-ui:message arguments="<%= new String[] {restoreJournalArticleLink, selectJournalArticleLink} %>" key="do-you-want-to-x-or-x-web-content" />
 								</c:when>
 								<c:otherwise>
-									<liferay-ui:message arguments="<%= articleSelectLink %>" key="do-you-want-to-x-web-content" />
+									<liferay-ui:message arguments="<%= selectJournalArticleLink %>" key="do-you-want-to-x-web-content" />
 								</c:otherwise>
 							</c:choose>
 						</div>
