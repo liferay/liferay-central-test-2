@@ -40,7 +40,7 @@ public class JournalArticleConstants {
 
 	public static final int NOTIFICATION_TYPE_MOVE_ENTRY_TO_FOLDER = 3;
 
-	public static final int NOTIFICATION_TYPE_MOVE_ENTRY_TO_TRASH = 4;
+	public static final int NOTIFICATION_TYPE_MOVE_ENTRY_TO_TRASH = 5;
 
 	public static final String PORTLET = "portlet";
 
