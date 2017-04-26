@@ -156,7 +156,7 @@ public class AssetTagLocalServiceTest {
 	}
 
 	@Test(expected = DuplicateTagException.class)
-	public void testCannotAddDuplicateTags() throws Exception {
+	public void testAddDuplicateTags() throws Exception {
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(
 				_group.getGroupId(), TestPropsValues.getUserId());
@@ -171,7 +171,7 @@ public class AssetTagLocalServiceTest {
 	}
 
 	@Test(expected = AssetTagException.class)
-	public void testCannotAddTagWithEmptyName() throws Exception {
+	public void testAddTagWithEmptyName() throws Exception {
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(
 				_group.getGroupId(), TestPropsValues.getUserId());
@@ -182,7 +182,7 @@ public class AssetTagLocalServiceTest {
 	}
 
 	@Test(expected = AssetTagException.class)
-	public void testCannotAddTagWithInvalidCharacters() throws Exception {
+	public void testAddTagWithInvalidCharacters() throws Exception {
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(
 				_group.getGroupId(), TestPropsValues.getUserId());
@@ -196,7 +196,7 @@ public class AssetTagLocalServiceTest {
 	}
 
 	@Test(expected = AssetTagException.class)
-	public void testCannotAddTagWithNullName() throws Exception {
+	public void testAddTagWithNullName() throws Exception {
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(
 				_group.getGroupId(), TestPropsValues.getUserId());
@@ -207,7 +207,7 @@ public class AssetTagLocalServiceTest {
 	}
 
 	@Test(expected = AssetTagException.class)
-	public void testCannotAddTagWithOnlySpacesInName() throws Exception {
+	public void testAddTagWithOnlySpacesInName() throws Exception {
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(
 				_group.getGroupId(), TestPropsValues.getUserId());
