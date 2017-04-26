@@ -37,32 +37,32 @@ public class UpgradeImageTypeContentAttributes extends UpgradeProcess {
 	protected String addImageContentAttributes(String content)
 		throws Exception {
 
-		Document contentDocument = SAXReaderUtil.read(content);
+		Document document = SAXReaderUtil.read(content);
 
-		contentDocument = contentDocument.clone();
+		document = document.clone();
 
 		XPath xPath = SAXReaderUtil.createXPath(
 			"//dynamic-element[@type='image']");
 
-		List<Node> imageNodes = xPath.selectNodes(contentDocument);
+		List<Node> imageNodes = xPath.selectNodes(document);
 
 		for (Node imageNode : imageNodes) {
-			Element imageEl = (Element)imageNode;
+			Element imageElement = (Element)imageNode;
 
-			List<Element> dynamicContentEls = imageEl.elements(
+			List<Element> dynamicContentElements = imageElement.elements(
 				"dynamic-content");
 
-			for (Element dynamicContentEl : dynamicContentEls) {
-				String id = dynamicContentEl.attributeValue("id");
+			for (Element dynamicContentElement : dynamicContentElements) {
+				String id = dynamicContentElement.attributeValue("id");
 
-				dynamicContentEl.addAttribute("alt", StringPool.BLANK);
-				dynamicContentEl.addAttribute("name", id);
-				dynamicContentEl.addAttribute("title", id);
-				dynamicContentEl.addAttribute("type", "journal");
+				dynamicContentElement.addAttribute("alt", StringPool.BLANK);
+				dynamicContentElement.addAttribute("name", id);
+				dynamicContentElement.addAttribute("title", id);
+				dynamicContentElement.addAttribute("type", "journal");
 			}
 		}
 
-		return contentDocument.formattedString();
+		return document.formattedString();
 	}
 
 	@Override
