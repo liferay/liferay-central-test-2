@@ -23,7 +23,7 @@ Map<String, Object> context = new HashMap<>();
 
 context.put("nodes", journalDisplayContext.getFoldersJSONArray());
 context.put("pathThemeImages", themeDisplay.getPathThemeImages());
-context.put("portletNamespace", liferayPortletResponse.getNamespace());
+context.put("namespace", liferayPortletResponse.getNamespace());
 context.put("itemSelectorSaveEvent", eventName);
 %>
 
