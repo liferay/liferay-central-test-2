@@ -41,7 +41,11 @@ public class AdaptiveMediaJournalImageConfigurationMessageListener
 		_journalContent.clearCache();
 	}
 
-	@Reference
+	@Reference(unbind = "-")
+	protected void setJournalContent(JournalContent journalContent) {
+		_journalContent = journalContent;
+	}
+
 	private JournalContent _journalContent;
 
 }
