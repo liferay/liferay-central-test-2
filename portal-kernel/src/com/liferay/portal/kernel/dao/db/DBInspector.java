@@ -47,15 +47,16 @@ public class DBInspector {
 	}
 
 	public String getSchema() {
-		String schema = null;
-
 		try {
-			schema = _connection.getSchema();
+			return _connection.getSchema();
 		}
 		catch (Throwable t) {
-		}
+			if (_log.isDebugEnabled()) {
+				_log.debug(t, t);
+			}
 
-		return schema;
+			return null;
+		}
 	}
 
 	public boolean hasColumn(String tableName, String columnName)
