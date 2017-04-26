@@ -129,7 +129,7 @@ public class CommentDemoDataCreatorImpl implements CommentDemoDataCreator {
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommentDemoDataCreatorImpl.class);
 
-	private static final List<String> _commentBodies = _read("CommentBodies");
+	private static final List<String> _commentBodies = _read("bodies");
 
 	@Reference
 	private AssetEntryLocalService _assetEntryLocalService;
