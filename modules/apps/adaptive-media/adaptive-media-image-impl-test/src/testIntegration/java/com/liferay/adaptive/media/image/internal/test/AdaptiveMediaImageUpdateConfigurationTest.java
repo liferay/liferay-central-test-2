@@ -18,6 +18,7 @@ import com.liferay.adaptive.media.AdaptiveMediaImageConfigurationException;
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationHelper;
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
+import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.Sync;
 import com.liferay.portal.kernel.test.rule.SynchronousDestinationTestRule;
@@ -26,6 +27,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -49,6 +51,59 @@ public class AdaptiveMediaImageUpdateConfigurationTest
 		new AggregateTestRule(
 			new LiferayIntegrationTestRule(),
 			SynchronousDestinationTestRule.INSTANCE);
+
+	@Test
+	public void testSendsAMessageToTheMessageBus() throws Exception {
+		AdaptiveMediaImageConfigurationHelper configurationHelper =
+			serviceTracker.getService();
+
+		Map<String, String> properties = new HashMap<>();
+
+		properties.put("max-height", "100");
+		properties.put("max-width", "100");
+
+		AdaptiveMediaImageConfigurationEntry configurationEntry =
+			configurationHelper.addAdaptiveMediaImageConfigurationEntry(
+				TestPropsValues.getCompanyId(), "one", "onedesc", "1",
+				properties);
+
+		List<Message> messages = collectConfigurationMessages(() -> {
+			configurationHelper.updateAdaptiveMediaImageConfigurationEntry(
+				TestPropsValues.getCompanyId(), "1", "two", "twodesc", "2",
+				properties);
+		});
+
+		Assert.assertEquals(messages.toString(), 1, messages.size());
+
+		Message message = messages.get(0);
+
+		Assert.assertEquals("UPDATED", message.getString("event_name"));
+
+		AdaptiveMediaImageConfigurationEntry[] configurationEntries =
+			(AdaptiveMediaImageConfigurationEntry[])message.getPayload();
+
+		AdaptiveMediaImageConfigurationEntry oldConfigurationEntry =
+			configurationEntries[0];
+
+		AdaptiveMediaImageConfigurationEntry newConfigurationEntry =
+			configurationEntries[1];
+
+		Assert.assertEquals(
+			configurationEntry.getName(), oldConfigurationEntry.getName());
+		Assert.assertEquals(
+			configurationEntry.getDescription(),
+			oldConfigurationEntry.getDescription());
+		Assert.assertEquals(
+			configurationEntry.getUUID(), oldConfigurationEntry.getUUID());
+		Assert.assertEquals(
+			configurationEntry.getProperties(),
+			oldConfigurationEntry.getProperties());
+
+		Assert.assertEquals("two", newConfigurationEntry.getName());
+		Assert.assertEquals("twodesc", newConfigurationEntry.getDescription());
+		Assert.assertEquals("2", newConfigurationEntry.getUUID());
+		Assert.assertEquals(properties, newConfigurationEntry.getProperties());
+	}
 
 	@Test
 	public void testUpdateConfigurationEntryWithBlankDescription()

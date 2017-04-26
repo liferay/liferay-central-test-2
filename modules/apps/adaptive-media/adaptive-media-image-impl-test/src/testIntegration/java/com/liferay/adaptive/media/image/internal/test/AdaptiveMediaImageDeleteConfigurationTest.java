@@ -22,6 +22,7 @@ import com.liferay.adaptive.media.image.service.AdaptiveMediaImageEntryLocalServ
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
 import com.liferay.document.library.kernel.model.DLFolderConstants;
 import com.liferay.document.library.kernel.service.DLAppLocalServiceUtil;
+import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
@@ -38,6 +39,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -730,6 +732,50 @@ public class AdaptiveMediaImageDeleteConfigurationTest
 				TestPropsValues.getCompanyId(), "2");
 
 		Assert.assertFalse(secondConfigurationEntryOptional.isPresent());
+	}
+
+	@Test
+	public void testSendsAMessageToTheMessageBus() throws Exception {
+		AdaptiveMediaImageConfigurationHelper configurationHelper =
+			serviceTracker.getService();
+
+		Map<String, String> properties = new HashMap<>();
+
+		properties.put("max-height", "100");
+		properties.put("max-width", "100");
+
+		AdaptiveMediaImageConfigurationEntry configurationEntry =
+			configurationHelper.addAdaptiveMediaImageConfigurationEntry(
+				TestPropsValues.getCompanyId(), "one", "onedesc", "1",
+				properties);
+
+		configurationHelper.disableAdaptiveMediaImageConfigurationEntry(
+			TestPropsValues.getCompanyId(), "1");
+
+		List<Message> messages = collectConfigurationMessages(() -> {
+			configurationHelper.deleteAdaptiveMediaImageConfigurationEntry(
+				TestPropsValues.getCompanyId(), "1");
+		});
+
+		Assert.assertEquals(messages.toString(), 1, messages.size());
+
+		Message message = messages.get(0);
+
+		Assert.assertEquals("DELETED", message.getString("event_name"));
+
+		AdaptiveMediaImageConfigurationEntry deletedConfigurationEntry =
+			(AdaptiveMediaImageConfigurationEntry)message.getPayload();
+
+		Assert.assertEquals(
+			configurationEntry.getName(), deletedConfigurationEntry.getName());
+		Assert.assertEquals(
+			configurationEntry.getDescription(),
+			deletedConfigurationEntry.getDescription());
+		Assert.assertEquals(
+			configurationEntry.getUUID(), deletedConfigurationEntry.getUUID());
+		Assert.assertEquals(
+			configurationEntry.getProperties(),
+			deletedConfigurationEntry.getProperties());
 	}
 
 	private FileEntry _addFileEntry() throws Exception {

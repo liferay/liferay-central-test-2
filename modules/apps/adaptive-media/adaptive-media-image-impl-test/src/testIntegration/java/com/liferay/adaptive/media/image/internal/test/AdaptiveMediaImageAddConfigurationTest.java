@@ -18,6 +18,7 @@ import com.liferay.adaptive.media.AdaptiveMediaImageConfigurationException;
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationHelper;
 import com.liferay.arquillian.extension.junit.bridge.junit.Arquillian;
+import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.Sync;
 import com.liferay.portal.kernel.test.rule.SynchronousDestinationTestRule;
@@ -28,6 +29,7 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -405,6 +407,37 @@ public class AdaptiveMediaImageAddConfigurationTest
 
 		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
 			TestPropsValues.getCompanyId(), "two", "twodesc", "1", properties);
+	}
+
+	@Test
+	public void testSendsAMessageToTheMessageBus() throws Exception {
+		AdaptiveMediaImageConfigurationHelper configurationHelper =
+			serviceTracker.getService();
+
+		Map<String, String> properties = new HashMap<>();
+
+		properties.put("max-height", "100");
+		properties.put("max-width", "100");
+
+		List<Message> messages = collectConfigurationMessages(() -> {
+			configurationHelper.addAdaptiveMediaImageConfigurationEntry(
+				TestPropsValues.getCompanyId(), "one", "onedesc", "1",
+				properties);
+		});
+
+		Assert.assertEquals(messages.toString(), 1, messages.size());
+
+		Message message = messages.get(0);
+
+		Assert.assertEquals("ADDED", message.getString("event_name"));
+
+		AdaptiveMediaImageConfigurationEntry configurationEntry =
+			(AdaptiveMediaImageConfigurationEntry)message.getPayload();
+
+		Assert.assertEquals("one", configurationEntry.getName());
+		Assert.assertEquals("onedesc", configurationEntry.getDescription());
+		Assert.assertEquals("1", configurationEntry.getUUID());
+		Assert.assertEquals(properties, configurationEntry.getProperties());
 	}
 
 }
