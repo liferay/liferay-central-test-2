@@ -218,7 +218,7 @@ public class AssetTagLocalServiceTest {
 	}
 
 	@Test
-	public void testCreateTag() throws PortalException {
+	public void testAddTag() throws PortalException {
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(
 				_group.getGroupId(), TestPropsValues.getUserId());
