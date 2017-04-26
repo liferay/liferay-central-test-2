@@ -183,6 +183,22 @@
 		<execute macro="Smoke#viewWelcomePage" />
 	</command>
 
+	<command name="LoginWithSessionEnabled" priority="5">
+		<description message="This is a use case for LPS-48653." />
+
+		<property name="custom.properties" value="session.enable.url.with.session.id=true" />
+
+		<execute macro="Portlet#addPG">
+			<var name="portletName" value="Sign In" />
+		</execute>
+
+		<execute macro="User#logoutPG" />
+
+		<execute macro="SignIn#signIn" />
+
+		<execute macro="Smoke#viewWelcomePage" />
+	</command>
+
 	<command name="OpenIDSmoke" priority="4">
 		<property name="test.name.skip.portal.instance" value="Login#OpenIDSmoke" />
 
