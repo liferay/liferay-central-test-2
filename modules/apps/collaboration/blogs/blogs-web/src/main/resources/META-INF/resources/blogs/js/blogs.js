@@ -575,6 +575,8 @@ AUI.add(
 									var finalImage = finalContentImages[i];
 
 									if (el.get('tagName') === finalImage.tagName) {
+										el.removeAttribute('data-cke-saved-src');
+
 										for (var j = 0; j < finalImage.attributes.length; j++) {
 											var attr = finalImage.attributes[j];
 
