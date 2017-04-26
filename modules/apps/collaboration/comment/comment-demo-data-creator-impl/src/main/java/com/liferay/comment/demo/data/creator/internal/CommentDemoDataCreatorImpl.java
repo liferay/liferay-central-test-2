@@ -78,11 +78,10 @@ public class CommentDemoDataCreatorImpl implements CommentDemoDataCreator {
 		throws PortalException {
 
 		User user = _userLocalService.fetchUser(userId);
+		Comment parentComment = _commentManager.fetchComment(parentCommentId);
 
 		IdentityServiceContextFunction identityServiceContextFunction =
 			new IdentityServiceContextFunction(new ServiceContext());
-
-		Comment parentComment = _commentManager.fetchComment(parentCommentId);
 
 		long commentId = _commentManager.addComment(
 			userId, parentComment.getClassName(), parentComment.getClassPK(),
