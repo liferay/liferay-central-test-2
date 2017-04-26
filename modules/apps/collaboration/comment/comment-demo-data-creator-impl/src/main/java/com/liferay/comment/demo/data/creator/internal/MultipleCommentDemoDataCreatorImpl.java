@@ -26,7 +26,9 @@ import com.liferay.portal.kernel.service.UserLocalService;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -40,18 +42,20 @@ public class MultipleCommentDemoDataCreatorImpl
 
 	@Override
 	public void create(ClassedModel classedModel) throws PortalException {
-		int maxComments = RandomUtil.nextInt(_MAX_COMMENTS);
+		List<User> users = _userLocalService.getUsers(
+			0, Math.min(_userLocalService.getUsersCount(), _MAX_USERS));
 
-		int usersCount = _userLocalService.getUsersCount();
+		Stream<User> usersStream = users.stream();
 
-		int maxUsers = Math.min(usersCount, _MAX_USERS);
+		usersStream = usersStream.filter(this::_isRegularUser);
 
-		List<User> users = _userLocalService.getUsers(0, maxUsers);
+		Stream<Long> userIdsStream = usersStream.map(UserModel::getUserId);
 
-		List<Long> userIds = users.stream().filter(this::_isRegularUser).map(
-			UserModel::getUserId).collect(Collectors.toList());
+		List<Long> userIds = userIdsStream.collect(Collectors.toList());
 
-		_addComments(userIds, classedModel, _ROOT_COMMENT, maxComments, 1);
+		_addComments(
+			userIds, classedModel, _COMMENT_ID,
+			RandomUtil.nextInt(_MAX_COMMENTS), 1);
 	}
 
 	@Override
@@ -76,37 +80,36 @@ public class MultipleCommentDemoDataCreatorImpl
 			int maxComments, int level)
 		throws PortalException {
 
-		int commentsCreated = 0;
-
+		int commentsCount = 0;
 		int maxReplies = RandomUtil.nextInt(_MAX_REPLIES / level);
+		int repliesCount = 0;
 
-		int repliesCreated = 0;
-
-		while ((commentsCreated < maxComments) &&
-			   (repliesCreated < maxReplies)) {
+		while ((commentsCount < maxComments) &&
+			   (repliesCount < maxReplies)) {
 
 			long userId = _getRandomElement(userIds);
 
-			final Comment comment;
+			Comment comment = null;
 
-			if (commentId == _ROOT_COMMENT) {
+			if (commentId == _COMMENT_ID) {
 				comment = _commentDemoDataCreator.create(userId, classedModel);
 			}
 			else {
 				comment = _commentDemoDataCreator.create(userId, commentId);
-				repliesCreated++;
+
+				repliesCount++;
 			}
 
-			commentsCreated++;
+			commentsCount++;
 
 			if (level < _MAX_LEVEL) {
-				commentsCreated += _addComments(
+				commentsCount += _addComments(
 					userIds, classedModel, comment.getCommentId(),
-					maxComments - commentsCreated, level + 1);
+					maxComments - commentsCount, level + 1);
 			}
 		}
 
-		return commentsCreated;
+		return commentsCount;
 	}
 
 	private <T> T _getRandomElement(List<T> list) {
@@ -125,7 +128,7 @@ public class MultipleCommentDemoDataCreatorImpl
 
 	private static final int _MAX_USERS = 100;
 
-	private static final int _ROOT_COMMENT = 0;
+	private static final int _COMMENT_ID = 0;
 
 	private static final List<String> _excludedUsers = Arrays.asList(
 		"test@liferay.com", "default@liferay.com");
