@@ -14,6 +14,8 @@ AUI.add(
 			return Lang.toInt(value, 10, 0);
 		};
 
+		var REGEX_SUB = /\{\s*([^|}]+?)\s*(?:\|([^}]*))?\s*\}/g;
+
 		var STR_BLANK = '';
 
 		var STR_DASH = '-';
@@ -670,6 +672,14 @@ AUI.add(
 
 					scheduler.syncEventsUI();
 				}
+			},
+
+			sub: function(url, data) {
+				var instance = this;
+
+				url = Lang.sub(url, data);
+
+				return url.replace(REGEX_SUB, '');
 			},
 
 			syncCalendarsMap: function(calendarLists) {
