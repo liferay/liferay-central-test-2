@@ -47,12 +47,11 @@ public class UpgradeMVCCVersion extends UpgradeProcess {
 
 		DBInspector dbInspector = new DBInspector(connection);
 
-		String schema = dbInspector.getSchema();
-
 		tableName = normalizeName(tableName, databaseMetaData);
 
 		try (ResultSet tableResultSet = databaseMetaData.getTables(
-				dbInspector.getCatalog(), schema, tableName, null)) {
+				dbInspector.getCatalog(), dbInspector.getSchema(), tableName,
+				null)) {
 
 			if (!tableResultSet.next()) {
 				_log.error("Table " + tableName + " does not exist");
@@ -61,7 +60,8 @@ public class UpgradeMVCCVersion extends UpgradeProcess {
 			}
 
 			try (ResultSet columnResultSet = databaseMetaData.getColumns(
-					dbInspector.getCatalog(), schema, tableName,
+					dbInspector.getCatalog(), dbInspector.getSchema(),
+					tableName,
 					normalizeName("mvccVersion", databaseMetaData))) {
 
 				if (columnResultSet.next()) {
