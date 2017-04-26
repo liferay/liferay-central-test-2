@@ -6741,7 +6741,7 @@ public class JournalArticleLocalServiceImpl
 
 				if (incrementVersion) {
 					JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
-  						dynamicContent.getText());
+						dynamicContent.getText());
 
 					oldImageId = GetterUtil.getLong(
 						HttpUtil.getParameter(
