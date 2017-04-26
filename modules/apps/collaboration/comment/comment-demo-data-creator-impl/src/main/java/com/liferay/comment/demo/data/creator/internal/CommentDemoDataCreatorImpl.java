@@ -62,13 +62,13 @@ public class CommentDemoDataCreatorImpl implements CommentDemoDataCreator {
 
 		Group group = _groupLocalService.getGroup(assetEntry.getGroupId());
 
-		IdentityServiceContextFunction serviceContextFunction =
+		IdentityServiceContextFunction identityServiceContextFunction =
 			new IdentityServiceContextFunction(new ServiceContext());
 
 		long commentId = _commentManager.addComment(
 			user.getUserId(), group.getGroupId(), className, classPK,
 			user.getFullName(), StringPool.BLANK, _getRandomBody(),
-			serviceContextFunction);
+			identityServiceContextFunction);
 
 		return _getComment(commentId);
 	}
@@ -79,7 +79,7 @@ public class CommentDemoDataCreatorImpl implements CommentDemoDataCreator {
 
 		User user = _userLocalService.fetchUser(userId);
 
-		IdentityServiceContextFunction serviceContextFunction =
+		IdentityServiceContextFunction identityServiceContextFunction =
 			new IdentityServiceContextFunction(new ServiceContext());
 
 		Comment parentComment = _commentManager.fetchComment(parentCommentId);
@@ -87,7 +87,7 @@ public class CommentDemoDataCreatorImpl implements CommentDemoDataCreator {
 		long commentId = _commentManager.addComment(
 			userId, parentComment.getClassName(), parentComment.getClassPK(),
 			user.getFullName(), parentCommentId, StringPool.BLANK,
-			_getRandomBody(), serviceContextFunction);
+			_getRandomBody(), identityServiceContextFunction);
 
 		return _getComment(commentId);
 	}
