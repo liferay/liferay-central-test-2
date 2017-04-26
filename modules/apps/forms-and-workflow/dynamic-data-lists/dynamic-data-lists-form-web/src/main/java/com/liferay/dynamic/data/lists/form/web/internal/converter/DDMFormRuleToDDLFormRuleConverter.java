@@ -266,13 +266,16 @@ public class DDMFormRuleToDDLFormRuleConverter {
 
 			List<Operand> belongsToOperands = new ArrayList<>();
 
-			Stream<String> valueStream = operands.stream().map(
+			Stream<Operand> operandsStream = operands.stream();
+
+			Stream<String> valuesStream = operandsStream.map(
 				operand -> operand.getValue());
 
 			belongsToOperands.add(
 				new Operand(
 					"list",
-					valueStream.collect(Collectors.joining(StringPool.COMMA))));
+					valuesStream.collect(
+						Collectors.joining(StringPool.COMMA))));
 
 			return new DDLFormRuleCondition(
 				belongsToFunctionName, belongsToOperands);
