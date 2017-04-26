@@ -67,7 +67,7 @@ public class CommentDemoDataCreatorImpl implements CommentDemoDataCreator {
 
 		long commentId = _commentManager.addComment(
 			user.getUserId(), group.getGroupId(), className, classPK,
-			user.getFullName(), StringPool.BLANK, _getRandomCommentBody(),
+			user.getFullName(), StringPool.BLANK, _getRandomBody(),
 			serviceContextFunction);
 
 		return _getComment(commentId);
@@ -87,7 +87,7 @@ public class CommentDemoDataCreatorImpl implements CommentDemoDataCreator {
 		long commentId = _commentManager.addComment(
 			userId, parentComment.getClassName(), parentComment.getClassPK(),
 			user.getFullName(), parentCommentId, StringPool.BLANK,
-			_getRandomCommentBody(), serviceContextFunction);
+			_getRandomBody(), serviceContextFunction);
 
 		return _getComment(commentId);
 	}
@@ -122,14 +122,14 @@ public class CommentDemoDataCreatorImpl implements CommentDemoDataCreator {
 		return _commentManager.fetchComment(commentId);
 	}
 
-	private String _getRandomCommentBody() {
-		return _commentBodies.get(RandomUtil.nextInt(_commentBodies.size()));
+	private String _getRandomBody() {
+		return _bodies.get(RandomUtil.nextInt(_bodies.size()));
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CommentDemoDataCreatorImpl.class);
 
-	private static final List<String> _commentBodies = _read("bodies");
+	private static final List<String> _bodies = _read("bodies");
 
 	@Reference
 	private AssetEntryLocalService _assetEntryLocalService;
