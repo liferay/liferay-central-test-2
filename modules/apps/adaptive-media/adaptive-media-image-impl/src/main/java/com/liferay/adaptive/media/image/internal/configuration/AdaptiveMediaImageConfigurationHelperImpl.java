@@ -19,7 +19,13 @@ import com.liferay.adaptive.media.AdaptiveMediaImageConfigurationException.Inval
 import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationHelper;
+import com.liferay.adaptive.media.image.messaging.AdaptiveMediaImageDestinationNames;
 import com.liferay.adaptive.media.image.service.AdaptiveMediaImageEntryLocalService;
+import com.liferay.portal.kernel.messaging.Destination;
+import com.liferay.portal.kernel.messaging.DestinationConfiguration;
+import com.liferay.portal.kernel.messaging.DestinationFactory;
+import com.liferay.portal.kernel.messaging.Message;
+import com.liferay.portal.kernel.messaging.MessageBus;
 import com.liferay.portal.kernel.settings.CompanyServiceSettingsLocator;
 import com.liferay.portal.kernel.settings.ModifiableSettings;
 import com.liferay.portal.kernel.settings.PortletPreferencesSettings;
@@ -43,7 +49,9 @@ import java.util.stream.Stream;
 import javax.portlet.PortletPreferences;
 import javax.portlet.ValidatorException;
 
+import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Deactivate;
 import org.osgi.service.component.annotations.Reference;
 
 /**
@@ -90,6 +98,8 @@ public class AdaptiveMediaImageConfigurationHelperImpl
 		updatedConfigurationEntries.add(configurationEntry);
 
 		_updateConfiguration(companyId, updatedConfigurationEntries);
+
+		_triggerConfigurationEvent(EventName.ADDED, configurationEntry);
 
 		return configurationEntry;
 	}
@@ -158,6 +168,8 @@ public class AdaptiveMediaImageConfigurationHelperImpl
 		updatedConfigurationEntries.add(newConfigurationEntry);
 
 		_updateConfiguration(companyId, updatedConfigurationEntries);
+
+		_triggerConfigurationEvent(EventName.DISABLED, configurationEntry);
 	}
 
 	@Override
@@ -200,6 +212,8 @@ public class AdaptiveMediaImageConfigurationHelperImpl
 		updatedConfigurationEntries.add(newConfigurationEntry);
 
 		_updateConfiguration(companyId, updatedConfigurationEntries);
+
+		_triggerConfigurationEvent(EventName.ENABLED, configurationEntry);
 	}
 
 	@Override
@@ -215,8 +229,11 @@ public class AdaptiveMediaImageConfigurationHelperImpl
 			return;
 		}
 
+		AdaptiveMediaImageConfigurationEntry configurationEntry =
+			configurationEntryOptional.get();
+
 		_imageEntryLocalService.deleteAdaptiveMediaImageEntries(
-			companyId, configurationEntryOptional.get());
+			companyId, configurationEntry);
 
 		Collection<AdaptiveMediaImageConfigurationEntry> configurationEntries =
 			getAdaptiveMediaImageConfigurationEntries(
@@ -229,6 +246,8 @@ public class AdaptiveMediaImageConfigurationHelperImpl
 				Collectors.toList());
 
 		_updateConfiguration(companyId, updatedConfigurationEntries);
+
+		_triggerConfigurationEvent(EventName.DELETED, configurationEntry);
 	}
 
 	@Override
@@ -334,7 +353,34 @@ public class AdaptiveMediaImageConfigurationHelperImpl
 
 		_updateConfiguration(companyId, updatedConfigurationEntries);
 
+		_triggerConfigurationEvent(
+			EventName.UPDATED,
+			new AdaptiveMediaImageConfigurationEntry[] {
+				oldConfigurationEntry, configurationEntry
+			});
+
 		return configurationEntry;
+	}
+
+	@Activate
+	protected void activate() {
+		DestinationConfiguration destinationConfiguration =
+			new DestinationConfiguration(
+				DestinationConfiguration.DESTINATION_TYPE_SERIAL,
+				AdaptiveMediaImageDestinationNames.
+					ADAPTIVE_MEDIA_IMAGE_CONFIGURATION);
+
+		Destination destination = _destinationFactory.createDestination(
+			destinationConfiguration);
+
+		_messageBus.addDestination(destination);
+	}
+
+	@Deactivate
+	protected void deactivate() {
+		_messageBus.removeDestination(
+			AdaptiveMediaImageDestinationNames.
+				ADAPTIVE_MEDIA_IMAGE_CONFIGURATION);
 	}
 
 	@Reference(unbind = "-")
@@ -462,6 +508,18 @@ public class AdaptiveMediaImageConfigurationHelperImpl
 		return Optional.ofNullable(map.get("imageVariants"));
 	}
 
+	private void _triggerConfigurationEvent(EventName event, Object payload) {
+		Message message = new Message();
+
+		message.put("event_name", event.toString());
+		message.setPayload(payload);
+
+		_messageBus.sendMessage(
+			AdaptiveMediaImageDestinationNames.
+				ADAPTIVE_MEDIA_IMAGE_CONFIGURATION,
+			message);
+	}
+
 	private void _updateConfiguration(
 			long companyId,
 			List<AdaptiveMediaImageConfigurationEntry> configurationEntries)
@@ -495,6 +553,17 @@ public class AdaptiveMediaImageConfigurationHelperImpl
 		_configurationEntryParser;
 
 	@Reference
+	private DestinationFactory _destinationFactory;
+
+	@Reference
 	private AdaptiveMediaImageEntryLocalService _imageEntryLocalService;
+
+	@Reference
+	private MessageBus _messageBus;
+
+	private enum EventName {
+
+		ADDED, DELETED, ENABLED, DISABLED, UPDATED
+	}
 
 }
