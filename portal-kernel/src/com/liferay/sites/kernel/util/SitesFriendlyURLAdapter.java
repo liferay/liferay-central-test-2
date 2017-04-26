@@ -23,7 +23,7 @@ import java.util.Locale;
  */
 public interface SitesFriendlyURLAdapter {
 
-	public Group getGroupBySiteFriendlyURL(long companyId, String friendlyURL);
+	public Group getGroup(long companyId, String friendlyURL);
 
 	public String getSiteFriendlyURL(long groupId, Locale locale);
 

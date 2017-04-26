@@ -28,15 +28,12 @@ import java.util.Locale;
  */
 public class SitesFriendlyURLAdapterUtil {
 
-	public static Group getGroupBySiteFriendlyURL(
-		long companyId, String friendlyURL) {
-
+	public static Group getGroup(long companyId, String friendlyURL) {
 		SitesFriendlyURLAdapter sitesFriendlyURLAdapter =
 			getSiteFriendlyURLAdapter();
 
 		if (sitesFriendlyURLAdapter != null) {
-			return sitesFriendlyURLAdapter.getGroupBySiteFriendlyURL(
-				companyId, friendlyURL);
+			return sitesFriendlyURLAdapter.getGroup(companyId, friendlyURL);
 		}
 
 		return null;
