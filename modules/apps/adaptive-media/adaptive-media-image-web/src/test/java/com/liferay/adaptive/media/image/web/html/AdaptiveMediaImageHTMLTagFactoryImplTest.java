@@ -66,7 +66,7 @@ public class AdaptiveMediaImageHTMLTagFactoryImplTest {
 		expectedSB.append("<picture data-fileEntryId=\"1234\">");
 		expectedSB.append("<source media=\"(max-width:1989px)\" ");
 		expectedSB.append("srcset=\"adaptiveURL\"/>");
-		expectedSB.append(originalImgTag);
+		expectedSB.append("<img src=\"originalURL\"/>");
 		expectedSB.append("</picture>");
 
 		String pictureTag = _adaptiveMediaImageHTMLTagFactory.create(
@@ -93,7 +93,7 @@ public class AdaptiveMediaImageHTMLTagFactoryImplTest {
 		expectedSB.append("srcset=\"adaptiveURL1\"/>");
 		expectedSB.append("<source media=\"(max-width:1989px)\" ");
 		expectedSB.append("srcset=\"adaptiveURL2\"/>");
-		expectedSB.append(originalImgTag);
+		expectedSB.append("<img src=\"originalURL\"/>");
 		expectedSB.append("</picture>");
 
 		String pictureTag = _adaptiveMediaImageHTMLTagFactory.create(
@@ -110,8 +110,7 @@ public class AdaptiveMediaImageHTMLTagFactoryImplTest {
 		StringBundler expectedSB = new StringBundler(8);
 
 		expectedSB.append("<picture data-fileEntryId=\"1234\">");
-		expectedSB.append(
-			"<img src=\"originalURL\" data-fileEntryId=\"1234\"/>");
+		expectedSB.append("<img src=\"originalURL\"/>");
 		expectedSB.append("</picture>");
 
 		String originalImgTag =
@@ -153,7 +152,7 @@ public class AdaptiveMediaImageHTMLTagFactoryImplTest {
 		expectedSB.append("<picture data-fileEntryId=\"1234\">");
 		expectedSB.append("<source media=\"(max-width:1989px)\" ");
 		expectedSB.append("srcset=\"adaptiveURL\"/>");
-		expectedSB.append(originalSB);
+		expectedSB.append("<img \nsrc=\"adaptable\"/>");
 		expectedSB.append("</picture>");
 
 		String pictureTag = _adaptiveMediaImageHTMLTagFactory.create(
@@ -174,7 +173,7 @@ public class AdaptiveMediaImageHTMLTagFactoryImplTest {
 		expectedSB.append("<picture data-fileEntryId=\"1234\">");
 		expectedSB.append("<source media=\"(max-width:1989px)\" ");
 		expectedSB.append("srcset=\"adaptiveURL\"/>");
-		expectedSB.append(originalImgTag);
+		expectedSB.append("<img src=\"originalURL\"/>");
 		expectedSB.append("</picture>");
 
 		String pictureTag = _adaptiveMediaImageHTMLTagFactory.create(

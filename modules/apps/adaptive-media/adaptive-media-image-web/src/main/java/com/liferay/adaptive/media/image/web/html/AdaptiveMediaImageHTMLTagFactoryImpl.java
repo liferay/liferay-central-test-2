@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -58,7 +59,9 @@ public class AdaptiveMediaImageHTMLTagFactoryImpl
 
 		sourceElements.forEach(sb::append);
 
-		sb.append(originalImgTag);
+		Matcher matcher = _ATTR_PATTERN.matcher(originalImgTag);
+
+		sb.append(matcher.replaceAll(""));
 
 		sb.append("</picture>");
 
