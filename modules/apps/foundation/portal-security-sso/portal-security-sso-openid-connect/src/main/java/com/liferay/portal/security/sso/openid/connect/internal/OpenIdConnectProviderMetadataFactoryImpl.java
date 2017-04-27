@@ -72,13 +72,12 @@ public class OpenIdConnectProviderMetadataFactoryImpl
 		}
 		catch (URISyntaxException urise) {
 			throw new OpenIdConnectServiceException.ProviderException(
-				"Error processing configured URI for provider " +
-					_providerName,
+				"Invalid URLs for OpenId Connect provider " + _providerName,
 				urise);
 		}
 		catch (ParseException pe) {
 			throw new OpenIdConnectServiceException.ProviderException(
-				"Error processing configured SubjectType for provider " +
+				"Invalid subject types for OpenId Connect provider " +
 					_providerName,
 				pe);
 		}
