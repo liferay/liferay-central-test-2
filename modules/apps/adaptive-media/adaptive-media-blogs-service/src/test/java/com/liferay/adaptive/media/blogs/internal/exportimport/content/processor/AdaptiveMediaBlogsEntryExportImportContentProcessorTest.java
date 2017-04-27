@@ -82,6 +82,28 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 	}
 
 	@Test
+	public void testExportContentWithDynamicReferenceContainingMoreAttributes()
+		throws Exception {
+
+		String prefix = StringUtil.randomString();
+		String suffix = StringUtil.randomString();
+
+		String content =
+			prefix + "<img attr1=\"1\" data-fileentryid=\"1\" attr2=\"2\" " +
+				"src=\"url\" attr3=\"3\"/>" + suffix;
+
+		_makeOverridenProcessorReturn(content);
+
+		_defineFileEntryToExport(1, _fileEntry1);
+
+		String replacedContent =
+			_blogsExportImportContentProcessor.replaceExportContentReferences(
+				_portletDataContext, _blogsEntry, content, false, false);
+
+		Assert.assertEquals(prefix + "PLACEHOLDER_1" + suffix, replacedContent);
+	}
+
+	@Test
 	public void testExportContentWithDynamicReferenceDoesNotEscape()
 		throws Exception {
 

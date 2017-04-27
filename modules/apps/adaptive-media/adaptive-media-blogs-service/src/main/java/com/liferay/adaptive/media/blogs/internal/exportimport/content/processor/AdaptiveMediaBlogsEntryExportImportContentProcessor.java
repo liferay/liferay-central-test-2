@@ -234,8 +234,8 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessor
 		Pattern.CASE_INSENSITIVE);
 
 	private static final Pattern _DYNAMIC_TAG_REGEXP = Pattern.compile(
-		"<img data-fileentryid=\"(\\d+)\" src=\"[^\"]+\" />",
-		Pattern.CASE_INSENSITIVE);
+		"<img .*?\\s*data-fileEntryId=\"(\\d+)\".*?/>",
+		Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
 
 	private static final Pattern _STATIC_PLACEHOLDER_REGEXP = Pattern.compile(
 		"\\[\\$adaptive-media-static-media path=\"([^\"]+)\"\\$]",
