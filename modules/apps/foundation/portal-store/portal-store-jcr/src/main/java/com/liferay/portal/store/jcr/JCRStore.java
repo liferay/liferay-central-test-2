@@ -62,11 +62,10 @@ import org.osgi.service.component.annotations.Deactivate;
 import org.osgi.service.component.annotations.Modified;
 
 /**
- * @author Michael Young
- * @author Brian Wing Shun Chan
- * @author Edward Han
- * @author Manuel de la Peña
- *
+ * @author     Michael Young
+ * @author     Brian Wing Shun Chan
+ * @author     Edward Han
+ * @author     Manuel de la Peña
  * @deprecated As of 2.0.0, with no direct replacement
  */
 @Component(
