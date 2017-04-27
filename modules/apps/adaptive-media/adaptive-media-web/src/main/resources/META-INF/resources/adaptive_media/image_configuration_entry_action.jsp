@@ -69,7 +69,11 @@ String entryUuid = String.valueOf(configurationEntry.getUUID());
 			</portlet:actionURL>
 
 			<%
-			String cssClass = (!optimizeImagesEnabled) ? "disabled" : "";
+			String cssClass = StringPool.BLANK;
+
+			if (!optimizeImagesEnabled) {
+				cssClass = "disabled";
+			}
 			%>
 
 			<liferay-ui:icon
@@ -102,7 +106,7 @@ String entryUuid = String.valueOf(configurationEntry.getUUID());
 
 	int percentage = AdaptiveMediaImageEntryLocalServiceUtil.getPercentage(themeDisplay.getCompanyId(), entryUuid);
 
-	String cssClass = (!configurationEntry.isEnabled() || percentage == 100 || !optimizeImagesEnabled) ? "disabled" : "";
+	String cssClass = (!configurationEntry.isEnabled() || percentage == 100 || !optimizeImagesEnabled) ? "disabled" : StringPool.BLANK;
 	%>
 
 	<liferay-ui:icon
