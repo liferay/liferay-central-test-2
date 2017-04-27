@@ -42,7 +42,7 @@ import org.osgi.service.component.annotations.Reference;
 	},
 	service = MVCResourceCommand.class
 )
-public class OptimizedImagesPercentageMVCResourceCommand
+public class AdaptedImagesPercentageMVCResourceCommand
 	extends BaseMVCResourceCommand {
 
 	@Override
