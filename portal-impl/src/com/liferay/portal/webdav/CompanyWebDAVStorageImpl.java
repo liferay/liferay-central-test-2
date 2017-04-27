@@ -28,7 +28,6 @@ import com.liferay.sites.kernel.util.SitesFriendlyURLAdapterUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * @author Alexander Chow
