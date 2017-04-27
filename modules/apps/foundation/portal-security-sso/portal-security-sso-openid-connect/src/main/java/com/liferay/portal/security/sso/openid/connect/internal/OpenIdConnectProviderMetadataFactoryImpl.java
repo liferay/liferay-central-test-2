@@ -70,16 +70,16 @@ public class OpenIdConnectProviderMetadataFactoryImpl
 			_oidcProviderMetadata.setUserInfoEndpointURI(
 				new URI(userInfoEndPointURL));
 		}
-		catch (URISyntaxException urise) {
-			throw new OpenIdConnectServiceException.ProviderException(
-				"Invalid URLs for OpenId Connect provider " + _providerName,
-				urise);
-		}
 		catch (ParseException pe) {
 			throw new OpenIdConnectServiceException.ProviderException(
 				"Invalid subject types for OpenId Connect provider " +
 					_providerName,
 				pe);
+		}
+		catch (URISyntaxException urise) {
+			throw new OpenIdConnectServiceException.ProviderException(
+				"Invalid URLs for OpenId Connect provider " + _providerName,
+				urise);
 		}
 	}
 
