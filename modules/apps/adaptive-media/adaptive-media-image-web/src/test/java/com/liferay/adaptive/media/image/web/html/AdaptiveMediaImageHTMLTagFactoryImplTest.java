@@ -109,8 +109,9 @@ public class AdaptiveMediaImageHTMLTagFactoryImplTest {
 
 		StringBundler expectedSB = new StringBundler(8);
 
-		expectedSB.append("<picture>");
-		expectedSB.append("<img src=\"originalURL\"/>");
+		expectedSB.append("<picture data-fileEntryId=\"1234\">");
+		expectedSB.append(
+			"<img src=\"originalURL\" data-fileEntryId=\"1234\"/>");
 		expectedSB.append("</picture>");
 
 		String originalImgTag =
