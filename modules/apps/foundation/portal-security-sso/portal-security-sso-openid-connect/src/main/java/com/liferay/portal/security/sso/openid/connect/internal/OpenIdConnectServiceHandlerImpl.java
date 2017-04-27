@@ -114,14 +114,11 @@ public class OpenIdConnectServiceHandlerImpl
 			(OpenIdConnectSession)httpSession.getAttribute(
 				OpenIdConnectWebKeys.OPEN_ID_CONNECT_SESSION);
 
-		boolean validAccessToken = hasValidAccessToken(openIdConnectSession);
-
-		if (!validAccessToken) {
+		if (!hasValidAccessToken(openIdConnectSession)) {
 			return refreshAuthToken(openIdConnectSession);
 		}
-		else {
-			return true;
-		}
+
+		return true;
 	}
 
 	@Override
