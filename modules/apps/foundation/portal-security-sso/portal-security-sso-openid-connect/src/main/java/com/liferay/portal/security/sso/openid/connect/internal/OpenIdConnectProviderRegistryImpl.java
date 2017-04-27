@@ -106,62 +106,48 @@ public class OpenIdConnectProviderRegistryImpl
 				openIdConnectProviderConfiguration)
 		throws ConfigurationException {
 
-		String providerName = openIdConnectProviderConfiguration.providerName();
-		String discoveryEndPoint =
-			openIdConnectProviderConfiguration.discoveryEndPoint();
-
 		OpenIdConnectProviderMetadataFactory
-			openIdConnectProviderMetadataFactory;
+			openIdConnectProviderMetadataFactory = null;
 
 		try {
-			if (Validator.isNotNull(discoveryEndPoint)) {
-				long discoveryEndPointCacheInMillis =
-					openIdConnectProviderConfiguration.
-						discoveryEndPointCacheInMillis();
-
-				URL discoveryEndPointURL = new URL(discoveryEndPoint);
+			if (Validator.isNotNull(
+					openIdConnectProviderConfiguration.discoveryEndPoint())) {
 
 				openIdConnectProviderMetadataFactory =
 					new OpenIdConnectProviderMetadataFactoryImpl(
-						providerName, discoveryEndPointURL,
-						discoveryEndPointCacheInMillis);
+						openIdConnectProviderConfiguration.providerName(),
+						new URL(
+							openIdConnectProviderConfiguration.
+								discoveryEndPoint()),
+						openIdConnectProviderConfiguration.
+							discoveryEndPointCacheInMillis());
 			}
 			else {
-				String issuerURL =
-					openIdConnectProviderConfiguration.issuerURL();
-				String[] subjectTypes =
-					openIdConnectProviderConfiguration.subjectTypes();
-				String jwks = openIdConnectProviderConfiguration.jwksURI();
-				String authorizationEndPoint =
-					openIdConnectProviderConfiguration.authorizationEndPoint();
-				String tokenEndPoint =
-					openIdConnectProviderConfiguration.tokenEndPoint();
-				String userInfoEndPoint =
-					openIdConnectProviderConfiguration.userInfoEndPoint();
-
 				openIdConnectProviderMetadataFactory =
 					new OpenIdConnectProviderMetadataFactoryImpl(
-						providerName, issuerURL, subjectTypes, jwks,
-						authorizationEndPoint, tokenEndPoint, userInfoEndPoint);
+						openIdConnectProviderConfiguration.providerName(),
+						openIdConnectProviderConfiguration.issuerURL(),
+						openIdConnectProviderConfiguration.subjectTypes(),
+						openIdConnectProviderConfiguration.jwksURI(),
+						openIdConnectProviderConfiguration.
+							authorizationEndPoint(),
+						openIdConnectProviderConfiguration.tokenEndPoint(),
+						openIdConnectProviderConfiguration.userInfoEndPoint());
 			}
 		}
 		catch (Exception e) {
 			throw new ConfigurationException(
 				null,
-				"Unable to instantiate Provider Metadata Factory for " +
-					openIdConnectProviderConfiguration.providerName() +
-						". Invalid configuration",
+				"Unable to instantiate provider metadata factory for " +
+					openIdConnectProviderConfiguration.providerName(),
 				e);
 		}
 
-		String clientId =
-			openIdConnectProviderConfiguration.openIdConnectClientId();
-		String clientSecret =
-			openIdConnectProviderConfiguration.openIdConnectClientSecret();
-		String scopes = openIdConnectProviderConfiguration.scopes();
-
 		OpenIdConnectProvider openIdConnectProvider = new OpenIdConnectProvider(
-			providerName, clientId, clientSecret, scopes,
+			openIdConnectProviderConfiguration.providerName(),
+			openIdConnectProviderConfiguration.openIdConnectClientId(),
+			openIdConnectProviderConfiguration.openIdConnectClientSecret(),
+			openIdConnectProviderConfiguration.scopes(),
 			openIdConnectProviderMetadataFactory);
 
 		return openIdConnectProvider;

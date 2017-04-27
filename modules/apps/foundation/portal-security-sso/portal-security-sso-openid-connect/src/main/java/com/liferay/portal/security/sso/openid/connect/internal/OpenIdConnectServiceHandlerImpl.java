@@ -152,7 +152,7 @@ public class OpenIdConnectServiceHandlerImpl
 			if (Validator.isNull(openIdConnectSession)) {
 				throw new OpenIdConnectServiceException.
 					AuthenticationErrorException(
-						"No existing OpenId Connect Session Found");
+						"No existing OpenId Connect session found");
 			}
 
 			AuthenticationSuccessResponse authenticationSuccessResponse =
@@ -273,11 +273,11 @@ public class OpenIdConnectServiceHandlerImpl
 			httpServletResponse.sendRedirect(
 				authenticationRequestURI.toString());
 
+			HttpSession httpSession = httpServletRequest.getSession();
+
 			OpenIdConnectSession openIdConnectSession =
 				new OpenIdConnectSession(
 					openIdConnectProviderName, nonce, state);
-
-			HttpSession httpSession = httpServletRequest.getSession();
 
 			httpSession.setAttribute(
 				OpenIdConnectWebKeys.OPEN_ID_CONNECT_SESSION,
@@ -351,8 +351,8 @@ public class OpenIdConnectServiceHandlerImpl
 			return false;
 		}
 
-		long lifetime = accessToken.getLifetime() * Time.SECOND;
 		long currentTime = System.currentTimeMillis();
+		long lifetime = accessToken.getLifetime() * Time.SECOND;
 		long loginTime = openIdConnectSession.getLoginTime();
 
 		if ((currentTime - loginTime) < lifetime) {
@@ -374,7 +374,7 @@ public class OpenIdConnectServiceHandlerImpl
 			if (_log.isInfoEnabled()) {
 				_log.info(
 					"User session auth token is invalid, attempting to use " +
-						"refresh token to obtain a valid auth token.");
+						"refresh token to obtain a valid auth token");
 			}
 
 			RefreshToken refreshToken = openIdConnectSession.getRefreshToken();
@@ -382,8 +382,8 @@ public class OpenIdConnectServiceHandlerImpl
 			if (refreshToken == null) {
 				if (_log.isInfoEnabled()) {
 					_log.info(
-						"Cannot refresh auth token, no refresh token " +
-							"supplied.");
+						"Unable to refresh auth token because no refresh " +
+							"token is supplied");
 				}
 
 				return false;
