@@ -165,7 +165,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 					<liferay-ui:search-container-column-text
 						cssClass="table-cell-content"
-						name="optimized-images"
+						name="adapted-images"
 					>
 
 						<%

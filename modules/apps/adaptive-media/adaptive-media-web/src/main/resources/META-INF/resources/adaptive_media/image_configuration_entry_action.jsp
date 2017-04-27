@@ -112,7 +112,7 @@ String entryUuid = String.valueOf(configurationEntry.getUUID());
 	<liferay-ui:icon
 		cssClass="<%= cssClass %>"
 		id='<%= "icon-optimize-" + entryUuid %>'
-		message="optimize-remaining"
+		message="adapt-remaining"
 		onClick="<%= onClick %>"
 		url="javascript:;"
 	/>

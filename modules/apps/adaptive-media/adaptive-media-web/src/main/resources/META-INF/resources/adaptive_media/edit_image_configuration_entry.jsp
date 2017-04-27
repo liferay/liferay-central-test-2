@@ -61,7 +61,7 @@ if (configurationEntry != null) {
 							<liferay-ui:message key="at-least-one-dimension-value-is-required" />
 						</c:when>
 						<c:otherwise>
-							<liferay-ui:message key="the-images-for-this-resolution-are-already-optimized" />
+							<liferay-ui:message key="the-images-for-this-resolution-are-already-adapted" />
 						</c:otherwise>
 					</c:choose>
 				</div>

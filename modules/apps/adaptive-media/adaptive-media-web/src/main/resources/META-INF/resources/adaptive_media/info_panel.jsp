@@ -80,7 +80,7 @@ if (ListUtil.isNotEmpty(selectedConfigurationEntries)) {
 							<%= configurationEntry.isEnabled() ? LanguageUtil.get(request, "enabled") : LanguageUtil.get(request, "disabled") %>
 						</dd>
 						<dt class="h5">
-							<liferay-ui:message key="optimized-images" />
+							<liferay-ui:message key="adapted-images" />
 						</dt>
 						<dd class="h6 sidebar-caption">
 							<%= AdaptiveMediaImageEntryLocalServiceUtil.getAdaptiveMediaImageEntriesCount(themeDisplay.getCompanyId(), configurationEntry.getUUID()) + "/" + AdaptiveMediaImageEntryLocalServiceUtil.getExpectedAdaptiveMediaImageEntriesCount(themeDisplay.getCompanyId()) %>

@@ -61,8 +61,7 @@ public class OptimizeImagesPortletConfigurationIcon
 	@Override
 	public String getMessage(PortletRequest portletRequest) {
 		return LanguageUtil.get(
-			getResourceBundle(getLocale(portletRequest)),
-			"optimize-all-images");
+			getResourceBundle(getLocale(portletRequest)), "adapt-all-images");
 	}
 
 	@Override
