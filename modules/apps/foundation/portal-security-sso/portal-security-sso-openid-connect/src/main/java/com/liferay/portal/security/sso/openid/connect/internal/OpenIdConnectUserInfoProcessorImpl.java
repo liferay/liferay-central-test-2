@@ -47,8 +47,6 @@ public class OpenIdConnectUserInfoProcessorImpl
 	public long processUserInfo(UserInfo userInfo, long companyId)
 		throws PortalException {
 
-		Company company = _companyLocalService.getCompany(companyId);
-
 		String firstName = userInfo.getGivenName();
 		String lastName = userInfo.getFamilyName();
 
@@ -80,7 +78,11 @@ public class OpenIdConnectUserInfoProcessorImpl
 		boolean autoScreenName = true;
 		String screenName = StringPool.BLANK;
 		long facebookId = 0;
+
+		Company company = _companyLocalService.getCompany(companyId);
+
 		Locale locale = company.getLocale();
+
 		String middleName = userInfo.getMiddleName();
 		long prefixId = 0;
 		long suffixId = 0;
