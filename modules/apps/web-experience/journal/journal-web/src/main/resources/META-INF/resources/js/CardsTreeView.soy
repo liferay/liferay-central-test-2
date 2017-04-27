@@ -4,10 +4,9 @@
  * This renders the main element.
  */
 {template .render}
-	{@param? elementClasses: string}
 	{@param nodes: list<?>}
 
-	<div class="treeview{$elementClasses ? ' ' + $elementClasses : ''}" role="tree">
+	<div class="treeview" role="tree">
 		{call .nodes data="all"}
 			{param nodes: $nodes /}
 		{/call}
