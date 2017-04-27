@@ -53,9 +53,9 @@ public class OpenIdConnectSessionValidationFilter
 			Object object)
 		throws Exception {
 
-		HttpSession httpSession = request.getSession();
-
 		boolean endSession = false;
+
+		HttpSession httpSession = request.getSession();
 
 		OpenIdConnectSession openIdConnectSession =
 			(OpenIdConnectSession)httpSession.getAttribute(
@@ -72,7 +72,7 @@ public class OpenIdConnectSessionValidationFilter
 				}
 			}
 			catch (PortalException pe) {
-				_log.error("Unable to validate OpenIdSession: ", pe);
+				_log.error("Unable to validate OpenId session", pe);
 
 				endSession = true;
 			}
