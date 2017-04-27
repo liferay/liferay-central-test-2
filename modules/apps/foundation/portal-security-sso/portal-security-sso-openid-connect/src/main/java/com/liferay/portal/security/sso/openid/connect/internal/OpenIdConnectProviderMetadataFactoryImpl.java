@@ -54,26 +54,21 @@ public class OpenIdConnectProviderMetadataFactoryImpl
 		_providerName = providerName;
 
 		try {
-			Issuer issuer = new Issuer(issuerURL);
-
-			List<SubjectType> subjectTypeList = new ArrayList<>();
+			List<SubjectType> subjectTypesList = new ArrayList<>();
 
 			for (String subjectType : subjectTypes) {
-				subjectTypeList.add(SubjectType.parse(subjectType));
+				subjectTypesList.add(SubjectType.parse(subjectType));
 			}
 
-			URI jwksURI = new URI(jwksURL);
-			URI authorizationEndpointURI = new URI(authorizationEndPointURL);
-			URI tokenEndpointURI = new URI(tokenEndPointURL);
-			URI userInfoEndpointURI = new URI(userInfoEndPointURL);
-
 			_oidcProviderMetadata = new OIDCProviderMetadata(
-				issuer, subjectTypeList, jwksURI);
+				new Issuer(issuerURL), subjectTypesList, new URI(jwksURL));
 
 			_oidcProviderMetadata.setAuthorizationEndpointURI(
-				authorizationEndpointURI);
-			_oidcProviderMetadata.setTokenEndpointURI(tokenEndpointURI);
-			_oidcProviderMetadata.setUserInfoEndpointURI(userInfoEndpointURI);
+				new URI(authorizationEndPointURL));
+			_oidcProviderMetadata.setTokenEndpointURI(
+				new URI(tokenEndPointURL));
+			_oidcProviderMetadata.setUserInfoEndpointURI(
+				new URI(userInfoEndPointURL));
 
 			_discoveryEndPointURL = null;
 			_cacheInMilliseconds = 0;
