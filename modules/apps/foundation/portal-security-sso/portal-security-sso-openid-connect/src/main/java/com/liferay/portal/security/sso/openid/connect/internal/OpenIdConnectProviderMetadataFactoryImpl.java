@@ -69,9 +69,6 @@ public class OpenIdConnectProviderMetadataFactoryImpl
 				new URI(tokenEndPointURL));
 			_oidcProviderMetadata.setUserInfoEndpointURI(
 				new URI(userInfoEndPointURL));
-
-			_discoveryEndPointURL = null;
-			_cacheInMilliseconds = 0;
 		}
 		catch (URISyntaxException urise) {
 			throw new OpenIdConnectServiceException.ProviderException(
