@@ -53,6 +53,9 @@ public class OpenIdConnectProviderMetadataFactoryImpl
 
 		_providerName = providerName;
 
+		_cacheInMilliseconds = 0;
+		_discoveryEndPointURL = null;
+
 		try {
 			List<SubjectType> subjectTypesList = new ArrayList<>();
 
@@ -96,7 +99,6 @@ public class OpenIdConnectProviderMetadataFactoryImpl
 		_providerName = providerName;
 		_discoveryEndPointURL = discoveryEndPointURL;
 		_cacheInMilliseconds = cacheInMilliseconds;
-		_oidcProviderMetadata = null;
 	}
 
 	@Override
@@ -116,8 +118,7 @@ public class OpenIdConnectProviderMetadataFactoryImpl
 		if (_oidcProviderMetadata == null) {
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					"OIDC Provider " + _providerName +
-						": No cached metadata found, refreshing");
+					"Refreshing new OpenId Connect provider " + _providerName);
 			}
 
 			return true;
@@ -130,8 +131,8 @@ public class OpenIdConnectProviderMetadataFactoryImpl
 
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					"OIDC Provider " + _providerName +
-						": Cached metadata expired, refreshing");
+					"Refreshing stale OpenId Connect provider " +
+						_providerName);
 			}
 
 			return true;
@@ -162,7 +163,7 @@ public class OpenIdConnectProviderMetadataFactoryImpl
 			}
 			catch (IOException | ParseException e) {
 				throw new OpenIdConnectServiceException.ProviderException(
-					"Error getting OIDC Provider Metadata for provider " +
+					"Unable to get OpenId Connect provider metadata for " +
 						_providerName,
 					e);
 			}
@@ -171,7 +172,7 @@ public class OpenIdConnectProviderMetadataFactoryImpl
 
 				if (_log.isInfoEnabled()) {
 					_log.info(
-						"Getting OIDCProvider Metadata from " +
+						"Getting OpenId Connect provider metadata from " +
 							_discoveryEndPointURL + " took " +
 								stopWatch.getTime() + "ms");
 				}
