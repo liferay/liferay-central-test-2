@@ -66,13 +66,13 @@ if (ratingsEntry != null) {
 	yourScore = ratingsEntry.getScore();
 }
 
-boolean isInTrash = TrashUtil.isInTrash(className, classPK);
+boolean inTrash = TrashUtil.isInTrash(className, classPK);
 %>
 
 <div class="taglib-ratings <%= type %>" id="<%= randomNamespace %>ratingContainer">
 	<c:choose>
 		<c:when test="<%= type.equals(RatingsType.STARS.getValue()) %>">
-			<c:if test="<%= themeDisplay.isSignedIn() && !isInTrash %>">
+			<c:if test="<%= themeDisplay.isSignedIn() && !inTrash %>">
 				<div class="liferay-rating-vote" id="<%= randomNamespace %>ratingStar">
 					<div id="<%= randomNamespace %>ratingStarContent">
 						<div class="rating-label"><liferay-ui:message key="your-rating" /></div>
@@ -117,7 +117,7 @@ boolean isInTrash = TrashUtil.isInTrash(className, classPK);
 						for (int i = 1; i <= numberOfStars; i++) {
 						%>
 
-							<span class="rating-element <%= (i <= averageIndex) ? "icon-star" : "icon-star-empty" %>" title="<%= isInTrash ? LanguageUtil.get(resourceBundle, "ratings-are-disabled-because-this-entry-is-in-the-recycle-bin") : ((i == 1) ? LanguageUtil.format(request, ((formattedAverageScore == 1.0) ? "the-average-rating-is-x-star-out-of-x" : "the-average-rating-is-x-stars-out-of-x"), new Object[] {formattedAverageScore, numberOfStars}, false) : StringPool.BLANK) %>"></span>
+							<span class="rating-element <%= (i <= averageIndex) ? "icon-star" : "icon-star-empty" %>" title="<%= inTrash ? LanguageUtil.get(resourceBundle, "ratings-are-disabled-because-this-entry-is-in-the-recycle-bin") : ((i == 1) ? LanguageUtil.format(request, ((formattedAverageScore == 1.0) ? "the-average-rating-is-x-star-out-of-x" : "the-average-rating-is-x-stars-out-of-x"), new Object[] {formattedAverageScore, numberOfStars}, false) : StringPool.BLANK) %>"></span>
 
 						<%
 						}
@@ -151,12 +151,12 @@ boolean isInTrash = TrashUtil.isInTrash(className, classPK);
 						%>
 
 						<c:choose>
-							<c:when test="<%= !themeDisplay.isSignedIn() || isInTrash %>">
+							<c:when test="<%= !themeDisplay.isSignedIn() || inTrash %>">
 
 								<%
 								String thumbsTitle = StringPool.BLANK;
 
-								if (isInTrash) {
+								if (inTrash) {
 									thumbsTitle = LanguageUtil.get(resourceBundle, "ratings-are-disabled-because-this-entry-is-in-the-recycle-bin");
 								}
 								%>
@@ -213,7 +213,7 @@ boolean isInTrash = TrashUtil.isInTrash(className, classPK);
 	</c:choose>
 </div>
 
-<c:if test="<%= !isInTrash %>">
+<c:if test="<%= !inTrash %>">
 	<aui:script use="liferay-ratings">
 		Liferay.Ratings.register(
 			{
