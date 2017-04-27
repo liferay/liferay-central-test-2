@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.service.UserLocalService;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -84,9 +83,7 @@ public class MultipleCommentDemoDataCreatorImpl
 		int maxReplies = RandomUtil.nextInt(_MAX_REPLIES / level);
 		int repliesCount = 0;
 
-		while ((commentsCount < maxComments) &&
-			   (repliesCount < maxReplies)) {
-
+		while ((commentsCount < maxComments) && (repliesCount < maxReplies)) {
 			Comment comment = null;
 
 			long userId = _getRandomElement(userIds);
@@ -120,6 +117,8 @@ public class MultipleCommentDemoDataCreatorImpl
 		return !_excludedUsers.contains(user.getEmailAddress());
 	}
 
+	private static final int _COMMENT_ID = 0;
+
 	private static final int _MAX_COMMENTS = 100;
 
 	private static final int _MAX_LEVEL = 3;
@@ -127,8 +126,6 @@ public class MultipleCommentDemoDataCreatorImpl
 	private static final int _MAX_REPLIES = 10;
 
 	private static final int _MAX_USERS = 100;
-
-	private static final int _COMMENT_ID = 0;
 
 	private static final List<String> _excludedUsers = Arrays.asList(
 		"test@liferay.com", "default@liferay.com");
