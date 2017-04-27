@@ -188,6 +188,8 @@
 
 		<property name="custom.properties" value="session.enable.url.with.session.id=true" />
 
+		<execute macro="User#firstLoginPG" />
+
 		<execute macro="Portlet#addPG">
 			<var name="portletName" value="Sign In" />
 		</execute>
