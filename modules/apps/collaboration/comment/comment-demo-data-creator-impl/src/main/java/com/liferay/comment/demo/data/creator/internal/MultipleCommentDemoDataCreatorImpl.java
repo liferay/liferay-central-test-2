@@ -87,9 +87,9 @@ public class MultipleCommentDemoDataCreatorImpl
 		while ((commentsCount < maxComments) &&
 			   (repliesCount < maxReplies)) {
 
-			long userId = _getRandomElement(userIds);
-
 			Comment comment = null;
+
+			long userId = _getRandomElement(userIds);
 
 			if (commentId == _COMMENT_ID) {
 				comment = _commentDemoDataCreator.create(userId, classedModel);
