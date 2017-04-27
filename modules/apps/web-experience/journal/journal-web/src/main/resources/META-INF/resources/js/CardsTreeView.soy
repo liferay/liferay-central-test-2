@@ -2,11 +2,11 @@
 
 /**
  * This renders the main element.
- *
- * @param? elementClasses
- * @param nodes
  */
 {template .render}
+	{@param? elementClasses: string}
+	{@param nodes: list<?>}
+
 	<div class="treeview{$elementClasses ? ' ' + $elementClasses : ''}" role="tree">
 		{call .nodes data="all"}
 			{param nodes: $nodes /}
@@ -16,18 +16,18 @@
 
 /**
  * Renders the list of tree nodes. Uses the same markup as the parent Treeview component
- *
- * @param nodes
- * @param? parentPath
  */
 {template .nodes}
+	{@param nodes: list<?>}
+	{@param? parentPath: string}
+
 	{if $nodes}
 		<ul class="treeview-nodes">
 			{foreach $node in $nodes}
 				{let $index: index($node) /}
 				{call .node data="all"}
 					{param node: $node /}
-					{param path: isNonnull($parentPath) ? ($parentPath + '-' + $index) : $index /}
+					{param path: isNonnull($parentPath) ? ($parentPath + '-' + $index) : '' + $index /}
 				{/call}
 			{/foreach}
 		</ul>
@@ -36,12 +36,21 @@
 
 /**
  * Overrides the parent Treeview node template to show a Lexicon card instead of the simple label
- *
- * @param node
- * @param path
- * @param? viewType
  */
 {template .node}
+	{@param node: [
+		children: list<?>,
+		disabled: bool,
+		expanded: bool,
+		icon: string,
+		id: string,
+		name: string,
+		selected: bool,
+		value: string
+	]}
+	{@param path: string}
+	{@param? viewType: string}
+
 	<li class="treeview-node" data-treeview-path="{$path}">
 		{if $node}
 			<div class="treeview-node-wrapper{$node.expanded ? ' expanded' : ''}">
@@ -90,14 +99,14 @@
 
 /**
  * Renders a Lexicon Horizontal Card
- *
- * @param disabled
- * @param icon
- * @param path
- * @param pathThemeImages
- * @param title
  */
 {template .card}
+	{@param? disabled: bool}
+	{@param icon: string}
+	{@param path: string}
+	{@param pathThemeImages: string}
+	{@param title: string}
+
 	{let $nodeAttributes kind="attributes"}
 		class="card card-horizontal"
 		{if not $disabled}
