@@ -80,7 +80,7 @@ public class GroupWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 		throw new WebDAVException(
 			"Invalid group for given credentials " +
-				webDAVRequest.getRootPath() + path);
+				webDAVRequest.getRootPath() + webDAVRequest.getPath());
 	}
 
 }
