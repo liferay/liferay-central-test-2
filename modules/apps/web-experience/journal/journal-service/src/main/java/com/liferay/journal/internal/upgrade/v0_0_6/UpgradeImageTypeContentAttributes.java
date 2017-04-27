@@ -65,7 +65,8 @@ public class UpgradeImageTypeContentAttributes extends UpgradeProcess {
 			}
 
 			if (Validator.isNotNull(id)) {
-				imageElement.addAttribute("instance-id", getImageInstanceId(id));
+				imageElement.addAttribute(
+					"instance-id", getImageInstanceId(id));
 			}
 		}
 
