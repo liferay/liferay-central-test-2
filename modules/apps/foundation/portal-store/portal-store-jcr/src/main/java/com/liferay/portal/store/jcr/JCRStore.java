@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -856,10 +857,13 @@ public class JCRStore extends BaseStore {
 		throws RepositoryException {
 
 		if (_log.isWarnEnabled()) {
-			_log.warn(
-				"The JCR implementation of Store service is deprecated. You " +
-					"could migrate your data to Liferay's FileSystemStore or " +
-						"DBStore");
+			StringBundler sb = new StringBundler(3);
+
+			sb.append("Liferay is configured via the portal property ");
+			sb.append("\"dl.store.impl\" to use JCR to persist documents. ");
+			sb.append("JCR is deprecated and is not supported.");
+
+			_log.warn(sb);
 		}
 
 		_jcrStoreConfiguration = ConfigurableUtil.createConfigurable(
