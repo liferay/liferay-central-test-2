@@ -107,6 +107,14 @@ SelectFolder.STATE = {
 	},
 
 	/**
+	 * Theme images root path
+	 * @type {String}
+	 */
+	pathThemeImages: {
+		validator: core.isString
+	},
+
+	/**
 	 * Type of view to render. Accepted values are 'tree' and 'flat'
 	 * @type {String}
 	 */
