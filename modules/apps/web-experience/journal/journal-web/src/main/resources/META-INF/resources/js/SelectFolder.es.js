@@ -2,6 +2,7 @@ import Component from 'metal-component';
 import core from 'metal';
 import PortletBase from 'frontend-js-web/liferay/PortletBase.es';
 import Soy from 'metal-soy';
+import { Config } from 'metal-state';
 
 import CardsTreeView from './CardsTreeView.es';
 import templates from './SelectFolder.soy';
@@ -94,34 +95,25 @@ SelectFolder.STATE = {
 	 * Event name to fire on node selection
 	 * @type {String}
 	 */
-	itemSelectorSaveEvent: {
-		validator: core.isString
-	},
+	itemSelectorSaveEvent: Config.string(),
 
 	/**
 	 * List of nodes
 	 * @type {Array.<Object>}
 	 */
-	nodes: {
-		validator: core.isArray
-	},
+	nodes: Config.array().required(),
 
 	/**
 	 * Theme images root path
 	 * @type {String}
 	 */
-	pathThemeImages: {
-		validator: core.isString
-	},
+	pathThemeImages: Config.string().required(),
 
 	/**
 	 * Type of view to render. Accepted values are 'tree' and 'flat'
 	 * @type {String}
 	 */
-	viewType: {
-		validator: core.isString,
-		value: 'tree'
-	}
+	viewType: Config.string().value('tree')
 };
 
 Soy.register(SelectFolder, templates);
