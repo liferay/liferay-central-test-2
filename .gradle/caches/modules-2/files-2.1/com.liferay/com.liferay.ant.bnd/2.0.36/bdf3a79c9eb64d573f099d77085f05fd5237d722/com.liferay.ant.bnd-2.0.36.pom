@@ -3,9 +3,9 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.liferay</groupId>
-  <artifactId>com.liferay.portal.tools.upgrade.table.builder</artifactId>
-  <version>1.0.6</version>
-  <description>Liferay Portal Tools Upgrade Table Builder</description>
+  <artifactId>com.liferay.ant.bnd</artifactId>
+  <version>2.0.36</version>
+  <description>Liferay Ant BND</description>
   <licenses>
     <license>
       <name>LGPL 2.1</name>
@@ -26,33 +26,21 @@
   </scm>
   <dependencies>
     <dependency>
-      <groupId>com.liferay.portal</groupId>
-      <artifactId>com.liferay.portal.impl</artifactId>
-      <version>2.0.0</version>
-      <scope>provided</scope>
+      <groupId>biz.aQute.bnd</groupId>
+      <artifactId>biz.aQute.bnd</artifactId>
+      <version>3.2.0</version>
+      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>com.liferay.portal</groupId>
-      <artifactId>com.liferay.portal.kernel</artifactId>
-      <version>2.0.0</version>
+      <artifactId>com.liferay.portal.impl</artifactId>
+      <version>2.4.0</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.ant</groupId>
       <artifactId>ant</artifactId>
       <version>1.9.4</version>
-      <scope>provided</scope>
-      <exclusions>
-        <exclusion>
-          <artifactId>*</artifactId>
-          <groupId>*</groupId>
-        </exclusion>
-      </exclusions>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.maven</groupId>
-      <artifactId>maven-plugin-api</artifactId>
-      <version>3.0.4</version>
       <scope>provided</scope>
       <exclusions>
         <exclusion>
