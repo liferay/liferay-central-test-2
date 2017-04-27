@@ -6,7 +6,7 @@ import PortletBase from 'frontend-js-web/liferay/PortletBase.es';
 
 /**
  * Enables/disables the actions of the configuration entry's while
- * it is being optimized.
+ * it is being adapted.
  *
  * @abstract
  * @extends {PortletBase}
@@ -27,15 +27,15 @@ class AdaptiveMediaOptionsHandler extends PortletBase {
 		let progressBarComponent = this.getProgressBarComponent_();
 
 		this.eventHandler_.add(
-			progressBarComponent.on('start_optimizing', () => this.onStartOptimizing_())
+			progressBarComponent.on('start', () => this.onStart_())
 		);
 
 		this.eventHandler_.add(
-			progressBarComponent.on('finish_optimizing', () => this.onFinishOptimizing_())
+			progressBarComponent.on('finish', () => this.onFinish_())
 		);
 
 		this.disableIcon = this.one('#icon-disable-' + this.uuid, 'body');
-		this.optimizeIcon = this.one('#icon-optimize-' + this.uuid, 'body');
+		this.adaptRemainingIcon = this.one('#icon-adapt-remaining' + this.uuid, 'body');
 	}
 
 	/**
@@ -55,19 +55,19 @@ class AdaptiveMediaOptionsHandler extends PortletBase {
 	 */
 	getProgressBarComponent_() {
 		if (!this.progressBarComponent_) {
-			this.progressBarComponent_ = Liferay.component(this.ns('OptimizeRemaining' + this.uuid));
+			this.progressBarComponent_ = Liferay.component(this.ns('AdaptRemaining' + this.uuid));
 		}
 
 		return this.progressBarComponent_;
 	}
 
 	/**
-	 * Disables the "Disable" and "Optimize Remaining" icons.
+	 * Disables the "Disable" and "Adapt Remaining" icons.
 	 *
 	 * @protected
 	 */
-	onStartOptimizing_() {
-		this.disableIcon_(this.optimizeIcon);
+	onStart_() {
+		this.disableIcon_(this.adaptRemainingIcon);
 		this.disableIcon_(this.disableIcon);
 	}
 
@@ -76,7 +76,7 @@ class AdaptiveMediaOptionsHandler extends PortletBase {
 	 *
 	 * @protected
 	 */
-	onFinishOptimizing_() {
+	onFinish_() {
 		this.enableIcon_(this.disableIcon);
 	}
 

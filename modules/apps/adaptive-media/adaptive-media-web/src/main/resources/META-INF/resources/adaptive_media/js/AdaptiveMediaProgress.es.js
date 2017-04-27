@@ -20,13 +20,13 @@ class AdaptiveMediaProgress extends PortletBase {
 	 * @inheritDoc
 	 */
 	created() {
-		this.id_ = this.namespace + 'OptimizeRemaining' + this.uuid + 'Progress';
+		this.id_ = this.namespace + 'AdaptRemaining' + this.uuid + 'Progress';
 
-		this.updateProgressBar_(this.optimizedImages, this.totalImages);
+		this.updateProgressBar_(this.adaptedImages, this.totalImages);
 	}
 
 	/**
-	 * It starts checking the percentage of optimized images by
+	 * It starts checking the percentage of adapted images by
 	 * doing ajax request continously.
 	 *
 	 * @param  {String} backgroundTaskUrl The background task
@@ -44,13 +44,13 @@ class AdaptiveMediaProgress extends PortletBase {
 		this.clearInterval_();
 
 		this.intervalId_ = setInterval(
-			this.getOptimizedImagesPercentage_.bind(this),
+			this.getAdaptedImagesPercentage_.bind(this),
 			this.intervalSpeed
 		);
 
 		this.showLoadingIndicator_ = true;
 
-		this.emit('start_optimizing', {uuid: this.uuid});
+		this.emit('start', {uuid: this.uuid});
 	}
 
 	/**
@@ -66,20 +66,20 @@ class AdaptiveMediaProgress extends PortletBase {
 
 	/**
 	 * Sends an ajax request to obtain the percentage of
-	 * optimized images and updates the progressbar.
+	 * adapted images and updates the progressbar.
 	 *
 	 * @protected
 	 */
-	getOptimizedImagesPercentage_() {
+	getAdaptedImagesPercentage_() {
 		Ajax.request(this.percentageUrl).then((xhr) => {
 			try {
 				let json = JSON.parse(xhr.response);
 
-				let optimizedImages = json.optimizedImages;
+				let adaptedImages = json.adaptedImages;
 
 				let totalImages = json.totalImages;
 
-				this.updateProgressBar_(optimizedImages, totalImages);
+				this.updateProgressBar_(adaptedImages, totalImages);
 
 				if (this.percentage_ >= 100) {
 					this.onProgressBarComplete_();
@@ -99,7 +99,7 @@ class AdaptiveMediaProgress extends PortletBase {
 		this.clearInterval_();
 		this.showLoadingIndicator_ = false;
 
-		this.emit('finish_optimizing', {uuid: this.uuid});
+		this.emit('finish', {uuid: this.uuid});
 	}
 
 	/**
@@ -108,13 +108,13 @@ class AdaptiveMediaProgress extends PortletBase {
 	 * @param  {Number} progress progressbar value
 	 * @protected
 	 */
-	updateProgressBar_(optimizedImages, totalImages) {
-		let percentage = Math.round(optimizedImages / totalImages * 100) || 0;
+	updateProgressBar_(adaptedImages, totalImages) {
+		let percentage = Math.round(adaptedImages / totalImages * 100) || 0;
 
 		this.progressBarClass_ = (percentage >= 100) ? 'progress-bar-success' : '';
 		this.progressBarLabel_ = percentage + '%';
 		this.progressBarValue_ = percentage;
-		this.progressBarTooltip_ = this.tooltip ? this.tooltip : optimizedImages + "/" + totalImages;
+		this.progressBarTooltip_ = this.tooltip ? this.tooltip : adaptedImages + "/" + totalImages;
 		this.percentage_ = percentage;
 	}
 }
@@ -126,6 +126,17 @@ class AdaptiveMediaProgress extends PortletBase {
  * @type {!Object}
  */
 AdaptiveMediaProgress.STATE = {
+	/**
+	 * Number of adapted images in the platform.
+	 *
+	 * @instance
+	 * @memberof AdaptiveMediaProgress
+	 * @type {Number}
+	 */
+	adaptedImages: {
+		validator: core.isNumber
+	},
+
 	/**
 	 * Indicates if the entry is disabled or not.
 	 *
@@ -140,7 +151,7 @@ AdaptiveMediaProgress.STATE = {
 
 	/**
 	 * The interval (in milliseconds) on how often
-	 * we will check the percentage of optimized images.
+	 * we will check the percentage of adapted images.
 	 *
 	 * @instance
 	 * @memberof AdaptiveMediaProgress
@@ -152,18 +163,7 @@ AdaptiveMediaProgress.STATE = {
 	},
 
 	/**
-	 * Number of optimized images in the platform.
-	 *
-	 * @instance
-	 * @memberof AdaptiveMediaProgress
-	 * @type {Number}
-	 */
-	optimizedImages: {
-		validator: core.isNumber
-	},
-
-	/**
-	 * Percentage of optimized images.
+	 * Percentage of adapted images.
 	 *
 	 * @memberof AdaptiveMediaProgress
 	 * @protected
@@ -175,7 +175,7 @@ AdaptiveMediaProgress.STATE = {
 
 	/**
 	 * Url to the action that returns the percentage
-	 * of optimized images.
+	 * of adapted images.
 	 *
 	 * @instance
 	 * @memberof AdaptiveMediaProgress

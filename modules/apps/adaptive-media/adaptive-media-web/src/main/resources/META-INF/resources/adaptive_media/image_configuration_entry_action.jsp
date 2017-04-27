@@ -102,7 +102,7 @@ String entryUuid = String.valueOf(configurationEntry.getUUID());
 	</portlet:actionURL>
 
 	<%
-	String onClick = liferayPortletResponse.getNamespace() + "optimizeRemaining('" + entryUuid + "', '" + optimizeImagesURL.toString() + "');";
+	String onClick = liferayPortletResponse.getNamespace() + "adaptRemaining('" + entryUuid + "', '" + optimizeImagesURL.toString() + "');";
 
 	int percentage = AdaptiveMediaImageEntryLocalServiceUtil.getPercentage(themeDisplay.getCompanyId(), entryUuid);
 
@@ -111,7 +111,7 @@ String entryUuid = String.valueOf(configurationEntry.getUUID());
 
 	<liferay-ui:icon
 		cssClass="<%= cssClass %>"
-		id='<%= "icon-optimize-" + entryUuid %>'
+		id='<%= "icon-adapt-remaining" + entryUuid %>'
 		message="adapt-remaining"
 		onClick="<%= onClick %>"
 		url="javascript:;"

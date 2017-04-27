@@ -38,7 +38,7 @@ import org.osgi.service.component.annotations.Reference;
 	immediate = true,
 	property = {
 		"javax.portlet.name=" + AdaptiveMediaPortletKeys.ADAPTIVE_MEDIA,
-		"mvc.command.name=/adaptive_media/optimized_images_percentage"
+		"mvc.command.name=/adaptive_media/adapted_images_percentage"
 	},
 	service = MVCResourceCommand.class
 )
@@ -59,7 +59,7 @@ public class OptimizedImagesPercentageMVCResourceCommand
 
 		String entryUuid = ParamUtil.getString(resourceRequest, "entryUuid");
 
-		int optimizedImages =
+		int adaptedImages =
 			_imageEntryLocalService.getAdaptiveMediaImageEntriesCount(
 				companyId, entryUuid);
 
@@ -67,7 +67,7 @@ public class OptimizedImagesPercentageMVCResourceCommand
 			_imageEntryLocalService.getExpectedAdaptiveMediaImageEntriesCount(
 				companyId);
 
-		jsonObject.put("optimizedImages", String.valueOf(optimizedImages));
+		jsonObject.put("adaptedImages", String.valueOf(adaptedImages));
 
 		jsonObject.put("totalImages", String.valueOf(totalImages));
 
