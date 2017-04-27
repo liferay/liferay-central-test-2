@@ -761,8 +761,6 @@ public class AdaptiveMediaImageDeleteConfigurationTest
 
 		Message message = messages.get(0);
 
-		Assert.assertEquals("DELETED", message.getString("event_name"));
-
 		AdaptiveMediaImageConfigurationEntry deletedConfigurationEntry =
 			(AdaptiveMediaImageConfigurationEntry)message.getPayload();
 

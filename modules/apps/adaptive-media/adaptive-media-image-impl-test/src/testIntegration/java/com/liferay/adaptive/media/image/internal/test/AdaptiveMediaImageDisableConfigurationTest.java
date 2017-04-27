@@ -316,8 +316,6 @@ public class AdaptiveMediaImageDisableConfigurationTest
 
 		Message message = messages.get(0);
 
-		Assert.assertEquals("DISABLED", message.getString("event_name"));
-
 		AdaptiveMediaImageConfigurationEntry configurationEntry =
 			(AdaptiveMediaImageConfigurationEntry)message.getPayload();
 

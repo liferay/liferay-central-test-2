@@ -77,8 +77,6 @@ public class AdaptiveMediaImageUpdateConfigurationTest
 
 		Message message = messages.get(0);
 
-		Assert.assertEquals("UPDATED", message.getString("event_name"));
-
 		AdaptiveMediaImageConfigurationEntry[] configurationEntries =
 			(AdaptiveMediaImageConfigurationEntry[])message.getPayload();
 

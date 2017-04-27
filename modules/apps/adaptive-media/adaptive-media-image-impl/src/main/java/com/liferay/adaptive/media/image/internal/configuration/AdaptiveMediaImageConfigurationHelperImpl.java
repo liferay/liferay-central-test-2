@@ -99,7 +99,7 @@ public class AdaptiveMediaImageConfigurationHelperImpl
 
 		_updateConfiguration(companyId, updatedConfigurationEntries);
 
-		_triggerConfigurationEvent(EventName.ADDED, configurationEntry);
+		_triggerConfigurationEvent(configurationEntry);
 
 		return configurationEntry;
 	}
@@ -169,7 +169,7 @@ public class AdaptiveMediaImageConfigurationHelperImpl
 
 		_updateConfiguration(companyId, updatedConfigurationEntries);
 
-		_triggerConfigurationEvent(EventName.DISABLED, configurationEntry);
+		_triggerConfigurationEvent(configurationEntry);
 	}
 
 	@Override
@@ -213,7 +213,7 @@ public class AdaptiveMediaImageConfigurationHelperImpl
 
 		_updateConfiguration(companyId, updatedConfigurationEntries);
 
-		_triggerConfigurationEvent(EventName.ENABLED, configurationEntry);
+		_triggerConfigurationEvent(configurationEntry);
 	}
 
 	@Override
@@ -247,7 +247,7 @@ public class AdaptiveMediaImageConfigurationHelperImpl
 
 		_updateConfiguration(companyId, updatedConfigurationEntries);
 
-		_triggerConfigurationEvent(EventName.DELETED, configurationEntry);
+		_triggerConfigurationEvent(configurationEntry);
 	}
 
 	@Override
@@ -354,7 +354,6 @@ public class AdaptiveMediaImageConfigurationHelperImpl
 		_updateConfiguration(companyId, updatedConfigurationEntries);
 
 		_triggerConfigurationEvent(
-			EventName.UPDATED,
 			new AdaptiveMediaImageConfigurationEntry[] {
 				oldConfigurationEntry, configurationEntry
 			});
@@ -508,10 +507,9 @@ public class AdaptiveMediaImageConfigurationHelperImpl
 		return Optional.ofNullable(map.get("imageVariants"));
 	}
 
-	private void _triggerConfigurationEvent(EventName event, Object payload) {
+	private void _triggerConfigurationEvent(Object payload) {
 		Message message = new Message();
 
-		message.put("event_name", event.toString());
 		message.setPayload(payload);
 
 		_messageBus.sendMessage(
@@ -560,10 +558,5 @@ public class AdaptiveMediaImageConfigurationHelperImpl
 
 	@Reference
 	private MessageBus _messageBus;
-
-	private enum EventName {
-
-		ADDED, DELETED, ENABLED, DISABLED, UPDATED
-	}
 
 }

@@ -399,8 +399,6 @@ public class AdaptiveMediaImageEnableConfigurationTest
 
 		Message message = messages.get(0);
 
-		Assert.assertEquals("ENABLED", message.getString("event_name"));
-
 		AdaptiveMediaImageConfigurationEntry configurationEntry =
 			(AdaptiveMediaImageConfigurationEntry)message.getPayload();
 
