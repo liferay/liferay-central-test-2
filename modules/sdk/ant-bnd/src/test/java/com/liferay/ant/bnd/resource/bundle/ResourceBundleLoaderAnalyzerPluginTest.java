@@ -44,7 +44,7 @@ public class ResourceBundleLoaderAnalyzerPluginTest {
 
 		InputStream inputStream =
 			ResourceBundleLoaderAnalyzerPluginTest.class.getResourceAsStream(
-				"dependencies/resources.test-1.jar");
+				"dependencies/resources.test1.jar");
 
 		try (Jar jar = new Jar("dot", inputStream);
 			Analyzer analyzer = new Analyzer()) {
@@ -95,7 +95,7 @@ public class ResourceBundleLoaderAnalyzerPluginTest {
 
 		InputStream inputStream =
 			ResourceBundleLoaderAnalyzerPluginTest.class.getResourceAsStream(
-				"dependencies/resources.test-1.jar");
+				"dependencies/resources.test1.jar");
 
 		try (Jar jar = new Jar("dot", inputStream);
 			Analyzer analyzer = new Analyzer()) {
@@ -226,7 +226,7 @@ public class ResourceBundleLoaderAnalyzerPluginTest {
 
 		InputStream inputStream =
 			ResourceBundleLoaderAnalyzerPluginTest.class.getResourceAsStream(
-				"dependencies/resources.test-1.jar");
+				"dependencies/resources.test1.jar");
 
 		try (Jar jar = new Jar("dot", inputStream);
 			Analyzer analyzer = new Analyzer()) {
@@ -258,7 +258,7 @@ public class ResourceBundleLoaderAnalyzerPluginTest {
 
 		InputStream inputStream =
 			ResourceBundleLoaderAnalyzerPluginTest.class.getResourceAsStream(
-				"dependencies/resources.test-2.jar");
+				"dependencies/resources.test2.jar");
 
 		try (Jar jar = new Jar("dot", inputStream);
 			Analyzer analyzer = new Analyzer()) {
