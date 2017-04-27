@@ -55,6 +55,7 @@ import com.liferay.journal.exception.ArticleVersionException;
 import com.liferay.journal.exception.DuplicateArticleIdException;
 import com.liferay.journal.exception.InvalidDDMStructureException;
 import com.liferay.journal.exception.NoSuchArticleException;
+import com.liferay.journal.exception.RequiredArticleLocalizationException;
 import com.liferay.journal.model.JournalArticle;
 import com.liferay.journal.model.JournalArticleConstants;
 import com.liferay.journal.model.JournalArticleDisplay;
@@ -3699,6 +3700,13 @@ public class JournalArticleLocalServiceImpl
 
 		JournalArticle article = journalArticlePersistence.findByG_A_V(
 			groupId, articleId, version);
+
+		String defaultLanguageId = article.getDefaultLanguageId();
+
+		if (languageId.equals(defaultLanguageId)) {
+			throw new RequiredArticleLocalizationException(
+				"The default article localization cannot be removed.");
+		}
 
 		String title = article.getTitle();
 
