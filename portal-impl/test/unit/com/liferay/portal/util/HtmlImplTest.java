@@ -158,21 +158,20 @@ public class HtmlImplTest {
 
 	@Test
 	public void testEscapeJS() throws ScriptException {
-		ScriptEngineManager factory = new ScriptEngineManager();
+		ScriptEngineManager scriptEngineManager = new ScriptEngineManager();
 
-		ScriptEngine engine = factory.getEngineByName("JavaScript");
+		ScriptEngine scriptEngine = scriptEngineManager.getEngineByName(
+			"JavaScript");
 
-		String[] dangerousStringLiterals =
-			new String[] {"'", "\"", "\\", "\n", "\r", "\u2028", "\u2029"};
+		String[] stringLiterals =
+			{"'", "\"", "\\", "\n", "\r", "\u2028", "\u2029"};
 
-		for (String stringLiteral : dangerousStringLiterals) {
+		for (String stringLiteral : stringLiterals) {
 			String escaped = _htmlImpl.escapeJS(stringLiteral);
 
-			engine.eval(String.format("var result = '%1$s';", escaped));
+			scriptEngine.eval(String.format("var result = '%1$s';", escaped));
 
-			String evaluated = (String)engine.get("result");
-
-			Assert.assertEquals(stringLiteral, evaluated);
+			Assert.assertEquals(stringLiteral, scriptEngine.get("result"));
 		}
 	}
 
