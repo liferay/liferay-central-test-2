@@ -5,10 +5,14 @@
  */
 {template .render}
 	{@param nodes: list<?>}
+	{@param pathThemeImages: string}
+	{@param? viewType: string}
 
 	<div class="treeview" role="tree">
-		{call .nodes data="all"}
+		{call .nodes}
 			{param nodes: $nodes /}
+			{param pathThemeImages: $pathThemeImages /}
+			{param viewType: $viewType /}
 		{/call}
 	</div>
 {/template}
@@ -19,14 +23,18 @@
 {template .nodes}
 	{@param nodes: list<?>}
 	{@param? parentPath: string}
+	{@param pathThemeImages: string}
+	{@param? viewType: string}
 
 	{if $nodes}
 		<ul class="treeview-nodes">
 			{foreach $node in $nodes}
 				{let $index: index($node) /}
-				{call .node data="all"}
+				{call .node}
 					{param node: $node /}
 					{param path: isNonnull($parentPath) ? ($parentPath + '-' + $index) : '' + $index /}
+					{param pathThemeImages: $pathThemeImages /}
+					{param viewType: $viewType /}
 				{/call}
 			{/foreach}
 		</ul>
@@ -48,6 +56,7 @@
 		value: string
 	]}
 	{@param path: string}
+	{@param pathThemeImages: string}
 	{@param? viewType: string}
 
 	<li class="treeview-node" data-treeview-path="{$path}">
@@ -78,17 +87,21 @@
 						</div>
 					{/if}
 
-					{call .card data="all"}
+					{call .card}
 						{param disabled: $node.disabled /}
 						{param icon: $node.icon /}
+						{param path: $path /}
+						{param pathThemeImages: $pathThemeImages /}
 						{param title: $node.name /}
 					{/call}
 				</div>
 
 				{if $viewType == 'tree' and $node.expanded}
-					{call .nodes data="all"}
+					{call .nodes}
 						{param nodes: $node.children /}
 						{param parentPath: $path /}
+						{param pathThemeImages: $pathThemeImages /}
+						{param viewType: $viewType /}
 					{/call}
 				{/if}
 			</div>
