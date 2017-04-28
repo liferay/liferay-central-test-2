@@ -48,60 +48,62 @@ public class SecurePrintStream extends PrintStream {
 	}
 
 	@Override
-	public PrintStream append(CharSequence csq) {
+	public PrintStream append(CharSequence charSequence) {
 		if (_suspendFlush) {
-			return _tempPrintStream.append(csq);
+			return _tempPrintStream.append(charSequence);
 		}
 
-		return super.append(csq);
+		return super.append(charSequence);
 	}
 
 	@Override
-	public PrintStream append(CharSequence csq, int start, int end) {
+	public PrintStream append(CharSequence charSequence, int start, int end) {
 		if (_suspendFlush) {
-			return _tempPrintStream.append(csq, start, end);
+			return _tempPrintStream.append(charSequence, start, end);
 		}
 
-		return super.append(csq, start, end);
+		return super.append(charSequence, start, end);
 	}
 
 	@Override
 	public void flush() {
-		if (!_suspendFlush) {
-			synchronized (this) {
-				ByteArrayOutputStream tempByteArrayOutputStream =
-					new ByteArrayOutputStream();
+		if (_suspendFlush) {
+			return;
+		}
+
+		synchronized (this) {
+			ByteArrayOutputStream byteArrayOutputStream =
+				new ByteArrayOutputStream();
+
+			try {
+				_tempPrintStream = new PrintStream(byteArrayOutputStream);
+
+				_suspendFlush = true;
+
+				String content =
+					_securePrintStreamByteArrayOutputStream.toString();
+
+				content = JenkinsResultsParserUtil.redact(content);
+
+				_systemOutPrintStream.print(content);
+			}
+			finally {
+				_securePrintStreamByteArrayOutputStream.reset();
+
+				_suspendFlush = false;
 
 				try {
-					_tempPrintStream = new PrintStream(
-						tempByteArrayOutputStream);
-
-					_suspendFlush = true;
-
-					String content = _byteArrayOutputStream.toString();
-
-					content = JenkinsResultsParserUtil.redact(content);
-
-					_standardOut.print(content);
+					_securePrintStreamByteArrayOutputStream.write(
+						byteArrayOutputStream.toByteArray());
+				}
+				catch (IOException ioe) {
+					ioe.printStackTrace();
 				}
 				finally {
-					_byteArrayOutputStream.reset();
-
-					_suspendFlush = false;
-
-					try {
-						_byteArrayOutputStream.write(
-							tempByteArrayOutputStream.toByteArray());
-					}
-					catch (IOException ioe) {
-						ioe.printStackTrace();
-					}
-					finally {
-						tempByteArrayOutputStream.reset();
-					}
-
-					_tempPrintStream.close();
+					byteArrayOutputStream.reset();
 				}
+
+				_tempPrintStream.close();
 			}
 		}
 	}
@@ -129,14 +131,14 @@ public class SecurePrintStream extends PrintStream {
 	}
 
 	@Override
-	public void print(char[] s) {
+	public void print(char[] chars) {
 		if (_suspendFlush) {
-			_tempPrintStream.print(s);
+			_tempPrintStream.print(chars);
 
 			return;
 		}
 
-		super.print(s);
+		super.print(chars);
 	}
 
 	@Override
@@ -184,25 +186,25 @@ public class SecurePrintStream extends PrintStream {
 	}
 
 	@Override
-	public void print(Object obj) {
+	public void print(Object object) {
 		if (_suspendFlush) {
-			_tempPrintStream.print(obj);
+			_tempPrintStream.print(object);
 
 			return;
 		}
 
-		super.print(obj);
+		super.print(object);
 	}
 
 	@Override
-	public void print(String s) {
+	public void print(String string) {
 		if (_suspendFlush) {
-			_tempPrintStream.print(s);
+			_tempPrintStream.print(string);
 
 			return;
 		}
 
-		super.print(s);
+		super.print(string);
 	}
 
 	@Override
@@ -217,91 +219,91 @@ public class SecurePrintStream extends PrintStream {
 	}
 
 	@Override
-	public void println(boolean x) {
+	public void println(boolean b) {
 		if (_suspendFlush) {
-			_tempPrintStream.println(x);
+			_tempPrintStream.println(b);
 
 			return;
 		}
 
-		super.println(x);
+		super.println(b);
 	}
 
 	@Override
-	public void println(char x) {
+	public void println(char c) {
 		if (_suspendFlush) {
-			_tempPrintStream.println(x);
+			_tempPrintStream.println(c);
 
 			return;
 		}
 
-		super.println(x);
+		super.println(c);
 	}
 
 	@Override
-	public void println(char[] x) {
+	public void println(char[] chars) {
 		if (_suspendFlush) {
-			_tempPrintStream.println(x);
+			_tempPrintStream.println(chars);
 
 			return;
 		}
 
-		super.println(x);
+		super.println(chars);
 	}
 
 	@Override
-	public void println(double x) {
+	public void println(double d) {
 		if (_suspendFlush) {
-			_tempPrintStream.println(x);
+			_tempPrintStream.println(d);
 
 			return;
 		}
 
-		super.println(x);
+		super.println(d);
 	}
 
 	@Override
-	public void println(float x) {
+	public void println(float f) {
 		if (_suspendFlush) {
-			_tempPrintStream.println(x);
+			_tempPrintStream.println(f);
 
 			return;
 		}
 
-		super.println(x);
+		super.println(f);
 	}
 
 	@Override
-	public void println(int x) {
+	public void println(int i) {
 		if (_suspendFlush) {
-			_tempPrintStream.println(x);
+			_tempPrintStream.println(i);
 
 			return;
 		}
 
-		super.println(x);
+		super.println(i);
 	}
 
 	@Override
-	public void println(long x) {
+	public void println(long l) {
 		if (_suspendFlush) {
-			_tempPrintStream.println(x);
+			_tempPrintStream.println(l);
 
 			return;
 		}
 
-		super.println(x);
+		super.println(l);
 	}
 
 	@Override
-	public void println(Object x) {
+	public void println(Object object) {
 		if (_suspendFlush) {
-			_tempPrintStream.println(x);
+			_tempPrintStream.println(object);
 
 			return;
 		}
 
-		super.println(x);
+		super.println(object);
 	}
 
 	@Override
@@ -316,25 +318,25 @@ public class SecurePrintStream extends PrintStream {
 	}
 
 	@Override
-	public void write(byte[] b) throws IOException {
+	public void write(byte[] bytes) throws IOException {
 		if (_suspendFlush) {
-			_tempPrintStream.write(b);
+			_tempPrintStream.write(bytes);
 
 			return;
 		}
 
-		super.write(b);
+		super.write(bytes);
 	}
 
 	@Override
-	public void write(byte[] buf, int off, int len) {
+	public void write(byte[] buffer, int offset, int length) {
 		if (_suspendFlush) {
-			_tempPrintStream.write(buf, off, len);
+			_tempPrintStream.write(buffer, offset, length);
 
 			return;
 		}
 
-		super.write(buf, off, len);
+		super.write(buffer, offset, length);
 	}
 
 	@Override
@@ -349,23 +351,26 @@ public class SecurePrintStream extends PrintStream {
 	}
 
 	private SecurePrintStream(
-			SecurePrintStreamByteArrayOutputStream byteArrayOutputStream)
+			SecurePrintStreamByteArrayOutputStream
+				securePrintStreamByteArrayOutputStream)
 		throws UnsupportedEncodingException {
 
-		super(byteArrayOutputStream, true);
+		super(securePrintStreamByteArrayOutputStream, true);
 
-		_byteArrayOutputStream = byteArrayOutputStream;
+		_securePrintStreamByteArrayOutputStream =
+			securePrintStreamByteArrayOutputStream;
 
-		_byteArrayOutputStream.setSecurePrintStream(this);
+		_securePrintStreamByteArrayOutputStream.setSecurePrintStream(this);
 
-		_standardOut = System.out;
+		_systemOutPrintStream = System.out;
 	}
 
 	private static SecurePrintStream _securePrintStream;
 
-	private final SecurePrintStreamByteArrayOutputStream _byteArrayOutputStream;
-	private final PrintStream _standardOut;
+	private final SecurePrintStreamByteArrayOutputStream
+		_securePrintStreamByteArrayOutputStream;
 	private boolean _suspendFlush;
+	private final PrintStream _systemOutPrintStream;
 	private PrintStream _tempPrintStream;
 
 	private static class SecurePrintStreamByteArrayOutputStream
