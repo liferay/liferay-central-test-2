@@ -13,7 +13,7 @@
 		<!-- LPS-70260 -->
 
 		<if>
-			<condition function="IsElementPresent#isElementPresentAfterWait" locator1="ListGroupItem#INDEPENDENT_MODULES_LINK" value1="Independent Modules" />
+			<condition function="IsElementPresent" locator1="ListGroupItem#INDEPENDENT_MODULES_LINK" value1="Independent Modules" />
 			<then>
 				<execute macro="AppManager#selectAppCP">
 					<var name="appName" value="Independent Modules" />
