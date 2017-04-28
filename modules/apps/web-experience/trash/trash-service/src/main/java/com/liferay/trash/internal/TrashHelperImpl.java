@@ -82,17 +82,19 @@ public class TrashHelperImpl implements TrashHelper {
 			trashRenderer = trashHandler.getTrashRenderer(classPK);
 		}
 
-		Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(
-			themeDisplay.getLocale(), themeDisplay.getTimeZone());
-
 		StringBundler sb = new StringBundler(3);
 
 		sb.append(StringPool.OPEN_PARENTHESIS);
+
+		Format format = FastDateFormatFactoryUtil.getDateTime(
+			themeDisplay.getLocale(), themeDisplay.getTimeZone());
+
 		sb.append(
 			StringUtil.replace(
-				dateFormatDateTime.format(new Date()),
+				format.format(new Date()),
 				new char[] {CharPool.SLASH, CharPool.COLON},
 				new char[] {CharPool.PERIOD, CharPool.PERIOD}));
+
 		sb.append(StringPool.CLOSE_PARENTHESIS);
 
 		if (trashRenderer != null) {
