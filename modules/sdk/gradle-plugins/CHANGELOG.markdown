@@ -1543,7 +1543,7 @@ dependency to version 2.1.13.
 - [LPS-72152]: Update the [Liferay Gradle Plugins JS Transpiler] dependency to
 version 2.3.11.
 
-## 3.3.6 - 2017-04-27
+## 3.3.6 - 2017-04-27 [YANKED]
 
 ### Changed
 - [LPS-53392]: Update the [Liferay Gradle Plugins Upgrade Table Builder]
