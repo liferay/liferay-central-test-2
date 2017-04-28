@@ -211,14 +211,14 @@ public class VirtualHostFilter extends BasePortalFilter {
 			friendlyURL = friendlyURL.substring(i18nLanguageId.length());
 		}
 
-		int widgetPos = 0;
+		int widgetServletMappingPos = 0;
 
 		if (friendlyURL.contains(PropsValues.WIDGET_SERVLET_MAPPING)) {
 			friendlyURL = StringUtil.replaceFirst(
 				friendlyURL, PropsValues.WIDGET_SERVLET_MAPPING,
 				StringPool.BLANK);
 
-			widgetPos = PropsValues.WIDGET_SERVLET_MAPPING.length();
+			widgetServletMappingPos = PropsValues.WIDGET_SERVLET_MAPPING.length();
 		}
 
 		if (_log.isDebugEnabled()) {
@@ -233,7 +233,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 			if (i18nLanguageId != null) {
 				int offset =
 					originalFriendlyURL.length() - friendlyURL.length() -
-						(i18nLanguageId.length() + widgetPos);
+						(i18nLanguageId.length() + widgetServletMappingPos);
 
 				if (!originalFriendlyURL.regionMatches(
 						offset, i18nLanguageId, 0, i18nLanguageId.length())) {
