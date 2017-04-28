@@ -731,7 +731,7 @@ public class PortletDataHandlerExceptionTest {
 
 	private void _validateException(Exception e, String message) {
 
-		// First are foremost it always need to throw a PortletDataException
+		// Ensure that thrown exceptions are an instance of PortletDataException
 
 		Assert.assertTrue(
 			"Exception thrown always have to be type of PortletDataException",
@@ -742,7 +742,7 @@ public class PortletDataHandlerExceptionTest {
 		String portletId = pde.getPortletId();
 		int type = pde.getType();
 
-		// At this point the portlet ID is mandatory
+		// At this point, the portlet ID is mandatory
 
 		Assert.assertFalse(
 			"Exceptions coming from a PortletDataHandler has to have a " +
@@ -756,7 +756,7 @@ public class PortletDataHandlerExceptionTest {
 				"attribute",
 			type == PortletDataException.DEFAULT);
 
-		// If there was a message validate that it hasn't disappeared
+		// If there was a message, validate that it has not disappeared
 
 		Assert.assertEquals(message, pde.getMessage());
 	}

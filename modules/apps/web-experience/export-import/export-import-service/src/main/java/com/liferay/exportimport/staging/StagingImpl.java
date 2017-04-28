@@ -906,8 +906,6 @@ public class StagingImpl implements Staging {
 		else if (e instanceof PortletDataException) {
 			PortletDataException pde = (PortletDataException)e;
 
-			String portletId = pde.getPortletId();
-
 			StagedModel stagedModel = pde.getStagedModel();
 
 			String referrerClassName = StringPool.BLANK;
@@ -933,7 +931,7 @@ public class StagingImpl implements Staging {
 						"the-following-error-in-x-while-deleting-its-data-" +
 							"has-stopped-the-process-x",
 						new String[] {
-							_portal.getPortletTitle(portletId, locale),
+							_portal.getPortletTitle(pde.getPortletId(), locale),
 							pde.getLocalizedMessage()
 						},
 						false);
@@ -944,7 +942,7 @@ public class StagingImpl implements Staging {
 						"an-unexpected-error-in-x-while-deleting-its-data-" +
 							"has-stopped-the-process",
 						new String[] {
-							_portal.getPortletTitle(portletId, locale)
+							_portal.getPortletTitle(pde.getPortletId(), locale)
 						},
 						false);
 				}
@@ -958,7 +956,7 @@ public class StagingImpl implements Staging {
 						"the-following-error-in-x-while-exporting-its-data-" +
 							"has-stopped-the-process-x",
 						new String[] {
-							_portal.getPortletTitle(portletId, locale),
+							_portal.getPortletTitle(pde.getPortletId(), locale),
 							pde.getLocalizedMessage()
 						},
 						false);
@@ -969,7 +967,7 @@ public class StagingImpl implements Staging {
 						"an-unexpected-error-in-x-while-exporting-its-data-" +
 							"has-stopped-the-process",
 						new String[] {
-							_portal.getPortletTitle(portletId, locale)
+							_portal.getPortletTitle(pde.getPortletId(), locale)
 						},
 						false);
 				}
@@ -983,7 +981,7 @@ public class StagingImpl implements Staging {
 						"the-following-error-in-x-while-importing-its-data-" +
 							"has-stopped-the-process-x",
 						new String[] {
-							_portal.getPortletTitle(portletId, locale),
+							_portal.getPortletTitle(pde.getPortletId(), locale),
 							pde.getLocalizedMessage()
 						},
 						false);
@@ -994,7 +992,7 @@ public class StagingImpl implements Staging {
 						"an-unexpected-error-in-x-while-importing-its-data-" +
 							"has-stopped-the-process",
 						new String[] {
-							_portal.getPortletTitle(portletId, locale)
+							_portal.getPortletTitle(pde.getPortletId(), locale)
 						},
 						false);
 				}
@@ -1022,7 +1020,7 @@ public class StagingImpl implements Staging {
 						"the-following-error-in-x-while-preparing-its-" +
 							"manifest-has-stopped-the-process-x",
 						new String[] {
-							_portal.getPortletTitle(portletId, locale),
+							_portal.getPortletTitle(pde.getPortletId(), locale),
 							pde.getLocalizedMessage()
 						},
 						false);
@@ -1033,7 +1031,7 @@ public class StagingImpl implements Staging {
 						"an-unexpected-error-in-x-while-preparing-its-" +
 							"manifest-has-stopped-the-process",
 						new String[] {
-							_portal.getPortletTitle(portletId, locale)
+							_portal.getPortletTitle(pde.getPortletId(), locale)
 						},
 						false);
 				}
