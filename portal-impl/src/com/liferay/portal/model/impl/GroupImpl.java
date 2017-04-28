@@ -70,7 +70,6 @@ import com.liferay.portal.util.PropsValues;
 import java.io.IOException;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
@@ -123,20 +122,12 @@ public class GroupImpl extends GroupBaseImpl {
 			group = this;
 		}
 
-		List<Group> groups = null;
+		List<Group> groups = new ArrayList<>();
 
 		while (!group.isRoot()) {
 			group = group.getParentGroup();
 
-			if (groups == null) {
-				groups = new ArrayList<>();
-			}
-
 			groups.add(group);
-		}
-
-		if (groups == null) {
-			return Collections.emptyList();
 		}
 
 		return groups;
