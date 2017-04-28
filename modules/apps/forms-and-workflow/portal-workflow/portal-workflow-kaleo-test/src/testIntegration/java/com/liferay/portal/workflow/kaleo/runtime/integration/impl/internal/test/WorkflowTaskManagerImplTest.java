@@ -28,9 +28,14 @@ import com.liferay.journal.model.JournalArticleConstants;
 import com.liferay.journal.model.JournalFolder;
 import com.liferay.journal.model.JournalFolderConstants;
 import com.liferay.journal.service.JournalArticleLocalServiceUtil;
+import com.liferay.portal.kernel.model.Organization;
+import com.liferay.portal.kernel.model.RoleConstants;
+import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
 import com.liferay.portal.kernel.test.rule.Sync;
 import com.liferay.portal.kernel.test.rule.SynchronousDestinationTestRule;
+import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowTask;
@@ -61,7 +66,9 @@ public class WorkflowTaskManagerImplTest
 	public void testApproveJoinXorWorkflow() throws Exception {
 		createJoinXorWorkflow();
 
-		activateWorkflow(BlogsEntry.class.getName(), 0, 0, "Join Xor", 1);
+		activateWorkflow(
+			group.getGroupId(), BlogsEntry.class.getName(), 0, 0, "Join Xor",
+			1);
 
 		BlogsEntry blogsEntry = addBlogsEntry();
 
@@ -69,7 +76,8 @@ public class WorkflowTaskManagerImplTest
 
 		completeWorkflowTask(siteAdminUser, "join-xor", "task1");
 
-		WorkflowTask workflowTask2 = getWorkflowTask("task2", true);
+		WorkflowTask workflowTask2 = getWorkflowTask(
+			siteAdminUser, "task2", true);
 
 		Assert.assertTrue(workflowTask2.isCompleted());
 
@@ -225,6 +233,53 @@ public class WorkflowTaskManagerImplTest
 		deactivateWorkflow(
 			JournalFolder.class.getName(), folder.getFolderId(),
 			JournalArticleConstants.DDM_STRUCTURE_ID_ALL);
+	}
+
+	@Test
+	public void testApproveOrganizationParentReviewer() throws Exception {
+		Organization parentOrganization = createOrganization();
+
+		User reviewerUser = createUser(
+			"Organization Content Reviewer", parentOrganization.getGroup());
+
+		OrganizationLocalServiceUtil.addUserOrganization(
+			reviewerUser.getUserId(), parentOrganization);
+
+		Organization childOrganization = createOrganization(
+			parentOrganization.getOrganizationId());
+
+		User memberUser = createUser(
+			RoleConstants.ORGANIZATION_ADMINISTRATOR,
+			childOrganization.getGroup());
+
+		OrganizationLocalServiceUtil.addUserOrganization(
+			memberUser.getUserId(), childOrganization);
+
+		serviceContext = ServiceContextTestUtil.getServiceContext(
+			childOrganization.getGroupId());
+
+		activateSingleApproverWorkflow(
+			childOrganization.getGroupId(), BlogsEntry.class.getName(), 0, 0);
+
+		BlogsEntry blogsEntry = addBlogsEntry(memberUser);
+
+		checkUserNotificationEventsByUsers(reviewerUser);
+
+		assignWorkflowTaskToUser(reviewerUser, reviewerUser);
+
+		completeWorkflowTask(reviewerUser, Constants.APPROVE);
+
+		blogsEntry = BlogsEntryLocalServiceUtil.getBlogsEntry(
+			blogsEntry.getEntryId());
+
+		Assert.assertEquals(
+			WorkflowConstants.STATUS_APPROVED, blogsEntry.getStatus());
+
+		deactivateWorkflow(
+			childOrganization.getGroupId(), BlogsEntry.class.getName(), 0, 0);
+
+		serviceContext = ServiceContextTestUtil.getServiceContext(
+			group.getGroupId());
 	}
 
 	@Test
