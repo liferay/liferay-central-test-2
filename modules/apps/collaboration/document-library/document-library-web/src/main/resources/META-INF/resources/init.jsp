@@ -266,6 +266,8 @@ page import="javax.portlet.WindowState" %>
 <portlet:defineObjects />
 
 <%
+DLTrashUtil dlTrashUtil = (DLTrashUtil)request.getAttribute(DLWebKeys.DOCUMENT_LIBRARY_TRASH_UTIL);
+
 DLWebComponentProvider dlWebComponentProvider = DLWebComponentProvider.getDLWebComponentProvider();
 
 DLDisplayContextProvider dlDisplayContextProvider = dlWebComponentProvider.getDLDisplayContextProvider();
@@ -273,8 +275,6 @@ IGDisplayContextProvider igDisplayContextProvider = dlWebComponentProvider.getIG
 
 Format dateFormatDate = FastDateFormatFactoryUtil.getDate(locale, timeZone);
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
-
-DLTrashUtil dlTrashUtil = (DLTrashUtil)request.getAttribute(DLWebKeys.DOCUMENT_LIBRARY_TRASH_UTIL);
 %>
 
 <%@ include file="/init-ext.jsp" %>
