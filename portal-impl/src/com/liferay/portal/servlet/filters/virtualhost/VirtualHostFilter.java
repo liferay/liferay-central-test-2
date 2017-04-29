@@ -219,7 +219,8 @@ public class VirtualHostFilter extends BasePortalFilter {
 				friendlyURL, PropsValues.WIDGET_SERVLET_MAPPING,
 				StringPool.BLANK);
 
-			widgetServletMappingPos = PropsValues.WIDGET_SERVLET_MAPPING.length();
+			widgetServletMappingPos =
+				PropsValues.WIDGET_SERVLET_MAPPING.length();
 		}
 
 		if (_log.isDebugEnabled()) {
