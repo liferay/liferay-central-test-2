@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/asset-init.jsp" %>
+<%@ include file="/asset/init.jsp" %>
 
 <%
 AssetRendererFactory<?> assetRendererFactory = (AssetRendererFactory<?>)request.getAttribute(WebKeys.ASSET_RENDERER_FACTORY);
