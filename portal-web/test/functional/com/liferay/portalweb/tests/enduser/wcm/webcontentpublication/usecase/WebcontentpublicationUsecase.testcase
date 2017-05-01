@@ -1860,7 +1860,7 @@
 			<var name="pageName" value="Web Content Display Page" />
 		</execute>
 
-		<execute macro="WebContent#viewNoContentPGViaWCD" />
+		<execute macro="WebContentDisplayPortlet#viewDeletedArticle" />
 
 		<execute macro="User#logoutPG" />
 
