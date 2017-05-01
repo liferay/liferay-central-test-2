@@ -364,7 +364,7 @@
 	</command>
 
 	<command name="viewDeletedArticle">
-		<execute function="AssertTextEquals" locator1="Message#ERROR" value1="The selected web content no longer exists." />
+		<execute function="AssertTextEquals#assertPartialText" locator1="Message#ERROR_3" value1="The selected web content no longer exists." />
 	</command>
 
 	<command name="viewEnabledFileTypesPGViaWCD">
