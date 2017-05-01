@@ -1069,7 +1069,7 @@
 			<var name="pageName" value="Web Content Display Page" />
 		</execute>
 
-		<execute macro="WebContentDisplayPortlet#viewDeletedArticlePGViaWCD">
+		<execute macro="WebContentDisplayPortlet#viewDeletedArticle">
 			<var name="webContentTitle" value="WC WebContent Title" />
 		</execute>
 	</command>

@@ -363,7 +363,7 @@
 		<execute function="AssertClick" locator1="Pagination#PREVIOUS_LINK" value1="Previous" />
 	</command>
 
-	<command name="viewDeletedArticlePGViaWCD">
+	<command name="viewDeletedArticle">
 		<execute function="AssertTextEquals" locator1="Message#ERROR" value1="The selected web content no longer exists." />
 	</command>
 
