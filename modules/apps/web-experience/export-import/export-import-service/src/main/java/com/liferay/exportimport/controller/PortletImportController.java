@@ -405,7 +405,7 @@ public class PortletImportController implements ImportController {
 					throw new SystemException(
 						"Unable to parse XML portlet preferences for " +
 							portletDataContext.getPortletId() +
-								" during importing the portlet preferences",
+								" while importing portlet preferences",
 						de);
 				}
 
@@ -842,7 +842,7 @@ public class PortletImportController implements ImportController {
 		catch (DocumentException de) {
 			throw new SystemException(
 				"Unable to parse XML document for " +
-					portletDataContext.getPortletId() + " during importing",
+					portletDataContext.getPortletId() + " while importing",
 				de);
 		}
 
