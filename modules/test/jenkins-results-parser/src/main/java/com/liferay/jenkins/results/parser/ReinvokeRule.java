@@ -127,34 +127,38 @@ public class ReinvokeRule {
 		StringBuilder sb = new StringBuilder();
 
 		if (axisVariablePattern != null) {
-			sb.append("\naxisVariable=");
+			sb.append("axisVariable=");
 			sb.append(axisVariablePattern.pattern());
+			sb.append("\n");
 		}
 
 		if (consolePattern != null) {
-			sb.append("\nconsole=");
+			sb.append("console=");
 			sb.append(consolePattern.pattern());
+			sb.append("\n");
 		}
 
 		if (jobVariantPattern != null) {
-			sb.append("\njobVariant=");
+			sb.append("jobVariant=");
 			sb.append(jobVariantPattern.pattern());
+			sb.append("\n");
 		}
 
 		sb.append("name=");
 		sb.append(name);
+		sb.append("\n");
 
 		if (notificationList != null) {
-			sb.append("\nnotificationList=");
+			sb.append("notificationList=");
 			sb.append(notificationList);
+			sb.append("\n");
 		}
 
 		if (topLevelBuildJobNamePattern != null) {
-			sb.append("\ntopLevelJobName=");
+			sb.append("topLevelJobName=");
 			sb.append(topLevelBuildJobNamePattern.pattern());
+			sb.append("\n");
 		}
-
-		sb.append("\n");
 
 		return sb.toString();
 	}
