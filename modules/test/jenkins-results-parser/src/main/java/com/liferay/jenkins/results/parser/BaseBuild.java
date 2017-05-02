@@ -815,7 +815,7 @@ public abstract class BaseBuild implements Build {
 			if ((notificationList != null) && notificationList.isEmpty()) {
 				try {
 					JenkinsResultsParserUtil.sendEmail(
-						message, "jenkins", "Build reinvoked",
+						message, "jenkins", "Build Reinvoked",
 						reinvokeRule.notificationList);
 				}
 				catch (Exception e) {
