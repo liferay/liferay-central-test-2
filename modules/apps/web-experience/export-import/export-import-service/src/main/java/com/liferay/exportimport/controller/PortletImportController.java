@@ -295,7 +295,7 @@ public class PortletImportController implements ImportController {
 			if (_log.isDebugEnabled()) {
 				StringBundler sb = new StringBundler(4);
 
-				sb.append("Do not import portlet data for ");
+				sb.append("Do not import portlet data for portlet ");
 				sb.append(portletDataContext.getPortletId());
 				sb.append(" because the portlet does not have a portlet data ");
 				sb.append("handler");
@@ -308,7 +308,8 @@ public class PortletImportController implements ImportController {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
-				"Importing data for " + portletDataContext.getPortletId());
+				"Importing data for portlet " +
+					portletDataContext.getPortletId());
 		}
 
 		String portletData = portletDataContext.getZipEntryAsString(
@@ -403,7 +404,7 @@ public class PortletImportController implements ImportController {
 				}
 				catch (DocumentException de) {
 					throw new SystemException(
-						"Unable to parse XML portlet preferences for " +
+						"Unable to parse XML portlet preferences for portlet " +
 							portletDataContext.getPortletId() +
 								" while importing portlet preferences",
 						de);
@@ -700,7 +701,7 @@ public class PortletImportController implements ImportController {
 		if (!group.isStagedPortlet(portletDataContext.getPortletId())) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Do not delete portlet data for " +
+					"Do not delete portlet data for portlet " +
 						portletDataContext.getPortletId() +
 							" because the portlet is not staged");
 			}
@@ -717,7 +718,7 @@ public class PortletImportController implements ImportController {
 			if (_log.isDebugEnabled()) {
 				StringBundler sb = new StringBundler(4);
 
-				sb.append("Do not delete portlet data for ");
+				sb.append("Do not delete portlet data for portlet ");
 				sb.append(portletDataContext.getPortletId());
 				sb.append(" because the portlet does not have a ");
 				sb.append("PortletDataHandler");
@@ -730,7 +731,8 @@ public class PortletImportController implements ImportController {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
-				"Deleting data for " + portletDataContext.getPortletId());
+				"Deleting data for portlet " +
+					portletDataContext.getPortletId());
 		}
 
 		try {
@@ -841,7 +843,7 @@ public class PortletImportController implements ImportController {
 		}
 		catch (DocumentException de) {
 			throw new SystemException(
-				"Unable to parse XML document for " +
+				"Unable to parse XML document for portlet " +
 					portletDataContext.getPortletId() + " during import",
 				de);
 		}
@@ -971,13 +973,13 @@ public class PortletImportController implements ImportController {
 			}
 			catch (DocumentException de) {
 				throw new SystemException(
-					"Unable to parse XML service information for " +
+					"Unable to parse XML service information for portlet " +
 						portletDataContext.getPortletId() + " during import",
 					de);
 			}
 			catch (PortalException pe) {
 				throw new PortletDataException(
-					"Unable to import service preferences for " +
+					"Unable to import service preferences for portlet " +
 						portletDataContext.getPortletId(),
 					pe);
 			}
