@@ -678,9 +678,9 @@ public class PortletExportController implements ExportController {
 
 			StringBundler sb = new StringBundler(4);
 
-			sb.append("The selected layout ");
+			sb.append("Unable to export layout ");
 			sb.append(layout.getPlid());
-			sb.append(" has an invalid type for export of ");
+			sb.append(" because it has an invalid type: ");
 			sb.append(layout.getType());
 
 			throw new LayoutImportException(sb.toString());
