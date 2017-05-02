@@ -842,7 +842,7 @@ public class PortletImportController implements ImportController {
 		catch (DocumentException de) {
 			throw new SystemException(
 				"Unable to parse XML document for " +
-					portletDataContext.getPortletId() + " while importing",
+					portletDataContext.getPortletId() + " during import",
 				de);
 		}
 
