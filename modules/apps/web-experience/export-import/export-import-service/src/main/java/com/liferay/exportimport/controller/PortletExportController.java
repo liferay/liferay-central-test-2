@@ -828,8 +828,8 @@ public class PortletExportController implements ExportController {
 		}
 		catch (IOException ioe) {
 			throw new SystemException(
-				"An error occured when trying to create the LAR manifest " +
-					"file during export",
+				"Unable to create the export LAR manifest file for portlet " +
+					portletDataContext.getPortletId(),
 				ioe);
 		}
 
