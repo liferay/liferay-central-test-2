@@ -177,7 +177,7 @@ public class ReinvokeRule {
 
 			value = value.trim();
 
-			if (value.isEmpty())  {
+			if (value.isEmpty()) {
 				continue;
 			}
 
