@@ -973,8 +973,8 @@
 
 		<execute function="Confirm#waitForConfirmation" value1="Deleting this event will cancel the meeting with your guests. Would you like to delete?" />
 
-		<var method="selenium#getCurrentDayName()" name="currentDay" />
-		<var method="selenium#getCurrentHour()" name="currentHour" />
+		<var method="DateUtil#getCurrentDayOfWeek()" name="currentDay" />
+		<var method="DateUtil#getCurrentHour()" name="currentHour" />
 
 		<if>
 			<and>
@@ -2038,7 +2038,7 @@
 			<elseif>
 				<equals arg1="${frequency}" arg2="Weekly" />
 				<then>
-					<var method="selenium#getCurrentHour()" name="currentHour" />
+					<var method="DateUtil#getCurrentHour()" name="currentHour" />
 
 					<if>
 						<equals arg1="${currentHour}" arg2="23" />
@@ -2047,7 +2047,7 @@
 							<execute function="AssertTextEquals#assertPartialText" locator1="CalendarViewEventDetails#REPEAT_OCCURRENCE_SUMMARY" value1=", ${numberOfOccurrences} Times" />
 						</then>
 						<else>
-							<var method="selenium#getCurrentDayName()" name="today" />
+							<var method="DateUtil#getCurrentDayOfWeek()" name="today" />
 
 							<execute function="AssertTextEquals" locator1="CalendarViewEventDetails#REPEAT_OCCURRENCE_SUMMARY" value1="Weekly, on ${today}, ${numberOfOccurrences} Times" />
 						</else>
@@ -2063,7 +2063,7 @@
 			<elseif>
 				<equals arg1="${frequency}" arg2="Monthly" />
 				<then>
-					<var method="selenium#getCurrentDayName()" name="today" />
+					<var method="DateUtil#getCurrentDayOfWeek()" name="today" />
 
 					<execute function="AssertTextEquals#assertPartialText" locator1="CalendarViewEventDetails#REPEAT_OCCURRENCE_SUMMARY" value1="Monthly" />
 					<execute function="AssertTextEquals#assertPartialText" locator1="CalendarViewEventDetails#REPEAT_OCCURRENCE_SUMMARY" value1="${numberOfOccurrences} Times" />
