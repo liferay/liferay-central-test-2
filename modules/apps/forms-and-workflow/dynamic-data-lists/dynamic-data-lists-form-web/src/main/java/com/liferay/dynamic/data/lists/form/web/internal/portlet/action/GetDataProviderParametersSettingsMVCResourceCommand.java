@@ -156,8 +156,6 @@ public class GetDataProviderParametersSettingsMVCResourceCommand
 
 			JSONObject inputJSONObject = _jsonFactory.createJSONObject();
 
-			inputJSONObject.put("name", name);
-
 			if (Validator.isNotNull(label)) {
 				inputJSONObject.put("label", label);
 			}
@@ -165,10 +163,10 @@ public class GetDataProviderParametersSettingsMVCResourceCommand
 				inputJSONObject.put("label", name);
 			}
 
+			inputJSONObject.put("name", name);
 			inputJSONObject.put(
 				"required",
 				ddmDataProviderInputParameterSetting.inputParameterRequired());
-
 			inputJSONObject.put("type", type);
 
 			inputsJSONArray.put(inputJSONObject);
