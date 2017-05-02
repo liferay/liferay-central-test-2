@@ -119,7 +119,9 @@ public class DDLFormRuleToDDMFormRuleConverter {
 		UnaryOperator<String> quoteOperation = StringUtil::quote;
 		UnaryOperator<String> trimOperation = StringUtil::trim;
 
-		Stream<String> valueStream = Stream.of(values).map(
+		Stream<String> valuesStream = Stream.of(values);
+
+		Stream<String> valueStream = valuesStream.map(
 			trimOperation.andThen(quoteOperation));
 
 		return valueStream.collect(
