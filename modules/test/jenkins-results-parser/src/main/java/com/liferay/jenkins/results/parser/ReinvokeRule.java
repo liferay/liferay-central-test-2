@@ -126,9 +126,6 @@ public class ReinvokeRule {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("name=");
-		sb.append(name);
-
 		if (axisVariablePattern != null) {
 			sb.append("\naxisVariable=");
 			sb.append(axisVariablePattern.pattern());
@@ -143,6 +140,9 @@ public class ReinvokeRule {
 			sb.append("\njobVariant=");
 			sb.append(jobVariantPattern.pattern());
 		}
+
+		sb.append("name=");
+		sb.append(name);
 
 		if (notificationList != null) {
 			sb.append("\nnotificationList=");
