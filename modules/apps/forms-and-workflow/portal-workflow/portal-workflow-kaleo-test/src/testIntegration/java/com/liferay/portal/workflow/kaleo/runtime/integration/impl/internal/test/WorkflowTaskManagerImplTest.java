@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.model.RoleConstants;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
+import com.liferay.portal.kernel.test.rule.DeleteAfterTestRun;
 import com.liferay.portal.kernel.test.rule.Sync;
 import com.liferay.portal.kernel.test.rule.SynchronousDestinationTestRule;
 import com.liferay.portal.kernel.test.util.ServiceContextTestUtil;
@@ -40,6 +41,9 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowTask;
 import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.ClassRule;
@@ -258,6 +262,14 @@ public class WorkflowTaskManagerImplTest
 		serviceContext = ServiceContextTestUtil.getServiceContext(
 			childOrganization.getGroupId());
 
+		_organizations.add(childOrganization);
+
+		_organizations.add(parentOrganization);
+
+		_users.add(memberUser);
+
+		_users.add(reviewerUser);
+
 		activateSingleApproverWorkflow(
 			childOrganization.getGroupId(), BlogsEntry.class.getName(), 0, 0);
 
@@ -397,5 +409,11 @@ public class WorkflowTaskManagerImplTest
 
 		deactivateWorkflow(BlogsEntry.class.getName(), 0, 0);
 	}
+
+	@DeleteAfterTestRun
+	private final List<Organization> _organizations = new ArrayList<>();
+
+	@DeleteAfterTestRun
+	private final List<User> _users = new ArrayList<>();
 
 }
