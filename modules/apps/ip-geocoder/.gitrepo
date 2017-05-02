@@ -4,8 +4,8 @@
 [subrepo]
 	autopull = false
 	cmdver = liferay
-	commit = f1d90a4f10743a5695bc5a27a511cc175467f57e
+	commit = 2629dffd35eef907ba521ffe94146843d5d18b29
 	mergebuttonmergecommits = false
 	mode = push
-	parent = ea34415d67749b72665871cd4490eb82a996da56
+	parent = 42887b8b71e3134d0f716021dbbf93e8f994d5e7
 	remote = git@github.com:liferay/com-liferay-ip-geocoder.git
