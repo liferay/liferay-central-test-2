@@ -972,7 +972,7 @@ public class PortletImportController implements ImportController {
 			catch (DocumentException de) {
 				throw new SystemException(
 					"Unable to parse XML service information for " +
-						portletDataContext.getPortletId() + "during import",
+						portletDataContext.getPortletId() + " during import",
 					de);
 			}
 			catch (PortalException pe) {
