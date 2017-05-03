@@ -1,13 +1,13 @@
 import com.liferay.gradle.util.copy.StripPathSegmentsAction
 
-sourceCompatibility = "1.8"
-targetCompatibility = "1.8"
-
 configurations {
 	picturefill
 }
 
 task buildPictureFill(type: Copy)
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
 
 String pictureFillVersion = "3.0.2"
 
