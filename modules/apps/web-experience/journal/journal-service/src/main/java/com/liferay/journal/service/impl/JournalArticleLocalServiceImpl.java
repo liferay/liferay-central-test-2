@@ -6341,6 +6341,7 @@ public class JournalArticleLocalServiceImpl
 			JSONObject cdata = JSONFactoryUtil.createJSONObject(
 				dynamicContentElement.getText());
 
+			cdata.put("fileEntryId", fileEntry.getFileEntryId());
 			cdata.put("resourcePrimKey", article.getResourcePrimKey());
 			cdata.put("uuid", fileEntry.getUuid());
 
