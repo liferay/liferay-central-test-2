@@ -109,6 +109,8 @@
 
 		<execute function="AssertClick" locator1="MenuItem#THREAD" value1="Thread" />
 
+		<execute function="Click" locator1="TextInput#SUBJECT" />
+
 		<execute function="Type" locator1="TextInput#SUBJECT" value1="CKEditor Entry Subject" />
 
 		<execute macro="CKEditor#assertEditorPresent" />
