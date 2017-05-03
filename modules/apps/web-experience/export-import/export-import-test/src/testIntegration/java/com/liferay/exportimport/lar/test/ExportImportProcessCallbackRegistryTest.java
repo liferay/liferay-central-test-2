@@ -63,9 +63,11 @@ public class ExportImportProcessCallbackRegistryTest {
 		startProcess(_processId);
 
 		Thread thread1 = new Thread(getFullProcessRunnable());
-		Thread thread2 = new Thread(getFullProcessRunnable());
 
 		thread1.start();
+
+		Thread thread2 = new Thread(getFullProcessRunnable());
+
 		thread2.start();
 
 		ExportImportProcessCallbackRegistryUtil.registerCallback(
