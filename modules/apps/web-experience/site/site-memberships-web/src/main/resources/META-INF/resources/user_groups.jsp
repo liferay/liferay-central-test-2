@@ -61,7 +61,7 @@ LinkedHashMap<String, Object> userGroupParams = new LinkedHashMap<String, Object
 userGroupParams.put("userGroupsGroups", Long.valueOf(siteMembershipsDisplayContext.getGroupId()));
 
 if (role != null) {
-	userGroupParams.put(UserGroupFinderConstants.PARAM_KEY_USER_GROUP_GROUP_ROLE, new Long[] {Long.valueOf(roleId), Long.valueOf(siteMembershipsDisplayContext.getGroupId())});
+	userGroupParams.put("userGroupGroupRole", new Long[] {Long.valueOf(roleId), Long.valueOf(siteMembershipsDisplayContext.getGroupId())});
 }
 
 int userGroupsCount = UserGroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getKeywords(), userGroupParams);
