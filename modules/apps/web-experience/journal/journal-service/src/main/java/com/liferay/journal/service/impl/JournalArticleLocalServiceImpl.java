@@ -3701,11 +3701,9 @@ public class JournalArticleLocalServiceImpl
 		JournalArticle article = journalArticlePersistence.findByG_A_V(
 			groupId, articleId, version);
 
-		String defaultLanguageId = article.getDefaultLanguageId();
-
-		if (languageId.equals(defaultLanguageId)) {
+		if (Objects.equals(languageId, article.getDefaultLanguageId())) {
 			throw new RequiredArticleLocalizationException(
-				"The default article localization cannot be removed.");
+				"Default article localization cannot be removed.");
 		}
 
 		String title = article.getTitle();
