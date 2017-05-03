@@ -18,13 +18,17 @@ cache:
     - $HOME/.gradle/wrapper/
 
 before_script:
-  - ./gradlew runDocker -Pdocker
-  - ./gradlew startJacocoRecording
+  - wget http://services.gradle.org/distributions/gradle-3.3-bin.zip
+  - unzip gradle-3.3-bin.zip
+  - export GRADLE_HOME=$PWD/gradle-3.3
+  - export PATH=$GRADLE_HOME/bin:$PATH
+  - gradle runDocker -Pdocker
+  - gradle startJacocoRecording
 
 script:
-  - ./gradlew test testIntegration -Pdocker
+  - gradle test testIntegration -Pdocker
 
 after_success:
-  - ./gradlew stopJacocoRecording
+  - gradle stopJacocoRecording
   - sleep 20
-  - ./gradlew coveralls
+  - gradle coveralls
