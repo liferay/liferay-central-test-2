@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.security.permission.ResourceActions;
 import com.liferay.portal.kernel.service.CompanyLocalService;
 import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.service.ResourceActionLocalService;
+import com.liferay.portal.kernel.service.ResourceLocalService;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
@@ -80,7 +81,9 @@ public class UpgradeJournal extends UpgradeProcess {
 		DefaultDDMStructureHelper defaultDDMStructureHelper,
 		GroupLocalService groupLocalService,
 		ResourceActionLocalService resourceActionLocalService,
-		ResourceActions resourceActions, UserLocalService userLocalService) {
+		ResourceActions resourceActions,
+		ResourceLocalService resourceLocalService,
+		UserLocalService userLocalService) {
 
 		_companyLocalService = companyLocalService;
 		_ddmStorageLinkLocalService = ddmStorageLinkLocalService;
@@ -90,6 +93,7 @@ public class UpgradeJournal extends UpgradeProcess {
 		_groupLocalService = groupLocalService;
 		_resourceActionLocalService = resourceActionLocalService;
 		_resourceActions = resourceActions;
+		_resourceLocalService = resourceLocalService;
 		_userLocalService = userLocalService;
 	}
 
@@ -218,6 +222,29 @@ public class UpgradeJournal extends UpgradeProcess {
 		}
 	}
 
+	protected void addDefaultResourcePermissions() throws Exception {
+		String modelResource = _resourceActions.getCompositeModelName(
+			DDMStructure.class.getName(), JournalArticle.class.getName());
+
+		try (PreparedStatement ps = connection.prepareStatement(
+				"SELECT companyId, structureId FROM DDMStructure WHERE " +
+					"structureKey = ?")) {
+
+			ps.setString(1, _BASIC_WEB_CONTENT);
+
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				long companyId = rs.getLong("companyId");
+				long primKey = rs.getLong("structureId");
+
+				_resourceLocalService.addResources(
+					companyId, 0, 0, modelResource, primKey, false, false,
+					true);
+			}
+		}
+	}
+
 	protected boolean containsDateFieldType(String content) {
 		if (content.indexOf(_TYPE_ATTRIBUTE_DDM_DATE) != -1) {
 			return true;
@@ -283,6 +310,8 @@ public class UpgradeJournal extends UpgradeProcess {
 	@Override
 	protected void doUpgrade() throws Exception {
 		updateJournalArticles();
+
+		addDefaultResourcePermissions();
 
 		addDDMStorageLinks();
 		addDDMTemplateLinks();
@@ -588,6 +617,8 @@ public class UpgradeJournal extends UpgradeProcess {
 		return LanguageUtil.getLanguageId(defaultLocale);
 	}
 
+	private static final String _BASIC_WEB_CONTENT = "BASIC-WEB-CONTENT";
+
 	private static final String _INVALID_FIELD_NAME_CHARS_REGEX =
 		"([\\p{Punct}&&[^_]]|\\p{Space})+";
 
@@ -606,6 +637,7 @@ public class UpgradeJournal extends UpgradeProcess {
 		"name=\"([^\"]+)\"");
 	private final ResourceActionLocalService _resourceActionLocalService;
 	private final ResourceActions _resourceActions;
+	private final ResourceLocalService _resourceLocalService;
 	private final UserLocalService _userLocalService;
 
 }
