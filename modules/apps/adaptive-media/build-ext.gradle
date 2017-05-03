@@ -1,6 +1,7 @@
+import org.kt3k.gradle.plugin.CoverallsPlugin
+
 buildscript {
 	dependencies {
-		classpath group: "com.liferay", name: "com.liferay.gradle.plugins.defaults", version: "latest.release"
 		classpath group: "org.kt3k.gradle.plugin", name: "coveralls-gradle-plugin", version: "2.6.3"
 	}
 
@@ -17,8 +18,7 @@ buildscript {
 	}
 }
 
-apply plugin: "com.github.kt3k.coveralls"
-apply plugin: "com.liferay.app.defaults.plugin"
+apply plugin: CoverallsPlugin
 apply plugin: "jacoco"
 
 task createTempDir(type: Exec) {
@@ -222,8 +222,6 @@ allprojects {
 }
 
 configure(subprojects.findAll {!it.childProjects}) {
-	apply plugin: "com.liferay.defaults.plugin"
-
 	configurations {
 		runtimeLib {
 			description = 'deployable runtime libs'
