@@ -161,12 +161,12 @@ task runDocker(type: Exec) {
 	dependsOn rmDocker
 	dependsOn copyJacocoAgent
 
-	def javaOpts = project.getProperty('com.liferay.adaptive.media.javaOpts');
+	def javaOpts = project.getProperty('com.liferay.adaptive.media.java.opts');
 
-	javaOpts += ' ' + project.getProperty('com.liferay.adaptive.media.jacocoOpts')
+	javaOpts += ' ' + project.getProperty('com.liferay.adaptive.media.jacoco.opts')
 
 	if (project.hasProperty('debug')) {
-		javaOpts += ' ' + project.getProperty('com.liferay.adaptive.media.debugOpts');
+		javaOpts += ' ' + project.getProperty('com.liferay.adaptive.media.debug.opts');
 	}
 
 	commandLine 'docker', 'run',
