@@ -3857,7 +3857,7 @@ public class JournalArticleLocalServiceImpl
 
 		if (Objects.equals(languageId, article.getDefaultLanguageId())) {
 			throw new RequiredArticleLocalizationException(
-				"Default article localization cannot be removed.");
+				"Default article localization is required");
 		}
 
 		journalArticleLocalizationPersistence.removeByA_L(
