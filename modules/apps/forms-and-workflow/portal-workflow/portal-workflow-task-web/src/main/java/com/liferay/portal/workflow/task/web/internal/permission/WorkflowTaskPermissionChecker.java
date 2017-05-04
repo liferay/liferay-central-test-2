@@ -85,9 +85,9 @@ public class WorkflowTaskPermissionChecker {
 		try {
 			Group group = GroupLocalServiceUtil.getGroup(groupId);
 
-			for (Group ancestor : group.getAncestors()) {
+			for (Group ancestorGroup : group.getAncestors()) {
 				long[] ancestorRoleIds = permissionChecker.getRoleIds(
-					permissionChecker.getUserId(), ancestor.getGroupId());
+					permissionChecker.getUserId(), ancestorGroup.getGroupId());
 
 				roleIds = ArrayUtil.append(roleIds, ancestorRoleIds);
 			}

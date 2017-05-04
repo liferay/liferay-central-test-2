@@ -111,9 +111,9 @@ public class GroupAwareRoleTaskAssignmentSelector
 			group = _groupLocalService.getGroup(groupId);
 
 			if (group.isSite()) {
-				for (Group ancestor : group.getAncestors()) {
+				for (Group ancestorGroup : group.getAncestors()) {
 					populateKaleoTaskAssigments(
-						kaleoTaskAssignments, ancestor.getGroupId(), role);
+						kaleoTaskAssignments, ancestorGroup.getGroupId(), role);
 				}
 			}
 

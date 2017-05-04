@@ -177,8 +177,8 @@ public class RoleNotificationRecipientBuilder
 			group = _groupLocalService.getGroup(groupId);
 
 			if (group.isSite()) {
-				for (Group ancestor : group.getAncestors()) {
-					populateGroupIs(groupIds, ancestor.getGroupId(), role);
+				for (Group ancestorGroup : group.getAncestors()) {
+					populateGroupIs(groupIds, ancestorGroup.getGroupId(), role);
 				}
 			}
 		}
