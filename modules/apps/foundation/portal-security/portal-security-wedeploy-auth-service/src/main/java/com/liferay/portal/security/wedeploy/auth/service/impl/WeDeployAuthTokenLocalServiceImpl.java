@@ -44,8 +44,8 @@ public class WeDeployAuthTokenLocalServiceImpl
 			PwdGenerator.getPassword());
 
 		return addWeDeployAuthToken(
-			userId, clientId, token,
-			WeDeployAuthTokenConstants.TYPE_ACCESS, new ServiceContext());
+			userId, clientId, token, WeDeployAuthTokenConstants.TYPE_ACCESS,
+			new ServiceContext());
 	}
 
 	public WeDeployAuthToken addAuthorizationWeDeployAuthToken(
