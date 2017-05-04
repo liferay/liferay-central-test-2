@@ -176,6 +176,14 @@ AUI.add(
 						if (submitButton) {
 							submitButton.attr('disabled', false);
 						}
+
+						var container = instance.get('container');
+
+						Liferay.fire(Liferay.namespace('DDM').Form + ':render',
+							{
+								containerId: container.get('id')
+							}
+						);
 					},
 
 					_onLiferaySubmitForm: function(event) {
