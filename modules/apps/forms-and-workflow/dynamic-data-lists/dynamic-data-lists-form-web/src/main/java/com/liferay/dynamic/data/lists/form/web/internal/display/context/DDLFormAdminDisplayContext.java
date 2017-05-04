@@ -268,7 +268,7 @@ public class DDLFormAdminDisplayContext {
 		ThemeDisplay themeDisplay =
 			_ddlFormAdminRequestHelper.getThemeDisplay();
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(3);
 
 		sb.append(themeDisplay.getPathThemeImages());
 		sb.append("/lexicon/icons.svg");
