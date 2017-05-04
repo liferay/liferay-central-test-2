@@ -14,7 +14,6 @@
 
 package com.liferay.journal.content.search.web.internal.upgrade.v1_0_1;
 
-import com.liferay.journal.content.web.constants.JournalContentPortletKeys;
 import com.liferay.portal.kernel.dao.jdbc.AutoBatchPreparedStatementUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -61,7 +60,7 @@ public class UpgradePortletId extends UpgradeProcess {
 	}
 
 	private static final String _NEW_ROOT_PORTLET_ID =
-		JournalContentPortletKeys.JOURNAL_CONTENT;
+		"com_liferay_journal_content_web_portlet_JournalContentPortlet";
 
 	private static final String _OLD_ROOT_PORTLET_ID = "56";
 
