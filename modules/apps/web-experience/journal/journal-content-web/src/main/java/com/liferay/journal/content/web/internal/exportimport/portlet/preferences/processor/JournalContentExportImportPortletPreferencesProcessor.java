@@ -279,14 +279,17 @@ public class JournalContentExportImportPortletPreferencesProcessor
 						_journalArticleLocalService.fetchLatestArticle(
 							groupId, articleId, WorkflowConstants.STATUS_ANY);
 
-					AssetEntry assetEntry = _assetEntryLocalService.fetchEntry(
-						JournalArticle.class.getName(),
-						article.getResourcePrimKey());
+					if (article != null) {
+						AssetEntry assetEntry =
+							_assetEntryLocalService.fetchEntry(
+								JournalArticle.class.getName(),
+								article.getResourcePrimKey());
 
-					if (assetEntry != null) {
-						portletPreferences.setValue(
-							"assetEntryId",
-							String.valueOf(assetEntry.getEntryId()));
+						if (assetEntry != null) {
+							portletPreferences.setValue(
+								"assetEntryId",
+								String.valueOf(assetEntry.getEntryId()));
+						}
 					}
 
 					if (portletDataContext.getPlid() > 0) {
