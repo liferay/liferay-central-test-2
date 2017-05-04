@@ -43,8 +43,8 @@ public abstract class BaseJournalUserNotificationDefinition
 	public String getDescription(Locale locale) {
 		String languageId = LocaleUtil.toLanguageId(locale);
 
-		ResourceBundle resourceBundle = resourceBundleLoader.loadResourceBundle(
-			languageId);
+		ResourceBundle resourceBundle =
+			_resourceBundleLoader.loadResourceBundle(languageId);
 
 		String description = ResourceBundleUtil.getString(
 			resourceBundle, _description);
@@ -56,9 +56,9 @@ public abstract class BaseJournalUserNotificationDefinition
 		return _description;
 	}
 
-	@Reference(target = "(bundle.symbolic.name=com.liferay.journal.web)")
-	protected ResourceBundleLoader resourceBundleLoader;
-
 	private final String _description;
+
+	@Reference(target = "(bundle.symbolic.name=com.liferay.journal.web)")
+	private ResourceBundleLoader _resourceBundleLoader;
 
 }
