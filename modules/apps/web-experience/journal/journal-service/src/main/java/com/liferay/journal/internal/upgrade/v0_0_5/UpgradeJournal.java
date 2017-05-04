@@ -116,6 +116,8 @@ public class UpgradeJournal extends UpgradeProcess {
 				"/basic-web-content-structure.xml",
 			new ServiceContext());
 
+		addDefaultResourcePermissions(group.getGroupId());
+
 		String defaultLanguageId = UpgradeProcessUtil.getDefaultLanguageId(
 			companyId);
 
@@ -222,27 +224,19 @@ public class UpgradeJournal extends UpgradeProcess {
 		}
 	}
 
-	protected void addDefaultResourcePermissions() throws Exception {
+	protected void addDefaultResourcePermissions(long groupId)
+		throws Exception {
+
 		String modelResource = _resourceActions.getCompositeModelName(
 			DDMStructure.class.getName(), JournalArticle.class.getName());
 
-		try (PreparedStatement ps = connection.prepareStatement(
-				"SELECT companyId, structureId FROM DDMStructure WHERE " +
-					"structureKey = ?")) {
+		DDMStructure ddmStructure = _ddmStructureLocalService.fetchStructure(
+			groupId, PortalUtil.getClassNameId(JournalArticle.class),
+			_BASIC_WEB_CONTENT);
 
-			ps.setString(1, _BASIC_WEB_CONTENT);
-
-			ResultSet rs = ps.executeQuery();
-
-			if (rs.next()) {
-				long companyId = rs.getLong("companyId");
-				long primKey = rs.getLong("structureId");
-
-				_resourceLocalService.addResources(
-					companyId, 0, 0, modelResource, primKey, false, false,
-					true);
-			}
-		}
+		_resourceLocalService.addResources(
+			ddmStructure.getCompanyId(), 0, 0, modelResource,
+			ddmStructure.getStructureId(), false, false, true);
 	}
 
 	protected boolean containsDateFieldType(String content) {
@@ -310,8 +304,6 @@ public class UpgradeJournal extends UpgradeProcess {
 	@Override
 	protected void doUpgrade() throws Exception {
 		updateJournalArticles();
-
-		addDefaultResourcePermissions();
 
 		addDDMStorageLinks();
 		addDDMTemplateLinks();
