@@ -54,7 +54,7 @@ public class JournalResultRowSplitter implements ResultRowSplitter {
 		if (!journalArticleResultRows.isEmpty()) {
 			resultRowSplitterEntries.add(
 				new ResultRowSplitterEntry(
-					"articles", journalArticleResultRows));
+					"Web Content", journalArticleResultRows));
 		}
 
 		return resultRowSplitterEntries;
