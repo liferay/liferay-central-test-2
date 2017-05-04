@@ -36,6 +36,8 @@ public class WeDeployAuthAppLocalServiceImpl
 			long userId, String name, ServiceContext serviceContext)
 		throws PortalException {
 
+		// WeDeploy auth app
+
 		User user = userLocalService.fetchUserById(userId);
 		Date date = new Date();
 

@@ -66,6 +66,8 @@ public class WeDeployAuthTokenLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException {
 
+		// WeDeploy auth token
+
 		User user = userLocalService.fetchUserById(userId);
 		Date date = new Date();
 
