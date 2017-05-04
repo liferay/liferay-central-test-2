@@ -1,3 +1,6 @@
+import java.nio.charset.Charset
+import java.nio.file.Files
+
 import org.kt3k.gradle.plugin.CoverallsPlugin
 
 buildscript {
@@ -32,9 +35,6 @@ task copyJacocoAgent(type: Copy) {
 
 	into "${rootDir}/build/jacoco"
 }
-
-import java.nio.charset.Charset
-import java.nio.file.Files
 
 def isAlreadyLoggedIn() {
 	String homeDir = System.getenv().get("HOME");
