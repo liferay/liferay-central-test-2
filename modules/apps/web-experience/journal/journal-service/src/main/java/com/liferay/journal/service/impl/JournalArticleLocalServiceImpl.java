@@ -6338,16 +6338,17 @@ public class JournalArticleLocalServiceImpl
 					tempFileEntry.getFileEntryId());
 			}
 
-			JSONObject cdata = JSONFactoryUtil.createJSONObject(
+			JSONObject cdataJSONObject = JSONFactoryUtil.createJSONObject(
 				dynamicContentElement.getText());
 
-			cdata.put("fileEntryId", fileEntry.getFileEntryId());
-			cdata.put("resourcePrimKey", article.getResourcePrimKey());
-			cdata.put("uuid", fileEntry.getUuid());
+			cdataJSONObject.put("fileEntryId", fileEntry.getFileEntryId());
+			cdataJSONObject.put(
+				"resourcePrimKey", article.getResourcePrimKey());
+			cdataJSONObject.put("uuid", fileEntry.getUuid());
 
 			dynamicContentElement.clearContent();
 
-			dynamicContentElement.addCDATA(cdata.toString());
+			dynamicContentElement.addCDATA(cdataJSONObject.toString());
 		}
 	}
 
