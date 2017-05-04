@@ -83,9 +83,18 @@ public class UpgradeImageTypeContent extends UpgradeProcess {
 
 				long folderId = getFolderId(userId, groupId, resourcePrimKey);
 
-				FileEntry fileEntry =
-					PortletFileRepositoryUtil.getPortletFileEntry(
+				FileEntry fileEntry = null;
+
+				try {
+					fileEntry = PortletFileRepositoryUtil.getPortletFileEntry(
 						groupId, folderId, id);
+				}
+				catch (PortalException pe) {
+					_log.error(
+						"Unable to get file entry with group ID " + groupId +
+							", folder ID " + folderId + ", and file name " + id,
+						pe);
+				}
 
 				if (fileEntry == null) {
 					continue;
