@@ -45,7 +45,7 @@ public class WeDeployAuthTokenLocalServiceImpl
 
 		return addWeDeployAuthToken(
 			userId, clientId, token,
-			WeDeployAuthTokenConstants.TOKEN_TYPE_ACCESS, new ServiceContext());
+			WeDeployAuthTokenConstants.TYPE_ACCESS, new ServiceContext());
 	}
 
 	public WeDeployAuthToken addAuthorizationWeDeployAuthToken(
@@ -57,7 +57,7 @@ public class WeDeployAuthTokenLocalServiceImpl
 
 		return addWeDeployAuthToken(
 			userId, clientId, token,
-			WeDeployAuthTokenConstants.TOKEN_TYPE_AUTHORIZATION,
+			WeDeployAuthTokenConstants.TYPE_AUTHORIZATION,
 			new ServiceContext());
 	}
 
