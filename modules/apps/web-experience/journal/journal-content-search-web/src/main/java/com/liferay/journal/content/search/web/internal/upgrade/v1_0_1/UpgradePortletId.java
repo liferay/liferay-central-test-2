@@ -49,6 +49,7 @@ public class UpgradePortletId extends UpgradeProcess {
 					portletId, _OLD_ROOT_PORTLET_ID, _NEW_ROOT_PORTLET_ID);
 
 				ps2.setString(1, newPortletId);
+
 				ps2.setLong(2, contentSearchId);
 
 				ps2.addBatch();
