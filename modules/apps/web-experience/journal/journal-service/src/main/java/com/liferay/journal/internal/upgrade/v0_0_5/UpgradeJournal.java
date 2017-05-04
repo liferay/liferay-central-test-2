@@ -232,7 +232,7 @@ public class UpgradeJournal extends UpgradeProcess {
 
 		DDMStructure ddmStructure = _ddmStructureLocalService.fetchStructure(
 			groupId, PortalUtil.getClassNameId(JournalArticle.class),
-			_DDM_STRUCTURE_KEY_BASIC_WEB_CONTENT);
+			"BASIC-WEB-CONTENT");
 
 		_resourceLocalService.addResources(
 			ddmStructure.getCompanyId(), 0, 0, modelResource,
@@ -608,9 +608,6 @@ public class UpgradeJournal extends UpgradeProcess {
 
 		return LanguageUtil.getLanguageId(defaultLocale);
 	}
-
-	private static final String _DDM_STRUCTURE_KEY_BASIC_WEB_CONTENT =
-		"BASIC-WEB-CONTENT";
 
 	private static final String _INVALID_FIELD_NAME_CHARS_REGEX =
 		"([\\p{Punct}&&[^_]]|\\p{Space})+";
