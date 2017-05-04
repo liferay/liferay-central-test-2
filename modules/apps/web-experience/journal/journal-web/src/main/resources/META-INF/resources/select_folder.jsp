@@ -21,10 +21,10 @@ String eventName = ParamUtil.getString(request, "eventName", liferayPortletRespo
 
 Map<String, Object> context = new HashMap<>();
 
+context.put("itemSelectorSaveEvent", eventName);
+context.put("namespace", liferayPortletResponse.getNamespace());
 context.put("nodes", journalDisplayContext.getFoldersJSONArray());
 context.put("pathThemeImages", themeDisplay.getPathThemeImages());
-context.put("namespace", liferayPortletResponse.getNamespace());
-context.put("itemSelectorSaveEvent", eventName);
 %>
 
 <soy:template-renderer
