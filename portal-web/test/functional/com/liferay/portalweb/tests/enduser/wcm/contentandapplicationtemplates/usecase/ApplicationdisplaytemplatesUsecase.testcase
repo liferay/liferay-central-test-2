@@ -785,6 +785,8 @@
 	</command>
 
 	<command name="ADTWiki" priority="3">
+		<description message="This case uses a workaround for LPS-68008" />
+
 		<execute macro="Navigator#openSiteURL">
 			<var name="siteName" value="Test Site Name" />
 		</execute>

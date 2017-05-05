@@ -31,6 +31,8 @@
 	</tear-down>
 
 	<command name="ExportImportPortletWithADT" priority="3">
+		<description message="This case uses a workaround for LPS-68008" />
+
 		<execute macro="Navigator#openURL" />
 
 		<execute macro="ProductMenu#gotoSitesConfiguration">
