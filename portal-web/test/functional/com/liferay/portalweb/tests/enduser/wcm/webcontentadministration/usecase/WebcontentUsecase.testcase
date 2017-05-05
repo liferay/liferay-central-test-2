@@ -1287,7 +1287,7 @@
 		</execute>
 	</command>
 
-	<command ignore="true" name="EditContentWithTitleAndAllFieldsNull" priority="4">
+	<command name="EditContentWithTitleAndAllFieldsNull" priority="4">
 		<execute macro="Navigator#openURL" />
 
 		<execute macro="ProductMenu#gotoSitesContent">
