@@ -31,7 +31,7 @@ public class DB2SQLTransformerLogicTest
 	}
 
 	@Test
-	public void testAlterColumnType() {
+	public void testReplaceAlterColumnType() {
 		Assert.assertEquals(
 			"ALTER TABLE T ALTER COLUMN C SET DATA TYPE VARCHAR(256)",
 			sqlTransformer.transform("ALTER_COLUMN_TYPE T C VARCHAR(256)"));
