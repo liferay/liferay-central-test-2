@@ -93,6 +93,25 @@ public class HtmlContentTransformerImplTest {
 	}
 
 	@Test
+	public void testReplacesAnAdaptableImgAfterANonAdaptableOne()
+		throws Exception {
+
+		Mockito.when(
+			_adaptiveMediaImageHTMLTagFactory.create(
+				"<img data-fileEntryId=\"1989\" src=\"adaptable\"/>",
+				_fileEntry)
+		).thenReturn(
+			"<whatever></whatever>"
+		);
+
+		Assert.assertEquals(
+			"<img src=\"not-adaptable\"/><whatever></whatever>",
+			_htmlContentTransformer.transform(
+				"<img src=\"not-adaptable\"/>" +
+					"<img data-fileEntryId=\"1989\" src=\"adaptable\"/>"));
+	}
+
+	@Test
 	public void testReplacesTheAdaptableImagesWithTheAdaptiveTag()
 		throws Exception {
 
