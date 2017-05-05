@@ -262,7 +262,7 @@ public class JenkinsResultsParserUtil {
 		while ((returnCode == -1) && (duration < timeout)) {
 			duration = System.currentTimeMillis() - start;
 
-			System.out.println("duration: " + duration);
+			System.out.println("Duration: " + duration);
 
 			try {
 				returnCode = process.exitValue();
@@ -279,8 +279,8 @@ public class JenkinsResultsParserUtil {
 
 			throw new RuntimeException(
 				combine(
-					"Timeout occurred while executing bash commands \"",
-					bashCommands[2], "\""));
+					"Timeout occurred while executing bash commands: ",
+					bashCommands[2]));
 		}
 
 		if (debug) {
