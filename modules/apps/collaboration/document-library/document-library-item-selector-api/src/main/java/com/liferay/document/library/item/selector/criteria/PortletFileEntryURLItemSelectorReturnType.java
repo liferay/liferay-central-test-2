@@ -17,6 +17,8 @@ package com.liferay.document.library.item.selector.criteria;
 import com.liferay.item.selector.ItemSelectorReturnType;
 
 /**
+ * This return type should return the URL of the entity as a string.
+ *
  * @author Roberto Díaz
  */
 public class PortletFileEntryURLItemSelectorReturnType
