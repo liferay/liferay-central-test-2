@@ -16,6 +16,7 @@ package com.liferay.adaptive.media.journal.web.internal.transformer;
 
 import com.liferay.adaptive.media.content.transformer.ContentTransformerHandler;
 import com.liferay.adaptive.media.content.transformer.constants.ContentTransformerContentTypes;
+import com.liferay.journal.util.JournalContent;
 import com.liferay.portal.kernel.xml.Document;
 
 import java.util.HashMap;
@@ -40,6 +41,22 @@ public class AdaptiveMediaJournalTransformerListenerTest {
 	public void setUp() {
 		_adaptiveMediaJournalTransformerListener.setContentTransformerHandler(
 			_contentTransformerHandler);
+		_adaptiveMediaJournalTransformerListener.setJournalContent(
+			_journalContent);
+	}
+
+	@Test
+	public void testOnActivationClearsJournalCache() throws Exception {
+		_adaptiveMediaJournalTransformerListener.activate();
+
+		Mockito.verify(_journalContent, Mockito.times(1)).clearCache();
+	}
+
+	@Test
+	public void testOnDeactivationClearsJournalCache() throws Exception {
+		_adaptiveMediaJournalTransformerListener.deactivate();
+
+		Mockito.verify(_journalContent, Mockito.times(1)).clearCache();
 	}
 
 	@Test
@@ -93,6 +110,9 @@ public class AdaptiveMediaJournalTransformerListenerTest {
 
 	@Mock
 	private Document _document;
+
+	@Mock
+	private JournalContent _journalContent;
 
 	private final Map<String, String> _tokens = new HashMap<>();
 

@@ -17,12 +17,15 @@ package com.liferay.adaptive.media.journal.web.internal.transformer;
 import com.liferay.adaptive.media.content.transformer.ContentTransformerHandler;
 import com.liferay.adaptive.media.content.transformer.constants.ContentTransformerContentTypes;
 import com.liferay.journal.constants.JournalPortletKeys;
+import com.liferay.journal.util.JournalContent;
 import com.liferay.portal.kernel.templateparser.BaseTransformerListener;
 import com.liferay.portal.kernel.templateparser.TransformerListener;
 
 import java.util.Map;
 
+import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Deactivate;
 import org.osgi.service.component.annotations.Reference;
 
 /**
@@ -44,6 +47,16 @@ public class AdaptiveMediaJournalTransformerListener
 			ContentTransformerContentTypes.HTML, output);
 	}
 
+	@Activate
+	protected void activate() {
+		_journalContent.clearCache();
+	}
+
+	@Deactivate
+	protected void deactivate() {
+		_journalContent.clearCache();
+	}
+
 	@Reference(unbind = "-")
 	protected void setContentTransformerHandler(
 		ContentTransformerHandler contentTransformerHandler) {
@@ -51,6 +64,12 @@ public class AdaptiveMediaJournalTransformerListener
 		_contentTransformerHandler = contentTransformerHandler;
 	}
 
+	@Reference(unbind = "-")
+	protected void setJournalContent(JournalContent journalContent) {
+		_journalContent = journalContent;
+	}
+
 	private ContentTransformerHandler _contentTransformerHandler;
+	private JournalContent _journalContent;
 
 }
