@@ -432,6 +432,8 @@
 	</command>
 
 	<command name="PortletInteractionLocalization" priority="4">
+		<description message="This case uses a workaround for LPS-71938" />
+
 		<property name="test.name.skip.portal.instance" value="SitelocalizationUsecase#PortletInteractionLocalization" />
 
 		<execute macro="ProductMenu#gotoControlPanelSites">
@@ -521,7 +523,7 @@
 
 		<execute macro="ProductMenu#gotoLocalizedControlPanel">
 			<var name="category" value="Configuración" />
-			<var name="portlet" value="Configuración de la instancia" />
+			<var name="portlet" value="Instance Settings" />
 		</execute>
 
 		<execute macro="PortalSettings#viewCurrentDefaultPortalLanguageCP">
