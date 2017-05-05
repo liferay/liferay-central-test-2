@@ -20,8 +20,6 @@ import com.liferay.item.selector.ItemSelector;
 import com.liferay.item.selector.ItemSelectorCriterion;
 import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.criteria.FileEntryItemSelectorReturnType;
-import com.liferay.item.selector.criteria.PortletFileEntryItemSelectorReturnType;
-import com.liferay.item.selector.criteria.PortletFileEntryURLItemSelectorReturnType;
 import com.liferay.item.selector.criteria.URLItemSelectorReturnType;
 import com.liferay.item.selector.criteria.image.criterion.ImageItemSelectorCriterion;
 import com.liferay.item.selector.criteria.upload.criterion.UploadItemSelectorCriterion;
@@ -114,35 +112,27 @@ public class BlogsContentEditorConfigContributor
 		RequestBackedPortletURLFactory requestBackedPortletURLFactory,
 		String eventName) {
 
-		List<ItemSelectorReturnType> blogsDesiredItemSelectorReturnTypes =
-			new ArrayList<>();
+		List<ItemSelectorReturnType>
+			blogsContentEditorDesiredItemSelectorReturnTypes =
+				new ArrayList<>();
 
-		blogsDesiredItemSelectorReturnTypes.add(
-			new PortletFileEntryItemSelectorReturnType());
+		blogsContentEditorDesiredItemSelectorReturnTypes.add(
+			new FileEntryItemSelectorReturnType());
 
-		blogsDesiredItemSelectorReturnTypes.add(
-			new PortletFileEntryURLItemSelectorReturnType());
+		blogsContentEditorDesiredItemSelectorReturnTypes.add(
+			new URLItemSelectorReturnType());
 
 		ItemSelectorCriterion blogsItemSelectorCriterion =
 			new BlogsItemSelectorCriterion();
 
 		blogsItemSelectorCriterion.setDesiredItemSelectorReturnTypes(
-			blogsDesiredItemSelectorReturnTypes);
-
-		List<ItemSelectorReturnType> imageDesiredItemSelectorReturnTypes =
-			new ArrayList<>();
-
-		imageDesiredItemSelectorReturnTypes.add(
-			new FileEntryItemSelectorReturnType());
-
-		imageDesiredItemSelectorReturnTypes.add(
-			new URLItemSelectorReturnType());
+			blogsContentEditorDesiredItemSelectorReturnTypes);
 
 		ItemSelectorCriterion imageItemSelectorCriterion =
 			new ImageItemSelectorCriterion();
 
 		imageItemSelectorCriterion.setDesiredItemSelectorReturnTypes(
-			imageDesiredItemSelectorReturnTypes);
+			blogsContentEditorDesiredItemSelectorReturnTypes);
 
 		ItemSelectorCriterion urlItemSelectorCriterion =
 			new URLItemSelectorCriterion();

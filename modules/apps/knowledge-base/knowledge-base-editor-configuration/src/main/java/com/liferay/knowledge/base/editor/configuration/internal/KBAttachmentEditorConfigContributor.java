@@ -18,8 +18,6 @@ import com.liferay.item.selector.ItemSelector;
 import com.liferay.item.selector.ItemSelectorCriterion;
 import com.liferay.item.selector.ItemSelectorReturnType;
 import com.liferay.item.selector.criteria.FileEntryItemSelectorReturnType;
-import com.liferay.item.selector.criteria.PortletFileEntryItemSelectorReturnType;
-import com.liferay.item.selector.criteria.PortletFileEntryURLItemSelectorReturnType;
 import com.liferay.item.selector.criteria.URLItemSelectorReturnType;
 import com.liferay.item.selector.criteria.image.criterion.ImageItemSelectorCriterion;
 import com.liferay.item.selector.criteria.upload.criterion.UploadItemSelectorCriterion;
@@ -94,33 +92,19 @@ public class KBAttachmentEditorConfigContributor
 			return;
 		}
 
-		List<ItemSelectorReturnType> kbItemSelectorReturnTypes =
+		List<ItemSelectorReturnType> desiredItemSelectorReturnTypes =
 			new ArrayList<>();
 
-		kbItemSelectorReturnTypes.add(
-			new PortletFileEntryItemSelectorReturnType());
-
-		kbItemSelectorReturnTypes.add(
-			new PortletFileEntryURLItemSelectorReturnType());
+		desiredItemSelectorReturnTypes.add(
+			new FileEntryItemSelectorReturnType());
+		desiredItemSelectorReturnTypes.add(new URLItemSelectorReturnType());
 
 		ItemSelectorCriterion kbAttachmentsItemSelectorCriterion =
 			getKBAttachmentItemSelectorCriterion(
-				resourcePrimKey, kbItemSelectorReturnTypes);
-
-		List<ItemSelectorReturnType> imageDesiredItemSelectorReturnTypes =
-			new ArrayList<>();
-
-		imageDesiredItemSelectorReturnTypes.add(
-			new FileEntryItemSelectorReturnType());
-
-		imageDesiredItemSelectorReturnTypes.add(
-			new URLItemSelectorReturnType());
+				resourcePrimKey, desiredItemSelectorReturnTypes);
 
 		ItemSelectorCriterion imageItemSelectorCriterion =
-			new ImageItemSelectorCriterion();
-
-		imageItemSelectorCriterion.setDesiredItemSelectorReturnTypes(
-			imageDesiredItemSelectorReturnTypes);
+			getImageItemSelectorCriterion(desiredItemSelectorReturnTypes);
 
 		ItemSelectorCriterion urlItemSelectorCriterion =
 			getURLItemSelectorCriterion();
