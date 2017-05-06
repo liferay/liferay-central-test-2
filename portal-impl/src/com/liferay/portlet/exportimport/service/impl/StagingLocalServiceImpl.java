@@ -910,8 +910,8 @@ public class StagingLocalServiceImpl extends StagingLocalServiceBaseImpl {
 
 			if (stagingRequestFileEntry == null) {
 				throw new SystemException(
-					"Unable to assemble LAR file for remote publication " +
-						"request " + stagingRequestId);
+					"Unable to assemble LAR file for remote staging " +
+						"publication request " + stagingRequestId);
 			}
 
 			return stagingRequestFileEntry;
