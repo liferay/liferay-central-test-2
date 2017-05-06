@@ -2404,7 +2404,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		if (_importDataRootElement == null) {
 			throw new IllegalStateException(
 				"Unable to return the import data group element for group " +
-					name + " because the root data element not initialized");
+					name + " because the root data element is not initialized");
 		}
 
 		if (Validator.isNull(name)) {

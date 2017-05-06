@@ -204,7 +204,7 @@ public class PortletDataContextFactoryImpl
 			if (!CompanyThreadLocal.isDeleteInProcess()) {
 				throw new IllegalStateException(
 					"Unable to create a portlet data context for company " +
-						companyId + " because it's being deleted",
+						companyId + " because it is being deleted",
 					e);
 			}
 		}
@@ -226,7 +226,7 @@ public class PortletDataContextFactoryImpl
 			if (!CompanyThreadLocal.isDeleteInProcess()) {
 				throw new IllegalStateException(
 					"Unable to create a portlet data context for company " +
-						companyId + " because it's being deleted",
+						companyId + " because it is being deleted",
 					e);
 			}
 		}
@@ -249,7 +249,7 @@ public class PortletDataContextFactoryImpl
 		catch (Exception e) {
 			throw new PortletDataException(
 				"Unable to create portlet data context for the import " +
-					"process. The LAR manifest cannot be parsed",
+					"process because of an invalid LAR manifest",
 				e);
 		}
 
