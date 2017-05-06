@@ -833,7 +833,7 @@
 			<var name="siteName" value="Test Site Name" />
 		</execute>
 
-		<execute macro="ApplicationDisplayTemplates#addADTviaPortletPG">
+		<execute macro="ApplicationDisplayTemplates#selectPortletADT">
 			<var name="adtType" value="Wiki" />
 			<var name="portletName" value="Wiki" />
 		</execute>
