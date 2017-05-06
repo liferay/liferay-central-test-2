@@ -100,7 +100,7 @@ public class ExportImportPathUtil {
 	public static String getExpandoPath(String path) {
 		if (!Validator.isFilePath(path, false)) {
 			throw new IllegalArgumentException(
-				"Unable to retrieve expando path " + path +
+				"Unable to get expando path " + path +
 					" because it is located outside of the LAR");
 		}
 
@@ -108,7 +108,7 @@ public class ExportImportPathUtil {
 
 		if (pos == -1) {
 			throw new IllegalArgumentException(
-				"Unable to retrieve expando path " + path +
+				"Unable to get expando path " + path +
 					" because it is not an XML file");
 		}
 
