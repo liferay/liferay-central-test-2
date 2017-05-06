@@ -893,8 +893,8 @@ public class StagingLocalServiceImpl extends StagingLocalServiceBaseImpl {
 
 			if (!checksum.equals(folder.getName())) {
 				throw new SystemException(
-					"Unable to process LAR file pieces for remote " +
-						"publication: LAR file checksum is invalid " +
+					"Unable to process LAR file pieces for remote staging " +
+						"publication because LAR file checksum is not " +
 							checksum);
 			}
 
