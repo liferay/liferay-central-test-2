@@ -176,7 +176,9 @@ public class MediaQueryProviderImpl implements MediaQueryProvider {
 				_getAdaptiveMediaFromConfigurationEntry(
 					fileEntry, configurationEntry);
 
-			adaptiveMedias.add(adaptiveMedia);
+			if (_getWidth(adaptiveMedia) > 0) {
+				adaptiveMedias.add(adaptiveMedia);
+			}
 		}
 
 		Collections.sort(adaptiveMedias, _comparator);

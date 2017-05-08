@@ -177,6 +177,25 @@ public class MediaQueryProviderImplTest {
 	}
 
 	@Test
+	public void testFiltersOutAdaptiveMediasWithNoWidth() throws Exception {
+		int auto = 0;
+
+		_addConfigs(
+			_createConfig("normal", 2048, 1024, StringPool.BLANK),
+			_createConfig("wauto", 900, auto, StringPool.BLANK));
+
+		_addAdaptiveMedias(
+			_fileEntry, _createAdaptiveMedia("normal", 1334, 750, "normalURL"));
+
+		List<MediaQuery> mediaQueries = _mediaQueryProvider.getMediaQueries(
+			_fileEntry);
+
+		Assert.assertEquals(mediaQueries.toString(), 1, mediaQueries.size());
+
+		_assertMediaQuery(mediaQueries.get(0), "normalURL", 750);
+	}
+
+	@Test
 	public void testHDMediaQueriesApplies() throws Exception {
 		_addConfigs(
 			_createConfig("uuid1", 450, 800, "http://small.adaptive.com"),
@@ -550,12 +569,11 @@ public class MediaQueryProviderImplTest {
 		List<MediaQuery> mediaQueries = _mediaQueryProvider.getMediaQueries(
 			_fileEntry);
 
-		Assert.assertEquals(mediaQueries.toString(), 4, mediaQueries.size());
+		Assert.assertEquals(mediaQueries.toString(), 3, mediaQueries.size());
 
-		_assertMediaQuery(mediaQueries.get(0), "wautoURL", 0);
-		_assertMediaQuery(mediaQueries.get(1), "lowURL", 0, 300);
-		_assertMediaQuery(mediaQueries.get(2), "hautoURL", 300, 600);
-		_assertMediaQuery(mediaQueries.get(3), "normalURL", 600, 1024);
+		_assertMediaQuery(mediaQueries.get(0), "lowURL", 300);
+		_assertMediaQuery(mediaQueries.get(1), "hautoURL", 300, 600);
+		_assertMediaQuery(mediaQueries.get(2), "normalURL", 600, 1024);
 	}
 
 	@Test
