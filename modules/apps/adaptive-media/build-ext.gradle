@@ -3,6 +3,8 @@ import java.nio.file.Files
 
 import org.kt3k.gradle.plugin.CoverallsPlugin
 
+import org.gradle.testing.jacoco.tasks.JacocoReport
+
 buildscript {
 	dependencies {
 		classpath group: "org.kt3k.gradle.plugin", name: "coveralls-gradle-plugin", version: "2.6.3"
@@ -24,11 +26,22 @@ buildscript {
 apply plugin: CoverallsPlugin
 apply plugin: "jacoco"
 
-task createTempDir(type: Exec) {
+task checkDocker
+task copyJacocoAgent(type: Copy)
+task coverageReport(type: JacocoReport)
+task createTempDir(type: Exec)
+task loginDocker
+task rmDocker(type: Exec)
+task runDocker(type: Exec)
+task startJacocoRecording
+task stopDocker(type: Exec)
+task stopJacocoRecording(type: Exec)
+
+createTempDir {
 	commandLine 'mkdir', '-m', '777', '-p', "${rootDir}/build/tmpdir"
 }
 
-task copyJacocoAgent(type: Copy) {
+copyJacocoAgent {
 	configurations.jacocoAgent.asFileTree.each {
 		from(zipTree(it))
 	}
@@ -56,7 +69,7 @@ def isAlreadyLoggedIn() {
 	return loggedIn;
 }
 
-task loginDocker << {
+loginDocker << {
 	exec {
 		if (!isAlreadyLoggedIn()) {
 			println "User not logged in into docker yet"
@@ -118,7 +131,7 @@ task loginDocker << {
 	}
 }
 
-task checkDocker() {
+checkDocker {
 	doLast {
 		def url = "http://localhost:8080";
 
@@ -141,13 +154,13 @@ task checkDocker() {
 	}
 }
 
-task stopDocker(type: Exec) {
+stopDocker {
 	ignoreExitValue true
 
 	commandLine 'docker', 'stop', "com-liferay-adaptive-media"
 }
 
-task rmDocker(type: Exec) {
+rmDocker {
 	dependsOn stopDocker
 
 	ignoreExitValue true
@@ -155,7 +168,7 @@ task rmDocker(type: Exec) {
 	commandLine 'docker', 'rm', "com-liferay-adaptive-media"
 }
 
-task runDocker(type: Exec) {
+runDocker {
 	dependsOn createTempDir
 	dependsOn loginDocker
 	dependsOn rmDocker
@@ -187,7 +200,7 @@ task runDocker(type: Exec) {
 	finalizedBy checkDocker
 }
 
-task startJacocoRecording() {
+startJacocoRecording {
 	doLast {
 		def file = new File("${rootDir}/build/jacoco/testIntegration.exec");
 
@@ -201,7 +214,7 @@ task startJacocoRecording() {
 	}
 }
 
-task stopJacocoRecording(type: Exec) {
+stopJacocoRecording {
 	commandLine 'docker', 'exec', '-d', 'com-liferay-adaptive-media', 'env', 'JAVA_OPTS=', '/liferay/tomcat-8.0.32/bin/shutdown.sh'
 }
 
@@ -281,7 +294,7 @@ repositories {
 	jcenter()
 }
 
-task coverageReport(type: org.gradle.testing.jacoco.tasks.JacocoReport) {
+coverageReport {
 	additionalSourceDirs = files(subprojects.findAll{!it.childProjects}.sourceSets.main.allSource.srcDirs)
 	classDirectories = files(subprojects.findAll{!it.childProjects}.sourceSets.main.output)
 	executionData = files(subprojects.findAll{!it.childProjects}.jacocoTestReport.executionData, "${rootDir}/build/jacoco/testIntegration.exec")
