@@ -36,14 +36,13 @@ import java.net.URI;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -126,43 +125,63 @@ public class MediaQueryProviderImpl implements MediaQueryProvider {
 		}
 	}
 
+	private AdaptiveMedia<AdaptiveMediaImageProcessor>
+		_getAdaptiveMediaFromConfigurationEntry(
+			FileEntry fileEntry,
+			AdaptiveMediaImageConfigurationEntry configurationEntry) {
+
+		Optional<AdaptiveMedia<AdaptiveMediaImageProcessor>>
+			adaptiveMediaOptional = _findAdaptiveMedia(
+				fileEntry, configurationEntry);
+
+		if (adaptiveMediaOptional.isPresent()) {
+			return adaptiveMediaOptional.get();
+		}
+
+		Optional<Integer> widthOptional = _getWidth(configurationEntry);
+		Optional<Integer> heightOptional = _getHeight(configurationEntry);
+
+		Map<String, String> properties = new HashMap<>();
+
+		properties.put(
+			AdaptiveMediaImageAttribute.IMAGE_WIDTH.getName(),
+			String.valueOf(widthOptional.orElse(0)));
+
+		properties.put(
+			AdaptiveMediaImageAttribute.IMAGE_HEIGHT.getName(),
+			String.valueOf(heightOptional.orElse(0)));
+
+		return new AdaptiveMediaImage(
+			() -> null,
+			AdaptiveMediaImageAttributeMapping.fromProperties(properties),
+			_getFileEntryURL(fileEntry, configurationEntry));
+	}
+
 	private Collection<AdaptiveMedia<AdaptiveMediaImageProcessor>>
 			_getAdaptiveMedias(FileEntry fileEntry)
 		throws AdaptiveMediaException, PortalException {
 
-		Stream<AdaptiveMediaImageConfigurationEntry> configurationEntries =
+		Collection<AdaptiveMediaImageConfigurationEntry> configurationEntries =
 			_adaptiveMediaImageConfigurationHelper.
 				getAdaptiveMediaImageConfigurationEntries(
-					fileEntry.getCompanyId()).stream();
+					fileEntry.getCompanyId());
 
-		return configurationEntries.map(configurationEntry -> {
-			Optional<AdaptiveMedia<AdaptiveMediaImageProcessor>>
-				adaptiveMediaOptional = _findAdaptiveMedia(
+		List<AdaptiveMedia<AdaptiveMediaImageProcessor>> adaptiveMedias =
+			new ArrayList<>();
+
+		for (AdaptiveMediaImageConfigurationEntry configurationEntry :
+				configurationEntries) {
+
+			AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia =
+				_getAdaptiveMediaFromConfigurationEntry(
 					fileEntry, configurationEntry);
 
-			if (adaptiveMediaOptional.isPresent()) {
-				return adaptiveMediaOptional.get();
-			}
+			adaptiveMedias.add(adaptiveMedia);
+		}
 
-			Optional<Integer> widthOptional = _getWidth(configurationEntry);
-			Optional<Integer> heightOptional = _getHeight(configurationEntry);
+		Collections.sort(adaptiveMedias, _comparator);
 
-			Map<String, String> properties = new HashMap<>();
-
-			properties.put(
-				AdaptiveMediaImageAttribute.IMAGE_WIDTH.getName(),
-				String.valueOf(widthOptional.orElse(0)));
-
-			properties.put(
-				AdaptiveMediaImageAttribute.IMAGE_HEIGHT.getName(),
-				String.valueOf(heightOptional.orElse(0)));
-
-			return new AdaptiveMediaImage(
-				() -> null,
-				AdaptiveMediaImageAttributeMapping.fromProperties(properties),
-				_getFileEntryURL(fileEntry, configurationEntry));
-
-		}).sorted(_comparator).collect(Collectors.toList());
+		return adaptiveMedias;
 	}
 
 	private Optional<Integer> _getAttribute(
