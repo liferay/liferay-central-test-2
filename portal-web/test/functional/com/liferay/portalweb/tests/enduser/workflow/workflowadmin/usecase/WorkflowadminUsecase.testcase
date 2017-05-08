@@ -1325,6 +1325,8 @@
 	<command name="AssignThenApproveWorkflowTaskAsPortalContentReviewer" priority="3">
 		<description message="This is a use case for LPS-66668." />
 
+		<property name="test.name.skip.portal.instance" value="WorkflowadminUsecase#AssignThenApproveWorkflowTaskAsPortalContentReviewer" />
+
 		<execute macro="Navigator#openURL" />
 
 		<execute macro="ProductMenu#gotoControlPanelUsers">
