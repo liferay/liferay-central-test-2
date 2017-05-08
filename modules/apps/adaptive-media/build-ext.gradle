@@ -37,8 +37,43 @@ task startJacocoRecording
 task stopDocker(type: Exec)
 task stopJacocoRecording(type: Exec)
 
-createTempDir {
-	commandLine 'mkdir', '-m', '777', '-p', "${rootDir}/build/tmpdir"
+allprojects {
+	apply plugin: "jacoco"
+
+	jacoco {
+		toolVersion = "0.7.8"
+	}
+
+	repositories {
+		mavenLocal()
+
+		maven {
+			url "https://cdn.lfrs.sl/repository.liferay.com/nexus/content/groups/public"
+		}
+	}
+}
+
+checkDocker {
+	doLast {
+		def url = "http://localhost:8080";
+
+		println("Trying to reach " + url);
+
+		while (true) {
+			try {
+				print(".");
+
+				url.toURL().text;
+
+				println("Portal startup finished");
+
+				break;
+			}
+			catch (Exception e) {
+				Thread.sleep(1000);
+			}
+		}
+	}
 }
 
 copyJacocoAgent {
@@ -49,24 +84,45 @@ copyJacocoAgent {
 	into "${rootDir}/build/jacoco"
 }
 
-def isAlreadyLoggedIn() {
-	String homeDir = System.getenv().get("HOME");
+coverageReport {
+	additionalSourceDirs = files(subprojects.findAll{!it.childProjects}.sourceSets.main.allSource.srcDirs)
+	classDirectories = files(subprojects.findAll{!it.childProjects}.sourceSets.main.output)
+	executionData = files(subprojects.findAll{!it.childProjects}.jacocoTestReport.executionData, "${rootDir}/build/jacoco/testIntegration.exec")
+	sourceDirectories = files(subprojects.findAll{!it.childProjects}.sourceSets.main.allSource.srcDirs)
 
-	File dockerConfigFile = file(new File(homeDir + '/.docker/config.json'));
-
-	boolean loggedIn = false;
-
-	if (dockerConfigFile.exists()) {
-		String dockerConfigContent = new String(
-			Files.readAllBytes(dockerConfigFile.toPath()),
-			Charset.forName("UTF-8"));
-
-		if (dockerConfigContent.contains("https://index.docker.io/v1/")) {
-			loggedIn = true;
-		}
+	reports {
+		html.enabled = true
+		xml.enabled = true
 	}
 
-	return loggedIn;
+	onlyIf = { true }
+
+	doFirst {
+		executionData = files(executionData.findAll { it.exists() })
+	}
+
+	afterEvaluate {
+		classDirectories = files(classDirectories.files.collect {
+			fileTree(
+				dir: it,
+				exclude: [
+					'**/*Exception*',
+					'**/*ServiceUtil*',
+					'**/*ServiceWrapper*',
+					'**/constants/*',
+					'**/exception/*',
+					'**/model/*',
+					'**/model/impl/*',
+					'**/persistence/*',
+					'**/service/base/*',
+					'**/service/util/*'
+				])
+		})
+	}
+}
+
+createTempDir {
+	commandLine 'mkdir', '-m', '777', '-p', "${rootDir}/build/tmpdir"
 }
 
 loginDocker << {
@@ -131,35 +187,6 @@ loginDocker << {
 	}
 }
 
-checkDocker {
-	doLast {
-		def url = "http://localhost:8080";
-
-		println("Trying to reach " + url);
-
-		while (true) {
-			try {
-				print(".");
-
-				url.toURL().text;
-
-				println("Portal startup finished");
-
-				break;
-			}
-			catch (Exception e) {
-				Thread.sleep(1000);
-			}
-		}
-	}
-}
-
-stopDocker {
-	ignoreExitValue true
-
-	commandLine 'docker', 'stop', "com-liferay-adaptive-media"
-}
-
 rmDocker {
 	dependsOn stopDocker
 
@@ -214,24 +241,14 @@ startJacocoRecording {
 	}
 }
 
-stopJacocoRecording {
-	commandLine 'docker', 'exec', '-d', 'com-liferay-adaptive-media', 'env', 'JAVA_OPTS=', '/liferay/tomcat-8.0.32/bin/shutdown.sh'
+stopDocker {
+	ignoreExitValue true
+
+	commandLine 'docker', 'stop', "com-liferay-adaptive-media"
 }
 
-allprojects {
-	apply plugin: "jacoco"
-
-	jacoco {
-		toolVersion = "0.7.8"
-	}
-
-	repositories {
-		mavenLocal()
-
-		maven {
-			url "https://cdn.lfrs.sl/repository.liferay.com/nexus/content/groups/public"
-		}
-	}
+stopJacocoRecording {
+	commandLine 'docker', 'exec', '-d', 'com-liferay-adaptive-media', 'env', 'JAVA_OPTS=', '/liferay/tomcat-8.0.32/bin/shutdown.sh'
 }
 
 configure(subprojects.findAll {!it.childProjects}) {
@@ -294,43 +311,6 @@ repositories {
 	jcenter()
 }
 
-coverageReport {
-	additionalSourceDirs = files(subprojects.findAll{!it.childProjects}.sourceSets.main.allSource.srcDirs)
-	classDirectories = files(subprojects.findAll{!it.childProjects}.sourceSets.main.output)
-	executionData = files(subprojects.findAll{!it.childProjects}.jacocoTestReport.executionData, "${rootDir}/build/jacoco/testIntegration.exec")
-	sourceDirectories = files(subprojects.findAll{!it.childProjects}.sourceSets.main.allSource.srcDirs)
-
-	reports {
-		html.enabled = true
-		xml.enabled = true
-	}
-
-	onlyIf = { true }
-
-	doFirst {
-		executionData = files(executionData.findAll { it.exists() })
-	}
-
-	afterEvaluate {
-		classDirectories = files(classDirectories.files.collect {
-			fileTree(
-				dir: it,
-				exclude: [
-					'**/*Exception*',
-					'**/*ServiceUtil*',
-					'**/*ServiceWrapper*',
-					'**/constants/*',
-					'**/exception/*',
-					'**/model/*',
-					'**/model/impl/*',
-					'**/persistence/*',
-					'**/service/base/*',
-					'**/service/util/*'
-				])
-		})
-	}
-}
-
 tasks.coveralls {
 	dependsOn 'coverageReport'
 }
@@ -338,4 +318,24 @@ tasks.coveralls {
 coveralls.jacocoReportPath = "build/reports/jacoco/coverageReport/coverageReport.xml"
 coveralls.sourceDirs = files(subprojects.findAll{!it.childProjects}.sourceSets.main.allSource.srcDirs).collect {
 	file -> file.absolutePath
+}
+
+def isAlreadyLoggedIn() {
+	String homeDir = System.getenv().get("HOME");
+
+	File dockerConfigFile = file(new File(homeDir + '/.docker/config.json'));
+
+	boolean loggedIn = false;
+
+	if (dockerConfigFile.exists()) {
+		String dockerConfigContent = new String(
+			Files.readAllBytes(dockerConfigFile.toPath()),
+			Charset.forName("UTF-8"));
+
+		if (dockerConfigContent.contains("https://index.docker.io/v1/")) {
+			loggedIn = true;
+		}
+	}
+
+	return loggedIn;
 }
