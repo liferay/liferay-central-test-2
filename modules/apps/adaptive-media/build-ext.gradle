@@ -42,7 +42,7 @@ allprojects {
 
 checkDocker {
 	doLast {
-		def url = "http://localhost:8080"
+		URL url = new URL("http://localhost:8080")
 
 		println("Trying to reach " + url)
 
@@ -50,7 +50,7 @@ checkDocker {
 			try {
 				print(".")
 
-				url.toURL().text
+				url.text
 
 				println("Portal startup finished")
 
@@ -114,7 +114,7 @@ createTempDir {
 
 loginDocker << {
 	exec {
-		if (!isAlreadyLoggedIn()) {
+		if (!_isAlreadyLoggedIn()) {
 			println "User not logged in into docker yet"
 
 			// If environment variables are set, use them
@@ -188,7 +188,7 @@ runDocker {
 	dependsOn rmDocker
 	dependsOn copyJacocoAgent
 
-	def javaOpts = project.getProperty("com.liferay.adaptive.media.java.opts")
+	String javaOpts = project.getProperty("com.liferay.adaptive.media.java.opts")
 
 	javaOpts += " " + project.getProperty("com.liferay.adaptive.media.jacoco.opts")
 
@@ -216,7 +216,7 @@ runDocker {
 
 startJacocoRecording {
 	doLast {
-		def file = new File("${rootDir}/build/jacoco/testIntegration.exec")
+		File file = new File("${rootDir}/build/jacoco/testIntegration.exec")
 
 		if (file.exists()) {
 			file.deleteOnExit()
@@ -310,7 +310,7 @@ coveralls.sourceDirs = files(subprojects.findAll{!it.childProjects}.sourceSets.m
 	file -> file.absolutePath
 }
 
-def isAlreadyLoggedIn() {
+private boolean _isAlreadyLoggedIn() {
 	String homeDir = System.getenv().get("HOME")
 
 	File dockerConfigFile = file(new File(homeDir + "/.docker/config.json"))
