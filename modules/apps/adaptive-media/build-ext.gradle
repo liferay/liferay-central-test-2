@@ -102,23 +102,23 @@ coverageReport {
 			fileTree(
 				dir: it,
 				exclude: [
-					'**/*Exception*',
-					'**/*ServiceUtil*',
-					'**/*ServiceWrapper*',
-					'**/constants/*',
-					'**/exception/*',
-					'**/model/*',
-					'**/model/impl/*',
-					'**/persistence/*',
-					'**/service/base/*',
-					'**/service/util/*'
+					"**/*Exception*",
+					"**/*ServiceUtil*",
+					"**/*ServiceWrapper*",
+					"**/constants/*",
+					"**/exception/*",
+					"**/model/*",
+					"**/model/impl/*",
+					"**/persistence/*",
+					"**/service/base/*",
+					"**/service/util/*"
 				])
 		})
 	}
 }
 
 createTempDir {
-	commandLine 'mkdir', '-m', '777', '-p', "${rootDir}/build/tmpdir"
+	commandLine "mkdir", "-m", "777", "-p", "${rootDir}/build/tmpdir"
 }
 
 loginDocker << {
@@ -173,12 +173,12 @@ loginDocker << {
 						"environment variable to proceed.")
 			}
 
-			commandLine 'docker', 'login', "--username=$dockerUser",
+			commandLine "docker", "login", "--username=$dockerUser",
 					"--password=$dockerPwd"
 
 		}
 		else {
-			commandLine 'echo', "User already logged in in docker"
+			commandLine "echo", "User already logged in in docker"
 		}
 	}
 }
@@ -188,7 +188,7 @@ rmDocker {
 
 	ignoreExitValue true
 
-	commandLine 'docker', 'rm', "com-liferay-adaptive-media"
+	commandLine "docker", "rm", "com-liferay-adaptive-media"
 }
 
 runDocker {
@@ -197,28 +197,28 @@ runDocker {
 	dependsOn rmDocker
 	dependsOn copyJacocoAgent
 
-	def javaOpts = project.getProperty('com.liferay.adaptive.media.java.opts');
+	def javaOpts = project.getProperty("com.liferay.adaptive.media.java.opts");
 
-	javaOpts += ' ' + project.getProperty('com.liferay.adaptive.media.jacoco.opts')
+	javaOpts += " " + project.getProperty("com.liferay.adaptive.media.jacoco.opts")
 
-	if (project.hasProperty('debug')) {
-		javaOpts += ' ' + project.getProperty('com.liferay.adaptive.media.debug.opts');
+	if (project.hasProperty("debug")) {
+		javaOpts += " " + project.getProperty("com.liferay.adaptive.media.debug.opts");
 	}
 
-	commandLine 'docker', 'run',
-		'-h', "localhost",
-		'-e', "JAVA_OPTS=$javaOpts",
-		'-p', '5005:5005',
-		'-p', '8080:8080',
-		'-p', '8099:8099',
-		'-p', '11311:11311',
-		'-v', "${rootDir}/../bundles/deploy:/liferay/deploy",
-		'-v', "${rootDir}/docker/portal-ext.properties:/liferay/portal-ext.properties",
-		'-v', "${rootDir}/build/tmpdir:${rootDir}/build/tmpdir",
-		'-v', "${rootDir}/build/jacoco:/jacoco",
-		'-d',
-		'--name', "com-liferay-adaptive-media",
-		'liferay/liferay-de:20170421073001106222642-db'
+	commandLine "docker", "run",
+		"-h", "localhost",
+		"-e", "JAVA_OPTS=$javaOpts",
+		"-p", "5005:5005",
+		"-p", "8080:8080",
+		"-p", "8099:8099",
+		"-p", "11311:11311",
+		"-v", "${rootDir}/../bundles/deploy:/liferay/deploy",
+		"-v", "${rootDir}/docker/portal-ext.properties:/liferay/portal-ext.properties",
+		"-v", "${rootDir}/build/tmpdir:${rootDir}/build/tmpdir",
+		"-v", "${rootDir}/build/jacoco:/jacoco",
+		"-d",
+		"--name", "com-liferay-adaptive-media",
+		"liferay/liferay-de:20170421073001106222642-db"
 
 	finalizedBy checkDocker
 }
@@ -240,17 +240,17 @@ startJacocoRecording {
 stopDocker {
 	ignoreExitValue true
 
-	commandLine 'docker', 'stop', "com-liferay-adaptive-media"
+	commandLine "docker", "stop", "com-liferay-adaptive-media"
 }
 
 stopJacocoRecording {
-	commandLine 'docker', 'exec', '-d', 'com-liferay-adaptive-media', 'env', 'JAVA_OPTS=', '/liferay/tomcat-8.0.32/bin/shutdown.sh'
+	commandLine "docker", "exec", "-d", "com-liferay-adaptive-media", "env", "JAVA_OPTS=", "/liferay/tomcat-8.0.32/bin/shutdown.sh"
 }
 
 configure(subprojects.findAll {!it.childProjects}) {
 	configurations {
 		runtimeLib {
-			description = 'deployable runtime libs'
+			description = "deployable runtime libs"
 		}
 
 		compile.extendsFrom(runtimeLib)
@@ -294,7 +294,7 @@ configure(subprojects.findAll {!it.childProjects}) {
 	runDocker.dependsOn deploy
 	runDocker.dependsOn deployRuntimeLibs
 
-	if (project.hasProperty('docker')) {
+	if (project.hasProperty("docker")) {
 		setUpTestableTomcat.enabled = false
 	}
 
@@ -322,7 +322,7 @@ coveralls.sourceDirs = files(subprojects.findAll{!it.childProjects}.sourceSets.m
 def isAlreadyLoggedIn() {
 	String homeDir = System.getenv().get("HOME");
 
-	File dockerConfigFile = file(new File(homeDir + '/.docker/config.json'));
+	File dockerConfigFile = file(new File(homeDir + "/.docker/config.json"));
 
 	boolean loggedIn = false;
 
