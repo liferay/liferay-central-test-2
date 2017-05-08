@@ -135,13 +135,10 @@ public class URLCodec {
 			return StringPool.BLANK;
 		}
 
-		StringBuilder sb = null;
-
-		int lastReplacementIndex = 0;
-
 		CharsetEncoder charsetEncoder = null;
-
 		char[] hexes = new char[2];
+		int lastReplacementIndex = 0;
+		StringBuilder sb = null;
 
 		for (int i = 0; i < rawURLString.length(); i++) {
 			char c = rawURLString.charAt(i);
