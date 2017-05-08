@@ -762,7 +762,7 @@
 
 	<command name="viewCurrentDefaultPortalLanguageCP">
 		<execute macro="Navigator#gotoNavTab">
-			<var name="navTab" value="Miscellaneous" />
+			<var name="navTab" value="${navTab}" />
 		</execute>
 
 		<execute function="AssertSelectedLabel" locator1="PortalSettingsDisplaySettings#DEFAULT_LANGUAGE_SELECT" value1="${defaultPortalLanguage}" />

@@ -415,9 +415,19 @@
 		<if>
 			<condition function="IsNotVisible" locator1="SiteSettingsDisplaySettings#DEFINE_DEFAULT_AND_AVAILABLE_SITE_LANGUAGES_RADIO" />
 			<then>
-				<execute macro="Navigator#gotoNavTab">
-					<var name="navTab" value="Languages" />
-				</execute>
+				<if>
+					<isset var="localizedLanguageTab" />
+					<then>
+						<execute macro="Navigator#gotoNavTab">
+							<var name="navTab" value="${localizedLanguageTab}" />
+						</execute>
+					</then>
+					<else>
+						<execute macro="Navigator#gotoNavTab">
+							<var name="navTab" value="Languages" />
+						</execute>
+					</else>
+				</if>
 			</then>
 		</if>
 
