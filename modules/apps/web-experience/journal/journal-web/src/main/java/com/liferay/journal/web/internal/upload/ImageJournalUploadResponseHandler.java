@@ -14,100 +14,36 @@
 
 package com.liferay.journal.web.internal.upload;
 
-import com.liferay.document.library.kernel.util.DLValidator;
-import com.liferay.journal.configuration.JournalFileUploadsConfiguration;
-import com.liferay.journal.service.permission.JournalPermission;
 import com.liferay.portal.kernel.exception.ImageTypeException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
-import com.liferay.portal.kernel.security.auth.PrincipalException;
-import com.liferay.portal.kernel.security.permission.ActionKeys;
-import com.liferay.portal.kernel.security.permission.PermissionChecker;
-import com.liferay.portal.kernel.security.permission.ResourcePermissionCheckerUtil;
-import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.servlet.ServletResponseConstants;
-import com.liferay.portal.kernel.upload.BaseUploadHandler;
-import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.TempFileEntryUtil;
+import com.liferay.upload.UploadResponseHandler;
 
 import javax.portlet.PortletRequest;
-import javax.portlet.PortletResponse;
-import java.io.InputStream;
+
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Eduardo Garcia
+ * @author Alejandro Tardín
  */
-public class ImageJournalUploadResponseHandler extends BaseUploadHandler {
-
-	public ImageJournalUploadResponseHandler(
-		DLValidator dlValidator,
-		JournalFileUploadsConfiguration journalFileUploadsConfiguration) {
-
-		_dlValidator = dlValidator;
-		_journalFileUploadsConfiguration = journalFileUploadsConfiguration;
-	}
+@Component(service = ImageJournalUploadResponseHandler.class)
+public class ImageJournalUploadResponseHandler
+	implements UploadResponseHandler {
 
 	@Override
-	public void validateFile(String fileName, String contentType, long size)
+	public JSONObject onFailure(
+			PortletRequest portletRequest, PortalException pe)
 		throws PortalException {
 
-		_dlValidator.validateFileSize(fileName, size);
-
-		String extension = FileUtil.getExtension(fileName);
-
-		for (String imageExtension :
-				_journalFileUploadsConfiguration.imageExtensions()) {
-
-			if (StringPool.STAR.equals(imageExtension) ||
-				imageExtension.equals(StringPool.PERIOD + extension)) {
-
-				return;
-			}
-		}
-
-		throw new ImageTypeException(
-			"Invalid image type for file name " + fileName);
-	}
-
-	@Override
-	protected FileEntry addFileEntry(
-			long userId, long groupId, long folderId, String fileName,
-			String contentType, InputStream inputStream, long size,
-			ServiceContext serviceContext)
-		throws PortalException {
-
-		return TempFileEntryUtil.addTempFileEntry(
-			groupId, userId, TEMP_FOLDER_NAME, fileName, inputStream,
-			contentType);
-	}
-
-	@Override
-	protected void checkPermission(
-			long groupId, long folderId, PermissionChecker permissionChecker)
-		throws PortalException {
-
-		boolean containsResourcePermission =
-			ResourcePermissionCheckerUtil.containsResourcePermission(
-				permissionChecker, JournalPermission.RESOURCE_NAME, groupId,
-				ActionKeys.ADD_ARTICLE);
-
-		if (!containsResourcePermission) {
-			throw new PrincipalException.MustHavePermission(
-				permissionChecker, JournalPermission.RESOURCE_NAME, groupId,
-				ActionKeys.ADD_ARTICLE);
-		}
-	}
-
-	@Override
-	protected void doHandleUploadException(
-			PortletRequest portletRequest, PortletResponse portletResponse,
-			PortalException pe, JSONObject jsonObject)
-		throws PortalException {
+		JSONObject jsonObject = _defaultUploadResponseHandler.onFailure(
+			portletRequest, pe);
 
 		if (pe instanceof ImageTypeException) {
 			JSONObject errorJSONObject = JSONFactoryUtil.createJSONObject();
@@ -119,49 +55,26 @@ public class ImageJournalUploadResponseHandler extends BaseUploadHandler {
 
 			jsonObject.put("error", errorJSONObject);
 		}
-		else {
-			throw pe;
-		}
+
+		return jsonObject;
 	}
 
 	@Override
-	protected FileEntry fetchFileEntry(
-		long userId, long groupId, long folderId, String fileName) {
-
-		try {
-			return TempFileEntryUtil.getTempFileEntry(
-				groupId, userId, TEMP_FOLDER_NAME, fileName);
-		}
-		catch (PortalException pe) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(pe, pe);
-			}
-
-			return null;
-		}
-	}
-
-	@Override
-	protected JSONObject getImageJSONObject(PortletRequest portletRequest)
+	public JSONObject onSuccess(
+			UploadPortletRequest uploadPortletRequest, FileEntry fileEntry)
 		throws PortalException {
 
-		JSONObject imageJSONObject = super.getImageJSONObject(portletRequest);
+		JSONObject jsonObject = _defaultUploadResponseHandler.onSuccess(
+			uploadPortletRequest, fileEntry);
 
-		imageJSONObject.put("type", "journal");
+		JSONObject fileJSONObject = jsonObject.getJSONObject("file");
 
-		return imageJSONObject;
+		fileJSONObject.put("type", "journal");
+
+		return jsonObject;
 	}
 
-	@Override
-	protected String getParameterName() {
-		return "imageSelectorFileName";
-	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		ImageJournalUploadResponseHandler.class);
-
-	private final DLValidator _dlValidator;
-	private final JournalFileUploadsConfiguration
-		_journalFileUploadsConfiguration;
+	@Reference(target = "(upload.response.handler.system.default=true)")
+	private UploadResponseHandler _defaultUploadResponseHandler;
 
 }
