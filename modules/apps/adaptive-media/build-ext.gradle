@@ -19,8 +19,8 @@ buildscript {
 	}
 }
 
-apply plugin: CoverallsPlugin
 apply plugin: "jacoco"
+apply plugin: CoverallsPlugin
 
 task checkDocker
 task copyJacocoAgent(type: Copy)
