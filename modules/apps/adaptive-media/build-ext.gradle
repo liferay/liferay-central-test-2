@@ -311,7 +311,7 @@ repositories {
 }
 
 tasks.coveralls {
-	dependsOn 'coverageReport'
+	dependsOn coverageReport
 }
 
 coveralls.jacocoReportPath = "build/reports/jacoco/coverageReport/coverageReport.xml"
