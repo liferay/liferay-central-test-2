@@ -304,7 +304,10 @@ configure(subprojects.findAll {!it.childProjects}) {
 
 repositories {
 	mavenLocal()
-	jcenter()
+
+	maven {
+		url "https://cdn.lfrs.sl/repository.liferay.com/nexus/content/groups/public"
+	}
 }
 
 tasks.coveralls {
