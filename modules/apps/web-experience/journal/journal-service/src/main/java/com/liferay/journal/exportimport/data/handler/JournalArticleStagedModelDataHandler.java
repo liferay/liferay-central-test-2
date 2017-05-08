@@ -198,10 +198,6 @@ public class JournalArticleStagedModelDataHandler
 
 		boolean preloaded = isPreloadedArticle(defaultUserId, article);
 
-		if (defaultUserId == article.getUserId()) {
-			preloaded = true;
-		}
-
 		referenceAttributes.put("preloaded", String.valueOf(preloaded));
 
 		return referenceAttributes;
@@ -954,13 +950,12 @@ public class JournalArticleStagedModelDataHandler
 			return true;
 		}
 
-		JournalArticle preLoadedJournalArticle =
-			_journalArticleLocalService.fetchArticle(
-				article.getGroupId(), article.getArticleId(),
-				JournalArticleConstants.VERSION_DEFAULT);
+		JournalArticle firstArticle = _journalArticleLocalService.fetchArticle(
+			article.getGroupId(), article.getArticleId(),
+			JournalArticleConstants.VERSION_DEFAULT);
 
-		if ((preLoadedJournalArticle != null) &&
-			(defaultUserId == preLoadedJournalArticle.getUserId())) {
+		if ((firstArticle != null) &&
+			(defaultUserId == firstArticle.getUserId())) {
 
 			return true;
 		}
