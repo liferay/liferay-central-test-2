@@ -24,7 +24,6 @@ import com.liferay.portal.kernel.test.ReflectionTestUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.Function;
 import com.liferay.portal.kernel.util.Http;
-import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.Props;
@@ -72,7 +71,6 @@ public class TrackbackMVCActionCommandTest extends PowerMockito {
 		setUpActionRequest();
 		setUpActionUtil();
 		setUpBlogsEntry();
-		setUpHttpUtil();
 		setUpPortalUtil();
 		setUpPortletPreferencesFactoryUtil();
 		setUpPropsUtil();
@@ -170,6 +168,8 @@ public class TrackbackMVCActionCommandTest extends PowerMockito {
 			new TrackbackMVCActionCommand(_trackback);
 
 		ReflectionTestUtil.setFieldValue(
+			trackbackMVCActionCommand, "_http", _http);
+		ReflectionTestUtil.setFieldValue(
 			trackbackMVCActionCommand, "_portal", PortalUtil.getPortal());
 
 		trackbackMVCActionCommand.addTrackback(_actionRequest, _actionResponse);
@@ -238,12 +238,6 @@ public class TrackbackMVCActionCommandTest extends PowerMockito {
 		).thenReturn(
 			true
 		);
-	}
-
-	protected void setUpHttpUtil() throws Exception {
-		HttpUtil httpUtil = new HttpUtil();
-
-		httpUtil.setHttp(_http);
 	}
 
 	protected void setUpPortalUtil() throws Exception {
