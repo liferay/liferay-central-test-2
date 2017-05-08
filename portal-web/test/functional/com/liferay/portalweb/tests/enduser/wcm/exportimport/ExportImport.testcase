@@ -31,6 +31,8 @@
 	</tear-down>
 
 	<command name="EditExportTemplate" priority="4">
+		<property name="test.name.skip.portal.instance" value="ExportImport#EditExportTemplate" />
+
 		<execute macro="Navigator#openURL" />
 
 		<execute macro="ProductMenu#gotoSitesContent">
@@ -404,6 +406,8 @@
 	</command>
 
 	<command name="ExportImportPortletWithADT" priority="3">
+		<property name="test.name.skip.portal.instance" value="ExportImport#ExportImportPortletWithADT" />
+
 		<execute macro="Navigator#openURL" />
 
 		<execute macro="ProductMenu#gotoSitesConfiguration">
