@@ -527,10 +527,12 @@
 		</execute>
 
 		<execute macro="PortalSettings#viewCurrentDefaultPortalLanguageCP">
-			<var name="defaultPortalLanguage" value="English (United States)" />
+			<var name="defaultPortalLanguage" value="inglés (Estados Unidos)" />
+			<var name="navTab" value="Varios" />
 		</execute>
 
-		<execute macro="ProductMenu#gotoSite">
+		<execute macro="ProductMenu#gotoLocalizedSite">
+			<var name="navItem" value="Mis Sitios" />
 			<var name="site" value="Site Name" />
 		</execute>
 
@@ -540,9 +542,10 @@
 		</execute>
 
 		<execute macro="Site#configureCurrentLanguagesCP">
-			<var name="currentSiteLanguages" value="Spanish (Spain),German (Germany)" />
+			<var name="currentSiteLanguages" value="español (España),alemán (Alemania)" />
 			<var name="displaySettings" value="Display Settings" />
-			<var name="localizedSuccessMessage" value="Your request completed successfully." />
+			<var name="localizedLanguageTab" value="Idiomas" />
+			<var name="localizedSuccessMessage" value="Su petición ha terminado con éxito." />
 		</execute>
 
 		<execute macro="Navigator#gotoSitePage">
