@@ -19,6 +19,7 @@ import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMapFactory
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
@@ -30,6 +31,7 @@ import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.workflow.WorkflowDefinition;
 import com.liferay.portal.kernel.workflow.WorkflowDefinitionFileException;
 import com.liferay.portal.kernel.workflow.WorkflowDefinitionManager;
+import com.liferay.portal.kernel.workflow.WorkflowException;
 
 import java.util.Locale;
 import java.util.Map;
@@ -37,6 +39,7 @@ import java.util.Objects;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.portlet.PortletException;
 
 import org.osgi.framework.BundleContext;
 import org.osgi.service.component.annotations.Activate;
@@ -56,6 +59,31 @@ import org.osgi.service.component.annotations.Deactivate;
 )
 public class UpdateWorkflowDefinitionMVCActionCommand
 	extends BaseMVCActionCommand {
+
+	@Override
+	public boolean processAction(
+			ActionRequest actionRequest, ActionResponse actionResponse)
+		throws PortletException {
+
+		try {
+			doProcessAction(actionRequest, actionResponse);
+
+			return SessionErrors.isEmpty(actionRequest);
+		}
+		catch (WorkflowException we) {
+			hideDefaultErrorMessage(actionRequest);
+
+			SessionErrors.add(actionRequest, we.getClass());
+
+			return false;
+		}
+		catch (PortletException pe) {
+			throw pe;
+		}
+		catch (Exception e) {
+			throw new PortletException(e);
+		}
+	}
 
 	@Activate
 	protected void activate(BundleContext bundleContext) {
