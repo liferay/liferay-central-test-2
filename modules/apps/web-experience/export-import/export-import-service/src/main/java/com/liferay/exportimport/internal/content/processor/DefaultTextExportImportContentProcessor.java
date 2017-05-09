@@ -1150,7 +1150,7 @@ public class DefaultTextExportImportContentProcessor
 
 					sb.append("Validation failed for a referenced file entry ");
 					sb.append(
-						"because file entry could not be found with the ");
+						"because a file entry could not be found with the ");
 					sb.append("following parameters: ");
 					sb.append(dlReferenceParameters);
 
