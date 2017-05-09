@@ -21,15 +21,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 WorkflowDefinition workflowDefinition = (WorkflowDefinition)request.getAttribute(WebKeys.WORKFLOW_DEFINITION);
 
-String name = StringPool.BLANK;
-int version = 0;
-String content = StringPool.BLANK;
-
-if (workflowDefinition != null) {
-	name = workflowDefinition.getName();
-	version = workflowDefinition.getVersion();
-	content = workflowDefinition.getContent();
-}
+String name = BeanParamUtil.getString(workflowDefinition, request, "name");
+int version = BeanParamUtil.getInteger(workflowDefinition, request, "version");
+String content = BeanParamUtil.getString(workflowDefinition, request, "content");
 
 portletDisplay.setShowBackIcon(true);
 portletDisplay.setURLBack(redirect);
