@@ -376,7 +376,7 @@ public class JournalArticleStagedModelDataHandler
 		long defaultUserId = _userLocalService.getDefaultUserId(
 			article.getCompanyId());
 
-		if (defaultUserId == article.getUserId()) {
+		if (isPreloadedArticle(defaultUserId, article)) {
 			articleElement.addAttribute("preloaded", "true");
 		}
 
