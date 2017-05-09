@@ -127,7 +127,7 @@ loginDocker {
 			def console = System.console()
 
 			if (console == null) {
-				throw new Exception("It is not possible to read docker credentials")
+				throw new GradleException("It is not possible to read docker credentials")
 			}
 
 			println "Using system in to prompt for docker user and password"
@@ -137,7 +137,7 @@ loginDocker {
 			dockerUser = console.readLine()
 
 			if (!dockerUser) {
-				throw new Exception("You must enter docker user or set DOCKER_USER environment variable to proceed.")
+				throw new GradleException("You must enter docker user or set DOCKER_USER environment variable to proceed.")
 			}
 
 			println "Please enter docker password:"
@@ -145,7 +145,7 @@ loginDocker {
 			dockerPwd = console.readPassword()
 
 			if (!dockerPwd) {
-				throw new Exception("You must enter docker password or set DOCKER_PWD environment variable to proceed.")
+				throw new GradleException("You must enter docker password or set DOCKER_PWD environment variable to proceed.")
 			}
 
 			args "--username=${dockerUser}"
