@@ -44,20 +44,20 @@ checkDocker {
 	doLast {
 		URL url = new URL("http://localhost:8080")
 
-		println("Trying to reach " + url)
+		println "Trying to reach ${url}"
 
 		while (true) {
 			try {
-				print(".")
+				print "."
 
 				url.text
 
-				println("Portal startup finished")
+				println "Portal startup finished"
 
 				break
 			}
 			catch (Exception e) {
-				Thread.sleep(1000)
+				Thread.sleep 1000
 			}
 		}
 	}
