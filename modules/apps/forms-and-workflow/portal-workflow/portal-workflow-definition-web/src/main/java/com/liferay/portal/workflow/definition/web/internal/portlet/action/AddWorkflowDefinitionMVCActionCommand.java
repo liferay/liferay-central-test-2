@@ -62,7 +62,7 @@ public class AddWorkflowDefinitionMVCActionCommand
 			throw new WorkflowDefinitionFileException();
 		}
 
-		workflowDefinitionManager.deployWorkflowDefinition(
+		getWorkflowDefinitionManager().deployWorkflowDefinition(
 			themeDisplay.getCompanyId(), themeDisplay.getUserId(),
 			getTitle(titleMap), content.getBytes());
 
