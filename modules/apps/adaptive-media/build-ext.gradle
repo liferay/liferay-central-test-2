@@ -74,6 +74,14 @@ copyJacocoAgent {
 	into "${rootDir}/build/jacoco"
 }
 
+coveralls {
+	jacocoReportPath = new File(buildDir, "reports/jacoco/coverageReport/coverageReport.xml")
+
+	sourceDirs = moduleSrcDirs.collect {
+		file -> file.absolutePath
+	}
+}
+
 coverageReport {
 	additionalSourceDirs = moduleSrcDirs
 	classDirectories = files(moduleProjects.sourceSets.main.output)
@@ -293,11 +301,6 @@ repositories {
 
 tasks.coveralls {
 	dependsOn coverageReport
-}
-
-coveralls.jacocoReportPath = "build/reports/jacoco/coverageReport/coverageReport.xml"
-coveralls.sourceDirs = moduleSrcDirs.collect {
-	file -> file.absolutePath
 }
 
 private boolean _isAlreadyLoggedIn() {
