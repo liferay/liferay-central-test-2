@@ -33,6 +33,8 @@ Iterable<Project> moduleProjects = subprojects.findAll{
 	!it.childProjects
 }
 
+FileCollection moduleSrcDirs = files(moduleProjects.sourceSets.main.allSource.srcDirs)
+
 allprojects {
 	apply plugin: "jacoco"
 
@@ -73,10 +75,10 @@ copyJacocoAgent {
 }
 
 coverageReport {
-	additionalSourceDirs = files(moduleProjects.sourceSets.main.allSource.srcDirs)
+	additionalSourceDirs = moduleSrcDirs
 	classDirectories = files(moduleProjects.sourceSets.main.output)
 	executionData = files(moduleProjects.jacocoTestReport.executionData, "${rootDir}/build/jacoco/testIntegration.exec")
-	sourceDirectories = files(moduleProjects.sourceSets.main.allSource.srcDirs)
+	sourceDirectories = moduleSrcDirs
 
 	reports {
 		html.enabled = true
@@ -294,7 +296,7 @@ tasks.coveralls {
 }
 
 coveralls.jacocoReportPath = "build/reports/jacoco/coverageReport/coverageReport.xml"
-coveralls.sourceDirs = files(moduleProjects.sourceSets.main.allSource.srcDirs).collect {
+coveralls.sourceDirs = moduleSrcDirs.collect {
 	file -> file.absolutePath
 }
 
