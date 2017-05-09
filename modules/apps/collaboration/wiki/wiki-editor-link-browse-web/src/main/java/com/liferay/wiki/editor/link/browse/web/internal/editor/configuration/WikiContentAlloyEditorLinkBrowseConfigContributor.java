@@ -63,63 +63,63 @@ public class WikiContentAlloyEditorLinkBrowseConfigContributor
 			(Map<String, String>)inputEditorTaglibAttributes.get(
 				"liferay-ui:input-editor:fileBrowserParams");
 
-		if (fileBrowserParamsMap != null) {
-			long wikiPageResourcePrimKey = GetterUtil.getLong(
-				fileBrowserParamsMap.get("wikiPageResourcePrimKey"));
-
-			if (wikiPageResourcePrimKey != 0) {
-				String documentBrowseLinkUrl = jsonObject.getString(
-					"documentBrowseLinkUrl");
-
-				PortletURL itemSelectorURL = null;
-
-				if (documentBrowseLinkUrl == null) {
-					String name = GetterUtil.getString(
-						inputEditorTaglibAttributes.get(
-							"liferay-ui:input-editor:name"));
-
-					boolean inlineEdit = GetterUtil.getBoolean(
-						inputEditorTaglibAttributes.get(
-							"liferay-ui:input-editor:inlineEdit"));
-
-					if (!inlineEdit) {
-						String namespace = GetterUtil.getString(
-							inputEditorTaglibAttributes.get(
-								"liferay-ui:input-editor:namespace"));
-
-						name = namespace + name;
-					}
-
-					itemSelectorURL = _itemSelector.getItemSelectorURL(
-						requestBackedPortletURLFactory, name + "selectItem",
-						getWikiAttachmentItemSelectorCriterion(
-							wikiPageResourcePrimKey));
-				}
-				else {
-					List<ItemSelectorCriterion> itemSelectorCriteria =
-						_itemSelector.getItemSelectorCriteria(
-							documentBrowseLinkUrl);
-
-					String itemSelectedEventName =
-						_itemSelector.getItemSelectedEventName(
-							documentBrowseLinkUrl);
-
-					itemSelectorCriteria.add(
-						0,
-						getWikiAttachmentItemSelectorCriterion(
-							wikiPageResourcePrimKey));
-
-					itemSelectorURL = _itemSelector.getItemSelectorURL(
-						requestBackedPortletURLFactory, itemSelectedEventName,
-						itemSelectorCriteria.toArray(
-							new ItemSelectorCriterion[
-								itemSelectorCriteria.size()]));
-				}
-
-				jsonObject.put(
-					"documentBrowseLinkUrl", itemSelectorURL.toString());
-			}
+		if (fileBrowserParamsMap == null) {
+			return;
 		}
+
+		long wikiPageResourcePrimKey = GetterUtil.getLong(
+			fileBrowserParamsMap.get("wikiPageResourcePrimKey"));
+
+		if (wikiPageResourcePrimKey == 0) {
+			return;
+		}
+
+		String documentBrowseLinkUrl = jsonObject.getString(
+			"documentBrowseLinkUrl");
+
+		PortletURL itemSelectorURL = null;
+
+		if (documentBrowseLinkUrl == null) {
+			String name = GetterUtil.getString(
+				inputEditorTaglibAttributes.get(
+					"liferay-ui:input-editor:name"));
+
+			boolean inlineEdit = GetterUtil.getBoolean(
+				inputEditorTaglibAttributes.get(
+					"liferay-ui:input-editor:inlineEdit"));
+
+			if (!inlineEdit) {
+				String namespace = GetterUtil.getString(
+					inputEditorTaglibAttributes.get(
+						"liferay-ui:input-editor:namespace"));
+
+				name = namespace + name;
+			}
+
+			itemSelectorURL = _itemSelector.getItemSelectorURL(
+				requestBackedPortletURLFactory, name + "selectItem",
+				getWikiAttachmentItemSelectorCriterion(
+					wikiPageResourcePrimKey));
+		}
+		else {
+			List<ItemSelectorCriterion> itemSelectorCriteria =
+				_itemSelector.getItemSelectorCriteria(documentBrowseLinkUrl);
+
+			String itemSelectedEventName =
+				_itemSelector.getItemSelectedEventName(documentBrowseLinkUrl);
+
+			itemSelectorCriteria.add(
+				0,
+				getWikiAttachmentItemSelectorCriterion(
+					wikiPageResourcePrimKey));
+
+			itemSelectorURL = _itemSelector.getItemSelectorURL(
+				requestBackedPortletURLFactory, itemSelectedEventName,
+				itemSelectorCriteria.toArray(
+					new ItemSelectorCriterion[itemSelectorCriteria.size()]));
+		}
+
+		jsonObject.put("documentBrowseLinkUrl", itemSelectorURL.toString());
 	}
 
 	protected WikiAttachmentItemSelectorCriterion

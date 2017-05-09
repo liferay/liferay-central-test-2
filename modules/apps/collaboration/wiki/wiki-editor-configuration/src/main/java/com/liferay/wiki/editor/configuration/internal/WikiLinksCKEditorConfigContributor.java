@@ -63,36 +63,35 @@ public class WikiLinksCKEditorConfigContributor
 			(Map<String, String>)inputEditorTaglibAttributes.get(
 				"liferay-ui:input-editor:fileBrowserParams");
 
-		if (fileBrowserParamsMap != null) {
-			long wikiPageResourcePrimKey = GetterUtil.getLong(
-				fileBrowserParamsMap.get("wikiPageResourcePrimKey"));
-
-			if (wikiPageResourcePrimKey != 0) {
-				String filebrowserBrowseUrl = jsonObject.getString(
-					"filebrowserBrowseUrl");
-
-				String itemSelectedEventName =
-					_itemSelector.getItemSelectedEventName(
-						filebrowserBrowseUrl);
-
-				List<ItemSelectorCriterion> itemSelectorCriteria =
-					_itemSelector.getItemSelectorCriteria(filebrowserBrowseUrl);
-
-				itemSelectorCriteria.add(
-					0,
-					getWikiAttachmentItemSelectorCriterion(
-						wikiPageResourcePrimKey));
-
-				PortletURL itemSelectorURL = _itemSelector.getItemSelectorURL(
-					requestBackedPortletURLFactory, itemSelectedEventName,
-					itemSelectorCriteria.toArray(
-						new ItemSelectorCriterion[
-							itemSelectorCriteria.size()]));
-
-				jsonObject.put(
-					"filebrowserBrowseUrl", itemSelectorURL.toString());
-			}
+		if (fileBrowserParamsMap == null) {
+			return;
 		}
+
+		long wikiPageResourcePrimKey = GetterUtil.getLong(
+			fileBrowserParamsMap.get("wikiPageResourcePrimKey"));
+
+		if (wikiPageResourcePrimKey == 0) {
+			return;
+		}
+
+		String filebrowserBrowseUrl = jsonObject.getString(
+			"filebrowserBrowseUrl");
+
+		String itemSelectedEventName = _itemSelector.getItemSelectedEventName(
+			filebrowserBrowseUrl);
+
+		List<ItemSelectorCriterion> itemSelectorCriteria =
+			_itemSelector.getItemSelectorCriteria(filebrowserBrowseUrl);
+
+		itemSelectorCriteria.add(
+			0, getWikiAttachmentItemSelectorCriterion(wikiPageResourcePrimKey));
+
+		PortletURL itemSelectorURL = _itemSelector.getItemSelectorURL(
+			requestBackedPortletURLFactory, itemSelectedEventName,
+			itemSelectorCriteria.toArray(
+				new ItemSelectorCriterion[itemSelectorCriteria.size()]));
+
+		jsonObject.put("filebrowserBrowseUrl", itemSelectorURL.toString());
 	}
 
 	protected WikiAttachmentItemSelectorCriterion
