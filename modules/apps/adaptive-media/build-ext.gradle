@@ -207,7 +207,7 @@ startJacocoRecording {
 			file.deleteOnExit()
 		}
 
-		file.getParentFile().mkdirs()
+		file.parentFile.mkdirs()
 
 		file.createNewFile()
 	}
