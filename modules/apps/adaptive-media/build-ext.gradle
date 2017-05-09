@@ -118,12 +118,12 @@ loginDocker {
 
 	doFirst {
 		if (_isAlreadyLoggedIn()) {
-			println "User already logged in in docker"
+			println "User already logged in in Docker"
 
 			throw new StopExecutionException()
 		}
 
-		println "User not logged in into docker yet"
+		println "User not logged in into Docker yet"
 
 		if (!dockerPwd || !dockerUser) {
 			println "DOCKER_USER or DOCKER_PWD environment variables not set"
@@ -131,25 +131,25 @@ loginDocker {
 			def console = System.console()
 
 			if (console == null) {
-				throw new GradleException("It is not possible to read docker credentials")
+				throw new GradleException("It is not possible to read Docker credentials.")
 			}
 
-			println "Using system in to prompt for docker user and password"
+			println "Using system.in to prompt for Docker user and password"
 
 			println "Please enter docker user:"
 
 			dockerUser = console.readLine()
 
 			if (!dockerUser) {
-				throw new GradleException("You must enter docker user or set DOCKER_USER environment variable to proceed.")
+				throw new GradleException("You must enter Docker user or set DOCKER_USER environment variable to proceed.")
 			}
 
-			println "Please enter docker password:"
+			println "Please enter Docker password:"
 
 			dockerPwd = console.readPassword()
 
 			if (!dockerPwd) {
-				throw new GradleException("You must enter docker password or set DOCKER_PWD environment variable to proceed.")
+				throw new GradleException("You must enter Docker password or set DOCKER_PWD environment variable to proceed.")
 			}
 
 			args "--username=${dockerUser}"
@@ -229,7 +229,7 @@ stopJacocoRecording {
 configure(subprojects.findAll {!it.childProjects}) {
 	configurations {
 		runtimeLib {
-			description = "deployable runtime libs"
+			description = "Configures deployable runtime libs."
 		}
 
 		compile.extendsFrom(runtimeLib)
