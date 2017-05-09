@@ -22,7 +22,7 @@ task checkDocker
 task copyJacocoAgent(type: Copy)
 task coverageReport(type: JacocoReport)
 task createTempDir(type: Exec)
-task loginDocker
+task loginDocker(type: Exec)
 task rmDocker(type: Exec)
 task runDocker(type: Exec)
 task startJacocoRecording
@@ -109,65 +109,55 @@ createTempDir {
 	commandLine "mkdir", "-m", "777", "-p", "${rootDir}/build/tmpdir"
 }
 
-loginDocker << {
-	exec {
-		if (!_isAlreadyLoggedIn()) {
-			println "User not logged in into docker yet"
+loginDocker {
+	args "login"
 
-			// If environment variables are set, use them
+	doFirst {
+		if (_isAlreadyLoggedIn()) {
+			println "User already logged in in docker"
 
-			String dockerUser = System.getenv().get("DOCKER_USER")
-
-			String dockerPwd = System.getenv().get("DOCKER_PWD")
-
-			if (dockerUser == null || dockerPwd == null) {
-				println "DOCKER_USER or DOCKER_PWD environment variables not set"
-
-				// If no environment variables are set, read credentials from
-				// standard input if possible
-
-				if (System.console() == null) {
-					throw new Exception(
-						"It is not possible to read docker credentials")
-				}
-				else {
-					println "Using system in to prompt for docker user and password"
-
-					println "Please enter docker user:"
-
-					dockerUser = System.console().readLine()
-
-					dockerUser = new String(dockerUser)
-
-					char[] dockerPwdCharArray = System.console().
-						readPassword("Please enter docker password:")
-
-					dockerPwd = new String(dockerPwdCharArray)
-				}
-			}
-			else {
-				println "Using DOCKER_USER and DOCKER_PWD environment variables"
-			}
-
-			if (dockerUser.size() <= 0) {
-				throw new Exception(
-					"You must enter docker user or set DOCKER_USER " +
-						"environment variable to proceed.")
-			}
-
-			if (dockerPwd.size() <= 0) {
-				throw new Exception(
-					"You must enter docker password or set DOCKER_PWD " +
-						"environment variable to proceed.")
-			}
-
-			commandLine "docker", "login", "--username=$dockerUser",
-					"--password=$dockerPwd"
-
+			throw new StopExecutionException()
 		}
-		else {
-			commandLine "echo", "User already logged in in docker"
+
+		println "User not logged in into docker yet"
+
+		if (!dockerPwd || !dockerUser) {
+			println "DOCKER_USER or DOCKER_PWD environment variables not set"
+
+			def console = System.console()
+
+			if (console == null) {
+				throw new Exception("It is not possible to read docker credentials")
+			}
+
+			println "Using system in to prompt for docker user and password"
+
+			println "Please enter docker user:"
+
+			dockerUser = console.readLine()
+
+			if (!dockerUser) {
+				throw new Exception("You must enter docker user or set DOCKER_USER environment variable to proceed.")
+			}
+
+			println "Please enter docker password:"
+
+			dockerPwd = console.readPassword()
+
+			if (!dockerPwd) {
+				throw new Exception("You must enter docker password or set DOCKER_PWD environment variable to proceed.")
+			}
+
+			args "--username=${dockerUser}"
+			args "--password=${dockerPwd}"
 		}
+	}
+
+	executable = "docker"
+
+	ext {
+		dockerPwd = System.getenv("DOCKER_PWD")
+		dockerUser = System.getenv("DOCKER_USER")
 	}
 }
 
