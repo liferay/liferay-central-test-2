@@ -162,11 +162,9 @@ loginDocker {
 }
 
 rmDocker {
-	dependsOn stopDocker
-
-	ignoreExitValue true
-
 	commandLine "docker", "rm", "com-liferay-adaptive-media"
+	dependsOn stopDocker
+	ignoreExitValue = true
 }
 
 runDocker {
@@ -216,9 +214,8 @@ startJacocoRecording {
 }
 
 stopDocker {
-	ignoreExitValue true
-
 	commandLine "docker", "stop", "com-liferay-adaptive-media"
+	ignoreExitValue = true
 }
 
 stopJacocoRecording {
