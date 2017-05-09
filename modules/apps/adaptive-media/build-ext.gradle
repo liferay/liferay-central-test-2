@@ -84,20 +84,6 @@ coveralls {
 
 coverageReport {
 	additionalSourceDirs = moduleSrcDirs
-	classDirectories = files(moduleProjects.sourceSets.main.output)
-	executionData = files(moduleProjects.jacocoTestReport.executionData, "${rootDir}/build/jacoco/testIntegration.exec")
-	sourceDirectories = moduleSrcDirs
-
-	reports {
-		html.enabled = true
-		xml.enabled = true
-	}
-
-	onlyIf = { true }
-
-	doFirst {
-		executionData = files(executionData.findAll { it.exists() })
-	}
 
 	afterEvaluate {
 		classDirectories = files(classDirectories.files.collect {
@@ -117,6 +103,27 @@ coverageReport {
 				])
 		})
 	}
+
+	classDirectories = files(moduleProjects.sourceSets.main.output)
+
+	doFirst {
+		executionData = executionData.filter {
+			it.exists()
+		}
+	}
+
+	executionData = files(moduleProjects.jacocoTestReport.executionData, new File(buildDir, "jacoco/testIntegration.exec"))
+
+	onlyIf = {
+		true
+	}
+
+	reports {
+		html.enabled = true
+		xml.enabled = true
+	}
+
+	sourceDirectories = moduleSrcDirs
 }
 
 createTempDir {
@@ -182,11 +189,6 @@ rmDocker {
 }
 
 runDocker {
-	dependsOn createTempDir
-	dependsOn loginDocker
-	dependsOn rmDocker
-	dependsOn copyJacocoAgent
-
 	String javaOpts = project.getProperty("com.liferay.adaptive.media.java.opts")
 
 	javaOpts += " " + project.getProperty("com.liferay.adaptive.media.jacoco.opts")
@@ -195,27 +197,33 @@ runDocker {
 		javaOpts += " " + project.getProperty("com.liferay.adaptive.media.debug.opts")
 	}
 
-	commandLine "docker", "run",
-		"-h", "localhost",
-		"-e", "JAVA_OPTS=$javaOpts",
-		"-p", "5005:5005",
-		"-p", "8080:8080",
-		"-p", "8099:8099",
-		"-p", "11311:11311",
-		"-v", "${rootDir}/../bundles/deploy:/liferay/deploy",
-		"-v", "${rootDir}/docker/portal-ext.properties:/liferay/portal-ext.properties",
-		"-v", "${rootDir}/build/tmpdir:${rootDir}/build/tmpdir",
-		"-v", "${rootDir}/build/jacoco:/jacoco",
-		"-d",
-		"--name", "com-liferay-adaptive-media",
-		"liferay/liferay-de:20170421073001106222642-db"
+	args "run"
+	args "-h", "localhost"
+	args "-e", "JAVA_OPTS=$javaOpts"
+	args "-p", "5005:5005"
+	args "-p", "8080:8080"
+	args "-p", "8099:8099"
+	args "-p", "11311:11311"
+	args "-v", "${rootDir}/../bundles/deploy:/liferay/deploy"
+	args "-v", "${rootDir}/docker/portal-ext.properties:/liferay/portal-ext.properties"
+	args "-v", "${rootDir}/build/tmpdir:${rootDir}/build/tmpdir"
+	args "-v", "${rootDir}/build/jacoco:/jacoco"
+	args "-d"
+	args "--name", "com-liferay-adaptive-media"
+	args "liferay/liferay-de:20170421073001106222642-db"
 
+	dependsOn createTempDir
+	dependsOn loginDocker
+	dependsOn rmDocker
+	dependsOn copyJacocoAgent
+
+	executable = "docker"
 	finalizedBy checkDocker
 }
 
 startJacocoRecording {
 	doLast {
-		File file = new File("${rootDir}/build/jacoco/testIntegration.exec")
+		File file = new File(buildDir, "jacoco/testIntegration.exec")
 
 		if (file.exists()) {
 			file.deleteOnExit()
@@ -237,27 +245,52 @@ stopJacocoRecording {
 }
 
 configure(subprojects.findAll {!it.childProjects}) {
+	task deployRuntimeLibs(type: Copy)
+
 	configurations {
 		runtimeLib {
 			description = "Configures deployable runtime libs."
 		}
 
-		compile.extendsFrom(runtimeLib)
+		compile.extendsFrom runtimeLib
 	}
 
-	liferay {
-		deployDir = new File("${rootDir}/../bundles/deploy")
+	deployRuntimeLibs {
+		from configurations.runtimeLib
+
+		into {
+			liferay.deployDir
+		}
+
+		rename {
+			String fileName ->
+
+			fileName.replaceAll "(.*)-((\\d\\.{1})*\\d)\\.jar", "\$1.jar"
+		}
 	}
 
 	jacocoTestReport {
 		additionalSourceDirs = files(sourceSets.main.allSource.srcDirs)
-		sourceDirectories = files(sourceSets.main.allSource.srcDirs)
 		classDirectories =  files(sourceSets.main.output)
 
 		reports {
 			html.enabled = true
 			xml.enabled = true
 		}
+
+		sourceDirectories = files(sourceSets.main.allSource.srcDirs)
+	}
+
+	liferay {
+		deployDir = new File(rootDir, "../bundles/deploy")
+	}
+
+	startTestableTomcat {
+		enabled = false
+	}
+
+	stopTestableTomcat {
+		enabled = false
 	}
 
 	test {
@@ -266,29 +299,20 @@ configure(subprojects.findAll {!it.childProjects}) {
 
 	testIntegration {
 		dependsOn createTempDir
-
 		ignoreFailures = false
-		systemProperty "java.io.tmpdir", "${rootDir}/build/tmpdir"
+		systemProperty "java.io.tmpdir", new File(buildDir, "tmpdir")
 	}
 
-	task deployRuntimeLibs(type: Copy) {
-		into liferay.deployDir
-		from configurations.runtimeLib
-		rename {
-			String fileName ->
-				fileName.replaceAll("(.*)-((\\d\\.{1})*\\d)\\.jar", "\$1.jar")
+	if (project.hasProperty("docker")) {
+		setUpTestableTomcat {
+			enabled = false
 		}
 	}
 
-	runDocker.dependsOn deploy
-	runDocker.dependsOn deployRuntimeLibs
-
-	if (project.hasProperty("docker")) {
-		setUpTestableTomcat.enabled = false
+	rootProject.runDocker {
+		dependsOn deploy
+		dependsOn deployRuntimeLibs
 	}
-
-	startTestableTomcat.enabled = false
-	stopTestableTomcat.enabled = false
 }
 
 repositories {
