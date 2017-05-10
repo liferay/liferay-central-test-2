@@ -14,8 +14,6 @@
 
 package com.liferay.portal.workflow.definition.web.internal.portlet.action;
 
-import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMap;
-import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMapFactory;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
@@ -41,10 +39,8 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
 
-import org.osgi.framework.BundleContext;
-import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Deactivate;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Leonardo Barros
@@ -85,17 +81,6 @@ public class UpdateWorkflowDefinitionMVCActionCommand
 		}
 	}
 
-	@Activate
-	protected void activate(BundleContext bundleContext) {
-		_serviceTrackerMap = ServiceTrackerMapFactory.openSingleValueMap(
-			bundleContext, WorkflowDefinitionManager.class, "proxy.bean");
-	}
-
-	@Deactivate
-	protected void deactivate() {
-		_serviceTrackerMap.close();
-	}
-
 	@Override
 	protected void doProcessAction(
 			ActionRequest actionRequest, ActionResponse actionResponse)
@@ -116,16 +101,16 @@ public class UpdateWorkflowDefinitionMVCActionCommand
 		}
 
 		WorkflowDefinition workflowDefinition =
-			getWorkflowDefinitionManager().getWorkflowDefinition(
+			workflowDefinitionManager.getWorkflowDefinition(
 				themeDisplay.getCompanyId(), name, version);
 
 		if (Objects.equals(workflowDefinition.getContent(), content)) {
-			getWorkflowDefinitionManager().updateTitle(
+			workflowDefinitionManager.updateTitle(
 				themeDisplay.getCompanyId(), themeDisplay.getUserId(), name,
 				version, getTitle(titleMap));
 		}
 		else {
-			getWorkflowDefinitionManager().deployWorkflowDefinition(
+			workflowDefinitionManager.deployWorkflowDefinition(
 				themeDisplay.getCompanyId(), themeDisplay.getUserId(),
 				getTitle(titleMap), content.getBytes());
 		}
@@ -157,20 +142,7 @@ public class UpdateWorkflowDefinitionMVCActionCommand
 		return value;
 	}
 
-	protected WorkflowDefinitionManager getWorkflowDefinitionManager()
-		throws WorkflowException {
-
-		WorkflowDefinitionManager workflowDefinitionManager =
-			_serviceTrackerMap.getService("false");
-
-		if (workflowDefinitionManager == null) {
-			throw new WorkflowException("No workflow engine is deployed");
-		}
-
-		return workflowDefinitionManager;
-	}
-
-	private ServiceTrackerMap<String, WorkflowDefinitionManager>
-		_serviceTrackerMap;
+	@Reference(target = "(proxy.bean=false)")
+	protected WorkflowDefinitionManager workflowDefinitionManager;
 
 }

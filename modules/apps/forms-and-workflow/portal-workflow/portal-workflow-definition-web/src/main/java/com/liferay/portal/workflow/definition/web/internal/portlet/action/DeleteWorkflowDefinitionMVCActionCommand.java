@@ -50,7 +50,7 @@ public class DeleteWorkflowDefinitionMVCActionCommand
 		String name = ParamUtil.getString(actionRequest, "name");
 		int version = ParamUtil.getInteger(actionRequest, "version");
 
-		getWorkflowDefinitionManager().undeployWorkflowDefinition(
+		workflowDefinitionManager.undeployWorkflowDefinition(
 			themeDisplay.getCompanyId(), themeDisplay.getUserId(), name,
 			version);
 	}

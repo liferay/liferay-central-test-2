@@ -50,7 +50,7 @@ public class RestoreWorkflowDefinitionMVCActionCommand
 		String name = ParamUtil.getString(actionRequest, "name");
 		int version = ParamUtil.getInteger(actionRequest, "version");
 
-		getWorkflowDefinitionManager().updateActive(
+		workflowDefinitionManager.updateActive(
 			themeDisplay.getCompanyId(), themeDisplay.getUserId(), name,
 			version, isActive());
 	}
