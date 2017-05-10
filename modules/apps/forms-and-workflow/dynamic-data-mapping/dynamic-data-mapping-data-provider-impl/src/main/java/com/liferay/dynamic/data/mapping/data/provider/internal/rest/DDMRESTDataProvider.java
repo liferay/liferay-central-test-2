@@ -125,21 +125,21 @@ public class DDMRESTDataProvider implements DDMDataProvider {
 			String type = outputParameterSettings.outputParameterType();
 			String path = outputParameterSettings.outputParameterPath();
 
-			if (Objects.equals(type, "[\"text\"]")) {
+			if (Objects.equals(type, "text")) {
 				String nomalizedPath = normalizePath(path);
 
 				ddmDataProviderResponseOutputs.add(
 					DDMDataProviderResponseOutput.of(
 						name, "text", documentContext.read(nomalizedPath)));
 			}
-			else if (Objects.equals(type, "[\"number\"]")) {
+			else if (Objects.equals(type, "number")) {
 				String nomalizedPath = normalizePath(path);
 
 				ddmDataProviderResponseOutputs.add(
 					DDMDataProviderResponseOutput.of(
 						name, "number", documentContext.read(nomalizedPath)));
 			}
-			else if (Objects.equals(type, "[\"list\"]")) {
+			else if (Objects.equals(type, "list")) {
 				String[] paths = StringUtil.split(path, CharPool.SEMICOLON);
 
 				String normalizedValuePath = normalizePath(paths[0]);
