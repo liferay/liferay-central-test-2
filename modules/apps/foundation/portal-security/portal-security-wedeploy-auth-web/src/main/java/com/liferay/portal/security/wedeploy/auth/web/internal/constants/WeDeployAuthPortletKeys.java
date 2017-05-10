@@ -20,7 +20,7 @@ package com.liferay.portal.security.wedeploy.auth.web.internal.constants;
 public class WeDeployAuthPortletKeys {
 
 	public static final String WEDEPLOY_AUTH_ADMIN =
-		"com_liferay_portal_security_wedeploy_auth_web_portlet_" +
+		"com_liferay_portal_security_wedeploy_auth_web_internal_portlet_" +
 			"WeDeployAuthAdminPortlet";
 
 }
