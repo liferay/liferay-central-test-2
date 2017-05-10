@@ -57,7 +57,6 @@ public abstract class BaseLayoutsItemSelectorView
 		return _supportedItemSelectorReturnTypes;
 	}
 
-	@Override
 	public abstract boolean isPrivateLayout();
 
 	@Override
