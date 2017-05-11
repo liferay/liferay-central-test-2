@@ -105,7 +105,7 @@ for (KBArticle curKBArticle : kbArticles) {
 												<portlet:param name="resourcePrimKey" value="<%= String.valueOf(kbArticle.getResourcePrimKey()) %>" />
 											</portlet:renderURL>
 
-											var uri = '<%= compareVersionURL %>';
+											var uri = '<%= HtmlUtil.escapeJS(compareVersionURL) %>';
 
 											uri = Liferay.Util.addParams('<portlet:namespace />sourceVersion=' + event.sourceversion, uri);
 											uri = Liferay.Util.addParams('<portlet:namespace />targetVersion=' + event.targetversion, uri);
