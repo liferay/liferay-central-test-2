@@ -56,7 +56,8 @@ import org.osgi.service.component.annotations.Reference;
 public class AdaptiveMediaImageFinderImpl implements AdaptiveMediaImageFinder {
 
 	@Override
-	public Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>> getAdaptiveMedia(
+	public Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>>
+		getAdaptiveMediaStream(
 			Function
 				<AdaptiveMediaImageQueryBuilder, AdaptiveMediaQuery
 					<FileVersion, AdaptiveMediaImageProcessor>>

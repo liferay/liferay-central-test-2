@@ -110,12 +110,13 @@ public class MediaQueryProviderImpl implements MediaQueryProvider {
 			AdaptiveMediaImageConfigurationEntry configurationEntry) {
 
 		try {
-			return _adaptiveMediaImageFinder.getAdaptiveMediaStream(queryBuilder ->
-				queryBuilder.forFileEntry(
-					fileEntry
-				).forConfiguration(
-					configurationEntry.getUUID()
-				).done()
+			return _adaptiveMediaImageFinder.getAdaptiveMediaStream(
+				queryBuilder ->
+					queryBuilder.forFileEntry(
+						fileEntry
+					).forConfiguration(
+						configurationEntry.getUUID()
+					).done()
 			).findFirst();
 		}
 		catch (PortalException pe) {
