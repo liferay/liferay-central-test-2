@@ -17,6 +17,7 @@ package com.liferay.dynamic.data.mapping.data.provider.internal;
 import com.liferay.dynamic.data.mapping.data.provider.DDMDataProvider;
 import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderContext;
 import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderContextContributor;
+import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderContextFactory;
 import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderInvoker;
 import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderRequest;
 import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderResponse;
@@ -41,21 +42,23 @@ public class DDMDataProviderInvokerImpl implements DDMDataProviderInvoker {
 		DDMDataProviderRequest ddmDataProviderRequest) {
 
 		try {
-			addDDMDataProviderContextParameters(ddmDataProviderRequest);
+			DDMDataProviderContext ddmDataProviderContext =
+				ddmDataProviderContextFactory.create(
+					ddmDataProviderRequest.getDDMDataProviderInstanceId());
 
 			DDMDataProvider ddmDataProvider = getDDMDataProvider(
-				ddmDataProviderRequest.getDDMDataProviderContext());
+				ddmDataProviderContext);
+
+			addDDMDataProviderRequestParameters(
+				ddmDataProviderRequest, ddmDataProviderContext);
 
 			return ddmDataProvider.getData(ddmDataProviderRequest);
 		}
 		catch (Exception e) {
-			DDMDataProviderContext ddmDataProviderContext =
-				ddmDataProviderRequest.getDDMDataProviderContext();
-
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"Unable to fetch data from DDM Data Provider instance ID " +
-						ddmDataProviderContext.getDDMDataProviderInstanceId(),
+						ddmDataProviderRequest.getDDMDataProviderInstanceId(),
 					e);
 			}
 		}
@@ -63,11 +66,9 @@ public class DDMDataProviderInvokerImpl implements DDMDataProviderInvoker {
 		return DDMDataProviderResponse.error(Status.INTERNAL_SERVER_ERROR);
 	}
 
-	protected void addDDMDataProviderContextParameters(
-		DDMDataProviderRequest ddmDataProviderRequest) {
-
-		DDMDataProviderContext ddmDataProviderContext =
-			ddmDataProviderRequest.getDDMDataProviderContext();
+	protected void addDDMDataProviderRequestParameters(
+		DDMDataProviderRequest ddmDataProviderRequest,
+		DDMDataProviderContext ddmDataProviderContext) {
 
 		if (ddmDataProviderContext.getType() == null) {
 			return;
@@ -113,6 +114,9 @@ public class DDMDataProviderInvokerImpl implements DDMDataProviderInvoker {
 
 		return ddmDataProviderTracker.getDDMDataProvider(type);
 	}
+
+	@Reference
+	protected DDMDataProviderContextFactory ddmDataProviderContextFactory;
 
 	@Reference
 	protected DDMDataProviderTracker ddmDataProviderTracker;

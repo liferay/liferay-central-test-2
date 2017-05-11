@@ -97,12 +97,9 @@ public class DDMFormFieldOptionsFactoryImpl
 			String ddmDataProviderInstanceId = GetterUtil.getString(
 				ddmFormField.getProperty("ddmDataProviderInstanceId"));
 
-			DDMDataProviderContext ddmDataProviderContext =
-				ddmDataProviderContextFactory.create(ddmDataProviderInstanceId);
-
 			DDMDataProviderRequest ddmDataProviderRequest =
 				new DDMDataProviderRequest(
-					ddmDataProviderContext,
+					ddmDataProviderInstanceId,
 					ddmFormFieldRenderingContext.getHttpServletRequest());
 
 			ddmDataProviderRequest.queryString(
@@ -143,9 +140,6 @@ public class DDMFormFieldOptionsFactoryImpl
 
 		return ddmFormFieldOptions;
 	}
-
-	@Reference
-	protected DDMDataProviderContextFactory ddmDataProviderContextFactory;
 
 	@Reference
 	protected DDMDataProviderInvoker ddmDataProviderInvoker;
