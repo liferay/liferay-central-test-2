@@ -19,7 +19,6 @@ import com.liferay.adaptive.media.AdaptiveMediaException;
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationHelper;
 import com.liferay.adaptive.media.image.finder.AdaptiveMediaImageFinder;
-import com.liferay.adaptive.media.image.finder.AdaptiveMediaImageQueryBuilder;
 import com.liferay.adaptive.media.image.internal.configuration.AdaptiveMediaImageAttributeMapping;
 import com.liferay.adaptive.media.image.internal.processor.AdaptiveMediaImage;
 import com.liferay.adaptive.media.image.mediaquery.Condition;
@@ -110,15 +109,13 @@ public class MediaQueryProviderImpl implements MediaQueryProvider {
 			AdaptiveMediaImageConfigurationEntry configurationEntry) {
 
 		try {
-			return _adaptiveMediaImageFinder.getAdaptiveMedia(queryBuilder -> {
-				AdaptiveMediaImageQueryBuilder.InitialStep initialStep =
-					queryBuilder.forFileEntry(fileEntry);
-
-				AdaptiveMediaImageQueryBuilder.FinalStep finalStep =
-					initialStep.forConfiguration(configurationEntry.getUUID());
-
-				return finalStep.done();
-			}).findFirst();
+			return _adaptiveMediaImageFinder.getAdaptiveMedia(queryBuilder ->
+				queryBuilder.forFileEntry(
+					fileEntry
+				).forConfiguration(
+					configurationEntry.getUUID()
+				).done()
+			).findFirst();
 		}
 		catch (AdaptiveMediaException | PortalException e) {
 			return Optional.empty();
