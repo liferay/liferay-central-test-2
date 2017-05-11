@@ -42,13 +42,6 @@ public final class AdaptiveMediaImage
 	}
 
 	@Override
-	public <V> Optional<V> getValueOptional(
-		AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, V> adaptiveMediaAttribute) {
-
-		return _attributeMapping.getAttributeValue(adaptiveMediaAttribute);
-	}
-
-	@Override
 	public InputStream getInputStream() {
 		return _supplier.get();
 	}
@@ -56,6 +49,14 @@ public final class AdaptiveMediaImage
 	@Override
 	public URI getURI() {
 		return _uri;
+	}
+
+	@Override
+	public <V> Optional<V> getValueOptional(
+		AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, V>
+			adaptiveMediaAttribute) {
+
+		return _attributeMapping.getAttributeValue(adaptiveMediaAttribute);
 	}
 
 	private final AdaptiveMediaImageAttributeMapping _attributeMapping;

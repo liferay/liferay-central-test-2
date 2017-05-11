@@ -66,15 +66,15 @@ public class BlogsPortletFilter implements RenderFilter {
 			return;
 		}
 
-		HttpServletResponse httpServletResponse = portal.getHttpServletResponse(
-			renderResponse);
+		HttpServletResponse httpServletResponse =
+			_portal.getHttpServletResponse(renderResponse);
 
 		BufferCacheServletResponse bufferCacheServletResponse =
 			(BufferCacheServletResponse)httpServletResponse;
 
 		String content = bufferCacheServletResponse.getString();
 
-		String transformedContent = contentTransformerHandler.transform(
+		String transformedContent = _contentTransformerHandler.transform(
 			ContentTransformerContentTypes.HTML, content);
 
 		ServletResponseUtil.write(httpServletResponse, transformedContent);
@@ -85,9 +85,9 @@ public class BlogsPortletFilter implements RenderFilter {
 	}
 
 	@Reference
-	private ContentTransformerHandler contentTransformerHandler;
+	private ContentTransformerHandler _contentTransformerHandler;
 
 	@Reference
-	private Portal portal;
+	private Portal _portal;
 
 }

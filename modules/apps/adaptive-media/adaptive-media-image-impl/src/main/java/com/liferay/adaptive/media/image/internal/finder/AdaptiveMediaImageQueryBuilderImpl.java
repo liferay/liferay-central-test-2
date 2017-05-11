@@ -175,7 +175,8 @@ public class AdaptiveMediaImageQueryBuilderImpl
 
 	@Override
 	public <V> StrictSortStep orderBy(
-		AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, V> adaptiveMediaAttribute,
+		AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, V>
+			adaptiveMediaAttribute,
 		boolean asc) {
 
 		if (adaptiveMediaAttribute == null) {
@@ -190,7 +191,8 @@ public class AdaptiveMediaImageQueryBuilderImpl
 
 	@Override
 	public <V> FuzzySortStep with(
-		AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, V> adaptiveMediaAttribute,
+		AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, V>
+			adaptiveMediaAttribute,
 		Optional<V> valueOptional) {
 
 		if (valueOptional == null) {
@@ -198,14 +200,16 @@ public class AdaptiveMediaImageQueryBuilderImpl
 				"Adaptive media attribute value optional cannot be null");
 		}
 
-		valueOptional.ifPresent(value -> _attributes.put(adaptiveMediaAttribute, value));
+		valueOptional.ifPresent(
+			value -> _attributes.put(adaptiveMediaAttribute, value));
 
 		return this;
 	}
 
 	@Override
 	public <V> FuzzySortStep with(
-		AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, V> adaptiveMediaAttribute,
+		AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, V>
+			adaptiveMediaAttribute,
 		V value) {
 
 		if (value == null) {

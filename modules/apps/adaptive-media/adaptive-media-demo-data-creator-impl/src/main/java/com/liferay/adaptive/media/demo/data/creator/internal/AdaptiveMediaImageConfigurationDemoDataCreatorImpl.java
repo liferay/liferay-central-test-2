@@ -117,6 +117,7 @@ public class AdaptiveMediaImageConfigurationDemoDataCreatorImpl
 
 	@Reference
 	private AdaptiveMediaImageConfigurationHelper _configurationHelper;
+
 	private final Map<Long, List<String>> _configurationIds = new HashMap<>();
 
 }

@@ -32,18 +32,6 @@ import java.util.Optional;
 public interface AdaptiveMedia<T> {
 
 	/**
-	 * Returns this {@link AdaptiveMedia} instance's value for the attribute.
-	 * This method always returns a non-<code>null</code> optional.
-	 *
-	 * @param  adaptiveMediaAttribute the adaptive media attribute
-	 * @return the attribute value wrapped in an {@link Optional}; {@link
-	 *         Optional#EMPTY} otherwise
-	 * @review
-	 */
-	public <V> Optional<V> getValueOptional(
-		AdaptiveMediaAttribute<T, V> adaptiveMediaAttribute);
-
-	/**
 	 * Returns an {@link InputStream} with the raw contents of this {@link
 	 * AdaptiveMedia} instance.
 	 *
@@ -60,5 +48,17 @@ public interface AdaptiveMedia<T> {
 	 * @return a URI for this {@link AdaptiveMedia} instance
 	 */
 	public URI getURI();
+
+	/**
+	 * Returns this {@link AdaptiveMedia} instance's value for the attribute.
+	 * This method always returns a non-<code>null</code> optional.
+	 *
+	 * @param  adaptiveMediaAttribute the adaptive media attribute
+	 * @return the attribute value wrapped in an {@link Optional}; {@link
+	 *         Optional#EMPTY} otherwise
+	 * @review
+	 */
+	public <V> Optional<V> getValueOptional(
+		AdaptiveMediaAttribute<T, V> adaptiveMediaAttribute);
 
 }

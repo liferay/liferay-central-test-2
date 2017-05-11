@@ -59,6 +59,7 @@ public class AdaptiveMediaMessagingConfigurator {
 
 	@Reference
 	private DestinationFactory _destinationFactory;
+
 	private ServiceRegistration<Destination> _serviceRegistration;
 
 }
