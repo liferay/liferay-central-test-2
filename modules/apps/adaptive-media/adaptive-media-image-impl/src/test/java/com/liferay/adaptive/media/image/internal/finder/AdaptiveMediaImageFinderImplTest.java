@@ -227,12 +227,12 @@ public class AdaptiveMediaImageFinderImplTest {
 			adaptiveMedias.get(0);
 
 		Assert.assertEquals(
-			adaptiveMedia.getAttributeValue(
+			adaptiveMedia.getValueOptional(
 				AdaptiveMediaImageAttribute.IMAGE_HEIGHT),
 			Optional.of(99));
 
 		Assert.assertEquals(
-			adaptiveMedia.getAttributeValue(
+			adaptiveMedia.getValueOptional(
 				AdaptiveMediaImageAttribute.IMAGE_WIDTH),
 			Optional.of(199));
 	}
@@ -331,7 +331,7 @@ public class AdaptiveMediaImageFinderImplTest {
 			adaptiveMedias.get(0);
 
 		Assert.assertEquals(
-			adaptiveMedia1.getAttributeValue(
+			adaptiveMedia1.getValueOptional(
 				AdaptiveMediaImageAttribute.IMAGE_WIDTH),
 			Optional.of(199));
 
@@ -339,7 +339,7 @@ public class AdaptiveMediaImageFinderImplTest {
 			adaptiveMedias.get(1);
 
 		Assert.assertEquals(
-			adaptiveMedia2.getAttributeValue(
+			adaptiveMedia2.getValueOptional(
 				AdaptiveMediaImageAttribute.IMAGE_WIDTH),
 			Optional.of(399));
 
@@ -347,7 +347,7 @@ public class AdaptiveMediaImageFinderImplTest {
 			adaptiveMedias.get(2);
 
 		Assert.assertEquals(
-			adaptiveMedia3.getAttributeValue(
+			adaptiveMedia3.getValueOptional(
 				AdaptiveMediaImageAttribute.IMAGE_WIDTH),
 			Optional.of(799));
 	}
@@ -446,7 +446,7 @@ public class AdaptiveMediaImageFinderImplTest {
 			adaptiveMedias.get(0);
 
 		Assert.assertEquals(
-			adaptiveMedia1.getAttributeValue(
+			adaptiveMedia1.getValueOptional(
 				AdaptiveMediaImageAttribute.IMAGE_WIDTH),
 			Optional.of(799));
 
@@ -454,7 +454,7 @@ public class AdaptiveMediaImageFinderImplTest {
 			adaptiveMedias.get(1);
 
 		Assert.assertEquals(
-			adaptiveMedia2.getAttributeValue(
+			adaptiveMedia2.getValueOptional(
 				AdaptiveMediaImageAttribute.IMAGE_WIDTH),
 			Optional.of(399));
 
@@ -462,7 +462,7 @@ public class AdaptiveMediaImageFinderImplTest {
 			adaptiveMedias.get(2);
 
 		Assert.assertEquals(
-			adaptiveMedia3.getAttributeValue(
+			adaptiveMedia3.getValueOptional(
 				AdaptiveMediaImageAttribute.IMAGE_WIDTH),
 			Optional.of(199));
 	}
@@ -635,12 +635,12 @@ public class AdaptiveMediaImageFinderImplTest {
 			adaptiveMedias.get(0);
 
 		Assert.assertEquals(
-			adaptiveMedia.getAttributeValue(
+			adaptiveMedia.getValueOptional(
 				AdaptiveMediaImageAttribute.IMAGE_HEIGHT),
 			Optional.of(99));
 
 		Assert.assertEquals(
-			adaptiveMedia.getAttributeValue(
+			adaptiveMedia.getValueOptional(
 				AdaptiveMediaImageAttribute.IMAGE_WIDTH),
 			Optional.of(1000));
 	}
@@ -720,7 +720,7 @@ public class AdaptiveMediaImageFinderImplTest {
 			adaptiveMedias.get(0);
 
 		Optional<Integer> adaptiveMedia0HeightOptional =
-			adaptiveMedia0.getAttributeValue(
+			adaptiveMedia0.getValueOptional(
 				AdaptiveMediaImageAttribute.IMAGE_HEIGHT);
 
 		Assert.assertEquals(99, (int)adaptiveMedia0HeightOptional.get());
@@ -729,7 +729,7 @@ public class AdaptiveMediaImageFinderImplTest {
 			adaptiveMedias.get(1);
 
 		Optional<Integer> adaptiveMedia1HeightOptional =
-			adaptiveMedia1.getAttributeValue(
+			adaptiveMedia1.getValueOptional(
 				AdaptiveMediaImageAttribute.IMAGE_HEIGHT);
 
 		Assert.assertEquals(199, (int)adaptiveMedia1HeightOptional.get());
@@ -810,7 +810,7 @@ public class AdaptiveMediaImageFinderImplTest {
 			adaptiveMedias.get(0);
 
 		Optional<Integer> adaptiveMedia0HeightOptional =
-			adaptiveMedia0.getAttributeValue(
+			adaptiveMedia0.getValueOptional(
 				AdaptiveMediaImageAttribute.IMAGE_HEIGHT);
 
 		Assert.assertEquals(199, (int)adaptiveMedia0HeightOptional.get());
@@ -819,7 +819,7 @@ public class AdaptiveMediaImageFinderImplTest {
 			adaptiveMedias.get(1);
 
 		Optional<Integer> adaptiveMedia1HeightOptional =
-			adaptiveMedia1.getAttributeValue(
+			adaptiveMedia1.getValueOptional(
 				AdaptiveMediaImageAttribute.IMAGE_HEIGHT);
 
 		Assert.assertEquals(99, (int)adaptiveMedia1HeightOptional.get());
@@ -900,7 +900,7 @@ public class AdaptiveMediaImageFinderImplTest {
 			adaptiveMedias.get(0);
 
 		Optional<Integer> adaptiveMedia0HeightOptional =
-			adaptiveMedia0.getAttributeValue(
+			adaptiveMedia0.getValueOptional(
 				AdaptiveMediaImageAttribute.IMAGE_HEIGHT);
 
 		Assert.assertEquals(99, (int)adaptiveMedia0HeightOptional.get());
@@ -909,7 +909,7 @@ public class AdaptiveMediaImageFinderImplTest {
 			adaptiveMedias.get(1);
 
 		Optional<Integer> adaptiveMedia1HeightOptional =
-			adaptiveMedia1.getAttributeValue(
+			adaptiveMedia1.getValueOptional(
 				AdaptiveMediaImageAttribute.IMAGE_HEIGHT);
 
 		Assert.assertEquals(55, (int)adaptiveMedia1HeightOptional.get());
@@ -993,7 +993,7 @@ public class AdaptiveMediaImageFinderImplTest {
 			adaptiveMedias.get(0);
 
 		Optional<String> adaptiveMedia0Optional =
-			adaptiveMedia0.getAttributeValue(
+			adaptiveMedia0.getValueOptional(
 				AdaptiveMediaAttribute.configurationUuid());
 
 		Assert.assertEquals("small", adaptiveMedia0Optional.get());
@@ -1097,7 +1097,7 @@ public class AdaptiveMediaImageFinderImplTest {
 			adaptiveMedias.get(0);
 
 		Optional<String> adaptiveMedia0Optional =
-			adaptiveMedia0.getAttributeValue(
+			adaptiveMedia0.getValueOptional(
 				AdaptiveMediaAttribute.configurationUuid());
 
 		Assert.assertEquals("small", adaptiveMedia0Optional.get());
@@ -1118,7 +1118,7 @@ public class AdaptiveMediaImageFinderImplTest {
 
 		adaptiveMedia0 = adaptiveMedias.get(0);
 
-		adaptiveMedia0Optional = adaptiveMedia0.getAttributeValue(
+		adaptiveMedia0Optional = adaptiveMedia0.getValueOptional(
 			AdaptiveMediaAttribute.configurationUuid());
 
 		Assert.assertEquals("small", adaptiveMedia0Optional.get());
@@ -1241,7 +1241,7 @@ public class AdaptiveMediaImageFinderImplTest {
 			adaptiveMedias.get(0);
 
 		Optional<String> adaptiveMedia0ConfigurationUuidOptional =
-			adaptiveMedia0.getAttributeValue(
+			adaptiveMedia0.getValueOptional(
 				AdaptiveMediaAttribute.configurationUuid());
 
 		Assert.assertEquals("1", adaptiveMedia0ConfigurationUuidOptional.get());
@@ -1260,7 +1260,7 @@ public class AdaptiveMediaImageFinderImplTest {
 		adaptiveMedia0 = adaptiveMedias.get(0);
 
 		adaptiveMedia0ConfigurationUuidOptional =
-			adaptiveMedia0.getAttributeValue(
+			adaptiveMedia0.getValueOptional(
 				AdaptiveMediaAttribute.configurationUuid());
 
 		Assert.assertEquals("2", adaptiveMedia0ConfigurationUuidOptional.get());
@@ -1279,7 +1279,7 @@ public class AdaptiveMediaImageFinderImplTest {
 		adaptiveMedia0 = adaptiveMedias.get(0);
 
 		adaptiveMedia0ConfigurationUuidOptional =
-			adaptiveMedia0.getAttributeValue(
+			adaptiveMedia0.getValueOptional(
 				AdaptiveMediaAttribute.configurationUuid());
 
 		Assert.assertEquals("1", adaptiveMedia0ConfigurationUuidOptional.get());
@@ -1288,7 +1288,7 @@ public class AdaptiveMediaImageFinderImplTest {
 			adaptiveMedias.get(1);
 
 		Optional<String> adaptiveMedia1ConfigurationUuidOptional =
-			adaptiveMedia1.getAttributeValue(
+			adaptiveMedia1.getValueOptional(
 				AdaptiveMediaAttribute.configurationUuid());
 
 		Assert.assertEquals("2", adaptiveMedia1ConfigurationUuidOptional.get());
@@ -1369,7 +1369,7 @@ public class AdaptiveMediaImageFinderImplTest {
 			adaptiveMedias.get(0);
 
 		Optional<Integer> adaptiveMedia0HeightOptional =
-			adaptiveMedia0.getAttributeValue(
+			adaptiveMedia0.getValueOptional(
 				AdaptiveMediaImageAttribute.IMAGE_HEIGHT);
 
 		Assert.assertEquals(99, (int)adaptiveMedia0HeightOptional.get());
@@ -1378,7 +1378,7 @@ public class AdaptiveMediaImageFinderImplTest {
 			adaptiveMedias.get(1);
 
 		Optional<Integer> adaptiveMedia1HeightOptional =
-			adaptiveMedia1.getAttributeValue(
+			adaptiveMedia1.getValueOptional(
 				AdaptiveMediaImageAttribute.IMAGE_HEIGHT);
 
 		Assert.assertEquals(199, (int)adaptiveMedia1HeightOptional.get());

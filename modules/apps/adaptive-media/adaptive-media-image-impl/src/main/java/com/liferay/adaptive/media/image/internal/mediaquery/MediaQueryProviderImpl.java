@@ -269,7 +269,7 @@ public class MediaQueryProviderImpl implements MediaQueryProvider {
 	private Integer _getHeight(
 		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia) {
 
-		return adaptiveMedia.getAttributeValue(
+		return adaptiveMedia.getValueOptional(
 			AdaptiveMediaImageAttribute.IMAGE_HEIGHT).orElse(0);
 	}
 
@@ -306,7 +306,7 @@ public class MediaQueryProviderImpl implements MediaQueryProvider {
 	private Integer _getWidth(
 		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia) {
 
-		Optional<Integer> attributeValue = adaptiveMedia.getAttributeValue(
+		Optional<Integer> attributeValue = adaptiveMedia.getValueOptional(
 			AdaptiveMediaImageAttribute.IMAGE_WIDTH);
 
 		return attributeValue.orElse(0);

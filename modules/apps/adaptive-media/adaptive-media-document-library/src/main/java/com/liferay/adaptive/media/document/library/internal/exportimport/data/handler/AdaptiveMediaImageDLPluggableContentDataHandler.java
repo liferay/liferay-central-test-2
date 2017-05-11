@@ -131,7 +131,7 @@ public class AdaptiveMediaImageDLPluggableContentDataHandler
 			AdaptiveMedia<AdaptiveMediaImageProcessor> media)
 		throws IOException {
 
-		Optional<String> configurationUuidOptional = media.getAttributeValue(
+		Optional<String> configurationUuidOptional = media.getValueOptional(
 			AdaptiveMediaAttribute.configurationUuid());
 
 		if (!configurationUuidOptional.isPresent()) {
@@ -213,13 +213,13 @@ public class AdaptiveMediaImageDLPluggableContentDataHandler
 				continue;
 			}
 
-			Optional<Integer> contentLengthOptional = media.getAttributeValue(
+			Optional<Integer> contentLengthOptional = media.getValueOptional(
 				AdaptiveMediaAttribute.contentLength());
 
-			Optional<Integer> widthOptional = media.getAttributeValue(
+			Optional<Integer> widthOptional = media.getValueOptional(
 				AdaptiveMediaImageAttribute.IMAGE_WIDTH);
 
-			Optional<Integer> heightOptional = media.getAttributeValue(
+			Optional<Integer> heightOptional = media.getValueOptional(
 				AdaptiveMediaImageAttribute.IMAGE_HEIGHT);
 
 			if (!contentLengthOptional.isPresent() ||

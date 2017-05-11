@@ -51,13 +51,13 @@ public class AdaptiveMediaPropertyDistanceComparator
 
 			Object requestedValue = entry.getValue();
 
-			Optional<?> value1Optional = adaptiveMedia1.getAttributeValue(
+			Optional<?> value1Optional = adaptiveMedia1.getValueOptional(
 				attribute);
 
 			Optional<Integer> value1DistanceOptional = value1Optional.map(
 				value1 -> attribute.distance(value1, requestedValue));
 
-			Optional<?> value2Optional = adaptiveMedia2.getAttributeValue(
+			Optional<?> value2Optional = adaptiveMedia2.getValueOptional(
 				attribute);
 
 			Optional<Integer> value2DistanceOptional = value2Optional.map(

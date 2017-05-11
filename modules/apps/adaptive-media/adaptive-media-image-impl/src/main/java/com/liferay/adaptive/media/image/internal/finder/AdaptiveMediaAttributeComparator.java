@@ -63,9 +63,9 @@ public class AdaptiveMediaAttributeComparator
 			AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, Object>
 				adaptiveMediaAttribute = sortCriterion.getKey();
 
-			Optional<?> value1Optional = adaptiveMedia1.getAttributeValue(
+			Optional<?> value1Optional = adaptiveMedia1.getValueOptional(
 				adaptiveMediaAttribute);
-			Optional<?> value2Optional = adaptiveMedia2.getAttributeValue(
+			Optional<?> value2Optional = adaptiveMedia2.getValueOptional(
 				adaptiveMediaAttribute);
 
 			Optional<Integer> valueOptional = value1Optional.flatMap(

@@ -40,7 +40,7 @@ public interface AdaptiveMedia<T> {
 	 *         Optional#EMPTY} otherwise
 	 * @review
 	 */
-	public <V> Optional<V> getAttributeValue(
+	public <V> Optional<V> getValueOptional(
 		AdaptiveMediaAttribute<T, V> adaptiveMediaAttribute);
 
 	/**

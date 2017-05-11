@@ -259,14 +259,14 @@ public class AdaptiveMediaImageRequestHandlerTest {
 
 		Assert.assertEquals(
 			Optional.of(_fileVersion.getFileName()),
-			adaptiveMedia.getAttributeValue(AdaptiveMediaAttribute.fileName()));
+			adaptiveMedia.getValueOptional(AdaptiveMediaAttribute.fileName()));
 
 		Assert.assertEquals(
 			Optional.of(_fileVersion.getMimeType()),
-			adaptiveMedia.getAttributeValue(
+			adaptiveMedia.getValueOptional(
 				AdaptiveMediaAttribute.contentType()));
 
-		Optional<Integer> contentLength = adaptiveMedia.getAttributeValue(
+		Optional<Integer> contentLength = adaptiveMedia.getValueOptional(
 			AdaptiveMediaAttribute.contentLength());
 
 		Assert.assertEquals(_fileVersion.getSize(), (long)contentLength.get());

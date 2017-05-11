@@ -123,7 +123,7 @@ public class AdaptiveMediaImageEntryProcessor
 			_getThumbnailAdaptiveMedia(fileVersion);
 
 		return stream.findFirst().flatMap(mediaMedia ->
-			mediaMedia.getAttributeValue(
+			mediaMedia.getValueOptional(
 				AdaptiveMediaAttribute.contentLength())).orElse(0);
 	}
 

@@ -42,7 +42,7 @@ public class AdaptiveMediaImageTest {
 		AdaptiveMediaImage adaptiveMedia = new AdaptiveMediaImage(
 			() -> null, attributeMapping, URI.create("/"));
 
-		adaptiveMedia.getAttributeValue(
+		adaptiveMedia.getValueOptional(
 			AdaptiveMediaImageAttribute.IMAGE_HEIGHT);
 
 		Mockito.verify(

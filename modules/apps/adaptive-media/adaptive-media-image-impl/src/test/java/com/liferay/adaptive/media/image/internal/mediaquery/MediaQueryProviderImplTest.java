@@ -629,7 +629,7 @@ public class MediaQueryProviderImplTest {
 				for (AdaptiveMedia<AdaptiveMediaImageProcessor>
 						adaptiveMedia : adaptiveMedias) {
 
-					String configurationUuid = adaptiveMedia.getAttributeValue(
+					String configurationUuid = adaptiveMedia.getValueOptional(
 						AdaptiveMediaAttribute.configurationUuid()).get();
 
 					if (fileEntry.getFileVersion().equals(

@@ -89,7 +89,7 @@ public class AdaptiveMediaImageSerializerImpl
 			AdaptiveMediaImageAttribute.allowedAttributes();
 
 		allowedAttributes.forEach((name, attribute) -> {
-			Optional<Object> valueOptional = media.getAttributeValue(
+			Optional<Object> valueOptional = media.getValueOptional(
 				(AdaptiveMediaAttribute)attribute);
 
 			valueOptional.ifPresent(

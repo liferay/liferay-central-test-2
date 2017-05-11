@@ -241,7 +241,7 @@ public class AdaptiveMediaImageRequestHandler
 	private Integer _getDistance(
 		int width, AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia) {
 
-		Optional<Integer> imageWidthOptional = adaptiveMedia.getAttributeValue(
+		Optional<Integer> imageWidthOptional = adaptiveMedia.getValueOptional(
 			AdaptiveMediaImageAttribute.IMAGE_WIDTH);
 
 		Optional<Integer> distanceOptional = imageWidthOptional.map(
@@ -306,7 +306,7 @@ public class AdaptiveMediaImageRequestHandler
 		AdaptiveMediaImageAttributeMapping attributeMapping) {
 
 		Optional<String> adaptiveMediaConfigurationUuidOptional =
-			adaptiveMedia.getAttributeValue(
+			adaptiveMedia.getValueOptional(
 				AdaptiveMediaAttribute.configurationUuid());
 
 		Optional<String> attributeMappingConfigurationUuidOptional =
