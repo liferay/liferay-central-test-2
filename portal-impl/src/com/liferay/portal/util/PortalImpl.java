@@ -8247,12 +8247,6 @@ public class PortalImpl implements Portal {
 					canonicalDomain, themeDisplay.getServerPort(),
 					themeDisplay.isSecure());
 
-				int pos = portalDomain.lastIndexOf(CharPool.COLON);
-
-				if (pos != -1) {
-					portalDomain = portalDomain.substring(0, pos);
-				}
-
 				if ((canonicalURL ||
 					 canonicalDomain.startsWith(portalDomain)) &&
 					!controlPanel) {
