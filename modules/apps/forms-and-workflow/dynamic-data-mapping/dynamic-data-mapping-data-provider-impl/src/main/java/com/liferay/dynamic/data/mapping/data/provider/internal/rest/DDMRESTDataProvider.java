@@ -28,8 +28,6 @@ import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderResponseOut
 import com.liferay.portal.kernel.cache.MultiVMPool;
 import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.json.JSONFactory;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.ListUtil;
@@ -42,10 +40,8 @@ import java.io.Serializable;
 import java.net.ConnectException;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import jodd.http.HttpException;
 import jodd.http.HttpRequest;
@@ -257,30 +253,6 @@ public class DDMRESTDataProvider implements DDMDataProvider {
 		return httpRequest.url();
 	}
 
-	protected Set<String> getOutputParameterPaths(
-		DDMDataProviderContext ddmDataProviderContext) {
-
-		DDMRESTDataProviderSettings ddmRESTDataProviderSettings =
-			ddmDataProviderContext.getSettingsInstance(
-				DDMRESTDataProviderSettings.class);
-
-		Set<String> outputParameterPaths = new HashSet<>();
-
-		for (DDMDataProviderOutputParametersSettings outputParameterSettings :
-				ddmRESTDataProviderSettings.outputParameters()) {
-
-			String[] paths = StringUtil.split(
-				outputParameterSettings.outputParameterPath(),
-				CharPool.SEMICOLON);
-
-			for (String path : paths) {
-				outputParameterPaths.add(path);
-			}
-		}
-
-		return outputParameterPaths;
-	}
-
 	protected String normalizePath(String path) {
 		if (StringUtil.startsWith(path, StringPool.PERIOD) ||
 			StringUtil.startsWith(path, StringPool.DOLLAR)) {
@@ -325,9 +297,6 @@ public class DDMRESTDataProvider implements DDMDataProvider {
 
 		httpRequest.query(ddmDataProviderRequest.getParameters());
 	}
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		DDMRESTDataProvider.class);
 
 	private JSONFactory _jsonFactory;
 	private PortalCache<String, DDMRESTDataProviderResult> _portalCache;
