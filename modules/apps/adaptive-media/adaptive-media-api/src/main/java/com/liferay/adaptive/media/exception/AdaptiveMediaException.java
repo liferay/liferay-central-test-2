@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.adaptive.media;
+package com.liferay.adaptive.media.exception;
 
 /**
  * @author Adolfo Pérez

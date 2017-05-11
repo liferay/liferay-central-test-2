@@ -15,7 +15,7 @@
 package com.liferay.adaptive.media.finder;
 
 import com.liferay.adaptive.media.AdaptiveMedia;
-import com.liferay.adaptive.media.AdaptiveMediaException;
+import com.liferay.adaptive.media.exception.AdaptiveMediaException;
 import com.liferay.portal.kernel.exception.PortalException;
 
 import java.util.function.Function;

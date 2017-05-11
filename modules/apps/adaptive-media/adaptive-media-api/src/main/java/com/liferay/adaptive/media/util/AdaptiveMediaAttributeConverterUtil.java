@@ -14,7 +14,7 @@
 
 package com.liferay.adaptive.media.util;
 
-import com.liferay.adaptive.media.AdaptiveMediaRuntimeException;
+import com.liferay.adaptive.media.exception.AdaptiveMediaRuntimeException;
 
 /**
  * Provides a set of functions for converting data into

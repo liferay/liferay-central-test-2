@@ -14,6 +14,7 @@
 
 package com.liferay.adaptive.media;
 
+import com.liferay.adaptive.media.exception.AdaptiveMediaRuntimeException;
 import com.liferay.portal.kernel.security.RandomUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 

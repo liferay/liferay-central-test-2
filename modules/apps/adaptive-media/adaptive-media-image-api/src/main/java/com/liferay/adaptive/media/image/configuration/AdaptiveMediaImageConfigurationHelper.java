@@ -16,8 +16,8 @@ package com.liferay.adaptive.media.image.configuration;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.adaptive.media.AdaptiveMediaImageConfigurationException;
-import com.liferay.adaptive.media.AdaptiveMediaImageConfigurationException.InvalidStateAdaptiveMediaImageConfigurationException;
+import com.liferay.adaptive.media.exception.AdaptiveMediaImageConfigurationException;
+import com.liferay.adaptive.media.exception.AdaptiveMediaImageConfigurationException.InvalidStateAdaptiveMediaImageConfigurationException;
 
 import java.io.IOException;
 

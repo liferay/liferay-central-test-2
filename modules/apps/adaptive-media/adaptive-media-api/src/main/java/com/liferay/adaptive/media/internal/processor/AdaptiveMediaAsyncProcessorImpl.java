@@ -14,7 +14,7 @@
 
 package com.liferay.adaptive.media.internal.processor;
 
-import com.liferay.adaptive.media.AdaptiveMediaException;
+import com.liferay.adaptive.media.exception.AdaptiveMediaException;
 import com.liferay.adaptive.media.internal.messaging.AdaptiveMediaDestinationNames;
 import com.liferay.adaptive.media.internal.messaging.AdaptiveMediaProcessorCommand;
 import com.liferay.adaptive.media.processor.AdaptiveMediaAsyncProcessor;

@@ -14,7 +14,7 @@
 
 package com.liferay.adaptive.media.content.transformer;
 
-import com.liferay.adaptive.media.AdaptiveMediaException;
+import com.liferay.adaptive.media.exception.AdaptiveMediaException;
 import com.liferay.osgi.service.tracker.collections.map.ServiceTrackerMap;
 
 import java.util.ArrayList;

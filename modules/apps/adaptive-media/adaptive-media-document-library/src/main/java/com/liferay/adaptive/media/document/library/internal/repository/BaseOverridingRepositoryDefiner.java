@@ -14,7 +14,7 @@
 
 package com.liferay.adaptive.media.document.library.internal.repository;
 
-import com.liferay.adaptive.media.AdaptiveMediaException;
+import com.liferay.adaptive.media.exception.AdaptiveMediaException;
 import com.liferay.adaptive.media.processor.AdaptiveMediaAsyncProcessor;
 import com.liferay.adaptive.media.processor.AdaptiveMediaAsyncProcessorLocator;
 import com.liferay.portal.kernel.exception.PortalException;
