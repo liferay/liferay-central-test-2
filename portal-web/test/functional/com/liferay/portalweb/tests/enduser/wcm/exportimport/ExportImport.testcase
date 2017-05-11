@@ -812,6 +812,8 @@
 	</command>
 
 	<command name="ExportImportValidation" priority="4">
+		<property name="test.name.skip.portal.instance" value="ExportImport#ExportImportValidation" />
+
 		<execute macro="Navigator#openURL" />
 
 		<execute macro="ProductMenu#gotoSitesContent">
