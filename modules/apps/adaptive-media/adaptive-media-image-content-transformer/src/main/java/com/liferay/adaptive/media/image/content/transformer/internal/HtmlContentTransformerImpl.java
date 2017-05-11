@@ -45,7 +45,7 @@ public class HtmlContentTransformerImpl implements ContentTransformer<String> {
 
 	@Override
 	public String transform(String html)
-		throws AdaptiveMediaException, PortalException {
+		throws PortalException {
 
 		if (html == null) {
 			return null;

@@ -42,7 +42,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 public class HtmlContentTransformerImplTest {
 
 	@Before
-	public void setUp() throws AdaptiveMediaException, PortalException {
+	public void setUp() throws PortalException {
 		Mockito.when(
 			_dlAppLocalService.getFileEntry(1989L)
 		).thenReturn(

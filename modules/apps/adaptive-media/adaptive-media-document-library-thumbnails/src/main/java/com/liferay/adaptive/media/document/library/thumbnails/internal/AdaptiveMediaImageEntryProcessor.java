@@ -151,7 +151,7 @@ public class AdaptiveMediaImageEntryProcessor
 
 			return false;
 		}
-		catch (AdaptiveMediaException | PortalException e) {
+		catch (PortalException pe) {
 			return false;
 		}
 	}
@@ -198,7 +198,7 @@ public class AdaptiveMediaImageEntryProcessor
 
 	private Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>>
 			_getThumbnailAdaptiveMedia(FileVersion fileVersion)
-		throws AdaptiveMediaException, PortalException {
+		throws PortalException {
 
 		return _adaptiveMediaImageFinder.getAdaptiveMedia(queryBuilder ->
 			queryBuilder.forVersion(fileVersion).with(

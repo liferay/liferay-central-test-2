@@ -61,7 +61,7 @@ public final class AdaptiveMediaAsyncProcessorImpl<M, T>
 
 	@Override
 	public void triggerCleanUp(M model, String modelId)
-		throws AdaptiveMediaException, PortalException {
+		throws PortalException {
 
 		if (Validator.isNotNull(modelId)) {
 			_modelIds.putIfAbsent(
@@ -110,7 +110,7 @@ public final class AdaptiveMediaAsyncProcessorImpl<M, T>
 
 	@Override
 	public void triggerProcess(M model, String modelId)
-		throws AdaptiveMediaException, PortalException {
+		throws PortalException {
 
 		if (Validator.isNotNull(modelId)) {
 			_modelIds.putIfAbsent(

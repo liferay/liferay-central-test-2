@@ -60,7 +60,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 public class MediaQueryProviderImplTest {
 
 	@Before
-	public void setUp() throws AdaptiveMediaException, PortalException {
+	public void setUp() throws PortalException {
 		Mockito.when(
 			_fileEntry.getCompanyId()
 		).thenReturn(
@@ -608,7 +608,7 @@ public class MediaQueryProviderImplTest {
 	private void _addAdaptiveMedias(
 			FileEntry fileEntry,
 			AdaptiveMedia<AdaptiveMediaImageProcessor>...adaptiveMedias)
-		throws AdaptiveMediaException, PortalException {
+		throws PortalException {
 
 		Mockito.when(
 			_adaptiveMediaImageFinder.getAdaptiveMedia(

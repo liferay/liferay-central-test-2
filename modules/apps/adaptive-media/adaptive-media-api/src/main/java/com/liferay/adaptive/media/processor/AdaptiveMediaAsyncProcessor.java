@@ -30,9 +30,9 @@ public interface AdaptiveMediaAsyncProcessor<M, T> {
 		AdaptiveMediaProcessorCommand command, String modelId);
 
 	public void triggerCleanUp(M model, String modelId)
-		throws AdaptiveMediaException, PortalException;
+		throws PortalException;
 
 	public void triggerProcess(M model, String modelId)
-		throws AdaptiveMediaException, PortalException;
+		throws PortalException;
 
 }

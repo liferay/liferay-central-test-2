@@ -55,6 +55,6 @@ public interface AdaptiveMediaFinder
 	 */
 	public Stream<AdaptiveMedia<T>> getAdaptiveMedia(
 			Function<B, AdaptiveMediaQuery<M, T>> queryBuilderFunction)
-		throws AdaptiveMediaException, PortalException;
+		throws PortalException;
 
 }

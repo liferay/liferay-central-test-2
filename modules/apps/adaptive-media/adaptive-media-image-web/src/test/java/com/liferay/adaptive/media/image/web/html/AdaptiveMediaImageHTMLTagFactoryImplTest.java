@@ -43,7 +43,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 public class AdaptiveMediaImageHTMLTagFactoryImplTest {
 
 	@Before
-	public void setUp() throws AdaptiveMediaException, PortalException {
+	public void setUp() throws PortalException {
 		_adaptiveMediaImageHTMLTagFactory.setMediaQueryProvider(
 			_mediaQueryProvider);
 

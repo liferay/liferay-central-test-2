@@ -54,7 +54,7 @@ public class MediaQueryProviderImpl implements MediaQueryProvider {
 
 	@Override
 	public List<MediaQuery> getMediaQueries(FileEntry fileEntry)
-		throws AdaptiveMediaException, PortalException {
+		throws PortalException {
 
 		Collection<AdaptiveMedia<AdaptiveMediaImageProcessor>> adaptiveMedias =
 			_getAdaptiveMedias(fileEntry);
@@ -117,7 +117,7 @@ public class MediaQueryProviderImpl implements MediaQueryProvider {
 				).done()
 			).findFirst();
 		}
-		catch (AdaptiveMediaException | PortalException e) {
+		catch (PortalException pe) {
 			return Optional.empty();
 		}
 	}
@@ -156,7 +156,7 @@ public class MediaQueryProviderImpl implements MediaQueryProvider {
 
 	private Collection<AdaptiveMedia<AdaptiveMediaImageProcessor>>
 			_getAdaptiveMedias(FileEntry fileEntry)
-		throws AdaptiveMediaException, PortalException {
+		throws PortalException {
 
 		Collection<AdaptiveMediaImageConfigurationEntry> configurationEntries =
 			_adaptiveMediaImageConfigurationHelper.

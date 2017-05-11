@@ -109,7 +109,7 @@ public class AdaptiveMediaImageRequestHandler
 
 	private AdaptiveMedia<AdaptiveMediaImageProcessor>
 			_createRawAdaptiveMedia(FileVersion fileVersion)
-		throws AdaptiveMediaException, PortalException {
+		throws PortalException {
 
 		Map<String, String> properties = new HashMap<>();
 
@@ -181,8 +181,8 @@ public class AdaptiveMediaImageRequestHandler
 
 			return Optional.of(_createRawAdaptiveMedia(fileVersion));
 		}
-		catch (AdaptiveMediaException | PortalException e) {
-			throw new AdaptiveMediaRuntimeException(e);
+		catch (PortalException pe) {
+			throw new AdaptiveMediaRuntimeException(pe);
 		}
 	}
 
@@ -217,8 +217,8 @@ public class AdaptiveMediaImageRequestHandler
 					return nextStep.done();
 				}).sorted(_getComparator(configurationWidth)).findFirst();
 		}
-		catch (AdaptiveMediaException | PortalException e) {
-			throw new AdaptiveMediaRuntimeException(e);
+		catch (PortalException pe) {
+			throw new AdaptiveMediaRuntimeException(pe);
 		}
 	}
 
@@ -226,7 +226,7 @@ public class AdaptiveMediaImageRequestHandler
 			_findExactAdaptiveMedia(
 				FileVersion fileVersion,
 				AdaptiveMediaImageConfigurationEntry configurationEntry)
-		throws AdaptiveMediaException, PortalException {
+		throws PortalException {
 
 		return _finder.getAdaptiveMedia(
 			queryBuilder -> queryBuilder.forVersion(fileVersion).
@@ -329,7 +329,7 @@ public class AdaptiveMediaImageRequestHandler
 			asyncProcessor.triggerProcess(
 				fileVersion, String.valueOf(fileVersion.getFileVersionId()));
 		}
-		catch (AdaptiveMediaException | PortalException e) {
+		catch (PortalException pe) {
 			_log.error(
 				"Unable to create lazy adaptive media for file version id " +
 					fileVersion.getFileVersionId());

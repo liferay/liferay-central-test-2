@@ -105,7 +105,7 @@ public class AdaptiveMediaImageDLPluggableContentDataHandler
 
 	private void _exportMedia(
 			PortletDataContext portletDataContext, FileEntry fileEntry)
-		throws AdaptiveMediaException, IOException, PortalException {
+		throws IOException, PortalException {
 
 		List<FileVersion> fileVersions = fileEntry.getFileVersions(
 			WorkflowConstants.STATUS_APPROVED);

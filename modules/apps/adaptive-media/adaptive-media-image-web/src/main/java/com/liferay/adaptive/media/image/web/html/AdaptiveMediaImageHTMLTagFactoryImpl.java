@@ -43,7 +43,7 @@ public class AdaptiveMediaImageHTMLTagFactoryImpl
 
 	@Override
 	public String create(String originalImgTag, FileEntry fileEntry)
-		throws AdaptiveMediaException, PortalException {
+		throws PortalException {
 
 		List<String> sourceElements = _getSourceElements(fileEntry);
 
@@ -123,7 +123,7 @@ public class AdaptiveMediaImageHTMLTagFactoryImpl
 	}
 
 	private List<String> _getSourceElements(FileEntry fileEntry)
-		throws AdaptiveMediaException, PortalException {
+		throws PortalException {
 
 		List<MediaQuery> mediaQueries = _mediaQueryProvider.getMediaQueries(
 			fileEntry);

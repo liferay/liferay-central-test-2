@@ -24,6 +24,6 @@ import com.liferay.portal.kernel.repository.model.FileEntry;
 public interface AdaptiveMediaImageHTMLTagFactory {
 
 	public String create(String originalImgTag, FileEntry fileEntry)
-		throws AdaptiveMediaException, PortalException;
+		throws PortalException;
 
 }

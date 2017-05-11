@@ -26,6 +26,6 @@ public interface AdaptiveMediaImageProcessor
 	extends AdaptiveMediaProcessor<FileVersion, AdaptiveMediaImageProcessor> {
 
 	public void process(FileVersion fileVersion, String configurationEntryUuid)
-		throws AdaptiveMediaException, PortalException;
+		throws PortalException;
 
 }

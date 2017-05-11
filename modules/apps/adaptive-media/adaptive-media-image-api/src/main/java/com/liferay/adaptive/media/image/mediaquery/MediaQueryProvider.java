@@ -26,6 +26,6 @@ import java.util.List;
 public interface MediaQueryProvider {
 
 	public List<MediaQuery> getMediaQueries(FileEntry fileEntry)
-		throws AdaptiveMediaException, PortalException;
+		throws PortalException;
 
 }

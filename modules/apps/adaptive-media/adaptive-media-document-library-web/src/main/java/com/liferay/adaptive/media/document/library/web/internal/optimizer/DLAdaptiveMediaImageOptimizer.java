@@ -135,11 +135,11 @@ public class DLAdaptiveMediaImageOptimizer
 						_sendStatusMessage(
 							atomicCounter.incrementAndGet(), total);
 					}
-					catch (AdaptiveMediaException | PortalException e) {
+					catch (PortalException pe) {
 						_log.error(
 							"Unable to process file entry id " +
 								fileEntry.getFileEntryId(),
-							e);
+							pe);
 					}
 				}
 

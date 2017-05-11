@@ -146,8 +146,8 @@ public abstract class BaseOverridingRepositoryDefiner
 					String.valueOf(fileVersion.getFileVersionId()));
 			}
 		}
-		catch (AdaptiveMediaException | PortalException e) {
-			throw new RuntimeException(e);
+		catch (PortalException pe) {
+			throw new RuntimeException(pe);
 		}
 	}
 
@@ -185,8 +185,8 @@ public abstract class BaseOverridingRepositoryDefiner
 				latestFileVersion,
 				String.valueOf(latestFileVersion.getFileVersionId()));
 		}
-		catch (AdaptiveMediaException | PortalException e) {
-			throw new RuntimeException(e);
+		catch (PortalException pe) {
+			throw new RuntimeException(pe);
 		}
 	}
 
