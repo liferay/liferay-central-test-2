@@ -50,7 +50,7 @@ public class DDMDataProviderResponse {
 
 	public enum Status {
 
-		INTERNAL_SERVER_ERROR, OK, SERVICE_UNAVAILABLE
+		INTERNAL_SERVER_ERROR, OK, SERVICE_UNAVAILABLE, UNAUTHORIZED
 
 	}
 
