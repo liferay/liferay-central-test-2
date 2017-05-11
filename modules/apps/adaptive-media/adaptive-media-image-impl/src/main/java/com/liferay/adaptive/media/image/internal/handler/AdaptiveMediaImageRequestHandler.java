@@ -199,22 +199,18 @@ public class AdaptiveMediaImageRequestHandler
 			properties.get("max-height"));
 
 		try {
-			return _finder.getAdaptiveMedia(
-				queryBuilder -> {
-					AdaptiveMediaImageQueryBuilder.InitialStep initialStep =
-						queryBuilder.forVersion(fileVersion);
-
-					AdaptiveMediaImageQueryBuilder.FuzzySortStep nextStep =
-						initialStep.with(
-							AdaptiveMediaImageAttribute.IMAGE_WIDTH,
-							configurationWidth);
-
-					nextStep = nextStep.with(
-						AdaptiveMediaImageAttribute.IMAGE_HEIGHT,
-						configurationHeight);
-
-					return nextStep.done();
-				}).sorted(_getComparator(configurationWidth)).findFirst();
+			return _finder.getAdaptiveMedia(queryBuilder ->
+				queryBuilder.forVersion(
+					fileVersion
+				).with(
+					AdaptiveMediaImageAttribute.IMAGE_WIDTH, configurationWidth
+				).with(
+					AdaptiveMediaImageAttribute.IMAGE_HEIGHT,
+					configurationHeight
+				).done()
+			).sorted(
+				_getComparator(configurationWidth)
+			).findFirst();
 		}
 		catch (PortalException pe) {
 			throw new AdaptiveMediaRuntimeException(pe);
@@ -227,10 +223,13 @@ public class AdaptiveMediaImageRequestHandler
 				AdaptiveMediaImageConfigurationEntry configurationEntry)
 		throws PortalException {
 
-		return _finder.getAdaptiveMedia(
-			queryBuilder -> queryBuilder.forVersion(fileVersion).
-				forConfiguration(configurationEntry.getUUID()).done()).
-				findFirst();
+		return _finder.getAdaptiveMedia(queryBuilder ->
+			queryBuilder.forVersion(
+				fileVersion
+			).forConfiguration(
+				configurationEntry.getUUID()
+			).done()
+		).findFirst();
 	}
 
 	private Comparator<AdaptiveMedia<AdaptiveMediaImageProcessor>>

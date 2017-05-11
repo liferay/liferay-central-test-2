@@ -122,9 +122,10 @@ public class AdaptiveMediaImageProcessorTest {
 			FileEntry fileEntry = _addNonImageFileEntry(serviceContext);
 
 			Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>> stream =
-				_finder.getAdaptiveMedia(
-					queryBuilder ->
-						queryBuilder.allForFileEntry(fileEntry).done());
+				_finder.getAdaptiveMedia(queryBuilder ->
+					queryBuilder.allForFileEntry(
+						fileEntry
+					).done());
 
 			Assert.assertEquals(0, stream.count());
 		}
@@ -143,9 +144,10 @@ public class AdaptiveMediaImageProcessorTest {
 			final FileEntry fileEntry = _addImageFileEntry(serviceContext);
 
 			Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>> stream =
-				_finder.getAdaptiveMedia(
-					queryBuilder ->
-						queryBuilder.allForFileEntry(fileEntry).done());
+				_finder.getAdaptiveMedia(queryBuilder ->
+					queryBuilder.allForFileEntry(
+						fileEntry
+					).done());
 
 			Assert.assertEquals(_getVariantsCount(), stream.count());
 		}
@@ -165,9 +167,10 @@ public class AdaptiveMediaImageProcessorTest {
 			FileEntry fileEntry = _addNonImageFileEntry(serviceContext);
 
 			Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>> stream =
-				_finder.getAdaptiveMedia(
-					queryBuilder ->
-						queryBuilder.allForFileEntry(fileEntry).done());
+				_finder.getAdaptiveMedia(queryBuilder ->
+					queryBuilder.allForFileEntry(
+						fileEntry
+					).done());
 
 			Assert.assertEquals(0, stream.count());
 		}
@@ -187,9 +190,10 @@ public class AdaptiveMediaImageProcessorTest {
 			_processor.cleanUp(fileEntry.getLatestFileVersion(true));
 
 			Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>> stream =
-				_finder.getAdaptiveMedia(
-					queryBuilder ->
-						queryBuilder.allForFileEntry(fileEntry).done());
+				_finder.getAdaptiveMedia(queryBuilder ->
+					queryBuilder.allForFileEntry(
+						fileEntry
+					).done());
 
 			Assert.assertEquals(0, stream.count());
 		}
@@ -209,9 +213,10 @@ public class AdaptiveMediaImageProcessorTest {
 			_processor.cleanUp(fileEntry.getLatestFileVersion(true));
 
 			Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>> stream =
-				_finder.getAdaptiveMedia(
-					queryBuilder ->
-						queryBuilder.allForFileEntry(fileEntry).done());
+				_finder.getAdaptiveMedia(queryBuilder ->
+					queryBuilder.allForFileEntry(
+						fileEntry
+					).done());
 
 			Assert.assertEquals(0, stream.count());
 		}

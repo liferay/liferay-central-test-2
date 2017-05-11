@@ -113,7 +113,9 @@ public class AdaptiveMediaImageDLPluggableContentDataHandler
 			Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>> stream =
 				_finder.getAdaptiveMedia(
 					queryBuilder ->
-						queryBuilder.allForVersion(fileVersion).done());
+						queryBuilder.allForVersion(
+							fileVersion
+						).done());
 
 			List<AdaptiveMedia<AdaptiveMediaImageProcessor>> mediaList =
 				stream.collect(Collectors.toList());
