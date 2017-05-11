@@ -24,12 +24,9 @@ import com.liferay.portal.kernel.template.TemplateResource;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.osgi.framework.Bundle;
@@ -53,27 +50,6 @@ public class SoyTemplateResourcesTracker {
 
 	public List<TemplateResource> getAllTemplateResources() {
 		return _templateResources;
-	}
-
-	public Bundle getBundle(long bundleId) {
-		return _bundleMap.get(bundleId);
-	}
-
-	public Collection<Bundle> getBundles() {
-		return _bundleMap.values();
-	}
-
-	public Bundle getTemplateBundle(String templateId) {
-		long bundleId = getBundleId(templateId);
-
-		Bundle bundle = getBundle(bundleId);
-
-		if (bundle == null) {
-			throw new IllegalStateException(
-				"There are no bundles providing " + bundleId);
-		}
-
-		return bundle;
 	}
 
 	protected static long getBundleId(String templateId) {
@@ -113,8 +89,6 @@ public class SoyTemplateResourcesTracker {
 	private static final Log _log = LogFactoryUtil.getLog(
 		SoyTemplateResourcesTracker.class);
 
-	private static final Map<Long, Bundle> _bundleMap =
-		new ConcurrentHashMap<>();
 	private static final List<TemplateResource> _templateResources =
 		new CopyOnWriteArrayList<>();
 
