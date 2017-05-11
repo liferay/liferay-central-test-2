@@ -1322,7 +1322,7 @@
 		<execute macro="Workflow#confirmAndViewSucessMessageViaDetails" />
 	</command>
 
-	<command name="AssignThenApproveWorkflowTaskAsPortalContentReviewer" priority="3">
+	<command ignore="true" name="AssignThenApproveWorkflowTaskAsPortalContentReviewer" priority="3">
 		<description message="This is a use case for LPS-66668." />
 
 		<property name="test.name.skip.portal.instance" value="WorkflowadminUsecase#AssignThenApproveWorkflowTaskAsPortalContentReviewer" />
