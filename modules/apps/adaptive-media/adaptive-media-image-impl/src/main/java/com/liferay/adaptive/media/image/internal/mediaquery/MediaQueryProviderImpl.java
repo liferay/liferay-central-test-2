@@ -27,6 +27,8 @@ import com.liferay.adaptive.media.image.processor.AdaptiveMediaImageAttribute;
 import com.liferay.adaptive.media.image.processor.AdaptiveMediaImageProcessor;
 import com.liferay.adaptive.media.image.url.AdaptiveMediaImageURLFactory;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.util.StringBundler;
 
@@ -117,6 +119,10 @@ public class MediaQueryProviderImpl implements MediaQueryProvider {
 			).findFirst();
 		}
 		catch (PortalException pe) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(pe);
+			}
+
 			return Optional.empty();
 		}
 	}
@@ -310,6 +316,9 @@ public class MediaQueryProviderImpl implements MediaQueryProvider {
 
 		return _getAttribute(configurationEntry, "max-width");
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		MediaQueryProviderImpl.class);
 
 	private AdaptiveMediaImageConfigurationHelper
 		_adaptiveMediaImageConfigurationHelper;

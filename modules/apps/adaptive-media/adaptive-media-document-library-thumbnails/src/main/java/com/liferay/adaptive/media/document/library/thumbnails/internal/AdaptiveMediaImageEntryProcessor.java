@@ -25,6 +25,8 @@ import com.liferay.document.library.kernel.util.DLProcessor;
 import com.liferay.document.library.kernel.util.ImageProcessor;
 import com.liferay.exportimport.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.xml.Element;
@@ -151,6 +153,10 @@ public class AdaptiveMediaImageEntryProcessor
 			return false;
 		}
 		catch (PortalException pe) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(pe);
+			}
+
 			return false;
 		}
 	}
@@ -213,6 +219,9 @@ public class AdaptiveMediaImageEntryProcessor
 
 		return supportedMimeTypes.contains(mimeType);
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		AdaptiveMediaImageEntryProcessor.class);
 
 	@Reference
 	private AdaptiveMediaImageFinder _adaptiveMediaImageFinder;
