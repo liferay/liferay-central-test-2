@@ -67,15 +67,6 @@ public class InfoPanelMVCResourceCommand extends BaseMVCResourceCommand {
 			"/adaptive_media/info_panel.jsp");
 	}
 
-	@Reference(unbind = "-")
-	protected void setAdaptiveMediaImageConfigurationHelper(
-		AdaptiveMediaImageConfigurationHelper
-			adaptiveMediaImageConfigurationHelper) {
-
-		_adaptiveMediaImageConfigurationHelper =
-			adaptiveMediaImageConfigurationHelper;
-	}
-
 	private List<AdaptiveMediaImageConfigurationEntry>
 		_getAdaptiveMediaImageConfigurationEntries(
 			ResourceRequest resourceRequest) {
@@ -120,6 +111,7 @@ public class InfoPanelMVCResourceCommand extends BaseMVCResourceCommand {
 		return configurationEntries;
 	}
 
+	@Reference
 	private AdaptiveMediaImageConfigurationHelper
 		_adaptiveMediaImageConfigurationHelper;
 

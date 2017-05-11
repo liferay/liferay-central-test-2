@@ -57,11 +57,7 @@ public class AdaptiveMediaMessagingConfigurator {
 		_serviceRegistration.unregister();
 	}
 
-	@Reference(unbind = "-")
-	public void setDestinationFactory(DestinationFactory destinationFactory) {
-		_destinationFactory = destinationFactory;
-	}
-
+	@Reference
 	private DestinationFactory _destinationFactory;
 	private ServiceRegistration<Destination> _serviceRegistration;
 

@@ -91,53 +91,28 @@ public class AdaptiveMediaImageDemo
 		_omniAdminUserDemoDataCreator.delete();
 	}
 
-	@Reference(unbind = "-")
-	protected void setConfigurationDemoDataCreator(
-		AdaptiveMediaImageConfigurationDemoDataCreator
-			configurationDemoDataCreator) {
-
-		_configurationDemoDataCreator = configurationDemoDataCreator;
-	}
-
-	@Reference(unbind = "-")
-	protected void setFileEntryDemoDataCreator(
-		FileEntryDemoDataCreator fileEntryDemoDataCreator) {
-
-		_fileEntryDemoDataCreator = fileEntryDemoDataCreator;
-	}
-
-	@Reference(unbind = "-")
-	protected void setGroupLocalService(GroupLocalService groupLocalService) {
-		_groupLocalService = groupLocalService;
-	}
-
 	@Reference(target = ModuleServiceLifecycle.PORTAL_INITIALIZED, unbind = "-")
 	protected void setModuleServiceLifecycle(
 		ModuleServiceLifecycle moduleServiceLifecycle) {
 	}
 
-	@Reference(unbind = "-")
-	protected void setOmniAdminUserDemoDataCreator(
-		OmniAdminUserDemoDataCreator omniAdminUserDemoDataCreator) {
-
-		_omniAdminUserDemoDataCreator = omniAdminUserDemoDataCreator;
-	}
-
-	@Reference(unbind = "-")
-	protected void setRootFolderDemoDataCreator(
-		RootFolderDemoDataCreator rootFolderDemoDataCreator) {
-
-		_rootFolderDemoDataCreator = rootFolderDemoDataCreator;
-	}
-
 	private static final Log _log = LogFactoryUtil.getLog(
 		AdaptiveMediaImageDemo.class);
 
+	@Reference
 	private AdaptiveMediaImageConfigurationDemoDataCreator
 		_configurationDemoDataCreator;
+
+	@Reference
 	private FileEntryDemoDataCreator _fileEntryDemoDataCreator;
+
+	@Reference
 	private GroupLocalService _groupLocalService;
+
+	@Reference
 	private OmniAdminUserDemoDataCreator _omniAdminUserDemoDataCreator;
+
+	@Reference
 	private RootFolderDemoDataCreator _rootFolderDemoDataCreator;
 
 }

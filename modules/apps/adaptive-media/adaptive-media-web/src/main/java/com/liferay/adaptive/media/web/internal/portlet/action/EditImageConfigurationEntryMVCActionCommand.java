@@ -180,15 +180,6 @@ public class EditImageConfigurationEntryMVCActionCommand
 		}
 	}
 
-	@Reference(unbind = "-")
-	protected void setAdaptiveMediaImageConfigurationHelper(
-		AdaptiveMediaImageConfigurationHelper
-			adaptiveMediaImageConfigurationHelper) {
-
-		_adaptiveMediaImageConfigurationHelper =
-			adaptiveMediaImageConfigurationHelper;
-	}
-
 	private AdaptiveMediaImageConfigurationEntry
 			_addHighResolutionConfigurationEntry(
 				long companyId,
@@ -259,6 +250,7 @@ public class EditImageConfigurationEntryMVCActionCommand
 		return false;
 	}
 
+	@Reference
 	private AdaptiveMediaImageConfigurationHelper
 		_adaptiveMediaImageConfigurationHelper;
 

@@ -75,13 +75,7 @@ public class AdaptedImagesPercentageMVCResourceCommand
 			resourceRequest, resourceResponse, jsonObject);
 	}
 
-	@Reference(unbind = "-")
-	protected void setAdaptiveMediaImageEntryLocalService(
-		AdaptiveMediaImageEntryLocalService imageEntryLocalService) {
-
-		_imageEntryLocalService = imageEntryLocalService;
-	}
-
+	@Reference
 	private AdaptiveMediaImageEntryLocalService _imageEntryLocalService;
 
 }

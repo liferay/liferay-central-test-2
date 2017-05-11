@@ -65,15 +65,6 @@ public class ViewMVCRenderCommand implements MVCRenderCommand {
 		return "/adaptive_media/view.jsp";
 	}
 
-	@Reference(unbind = "-")
-	protected void setAdaptiveMediaImageConfigurationHelper(
-		AdaptiveMediaImageConfigurationHelper
-			adaptiveMediaImageConfigurationHelper) {
-
-		_adaptiveMediaImageConfigurationHelper =
-			adaptiveMediaImageConfigurationHelper;
-	}
-
 	private Collection<AdaptiveMediaImageConfigurationEntry>
 		_getAdaptiveMediaImageConfigurationEntries(
 			RenderRequest renderRequest) {
@@ -101,6 +92,7 @@ public class ViewMVCRenderCommand implements MVCRenderCommand {
 				themeDisplay.getCompanyId(), predicate);
 	}
 
+	@Reference
 	private AdaptiveMediaImageConfigurationHelper
 		_adaptiveMediaImageConfigurationHelper;
 

@@ -87,15 +87,7 @@ public class EditImageConfigurationEntryMVCRenderCommand
 		return "/adaptive_media/edit_image_configuration_entry.jsp";
 	}
 
-	@Reference(unbind = "-")
-	protected void setAdaptiveMediaImageConfigurationHelper(
-		AdaptiveMediaImageConfigurationHelper
-			adaptiveMediaImageConfigurationHelper) {
-
-		_adaptiveMediaImageConfigurationHelper =
-			adaptiveMediaImageConfigurationHelper;
-	}
-
+	@Reference
 	private AdaptiveMediaImageConfigurationHelper
 		_adaptiveMediaImageConfigurationHelper;
 

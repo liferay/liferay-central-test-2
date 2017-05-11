@@ -85,9 +85,9 @@ public class BlogsPortletFilter implements RenderFilter {
 	}
 
 	@Reference
-	protected ContentTransformerHandler contentTransformerHandler;
+	private ContentTransformerHandler contentTransformerHandler;
 
 	@Reference
-	protected Portal portal;
+	private Portal portal;
 
 }
