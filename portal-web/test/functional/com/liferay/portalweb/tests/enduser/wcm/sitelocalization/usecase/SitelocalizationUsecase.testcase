@@ -545,6 +545,7 @@
 			<var name="currentSiteLanguages" value="español (España),alemán (Alemania)" />
 			<var name="displaySettings" value="Display Settings" />
 			<var name="localizedLanguageTab" value="Idiomas" />
+			<var name="localizedSaveButton" value="Guardar" />
 			<var name="localizedSuccessMessage" value="Su petición ha terminado con éxito." />
 		</execute>
 
