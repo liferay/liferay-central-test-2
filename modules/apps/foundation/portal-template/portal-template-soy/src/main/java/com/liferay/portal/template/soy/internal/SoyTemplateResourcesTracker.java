@@ -18,10 +18,10 @@ import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.cache.SingleVMPoolUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.template.TemplateConstants;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateResource;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.template.soy.utils.SoyTemplateUtil;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -50,24 +50,6 @@ public class SoyTemplateResourcesTracker {
 
 	public List<TemplateResource> getAllTemplateResources() {
 		return _templateResources;
-	}
-
-	protected static long getBundleId(String templateId) {
-		int pos = templateId.indexOf(TemplateConstants.BUNDLE_SEPARATOR);
-
-		if (pos == -1) {
-			if (_log.isDebugEnabled()) {
-				String message = String.format(
-					"The templateId \"%s\" does not map to a Soy template",
-					templateId);
-
-				_log.debug(message);
-			}
-
-			return -1;
-		}
-
-		return Long.valueOf(templateId.substring(0, pos));
 	}
 
 	@Activate
@@ -192,7 +174,7 @@ public class SoyTemplateResourcesTracker {
 			while (iterator.hasNext()) {
 				TemplateResource templateResource = iterator.next();
 
-				long bundleId = SoyTemplateResourcesTracker.getBundleId(
+				long bundleId = SoyTemplateUtil.getBundleId(
 					templateResource.getTemplateId());
 
 				if (bundle.getBundleId() == bundleId) {
