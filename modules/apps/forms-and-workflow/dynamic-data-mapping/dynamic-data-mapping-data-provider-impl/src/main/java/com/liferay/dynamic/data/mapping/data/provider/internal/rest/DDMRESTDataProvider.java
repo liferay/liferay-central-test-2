@@ -63,7 +63,7 @@ public class DDMRESTDataProvider implements DDMDataProvider {
 
 		try {
 			DDMDataProviderRequest ddmDataProviderRequest =
-				new DDMDataProviderRequest(ddmDataProviderContext, null);
+				createDDMDataProviderRequest(ddmDataProviderContext);
 
 			DDMDataProviderResponse ddmDataProviderResponse = doGetData(
 				ddmDataProviderRequest);
@@ -108,6 +108,23 @@ public class DDMRESTDataProvider implements DDMDataProvider {
 	@Override
 	public Class<?> getSettings() {
 		return DDMRESTDataProviderSettings.class;
+	}
+
+	protected DDMDataProviderRequest createDDMDataProviderRequest(
+		DDMDataProviderContext ddmDataProviderContext) {
+
+		DDMDataProviderRequest ddmDataProviderRequest =
+			new DDMDataProviderRequest(null, null);
+
+		ddmDataProviderRequest.setDDMDataProviderContext(
+			ddmDataProviderContext);
+
+		// Backwards compatibility
+
+		ddmDataProviderRequest.queryString(
+			ddmDataProviderContext.getParameters());
+
+		return ddmDataProviderRequest;
 	}
 
 	protected DDMDataProviderResponse createDDMDataProviderResponse(
