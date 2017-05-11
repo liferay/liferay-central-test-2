@@ -14,8 +14,8 @@
 
 package com.liferay.adaptive.media.image.content.transformer.internal;
 
-import com.liferay.adaptive.media.exception.AdaptiveMediaException;
 import com.liferay.adaptive.media.content.transformer.constants.ContentTransformerContentTypes;
+import com.liferay.adaptive.media.exception.AdaptiveMediaException;
 import com.liferay.adaptive.media.image.html.AdaptiveMediaImageHTMLTagFactory;
 import com.liferay.document.library.kernel.service.DLAppLocalService;
 import com.liferay.portal.kernel.exception.PortalException;

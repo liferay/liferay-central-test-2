@@ -14,8 +14,6 @@
 
 package com.liferay.adaptive.media.exception;
 
-import com.liferay.adaptive.media.AdaptiveMediaAttribute;
-
 /**
  * @author Adolfo Pérez
  */
