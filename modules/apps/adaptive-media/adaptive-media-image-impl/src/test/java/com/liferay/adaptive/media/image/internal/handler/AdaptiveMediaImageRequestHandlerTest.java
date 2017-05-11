@@ -90,7 +90,7 @@ public class AdaptiveMediaImageRequestHandlerTest {
 			_fileVersion, configurationEntry);
 
 		Mockito.when(
-			_finder.getAdaptiveMedia(Mockito.any(Function.class))
+			_finder.getAdaptiveMediaStream(Mockito.any(Function.class))
 		).thenThrow(
 			AdaptiveMediaException.class
 		);
@@ -108,7 +108,7 @@ public class AdaptiveMediaImageRequestHandlerTest {
 			_fileVersion, configurationEntry);
 
 		Mockito.when(
-			_finder.getAdaptiveMedia(Mockito.any(Function.class))
+			_finder.getAdaptiveMediaStream(Mockito.any(Function.class))
 		).thenThrow(
 			PortalException.class
 		);
@@ -240,7 +240,7 @@ public class AdaptiveMediaImageRequestHandlerTest {
 			_fileVersion, configurationEntry);
 
 		Mockito.when(
-			_finder.getAdaptiveMedia(Mockito.any(Function.class))
+			_finder.getAdaptiveMediaStream(Mockito.any(Function.class))
 		).thenAnswer(
 			invocation -> Stream.empty()
 		);
@@ -426,7 +426,7 @@ public class AdaptiveMediaImageRequestHandlerTest {
 		throws Exception {
 
 		Mockito.when(
-			_finder.getAdaptiveMedia(Mockito.any(Function.class))
+			_finder.getAdaptiveMediaStream(Mockito.any(Function.class))
 		).thenAnswer(
 			invocation -> {
 				Function<AdaptiveMediaImageQueryBuilder, AdaptiveMediaQuery>
@@ -476,7 +476,7 @@ public class AdaptiveMediaImageRequestHandlerTest {
 		throws Exception {
 
 		Mockito.when(
-			_finder.getAdaptiveMedia(Mockito.any(Function.class))
+			_finder.getAdaptiveMediaStream(Mockito.any(Function.class))
 		).thenAnswer(
 			invocation -> {
 				Function<AdaptiveMediaImageQueryBuilder, AdaptiveMediaQuery>

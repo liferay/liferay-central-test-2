@@ -110,7 +110,7 @@ public class MediaQueryProviderImpl implements MediaQueryProvider {
 			AdaptiveMediaImageConfigurationEntry configurationEntry) {
 
 		try {
-			return _adaptiveMediaImageFinder.getAdaptiveMedia(queryBuilder ->
+			return _adaptiveMediaImageFinder.getAdaptiveMediaStream(queryBuilder ->
 				queryBuilder.forFileEntry(
 					fileEntry
 				).forConfiguration(

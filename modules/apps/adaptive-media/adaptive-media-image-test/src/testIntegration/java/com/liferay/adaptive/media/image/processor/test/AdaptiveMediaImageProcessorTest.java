@@ -122,7 +122,7 @@ public class AdaptiveMediaImageProcessorTest {
 			FileEntry fileEntry = _addNonImageFileEntry(serviceContext);
 
 			Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>> stream =
-				_finder.getAdaptiveMedia(queryBuilder ->
+				_finder.getAdaptiveMediaStream(queryBuilder ->
 					queryBuilder.allForFileEntry(
 						fileEntry
 					).done());
@@ -144,7 +144,7 @@ public class AdaptiveMediaImageProcessorTest {
 			final FileEntry fileEntry = _addImageFileEntry(serviceContext);
 
 			Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>> stream =
-				_finder.getAdaptiveMedia(queryBuilder ->
+				_finder.getAdaptiveMediaStream(queryBuilder ->
 					queryBuilder.allForFileEntry(
 						fileEntry
 					).done());
@@ -167,7 +167,7 @@ public class AdaptiveMediaImageProcessorTest {
 			FileEntry fileEntry = _addNonImageFileEntry(serviceContext);
 
 			Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>> stream =
-				_finder.getAdaptiveMedia(queryBuilder ->
+				_finder.getAdaptiveMediaStream(queryBuilder ->
 					queryBuilder.allForFileEntry(
 						fileEntry
 					).done());
@@ -190,7 +190,7 @@ public class AdaptiveMediaImageProcessorTest {
 			_processor.cleanUp(fileEntry.getLatestFileVersion(true));
 
 			Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>> stream =
-				_finder.getAdaptiveMedia(queryBuilder ->
+				_finder.getAdaptiveMediaStream(queryBuilder ->
 					queryBuilder.allForFileEntry(
 						fileEntry
 					).done());
@@ -213,7 +213,7 @@ public class AdaptiveMediaImageProcessorTest {
 			_processor.cleanUp(fileEntry.getLatestFileVersion(true));
 
 			Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>> stream =
-				_finder.getAdaptiveMedia(queryBuilder ->
+				_finder.getAdaptiveMediaStream(queryBuilder ->
 					queryBuilder.allForFileEntry(
 						fileEntry
 					).done());

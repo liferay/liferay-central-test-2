@@ -205,7 +205,7 @@ public class AdaptiveMediaImageEntryProcessor
 			_getThumbnailAdaptiveMedia(FileVersion fileVersion)
 		throws PortalException {
 
-		return _adaptiveMediaImageFinder.getAdaptiveMedia(queryBuilder ->
+		return _adaptiveMediaImageFinder.getAdaptiveMediaStream(queryBuilder ->
 			queryBuilder.forVersion(
 				fileVersion
 			).with(

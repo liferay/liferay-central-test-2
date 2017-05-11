@@ -111,7 +111,7 @@ public class AdaptiveMediaImageDLPluggableContentDataHandler
 
 		for (FileVersion fileVersion : fileVersions) {
 			Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>> stream =
-				_finder.getAdaptiveMedia(
+				_finder.getAdaptiveMediaStream(
 					queryBuilder ->
 						queryBuilder.allForVersion(
 							fileVersion

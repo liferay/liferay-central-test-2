@@ -21,7 +21,6 @@ import com.liferay.adaptive.media.handler.AdaptiveMediaRequestHandler;
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationHelper;
 import com.liferay.adaptive.media.image.finder.AdaptiveMediaImageFinder;
-import com.liferay.adaptive.media.image.finder.AdaptiveMediaImageQueryBuilder;
 import com.liferay.adaptive.media.image.internal.configuration.AdaptiveMediaImageAttributeMapping;
 import com.liferay.adaptive.media.image.internal.processor.AdaptiveMediaImage;
 import com.liferay.adaptive.media.image.internal.util.Tuple;
@@ -199,7 +198,7 @@ public class AdaptiveMediaImageRequestHandler
 			properties.get("max-height"));
 
 		try {
-			return _finder.getAdaptiveMedia(queryBuilder ->
+			return _finder.getAdaptiveMediaStream(queryBuilder ->
 				queryBuilder.forVersion(
 					fileVersion
 				).with(
@@ -223,7 +222,7 @@ public class AdaptiveMediaImageRequestHandler
 				AdaptiveMediaImageConfigurationEntry configurationEntry)
 		throws PortalException {
 
-		return _finder.getAdaptiveMedia(queryBuilder ->
+		return _finder.getAdaptiveMediaStream(queryBuilder ->
 			queryBuilder.forVersion(
 				fileVersion
 			).forConfiguration(

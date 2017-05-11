@@ -73,7 +73,7 @@ public class MediaQueryProviderImplTest {
 		);
 
 		Mockito.when(
-			_adaptiveMediaImageFinder.getAdaptiveMedia(
+			_adaptiveMediaImageFinder.getAdaptiveMediaStream(
 				Mockito.any(Function.class))
 		).thenAnswer(
 			invocation -> Stream.empty()
@@ -610,7 +610,7 @@ public class MediaQueryProviderImplTest {
 		throws PortalException {
 
 		Mockito.when(
-			_adaptiveMediaImageFinder.getAdaptiveMedia(
+			_adaptiveMediaImageFinder.getAdaptiveMediaStream(
 				Mockito.any(Function.class))
 		).thenAnswer(
 			invocation -> {

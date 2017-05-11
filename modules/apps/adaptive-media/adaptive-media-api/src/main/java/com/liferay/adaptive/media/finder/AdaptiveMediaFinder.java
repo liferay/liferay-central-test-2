@@ -52,7 +52,7 @@ public interface AdaptiveMediaFinder
 	 * @throws PortalException if an error occurred while calling any Liferay
 	 *         service
 	 */
-	public Stream<AdaptiveMedia<T>> getAdaptiveMedia(
+	public Stream<AdaptiveMedia<T>> getAdaptiveMediaStream(
 			Function<B, AdaptiveMediaQuery<M, T>> queryBuilderFunction)
 		throws PortalException;
 
