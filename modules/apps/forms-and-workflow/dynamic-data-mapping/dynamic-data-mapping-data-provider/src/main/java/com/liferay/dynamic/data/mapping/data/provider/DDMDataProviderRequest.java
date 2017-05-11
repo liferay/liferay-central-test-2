@@ -32,6 +32,10 @@ public class DDMDataProviderRequest {
 		_httpServletRequest = httpServletRequest;
 	}
 
+	public DDMDataProviderContext getDDMDataProviderContext() {
+		return _ddmDataProviderContext;
+	}
+
 	public String getDDMDataProviderInstanceId() {
 		return _ddmDataProviderInstanceId;
 	}
@@ -56,6 +60,13 @@ public class DDMDataProviderRequest {
 		_parameters.put(name, value);
 	}
 
+	public void setDDMDataProviderContext(
+		DDMDataProviderContext ddmDataProviderContext) {
+
+		_ddmDataProviderContext = ddmDataProviderContext;
+	}
+
+	private DDMDataProviderContext _ddmDataProviderContext;
 	private final String _ddmDataProviderInstanceId;
 	private final HttpServletRequest _httpServletRequest;
 	private final Map<String, String> _parameters = new HashMap<>();
