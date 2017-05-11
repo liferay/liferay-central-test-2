@@ -137,7 +137,7 @@ public class DDMFormEvaluatorHelperTest {
 
 		DDMFormEvaluatorHelper ddmFormEvaluatorHelper =
 			new DDMFormEvaluatorHelper(
-				null, null, _ddmExpressionFactory, ddmFormEvaluatorContext,
+				null, _ddmExpressionFactory, ddmFormEvaluatorContext,
 				_jsonFactory, null, null, _userLocalService);
 
 		DDMFormEvaluationResult ddmFormEvaluationResult =
@@ -211,7 +211,7 @@ public class DDMFormEvaluatorHelperTest {
 
 		DDMFormEvaluatorHelper ddmFormEvaluatorHelper =
 			new DDMFormEvaluatorHelper(
-				null, null, _ddmExpressionFactory, ddmFormEvaluatorContext,
+				null, _ddmExpressionFactory, ddmFormEvaluatorContext,
 				_jsonFactory, _roleLocalService, _userGroupRoleLocalService,
 				_userLocalService);
 
@@ -264,7 +264,7 @@ public class DDMFormEvaluatorHelperTest {
 
 		DDMFormEvaluatorHelper ddmFormEvaluatorHelper =
 			new DDMFormEvaluatorHelper(
-				null, null, _ddmExpressionFactory, ddmFormEvaluatorContext,
+				null, _ddmExpressionFactory, ddmFormEvaluatorContext,
 				_jsonFactory, null, null, null);
 
 		DDMFormEvaluationResult ddmFormEvaluationResult =
@@ -322,7 +322,7 @@ public class DDMFormEvaluatorHelperTest {
 
 		DDMFormEvaluatorHelper ddmFormEvaluatorHelper =
 			new DDMFormEvaluatorHelper(
-				null, null, _ddmExpressionFactory, ddmFormEvaluatorContext,
+				null, _ddmExpressionFactory, ddmFormEvaluatorContext,
 				_jsonFactory, null, null, _userLocalService);
 
 		DDMFormEvaluationResult ddmFormEvaluationResult =
@@ -382,7 +382,7 @@ public class DDMFormEvaluatorHelperTest {
 
 		DDMFormEvaluatorHelper ddmFormEvaluatorHelper =
 			new DDMFormEvaluatorHelper(
-				null, null, _ddmExpressionFactory, ddmFormEvaluatorContext,
+				null, _ddmExpressionFactory, ddmFormEvaluatorContext,
 				_jsonFactory, _roleLocalService, _userGroupRoleLocalService,
 				_userLocalService);
 
@@ -435,7 +435,7 @@ public class DDMFormEvaluatorHelperTest {
 
 		DDMFormEvaluatorHelper ddmFormEvaluatorHelper =
 			new DDMFormEvaluatorHelper(
-				null, null, _ddmExpressionFactory, ddmFormEvaluatorContext,
+				null, _ddmExpressionFactory, ddmFormEvaluatorContext,
 				_jsonFactory, null, null, null);
 
 		DDMFormEvaluationResult ddmFormEvaluationResult =
@@ -471,7 +471,7 @@ public class DDMFormEvaluatorHelperTest {
 
 		DDMFormEvaluatorHelper ddmFormEvaluatorHelper =
 			new DDMFormEvaluatorHelper(
-				null, null, _ddmExpressionFactory, ddmFormEvaluatorContext,
+				null, _ddmExpressionFactory, ddmFormEvaluatorContext,
 				_jsonFactory, null, null, null);
 
 		DDMFormEvaluationResult ddmFormEvaluationResult =
@@ -528,7 +528,7 @@ public class DDMFormEvaluatorHelperTest {
 
 		DDMFormEvaluatorHelper ddmFormEvaluatorHelper =
 			new DDMFormEvaluatorHelper(
-				null, null, _ddmExpressionFactory, ddmFormEvaluatorContext,
+				null, _ddmExpressionFactory, ddmFormEvaluatorContext,
 				_jsonFactory, null, null, null);
 
 		DDMFormEvaluationResult ddmFormEvaluationResult =
@@ -591,7 +591,7 @@ public class DDMFormEvaluatorHelperTest {
 
 		DDMFormEvaluatorHelper ddmFormEvaluatorHelper =
 			new DDMFormEvaluatorHelper(
-				null, null, _ddmExpressionFactory, ddmFormEvaluatorContext,
+				null, _ddmExpressionFactory, ddmFormEvaluatorContext,
 				_jsonFactory, null, null, null);
 
 		DDMFormEvaluationResult ddmFormEvaluationResult =
@@ -639,7 +639,7 @@ public class DDMFormEvaluatorHelperTest {
 
 		DDMFormEvaluatorHelper ddmFormEvaluatorHelper =
 			new DDMFormEvaluatorHelper(
-				null, null, _ddmExpressionFactory, ddmFormEvaluatorContext,
+				null, _ddmExpressionFactory, ddmFormEvaluatorContext,
 				_jsonFactory, null, null, null);
 
 		DDMFormEvaluationResult ddmFormEvaluationResult =
@@ -708,7 +708,7 @@ public class DDMFormEvaluatorHelperTest {
 
 		DDMFormEvaluatorHelper ddmFormEvaluatorHelper =
 			new DDMFormEvaluatorHelper(
-				null, null, _ddmExpressionFactory, ddmFormEvaluatorContext,
+				null, _ddmExpressionFactory, ddmFormEvaluatorContext,
 				_jsonFactory, null, null, null);
 
 		DDMFormEvaluationResult ddmFormEvaluationResult =
@@ -808,7 +808,7 @@ public class DDMFormEvaluatorHelperTest {
 
 		DDMFormEvaluatorHelper ddmFormEvaluatorHelper =
 			new DDMFormEvaluatorHelper(
-				null, null, _ddmExpressionFactory, ddmFormEvaluatorContext,
+				null, _ddmExpressionFactory, ddmFormEvaluatorContext,
 				_jsonFactory, null, null, null);
 
 		DDMFormEvaluationResult ddmFormEvaluationResult =
@@ -889,7 +889,7 @@ public class DDMFormEvaluatorHelperTest {
 
 		DDMFormEvaluatorHelper ddmFormEvaluatorHelper =
 			new DDMFormEvaluatorHelper(
-				null, null, _ddmExpressionFactory, ddmFormEvaluatorContext,
+				null, _ddmExpressionFactory, ddmFormEvaluatorContext,
 				_jsonFactory, null, null, null);
 
 		DDMFormEvaluationResult ddmFormEvaluationResult =
@@ -942,7 +942,7 @@ public class DDMFormEvaluatorHelperTest {
 
 		DDMFormEvaluatorHelper ddmFormEvaluatorHelper =
 			new DDMFormEvaluatorHelper(
-				null, null, _ddmExpressionFactory, ddmFormEvaluatorContext,
+				null, _ddmExpressionFactory, ddmFormEvaluatorContext,
 				_jsonFactory, null, null, null);
 
 		DDMFormEvaluationResult ddmFormEvaluationResult =
@@ -996,7 +996,7 @@ public class DDMFormEvaluatorHelperTest {
 
 		DDMFormEvaluatorHelper ddmFormEvaluatorHelper =
 			new DDMFormEvaluatorHelper(
-				null, null, _ddmExpressionFactory, ddmFormEvaluatorContext,
+				null, _ddmExpressionFactory, ddmFormEvaluatorContext,
 				_jsonFactory, null, null, null);
 
 		DDMFormEvaluationResult ddmFormEvaluationResult =
@@ -1052,7 +1052,7 @@ public class DDMFormEvaluatorHelperTest {
 
 		DDMFormEvaluatorHelper ddmFormEvaluatorHelper =
 			new DDMFormEvaluatorHelper(
-				null, null, _ddmExpressionFactory, ddmFormEvaluatorContext,
+				null, _ddmExpressionFactory, ddmFormEvaluatorContext,
 				_jsonFactory, null, null, null);
 
 		DDMFormEvaluationResult ddmFormEvaluationResult =
