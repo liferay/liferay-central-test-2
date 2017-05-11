@@ -35,6 +35,8 @@
 	</tear-down>
 
 	<command name="DeleteTaskNode" priority="5">
+		<property name="test.name.skip.portal.instance" value="KaleoDesignerEditSingleApprover#DeleteTaskNode" />
+
 		<execute macro="KaleoDesigner#editWorkflowDefinitionTitleViaWorkflowCP">
 			<var name="workflowDefinitionTitle" value="Edited Workflow Definition" />
 		</execute>
@@ -71,6 +73,8 @@
 	<command name="ViewInvalidSourceXMLRemainsAfterTabSwitch" priority="4">
 		<description message="This is a use case for LPS-48590." />
 
+		<property name="test.name.skip.portal.instance" value="KaleoDesignerEditSingleApprover#ViewInvalidSourceXMLRemainsAfterTabSwitch" />
+
 		<execute macro="KaleoDesigner#editSourceXML">
 			<var name="kdSourceXML" value="INVALID" />
 			<var name="line" value="6" />
@@ -87,6 +91,8 @@
 
 	<command name="ViewNodeNotificationRecipientPersistsAfterSwitchingTabs" priority="4">
 		<description message="This is a use case for LPS-46657." />
+
+		<property name="test.name.skip.portal.instance" value="KaleoDesignerEditSingleApprover#ViewNodeNotificationRecipientPersistsAfterSwitchingTabs" />
 
 		<execute macro="KaleoDesigner#selectNode">
 			<var name="nodeNodeLabel" value="review" />
@@ -117,6 +123,8 @@
 
 	<command name="ViewUserNotificationOption" priority="3">
 		<description message="This is a use case for LPS-46605." />
+
+		<property name="test.name.skip.portal.instance" value="KaleoDesignerEditSingleApprover#ViewUserNotificationOption" />
 
 		<execute macro="KaleoDesigner#selectNode">
 			<var name="nodeNodeLabel" value="review" />
