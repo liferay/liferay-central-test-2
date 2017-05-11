@@ -296,7 +296,7 @@ public class AdaptiveMediaImageRequestHandler
 
 			return Optional.of(Tuple.of(fileVersion, attributeMapping));
 		}
-		catch (NumberFormatException | AdaptiveMediaRuntimeException e) {
+		catch (AdaptiveMediaRuntimeException | NumberFormatException e) {
 			_log.error(e);
 
 			return Optional.empty();
@@ -329,7 +329,7 @@ public class AdaptiveMediaImageRequestHandler
 			asyncProcessor.triggerProcess(
 				fileVersion, String.valueOf(fileVersion.getFileVersionId()));
 		}
-		catch (PortalException | AdaptiveMediaException e) {
+		catch (AdaptiveMediaException | PortalException e) {
 			_log.error(
 				"Unable to create lazy adaptive media for file version id " +
 					fileVersion.getFileVersionId());
