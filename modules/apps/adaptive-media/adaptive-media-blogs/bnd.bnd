@@ -1,5 +1,5 @@
-Bundle-Name: Liferay Adaptive Media Blogs Service
-Bundle-SymbolicName: com.liferay.adaptive.media.blogs.service
+Bundle-Name: Liferay Adaptive Media Blogs
+Bundle-SymbolicName: com.liferay.adaptive.media.blogs
 Bundle-Version: 1.0.0
 Liferay-Releng-Module-Group-Description:
 Liferay-Releng-Module-Group-Title: Adaptive Media
