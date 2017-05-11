@@ -9,6 +9,7 @@ Liferay.Loader.require.apply(
 					'beforeScreenFlip',
 					function() {
 						Liferay.component('$ID').dispose();
+						Liferay.component('$ID', null);
 					}
 				);
 			}
