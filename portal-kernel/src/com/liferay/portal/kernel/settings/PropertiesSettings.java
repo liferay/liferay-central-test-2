@@ -41,6 +41,7 @@ public class PropertiesSettings extends BaseSettings {
 		super(parentSettings);
 
 		_locationVariableResolver = locationVariableResolver;
+
 		_properties = new HashMap<>((Map)properties);
 	}
 
