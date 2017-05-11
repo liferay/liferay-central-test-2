@@ -17,11 +17,13 @@ package com.liferay.dynamic.data.mapping.data.provider.internal;
 import com.liferay.dynamic.data.mapping.data.provider.DDMDataProvider;
 import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderContext;
 import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderContextContributor;
-import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderException;
 import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderInvoker;
 import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderRequest;
 import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderResponse;
+import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderResponse.Status;
 import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderTracker;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -36,15 +38,29 @@ import org.osgi.service.component.annotations.Reference;
 public class DDMDataProviderInvokerImpl implements DDMDataProviderInvoker {
 
 	public DDMDataProviderResponse invoke(
-			DDMDataProviderRequest ddmDataProviderRequest)
-		throws DDMDataProviderException {
+		DDMDataProviderRequest ddmDataProviderRequest) {
 
-		addDDMDataProviderContextParameters(ddmDataProviderRequest);
+		try {
+			addDDMDataProviderContextParameters(ddmDataProviderRequest);
 
-		DDMDataProvider ddmDataProvider = getDDMDataProvider(
-			ddmDataProviderRequest.getDDMDataProviderContext());
+			DDMDataProvider ddmDataProvider = getDDMDataProvider(
+				ddmDataProviderRequest.getDDMDataProviderContext());
 
-		return ddmDataProvider.getData(ddmDataProviderRequest);
+			return ddmDataProvider.getData(ddmDataProviderRequest);
+		}
+		catch (Exception e) {
+			DDMDataProviderContext ddmDataProviderContext =
+				ddmDataProviderRequest.getDDMDataProviderContext();
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Unable to fetch data from DDM Data Provider instance ID " +
+						ddmDataProviderContext.getDDMDataProviderInstanceId(),
+					e);
+			}
+		}
+
+		return DDMDataProviderResponse.error(Status.INTERNAL_SERVER_ERROR);
 	}
 
 	protected void addDDMDataProviderContextParameters(
@@ -100,5 +116,8 @@ public class DDMDataProviderInvokerImpl implements DDMDataProviderInvoker {
 
 	@Reference
 	protected DDMDataProviderTracker ddmDataProviderTracker;
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		DDMDataProviderInvokerImpl.class);
 
 }
