@@ -81,18 +81,20 @@ public class AdaptiveMediaImageAttributeMapping {
 	 * Returns an {@link Optional} instance that contains the value of the
 	 * attribute (if any) in this mapping.
 	 *
-	 * @param  attribute a non <code>null</code> attribute
+	 * @param  adaptiveMediaAttribute a non <code>null</code> attribute
 	 * @return A non-<code>null</code> optional that will contain the
 	 *         (non-<code>null</code>) value (if any)
+	 * @review
 	 */
 	public <V> Optional<V> getAttributeValue(
-		AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, V> attribute) {
+		AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, V>
+			adaptiveMediaAttribute) {
 
-		if (attribute == null) {
+		if (adaptiveMediaAttribute == null) {
 			throw new IllegalArgumentException("attribute cannot be null");
 		}
 
-		return (Optional<V>)_attributes.get(attribute);
+		return (Optional<V>)_attributes.get(adaptiveMediaAttribute);
 	}
 
 	protected AdaptiveMediaImageAttributeMapping(
@@ -104,15 +106,16 @@ public class AdaptiveMediaImageAttributeMapping {
 
 	private static <V> Optional<V> _getAttributeValue(
 		Map<String, String> properties,
-		AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, V> attribute) {
+		AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, V>
+			adaptiveMediaAttribute) {
 
-		String value = properties.get(attribute.getName());
+		String value = properties.get(adaptiveMediaAttribute.getName());
 
 		if (value == null) {
 			return Optional.empty();
 		}
 
-		return Optional.of(attribute.convert(value));
+		return Optional.of(adaptiveMediaAttribute.convert(value));
 	}
 
 	private final Map

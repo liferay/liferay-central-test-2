@@ -43,9 +43,9 @@ public final class AdaptiveMediaImage
 
 	@Override
 	public <V> Optional<V> getAttributeValue(
-		AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, V> attribute) {
+		AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, V> adaptiveMediaAttribute) {
 
-		return _attributeMapping.getAttributeValue(attribute);
+		return _attributeMapping.getAttributeValue(adaptiveMediaAttribute);
 	}
 
 	@Override

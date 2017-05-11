@@ -79,11 +79,13 @@ public interface AdaptiveMediaImageQueryBuilder
 	public interface FuzzySortStep extends FinalStep {
 
 		public <V> FuzzySortStep with(
-			AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, V> attribute,
+			AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, V>
+				adaptiveMediaAttribute,
 			Optional<V> valueOptional);
 
 		public <V> FuzzySortStep with(
-			AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, V> attribute,
+			AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, V>
+				adaptiveMediaAttribute,
 			V value);
 
 	}
@@ -95,7 +97,8 @@ public interface AdaptiveMediaImageQueryBuilder
 	public interface StrictSortStep extends FinalStep {
 
 		public <V> StrictSortStep orderBy(
-			AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, V> attribute,
+			AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, V>
+				adaptiveMediaAttribute,
 			boolean asc);
 
 	}

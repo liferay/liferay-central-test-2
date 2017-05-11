@@ -30,16 +30,18 @@ public class AdaptiveMediaAttributeComparator
 	implements Comparator<AdaptiveMedia<AdaptiveMediaImageProcessor>> {
 
 	public AdaptiveMediaAttributeComparator(
-		AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, ?> attribute) {
+		AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, ?>
+			adaptiveMediaAttribute) {
 
-		this(Collections.singletonMap(attribute, true));
+		this(Collections.singletonMap(adaptiveMediaAttribute, true));
 	}
 
 	public AdaptiveMediaAttributeComparator(
-		AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, ?> attribute,
+		AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, ?>
+			adaptiveMediaAttribute,
 		boolean ascending) {
 
-		this(Collections.singletonMap(attribute, ascending));
+		this(Collections.singletonMap(adaptiveMediaAttribute, ascending));
 	}
 
 	public AdaptiveMediaAttributeComparator(
@@ -59,17 +61,18 @@ public class AdaptiveMediaAttributeComparator
 					Boolean> sortCriterion : _sortCriteria.entrySet()) {
 
 			AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, Object>
-				attribute = sortCriterion.getKey();
+				adaptiveMediaAttribute = sortCriterion.getKey();
 
 			Optional<?> value1Optional = adaptiveMedia1.getAttributeValue(
-				attribute);
+				adaptiveMediaAttribute);
 			Optional<?> value2Optional = adaptiveMedia2.getAttributeValue(
-				attribute);
+				adaptiveMediaAttribute);
 
 			Optional<Integer> valueOptional = value1Optional.flatMap(
 				value1 ->
 					value2Optional.map(
-						value2 -> attribute.compare(value1, value2)));
+						value2 ->
+							adaptiveMediaAttribute.compare(value1, value2)));
 
 			int result = valueOptional.map(
 				value -> sortCriterion.getValue() ? value : -value).orElse(0);
