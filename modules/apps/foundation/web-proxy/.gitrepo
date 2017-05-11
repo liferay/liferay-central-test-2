@@ -4,8 +4,8 @@
 [subrepo]
 	autopull = false
 	cmdver = liferay
-	commit = 2fba1b5e9d4a997eaa0d48d3961a64d808342012
+	commit = fcd495979bb32122b4660be1559e0c9101a7b25f
 	mergebuttonmergecommits = false
 	mode = push
-	parent = 0d3bf4c37ef5f969ac72592d4e6acc1d016ddfc6
+	parent = 09404295e9e6030e923afcfd23d4efcc799226b2
 	remote = git@github.com:liferay/com-liferay-web-proxy.git
