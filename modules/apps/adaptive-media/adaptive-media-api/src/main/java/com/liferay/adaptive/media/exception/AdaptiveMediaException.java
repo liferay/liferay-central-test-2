@@ -14,10 +14,12 @@
 
 package com.liferay.adaptive.media.exception;
 
+import com.liferay.portal.kernel.exception.PortalException;
+
 /**
  * @author Adolfo Pérez
  */
-public class AdaptiveMediaException extends Exception {
+public class AdaptiveMediaException extends PortalException {
 
 	public AdaptiveMediaException() {
 	}
