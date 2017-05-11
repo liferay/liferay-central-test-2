@@ -14,7 +14,6 @@
 
 package com.liferay.dynamic.data.mapping.form.evaluator.internal;
 
-import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderContextFactory;
 import com.liferay.dynamic.data.mapping.data.provider.DDMDataProviderInvoker;
 import com.liferay.dynamic.data.mapping.expression.DDMExpression;
 import com.liferay.dynamic.data.mapping.expression.DDMExpressionException;
@@ -76,7 +75,6 @@ import javax.servlet.http.HttpServletRequest;
 public class DDMFormEvaluatorHelper {
 
 	public DDMFormEvaluatorHelper(
-		DDMDataProviderContextFactory ddmDataProviderContextFactory,
 		DDMDataProviderInvoker ddmDataProviderInvoker,
 		DDMExpressionFactory ddmExpressionFactory,
 		DDMFormEvaluatorContext ddmFormEvaluatorContext,
@@ -84,7 +82,6 @@ public class DDMFormEvaluatorHelper {
 		UserGroupRoleLocalService userGroupRoleLocalService,
 		UserLocalService userLocalService) {
 
-		_ddmDataProviderContextFactory = ddmDataProviderContextFactory;
 		_ddmDataProviderInvoker = ddmDataProviderInvoker;
 		_ddmExpressionFactory = ddmExpressionFactory;
 		_jsonFactory = jsonFactory;
@@ -437,8 +434,8 @@ public class DDMFormEvaluatorHelper {
 		_ddmExpressionFunctionRegistry.registerDDMExpressionFunction(
 			"call",
 			new CallFunction(
-				_ddmDataProviderContextFactory, _ddmDataProviderInvoker,
-				_ddmFormFieldEvaluationResultsMap, _request, _jsonFactory));
+				_ddmDataProviderInvoker, _ddmFormFieldEvaluationResultsMap,
+				_request, _jsonFactory));
 		_ddmExpressionFunctionRegistry.registerDDMExpressionFunction(
 			"getValue",
 			new GetPropertyFunction(
@@ -658,7 +655,6 @@ public class DDMFormEvaluatorHelper {
 	private static final Log _log = LogFactoryUtil.getLog(
 		DDMFormEvaluatorHelper.class);
 
-	private final DDMDataProviderContextFactory _ddmDataProviderContextFactory;
 	private final DDMDataProviderInvoker _ddmDataProviderInvoker;
 	private final DDMExpressionFactory _ddmExpressionFactory;
 	private final DDMExpressionFunctionRegistry _ddmExpressionFunctionRegistry =
