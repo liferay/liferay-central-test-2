@@ -16,7 +16,6 @@ package com.liferay.adaptive.media.image.internal.handler;
 
 import com.liferay.adaptive.media.AdaptiveMedia;
 import com.liferay.adaptive.media.AdaptiveMediaAttribute;
-import com.liferay.adaptive.media.exception.AdaptiveMediaException;
 import com.liferay.adaptive.media.exception.AdaptiveMediaRuntimeException;
 import com.liferay.adaptive.media.handler.AdaptiveMediaRequestHandler;
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry;

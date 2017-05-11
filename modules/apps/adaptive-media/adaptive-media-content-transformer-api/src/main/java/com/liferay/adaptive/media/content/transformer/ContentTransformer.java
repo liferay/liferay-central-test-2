@@ -14,7 +14,6 @@
 
 package com.liferay.adaptive.media.content.transformer;
 
-import com.liferay.adaptive.media.exception.AdaptiveMediaException;
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
@@ -24,7 +23,6 @@ public interface ContentTransformer<T> {
 
 	public ContentTransformerContentType<T> getContentType();
 
-	public T transform(T content)
-		throws PortalException;
+	public T transform(T content) throws PortalException;
 
 }

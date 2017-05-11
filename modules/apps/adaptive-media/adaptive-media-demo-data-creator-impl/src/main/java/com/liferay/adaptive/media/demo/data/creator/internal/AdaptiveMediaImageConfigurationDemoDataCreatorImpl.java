@@ -14,9 +14,9 @@
 
 package com.liferay.adaptive.media.demo.data.creator.internal;
 
-import com.liferay.adaptive.media.exception.AdaptiveMediaImageConfigurationException;
 import com.liferay.adaptive.media.demo.data.creator.AdaptiveMediaImageConfigurationDemoDataCreator;
 import com.liferay.adaptive.media.demo.data.creator.DemoAdaptiveMediaImageConfigurationVariant;
+import com.liferay.adaptive.media.exception.AdaptiveMediaImageConfigurationException;
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationHelper;
 import com.liferay.portal.kernel.log.Log;

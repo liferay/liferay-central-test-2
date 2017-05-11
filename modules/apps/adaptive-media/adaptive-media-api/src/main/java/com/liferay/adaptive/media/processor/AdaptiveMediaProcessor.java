@@ -16,7 +16,6 @@ package com.liferay.adaptive.media.processor;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.adaptive.media.exception.AdaptiveMediaException;
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**

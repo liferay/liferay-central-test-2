@@ -16,7 +16,6 @@ package com.liferay.adaptive.media.processor;
 
 import aQute.bnd.annotation.ProviderType;
 
-import com.liferay.adaptive.media.exception.AdaptiveMediaException;
 import com.liferay.adaptive.media.internal.messaging.AdaptiveMediaProcessorCommand;
 import com.liferay.portal.kernel.exception.PortalException;
 
@@ -29,10 +28,8 @@ public interface AdaptiveMediaAsyncProcessor<M, T> {
 	public void cleanQueue(
 		AdaptiveMediaProcessorCommand command, String modelId);
 
-	public void triggerCleanUp(M model, String modelId)
-		throws PortalException;
+	public void triggerCleanUp(M model, String modelId) throws PortalException;
 
-	public void triggerProcess(M model, String modelId)
-		throws PortalException;
+	public void triggerProcess(M model, String modelId) throws PortalException;
 
 }

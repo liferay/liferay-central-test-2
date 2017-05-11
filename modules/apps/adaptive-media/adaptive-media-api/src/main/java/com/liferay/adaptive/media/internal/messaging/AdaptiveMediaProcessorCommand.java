@@ -14,7 +14,6 @@
 
 package com.liferay.adaptive.media.internal.messaging;
 
-import com.liferay.adaptive.media.exception.AdaptiveMediaException;
 import com.liferay.adaptive.media.processor.AdaptiveMediaProcessor;
 import com.liferay.portal.kernel.exception.PortalException;
 

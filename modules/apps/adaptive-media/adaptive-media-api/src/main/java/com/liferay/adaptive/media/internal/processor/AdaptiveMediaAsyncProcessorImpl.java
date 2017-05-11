@@ -14,7 +14,6 @@
 
 package com.liferay.adaptive.media.internal.processor;
 
-import com.liferay.adaptive.media.exception.AdaptiveMediaException;
 import com.liferay.adaptive.media.internal.messaging.AdaptiveMediaDestinationNames;
 import com.liferay.adaptive.media.internal.messaging.AdaptiveMediaProcessorCommand;
 import com.liferay.adaptive.media.processor.AdaptiveMediaAsyncProcessor;
@@ -60,9 +59,7 @@ public final class AdaptiveMediaAsyncProcessorImpl<M, T>
 	}
 
 	@Override
-	public void triggerCleanUp(M model, String modelId)
-		throws PortalException {
-
+	public void triggerCleanUp(M model, String modelId) throws PortalException {
 		if (Validator.isNotNull(modelId)) {
 			_modelIds.putIfAbsent(
 				AdaptiveMediaProcessorCommand.CLEAN_UP,
@@ -109,9 +106,7 @@ public final class AdaptiveMediaAsyncProcessorImpl<M, T>
 	}
 
 	@Override
-	public void triggerProcess(M model, String modelId)
-		throws PortalException {
-
+	public void triggerProcess(M model, String modelId) throws PortalException {
 		if (Validator.isNotNull(modelId)) {
 			_modelIds.putIfAbsent(
 				AdaptiveMediaProcessorCommand.PROCESS,

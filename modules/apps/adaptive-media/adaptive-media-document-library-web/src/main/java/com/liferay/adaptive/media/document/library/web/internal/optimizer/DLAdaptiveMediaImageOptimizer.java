@@ -14,7 +14,6 @@
 
 package com.liferay.adaptive.media.document.library.web.internal.optimizer;
 
-import com.liferay.adaptive.media.exception.AdaptiveMediaException;
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationHelper;
 import com.liferay.adaptive.media.image.constants.AdaptiveMediaImageConstants;
