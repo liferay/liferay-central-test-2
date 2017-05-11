@@ -14,11 +14,14 @@
 
 package com.liferay.portal.kernel.lock;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
  * @author Tina Tian
  */
+@ProviderType
 public interface LockManager {
 
 	public void clear();
