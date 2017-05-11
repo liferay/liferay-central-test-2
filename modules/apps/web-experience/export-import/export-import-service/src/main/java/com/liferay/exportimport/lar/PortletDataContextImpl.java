@@ -2408,7 +2408,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 			XStreamConfiguratorRegistryUtil.getXStreamConfigurators();
 
 		if ((_xStream != null) &&
-			xStreamConfigurators.equals(xStreamConfigurators)) {
+			xStreamConfigurators.equals(_xStreamConfigurators)) {
 
 			return;
 		}
