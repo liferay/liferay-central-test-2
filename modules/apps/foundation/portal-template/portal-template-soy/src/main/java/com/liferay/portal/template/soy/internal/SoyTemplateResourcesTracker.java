@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.template.TemplateException;
 import com.liferay.portal.kernel.template.TemplateResource;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.template.soy.utils.SoyTemplateUtil;
 
@@ -39,6 +40,7 @@ import org.osgi.framework.wiring.BundleWiring;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Deactivate;
+import org.osgi.service.component.annotations.Reference;
 import org.osgi.util.tracker.BundleTracker;
 import org.osgi.util.tracker.BundleTrackerCustomizer;
 
@@ -58,7 +60,7 @@ public class SoyTemplateResourcesTracker {
 
 		_bundleTracker = new BundleTracker<>(
 			bundleContext, stateMask,
-			new SoyCapabilityBundleTrackerCustomizer("soy"));
+			new SoyCapabilityBundleTrackerCustomizer());
 
 		_bundleTracker.open();
 	}
@@ -68,9 +70,22 @@ public class SoyTemplateResourcesTracker {
 		_bundleTracker.close();
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(
-		SoyTemplateResourcesTracker.class);
+	@Reference(unbind = "-")
+	protected void setSoyProviderCapabilityBundleRegister(
+		SoyProviderCapabilityBundleRegister
+			soyProviderCapabilityBundleRegister) {
 
+		_soyProviderCapabilityBundleRegister =
+			soyProviderCapabilityBundleRegister;
+	}
+
+	@Reference(unbind = "-")
+	protected void setSoyTemplateBundleResourceParser(
+		SoyTemplateBundleResourceParser soyTemplateBundleResourceParser) {
+	}
+
+	private static SoyProviderCapabilityBundleRegister
+		_soyProviderCapabilityBundleRegister;
 	private static final List<TemplateResource> _templateResources =
 		new CopyOnWriteArrayList<>();
 
@@ -79,7 +94,7 @@ public class SoyTemplateResourcesTracker {
 	private static final class SoyCapabilityBundleTrackerCustomizer
 		implements BundleTrackerCustomizer<List<BundleCapability>> {
 
-		public SoyCapabilityBundleTrackerCustomizer(String namespace) {
+		public SoyCapabilityBundleTrackerCustomizer() {
 			_soyTofuCacheHandler = new SoyTofuCacheHandler(_portalCache);
 		}
 
@@ -87,12 +102,18 @@ public class SoyTemplateResourcesTracker {
 		public List<BundleCapability> addingBundle(
 			Bundle bundle, BundleEvent bundleEvent) {
 
-			_addTemplateResourcesToList(bundle);
-
 			BundleWiring bundleWiring = bundle.adapt(BundleWiring.class);
 
 			List<BundleCapability> bundleCapabilities =
 				bundleWiring.getCapabilities("soy");
+
+			if (ListUtil.isEmpty(bundleCapabilities)) {
+				return bundleCapabilities;
+			}
+
+			_registerBundle(bundle);
+
+			_addTemplateResourcesToList(bundle);
 
 			return bundleCapabilities;
 		}
@@ -122,22 +143,10 @@ public class SoyTemplateResourcesTracker {
 
 			_soyTofuCacheHandler.removeIfAny(removedTemplateResources);
 
-			_bundleMap.remove(bundle.getBundleId());
+			_soyProviderCapabilityBundleRegister.unregister(bundle);
 		}
 
 		private void _addTemplateResourcesToList(Bundle bundle) {
-			BundleWiring bundleWiring = bundle.adapt(BundleWiring.class);
-
-			for (BundleWire bundleWire : bundleWiring.getRequiredWires("soy")) {
-				BundleRevision bundleRevision = bundleWire.getProvider();
-
-				Bundle providerBundle = bundleRevision.getBundle();
-
-				_bundleMap.put(providerBundle.getBundleId(), providerBundle);
-			}
-
-			_bundleMap.put(bundle.getBundleId(), bundle);
-
 			SoyTemplateResourcesCollector soyTemplateResourceCollector =
 				new SoyTemplateResourcesCollector(bundle, StringPool.SLASH);
 
@@ -162,6 +171,19 @@ public class SoyTemplateResourcesTracker {
 						te);
 				}
 			}
+		}
+
+		private void _registerBundle(Bundle bundle) {
+			BundleWiring bundleWiring = bundle.adapt(BundleWiring.class);
+
+			for (BundleWire bundleWire : bundleWiring.getRequiredWires("soy")) {
+				BundleRevision bundleRevision = bundleWire.getProvider();
+
+				_soyProviderCapabilityBundleRegister.register(
+					bundleRevision.getBundle());
+			}
+
+			_soyProviderCapabilityBundleRegister.register(bundle);
 		}
 
 		private List<TemplateResource> _removeBundleTemplateResourcesFromList(
