@@ -1324,9 +1324,8 @@ public class LayoutImportController implements ImportController {
 		}
 		else {
 			BiPredicate<Version, Version> majorVersionBiPredicate =
-				(currentVersion, importVersion) ->
-					Objects.equals(
-						currentVersion.getMajor(), importVersion.getMajor());
+				(currentVersion, importVersion) -> Objects.equals(
+					currentVersion.getMajor(), importVersion.getMajor());
 
 			BiPredicate<Version, Version> minorVersionBiPredicate =
 				(currentVersion, importVersion) -> {
