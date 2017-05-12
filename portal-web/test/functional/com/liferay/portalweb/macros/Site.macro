@@ -469,7 +469,7 @@
 		<if>
 			<isset var="localizedSaveButton" />
 			<then>
-				<var name="key_siteName" value="${localizedSaveButton}" />
+				<var name="key_saveButton" value="${localizedSaveButton}" />
 
 				<execute function="AssertClick" locator1="Button#SAVE_LOCALIZED" value1="${localizedSaveButton}" />
 			</then>
