@@ -14,19 +14,24 @@
 
 package com.liferay.dynamic.data.mapping.internal.util;
 
+import static com.liferay.dynamic.data.mapping.test.util.DDMFormTestUtil.createDDMForm;
+
+import com.liferay.dynamic.data.mapping.form.field.type.DDMFormFieldTypeServicesTracker;
 import com.liferay.dynamic.data.mapping.internal.test.util.DDMFixture;
-import com.liferay.dynamic.data.mapping.internal.test.util.DDMFormBuilder;
-import com.liferay.dynamic.data.mapping.internal.test.util.DDMFormFieldBuilder;
-import com.liferay.dynamic.data.mapping.internal.test.util.DDMFormFieldValueBuilder;
-import com.liferay.dynamic.data.mapping.internal.test.util.DDMFormValuesBuilder;
-import com.liferay.dynamic.data.mapping.internal.test.util.DDMStructureBuilder;
+import com.liferay.dynamic.data.mapping.io.DDMFormJSONSerializer;
+import com.liferay.dynamic.data.mapping.io.internal.DDMFormJSONSerializerImpl;
 import com.liferay.dynamic.data.mapping.model.DDMForm;
 import com.liferay.dynamic.data.mapping.model.DDMFormField;
 import com.liferay.dynamic.data.mapping.model.DDMStructure;
+import com.liferay.dynamic.data.mapping.model.LocalizedValue;
+import com.liferay.dynamic.data.mapping.model.impl.DDMStructureImpl;
 import com.liferay.dynamic.data.mapping.service.DDMStructureLocalServiceUtil;
 import com.liferay.dynamic.data.mapping.storage.DDMFormFieldValue;
 import com.liferay.dynamic.data.mapping.storage.DDMFormValues;
+import com.liferay.dynamic.data.mapping.test.util.DDMFormTestUtil;
+import com.liferay.dynamic.data.mapping.test.util.DDMFormValuesTestUtil;
 import com.liferay.dynamic.data.mapping.util.DDMIndexer;
+import com.liferay.portal.json.JSONFactoryImpl;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.test.util.RandomTestUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -51,6 +56,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import org.mockito.Mockito;
+
 import org.powermock.core.classloader.annotations.PrepareOnlyThisForTest;
 import org.powermock.core.classloader.annotations.SuppressStaticInitializationFor;
 import org.powermock.modules.junit4.PowerMockRunner;
@@ -74,7 +81,6 @@ public class DDMIndexerImplTest {
 	@Before
 	public void setUp() throws Exception {
 		ddmFixture.setUp();
-
 		documentFixture.setUp();
 	}
 
@@ -211,51 +217,50 @@ public class DDMIndexerImplTest {
 			"ddm__text", document, fieldValueJP);
 	}
 
-	protected DDMForm createDDMForm(
-		Set<Locale> availableLocales, Locale defaultLocale) {
-
-		DDMFormBuilder ddmFormBuilder = new DDMFormBuilder();
-
-		ddmFormBuilder.setAvailableLocales(availableLocales);
-		ddmFormBuilder.setDefaultLocale(defaultLocale);
-
-		return ddmFormBuilder.build();
-	}
-
 	protected DDMFormField createDDMFormField(
 		String fieldName, String indexType) {
 
-		DDMFormFieldBuilder ddmFormFieldBuilder = new DDMFormFieldBuilder();
+		DDMFormField ddmFormField = DDMFormTestUtil.createTextDDMFormField(
+			fieldName, false, false, true);
 
-		ddmFormFieldBuilder.setFieldName(fieldName);
-		ddmFormFieldBuilder.setIndexType(indexType);
+		ddmFormField.setIndexType(indexType);
 
-		return ddmFormFieldBuilder.build();
+		return ddmFormField;
 	}
 
 	protected DDMFormFieldValue createDDMFormFieldValue(
-		String name, Locale locale, String value, Locale defaultLocale) {
+		String name, Locale locale, String valueString, Locale defaultLocale) {
 
-		DDMFormFieldValueBuilder ddmFormFieldValueBuilder =
-			new DDMFormFieldValueBuilder();
+		LocalizedValue localizedValue = new LocalizedValue(defaultLocale);
 
-		ddmFormFieldValueBuilder.setDefaultLocale(defaultLocale);
-		ddmFormFieldValueBuilder.setLocale(locale);
-		ddmFormFieldValueBuilder.setName(name);
-		ddmFormFieldValueBuilder.setValue(value);
+		localizedValue.addString(locale, valueString);
 
-		return ddmFormFieldValueBuilder.build();
+		return DDMFormValuesTestUtil.createDDMFormFieldValue(
+			name, localizedValue);
+	}
+
+	protected DDMFormJSONSerializer createDDMFormJSONSerializer() {
+		return new DDMFormJSONSerializerImpl() {
+			{
+				setDDMFormFieldTypeServicesTracker(
+					Mockito.mock(DDMFormFieldTypeServicesTracker.class));
+
+				setJSONFactory(new JSONFactoryImpl());
+			}
+		};
 	}
 
 	protected DDMFormValues createDDMFormValues(
 		DDMForm ddmForm, DDMFormFieldValue... ddmFormFieldValues) {
 
-		DDMFormValuesBuilder ddmFormValuesBuilder = new DDMFormValuesBuilder();
+		DDMFormValues ddmFormValues = DDMFormValuesTestUtil.createDDMFormValues(
+			ddmForm);
 
-		ddmFormValuesBuilder.setDdmForm(ddmForm);
-		ddmFormValuesBuilder.setDdmFormFieldValues(ddmFormFieldValues);
+		for (DDMFormFieldValue ddmFormFieldValue : ddmFormFieldValues) {
+			ddmFormValues.addDDMFormFieldValue(ddmFormFieldValue);
+		}
 
-		return ddmFormValuesBuilder.build();
+		return ddmFormValues;
 	}
 
 	protected DDMIndexer createDDMIndexer() {
@@ -268,11 +273,14 @@ public class DDMIndexerImplTest {
 	}
 
 	protected DDMStructure createDDMStructure(DDMForm ddmForm) {
-		DDMStructureBuilder ddmStructureBuilder = new DDMStructureBuilder();
+		DDMStructure ddmStructure = new DDMStructureImpl();
 
-		ddmStructureBuilder.setDDMForm(ddmForm);
+		ddmStructure.setDefinition(ddmFormJSONSerializer.serialize(ddmForm));
 
-		DDMStructure ddmStructure = ddmStructureBuilder.build();
+		ddmStructure.setDDMForm(ddmForm);
+
+		ddmStructure.setName(RandomTestUtil.randomString());
+		ddmStructure.setStructureId(RandomTestUtil.randomLong());
 
 		ddmFixture.whenDDMStructureLocalServiceFetchStructure(ddmStructure);
 
@@ -286,6 +294,8 @@ public class DDMIndexerImplTest {
 	}
 
 	protected final DDMFixture ddmFixture = new DDMFixture();
+	protected final DDMFormJSONSerializer ddmFormJSONSerializer =
+		createDDMFormJSONSerializer();
 	protected final DDMIndexer ddmIndexer = createDDMIndexer();
 	protected final DocumentFixture documentFixture = new DocumentFixture();
 
