@@ -80,8 +80,20 @@ portletURL.setParameter("mvcRenderCommandName", "/wedeploy_auth_admin/view");
 				orderable="<%= false %>"
 				property="modifiedDate"
 			/>
+
+			<liferay-ui:search-container-column-jsp
+				path="/wedeploy_auth_admin/entry_action.jsp"
+			/>
 		</liferay-ui:search-container-row>
 
 		<liferay-ui:search-iterator displayStyle="list" markupView="lexicon" />
 	</liferay-ui:search-container>
+
+	<portlet:renderURL var="editWeDeployAuthAppURL">
+		<portlet:param name="mvcRenderCommandName" value="/wedeploy_auth_admin/edit_wedeploy_auth_app" />
+	</portlet:renderURL>
+
+	<liferay-frontend:add-menu>
+		<liferay-frontend:add-menu-item title='<%= LanguageUtil.get(request, "add-wedeploy-app") %>' url="<%= editWeDeployAuthAppURL %>" />
+	</liferay-frontend:add-menu>
 </div>
