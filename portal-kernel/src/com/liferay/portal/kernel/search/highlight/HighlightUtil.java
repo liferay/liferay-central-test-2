@@ -80,7 +80,7 @@ public class HighlightUtil {
 
 			sb.append(Pattern.quote(queryTerms[i].trim()));
 
-			sb.append(_PATTERN_WORD_BOUNDARY);
+			sb.append(_REGEXP_WORD_BOUNDARY);
 		}
 
 		Pattern pattern = Pattern.compile(
@@ -111,7 +111,7 @@ public class HighlightUtil {
 		return sb.toString();
 	}
 
-	private static final String _PATTERN_WORD_BOUNDARY = "\\b";
+	private static final String _REGEXP_WORD_BOUNDARY = "\\b";
 
 	private static final Pattern _pattern = Pattern.compile(
 		HIGHLIGHT_TAG_OPEN + "(.*?)" + HIGHLIGHT_TAG_CLOSE);
