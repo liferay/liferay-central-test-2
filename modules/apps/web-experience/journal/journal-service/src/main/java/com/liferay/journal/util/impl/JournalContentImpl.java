@@ -35,6 +35,8 @@ import com.liferay.portal.kernel.module.framework.service.IdentifiableOSGiServic
 import com.liferay.portal.kernel.portlet.PortletRequestModel;
 import com.liferay.portal.kernel.security.pacl.DoPrivileged;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
+import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.ServiceContextThreadLocal;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HashUtil;
@@ -95,6 +97,15 @@ public class JournalContentImpl
 				ReflectionUtil.throwException(t);
 			}
 		}
+	}
+
+	@Override
+	public String getContent(
+		long groupId, String articleId, String viewMode, String languageId) {
+
+		return getContent(
+			groupId, articleId, null, viewMode, languageId, null,
+			_getDefaultThemeDisplay());
 	}
 
 	@Override
@@ -402,6 +413,17 @@ public class JournalContentImpl
 	}
 
 	protected static final String CACHE_NAME = JournalContent.class.getName();
+
+	private ThemeDisplay _getDefaultThemeDisplay() {
+		ServiceContext serviceContext =
+			ServiceContextThreadLocal.getServiceContext();
+
+		if (serviceContext == null) {
+			return null;
+		}
+
+		return serviceContext.getThemeDisplay();
+	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		JournalContentImpl.class);
