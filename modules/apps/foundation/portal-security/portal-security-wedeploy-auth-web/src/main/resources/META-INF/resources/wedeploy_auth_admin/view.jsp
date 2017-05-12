@@ -82,7 +82,7 @@ portletURL.setParameter("mvcRenderCommandName", "/wedeploy_auth_admin/view");
 			/>
 
 			<liferay-ui:search-container-column-jsp
-				path="/wedeploy_auth_admin/entry_action.jsp"
+				path="/wedeploy_auth_admin/wedeploy_auth_app_action.jsp"
 			/>
 		</liferay-ui:search-container-row>
 
