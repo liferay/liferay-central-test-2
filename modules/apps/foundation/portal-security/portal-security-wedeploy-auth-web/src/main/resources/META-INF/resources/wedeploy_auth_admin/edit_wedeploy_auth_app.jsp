@@ -27,18 +27,13 @@ portletDisplay.setURLBack(redirect);
 	<portlet:actionURL name="/wedeploy_auth_admin/edit_wedeploy_auth_app" var="editWeDeployAuthAppURL" />
 
 	<aui:form action="<%= editWeDeployAuthAppURL %>" method="post" name="fm">
+		<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
 		<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
 		<div class="lfr-form-content">
 			<aui:fieldset-group markupView="lexicon">
 				<aui:fieldset label="add-wedeploy-app">
-					<aui:input autoFocus="<%= true %>" name="name">
-						<aui:validator name="required" />
-					</aui:input>
-
-					<aui:input name="description">
-						<aui:validator name="required" />
-					</aui:input>
+					<aui:input autoFocus="<%= true %>" name="name" />
 				</aui:fieldset>
 			</aui:fieldset-group>
 		</div>

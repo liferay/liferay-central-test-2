@@ -19,7 +19,7 @@
 <%
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-WeDeployAuthApp entry = (WeDeployAuthApp)row.getObject();
+WeDeployAuthApp weDeployAuthApp = (WeDeployAuthApp)row.getObject();
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -34,9 +34,8 @@ portletURL.setParameter("mvcRenderCommandName", "/wedeploy_auth_admin/view");
 	<portlet:actionURL name="/wedeploy_auth_admin/edit_wedeploy_auth_app" var="deleteURL">
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 		<portlet:param name="redirect" value="<%= portletURL.toString() %>" />
-		<portlet:param name="weDeployAuthAppId" value="<%= String.valueOf(entry.getWeDeployAuthAppId()) %>" />
+		<portlet:param name="weDeployAuthAppId" value="<%= String.valueOf(weDeployAuthApp.getWeDeployAuthAppId()) %>" />
 	</portlet:actionURL>
 
-	<liferay-ui:icon-delete url="<%= deleteURL %>"
-	/>
+	<liferay-ui:icon-delete url="<%= deleteURL %>" />
 </liferay-ui:icon-menu>

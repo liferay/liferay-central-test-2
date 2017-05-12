@@ -14,15 +14,16 @@
 
 package com.liferay.portal.security.wedeploy.auth.web.internal.portlet.action;
 
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.security.wedeploy.auth.model.WeDeployAuthApp;
 import com.liferay.portal.security.wedeploy.auth.service.WeDeployAuthAppLocalService;
 import com.liferay.portal.security.wedeploy.auth.web.internal.constants.WeDeployAuthPortletKeys;
 
@@ -72,13 +73,11 @@ public class EditWeDeployAuthAppMVCActionCommand extends BaseMVCActionCommand {
 
 		String name = ParamUtil.getString(actionRequest, "name");
 
-		try {
-			_weDeployAuthAppLocalService.addWeDeployAuthApp(
-				themeDisplay.getUserId(), name, new ServiceContext());
-		}
-		catch (PortalException pe) {
-			SessionErrors.add(actionRequest, pe.getClass());
-		}
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			WeDeployAuthApp.class.getName(), actionRequest);
+
+		_weDeployAuthAppLocalService.addWeDeployAuthApp(
+			themeDisplay.getUserId(), name, serviceContext);
 	}
 
 	protected void deleteWeDeployAuthApp(ActionRequest actionRequest)
@@ -87,13 +86,7 @@ public class EditWeDeployAuthAppMVCActionCommand extends BaseMVCActionCommand {
 		long weDeployAuthAppId = ParamUtil.getLong(
 			actionRequest, "weDeployAuthAppId");
 
-		try {
-			_weDeployAuthAppLocalService.deleteWeDeployAuthApp(
-				weDeployAuthAppId);
-		}
-		catch (PortalException pe) {
-			SessionErrors.add(actionRequest, pe.getClass());
-		}
+		_weDeployAuthAppLocalService.deleteWeDeployAuthApp(weDeployAuthAppId);
 	}
 
 	@Reference
