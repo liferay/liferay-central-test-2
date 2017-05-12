@@ -57,6 +57,8 @@
 	</command>
 
 	<command name="removeUserFacetDisplayPG">
+		<execute function="Click" locator1="Search#SEARCH_FIELD" />
+
 		<execute function="Click#makeVisibleClickAt" locator1="Search#SEARCH_PORTLET_OPTIONS_WRENCH" />
 
 		<execute function="AssertClick" locator1="MenuItem#CONFIGURATION" value1="Configuration" />
