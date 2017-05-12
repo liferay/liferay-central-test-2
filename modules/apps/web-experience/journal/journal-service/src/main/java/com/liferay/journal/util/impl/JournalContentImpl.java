@@ -293,8 +293,11 @@ public class JournalContentImpl
 		String languageId, int page, PortletRequestModel portletRequestModel,
 		ThemeDisplay themeDisplay) {
 
+		JournalArticle article = _journalArticleLocalService.fetchLatestArticle(
+			groupId, articleId, WorkflowConstants.STATUS_APPROVED);
+
 		return getDisplay(
-			groupId, articleId, 0, ddmTemplateKey, viewMode, languageId, 1,
+			article, ddmTemplateKey, viewMode, languageId, 1,
 			portletRequestModel, themeDisplay);
 	}
 
