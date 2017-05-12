@@ -137,3 +137,8 @@ decdaf9524134097bf70896b73354f847c1dc165^..6bdb4d13f97caae88eccdeb8d50370ccdb523
 # Bundle Version 3.5.3
 #
 6bdb4d13f97caae88eccdeb8d50370ccdb523b8e^..505863bfc068cd49ffacdef05c99fbf50850f23f=LPS-72320
+
+#
+# Bundle Version 3.5.4
+#
+505863bfc068cd49ffacdef05c99fbf50850f23f^..37eb22dd90d79abd5616ef4fa5ce3604117c72ed=LPS-71050 LPS-72002
