@@ -115,7 +115,7 @@ public class JournalContentImpl
 
 		return getContent(
 			groupId, articleId, null, viewMode, languageId, portletRequestModel,
-			null);
+			_getDefaultThemeDisplay());
 	}
 
 	@Override
@@ -125,7 +125,7 @@ public class JournalContentImpl
 
 		return getContent(
 			groupId, articleId, ddmTemplateKey, viewMode, languageId,
-			portletRequestModel, null);
+			portletRequestModel, _getDefaultThemeDisplay());
 	}
 
 	@Override
@@ -284,7 +284,7 @@ public class JournalContentImpl
 
 		return getDisplay(
 			groupId, articleId, null, viewMode, languageId, 1,
-			portletRequestModel, null);
+			portletRequestModel, _getDefaultThemeDisplay());
 	}
 
 	@Override
@@ -308,7 +308,7 @@ public class JournalContentImpl
 
 		return getDisplay(
 			groupId, articleId, ddmTemplateKey, viewMode, languageId, 1,
-			portletRequestModel, null);
+			portletRequestModel, _getDefaultThemeDisplay());
 	}
 
 	@Override
