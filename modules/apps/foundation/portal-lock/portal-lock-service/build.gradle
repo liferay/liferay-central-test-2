@@ -12,5 +12,5 @@ dependencies {
 	provided group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "default"
 	provided group: "com.liferay.portal", name: "com.liferay.util.java", version: "2.0.0"
 	provided group: "org.hibernate", name: "hibernate-core", version: "3.6.10.Final"
-	provided project(":apps:foundation:portal-lock:portal-lock-api")
+	provided group: "com.liferay", name: "com.liferay.portal.lock.api", version: "2.1.0"
 }
