@@ -23,6 +23,7 @@ import com.liferay.registry.ServiceTrackerCustomizer;
 import com.liferay.registry.collections.ServiceRegistrationMap;
 import com.liferay.registry.collections.ServiceRegistrationMapImpl;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -32,7 +33,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class XStreamAliasRegistryUtil {
 
 	public static Map<Class<?>, String> getAliases() {
-		return _instance._getAliases();
+		return new HashMap<>(_instance._getAliases());
 	}
 
 	public static void register(Class<?> clazz, String name) {
