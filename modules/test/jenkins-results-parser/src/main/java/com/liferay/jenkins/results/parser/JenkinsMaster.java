@@ -31,7 +31,6 @@ public class JenkinsMaster implements Comparable<JenkinsMaster> {
 	public JenkinsMaster(String masterName, String masterURL) {
 		_masterName = masterName;
 		_masterURL = masterURL;
-		_recentBatchesMap = new TreeMap<>();
 	}
 
 	public synchronized void addRecentBatch(int batchSize) {
@@ -216,7 +215,7 @@ public class JenkinsMaster implements Comparable<JenkinsMaster> {
 	private boolean _available;
 	private final String _masterName;
 	private final String _masterURL;
-	private final Map<Long, Integer> _recentBatchesMap;
+	private final Map<Long, Integer> _recentBatchesMap = new TreeMap<>();
 	private int _reportedSlavesAvailable;
 	private String _summary;
 
