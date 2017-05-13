@@ -14,6 +14,10 @@
 
 package com.liferay.portal.template.soy.internal;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.template.soy.utils.SoyTemplateUtil;
 
 import java.util.Collection;
@@ -43,6 +47,17 @@ public class SoyProviderCapabilityBundleRegister {
 		Bundle bundle = getBundle(bundleId);
 
 		if (bundle == null) {
+			Collection<Bundle> bundles = getBundles();
+
+			StringBundler sb = new StringBundler(bundles.size() * 2);
+
+			for (Bundle registredBundle : bundles) {
+				sb.append(registredBundle.getSymbolicName());
+				sb.append(StringPool.COMMA_AND_SPACE);
+			}
+
+			_log.error(String.format("Registred bundles %s", sb.toString()));
+
 			throw new IllegalStateException(
 				"There are no bundles providing " + templateId);
 		}
@@ -57,6 +72,9 @@ public class SoyProviderCapabilityBundleRegister {
 	public void unregister(Bundle bundle) {
 		_bundleMap.remove(bundle.getBundleId());
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		SoyProviderCapabilityBundleRegister.class);
 
 	private static final Map<Long, Bundle> _bundleMap =
 		new ConcurrentHashMap<>();
