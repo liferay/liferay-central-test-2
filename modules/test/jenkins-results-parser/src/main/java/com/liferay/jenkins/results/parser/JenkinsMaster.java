@@ -131,11 +131,11 @@ public class JenkinsMaster implements Comparable<JenkinsMaster> {
 
 		int idleCount = 0;
 
-		JSONArray computersJSONArray = computerJSONObject.getJSONArray(
+		JSONArray computerJSONArray = computerJSONObject.getJSONArray(
 			"computer");
 
-		for (int i = 0; i < computersJSONArray.length(); i++) {
-			JSONObject curComputerJSONObject = computersJSONArray.getJSONObject(
+		for (int i = 0; i < computerJSONArray.length(); i++) {
+			JSONObject curComputerJSONObject = computerJSONArray.getJSONObject(
 				i);
 
 			if (curComputerJSONObject.getBoolean("idle") &&
