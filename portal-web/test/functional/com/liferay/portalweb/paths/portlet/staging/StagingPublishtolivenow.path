@@ -118,7 +118,12 @@
 </tr>
 <tr>
 	<td>APPLICATION_CONFIGURATION_APPLICATION_CHANGE_LINK</td>
-	<td>//a[@data-portlettitle='${key_applicationName}']</td>
+	<td>//a[contains(@data-portletid,'${key_applicationName}')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>APPLICATION_CONFIGURATION_APPLICATION_SETUP_CHECK</td>
+	<td>//label[contains(.,'Setup')]//input</td>
 	<td></td>
 </tr>
 <tr>
