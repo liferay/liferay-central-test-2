@@ -65,10 +65,10 @@ public class JenkinsMaster implements Comparable<JenkinsMaster> {
 	}
 
 	public int getAvailableSlavesCount() {
-		int totalRecentBatchSizes = _getTotalRecentBatchSizes();
+		int recentBatchSizesTotal = _getRecentBatchSizesTotal();
 
 		int availableSlavesCount =
-			_reportedSlavesAvailable - totalRecentBatchSizes;
+			_reportedSlavesAvailable - recentBatchSizesTotal;
 
 		StringBuilder sb = new StringBuilder();
 
@@ -77,7 +77,7 @@ public class JenkinsMaster implements Comparable<JenkinsMaster> {
 		sb.append(", reportedSlavesAvailable=");
 		sb.append(_reportedSlavesAvailable);
 		sb.append(", recentBatchSizesTotal=");
-		sb.append(totalRecentBatchSizes);
+		sb.append(recentBatchSizesTotal);
 		sb.append(", url=");
 		sb.append(_masterURL);
 		sb.append("}");
@@ -188,9 +188,9 @@ public class JenkinsMaster implements Comparable<JenkinsMaster> {
 
 	protected static long maxRecentBatchAge = 120 * 1000;
 
-	private synchronized int _getTotalRecentBatchSizes() {
+	private synchronized int _getRecentBatchSizesTotal() {
 		long currentTimestamp = System.currentTimeMillis();
-		int totalRecentBatchSizes = 0;
+		int recentBatchSizesTotal = 0;
 
 		List<Long> expiredTimestamps = new ArrayList<>(_batchSizes.size());
 
@@ -201,14 +201,14 @@ public class JenkinsMaster implements Comparable<JenkinsMaster> {
 				continue;
 			}
 
-			totalRecentBatchSizes += _batchSizes.get(expiryTimestamp);
+			recentBatchSizesTotal += _batchSizes.get(expiryTimestamp);
 		}
 
 		for (Long expiredTimestamp : expiredTimestamps) {
 			_batchSizes.remove(expiredTimestamp);
 		}
 
-		return totalRecentBatchSizes;
+		return recentBatchSizesTotal;
 	}
 
 	private boolean _available;
