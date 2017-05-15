@@ -41,11 +41,11 @@ public class JenkinsMaster implements Comparable<JenkinsMaster> {
 	}
 
 	@Override
-	public int compareTo(JenkinsMaster otherJenkinsMaster) {
+	public int compareTo(JenkinsMaster jenkinsMaster) {
 		Integer availableSlavesCount = getAvailableSlavesCount();
 
 		int value = availableSlavesCount.compareTo(
-			otherJenkinsMaster.getAvailableSlavesCount());
+			jenkinsMaster.getAvailableSlavesCount());
 
 		if (value != 0) {
 			return -value;
