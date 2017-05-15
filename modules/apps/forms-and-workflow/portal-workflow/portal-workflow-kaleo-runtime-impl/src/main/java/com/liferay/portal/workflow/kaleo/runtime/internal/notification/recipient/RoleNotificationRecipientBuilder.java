@@ -17,12 +17,14 @@ package com.liferay.portal.workflow.kaleo.runtime.internal.notification.recipien
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Group;
+import com.liferay.portal.kernel.model.Organization;
 import com.liferay.portal.kernel.model.Role;
 import com.liferay.portal.kernel.model.RoleConstants;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.model.UserGroupGroupRole;
 import com.liferay.portal.kernel.model.UserGroupRole;
 import com.liferay.portal.kernel.service.GroupLocalService;
+import com.liferay.portal.kernel.service.OrganizationLocalService;
 import com.liferay.portal.kernel.service.RoleLocalService;
 import com.liferay.portal.kernel.service.UserGroupGroupRoleLocalService;
 import com.liferay.portal.kernel.service.UserGroupRoleLocalService;
@@ -108,6 +110,46 @@ public class RoleNotificationRecipientBuilder
 		}
 	}
 
+	protected List<Long> getGroupIds(long groupId, Role role)
+		throws PortalException {
+
+		List<Long> groupIds = new ArrayList<>();
+
+		Group group = null;
+
+		if (groupId != WorkflowConstants.DEFAULT_GROUP_ID) {
+			group = _groupLocalService.getGroup(groupId);
+
+			if (group.isOrganization()) {
+				Organization organization =
+					_organizationLocalService.getOrganization(
+						group.getClassPK());
+
+				for (Organization ancestorOrganization :
+						organization.getAncestors()) {
+
+					if (isValidGroup(ancestorOrganization.getGroup(), role)) {
+						groupIds.add(ancestorOrganization.getGroupId());
+					}
+				}
+			}
+
+			if (group.isSite()) {
+				for (Group ancestorGroup : group.getAncestors()) {
+					if (isValidGroup(ancestorGroup, role)) {
+						groupIds.add(ancestorGroup.getGroupId());
+					}
+				}
+			}
+		}
+
+		if (isValidGroup(group, role)) {
+			groupIds.add(group.getGroupId());
+		}
+
+		return groupIds;
+	}
+
 	protected List<User> getRoleUsers(
 			Role role, ExecutionContext executionContext)
 		throws Exception {
@@ -122,9 +164,8 @@ public class RoleNotificationRecipientBuilder
 		KaleoInstanceToken kaleoInstanceToken =
 			executionContext.getKaleoInstanceToken();
 
-		List<Long> groupIds = new ArrayList<>();
-
-		populateGroupIs(groupIds, kaleoInstanceToken.getGroupId(), role);
+		List<Long> groupIds = getGroupIds(
+			kaleoInstanceToken.getGroupId(), role);
 
 		List<User> users = new ArrayList<>();
 
@@ -168,28 +209,11 @@ public class RoleNotificationRecipientBuilder
 		return false;
 	}
 
-	protected void populateGroupIs(List<Long> groupIds, long groupId, Role role)
-		throws PortalException {
-
-		Group group = null;
-
-		if (groupId != WorkflowConstants.DEFAULT_GROUP_ID) {
-			group = _groupLocalService.getGroup(groupId);
-
-			if (group.isSite()) {
-				for (Group ancestorGroup : group.getAncestors()) {
-					populateGroupIs(groupIds, ancestorGroup.getGroupId(), role);
-				}
-			}
-		}
-
-		if (isValidGroup(group, role)) {
-			groupIds.add(group.getGroupId());
-		}
-	}
-
 	@Reference
 	private GroupLocalService _groupLocalService;
+
+	@Reference
+	private OrganizationLocalService _organizationLocalService;
 
 	@Reference
 	private RoleLocalService _roleLocalService;
