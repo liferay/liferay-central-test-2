@@ -158,14 +158,6 @@ public class JenkinsMaster implements Comparable<JenkinsMaster> {
 			for (int i = 0; i < itemsJSONArray.length(); i++) {
 				JSONObject itemJSONObject = itemsJSONArray.getJSONObject(i);
 
-				if (itemJSONObject.has("why")) {
-					String why = itemJSONObject.getString("why");
-
-					if (why.endsWith("is offline")) {
-						continue;
-					}
-				}
-
 				if (itemJSONObject.has("task")) {
 					JSONObject taskJSONObject = itemJSONObject.getJSONObject(
 						"task");
@@ -173,6 +165,14 @@ public class JenkinsMaster implements Comparable<JenkinsMaster> {
 					String taskName = taskJSONObject.getString("name");
 
 					if (taskName.equals("verification-node")) {
+						continue;
+					}
+				}
+
+				if (itemJSONObject.has("why")) {
+					String why = itemJSONObject.getString("why");
+
+					if (why.endsWith("is offline")) {
 						continue;
 					}
 				}
