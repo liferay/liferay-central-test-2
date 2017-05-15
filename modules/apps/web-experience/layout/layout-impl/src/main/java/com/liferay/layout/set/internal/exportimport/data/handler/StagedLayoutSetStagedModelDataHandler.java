@@ -205,7 +205,7 @@ public class StagedLayoutSetStagedModelDataHandler
 
 		settingsProperties.remove("last-publish-date");
 
-		// Page Versioning
+		// Page versioning
 
 		stagedLayoutSet = unwrapLayoutSetStagingHandler(stagedLayoutSet);
 

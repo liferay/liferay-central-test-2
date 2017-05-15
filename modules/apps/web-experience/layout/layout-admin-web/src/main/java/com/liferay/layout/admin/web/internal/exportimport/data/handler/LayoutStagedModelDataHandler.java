@@ -320,7 +320,7 @@ public class LayoutStagedModelDataHandler
 
 		exportTheme(portletDataContext, layout);
 
-		// Page Versioning
+		// Page versioning
 
 		LayoutStagingHandler layoutStagingHandler =
 			LayoutStagingUtil.getLayoutStagingHandler(layout);
