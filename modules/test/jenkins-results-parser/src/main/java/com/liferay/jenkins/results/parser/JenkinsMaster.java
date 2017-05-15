@@ -34,7 +34,7 @@ public class JenkinsMaster implements Comparable<JenkinsMaster> {
 	}
 
 	public synchronized void addRecentBatch(int batchSize) {
-		_recentBatchesMap.put(
+		_batchSizes.put(
 			System.currentTimeMillis() + maxRecentBatchAge, batchSize);
 
 		getAvailableSlavesCount();
@@ -193,20 +193,20 @@ public class JenkinsMaster implements Comparable<JenkinsMaster> {
 		int totalRecentBatchSizes = 0;
 
 		List<Long> expiredTimestamps = new ArrayList<>(
-			_recentBatchesMap.size());
+			_batchSizes.size());
 
-		for (long expiryTimestamp : _recentBatchesMap.keySet()) {
+		for (long expiryTimestamp : _batchSizes.keySet()) {
 			if (expiryTimestamp < currentTimestamp) {
 				expiredTimestamps.add(expiryTimestamp);
 
 				continue;
 			}
 
-			totalRecentBatchSizes += _recentBatchesMap.get(expiryTimestamp);
+			totalRecentBatchSizes += _batchSizes.get(expiryTimestamp);
 		}
 
 		for (Long expiredTimestamp : expiredTimestamps) {
-			_recentBatchesMap.remove(expiredTimestamp);
+			_batchSizes.remove(expiredTimestamp);
 		}
 
 		return totalRecentBatchSizes;
@@ -215,7 +215,7 @@ public class JenkinsMaster implements Comparable<JenkinsMaster> {
 	private boolean _available;
 	private final String _masterName;
 	private final String _masterURL;
-	private final Map<Long, Integer> _recentBatchesMap = new TreeMap<>();
+	private final Map<Long, Integer> _batchSizes = new TreeMap<>();
 	private int _reportedSlavesAvailable;
 	private String _summary;
 
