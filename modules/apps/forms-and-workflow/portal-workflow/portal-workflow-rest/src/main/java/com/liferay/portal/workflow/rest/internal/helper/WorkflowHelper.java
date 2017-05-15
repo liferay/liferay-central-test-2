@@ -16,6 +16,7 @@ package com.liferay.portal.workflow.rest.internal.helper;
 
 import com.liferay.asset.kernel.model.AssetEntry;
 import com.liferay.asset.kernel.model.AssetRendererFactory;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.model.Role;
@@ -31,9 +32,12 @@ import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
 import com.liferay.portal.kernel.workflow.WorkflowInstance;
 import com.liferay.portal.kernel.workflow.WorkflowInstanceManager;
 import com.liferay.portal.kernel.workflow.WorkflowInstanceManagerUtil;
+import com.liferay.portal.kernel.workflow.WorkflowLog;
+import com.liferay.portal.kernel.workflow.WorkflowLogManager;
 import com.liferay.portal.kernel.workflow.WorkflowTask;
 import com.liferay.portal.kernel.workflow.WorkflowTaskAssignee;
 import com.liferay.portal.kernel.workflow.WorkflowTaskManager;
+import com.liferay.portal.kernel.workflow.comparator.WorkflowComparatorFactory;
 import com.liferay.portal.workflow.rest.internal.model.WorkflowAssetModel;
 import com.liferay.portal.workflow.rest.internal.model.WorkflowAssigneeModel;
 import com.liferay.portal.workflow.rest.internal.model.WorkflowTaskModel;
@@ -42,6 +46,8 @@ import com.liferay.portal.workflow.rest.internal.model.WorkflowUserModel;
 
 import java.io.Serializable;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -82,6 +88,33 @@ public class WorkflowHelper {
 			workflowTaskTransitionOperationModel.getComment(), workflowContext);
 	}
 
+	public List<WorkflowLog> getWorkflowLogs(
+			long companyId, WorkflowTask workflowTask)
+		throws PortalException {
+
+		return getWorkflowLogs(companyId, workflowTaskId, false);
+	}
+
+	public List<WorkflowLog> getWorkflowLogs(
+			long companyId, long workflowTaskId, boolean oldestFirst)
+		throws PortalException {
+
+		List<Integer> logTypes = new ArrayList<>();
+
+		logTypes.add(WorkflowLog.TASK_ASSIGN);
+		logTypes.add(WorkflowLog.TASK_COMPLETION);
+		logTypes.add(WorkflowLog.TASK_UPDATE);
+		logTypes.add(WorkflowLog.TRANSITION);
+
+		WorkflowInstance workflowInstance = getWorkflowInstance(
+			companyId, workflowTask.getWorkflowTaskId());
+
+		return _workflowLogManager.getWorkflowLogsByWorkflowInstance(
+			companyId, workflowInstance.getWorkflowInstanceId(), logTypes,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			_workflowComparatorFactory.getLogCreateDateComparator(oldestFirst));
+	}
+
 	public WorkflowTaskModel getWorkflowTaskModel(
 			long companyId, long userId, long workflowTaskId, Locale locale)
 		throws PortalException {
@@ -98,9 +131,22 @@ public class WorkflowHelper {
 		List<String> transitions = _workflowTaskManager.getNextTransitionNames(
 			companyId, userId, workflowTaskId);
 
+		List<WorkflowLog> workflowLogs = getWorkflowLogs(
+			companyId, workflowTask);
+
+		long lastActivityTime = 0;
+
+		if (!workflowLogs.isEmpty()) {
+			WorkflowLog workflowLog = workflowLogs.get(0);
+
+			Date createDate = workflowLog.getCreateDate();
+
+			lastActivityTime = createDate.getTime();
+		}
+
 		return new WorkflowTaskModel(
-			workflowTask, workflowAssigneeModel, workflowAssetModel, state,
-			transitions);
+			workflowTask, workflowAssigneeModel, workflowAssetModel,
+			lastActivityTime, state, transitions);
 	}
 
 	protected String getState(
@@ -225,10 +271,16 @@ public class WorkflowHelper {
 	private UserLocalService _userLocalService;
 
 	@Reference
+	private WorkflowComparatorFactory _workflowComparatorFactory;
+
+	@Reference
 	private WorkflowInstanceLinkLocalService _workflowInstanceLinkLocalService;
 
 	@Reference
 	private WorkflowInstanceManager _workflowInstanceManager;
+
+	@Reference
+	private WorkflowLogManager _workflowLogManager;
 
 	@Reference
 	private WorkflowTaskManager _workflowTaskManager;

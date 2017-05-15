@@ -31,6 +31,8 @@ public class WorkflowAssetModel {
 	public WorkflowAssetModel() {
 		_className = null;
 		_classPK = 0;
+		_createTime = 0;
+		_modifiedTime = 0;
 		_summary = null;
 		_title = null;
 		_url = null;
@@ -46,6 +48,8 @@ public class WorkflowAssetModel {
 
 		_className = assetEntry.getClassName();
 		_classPK = assetEntry.getClassPK();
+		_createTime = assetEntry.getCreateDate().getTime();
+		_modifiedTime = assetEntry.getModifiedDate().getTime();
 		_summary = assetEntry.getSummary(locale);
 		_title = assetEntry.getTitle(locale);
 		_url = assetEntry.getUrl();
@@ -59,6 +63,16 @@ public class WorkflowAssetModel {
 	@XmlElement
 	public long getClassPK() {
 		return _classPK;
+	}
+
+	@XmlElement
+	public long getCreateTime() {
+		return _createTime;
+	}
+
+	@XmlElement
+	public long getModifiedTime() {
+		return _modifiedTime;
 	}
 
 	@XmlElement
@@ -83,6 +97,8 @@ public class WorkflowAssetModel {
 
 	private final String _className;
 	private final long _classPK;
+	private final long _createTime;
+	private final long _modifiedTime;
 	private final String _summary;
 	private final String _title;
 	private final String _url;
