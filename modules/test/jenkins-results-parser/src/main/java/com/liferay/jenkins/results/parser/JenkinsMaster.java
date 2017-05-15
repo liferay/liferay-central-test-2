@@ -65,13 +65,15 @@ public class JenkinsMaster implements Comparable<JenkinsMaster> {
 	public int getAvailableSlavesCount() {
 		int recentBatchSizesTotal = _getRecentBatchSizesTotal();
 
-		int availableSlavesCount =
-			_reportedAvailableSlavesCount - recentBatchSizesTotal;
-
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("{availableSlavesCount=");
+
+		int availableSlavesCount =
+			_reportedAvailableSlavesCount - recentBatchSizesTotal;
+
 		sb.append(availableSlavesCount);
+
 		sb.append(", recentBatchSizesTotal=");
 		sb.append(recentBatchSizesTotal);
 		sb.append(", reportedAvailableSlavesCount=");
