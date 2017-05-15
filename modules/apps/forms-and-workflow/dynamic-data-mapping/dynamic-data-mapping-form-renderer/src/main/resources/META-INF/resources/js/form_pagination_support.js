@@ -370,7 +370,7 @@ AUI.add(
 			_valuePagesState: function() {
 				var instance = this;
 
-				return instance.get('layout').pages;
+				return instance.get('context').pages;
 			}
 		};
 

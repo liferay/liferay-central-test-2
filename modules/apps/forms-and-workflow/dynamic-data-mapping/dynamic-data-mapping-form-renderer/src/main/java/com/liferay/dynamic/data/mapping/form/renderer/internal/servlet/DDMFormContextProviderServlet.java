@@ -128,7 +128,7 @@ public class DDMFormContextProviderServlet extends HttpServlet {
 	}
 
 	protected DDMFormTemplateContextProcessor
-		createDDMFormTemplateContextProcessor(HttpServletRequest request)
+			createDDMFormTemplateContextProcessor(HttpServletRequest request)
 		throws Exception {
 
 		String serializedFormContext = ParamUtil.getString(

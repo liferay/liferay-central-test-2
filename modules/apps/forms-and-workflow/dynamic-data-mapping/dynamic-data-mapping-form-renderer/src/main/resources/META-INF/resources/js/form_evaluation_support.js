@@ -92,7 +92,7 @@ AUI.add(
 								fieldContext.errorMessage = '';
 							}
 
-							fieldContext = field.processEvaluationContext(fieldContext, result);
+							fieldContext = A.merge(field.get('context'), field.processEvaluationContext(fieldContext, result));
 
 							field.set('context', fieldContext);
 						}
