@@ -1,8 +1,8 @@
 <definition component-name="portal-mobile-device-rules">
 	<property name="osgi.app.includes" value="portal-mobile-device-detection-fiftyonedegrees" />
+	<property name="plugins.deployment.type" value="osgi" />
 	<property name="portal.release" value="true" />
 	<property name="portal.upstream" value="true" />
-	<property name="plugins.deployment.type" value="osgi" />
 	<property name="testray.main.component.name" value="Mobile Device Rules" />
 
 	<set-up>
