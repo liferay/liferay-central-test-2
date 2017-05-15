@@ -202,12 +202,13 @@ public class LoadBalancerUtil {
 					JenkinsResultsParserUtil.getMasters(
 						properties, masterPrefix)) {
 
-				allJenkinsMasters.add(
-					new JenkinsMaster(
-						masterName,
-						properties.getProperty(
-							JenkinsResultsParserUtil.combine(
-								"jenkins.local.url[", masterName, "]"))));
+				JenkinsMaster jenkinsMaster = new JenkinsMaster(
+					masterName,
+					properties.getProperty(
+						JenkinsResultsParserUtil.combine(
+							"jenkins.local.url[", masterName, "]")));
+
+				allJenkinsMasters.add(jenkinsMaster);
 			}
 
 			_jenkinsMasters.put(masterPrefix, allJenkinsMasters);
@@ -300,7 +301,7 @@ public class LoadBalancerUtil {
 
 		if (jenkinsMasters.isEmpty()) {
 			throw new RuntimeException(
-				"Unable to communicate with any jenkins masters.");
+				"Unable to communicate with any Jenkins masters");
 		}
 	}
 
