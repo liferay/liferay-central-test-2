@@ -74,10 +74,10 @@ public class JenkinsMaster implements Comparable<JenkinsMaster> {
 
 		sb.append("{available=");
 		sb.append(availableSlavesCount);
-		sb.append(", reportedSlavesAvailable=");
-		sb.append(_reportedSlavesAvailable);
 		sb.append(", recentBatchSizesTotal=");
 		sb.append(recentBatchSizesTotal);
+		sb.append(", reportedSlavesAvailable=");
+		sb.append(_reportedSlavesAvailable);
 		sb.append(", url=");
 		sb.append(_masterURL);
 		sb.append("}");
