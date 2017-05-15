@@ -193,9 +193,9 @@ public class LoadBalancerUtil {
 	private static List<JenkinsMaster> _getJenkinsMasters(
 		String masterPrefix, Properties properties) {
 
-		List<JenkinsMaster> allJenkinsMasters;
+		List<JenkinsMaster> allJenkinsMasters = null;
 
-		if (!_jenkinsMastersMap.containsKey(masterPrefix)) {
+		if (!_jenkinsMasters.containsKey(masterPrefix)) {
 			allJenkinsMasters = new ArrayList<>();
 
 			for (String masterName :
@@ -210,19 +210,20 @@ public class LoadBalancerUtil {
 								"jenkins.local.url[", masterName, "]"))));
 			}
 
-			_jenkinsMastersMap.put(masterPrefix, allJenkinsMasters);
+			_jenkinsMasters.put(masterPrefix, allJenkinsMasters);
 		}
 		else {
-			allJenkinsMasters = _jenkinsMastersMap.get(masterPrefix);
+			allJenkinsMasters = _jenkinsMasters.get(masterPrefix);
 		}
 
 		List<String> blacklist = _getBlacklist(properties);
-		List<JenkinsMaster> filteredJenkinsMasters = new ArrayList<>(
-			allJenkinsMasters.size());
 
 		if (blacklist.isEmpty()) {
 			return allJenkinsMasters;
 		}
+
+		List<JenkinsMaster> filteredJenkinsMasters = new ArrayList<>(
+			allJenkinsMasters.size());
 
 		for (JenkinsMaster jenkinsMaster : allJenkinsMasters) {
 			if (blacklist.contains(jenkinsMaster.getMasterName())) {
@@ -305,7 +306,7 @@ public class LoadBalancerUtil {
 
 	private static final int _MAX_RETRIES = 3;
 
-	private static final Map<String, List<JenkinsMaster>> _jenkinsMastersMap =
+	private static final Map<String, List<JenkinsMaster>> _jenkinsMasters =
 		new HashMap<>();
 	private static final Map<String, Long> _nextUpdateTimestampMap =
 		new HashMap<>();
