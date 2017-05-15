@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.model.Role;
 import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.security.permission.ResourceActions;
 import com.liferay.portal.kernel.service.ClassNameLocalService;
 import com.liferay.portal.kernel.service.RoleLocalService;
 import com.liferay.portal.kernel.service.UserLocalService;
@@ -86,6 +87,22 @@ public class WorkflowHelper {
 			companyId, userId, workflowTaskId,
 			workflowTaskTransitionOperationModel.getTransition(),
 			workflowTaskTransitionOperationModel.getComment(), workflowContext);
+	}
+
+	public String getAssetType(
+			long companyId, long workflowTaskId, Locale locale)
+		throws PortalException {
+
+		Map<String, Serializable> workflowContext = getWorkflowContext(
+			companyId, workflowTaskId);
+
+		String className = (String)workflowContext.get(
+			WorkflowConstants.CONTEXT_ENTRY_CLASS_NAME);
+
+		String modelResource = _resourceActions.getModelResource(
+			locale, className);
+
+		return LanguageUtil.get(locale, modelResource);
 	}
 
 	public List<WorkflowLog> getWorkflowLogs(
@@ -191,10 +208,13 @@ public class WorkflowHelper {
 		AssetEntry assetEntry = assetRendererFactory.getAssetEntry(
 			className, classPK);
 
+		String assetType = getAssetType(companyId, workflowTaskId, locale);
+
 		WorkflowUserModel workflowUserModel = getWorkflowUserModel(
 			assetEntry.getUserId());
 
-		return new WorkflowAssetModel(assetEntry, locale, workflowUserModel);
+		return new WorkflowAssetModel(
+			assetEntry, assetType, workflowUserModel, locale);
 	}
 
 	protected WorkflowAssigneeModel getWorkflowAssigneeModel(
@@ -263,6 +283,9 @@ public class WorkflowHelper {
 
 	@Reference
 	private ClassNameLocalService _classNameLocalService;
+
+	@Reference
+	private ResourceActions _resourceActions;
 
 	@Reference
 	private RoleLocalService _roleLocalService;
