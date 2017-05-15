@@ -194,14 +194,14 @@ public class JenkinsMaster implements Comparable<JenkinsMaster> {
 
 		List<Long> expiredTimestamps = new ArrayList<>(_batchSizes.size());
 
-		for (long expiryTimestamp : _batchSizes.keySet()) {
-			if (expiryTimestamp < currentTimestamp) {
-				expiredTimestamps.add(expiryTimestamp);
+		for (long expirationTimestamp : _batchSizes.keySet()) {
+			if (expirationTimestamp < currentTimestamp) {
+				expiredTimestamps.add(expirationTimestamp);
 
 				continue;
 			}
 
-			recentBatchSizesTotal += _batchSizes.get(expiryTimestamp);
+			recentBatchSizesTotal += _batchSizes.get(expirationTimestamp);
 		}
 
 		for (Long expiredTimestamp : expiredTimestamps) {
