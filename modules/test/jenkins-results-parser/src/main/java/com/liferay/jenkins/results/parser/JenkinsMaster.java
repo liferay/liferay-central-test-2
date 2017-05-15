@@ -66,16 +66,16 @@ public class JenkinsMaster implements Comparable<JenkinsMaster> {
 		int recentBatchSizesTotal = _getRecentBatchSizesTotal();
 
 		int availableSlavesCount =
-			_reportedSlavesAvailable - recentBatchSizesTotal;
+			_reportedAvailableSlavesCount - recentBatchSizesTotal;
 
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("{available=");
+		sb.append("{availableSlavesCount=");
 		sb.append(availableSlavesCount);
 		sb.append(", recentBatchSizesTotal=");
 		sb.append(recentBatchSizesTotal);
-		sb.append(", reportedSlavesAvailable=");
-		sb.append(_reportedSlavesAvailable);
+		sb.append(", reportedAvailableSlavesCount=");
+		sb.append(_reportedAvailableSlavesCount);
 		sb.append(", url=");
 		sb.append(_masterURL);
 		sb.append("}");
@@ -179,7 +179,7 @@ public class JenkinsMaster implements Comparable<JenkinsMaster> {
 			}
 		}
 
-		_reportedSlavesAvailable = idleCount - queueCount;
+		_reportedAvailableSlavesCount = idleCount - queueCount;
 
 		getAvailableSlavesCount();
 	}
@@ -213,7 +213,7 @@ public class JenkinsMaster implements Comparable<JenkinsMaster> {
 	private final Map<Long, Integer> _batchSizes = new TreeMap<>();
 	private final String _masterName;
 	private final String _masterURL;
-	private int _reportedSlavesAvailable;
+	private int _reportedAvailableSlavesCount;
 	private String _summary;
 
 }
