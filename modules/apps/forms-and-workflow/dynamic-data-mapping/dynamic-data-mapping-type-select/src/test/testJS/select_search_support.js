@@ -85,7 +85,7 @@ describe(
 					}
 				);
 
-				it(
+				xit(
 					'should clear the search input after closing the field',
 					function() {
 						selectField.set('options', [{label: 'foo', value: 'foo'}, {label: 'bar', value: 'bar'}]);
@@ -104,7 +104,7 @@ describe(
 					}
 				);
 
-				it(
+				xit(
 					'should clear the options list after closing the field',
 					function(done) {
 						selectField.set('options', [{label: 'foo', value: 'foo'}, {label: 'bar', value: 'bar'}]);
@@ -166,7 +166,7 @@ describe(
 					}
 				);
 
-				it(
+				xit(
 					'should not filter if no term was passed',
 					function(done) {
 						selectField.set('options', [{label: 'foo', value: 'foo'}, {label: 'bar', value: 'bar'}]);
