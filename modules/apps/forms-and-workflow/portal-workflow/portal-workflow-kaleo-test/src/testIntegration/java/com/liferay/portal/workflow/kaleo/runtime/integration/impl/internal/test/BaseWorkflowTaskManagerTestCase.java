@@ -396,18 +396,21 @@ public abstract class BaseWorkflowTaskManagerTestCase {
 		}
 	}
 
-	protected Organization createOrganization() throws PortalException {
+	protected Organization createOrganization(boolean site)
+		throws PortalException {
+
 		return createOrganization(
-			OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID);
+			OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID, site);
 	}
 
-	protected Organization createOrganization(long parentOrganizationId)
+	protected Organization createOrganization(
+			long parentOrganizationId, boolean site)
 		throws PortalException {
 
 		Organization organization =
 			OrganizationLocalServiceUtil.addOrganization(
 				adminUser.getUserId(), parentOrganizationId,
-				StringUtil.randomString(), true);
+				StringUtil.randomString(), site);
 
 		_organizations.add(0, organization);
 
@@ -474,13 +477,13 @@ public abstract class BaseWorkflowTaskManagerTestCase {
 		return "com/liferay/portal/workflow/kaleo/dependencies/";
 	}
 
-	protected WorkflowTask getWorkflowTask() throws WorkflowException {
+	protected WorkflowTask getWorkflowTask() throws Exception {
 		return getWorkflowTask(adminUser, null, false);
 	}
 
 	protected WorkflowTask getWorkflowTask(
 			User user, String taskName, boolean completed)
-		throws WorkflowException {
+		throws Exception {
 
 		List<WorkflowTask> workflowTasks = new ArrayList<>();
 
@@ -495,6 +498,11 @@ public abstract class BaseWorkflowTaskManagerTestCase {
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null));
 
 		for (WorkflowTask workflowTask : workflowTasks) {
+			PermissionChecker userPermissionChecker =
+				PermissionCheckerFactoryUtil.create(user);
+
+			PermissionThreadLocal.setPermissionChecker(userPermissionChecker);
+
 			if (Objects.equals(taskName, workflowTask.getName())) {
 				return workflowTask;
 			}

@@ -233,7 +233,7 @@ public class WorkflowTaskManagerImplTest
 
 	@Test
 	public void testApproveOrganizationParentReviewer() throws Exception {
-		Organization parentOrganization = createOrganization();
+		Organization parentOrganization = createOrganization(true);
 
 		User reviewerUser = createUser(
 			ORGANIZATION_CONTENT_REVIEWER, parentOrganization.getGroup());
@@ -242,7 +242,56 @@ public class WorkflowTaskManagerImplTest
 			reviewerUser.getUserId(), parentOrganization);
 
 		Organization childOrganization = createOrganization(
-			parentOrganization.getOrganizationId());
+			parentOrganization.getOrganizationId(), true);
+
+		User memberUser = createUser(
+			RoleConstants.ORGANIZATION_ADMINISTRATOR,
+			childOrganization.getGroup());
+
+		OrganizationLocalServiceUtil.addUserOrganization(
+			memberUser.getUserId(), childOrganization);
+
+		serviceContext = ServiceContextTestUtil.getServiceContext(
+			childOrganization.getGroupId());
+
+		activateSingleApproverWorkflow(
+			childOrganization.getGroupId(), BlogsEntry.class.getName(), 0, 0);
+
+		BlogsEntry blogsEntry = addBlogsEntry(memberUser);
+
+		checkUserNotificationEventsByUsers(reviewerUser);
+
+		assignWorkflowTaskToUser(reviewerUser, reviewerUser);
+
+		completeWorkflowTask(reviewerUser, Constants.APPROVE);
+
+		blogsEntry = BlogsEntryLocalServiceUtil.getBlogsEntry(
+			blogsEntry.getEntryId());
+
+		Assert.assertEquals(
+			WorkflowConstants.STATUS_APPROVED, blogsEntry.getStatus());
+
+		deactivateWorkflow(
+			childOrganization.getGroupId(), BlogsEntry.class.getName(), 0, 0);
+
+		serviceContext = ServiceContextTestUtil.getServiceContext(
+			group.getGroupId());
+	}
+
+	@Test
+	public void testApproveOrganizationParentReviewerWithoutSite()
+		throws Exception {
+
+		Organization parentOrganization = createOrganization(false);
+
+		User reviewerUser = createUser(
+			ORGANIZATION_CONTENT_REVIEWER, parentOrganization.getGroup());
+
+		OrganizationLocalServiceUtil.addUserOrganization(
+			reviewerUser.getUserId(), parentOrganization);
+
+		Organization childOrganization = createOrganization(
+			parentOrganization.getOrganizationId(), true);
 
 		User memberUser = createUser(
 			RoleConstants.ORGANIZATION_ADMINISTRATOR,
@@ -282,7 +331,7 @@ public class WorkflowTaskManagerImplTest
 	public void testApproveScriptAssignmentOrganizationAndSiteReviewer()
 		throws Exception {
 
-		Organization organization = createOrganization();
+		Organization organization = createOrganization(true);
 
 		User organizationReviewerUser = createUser(
 			ORGANIZATION_CONTENT_REVIEWER, organization.getGroup());
