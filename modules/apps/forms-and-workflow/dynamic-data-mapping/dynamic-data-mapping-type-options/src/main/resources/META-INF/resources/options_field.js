@@ -493,10 +493,15 @@ AUI.add(
 					_getCurrentEditingLanguageId: function() {
 						var instance = this;
 
-						var settingsForm = instance.get('parent');
-						var formBuilderField = settingsForm.get('field');
+						var form = instance.get('parent');
 
-						return formBuilderField.get('locale');
+						if (form) {
+							var field = form.get('field');
+
+							return field.get('locale');
+						}
+
+						return instance.get('defaultLanguageId');
 					},
 
 					_getCurrentLocaleOptionsValues: function() {
@@ -504,10 +509,10 @@ AUI.add(
 
 						var value = instance.get('value');
 
-						var editingLanguageId = instance._getCurrentEditingLanguageId();
 						var defaultLanguageId = instance.get('defaultLanguageId');
+						var editingLanguageId = instance._getCurrentEditingLanguageId();
 
-						return value[editingLanguageId] || value[defaultLanguageId];
+						return value[editingLanguageId] || value[defaultLanguageId] || [];
 					},
 
 					_getNodeIndex: function(node) {
