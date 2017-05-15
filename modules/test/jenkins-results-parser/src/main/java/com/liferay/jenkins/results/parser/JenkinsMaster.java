@@ -192,8 +192,7 @@ public class JenkinsMaster implements Comparable<JenkinsMaster> {
 		long currentTimestamp = System.currentTimeMillis();
 		int totalRecentBatchSizes = 0;
 
-		List<Long> expiredTimestamps = new ArrayList<>(
-			_batchSizes.size());
+		List<Long> expiredTimestamps = new ArrayList<>(_batchSizes.size());
 
 		for (long expiryTimestamp : _batchSizes.keySet()) {
 			if (expiryTimestamp < currentTimestamp) {
@@ -213,9 +212,9 @@ public class JenkinsMaster implements Comparable<JenkinsMaster> {
 	}
 
 	private boolean _available;
+	private final Map<Long, Integer> _batchSizes = new TreeMap<>();
 	private final String _masterName;
 	private final String _masterURL;
-	private final Map<Long, Integer> _batchSizes = new TreeMap<>();
 	private int _reportedSlavesAvailable;
 	private String _summary;
 
