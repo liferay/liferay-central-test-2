@@ -249,7 +249,8 @@ public class SearchDisplayContextTest {
 		).when(
 			portletURLFactory
 		).getPortletURL(
-			Mockito.<PortletRequest>any(), Mockito.<MimeResponse>any());
+			Mockito.<PortletRequest>any(), Mockito.<MimeResponse>any()
+		);
 	}
 
 	protected void setUpRenderRequest() throws Exception {
