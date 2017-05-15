@@ -20,10 +20,12 @@ import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.workflow.WorkflowException;
 import com.liferay.portal.kernel.workflow.WorkflowTask;
 import com.liferay.portal.workflow.rest.internal.helper.WorkflowHelper;
+import com.liferay.portal.workflow.rest.internal.model.WorkflowActivityModel;
 import com.liferay.portal.workflow.rest.internal.model.WorkflowOperationResultModel;
 import com.liferay.portal.workflow.rest.internal.model.WorkflowTaskModel;
 import com.liferay.portal.workflow.rest.internal.model.WorkflowTaskTransitionOperationModel;
 
+import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletResponse;
@@ -45,6 +47,19 @@ import org.osgi.service.component.annotations.Reference;
 @Component(immediate = true, service = WorkflowTaskResource.class)
 @Path("/task")
 public class WorkflowTaskResource {
+
+	@GET
+	@Path("/{workflowTaskId}/activities")
+	@Produces("application/json")
+	public List<WorkflowActivityModel> activities(
+			@Context Company company, @Context User user,
+			@Context Locale locale,
+			@PathParam("workflowTaskId") long workflowTaskId)
+		throws PortalException {
+
+		return _workflowHelper.getWorkflowActivityModels(
+			company.getCompanyId(), user.getUserId(), workflowTaskId, locale);
+	}
 
 	@Path("/{workflowTaskId}/assign-to-me")
 	@POST
