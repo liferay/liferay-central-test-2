@@ -46,11 +46,10 @@ public class JenkinsMaster implements Comparable<JenkinsMaster> {
 		Integer otherAvailableSlavesCount =
 			otherJenkinsMaster.getAvailableSlavesCount();
 
-		int availableSlavesCountCompareToResult =
-			-1 * (availableSlavesCount.compareTo(otherAvailableSlavesCount));
+		int value = availableSlavesCount.compareTo(otherAvailableSlavesCount);
 
-		if (availableSlavesCountCompareToResult != 0) {
-			return availableSlavesCountCompareToResult;
+		if (value != 0) {
+			return -value;
 		}
 
 		Random random = new Random();
