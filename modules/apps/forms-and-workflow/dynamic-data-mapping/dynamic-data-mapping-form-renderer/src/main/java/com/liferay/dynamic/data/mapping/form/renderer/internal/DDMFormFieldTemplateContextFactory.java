@@ -505,6 +505,10 @@ public class DDMFormFieldTemplateContextFactory {
 		Map<String, Object> ddmFormFieldTemplateContext,
 		DDMFormFieldValidation ddmFormFieldValidation) {
 
+		if (ddmFormFieldValidation == null) {
+			return;
+		}
+
 		Map<String, String> validation = new HashMap<>();
 
 		validation.put(
