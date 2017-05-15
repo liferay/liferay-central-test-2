@@ -58,7 +58,7 @@ public class PortletDataContextFactoryImpl
 		}
 
 		PortletDataContext clonePortletDataContext = new PortletDataContextImpl(
-			_lockManager);
+			_lockManager, false);
 
 		clonePortletDataContext.setCompanyId(portletDataContext.getCompanyId());
 		clonePortletDataContext.setCompanyGroupId(
