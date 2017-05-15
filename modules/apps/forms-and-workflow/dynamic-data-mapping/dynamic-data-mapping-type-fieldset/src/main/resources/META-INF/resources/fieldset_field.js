@@ -1,6 +1,8 @@
 AUI.add(
 	'liferay-ddm-form-field-fieldset',
 	function(A) {
+		var Lang = A.Lang;
+
 		var Renderer = Liferay.DDM.Renderer;
 
 		var FieldSetUtil = Liferay.DDM.Field.FieldSetUtil;
@@ -49,7 +51,15 @@ AUI.add(
 							function(field) {
 								delete field.instanceId;
 								delete field.name;
-								delete field.value;
+								if (Lang.isArray(field.value)) {
+									field.value = [];
+								}
+								else if (Lang.isObject(field.value)) {
+									field.value = {};
+								}
+								else {
+									field.value = '';
+								}
 							}
 						);
 
