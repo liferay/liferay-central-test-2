@@ -30,10 +30,14 @@ import com.liferay.dynamic.data.mapping.storage.DDMFormValues;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Marcellus Tavares
@@ -67,6 +71,15 @@ public class DDMFormTemplateContextProcessor {
 	}
 
 	protected void addDDMFormDDMFormField(JSONObject jsonObject) {
+		Map<String, DDMFormField> ddmFormFields = _ddmForm.getDDMFormFieldsMap(
+			true);
+
+		String fieldName = jsonObject.getString("fieldName");
+
+		if (ddmFormFields.containsKey(fieldName)) {
+			return;
+		}
+
 		DDMFormField ddmFormField = getDDMFormField(jsonObject);
 
 		_ddmForm.addDDMFormField(ddmFormField);
@@ -324,7 +337,7 @@ public class DDMFormTemplateContextProcessor {
 	protected void traverseFields(
 		JSONArray jsonArray, DDMFormLayoutColumn ddmFormLayoutColumn) {
 
-		List<String> ddmFormFieldNames = new ArrayList<>();
+		Set<String> ddmFormFieldNames = new LinkedHashSet<>();
 
 		for (int i = 0; i < jsonArray.length(); i++) {
 			JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -335,7 +348,8 @@ public class DDMFormTemplateContextProcessor {
 			ddmFormFieldNames.add(jsonObject.getString("fieldName"));
 		}
 
-		ddmFormLayoutColumn.setDDMFormFieldNames(ddmFormFieldNames);
+		ddmFormLayoutColumn.setDDMFormFieldNames(
+			ListUtil.fromCollection(ddmFormFieldNames));
 	}
 
 	protected void traversePages(JSONArray jsonArray) {

@@ -5,6 +5,8 @@ AUI.add(
 
 		var Renderer = Liferay.DDM.Renderer;
 
+		var Util = Renderer.Util;
+
 		var FieldTypes = Renderer.FieldTypes;
 
 		var SELECTOR_REPEAT_BUTTONS = '.lfr-ddm-form-field-repeatable-add-button, .lfr-ddm-form-field-repeatable-delete-button';
@@ -86,10 +88,13 @@ AUI.add(
 					}
 				);
 
-				delete config.context.instanceId;
+				var newInstanceId = Util.generateInstanceId(8);
+
+				config.context.instanceId = newInstanceId;
+				config.instanceId = newInstanceId;
+
 				delete config.context.name;
 				delete config.context.value;
-				delete config.instanceId;
 				delete config.name;
 				delete config.value;
 

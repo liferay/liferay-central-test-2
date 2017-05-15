@@ -119,11 +119,36 @@ AUI.add(
 
 				visitor.set(
 					'fieldHandler',
-					function(fieldContext) {
+					function(fieldContext, args, columnFieldContexts) {
 						var field = instance.getField(fieldContext.fieldName, fieldContext.instanceId);
 
 						if (field) {
-							A.mix(fieldContext, field.get('context'), true);
+							var repeatedSiblings = field.getRepeatedSiblings();
+
+							repeatedSiblings.forEach(
+								function(repeatedSibling) {
+									var repeatedContext = repeatedSibling.get('context');
+
+									if (repeatedSibling) {
+										var foundFieldContext = columnFieldContexts.find(
+											function(columnFieldContext) {
+												if (columnFieldContext.fieldName === repeatedContext.fieldName &&
+														columnFieldContext.instanceId === repeatedContext.instanceId) {
+
+													return true;
+												}
+											}
+										);
+
+										if (foundFieldContext) {
+											A.mix(foundFieldContext, repeatedContext, true);
+										}
+										else {
+											columnFieldContexts.push(repeatedContext);
+										}
+									}
+								}
+							);
 						}
 					}
 				);
