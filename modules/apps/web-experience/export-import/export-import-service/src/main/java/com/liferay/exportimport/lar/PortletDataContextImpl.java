@@ -2428,14 +2428,14 @@ public class PortletDataContextImpl implements PortletDataContext {
 			return;
 		}
 
-		_xStreamConfigurators = xStreamConfigurators;
-
 		_classLoader = classLoader;
 
 		_xStream = new XStream(
 			null, new XppDriver(), new ClassLoaderReference(classLoader));
 
 		_xStream.omitField(HashMap.class, "cache_bitmask");
+
+		_xStreamConfigurators = xStreamConfigurators;
 
 		if (xStreamConfigurators.isEmpty()) {
 			return;
