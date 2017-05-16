@@ -70,8 +70,6 @@ public class DDMDataProviderInstancesDataProvider implements DDMDataProvider {
 			long[] groupIds = _portal.getCurrentAndAncestorSiteGroupIds(
 				themeDisplay.getScopeGroupId());
 
-			//todo expose in the service
-
 			List<DDMDataProviderInstance> ddmDataProviderInstances =
 				_ddmDataProviderInstanceLocalService.getDataProviderInstances(
 					groupIds);
