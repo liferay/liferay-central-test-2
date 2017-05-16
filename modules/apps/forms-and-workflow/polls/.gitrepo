@@ -4,8 +4,8 @@
 [subrepo]
 	autopull = false
 	cmdver = liferay
-	commit = d7e9b930fe2e7f4a08759f410565d7e639058fde
+	commit = eefe3124426d1e12db4316257f46d2a1c41d72ee
 	mergebuttonmergecommits = false
 	mode = push
-	parent = 0a994468c90179514cc67b0fe944035f0a8ff0dc
+	parent = 2d086feecee77dde93b59164422873367e96ac58
 	remote = git@github.com:liferay/com-liferay-polls.git
