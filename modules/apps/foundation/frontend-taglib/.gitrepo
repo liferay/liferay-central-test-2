@@ -4,8 +4,8 @@
 [subrepo]
 	autopull = false
 	cmdver = liferay
-	commit = d2acac5344d6d07e25a4fc2a141556c5d9838aea
+	commit = 0fc94988824f2e189c5c580839b145aabab0ca0e
 	mergebuttonmergecommits = false
 	mode = push
-	parent = 419c41d510160bcd35075c5544c586d5bdbde31c
+	parent = 5869b26817c9aa9b297943b676c1528dd571adb0
 	remote = git@github.com:liferay/com-liferay-frontend-taglib.git
