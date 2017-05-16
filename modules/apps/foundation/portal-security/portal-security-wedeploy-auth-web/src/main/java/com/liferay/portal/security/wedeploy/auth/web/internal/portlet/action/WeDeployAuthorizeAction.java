@@ -50,14 +50,14 @@ public class WeDeployAuthorizeAction extends BaseStrutsAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		String clientId = ParamUtil.getString(request, "client_id");
-		String redirectURI = ParamUtil.getString(request, "redirect_uri");
-
 		if (!themeDisplay.isSignedIn()) {
 			sendLoginRedirect(request, response, themeDisplay.getPlid());
 
 			return null;
 		}
+
+		String clientId = ParamUtil.getString(request, "client_id");
+		String redirectURI = ParamUtil.getString(request, "redirect_uri");
 
 		PortletURL portletURL = PortletURLFactoryUtil.create(
 			request, WeDeployAuthPortletKeys.WEDEPLOY_AUTH,
