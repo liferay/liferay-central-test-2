@@ -109,7 +109,7 @@ public class SoyTemplateResourcesCollector {
 				catch (IllegalStateException ise) {
 					_log.error(
 						String.format(
-							"providerBundle = %s, templateId = %s",
+							"{providerBundle=%s, templateId=%s}",
 							providerBundle.getSymbolicName(), templateId));
 
 					throw ise;

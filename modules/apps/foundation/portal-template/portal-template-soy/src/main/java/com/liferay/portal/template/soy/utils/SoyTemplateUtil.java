@@ -29,7 +29,7 @@ public class SoyTemplateUtil {
 		if (pos == -1) {
 			if (_log.isDebugEnabled()) {
 				String message = String.format(
-					"The templateId \"%s\" does not map to a Soy template",
+					"The template ID \"%s\" does not map to a Soy template",
 					templateId);
 
 				_log.debug(message);

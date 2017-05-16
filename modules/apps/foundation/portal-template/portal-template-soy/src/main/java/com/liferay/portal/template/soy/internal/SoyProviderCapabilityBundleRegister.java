@@ -34,11 +34,11 @@ import org.osgi.service.component.annotations.Component;
 public class SoyProviderCapabilityBundleRegister {
 
 	public Bundle getBundle(long bundleId) {
-		return _bundleMap.get(bundleId);
+		return _bundles.get(bundleId);
 	}
 
 	public Collection<Bundle> getBundles() {
-		return _bundleMap.values();
+		return _bundles.values();
 	}
 
 	public Bundle getTemplateBundle(String templateId) {
@@ -66,17 +66,17 @@ public class SoyProviderCapabilityBundleRegister {
 	}
 
 	public void register(Bundle bundle) {
-		_bundleMap.put(bundle.getBundleId(), bundle);
+		_bundles.put(bundle.getBundleId(), bundle);
 	}
 
 	public void unregister(Bundle bundle) {
-		_bundleMap.remove(bundle.getBundleId());
+		_bundles.remove(bundle.getBundleId());
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		SoyProviderCapabilityBundleRegister.class);
 
-	private static final Map<Long, Bundle> _bundleMap =
+	private static final Map<Long, Bundle> _bundles =
 		new ConcurrentHashMap<>();
 
 }

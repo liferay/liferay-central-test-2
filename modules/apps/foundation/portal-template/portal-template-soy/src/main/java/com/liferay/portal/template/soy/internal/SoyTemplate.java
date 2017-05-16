@@ -81,10 +81,10 @@ public class SoyTemplate extends AbstractMultiResourceTemplate {
 			templateResources, errorTemplateResource, context,
 			templateContextHelper, TemplateConstants.LANG_TYPE_SOY, 0);
 
-		_templateContextHelper = templateContextHelper;
 		_privileged = privileged;
 		_soyMapData = new SoyMapData();
 		_soyTofuCacheHandler = new SoyTofuCacheHandler(_portalCache);
+		_templateContextHelper = templateContextHelper;
 	}
 
 	@Override
@@ -106,7 +106,7 @@ public class SoyTemplate extends AbstractMultiResourceTemplate {
 		if (!restrictedVariables.contains(key) &&
 			!Objects.equals(value, currentValue)) {
 
-			Object soyMapValue;
+			Object soyMapValue = null;
 
 			if (value == null) {
 				soyMapValue = null;
@@ -275,7 +275,7 @@ public class SoyTemplate extends AbstractMultiResourceTemplate {
 				get(TemplateConstants.NAMESPACE));
 
 			if (Validator.isNull(namespace)) {
-				throw new TemplateException("No namespace specified.");
+				throw new TemplateException("Namespace is not specified");
 			}
 
 			SoyTofuCacheBag soyTofuCacheBag = getSoyTofuCacheBag(
@@ -334,7 +334,7 @@ public class SoyTemplate extends AbstractMultiResourceTemplate {
 					String templateId = templateResource.getTemplateId();
 
 					_log.debug(
-						"Could not get language resource bundle for template " +
+						"Unable to get language resource bundle for template " +
 							StringUtil.quote(templateId),
 						e);
 				}
