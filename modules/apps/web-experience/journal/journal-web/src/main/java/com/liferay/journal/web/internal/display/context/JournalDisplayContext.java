@@ -736,7 +736,15 @@ public class JournalDisplayContext {
 
 				params.put("expandoAttributes", getKeywords());
 
-				Indexer indexer = JournalSearcher.getInstance();
+				Indexer indexer = null;
+
+				if (!showVersions) {
+					indexer = JournalSearcher.getInstance();
+				}
+				else {
+					indexer = IndexerRegistryUtil.getIndexer(
+						JournalArticle.class);
+				}
 
 				SearchContext searchContext = buildSearchContext(
 					themeDisplay.getCompanyId(), themeDisplay.getScopeGroupId(),
