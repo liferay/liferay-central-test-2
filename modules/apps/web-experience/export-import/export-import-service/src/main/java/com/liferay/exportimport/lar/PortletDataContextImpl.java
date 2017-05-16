@@ -2662,14 +2662,14 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 		if ((_xStream != null) &&
 			xStreamConfigurators.equals(_xStreamConfigurators) &&
-			classLoader.equals(_classloader)) {
+			classLoader.equals(_classLoader)) {
 
 			return;
 		}
 
 		_xStreamConfigurators = xStreamConfigurators;
 
-		_classloader = classLoader;
+		_classLoader = classLoader;
 
 		_xStream = new XStream(
 			null, new XppDriver(), new ClassLoaderReference(classLoader));
@@ -2778,7 +2778,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 	private static final Log _log = LogFactoryUtil.getLog(
 		PortletDataContextImpl.class);
 
-	private static ClassLoader _classloader;
+	private static ClassLoader _classLoader;
 	private static transient XStream _xStream;
 	private static Set<XStreamConfigurator> _xStreamConfigurators;
 
