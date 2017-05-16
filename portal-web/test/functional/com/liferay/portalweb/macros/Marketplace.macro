@@ -123,9 +123,7 @@
 			<var name="entryComment" value="Blogs Entry 1 Comment" />
 		</execute>
 
-		<execute macro="Navigator#gotoPage">
-			<var name="pageName" value="Blogs Test Page" />
-		</execute>
+		<execute macro="Navigator#openURL" />
 
 		<execute macro="Page#add">
 			<var name="columnName" value="1 Column" />
@@ -172,9 +170,7 @@
 			<var name="dmDocumentTitle" value="DM Folder Image 1 Title" />
 		</execute>
 
-		<execute macro="Navigator#gotoPage">
-			<var name="pageName" value="Documents and Media Test Page" />
-		</execute>
+		<execute macro="Navigator#openURL" />
 
 		<execute macro="Page#add">
 			<var name="pageName" value="Wiki Test Page" />
@@ -201,9 +197,7 @@
 			<var name="wikiPageTitle" value="FrontPage" />
 		</execute>
 
-		<execute macro="Navigator#gotoPage">
-			<var name="pageName" value="Wiki Test Page" />
-		</execute>
+		<execute macro="Navigator#openURL" />
 
 		<execute macro="Page#add">
 			<var name="columnName" value="1 Column" />
@@ -237,9 +231,7 @@
 			<var name="eventTitle" value="Calendar Event Title" />
 		</execute>
 
-		<execute macro="Navigator#gotoPage">
-			<var name="pageName" value="Calendar Test Page" />
-		</execute>
+		<execute macro="Navigator#openURL" />
 
 		<execute macro="Page#add">
 			<var name="pageName" value="Bookmarks Test Page" />
