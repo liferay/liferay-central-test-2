@@ -3061,7 +3061,11 @@ AUI.add(
 							else if (event.type === 'liferay-ddm-field:remove') {
 								delete validatorRules[field.getInputName()];
 
-								liferayForm.formValidator.resetField(field.getInputNode());
+								var inputNode = field.getInputNode();
+
+								if (inputNode) {
+									liferayForm.formValidator.resetField(inputNode);
+								}
 
 								if (field.get('repeatable')) {
 									instance.unregisterRepeatable(field);
