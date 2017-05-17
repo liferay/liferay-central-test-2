@@ -22,12 +22,9 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.model.SystemEventConstants;
 import com.liferay.portal.kernel.model.User;
-import com.liferay.portal.kernel.search.Indexer;
-import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.social.SocialActivityManagerUtil;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
-import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portlet.ratings.service.base.RatingsEntryLocalServiceBaseImpl;
 import com.liferay.ratings.kernel.exception.EntryScoreException;
 import com.liferay.ratings.kernel.model.RatingsEntry;
@@ -92,8 +89,6 @@ public class RatingsEntryLocalServiceImpl
 		stats.setAverageScore(averageScore);
 
 		ratingsStatsPersistence.update(stats);
-
-		reindex(stats);
 	}
 
 	@Override
@@ -184,8 +179,6 @@ public class RatingsEntryLocalServiceImpl
 				stats.getTotalScore() / stats.getTotalEntries());
 
 			ratingsStatsPersistence.update(stats);
-
-			reindex(stats);
 		}
 		else {
 			newEntry = true;
@@ -216,8 +209,6 @@ public class RatingsEntryLocalServiceImpl
 				stats.getTotalScore() / stats.getTotalEntries());
 
 			ratingsStatsPersistence.update(stats);
-
-			reindex(stats);
 		}
 
 		// Blogs entry
@@ -268,14 +259,6 @@ public class RatingsEntryLocalServiceImpl
 		}
 
 		return entry;
-	}
-
-	protected void reindex(RatingsStats stats) throws PortalException {
-		String className = PortalUtil.getClassName(stats.getClassNameId());
-
-		Indexer<?> indexer = IndexerRegistryUtil.nullSafeGetIndexer(className);
-
-		indexer.reindex(className, stats.getClassPK());
 	}
 
 	protected void validate(double score) throws PortalException {
