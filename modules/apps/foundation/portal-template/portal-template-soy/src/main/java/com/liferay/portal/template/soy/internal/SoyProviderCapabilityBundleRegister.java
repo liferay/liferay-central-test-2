@@ -76,7 +76,6 @@ public class SoyProviderCapabilityBundleRegister {
 	private static final Log _log = LogFactoryUtil.getLog(
 		SoyProviderCapabilityBundleRegister.class);
 
-	private static final Map<Long, Bundle> _bundles =
-		new ConcurrentHashMap<>();
+	private static final Map<Long, Bundle> _bundles = new ConcurrentHashMap<>();
 
 }
