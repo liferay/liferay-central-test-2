@@ -5338,7 +5338,7 @@ public class JournalArticleLocalServiceImpl
 			smallImage, article.getSmallImageId(), smallImageFile,
 			smallImageBytes);
 
-		// Email and Workflow
+		// Email and workflow
 
 		if (expired && imported) {
 			updateStatus(
