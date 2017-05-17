@@ -8260,7 +8260,10 @@ public class PortalImpl implements Portal {
 						return portalURL.concat(_pathContext).concat(path);
 					}
 
-					if (_isSameHostName(virtualHostname, portalDomain)) {
+					if (_isSameHostName(virtualHostname, portalDomain) &&
+						virtualHostname.equals(
+							layoutSet.getVirtualHostname())) {
+
 						String path = StringPool.BLANK;
 
 						if (themeDisplay.isWidget()) {
