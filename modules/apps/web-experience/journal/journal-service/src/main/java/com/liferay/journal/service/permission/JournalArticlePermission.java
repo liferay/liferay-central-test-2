@@ -16,13 +16,15 @@ package com.liferay.journal.service.permission;
 
 import com.liferay.exportimport.kernel.staging.permission.StagingPermissionUtil;
 import com.liferay.journal.configuration.JournalServiceConfiguration;
-import com.liferay.journal.exception.NoSuchFolderException;
 import com.liferay.journal.model.JournalArticle;
 import com.liferay.journal.model.JournalFolder;
 import com.liferay.journal.model.JournalFolderConstants;
 import com.liferay.journal.service.JournalArticleLocalService;
 import com.liferay.journal.service.JournalFolderLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.module.configuration.ConfigurationException;
 import com.liferay.portal.kernel.module.configuration.ConfigurationProvider;
 import com.liferay.portal.kernel.portlet.PortletProvider;
 import com.liferay.portal.kernel.portlet.PortletProviderUtil;
@@ -248,45 +250,63 @@ public class JournalArticlePermission implements BaseModelPermissionChecker {
 			}
 		}
 
-		JournalServiceConfiguration journalServiceConfiguration =
-			_configurationProvider.getCompanyConfiguration(
-				JournalServiceConfiguration.class,
-				permissionChecker.getCompanyId());
+		if (actionId.equals(ActionKeys.VIEW)) {
+			JournalServiceConfiguration journalServiceConfiguration = null;
 
-		if (actionId.equals(ActionKeys.VIEW) &&
-			!journalServiceConfiguration.articleViewPermissionsCheckEnabled()) {
-
-			return true;
-		}
-
-		if (actionId.equals(ActionKeys.VIEW) &&
-			PropsValues.PERMISSIONS_VIEW_DYNAMIC_INHERITANCE) {
-
-			long folderId = article.getFolderId();
-
-			if (folderId == JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-				if (!JournalPermission.contains(
-						permissionChecker, article.getGroupId(), actionId)) {
-
-					return false;
-				}
+			try {
+				journalServiceConfiguration =
+					_configurationProvider.getCompanyConfiguration(
+						JournalServiceConfiguration.class,
+						permissionChecker.getCompanyId());
 			}
-			else {
-				try {
-					JournalFolder folder = _journalFolderLocalService.getFolder(
-						folderId);
+			catch (ConfigurationException ce) {
+				_log.error(
+					"Unable to get journal service configuration for company " +
+						permissionChecker.getCompanyId(),
+					ce);
 
-					if (!JournalFolderPermission.contains(
-							permissionChecker, folder, ActionKeys.ACCESS) &&
-						!JournalFolderPermission.contains(
-							permissionChecker, folder, ActionKeys.VIEW)) {
+				return false;
+			}
+
+			if (!journalServiceConfiguration.
+					articleViewPermissionsCheckEnabled()) {
+
+				return true;
+			}
+
+			if (PropsValues.PERMISSIONS_VIEW_DYNAMIC_INHERITANCE) {
+				long folderId = article.getFolderId();
+
+				if (folderId ==
+						JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+
+					if (!JournalPermission.contains(
+							permissionChecker, article.getGroupId(),
+							actionId)) {
 
 						return false;
 					}
 				}
-				catch (NoSuchFolderException nsfe) {
-					if (!article.isInTrash()) {
-						throw nsfe;
+				else {
+					JournalFolder folder =
+						_journalFolderLocalService.fetchFolder(folderId);
+
+					if (folder != null) {
+						if (!JournalFolderPermission.contains(
+								permissionChecker, folder, ActionKeys.ACCESS) &&
+							!JournalFolderPermission.contains(
+								permissionChecker, folder, ActionKeys.VIEW)) {
+
+							return false;
+						}
+					}
+					else {
+						if (!article.isInTrash()) {
+							_log.error(
+								"Unable to get journal folder " + folderId);
+
+							return false;
+						}
 					}
 				}
 			}
@@ -303,6 +323,9 @@ public class JournalArticlePermission implements BaseModelPermissionChecker {
 			article.getGroupId(), JournalArticle.class.getName(),
 			article.getResourcePrimKey(), actionId);
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		JournalArticlePermission.class);
 
 	private static ConfigurationProvider _configurationProvider;
 	private static JournalArticleLocalService _journalArticleLocalService;
