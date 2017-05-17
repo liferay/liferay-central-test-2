@@ -347,4 +347,6 @@ Import-Package: !*
 	@lib/com.liferay.osgi.service.tracker.collections.jar,\
 	@lib/com.liferay.portal.app.license.api.jar,\
 	@lib/com.liferay.registry.api.jar
--removeheaders: Private-Package, Service-Component
+-removeheaders:\
+	Private-Package,\
+	Service-Component
