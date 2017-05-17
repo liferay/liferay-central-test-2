@@ -363,12 +363,6 @@
 		<execute function="AssertClick" locator1="Pagination#PREVIOUS_LINK" value1="Previous" />
 	</command>
 
-	<command name="viewDeletedArticle">
-		<var name="key_webContentTitle" value="${webContentTitle}" />
-
-		<execute function="AssertTextEquals#assertPartialText" locator1="Message#ERROR_3" value1="The Web Content article ${webContentTitle} was moved to the Recycle Bin" />
-	</command>
-
 	<command name="viewEnabledFileTypesPGViaWCD">
 		<for list="${fileTypes}" param="fileType">
 			<var name="key_fileType" value="${fileType}" />
@@ -384,5 +378,11 @@
 
 	<command name="viewNoPermissionPG">
 		<execute function="AssertTextEquals" locator1="Message#ERROR" value1="You do not have the roles required to access this portlet." />
+	</command>
+
+	<command name="viewRecycleBinMessage">
+		<var name="key_webContentTitle" value="${webContentTitle}" />
+
+		<execute function="AssertTextEquals#assertPartialText" locator1="Message#ERROR_3" value1="The Web Content article ${webContentTitle} was moved to the Recycle Bin" />
 	</command>
 </definition>
