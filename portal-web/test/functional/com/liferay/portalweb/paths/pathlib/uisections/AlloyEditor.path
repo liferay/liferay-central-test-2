@@ -39,6 +39,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>CONTENT_FIELD_LOCALIZED_1</td>
+	<td>//div[contains(@class,'alloy-editor-container')]//div[(contains(@data-placeholder,'Escriba su comentario aquí...') or contains(@data-placeholder,'Content')) and contains(@title,'Editor de texto enriquecido')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>CONTENT_ADD_BUTTON</td>
 	<td>//button[contains(@class,'ae-button') and contains(@class,'add')]</td>
 	<td></td>
