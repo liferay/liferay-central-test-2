@@ -3,6 +3,10 @@
 		<execute function="Type#typeEditor" locator1="AlloyEditor#CONTENT_FIELD" value1="${content}" />
 	</command>
 
+	<command name="addLocalizedContent">
+		<execute function="Type#typeEditor" locator1="AlloyEditor#CONTENT_FIELD_LOCALIZED_1" value1="${content}" />
+	</command>
+
 	<command name="addTitle">
 		<execute function="Type#typeEditor" locator1="AlloyEditor#TITLE_FIELD" value1="${title}" />
 	</command>

@@ -39,6 +39,15 @@
 				</execute>
 			</then>
 		</if>
+
+		<if>
+			<isset var="localizedWebContentContent" />
+			<then>
+				<execute macro="AlloyEditor#addLocalizedContent">
+					<var name="content" value="${localizedWebContentContent}" />
+				</execute>
+			</then>
+		</if>
 	</command>
 
 	<command name="addDraft">
@@ -184,7 +193,7 @@
 		</execute>
 
 		<execute macro="WebContent#addCP">
-			<var name="webContentContent" value="${webContentContent}" />
+			<var name="localizedWebContentContent" value="${localizedWebContentContent}" />
 			<var name="webContentTitle" value="${webContentTitle}" />
 		</execute>
 
