@@ -59,58 +59,50 @@ public class GroupAwareRoleTaskAssignmentSelector
 		Role role = _roleLocalService.getRole(
 			kaleoTaskAssignment.getAssigneeClassPK());
 
-		List<KaleoTaskAssignment> calculatedKaleoTaskAssignments =
-			createKaleoTaskAssigments(kaleoInstanceToken.getGroupId(), role);
-
-		return calculatedKaleoTaskAssignments;
+		return createKaleoTaskAssigments(kaleoInstanceToken.getGroupId(), role);
 	}
 
 	protected List<KaleoTaskAssignment> createKaleoTaskAssigments(
 			long groupId, Role role)
 		throws PortalException {
 
-		List<KaleoTaskAssignment> kaleoTaskAssignments = new ArrayList<>();
-
-		Group group = null;
+		List<Group> groups = new ArrayList<>();
 
 		if (groupId != WorkflowConstants.DEFAULT_GROUP_ID) {
-			group = _groupLocalService.getGroup(groupId);
+			Group group = _groupLocalService.getGroup(groupId);
 
 			if (group.isOrganization()) {
-				Organization organization =
-					_organizationLocalService.getOrganization(
-						group.getClassPK());
-
-				for (Organization ancestorOrganization :
-						organization.getAncestors()) {
-
-					if (isValidAssignment(
-							role, ancestorOrganization.getGroup())) {
-
-						kaleoTaskAssignments.add(
-							createKaleoTaskAssignment(
-								role, ancestorOrganization.getGroupId()));
-					}
-				}
+				groups.addAll(getAncestorOrganizationGroups(group));
 			}
 
 			if (group.isSite()) {
-				for (Group ancestorGroup : group.getAncestors()) {
-					if (isValidAssignment(role, ancestorGroup)) {
-						kaleoTaskAssignments.add(
-							createKaleoTaskAssignment(
-								role, ancestorGroup.getGroupId()));
-					}
-				}
+				groups.addAll(getAncestorGroups(group));
 			}
 
 			if (group.isLayout()) {
-				group = _groupLocalService.getGroup(group.getParentGroupId());
+				Group parentGroup = _groupLocalService.getGroup(
+					group.getParentGroupId());
+
+				groups.add(parentGroup);
 			}
+
+			groups.add(group);
 		}
 
-		if (isValidAssignment(role, group)) {
-			kaleoTaskAssignments.add(createKaleoTaskAssignment(role, groupId));
+		return createKaleoTaskAssigments(role, groups);
+	}
+
+	protected List<KaleoTaskAssignment> createKaleoTaskAssigments(
+			Role role, List<Group> groups)
+		throws PortalException {
+
+		List<KaleoTaskAssignment> kaleoTaskAssignments = new ArrayList<>();
+
+		for (Group group : groups) {
+			if (isValidAssignment(role, group)) {
+				kaleoTaskAssignments.add(
+					createKaleoTaskAssignment(role, group.getGroupId()));
+			}
 		}
 
 		return kaleoTaskAssignments;
@@ -127,6 +119,33 @@ public class GroupAwareRoleTaskAssignmentSelector
 		kaleoTaskAssignment.setGroupId(groupId);
 
 		return kaleoTaskAssignment;
+	}
+
+	protected List<Group> getAncestorGroups(Group group)
+		throws PortalException {
+
+		List<Group> groups = new ArrayList<>();
+
+		for (Group ancestorGroup : group.getAncestors()) {
+			groups.add(ancestorGroup);
+		}
+
+		return groups;
+	}
+
+	protected List<Group> getAncestorOrganizationGroups(Group group)
+		throws PortalException {
+
+		List<Group> groups = new ArrayList<>();
+
+		Organization organization = _organizationLocalService.getOrganization(
+			group.getClassPK());
+
+		for (Organization ancestorOrganization : organization.getAncestors()) {
+			groups.add(ancestorOrganization.getGroup());
+		}
+
+		return groups;
 	}
 
 	protected boolean isValidAssignment(Role role, Group group)

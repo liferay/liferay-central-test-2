@@ -110,41 +110,58 @@ public class RoleNotificationRecipientBuilder
 		}
 	}
 
+	protected List<Group> getAncestorGroups(Group group)
+		throws PortalException {
+
+		List<Group> groups = new ArrayList<>();
+
+		for (Group ancestorGroup : group.getAncestors()) {
+			groups.add(ancestorGroup);
+		}
+
+		return groups;
+	}
+
+	protected List<Group> getAncestorOrganizationGroups(Group group)
+		throws PortalException {
+
+		List<Group> groups = new ArrayList<>();
+
+		Organization organization = _organizationLocalService.getOrganization(
+			group.getClassPK());
+
+		for (Organization ancestorOrganization : organization.getAncestors()) {
+			groups.add(ancestorOrganization.getGroup());
+		}
+
+		return groups;
+	}
+
 	protected List<Long> getGroupIds(long groupId, Role role)
 		throws PortalException {
 
-		List<Long> groupIds = new ArrayList<>();
-
-		Group group = null;
+		List<Group> groups = new ArrayList<>();
 
 		if (groupId != WorkflowConstants.DEFAULT_GROUP_ID) {
-			group = _groupLocalService.getGroup(groupId);
+			Group group = _groupLocalService.getGroup(groupId);
 
 			if (group.isOrganization()) {
-				Organization organization =
-					_organizationLocalService.getOrganization(
-						group.getClassPK());
-
-				for (Organization ancestorOrganization :
-						organization.getAncestors()) {
-
-					if (isValidGroup(ancestorOrganization.getGroup(), role)) {
-						groupIds.add(ancestorOrganization.getGroupId());
-					}
-				}
+				groups.addAll(getAncestorOrganizationGroups(group));
 			}
 
 			if (group.isSite()) {
-				for (Group ancestorGroup : group.getAncestors()) {
-					if (isValidGroup(ancestorGroup, role)) {
-						groupIds.add(ancestorGroup.getGroupId());
-					}
-				}
+				groups.addAll(getAncestorGroups(group));
 			}
+
+			groups.add(group);
 		}
 
-		if (isValidGroup(group, role)) {
-			groupIds.add(group.getGroupId());
+		List<Long> groupIds = new ArrayList<>();
+
+		for (Group group : groups) {
+			if (isValidGroup(group, role)) {
+				groupIds.add(group.getGroupId());
+			}
 		}
 
 		return groupIds;
