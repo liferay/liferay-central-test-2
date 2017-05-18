@@ -43,6 +43,7 @@ import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.LocaleThreadLocal;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -113,6 +114,21 @@ public class DDLImpl implements DDL {
 
 			if (fieldValue instanceof Date) {
 				jsonObject.put(fieldName, ((Date)fieldValue).getTime());
+			}
+			else if (Validator.isNotNull(fieldValue) && isArray(fieldValue)) {
+				Object[] values = (Object[])fieldValue;
+
+				StringBundler sb = new StringBundler(values.length);
+
+				for (int i = 0; i < values.length; i++) {
+					sb.append(String.valueOf(values[i]));
+
+					if (i < (values.length - 1)) {
+						sb.append(StringPool.COMMA_AND_SPACE);
+					}
+				}
+
+				jsonObject.put(fieldName, sb.toString());
 			}
 			else if (fieldType.equals(DDMFormFieldType.DOCUMENT_LIBRARY) &&
 					 Validator.isNotNull(fieldValue)) {
@@ -382,6 +398,12 @@ public class DDLImpl implements DDL {
 				LocaleUtil.getSiteDefault(), "is-temporarily-unavailable",
 				"content");
 		}
+	}
+
+	protected boolean isArray(Object parameter) {
+		Class<?> clazz = parameter.getClass();
+
+		return clazz.isArray();
 	}
 
 	@Reference(unbind = "-")
