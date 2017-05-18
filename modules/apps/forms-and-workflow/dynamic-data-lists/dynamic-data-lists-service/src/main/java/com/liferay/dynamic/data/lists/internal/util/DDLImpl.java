@@ -112,70 +112,105 @@ public class DDLImpl implements DDL {
 			String fieldType = field.getType();
 			Object fieldValue = field.getValue(locale);
 
-			if (fieldValue instanceof Date) {
-				jsonObject.put(fieldName, ((Date)fieldValue).getTime());
+			if (Validator.isNull(fieldValue)) {
+				continue;
 			}
-			else if (Validator.isNotNull(fieldValue) && isArray(fieldValue)) {
-				Object[] values = (Object[])fieldValue;
 
-				StringBundler sb = new StringBundler(values.length);
+			Object[] fieldValues;
 
-				for (int i = 0; i < values.length; i++) {
-					sb.append(String.valueOf(values[i]));
+			if (fieldValue instanceof Object[]) {
+				fieldValues = (Object[])fieldValue;
+			}
+			else {
+				fieldValues = new Object[1];
 
-					if (i < (values.length - 1)) {
-						sb.append(StringPool.COMMA_AND_SPACE);
-					}
+				fieldValues[0] = fieldValue;
+			}
+
+			JSONArray fieldJSONArray = null;
+			StringBundler sb = new StringBundler();
+			String jsonObjectValueName = null;
+
+			for (int i = 0; i < fieldValues.length; i++) {
+				fieldValue = fieldValues[i];
+
+				if (Validator.isNull(fieldValue)) {
+					continue;
 				}
 
+				if (sb.length() != 0) {
+					sb.append(StringPool.COMMA_AND_SPACE);
+				}
+
+				if (fieldValue instanceof Date) {
+					sb.append(((Date)fieldValue).getTime());
+				}
+				else if (fieldType.equals(DDMFormFieldType.DOCUMENT_LIBRARY)) {
+					JSONObject fieldValueJSONObject =
+						JSONFactoryUtil.createJSONObject(
+							String.valueOf(fieldValue));
+
+					String uuid = fieldValueJSONObject.getString("uuid");
+					long groupId = fieldValueJSONObject.getLong("groupId");
+
+					jsonObjectValueName = "title";
+
+					sb.append(getFileEntryTitle(uuid, groupId));
+				}
+				else if (fieldType.equals(DDMFormFieldType.LINK_TO_PAGE)) {
+					JSONObject fieldValueJSONObject =
+						JSONFactoryUtil.createJSONObject(
+							String.valueOf(fieldValue));
+
+					long groupId = fieldValueJSONObject.getLong("groupId");
+					boolean privateLayout = fieldValueJSONObject.getBoolean(
+						"privateLayout");
+					long layoutId = fieldValueJSONObject.getLong("layoutId");
+
+					jsonObjectValueName = "name";
+
+					String layoutName = getLayoutName(
+						groupId, privateLayout, layoutId,
+						LanguageUtil.getLanguageId(locale));
+
+					sb.append(layoutName);
+				}
+				else if (fieldType.equals(DDMFormFieldType.RADIO) ||
+						 fieldType.equals(DDMFormFieldType.SELECT)) {
+
+					if (fieldJSONArray == null) {
+						fieldJSONArray = JSONFactoryUtil.createJSONArray(
+							String.valueOf(fieldValue));
+					}
+					else {
+						JSONArray tempJSONArray =
+							JSONFactoryUtil.createJSONArray(
+								String.valueOf(fieldValue));
+
+						fieldJSONArray.put(tempJSONArray.get(0));
+					}
+				}
+				else {
+					sb.append(String.valueOf(fieldValue));
+				}
+			}
+
+			if (fieldType.equals(DDMFormFieldType.DOCUMENT_LIBRARY) ||
+				fieldType.equals(DDMFormFieldType.LINK_TO_PAGE)) {
+
+				JSONObject fieldJSONObject = JSONFactoryUtil.createJSONObject();
+
+				fieldJSONObject.put(jsonObjectValueName, sb.toString());
+
+				jsonObject.put(fieldName, fieldJSONObject.toString());
+			}
+			else if (fieldType.equals(DDMFormFieldType.RADIO) ||
+					 fieldType.equals(DDMFormFieldType.SELECT)) {
+
+				jsonObject.put(fieldName, fieldJSONArray);
+			}
+			else {
 				jsonObject.put(fieldName, sb.toString());
-			}
-			else if (fieldType.equals(DDMFormFieldType.DOCUMENT_LIBRARY) &&
-					 Validator.isNotNull(fieldValue)) {
-
-				JSONObject fieldValueJSONObject =
-					JSONFactoryUtil.createJSONObject(
-						String.valueOf(fieldValue));
-
-				String uuid = fieldValueJSONObject.getString("uuid");
-				long groupId = fieldValueJSONObject.getLong("groupId");
-
-				fieldValueJSONObject.put(
-					"title", getFileEntryTitle(uuid, groupId));
-
-				jsonObject.put(fieldName, fieldValueJSONObject.toString());
-			}
-			else if (fieldType.equals(DDMFormFieldType.LINK_TO_PAGE) &&
-					 Validator.isNotNull(fieldValue)) {
-
-				JSONObject fieldValueJSONObject =
-					JSONFactoryUtil.createJSONObject(
-						String.valueOf(fieldValue));
-
-				long groupId = fieldValueJSONObject.getLong("groupId");
-				boolean privateLayout = fieldValueJSONObject.getBoolean(
-					"privateLayout");
-				long layoutId = fieldValueJSONObject.getLong("layoutId");
-
-				String layoutName = getLayoutName(
-					groupId, privateLayout, layoutId,
-					LanguageUtil.getLanguageId(locale));
-
-				fieldValueJSONObject.put("name", layoutName);
-
-				jsonObject.put(fieldName, fieldValueJSONObject.toString());
-			}
-			else if ((fieldType.equals(DDMFormFieldType.RADIO) ||
-					  fieldType.equals(DDMFormFieldType.SELECT)) &&
-					 Validator.isNotNull(fieldValue)) {
-
-				fieldValue = JSONFactoryUtil.createJSONArray(
-					String.valueOf(fieldValue));
-
-				jsonObject.put(fieldName, (JSONArray)fieldValue);
-			}
-			else if (Validator.isNotNull(fieldValue)) {
-				jsonObject.put(fieldName, String.valueOf(fieldValue));
 			}
 		}
 
