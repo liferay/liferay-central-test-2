@@ -4552,7 +4552,7 @@
 	</command>
 
 	<command name="ViewCalendarTimeZoneDefaults" priority="5">
-		<property name="portal.acceptance" value="true" />
+		<property name="portal.acceptance" value="quarantine" />
 		<property name="test.name.skip.portal.instance" value="Calendar#ViewCalendarTimeZoneDefaults" />
 
 		<execute macro="UserBar#gotoMyAccount" />
