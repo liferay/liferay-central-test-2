@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.security.auth.tunnel.TunnelAuthenticationManagerUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.HttpMethods;
+import com.liferay.portal.kernel.util.AggregateClassLoader;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MethodHandler;
@@ -78,7 +79,9 @@ public class TunnelUtil {
 		try (ObjectInputStream objectInputStream =
 				new ProtectedClassLoaderObjectInputStream(
 					httpURLConnection.getInputStream(),
-					thread.getContextClassLoader())) {
+					AggregateClassLoader.getAggregateClassLoader(
+						TunnelUtil.class.getClassLoader(),
+						thread.getContextClassLoader()))) {
 
 			returnObject = objectInputStream.readObject();
 		}
