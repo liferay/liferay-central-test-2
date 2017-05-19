@@ -461,7 +461,7 @@
 			<var name="dmDocumentTitle" value="Document_1.png" />
 		</execute>
 
-		<execute macro="SOTasks#addTask">
+		<execute macro="Tasks#addTask">
 			<var name="dueDate" value="true" />
 			<var name="taskAssignee" value="userfn userln" />
 			<var name="taskDescription" value="Review Tests" />
