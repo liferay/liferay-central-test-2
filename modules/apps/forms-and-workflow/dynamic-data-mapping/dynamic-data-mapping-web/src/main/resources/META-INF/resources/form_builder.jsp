@@ -17,8 +17,9 @@
 <%@ include file="/init.jsp" %>
 
 <%
-long structureId = ParamUtil.getLong(request, "structureId");
 String portletResourceNamespace = ParamUtil.getString(request, "portletResourceNamespace");
+
+long structureId = ParamUtil.getLong(request, "structureId");
 String className = ParamUtil.getString(request, "className");
 String script = ParamUtil.getString(request, "script");
 String fieldsJSONArrayString = ParamUtil.getString(request, "fieldsJSONArrayString");
