@@ -203,7 +203,7 @@ public class JournalArticleStagedModelDataHandlerTest
 			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			RandomTestUtil.randomString(), false, serviceContext);
 
-		JournalArticle importJournalArticle = JournalTestUtil.addArticle(
+		JournalTestUtil.addArticle(
 			liveGroup.getGroupId(), journalArticle.getFolderId(),
 			journalArticle.getArticleId(), false);
 
@@ -233,7 +233,7 @@ public class JournalArticleStagedModelDataHandlerTest
 			ExportImportThreadLocal.setPortletImportInProcess(false);
 		}
 
-		importJournalArticle =
+		JournalArticle importJournalArticle =
 			JournalArticleLocalServiceUtil.fetchJournalArticleByUuidAndGroupId(
 				journalArticle.getUuid(), liveGroup.getGroupId());
 
