@@ -116,19 +116,19 @@
 
 		<var name="key_taskDescription" value="${taskDescription}" />
 
-		<execute function="AssertTextEquals" locator1="SOTasksTask#TASK_DESCRIPTION" value1="${taskDescription}" />
+		<execute function="AssertTextEquals" locator1="TasksTask#TASK_DESCRIPTION" value1="${taskDescription}" />
 
 		<if>
 			<equals arg1="${taskAssignee}" arg2="Unassigned" />
 			<then>
-				<execute function="AssertTextEquals" locator1="SOTasksTask#TASK_ASSIGNEE" value1="Unassigned" />
+				<execute function="AssertTextEquals" locator1="TasksTask#TASK_ASSIGNEE" value1="Unassigned" />
 			</then>
 			<else>
-				<execute function="AssertTextEquals" locator1="SOTasksTask#TASK_ASSIGNEE" value1="Assigned to ${taskAssignee}" />
+				<execute function="AssertTextEquals" locator1="TasksTask#TASK_ASSIGNEE" value1="Assigned to ${taskAssignee}" />
 			</else>
 		</if>
 
-		<execute function="AssertTextEquals" locator1="SOTasksTask#TASK_REPORTER" value1="Created by ${taskReporter}" />
+		<execute function="AssertTextEquals" locator1="TasksTask#TASK_REPORTER" value1="Created by ${taskReporter}" />
 		<execute function="SelectFrame" value1="relative=top" />
 
 		<execute macro="Navigator#openURL" />
