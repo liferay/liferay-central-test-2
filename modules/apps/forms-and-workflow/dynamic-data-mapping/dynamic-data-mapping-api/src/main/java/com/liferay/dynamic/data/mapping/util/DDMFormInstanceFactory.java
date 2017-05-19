@@ -161,6 +161,10 @@ public class DDMFormInstanceFactory {
 		}
 
 		protected String joinJSONArrayString(String valueString) {
+			if (Validator.isNull(valueString)) {
+				return valueString;
+			}
+
 			try {
 				JSONArray jsonArray = JSONFactoryUtil.createJSONArray(
 					valueString);
