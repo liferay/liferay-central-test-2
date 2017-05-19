@@ -1610,15 +1610,7 @@
 
 		<execute function="Click" locator1="DocumentsAndMedia#ICON_DOCUMENT_THUMBNAIL" />
 
-		<if>
-			<equals arg1="${soDocument}" arg2="true" />
-			<then>
-				<execute function="SikuliClick" locator1="DocumentsAndMediaDocument#SOCIAL_OFFICE_AVERAGE_RATING_STAR_ICON_PNG" />
-			</then>
-			<else>
-				<execute function="SikuliClick" locator1="Ratings#AVERAGE_RATING_STAR_ICON_PNG" />
-			</else>
-		</if>
+		<execute function="SikuliClick" locator1="Ratings#AVERAGE_RATING_STAR_ICON_PNG" />
 
 		<execute function="SikuliClick" locator1="DocumentsAndMediaDocument#DOCUMENT_DETAILS_WORKFLOW_PNG" />
 	</command>
@@ -1794,15 +1786,7 @@
 			<var name="tagNameList" value="${tagNameList}" />
 		</execute>
 
-		<if>
-			<condition function="IsElementPresent" locator1="SODocuments#DOCUMENT_BREADCRUMBS" />
-			<then>
-				<execute function="AssertElementPresent" locator1="SODocuments#DOCUMENT_BREADCRUMBS" />
-			</then>
-			<else>
-				<execute function="AssertElementPresent" locator1="Icon#ANGLE_LEFT_BACK" />
-			</else>
-		</if>
+		<execute function="AssertElementPresent" locator1="Icon#ANGLE_LEFT_BACK" />
 
 		<execute macro="DMDocument#viewDocumentToolbarCmdPG" />
 
@@ -2212,51 +2196,6 @@
 		<execute function="AssertTextEquals" locator1="DocumentsAndMediaDocument#DOCUMENT_INFO_TITLE" value1="${dmDocumentTitleEdit}" />
 	</command>
 
-	<command name="viewEditedDraftPG">
-		<var name="key_dmDocumentTitle" value="${dmDocumentTitle}" />
-		<var name="key_dmDocumentVersionNumber" value="${dmDocumentVersionNumberEdit}" />
-
-		<execute function="AssertTextPresent" locator1="DocumentsAndMedia#BREADCRUMB_HOME" value1="Home" />
-
-		<execute function="Type" locator1="Search#SEARCH_FIELD" value1="${dmDocumentTitle}" />
-
-		<execute function="Click" locator1="Search#SEARCH_BUTTON" />
-
-		<execute function="AssertClick#assertPartialTextClickAt" locator1="DocumentsAndMedia#SEARCH_TITLE" value1="${dmDocumentTitle} Draft" />
-
-		<execute macro="DMDocument#viewDocumentToolbarCmdPG" />
-
-		<execute macro="DMDocument#viewDocumentTitleCmdPG">
-			<var name="dmDocumentTitle" value="${dmDocumentTitleEdit}" />
-		</execute>
-
-		<execute function="AssertElementPresent" locator1="DocumentsAndMediaDocument#DOCUMENT_INFO_THUMBNAIL" />
-		<execute function="AssertTextEquals" locator1="DocumentsAndMediaDocument#DOCUMENT_INFO_UPLOADED_BY" value1="${dmDocumentUploader}" />
-		<execute function="AssertElementPresent" locator1="DocumentsAndMediaDocument#DOCUMENT_INFO_RATING" value1="Ratings" />
-
-		<if>
-			<condition function="IsElementPresent" locator1="SODocuments#VERSION_HISTORY_TITLE" />
-			<then>
-				<execute function="AssertTextEquals" locator1="SODocuments#VERSION_HISTORY_TITLE" value1="Version History" />
-				<execute function="AssertTextEquals" locator1="SODocuments#VERSION_HISTORY_NUMBER" value1="Version ${dmDocumentVersionNumberEdit}" />
-				<execute function="AssertTextEquals" locator1="SODocuments#VERSION_HISTORY_UPLOADER_NAME" value1="By: ${dmDocumentUploader}" />
-				<execute function="AssertElementPresent" locator1="SODocuments#VERSION_HISTORY_DATE" />
-				<execute function="AssertTextEquals" locator1="SODocuments#VERSION_HISTORY_SIZE" value1="Size: ${dmDocumentSizeSO}" />
-			</then>
-		</if>
-
-		<execute function="AssertTextEquals" locator1="Comments#SUBSCRIBE_TO_COMMENTS_LINK" value1="Subscribe to Comments" />
-
-		<var name="key_dmDocumentVersionNumber" value="${dmDocumentVersionNumberEdit}" />
-
-		<execute function="AssertTextEquals" locator1="DocumentsAndMediaDocument#DOCUMENT_DETAILS_VERSION" value1="Version ${dmDocumentVersionNumberEdit}" />
-		<execute function="AssertTextEquals" locator1="DocumentsAndMediaDocument#DOCUMENT_DETAILS_UPLOADER" value1="Last Updated by ${dmDocumentUploader}" />
-		<execute function="AssertElementPresent" locator1="DocumentsAndMediaDocument#DOCUMENT_DETAILS_DATE" />
-		<execute function="AssertTextEquals" locator1="DocumentsAndMediaDocument#DOCUMENT_DETAILS_WORKFLOW" value1="Status: Draft" />
-		<execute function="AssertTextEquals" locator1="DocumentsAndMediaDocument#DOCUMENT_DETAILS_DOWNLOAD" value1="Download (${dmDocumentSize2})" />
-		<execute function="AssertTextEquals" locator1="DocumentsAndMediaDocument#DOCUMENT_DETAILS_URL" value1="Get URL or WebDAV URL." />
-	</command>
-
 	<command name="viewFolderViewPermissionsPG">
 		<var name="key_dmDocumentTitle" value="${dmDocumentTitle}" />
 		<var method="StringUtil#lowerCase('${key_roleName}')" name="key_roleName" />
@@ -2428,46 +2367,6 @@
 		<execute function="AssertElementPresent" locator1="DocumentsAndMediaDocument#DOCUMENT_INFO_THUMBNAIL" />
 		<execute function="AssertElementPresent" locator1="DocumentsAndMediaDocument#DOCUMENT_INFO_RATING" value1="Rating" />
 		<execute function="AssertTextEquals" locator1="DocumentsAndMediaDocument#DOCUMENT_INFO_DESCRIPTION" value1="${dmDocumentDescription}" />
-	</command>
-
-	<command name="viewPGNonAuthor">
-		<execute macro="DMDocument#viewPG">
-			<var name="categoryName" value="${categoryName}" />
-			<var name="dmDocumentDescription" value="${dmDocumentDescription}" />
-			<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
-			<var name="tagName" value="${tagName}" />
-			<var name="tagNameList" value="${tagNameList}" />
-		</execute>
-
-		<if>
-			<condition function="IsElementPresent" locator1="SODocuments#DOCUMENT_BREADCRUMBS" />
-			<then>
-				<execute function="AssertElementPresent" locator1="SODocuments#DOCUMENT_BREADCRUMBS" />
-			</then>
-			<else>
-				<execute function="AssertTextEquals" locator1="Button#BACK" value1="Back" />
-			</else>
-		</if>
-
-		<execute function="AssertTextEquals" locator1="Button#DOWNLOAD" value1="Download" />
-
-		<execute macro="DMDocument#viewDocumentAuthorCmdPG">
-			<var name="dmDocumentAuthor" value="${dmDocumentAuthor}" />
-		</execute>
-
-		<execute macro="DMDocument#viewDocumentNoCommentsCmdPG" />
-
-		<if>
-			<isset var="dmDocumentVersionNumber" />
-			<then>
-				<execute function="AssertTextEquals" locator1="DocumentsAndMediaDocument#DOCUMENT_INFO_VERSION" value1="Version ${dmDocumentVersionNumber}" />
-			</then>
-			<else>
-				<execute function="AssertTextEquals" locator1="DocumentsAndMediaDocument#DOCUMENT_INFO_VERSION" value1="Version 1.0" />
-			</else>
-		</if>
-
-		<execute macro="DMDocument#viewDocumentDetailsCmdPG" />
 	</command>
 
 	<command name="viewPGRating">
