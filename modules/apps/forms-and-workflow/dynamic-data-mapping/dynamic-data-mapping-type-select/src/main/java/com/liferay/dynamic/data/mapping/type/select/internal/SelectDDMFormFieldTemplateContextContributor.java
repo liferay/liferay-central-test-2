@@ -92,6 +92,7 @@ public class SelectDDMFormFieldTemplateContextContributor
 			"emptyList", LanguageUtil.get(resourceBundle, "empty-list"));
 
 		parameters.put("strings", stringsMap);
+
 		parameters.put(
 			"value", getValue(ddmFormFieldRenderingContext.getValue()));
 

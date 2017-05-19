@@ -144,8 +144,6 @@ public class DDMFormTemplateContextFactoryImpl
 			"portletNamespace", ddmFormRenderingContext.getPortletNamespace());
 		templateContext.put("readOnly", ddmFormRenderingContext.isReadOnly());
 
-		templateContext.put("rules", ddmForm.getDDMFormRules());
-
 		Locale locale = ddmFormRenderingContext.getLocale();
 
 		if (locale == null) {
@@ -158,6 +156,7 @@ public class DDMFormTemplateContextFactoryImpl
 			"requiredFieldsWarningMessageHTML",
 			getRequiredFieldsWarningMessageHTML(resourceBundle));
 
+		templateContext.put("rules", ddmForm.getDDMFormRules());
 		templateContext.put(
 			"showRequiredFieldsWarning",
 			ddmFormRenderingContext.isShowRequiredFieldsWarning());

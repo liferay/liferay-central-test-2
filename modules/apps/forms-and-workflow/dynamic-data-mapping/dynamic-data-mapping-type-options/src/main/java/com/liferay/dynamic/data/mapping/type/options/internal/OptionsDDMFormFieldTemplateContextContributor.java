@@ -15,6 +15,7 @@
 package com.liferay.dynamic.data.mapping.type.options.internal;
 
 import com.liferay.dynamic.data.mapping.form.field.type.DDMFormFieldTemplateContextContributor;
+import com.liferay.dynamic.data.mapping.model.DDMForm;
 import com.liferay.dynamic.data.mapping.model.DDMFormField;
 import com.liferay.dynamic.data.mapping.render.DDMFormFieldRenderingContext;
 import com.liferay.portal.kernel.json.JSONFactory;
@@ -51,13 +52,15 @@ public class OptionsDDMFormFieldTemplateContextContributor
 			"allowEmptyOptions",
 			GetterUtil.getBoolean(
 				ddmFormField.getProperty("allowEmptyOptions")));
-		parameters.put(
-			"value", getValue(ddmFormField, ddmFormFieldRenderingContext));
+
+		DDMForm ddmForm = ddmFormField.getDDMForm();
 
 		parameters.put(
 			"defaultLanguageId",
-			LocaleUtil.toLanguageId(
-				ddmFormField.getDDMForm().getDefaultLocale()));
+			LocaleUtil.toLanguageId(ddmForm.getDefaultLocale()));
+
+		parameters.put(
+			"value", getValue(ddmFormField, ddmFormFieldRenderingContext));
 
 		return parameters;
 	}

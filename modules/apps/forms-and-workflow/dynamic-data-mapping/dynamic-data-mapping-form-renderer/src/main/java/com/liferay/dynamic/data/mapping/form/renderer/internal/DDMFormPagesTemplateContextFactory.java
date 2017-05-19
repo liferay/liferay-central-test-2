@@ -182,10 +182,14 @@ public class DDMFormPagesTemplateContextFactory {
 		LocalizedValue description = ddmFormLayoutPage.getDescription();
 
 		pageTemplateContext.put("description", description.getString(_locale));
+
+		pageTemplateContext.put("enabled", isPageEnabled(pageIndex));
 		pageTemplateContext.put(
 			"localizedDescription", getLocalizedValueMap(description));
 
-		pageTemplateContext.put("enabled", isPageEnabled(pageIndex));
+		LocalizedValue title = ddmFormLayoutPage.getTitle();
+
+		pageTemplateContext.put("localizedTitle", getLocalizedValueMap(title));
 
 		pageTemplateContext.put(
 			"rows",
@@ -198,9 +202,6 @@ public class DDMFormPagesTemplateContextFactory {
 		pageTemplateContext.put(
 			"showRequiredFieldsWarning", showRequiredFieldsWarning);
 
-		LocalizedValue title = ddmFormLayoutPage.getTitle();
-
-		pageTemplateContext.put("localizedTitle", getLocalizedValueMap(title));
 		pageTemplateContext.put("title", title.getString(_locale));
 
 		return pageTemplateContext;
