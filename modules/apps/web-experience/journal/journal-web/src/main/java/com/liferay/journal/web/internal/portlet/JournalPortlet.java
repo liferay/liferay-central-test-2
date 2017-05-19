@@ -706,6 +706,7 @@ public class JournalPortlet extends MVCPortlet {
 			uploadPortletRequest, "reviewDateMinute");
 		int reviewDateAmPm = ParamUtil.getInteger(
 			uploadPortletRequest, "reviewDateAmPm");
+
 		boolean neverReview = ParamUtil.getBoolean(
 			uploadPortletRequest, "neverReview");
 
