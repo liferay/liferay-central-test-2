@@ -17,7 +17,6 @@ package com.liferay.portal.kernel.service.http;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.security.auth.HttpPrincipal;
-import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.security.auth.tunnel.TunnelAuthenticationManagerUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.HttpMethods;
@@ -66,15 +65,6 @@ public class TunnelUtil {
 		Object returnObject = null;
 
 		Thread thread = Thread.currentThread();
-
-		int responseCode = httpURLConnection.getResponseCode();
-
-		if ((responseCode == HttpURLConnection.HTTP_UNAUTHORIZED) ||
-			(responseCode == HttpURLConnection.HTTP_FORBIDDEN)) {
-
-			throw new PrincipalException.MustBeAuthenticated(
-				httpPrincipal.getLogin());
-		}
 
 		try (ObjectInputStream objectInputStream =
 				new ProtectedClassLoaderObjectInputStream(
