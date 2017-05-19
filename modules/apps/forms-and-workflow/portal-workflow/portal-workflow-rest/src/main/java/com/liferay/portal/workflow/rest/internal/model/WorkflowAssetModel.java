@@ -17,6 +17,7 @@ package com.liferay.portal.workflow.rest.internal.model;
 import com.liferay.asset.kernel.model.AssetEntry;
 import com.liferay.portal.kernel.exception.PortalException;
 
+import java.util.Date;
 import java.util.Locale;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -47,8 +48,15 @@ public class WorkflowAssetModel {
 
 		_className = assetEntry.getClassName();
 		_classPK = assetEntry.getClassPK();
-		_createTime = assetEntry.getCreateDate().getTime();
-		_modifiedTime = assetEntry.getModifiedDate().getTime();
+
+		Date createDate = assetEntry.getCreateDate();
+
+		_createTime = createDate.getTime();
+
+		Date modifiedDate = assetEntry.getModifiedDate();
+
+		_modifiedTime = modifiedDate.getTime();
+
 		_summary = assetEntry.getSummary(locale);
 		_title = assetEntry.getTitle(locale);
 		_url = assetEntry.getUrl();

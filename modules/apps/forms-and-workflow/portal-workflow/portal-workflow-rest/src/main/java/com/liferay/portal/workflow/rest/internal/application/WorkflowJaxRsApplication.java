@@ -43,7 +43,6 @@ public class WorkflowJaxRsApplication extends Application {
 		singletons.add(_companyContextProvider);
 		singletons.add(_localeContextProvider);
 		singletons.add(_userContextProvider);
-
 		singletons.add(_workflowListedTaskResource);
 		singletons.add(_workflowTaskResource);
 

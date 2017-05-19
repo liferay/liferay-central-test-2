@@ -48,19 +48,6 @@ import org.osgi.service.component.annotations.Reference;
 @Path("/task")
 public class WorkflowTaskResource {
 
-	@GET
-	@Path("/{workflowTaskId}/activities")
-	@Produces("application/json")
-	public List<WorkflowActivityModel> activities(
-			@Context Company company, @Context User user,
-			@Context Locale locale,
-			@PathParam("workflowTaskId") long workflowTaskId)
-		throws PortalException {
-
-		return _workflowHelper.getWorkflowActivityModels(
-			company.getCompanyId(), user.getUserId(), workflowTaskId, locale);
-	}
-
 	@Path("/{workflowTaskId}/assign-to-me")
 	@POST
 	@Produces("application/json")
@@ -82,6 +69,19 @@ public class WorkflowTaskResource {
 		catch (PortalException pe) {
 			return getFailureWorkflowOperationResultModel(response, pe);
 		}
+	}
+
+	@GET
+	@Path("/{workflowTaskId}/activities")
+	@Produces("application/json")
+	public List<WorkflowActivityModel> getWorkflowActivities(
+			@Context Company company, @Context User user,
+			@Context Locale locale,
+			@PathParam("workflowTaskId") long workflowTaskId)
+		throws PortalException {
+
+		return _workflowHelper.getWorkflowActivityModels(
+			company.getCompanyId(), user.getUserId(), workflowTaskId, locale);
 	}
 
 	@GET
