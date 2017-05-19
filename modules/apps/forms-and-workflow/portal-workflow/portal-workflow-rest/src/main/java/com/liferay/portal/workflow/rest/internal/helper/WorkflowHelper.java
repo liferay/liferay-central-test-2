@@ -190,7 +190,8 @@ public class WorkflowHelper {
 		return null;
 	}
 
-	protected String getAssignmentMessage(WorkflowLog workflowLog)
+	protected String getAssignmentMessage(
+			WorkflowLog workflowLog, Locale locale)
 		throws PortalException {
 
 		String message = "";
@@ -202,29 +203,27 @@ public class WorkflowHelper {
 		String auditUserName = getAuditUserName(workflowLog);
 
 		if (userId != 0) {
-			String assignee = "";
-
 			User user = _userLocalService.getUser(userId);
 
 			if (auditUserId == userId) {
 				if (user.isMale()) {
-					assignee = "himself";
+					message = LanguageUtil.format(
+						locale, "x-assigned-the-task-to-himself",
+						quote(auditUserName));
 				}
 				else {
-					assignee = "herself";
+					message = LanguageUtil.format(
+						locale, "x-assigned-the-task-to-herself",
+						quote(auditUserName));
 				}
 			}
-
-			message =
-				quote(auditUserName) + " assigned the task to " + assignee +
-					".";
 		}
 		else if (roleId != 0) {
 			Role role = _roleLocalService.getRole(roleId);
 
-			message =
-				quote(auditUserName) + " assigned the task to " +
-					role.getDescriptiveName() + " role.";
+			message = LanguageUtil.format(
+				locale, "x-assigned-the-task-to-the-x-role",
+				new String[] {quote(auditUserName), role.getDescriptiveName()});
 		}
 
 		return message;
@@ -242,12 +241,18 @@ public class WorkflowHelper {
 		return workflowLog.getState();
 	}
 
-	protected String getCompletionMessage(WorkflowLog workflowLog)
+	protected String getCompletionMessage(
+			long companyId, WorkflowLog workflowLog, Locale locale)
 		throws PortalException {
 
 		String userName = getAuditUserName(workflowLog);
 
-		return quote(userName) + " completed the task.";
+		WorkflowTask workflowTask = _workflowTaskManager.getWorkflowTask(
+			companyId, workflowLog.getWorkflowTaskId());
+
+		return LanguageUtil.format(
+			locale, "x-completed-the-task-x",
+			new String[] {userName, workflowTask.getName()});
 	}
 
 	protected String getState(
@@ -277,13 +282,15 @@ public class WorkflowHelper {
 		if (workflowLog.getUserId() != 0) {
 			User user = _userLocalService.getUser(workflowLog.getUserId());
 
-			return "Task initially assigned to " + user.getFullName() + ".";
+			return LanguageUtil.format(
+				locale, "task-initially-assigned-to-x", user.getFullName());
 		}
 		else {
 			Role role = _roleLocalService.getRole(workflowLog.getRoleId());
 
-			return "Task initially assigned to " + role.getDescriptiveName() +
-				" role.";
+			return LanguageUtil.format(
+				locale, "task-initially-assigned-to-the-x-role",
+				role.getDescriptiveName());
 		}
 	}
 
@@ -293,20 +300,22 @@ public class WorkflowHelper {
 
 		String userName = getAuditUserName(workflowLog);
 
-		return quote(userName) + " submitted a " + assetType +
-			" for publication.";
+		return LanguageUtil.format(
+			locale, "x-submitted-a-x-for-publication",
+			new String[] {quote(userName), assetType});
 	}
 
 	protected String getUpdateDetails(WorkflowLog workflowLog) {
 		return null;
 	}
 
-	protected String getUpdateMessage(WorkflowLog workflowLog)
+	protected String getUpdateMessage(WorkflowLog workflowLog, Locale locale)
 		throws PortalException {
 
 		String userName = getAuditUserName(workflowLog);
 
-		return quote(userName) + " updated the task.";
+		return LanguageUtil.format(
+			locale, "x-updated-the-task", quote(userName));
 	}
 
 	protected WorkflowActivityModel getWorkflowActivityModel(
@@ -325,17 +334,17 @@ public class WorkflowHelper {
 			details = getSubmissionForPublicationDetails(workflowLog, locale);
 		}
 		else if (type == WorkflowLog.TASK_ASSIGN) {
-			message = getAssignmentMessage(workflowLog);
+			message = getAssignmentMessage(workflowLog, locale);
 
 			details = getAssignmentDetails(workflowLog);
 		}
 		else if (type == WorkflowLog.TASK_COMPLETION) {
-			message = getCompletionMessage(workflowLog);
+			message = getCompletionMessage(companyId, workflowLog, locale);
 
 			details = getCompletionDetails(workflowLog);
 		}
 		else if (type == WorkflowLog.TASK_UPDATE) {
-			message = getUpdateMessage(workflowLog);
+			message = getUpdateMessage(workflowLog, locale);
 
 			details = getUpdateDetails(workflowLog);
 		}
