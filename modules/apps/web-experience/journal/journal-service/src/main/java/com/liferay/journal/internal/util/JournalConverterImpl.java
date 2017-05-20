@@ -395,7 +395,7 @@ public class JournalConverterImpl implements JournalConverter {
 
 	protected String decodeURL(String url) {
 		try {
-			return HttpUtil.decodeURL(url);
+			return _httpUtil.decodeURL(url);
 		}
 		catch (IllegalArgumentException iae) {
 			return url;
@@ -1106,6 +1106,10 @@ public class JournalConverterImpl implements JournalConverter {
 	private DLAppLocalService _dlAppLocalService;
 	private FieldsToDDMFormValuesConverter _fieldsToDDMFormValuesConverter;
 	private GroupLocalService _groupLocalService;
+
+	@Reference
+	private HttpUtil _httpUtil;
+
 	private final Map<String, String> _journalTypesToDDMTypes;
 
 }

@@ -1316,18 +1316,18 @@ public class JournalPortlet extends MVCPortlet {
 		int workflowAction = ParamUtil.getInteger(
 			actionRequest, "workflowAction", WorkflowConstants.ACTION_PUBLISH);
 
-		String portletId = HttpUtil.getParameter(redirect, "p_p_id", false);
+		String portletId = _httpUtil.getParameter(redirect, "p_p_id", false);
 
 		String namespace = _portal.getPortletNamespace(portletId);
 
 		if (Validator.isNotNull(oldUrlTitle)) {
 			String oldRedirectParam = namespace + "redirect";
 
-			String oldRedirect = HttpUtil.getParameter(
+			String oldRedirect = _httpUtil.getParameter(
 				redirect, oldRedirectParam, false);
 
 			if (Validator.isNotNull(oldRedirect)) {
-				String newRedirect = HttpUtil.decodeURL(oldRedirect);
+				String newRedirect = _httpUtil.decodeURL(oldRedirect);
 
 				newRedirect = StringUtil.replace(
 					newRedirect, oldUrlTitle, article.getUrlTitle());
@@ -1373,10 +1373,10 @@ public class JournalPortlet extends MVCPortlet {
 
 				if (Validator.isNotNull(redirect)) {
 					if (actionName.equals("addArticle") && (article != null)) {
-						redirect = HttpUtil.addParameter(
+						redirect = _httpUtil.addParameter(
 							redirect, namespace + "className",
 							JournalArticle.class.getName());
-						redirect = HttpUtil.addParameter(
+						redirect = _httpUtil.addParameter(
 							redirect, namespace + "classPK",
 							JournalArticleAssetRenderer.getClassPK(article));
 					}
@@ -1554,6 +1554,10 @@ public class JournalPortlet extends MVCPortlet {
 
 	private AssetEntryLocalService _assetEntryLocalService;
 	private DDMStructureLocalService _ddmStructureLocalService;
+
+	@Reference
+	private HttpUtil _httpUtil;
+
 	private ItemSelector _itemSelector;
 	private JournalArticleService _journalArticleService;
 	private JournalContent _journalContent;

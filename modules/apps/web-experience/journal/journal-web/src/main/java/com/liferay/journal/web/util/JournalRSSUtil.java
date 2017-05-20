@@ -190,9 +190,9 @@ public class JournalRSSUtil {
 	public FileEntry getFileEntry(String url) {
 		FileEntry fileEntry = null;
 
-		String queryString = HttpUtil.getQueryString(url);
+		String queryString = _httpUtil.getQueryString(url);
 
-		Map<String, String[]> parameters = HttpUtil.parameterMapFromString(
+		Map<String, String[]> parameters = _httpUtil.parameterMapFromString(
 			queryString);
 
 		if (url.startsWith("/documents/")) {
@@ -208,7 +208,7 @@ public class JournalRSSUtil {
 			}
 			else if (pathArray.length == 5) {
 				folderId = GetterUtil.getLong(pathArray[3]);
-				title = HttpUtil.decodeURL(pathArray[4]);
+				title = _httpUtil.decodeURL(pathArray[4]);
 			}
 			else if (pathArray.length > 5) {
 				uuid = pathArray[5];
@@ -313,9 +313,9 @@ public class JournalRSSUtil {
 	public Image getImage(String url) {
 		Image image = null;
 
-		String queryString = HttpUtil.getQueryString(url);
+		String queryString = _httpUtil.getQueryString(url);
 
-		Map<String, String[]> parameters = HttpUtil.parameterMapFromString(
+		Map<String, String[]> parameters = _httpUtil.parameterMapFromString(
 			queryString);
 
 		if (parameters.containsKey("image_id") ||
@@ -722,6 +722,10 @@ public class JournalRSSUtil {
 	private static final Log _log = LogFactoryUtil.getLog(JournalRSSUtil.class);
 
 	private DLAppLocalService _dlAppLocalService;
+
+	@Reference
+	private HttpUtil _httpUtil;
+
 	private ImageLocalService _imageLocalService;
 	private JournalArticleLocalService _journalArticleLocalService;
 	private JournalContent _journalContent;
