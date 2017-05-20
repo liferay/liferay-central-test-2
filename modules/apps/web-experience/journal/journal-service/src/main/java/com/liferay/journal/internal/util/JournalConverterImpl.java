@@ -276,13 +276,6 @@ public class JournalConverterImpl implements JournalConverter {
 		return XMLUtil.formatXML(document);
 	}
 
-	@Reference(unbind = "-")
-	public void setFieldsToDDMFormValuesConverter(
-		FieldsToDDMFormValuesConverter fieldsToDDMFormValuesConverter) {
-
-		_fieldsToDDMFormValuesConverter = fieldsToDDMFormValuesConverter;
-	}
-
 	protected void addDDMFields(
 			Element dynamicElementElement, DDMStructure ddmStructure,
 			Fields ddmFields, String[] availableLanguageIds,
@@ -660,11 +653,6 @@ public class JournalConverterImpl implements JournalConverter {
 	@Reference(unbind = "-")
 	protected void setDLAppLocalService(DLAppLocalService dlAppLocalService) {
 		_dlAppLocalService = dlAppLocalService;
-	}
-
-	@Reference(unbind = "-")
-	protected void setGroupLocalService(GroupLocalService groupLocalService) {
-		_groupLocalService = groupLocalService;
 	}
 
 	protected String[] splitFieldsDisplayValue(Field fieldsDisplayField) {
@@ -1104,7 +1092,11 @@ public class JournalConverterImpl implements JournalConverter {
 	private final Map<String, String> _ddmMetadataAttributes;
 	private final Map<String, String> _ddmTypesToJournalTypes;
 	private DLAppLocalService _dlAppLocalService;
+
+	@Reference
 	private FieldsToDDMFormValuesConverter _fieldsToDDMFormValuesConverter;
+
+	@Reference
 	private GroupLocalService _groupLocalService;
 
 	@Reference

@@ -565,11 +565,6 @@ public class JournalPortlet extends MVCPortlet {
 		}
 	}
 
-	@Reference(unbind = "-")
-	public void setItemSelector(ItemSelector itemSelector) {
-		_itemSelector = itemSelector;
-	}
-
 	public void subscribeArticle(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
@@ -1404,129 +1399,11 @@ public class JournalPortlet extends MVCPortlet {
 		}
 	}
 
-	@Reference
-	protected void setAssetEntryLocalService(
-		AssetEntryLocalService assetEntryLocalService) {
-
-		_assetEntryLocalService = assetEntryLocalService;
-	}
-
-	@Reference
-	protected void setDDMStructureLocalService(
-		DDMStructureLocalService ddmStructureLocalService) {
-
-		_ddmStructureLocalService = ddmStructureLocalService;
-	}
-
-	@Reference
-	protected void setJournalArticleService(
-		JournalArticleService journalArticleService) {
-
-		_journalArticleService = journalArticleService;
-	}
-
-	@Reference
-	protected void setJournalContent(JournalContent journalContent) {
-		_journalContent = journalContent;
-	}
-
-	@Reference
-	protected void setJournalContentSearchLocalService(
-		JournalContentSearchLocalService journalContentSearchLocalService) {
-
-		_journalContentSearchLocalService = journalContentSearchLocalService;
-	}
-
-	@Reference
-	protected void setJournalConverter(JournalConverter journalConverter) {
-		_journalConverter = journalConverter;
-	}
-
-	@Reference
-	protected void setJournalFeedService(
-		JournalFeedService journalFeedService) {
-
-		_journalFeedService = journalFeedService;
-	}
-
-	@Reference
-	protected void setJournalFolderService(
-		JournalFolderService journalFolderService) {
-
-		_journalFolderService = journalFolderService;
-	}
-
-	@Reference
-	protected void setLayoutLocalService(
-		LayoutLocalService layoutLocalService) {
-
-		_layoutLocalService = layoutLocalService;
-	}
-
 	@Reference(
 		target = "(&(release.bundle.symbolic.name=com.liferay.journal.web)(release.schema.version=1.0.0))",
 		unbind = "-"
 	)
 	protected void setRelease(Release release) {
-	}
-
-	@Reference
-	protected void setTrashEntryService(TrashEntryService trashEntryService) {
-		_trashEntryService = trashEntryService;
-	}
-
-	protected void unsetAssetEntryLocalService(
-		AssetEntryLocalService assetEntryLocalService) {
-
-		_assetEntryLocalService = null;
-	}
-
-	protected void unsetDDMStructureLocalService(
-		DDMStructureLocalService ddmStructureLocalService) {
-
-		_ddmStructureLocalService = null;
-	}
-
-	protected void unsetJournalArticleService(
-		JournalArticleService journalArticleService) {
-
-		_journalArticleService = null;
-	}
-
-	protected void unsetJournalContent(JournalContent journalContent) {
-		_journalContent = null;
-	}
-
-	protected void unsetJournalContentSearchLocalService(
-		JournalContentSearchLocalService journalContentSearchLocalService) {
-
-		_journalContentSearchLocalService = null;
-	}
-
-	protected void unsetJournalConverter(JournalConverter journalConverter) {
-		_journalConverter = null;
-	}
-
-	protected void unsetJournalFeedService(
-		JournalFeedService journalFeedService) {
-
-		_journalFeedService = null;
-	}
-
-	protected void unsetJournalFolderService(
-		JournalFolderService journalFolderService) {
-
-		_journalFolderService = null;
-	}
-
-	protected void unsetLayoutLocalService(
-		LayoutLocalService layoutLocalService) {
-
-		_layoutLocalService = null;
-	}
-
-	protected void unsetTrashEntryService(TrashEntryService trashEntryService) {
-		_trashEntryService = null;
 	}
 
 	protected void updateContentSearch(
@@ -1552,25 +1429,45 @@ public class JournalPortlet extends MVCPortlet {
 
 	private static final Log _log = LogFactoryUtil.getLog(JournalPortlet.class);
 
+	@Reference
 	private AssetEntryLocalService _assetEntryLocalService;
+
+	@Reference
 	private DDMStructureLocalService _ddmStructureLocalService;
 
 	@Reference
 	private Http _http;
 
+	@Reference
 	private ItemSelector _itemSelector;
+
+	@Reference
 	private JournalArticleService _journalArticleService;
+
+	@Reference
 	private JournalContent _journalContent;
+
+	@Reference
 	private JournalContentSearchLocalService _journalContentSearchLocalService;
+
+	@Reference
 	private JournalConverter _journalConverter;
+
+	@Reference
 	private JournalFeedService _journalFeedService;
+
+	@Reference
 	private JournalFolderService _journalFolderService;
+
 	private volatile JournalWebConfiguration _journalWebConfiguration;
+
+	@Reference
 	private LayoutLocalService _layoutLocalService;
 
 	@Reference
 	private Portal _portal;
 
+	@Reference
 	private TrashEntryService _trashEntryService;
 
 }
