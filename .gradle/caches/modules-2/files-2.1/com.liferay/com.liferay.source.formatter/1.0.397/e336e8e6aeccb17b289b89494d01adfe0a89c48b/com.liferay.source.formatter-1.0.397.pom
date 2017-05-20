@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.liferay</groupId>
   <artifactId>com.liferay.source.formatter</artifactId>
-  <version>1.0.396</version>
+  <version>1.0.397</version>
   <description>Liferay Source Formatter</description>
   <licenses>
     <license>
@@ -94,7 +94,7 @@
     <dependency>
       <groupId>com.liferay.portal</groupId>
       <artifactId>com.liferay.portal.impl</artifactId>
-      <version>2.6.0</version>
+      <version>default</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
