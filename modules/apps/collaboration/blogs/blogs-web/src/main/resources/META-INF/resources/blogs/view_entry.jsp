@@ -161,29 +161,32 @@ if (portletTitleBasedNavigation) {
 		</c:if>
 	</c:if>
 
-	<%
-	Discussion discussion = CommentManagerUtil.getDiscussion(user.getUserId(), scopeGroupId, BlogsEntry.class.getName(), entry.getEntryId(), new ServiceContextFunction(request));
-	%>
-
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
-			<c:if test="<%= (discussion != null) && blogsPortletInstanceConfiguration.enableComments() %>">
-				<h2>
-					<strong><liferay-ui:message arguments="<%= CommentManagerUtil.getCommentsCount(BlogsEntry.class.getName(), entry.getEntryId()) %>" key="x-comments" /></strong>
-				</h2>
+			<c:if test="<%= blogsPortletInstanceConfiguration.enableComments() %>">
 
-				<c:if test="<%= PropsValues.BLOGS_TRACKBACK_ENABLED && entry.isAllowTrackbacks() %>">
-					<aui:input inlineLabel="left" name="trackbackURL" type="resource" value='<%= PortalUtil.getLayoutFullURL(themeDisplay) + Portal.FRIENDLY_URL_SEPARATOR + "blogs/trackback/" + entry.getUrlTitle() %>' />
+				<%
+				Discussion discussion = CommentManagerUtil.getDiscussion(user.getUserId(), scopeGroupId, BlogsEntry.class.getName(), entry.getEntryId(), new ServiceContextFunction(request));
+				%>
+
+				<c:if test="<%= discussion != null %>">
+					<h2>
+						<strong><liferay-ui:message arguments="<%= CommentManagerUtil.getCommentsCount(BlogsEntry.class.getName(), entry.getEntryId()) %>" key="x-comments" /></strong>
+					</h2>
+
+					<c:if test="<%= PropsValues.BLOGS_TRACKBACK_ENABLED && entry.isAllowTrackbacks() %>">
+						<aui:input inlineLabel="left" name="trackbackURL" type="resource" value='<%= PortalUtil.getLayoutFullURL(themeDisplay) + Portal.FRIENDLY_URL_SEPARATOR + "blogs/trackback/" + entry.getUrlTitle() %>' />
+					</c:if>
+
+					<liferay-ui:discussion
+						className="<%= BlogsEntry.class.getName() %>"
+						classPK="<%= entry.getEntryId() %>"
+						formName="fm2"
+						ratingsEnabled="<%= blogsPortletInstanceConfiguration.enableCommentRatings() %>"
+						redirect="<%= currentURL %>"
+						userId="<%= entry.getUserId() %>"
+					/>
 				</c:if>
-
-				<liferay-ui:discussion
-					className="<%= BlogsEntry.class.getName() %>"
-					classPK="<%= entry.getEntryId() %>"
-					formName="fm2"
-					ratingsEnabled="<%= blogsPortletInstanceConfiguration.enableCommentRatings() %>"
-					redirect="<%= currentURL %>"
-					userId="<%= entry.getUserId() %>"
-				/>
 			</c:if>
 		</div>
 	</div>
