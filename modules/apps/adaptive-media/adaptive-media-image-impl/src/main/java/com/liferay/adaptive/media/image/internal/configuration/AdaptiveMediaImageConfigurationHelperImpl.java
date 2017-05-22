@@ -448,7 +448,7 @@ public class AdaptiveMediaImageConfigurationHelperImpl
 		String maxHeightString = properties.get("max-height");
 
 		if (Validator.isNotNull(maxHeightString) &&
-			_isPositiveNumber(maxHeightString)) {
+			!_isPositiveNumber(maxHeightString)) {
 
 			throw new AdaptiveMediaImageConfigurationException.
 				InvalidHeightException();
@@ -457,7 +457,7 @@ public class AdaptiveMediaImageConfigurationHelperImpl
 		String maxWidthString = properties.get("max-width");
 
 		if (Validator.isNotNull(maxWidthString) &&
-			_isPositiveNumber(maxWidthString)) {
+			!_isPositiveNumber(maxWidthString)) {
 
 			throw new AdaptiveMediaImageConfigurationException.
 				InvalidWidthException();
