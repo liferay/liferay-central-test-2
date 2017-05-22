@@ -145,7 +145,7 @@ public class AdaptiveMediaImageQueryBuilderImpl
 		}
 
 		if (_hasConfiguration()) {
-			return AdaptiveMediaImageQueryBuilder.ConfigurationStatus.ALL;
+			return AdaptiveMediaImageQueryBuilder.ConfigurationStatus.ANY;
 		}
 
 		return AdaptiveMediaImageQueryBuilder.ConfigurationStatus.ENABLED;
@@ -177,11 +177,17 @@ public class AdaptiveMediaImageQueryBuilderImpl
 	public <V> StrictSortStep orderBy(
 		AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, V>
 			adaptiveMediaAttribute,
-		boolean asc) {
+		AdaptiveMediaImageQueryBuilder.SortOrder sortOrder) {
 
 		if (adaptiveMediaAttribute == null) {
 			throw new IllegalArgumentException(
 				"Adaptive media attribute cannot be null");
+		}
+
+		boolean asc = true;
+
+		if (sortOrder == SortOrder.DESC) {
+			asc = false;
 		}
 
 		_sortCriteria.put(adaptiveMediaAttribute, asc);

@@ -318,7 +318,8 @@ public class AdaptiveMediaImageFinderImplTest {
 				queryBuilder.allForVersion(
 					_fileVersion
 				).orderBy(
-					AdaptiveMediaImageAttribute.IMAGE_WIDTH, true
+					AdaptiveMediaImageAttribute.IMAGE_WIDTH,
+					AdaptiveMediaImageQueryBuilder.SortOrder.ASC
 				).done());
 
 		List<AdaptiveMedia<AdaptiveMediaImageProcessor>> adaptiveMedias =
@@ -433,7 +434,8 @@ public class AdaptiveMediaImageFinderImplTest {
 				queryBuilder.allForVersion(
 					_fileVersion
 				).orderBy(
-					AdaptiveMediaImageAttribute.IMAGE_WIDTH, false
+					AdaptiveMediaImageAttribute.IMAGE_WIDTH,
+					AdaptiveMediaImageQueryBuilder.SortOrder.DESC
 				).done());
 
 		List<AdaptiveMedia<AdaptiveMediaImageProcessor>> adaptiveMedias =
@@ -928,13 +930,13 @@ public class AdaptiveMediaImageFinderImplTest {
 				MapUtil.fromArray("max-height", "200", "max-width", "200"));
 
 		AdaptiveMediaImageQueryBuilder.ConfigurationStatus
-			allConfigurationStatus =
-				AdaptiveMediaImageQueryBuilder.ConfigurationStatus.ALL;
+			anyConfigurationStatus =
+				AdaptiveMediaImageQueryBuilder.ConfigurationStatus.ANY;
 
 		Mockito.when(
 			_configurationHelper.getAdaptiveMediaImageConfigurationEntries(
 				_fileVersion.getCompanyId(),
-				allConfigurationStatus.getPredicate())
+				anyConfigurationStatus.getPredicate())
 		).thenReturn(
 			Arrays.asList(configurationEntry1, configurationEntry2)
 		);
@@ -1017,7 +1019,7 @@ public class AdaptiveMediaImageFinderImplTest {
 		Mockito.when(
 			_configurationHelper.getAdaptiveMediaImageConfigurationEntries(
 				_fileVersion.getCompanyId(),
-				AdaptiveMediaImageQueryBuilder.ConfigurationStatus.ALL.
+				AdaptiveMediaImageQueryBuilder.ConfigurationStatus.ANY.
 					getPredicate())
 		).thenReturn(
 			Arrays.asList(configurationEntry1, configurationEntry2)
@@ -1106,7 +1108,7 @@ public class AdaptiveMediaImageFinderImplTest {
 			queryBuilder.forVersion(
 				_fileVersion
 			).withConfigurationStatus(
-				AdaptiveMediaImageQueryBuilder.ConfigurationStatus.ALL
+				AdaptiveMediaImageQueryBuilder.ConfigurationStatus.ANY
 			).forConfiguration(
 				"small"
 			).done());
@@ -1178,7 +1180,7 @@ public class AdaptiveMediaImageFinderImplTest {
 
 		AdaptiveMediaImageQueryBuilder.ConfigurationStatus
 			allConfigurationStatus =
-				AdaptiveMediaImageQueryBuilder.ConfigurationStatus.ALL;
+				AdaptiveMediaImageQueryBuilder.ConfigurationStatus.ANY;
 
 		Mockito.when(
 			_configurationHelper.getAdaptiveMediaImageConfigurationEntries(

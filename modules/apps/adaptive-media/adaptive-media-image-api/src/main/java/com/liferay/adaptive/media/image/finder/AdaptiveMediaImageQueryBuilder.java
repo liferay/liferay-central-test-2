@@ -42,8 +42,8 @@ public interface AdaptiveMediaImageQueryBuilder
 
 	public enum ConfigurationStatus {
 
-		ALL(configurationEntry -> true),
-		ENABLED(configurationEntry -> configurationEntry.isEnabled()),
+		ANY(configurationEntry -> true),
+		ENABLED(AdaptiveMediaImageConfigurationEntry::isEnabled),
 		DISABLED(configurationEntry -> !configurationEntry.isEnabled());
 
 		public Predicate<AdaptiveMediaImageConfigurationEntry> getPredicate() {
@@ -56,7 +56,8 @@ public interface AdaptiveMediaImageQueryBuilder
 			_predicate = predicate;
 		}
 
-		private final Predicate _predicate;
+		private final Predicate<AdaptiveMediaImageConfigurationEntry>
+			_predicate;
 
 	}
 
@@ -94,12 +95,18 @@ public interface AdaptiveMediaImageQueryBuilder
 		extends ConfigurationStep, FuzzySortStep, StrictSortStep {
 	}
 
+	public enum SortOrder {
+
+		ASC, DESC
+
+	}
+
 	public interface StrictSortStep extends FinalStep {
 
 		public <V> StrictSortStep orderBy(
 			AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, V>
 				adaptiveMediaAttribute,
-			boolean asc);
+			SortOrder sortOrder);
 
 	}
 

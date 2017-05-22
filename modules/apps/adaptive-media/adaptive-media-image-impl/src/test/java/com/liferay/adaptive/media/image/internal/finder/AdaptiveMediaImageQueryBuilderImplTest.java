@@ -16,6 +16,7 @@ package com.liferay.adaptive.media.image.internal.finder;
 
 import com.liferay.adaptive.media.AdaptiveMediaAttribute;
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry;
+import com.liferay.adaptive.media.image.finder.AdaptiveMediaImageQueryBuilder;
 import com.liferay.adaptive.media.image.internal.configuration.AdaptiveMediaImageConfigurationEntryImpl;
 import com.liferay.adaptive.media.image.processor.AdaptiveMediaImageAttribute;
 import com.liferay.adaptive.media.image.processor.AdaptiveMediaImageProcessor;
@@ -54,7 +55,9 @@ public class AdaptiveMediaImageQueryBuilderImplTest {
 
 		FileEntry fileEntry = Mockito.mock(FileEntry.class);
 
-		_queryBuilder.forFileEntry(fileEntry).done();
+		_queryBuilder.forFileEntry(
+			fileEntry
+		).done();
 
 		Assert.assertEquals(
 			fileEntry.getFileVersion(), _queryBuilder.getFileVersion());
@@ -64,7 +67,11 @@ public class AdaptiveMediaImageQueryBuilderImplTest {
 	public void testMatchingConfigurationAttributeQuery() {
 		FileVersion fileVersion = Mockito.mock(FileVersion.class);
 
-		_queryBuilder.forVersion(fileVersion).forConfiguration("small");
+		_queryBuilder.forVersion(
+			fileVersion
+		).forConfiguration(
+			"small"
+		);
 
 		AdaptiveMediaImageConfigurationEntry configurationEntry =
 			new AdaptiveMediaImageConfigurationEntryImpl(
@@ -81,7 +88,11 @@ public class AdaptiveMediaImageQueryBuilderImplTest {
 	public void testNonMatchingConfigurationAttributeQuery() {
 		FileVersion fileVersion = Mockito.mock(FileVersion.class);
 
-		_queryBuilder.forVersion(fileVersion).forConfiguration("small");
+		_queryBuilder.forVersion(
+			fileVersion
+		).forConfiguration(
+			"small"
+		);
 
 		AdaptiveMediaImageConfigurationEntry configurationEntry =
 			new AdaptiveMediaImageConfigurationEntryImpl(
@@ -98,8 +109,11 @@ public class AdaptiveMediaImageQueryBuilderImplTest {
 	public void testNonNullOptionalAttributeQuery() {
 		FileVersion fileVersion = Mockito.mock(FileVersion.class);
 
-		_queryBuilder.forVersion(fileVersion).with(
-			AdaptiveMediaImageAttribute.IMAGE_HEIGHT, Optional.of(100));
+		_queryBuilder.forVersion(
+			fileVersion
+		).with(
+			AdaptiveMediaImageAttribute.IMAGE_HEIGHT, Optional.of(100)
+		);
 
 		Map<AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, ?>, Object>
 			attributes = _queryBuilder.getAttributes();
@@ -112,15 +126,22 @@ public class AdaptiveMediaImageQueryBuilderImplTest {
 	public void testNullAttributeFailsWhenOrderingByIt() {
 		FileVersion fileVersion = Mockito.mock(FileVersion.class);
 
-		_queryBuilder.forVersion(fileVersion).orderBy(null, false);
+		_queryBuilder.forVersion(
+			fileVersion
+		).orderBy(
+			null, AdaptiveMediaImageQueryBuilder.SortOrder.DESC
+		);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testNullAttributeValueFailsWhenQueryingAttributes() {
 		FileVersion fileVersion = Mockito.mock(FileVersion.class);
 
-		_queryBuilder.forVersion(fileVersion).with(
-			AdaptiveMediaImageAttribute.IMAGE_HEIGHT, (Integer)null);
+		_queryBuilder.forVersion(
+			fileVersion
+		).with(
+			AdaptiveMediaImageAttribute.IMAGE_HEIGHT, (Integer)null
+		);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -132,7 +153,11 @@ public class AdaptiveMediaImageQueryBuilderImplTest {
 	public void testNullConfigurationUUIDFailsWhenQueryingAttributes() {
 		FileVersion fileVersion = Mockito.mock(FileVersion.class);
 
-		_queryBuilder.forVersion(fileVersion).forConfiguration(null);
+		_queryBuilder.forVersion(
+			fileVersion
+		).forConfiguration(
+			null
+		);
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -159,8 +184,11 @@ public class AdaptiveMediaImageQueryBuilderImplTest {
 	public void testNullOptionalAttributeValueFailsWhenQueryingAttributes() {
 		FileVersion fileVersion = Mockito.mock(FileVersion.class);
 
-		_queryBuilder.forVersion(fileVersion).with(
-			AdaptiveMediaImageAttribute.IMAGE_HEIGHT, (Optional<Integer>)null);
+		_queryBuilder.forVersion(
+			fileVersion
+		).with(
+			AdaptiveMediaImageAttribute.IMAGE_HEIGHT, (Optional<Integer>)null
+		);
 	}
 
 	private final AdaptiveMediaImageQueryBuilderImpl _queryBuilder =
