@@ -234,18 +234,9 @@
 				(JournalArticle.groupId = tempJournalArticle.groupId) AND
 				(JournalArticle.articleId = tempJournalArticle.articleId) AND
 				(JournalArticle.version < tempJournalArticle.version)
-			LEFT JOIN
-				(SELECT DISTINCT
-					JournalArticleLocalization.companyId, JournalArticleLocalization.articlePK
-				FROM
-					JournalArticleLocalization
-				WHERE
-					(JournalArticleLocalization.title LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
-					(JournalArticleLocalization.description LIKE ? [$AND_OR_NULL_CHECK$])
-				) tempJournalArticleLocalization
-				ON
-					(JournalArticle.companyId = tempJournalArticleLocalization.companyId) AND
-					(JournalArticle.id_ = tempJournalArticleLocalization.articlePK)
+			LEFT JOIN JournalArticleLocalization ON
+				(JournalArticle.companyId = JournalArticleLocalization.companyId) AND
+				(JournalArticle.id_ = JournalArticleLocalization.articlePK)
 			WHERE
 				(JournalArticle.companyId = ?) AND
 				(JournalArticle.groupId = ?) AND
@@ -257,6 +248,8 @@
 				(
 					(JournalArticle.articleId LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(JournalArticle.version = ?) [$AND_OR_CONNECTOR$]
+					(lower(JournalArticleLocalization.title) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(JournalArticleLocalization.description LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(JournalArticle.content LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(JournalArticle.displayDate >= ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(JournalArticle.displayDate <= ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
