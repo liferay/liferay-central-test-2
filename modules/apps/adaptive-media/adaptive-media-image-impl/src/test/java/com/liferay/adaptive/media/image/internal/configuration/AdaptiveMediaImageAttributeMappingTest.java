@@ -35,12 +35,12 @@ public class AdaptiveMediaImageAttributeMappingTest {
 			AdaptiveMediaImageAttributeMapping.fromProperties(
 				Collections.emptyMap());
 
-		Optional<Integer> heightOptional = attributeMapping.getAttributeValue(
+		Optional<Integer> heightOptional = attributeMapping.getValueOptional(
 			AdaptiveMediaImageAttribute.IMAGE_HEIGHT);
 
 		Assert.assertFalse(heightOptional.isPresent());
 
-		Optional<Integer> widthOptional = attributeMapping.getAttributeValue(
+		Optional<Integer> widthOptional = attributeMapping.getValueOptional(
 			AdaptiveMediaImageAttribute.IMAGE_WIDTH);
 
 		Assert.assertFalse(widthOptional.isPresent());
@@ -59,7 +59,7 @@ public class AdaptiveMediaImageAttributeMappingTest {
 					AdaptiveMediaImageAttribute.IMAGE_HEIGHT.getName(), "100",
 					AdaptiveMediaImageAttribute.IMAGE_WIDTH.getName(), "200"));
 
-		attributeMapping.getAttributeValue(null);
+		attributeMapping.getValueOptional(null);
 	}
 
 	@Test
@@ -68,12 +68,12 @@ public class AdaptiveMediaImageAttributeMappingTest {
 			AdaptiveMediaImageAttributeMapping.fromProperties(
 				MapUtil.fromArray("foo", StringUtil.randomString()));
 
-		Optional<Integer> heightOptional = attributeMapping.getAttributeValue(
+		Optional<Integer> heightOptional = attributeMapping.getValueOptional(
 			AdaptiveMediaImageAttribute.IMAGE_HEIGHT);
 
 		Assert.assertFalse(heightOptional.isPresent());
 
-		Optional<Integer> widthOptional = attributeMapping.getAttributeValue(
+		Optional<Integer> widthOptional = attributeMapping.getValueOptional(
 			AdaptiveMediaImageAttribute.IMAGE_WIDTH);
 
 		Assert.assertFalse(widthOptional.isPresent());
@@ -87,12 +87,12 @@ public class AdaptiveMediaImageAttributeMappingTest {
 					AdaptiveMediaImageAttribute.IMAGE_HEIGHT.getName(), "100",
 					AdaptiveMediaImageAttribute.IMAGE_WIDTH.getName(), "200"));
 
-		Optional<Integer> heightOptional = attributeMapping.getAttributeValue(
+		Optional<Integer> heightOptional = attributeMapping.getValueOptional(
 			AdaptiveMediaImageAttribute.IMAGE_HEIGHT);
 
 		Assert.assertEquals(Integer.valueOf(100), heightOptional.get());
 
-		Optional<Integer> widthOptional = attributeMapping.getAttributeValue(
+		Optional<Integer> widthOptional = attributeMapping.getValueOptional(
 			AdaptiveMediaImageAttribute.IMAGE_WIDTH);
 
 		Assert.assertEquals(Integer.valueOf(200), widthOptional.get());
@@ -105,12 +105,12 @@ public class AdaptiveMediaImageAttributeMappingTest {
 				MapUtil.fromArray(
 					AdaptiveMediaImageAttribute.IMAGE_HEIGHT.getName(), "100"));
 
-		Optional<Integer> heightOptional = attributeMapping.getAttributeValue(
+		Optional<Integer> heightOptional = attributeMapping.getValueOptional(
 			AdaptiveMediaImageAttribute.IMAGE_HEIGHT);
 
 		Assert.assertEquals(Integer.valueOf(100), heightOptional.get());
 
-		Optional<Integer> widthOptional = attributeMapping.getAttributeValue(
+		Optional<Integer> widthOptional = attributeMapping.getValueOptional(
 			AdaptiveMediaImageAttribute.IMAGE_WIDTH);
 
 		Assert.assertFalse(widthOptional.isPresent());

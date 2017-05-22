@@ -47,7 +47,7 @@ public class AdaptiveMediaImageTest {
 
 		Mockito.verify(
 			attributeMapping
-		).getAttributeValue(
+		).getValueOptional(
 			AdaptiveMediaImageAttribute.IMAGE_HEIGHT
 		);
 	}

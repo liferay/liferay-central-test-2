@@ -52,26 +52,26 @@ public class AdaptiveMediaImageAttributeMapping {
 
 		attributes.put(
 			AdaptiveMediaAttribute.configurationUuid(),
-			_getAttributeValue(
+			_getValueOptional(
 				properties, AdaptiveMediaAttribute.configurationUuid()));
 		attributes.put(
 			AdaptiveMediaAttribute.contentLength(),
-			_getAttributeValue(
+			_getValueOptional(
 				properties, AdaptiveMediaAttribute.contentLength()));
 		attributes.put(
 			AdaptiveMediaAttribute.contentType(),
-			_getAttributeValue(
+			_getValueOptional(
 				properties, AdaptiveMediaAttribute.contentType()));
 		attributes.put(
 			AdaptiveMediaAttribute.fileName(),
-			_getAttributeValue(properties, AdaptiveMediaAttribute.fileName()));
+			_getValueOptional(properties, AdaptiveMediaAttribute.fileName()));
 		attributes.put(
 			AdaptiveMediaImageAttribute.IMAGE_HEIGHT,
-			_getAttributeValue(
+			_getValueOptional(
 				properties, AdaptiveMediaImageAttribute.IMAGE_HEIGHT));
 		attributes.put(
 			AdaptiveMediaImageAttribute.IMAGE_WIDTH,
-			_getAttributeValue(
+			_getValueOptional(
 				properties, AdaptiveMediaImageAttribute.IMAGE_WIDTH));
 
 		return new AdaptiveMediaImageAttributeMapping(attributes);
@@ -86,7 +86,7 @@ public class AdaptiveMediaImageAttributeMapping {
 	 *         (non-<code>null</code>) value (if any)
 	 * @review
 	 */
-	public <V> Optional<V> getAttributeValue(
+	public <V> Optional<V> getValueOptional(
 		AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, V>
 			adaptiveMediaAttribute) {
 
@@ -104,7 +104,7 @@ public class AdaptiveMediaImageAttributeMapping {
 		_attributes = attributes;
 	}
 
-	private static <V> Optional<V> _getAttributeValue(
+	private static <V> Optional<V> _getValueOptional(
 		Map<String, String> properties,
 		AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, V>
 			adaptiveMediaAttribute) {

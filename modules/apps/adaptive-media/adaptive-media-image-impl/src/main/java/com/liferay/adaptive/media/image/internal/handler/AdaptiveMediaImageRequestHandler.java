@@ -146,7 +146,7 @@ public class AdaptiveMediaImageRequestHandler
 
 		try {
 			Optional<AdaptiveMediaImageConfigurationEntry>
-				configurationEntryOptional = attributeMapping.getAttributeValue(
+				configurationEntryOptional = attributeMapping.getValueOptional(
 					AdaptiveMediaAttribute.configurationUuid()).flatMap(
 						configurationUuid ->
 							_configurationHelper.
@@ -309,7 +309,7 @@ public class AdaptiveMediaImageRequestHandler
 				AdaptiveMediaAttribute.configurationUuid());
 
 		Optional<String> attributeMappingConfigurationUuidOptional =
-			attributeMapping.getAttributeValue(
+			attributeMapping.getValueOptional(
 				AdaptiveMediaAttribute.configurationUuid());
 
 		if (adaptiveMediaConfigurationUuidOptional.equals(

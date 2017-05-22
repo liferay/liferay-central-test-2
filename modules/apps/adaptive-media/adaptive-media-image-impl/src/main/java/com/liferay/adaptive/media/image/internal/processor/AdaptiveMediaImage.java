@@ -56,7 +56,7 @@ public final class AdaptiveMediaImage
 		AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, V>
 			adaptiveMediaAttribute) {
 
-		return _attributeMapping.getAttributeValue(adaptiveMediaAttribute);
+		return _attributeMapping.getValueOptional(adaptiveMediaAttribute);
 	}
 
 	private final AdaptiveMediaImageAttributeMapping _attributeMapping;
