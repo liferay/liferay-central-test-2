@@ -44,10 +44,10 @@ public class SoyTemplateBundleResourceParser extends URLResourceParser {
 
 		Bundle bundle = _bundleContext.getBundle(bundleId);
 
-		int pos = templateId.indexOf(TemplateConstants.BUNDLE_SEPARATOR);
+		int index = templateId.indexOf(TemplateConstants.BUNDLE_SEPARATOR);
 
 		String templateName = templateId.substring(
-			pos + TemplateConstants.BUNDLE_SEPARATOR.length());
+			index + TemplateConstants.BUNDLE_SEPARATOR.length());
 
 		return bundle.getResource(templateName);
 	}
