@@ -132,6 +132,13 @@ public class MBDiscussionCommentImpl
 	}
 
 	@Override
+	public boolean isInTrash() {
+		MBMessage message = getMessage();
+
+		return message.isInTrash();
+	}
+
+	@Override
 	public boolean isRoot() {
 		MBMessage message = getMessage();
 
