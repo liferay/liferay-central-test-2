@@ -184,13 +184,7 @@ public class AdaptiveMediaImageQueryBuilderImpl
 				"Adaptive media attribute cannot be null");
 		}
 
-		boolean asc = true;
-
-		if (sortOrder == SortOrder.DESC) {
-			asc = false;
-		}
-
-		_sortCriteria.put(adaptiveMediaAttribute, asc);
+		_sortCriteria.put(adaptiveMediaAttribute, sortOrder);
 
 		return this;
 	}
@@ -258,7 +252,7 @@ public class AdaptiveMediaImageQueryBuilderImpl
 	private FileEntry _fileEntry;
 	private FileVersion _fileVersion;
 	private final Map
-		<AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, ?>, Boolean>
+		<AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, ?>, SortOrder>
 			_sortCriteria = new LinkedHashMap<>();
 
 }

@@ -16,6 +16,7 @@ package com.liferay.adaptive.media.image.internal.finder;
 
 import com.liferay.adaptive.media.AdaptiveMedia;
 import com.liferay.adaptive.media.AdaptiveMediaAttribute;
+import com.liferay.adaptive.media.image.finder.AdaptiveMediaImageQueryBuilder;
 import com.liferay.adaptive.media.image.internal.configuration.AdaptiveMediaImageAttributeMapping;
 import com.liferay.adaptive.media.image.internal.processor.AdaptiveMediaImage;
 import com.liferay.adaptive.media.image.processor.AdaptiveMediaImageProcessor;
@@ -35,11 +36,17 @@ public class AdaptiveMediaAttributeComparatorTest {
 
 	@Before
 	public void setUp() {
-		Map<AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, ?>, Boolean>
-			attributes = new HashMap<>();
+		Map<
+			AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, ?>,
+			AdaptiveMediaImageQueryBuilder.SortOrder>
+				attributes = new HashMap<>();
 
-		attributes.put(AdaptiveMediaAttribute.contentLength(), true);
-		attributes.put(AdaptiveMediaAttribute.fileName(), false);
+		attributes.put(
+			AdaptiveMediaAttribute.contentLength(),
+			AdaptiveMediaImageQueryBuilder.SortOrder.ASC);
+		attributes.put(
+			AdaptiveMediaAttribute.fileName(),
+			AdaptiveMediaImageQueryBuilder.SortOrder.DESC);
 
 		_multiAttributeComparator = new AdaptiveMediaAttributeComparator(
 			attributes);

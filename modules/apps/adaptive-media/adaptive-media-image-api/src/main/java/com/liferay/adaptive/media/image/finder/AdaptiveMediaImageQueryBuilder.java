@@ -97,7 +97,25 @@ public interface AdaptiveMediaImageQueryBuilder
 
 	public enum SortOrder {
 
-		ASC, DESC
+		ASC {
+
+			@Override
+			public int getSortValue(int value) {
+				return value;
+			}
+
+		},
+
+		DESC {
+
+			@Override
+			public int getSortValue(int value) {
+				return -value;
+			}
+
+		};
+
+		public abstract int getSortValue(int value);
 
 	}
 
