@@ -14,8 +14,6 @@
 
 package com.liferay.adaptive.media.image.service.impl;
 
-import aQute.bnd.annotation.ProviderType;
-
 import com.liferay.adaptive.media.exception.AdaptiveMediaRuntimeException;
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry;
 import com.liferay.adaptive.media.image.counter.AdaptiveMediaImageCounter;
@@ -62,7 +60,6 @@ import org.osgi.framework.FrameworkUtil;
  *
  * @review
  */
-@ProviderType
 public class AdaptiveMediaImageEntryLocalServiceImpl
 	extends AdaptiveMediaImageEntryLocalServiceBaseImpl {
 

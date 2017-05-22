@@ -132,8 +132,8 @@ public class AdaptiveMediaImageQueryBuilderImpl
 		getConfigurationEntryFilter() {
 
 		if (_hasConfiguration()) {
-			return configurationEntry ->
-				_configurationUuid.equals(configurationEntry.getUUID());
+			return configurationEntry -> _configurationUuid.equals(
+				configurationEntry.getUUID());
 		}
 
 		return configurationEntry -> true;

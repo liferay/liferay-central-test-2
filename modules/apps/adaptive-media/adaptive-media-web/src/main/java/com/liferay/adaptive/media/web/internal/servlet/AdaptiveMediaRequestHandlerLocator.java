@@ -34,10 +34,9 @@ public class AdaptiveMediaRequestHandlerLocator {
 		_serviceTrackerMap = ServiceTrackerMapFactory.openSingleValueMap(
 			bundleContext, AdaptiveMediaRequestHandler.class,
 			"(adaptive.media.handler.pattern=*)",
-			(serviceReference, emitter) ->
-				emitter.emit(
-					(String)serviceReference.getProperty(
-						"adaptive.media.handler.pattern")));
+			(serviceReference, emitter) -> emitter.emit(
+				(String)serviceReference.getProperty(
+					"adaptive.media.handler.pattern")));
 	}
 
 	@Deactivate

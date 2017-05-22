@@ -180,10 +180,9 @@ public class AdaptiveMediaThumbnailsOSGiCommands {
 										configurationEntries);
 
 						configurationEntryOptional.ifPresent(
-							configurationEntry ->
-								_migrate(
-									actualFileName, configurationEntry,
-									thumbnailConfiguration));
+							configurationEntry -> _migrate(
+								actualFileName, configurationEntry,
+								thumbnailConfiguration));
 					}
 				}
 			}
@@ -266,9 +265,8 @@ public class AdaptiveMediaThumbnailsOSGiCommands {
 			_getThumbnailConfigurations());
 
 		return stream.anyMatch(
-			thumbnailConfiguration ->
-				configurationEntries.stream().anyMatch(
-					thumbnailConfiguration::matches));
+			thumbnailConfiguration -> configurationEntries.stream().anyMatch(
+				thumbnailConfiguration::matches));
 	}
 
 	private void _migrate(

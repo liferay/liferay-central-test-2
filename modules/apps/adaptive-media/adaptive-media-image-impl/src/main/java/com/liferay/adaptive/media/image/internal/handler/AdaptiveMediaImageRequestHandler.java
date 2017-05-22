@@ -73,9 +73,8 @@ public class AdaptiveMediaImageRequestHandler
 						tuple.first, tuple.second);
 
 				adaptiveMediaOptional.ifPresent(
-					adaptiveMedia ->
-						_processAdaptiveMediaImage(
-							adaptiveMedia, tuple.first, tuple.second));
+					adaptiveMedia -> _processAdaptiveMediaImage(
+						adaptiveMedia, tuple.first, tuple.second));
 
 				return adaptiveMediaOptional;
 			});

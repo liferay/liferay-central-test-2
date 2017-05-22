@@ -50,9 +50,8 @@ public class AdaptiveMediaMessageListener extends BaseMessageListener {
 	public void activate(BundleContext bundleContext) {
 		_serviceTrackerMap = ServiceTrackerMapFactory.openMultiValueMap(
 			bundleContext, AdaptiveMediaProcessor.class, "(model.class.name=*)",
-			(serviceReference, emitter) ->
-				emitter.emit(
-					(String)serviceReference.getProperty("model.class.name")));
+			(serviceReference, emitter) -> emitter.emit(
+				(String)serviceReference.getProperty("model.class.name")));
 	}
 
 	@Deactivate

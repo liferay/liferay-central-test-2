@@ -69,10 +69,8 @@ public class AdaptiveMediaAttributeComparator
 				adaptiveMediaAttribute);
 
 			Optional<Integer> valueOptional = value1Optional.flatMap(
-				value1 ->
-					value2Optional.map(
-						value2 ->
-							adaptiveMediaAttribute.compare(value1, value2)));
+				value1 -> value2Optional.map(
+					value2 -> adaptiveMediaAttribute.compare(value1, value2)));
 
 			int result = valueOptional.map(
 				value -> sortCriterion.getValue() ? value : -value).orElse(0);
