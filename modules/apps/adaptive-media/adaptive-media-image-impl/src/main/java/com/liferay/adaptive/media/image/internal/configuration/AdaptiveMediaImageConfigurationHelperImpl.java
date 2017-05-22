@@ -43,6 +43,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Predicate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -389,6 +391,12 @@ public class AdaptiveMediaImageConfigurationHelperImpl
 		_configurationEntryParser = configurationEntryParser;
 	}
 
+	private static final boolean _isPositiveNumber(String s) {
+		Matcher matcher = _positiveNumberPattern.matcher(s);
+
+		return matcher.matches();
+	}
+
 	private void _checkDuplicatesName(
 			Collection<AdaptiveMediaImageConfigurationEntry>
 				configurationEntries,
@@ -440,8 +448,7 @@ public class AdaptiveMediaImageConfigurationHelperImpl
 		String maxHeightString = properties.get("max-height");
 
 		if (Validator.isNotNull(maxHeightString) &&
-			!Validator.isNumber(maxHeightString) ||
-			maxHeightString.equals("0")) {
+			_isPositiveNumber(maxHeightString)) {
 
 			throw new AdaptiveMediaImageConfigurationException.
 				InvalidHeightException();
@@ -450,7 +457,7 @@ public class AdaptiveMediaImageConfigurationHelperImpl
 		String maxWidthString = properties.get("max-width");
 
 		if (Validator.isNotNull(maxWidthString) &&
-			!Validator.isNumber(maxWidthString) || maxWidthString.equals("0")) {
+			_isPositiveNumber(maxWidthString)) {
 
 			throw new AdaptiveMediaImageConfigurationException.
 				InvalidWidthException();
@@ -547,6 +554,9 @@ public class AdaptiveMediaImageConfigurationHelperImpl
 			throw new AdaptiveMediaRuntimeException.InvalidConfiguration(e);
 		}
 	}
+
+	private static final Pattern _positiveNumberPattern = Pattern.compile(
+		"\\d*[1-9]\\d*");
 
 	private AdaptiveMediaImageConfigurationEntryParser
 		_configurationEntryParser;
