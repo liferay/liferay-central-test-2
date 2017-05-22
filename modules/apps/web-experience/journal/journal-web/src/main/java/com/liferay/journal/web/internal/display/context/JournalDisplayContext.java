@@ -129,22 +129,6 @@ public class JournalDisplayContext {
 		return _article;
 	}
 
-	public List<Locale> getAvailableArticleLocales() throws PortalException {
-		JournalArticle article = getArticle();
-
-		if (article == null) {
-			return Collections.emptyList();
-		}
-
-		List<Locale> availableLocales = new ArrayList<>();
-
-		for (String languageId : article.getAvailableLanguageIds()) {
-			availableLocales.add(LocaleUtil.fromLanguageId(languageId));
-		}
-
-		return availableLocales;
-	}
-
 	public JournalArticleDisplay getArticleDisplay() throws Exception {
 		if (_articleDisplay != null) {
 			return _articleDisplay;
@@ -162,6 +146,22 @@ public class JournalDisplayContext {
 			themeDisplay);
 
 		return _articleDisplay;
+	}
+
+	public List<Locale> getAvailableArticleLocales() throws PortalException {
+		JournalArticle article = getArticle();
+
+		if (article == null) {
+			return Collections.emptyList();
+		}
+
+		List<Locale> availableLocales = new ArrayList<>();
+
+		for (String languageId : article.getAvailableLanguageIds()) {
+			availableLocales.add(LocaleUtil.fromLanguageId(languageId));
+		}
+
+		return availableLocales;
 	}
 
 	public String[] getCharactersBlacklist() throws PortalException {
