@@ -281,11 +281,11 @@ public class DDLFormAdminDisplayContextTest extends PowerMockito {
 			mock(DDMFormContextProviderServlet.class),
 			mock(DDMFormFieldTypeServicesTracker.class),
 			mock(DDMFormFieldTypesJSONSerializer.class),
-			mock(DDMFormTemplateContextFactory.class),
 			mock(DDMFormJSONSerializer.class),
 			mock(DDMFormLayoutJSONSerializer.class),
 			mock(DDMFormRenderer.class),
 			mock(DDMFormRuleToDDLFormRuleConverter.class),
+			mock(DDMFormTemplateContextFactory.class),
 			mock(DDMFormValuesFactory.class), mock(DDMFormValuesMerger.class),
 			mock(DDMStructureLocalService.class), mock(JSONFactory.class),
 			mock(StorageEngine.class), mock(WorkflowEngineManager.class));

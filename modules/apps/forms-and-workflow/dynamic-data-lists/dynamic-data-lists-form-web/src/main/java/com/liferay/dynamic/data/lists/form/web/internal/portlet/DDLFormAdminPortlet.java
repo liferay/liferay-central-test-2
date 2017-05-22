@@ -331,10 +331,10 @@ public class DDLFormAdminPortlet extends MVCPortlet {
 				_ddlRecordLocalService, _ddlRecordSetService,
 				_ddmFormContextProviderServlet,
 				_ddmFormFieldTypeServicesTracker,
-				_ddmFormFieldTypesJSONSerializer,
-				_ddmFormTemplateContextFactory, _ddmFormJSONSerializer,
+				_ddmFormFieldTypesJSONSerializer, _ddmFormJSONSerializer,
 				_ddmFormLayoutJSONSerializer, _ddmFormRenderer,
-				_ddmFormRulesToDDLFormRulesConverter, _ddmFormValuesFactory,
+				_ddmFormRulesToDDLFormRulesConverter,
+				_ddmFormTemplateContextFactory, _ddmFormValuesFactory,
 				_ddmFormValuesMerger, _ddmStructureLocalService, _jsonFactory,
 				_storageEngine, _workflowEngineManager);
 
