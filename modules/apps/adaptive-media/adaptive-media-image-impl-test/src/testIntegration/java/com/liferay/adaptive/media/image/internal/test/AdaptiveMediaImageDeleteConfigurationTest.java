@@ -752,10 +752,10 @@ public class AdaptiveMediaImageDeleteConfigurationTest
 		configurationHelper.disableAdaptiveMediaImageConfigurationEntry(
 			TestPropsValues.getCompanyId(), "1");
 
-		List<Message> messages = collectConfigurationMessages(() -> {
-			configurationHelper.deleteAdaptiveMediaImageConfigurationEntry(
-				TestPropsValues.getCompanyId(), "1");
-		});
+		List<Message> messages = collectConfigurationMessages(
+			() ->
+				configurationHelper.deleteAdaptiveMediaImageConfigurationEntry(
+					TestPropsValues.getCompanyId(), "1"));
 
 		Assert.assertEquals(messages.toString(), 1, messages.size());
 

@@ -74,8 +74,9 @@ public final class AdaptiveMediaImageProcessorImpl
 			_configurationHelper.getAdaptiveMediaImageConfigurationEntries(
 				fileVersion.getCompanyId());
 
-		configurationEntries.forEach(configurationEntry -> process(
-			fileVersion, configurationEntry.getUUID()));
+		configurationEntries.forEach(
+			configurationEntry -> process(
+				fileVersion, configurationEntry.getUUID()));
 	}
 
 	@Override

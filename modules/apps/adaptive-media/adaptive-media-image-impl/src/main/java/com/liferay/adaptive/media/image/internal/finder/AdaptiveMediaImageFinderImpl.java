@@ -99,12 +99,20 @@ public class AdaptiveMediaImageFinderImpl implements AdaptiveMediaImageFinder {
 		Predicate<AdaptiveMediaImageConfigurationEntry> filter =
 			queryBuilder.getConfigurationEntryFilter();
 
-		return configurationEntries.stream().filter(configurationEntry ->
-			filter.test(configurationEntry) &&
-			_hasAdaptiveMedia(fileVersion, configurationEntry)).map(
-				configurationEntry ->
-					_createMedia(fileVersion, uriFactory, configurationEntry)).
-				sorted(queryBuilder.getComparator());
+		Stream<AdaptiveMediaImageConfigurationEntry>
+			adaptiveMediaImageConfigurationEntryStream =
+				configurationEntries.stream();
+
+		return adaptiveMediaImageConfigurationEntryStream.filter(
+			configurationEntry ->
+				filter.test(configurationEntry) &&
+				_hasAdaptiveMedia(fileVersion, configurationEntry)
+		).map(
+			configurationEntry ->
+				_createMedia(fileVersion, uriFactory, configurationEntry)
+		).sorted(
+			queryBuilder.getComparator()
+		);
 	}
 
 	@Reference(unbind = "-")

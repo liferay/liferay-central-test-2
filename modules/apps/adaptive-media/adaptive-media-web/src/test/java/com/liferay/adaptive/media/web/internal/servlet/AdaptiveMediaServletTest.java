@@ -65,8 +65,8 @@ public class AdaptiveMediaServletTest {
 		Mockito.verify(
 			_response
 		).sendError(
-			Mockito.eq(HttpServletResponse.SC_BAD_REQUEST),
-			Mockito.anyString());
+			Mockito.eq(HttpServletResponse.SC_BAD_REQUEST), Mockito.anyString()
+		);
 	}
 
 	@Test
@@ -94,7 +94,8 @@ public class AdaptiveMediaServletTest {
 		Mockito.verify(
 			_response
 		).sendError(
-			Mockito.eq(HttpServletResponse.SC_NOT_FOUND), Mockito.anyString());
+			Mockito.eq(HttpServletResponse.SC_NOT_FOUND), Mockito.anyString()
+		);
 	}
 
 	@Test
@@ -122,7 +123,8 @@ public class AdaptiveMediaServletTest {
 		Mockito.verify(
 			_response
 		).sendError(
-			Mockito.eq(HttpServletResponse.SC_NOT_FOUND), Mockito.anyString());
+			Mockito.eq(HttpServletResponse.SC_NOT_FOUND), Mockito.anyString()
+		);
 	}
 
 	@Test
@@ -150,7 +152,8 @@ public class AdaptiveMediaServletTest {
 		Mockito.verify(
 			_response
 		).sendError(
-			Mockito.eq(HttpServletResponse.SC_FORBIDDEN), Mockito.anyString());
+			Mockito.eq(HttpServletResponse.SC_FORBIDDEN), Mockito.anyString()
+		);
 	}
 
 	@Test
@@ -172,7 +175,8 @@ public class AdaptiveMediaServletTest {
 		Mockito.verify(
 			_response
 		).sendError(
-			Mockito.eq(HttpServletResponse.SC_NOT_FOUND), Mockito.anyString());
+			Mockito.eq(HttpServletResponse.SC_NOT_FOUND), Mockito.anyString()
+		);
 	}
 
 	private final HttpServletRequest _request = Mockito.mock(

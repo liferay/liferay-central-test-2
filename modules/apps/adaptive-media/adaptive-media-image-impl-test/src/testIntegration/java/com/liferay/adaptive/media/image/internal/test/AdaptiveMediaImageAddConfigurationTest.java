@@ -419,11 +419,10 @@ public class AdaptiveMediaImageAddConfigurationTest
 		properties.put("max-height", "100");
 		properties.put("max-width", "100");
 
-		List<Message> messages = collectConfigurationMessages(() -> {
-			configurationHelper.addAdaptiveMediaImageConfigurationEntry(
+		List<Message> messages = collectConfigurationMessages(
+			() -> configurationHelper.addAdaptiveMediaImageConfigurationEntry(
 				TestPropsValues.getCompanyId(), "one", "onedesc", "1",
-				properties);
-		});
+				properties));
 
 		Assert.assertEquals(messages.toString(), 1, messages.size());
 

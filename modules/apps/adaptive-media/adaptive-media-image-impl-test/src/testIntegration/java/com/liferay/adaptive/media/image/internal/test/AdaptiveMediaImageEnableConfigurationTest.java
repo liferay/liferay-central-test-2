@@ -66,10 +66,10 @@ public class AdaptiveMediaImageEnableConfigurationTest
 		configurationHelper.addAdaptiveMediaImageConfigurationEntry(
 			TestPropsValues.getCompanyId(), "one", "onedesc", "1", properties);
 
-		List<Message> messages = collectConfigurationMessages(() -> {
-			configurationHelper.enableAdaptiveMediaImageConfigurationEntry(
-				TestPropsValues.getCompanyId(), "1");
-		});
+		List<Message> messages = collectConfigurationMessages(
+			() ->
+				configurationHelper.enableAdaptiveMediaImageConfigurationEntry(
+					TestPropsValues.getCompanyId(), "1"));
 
 		Assert.assertEquals(messages.toString(), 0, messages.size());
 	}
@@ -390,10 +390,10 @@ public class AdaptiveMediaImageEnableConfigurationTest
 		configurationHelper.disableAdaptiveMediaImageConfigurationEntry(
 			TestPropsValues.getCompanyId(), "1");
 
-		List<Message> messages = collectConfigurationMessages(() -> {
-			configurationHelper.enableAdaptiveMediaImageConfigurationEntry(
-				TestPropsValues.getCompanyId(), "1");
-		});
+		List<Message> messages = collectConfigurationMessages(
+			() ->
+				configurationHelper.enableAdaptiveMediaImageConfigurationEntry(
+					TestPropsValues.getCompanyId(), "1"));
 
 		Assert.assertEquals(messages.toString(), 1, messages.size());
 

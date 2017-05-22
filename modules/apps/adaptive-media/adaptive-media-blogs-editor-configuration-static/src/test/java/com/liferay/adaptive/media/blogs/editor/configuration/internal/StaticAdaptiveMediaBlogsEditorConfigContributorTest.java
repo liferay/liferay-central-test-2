@@ -157,7 +157,8 @@ public class StaticAdaptiveMediaBlogsEditorConfigContributorTest
 			_itemSelector
 		).getItemSelectorURL(
 			Mockito.any(RequestBackedPortletURLFactory.class),
-			Mockito.anyString(), Mockito.any(ItemSelectorCriterion[].class));
+			Mockito.anyString(), Mockito.any(ItemSelectorCriterion[].class)
+		);
 
 		StaticAdaptiveMediaBlogsEditorConfigContributor
 			staticAdaptiveMediaBlogsEditorConfigContributor =

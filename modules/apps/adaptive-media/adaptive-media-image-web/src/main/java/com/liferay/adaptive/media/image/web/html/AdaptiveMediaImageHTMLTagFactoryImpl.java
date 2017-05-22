@@ -106,17 +106,18 @@ public class AdaptiveMediaImageHTMLTagFactoryImpl
 		Optional<String> mediaQueryStringOptional = _getMediaQueryString(
 			mediaQuery);
 
-		mediaQueryStringOptional.ifPresent(mediaQueryString -> {
-			sb.append("<source ");
-			sb.append("media=\"");
-			sb.append(mediaQueryString);
-			sb.append("\" ");
-			sb.append("srcset=\"");
-			sb.append(mediaQuery.getSrc());
-			sb.append("\"");
-			sb.append("/>");
+		mediaQueryStringOptional.ifPresent(
+			mediaQueryString -> {
+				sb.append("<source ");
+				sb.append("media=\"");
+				sb.append(mediaQueryString);
+				sb.append("\" ");
+				sb.append("srcset=\"");
+				sb.append(mediaQuery.getSrc());
+				sb.append("\"");
+				sb.append("/>");
 
-		});
+			});
 
 		return sb.toString();
 	}

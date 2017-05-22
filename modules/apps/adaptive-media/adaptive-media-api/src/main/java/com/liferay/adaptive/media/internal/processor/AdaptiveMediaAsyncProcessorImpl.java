@@ -96,13 +96,14 @@ public final class AdaptiveMediaAsyncProcessorImpl<M, T>
 			message.put("modelId", modelId);
 		}
 
-		TransactionCommitCallbackUtil.registerCallback(() -> {
-			_messageBus.sendMessage(
-				AdaptiveMediaDestinationNames.ADAPTIVE_MEDIA_PROCESSOR,
-				message);
+		TransactionCommitCallbackUtil.registerCallback(
+			() -> {
+				_messageBus.sendMessage(
+					AdaptiveMediaDestinationNames.ADAPTIVE_MEDIA_PROCESSOR,
+					message);
 
-			return null;
-		});
+				return null;
+			});
 	}
 
 	@Override
@@ -143,13 +144,14 @@ public final class AdaptiveMediaAsyncProcessorImpl<M, T>
 			message.put("modelId", modelId);
 		}
 
-		TransactionCommitCallbackUtil.registerCallback(() -> {
-			_messageBus.sendMessage(
-				AdaptiveMediaDestinationNames.ADAPTIVE_MEDIA_PROCESSOR,
-				message);
+		TransactionCommitCallbackUtil.registerCallback(
+			() -> {
+				_messageBus.sendMessage(
+					AdaptiveMediaDestinationNames.ADAPTIVE_MEDIA_PROCESSOR,
+					message);
 
-			return null;
-		});
+				return null;
+			});
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(

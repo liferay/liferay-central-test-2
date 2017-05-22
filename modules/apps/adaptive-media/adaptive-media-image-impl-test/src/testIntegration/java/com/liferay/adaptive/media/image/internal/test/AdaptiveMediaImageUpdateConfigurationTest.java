@@ -67,11 +67,11 @@ public class AdaptiveMediaImageUpdateConfigurationTest
 				TestPropsValues.getCompanyId(), "one", "onedesc", "1",
 				properties);
 
-		List<Message> messages = collectConfigurationMessages(() -> {
-			configurationHelper.updateAdaptiveMediaImageConfigurationEntry(
-				TestPropsValues.getCompanyId(), "1", "two", "twodesc", "2",
-				properties);
-		});
+		List<Message> messages = collectConfigurationMessages(
+			() ->
+				configurationHelper.updateAdaptiveMediaImageConfigurationEntry(
+					TestPropsValues.getCompanyId(), "1", "two", "twodesc", "2",
+					properties));
 
 		Assert.assertEquals(messages.toString(), 1, messages.size());
 

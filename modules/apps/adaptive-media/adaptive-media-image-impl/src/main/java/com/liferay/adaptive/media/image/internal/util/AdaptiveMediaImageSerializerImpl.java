@@ -59,11 +59,13 @@ public class AdaptiveMediaImageSerializerImpl
 			Map<String, AdaptiveMediaAttribute<?, ?>> allowedAttributes =
 				AdaptiveMediaImageAttribute.allowedAttributes();
 
-			allowedAttributes.forEach((name, attribute) -> {
-				if (attributesJSONObject.has(name)) {
-					properties.put(name, attributesJSONObject.getString(name));
-				}
-			});
+			allowedAttributes.forEach(
+				(name, attribute) -> {
+					if (attributesJSONObject.has(name)) {
+						properties.put(
+							name, attributesJSONObject.getString(name));
+					}
+				});
 
 			String uri = jsonObject.getString("uri");
 
@@ -88,14 +90,15 @@ public class AdaptiveMediaImageSerializerImpl
 		Map<String, AdaptiveMediaAttribute<?, ?>> allowedAttributes =
 			AdaptiveMediaImageAttribute.allowedAttributes();
 
-		allowedAttributes.forEach((name, attribute) -> {
-			Optional<Object> valueOptional = media.getValueOptional(
-				(AdaptiveMediaAttribute)attribute);
+		allowedAttributes.forEach(
+			(name, attribute) -> {
+				Optional<Object> valueOptional = media.getValueOptional(
+					(AdaptiveMediaAttribute)attribute);
 
-			valueOptional.ifPresent(
-				value -> attributesJSONObject.put(name, String.valueOf(value)));
-
-		});
+				valueOptional.ifPresent(
+					value -> attributesJSONObject.put(
+						name, String.valueOf(value)));
+			});
 
 		jsonObject.put("attributes", attributesJSONObject);
 

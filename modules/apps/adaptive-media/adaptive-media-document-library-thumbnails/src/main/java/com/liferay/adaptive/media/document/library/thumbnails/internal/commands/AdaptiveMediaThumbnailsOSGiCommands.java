@@ -196,12 +196,22 @@ public class AdaptiveMediaThumbnailsOSGiCommands {
 		if (companyIds.length == 0) {
 			List<Company> companies = _companyLocalService.getCompanies();
 
-			return companies.stream().map(Company::getCompanyId).collect(
-				Collectors.toList());
+			Stream<Company> companyStream = companies.stream();
+
+			return companyStream.map(
+				Company::getCompanyId
+			).collect(
+				Collectors.toList()
+			);
 		}
 
-		return Arrays.stream(companyIds).map(Long::parseLong).collect(
-			Collectors.toList());
+		Stream<String> companyIdStream = Arrays.stream(companyIds);
+
+		return companyIdStream.map(
+			Long::parseLong
+		).collect(
+			Collectors.toList()
+		);
 	}
 
 	private FileVersion _getFileVersion(long fileVersionId)
@@ -261,12 +271,18 @@ public class AdaptiveMediaThumbnailsOSGiCommands {
 	private boolean _isValidConfigurationEntries(
 		Collection<AdaptiveMediaImageConfigurationEntry> configurationEntries) {
 
-		Stream<ThumbnailConfiguration> stream = Arrays.stream(
-			_getThumbnailConfigurations());
+		Stream<ThumbnailConfiguration> thumbnailConfigurationStream =
+			Arrays.stream(_getThumbnailConfigurations());
 
-		return stream.anyMatch(
-			thumbnailConfiguration -> configurationEntries.stream().anyMatch(
-				thumbnailConfiguration::matches));
+		return thumbnailConfigurationStream.anyMatch(
+			thumbnailConfiguration -> {
+				Stream<AdaptiveMediaImageConfigurationEntry>
+					adaptiveMediaImageConfigurationEntryStream =
+						configurationEntries.stream();
+
+				return adaptiveMediaImageConfigurationEntryStream.anyMatch(
+					thumbnailConfiguration::matches);
+			});
 	}
 
 	private void _migrate(

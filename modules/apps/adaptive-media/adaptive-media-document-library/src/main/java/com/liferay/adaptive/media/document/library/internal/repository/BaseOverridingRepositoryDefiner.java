@@ -40,6 +40,8 @@ import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 import org.osgi.service.component.annotations.Reference;
 
@@ -112,12 +114,18 @@ public abstract class BaseOverridingRepositoryDefiner
 		List<RepositoryDefiner> repositoryDefiners = _getFieldValue(
 			"_repositoryDefiners");
 
-		_overridenRepositoryDefiner = repositoryDefiners.stream().filter(
-			(repositoryDefiner) ->
-				className.equals(repositoryDefiner.getClassName())).findFirst().
-				orElseThrow(
-					() -> new RepositoryException(
-						"No repository found with className " + className));
+		Stream<RepositoryDefiner> repositoryDefinerStream =
+			repositoryDefiners.stream();
+
+		Optional<RepositoryDefiner> repositoryDefinerOptional =
+			repositoryDefinerStream.filter(
+				repositoryDefiner ->
+					className.equals(repositoryDefiner.getClassName())
+			).findFirst();
+
+		_overridenRepositoryDefiner = repositoryDefinerOptional.orElseThrow(
+			() -> new RepositoryException(
+				"No repository found with className " + className));
 	}
 
 	protected void restoreOverridenRepositoryDefiner(String className) {

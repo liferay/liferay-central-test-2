@@ -293,7 +293,8 @@ public class DynamicAdaptiveMediaBlogsEditorConfigContributorTest
 			_itemSelector, Mockito.never()
 		).getItemSelectorURL(
 			Mockito.any(RequestBackedPortletURLFactory.class),
-			Mockito.anyString(), Mockito.any(ItemSelectorCriterion.class));
+			Mockito.anyString(), Mockito.any(ItemSelectorCriterion.class)
+		);
 
 		JSONObject expectedJSONObject = JSONFactoryUtil.createJSONObject(
 			originalJSONObject.toJSONString());
@@ -340,7 +341,8 @@ public class DynamicAdaptiveMediaBlogsEditorConfigContributorTest
 			_itemSelector, Mockito.never()
 		).getItemSelectorURL(
 			Mockito.any(RequestBackedPortletURLFactory.class),
-			Mockito.anyString(), Mockito.any(ItemSelectorCriterion.class));
+			Mockito.anyString(), Mockito.any(ItemSelectorCriterion.class)
+		);
 
 		JSONObject expectedJSONObject = JSONFactoryUtil.createJSONObject(
 			originalJSONObject.toJSONString());
@@ -409,7 +411,8 @@ public class DynamicAdaptiveMediaBlogsEditorConfigContributorTest
 			_itemSelector
 		).getItemSelectorURL(
 			Mockito.any(RequestBackedPortletURLFactory.class),
-			Mockito.anyString(), Mockito.any(ItemSelectorCriterion.class));
+			Mockito.anyString(), Mockito.any(ItemSelectorCriterion.class)
+		);
 	}
 
 	@Test
@@ -470,7 +473,8 @@ public class DynamicAdaptiveMediaBlogsEditorConfigContributorTest
 			_itemSelector
 		).getItemSelectorURL(
 			Mockito.any(RequestBackedPortletURLFactory.class),
-			Mockito.anyString(), Mockito.any(ItemSelectorCriterion.class));
+			Mockito.anyString(), Mockito.any(ItemSelectorCriterion.class)
+		);
 	}
 
 	private List<ItemSelectorCriterion>
