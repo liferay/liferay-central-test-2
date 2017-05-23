@@ -76,10 +76,10 @@ public class LanguageExtension implements Extension {
 	public void start() throws Exception {
 		BundleWiring bundleWiring = _bundle.adapt(BundleWiring.class);
 
-		for (BundleCapability capability : _bundleCapabilities) {
+		for (BundleCapability bundleCapability : _bundleCapabilities) {
 			ResourceBundleLoader resourceBundleLoader = null;
 
-			Map<String, Object> attributes = capability.getAttributes();
+			Map<String, Object> attributes = bundleCapability.getAttributes();
 
 			Object aggregate = attributes.get("resource.bundle.aggregate");
 
@@ -119,7 +119,7 @@ public class LanguageExtension implements Extension {
 			else {
 				_logger.log(
 					Logger.LOG_WARNING,
-					"Unable to handle " + capability + " in " +
+					"Unable to handle " + bundleCapability + " in " +
 						_bundle.getSymbolicName());
 			}
 		}
