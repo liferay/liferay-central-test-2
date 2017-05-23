@@ -316,35 +316,35 @@ public class LanguageExtension implements Extension {
 				serviceReference.getProperty("service.ranking"),
 				Integer.MIN_VALUE);
 
-			String incomingBundleSymbolicName = null;
+			String bundleSymbolicName = null;
 
 			Object bundleSymbolicNameObject = serviceReference.getProperty(
 				"bundle.symbolic.name");
 
 			if (bundleSymbolicNameObject == null) {
-				Bundle incomingBundle = serviceReference.getBundle();
+				Bundle bundle = serviceReference.getBundle();
 
-				incomingBundleSymbolicName = incomingBundle.getSymbolicName();
+				bundleSymbolicName = bundle.getSymbolicName();
 			}
 			else {
-				incomingBundleSymbolicName =
+				bundleSymbolicName =
 					bundleSymbolicNameObject.toString();
 			}
 
-			String incomingBundleBaseName = null;
+			String bundleBaseName = null;
 
 			Object bundleBaseNameObject = serviceReference.getProperty(
 				"resource.bundle.base.name");
 
 			if (bundleBaseNameObject == null) {
-				incomingBundleBaseName = "content.Language";
+				bundleBaseName = "content.Language";
 			}
 			else {
-				incomingBundleBaseName = bundleBaseNameObject.toString();
+				bundleBaseName = bundleBaseNameObject.toString();
 			}
 
-			if (_bundleSymbolicName.equals(incomingBundleSymbolicName) &&
-				_baseName.equals(incomingBundleBaseName)) {
+			if (_bundleSymbolicName.equals(bundleSymbolicName) &&
+				_baseName.equals(bundleBaseName)) {
 
 				if (_limit <= serviceRanking) {
 					return false;
