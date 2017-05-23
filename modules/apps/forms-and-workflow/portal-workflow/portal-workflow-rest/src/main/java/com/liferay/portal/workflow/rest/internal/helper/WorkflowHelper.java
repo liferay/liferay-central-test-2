@@ -197,16 +197,12 @@ public class WorkflowHelper {
 
 		String message = "";
 
-		long auditUserId = workflowLog.getAuditUserId();
-		long userId = workflowLog.getUserId();
-		long roleId = workflowLog.getRoleId();
-
 		String auditUserName = getAuditUserName(workflowLog);
 
-		if (userId != 0) {
-			User user = _userLocalService.getUser(userId);
+		if (workflowLog.getUserId() != 0) {
+			User user = _userLocalService.getUser(workflowLog.getUserId());
 
-			if (auditUserId == userId) {
+			if (workflowLog.getAuditUserId() == workflowLog.getUserId()) {
 				if (user.isMale()) {
 					message = LanguageUtil.format(
 						locale, "x-assigned-the-task-to-himself",
@@ -219,8 +215,8 @@ public class WorkflowHelper {
 				}
 			}
 		}
-		else if (roleId != 0) {
-			Role role = _roleLocalService.getRole(roleId);
+		else if (workflowLog.getRoleId() != 0) {
+			Role role = _roleLocalService.getRole(workflowLog.getRoleId());
 
 			message = LanguageUtil.format(
 				locale, "x-assigned-the-task-to-the-x-role",
