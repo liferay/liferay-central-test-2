@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.comment.WorkflowableComment;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.ratings.kernel.model.RatingsEntry;
 import com.liferay.ratings.kernel.model.RatingsStats;
+import com.liferay.ratings.kernel.service.persistence.RatingsStatsUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -105,7 +106,7 @@ public class MBDiscussionCommentImpl
 			}
 		}
 
-		return null;
+		return RatingsStatsUtil.create(0);
 	}
 
 	/**
