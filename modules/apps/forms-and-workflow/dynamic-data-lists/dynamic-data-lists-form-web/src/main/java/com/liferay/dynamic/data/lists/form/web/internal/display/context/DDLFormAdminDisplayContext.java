@@ -274,6 +274,8 @@ public class DDLFormAdminDisplayContext {
 			return serializedFormBuilderContext;
 		}
 
+		JSONSerializer jsonSerializer = _jsonFactory.createJSONSerializer();
+
 		Optional<DDLRecordSet> recordSetOptional = Optional.ofNullable(
 			getRecordSet());
 
@@ -287,18 +289,16 @@ public class DDLFormAdminDisplayContext {
 		Map<String, Object> formBuilderContext =
 			ddlFormBuilderContextFactory.create();
 
-		JSONSerializer jsonSerializer = _jsonFactory.createJSONSerializer();
-
 		return jsonSerializer.serializeDeep(formBuilderContext);
 	}
 
 	public String getFormDescription() throws PortalException {
-		ThemeDisplay themeDisplay =
-			_ddlFormAdminRequestHelper.getThemeDisplay();
-
 		DDLRecordSet recordSet = getRecordSet();
 
 		if (recordSet != null) {
+			ThemeDisplay themeDisplay =
+				_ddlFormAdminRequestHelper.getThemeDisplay();
+
 			return LocalizationUtil.getLocalization(
 				recordSet.getDescription(), themeDisplay.getLanguageId());
 		}
@@ -307,9 +307,9 @@ public class DDLFormAdminDisplayContext {
 	}
 
 	public String getFormLocalizedDescription() throws PortalException {
-		DDLRecordSet recordSet = getRecordSet();
-
 		JSONObject jsonObject = _jsonFactory.createJSONObject();
+
+		DDLRecordSet recordSet = getRecordSet();
 
 		if (recordSet == null) {
 			jsonObject.put(getDefaultLanguageId(), "");
@@ -327,9 +327,9 @@ public class DDLFormAdminDisplayContext {
 	}
 
 	public String getFormLocalizedName() throws PortalException {
-		DDLRecordSet recordSet = getRecordSet();
-
 		JSONObject jsonObject = _jsonFactory.createJSONObject();
+
+		DDLRecordSet recordSet = getRecordSet();
 
 		if (recordSet == null) {
 			jsonObject.put(getDefaultLanguageId(), "");
@@ -347,12 +347,12 @@ public class DDLFormAdminDisplayContext {
 	}
 
 	public String getFormName() throws PortalException {
-		ThemeDisplay themeDisplay =
-			_ddlFormAdminRequestHelper.getThemeDisplay();
-
 		DDLRecordSet recordSet = getRecordSet();
 
 		if (recordSet != null) {
+			ThemeDisplay themeDisplay =
+				_ddlFormAdminRequestHelper.getThemeDisplay();
+
 			return LocalizationUtil.getLocalization(
 				recordSet.getName(), themeDisplay.getLanguageId());
 		}
@@ -365,9 +365,9 @@ public class DDLFormAdminDisplayContext {
 	}
 
 	public String getFormURL(DDLRecordSet recordSet) throws PortalException {
-		DDLRecordSetSettings recordSetSettings = recordSet.getSettingsModel();
-
 		String formURL = null;
+
+		DDLRecordSetSettings recordSetSettings = recordSet.getSettingsModel();
 
 		if (recordSetSettings.requireAuthentication()) {
 			formURL = getRestrictedFormURL();
