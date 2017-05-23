@@ -379,7 +379,7 @@ public class EditUserMVCActionCommand extends BaseMVCActionCommand {
 						redirect, themeDisplay.getI18nPath(), i18nPath);
 				}
 
-				redirect = _http.setParameter(
+				redirect = http.setParameter(
 					redirect, actionResponse.getNamespace() + "p_u_i_d",
 					user.getUserId());
 			}
@@ -390,8 +390,8 @@ public class EditUserMVCActionCommand extends BaseMVCActionCommand {
 				(userLocalService.fetchUserById(scopeGroup.getClassPK()) ==
 					null)) {
 
-				redirect = _http.setParameter(redirect, "doAsGroupId", 0);
-				redirect = _http.setParameter(redirect, "refererPlid", 0);
+				redirect = http.setParameter(redirect, "doAsGroupId", 0);
+				redirect = http.setParameter(redirect, "refererPlid", 0);
 			}
 
 			sendRedirect(actionRequest, actionResponse, redirect);
@@ -462,7 +462,7 @@ public class EditUserMVCActionCommand extends BaseMVCActionCommand {
 					if (submittedPassword) {
 						User user = portal.getSelectedUser(actionRequest);
 
-						redirect = _http.setParameter(
+						redirect = http.setParameter(
 							redirect, actionResponse.getNamespace() + "p_u_i_d",
 							user.getUserId());
 					}
@@ -813,6 +813,9 @@ public class EditUserMVCActionCommand extends BaseMVCActionCommand {
 	}
 
 	@Reference
+	protected Http http;
+
+	@Reference
 	protected Portal portal;
 
 	protected UserLocalService userLocalService;
@@ -820,10 +823,6 @@ public class EditUserMVCActionCommand extends BaseMVCActionCommand {
 	private AnnouncementsDeliveryLocalService
 		_announcementsDeliveryLocalService;
 	private DLAppLocalService _dlAppLocalService;
-
-	@Reference
-	private Http _http;
-
 	private ListTypeLocalService _listTypeLocalService;
 	private UserService _userService;
 
