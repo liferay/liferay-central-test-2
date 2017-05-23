@@ -72,7 +72,18 @@ public class CalendarDisplayContext {
 				}
 			}
 
-			if ((defaultCalendar == null) && !groupCalendars.isEmpty()) {
+			if (defaultCalendar == null) {
+	 			for (Calendar groupCalendar : groupCalendars) {
+	 				if (CalendarPermission.contains(
+	 						_themeDisplay.getPermissionChecker(), groupCalendar,
+	 						CalendarActionKeys.MANAGE_BOOKINGS)) {
+	 
+	 					defaultCalendar = groupCalendar;
+	 				}
+	 			}
+	 		}
+	 
+	 		if (defaultCalendar == null) {
 				for (Calendar groupCalendar : groupCalendars) {
 					if (groupCalendar.isDefaultCalendar() &&
 						CalendarPermission.contains(
