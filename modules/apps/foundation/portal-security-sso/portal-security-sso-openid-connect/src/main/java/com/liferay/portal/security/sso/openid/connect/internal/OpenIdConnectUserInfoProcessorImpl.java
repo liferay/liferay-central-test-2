@@ -65,20 +65,20 @@ public class OpenIdConnectUserInfoProcessorImpl
 		if (Validator.isNull(firstName) || Validator.isNull(lastName) ||
 			Validator.isNull(emailAddress)) {
 
-			StringBundler message = new StringBundler(7);
+			StringBundler sb = new StringBundler(9);
 
-			message.append(
-				"Unable to map OpenId Connect user to the portal, missing or " +
-					"invalid profile information: firstName(");
-			message.append(firstName);
-			message.append(") lastName(");
-			message.append(lastName);
-			message.append(") emailAddresss(");
-			message.append(emailAddress);
-			message.append(")");
+			sb.append("Unable to map OpenId Connect user to the portal, ");
+			sb.append("missing or invalid profile information: ");
+			sb.append("{emailAddresss=");
+			sb.append(emailAddress);
+			sb.append(", firstName=");
+			sb.append(firstName);
+			sb.append(", lastName=");
+			sb.append(lastName);
+			sb.append("}");
 
 			throw new OpenIdConnectServiceException.UserMappingException(
-				message.toString());
+				sb.toString());
 		}
 
 		long creatorUserId = 0;

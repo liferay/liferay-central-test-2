@@ -285,7 +285,7 @@ public class OpenIdConnectServiceHandlerImpl
 		}
 		catch (URISyntaxException urise) {
 			throw new SystemException(
-				"Error generating OpenId Connect login redirect URI", urise);
+				"Unable to generate OpenId Connect login redirect URI", urise);
 		}
 	}
 
@@ -312,7 +312,7 @@ public class OpenIdConnectServiceHandlerImpl
 		if (Validator.isNull(openIdConnectSession)) {
 			throw new OpenIdConnectServiceException.
 				NoOpenIdConnectSessionException(
-					"HttpSession does not hold an OpenId Connect session");
+					"HTTP session does contain an OpenId Connect session");
 		}
 
 		return openIdConnectSession;
@@ -349,9 +349,9 @@ public class OpenIdConnectServiceHandlerImpl
 		long userId = _openIdConnectUserInfoProcessor.processUserInfo(
 			userInfo, companyId);
 
-		openIdConnectSession.setUserInfo(userInfo);
-
 		openIdConnectSession.setLoginUserId(userId);
+
+		openIdConnectSession.setUserInfo(userInfo);
 	}
 
 	protected boolean refreshAuthToken(
@@ -480,11 +480,11 @@ public class OpenIdConnectServiceHandlerImpl
 		}
 		catch (IOException ioe) {
 			throw new OpenIdConnectServiceException.TokenException(
-				"Unable to get Tokens", ioe);
+				"Unable to get tokens", ioe);
 		}
 		catch (ParseException pe) {
 			throw new OpenIdConnectServiceException.TokenException(
-				"Unable to parse Token Response", pe);
+				"Unable to parse tokens response", pe);
 		}
 	}
 
@@ -522,11 +522,11 @@ public class OpenIdConnectServiceHandlerImpl
 		}
 		catch (IOException ioe) {
 			throw new OpenIdConnectServiceException.UserInfoException(
-				"Request for UserInfo failed", ioe);
+				"Unable to get user information", ioe);
 		}
 		catch (ParseException pe) {
 			throw new OpenIdConnectServiceException.UserInfoException(
-				"Unable to parse UserInfo response", pe);
+				"Unable to parse user information response", pe);
 		}
 	}
 
@@ -543,9 +543,9 @@ public class OpenIdConnectServiceHandlerImpl
 
 		if (!state.equals(requestedState)) {
 			throw new OpenIdConnectServiceException.AuthenticationException(
-				"Requested (" + requestedState.getValue() +
-					") and approved state (" + state.getValue() +
-						") do not match");
+				"Requested value \"" + requestedState.getValue() +
+					"\" and approved state \"" + state.getValue() +
+						"\" do not match");
 		}
 	}
 
