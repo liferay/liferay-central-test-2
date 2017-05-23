@@ -98,11 +98,10 @@ public class LanguageExtension implements Extension {
 			Object baseName = attributes.get("resource.bundle.base.name");
 
 			if (aggregate instanceof String) {
-				Object serviceRankingAttribute = attributes.get(
+				Object serviceRankingObject = attributes.get(
 					"service.ranking");
 
-				int serviceRanking = _safeServiceRanking(
-					serviceRankingAttribute);
+				int serviceRanking = _safeServiceRanking(serviceRankingObject);
 
 				resourceBundleLoader = processAggregate(
 					(String)aggregate, bundleSymbolicName, (String)baseName,
