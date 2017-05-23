@@ -312,8 +312,7 @@ public class LanguageExtension implements Extension {
 				bundleSymbolicName = bundle.getSymbolicName();
 			}
 			else {
-				bundleSymbolicName =
-					bundleSymbolicNameObject.toString();
+				bundleSymbolicName = bundleSymbolicNameObject.toString();
 			}
 
 			String bundleBaseName = null;
