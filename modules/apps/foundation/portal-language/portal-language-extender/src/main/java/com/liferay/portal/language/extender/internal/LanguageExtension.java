@@ -301,10 +301,6 @@ public class LanguageExtension implements Extension {
 		public boolean test(
 			ServiceReference<ResourceBundleLoader> serviceReference) {
 
-			int serviceRanking = GetterUtil.getInteger(
-				serviceReference.getProperty("service.ranking"),
-				Integer.MIN_VALUE);
-
 			String bundleSymbolicName = null;
 
 			Object bundleSymbolicNameObject = serviceReference.getProperty(
@@ -334,6 +330,10 @@ public class LanguageExtension implements Extension {
 
 			if (_bundleSymbolicName.equals(bundleSymbolicName) &&
 				_baseName.equals(bundleBaseName)) {
+
+				int serviceRanking = GetterUtil.getInteger(
+					serviceReference.getProperty("service.ranking"),
+					Integer.MIN_VALUE);
 
 				if (_limit <= serviceRanking) {
 					return false;
