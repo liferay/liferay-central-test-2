@@ -293,10 +293,10 @@ public class LanguageExtension implements Extension {
 		implements Predicate<ServiceReference<ResourceBundleLoader>> {
 
 		public ResourceBundleLoaderPredicate(
-			String bundleSymbolicName, String bundleName, int limit) {
+			String bundleSymbolicName, String baseName, int limit) {
 
 			_bundleSymbolicName = bundleSymbolicName;
-			_bundleName = bundleName;
+			_baseName = baseName;
 			_limit = limit;
 		}
 
@@ -337,7 +337,7 @@ public class LanguageExtension implements Extension {
 			}
 
 			if (_bundleSymbolicName.equals(incomingBundleSymbolicName) &&
-				_bundleName.equals(incomingBundleBaseName)) {
+				_baseName.equals(incomingBundleBaseName)) {
 
 				if (_limit <= serviceRanking) {
 					return false;
@@ -347,7 +347,7 @@ public class LanguageExtension implements Extension {
 			return true;
 		}
 
-		private final String _bundleName;
+		private final String _baseName;
 		private final String _bundleSymbolicName;
 		private final int _limit;
 
