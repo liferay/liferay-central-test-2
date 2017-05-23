@@ -12,6 +12,4 @@ dependencies {
 	provided group: "com.liferay", name: "com.liferay.users.admin.demo.data.creator.impl", version: "1.0.6"
 }
 
-if (!project.hasProperty("DEMO")) {
-	deploy.enabled = false
-}
+deploy.enabled = false
