@@ -48,54 +48,54 @@ public class CalendarDisplayContext {
 		_calendarLocalService = calendarLocalService;
 		_themeDisplay = themeDisplay;
 	}
-	
+
 	public Calendar getDefaultCalendar(
-			List<Calendar> groupCalendars, List<Calendar> userCalendars) {
+		List<Calendar> groupCalendars, List<Calendar> userCalendars) {
 
-			Calendar defaultCalendar = null;
+		Calendar defaultCalendar = null;
 
+		for (Calendar groupCalendar : groupCalendars) {
+			if (groupCalendar.isDefaultCalendar() &&
+				CalendarPermission.contains(
+					_themeDisplay.getPermissionChecker(), groupCalendar,
+					CalendarActionKeys.MANAGE_BOOKINGS)) {
+
+				defaultCalendar = groupCalendar;
+			}
+		}
+
+		if (defaultCalendar == null) {
+			for (Calendar userCalendar : userCalendars) {
+				if (userCalendar.isDefaultCalendar()) {
+					defaultCalendar = userCalendar;
+				}
+			}
+		}
+
+		if (defaultCalendar == null) {
 			for (Calendar groupCalendar : groupCalendars) {
-				if (groupCalendar.isDefaultCalendar() &&
-					CalendarPermission.contains(
+				if (CalendarPermission.contains(
 						_themeDisplay.getPermissionChecker(), groupCalendar,
 						CalendarActionKeys.MANAGE_BOOKINGS)) {
 
 					defaultCalendar = groupCalendar;
 				}
 			}
+		}
 
-			if (defaultCalendar == null) {
-				for (Calendar userCalendar : userCalendars) {
-					if (userCalendar.isDefaultCalendar()) {
-						defaultCalendar = userCalendar;
-					}
+		if (defaultCalendar == null) {
+			for (Calendar groupCalendar : groupCalendars) {
+				if (groupCalendar.isDefaultCalendar() &&
+					CalendarPermission.contains(
+						_themeDisplay.getPermissionChecker(), groupCalendar,
+						CalendarActionKeys.VIEW_BOOKING_DETAILS)) {
+
+					defaultCalendar = groupCalendar;
 				}
 			}
+		}
 
-			if (defaultCalendar == null) {
-	 			for (Calendar groupCalendar : groupCalendars) {
-	 				if (CalendarPermission.contains(
-	 						_themeDisplay.getPermissionChecker(), groupCalendar,
-	 						CalendarActionKeys.MANAGE_BOOKINGS)) {
-	 
-	 					defaultCalendar = groupCalendar;
-	 				}
-	 			}
-	 		}
-	 
-	 		if (defaultCalendar == null) {
-				for (Calendar groupCalendar : groupCalendars) {
-					if (groupCalendar.isDefaultCalendar() &&
-						CalendarPermission.contains(
-							_themeDisplay.getPermissionChecker(), groupCalendar,
-							CalendarActionKeys.VIEW_BOOKING_DETAILS)) {
-
-						defaultCalendar = groupCalendar;
-					}
-				}
-			}
-
-			return defaultCalendar;
+		return defaultCalendar;
 	}
 
 	public List<Calendar> getOtherCalendars(User user, long[] calendarIds)
