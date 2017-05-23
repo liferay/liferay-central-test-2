@@ -63,14 +63,14 @@ public class RateEntryAction extends JSONAction {
 			totalScore = stats.getTotalScore();
 		}
 
-		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-		jsonObject.put("averageScore", averageScore);
-		jsonObject.put("score", score);
-		jsonObject.put("totalEntries", totalEntries);
-		jsonObject.put("totalScore", totalScore);
+		jsonObj.put("averageScore", averageScore);
+		jsonObj.put("score", score);
+		jsonObj.put("totalEntries", totalEntries);
+		jsonObj.put("totalScore", totalScore);
 
-		return jsonObject.toString();
+		return jsonObj.toString();
 	}
 
 	protected String getClassName(HttpServletRequest request) {

@@ -41,6 +41,7 @@ request.setAttribute("view_entry_content.jsp-entry", entry);
 request.setAttribute("view_entry_content.jsp-assetEntry", assetEntry);
 
 request.setAttribute("view_entry_content.jsp-ratingsEntry", ratingsEntry);
+
 request.setAttribute("view_entry_content.jsp-ratingsStats", ratingsStats);
 
 portletDisplay.setShowBackIcon(true);
