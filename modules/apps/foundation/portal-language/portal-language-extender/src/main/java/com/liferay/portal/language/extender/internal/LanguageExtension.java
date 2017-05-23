@@ -16,6 +16,7 @@ package com.liferay.portal.language.extender.internal;
 
 import com.liferay.portal.kernel.util.AggregateResourceBundle;
 import com.liferay.portal.kernel.util.CacheResourceBundleLoader;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ResourceBundleLoader;
 import com.liferay.portal.kernel.util.ResourceBundleUtil;
@@ -101,7 +102,8 @@ public class LanguageExtension implements Extension {
 				Object serviceRankingObject = attributes.get(
 					"service.ranking");
 
-				int serviceRanking = _safeServiceRanking(serviceRankingObject);
+				int serviceRanking = GetterUtil.getInteger(
+					serviceRankingObject, Integer.MIN_VALUE);
 
 				resourceBundleLoader = processAggregate(
 					(String)aggregate, bundleSymbolicName, (String)baseName,
@@ -187,15 +189,6 @@ public class LanguageExtension implements Extension {
 		_serviceRegistrations.add(
 			_bundleContext.registerService(
 				ResourceBundleLoader.class, resourceBundleLoader, properties));
-	}
-
-	private int _safeServiceRanking(Object serviceRankingObject) {
-		try {
-			return Integer.parseInt(serviceRankingObject.toString());
-		}
-		catch (Exception e) {
-			return Integer.MIN_VALUE;
-		}
 	}
 
 	private final Bundle _bundle;
@@ -321,10 +314,11 @@ public class LanguageExtension implements Extension {
 		public boolean test(
 			ServiceReference<ResourceBundleLoader> serviceReference) {
 
-			Object serviceRankingProperty = serviceReference.getProperty(
+			Object serviceRankingObject = serviceReference.getProperty(
 				"service.ranking");
 
-			int serviceRanking = _safeServiceRanking(serviceRankingProperty);
+			int serviceRanking = GetterUtil.getInteger(
+				serviceRankingObject, Integer.MIN_VALUE);
 
 			Object bundleSymbolicNameObject = serviceReference.getProperty(
 				"bundle.symbolic.name");
