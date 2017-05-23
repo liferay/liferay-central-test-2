@@ -102,12 +102,17 @@ public class RatingsStatsLocalServiceImpl
 	}
 
 	@Override
-	public RatingsStats getStats(String className, long classPK)
-		throws PortalException {
-
+	public RatingsStats getStats(String className, long classPK) {
 		long classNameId = classNameLocalService.getClassNameId(className);
 
-		return ratingsStatsPersistence.findByC_C(classNameId, classPK);
+		RatingsStats stats = ratingsStatsPersistence.fetchByC_C(
+			classNameId, classPK);
+
+		if (stats == null) {
+			stats = ratingsStatsLocalService.addStats(classNameId, classPK);
+		}
+
+		return stats;
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
