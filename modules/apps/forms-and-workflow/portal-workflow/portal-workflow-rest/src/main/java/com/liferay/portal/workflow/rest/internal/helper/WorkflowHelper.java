@@ -243,7 +243,6 @@ public class WorkflowHelper {
 		throws PortalException {
 
 		String userName = getAuditUserName(workflowLog);
-
 		WorkflowTask workflowTask = _workflowTaskManager.getWorkflowTask(
 			companyId, workflowLog.getWorkflowTaskId());
 
