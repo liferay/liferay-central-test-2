@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.service.RoleLocalService;
 import com.liferay.portal.kernel.service.UserLocalService;
 import com.liferay.portal.kernel.service.WorkflowInstanceLinkLocalService;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowHandler;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
@@ -462,10 +463,8 @@ public class WorkflowHelper {
 	}
 
 	protected String quote(String userName) {
-		return _EMPHASIS_TOKEN + userName + _EMPHASIS_TOKEN;
+		return StringUtil.quote(userName, "%~{}~%");
 	}
-
-	private static final String _EMPHASIS_TOKEN = "%~{}~%";
 
 	@Reference
 	private ClassNameLocalService _classNameLocalService;
