@@ -99,11 +99,8 @@ public class LanguageExtension implements Extension {
 			Object baseName = attributes.get("resource.bundle.base.name");
 
 			if (aggregate instanceof String) {
-				Object serviceRankingObject = attributes.get(
-					"service.ranking");
-
 				int serviceRanking = GetterUtil.getInteger(
-					serviceRankingObject, Integer.MIN_VALUE);
+					attributes.get("service.ranking"), Integer.MIN_VALUE);
 
 				resourceBundleLoader = processAggregate(
 					(String)aggregate, bundleSymbolicName, (String)baseName,
@@ -315,11 +312,9 @@ public class LanguageExtension implements Extension {
 		public boolean test(
 			ServiceReference<ResourceBundleLoader> serviceReference) {
 
-			Object serviceRankingObject = serviceReference.getProperty(
-				"service.ranking");
-
 			int serviceRanking = GetterUtil.getInteger(
-				serviceRankingObject, Integer.MIN_VALUE);
+				serviceReference.getProperty("service.ranking"),
+				Integer.MIN_VALUE);
 
 			Object bundleSymbolicNameObject = serviceReference.getProperty(
 				"bundle.symbolic.name");
