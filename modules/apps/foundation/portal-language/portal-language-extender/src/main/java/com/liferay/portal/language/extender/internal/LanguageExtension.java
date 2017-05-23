@@ -316,12 +316,10 @@ public class LanguageExtension implements Extension {
 				serviceReference.getProperty("service.ranking"),
 				Integer.MIN_VALUE);
 
+			String incomingBundleSymbolicName = null;
+
 			Object bundleSymbolicNameObject = serviceReference.getProperty(
 				"bundle.symbolic.name");
-			Object bundleBaseNameObject = serviceReference.getProperty(
-				"resource.bundle.base.name");
-
-			String incomingBundleSymbolicName;
 
 			if (bundleSymbolicNameObject == null) {
 				Bundle incomingBundle = serviceReference.getBundle();
@@ -333,7 +331,10 @@ public class LanguageExtension implements Extension {
 					bundleSymbolicNameObject.toString();
 			}
 
-			String incomingBundleBaseName;
+			String incomingBundleBaseName = null;
+
+			Object bundleBaseNameObject = serviceReference.getProperty(
+				"resource.bundle.base.name");
 
 			if (bundleBaseNameObject == null) {
 				incomingBundleBaseName = "content.Language";
