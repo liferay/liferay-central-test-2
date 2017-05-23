@@ -319,29 +319,24 @@ public class WorkflowHelper {
 			String assetType, Locale locale)
 		throws PortalException {
 
-		int type = workflowLog.getType();
 		String message = "";
 		String details = "";
 
 		if (index == 0) {
 			message = getSubmissionForPublicationMessage(
 				workflowLog, assetType, locale);
-
 			details = getSubmissionForPublicationDetails(workflowLog, locale);
 		}
-		else if (type == WorkflowLog.TASK_ASSIGN) {
+		else if (workflowLog.getType() == WorkflowLog.TASK_ASSIGN) {
 			message = getAssignmentMessage(workflowLog, locale);
-
 			details = getAssignmentDetails(workflowLog);
 		}
-		else if (type == WorkflowLog.TASK_COMPLETION) {
+		else if (workflowLog.getType() == WorkflowLog.TASK_COMPLETION) {
 			message = getCompletionMessage(companyId, workflowLog, locale);
-
 			details = getCompletionDetails(workflowLog);
 		}
-		else if (type == WorkflowLog.TASK_UPDATE) {
+		else if (workflowLog.getType() == WorkflowLog.TASK_UPDATE) {
 			message = getUpdateMessage(workflowLog, locale);
-
 			details = getUpdateDetails(workflowLog);
 		}
 
