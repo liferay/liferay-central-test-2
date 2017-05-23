@@ -136,15 +136,15 @@ public class WorkflowHelper {
 			long companyId, long workflowTaskId, boolean oldestFirst)
 		throws PortalException {
 
+		WorkflowInstance workflowInstance = getWorkflowInstance(
+			companyId, workflowTaskId);
+
 		List<Integer> logTypes = new ArrayList<>();
 
 		logTypes.add(WorkflowLog.TASK_ASSIGN);
 		logTypes.add(WorkflowLog.TASK_COMPLETION);
 		logTypes.add(WorkflowLog.TASK_UPDATE);
 		logTypes.add(WorkflowLog.TRANSITION);
-
-		WorkflowInstance workflowInstance = getWorkflowInstance(
-			companyId, workflowTaskId);
 
 		return _workflowLogManager.getWorkflowLogsByWorkflowInstance(
 			companyId, workflowInstance.getWorkflowInstanceId(), logTypes,
