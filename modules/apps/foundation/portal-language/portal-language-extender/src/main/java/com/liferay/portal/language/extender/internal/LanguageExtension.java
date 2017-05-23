@@ -77,14 +77,16 @@ public class LanguageExtension implements Extension {
 		BundleWiring bundleWiring = _bundle.adapt(BundleWiring.class);
 
 		for (BundleCapability capability : _bundleCapabilities) {
+			ResourceBundleLoader resourceBundleLoader = null;
+
 			Map<String, Object> attributes = capability.getAttributes();
 
 			Object aggregate = attributes.get("resource.bundle.aggregate");
-			Object baseName = attributes.get("resource.bundle.base.name");
+
+			String bundleSymbolicName = null;
+
 			Object bundleSymbolicNameObject = attributes.get(
 				"bundle.symbolic.name");
-
-			String bundleSymbolicName;
 
 			if (Validator.isNull(bundleSymbolicNameObject)) {
 				bundleSymbolicName = _bundle.getSymbolicName();
@@ -93,7 +95,7 @@ public class LanguageExtension implements Extension {
 				bundleSymbolicName = bundleSymbolicNameObject.toString();
 			}
 
-			ResourceBundleLoader resourceBundleLoader = null;
+			Object baseName = attributes.get("resource.bundle.base.name");
 
 			if (aggregate instanceof String) {
 				Object serviceRankingAttribute = attributes.get(
