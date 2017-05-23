@@ -695,6 +695,12 @@ public abstract class BaseWorkflowTaskManagerTestCase {
 		PrincipalThreadLocal.setName(TestPropsValues.getUserId());
 	}
 
+	protected int searchCount(String keywords) throws Exception {
+		return WorkflowTaskManagerUtil.searchCount(
+			adminUser.getCompanyId(), adminUser.getUserId(), keywords, null,
+			false, true);
+	}
+
 	protected void setUpUsers() throws Exception {
 		adminUser = createUser(RoleConstants.ADMINISTRATOR);
 
