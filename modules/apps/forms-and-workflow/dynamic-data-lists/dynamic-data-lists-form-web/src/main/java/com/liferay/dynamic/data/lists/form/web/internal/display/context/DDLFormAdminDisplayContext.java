@@ -740,7 +740,7 @@ public class DDLFormAdminDisplayContext {
 				new Locale[availableLocales.size()]);
 		}
 		catch (PortalException pe) {
-			_log.error(pe);
+			_log.error(pe, pe);
 
 			return null;
 		}
@@ -759,7 +759,7 @@ public class DDLFormAdminDisplayContext {
 			return LocaleUtil.toLanguageId(ddmForm.getDefaultLocale());
 		}
 		catch (PortalException pe) {
-			_log.error(pe);
+			_log.error(pe, pe);
 
 			return null;
 		}
