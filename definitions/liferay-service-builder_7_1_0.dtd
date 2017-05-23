@@ -337,7 +337,7 @@ primary key of a parent container model.
 <!--
 The localized-entity element represents a table with a one to many mapping from
 the entity table to the localized entity table. The localized entity table is
-designed to be used instead of setting column element's localized attribute to
+designed to be used instead of setting a column element's localized attribute to
 true. A defaultLanguageId column is generated for the entity table and several
 columns, finders, and update methods are generated for the localized entity.
 -->
