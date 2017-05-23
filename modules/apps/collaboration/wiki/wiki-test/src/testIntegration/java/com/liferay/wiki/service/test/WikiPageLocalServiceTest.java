@@ -451,7 +451,7 @@ public class WikiPageLocalServiceTest {
 	}
 
 	@Test
-	public void testRenameNotDefaultVersionPageWithAssetCategories()
+	public void testRenameNonDefaultVersionPageWithAssetCategories()
 		throws Exception {
 
 		ServiceContext serviceContext =
@@ -497,7 +497,7 @@ public class WikiPageLocalServiceTest {
 	}
 
 	@Test
-	public void testRenameNotDefaultVersionPageWithAssetTags()
+	public void testRenameNonDefaultVersionPageWithAssetTags()
 		throws Exception {
 
 		ServiceContext serviceContext =
