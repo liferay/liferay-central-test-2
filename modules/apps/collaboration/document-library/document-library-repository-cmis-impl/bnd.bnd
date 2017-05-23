@@ -27,6 +27,7 @@ Import-Package:\
 	!org.relaxng.datatype.*,\
 	\
 	com.liferay.portal.kernel.repository.model;version="[7.0.0,8.0.0)",\
+	\
 	*
 Liferay-Releng-Module-Group-Description:
 Liferay-Releng-Module-Group-Title: Document Library
