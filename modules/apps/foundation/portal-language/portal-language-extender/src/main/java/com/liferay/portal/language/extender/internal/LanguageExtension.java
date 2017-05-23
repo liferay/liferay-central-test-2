@@ -57,14 +57,12 @@ public class LanguageExtension implements Extension {
 		_bundle = bundle;
 		_bundleCapabilities = bundleCapabilities;
 		_logger = logger;
-
-		_closingHandlers = new ArrayList<>();
 	}
 
 	@Override
 	public void destroy() throws Exception {
-		for (Runnable closingHandler : _closingHandlers) {
-			closingHandler.run();
+		for (Runnable closingRunnable : _closingRunnables) {
+			closingRunnable.run();
 		}
 
 		for (ServiceRegistration<ResourceBundleLoader> serviceRegistration :
@@ -156,7 +154,7 @@ public class LanguageExtension implements Extension {
 
 			serviceTracker.open();
 
-			_closingHandlers.add(serviceTracker::close);
+			_closingRunnables.add(serviceTracker::close);
 
 			serviceTrackers.add(serviceTracker);
 		}
@@ -202,7 +200,7 @@ public class LanguageExtension implements Extension {
 	private final Bundle _bundle;
 	private final List<BundleCapability> _bundleCapabilities;
 	private final BundleContext _bundleContext;
-	private final ArrayList<Runnable> _closingHandlers;
+	private final List<Runnable> _closingRunnables = new ArrayList<>();
 	private final Logger _logger;
 	private final Collection<ServiceRegistration<ResourceBundleLoader>>
 		_serviceRegistrations = new ArrayList<>();
