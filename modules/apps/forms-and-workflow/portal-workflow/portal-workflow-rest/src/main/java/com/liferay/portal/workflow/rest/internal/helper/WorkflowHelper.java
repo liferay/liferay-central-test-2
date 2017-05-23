@@ -319,6 +319,8 @@ public class WorkflowHelper {
 			String assetType, Locale locale)
 		throws PortalException {
 
+		Date createDate = workflowLog.getCreateDate();
+
 		String message = "";
 		String details = "";
 
@@ -339,8 +341,6 @@ public class WorkflowHelper {
 			message = getUpdateMessage(workflowLog, locale);
 			details = getUpdateDetails(workflowLog);
 		}
-
-		Date createDate = workflowLog.getCreateDate();
 
 		return new WorkflowActivityModel(
 			createDate.getTime(), message, details);
