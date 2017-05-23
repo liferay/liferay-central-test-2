@@ -265,6 +265,7 @@ public class LanguageExtension implements Extension {
 			Predicate<ServiceReference<ResourceBundleLoader>> predicate) {
 
 			super(_bundleContext, filter, null);
+
 			_predicate = predicate;
 		}
 
@@ -283,7 +284,7 @@ public class LanguageExtension implements Extension {
 		@Override
 		public void modifiedService(
 			ServiceReference<ResourceBundleLoader> serviceReference,
-			ResourceBundleLoader service) {
+			ResourceBundleLoader resourceBundleLoader) {
 
 			if (!_predicate.test(serviceReference)) {
 				_bundleContext.ungetService(serviceReference);
@@ -291,7 +292,7 @@ public class LanguageExtension implements Extension {
 				remove(serviceReference);
 			}
 
-			super.modifiedService(serviceReference, service);
+			super.modifiedService(serviceReference, resourceBundleLoader);
 		}
 
 		private final Predicate<ServiceReference<ResourceBundleLoader>>
