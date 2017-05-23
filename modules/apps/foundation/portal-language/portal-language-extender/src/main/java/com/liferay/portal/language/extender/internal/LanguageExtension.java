@@ -134,11 +134,11 @@ public class LanguageExtension implements Extension {
 			serviceTrackers = new ArrayList<>(filterStrings.length);
 
 		for (String filterString : filterStrings) {
+			Filter filter = null;
+
 			filterString =
 				"(&(objectClass=" + ResourceBundleLoader.class.getName() + ")" +
 					filterString + ")";
-
-			Filter filter = null;
 
 			try {
 				filter = _bundleContext.createFilter(filterString);
