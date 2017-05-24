@@ -626,7 +626,7 @@ information.
 					</exec>
 				</then>
 				<else>
-					<echo>SKIPPED: Unavailable task @{task}</echo>
+					<echo>Skipped unavailable task: @{task}.</echo>
 				</else>
 			</if>
 		</sequential>
