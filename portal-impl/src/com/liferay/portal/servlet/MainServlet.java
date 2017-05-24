@@ -248,15 +248,15 @@ public class MainServlet extends ActionServlet {
 
 			TimeZone timeZone = TimeZone.getDefault();
 
-			String jvmTimeZone = timeZone.getID();
+			String timeZoneID = timeZone.getID();
 
-			if (!Objects.equals("UTC", jvmTimeZone) &&
-				!Objects.equals("GMT", jvmTimeZone)) {
+			if (!Objects.equals("UTC", timeZoneID) &&
+				!Objects.equals("GMT", timeZoneID)) {
 
 				StringBundler sb = new StringBundler(4);
 
 				sb.append("The default JVM time zone \"");
-				sb.append(jvmTimeZone);
+				sb.append(timeZoneID);
 				sb.append("\" is not UTC or GMT. Please review the JVM ");
 				sb.append("property \"user.timezone\".");
 
