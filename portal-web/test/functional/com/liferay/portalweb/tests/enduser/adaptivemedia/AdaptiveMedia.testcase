@@ -571,4 +571,107 @@
 			<var name="imageName" value="This should not appear on new virtual instance" />
 		</execute>
 	</command>
+
+	<command name="ViewNumberOfAdaptedImagesAfterAdaptingImages" priority="5">
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="Adaptive Media" />
+		</execute>
+
+		<execute macro="AdaptiveMedia#addImageResolution">
+			<var name="imageName" value="Low Resolution" />
+			<var name="maxHeight" value="480" />
+			<var name="maxWidth" value="320" />
+		</execute>
+
+		<execute macro="AdaptiveMedia#viewImageResolutionTableEntry">
+			<var name="imageName" value="Low Resolution" />
+			<var name="maxHeight" value="480" />
+			<var name="maxWidth" value="320" />
+			<var name="percentAdapted" value="0" />
+		</execute>
+
+		<for list="1,2" param="entryCount" >
+			<execute macro="ProductMenu#gotoSitesContent">
+				<var name="portlet" value="Documents and Media" />
+			</execute>
+
+			<execute macro="DMDocument#addCP">
+				<var name="dmDocumentDescription" value="DM Document Description" />
+				<var name="dmDocumentFile" value="Document_${entryCount}.jpg" />
+				<var name="dmDocumentTitle" value="Document_${entryCount}.jpg" />
+			</execute>
+		</for>
+
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="Adaptive Media" />
+		</execute>
+
+		<execute macro="AdaptiveMedia#adaptRemainingImages">
+			<var name="imageName" value="Low Resolution" />
+			<var name="percentAdapted" value="100" />
+		</execute>
+
+		<execute macro="AdaptiveMedia#disableImageResolution">
+			<var name="imageName" value="Low Resolution" />
+			<var name="imageState" value="Disabled" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoControlPanelSites">
+			<var name="portlet" value="Sites" />
+		</execute>
+
+		<execute macro="Site#addBlankCP">
+			<var name="siteName" value="New Site" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="New Site" />
+		</execute>
+
+		<for list="1,2" param="entryCount" >
+			<execute macro="ProductMenu#gotoSitesContent">
+				<var name="portlet" value="Documents and Media" />
+			</execute>
+
+			<execute macro="DMDocument#addCP">
+				<var name="dmDocumentDescription" value="DM Document Description" />
+				<var name="dmDocumentFile" value="Document_${entryCount}.jpg" />
+				<var name="dmDocumentTitle" value="Document_${entryCount}.jpg" />
+			</execute>
+		</for>
+
+		<execute macro="ProductMenu#gotoSite">
+			<var name="site" value="Liferay" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="Adaptive Media" />
+		</execute>
+
+		<execute macro="AdaptiveMedia#selectAdaptiveMediaImage">
+			<var name="imageName" value="Low Resolution" />
+		</execute>
+
+		<execute macro="AdaptiveMedia#viewNumberOfAdaptedImages">
+			<var name="numberOfAdaptedImages" value="2/4" />
+		</execute>
+
+		<execute macro="AdaptiveMedia#enableImageResolution">
+			<var name="imageName" value="Low Resolution" />
+			<var name="imageState" value="Enabled" />
+		</execute>
+
+		<execute macro="AdaptiveMedia#adaptRemainingImages">
+			<var name="imageName" value="Low Resolution" />
+			<var name="percentAdapted" value="100" />
+		</execute>
+
+		<execute macro="AdaptiveMedia#selectAdaptiveMediaImage">
+			<var name="imageName" value="Low Resolution" />
+		</execute>
+
+		<execute macro="AdaptiveMedia#viewNumberOfAdaptedImages">
+			<var name="numberOfAdaptedImages" value="4/4" />
+		</execute>
+	</command>
 </definition>
