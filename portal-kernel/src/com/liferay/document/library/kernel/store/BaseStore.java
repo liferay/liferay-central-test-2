@@ -99,7 +99,7 @@ public abstract class BaseStore implements Store {
 			throw new SystemException(fnfe);
 		}
 		catch (IOException ioe) {
-			_log.error("Error adding file", ioe);
+			_log.error("Unable to add file", ioe);
 		}
 	}
 
