@@ -302,7 +302,7 @@ public class GroupImpl extends GroupBaseImpl {
 					layoutSet, themeDisplay);
 
 				return PortalUtil.addPreservedParameters(
-					themeDisplay, groupFriendlyURL);
+					themeDisplay, groupFriendlyURL, isUser());
 			}
 		}
 		catch (PortalException pe) {
