@@ -156,7 +156,7 @@ public class DefaultLPKGDeployer implements LPKGDeployer {
 
 			if (lpkgBundle.getState() == Bundle.UNINSTALLED) {
 				if (_log.isInfoEnabled()) {
-					_log.info("Did not deploy outdated LPKG " + lpkgFile);
+					_log.info("Skipped deployment of outdated LPKG " + lpkgFile);
 				}
 
 				return bundles;
