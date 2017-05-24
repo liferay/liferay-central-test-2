@@ -741,16 +741,18 @@ public class JenkinsResultsParserUtil {
 		return getSlaves(getBuildProperties(), masterPatternString);
 	}
 
-	public static void offlineSlaves(
-		String masterHostName, String... nodeNames) {
+	public static String merge(String... strings) {
+		StringBuilder sb = new StringBuilder();
 
-		_setSlaveStatus(masterHostName, true, nodeNames);
-	}
+		for (int i = 0; i < strings.length; i++) {
+			sb.append(strings[i]);
 
-	public static void onlineSlaves(
-		String masterHostName, String... nodeNames) {
+			if (i < (strings.length - 1)) {
+				sb.append(",");
+			}
+		}
 
-		_setSlaveStatus(masterHostName, false, nodeNames);
+		return sb.toString();
 	}
 
 	public static String read(File file) throws IOException {
@@ -864,20 +866,6 @@ public class JenkinsResultsParserUtil {
 		catch (InterruptedException ie) {
 			throw new RuntimeException(ie);
 		}
-	}
-
-	public static String toCommaDelimitedString(String... strings) {
-		StringBuilder sb = new StringBuilder();
-
-		for (int i = 0; i < strings.length; i++) {
-			sb.append(strings[i]);
-
-			if (i < (strings.length - 1)) {
-				sb.append(",");
-			}
-		}
-
-		return sb.toString();
 	}
 
 	public static String toDurationString(long duration) {
@@ -1171,6 +1159,14 @@ public class JenkinsResultsParserUtil {
 			_RETRY_PERIOD_DEFAULT, _TIMEOUT_DEFAULT);
 	}
 
+	public static void turnSlavesOff(String master, String... slaves) {
+		_setSlaveStatus(master, true, slaves);
+	}
+
+	public static void turnSlavesOn(String master, String... slaves) {
+		_setSlaveStatus(master, false, slaves);
+	}
+
 	public static void write(File file, String content) throws IOException {
 		if (debug) {
 			System.out.println(
@@ -1245,32 +1241,28 @@ public class JenkinsResultsParserUtil {
 		return duration;
 	}
 
-	private static void _executeJenkinsScript(
-		String script, String masterHostName) {
-
+	private static void _executeJenkinsScript(String master, String script) {
 		try {
-			String normalizedBuildURL = fixURL(
-				getLocalURL("http://" + masterHostName + "/script"));
-
-			URL urlObject = new URL(normalizedBuildURL);
+			URL urlObject = new URL(
+				fixURL(getLocalURL("http://" + master + "/script")));
 
 			HttpURLConnection httpURLConnection =
 				(HttpURLConnection)urlObject.openConnection();
 
-			Properties buildProperties = getBuildProperties();
-
+			httpURLConnection.setDoOutput(true);
 			httpURLConnection.setRequestMethod("POST");
+
+			Properties buildProperties = getBuildProperties();
 
 			String authorizationString =
 				buildProperties.getProperty("jenkins.admin.user.name") + ":" +
 					buildProperties.getProperty("jenkins.admin.user.token");
 
-			String encodedAuthString = Base64.encodeBase64String(
+			String encodedAuthorizationString = Base64.encodeBase64String(
 				authorizationString.getBytes());
 
-			httpURLConnection.setDoOutput(true);
 			httpURLConnection.setRequestProperty(
-				"Authorization", "Basic " + encodedAuthString);
+				"Authorization", "Basic " + encodedAuthorizationString);
 
 			try (OutputStream outputStream =
 					httpURLConnection.getOutputStream()) {
@@ -1283,12 +1275,12 @@ public class JenkinsResultsParserUtil {
 			httpURLConnection.connect();
 
 			System.out.println(
-				"Response from " + urlObject.toString() + ": " +
+				"Response from " + urlObject + ": " +
 					httpURLConnection.getResponseCode() + " " +
 						httpURLConnection.getResponseMessage());
 		}
 		catch (IOException ioe) {
-			System.out.println("Error occurred while executing script.");
+			System.out.println("Unable to execute Jenkins script");
 		}
 	}
 
@@ -1297,25 +1289,26 @@ public class JenkinsResultsParserUtil {
 	}
 
 	private static void _setSlaveStatus(
-		String masterHostName, boolean offlineStatus, String... nodeNames) {
+		String master, boolean offlineStatus, String... slaves) {
 
 		try {
+			String script = "script=";
+
 			Class<?> clazz = JenkinsResultsParserUtil.class;
 
-			String resource =
-				"script=" +
-					readInputStream(
-						clazz.getResourceAsStream("setSlaveStatus.groovy"));
+			script += readInputStream(
+				clazz.getResourceAsStream(
+					"dependencies/set-slave-status.groovy"));
 
-			resource = resource.replace(
-				"${node.names}", toCommaDelimitedString(nodeNames));
-			resource = resource.replace(
-				"${offline.status}", Boolean.toString(offlineStatus));
+			script = script.replace("${slaves}", merge(slaves));
+			script = script.replace(
+				"${offline.status}", String.valueOf(offlineStatus));
 
-			_executeJenkinsScript(resource, masterHostName);
+			_executeJenkinsScript(master, script);
 		}
 		catch (IOException ioe) {
-			System.out.println("Unable to turn " + nodeNames + " offline.");
+			System.out.println(
+				"Unable to set the status for slaves: " + slaves);
 
 			ioe.printStackTrace();
 		}
