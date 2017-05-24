@@ -79,7 +79,7 @@ public class HtmlContentTransformerImpl implements ContentTransformer<String> {
 	}
 
 	@Reference(unbind = "-")
-	protected void setDlAppLocalService(DLAppLocalService dlAppLocalService) {
+	protected void setDLAppLocalService(DLAppLocalService dlAppLocalService) {
 		_dlAppLocalService = dlAppLocalService;
 	}
 

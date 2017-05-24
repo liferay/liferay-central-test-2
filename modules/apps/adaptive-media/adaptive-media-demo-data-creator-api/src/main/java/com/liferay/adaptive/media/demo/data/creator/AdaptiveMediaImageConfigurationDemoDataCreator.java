@@ -45,12 +45,14 @@ public interface AdaptiveMediaImageConfigurationDemoDataCreator {
 	 *
 	 * @param companyId ID of the company where the configuration will be
 	 * created
-	 * @param configurationVariant the configuration to create
+	 * @param demoAdaptiveMediaImageConfigurationVariant the configuration to
+	 *        create
 	 * @return the configuration
 	 */
 	public AdaptiveMediaImageConfigurationEntry create(
 			long companyId,
-			DemoAdaptiveMediaImageConfigurationVariant configurationVariant)
+			DemoAdaptiveMediaImageConfigurationVariant
+				demoAdaptiveMediaImageConfigurationVariant)
 		throws IOException;
 
 	/**

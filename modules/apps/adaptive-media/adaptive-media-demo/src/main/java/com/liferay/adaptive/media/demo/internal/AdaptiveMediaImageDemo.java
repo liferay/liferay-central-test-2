@@ -66,7 +66,8 @@ public class AdaptiveMediaImageDemo
 			}
 		}
 
-		_configurationDemoDataCreator.create(company.getCompanyId());
+		_adaptiveMediaImageConfigurationDemoDataCreator.create(
+			company.getCompanyId());
 
 		Folder adaptiveMediaFolder = _rootFolderDemoDataCreator.create(
 			user.getUserId(), guestGroup.getGroupId(), "Adaptive Media");
@@ -85,7 +86,7 @@ public class AdaptiveMediaImageDemo
 
 	@Deactivate
 	protected void deactivate() throws IOException, PortalException {
-		_configurationDemoDataCreator.delete();
+		_adaptiveMediaImageConfigurationDemoDataCreator.delete();
 		_fileEntryDemoDataCreator.delete();
 		_rootFolderDemoDataCreator.delete();
 		_omniAdminUserDemoDataCreator.delete();
@@ -101,7 +102,7 @@ public class AdaptiveMediaImageDemo
 
 	@Reference
 	private AdaptiveMediaImageConfigurationDemoDataCreator
-		_configurationDemoDataCreator;
+		_adaptiveMediaImageConfigurationDemoDataCreator;
 
 	@Reference
 	private FileEntryDemoDataCreator _fileEntryDemoDataCreator;

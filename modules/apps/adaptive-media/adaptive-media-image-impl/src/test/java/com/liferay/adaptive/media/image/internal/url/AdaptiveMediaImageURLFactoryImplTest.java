@@ -59,12 +59,13 @@ public class AdaptiveMediaImageURLFactoryImplTest {
 		);
 
 		Mockito.when(
-			_uriResolver.resolveURI(Mockito.any(URI.class))
+			_adaptiveMediaURIResolver.resolveURI(Mockito.any(URI.class))
 		).thenAnswer(
 			invocation -> URI.create("prefix/" + invocation.getArguments()[0])
 		);
 
-		_adaptiveMediaImageURLFactory.setAdaptiveMediaURIResolver(_uriResolver);
+		_adaptiveMediaImageURLFactory.setAdaptiveMediaURIResolver(
+			_adaptiveMediaURIResolver);
 	}
 
 	@Test
@@ -88,14 +89,15 @@ public class AdaptiveMediaImageURLFactoryImplTest {
 
 	private final AdaptiveMediaImageURLFactoryImpl
 		_adaptiveMediaImageURLFactory = new AdaptiveMediaImageURLFactoryImpl();
+
+	@Mock
+	private AdaptiveMediaURIResolver _adaptiveMediaURIResolver;
+
 	private final AdaptiveMediaImageConfigurationEntry _configurationEntry =
 		new AdaptiveMediaImageConfigurationEntryImpl(
 			"small", _UUID, new HashMap<>());
 
 	@Mock
 	private FileVersion _fileVersion;
-
-	@Mock
-	private AdaptiveMediaURIResolver _uriResolver;
 
 }

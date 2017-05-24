@@ -29,6 +29,7 @@ public interface AdaptiveMediaImageSerializer {
 	public AdaptiveMedia<AdaptiveMediaImageProcessor> deserialize(
 		String s, Supplier<InputStream> inputStreamSupplier);
 
-	public String serialize(AdaptiveMedia<AdaptiveMediaImageProcessor> media);
+	public String serialize(
+		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia);
 
 }

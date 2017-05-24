@@ -67,10 +67,12 @@ public class ThumbnailConfiguration {
 			Collection<AdaptiveMediaImageConfigurationEntry>
 				configurationEntries) {
 
-		Stream<AdaptiveMediaImageConfigurationEntry> stream =
+		Stream<AdaptiveMediaImageConfigurationEntry> configurationEntryStream =
 			configurationEntries.stream();
 
-		return stream.filter(this::matches).findFirst();
+		return configurationEntryStream.filter(
+			this::matches
+		).findFirst();
 	}
 
 	private final int _height;

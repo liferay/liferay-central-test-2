@@ -149,7 +149,7 @@ public class AdaptiveMediaThumbnailsOSGiCommands {
 		for (long companyId : _getCompanyIds(companyIds)) {
 			Collection<AdaptiveMediaImageConfigurationEntry>
 				configurationEntries =
-					_configurationHelper.
+					_adaptiveMediaImageConfigurationHelper.
 						getAdaptiveMediaImageConfigurationEntries(companyId);
 
 			if (!_isValidConfigurationEntries(configurationEntries)) {
@@ -298,12 +298,13 @@ public class AdaptiveMediaThumbnailsOSGiCommands {
 				return;
 			}
 
-			AdaptiveMediaImageEntry imageEntry =
-				_imageEntryLocalService.fetchAdaptiveMediaImageEntry(
-					configurationEntry.getUUID(),
-					fileVersion.getFileVersionId());
+			AdaptiveMediaImageEntry adaptiveMediaImageEntry =
+				_adaptiveMediaImageEntryLocalService.
+					fetchAdaptiveMediaImageEntry(
+						configurationEntry.getUUID(),
+						fileVersion.getFileVersionId());
 
-			if (imageEntry != null) {
+			if (adaptiveMediaImageEntry != null) {
 				return;
 			}
 
@@ -315,7 +316,7 @@ public class AdaptiveMediaThumbnailsOSGiCommands {
 
 			RenderedImage renderedImage = imageBag.getRenderedImage();
 
-			_imageEntryLocalService.addAdaptiveMediaImageEntry(
+			_adaptiveMediaImageEntryLocalService.addAdaptiveMediaImageEntry(
 				configurationEntry, fileVersion, renderedImage.getWidth(),
 				renderedImage.getHeight(),
 				new UnsyncByteArrayInputStream(bytes), bytes.length);
@@ -329,15 +330,17 @@ public class AdaptiveMediaThumbnailsOSGiCommands {
 		AdaptiveMediaThumbnailsOSGiCommands.class);
 
 	@Reference
+	private AdaptiveMediaImageConfigurationHelper
+		_adaptiveMediaImageConfigurationHelper;
+
+	@Reference
+	private AdaptiveMediaImageEntryLocalService
+		_adaptiveMediaImageEntryLocalService;
+
+	@Reference
 	private CompanyLocalService _companyLocalService;
 
 	@Reference
-	private AdaptiveMediaImageConfigurationHelper _configurationHelper;
-
-	@Reference
 	private DLAppLocalService _dlAppLocalService;
-
-	@Reference
-	private AdaptiveMediaImageEntryLocalService _imageEntryLocalService;
 
 }

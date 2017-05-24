@@ -44,6 +44,7 @@ public class AdaptiveMediaBlogsEntryAttachmentContentUpdaterTest {
 		MockitoAnnotations.initMocks(this);
 
 		PowerMockito.mockStatic(PortletFileRepositoryUtil.class);
+
 		Mockito.when(
 			PortletFileRepositoryUtil.getPortletFileEntryURL(
 				Mockito.isNull(ThemeDisplay.class), Mockito.eq(_fileEntry),

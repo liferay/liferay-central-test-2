@@ -168,14 +168,15 @@ public final class AdaptiveMediaAttribute<T, V> {
 	private static final AdaptiveMediaAttribute<?, Integer> _CONTENT_LENGTH =
 		new AdaptiveMediaAttribute<>(
 			"content-length", AdaptiveMediaAttributeConverterUtil::parseInt,
-			(i1, i2) -> i1 - i2);
+			Comparator.comparingInt(value -> value));
 
 	private static final AdaptiveMediaAttribute<?, String> _CONTENT_TYPE =
 		new AdaptiveMediaAttribute<>(
-			"content-type", (s) -> s, String::compareTo);
+			"content-type", (value) -> value, String::compareTo);
 
 	private static final AdaptiveMediaAttribute<?, String> _FILE_NAME =
-		new AdaptiveMediaAttribute<>("file-name", (s) -> s, String::compareTo);
+		new AdaptiveMediaAttribute<>(
+			"file-name", (value) -> value, String::compareTo);
 
 	private static final Map<String, AdaptiveMediaAttribute<?, ?>>
 		_allowedAttributes = new HashMap<>();

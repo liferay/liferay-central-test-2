@@ -58,12 +58,14 @@ public class BlogsAdaptiveMediaImageOptimizer
 	@Override
 	public void optimize(long companyId) {
 		Collection<AdaptiveMediaImageConfigurationEntry> configurationEntries =
-			_configurationHelper.getAdaptiveMediaImageConfigurationEntries(
+			_adaptiveMediaImageConfigurationHelper.
+				getAdaptiveMediaImageConfigurationEntries(companyId);
+
+		int count =
+			_adaptiveMediaImageCounter.countExpectedAdaptiveMediaImageEntries(
 				companyId);
 
-		int total =
-			_counter.countExpectedAdaptiveMediaImageEntries(companyId) *
-				configurationEntries.size();
+		int total = count * configurationEntries.size();
 
 		final AtomicInteger atomicCounter = new AtomicInteger(0);
 
@@ -77,7 +79,9 @@ public class BlogsAdaptiveMediaImageOptimizer
 
 	@Override
 	public void optimize(long companyId, String configurationEntryUuid) {
-		int total = _counter.countExpectedAdaptiveMediaImageEntries(companyId);
+		int total =
+			_adaptiveMediaImageCounter.countExpectedAdaptiveMediaImageEntries(
+				companyId);
 
 		final AtomicInteger atomicCounter = new AtomicInteger(0);
 
@@ -130,7 +134,7 @@ public class BlogsAdaptiveMediaImageOptimizer
 					FileEntry fileEntry = new LiferayFileEntry(dlFileEntry);
 
 					try {
-						_processor.process(
+						_adaptiveMediaImageProcessor.process(
 							fileEntry.getFileVersion(), configurationEntryUuid);
 
 						_sendStatusMessage(
@@ -179,6 +183,16 @@ public class BlogsAdaptiveMediaImageOptimizer
 		BlogsAdaptiveMediaImageOptimizer.class);
 
 	@Reference
+	private AdaptiveMediaImageConfigurationHelper
+		_adaptiveMediaImageConfigurationHelper;
+
+	@Reference(target = "(adaptive.media.key=blogs)")
+	private AdaptiveMediaImageCounter _adaptiveMediaImageCounter;
+
+	@Reference
+	private AdaptiveMediaImageProcessor _adaptiveMediaImageProcessor;
+
+	@Reference
 	private BackgroundTaskStatusMessageSender
 		_backgroundTaskStatusMessageSender;
 
@@ -186,15 +200,6 @@ public class BlogsAdaptiveMediaImageOptimizer
 	private ClassNameLocalService _classNameLocalService;
 
 	@Reference
-	private AdaptiveMediaImageConfigurationHelper _configurationHelper;
-
-	@Reference(target = "(adaptive.media.key=blogs)")
-	private AdaptiveMediaImageCounter _counter;
-
-	@Reference
 	private DLFileEntryLocalService _dlFileEntryLocalService;
-
-	@Reference
-	private AdaptiveMediaImageProcessor _processor;
 
 }

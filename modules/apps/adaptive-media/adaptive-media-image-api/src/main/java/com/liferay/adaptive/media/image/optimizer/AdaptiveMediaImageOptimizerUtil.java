@@ -46,10 +46,10 @@ public class AdaptiveMediaImageOptimizerUtil {
 		Set<String> modelClassNames = _serviceTrackerMap.keySet();
 
 		for (String modelClassName : modelClassNames) {
-			AdaptiveMediaImageOptimizer optimizer =
+			AdaptiveMediaImageOptimizer adaptiveMediaImageOptimizer =
 				_serviceTrackerMap.getService(modelClassName);
 
-			optimizer.optimize(companyId);
+			adaptiveMediaImageOptimizer.optimize(companyId);
 		}
 	}
 
@@ -67,10 +67,11 @@ public class AdaptiveMediaImageOptimizerUtil {
 		Set<String> modelClassNames = _serviceTrackerMap.keySet();
 
 		for (String modelClassName : modelClassNames) {
-			AdaptiveMediaImageOptimizer optimizer =
+			AdaptiveMediaImageOptimizer adaptiveMediaImageOptimizer =
 				_serviceTrackerMap.getService(modelClassName);
 
-			optimizer.optimize(companyId, configurationEntryUuid);
+			adaptiveMediaImageOptimizer.optimize(
+				companyId, configurationEntryUuid);
 		}
 	}
 

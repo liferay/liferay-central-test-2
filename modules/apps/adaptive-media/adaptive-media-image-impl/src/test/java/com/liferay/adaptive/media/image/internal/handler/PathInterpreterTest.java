@@ -43,7 +43,7 @@ public class PathInterpreterTest {
 	public void setUp() {
 		_pathInterpreter.setDLAppLocalService(_dlAppLocalService);
 		_pathInterpreter.setAdaptiveMediaImageConfigurationHelper(
-			_configurationHelper);
+			_adaptiveMediaImageConfigurationHelper);
 	}
 
 	@Test
@@ -61,8 +61,9 @@ public class PathInterpreterTest {
 		);
 
 		Mockito.when(
-			_configurationHelper.getAdaptiveMediaImageConfigurationEntry(
-				Mockito.anyLong(), Mockito.eq("x"))
+			_adaptiveMediaImageConfigurationHelper.
+				getAdaptiveMediaImageConfigurationEntry(
+					Mockito.anyLong(), Mockito.eq("x"))
 		).thenReturn(
 			Optional.of(_configurationEntry)
 		);
@@ -112,8 +113,9 @@ public class PathInterpreterTest {
 		);
 
 		Mockito.when(
-			_configurationHelper.getAdaptiveMediaImageConfigurationEntry(
-				Mockito.anyLong(), Mockito.eq("x"))
+			_adaptiveMediaImageConfigurationHelper.
+				getAdaptiveMediaImageConfigurationEntry(
+					Mockito.anyLong(), Mockito.eq("x"))
 		).thenReturn(
 			Optional.of(_configurationEntry)
 		);
@@ -151,10 +153,11 @@ public class PathInterpreterTest {
 		_pathInterpreter.interpretPath(null);
 	}
 
+	private final AdaptiveMediaImageConfigurationHelper
+		_adaptiveMediaImageConfigurationHelper = Mockito.mock(
+			AdaptiveMediaImageConfigurationHelperImpl.class);
 	private final AdaptiveMediaImageConfigurationEntry _configurationEntry =
 		Mockito.mock(AdaptiveMediaImageConfigurationEntry.class);
-	private final AdaptiveMediaImageConfigurationHelper _configurationHelper =
-		Mockito.mock(AdaptiveMediaImageConfigurationHelperImpl.class);
 	private final DLAppLocalService _dlAppLocalService = Mockito.mock(
 		DLAppLocalService.class);
 	private final FileEntry _fileEntry = Mockito.mock(FileEntry.class);

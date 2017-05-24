@@ -48,7 +48,7 @@ public class HtmlContentTransformerImplTest {
 			_fileEntry
 		);
 
-		_htmlContentTransformer.setDlAppLocalService(_dlAppLocalService);
+		_htmlContentTransformer.setDLAppLocalService(_dlAppLocalService);
 		_htmlContentTransformer.setAdaptiveMediaImageHTMLTagFactory(
 			_adaptiveMediaImageHTMLTagFactory);
 	}

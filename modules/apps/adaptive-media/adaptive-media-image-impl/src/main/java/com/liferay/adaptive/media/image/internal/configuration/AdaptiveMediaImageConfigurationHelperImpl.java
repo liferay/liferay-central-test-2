@@ -238,7 +238,7 @@ public class AdaptiveMediaImageConfigurationHelperImpl
 		AdaptiveMediaImageConfigurationEntry configurationEntry =
 			configurationEntryOptional.get();
 
-		_imageEntryLocalService.deleteAdaptiveMediaImageEntries(
+		_adaptiveMediaImageEntryLocalService.deleteAdaptiveMediaImageEntries(
 			companyId, configurationEntry);
 
 		Collection<AdaptiveMediaImageConfigurationEntry> configurationEntries =
@@ -580,14 +580,15 @@ public class AdaptiveMediaImageConfigurationHelperImpl
 	private static final Pattern _positiveNumberPattern = Pattern.compile(
 		"\\d*[1-9]\\d*");
 
+	@Reference
+	private AdaptiveMediaImageEntryLocalService
+		_adaptiveMediaImageEntryLocalService;
+
 	private AdaptiveMediaImageConfigurationEntryParser
 		_configurationEntryParser;
 
 	@Reference
 	private DestinationFactory _destinationFactory;
-
-	@Reference
-	private AdaptiveMediaImageEntryLocalService _imageEntryLocalService;
 
 	@Reference
 	private MessageBus _messageBus;

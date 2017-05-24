@@ -108,23 +108,35 @@ public class AdaptiveMediaImageEntryProcessor
 	public InputStream getThumbnailAsStream(FileVersion fileVersion, int index)
 		throws Exception {
 
-		Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>> stream =
+		Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>> adaptiveMediaStream =
 			_getThumbnailAdaptiveMedia(fileVersion);
 
-		return stream.findFirst().map(AdaptiveMedia::getInputStream).orElse(
-			new ByteArrayInputStream(new byte[0]));
+		Optional<AdaptiveMedia<AdaptiveMediaImageProcessor>>
+			adaptiveMediaOptional = adaptiveMediaStream.findFirst();
+
+		return adaptiveMediaOptional.map(
+			AdaptiveMedia::getInputStream
+		).orElse(
+			new ByteArrayInputStream(new byte[0])
+		);
 	}
 
 	@Override
 	public long getThumbnailFileSize(FileVersion fileVersion, int index)
 		throws Exception {
 
-		Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>> stream =
+		Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>> adaptiveMediaStream =
 			_getThumbnailAdaptiveMedia(fileVersion);
 
-		return stream.findFirst().flatMap(mediaMedia ->
-			mediaMedia.getValueOptional(
-				AdaptiveMediaAttribute.contentLength())).orElse(0);
+		Optional<AdaptiveMedia<AdaptiveMediaImageProcessor>>
+			adaptiveMediaOptional = adaptiveMediaStream.findFirst();
+
+		return adaptiveMediaOptional.flatMap(
+			mediaMedia -> mediaMedia.getValueOptional(
+				AdaptiveMediaAttribute.contentLength())
+	).orElse(
+		0
+	);
 	}
 
 	@Override
@@ -140,11 +152,11 @@ public class AdaptiveMediaImageEntryProcessor
 	@Override
 	public boolean hasImages(FileVersion fileVersion) {
 		try {
-			Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>> stream =
-				_getThumbnailAdaptiveMedia(fileVersion);
+			Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>>
+				adaptiveMediaStream = _getThumbnailAdaptiveMedia(fileVersion);
 
 			Optional<AdaptiveMedia<AdaptiveMediaImageProcessor>>
-				adaptiveMediaOptional = stream.findFirst();
+				adaptiveMediaOptional = adaptiveMediaStream.findFirst();
 
 			if (adaptiveMediaOptional.isPresent()) {
 				return true;
@@ -205,8 +217,8 @@ public class AdaptiveMediaImageEntryProcessor
 			_getThumbnailAdaptiveMedia(FileVersion fileVersion)
 		throws PortalException {
 
-		return _adaptiveMediaImageFinder.getAdaptiveMediaStream(queryBuilder ->
-			queryBuilder.forVersion(
+		return _adaptiveMediaImageFinder.getAdaptiveMediaStream(
+			queryBuilder -> queryBuilder.forVersion(
 				fileVersion
 			).with(
 				AdaptiveMediaImageAttribute.IMAGE_WIDTH,

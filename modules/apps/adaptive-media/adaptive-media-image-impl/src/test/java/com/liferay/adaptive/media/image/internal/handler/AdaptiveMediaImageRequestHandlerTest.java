@@ -66,18 +66,19 @@ public class AdaptiveMediaImageRequestHandlerTest {
 		_fileVersion = _getFileVersion();
 
 		Mockito.doReturn(
-			_asyncProcessor
+			_adaptiveMediaAsyncProcessor
 		).when(
-			_asyncProcessorLocator
+			_adaptiveMediaAsyncProcessorLocator
 		).locateForClass(
 			FileVersion.class
 		);
 
-		_requestHandler.setAsyncProcessorLocator(_asyncProcessorLocator);
-		_requestHandler.setAdaptiveMediaImageFinder(_finder);
+		_requestHandler.setAsyncProcessorLocator(
+			_adaptiveMediaAsyncProcessorLocator);
+		_requestHandler.setAdaptiveMediaImageFinder(_adaptiveMediaImageFinder);
 		_requestHandler.setPathInterpreter(_pathInterpreter);
 		_requestHandler.setAdaptiveMediaImageConfigurationHelper(
-			_configurationHelper);
+			_adaptiveMediaImageConfigurationHelper);
 	}
 
 	@Test(expected = AdaptiveMediaRuntimeException.class)
@@ -90,7 +91,8 @@ public class AdaptiveMediaImageRequestHandlerTest {
 			_fileVersion, configurationEntry);
 
 		Mockito.when(
-			_finder.getAdaptiveMediaStream(Mockito.any(Function.class))
+			_adaptiveMediaImageFinder.getAdaptiveMediaStream(
+				Mockito.any(Function.class))
 		).thenThrow(
 			AdaptiveMediaException.class
 		);
@@ -108,7 +110,8 @@ public class AdaptiveMediaImageRequestHandlerTest {
 			_fileVersion, configurationEntry);
 
 		Mockito.when(
-			_finder.getAdaptiveMediaStream(Mockito.any(Function.class))
+			_adaptiveMediaImageFinder.getAdaptiveMediaStream(
+				Mockito.any(Function.class))
 		).thenThrow(
 			PortalException.class
 		);
@@ -126,10 +129,10 @@ public class AdaptiveMediaImageRequestHandlerTest {
 
 		HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
 
-		Optional<AdaptiveMedia<AdaptiveMediaImageProcessor>> mediaOptional =
-			_requestHandler.handleRequest(request);
+		Optional<AdaptiveMedia<AdaptiveMediaImageProcessor>>
+			adaptiveMediaOptional = _requestHandler.handleRequest(request);
 
-		Assert.assertFalse(mediaOptional.isPresent());
+		Assert.assertFalse(adaptiveMediaOptional.isPresent());
 	}
 
 	@Test(expected = NullPointerException.class)
@@ -147,10 +150,10 @@ public class AdaptiveMediaImageRequestHandlerTest {
 
 		HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
 
-		Optional<AdaptiveMedia<AdaptiveMediaImageProcessor>> mediaOptional =
-			_requestHandler.handleRequest(request);
+		Optional<AdaptiveMedia<AdaptiveMediaImageProcessor>>
+			adaptiveMediaOptional = _requestHandler.handleRequest(request);
 
-		Assert.assertFalse(mediaOptional.isPresent());
+		Assert.assertFalse(adaptiveMediaOptional.isPresent());
 	}
 
 	@Test
@@ -196,7 +199,7 @@ public class AdaptiveMediaImageRequestHandlerTest {
 			_requestHandler.handleRequest(request));
 
 		Mockito.verify(
-			_asyncProcessor
+			_adaptiveMediaAsyncProcessor
 		).triggerProcess(
 			_fileVersion, String.valueOf(_fileVersion.getFileVersionId())
 		);
@@ -222,7 +225,7 @@ public class AdaptiveMediaImageRequestHandlerTest {
 			Optional.of(adaptiveMedia), _requestHandler.handleRequest(request));
 
 		Mockito.verify(
-			_asyncProcessor, Mockito.never()
+			_adaptiveMediaAsyncProcessor, Mockito.never()
 		).triggerProcess(
 			_fileVersion, String.valueOf(_fileVersion.getFileVersionId())
 		);
@@ -240,18 +243,19 @@ public class AdaptiveMediaImageRequestHandlerTest {
 			_fileVersion, configurationEntry);
 
 		Mockito.when(
-			_finder.getAdaptiveMediaStream(Mockito.any(Function.class))
+			_adaptiveMediaImageFinder.getAdaptiveMediaStream(
+				Mockito.any(Function.class))
 		).thenAnswer(
 			invocation -> Stream.empty()
 		);
 
 		Optional<AdaptiveMedia<AdaptiveMediaImageProcessor>>
-			optionalAdaptiveMedia = _requestHandler.handleRequest(request);
+			adaptiveMediaOptional = _requestHandler.handleRequest(request);
 
-		Assert.assertTrue(optionalAdaptiveMedia.isPresent());
+		Assert.assertTrue(adaptiveMediaOptional.isPresent());
 
 		AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia =
-			optionalAdaptiveMedia.get();
+			adaptiveMediaOptional.get();
 
 		Assert.assertEquals(
 			_fileVersion.getContentStream(false),
@@ -272,7 +276,7 @@ public class AdaptiveMediaImageRequestHandlerTest {
 		Assert.assertEquals(_fileVersion.getSize(), (long)contentLength.get());
 
 		Mockito.verify(
-			_asyncProcessor
+			_adaptiveMediaAsyncProcessor
 		).triggerProcess(
 			_fileVersion, String.valueOf(_fileVersion.getFileVersionId())
 		);
@@ -342,19 +346,19 @@ public class AdaptiveMediaImageRequestHandlerTest {
 		properties.put("max-height", String.valueOf(height));
 		properties.put("max-width", String.valueOf(width));
 
-		AdaptiveMediaImageConfigurationEntryImpl
-			adaptiveMediaImageConfigurationEntry =
-				new AdaptiveMediaImageConfigurationEntryImpl(
-					uuid, uuid, properties);
+		AdaptiveMediaImageConfigurationEntryImpl configurationEntry =
+			new AdaptiveMediaImageConfigurationEntryImpl(
+				uuid, uuid, properties);
 
 		Mockito.when(
-			_configurationHelper.getAdaptiveMediaImageConfigurationEntry(
-				companyId, adaptiveMediaImageConfigurationEntry.getUUID())
+			_adaptiveMediaImageConfigurationHelper.
+				getAdaptiveMediaImageConfigurationEntry(
+					companyId, configurationEntry.getUUID())
 		).thenReturn(
-			Optional.of(adaptiveMediaImageConfigurationEntry)
+			Optional.of(configurationEntry)
 		);
 
-		return adaptiveMediaImageConfigurationEntry;
+		return configurationEntry;
 	}
 
 	private HttpServletRequest _createRequestFor(
@@ -422,11 +426,12 @@ public class AdaptiveMediaImageRequestHandlerTest {
 	private void _mockClosestMatch(
 			FileVersion fileVersion,
 			AdaptiveMediaImageConfigurationEntry configurationEntry,
-			List<AdaptiveMedia<AdaptiveMediaImageProcessor>> adaptiveMedias)
+			List<AdaptiveMedia<AdaptiveMediaImageProcessor>> adaptiveMediaList)
 		throws Exception {
 
 		Mockito.when(
-			_finder.getAdaptiveMediaStream(Mockito.any(Function.class))
+			_adaptiveMediaImageFinder.getAdaptiveMediaStream(
+				Mockito.any(Function.class))
 		).thenAnswer(
 			invocation -> {
 				Function<AdaptiveMediaImageQueryBuilder, AdaptiveMediaQuery>
@@ -435,7 +440,8 @@ public class AdaptiveMediaImageRequestHandlerTest {
 				AdaptiveMediaImageQueryBuilderImpl queryBuilder =
 					new AdaptiveMediaImageQueryBuilderImpl();
 
-				AdaptiveMediaQuery query = function.apply(queryBuilder);
+				AdaptiveMediaQuery adaptiveMediaQuery = function.apply(
+					queryBuilder);
 
 				Map<AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, ?>,
 					Object> attributes = queryBuilder.getAttributes();
@@ -455,13 +461,14 @@ public class AdaptiveMediaImageRequestHandlerTest {
 				int configurationHeight = GetterUtil.getInteger(
 					properties.get("max-height"));
 
-				if (AdaptiveMediaImageQueryBuilderImpl.QUERY.equals(query) &&
+				if (AdaptiveMediaImageQueryBuilderImpl.QUERY.equals(
+						adaptiveMediaQuery) &&
 					fileVersion.equals(queryBuilder.getFileVersion()) &&
 					(queryBuilder.getConfigurationUuid() == null) &&
 					queryBuilderWidth.equals(configurationWidth) &&
 					queryBuilderHeight.equals(configurationHeight)) {
 
-					return adaptiveMedias.stream();
+					return adaptiveMediaList.stream();
 				}
 
 				return Stream.empty();
@@ -476,7 +483,8 @@ public class AdaptiveMediaImageRequestHandlerTest {
 		throws Exception {
 
 		Mockito.when(
-			_finder.getAdaptiveMediaStream(Mockito.any(Function.class))
+			_adaptiveMediaImageFinder.getAdaptiveMediaStream(
+				Mockito.any(Function.class))
 		).thenAnswer(
 			invocation -> {
 				Function<AdaptiveMediaImageQueryBuilder, AdaptiveMediaQuery>
@@ -485,9 +493,12 @@ public class AdaptiveMediaImageRequestHandlerTest {
 				AdaptiveMediaImageQueryBuilderImpl queryBuilder =
 					new AdaptiveMediaImageQueryBuilderImpl();
 
-				AdaptiveMediaQuery query = function.apply(queryBuilder);
+				AdaptiveMediaQuery adaptiveMediaQuery = function.apply(
+					queryBuilder);
 
-				if (!AdaptiveMediaImageQueryBuilderImpl.QUERY.equals(query)) {
+				if (!AdaptiveMediaImageQueryBuilderImpl.QUERY.equals(
+						adaptiveMediaQuery)) {
+
 					return Stream.empty();
 				}
 
@@ -506,15 +517,18 @@ public class AdaptiveMediaImageRequestHandlerTest {
 		);
 	}
 
-	private final AdaptiveMediaAsyncProcessor<FileVersion, ?> _asyncProcessor =
-		Mockito.mock(AdaptiveMediaAsyncProcessor.class);
-	private final AdaptiveMediaAsyncProcessorLocator _asyncProcessorLocator =
-		Mockito.mock(AdaptiveMediaAsyncProcessorLocator.class);
-	private final AdaptiveMediaImageConfigurationHelper _configurationHelper =
-		Mockito.mock(AdaptiveMediaImageConfigurationHelper.class);
+	private final AdaptiveMediaAsyncProcessor<FileVersion, ?>
+		_adaptiveMediaAsyncProcessor = Mockito.mock(
+			AdaptiveMediaAsyncProcessor.class);
+	private final AdaptiveMediaAsyncProcessorLocator
+		_adaptiveMediaAsyncProcessorLocator = Mockito.mock(
+			AdaptiveMediaAsyncProcessorLocator.class);
+	private final AdaptiveMediaImageConfigurationHelper
+		_adaptiveMediaImageConfigurationHelper = Mockito.mock(
+			AdaptiveMediaImageConfigurationHelper.class);
+	private final AdaptiveMediaImageFinder _adaptiveMediaImageFinder =
+		Mockito.mock(AdaptiveMediaImageFinder.class);
 	private FileVersion _fileVersion;
-	private final AdaptiveMediaImageFinder _finder = Mockito.mock(
-		AdaptiveMediaImageFinder.class);
 	private final PathInterpreter _pathInterpreter = Mockito.mock(
 		PathInterpreter.class);
 	private final AdaptiveMediaImageRequestHandler _requestHandler =

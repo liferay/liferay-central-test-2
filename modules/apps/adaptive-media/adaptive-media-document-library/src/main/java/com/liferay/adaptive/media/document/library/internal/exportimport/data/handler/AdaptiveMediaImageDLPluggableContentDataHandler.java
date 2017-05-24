@@ -65,8 +65,9 @@ public class AdaptiveMediaImageDLPluggableContentDataHandler
 		throws Exception {
 
 		Collection<AdaptiveMediaImageConfigurationEntry> configurationEntries =
-			_configurationHelper.getAdaptiveMediaImageConfigurationEntries(
-				portletDataContext.getCompanyId());
+			_adaptiveMediaImageConfigurationHelper.
+				getAdaptiveMediaImageConfigurationEntries(
+					portletDataContext.getCompanyId());
 
 		configurationEntries.forEach(
 			configurationEntry -> _exportConfigurationEntry(
@@ -82,8 +83,9 @@ public class AdaptiveMediaImageDLPluggableContentDataHandler
 		throws Exception {
 
 		Collection<AdaptiveMediaImageConfigurationEntry> configurationEntries =
-			_configurationHelper.getAdaptiveMediaImageConfigurationEntries(
-				portletDataContext.getCompanyId());
+			_adaptiveMediaImageConfigurationHelper.
+				getAdaptiveMediaImageConfigurationEntries(
+					portletDataContext.getCompanyId());
 
 		for (AdaptiveMediaImageConfigurationEntry configurationEntry :
 				configurationEntries) {
@@ -99,7 +101,8 @@ public class AdaptiveMediaImageDLPluggableContentDataHandler
 
 		portletDataContext.addZipEntry(
 			_getConfigurationEntryBinPath(configurationEntry),
-			_imageConfigurationEntrySerializer.serialize(configurationEntry));
+			_adaptiveMediaImageConfigurationEntrySerializer.serialize(
+				configurationEntry));
 	}
 
 	private void _exportMedia(
@@ -110,42 +113,55 @@ public class AdaptiveMediaImageDLPluggableContentDataHandler
 			WorkflowConstants.STATUS_APPROVED);
 
 		for (FileVersion fileVersion : fileVersions) {
-			Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>> stream =
-				_finder.getAdaptiveMediaStream(
-					queryBuilder -> queryBuilder.allForVersion(
-						fileVersion
-					).done());
+			Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>>
+				adaptiveMediaStream =
+					_adaptiveMediaImageFinder.getAdaptiveMediaStream(
+						queryBuilder -> queryBuilder.allForVersion(
+							fileVersion
+						).done());
 
-			List<AdaptiveMedia<AdaptiveMediaImageProcessor>> mediaList =
-				stream.collect(Collectors.toList());
+			List<AdaptiveMedia<AdaptiveMediaImageProcessor>> adaptiveMediaList =
+				adaptiveMediaStream.collect(Collectors.toList());
 
-			for (AdaptiveMedia<AdaptiveMediaImageProcessor> media : mediaList) {
-				_exportMedia(portletDataContext, fileVersion, media);
+			for (AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia :
+					adaptiveMediaList) {
+
+				_exportMedia(portletDataContext, fileVersion, adaptiveMedia);
 			}
 		}
 	}
 
 	private void _exportMedia(
 			PortletDataContext portletDataContext, FileVersion fileVersion,
-			AdaptiveMedia<AdaptiveMediaImageProcessor> media)
+			AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia)
 		throws IOException {
 
-		Optional<String> configurationUuidOptional = media.getValueOptional(
-			AdaptiveMediaAttribute.configurationUuid());
+		Optional<String> configurationUuidOptional =
+			adaptiveMedia.getValueOptional(
+				AdaptiveMediaAttribute.configurationUuid());
 
 		if (!configurationUuidOptional.isPresent()) {
 			return;
 		}
 
-		String basePath = _getMediaBasePath(
+		String basePath = _getAdaptiveMediaBasePath(
 			fileVersion, configurationUuidOptional.get());
 
-		try (InputStream inputStream = media.getInputStream()) {
+		try (InputStream inputStream = adaptiveMedia.getInputStream()) {
 			portletDataContext.addZipEntry(basePath + ".bin", inputStream);
 		}
 
 		portletDataContext.addZipEntry(
-			basePath + ".json", _imageSerializer.serialize(media));
+			basePath + ".json",
+			_adaptiveMediaImageSerializer.serialize(adaptiveMedia));
+	}
+
+	private String _getAdaptiveMediaBasePath(
+		FileVersion fileVersion, String uuid) {
+
+		return String.format(
+			"adaptive-media/%s/%s/%s", FileVersion.class.getSimpleName(),
+			fileVersion.getUuid(), uuid);
 	}
 
 	private String _getConfigurationEntryBinPath(
@@ -159,26 +175,20 @@ public class AdaptiveMediaImageDLPluggableContentDataHandler
 		PortletDataContext portletDataContext, FileVersion fileVersion,
 		AdaptiveMediaImageConfigurationEntry configurationEntry) {
 
-		String basePath = _getMediaBasePath(
+		String basePath = _getAdaptiveMediaBasePath(
 			fileVersion, configurationEntry.getUUID());
 
-		String serializedMedia = portletDataContext.getZipEntryAsString(
+		String serializedAdaptiveMedia = portletDataContext.getZipEntryAsString(
 			basePath + ".json");
 
-		if (serializedMedia == null) {
+		if (serializedAdaptiveMedia == null) {
 			return null;
 		}
 
-		return _imageSerializer.deserialize(
-			serializedMedia,
+		return _adaptiveMediaImageSerializer.deserialize(
+			serializedAdaptiveMedia,
 			() -> portletDataContext.getZipEntryAsInputStream(
 				basePath + ".bin"));
-	}
-
-	private String _getMediaBasePath(FileVersion fileVersion, String uuid) {
-		return String.format(
-			"adaptive-media/%s/%s/%s", FileVersion.class.getSimpleName(),
-			fileVersion.getUuid(), uuid);
 	}
 
 	private void _importGeneratedMedia(
@@ -194,7 +204,8 @@ public class AdaptiveMediaImageDLPluggableContentDataHandler
 		}
 
 		AdaptiveMediaImageConfigurationEntry importedConfigurationEntry =
-			_imageConfigurationEntrySerializer.deserialize(configuration);
+			_adaptiveMediaImageConfigurationEntrySerializer.deserialize(
+				configuration);
 
 		if (!importedConfigurationEntry.equals(configurationEntry)) {
 			return;
@@ -204,21 +215,22 @@ public class AdaptiveMediaImageDLPluggableContentDataHandler
 			WorkflowConstants.STATUS_APPROVED);
 
 		for (FileVersion fileVersion : fileVersions) {
-			AdaptiveMedia<AdaptiveMediaImageProcessor> media =
+			AdaptiveMedia<AdaptiveMediaImageProcessor> adaptiveMedia =
 				_getExportedMedia(
 					portletDataContext, fileVersion, configurationEntry);
 
-			if (media == null) {
+			if (adaptiveMedia == null) {
 				continue;
 			}
 
-			Optional<Integer> contentLengthOptional = media.getValueOptional(
-				AdaptiveMediaAttribute.contentLength());
+			Optional<Integer> contentLengthOptional =
+				adaptiveMedia.getValueOptional(
+					AdaptiveMediaAttribute.contentLength());
 
-			Optional<Integer> widthOptional = media.getValueOptional(
+			Optional<Integer> widthOptional = adaptiveMedia.getValueOptional(
 				AdaptiveMediaImageAttribute.IMAGE_WIDTH);
 
-			Optional<Integer> heightOptional = media.getValueOptional(
+			Optional<Integer> heightOptional = adaptiveMedia.getValueOptional(
 				AdaptiveMediaImageAttribute.IMAGE_HEIGHT);
 
 			if (!contentLengthOptional.isPresent() ||
@@ -227,20 +239,21 @@ public class AdaptiveMediaImageDLPluggableContentDataHandler
 				continue;
 			}
 
-			AdaptiveMediaImageEntry imageEntry =
-				_imageEntryLocalService.fetchAdaptiveMediaImageEntry(
-					configurationEntry.getUUID(),
-					fileVersion.getFileVersionId());
+			AdaptiveMediaImageEntry adaptiveMediaImageEntry =
+				_adaptiveMediaImageEntryLocalService.
+					fetchAdaptiveMediaImageEntry(
+						configurationEntry.getUUID(),
+						fileVersion.getFileVersionId());
 
-			if (imageEntry != null) {
-				_imageEntryLocalService.
+			if (adaptiveMediaImageEntry != null) {
+				_adaptiveMediaImageEntryLocalService.
 					deleteAdaptiveMediaImageEntryFileVersion(
 						configurationEntry.getUUID(),
 						fileVersion.getFileVersionId());
 			}
 
-			try (InputStream inputStream = media.getInputStream()) {
-				_imageEntryLocalService.addAdaptiveMediaImageEntry(
+			try (InputStream inputStream = adaptiveMedia.getInputStream()) {
+				_adaptiveMediaImageEntryLocalService.addAdaptiveMediaImageEntry(
 					configurationEntry, fileVersion, widthOptional.get(),
 					heightOptional.get(), inputStream,
 					contentLengthOptional.get());
@@ -249,19 +262,21 @@ public class AdaptiveMediaImageDLPluggableContentDataHandler
 	}
 
 	@Reference
-	private AdaptiveMediaImageConfigurationHelper _configurationHelper;
-
-	@Reference
-	private AdaptiveMediaImageFinder _finder;
-
-	@Reference
 	private AdaptiveMediaImageConfigurationEntrySerializer
-		_imageConfigurationEntrySerializer;
+		_adaptiveMediaImageConfigurationEntrySerializer;
 
 	@Reference
-	private AdaptiveMediaImageEntryLocalService _imageEntryLocalService;
+	private AdaptiveMediaImageConfigurationHelper
+		_adaptiveMediaImageConfigurationHelper;
 
 	@Reference
-	private AdaptiveMediaImageSerializer _imageSerializer;
+	private AdaptiveMediaImageEntryLocalService
+		_adaptiveMediaImageEntryLocalService;
+
+	@Reference
+	private AdaptiveMediaImageFinder _adaptiveMediaImageFinder;
+
+	@Reference
+	private AdaptiveMediaImageSerializer _adaptiveMediaImageSerializer;
 
 }

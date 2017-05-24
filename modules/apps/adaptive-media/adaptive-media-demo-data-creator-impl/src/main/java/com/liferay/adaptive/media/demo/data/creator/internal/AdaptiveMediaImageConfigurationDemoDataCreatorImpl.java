@@ -65,18 +65,23 @@ public class AdaptiveMediaImageConfigurationDemoDataCreatorImpl
 	@Override
 	public AdaptiveMediaImageConfigurationEntry create(
 			long companyId,
-			DemoAdaptiveMediaImageConfigurationVariant configurationVariant)
+			DemoAdaptiveMediaImageConfigurationVariant
+				demoAdaptiveMediaImageConfigurationVariant)
 		throws IOException {
 
 		AdaptiveMediaImageConfigurationEntry configurationEntry = null;
 
 		try {
 			configurationEntry =
-				_configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-					companyId, configurationVariant.getName(),
-					configurationVariant.getDescription(),
-					configurationVariant.getUuid(),
-					configurationVariant.getProperties());
+				_adaptiveMediaImageConfigurationHelper.
+					addAdaptiveMediaImageConfigurationEntry(
+						companyId,
+						demoAdaptiveMediaImageConfigurationVariant.getName(),
+						demoAdaptiveMediaImageConfigurationVariant.
+							getDescription(),
+						demoAdaptiveMediaImageConfigurationVariant.getUuid(),
+						demoAdaptiveMediaImageConfigurationVariant.
+							getProperties());
 
 			_addConfigurationUuid(companyId, configurationEntry.getUUID());
 		}
@@ -94,7 +99,7 @@ public class AdaptiveMediaImageConfigurationDemoDataCreatorImpl
 			List<String> uuids = _configurationIds.get(companyId);
 
 			for (String uuid : uuids) {
-				_configurationHelper.
+				_adaptiveMediaImageConfigurationHelper.
 					forceDeleteAdaptiveMediaImageConfigurationEntry(
 						companyId, uuid);
 
@@ -116,7 +121,8 @@ public class AdaptiveMediaImageConfigurationDemoDataCreatorImpl
 		AdaptiveMediaImageConfigurationDemoDataCreatorImpl.class);
 
 	@Reference
-	private AdaptiveMediaImageConfigurationHelper _configurationHelper;
+	private AdaptiveMediaImageConfigurationHelper
+		_adaptiveMediaImageConfigurationHelper;
 
 	private final Map<Long, List<String>> _configurationIds = new HashMap<>();
 

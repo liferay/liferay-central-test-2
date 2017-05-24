@@ -32,19 +32,20 @@ public class AdaptiveMediaImageConfigurationEntrySerializerImpl
 
 	@Override
 	public AdaptiveMediaImageConfigurationEntry deserialize(String s) {
-		return _configurationEntryParser.parse(s);
+		return _adaptiveMediaImageConfigurationEntryParser.parse(s);
 	}
 
 	@Override
 	public String serialize(
 		AdaptiveMediaImageConfigurationEntry configurationEntry) {
 
-		return _configurationEntryParser.getConfigurationString(
-			configurationEntry);
+		return
+			_adaptiveMediaImageConfigurationEntryParser.getConfigurationString(
+				configurationEntry);
 	}
 
 	@Reference
 	private AdaptiveMediaImageConfigurationEntryParser
-		_configurationEntryParser;
+		_adaptiveMediaImageConfigurationEntryParser;
 
 }
