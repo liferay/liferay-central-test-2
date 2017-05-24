@@ -772,7 +772,7 @@ public class PortletURLImpl
 			}
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error("Unable to get company", e);
 		}
 
 		if (Validator.isNull(_layoutFriendlyURL)) {
