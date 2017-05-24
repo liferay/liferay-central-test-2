@@ -107,16 +107,15 @@ public class AssetPublisherDisplayContext {
 		_portletResponse = portletResponse;
 		_portletPreferences = portletPreferences;
 
-		_assetPublisherWebConfiguration =
-			(AssetPublisherWebConfiguration)portletRequest.getAttribute(
-				AssetPublisherWebKeys.ASSET_PUBLISHER_WEB_CONFIGURATION);
-		_request = PortalUtil.getHttpServletRequest(portletRequest);
-
 		_assetPublisherPortletInstanceConfiguration =
 			(AssetPublisherPortletInstanceConfiguration)
 				portletRequest.getAttribute(
 					AssetPublisherWebKeys.
 						ASSET_PUBLISHER_PORTLET_INSTANCE_CONFIGURATION);
+		_assetPublisherWebConfiguration =
+			(AssetPublisherWebConfiguration)portletRequest.getAttribute(
+				AssetPublisherWebKeys.ASSET_PUBLISHER_WEB_CONFIGURATION);
+		_request = PortalUtil.getHttpServletRequest(portletRequest);
 	}
 
 	/**
