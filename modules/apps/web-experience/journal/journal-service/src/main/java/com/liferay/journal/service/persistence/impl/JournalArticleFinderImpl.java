@@ -1058,8 +1058,8 @@ public class JournalArticleFinderImpl
 
 			if (!isNullArray(ddmTemplateKeys)) {
 				sql = CustomSQLUtil.replaceKeywords(
-					sql, "JournalArticle.DDMTemplateKey", StringPool.LIKE,
-					true, ddmTemplateKeys);
+					sql, "JournalArticle.DDMTemplateKey", StringPool.LIKE, true,
+					ddmTemplateKeys);
 			}
 
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
@@ -1399,8 +1399,8 @@ public class JournalArticleFinderImpl
 
 			if (!isNullArray(ddmTemplateKeys)) {
 				sql = CustomSQLUtil.replaceKeywords(
-					sql, "JournalArticle.DDMTemplateKey", StringPool.LIKE,
-					true, ddmTemplateKeys);
+					sql, "JournalArticle.DDMTemplateKey", StringPool.LIKE, true,
+					ddmTemplateKeys);
 			}
 
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
