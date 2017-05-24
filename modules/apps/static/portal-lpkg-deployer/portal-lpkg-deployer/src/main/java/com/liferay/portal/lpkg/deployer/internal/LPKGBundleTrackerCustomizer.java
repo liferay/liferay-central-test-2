@@ -97,7 +97,7 @@ public class LPKGBundleTrackerCustomizer
 				bundle.uninstall();
 			}
 			catch (BundleException be) {
-				_log.error("Unable to uninstall LPKG: " + bundle, be);
+				_log.error("Unable to uninstall LPKG " + bundle, be);
 			}
 
 			return null;
@@ -143,7 +143,7 @@ public class LPKGBundleTrackerCustomizer
 		}
 		catch (Exception e) {
 			_log.error(
-				"Unable to determine if LPKG: " + bundle + " is outdated", e);
+				"Unable to determine if LPKG " + bundle + " is outdated", e);
 		}
 
 		String symbolicName = bundle.getSymbolicName();
@@ -411,7 +411,7 @@ public class LPKGBundleTrackerCustomizer
 		}
 
 		if (_log.isInfoEnabled()) {
-			_log.info("Uninstalling outdated bundle: " + bundle);
+			_log.info("Uninstalling outdated bundle " + bundle);
 		}
 
 		bundle.uninstall();
