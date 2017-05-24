@@ -18,6 +18,7 @@
 
 <%
 String tabs1Param = "tabs1";
+String tabs1Value = GetterUtil.getString(SessionClicks.get(request, namespace + id, null));
 
 List<String> filterCategoryKeys = new ArrayList<String>();
 
@@ -28,8 +29,6 @@ for (String categoryKey : categoryKeys) {
 		filterCategoryKeys.add(categoryKey);
 	}
 }
-
-String tab = GetterUtil.getString(SessionClicks.get(request, namespace + id, null));
 %>
 
 <c:choose>
@@ -42,7 +41,7 @@ String tab = GetterUtil.getString(SessionClicks.get(request, namespace + id, nul
 			param="<%= tabs1Param %>"
 			refresh="<%= false %>"
 			type="tabs nav-tabs-default"
-			value="<%= tab %>"
+			value="<%= tabs1Value %>"
 		>
 
 			<%
