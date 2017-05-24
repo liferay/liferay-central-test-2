@@ -255,6 +255,8 @@
 					(JournalArticle.displayDate <= ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(JournalArticle.reviewDate <= ? [$AND_OR_NULL_CHECK$])
 				)
+			GROUP BY
+				JournalArticle.id_
 			ORDER BY
 				JournalArticle.id_ ASC
 		]]>
