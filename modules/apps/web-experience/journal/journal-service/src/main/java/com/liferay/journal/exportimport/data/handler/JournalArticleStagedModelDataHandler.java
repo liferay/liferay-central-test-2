@@ -196,7 +196,11 @@ public class JournalArticleStagedModelDataHandler
 			return referenceAttributes;
 		}
 
-		boolean preloaded = isPreloadedArticle(defaultUserId, article);
+		boolean preloaded = false;
+
+		if (defaultUserId == article.getUserId()) {
+			preloaded = true;
+		}
 
 		referenceAttributes.put("preloaded", String.valueOf(preloaded));
 
@@ -376,7 +380,7 @@ public class JournalArticleStagedModelDataHandler
 		long defaultUserId = _userLocalService.getDefaultUserId(
 			article.getCompanyId());
 
-		if (isPreloadedArticle(defaultUserId, article)) {
+		if (defaultUserId == article.getUserId()) {
 			articleElement.addAttribute("preloaded", "true");
 		}
 
@@ -941,26 +945,6 @@ public class JournalArticleStagedModelDataHandler
 
 		return _journalArticleLocalService.fetchArticle(
 			groupId, articleId, version);
-	}
-
-	protected boolean isPreloadedArticle(
-		long defaultUserId, JournalArticle article) {
-
-		if (defaultUserId == article.getUserId()) {
-			return true;
-		}
-
-		JournalArticle firstArticle = _journalArticleLocalService.fetchArticle(
-			article.getGroupId(), article.getArticleId(),
-			JournalArticleConstants.VERSION_DEFAULT);
-
-		if ((firstArticle != null) &&
-			(defaultUserId == firstArticle.getUserId())) {
-
-			return true;
-		}
-
-		return false;
 	}
 
 	@Reference(unbind = "-")
