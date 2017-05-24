@@ -188,10 +188,11 @@ public class ColorSchemeImpl implements ColorScheme {
 
 		try {
 			PropertiesUtil.load(_settingsProperties, settings);
+
 			PropertiesUtil.trimKeys(_settingsProperties);
 		}
 		catch (IOException ioe) {
-			_log.error("Error loading colorscheme properties", ioe);
+			_log.error("Unable to load colors cheme properties", ioe);
 		}
 	}
 

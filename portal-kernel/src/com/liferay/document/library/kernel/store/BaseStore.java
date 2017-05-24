@@ -488,7 +488,7 @@ public abstract class BaseStore implements Store {
 				companyId, repositoryId, fileName, versionLabel, fnfe);
 		}
 		catch (IOException ioe) {
-			_log.error("Error updating file", ioe);
+			_log.error("Unable to update file", ioe);
 		}
 	}
 

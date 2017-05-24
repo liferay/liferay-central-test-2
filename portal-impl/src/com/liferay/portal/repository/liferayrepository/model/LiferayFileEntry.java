@@ -132,7 +132,7 @@ public class LiferayFileEntry extends LiferayModel implements FileEntry {
 				PrincipalThreadLocal.getUserId(), this, true);
 		}
 		catch (Exception e) {
-			_log.error("Error getting document stream", e);
+			_log.error("Unable to get content stream", e);
 		}
 
 		return inputStream;

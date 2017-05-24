@@ -42,7 +42,7 @@ public class CaptchaPortletAction extends PortletAction {
 			CaptchaUtil.serveImage(resourceRequest, resourceResponse);
 		}
 		catch (Exception e) {
-			_log.error("Error serving captcha image", e);
+			_log.error("Unable to serve captcha image", e);
 		}
 	}
 

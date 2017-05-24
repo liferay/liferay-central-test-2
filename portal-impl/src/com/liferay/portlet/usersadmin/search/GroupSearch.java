@@ -105,7 +105,7 @@ public class GroupSearch extends SearchContainer<Group> {
 			setOrderByComparator(orderByComparator);
 		}
 		catch (Exception e) {
-			_log.error("Error setting up group search", e);
+			_log.error("Unable to initialize group search", e);
 		}
 	}
 

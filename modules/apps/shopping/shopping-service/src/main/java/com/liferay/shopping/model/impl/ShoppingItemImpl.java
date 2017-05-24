@@ -56,7 +56,7 @@ public class ShoppingItemImpl extends ShoppingItemBaseImpl {
 
 				category.setGroupId(getGroupId());
 
-				_log.error("Error fetching category", e);
+				_log.error("Unable to get category", e);
 			}
 		}
 		else {

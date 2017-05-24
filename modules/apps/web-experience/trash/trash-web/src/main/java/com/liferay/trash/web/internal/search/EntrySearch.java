@@ -110,7 +110,7 @@ public class EntrySearch extends SearchContainer<TrashEntry> {
 			setOrderByComparator(orderByComparator);
 		}
 		catch (Exception e) {
-			_log.error("Error setting up entry search", e);
+			_log.error("Unable to initialize entry search", e);
 		}
 	}
 

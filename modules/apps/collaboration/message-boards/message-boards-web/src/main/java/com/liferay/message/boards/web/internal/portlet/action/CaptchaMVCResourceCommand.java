@@ -48,7 +48,7 @@ public class CaptchaMVCResourceCommand implements MVCResourceCommand {
 			return false;
 		}
 		catch (Exception e) {
-			_log.error("Error serving captcha image", e);
+			_log.error("Unable to serve captcha image", e);
 
 			return true;
 		}

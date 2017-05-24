@@ -613,7 +613,7 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 			}
 		}
 		catch (Exception e) {
-			_log.error("Error checking user in role", e);
+			_log.error("Unable to check if a user is in role " + role, e);
 		}
 
 		return _request.isUserInRole(role);
@@ -883,7 +883,7 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 				}
 			}
 			catch (Exception e) {
-				_log.error("Error fetching user", e);
+				_log.error("Unable to get user", e);
 			}
 		}
 		else {
