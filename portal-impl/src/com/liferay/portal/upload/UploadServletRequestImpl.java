@@ -62,10 +62,8 @@ public class UploadServletRequestImpl
 
 	public static File getTempDir() {
 		if (_tempDir == null) {
-			String tempDir =
-				UploadServletRequestConfigurationHelperUtil.getTempDir();
-
-			_tempDir = new File(tempDir);
+			_tempDir = new File(
+				UploadServletRequestConfigurationHelperUtil.getTempDir());
 		}
 
 		return _tempDir;
