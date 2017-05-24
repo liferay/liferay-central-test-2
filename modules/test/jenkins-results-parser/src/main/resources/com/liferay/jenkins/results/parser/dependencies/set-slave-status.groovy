@@ -1,13 +1,13 @@
 import hudson.slaves.SlaveComputer;
 
-String nodeNames = "${node.names}";
+String slaves = "${slaves}";
 
-for (String nodeName : nodeNames.split(",")) {
+for (String slave : slaves.split(",")) {
 	Hudson hudson = Hudson.instance;
 
-	Slave slave = hudson.getNode(nodeName.trim());
+	Slave slaveObject = hudson.getNode(slave.trim());
 
-	SlaveComputer slaveComputer = slave.getComputer();
+	SlaveComputer slaveComputer = slaveObject.getComputer();
 
 	try {
 		boolean offlineStatus = ${offline.status};
