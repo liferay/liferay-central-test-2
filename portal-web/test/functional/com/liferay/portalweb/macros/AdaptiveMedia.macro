@@ -164,6 +164,18 @@
 		<execute macro="PortletEntry#save" />
 	</command>
 
+	<command name="enableImageResolution">
+		<var name="key_imageName" value="${imageName}" />
+
+		<execute function="Click" locator1="AdaptiveMediaTable#IMAGE_RESOLUTION_OPTIONS" />
+
+		<execute function="AssertClick" locator1="MenuItem#ENABLE" value1="Enable" />
+
+		<var name="key_imageState" value="${imageState}" />
+
+		<execute function="AssertTextEquals" locator1="AdaptiveMediaTable#STATE" value1="Enabled" />
+	</command>
+
 	<command name="gotoImageVariantEntry">
 		<var name="key_imageName" value="${imageName}" />
 
