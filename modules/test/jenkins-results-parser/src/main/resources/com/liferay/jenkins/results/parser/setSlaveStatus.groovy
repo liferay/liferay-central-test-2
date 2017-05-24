@@ -1,16 +1,17 @@
-import hudson.slaves.SlaveComputer
+import hudson.slaves.SlaveComputer;
 
-hudson = Hudson.instance
-
-String nodeNames = "${node.names}"
-boolean offlineStatus = ${offline.status}
+String nodeNames = "${node.names}";
 
 for (String nodeName : nodeNames.split(",")) {
-	Slave slave = hudson.getNode(nodeName.trim())
+	Hudson hudson = Hudson.instance;
 
-	SlaveComputer slaveComputer = slave.getComputer()
+	Slave slave = hudson.getNode(nodeName.trim());
+
+	SlaveComputer slaveComputer = slave.getComputer();
 
 	try {
+		boolean offlineStatus = ${offline.status};
+
 		slaveComputer.setTemporarilyOffline(offlineStatus)
 	}
 	catch (NullPointerException npe) {
