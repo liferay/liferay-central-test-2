@@ -184,7 +184,7 @@ if (layout != null) {
 
 						<%
 						}
-						catch (AuthException pe) {
+						catch (AuthException ae) {
 							_log.error("Unauthenticated user " + user.getScreenName());
 						%>
 
