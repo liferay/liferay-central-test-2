@@ -1053,13 +1053,13 @@ public class JournalArticleFinderImpl
 			if (!isNullArray(ddmStructureKeys)) {
 				sql = CustomSQLUtil.replaceKeywords(
 					sql, "JournalArticle.DDMStructureKey", StringPool.LIKE,
-					false, ddmStructureKeys);
+					true, ddmStructureKeys);
 			}
 
 			if (!isNullArray(ddmTemplateKeys)) {
 				sql = CustomSQLUtil.replaceKeywords(
 					sql, "JournalArticle.DDMTemplateKey", StringPool.LIKE,
-					false, ddmTemplateKeys);
+					true, ddmTemplateKeys);
 			}
 
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
@@ -1394,13 +1394,13 @@ public class JournalArticleFinderImpl
 			if (!isNullArray(ddmStructureKeys)) {
 				sql = CustomSQLUtil.replaceKeywords(
 					sql, "JournalArticle.DDMStructureKey", StringPool.LIKE,
-					false, ddmStructureKeys);
+					true, ddmStructureKeys);
 			}
 
 			if (!isNullArray(ddmTemplateKeys)) {
 				sql = CustomSQLUtil.replaceKeywords(
 					sql, "JournalArticle.DDMTemplateKey", StringPool.LIKE,
-					false, ddmTemplateKeys);
+					true, ddmTemplateKeys);
 			}
 
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
