@@ -168,7 +168,7 @@ public final class AdaptiveMediaAttribute<T, V> {
 	private static final AdaptiveMediaAttribute<?, Integer> _CONTENT_LENGTH =
 		new AdaptiveMediaAttribute<>(
 			"content-length", AdaptiveMediaAttributeConverterUtil::parseInt,
-			Comparator.comparingInt(value -> value));
+			(value1, value2) -> value1 - value2);
 
 	private static final AdaptiveMediaAttribute<?, String> _CONTENT_TYPE =
 		new AdaptiveMediaAttribute<>(
