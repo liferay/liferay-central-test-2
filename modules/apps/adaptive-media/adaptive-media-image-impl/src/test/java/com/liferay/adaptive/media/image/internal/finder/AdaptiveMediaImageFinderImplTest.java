@@ -1560,7 +1560,7 @@ public class AdaptiveMediaImageFinderImplTest {
 			AdaptiveMediaImageConfigurationHelper.class);
 	private final AdaptiveMediaImageEntryLocalService
 		_adaptiveMediaImageEntryLocalService = Mockito.mock(
-		AdaptiveMediaImageEntryLocalService.class);
+			AdaptiveMediaImageEntryLocalService.class);
 	private final AdaptiveMediaImageFinderImpl _adaptiveMediaImageFinder =
 		new AdaptiveMediaImageFinderImpl();
 	private final AdaptiveMediaImageURLFactory _adaptiveMediaImageURLFactory =

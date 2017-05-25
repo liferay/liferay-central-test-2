@@ -38,8 +38,8 @@ public class AdaptiveMediaAttributeComparatorTest {
 	public void setUp() {
 		Map<
 			AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, ?>,
-			AdaptiveMediaImageQueryBuilder.SortOrder>
-				attributes = new HashMap<>();
+				AdaptiveMediaImageQueryBuilder.SortOrder>
+					attributes = new HashMap<>();
 
 		attributes.put(
 			AdaptiveMediaAttribute.contentLength(),

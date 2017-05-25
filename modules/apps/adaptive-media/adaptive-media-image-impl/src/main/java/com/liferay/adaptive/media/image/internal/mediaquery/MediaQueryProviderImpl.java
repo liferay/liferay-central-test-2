@@ -116,7 +116,7 @@ public class MediaQueryProviderImpl implements MediaQueryProvider {
 				).forConfiguration(
 					configurationEntry.getUUID()
 				).done()
-		).findFirst();
+			).findFirst();
 		}
 		catch (PortalException pe) {
 			if (_log.isWarnEnabled()) {

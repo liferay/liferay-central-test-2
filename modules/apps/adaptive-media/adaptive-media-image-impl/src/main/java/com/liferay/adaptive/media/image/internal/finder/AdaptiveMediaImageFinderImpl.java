@@ -58,11 +58,11 @@ public class AdaptiveMediaImageFinderImpl implements AdaptiveMediaImageFinder {
 	@Override
 	public Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>>
 			getAdaptiveMediaStream(
-				Function<
-					AdaptiveMediaImageQueryBuilder,
-				AdaptiveMediaQuery<
-					FileVersion, AdaptiveMediaImageProcessor>>
-						queryBuilderFunction)
+				Function
+					<AdaptiveMediaImageQueryBuilder,
+						AdaptiveMediaQuery
+							<FileVersion, AdaptiveMediaImageProcessor>>
+								queryBuilderFunction)
 		throws PortalException {
 
 		if (queryBuilderFunction == null) {

@@ -49,9 +49,9 @@ public class AdaptiveMediaAttributeComparator
 	}
 
 	public AdaptiveMediaAttributeComparator(
-		Map<AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, ?>,
-		AdaptiveMediaImageQueryBuilder.SortOrder>
-			sortCriteria) {
+		Map
+			<AdaptiveMediaAttribute<AdaptiveMediaImageProcessor, ?>,
+				AdaptiveMediaImageQueryBuilder.SortOrder> sortCriteria) {
 
 		_sortCriteria = (Map)sortCriteria;
 	}
@@ -98,6 +98,6 @@ public class AdaptiveMediaAttributeComparator
 	private final Map
 		<AdaptiveMediaAttribute<
 			AdaptiveMediaImageProcessor, Object>,
-			AdaptiveMediaImageQueryBuilder.SortOrder> _sortCriteria;
+				AdaptiveMediaImageQueryBuilder.SortOrder> _sortCriteria;
 
 }
