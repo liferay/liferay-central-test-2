@@ -301,8 +301,13 @@ public class GroupImpl extends GroupBaseImpl {
 				String groupFriendlyURL = PortalUtil.getGroupFriendlyURL(
 					layoutSet, themeDisplay);
 
+				if (isUser()) {
+					return PortalUtil.addPreservedParameters(
+						themeDisplay, groupFriendlyURL, false, true);
+				}
+
 				return PortalUtil.addPreservedParameters(
-					themeDisplay, groupFriendlyURL, isUser());
+					themeDisplay, groupFriendlyURL);
 			}
 		}
 		catch (PortalException pe) {
