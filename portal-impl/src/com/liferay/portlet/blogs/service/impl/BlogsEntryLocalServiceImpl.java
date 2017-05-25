@@ -1463,7 +1463,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				imageBytes);
 		}
 		catch (IOException ioe) {
-			throw new EntryCoverImageCropException();
+			throw new EntryCoverImageCropException(ioe);
 		}
 	}
 
@@ -1541,7 +1541,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				imageBytes);
 		}
 		catch (IOException ioe) {
-			throw new EntrySmallImageScaleException();
+			throw new EntrySmallImageScaleException(ioe);
 		}
 	}
 
