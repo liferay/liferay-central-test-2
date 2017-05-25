@@ -34,6 +34,11 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.util.Validator;
 
+import com.netflix.hystrix.HystrixCommand;
+import com.netflix.hystrix.HystrixCommandGroupKey;
+import com.netflix.hystrix.HystrixCommandKey;
+import com.netflix.hystrix.exception.HystrixRuntimeException;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -51,19 +56,7 @@ public class DDMDataProviderInvokerImpl implements DDMDataProviderInvoker {
 		DDMDataProviderRequest ddmDataProviderRequest) {
 
 		try {
-			String ddmDataProviderInstanceId =
-				ddmDataProviderRequest.getDDMDataProviderInstanceId();
-
-			Optional<DDMDataProviderInstance> ddmDataProviderInstanceOptional =
-				fetchDDMDataProviderInstance(ddmDataProviderInstanceId);
-
-			setDDMDataProviderRequestAttributes(
-				ddmDataProviderRequest, ddmDataProviderInstanceOptional);
-
-			DDMDataProvider ddmDataProvider = getDDMDataProvider(
-				ddmDataProviderInstanceId, ddmDataProviderInstanceOptional);
-
-			return ddmDataProvider.getData(ddmDataProviderRequest);
+			return doInvoke(ddmDataProviderRequest);
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
@@ -73,12 +66,30 @@ public class DDMDataProviderInvokerImpl implements DDMDataProviderInvoker {
 					e);
 			}
 
-			if (e instanceof PrincipalException) {
+			if (e instanceof HystrixRuntimeException) {
+				HystrixRuntimeException hystrixRuntimeException =
+					(HystrixRuntimeException)e;
+
+				HystrixRuntimeException.FailureType failureType =
+					hystrixRuntimeException.getFailureType();
+
+				if (failureType ==
+						HystrixRuntimeException.FailureType.TIMEOUT) {
+
+					return DDMDataProviderResponse.error(Status.TIMEOUT);
+				}
+				else if (failureType ==
+							HystrixRuntimeException.FailureType.SHORTCIRCUIT) {
+
+					return DDMDataProviderResponse.error(Status.SHORTCIRCUIT);
+				}
+			}
+			else if (e instanceof PrincipalException) {
 				return DDMDataProviderResponse.error(Status.UNAUTHORIZED);
 			}
-		}
 
-		return DDMDataProviderResponse.error(Status.INTERNAL_SERVER_ERROR);
+			return DDMDataProviderResponse.error(Status.UNKNOWN_ERROR);
+		}
 	}
 
 	protected void addDDMDataProviderRequestParameters(
@@ -128,6 +139,30 @@ public class DDMDataProviderInvokerImpl implements DDMDataProviderInvoker {
 		catch (PortalException pe) {
 			throw new IllegalStateException(pe);
 		}
+	}
+
+	protected DDMDataProviderResponse doInvoke(
+			DDMDataProviderRequest ddmDataProviderRequest)
+		throws Exception {
+
+		String ddmDataProviderInstanceId =
+			ddmDataProviderRequest.getDDMDataProviderInstanceId();
+
+		Optional<DDMDataProviderInstance> ddmDataProviderInstanceOptional =
+			fetchDDMDataProviderInstance(ddmDataProviderInstanceId);
+
+		setDDMDataProviderRequestAttributes(
+			ddmDataProviderRequest, ddmDataProviderInstanceOptional);
+
+		DDMDataProvider ddmDataProvider = getDDMDataProvider(
+			ddmDataProviderInstanceId, ddmDataProviderInstanceOptional);
+
+		DDMDataProviderInvokeCommand invokeCommand =
+			new DDMDataProviderInvokeCommand(
+				ddmDataProviderInstanceId, ddmDataProvider,
+				ddmDataProviderRequest);
+
+		return invokeCommand.execute();
 	}
 
 	protected Optional<DDMDataProviderInstance> fetchDDMDataProviderInstance(
@@ -205,5 +240,36 @@ public class DDMDataProviderInvokerImpl implements DDMDataProviderInvoker {
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		DDMDataProviderInvokerImpl.class);
+
+	private static class DDMDataProviderInvokeCommand
+		extends HystrixCommand<DDMDataProviderResponse> {
+
+		public DDMDataProviderInvokeCommand(
+			String ddmDataProviderInstanceId, DDMDataProvider ddmDataProvider,
+			DDMDataProviderRequest ddmDataProviderRequest) {
+
+			super(
+				Setter.withGroupKey(_hystrixCommandGroupKey).andCommandKey(
+					HystrixCommandKey.Factory.asKey(
+						"DDMDataProviderInvokeCommand#" +
+							ddmDataProviderInstanceId)));
+
+			_ddmDataProvider = ddmDataProvider;
+			_ddmDataProviderRequest = ddmDataProviderRequest;
+		}
+
+		@Override
+		protected DDMDataProviderResponse run() throws Exception {
+			return _ddmDataProvider.getData(_ddmDataProviderRequest);
+		}
+
+		private static final HystrixCommandGroupKey _hystrixCommandGroupKey =
+			HystrixCommandGroupKey.Factory.asKey(
+				"DDMDataProviderInvokeCommandGroup");
+
+		private final DDMDataProvider _ddmDataProvider;
+		private final DDMDataProviderRequest _ddmDataProviderRequest;
+
+	}
 
 }
