@@ -40,6 +40,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -197,16 +198,19 @@ public class AdaptiveMediaImageRequestHandler
 			properties.get("max-height"));
 
 		try {
-			return _finder.getAdaptiveMediaStream(queryBuilder ->
-				queryBuilder.forVersion(
-					fileVersion
-				).with(
-					AdaptiveMediaImageAttribute.IMAGE_WIDTH, configurationWidth
-				).with(
-					AdaptiveMediaImageAttribute.IMAGE_HEIGHT,
-					configurationHeight
-				).done()
-			).sorted(
+			Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>>
+				adaptiveMediaStream = _finder.getAdaptiveMediaStream(
+					queryBuilder -> queryBuilder.forVersion(
+						fileVersion
+					).with(
+						AdaptiveMediaImageAttribute.IMAGE_WIDTH,
+						configurationWidth
+					).with(
+						AdaptiveMediaImageAttribute.IMAGE_HEIGHT,
+						configurationHeight
+					).done());
+
+			return adaptiveMediaStream.sorted(
 				_getComparator(configurationWidth)
 			).findFirst();
 		}
