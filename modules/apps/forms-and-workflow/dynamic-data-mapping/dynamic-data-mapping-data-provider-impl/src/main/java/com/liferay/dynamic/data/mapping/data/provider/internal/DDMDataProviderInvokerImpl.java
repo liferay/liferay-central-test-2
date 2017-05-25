@@ -38,6 +38,7 @@ import com.netflix.hystrix.HystrixCommand;
 import com.netflix.hystrix.HystrixCommandGroupKey;
 import com.netflix.hystrix.HystrixCommandKey;
 import com.netflix.hystrix.exception.HystrixRuntimeException;
+import com.netflix.hystrix.exception.HystrixRuntimeException.FailureType;
 
 import java.util.List;
 import java.util.Map;
@@ -66,29 +67,7 @@ public class DDMDataProviderInvokerImpl implements DDMDataProviderInvoker {
 					e);
 			}
 
-			if (e instanceof HystrixRuntimeException) {
-				HystrixRuntimeException hystrixRuntimeException =
-					(HystrixRuntimeException)e;
-
-				HystrixRuntimeException.FailureType failureType =
-					hystrixRuntimeException.getFailureType();
-
-				if (failureType ==
-						HystrixRuntimeException.FailureType.TIMEOUT) {
-
-					return DDMDataProviderResponse.error(Status.TIMEOUT);
-				}
-				else if (failureType ==
-							HystrixRuntimeException.FailureType.SHORTCIRCUIT) {
-
-					return DDMDataProviderResponse.error(Status.SHORTCIRCUIT);
-				}
-			}
-			else if (e instanceof PrincipalException) {
-				return DDMDataProviderResponse.error(Status.UNAUTHORIZED);
-			}
-
-			return DDMDataProviderResponse.error(Status.UNKNOWN_ERROR);
+			return createDDMDataProviderErrorResponse(e);
 		}
 	}
 
@@ -139,6 +118,26 @@ public class DDMDataProviderInvokerImpl implements DDMDataProviderInvoker {
 		catch (PortalException pe) {
 			throw new IllegalStateException(pe);
 		}
+	}
+
+	protected DDMDataProviderResponse createDDMDataProviderErrorResponse(
+		Exception e) {
+
+		if (e instanceof HystrixRuntimeException) {
+			FailureType failureType = getHystrixFailureType(e);
+
+			if (failureType == FailureType.TIMEOUT) {
+				return DDMDataProviderResponse.error(Status.TIMEOUT);
+			}
+			else if (failureType == FailureType.SHORTCIRCUIT) {
+				return DDMDataProviderResponse.error(Status.SHORTCIRCUIT);
+			}
+		}
+		else if (e instanceof PrincipalException) {
+			return DDMDataProviderResponse.error(Status.UNAUTHORIZED);
+		}
+
+		return DDMDataProviderResponse.error(Status.UNKNOWN_ERROR);
 	}
 
 	protected DDMDataProviderResponse doInvoke(
@@ -197,6 +196,13 @@ public class DDMDataProviderInvokerImpl implements DDMDataProviderInvoker {
 		return ddmDataProviderTypeOptional.orElseGet(
 			() -> ddmDataProviderTracker.getDDMDataProviderByInstanceId(
 				ddmDataProviderInstanceId));
+	}
+
+	protected FailureType getHystrixFailureType(Exception e) {
+		HystrixRuntimeException hystrixRuntimeException =
+			(HystrixRuntimeException)e;
+
+		return hystrixRuntimeException.getFailureType();
 	}
 
 	protected void setDDMDataProviderRequestAttributes(
