@@ -669,6 +669,12 @@ public abstract class BaseWorkflowTaskManagerTestCase {
 			clazz.getClassLoader(), getBasePath() + fileName);
 	}
 
+	protected int searchCount(String keywords) throws Exception {
+		return WorkflowTaskManagerUtil.searchCount(
+			adminUser.getCompanyId(), adminUser.getUserId(), keywords, null,
+			false, true);
+	}
+
 	protected void setUpPermissionThreadLocal() throws Exception {
 		_permissionChecker = PermissionThreadLocal.getPermissionChecker();
 
@@ -693,12 +699,6 @@ public abstract class BaseWorkflowTaskManagerTestCase {
 		_name = PrincipalThreadLocal.getName();
 
 		PrincipalThreadLocal.setName(TestPropsValues.getUserId());
-	}
-
-	protected int searchCount(String keywords) throws Exception {
-		return WorkflowTaskManagerUtil.searchCount(
-			adminUser.getCompanyId(), adminUser.getUserId(), keywords, null,
-			false, true);
 	}
 
 	protected void setUpUsers() throws Exception {
