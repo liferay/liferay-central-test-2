@@ -73,22 +73,24 @@ public class AdaptiveMediaImageProcessorTest {
 	public void setUp() throws Exception {
 		_group = GroupTestUtil.addGroup();
 
-		_configurationHelper = _getService(
+		_adaptiveMediaImageConfigurationHelper = _getService(
 			AdaptiveMediaImageConfigurationHelper.class);
 		_dlAppLocalService = _getService(DLAppLocalService.class);
-		_finder = _getService(AdaptiveMediaImageFinder.class);
-		_processor = _getService(AdaptiveMediaImageProcessor.class);
+		_adaptiveMediaImageFinder = _getService(AdaptiveMediaImageFinder.class);
+		_adaptiveMediaImageProcessor = _getService(
+			AdaptiveMediaImageProcessor.class);
 
 		ServiceTestUtil.setUser(TestPropsValues.getUser());
 
 		Collection<AdaptiveMediaImageConfigurationEntry> configurationEntries =
-			_configurationHelper.getAdaptiveMediaImageConfigurationEntries(
-				TestPropsValues.getCompanyId(), configurationEntry -> true);
+			_adaptiveMediaImageConfigurationHelper.
+				getAdaptiveMediaImageConfigurationEntries(
+					TestPropsValues.getCompanyId(), configurationEntry -> true);
 
 		for (AdaptiveMediaImageConfigurationEntry configurationEntry :
 				configurationEntries) {
 
-			_configurationHelper.
+			_adaptiveMediaImageConfigurationHelper.
 				forceDeleteAdaptiveMediaImageConfigurationEntry(
 					TestPropsValues.getCompanyId(),
 					configurationEntry.getUUID());
@@ -102,14 +104,17 @@ public class AdaptiveMediaImageProcessorTest {
 		throws Exception {
 
 		Collection<AdaptiveMediaImageConfigurationEntry> configurationEntries =
-			_configurationHelper.getAdaptiveMediaImageConfigurationEntries(
-				TestPropsValues.getCompanyId(), configurationEntry -> true);
+			_adaptiveMediaImageConfigurationHelper.
+				getAdaptiveMediaImageConfigurationEntries(
+					TestPropsValues.getCompanyId(), configurationEntry -> true);
 
 		for (AdaptiveMediaImageConfigurationEntry configurationEntry :
 				configurationEntries) {
 
-			_configurationHelper.disableAdaptiveMediaImageConfigurationEntry(
-				TestPropsValues.getCompanyId(), configurationEntry.getUUID());
+			_adaptiveMediaImageConfigurationHelper.
+				disableAdaptiveMediaImageConfigurationEntry(
+					TestPropsValues.getCompanyId(),
+					configurationEntry.getUUID());
 		}
 
 		try (DestinationReplacer destinationReplacer = new DestinationReplacer(
@@ -121,13 +126,14 @@ public class AdaptiveMediaImageProcessorTest {
 
 			FileEntry fileEntry = _addNonImageFileEntry(serviceContext);
 
-			Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>> stream =
-				_finder.getAdaptiveMediaStream(queryBuilder ->
-					queryBuilder.allForFileEntry(
-						fileEntry
-					).done());
+			Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>>
+				adaptiveMediaStream =
+					_adaptiveMediaImageFinder.getAdaptiveMediaStream(
+						queryBuilder -> queryBuilder.allForFileEntry(
+							fileEntry
+						).done());
 
-			Assert.assertEquals(0, stream.count());
+			Assert.assertEquals(0, adaptiveMediaStream.count());
 		}
 	}
 
@@ -143,13 +149,15 @@ public class AdaptiveMediaImageProcessorTest {
 
 			final FileEntry fileEntry = _addImageFileEntry(serviceContext);
 
-			Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>> stream =
-				_finder.getAdaptiveMediaStream(queryBuilder ->
-					queryBuilder.allForFileEntry(
-						fileEntry
-					).done());
+			Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>>
+				adaptiveMediaStream =
+					_adaptiveMediaImageFinder.getAdaptiveMediaStream(
+						queryBuilder -> queryBuilder.allForFileEntry(
+							fileEntry
+						).done());
 
-			Assert.assertEquals(_getVariantsCount(), stream.count());
+			Assert.assertEquals(
+				_getVariantsCount(), adaptiveMediaStream.count());
 		}
 	}
 
@@ -166,13 +174,14 @@ public class AdaptiveMediaImageProcessorTest {
 
 			FileEntry fileEntry = _addNonImageFileEntry(serviceContext);
 
-			Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>> stream =
-				_finder.getAdaptiveMediaStream(queryBuilder ->
-					queryBuilder.allForFileEntry(
-						fileEntry
-					).done());
+			Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>>
+				adaptiveMediaStream =
+					_adaptiveMediaImageFinder.getAdaptiveMediaStream(
+						queryBuilder -> queryBuilder.allForFileEntry(
+							fileEntry
+						).done());
 
-			Assert.assertEquals(0, stream.count());
+			Assert.assertEquals(0, adaptiveMediaStream.count());
 		}
 	}
 
@@ -187,15 +196,17 @@ public class AdaptiveMediaImageProcessorTest {
 
 			final FileEntry fileEntry = _addImageFileEntry(serviceContext);
 
-			_processor.cleanUp(fileEntry.getLatestFileVersion(true));
+			_adaptiveMediaImageProcessor.cleanUp(
+				fileEntry.getLatestFileVersion(true));
 
-			Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>> stream =
-				_finder.getAdaptiveMediaStream(queryBuilder ->
-					queryBuilder.allForFileEntry(
-						fileEntry
-					).done());
+			Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>>
+				adaptiveMediaStream =
+					_adaptiveMediaImageFinder.getAdaptiveMediaStream(
+						queryBuilder -> queryBuilder.allForFileEntry(
+							fileEntry
+						).done());
 
-			Assert.assertEquals(0, stream.count());
+			Assert.assertEquals(0, adaptiveMediaStream.count());
 		}
 	}
 
@@ -210,15 +221,17 @@ public class AdaptiveMediaImageProcessorTest {
 
 			final FileEntry fileEntry = _addNonImageFileEntry(serviceContext);
 
-			_processor.cleanUp(fileEntry.getLatestFileVersion(true));
+			_adaptiveMediaImageProcessor.cleanUp(
+				fileEntry.getLatestFileVersion(true));
 
-			Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>> stream =
-				_finder.getAdaptiveMediaStream(queryBuilder ->
-					queryBuilder.allForFileEntry(
-						fileEntry
-					).done());
+			Stream<AdaptiveMedia<AdaptiveMediaImageProcessor>>
+				adaptiveMediaStream =
+					_adaptiveMediaImageFinder.getAdaptiveMediaStream(
+						queryBuilder -> queryBuilder.allForFileEntry(
+							fileEntry
+						).done());
 
-			Assert.assertEquals(0, stream.count());
+			Assert.assertEquals(0, adaptiveMediaStream.count());
 		}
 	}
 
@@ -248,9 +261,10 @@ public class AdaptiveMediaImageProcessorTest {
 		properties.put("max-height", "100");
 		properties.put("max-width", "100");
 
-		_configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), "small", StringPool.BLANK, "0",
-			properties);
+		_adaptiveMediaImageConfigurationHelper.
+			addAdaptiveMediaImageConfigurationEntry(
+				TestPropsValues.getCompanyId(), "small", StringPool.BLANK, "0",
+				properties);
 	}
 
 	private byte[] _getImageBytes() throws Exception {
@@ -279,19 +293,20 @@ public class AdaptiveMediaImageProcessorTest {
 
 	private int _getVariantsCount() throws Exception {
 		Collection<AdaptiveMediaImageConfigurationEntry> configurationEntries =
-			_configurationHelper.getAdaptiveMediaImageConfigurationEntries(
-				TestPropsValues.getCompanyId());
+			_adaptiveMediaImageConfigurationHelper.
+				getAdaptiveMediaImageConfigurationEntries(
+					TestPropsValues.getCompanyId());
 
 		return configurationEntries.size();
 	}
 
-	private AdaptiveMediaImageConfigurationHelper _configurationHelper;
+	private AdaptiveMediaImageConfigurationHelper
+		_adaptiveMediaImageConfigurationHelper;
+	private AdaptiveMediaImageFinder _adaptiveMediaImageFinder;
+	private AdaptiveMediaImageProcessor _adaptiveMediaImageProcessor;
 	private DLAppLocalService _dlAppLocalService;
-	private AdaptiveMediaImageFinder _finder;
 
 	@DeleteAfterTestRun
 	private Group _group;
-
-	private AdaptiveMediaImageProcessor _processor;
 
 }

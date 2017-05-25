@@ -78,9 +78,13 @@ public class FileEntryAdaptiveMediaImageURLItemSelectorReturnTypeResolver
 		List<MediaQuery> mediaQueries = _mediaQueryProvider.getMediaQueries(
 			fileEntry);
 
-		Stream<MediaQuery> stream = mediaQueries.stream();
+		Stream<MediaQuery> mediaQueryStream = mediaQueries.stream();
 
-		stream.map(this::_getSourceJSONObject).forEach(sourcesArray::put);
+		mediaQueryStream.map(
+			this::_getSourceJSONObject
+		).forEach(
+			sourcesArray::put
+		);
 
 		fileEntryJSONObject.put("sources", sourcesArray);
 

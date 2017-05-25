@@ -49,14 +49,18 @@ public class AdaptiveMediaJournalTransformerListenerTest {
 	public void testOnActivationClearsJournalCache() throws Exception {
 		_adaptiveMediaJournalTransformerListener.activate();
 
-		Mockito.verify(_journalContent, Mockito.times(1)).clearCache();
+		Mockito.verify(
+			_journalContent, Mockito.times(1)
+		).clearCache();
 	}
 
 	@Test
 	public void testOnDeactivationClearsJournalCache() throws Exception {
 		_adaptiveMediaJournalTransformerListener.deactivate();
 
-		Mockito.verify(_journalContent, Mockito.times(1)).clearCache();
+		Mockito.verify(
+			_journalContent, Mockito.times(1)
+		).clearCache();
 	}
 
 	@Test

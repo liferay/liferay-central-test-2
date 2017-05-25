@@ -77,18 +77,21 @@ public abstract class BaseAdaptiveMediaImageConfigurationTestCase {
 	protected static void deleteAllConfigurationEntries()
 		throws IOException, PortalException {
 
-		AdaptiveMediaImageConfigurationHelper configurationHelper =
-			serviceTracker.getService();
+		AdaptiveMediaImageConfigurationHelper
+			adaptiveMediaImageConfigurationHelper = serviceTracker.getService();
 
 		Collection<AdaptiveMediaImageConfigurationEntry> configurationEntries =
-			configurationHelper.getAdaptiveMediaImageConfigurationEntries(
-				TestPropsValues.getCompanyId(), configurationEntry -> true);
+			adaptiveMediaImageConfigurationHelper.
+				getAdaptiveMediaImageConfigurationEntries(
+					TestPropsValues.getCompanyId(), configurationEntry -> true);
 
 		for (AdaptiveMediaImageConfigurationEntry configurationEntry :
 				configurationEntries) {
 
-			configurationHelper.forceDeleteAdaptiveMediaImageConfigurationEntry(
-				TestPropsValues.getCompanyId(), configurationEntry.getUUID());
+			adaptiveMediaImageConfigurationHelper.
+				forceDeleteAdaptiveMediaImageConfigurationEntry(
+					TestPropsValues.getCompanyId(),
+					configurationEntry.getUUID());
 		}
 	}
 

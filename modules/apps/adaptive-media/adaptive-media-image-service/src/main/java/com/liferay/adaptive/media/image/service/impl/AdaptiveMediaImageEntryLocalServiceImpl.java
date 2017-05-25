@@ -95,23 +95,26 @@ public class AdaptiveMediaImageEntryLocalServiceImpl
 
 		long imageEntryId = counterLocalService.increment();
 
-		AdaptiveMediaImageEntry imageEntry =
+		AdaptiveMediaImageEntry adaptiveMediaImageEntry =
 			adaptiveMediaImageEntryPersistence.create(imageEntryId);
 
-		imageEntry.setCompanyId(fileVersion.getCompanyId());
-		imageEntry.setGroupId(fileVersion.getGroupId());
-		imageEntry.setCreateDate(new Date());
-		imageEntry.setFileVersionId(fileVersion.getFileVersionId());
-		imageEntry.setMimeType(fileVersion.getMimeType());
-		imageEntry.setHeight(height);
-		imageEntry.setWidth(width);
-		imageEntry.setSize(size);
-		imageEntry.setConfigurationUuid(configurationEntry.getUUID());
+		adaptiveMediaImageEntry.setCompanyId(fileVersion.getCompanyId());
+		adaptiveMediaImageEntry.setGroupId(fileVersion.getGroupId());
+		adaptiveMediaImageEntry.setCreateDate(new Date());
+		adaptiveMediaImageEntry.setFileVersionId(
+			fileVersion.getFileVersionId());
+		adaptiveMediaImageEntry.setMimeType(fileVersion.getMimeType());
+		adaptiveMediaImageEntry.setHeight(height);
+		adaptiveMediaImageEntry.setWidth(width);
+		adaptiveMediaImageEntry.setSize(size);
+		adaptiveMediaImageEntry.setConfigurationUuid(
+			configurationEntry.getUUID());
 
 		imageStorage.save(
 			fileVersion, configurationEntry.getUUID(), inputStream);
 
-		return adaptiveMediaImageEntryPersistence.update(imageEntry);
+		return adaptiveMediaImageEntryPersistence.update(
+			adaptiveMediaImageEntry);
 	}
 
 	@Override
@@ -172,16 +175,20 @@ public class AdaptiveMediaImageEntryLocalServiceImpl
 			FileVersion fileVersion)
 		throws PortalException {
 
-		List<AdaptiveMediaImageEntry> imageEntries =
+		List<AdaptiveMediaImageEntry> adaptiveMediaImageEntries =
 			adaptiveMediaImageEntryPersistence.findByFileVersionId(
 				fileVersion.getFileVersionId());
 
-		for (AdaptiveMediaImageEntry imageEntry : imageEntries) {
+		for (AdaptiveMediaImageEntry adaptiveMediaImageEntry :
+				adaptiveMediaImageEntries) {
+
 			try {
-				adaptiveMediaImageEntryPersistence.remove(imageEntry);
+				adaptiveMediaImageEntryPersistence.remove(
+					adaptiveMediaImageEntry);
 
 				imageStorage.delete(
-					fileVersion, imageEntry.getConfigurationUuid());
+					fileVersion,
+					adaptiveMediaImageEntry.getConfigurationUuid());
 			}
 			catch (AdaptiveMediaRuntimeException.IOException amreioe) {
 				_log.error(amreioe);
@@ -212,13 +219,14 @@ public class AdaptiveMediaImageEntryLocalServiceImpl
 		FileVersion fileVersion = dlAppLocalService.getFileVersion(
 			fileVersionId);
 
-		AdaptiveMediaImageEntry imageEntry =
+		AdaptiveMediaImageEntry adaptiveMediaImageEntry =
 			adaptiveMediaImageEntryPersistence.findByC_F(
 				configurationUuid, fileVersionId);
 
-		adaptiveMediaImageEntryPersistence.remove(imageEntry);
+		adaptiveMediaImageEntryPersistence.remove(adaptiveMediaImageEntry);
 
-		imageStorage.delete(fileVersion, imageEntry.getConfigurationUuid());
+		imageStorage.delete(
+			fileVersion, adaptiveMediaImageEntry.getConfigurationUuid());
 	}
 
 	@Override
@@ -307,11 +315,11 @@ public class AdaptiveMediaImageEntryLocalServiceImpl
 	 */
 	@Override
 	public int getExpectedAdaptiveMediaImageEntriesCount(long companyId) {
-		Collection<AdaptiveMediaImageCounter> imageCounters =
+		Collection<AdaptiveMediaImageCounter> adaptiveMediaImageCounters =
 			_serviceTrackerMap.values();
 
 		Stream<AdaptiveMediaImageCounter> adaptiveMediaImageCounterStream =
-			imageCounters.stream();
+			adaptiveMediaImageCounters.stream();
 
 		return adaptiveMediaImageCounterStream.mapToInt(
 			adaptiveMediaImageCounter ->
@@ -336,17 +344,19 @@ public class AdaptiveMediaImageEntryLocalServiceImpl
 	 */
 	@Override
 	public int getPercentage(long companyId, String configurationUuid) {
-		int expectedImageEntries = getExpectedAdaptiveMediaImageEntriesCount(
+		int expectedEntriesCount = getExpectedAdaptiveMediaImageEntriesCount(
 			companyId);
 
-		if (expectedImageEntries == 0) {
+		if (expectedEntriesCount == 0) {
 			return 0;
 		}
 
-		int actualImageEntries = getAdaptiveMediaImageEntriesCount(
+		int actualEntriesCount = getAdaptiveMediaImageEntriesCount(
 			companyId, configurationUuid);
 
-		return Math.min(actualImageEntries * 100 / expectedImageEntries, 100);
+		int percentage = (actualEntriesCount * 100) / expectedEntriesCount;
+
+		return Math.min(percentage, 100);
 	}
 
 	@ServiceReference(type = DLAppLocalService.class)
@@ -358,11 +368,11 @@ public class AdaptiveMediaImageEntryLocalServiceImpl
 	private void _checkDuplicates(String configurationUuid, long fileVersionId)
 		throws DuplicateAdaptiveMediaImageEntryException {
 
-		AdaptiveMediaImageEntry imageEntry =
+		AdaptiveMediaImageEntry adaptiveMediaImageEntry =
 			adaptiveMediaImageEntryPersistence.fetchByC_F(
 				configurationUuid, fileVersionId);
 
-		if (imageEntry != null) {
+		if (adaptiveMediaImageEntry != null) {
 			throw new DuplicateAdaptiveMediaImageEntryException();
 		}
 	}

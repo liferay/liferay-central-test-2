@@ -128,9 +128,13 @@ public class AdaptiveMediaImageHTMLTagFactoryImpl
 		List<MediaQuery> mediaQueries = _mediaQueryProvider.getMediaQueries(
 			fileEntry);
 
-		Stream<MediaQuery> stream = mediaQueries.stream();
+		Stream<MediaQuery> mediaQueryStream = mediaQueries.stream();
 
-		return stream.map(this::_getSourceElement).collect(Collectors.toList());
+		return mediaQueryStream.map(
+			this::_getSourceElement
+		).collect(
+			Collectors.toList()
+		);
 	}
 
 	private static final Pattern _ATTR_PATTERN = Pattern.compile(

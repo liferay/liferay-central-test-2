@@ -78,7 +78,7 @@ public class FileEntryAdaptiveMediaImageURLItemSelectorReturnTypeResolverTest {
 	public void setUp() throws Exception {
 		_group = GroupTestUtil.addGroup();
 
-		_configurationHelper = _getService(
+		_adaptiveMediaImageConfigurationHelper = _getService(
 			AdaptiveMediaImageConfigurationHelper.class);
 		_dlAppLocalService = _getService(DLAppLocalService.class);
 
@@ -88,13 +88,14 @@ public class FileEntryAdaptiveMediaImageURLItemSelectorReturnTypeResolverTest {
 		ServiceTestUtil.setUser(TestPropsValues.getUser());
 
 		Collection<AdaptiveMediaImageConfigurationEntry> configurationEntries =
-			_configurationHelper.getAdaptiveMediaImageConfigurationEntries(
-				TestPropsValues.getCompanyId(), configurationEntry -> true);
+			_adaptiveMediaImageConfigurationHelper.
+				getAdaptiveMediaImageConfigurationEntries(
+					TestPropsValues.getCompanyId(), configurationEntry -> true);
 
 		for (AdaptiveMediaImageConfigurationEntry configurationEntry :
 				configurationEntries) {
 
-			_configurationHelper.
+			_adaptiveMediaImageConfigurationHelper.
 				forceDeleteAdaptiveMediaImageConfigurationEntry(
 					TestPropsValues.getCompanyId(),
 					configurationEntry.getUUID());
@@ -104,13 +105,14 @@ public class FileEntryAdaptiveMediaImageURLItemSelectorReturnTypeResolverTest {
 	@After
 	public void tearDown() throws Exception {
 		Collection<AdaptiveMediaImageConfigurationEntry> configurationEntries =
-			_configurationHelper.getAdaptiveMediaImageConfigurationEntries(
-				TestPropsValues.getCompanyId(), configurationEntry -> true);
+			_adaptiveMediaImageConfigurationHelper.
+				getAdaptiveMediaImageConfigurationEntries(
+					TestPropsValues.getCompanyId(), configurationEntry -> true);
 
 		for (AdaptiveMediaImageConfigurationEntry configurationEntry :
 				configurationEntries) {
 
-			_configurationHelper.
+			_adaptiveMediaImageConfigurationHelper.
 				forceDeleteAdaptiveMediaImageConfigurationEntry(
 					TestPropsValues.getCompanyId(),
 					configurationEntry.getUUID());
@@ -613,9 +615,10 @@ public class FileEntryAdaptiveMediaImageURLItemSelectorReturnTypeResolverTest {
 		properties.put("max-height", String.valueOf(height));
 		properties.put("max-width", String.valueOf(width));
 
-		_configurationHelper.addAdaptiveMediaImageConfigurationEntry(
-			TestPropsValues.getCompanyId(), name, StringPool.BLANK, uuid,
-			properties);
+		_adaptiveMediaImageConfigurationHelper.
+			addAdaptiveMediaImageConfigurationEntry(
+				TestPropsValues.getCompanyId(), name, StringPool.BLANK, uuid,
+				properties);
 	}
 
 	private void _assertAttibutes(
@@ -737,7 +740,8 @@ public class FileEntryAdaptiveMediaImageURLItemSelectorReturnTypeResolverTest {
 			"internal.resolver.FileEntryAdaptiveMediaImageURLItem" +
 				"SelectorReturnTypeResolver)";
 
-	private AdaptiveMediaImageConfigurationHelper _configurationHelper;
+	private AdaptiveMediaImageConfigurationHelper
+		_adaptiveMediaImageConfigurationHelper;
 	private DLAppLocalService _dlAppLocalService;
 
 	@DeleteAfterTestRun

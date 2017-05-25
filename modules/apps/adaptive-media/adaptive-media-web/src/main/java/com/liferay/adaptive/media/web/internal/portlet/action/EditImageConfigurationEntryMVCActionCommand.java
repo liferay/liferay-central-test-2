@@ -239,11 +239,12 @@ public class EditImageConfigurationEntryMVCActionCommand
 		long companyId,
 		AdaptiveMediaImageConfigurationEntry configurationEntry) {
 
-		int imageEntriesCount =
-			_imageEntryLocalService.getAdaptiveMediaImageEntriesCount(
-				companyId, configurationEntry.getUUID());
+		int entriesCount =
+			_adaptiveMediaImageEntryLocalService.
+				getAdaptiveMediaImageEntriesCount(
+					companyId, configurationEntry.getUUID());
 
-		if (imageEntriesCount == 0) {
+		if (entriesCount == 0) {
 			return true;
 		}
 
@@ -255,6 +256,7 @@ public class EditImageConfigurationEntryMVCActionCommand
 		_adaptiveMediaImageConfigurationHelper;
 
 	@Reference
-	private AdaptiveMediaImageEntryLocalService _imageEntryLocalService;
+	private AdaptiveMediaImageEntryLocalService
+		_adaptiveMediaImageEntryLocalService;
 
 }

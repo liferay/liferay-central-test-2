@@ -44,7 +44,9 @@ public class AdaptiveMediaJournalImageConfigurationMessageListenerTest {
 		_adaptiveMediaJournalImageConfigurationMessageListener.doReceive(
 			new Message());
 
-		Mockito.verify(_journalContent, Mockito.times(1)).clearCache();
+		Mockito.verify(
+			_journalContent, Mockito.times(1)
+		).clearCache();
 	}
 
 	private final AdaptiveMediaJournalImageConfigurationMessageListener

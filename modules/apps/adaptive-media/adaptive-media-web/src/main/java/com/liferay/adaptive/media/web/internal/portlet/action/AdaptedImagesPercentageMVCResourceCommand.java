@@ -59,23 +59,24 @@ public class AdaptedImagesPercentageMVCResourceCommand
 
 		String entryUuid = ParamUtil.getString(resourceRequest, "entryUuid");
 
-		int adaptedImages =
-			_imageEntryLocalService.getAdaptiveMediaImageEntriesCount(
-				companyId, entryUuid);
+		int entriesCount =
+			_adaptiveMediaImageEntryLocalService.
+				getAdaptiveMediaImageEntriesCount(companyId, entryUuid);
 
-		int totalImages =
-			_imageEntryLocalService.getExpectedAdaptiveMediaImageEntriesCount(
-				companyId);
+		int expectedEntriesCount =
+			_adaptiveMediaImageEntryLocalService.
+				getExpectedAdaptiveMediaImageEntriesCount(companyId);
 
-		jsonObject.put("adaptedImages", String.valueOf(adaptedImages));
+		jsonObject.put("adaptedImages", String.valueOf(entriesCount));
 
-		jsonObject.put("totalImages", String.valueOf(totalImages));
+		jsonObject.put("totalImages", String.valueOf(expectedEntriesCount));
 
 		JSONPortletResponseUtil.writeJSON(
 			resourceRequest, resourceResponse, jsonObject);
 	}
 
 	@Reference
-	private AdaptiveMediaImageEntryLocalService _imageEntryLocalService;
+	private AdaptiveMediaImageEntryLocalService
+		_adaptiveMediaImageEntryLocalService;
 
 }

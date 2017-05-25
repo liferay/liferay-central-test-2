@@ -37,7 +37,8 @@ public class AdaptiveMediaServletTest {
 
 	@Before
 	public void setUp() {
-		_servlet.setRequestHandlerLocator(_requestHandlerLocator);
+		_servlet.setAdaptiveMediaRequestHandlerLocator(
+			_adaptiveMediaRequestHandlerLocator);
 	}
 
 	@Test
@@ -49,13 +50,14 @@ public class AdaptiveMediaServletTest {
 		);
 
 		Mockito.when(
-			_requestHandlerLocator.locateForPattern(Mockito.anyString())
+			_adaptiveMediaRequestHandlerLocator.locateForPattern(
+				Mockito.anyString())
 		).thenReturn(
-			_requestHandler
+			_adaptiveMediaRequestHandler
 		);
 
 		Mockito.when(
-			_requestHandler.handleRequest(_request)
+			_adaptiveMediaRequestHandler.handleRequest(_request)
 		).thenThrow(
 			new IllegalArgumentException()
 		);
@@ -78,13 +80,14 @@ public class AdaptiveMediaServletTest {
 		);
 
 		Mockito.when(
-			_requestHandlerLocator.locateForPattern(Mockito.anyString())
+			_adaptiveMediaRequestHandlerLocator.locateForPattern(
+				Mockito.anyString())
 		).thenReturn(
-			_requestHandler
+			_adaptiveMediaRequestHandler
 		);
 
 		Mockito.when(
-			_requestHandler.handleRequest(_request)
+			_adaptiveMediaRequestHandler.handleRequest(_request)
 		).thenReturn(
 			Optional.empty()
 		);
@@ -107,13 +110,14 @@ public class AdaptiveMediaServletTest {
 		);
 
 		Mockito.when(
-			_requestHandlerLocator.locateForPattern(Mockito.anyString())
+			_adaptiveMediaRequestHandlerLocator.locateForPattern(
+				Mockito.anyString())
 		).thenReturn(
-			_requestHandler
+			_adaptiveMediaRequestHandler
 		);
 
 		Mockito.when(
-			_requestHandler.handleRequest(_request)
+			_adaptiveMediaRequestHandler.handleRequest(_request)
 		).thenThrow(
 			AdaptiveMediaException.AdaptiveMediaNotFound.class
 		);
@@ -136,13 +140,14 @@ public class AdaptiveMediaServletTest {
 		);
 
 		Mockito.when(
-			_requestHandlerLocator.locateForPattern(Mockito.anyString())
+			_adaptiveMediaRequestHandlerLocator.locateForPattern(
+				Mockito.anyString())
 		).thenReturn(
-			_requestHandler
+			_adaptiveMediaRequestHandler
 		);
 
 		Mockito.when(
-			_requestHandler.handleRequest(_request)
+			_adaptiveMediaRequestHandler.handleRequest(_request)
 		).thenThrow(
 			new ServletException(new PrincipalException())
 		);
@@ -165,7 +170,8 @@ public class AdaptiveMediaServletTest {
 		);
 
 		Mockito.when(
-			_requestHandlerLocator.locateForPattern(Mockito.anyString())
+			_adaptiveMediaRequestHandlerLocator.locateForPattern(
+				Mockito.anyString())
 		).thenReturn(
 			null
 		);
@@ -179,12 +185,13 @@ public class AdaptiveMediaServletTest {
 		);
 	}
 
+	private final AdaptiveMediaRequestHandler<?> _adaptiveMediaRequestHandler =
+		Mockito.mock(AdaptiveMediaRequestHandler.class);
+	private final AdaptiveMediaRequestHandlerLocator
+		_adaptiveMediaRequestHandlerLocator = Mockito.mock(
+			AdaptiveMediaRequestHandlerLocator.class);
 	private final HttpServletRequest _request = Mockito.mock(
 		HttpServletRequest.class);
-	private final AdaptiveMediaRequestHandler<?> _requestHandler = Mockito.mock(
-		AdaptiveMediaRequestHandler.class);
-	private final AdaptiveMediaRequestHandlerLocator _requestHandlerLocator =
-		Mockito.mock(AdaptiveMediaRequestHandlerLocator.class);
 	private final HttpServletResponse _response = Mockito.mock(
 		HttpServletResponse.class);
 	private final AdaptiveMediaServlet _servlet = new AdaptiveMediaServlet();
