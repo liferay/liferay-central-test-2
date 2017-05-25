@@ -156,9 +156,23 @@ public class DDMDataProviderInvokerImpl implements DDMDataProviderInvoker {
 		DDMDataProvider ddmDataProvider = getDDMDataProvider(
 			ddmDataProviderInstanceId, ddmDataProviderInstanceOptional);
 
+		if (ddmDataProviderInstanceOptional.isPresent()) {
+			return doInvokeExternal(
+				ddmDataProviderInstanceOptional.get(), ddmDataProvider,
+				ddmDataProviderRequest);
+		}
+
+		return ddmDataProvider.getData(ddmDataProviderRequest);
+	}
+
+	protected DDMDataProviderResponse doInvokeExternal(
+		DDMDataProviderInstance ddmDataProviderInstance,
+		DDMDataProvider ddmDataProvider,
+		DDMDataProviderRequest ddmDataProviderRequest) {
+
 		DDMDataProviderInvokeCommand invokeCommand =
 			new DDMDataProviderInvokeCommand(
-				ddmDataProviderInstanceId, ddmDataProvider,
+				ddmDataProviderInstance.getNameCurrentValue(), ddmDataProvider,
 				ddmDataProviderRequest);
 
 		return invokeCommand.execute();
@@ -251,14 +265,14 @@ public class DDMDataProviderInvokerImpl implements DDMDataProviderInvoker {
 		extends HystrixCommand<DDMDataProviderResponse> {
 
 		public DDMDataProviderInvokeCommand(
-			String ddmDataProviderInstanceId, DDMDataProvider ddmDataProvider,
+			String ddmDataProviderInstanceName, DDMDataProvider ddmDataProvider,
 			DDMDataProviderRequest ddmDataProviderRequest) {
 
 			super(
 				Setter.withGroupKey(_hystrixCommandGroupKey).andCommandKey(
 					HystrixCommandKey.Factory.asKey(
 						"DDMDataProviderInvokeCommand#" +
-							ddmDataProviderInstanceId)));
+							ddmDataProviderInstanceName)));
 
 			_ddmDataProvider = ddmDataProvider;
 			_ddmDataProviderRequest = ddmDataProviderRequest;
