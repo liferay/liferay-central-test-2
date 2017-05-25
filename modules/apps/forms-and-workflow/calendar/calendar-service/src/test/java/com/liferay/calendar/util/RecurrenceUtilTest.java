@@ -100,6 +100,53 @@ public class RecurrenceUtilTest {
 	}
 
 	@Test
+	public void testInTimeZoneDoesNotUpdateExceptionJCalendarsInSameDay() {
+		Recurrence recurrence = RecurrenceSerializer.deserialize(
+			"RRULE:FREQ=DAILY;INTERVAL=1\n" +
+				"EXDATE;TZID=\"UTC\";VALUE=DATE:20151225,20151231",
+			_utcTimeZone);
+
+		List<Calendar> exceptionJCalendars =
+			recurrence.getExceptionJCalendars();
+
+		Calendar exceptionJCalendar = exceptionJCalendars.get(0);
+
+		Assert.assertEquals(2015, exceptionJCalendar.get(Calendar.YEAR));
+		Assert.assertEquals(
+			Calendar.DECEMBER, exceptionJCalendar.get(Calendar.MONTH));
+		Assert.assertEquals(25, exceptionJCalendar.get(Calendar.DAY_OF_MONTH));
+
+		exceptionJCalendar = exceptionJCalendars.get(1);
+
+		Assert.assertEquals(2015, exceptionJCalendar.get(Calendar.YEAR));
+		Assert.assertEquals(
+			Calendar.DECEMBER, exceptionJCalendar.get(Calendar.MONTH));
+		Assert.assertEquals(31, exceptionJCalendar.get(Calendar.DAY_OF_MONTH));
+
+		Calendar startTimeJCalendar = JCalendarUtil.getJCalendar(
+			2015, Calendar.DECEMBER, 11, 10, 0, 0, 0, _utcTimeZone);
+
+		recurrence = RecurrenceUtil.inTimeZone(
+			recurrence, startTimeJCalendar, _losAngelesTimeZone);
+
+		exceptionJCalendars = recurrence.getExceptionJCalendars();
+
+		exceptionJCalendar = exceptionJCalendars.get(0);
+
+		Assert.assertEquals(2015, exceptionJCalendar.get(Calendar.YEAR));
+		Assert.assertEquals(
+			Calendar.DECEMBER, exceptionJCalendar.get(Calendar.MONTH));
+		Assert.assertEquals(25, exceptionJCalendar.get(Calendar.DAY_OF_MONTH));
+
+		exceptionJCalendar = exceptionJCalendars.get(1);
+
+		Assert.assertEquals(2015, exceptionJCalendar.get(Calendar.YEAR));
+		Assert.assertEquals(
+			Calendar.DECEMBER, exceptionJCalendar.get(Calendar.MONTH));
+		Assert.assertEquals(31, exceptionJCalendar.get(Calendar.DAY_OF_MONTH));
+	}
+
+	@Test
 	public void testInTimeZoneUpdatesUntilJCalendar() {
 		Recurrence recurrence = RecurrenceSerializer.deserialize(
 			"RRULE:FREQ=DAILY;INTERVAL=1;UNTIL=20160116", _utcTimeZone);
