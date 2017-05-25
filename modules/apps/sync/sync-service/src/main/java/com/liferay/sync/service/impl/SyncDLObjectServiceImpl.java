@@ -98,7 +98,6 @@ import jodd.util.NameValue;
 
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
-import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Michael Young
@@ -116,14 +115,14 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 		try {
 			Group group = groupLocalService.getGroup(repositoryId);
 
-			_syncUtil.checkSyncEnabled(group.getGroupId());
+			SyncUtil.checkSyncEnabled(group.getGroupId());
 
 			checkFolder(folderId);
 
 			if (!group.isUser() &&
 				ArrayUtil.isEmpty(serviceContext.getGroupPermissions())) {
 
-				_syncUtil.setFilePermissions(group, false, serviceContext);
+				SyncUtil.setFilePermissions(group, false, serviceContext);
 			}
 
 			serviceContext.setCommand(Constants.ADD);
@@ -150,7 +149,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 				}
 			}
 
-			throw new PortalException(_syncUtil.buildExceptionMessage(pe), pe);
+			throw new PortalException(SyncUtil.buildExceptionMessage(pe), pe);
 		}
 	}
 
@@ -163,14 +162,14 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 		try {
 			Group group = groupLocalService.getGroup(repositoryId);
 
-			_syncUtil.checkSyncEnabled(group.getGroupId());
+			SyncUtil.checkSyncEnabled(group.getGroupId());
 
 			checkFolder(parentFolderId);
 
 			if (!group.isUser() &&
 				ArrayUtil.isEmpty(serviceContext.getGroupPermissions())) {
 
-				_syncUtil.setFilePermissions(group, true, serviceContext);
+				SyncUtil.setFilePermissions(group, true, serviceContext);
 			}
 
 			Folder folder = dlAppService.addFolder(
@@ -193,7 +192,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 				}
 			}
 
-			throw new PortalException(_syncUtil.buildExceptionMessage(pe), pe);
+			throw new PortalException(SyncUtil.buildExceptionMessage(pe), pe);
 		}
 	}
 
@@ -204,7 +203,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 		try {
 			FileEntry fileEntry = dlAppLocalService.getFileEntry(fileEntryId);
 
-			_syncUtil.checkSyncEnabled(fileEntry.getGroupId());
+			SyncUtil.checkSyncEnabled(fileEntry.getGroupId());
 
 			checkFileEntry(fileEntry);
 
@@ -216,7 +215,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 				fileEntry, SyncDLObjectConstants.EVENT_CANCEL_CHECK_OUT);
 		}
 		catch (PortalException pe) {
-			throw new PortalException(_syncUtil.buildExceptionMessage(pe), pe);
+			throw new PortalException(SyncUtil.buildExceptionMessage(pe), pe);
 		}
 	}
 
@@ -229,7 +228,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 		try {
 			FileEntry fileEntry = dlAppLocalService.getFileEntry(fileEntryId);
 
-			_syncUtil.checkSyncEnabled(fileEntry.getGroupId());
+			SyncUtil.checkSyncEnabled(fileEntry.getGroupId());
 
 			checkFileEntry(fileEntry);
 
@@ -242,7 +241,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 				fileEntry, SyncDLObjectConstants.EVENT_CHECK_IN);
 		}
 		catch (PortalException pe) {
-			throw new PortalException(_syncUtil.buildExceptionMessage(pe), pe);
+			throw new PortalException(SyncUtil.buildExceptionMessage(pe), pe);
 		}
 	}
 
@@ -254,7 +253,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 		try {
 			FileEntry fileEntry = dlAppLocalService.getFileEntry(fileEntryId);
 
-			_syncUtil.checkSyncEnabled(fileEntry.getGroupId());
+			SyncUtil.checkSyncEnabled(fileEntry.getGroupId());
 
 			checkFileEntry(fileEntry);
 
@@ -266,7 +265,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 				fileEntry, SyncDLObjectConstants.EVENT_CHECK_OUT);
 		}
 		catch (PortalException pe) {
-			throw new PortalException(_syncUtil.buildExceptionMessage(pe), pe);
+			throw new PortalException(SyncUtil.buildExceptionMessage(pe), pe);
 		}
 	}
 
@@ -279,7 +278,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 		try {
 			FileEntry fileEntry = dlAppLocalService.getFileEntry(fileEntryId);
 
-			_syncUtil.checkSyncEnabled(fileEntry.getGroupId());
+			SyncUtil.checkSyncEnabled(fileEntry.getGroupId());
 
 			checkFileEntry(fileEntry);
 
@@ -290,7 +289,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 				fileEntry, SyncDLObjectConstants.EVENT_CHECK_OUT);
 		}
 		catch (PortalException pe) {
-			throw new PortalException(_syncUtil.buildExceptionMessage(pe), pe);
+			throw new PortalException(SyncUtil.buildExceptionMessage(pe), pe);
 		}
 	}
 
@@ -303,7 +302,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 		try {
 			Group group = groupLocalService.getGroup(repositoryId);
 
-			_syncUtil.checkSyncEnabled(group.getGroupId());
+			SyncUtil.checkSyncEnabled(group.getGroupId());
 
 			checkFolder(folderId);
 
@@ -319,7 +318,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 			if (!group.isUser() &&
 				ArrayUtil.isEmpty(serviceContext.getGroupPermissions())) {
 
-				_syncUtil.setFilePermissions(group, false, serviceContext);
+				SyncUtil.setFilePermissions(group, false, serviceContext);
 			}
 
 			serviceContext.setCommand(Constants.ADD);
@@ -335,7 +334,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 				sourceSyncDLObject.getChecksum());
 		}
 		catch (PortalException pe) {
-			throw new PortalException(_syncUtil.buildExceptionMessage(pe), pe);
+			throw new PortalException(SyncUtil.buildExceptionMessage(pe), pe);
 		}
 	}
 
@@ -344,7 +343,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 		throws PortalException {
 
 		try {
-			_syncUtil.checkSyncEnabled(repositoryId);
+			SyncUtil.checkSyncEnabled(repositoryId);
 
 			repositoryService.checkRepository(repositoryId);
 
@@ -356,7 +355,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 			return checkSyncDLObjects(syncDLObjects, repositoryId, 0);
 		}
 		catch (PortalException pe) {
-			throw new PortalException(_syncUtil.buildExceptionMessage(pe), pe);
+			throw new PortalException(SyncUtil.buildExceptionMessage(pe), pe);
 		}
 	}
 
@@ -366,7 +365,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 		throws PortalException {
 
 		try {
-			_syncUtil.checkSyncEnabled(repositoryId);
+			SyncUtil.checkSyncEnabled(repositoryId);
 
 			FileEntry fileEntry = dlAppService.getFileEntry(
 				repositoryId, folderId, title);
@@ -374,7 +373,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 			return toSyncDLObject(fileEntry, SyncDLObjectConstants.EVENT_GET);
 		}
 		catch (PortalException pe) {
-			throw new PortalException(_syncUtil.buildExceptionMessage(pe), pe);
+			throw new PortalException(SyncUtil.buildExceptionMessage(pe), pe);
 		}
 	}
 
@@ -384,7 +383,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 		throws PortalException {
 
 		try {
-			_syncUtil.checkSyncEnabled(repositoryId);
+			SyncUtil.checkSyncEnabled(repositoryId);
 
 			List<FileEntry> fileEntries = dlAppService.getFileEntries(
 				repositoryId, folderId);
@@ -402,7 +401,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 			return syncDLObjects;
 		}
 		catch (PortalException pe) {
-			throw new PortalException(_syncUtil.buildExceptionMessage(pe), pe);
+			throw new PortalException(SyncUtil.buildExceptionMessage(pe), pe);
 		}
 	}
 
@@ -413,18 +412,18 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 		try {
 			Folder folder = dlAppLocalService.getFolder(folderId);
 
-			_syncUtil.checkSyncEnabled(folder.getGroupId());
+			SyncUtil.checkSyncEnabled(folder.getGroupId());
 
 			folder = dlAppService.getFolder(folderId);
 
-			if (!_syncUtil.isSupportedFolder(folder)) {
+			if (!SyncUtil.isSupportedFolder(folder)) {
 				return null;
 			}
 
 			return toSyncDLObject(folder, SyncDLObjectConstants.EVENT_GET);
 		}
 		catch (PortalException pe) {
-			throw new PortalException(_syncUtil.buildExceptionMessage(pe), pe);
+			throw new PortalException(SyncUtil.buildExceptionMessage(pe), pe);
 		}
 	}
 
@@ -434,19 +433,19 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 		throws PortalException {
 
 		try {
-			_syncUtil.checkSyncEnabled(repositoryId);
+			SyncUtil.checkSyncEnabled(repositoryId);
 
 			Folder folder = dlAppService.getFolder(
 				repositoryId, parentFolderId, name);
 
-			if (!_syncUtil.isSupportedFolder(folder)) {
+			if (!SyncUtil.isSupportedFolder(folder)) {
 				return null;
 			}
 
 			return toSyncDLObject(folder, SyncDLObjectConstants.EVENT_GET);
 		}
 		catch (PortalException pe) {
-			throw new PortalException(_syncUtil.buildExceptionMessage(pe), pe);
+			throw new PortalException(SyncUtil.buildExceptionMessage(pe), pe);
 		}
 	}
 
@@ -456,7 +455,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 		throws PortalException {
 
 		try {
-			_syncUtil.checkSyncEnabled(repositoryId);
+			SyncUtil.checkSyncEnabled(repositoryId);
 
 			List<Folder> folders = dlAppService.getFolders(
 				repositoryId, parentFolderId);
@@ -464,7 +463,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 			List<SyncDLObject> syncDLObjects = new ArrayList<>(folders.size());
 
 			for (Folder folder : folders) {
-				if (!_syncUtil.isSupportedFolder(folder)) {
+				if (!SyncUtil.isSupportedFolder(folder)) {
 					continue;
 				}
 
@@ -477,31 +476,31 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 			return syncDLObjects;
 		}
 		catch (PortalException pe) {
-			throw new PortalException(_syncUtil.buildExceptionMessage(pe), pe);
+			throw new PortalException(SyncUtil.buildExceptionMessage(pe), pe);
 		}
 	}
 
 	@Override
 	public Group getGroup(long groupId) throws PortalException {
 		try {
-			_syncUtil.checkSyncEnabled(groupId);
+			SyncUtil.checkSyncEnabled(groupId);
 
 			return groupService.getGroup(groupId);
 		}
 		catch (PortalException pe) {
-			throw new PortalException(_syncUtil.buildExceptionMessage(pe), pe);
+			throw new PortalException(SyncUtil.buildExceptionMessage(pe), pe);
 		}
 	}
 
 	@Override
 	public long getLatestModifiedTime() throws PortalException {
 		try {
-			_syncUtil.checkSyncEnabled(0);
+			SyncUtil.checkSyncEnabled(0);
 
 			return syncDLObjectLocalService.getLatestModifiedTime();
 		}
 		catch (PortalException pe) {
-			throw new PortalException(_syncUtil.buildExceptionMessage(pe), pe);
+			throw new PortalException(SyncUtil.buildExceptionMessage(pe), pe);
 		}
 	}
 
@@ -509,7 +508,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 	@Override
 	public Object getSyncContext() throws PortalException {
 		try {
-			_syncUtil.checkSyncEnabled(0);
+			SyncUtil.checkSyncEnabled(0);
 
 			User user = getGuestOrUser();
 
@@ -584,7 +583,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 			return syncContext;
 		}
 		catch (PortalException pe) {
-			throw new PortalException(_syncUtil.buildExceptionMessage(pe), pe);
+			throw new PortalException(SyncUtil.buildExceptionMessage(pe), pe);
 		}
 	}
 
@@ -603,7 +602,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 		throws PortalException {
 
 		try {
-			_syncUtil.checkSyncEnabled(repositoryId);
+			SyncUtil.checkSyncEnabled(repositoryId);
 
 			repositoryService.checkRepository(repositoryId);
 
@@ -666,7 +665,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 			return syncDLObjectUpdate.toString();
 		}
 		catch (PortalException pe) {
-			throw new PortalException(_syncUtil.buildExceptionMessage(pe), pe);
+			throw new PortalException(SyncUtil.buildExceptionMessage(pe), pe);
 		}
 	}
 
@@ -676,7 +675,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 		throws PortalException {
 
 		try {
-			_syncUtil.checkSyncEnabled(repositoryId);
+			SyncUtil.checkSyncEnabled(repositoryId);
 
 			repositoryService.checkRepository(repositoryId);
 
@@ -696,14 +695,14 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 			return syncDLObjectUpdate.toString();
 		}
 		catch (PortalException pe) {
-			throw new PortalException(_syncUtil.buildExceptionMessage(pe), pe);
+			throw new PortalException(SyncUtil.buildExceptionMessage(pe), pe);
 		}
 	}
 
 	@Override
 	public List<Group> getUserSitesGroups() throws PortalException {
 		try {
-			_syncUtil.checkSyncEnabled(0);
+			SyncUtil.checkSyncEnabled(0);
 
 			User user = getUser();
 
@@ -719,7 +718,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 				QueryUtil.ALL_POS);
 
 			for (Group userSiteGroup : userSiteGroups) {
-				if (_syncUtil.isSyncEnabled(userSiteGroup)) {
+				if (SyncUtil.isSyncEnabled(userSiteGroup)) {
 					userSiteGroup.setName(userSiteGroup.getDescriptiveName());
 
 					groups.add(userSiteGroup);
@@ -734,7 +733,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 			for (Organization organization : organizations) {
 				Group userOrganizationGroup = organization.getGroup();
 
-				if (_syncUtil.isSyncEnabled(userOrganizationGroup)) {
+				if (SyncUtil.isSyncEnabled(userOrganizationGroup)) {
 					groups.add(userOrganizationGroup);
 				}
 
@@ -748,7 +747,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 						Group userAncestorOrganizationGroup =
 							ancestorOrganization.getGroup();
 
-						if (_syncUtil.isSyncEnabled(
+						if (SyncUtil.isSyncEnabled(
 								userAncestorOrganizationGroup)) {
 
 							groups.add(userAncestorOrganizationGroup);
@@ -773,7 +772,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 			Group companyGroup = groupLocalService.getCompanyGroup(
 				user.getCompanyId());
 
-			if (_syncUtil.isSyncEnabled(companyGroup)) {
+			if (SyncUtil.isSyncEnabled(companyGroup)) {
 				companyGroup.setName(companyGroup.getDescriptiveName());
 
 				groups.add(companyGroup);
@@ -798,7 +797,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 		try {
 			FileEntry fileEntry = dlAppLocalService.getFileEntry(fileEntryId);
 
-			_syncUtil.checkSyncEnabled(fileEntry.getGroupId());
+			SyncUtil.checkSyncEnabled(fileEntry.getGroupId());
 
 			checkFileEntry(fileEntry);
 
@@ -808,7 +807,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 			return toSyncDLObject(fileEntry, SyncDLObjectConstants.EVENT_MOVE);
 		}
 		catch (PortalException pe) {
-			throw new PortalException(_syncUtil.buildExceptionMessage(pe), pe);
+			throw new PortalException(SyncUtil.buildExceptionMessage(pe), pe);
 		}
 	}
 
@@ -819,7 +818,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 		try {
 			FileEntry fileEntry = dlAppLocalService.getFileEntry(fileEntryId);
 
-			_syncUtil.checkSyncEnabled(fileEntry.getGroupId());
+			SyncUtil.checkSyncEnabled(fileEntry.getGroupId());
 
 			checkFileEntry(fileEntry);
 
@@ -828,7 +827,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 			return toSyncDLObject(fileEntry, SyncDLObjectConstants.EVENT_TRASH);
 		}
 		catch (PortalException pe) {
-			throw new PortalException(_syncUtil.buildExceptionMessage(pe), pe);
+			throw new PortalException(SyncUtil.buildExceptionMessage(pe), pe);
 		}
 	}
 
@@ -840,7 +839,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 		try {
 			Folder folder = dlAppLocalService.getFolder(folderId);
 
-			_syncUtil.checkSyncEnabled(folder.getGroupId());
+			SyncUtil.checkSyncEnabled(folder.getGroupId());
 
 			checkFolder(folder);
 
@@ -850,7 +849,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 			return toSyncDLObject(folder, SyncDLObjectConstants.EVENT_MOVE);
 		}
 		catch (PortalException pe) {
-			throw new PortalException(_syncUtil.buildExceptionMessage(pe), pe);
+			throw new PortalException(SyncUtil.buildExceptionMessage(pe), pe);
 		}
 	}
 
@@ -861,7 +860,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 		try {
 			Folder folder = dlAppLocalService.getFolder(folderId);
 
-			_syncUtil.checkSyncEnabled(folder.getGroupId());
+			SyncUtil.checkSyncEnabled(folder.getGroupId());
 
 			checkFolder(folderId);
 
@@ -870,7 +869,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 			return toSyncDLObject(folder, SyncDLObjectConstants.EVENT_TRASH);
 		}
 		catch (PortalException pe) {
-			throw new PortalException(_syncUtil.buildExceptionMessage(pe), pe);
+			throw new PortalException(SyncUtil.buildExceptionMessage(pe), pe);
 		}
 	}
 
@@ -887,7 +886,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 		try {
 			FileEntry fileEntry = dlAppLocalService.getFileEntry(fileEntryId);
 
-			_syncUtil.checkSyncEnabled(fileEntry.getGroupId());
+			SyncUtil.checkSyncEnabled(fileEntry.getGroupId());
 
 			checkFileEntry(fileEntry);
 
@@ -899,7 +898,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 
 			patchedFile = FileUtil.createTempFile();
 
-			_syncUtil.patchFile(sourceFile, deltaFile, patchedFile);
+			SyncUtil.patchFile(sourceFile, deltaFile, patchedFile);
 
 			SyncDLObject syncDLObject = updateFileEntry(
 				fileEntryId, sourceFileName, mimeType, title, description,
@@ -920,7 +919,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 			return syncDLObject;
 		}
 		catch (PortalException pe) {
-			throw new PortalException(_syncUtil.buildExceptionMessage(pe), pe);
+			throw new PortalException(SyncUtil.buildExceptionMessage(pe), pe);
 		}
 		finally {
 			FileUtil.delete(patchedFile);
@@ -934,7 +933,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 		try {
 			FileEntry fileEntry = dlAppLocalService.getFileEntry(fileEntryId);
 
-			_syncUtil.checkSyncEnabled(fileEntry.getGroupId());
+			SyncUtil.checkSyncEnabled(fileEntry.getGroupId());
 
 			dlTrashService.restoreFileEntryFromTrash(fileEntryId);
 
@@ -944,7 +943,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 				fileEntry, SyncDLObjectConstants.EVENT_RESTORE);
 		}
 		catch (PortalException pe) {
-			throw new PortalException(_syncUtil.buildExceptionMessage(pe), pe);
+			throw new PortalException(SyncUtil.buildExceptionMessage(pe), pe);
 		}
 	}
 
@@ -955,7 +954,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 		try {
 			Folder folder = dlAppLocalService.getFolder(folderId);
 
-			_syncUtil.checkSyncEnabled(folder.getGroupId());
+			SyncUtil.checkSyncEnabled(folder.getGroupId());
 
 			dlTrashService.restoreFolderFromTrash(folderId);
 
@@ -964,7 +963,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 			return toSyncDLObject(folder, SyncDLObjectConstants.EVENT_RESTORE);
 		}
 		catch (PortalException pe) {
-			throw new PortalException(_syncUtil.buildExceptionMessage(pe), pe);
+			throw new PortalException(SyncUtil.buildExceptionMessage(pe), pe);
 		}
 	}
 
@@ -978,7 +977,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 		ZipReader zipReader = null;
 
 		try {
-			_syncUtil.checkSyncEnabled(0);
+			SyncUtil.checkSyncEnabled(0);
 
 			zipReader = ZipReaderFactoryUtil.getZipReader(zipFile);
 
@@ -1027,7 +1026,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 			}
 		}
 		catch (PortalException pe) {
-			throw new PortalException(_syncUtil.buildExceptionMessage(pe), pe);
+			throw new PortalException(SyncUtil.buildExceptionMessage(pe), pe);
 		}
 		finally {
 			if (zipReader != null) {
@@ -1049,7 +1048,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 		try {
 			FileEntry fileEntry = dlAppLocalService.getFileEntry(fileEntryId);
 
-			_syncUtil.checkSyncEnabled(fileEntry.getGroupId());
+			SyncUtil.checkSyncEnabled(fileEntry.getGroupId());
 
 			checkFileEntry(fileEntry);
 
@@ -1063,7 +1062,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 				fileEntry, SyncDLObjectConstants.EVENT_UPDATE, checksum);
 		}
 		catch (PortalException pe) {
-			throw new PortalException(_syncUtil.buildExceptionMessage(pe), pe);
+			throw new PortalException(SyncUtil.buildExceptionMessage(pe), pe);
 		}
 	}
 
@@ -1076,7 +1075,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 		try {
 			Folder folder = dlAppLocalService.getFolder(folderId);
 
-			_syncUtil.checkSyncEnabled(folder.getGroupId());
+			SyncUtil.checkSyncEnabled(folder.getGroupId());
 
 			checkFolder(folder);
 
@@ -1086,7 +1085,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 			return toSyncDLObject(folder, SyncDLObjectConstants.EVENT_UPDATE);
 		}
 		catch (PortalException pe) {
-			throw new PortalException(_syncUtil.buildExceptionMessage(pe), pe);
+			throw new PortalException(SyncUtil.buildExceptionMessage(pe), pe);
 		}
 	}
 
@@ -1425,17 +1424,17 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 			FileEntry fileEntry, String event, String checksum)
 		throws PortalException {
 
-		SyncDLObject syncDLObject = _syncUtil.toSyncDLObject(fileEntry, event);
+		SyncDLObject syncDLObject = SyncUtil.toSyncDLObject(fileEntry, event);
 
 		checkModifiedTime(syncDLObject, fileEntry.getFileEntryId());
 
 		if (Validator.isNotNull(checksum)) {
-			_syncUtil.addChecksum(
+			SyncUtil.addChecksum(
 				syncDLObject.getModifiedTime(), fileEntry.getFileEntryId(),
 				checksum);
 		}
 
-		String lanTokenKey = _syncUtil.getLanTokenKey(
+		String lanTokenKey = SyncUtil.getLanTokenKey(
 			syncDLObject.getModifiedTime(), fileEntry.getFileEntryId(), true);
 
 		syncDLObject.setLanTokenKey(lanTokenKey);
@@ -1446,7 +1445,7 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 	protected SyncDLObject toSyncDLObject(Folder folder, String event)
 		throws PortalException {
 
-		SyncDLObject syncDLObject = _syncUtil.toSyncDLObject(folder, event);
+		SyncDLObject syncDLObject = SyncUtil.toSyncDLObject(folder, event);
 
 		return checkModifiedTime(syncDLObject, folder.getFolderId());
 	}
@@ -1677,8 +1676,5 @@ public class SyncDLObjectServiceImpl extends SyncDLObjectServiceBaseImpl {
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		SyncDLObjectServiceImpl.class);
-
-	@Reference
-	private SyncUtil _syncUtil;
 
 }
