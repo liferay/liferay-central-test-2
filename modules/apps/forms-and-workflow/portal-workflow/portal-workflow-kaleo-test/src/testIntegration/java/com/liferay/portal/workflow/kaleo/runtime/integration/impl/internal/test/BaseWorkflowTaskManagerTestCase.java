@@ -222,26 +222,32 @@ public abstract class BaseWorkflowTaskManagerTestCase {
 	protected FileVersion addFileVersion(long folderId, long fileEntryTypeId)
 		throws Exception {
 
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(group.getGroupId());
+		try (CaptureAppender captureAppender =
+				Log4JLoggerTestUtil.configureLog4JLogger(
+					_MAIL_ENGINE_CLASS_NAME, Level.OFF)) {
 
-		serviceContext.setAttribute("fileEntryTypeId", fileEntryTypeId);
+			ServiceContext serviceContext =
+				ServiceContextTestUtil.getServiceContext(group.getGroupId());
 
-		FileEntry fileEntry = DLAppLocalServiceUtil.addFileEntry(
-			adminUser.getUserId(), group.getGroupId(), folderId,
-			RandomTestUtil.randomString(), ContentTypes.TEXT_PLAIN,
-			RandomTestUtil.randomString(), StringPool.BLANK, StringPool.BLANK,
-			RandomTestUtil.randomBytes(TikaSafeRandomizerBumper.INSTANCE),
-			serviceContext);
+			serviceContext.setAttribute("fileEntryTypeId", fileEntryTypeId);
 
-		DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
-			fileEntry.getFileEntryId());
+			FileEntry fileEntry = DLAppLocalServiceUtil.addFileEntry(
+				adminUser.getUserId(), group.getGroupId(), folderId,
+				RandomTestUtil.randomString(), ContentTypes.TEXT_PLAIN,
+				RandomTestUtil.randomString(), StringPool.BLANK,
+				StringPool.BLANK,
+				RandomTestUtil.randomBytes(TikaSafeRandomizerBumper.INSTANCE),
+				serviceContext);
 
-		_dlFileEntries.add(dlFileEntry);
+			DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
+				fileEntry.getFileEntryId());
 
-		_dlFileVersions.add(dlFileEntry.getFileVersion());
+			_dlFileEntries.add(dlFileEntry);
 
-		return fileEntry.getLatestFileVersion();
+			_dlFileVersions.add(dlFileEntry.getFileVersion());
+
+			return fileEntry.getLatestFileVersion();
+		}
 	}
 
 	protected Folder addFolder() throws PortalException {
