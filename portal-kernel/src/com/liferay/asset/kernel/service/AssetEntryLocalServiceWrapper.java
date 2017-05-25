@@ -923,6 +923,20 @@ public class AssetEntryLocalServiceWrapper implements AssetEntryLocalService,
 
 	@Override
 	public void validate(long groupId, java.lang.String className,
+		long classPK, long classTypePK, long[] categoryIds,
+		java.lang.String[] tagNames)
+		throws com.liferay.portal.kernel.exception.PortalException {
+		_assetEntryLocalService.validate(groupId, className, classPK,
+			classTypePK, categoryIds, tagNames);
+	}
+
+	/**
+	* @deprecated As of 7.0.0, replaced by {@link #validate(long, String, long,
+	long, long[], String[])}
+	*/
+	@Deprecated
+	@Override
+	public void validate(long groupId, java.lang.String className,
 		long classTypePK, long[] categoryIds, java.lang.String[] tagNames)
 		throws com.liferay.portal.kernel.exception.PortalException {
 		_assetEntryLocalService.validate(groupId, className, classTypePK,

@@ -583,6 +583,15 @@ public interface AssetEntryLocalService extends BaseLocalService,
 	public void setAssetTagAssetEntries(long tagId, long[] entryIds);
 
 	public void validate(long groupId, java.lang.String className,
+		long classPK, long classTypePK, long[] categoryIds,
+		java.lang.String[] tagNames) throws PortalException;
+
+	/**
+	* @deprecated As of 7.0.0, replaced by {@link #validate(long, String, long,
+	long, long[], String[])}
+	*/
+	@java.lang.Deprecated
+	public void validate(long groupId, java.lang.String className,
 		long classTypePK, long[] categoryIds, java.lang.String[] tagNames)
 		throws PortalException;
 
