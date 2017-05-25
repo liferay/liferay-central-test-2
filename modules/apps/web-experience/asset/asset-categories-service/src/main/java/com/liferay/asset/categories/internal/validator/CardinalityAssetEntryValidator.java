@@ -79,7 +79,7 @@ public class CardinalityAssetEntryValidator implements AssetEntryValidator {
 	}
 
 	/**
-	 * @deprecated As of 1.1.0
+	 * @deprecated As of 1.0.0
 	 */
 	@Deprecated
 	@Override
