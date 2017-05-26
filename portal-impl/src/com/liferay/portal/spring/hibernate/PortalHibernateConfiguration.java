@@ -337,7 +337,7 @@ public class PortalHibernateConfiguration extends LocalSessionFactoryBean {
 		PortalHibernateConfiguration.class);
 
 	private static final String _importedClassNamePattern =
-		PropsValues.HIBERNATE_SESSION_FACTORY_IMPORTED_CLASS_NAME_PATTERN;
+		PropsValues.HIBERNATE_SESSION_FACTORY_IMPORTED_CLASS_NAME_REGEXP;
 	private static final Map<ProxyFactory, ClassLoader>
 		_proxyFactoryClassLoaders = new ConcurrentReferenceKeyHashMap<>(
 			FinalizeManager.WEAK_REFERENCE_FACTORY);
