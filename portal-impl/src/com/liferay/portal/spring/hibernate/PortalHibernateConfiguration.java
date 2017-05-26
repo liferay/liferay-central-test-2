@@ -208,7 +208,9 @@ public class PortalHibernateConfiguration extends LocalSessionFactoryBean {
 
 		SessionFactory sessionFactory = super.newSessionFactory(configuration);
 
-		if (".*".equals(_importedClassNamePattern)) {
+		if (".*".equals(
+				PropsValues.
+					HIBERNATE_SESSION_FACTORY_IMPORTED_CLASS_NAME_REGEXP)) {
 
 			// For wildcard match, simply disable the optimization
 
@@ -315,13 +317,19 @@ public class PortalHibernateConfiguration extends LocalSessionFactoryBean {
 
 		Object sessionFactoryDelegate = null;
 
-		if (Validator.isBlank(_importedClassNamePattern)) {
+		if (Validator.isBlank(
+				PropsValues.
+					HIBERNATE_SESSION_FACTORY_IMPORTED_CLASS_NAME_REGEXP)) {
+
 			sessionFactoryDelegate = new NoPatternSessionFactoryDelegate(
 				imports);
 		}
 		else {
 			sessionFactoryDelegate = new PatternedSessionFactoryDelegate(
-				imports, _importedClassNamePattern, sessionFactoryImplementor);
+				imports,
+				PropsValues.
+					HIBERNATE_SESSION_FACTORY_IMPORTED_CLASS_NAME_REGEXP,
+				sessionFactoryImplementor);
 		}
 
 		return ASMWrapperUtil.createASMWrapper(
@@ -336,8 +344,6 @@ public class PortalHibernateConfiguration extends LocalSessionFactoryBean {
 	private static final Log _log = LogFactoryUtil.getLog(
 		PortalHibernateConfiguration.class);
 
-	private static final String _importedClassNamePattern =
-		PropsValues.HIBERNATE_SESSION_FACTORY_IMPORTED_CLASS_NAME_REGEXP;
 	private static final Map<ProxyFactory, ClassLoader>
 		_proxyFactoryClassLoaders = new ConcurrentReferenceKeyHashMap<>(
 			FinalizeManager.WEAK_REFERENCE_FACTORY);
@@ -408,13 +414,13 @@ public class PortalHibernateConfiguration extends LocalSessionFactoryBean {
 		}
 
 		private PatternedSessionFactoryDelegate(
-			Map<String, String> imports, String importedClassNamePattern,
+			Map<String, String> imports, String importedClassNameRegexp,
 			SessionFactoryImplementor sessionFactoryImplementor) {
 
 			super(imports);
 
 			_importedClassNamePattern = Pattern.compile(
-				importedClassNamePattern);
+				importedClassNameRegexp);
 
 			_sessionFactoryImplementor = sessionFactoryImplementor;
 		}
