@@ -16,6 +16,7 @@ package com.liferay.adaptive.media.web.internal.processor;
 
 import com.liferay.adaptive.media.AdaptiveMediaURIResolver;
 import com.liferay.adaptive.media.web.internal.constants.AdaptiveMediaWebConstants;
+import com.liferay.portal.kernel.test.ReflectionTestUtil;
 import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -39,6 +40,8 @@ public class DefaultAdaptiveMediaURIResolverTest {
 		PortalUtil portalUtil = new PortalUtil();
 
 		portalUtil.setPortal(_portal);
+
+		ReflectionTestUtil.setFieldValue(_uriResolver, "_portal", _portal);
 	}
 
 	@Test

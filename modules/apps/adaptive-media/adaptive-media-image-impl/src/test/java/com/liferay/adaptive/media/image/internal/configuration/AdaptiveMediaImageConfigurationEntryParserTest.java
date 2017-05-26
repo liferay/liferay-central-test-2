@@ -14,10 +14,11 @@
 
 package com.liferay.adaptive.media.image.internal.configuration;
 
-import static org.powermock.api.mockito.PowerMockito.mockStatic;
 import static org.powermock.api.mockito.PowerMockito.when;
 
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry;
+import com.liferay.portal.kernel.test.ReflectionTestUtil;
+import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
 
 import java.util.Collections;
@@ -29,6 +30,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
@@ -46,31 +48,32 @@ public class AdaptiveMediaImageConfigurationEntryParserTest {
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
 
-		mockStatic(HttpUtil.class);
-
 		when(
-			HttpUtil.encodeURL(Mockito.eq("desc"))
+			_http.encodeURL(Mockito.eq("desc"))
 		).thenReturn(
 			"desc"
 		);
 
 		when(
-			HttpUtil.decodeURL(Mockito.eq("desc"))
+			_http.decodeURL(Mockito.eq("desc"))
 		).thenReturn(
 			"desc"
 		);
 
 		when(
-			HttpUtil.encodeURL(Mockito.eq("test"))
+			_http.encodeURL(Mockito.eq("test"))
 		).thenReturn(
 			"test"
 		);
 
 		when(
-			HttpUtil.decodeURL(Mockito.eq("test"))
+			_http.decodeURL(Mockito.eq("test"))
 		).thenReturn(
 			"test"
 		);
+
+		ReflectionTestUtil.setFieldValue(
+			_configurationEntryParser, "_http", _http);
 	}
 
 	@Test
@@ -122,13 +125,13 @@ public class AdaptiveMediaImageConfigurationEntryParserTest {
 	@Test
 	public void testEncodedDescription() {
 		when(
-			HttpUtil.encodeURL(Mockito.eq("desc:;"))
+			_http.encodeURL(Mockito.eq("desc:;"))
 		).thenReturn(
 			"desc%3A%3B"
 		);
 
 		when(
-			HttpUtil.decodeURL(Mockito.eq("desc%3A%3B"))
+			_http.decodeURL(Mockito.eq("desc%3A%3B"))
 		).thenReturn(
 			"desc:;"
 		);
@@ -151,13 +154,13 @@ public class AdaptiveMediaImageConfigurationEntryParserTest {
 	@Test
 	public void testEncodedName() {
 		when(
-			HttpUtil.encodeURL(Mockito.eq("test:;"))
+			_http.encodeURL(Mockito.eq("test:;"))
 		).thenReturn(
 			"test%3A%3B"
 		);
 
 		when(
-			HttpUtil.decodeURL(Mockito.eq("test%3A%3B"))
+			_http.decodeURL(Mockito.eq("test%3A%3B"))
 		).thenReturn(
 			"test:;"
 		);
@@ -376,5 +379,8 @@ public class AdaptiveMediaImageConfigurationEntryParserTest {
 	private final AdaptiveMediaImageConfigurationEntryParser
 		_configurationEntryParser =
 			new AdaptiveMediaImageConfigurationEntryParser();
+
+	@Mock
+	private Http _http;
 
 }
