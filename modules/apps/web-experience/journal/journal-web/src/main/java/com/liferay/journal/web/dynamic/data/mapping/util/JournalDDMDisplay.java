@@ -81,7 +81,7 @@ public class JournalDDMDisplay extends BaseDDMDisplay {
 			DDMStructure structure, String redirectURL)
 		throws Exception {
 
-		PortletURL portletURL = _portal.getControlPanelPortletURL(
+		PortletURL portletURL = portal.getControlPanelPortletURL(
 			liferayPortletRequest, JournalPortletKeys.JOURNAL,
 			PortletRequest.RENDER_PHASE);
 
@@ -91,7 +91,7 @@ public class JournalDDMDisplay extends BaseDDMDisplay {
 			"groupId", String.valueOf(structure.getGroupId()));
 		portletURL.setParameter(
 			"classNameId",
-			String.valueOf(_portal.getClassNameId(DDMStructure.class)));
+			String.valueOf(portal.getClassNameId(DDMStructure.class)));
 		portletURL.setParameter(
 			"classPK", String.valueOf(structure.getStructureId()));
 		portletURL.setParameter("ddmStructureKey", structure.getStructureKey());
@@ -168,7 +168,7 @@ public class JournalDDMDisplay extends BaseDDMDisplay {
 	public long getTemplateHandlerClassNameId(
 		DDMTemplate template, long classNameId) {
 
-		return _portal.getClassNameId(JournalArticle.class);
+		return portal.getClassNameId(JournalArticle.class);
 	}
 
 	@Override
@@ -230,6 +230,9 @@ public class JournalDDMDisplay extends BaseDDMDisplay {
 		return true;
 	}
 
+	@Reference
+	protected Portal portal;
+
 	private static final Log _log = LogFactoryUtil.getLog(
 		JournalDDMDisplay.class);
 
@@ -240,8 +243,5 @@ public class JournalDDMDisplay extends BaseDDMDisplay {
 		});
 	private static final Set<String> _viewTemplateExcludedColumnNames =
 		SetUtil.fromArray(new String[] {"mode"});
-
-	@Reference
-	private Portal _portal;
 
 }
