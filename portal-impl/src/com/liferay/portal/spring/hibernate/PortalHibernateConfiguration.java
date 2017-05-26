@@ -210,7 +210,7 @@ public class PortalHibernateConfiguration extends LocalSessionFactoryBean {
 
 		if (".*".equals(_importedClassNamePattern)) {
 
-			// For wildcard match, simply disable the optimization.
+			// For wildcard match, simply disable the optimization
 
 			return sessionFactory;
 		}
