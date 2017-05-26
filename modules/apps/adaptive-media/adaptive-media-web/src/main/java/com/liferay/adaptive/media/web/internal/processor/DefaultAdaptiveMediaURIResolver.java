@@ -16,12 +16,13 @@ package com.liferay.adaptive.media.web.internal.processor;
 
 import com.liferay.adaptive.media.AdaptiveMediaURIResolver;
 import com.liferay.adaptive.media.web.internal.constants.AdaptiveMediaWebConstants;
-import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.net.URI;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Adolfo Pérez
@@ -32,7 +33,7 @@ public class DefaultAdaptiveMediaURIResolver
 
 	@Override
 	public URI resolveURI(URI relativeURI) {
-		String pathModule = PortalUtil.getPathModule();
+		String pathModule = _portal.getPathModule();
 
 		if (!pathModule.endsWith(StringPool.SLASH)) {
 			pathModule += StringPool.SLASH;
@@ -46,5 +47,8 @@ public class DefaultAdaptiveMediaURIResolver
 
 		return moduleURI.resolve(relativeURI);
 	}
+
+	@Reference
+	private Portal _portal;
 
 }

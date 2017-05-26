@@ -18,7 +18,7 @@ import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.servlet.taglib.BaseDynamicInclude;
 import com.liferay.portal.kernel.servlet.taglib.DynamicInclude;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.Portal;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.WebKeys;
 
@@ -54,7 +54,7 @@ public class AdaptiveMediaPictureDynamicInclude extends BaseDynamicInclude {
 
 			sb.append("<script src=\"");
 			sb.append(themeDisplay.getPortalURL());
-			sb.append(PortalUtil.getPathProxy());
+			sb.append(_portal.getPathProxy());
 			sb.append(_servletContext.getContextPath());
 			sb.append("/picturefill.js\" ");
 			sb.append("type= \"text/javascript\">");
@@ -69,6 +69,9 @@ public class AdaptiveMediaPictureDynamicInclude extends BaseDynamicInclude {
 		dynamicIncludeRegistry.register(
 			"/html/common/themes/top_head.jsp#post");
 	}
+
+	@Reference
+	private Portal _portal;
 
 	@Reference(
 		target = "(osgi.web.symbolicname=com.liferay.adaptive.media.image.web)",

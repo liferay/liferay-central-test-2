@@ -16,7 +16,7 @@ package com.liferay.adaptive.media.image.internal.configuration;
 
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -27,6 +27,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * Parses ConfigAdmin configuration entries.
@@ -81,9 +82,9 @@ public class AdaptiveMediaImageConfigurationEntryParser {
 
 		StringBundler sb = new StringBundler();
 
-		sb.append(HttpUtil.encodeURL(configurationEntry.getName()));
+		sb.append(_http.encodeURL(configurationEntry.getName()));
 		sb.append(StringPool.COLON);
-		sb.append(HttpUtil.encodeURL(configurationEntry.getDescription()));
+		sb.append(_http.encodeURL(configurationEntry.getDescription()));
 		sb.append(StringPool.COLON);
 		sb.append(configurationEntry.getUUID());
 		sb.append(StringPool.COLON);
@@ -137,11 +138,11 @@ public class AdaptiveMediaImageConfigurationEntryParser {
 
 		String name = fields[0];
 
-		name = HttpUtil.decodeURL(name);
+		name = _http.decodeURL(name);
 
 		String description = fields[1];
 
-		description = HttpUtil.decodeURL(description);
+		description = _http.decodeURL(description);
 
 		String uuid = fields[2];
 
@@ -192,5 +193,8 @@ public class AdaptiveMediaImageConfigurationEntryParser {
 
 	private static final Pattern _KEY_VALUE_SEPARATOR_PATTERN = Pattern.compile(
 		"\\s*=\\s*");
+
+	@Reference
+	private Http _http;
 
 }
