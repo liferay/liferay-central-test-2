@@ -25,10 +25,10 @@ public class ErrorTei extends TagExtraInfo {
 
 	@Override
 	public VariableInfo[] getVariableInfo(TagData tagData) {
-		return Holder._variableInfo;
+		return Concealer._variableInfo;
 	}
 
-	private static class Holder {
+	private static class Concealer {
 
 		private static final VariableInfo[] _variableInfo = new VariableInfo[] {
 			new VariableInfo(
