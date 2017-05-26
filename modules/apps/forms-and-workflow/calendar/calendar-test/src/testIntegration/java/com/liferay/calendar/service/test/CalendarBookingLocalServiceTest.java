@@ -1681,6 +1681,39 @@ public class CalendarBookingLocalServiceTest {
 	}
 
 	@Test
+	public void testUpdateLastInstanceCalendarBookingRecurrence()
+		throws Exception {
+
+		ServiceContext serviceContext = createServiceContext();
+
+		CalendarBooking calendarBooking =
+			CalendarBookingTestUtil.addDailyRecurringCalendarBooking(
+				_user, serviceContext);
+
+		CalendarBooking calendarBookingInstance =
+			CalendarBookingTestUtil.updateCalendarBookingInstance(
+				calendarBooking, 2, RandomTestUtil.randomLocaleStringMap(),
+				serviceContext);
+
+		java.util.Calendar untilJCalendar = CalendarFactoryUtil.getCalendar(
+			calendarBooking.getStartTime());
+
+		untilJCalendar.add(java.util.Calendar.DAY_OF_MONTH, 10);
+
+		Recurrence recurrence = RecurrenceTestUtil.getDailyRecurrence(
+			untilJCalendar);
+
+		CalendarBookingLocalServiceUtil.
+			updateLastInstanceCalendarBookingRecurrence(
+				calendarBookingInstance,
+				RecurrenceSerializer.serialize(recurrence));
+
+		assertDoesNotRepeat(calendarBookingInstance);
+
+		assertRepeatsUntil(calendarBooking, untilJCalendar);
+	}
+
+	@Test
 	public void testUpdateRecurringCalendarBooking() throws Exception {
 		ServiceContext serviceContext = createServiceContext();
 
@@ -1796,6 +1829,13 @@ public class CalendarBookingLocalServiceTest {
 		Assert.assertNull(calendarBookingInstance);
 	}
 
+	protected void assertDoesNotRepeat(CalendarBooking calendarBooking) {
+		calendarBooking = CalendarBookingLocalServiceUtil.fetchCalendarBooking(
+			calendarBooking.getCalendarBookingId());
+
+		Assert.assertNull(calendarBooking.getRecurrenceObj());
+	}
+
 	protected void assertEqualsTime(
 		int hour, int minute, java.util.Calendar jCalendar) {
 
@@ -1803,6 +1843,17 @@ public class CalendarBookingLocalServiceTest {
 			hour, jCalendar.get(java.util.Calendar.HOUR_OF_DAY));
 
 		Assert.assertEquals(minute, jCalendar.get(java.util.Calendar.MINUTE));
+	}
+
+	protected void assertRepeatsUntil(
+		CalendarBooking calendarBooking, java.util.Calendar untilJCalendar) {
+
+		calendarBooking = CalendarBookingLocalServiceUtil.fetchCalendarBooking(
+			calendarBooking.getCalendarBookingId());
+
+		Recurrence recurrence = calendarBooking.getRecurrenceObj();
+
+		assertSameDay(untilJCalendar, recurrence.getUntilJCalendar());
 	}
 
 	protected void assertSameDay(
