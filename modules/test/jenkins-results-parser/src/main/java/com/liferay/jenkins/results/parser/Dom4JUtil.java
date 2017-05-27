@@ -133,21 +133,21 @@ public class Dom4JUtil {
 	}
 
 	public static Element getOrderedListElement(
-		List<Element> items, Element parentElement, int maxItems) {
+		List<Element> itemElements, Element parentElement, int maxItems) {
 
 		Element orderedListElement = getNewElement("ol", parentElement);
 
 		int i = 0;
 
-		for (Element item : items) {
+		for (Element itemElement : itemElements) {
 			if (i < maxItems) {
-				String itemName = item.getName();
+				String itemElementName = itemElement.getName();
 
-				if (itemName.equals("li")) {
-					orderedListElement.add(item);
+				if (itemElementName.equals("li")) {
+					orderedListElement.add(itemElement);
 				}
 				else {
-					getNewElement("li", orderedListElement, item);
+					getNewElement("li", orderedListElement, itemElement);
 				}
 
 				i++;
@@ -164,9 +164,9 @@ public class Dom4JUtil {
 	}
 
 	public static Element getOrderedListElement(
-		List<Element> items, int maxItems) {
+		List<Element> itemElements, int maxItems) {
 
-		return getOrderedListElement(items, null, maxItems);
+		return getOrderedListElement(itemElements, null, maxItems);
 	}
 
 	public static Document parse(String xml) throws DocumentException {
