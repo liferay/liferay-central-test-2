@@ -237,7 +237,7 @@
 </tr>
 <tr>
 	<td>DIALOG_BOX_ASSIGN_TO_SELECT</td>
-	<td>//select[contains(@id,'MyWorkflowTaskPortlet_assigneeUserId')]</td>
+	<td>//form[contains(@id,'MyWorkflowTaskPortlet_assignFm')]//select</td>
 	<td></td>
 </tr>
 <tr>
