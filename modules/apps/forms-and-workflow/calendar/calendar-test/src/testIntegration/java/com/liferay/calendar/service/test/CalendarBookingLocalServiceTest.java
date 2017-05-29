@@ -1714,6 +1714,39 @@ public class CalendarBookingLocalServiceTest {
 	}
 
 	@Test
+	public void testUpdateLastInstanceCalendarBookingRecurrenceFromSingleInstance()
+		throws Exception {
+
+		ServiceContext serviceContext = createServiceContext();
+
+		CalendarBooking calendarBooking =
+			CalendarBookingTestUtil.addDailyRecurringCalendarBooking(
+				_user, serviceContext);
+
+		CalendarBooking calendarBookingInstance =
+			CalendarBookingTestUtil.updateCalendarBookingInstance(
+				calendarBooking, 2, RandomTestUtil.randomLocaleStringMap(),
+				serviceContext);
+
+		java.util.Calendar untilJCalendar = CalendarFactoryUtil.getCalendar(
+			calendarBooking.getStartTime());
+
+		untilJCalendar.add(java.util.Calendar.DAY_OF_MONTH, 10);
+
+		Recurrence recurrence = RecurrenceTestUtil.getDailyRecurrence(
+			untilJCalendar);
+
+		CalendarBookingLocalServiceUtil.
+			updateLastInstanceCalendarBookingRecurrence(
+				calendarBookingInstance,
+				RecurrenceSerializer.serialize(recurrence));
+
+		assertDoesNotRepeat(calendarBookingInstance);
+
+		assertRepeatsUntil(calendarBooking, untilJCalendar);
+	}
+
+	@Test
 	public void testUpdateRecurringCalendarBooking() throws Exception {
 		ServiceContext serviceContext = createServiceContext();
 
