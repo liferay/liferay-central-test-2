@@ -110,57 +110,55 @@ public class RoleNotificationRecipientBuilder
 		}
 	}
 
-	protected List<Group> getAncestorGroups(Group group)
+	protected List<Long> getAncestorGroupIds(Group group, Role role)
 		throws PortalException {
 
-		List<Group> groups = new ArrayList<>();
+		List<Long> groupIds = new ArrayList<>();
 
 		for (Group ancestorGroup : group.getAncestors()) {
-			groups.add(ancestorGroup);
+			if (isValidGroup(group, role)) {
+				groupIds.add(ancestorGroup.getGroupId());
+			}
 		}
 
-		return groups;
+		return groupIds;
 	}
 
-	protected List<Group> getAncestorOrganizationGroups(Group group)
+	protected List<Long> getAncestorOrganizationGroupIds(Group group, Role role)
 		throws PortalException {
 
-		List<Group> groups = new ArrayList<>();
+		List<Long> groupIds = new ArrayList<>();
 
 		Organization organization = _organizationLocalService.getOrganization(
 			group.getClassPK());
 
 		for (Organization ancestorOrganization : organization.getAncestors()) {
-			groups.add(ancestorOrganization.getGroup());
+			if (isValidGroup(group, role)) {
+				groupIds.add(ancestorOrganization.getGroupId());
+			}
 		}
 
-		return groups;
+		return groupIds;
 	}
 
 	protected List<Long> getGroupIds(long groupId, Role role)
 		throws PortalException {
 
-		List<Group> groups = new ArrayList<>();
+		List<Long> groupIds = new ArrayList<>();
 
 		if (groupId != WorkflowConstants.DEFAULT_GROUP_ID) {
 			Group group = _groupLocalService.getGroup(groupId);
 
 			if (group.isOrganization()) {
-				groups.addAll(getAncestorOrganizationGroups(group));
+				groupIds.addAll(getAncestorOrganizationGroupIds(group, role));
 			}
 
 			if (group.isSite()) {
-				groups.addAll(getAncestorGroups(group));
+				groupIds.addAll(getAncestorGroupIds(group, role));
 			}
 
-			groups.add(group);
-		}
-
-		List<Long> groupIds = new ArrayList<>();
-
-		for (Group group : groups) {
 			if (isValidGroup(group, role)) {
-				groupIds.add(group.getGroupId());
+				groupIds.add(groupId);
 			}
 		}
 

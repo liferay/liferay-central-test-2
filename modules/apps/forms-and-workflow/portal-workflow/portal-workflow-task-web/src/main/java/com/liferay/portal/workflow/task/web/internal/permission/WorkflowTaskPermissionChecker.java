@@ -110,15 +110,14 @@ public class WorkflowTaskPermissionChecker {
 	protected long[] getRoleIds(
 		long groupId, PermissionChecker permissionChecker) {
 
-		long[] roleIds = new long[0];
+		long[] roleIds = permissionChecker.getRoleIds(
+			permissionChecker.getUserId(), groupId);
 
 		try {
 			List<Group> groups = new ArrayList<>();
 
 			if (groupId != WorkflowConstants.DEFAULT_GROUP_ID) {
 				Group group = GroupLocalServiceUtil.getGroup(groupId);
-
-				groups.add(group);
 
 				if (group.isOrganization()) {
 					groups.addAll(getAncestorOrganizationGroups(group));

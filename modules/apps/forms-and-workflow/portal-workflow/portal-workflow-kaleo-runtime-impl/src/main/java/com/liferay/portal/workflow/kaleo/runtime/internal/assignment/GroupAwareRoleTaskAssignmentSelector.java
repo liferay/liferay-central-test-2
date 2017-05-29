@@ -66,43 +66,41 @@ public class GroupAwareRoleTaskAssignmentSelector
 			long groupId, Role role)
 		throws PortalException {
 
-		List<Group> groups = new ArrayList<>();
+		List<Long> groupIds = new ArrayList<>();
+
+		Group group = null;
 
 		if (groupId != WorkflowConstants.DEFAULT_GROUP_ID) {
-			Group group = _groupLocalService.getGroup(groupId);
+			group = _groupLocalService.getGroup(groupId);
 
 			if (group.isOrganization()) {
-				groups.addAll(getAncestorOrganizationGroups(group));
+				groupIds.addAll(getAncestorOrganizationGroupIds(group, role));
 			}
 
 			if (group.isSite()) {
-				groups.addAll(getAncestorGroups(group));
+				groupIds.addAll(getAncestorGroupIds(group, role));
 			}
 
 			if (group.isLayout()) {
-				Group parentGroup = _groupLocalService.getGroup(
-					group.getParentGroupId());
-
-				groups.add(parentGroup);
+				group = _groupLocalService.getGroup(group.getParentGroupId());
 			}
-
-			groups.add(group);
 		}
 
-		return createKaleoTaskAssigments(role, groups);
+		if (isValidAssignment(group, role)) {
+			groupIds.add(groupId);
+		}
+
+		return createKaleoTaskAssigments(role, groupIds);
 	}
 
 	protected List<KaleoTaskAssignment> createKaleoTaskAssigments(
-			Role role, List<Group> groups)
+			Role role, List<Long> groupIds)
 		throws PortalException {
 
 		List<KaleoTaskAssignment> kaleoTaskAssignments = new ArrayList<>();
 
-		for (Group group : groups) {
-			if (isValidAssignment(role, group)) {
-				kaleoTaskAssignments.add(
-					createKaleoTaskAssignment(role, group.getGroupId()));
-			}
+		for (Long groupId : groupIds) {
+			kaleoTaskAssignments.add(createKaleoTaskAssignment(role, groupId));
 		}
 
 		return kaleoTaskAssignments;
@@ -121,34 +119,38 @@ public class GroupAwareRoleTaskAssignmentSelector
 		return kaleoTaskAssignment;
 	}
 
-	protected List<Group> getAncestorGroups(Group group)
+	protected List<Long> getAncestorGroupIds(Group group, Role role)
 		throws PortalException {
 
-		List<Group> groups = new ArrayList<>();
+		List<Long> groupIds = new ArrayList<>();
 
 		for (Group ancestorGroup : group.getAncestors()) {
-			groups.add(ancestorGroup);
+			if (isValidAssignment(group, role)) {
+				groupIds.add(ancestorGroup.getGroupId());
+			}
 		}
 
-		return groups;
+		return groupIds;
 	}
 
-	protected List<Group> getAncestorOrganizationGroups(Group group)
+	protected List<Long> getAncestorOrganizationGroupIds(Group group, Role role)
 		throws PortalException {
 
-		List<Group> groups = new ArrayList<>();
+		List<Long> groupIds = new ArrayList<>();
 
 		Organization organization = _organizationLocalService.getOrganization(
 			group.getClassPK());
 
 		for (Organization ancestorOrganization : organization.getAncestors()) {
-			groups.add(ancestorOrganization.getGroup());
+			if (isValidAssignment(group, role)) {
+				groupIds.add(ancestorOrganization.getGroupId());
+			}
 		}
 
-		return groups;
+		return groupIds;
 	}
 
-	protected boolean isValidAssignment(Role role, Group group)
+	protected boolean isValidAssignment(Group group, Role role)
 		throws PortalException {
 
 		if (role.getType() == RoleConstants.TYPE_REGULAR) {
