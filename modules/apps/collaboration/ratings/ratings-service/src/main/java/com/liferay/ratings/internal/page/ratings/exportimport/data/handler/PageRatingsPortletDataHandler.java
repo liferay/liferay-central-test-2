@@ -225,7 +225,6 @@ public class PageRatingsPortletDataHandler extends BasePortletDataHandler {
 				}
 
 			});
-
 		exportActionableDynamicQuery.setPerformCountMethod(
 			new ActionableDynamicQuery.PerformCountMethod() {
 
