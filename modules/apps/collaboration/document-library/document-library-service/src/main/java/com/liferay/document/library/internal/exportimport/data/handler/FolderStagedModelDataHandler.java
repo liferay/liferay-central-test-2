@@ -496,7 +496,7 @@ public class FolderStagedModelDataHandler
 
 			pde.setStagedModelDisplayName(folder.getName());
 			pde.setStagedModelClassName(folder.getModelClassName());
-			pde.setStagedModelClassPk(
+			pde.setStagedModelClassPK(
 				GetterUtil.getString(folder.getFolderId()));
 
 			throw pde;
@@ -513,7 +513,7 @@ public class FolderStagedModelDataHandler
 
 				pde.setStagedModelDisplayName(folder.getName());
 				pde.setStagedModelClassName(folder.getModelClassName());
-				pde.setStagedModelClassPk(
+				pde.setStagedModelClassPK(
 					GetterUtil.getString(folder.getFolderId()));
 
 				throw pde;

@@ -892,7 +892,7 @@ public class FileEntryStagedModelDataHandler
 
 			pde.setStagedModelDisplayName(getDisplayName(fileEntry));
 			pde.setStagedModelClassName(fileEntry.getModelClassName());
-			pde.setStagedModelClassPk(
+			pde.setStagedModelClassPK(
 				GetterUtil.getString(fileEntry.getFileEntryId()));
 
 			throw pde;
@@ -910,7 +910,7 @@ public class FileEntryStagedModelDataHandler
 
 				pde.setStagedModelDisplayName(getDisplayName(fileEntry));
 				pde.setStagedModelClassName(fileVersion.getModelClassName());
-				pde.setStagedModelClassPk(
+				pde.setStagedModelClassPK(
 					GetterUtil.getString(fileVersion.getFileVersionId()));
 
 				throw pde;

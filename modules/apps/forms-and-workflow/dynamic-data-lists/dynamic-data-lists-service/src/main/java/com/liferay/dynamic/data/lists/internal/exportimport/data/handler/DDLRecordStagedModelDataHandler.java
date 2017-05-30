@@ -311,7 +311,7 @@ public class DDLRecordStagedModelDataHandler
 
 			pde.setStagedModelDisplayName(record.getUuid());
 			pde.setStagedModelClassName(record.getModelClassName());
-			pde.setStagedModelClassPk(
+			pde.setStagedModelClassPK(
 				GetterUtil.getString(record.getRecordId()));
 
 			throw pde;

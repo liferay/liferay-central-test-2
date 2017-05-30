@@ -91,7 +91,7 @@ public class PortletDataException extends PortalException {
 		return _stagedModelClassName;
 	}
 
-	public String getStagedModelClassPk() {
+	public String getStagedModelClassPK() {
 		return _stagedModelClassPK;
 	}
 
@@ -115,7 +115,7 @@ public class PortletDataException extends PortalException {
 		_stagedModelClassName = stagedModelClassName;
 	}
 
-	public void setStagedModelClassPk(String stagedModelClassPK) {
+	public void setStagedModelClassPK(String stagedModelClassPK) {
 		_stagedModelClassPK = stagedModelClassPK;
 	}
 
