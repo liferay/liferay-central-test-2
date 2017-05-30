@@ -1369,6 +1369,44 @@ public class CalendarBookingLocalServiceTest {
 	}
 
 	@Test
+	public void testUpdateCalendarBookingInstanceWithoutRecurrence()
+		throws Exception {
+
+		ServiceContext serviceContext = createServiceContext();
+
+		CalendarBooking calendarBooking =
+			CalendarBookingTestUtil.addDailyRecurringCalendarBooking(
+				_user, serviceContext);
+
+		Map<Locale, String> instanceTitleMap =
+			RandomTestUtil.randomLocaleStringMap();
+
+		CalendarBooking calendarBookingInstance =
+			CalendarBookingTestUtil.updateCalendarBookingInstance(
+				calendarBooking, 2, instanceTitleMap, serviceContext);
+
+		Assert.assertEquals(
+			instanceTitleMap, calendarBookingInstance.getTitleMap());
+
+		Map<Locale, String> newTitleMap =
+			RandomTestUtil.randomLocaleStringMap();
+
+		CalendarBookingLocalServiceUtil.updateCalendarBookingInstance(
+			_user.getUserId(), calendarBooking.getCalendarBookingId(), 1,
+			calendarBooking.getCalendarId(), newTitleMap,
+			calendarBooking.getDescriptionMap(), calendarBooking.getLocation(),
+			calendarBooking.getStartTime(), calendarBooking.getEndTime(), false,
+			calendarBooking.getRecurrence(), true, 0, null, 0, null,
+			serviceContext);
+
+		calendarBookingInstance =
+			CalendarBookingLocalServiceUtil.fetchCalendarBooking(
+				calendarBookingInstance.getCalendarBookingId());
+
+		Assert.assertEquals(newTitleMap, calendarBookingInstance.getTitleMap());
+	}
+
+	@Test
 	public void testUpdateCalendarBookingPreservesChildReminders()
 		throws Exception {
 
