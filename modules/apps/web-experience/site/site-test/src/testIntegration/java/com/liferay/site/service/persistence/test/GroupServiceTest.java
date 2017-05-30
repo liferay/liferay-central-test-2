@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.service;
+package com.liferay.site.service.persistence.test;
 
 import com.liferay.asset.kernel.service.AssetTagLocalServiceUtil;
 import com.liferay.blogs.kernel.model.BlogsEntry;
