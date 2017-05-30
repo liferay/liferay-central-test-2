@@ -15,7 +15,6 @@
 package com.liferay.journal.internal.exportimport.content.processor;
 
 import com.liferay.exportimport.content.processor.ExportImportContentProcessor;
-import com.liferay.exportimport.content.processor.base.BaseTextExportImportContentProcessor;
 import com.liferay.exportimport.kernel.lar.PortletDataContext;
 import com.liferay.exportimport.kernel.lar.StagedModelDataHandlerUtil;
 import com.liferay.journal.constants.JournalPortletKeys;
@@ -62,7 +61,7 @@ import org.osgi.service.component.annotations.Reference;
 	}
 )
 public class JournalArticleExportImportContentProcessor
-	extends BaseTextExportImportContentProcessor {
+	implements ExportImportContentProcessor<String> {
 
 	@Override
 	public String replaceExportContentReferences(
@@ -74,9 +73,11 @@ public class JournalArticleExportImportContentProcessor
 		content = replaceExportJournalArticleReferences(
 			portletDataContext, stagedModel, content, exportReferencedContent);
 
-		content = super.replaceExportContentReferences(
-			portletDataContext, stagedModel, content, exportReferencedContent,
-			escapeContent);
+		content =
+			_defaultTextExportImportContentProcessor.
+				replaceExportContentReferences(
+					portletDataContext, stagedModel, content,
+					exportReferencedContent, escapeContent);
 
 		return content;
 	}
@@ -90,8 +91,10 @@ public class JournalArticleExportImportContentProcessor
 		content = replaceImportJournalArticleReferences(
 			portletDataContext, stagedModel, content);
 
-		content = super.replaceImportContentReferences(
-			portletDataContext, stagedModel, content);
+		content =
+			_defaultTextExportImportContentProcessor.
+				replaceImportContentReferences(
+					portletDataContext, stagedModel, content);
 
 		return content;
 	}
@@ -102,7 +105,8 @@ public class JournalArticleExportImportContentProcessor
 
 		validateJournalArticleReferences(content);
 
-		super.validateContentReferences(groupId, content);
+		_defaultTextExportImportContentProcessor.validateContentReferences(
+			groupId, content);
 	}
 
 	protected String replaceExportJournalArticleReferences(
@@ -326,6 +330,10 @@ public class JournalArticleExportImportContentProcessor
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		JournalArticleExportImportContentProcessor.class);
+
+	@Reference(target = "(model.class.name=java.lang.String)")
+	private ExportImportContentProcessor<String>
+		_defaultTextExportImportContentProcessor;
 
 	@Reference
 	private GroupLocalService _groupLocalService;
