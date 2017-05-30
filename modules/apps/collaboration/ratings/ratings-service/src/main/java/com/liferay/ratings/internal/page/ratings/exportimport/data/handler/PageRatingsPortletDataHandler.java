@@ -126,7 +126,7 @@ public class PageRatingsPortletDataHandler extends BasePortletDataHandler {
 		actionableDynamicQuery.performCount();
 	}
 
-	protected long fetchRatedEntityGroupId(RatingsEntry ratingsEntry)
+	protected long getGroupId(RatingsEntry ratingsEntry)
 		throws PortalException {
 
 		PersistedModelLocalService persistedModelLocalService =
@@ -174,7 +174,7 @@ public class PageRatingsPortletDataHandler extends BasePortletDataHandler {
 				public void performAction(RatingsEntry ratingsEntry)
 					throws PortalException {
 
-					long groupId = fetchRatedEntityGroupId(ratingsEntry);
+					long groupId = getGroupId(ratingsEntry);
 
 					if ((groupId > 0) &&
 						(groupId != portletDataContext.getScopeGroupId())) {
@@ -206,7 +206,7 @@ public class PageRatingsPortletDataHandler extends BasePortletDataHandler {
 				public void performAction(RatingsEntry ratingsEntry)
 					throws PortalException {
 
-					long groupId = fetchRatedEntityGroupId(ratingsEntry);
+					long groupId = getGroupId(ratingsEntry);
 
 					if ((groupId > 0) &&
 						(groupId != portletDataContext.getScopeGroupId())) {
