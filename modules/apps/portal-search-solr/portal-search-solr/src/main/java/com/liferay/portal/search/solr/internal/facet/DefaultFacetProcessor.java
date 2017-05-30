@@ -38,18 +38,18 @@ public class DefaultFacetProcessor implements FacetProcessor<SolrQuery> {
 
 		String prefix = "f." + fieldName + ".";
 
-		JSONObject data = facetConfiguration.getData();
+		JSONObject dataJSONObject = facetConfiguration.getData();
 
-		applyFrequencyThreshold(solrQuery, prefix, data);
-		applyMaxTerms(solrQuery, prefix, data);
+		applyFrequencyThreshold(solrQuery, prefix, dataJSONObject);
+		applyMaxTerms(solrQuery, prefix, dataJSONObject);
 
 		solrQuery.addFacetField(fieldName);
 	}
 
 	protected void applyFrequencyThreshold(
-		SolrQuery solrQuery, String prefix, JSONObject data) {
+		SolrQuery solrQuery, String prefix, JSONObject dataJSONObject) {
 
-		int minCount = data.getInt("frequencyThreshold");
+		int minCount = dataJSONObject.getInt("frequencyThreshold");
 
 		if (minCount > 0) {
 			solrQuery.set(prefix.concat(FacetParams.FACET_MINCOUNT), minCount);
@@ -57,9 +57,9 @@ public class DefaultFacetProcessor implements FacetProcessor<SolrQuery> {
 	}
 
 	protected void applyMaxTerms(
-		SolrQuery solrQuery, String prefix, JSONObject data) {
+		SolrQuery solrQuery, String prefix, JSONObject dataJSONObject) {
 
-		int limit = data.getInt("maxTerms");
+		int limit = dataJSONObject.getInt("maxTerms");
 
 		if (limit > 0) {
 			solrQuery.set(prefix.concat(FacetParams.FACET_LIMIT), limit);
