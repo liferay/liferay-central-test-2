@@ -1747,6 +1747,41 @@ public class CalendarBookingLocalServiceTest {
 	}
 
 	@Test
+	public void testUpdateLastInstanceCalendarBookingRecurrencePreservesExceptionDate()
+		throws Exception {
+
+		ServiceContext serviceContext = createServiceContext();
+
+		CalendarBooking calendarBooking =
+			CalendarBookingTestUtil.addDailyRecurringCalendarBooking(
+				_user, serviceContext);
+
+		CalendarBooking calendarBookingInstance =
+			CalendarBookingTestUtil.updateCalendarBookingInstance(
+				calendarBooking, 2, RandomTestUtil.randomLocaleStringMap(),
+				serviceContext);
+
+		java.util.Calendar untilJCalendar = CalendarFactoryUtil.getCalendar(
+			calendarBooking.getStartTime());
+
+		untilJCalendar.add(java.util.Calendar.DAY_OF_MONTH, 10);
+
+		Recurrence recurrence = RecurrenceTestUtil.getDailyRecurrence(
+			untilJCalendar);
+
+		CalendarBookingLocalServiceUtil.
+			updateLastInstanceCalendarBookingRecurrence(
+				calendarBookingInstance,
+				RecurrenceSerializer.serialize(recurrence));
+
+		java.util.Calendar instanceStartTimeJCalendar =
+			CalendarFactoryUtil.getCalendar(
+				calendarBookingInstance.getStartTime(), _utcTimeZone);
+
+		assertRepeatsExceptFor(calendarBooking, instanceStartTimeJCalendar);
+	}
+
+	@Test
 	public void testUpdateRecurringCalendarBooking() throws Exception {
 		ServiceContext serviceContext = createServiceContext();
 
@@ -1876,6 +1911,24 @@ public class CalendarBookingLocalServiceTest {
 			hour, jCalendar.get(java.util.Calendar.HOUR_OF_DAY));
 
 		Assert.assertEquals(minute, jCalendar.get(java.util.Calendar.MINUTE));
+	}
+
+	protected void assertRepeatsExceptFor(
+		CalendarBooking calendarBooking,
+		java.util.Calendar exceptionJCalendar) {
+
+		calendarBooking = CalendarBookingLocalServiceUtil.fetchCalendarBooking(
+			calendarBooking.getCalendarBookingId());
+
+		Recurrence recurrence = calendarBooking.getRecurrenceObj();
+
+		List<java.util.Calendar> exceptionJCalendars =
+			recurrence.getExceptionJCalendars();
+
+		Assert.assertEquals(
+			exceptionJCalendars.toString(), 1, exceptionJCalendars.size());
+
+		assertSameDay(exceptionJCalendar, exceptionJCalendars.get(0));
 	}
 
 	protected void assertRepeatsUntil(
