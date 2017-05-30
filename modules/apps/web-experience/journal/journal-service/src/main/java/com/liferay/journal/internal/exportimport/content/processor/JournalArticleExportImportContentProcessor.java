@@ -14,7 +14,9 @@
 
 package com.liferay.journal.internal.exportimport.content.processor;
 
+import com.liferay.document.library.kernel.exception.NoSuchFileEntryException;
 import com.liferay.exportimport.content.processor.ExportImportContentProcessor;
+import com.liferay.exportimport.kernel.lar.ExportImportThreadLocal;
 import com.liferay.exportimport.kernel.lar.PortletDataContext;
 import com.liferay.exportimport.kernel.lar.StagedModelDataHandlerUtil;
 import com.liferay.journal.constants.JournalPortletKeys;
@@ -22,6 +24,7 @@ import com.liferay.journal.exception.NoSuchArticleException;
 import com.liferay.journal.model.JournalArticle;
 import com.liferay.journal.service.JournalArticleLocalService;
 import com.liferay.portal.kernel.exception.BulkException;
+import com.liferay.portal.kernel.exception.NoSuchLayoutException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONFactory;
 import com.liferay.portal.kernel.json.JSONObject;
@@ -33,6 +36,7 @@ import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
@@ -105,8 +109,39 @@ public class JournalArticleExportImportContentProcessor
 
 		validateJournalArticleReferences(content);
 
-		_defaultTextExportImportContentProcessor.validateContentReferences(
-			groupId, content);
+		try {
+			_defaultTextExportImportContentProcessor.validateContentReferences(
+				groupId, content);
+		}
+		catch (NoSuchFileEntryException | NoSuchLayoutException e) {
+			if (ExportImportThreadLocal.isImportInProcess()) {
+				if (_log.isDebugEnabled()) {
+					StringBundler sb = new StringBundler(9);
+
+					String type = "page";
+
+					if (e instanceof NoSuchFileEntryException) {
+						type = "file entry";
+					}
+
+					sb.append("An invalid ");
+					sb.append(type);
+					sb.append(" has been detected during ");
+					sb.append("import when validating the content below. ");
+					sb.append("This is not an error, it typically means the ");
+					sb.append(type);
+					sb.append(" has been deleted.");
+					sb.append(StringPool.NEW_LINE);
+					sb.append(content);
+
+					_log.debug(sb.toString());
+				}
+
+				return;
+			}
+
+			throw e;
+		}
 	}
 
 	protected String replaceExportJournalArticleReferences(
