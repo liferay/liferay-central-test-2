@@ -35,7 +35,7 @@
 </tr>
 <tr>
 	<td>SCRIPT_UTIL</td>
-	<td>//div[contains(@class,'palette-section') and contains(@id,'util')]//ul/li/span[contains(@data-title,'${key_fieldName}')]</td>
+	<td>//div[contains(@class,'palette-section') and contains(@id,'util')]//ul/li/span[contains(.,'${key_fieldName}')]</td>
 	<td></td>
 </tr>
 <tr>
