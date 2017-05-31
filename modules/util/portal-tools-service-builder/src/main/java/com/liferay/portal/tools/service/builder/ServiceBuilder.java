@@ -5694,8 +5694,8 @@ public class ServiceBuilder {
 
 			if (localized != null) {
 				throw new IllegalArgumentException(
-					"Unable to have localized columns in localized table " +
-						"for entity " + entity.getName());
+					"Unable to have localized columns in localized table for " +
+						"entity " + entity.getName());
 			}
 
 			Element newColumnElement = newLocalizedEntityElement.addElement(
