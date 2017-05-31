@@ -114,6 +114,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>SELECT_ASSIGN_TO</td>
+	<td>//iframe[contains(@id,'assignToDialog_iframe')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>SELECT_MEDIA_TYPE</td>
 	<td>//iframe[contains(@id,'selectFileEntryType_iframe')]</td>
 	<td></td>
