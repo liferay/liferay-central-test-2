@@ -719,7 +719,6 @@ AUI.add(
 									if (defaultCalendarId == null && calendarResourceId == Liferay.CalendarUtil.GROUP_CALENDAR_RESOURCE_ID && item.get('permissions').VIEW_BOOKING_DETAILS) {
 										defaultCalendarId = calendarId;
 									}
-
 								}
 							}
 						);
