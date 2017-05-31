@@ -2935,13 +2935,15 @@
 			<var name="siteName" value="${siteName}" />
 		</execute>
 
-		<for list="Device,Company,PermissionChecker" param="fieldName">
+		<for list="Device,Company,Permission Checker" param="fieldName">
 			<var name="key_fieldName" value="${fieldName}" />
 
 			<if>
-				<equals arg1="${fieldName}" arg2="PermissionChecker" />
+				<equals arg1="${fieldName}" arg2="Permission Checker" />
 				<then>
 					<execute function="MouseOver" locator1="DDMEditTemplate#SCRIPT_UTIL" />
+
+					<var name="fieldName" value="PermissionChecker" />
 				</then>
 				<else>
 					<execute function="MouseOver" locator1="DDMEditTemplate#SCRIPT_VARIABLE" />
