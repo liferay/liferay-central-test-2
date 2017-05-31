@@ -607,13 +607,14 @@ public class WabBundleProcessor {
 				StringUtil.readLines(inputStream, fqcns);
 
 				for (String fqcn : fqcns) {
-					int poundIndex = fqcn.indexOf(StringPool.POUND);
+					int index = fqcn.indexOf(StringPool.POUND);
 
-					if (poundIndex == 0) {
+					if (index == 0) {
 						continue;
 					}
-					else if (poundIndex > 0) {
-						fqcn = fqcn.substring(0, poundIndex);
+
+					if (index > 0) {
+						fqcn = fqcn.substring(0, index);
 					}
 
 					fqcn = fqcn.trim();
