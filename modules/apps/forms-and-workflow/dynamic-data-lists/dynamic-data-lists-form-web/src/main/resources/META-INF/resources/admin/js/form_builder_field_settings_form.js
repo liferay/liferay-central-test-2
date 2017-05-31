@@ -312,14 +312,6 @@ AUI.add(
 						instance._saveSettings();
 					},
 
-					_onNameChange: function(event) {
-						var instance = this;
-
-						var labelField = instance.getField('label');
-
-						labelField.set('key', event.newVal);
-					},
-
 					_onSubmitForm: function(event) {
 						var instance = this;
 
