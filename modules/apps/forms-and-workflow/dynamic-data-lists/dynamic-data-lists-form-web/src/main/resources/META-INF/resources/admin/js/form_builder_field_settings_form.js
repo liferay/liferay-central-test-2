@@ -372,7 +372,17 @@ AUI.add(
 						var labelField = instance.getField('label');
 						var nameField = instance.getField('name');
 
-						labelField.set('key', nameField.getValue());
+						var name = nameField.getValue();
+
+						if (!name) {
+							var formBuilderField = instance.get('field');
+
+							labelField.set('key', formBuilderField.generateFieldName(''));
+						}
+						else {
+							labelField.set('key', nameField.getValue());
+						}
+
 						labelField.set('keyInputEnabled', !editMode);
 						labelField.set('generationLocked', editMode);
 					},
