@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.bookmarks.internal.expando.value.delete.handler;
+package com.liferay.bookmarks.internal.expando.util;
 
 import com.liferay.bookmarks.model.BookmarksEntry;
 import com.liferay.bookmarks.service.BookmarksEntryLocalService;

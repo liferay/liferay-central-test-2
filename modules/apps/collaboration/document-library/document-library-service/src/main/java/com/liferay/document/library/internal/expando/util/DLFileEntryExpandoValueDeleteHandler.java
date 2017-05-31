@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.document.library.internal.expando.value.delete.handler;
+package com.liferay.document.library.internal.expando.util;
 
 import com.liferay.document.library.kernel.model.DLFileVersion;
 import com.liferay.document.library.kernel.service.DLFileVersionLocalService;
