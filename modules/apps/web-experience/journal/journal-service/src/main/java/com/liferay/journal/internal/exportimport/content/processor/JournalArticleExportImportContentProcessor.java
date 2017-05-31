@@ -36,7 +36,6 @@ import com.liferay.portal.kernel.service.GroupLocalService;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
@@ -116,7 +115,9 @@ public class JournalArticleExportImportContentProcessor
 		catch (NoSuchFileEntryException | NoSuchLayoutException e) {
 			if (ExportImportThreadLocal.isImportInProcess()) {
 				if (_log.isDebugEnabled()) {
-					StringBundler sb = new StringBundler(9);
+					StringBundler sb = new StringBundler(8);
+
+					sb.append("An invalid ");
 
 					String type = "page";
 
@@ -124,14 +125,13 @@ public class JournalArticleExportImportContentProcessor
 						type = "file entry";
 					}
 
-					sb.append("An invalid ");
 					sb.append(type);
-					sb.append(" has been detected during ");
-					sb.append("import when validating the content below. ");
-					sb.append("This is not an error, it typically means the ");
+
+					sb.append(" was detected during import when validating ");
+					sb.append("the content below. This is not an error, it ");
+					sb.append("typically means the ");
 					sb.append(type);
-					sb.append(" has been deleted.");
-					sb.append(StringPool.NEW_LINE);
+					sb.append(" was deleted.\n");
 					sb.append(content);
 
 					_log.debug(sb.toString());
