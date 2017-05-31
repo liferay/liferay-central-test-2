@@ -1006,7 +1006,7 @@ AUI.add(
 				'keyword': Liferay.Language.get('yes')
 			};
 
-			if (type == 'text') {
+			if (type == 'ddm-image' || type == 'text') {
 				indexTypeOptions = {
 					'': Liferay.Language.get('not-indexable'),
 					'keyword': Liferay.Language.get('indexable-keyword'),
@@ -1376,7 +1376,11 @@ AUI.add(
 
 					fieldNamespace: {
 						value: 'ddm'
-					}
+					},
+
+					indexType: {
+						value: 'text'
+  					}
 				},
 
 				EXTENDS: A.FormBuilderField,
