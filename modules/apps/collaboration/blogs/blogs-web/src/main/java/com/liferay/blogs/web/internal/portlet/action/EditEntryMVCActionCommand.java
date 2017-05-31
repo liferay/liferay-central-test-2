@@ -220,11 +220,11 @@ public class EditEntryMVCActionCommand extends BaseMVCActionCommand {
 				String oldRedirectParam =
 					_portal.getPortletNamespace(portletId) + "redirect";
 
-				String oldRedirect = HttpUtil.getParameter(
+				String oldRedirect = _http.getParameter(
 					redirect, oldRedirectParam, false);
 
 				if (Validator.isNotNull(oldRedirect)) {
-					String newRedirect = HttpUtil.decodeURL(oldRedirect);
+					String newRedirect = _http.decodeURL(oldRedirect);
 
 					newRedirect = StringUtil.replace(
 						newRedirect, oldUrlTitle, entry.getUrlTitle());
