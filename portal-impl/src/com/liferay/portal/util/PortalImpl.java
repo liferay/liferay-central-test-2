@@ -1371,11 +1371,10 @@ public class PortalImpl implements Portal {
 		if (PropsValues.LOCALE_PREPEND_FRIENDLY_URL_STYLE == 2) {
 			StringBundler sb = new StringBundler();
 
-			String defaultLocalePath = _buildI18NPath(
-				siteDefaultLocale.getLanguage(), siteDefaultLocale);
-
 			sb.append(groupFriendlyURL);
-			sb.append(defaultLocalePath);
+			sb.append(
+				_buildI18NPath(
+					siteDefaultLocale.getLanguage(), siteDefaultLocale));
 			sb.append(canonicalLayoutFriendlyURL);
 			sb.append(parametersURL);
 
