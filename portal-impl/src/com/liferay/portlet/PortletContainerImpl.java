@@ -140,8 +140,9 @@ public class PortletContainerImpl implements PortletContainer {
 	public void processPublicRenderParameters(
 		HttpServletRequest request, Layout layout) {
 
-		LayoutType layoutType = layout.getLayoutType();
 		LayoutTypePortlet layoutTypePortlet = null;
+
+		LayoutType layoutType = layout.getLayoutType();
 
 		if (layoutType instanceof LayoutTypePortlet) {
 			layoutTypePortlet = (LayoutTypePortlet)layoutType;
