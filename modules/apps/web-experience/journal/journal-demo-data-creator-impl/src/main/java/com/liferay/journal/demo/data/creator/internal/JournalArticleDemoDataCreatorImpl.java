@@ -18,6 +18,7 @@ import com.liferay.journal.demo.data.creator.JournalArticleDemoDataCreator;
 import com.liferay.journal.model.JournalArticle;
 import com.liferay.journal.service.JournalArticleLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.Release;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -108,6 +109,13 @@ public class JournalArticleDemoDataCreatorImpl
 		JournalArticleLocalService journalArticleLocalService) {
 
 		this.journalArticleLocalService = journalArticleLocalService;
+	}
+
+	@Reference(
+		target = "(&(release.bundle.symbolic.name=com.liferay.journal.service)(release.schema.version=1.0.0))",
+		unbind = "-"
+	)
+	protected void setRelease(Release release) {
 	}
 
 	protected final List<Long> entryIds = new CopyOnWriteArrayList<>();
