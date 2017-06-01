@@ -108,25 +108,25 @@ public class JSLoaderModulesServlet extends HttpServlet {
 
 		for (JSLoaderModule jsLoaderModule : jsLoaderModules) {
 			printWriter.write(delimiter);
-			printWriter.write("'");
+			printWriter.write("\"");
 			printWriter.write(jsLoaderModule.getName());
-			printWriter.write('@');
+			printWriter.write("@");
 			printWriter.write(jsLoaderModule.getVersion());
-			printWriter.write("': '");
+			printWriter.write("\": \"");
 			printWriter.write(_portal.getPathProxy());
 			printWriter.write(jsLoaderModule.getContextPath());
-			printWriter.write("'");
+			printWriter.write("\"");
 
 			if (!processedNames.contains(jsLoaderModule.getName())) {
 				processedNames.add(jsLoaderModule.getName());
 
 				printWriter.println(",");
-				printWriter.write("'");
+				printWriter.write("\"");
 				printWriter.write(jsLoaderModule.getName());
-				printWriter.write("': '");
+				printWriter.write("\": \"");
 				printWriter.write(_portal.getPathProxy());
 				printWriter.write(jsLoaderModule.getContextPath());
-				printWriter.write("'");
+				printWriter.write("\"");
 			}
 
 			delimiter = ",\n";
@@ -137,12 +137,12 @@ public class JSLoaderModulesServlet extends HttpServlet {
 
 		for (JSModule resolvedJSModule : resolvedJSModules) {
 			printWriter.write(delimiter);
-			printWriter.write("'");
+			printWriter.write("\"");
 			printWriter.write(resolvedJSModule.getResolvedId());
-			printWriter.write("': '");
+			printWriter.write("\": \"");
 			printWriter.write(_portal.getPathProxy());
 			printWriter.write(resolvedJSModule.getResolvedURL());
-			printWriter.write("'");
+			printWriter.write("\"");
 
 			delimiter = ",\n";
 		}
@@ -263,13 +263,13 @@ public class JSLoaderModulesServlet extends HttpServlet {
 			processedNames.add(jsLoaderModule.getName());
 
 			printWriter.write(delimiter);
-			printWriter.write("'");
+			printWriter.write("\"");
 			printWriter.write(jsLoaderModule.getName());
-			printWriter.write("': '");
+			printWriter.write("\": \"");
 			printWriter.write(jsLoaderModule.getName());
-			printWriter.write('@');
+			printWriter.write("@");
 			printWriter.write(jsLoaderModule.getVersion());
-			printWriter.write("'");
+			printWriter.write("\"");
 
 			delimiter = ",\n";
 
@@ -284,17 +284,17 @@ public class JSLoaderModulesServlet extends HttpServlet {
 
 		for (JSPackage jsPackage : _npmRegistry.getJSPackages()) {
 			printWriter.write(delimiter);
-			printWriter.write("'");
+			printWriter.write("\"");
 			printWriter.write(jsPackage.getName());
 			printWriter.write(StringPool.AT);
 			printWriter.write(jsPackage.getVersion());
-			printWriter.write("': {exactMatch: true, value: '");
+			printWriter.write("\": {exactMatch: true, value: \"");
 			printWriter.write(jsPackage.getName());
 			printWriter.write(StringPool.AT);
 			printWriter.write(jsPackage.getVersion());
 			printWriter.write(StringPool.SLASH);
 			printWriter.write(jsPackage.getMainModuleName());
-			printWriter.write("'}");
+			printWriter.write("\"}");
 
 			delimiter = ",\n";
 		}
