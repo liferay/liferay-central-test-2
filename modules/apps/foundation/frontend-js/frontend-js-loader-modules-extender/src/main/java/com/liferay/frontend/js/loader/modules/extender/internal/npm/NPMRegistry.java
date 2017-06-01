@@ -197,8 +197,8 @@ public class NPMRegistry {
 		new Comparator<JSBundle>() {
 
 			@Override
-			public int compare(JSBundle o1, JSBundle o2) {
-				return o1.getId().compareTo(o2.getId());
+			public int compare(JSBundle jsBundle1, JSBundle jsBundle2) {
+				return jsBundle1.getId().compareTo(jsBundle2.getId());
 			}
 
 		});
@@ -211,7 +211,7 @@ public class NPMRegistry {
 		implements BundleTrackerCustomizer<JSBundle> {
 
 		@Override
-		public JSBundle addingBundle(Bundle bundle, BundleEvent event) {
+		public JSBundle addingBundle(Bundle bundle, BundleEvent bundleEvent) {
 			for (JSBundleProcessor jsBundleProcessor : _jsBundleProcessors) {
 				JSBundle jsBundle = jsBundleProcessor.process(bundle);
 
@@ -227,16 +227,16 @@ public class NPMRegistry {
 
 		@Override
 		public void modifiedBundle(
-			Bundle bundle, BundleEvent event, JSBundle jsBundle) {
+			Bundle bundle, BundleEvent bundleEvent, JSBundle jsBundle) {
 
-			removedBundle(bundle, event, jsBundle);
+			removedBundle(bundle, bundleEvent, jsBundle);
 
-			addingBundle(bundle, event);
+			addingBundle(bundle, bundleEvent);
 		}
 
 		@Override
 		public void removedBundle(
-			Bundle bundle, BundleEvent event, JSBundle jsBundle) {
+			Bundle bundle, BundleEvent bundleEvent, JSBundle jsBundle) {
 
 			_removeBundle(jsBundle);
 		}
