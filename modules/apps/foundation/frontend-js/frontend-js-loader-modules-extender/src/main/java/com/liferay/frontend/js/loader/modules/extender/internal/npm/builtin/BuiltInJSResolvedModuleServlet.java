@@ -38,12 +38,12 @@ public class BuiltInJSResolvedModuleServlet extends BaseBuiltInJSModuleServlet {
 
 	@Override
 	protected JSModule getJSModule(String moduleName) {
-		return _packageRegistry.getResolvedJSModule(moduleName);
+		return _npmRegistry.getResolvedJSModule(moduleName);
 	}
 
 	private static final long serialVersionUID = 2647715401054034600L;
 
 	@Reference
-	private NPMRegistry _packageRegistry;
+	private NPMRegistry _npmRegistry;
 
 }
