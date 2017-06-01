@@ -130,9 +130,9 @@ public class FlatNPMBundleProcessor implements JSBundleProcessor {
 	}
 
 	private void _processModules(FlatJSPackage flatJSPackage, String location) {
-		FlatJSBundle flatJSBundle = flatJSPackage.getJSBundle();
-
 		String nodeModulesPath = StringPool.SLASH + location + "/node_modules/";
+
+		FlatJSBundle flatJSBundle = flatJSPackage.getJSBundle();
 
 		Enumeration<URL> urls = flatJSBundle.findEntries(
 			location, "*.js", true);
@@ -150,7 +150,7 @@ public class FlatNPMBundleProcessor implements JSBundleProcessor {
 
 			name = ModuleNameUtil.toModuleName(name);
 
-			Collection<String> dependencies;
+			Collection<String> dependencies = null;
 
 			try {
 				dependencies = _parseModuleDependencies(url);
