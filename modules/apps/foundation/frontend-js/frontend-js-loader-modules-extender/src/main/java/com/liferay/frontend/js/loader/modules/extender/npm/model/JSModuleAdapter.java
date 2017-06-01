@@ -32,12 +32,13 @@ public abstract class JSModuleAdapter implements JSModule {
 		String resolvedId, Collection<String> dependencies) {
 
 		_jsPackage = jsPackage;
-		_id = ModuleNameUtil.getModuleId(jsPackage, name);
 		_name = name;
 		_url = url;
 		_resolvedURL = resolvedURL;
 		_resolvedId = resolvedId;
 		_dependencies = dependencies;
+
+		_id = ModuleNameUtil.getModuleId(jsPackage, name);
 
 		for (String dependency : dependencies) {
 			_dependencyPackageNames.add(
