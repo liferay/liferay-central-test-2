@@ -153,8 +153,8 @@ public class NPMRegistry {
 	}
 
 	private void _refreshJSModuleCaches() {
-		Map<String, JSPackage> jsPackages = new HashMap<>();
 		Map<String, JSModule> jsModules = new HashMap<>();
+		Map<String, JSPackage> jsPackages = new HashMap<>();
 		Map<String, JSModule> resolvedJSModules = new HashMap<>();
 
 		for (JSBundle jsBundle : _jsBundles) {
@@ -162,15 +162,15 @@ public class NPMRegistry {
 				jsPackages.put(jsPackage.getId(), jsPackage);
 
 				for (JSModule jsModule : jsPackage.getJSModules()) {
-					resolvedJSModules.put(jsModule.getResolvedId(), jsModule);
 					jsModules.put(jsModule.getId(), jsModule);
+					resolvedJSModules.put(jsModule.getResolvedId(), jsModule);
 				}
 			}
 		}
 
-		_resolvedJSModules = resolvedJSModules;
 		_jsModules = jsModules;
 		_jsPackages = jsPackages;
+		_resolvedJSModules = resolvedJSModules;
 	}
 
 	private boolean _removeBundle(JSBundle jsBundle) {
