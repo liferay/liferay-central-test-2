@@ -288,13 +288,13 @@ public class JSLoaderModulesServlet extends HttpServlet {
 			printWriter.write(jsPackage.getName());
 			printWriter.write(StringPool.AT);
 			printWriter.write(jsPackage.getVersion());
-			printWriter.write("': { value: '");
+			printWriter.write("': {exactMatch: true, value: '");
 			printWriter.write(jsPackage.getName());
 			printWriter.write(StringPool.AT);
 			printWriter.write(jsPackage.getVersion());
 			printWriter.write(StringPool.SLASH);
 			printWriter.write(jsPackage.getMainModuleName());
-			printWriter.write("', exactMatch: true}");
+			printWriter.write("'}");
 
 			delimiter = ",\n";
 		}
