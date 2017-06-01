@@ -48,11 +48,14 @@ public class DocumentsAndMediaURLEditorConfigContributor
 		ThemeDisplay themeDisplay,
 		RequestBackedPortletURLFactory requestBackedPortletURLFactory) {
 
+		String namespace = GetterUtil.getString(
+			inputEditorTaglibAttributes.get(
+				"liferay-ui:input-editor:namespace"));
+		String name = GetterUtil.getString(
+			inputEditorTaglibAttributes.get("liferay-ui:input-editor:name"));
+
 		ItemSelectorCriterion fileItemSelectorCriterion =
 			new FileItemSelectorCriterion();
-
-		ItemSelectorCriterion layoutItemSelectorCriterion =
-			new LayoutItemSelectorCriterion();
 
 		List<ItemSelectorReturnType> desiredItemSelectorReturnTypes =
 			new ArrayList<>();
@@ -62,15 +65,11 @@ public class DocumentsAndMediaURLEditorConfigContributor
 		fileItemSelectorCriterion.setDesiredItemSelectorReturnTypes(
 			desiredItemSelectorReturnTypes);
 
+		ItemSelectorCriterion layoutItemSelectorCriterion =
+			new LayoutItemSelectorCriterion();
+
 		layoutItemSelectorCriterion.setDesiredItemSelectorReturnTypes(
 			desiredItemSelectorReturnTypes);
-
-		String namespace = GetterUtil.getString(
-			inputEditorTaglibAttributes.get(
-				"liferay-ui:input-editor:namespace"));
-
-		String name = GetterUtil.getString(
-			inputEditorTaglibAttributes.get("liferay-ui:input-editor:name"));
 
 		PortletURL itemSelectorURL = _itemSelector.getItemSelectorURL(
 			requestBackedPortletURLFactory, namespace + name + "selectItem",

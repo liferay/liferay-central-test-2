@@ -126,7 +126,6 @@ public class KBAttachmentEditorConfigContributor
 
 		desiredItemSelectorReturnTypes.add(
 			new FileEntryItemSelectorReturnType());
-
 		desiredItemSelectorReturnTypes.add(new URLItemSelectorReturnType());
 
 		imageItemSelectorCriterion.setDesiredItemSelectorReturnTypes(
@@ -146,7 +145,6 @@ public class KBAttachmentEditorConfigContributor
 
 		desiredItemSelectorReturnTypes.add(
 			new PortletFileEntryItemSelectorReturnType());
-
 		desiredItemSelectorReturnTypes.add(
 			new PortletFileEntryURLItemSelectorReturnType());
 

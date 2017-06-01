@@ -125,9 +125,6 @@ public class AlloyEditorLinkBrowseConfigContributor
 		ItemSelectorCriterion fileItemSelectorCriterion =
 			new FileItemSelectorCriterion();
 
-		ItemSelectorCriterion layoutItemSelectorCriterion =
-			new LayoutItemSelectorCriterion();
-
 		List<ItemSelectorReturnType> desiredItemSelectorReturnTypes =
 			new ArrayList<>();
 
@@ -135,6 +132,9 @@ public class AlloyEditorLinkBrowseConfigContributor
 
 		fileItemSelectorCriterion.setDesiredItemSelectorReturnTypes(
 			desiredItemSelectorReturnTypes);
+
+		ItemSelectorCriterion layoutItemSelectorCriterion =
+			new LayoutItemSelectorCriterion();
 
 		layoutItemSelectorCriterion.setDesiredItemSelectorReturnTypes(
 			desiredItemSelectorReturnTypes);
