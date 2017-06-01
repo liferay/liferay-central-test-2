@@ -30,7 +30,7 @@ public class MySQLSQLTransformerLogicTest
 	extends BaseSQLTransformerLogicTestCase {
 
 	public MySQLSQLTransformerLogicTest() {
-		super(_getCaseInsensitiveDB());
+		super(_getCaseInsensitiveMySQLDB());
 	}
 
 	@Test
@@ -74,7 +74,7 @@ public class MySQLSQLTransformerLogicTest
 	public void testReplaceSupportsStringCaseSensitiveQuery() {
 		String sql = "select * from foo";
 
-		MySQLDB mySQLDB = _getCaseSensitiveDB();
+		MySQLDB mySQLDB = _getCaseSensitiveMySQLDB();
 
 		SQLTransformer sqlTransformer = SQLTransformerFactory.getSQLTransformer(
 			mySQLDB);
@@ -121,7 +121,7 @@ public class MySQLSQLTransformerLogicTest
 		return "select NULL from Foo";
 	}
 
-	private static MySQLDB _getCaseInsensitiveDB() {
+	private static MySQLDB _getCaseInsensitiveMySQLDB() {
 		MySQLDB mySQLDB = Mockito.spy(new MySQLDB(5, 7));
 
 		when(mySQLDB.isSupportsStringCaseSensitiveQuery()).thenReturn(false);
@@ -129,7 +129,7 @@ public class MySQLSQLTransformerLogicTest
 		return mySQLDB;
 	}
 
-	private static MySQLDB _getCaseSensitiveDB() {
+	private static MySQLDB _getCaseSensitiveMySQLDB() {
 		MySQLDB mySQLDB = Mockito.spy(new MySQLDB(5, 7));
 
 		when(mySQLDB.isSupportsStringCaseSensitiveQuery()).thenReturn(true);
