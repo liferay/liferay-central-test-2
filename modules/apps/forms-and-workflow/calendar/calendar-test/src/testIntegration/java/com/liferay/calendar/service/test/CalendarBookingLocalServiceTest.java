@@ -785,17 +785,16 @@ public class CalendarBookingLocalServiceTest {
 		Map<Locale, String> earlierDescriptionMap = new HashMap<>(
 			calendarBooking.getDescriptionMap());
 
+		Map<Locale, String> laterDescriptionMap =
+			RandomTestUtil.randomLocaleStringMap();
+
 		CalendarBooking calendarBookingInstance =
 			CalendarBookingTestUtil.updateCalendarBookingInstance(
 				calendarBooking, 2, RandomTestUtil.randomLocaleStringMap(),
 				serviceContext);
 
 		long instanceStartTime = calendarBookingInstance.getStartTime();
-
 		long instanceEndTime = calendarBookingInstance.getEndTime();
-
-		Map<Locale, String> laterDescriptionMap =
-			RandomTestUtil.randomLocaleStringMap();
 
 		CalendarBookingLocalServiceUtil.updateCalendarBookingInstance(
 			_user.getUserId(), calendarBookingInstance.getCalendarBookingId(),
@@ -845,9 +844,7 @@ public class CalendarBookingLocalServiceTest {
 				_user, serviceContext);
 
 		Map<Locale, String> titleMap = RandomTestUtil.randomLocaleStringMap();
-
 		long instanceStartTime = calendarBooking.getStartTime() + Time.DAY * 2;
-
 		long instanceEndTime = instanceStartTime + (Time.HOUR * 10);
 
 		CalendarBooking calendarBookingInstance =
@@ -910,9 +907,7 @@ public class CalendarBookingLocalServiceTest {
 		Calendar calendar = CalendarTestUtil.addCalendar(_user, serviceContext);
 
 		long startTime = System.currentTimeMillis();
-
 		long endTime = startTime + Time.DAY;
-
 		Recurrence recurrence = RecurrenceTestUtil.getDailyRecurrence();
 
 		CalendarBooking calendarBooking =
@@ -922,16 +917,15 @@ public class CalendarBookingLocalServiceTest {
 
 		Map<Locale, String> titleMap = RandomTestUtil.randomLocaleStringMap();
 
+		Map<Locale, String> laterDescriptionMap =
+			RandomTestUtil.randomLocaleStringMap();
+
 		CalendarBooking calendarBookingInstance =
 			CalendarBookingTestUtil.updateCalendarBookingInstance(
 				calendarBooking, 2, titleMap, serviceContext);
 
 		long instanceEndTime = calendarBookingInstance.getEndTime();
-
 		long instanceStartTime = calendarBookingInstance.getStartTime();
-
-		Map<Locale, String> laterDescriptionMap =
-			RandomTestUtil.randomLocaleStringMap();
 
 		calendarBookingInstance =
 			CalendarBookingTestUtil.

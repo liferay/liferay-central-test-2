@@ -148,10 +148,8 @@ public class CalendarUtilTest {
 		ServiceContext serviceContext = new ServiceContext();
 
 		serviceContext.setCompanyId(_user.getCompanyId());
-
-		serviceContext.setUserId(_user.getUserId());
-
 		serviceContext.setScopeGroupId(_user.getGroupId());
+		serviceContext.setUserId(_user.getUserId());
 
 		return serviceContext;
 	}

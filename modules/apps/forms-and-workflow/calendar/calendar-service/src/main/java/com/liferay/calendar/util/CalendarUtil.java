@@ -279,7 +279,6 @@ public class CalendarUtil {
 				CalendarBooking.class.getName(),
 				calendarBooking.getCalendarBookingId()));
 		jsonObject.put("instanceIndex", calendarBooking.getInstanceIndex());
-
 		jsonObject.put("location", calendarBooking.getLocation());
 		jsonObject.put(
 			"parentCalendarBookingId",
