@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Repository;
 import com.liferay.portal.kernel.model.UserConstants;
+import com.liferay.portal.kernel.repository.DocumentRepository;
 import com.liferay.portal.kernel.repository.InvalidRepositoryIdException;
 import com.liferay.portal.kernel.repository.LocalRepository;
 import com.liferay.portal.kernel.repository.RepositoryProvider;
@@ -49,6 +50,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.repository.liferayrepository.model.LiferayFolder;
+import com.liferay.portal.repository.registry.RepositoryClassDefinitionCatalogUtil;
 import com.liferay.portlet.documentlibrary.service.base.DLAppLocalServiceBaseImpl;
 import com.liferay.portlet.documentlibrary.util.DLAppUtil;
 
@@ -56,6 +58,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -1374,9 +1377,11 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 
 		long repositoryId = localRepository.getRepositoryId();
 
-		dlAppHelperLocalService.deleteRepositoryFileEntries(repositoryId);
+		if (!_isExternalRepository(localRepository)) {
+			dlAppHelperLocalService.deleteRepositoryFileEntries(repositoryId);
 
-		localRepository.deleteAll();
+			localRepository.deleteAll();
+		}
 
 		repositoryLocalService.deleteRepository(repositoryId);
 	}
@@ -1446,6 +1451,23 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 
 	@BeanReference(type = RepositoryProvider.class)
 	protected RepositoryProvider repositoryProvider;
+
+	private boolean _isExternalRepository(DocumentRepository documentRepository)
+		throws PortalException {
+
+		Repository repository = repositoryLocalService.fetchRepository(
+			documentRepository.getRepositoryId());
+
+		if (repository == null) {
+			return false;
+		}
+
+		Collection<String> externalRepositoryClassNames =
+			RepositoryClassDefinitionCatalogUtil.
+				getExternalRepositoryClassNames();
+
+		return externalRepositoryClassNames.contains(repository.getClassName());
+	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		DLAppLocalServiceImpl.class);
