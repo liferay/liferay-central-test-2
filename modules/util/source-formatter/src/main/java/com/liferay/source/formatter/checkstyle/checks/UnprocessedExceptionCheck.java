@@ -49,12 +49,6 @@ public class UnprocessedExceptionCheck extends AbstractCheck {
 		return new int[] {TokenTypes.LITERAL_CATCH, TokenTypes.LITERAL_NEW};
 	}
 
-	public void setCheckUnprocessedThrownExceptions(
-		boolean checkUnprocessedThrownExceptions) {
-
-		_checkUnprocessedThrownExceptions = checkUnprocessedThrownExceptions;
-	}
-
 	@Override
 	public void visitToken(DetailAST detailAST) {
 		FileContents fileContents = getFileContents();
@@ -156,10 +150,6 @@ public class UnprocessedExceptionCheck extends AbstractCheck {
 	}
 
 	private void _checkUnprocessedThrownException(DetailAST detailAST) {
-		if (!_checkUnprocessedThrownExceptions) {
-			return;
-		}
-
 		String name = _getName(detailAST);
 
 		if ((name == null) || !name.endsWith("Exception")) {
@@ -294,7 +284,5 @@ public class UnprocessedExceptionCheck extends AbstractCheck {
 
 	private static final String _MSG_UNPROCESSED_EXCEPTION =
 		"exception.unprocessed";
-
-	private boolean _checkUnprocessedThrownExceptions;
 
 }
