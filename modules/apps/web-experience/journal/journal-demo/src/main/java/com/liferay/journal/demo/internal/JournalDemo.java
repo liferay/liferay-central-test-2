@@ -52,6 +52,7 @@ public class JournalDemo extends BasePortalInstanceLifecycleListener {
 	@Deactivate
 	protected void deactivate() throws PortalException {
 		_journalArticleDemoDataCreator.delete();
+
 		_siteAdminUserDemoDataCreator.delete();
 	}
 
