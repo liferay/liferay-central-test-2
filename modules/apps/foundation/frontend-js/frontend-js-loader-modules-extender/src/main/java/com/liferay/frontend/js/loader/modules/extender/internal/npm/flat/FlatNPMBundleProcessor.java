@@ -48,16 +48,6 @@ import org.osgi.service.component.annotations.Component;
 @Component(immediate = true, service = JSBundleProcessor.class)
 public class FlatNPMBundleProcessor implements JSBundleProcessor {
 
-	public static final String DEPENDENCIES = "dependencies";
-
-	public static final String MAIN = "main";
-
-	public static final String NAME = "name";
-
-	public static final String PEER_DEPENDENCIES = "peerDependencies";
-
-	public static final String VERSION = "version";
-
 	@Override
 	public JSBundle process(Bundle bundle) {
 		URL url = bundle.getResource("META-INF/resources/package.json");
@@ -221,11 +211,11 @@ public class FlatNPMBundleProcessor implements JSBundleProcessor {
 			return;
 		}
 
-		String main = jsonObject.getString(MAIN);
-		String name = jsonObject.getString(NAME);
-		String version = jsonObject.getString(VERSION);
+		String main = jsonObject.getString("main");
+		String name = jsonObject.getString("name");
+		String version = jsonObject.getString("version");
 
-		String mainModuleName;
+		String mainModuleName = null;
 
 		if (Validator.isNull(main)) {
 			mainModuleName = "index";
@@ -245,9 +235,9 @@ public class FlatNPMBundleProcessor implements JSBundleProcessor {
 			_log.info("Adding NPM package: " + flatJSPackage);
 		}
 
-		_processDependencies(flatJSPackage, jsonObject, DEPENDENCIES);
+		_processDependencies(flatJSPackage, jsonObject, "dependencies");
 
-		_processDependencies(flatJSPackage, jsonObject, PEER_DEPENDENCIES);
+		_processDependencies(flatJSPackage, jsonObject, "peerDependencies");
 
 		_processModules(flatJSPackage, location);
 
