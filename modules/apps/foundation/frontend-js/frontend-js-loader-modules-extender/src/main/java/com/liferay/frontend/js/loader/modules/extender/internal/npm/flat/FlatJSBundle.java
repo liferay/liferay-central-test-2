@@ -31,7 +31,7 @@ public class FlatJSBundle extends JSBundleAdapter {
 
 	public FlatJSBundle(Bundle bundle) {
 		super(
-			Long.toString(bundle.getBundleId()), bundle.getSymbolicName(),
+			String.valueOf(bundle.getBundleId()), bundle.getSymbolicName(),
 			bundle.getVersion().toString());
 
 		_bundle = bundle;
