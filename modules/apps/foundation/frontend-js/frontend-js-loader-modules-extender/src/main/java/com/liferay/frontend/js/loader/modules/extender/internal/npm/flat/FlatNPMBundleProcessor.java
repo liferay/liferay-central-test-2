@@ -211,11 +211,9 @@ public class FlatNPMBundleProcessor implements JSBundleProcessor {
 			return;
 		}
 
-		String main = jsonObject.getString("main");
-		String name = jsonObject.getString("name");
-		String version = jsonObject.getString("version");
-
 		String mainModuleName = null;
+
+		String main = jsonObject.getString("main");
 
 		if (Validator.isNull(main)) {
 			mainModuleName = "index";
@@ -229,7 +227,8 @@ public class FlatNPMBundleProcessor implements JSBundleProcessor {
 		}
 
 		FlatJSPackage flatJSPackage = new FlatJSPackage(
-			flatJSBundle, name, version, mainModuleName, root);
+			flatJSBundle, jsonObject.getString("name"),
+			jsonObject.getString("version"), mainModuleName, root);
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Adding NPM package: " + flatJSPackage);
