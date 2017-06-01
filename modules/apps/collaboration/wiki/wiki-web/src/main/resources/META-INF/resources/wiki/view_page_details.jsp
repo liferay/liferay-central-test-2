@@ -126,9 +126,9 @@ PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, "details
 
 					<%
 					for (String conversion : conversions) {
-						exportPageURL.setParameter("targetExtension", conversion);
-
 						Map<String, Object> data = new HashMap<>();
+
+						exportPageURL.setParameter("targetExtension", conversion);
 
 						data.put("resource-href", exportPageURL.toString());
 					%>
