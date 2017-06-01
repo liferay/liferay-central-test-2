@@ -11,35 +11,35 @@ AUI.add(
 					label: Liferay.Language.get('is-greater-than-or-equal-to'),
 					name: 'gteq',
 					parameterMessage: Liferay.Language.get('this-number'),
-					regex: /^(\w+)\>\=(\d+)$/,
+					regex: /^(.+)\>\=(\d+)$/,
 					template: '{name}>={parameter}'
 				},
 				{
 					label: Liferay.Language.get('is-greater-than'),
 					name: 'gt',
 					parameterMessage: Liferay.Language.get('this-number'),
-					regex: /^(\w+)\>(\d+)$/,
+					regex: /^(.+)\>(\d+)$/,
 					template: '{name}>{parameter}'
 				},
 				{
 					label: Liferay.Language.get('is-equal-to'),
 					name: 'eq',
 					parameterMessage: Liferay.Language.get('this-number'),
-					regex: /^(\w+)\=\=(\d+)$/,
+					regex: /^(.+)\=\=(\d+)$/,
 					template: '{name}=={parameter}'
 				},
 				{
 					label: Liferay.Language.get('is-less-than-or-equal-to'),
 					name: 'lteq',
 					parameterMessage: Liferay.Language.get('this-number'),
-					regex: /^(\w+)\<\=(\d+)$/,
+					regex: /^(.+)\<\=(\d+)$/,
 					template: '{name}<={parameter}'
 				},
 				{
 					label: Liferay.Language.get('is-less-than'),
 					name: 'lt',
 					parameterMessage: Liferay.Language.get('this-number'),
-					regex: /^(\w+)\<(\d+)$/,
+					regex: /^(.+)\<(\d+)$/,
 					template: '{name}<{parameter}'
 				}
 			],
@@ -48,35 +48,35 @@ AUI.add(
 					label: Liferay.Language.get('contains'),
 					name: 'contains',
 					parameterMessage: Liferay.Language.get('this-text'),
-					regex: /^contains\((\w+), "(\w+)"\)$/,
+					regex: /^contains\((.+), "(.+)"\)$/,
 					template: 'contains({name}, "{parameter}")'
 				},
 				{
 					label: Liferay.Language.get('not-contains'),
 					name: 'notContains',
 					parameterMessage: Liferay.Language.get('this-text'),
-					regex: /^NOT\(contains\((\w+), "(\w+)"\)\)$/,
+					regex: /^NOT\(contains\((.+), "(.+)"\)\)$/,
 					template: 'NOT(contains({name}, "{parameter}"))'
 				},
 				{
 					label: Liferay.Language.get('url'),
 					name: 'url',
 					parameterMessage: '',
-					regex: /^isURL\((\w+)\)$/,
+					regex: /^isURL\((.+)\)$/,
 					template: 'isURL({name})'
 				},
 				{
 					label: Liferay.Language.get('email'),
 					name: 'email',
 					parameterMessage: '',
-					regex: /^isEmailAddress\((\w+)\)$/,
+					regex: /^isEmailAddress\((.+)\)$/,
 					template: 'isEmailAddress({name})'
 				},
 				{
 					label: Liferay.Language.get('regular-expression'),
 					name: 'regularExpression',
 					parameterMessage: Liferay.Language.get('this-text'),
-					regex: /^match\((\w+), "(.*)"\)$/,
+					regex: /^match\((.+), "(.*)"\)$/,
 					template: 'match({name}, "{parameter}")'
 				}
 			]
