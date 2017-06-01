@@ -15,9 +15,12 @@
 package com.liferay.journal.demo.data.creator.internal;
 
 import com.liferay.journal.demo.data.creator.JournalArticleDemoDataCreator;
+import com.liferay.journal.exception.NoSuchArticleException;
 import com.liferay.journal.model.JournalArticle;
 import com.liferay.journal.service.JournalArticleLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.Release;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -28,10 +31,7 @@ import com.liferay.portal.kernel.xml.SAXReaderUtil;
 
 import java.io.IOException;
 
-import java.net.URL;
-
 import java.util.Collections;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -39,9 +39,7 @@ import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
-import org.osgi.framework.FrameworkUtil;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -55,17 +53,9 @@ public class JournalArticleDemoDataCreatorImpl
 
 	@Activate
 	public void activate(BundleContext bundleContext) {
-		Bundle bundle = FrameworkUtil.getBundle(getClass());
+		Collections.addAll(_availableIndexes, new Integer[] {1, 2, 3, 4, 5});
 
-		Enumeration<URL> paths = bundle.findEntries(
-			"/com/liferay/journal/demo/data/creator/internal/dependencies",
-			"article*", true);
-
-		List<URL> pathList = Collections.list(paths);
-
-		_availablePaths.addAll(pathList);
-
-		Collections.shuffle(_availablePaths);
+		Collections.shuffle(_availableIndexes);
 	}
 
 	@Override
@@ -76,31 +66,34 @@ public class JournalArticleDemoDataCreatorImpl
 
 		serviceContext.setScopeGroupId(groupId);
 
-		Locale defaultLocale = LocaleUtil.getSiteDefault();
+		int index = _getNextIndex();
 
-		URL path = _getNextPath();
+		Map<Locale, String> titleMap = _getTitleMap(index);
+		Map<Locale, String> descriptionMap = _getDescriptionMap(index);
+		String content = _getContent(index);
 
-		Map<Locale, String> titleMap = _getTitleMap(defaultLocale, path);
-
-		Map<Locale, String> descriptionMap = _getDescriptionMap(
-			defaultLocale, path);
-
-		String content = _getContent(defaultLocale, path);
-
-		JournalArticle journalArticle = journalArticleLocalService.addArticle(
+		JournalArticle journalArticle = _journalArticleLocalService.addArticle(
 			userId, groupId, 0, titleMap, descriptionMap, content,
 			"BASIC-WEB-CONTENT", "BASIC-WEB-CONTENT", serviceContext);
 
-		entryIds.add(journalArticle.getId());
+		_entryIds.add(journalArticle.getId());
 
 		return journalArticle;
 	}
 
 	@Override
 	public void delete() throws PortalException {
-		for (long entryId : entryIds) {
-			journalArticleLocalService.deleteJournalArticle(entryId);
-			entryIds.remove(entryId);
+		for (long entryId : _entryIds) {
+			try {
+				_journalArticleLocalService.deleteJournalArticle(entryId);
+			}
+			catch (NoSuchArticleException nsae) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(nsae);
+				}
+			}
+
+			_entryIds.remove(entryId);
 		}
 	}
 
@@ -108,7 +101,7 @@ public class JournalArticleDemoDataCreatorImpl
 	protected void setJournalArticleLocalService(
 		JournalArticleLocalService journalArticleLocalService) {
 
-		this.journalArticleLocalService = journalArticleLocalService;
+		_journalArticleLocalService = journalArticleLocalService;
 	}
 
 	@Reference(
@@ -117,9 +110,6 @@ public class JournalArticleDemoDataCreatorImpl
 	)
 	protected void setRelease(Release release) {
 	}
-
-	protected final List<Long> entryIds = new CopyOnWriteArrayList<>();
-	protected JournalArticleLocalService journalArticleLocalService;
 
 	private Document _createDocumentContent(String locale) {
 		Document document = SAXReaderUtil.createDocument();
@@ -132,45 +122,51 @@ public class JournalArticleDemoDataCreatorImpl
 		return document;
 	}
 
-	private String _getContent(Locale locale, URL path) throws IOException {
+	private String _getContent(int index) throws IOException {
 		Class<?> clazz = getClass();
 
-		String contentPath = path.getPath() + "content.txt";
+		String contentPath =
+			"com/liferay/journal/demo/data/creator/internal/dependencies" +
+				"/article" + index + "/content.txt";
 
 		String content = StringUtil.read(
 			clazz.getClassLoader(), contentPath, false);
 
-		return _getStructuredContent(content, locale);
+		return _getStructuredContent(content);
 	}
 
-	private Map<Locale, String> _getDescriptionMap(Locale locale, URL path)
+	private Map<Locale, String> _getDescriptionMap(int index)
 		throws IOException {
 
 		Class<?> clazz = getClass();
 
-		Map<Locale, String> descriptionMap = new HashMap<>();
-
-		String descriptionPath = path.getPath() + "description.txt";
+		String descriptionPath =
+			"com/liferay/journal/demo/data/creator/internal/dependencies" +
+				"/article" + index + "/description.txt";
 
 		String description = StringUtil.read(
 			clazz.getClassLoader(), descriptionPath, false);
 
-		descriptionMap.put(locale, description);
+		Map<Locale, String> descriptionMap = new HashMap<>();
+
+		descriptionMap.put(LocaleUtil.getSiteDefault(), description);
 
 		return descriptionMap;
 	}
 
-	private URL _getNextPath() {
+	private int _getNextIndex() {
 		int index = _atomicInteger.getAndIncrement();
 
-		if (index == (_availablePaths.size() - 1)) {
+		if (index == (_availableIndexes.size() - 1)) {
 			_atomicInteger.set(0);
 		}
 
-		return _availablePaths.get(index);
+		return _availableIndexes.get(index);
 	}
 
-	private String _getStructuredContent(String contents, Locale locale) {
+	private String _getStructuredContent(String content) {
+		Locale locale = LocaleUtil.getSiteDefault();
+
 		Document document = _createDocumentContent(locale.toString());
 
 		Element rootElement = document.getRootElement();
@@ -185,29 +181,35 @@ public class JournalArticleDemoDataCreatorImpl
 		Element element = dynamicElementElement.addElement("dynamic-content");
 
 		element.addAttribute("language-id", LocaleUtil.toLanguageId(locale));
-		element.addCDATA(contents);
+		element.addCDATA(content);
 
 		return document.asXML();
 	}
 
-	private Map<Locale, String> _getTitleMap(Locale locale, URL path)
-		throws IOException {
-
+	private Map<Locale, String> _getTitleMap(int index) throws IOException {
 		Class<?> clazz = getClass();
 
-		Map<Locale, String> titleMap = new HashMap<>();
-
-		String titlePath = path.getPath() + "title.txt";
+		String titlePath =
+			"com/liferay/journal/demo/data/creator/internal/dependencies" +
+				"/article" + index + "/title.txt";
 
 		String title = StringUtil.read(
 			clazz.getClassLoader(), titlePath, false);
 
-		titleMap.put(locale, title);
+		Map<Locale, String> titleMap = new HashMap<>();
+
+		titleMap.put(LocaleUtil.getSiteDefault(), title);
 
 		return titleMap;
 	}
 
+	private static final Log _log = LogFactoryUtil.getLog(
+		JournalArticleDemoDataCreatorImpl.class);
+
 	private final AtomicInteger _atomicInteger = new AtomicInteger(0);
-	private final List<URL> _availablePaths = new CopyOnWriteArrayList<>();
+	private final List<Integer> _availableIndexes =
+		new CopyOnWriteArrayList<>();
+	private final List<Long> _entryIds = new CopyOnWriteArrayList<>();
+	private JournalArticleLocalService _journalArticleLocalService;
 
 }
