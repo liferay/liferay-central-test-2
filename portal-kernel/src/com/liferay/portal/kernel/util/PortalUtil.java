@@ -370,6 +370,13 @@ public class PortalUtil {
 			canonicalURL, themeDisplay, locale, layout);
 	}
 
+	public static Map<Locale, String> getAlternateURLs(
+			String canonicalURL, ThemeDisplay themeDisplay, Layout layout)
+		throws PortalException {
+
+		return getPortal().getAlternateURLs(canonicalURL, themeDisplay, layout);
+	}
+
 	public static long[] getAncestorSiteGroupIds(long groupId)
 		throws PortalException {
 
