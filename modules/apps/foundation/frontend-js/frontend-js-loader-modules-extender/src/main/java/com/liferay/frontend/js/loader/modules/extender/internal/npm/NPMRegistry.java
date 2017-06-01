@@ -198,7 +198,10 @@ public class NPMRegistry {
 
 			@Override
 			public int compare(JSBundle jsBundle1, JSBundle jsBundle2) {
-				return jsBundle1.getId().compareTo(jsBundle2.getId());
+				String id1 = jsBundle1.getId();
+				String id2 = jsBundle2.getId();
+
+				return id1.compareTo(id2);
 			}
 
 		});
