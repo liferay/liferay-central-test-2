@@ -101,7 +101,7 @@ public class FlatNPMBundleProcessor implements JSBundleProcessor {
 
 		String urlContent = StringUtil.read(url.openStream());
 
-		Matcher matcher = _MODULE_DEFINITION_PATTERN.matcher(urlContent);
+		Matcher matcher = _moduleDefinitionPattern.matcher(urlContent);
 
 		if (!matcher.lookingAt()) {
 			return Collections.emptyList();
@@ -270,10 +270,10 @@ public class FlatNPMBundleProcessor implements JSBundleProcessor {
 		_processPackage(flatJSBundle, location, true);
 	}
 
-	private static final Pattern _MODULE_DEFINITION_PATTERN = Pattern.compile(
-		"Liferay\\.Loader\\.define.*\\[(.*)\\].*function", Pattern.MULTILINE);
-
 	private static final Log _log = LogFactoryUtil.getLog(
 		FlatNPMBundleProcessor.class);
+
+	private static final Pattern _moduleDefinitionPattern = Pattern.compile(
+		"Liferay\\.Loader\\.define.*\\[(.*)\\].*function", Pattern.MULTILINE);
 
 }
