@@ -524,7 +524,13 @@ public class LayoutLocalServiceStagingAdvice implements MethodInterceptor {
 				Object proxiedLayout = proxiedLayouts.get(layout);
 
 				if (proxiedLayout != null) {
-					return (Layout)proxiedLayout;
+					Layout layoutProxiedLayout = (Layout)proxiedLayout;
+
+					if (layoutProxiedLayout.getMvccVersion() ==
+							layout.getMvccVersion()) {
+
+						return (Layout)proxiedLayout;
+					}
 				}
 
 				proxiedLayout = ProxyUtil.newProxyInstance(
