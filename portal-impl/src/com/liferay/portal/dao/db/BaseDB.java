@@ -504,6 +504,8 @@ public abstract class BaseDB implements DB {
 		}
 
 		_supportsStringCaseSensitiveQuery = supportsStringCaseSensitiveQuery;
+
+		SQLTransformer.reloadSQLTransformer();
 	}
 
 	@Override
