@@ -102,7 +102,7 @@ public class PluginGitIDFailureMessageGenerator
 
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("https://github.com/liferay");
+		sb.append("https://github.com/liferay/");
 		sb.append(pluginsRepositoryName);
 		sb.append("/commits/");
 		sb.append(
