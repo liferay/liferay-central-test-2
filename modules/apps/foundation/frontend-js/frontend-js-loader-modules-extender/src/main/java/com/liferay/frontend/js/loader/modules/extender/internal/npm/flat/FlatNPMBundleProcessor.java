@@ -196,16 +196,14 @@ public class FlatNPMBundleProcessor implements JSBundleProcessor {
 
 		JSONObject jsonObject = null;
 
-		String packageJsonLocation = location + "/package.json";
-
 		try {
 			jsonObject = JSONFactoryUtil.createJSONObject(
-				_getResourceContent(flatJSBundle, packageJsonLocation));
+				_getResourceContent(flatJSBundle, location + "/package.json"));
 		}
 		catch (JSONException jsone) {
 			_log.error(
 				"Unable to parse package of " + flatJSBundle + ": " +
-					packageJsonLocation,
+					location + "/package.json",
 				jsone);
 
 			return;
