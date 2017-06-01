@@ -1211,7 +1211,7 @@ public abstract class BaseDB implements DB {
 	private final DBType _dbType;
 	private final int _majorVersion;
 	private final int _minorVersion;
-	private boolean _supportsStringCaseSensitiveQuery;
+	private boolean _supportsStringCaseSensitiveQuery = true;
 	private final Map<String, String> _templateMap = new HashMap<>();
 
 }
