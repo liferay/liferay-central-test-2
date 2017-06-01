@@ -102,13 +102,13 @@ AUI.add(
 					_afterDataProviderChange: function(event) {
 						var instance = this;
 
-						var dataProviderSelectField = event.newVal;
+						var dataProviderInstanceIdArray = event.newVal;
 
-						if (!dataProviderSelectField) {
+						if (!dataProviderInstanceIdArray) {
 							return;
 						}
 
-						var ddmDataProviderInstanceId = dataProviderSelectField.getValue()[0];
+						var ddmDataProviderInstanceId = dataProviderInstanceIdArray[0];
 
 						if (!ddmDataProviderInstanceId) {
 							return;
@@ -185,7 +185,6 @@ AUI.add(
 
 							inputParameterField = instance.createSelectField(
 								{
-									bubbleTargets: [instance],
 									fieldName: instance.get('index') + '-action',
 									options: instance.getFieldsByType(inputParameters[i].type),
 									showLabel: false,
@@ -209,7 +208,6 @@ AUI.add(
 
 						instance._dataProvidersList = instance.createSelectField(
 							{
-								bubbleTargets: [instance],
 								fieldName: instance.get('index') + '-action',
 								options: [],
 								showLabel: false,
@@ -269,12 +267,10 @@ AUI.add(
 
 							outputParameterField = instance.createSelectField(
 								{
-									bubbleTargets: [instance],
 									fieldName: instance.get('index') + '-action',
 									label: outputParameters[i],
 									options: instance.getFieldsByType(outputParameters[i].type),
 									showLabel: false,
-									value: value,
 									visible: true
 								}
 							).render(outputParametersContainer.one('.container-input-field-' + i));
@@ -285,6 +281,8 @@ AUI.add(
 									parameter: name
 								}
 							);
+
+							outputParameterField.setValue(value);
 						}
 					},
 
