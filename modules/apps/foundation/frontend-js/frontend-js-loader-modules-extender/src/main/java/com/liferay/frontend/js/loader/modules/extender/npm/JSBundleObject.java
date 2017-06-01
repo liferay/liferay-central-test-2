@@ -15,7 +15,6 @@
 package com.liferay.frontend.js.loader.modules.extender.npm;
 
 /**
- * An object that can be directly referenced by its unique id
  * @author Iván Zaera
  */
 public interface JSBundleObject {

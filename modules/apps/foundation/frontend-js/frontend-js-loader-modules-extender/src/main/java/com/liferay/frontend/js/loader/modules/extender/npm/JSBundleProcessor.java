@@ -17,8 +17,6 @@ package com.liferay.frontend.js.loader.modules.extender.npm;
 import org.osgi.framework.Bundle;
 
 /**
- * A service that can process an OSGi bundle to extract NPM packages from its
- * structure.
  * @author Iván Zaera
  */
 public interface JSBundleProcessor {

@@ -139,11 +139,6 @@ public class FlatNPMBundleProcessor implements JSBundleProcessor {
 		}
 	}
 
-	/**
-	 * @param flatJSPackage
-	 * @param location the bundle relative path of the package folder
-	 * @return
-	 */
 	private void _processModules(FlatJSPackage flatJSPackage, String location) {
 		FlatJSBundle flatJSBundle = flatJSPackage.getJSBundle();
 
@@ -206,11 +201,6 @@ public class FlatNPMBundleProcessor implements JSBundleProcessor {
 		}
 	}
 
-	/**
-	 * @param flatJSBundle
-	 * @param location the bundle relative path to a package.json file
-	 * @return
-	 */
 	private void _processPackage(
 		FlatJSBundle flatJSBundle, String location, boolean root) {
 

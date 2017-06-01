@@ -18,7 +18,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * A {@link JSBundleObject} which contents can be requested using a portal URL.
  * @author Iván Zaera
  */
 public interface JSBundleAsset extends JSBundleObject {
