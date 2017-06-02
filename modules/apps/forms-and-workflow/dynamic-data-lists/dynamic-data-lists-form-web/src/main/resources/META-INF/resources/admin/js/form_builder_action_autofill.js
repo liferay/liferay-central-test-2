@@ -100,19 +100,11 @@ AUI.add(
 					},
 
 					_afterDataProviderChange: function(event) {
+						if (!event.newVal || !event.newVal[0]) {
+							return;
+						}
+
 						var instance = this;
-
-						var dataProviderInstanceIdArray = event.newVal;
-
-						if (!dataProviderInstanceIdArray) {
-							return;
-						}
-
-						var ddmDataProviderInstanceId = dataProviderInstanceIdArray[0];
-
-						if (!ddmDataProviderInstanceId) {
-							return;
-						}
 
 						var boundingBox = instance.get('boundingBox');
 
@@ -123,7 +115,7 @@ AUI.add(
 						A.io.request(
 							Settings.getDataProviderParametersSettingsURL,
 							{
-								data: instance._getDataProviderPayload(ddmDataProviderInstanceId),
+								data: instance._getDataProviderPayload(event.newVal[0]),
 								method: 'GET',
 								on: {
 									success: function(event, id, xhr) {
