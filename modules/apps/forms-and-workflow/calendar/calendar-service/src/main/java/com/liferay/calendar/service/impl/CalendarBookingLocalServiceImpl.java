@@ -207,21 +207,19 @@ public class CalendarBookingLocalServiceImpl
 		calendarBooking.setSecondReminderType(secondReminderType);
 		calendarBooking.setExpandoBridgeAttributes(serviceContext);
 
+		int status;
+
 		if (calendarBooking.isMasterBooking()) {
-			calendarBooking.setStatus(
-				CalendarBookingWorkflowConstants.STATUS_DRAFT);
+			status = CalendarBookingWorkflowConstants.STATUS_DRAFT;
+		}
+		else if (hasExclusiveCalendarBooking(calendar, startTime, endTime)) {
+			status = CalendarBookingWorkflowConstants.STATUS_DENIED;
 		}
 		else {
-			if (hasExclusiveCalendarBooking(calendar, startTime, endTime)) {
-				calendarBooking.setStatus(
-					CalendarBookingWorkflowConstants.STATUS_DENIED);
-			}
-			else {
-				calendarBooking.setStatus(
-					CalendarBookingWorkflowConstants.STATUS_MASTER_PENDING);
-			}
+			status = CalendarBookingWorkflowConstants.STATUS_MASTER_PENDING;
 		}
 
+		calendarBooking.setStatus(status);
 		calendarBooking.setStatusDate(serviceContext.getModifiedDate(now));
 
 		calendarBookingPersistence.update(calendarBooking);
