@@ -1380,7 +1380,7 @@ AUI.add(
 
 					indexType: {
 						value: 'text'
-  					}
+					}
 				},
 
 				EXTENDS: A.FormBuilderField,
