@@ -638,6 +638,7 @@
 		</execute>
 
 		<execute macro="Staging#activateStagingCP">
+			<var name="pageVersioningEnabled" value="true" />
 			<var name="siteName" value="Site Name" />
 		</execute>
 
