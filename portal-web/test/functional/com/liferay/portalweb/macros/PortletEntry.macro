@@ -28,6 +28,8 @@
 	</command>
 
 	<command name="inputTitle">
+		<execute function="Click" locator1="TextInput#TITLE" />
+
 		<execute function="Type" locator1="TextInput#TITLE" value1="${title}" />
 	</command>
 
