@@ -215,14 +215,6 @@ public class CalendarBookingLocalServiceImpl
 			if (hasExclusiveCalendarBooking(calendar, startTime, endTime)) {
 				calendarBooking.setStatus(
 					CalendarBookingWorkflowConstants.STATUS_DENIED);
-
-				serviceContext.setAttribute("sendNotification", Boolean.TRUE);
-
-				sendNotification(
-					calendarBooking, NotificationTemplateType.DECLINE,
-					serviceContext);
-
-				serviceContext.setAttribute("sendNotification", Boolean.FALSE);
 			}
 			else {
 				calendarBooking.setStatus(
@@ -1723,8 +1715,11 @@ public class CalendarBookingLocalServiceImpl
 			NotificationTemplateType notificationTemplateType =
 				NotificationTemplateType.INVITE;
 
-			if (childCalendarBookingMap.containsKey(
-					childCalendarBooking.getCalendarId())) {
+			if (childCalendarBooking.isDenied()) {
+				notificationTemplateType = NotificationTemplateType.DECLINE;
+			}
+			else if (childCalendarBookingMap.containsKey(
+						childCalendarBooking.getCalendarId())) {
 
 				notificationTemplateType = NotificationTemplateType.UPDATE;
 			}
