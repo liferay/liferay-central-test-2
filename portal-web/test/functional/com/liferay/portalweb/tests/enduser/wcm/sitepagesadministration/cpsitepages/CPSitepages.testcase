@@ -440,6 +440,7 @@
 
 	<command name="EditSitePage" priority="5">
 		<property name="portal.acceptance" value="true" />
+		<property name="testray.component.names" value="Training" />
 
 		<execute macro="SitePageNavigator#gotoPages" >
 			<var name="page" value="Public Pages" />
