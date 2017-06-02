@@ -844,7 +844,9 @@ public class CalendarBookingLocalServiceTest {
 				_user, serviceContext);
 
 		Map<Locale, String> titleMap = RandomTestUtil.randomLocaleStringMap();
+
 		long instanceStartTime = calendarBooking.getStartTime() + Time.DAY * 2;
+
 		long instanceEndTime = instanceStartTime + (Time.HOUR * 10);
 
 		CalendarBooking calendarBookingInstance =
@@ -907,7 +909,9 @@ public class CalendarBookingLocalServiceTest {
 		Calendar calendar = CalendarTestUtil.addCalendar(_user, serviceContext);
 
 		long startTime = System.currentTimeMillis();
+
 		long endTime = startTime + Time.DAY;
+
 		Recurrence recurrence = RecurrenceTestUtil.getDailyRecurrence();
 
 		CalendarBooking calendarBooking =
