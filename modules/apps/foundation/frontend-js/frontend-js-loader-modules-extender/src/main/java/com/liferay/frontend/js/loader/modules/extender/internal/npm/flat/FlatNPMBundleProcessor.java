@@ -202,8 +202,8 @@ public class FlatNPMBundleProcessor implements JSBundleProcessor {
 		}
 		catch (JSONException jsone) {
 			_log.error(
-				"Unable to parse package of " + flatJSBundle + ": " +
-					location + "/package.json",
+				"Unable to parse package of " + flatJSBundle + ": " + location +
+					"/package.json",
 				jsone);
 
 			return;
