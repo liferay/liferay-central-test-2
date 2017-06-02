@@ -209,6 +209,27 @@ public class CalendarBookingTestUtil {
 			serviceContext);
 	}
 
+	public static CalendarBooking addMasterCalendarBookingWithWorkflow(
+			Calendar invitingCalendar, Calendar invitedCalendar,
+			int actionPublish)
+		throws PortalException {
+
+		long startTime = System.currentTimeMillis();
+
+		User user = UserLocalServiceUtil.fetchUser(invitedCalendar.getUserId());
+
+		ServiceContext serviceContext = createServiceContext(user);
+
+		serviceContext.setWorkflowAction(actionPublish);
+
+		CalendarBooking calendarBooking = addMasterCalendarBooking(
+			user, invitingCalendar,
+			new long[] {invitedCalendar.getCalendarId()}, startTime,
+			startTime + (Time.HOUR * 10), serviceContext);
+
+		return calendarBooking;
+	}
+
 	public static CalendarBooking addPublishedCalendarBooking(User user)
 		throws PortalException {
 

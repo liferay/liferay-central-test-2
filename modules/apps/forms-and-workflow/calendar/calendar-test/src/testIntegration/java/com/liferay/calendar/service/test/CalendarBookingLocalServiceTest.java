@@ -740,6 +740,32 @@ public class CalendarBookingLocalServiceTest {
 	}
 
 	@Test
+	public void testInviteToPublishedCalendarBookingNotifiesInvitee()
+		throws Exception {
+
+		_invitingUser = UserTestUtil.addUser();
+
+		Calendar invitingcalendar = CalendarTestUtil.addCalendar(_invitingUser);
+
+		Calendar invitedCalendar = CalendarTestUtil.addCalendar(_user);
+
+		CalendarBooking calendarBooking =
+			CalendarBookingTestUtil.addMasterCalendarBookingWithWorkflow(
+				invitingcalendar, invitedCalendar,
+				WorkflowConstants.ACTION_PUBLISH);
+
+		String mailMessageSubject =
+			"Calendar: Event Notification for " + StringPool.QUOTE +
+				calendarBooking.getTitle(LocaleUtil.getDefault()) +
+					StringPool.QUOTE;
+
+		List<com.dumbster.smtp.MailMessage> mailMessages =
+			MailServiceTestUtil.getMailMessages("Subject", mailMessageSubject);
+
+		Assert.assertEquals(mailMessages.toString(), 1, mailMessages.size());
+	}
+
+	@Test
 	public void testInviteToPublishedCalendarBookingResultsInPendingChild()
 		throws Exception {
 
