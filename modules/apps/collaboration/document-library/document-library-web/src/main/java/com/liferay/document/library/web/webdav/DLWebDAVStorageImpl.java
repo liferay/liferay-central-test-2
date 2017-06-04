@@ -1250,17 +1250,15 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			serviceContext.setAttribute(
 				"fileEntryTypeId", dlFileEntry.getFileEntryTypeId());
 
+			DLFileVersion dlFileVersion =
+				_dlFileVersionLocalService.getLatestFileVersion(
+					fileEntry.getFileEntryId(), !dlFileEntry.isCheckedOut());
+
 			DLFileEntryType dlFileEntryType =
 				_dlFileEntryTypeLocalService.getFileEntryType(fileEntryTypeId);
 
 			List<DDMStructure> ddmStructures =
 				dlFileEntryType.getDDMStructures();
-
-			boolean checkedOut = dlFileEntry.isCheckedOut();
-
-			DLFileVersion dlFileVersion =
-				_dlFileVersionLocalService.getLatestFileVersion(
-					fileEntry.getFileEntryId(), !checkedOut);
 
 			for (DDMStructure ddmStructure : ddmStructures) {
 				DLFileEntryMetadata dlFileEntryMetadata =
