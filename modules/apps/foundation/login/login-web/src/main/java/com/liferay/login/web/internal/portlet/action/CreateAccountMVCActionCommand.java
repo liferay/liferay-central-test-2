@@ -223,20 +223,7 @@ public class CreateAccountMVCActionCommand extends BaseMVCActionCommand {
 				company.getCompanyId(), PropsKeys.COMPANY_SECURITY_STRANGERS);
 		}
 
-		DynamicActionRequest dynamicActionRequest = new DynamicActionRequest(
-			actionRequest);
-
-		long prefixId = getListTypeId(
-			actionRequest, "prefixValue", ListTypeConstants.CONTACT_PREFIX);
-
-		dynamicActionRequest.setParameter("prefixId", String.valueOf(prefixId));
-
-		long suffixId = getListTypeId(
-			actionRequest, "suffixValue", ListTypeConstants.CONTACT_SUFFIX);
-
-		dynamicActionRequest.setParameter("suffixId", String.valueOf(suffixId));
-
-		actionRequest = dynamicActionRequest;
+		actionRequest = wrapActionRequest(actionRequest);
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
@@ -553,6 +540,25 @@ public class CreateAccountMVCActionCommand extends BaseMVCActionCommand {
 
 		sendRedirect(
 			actionRequest, actionResponse, themeDisplay, user, password1);
+	}
+
+	protected ActionRequest wrapActionRequest(ActionRequest actionRequest)
+		throws Exception {
+
+		DynamicActionRequest dynamicActionRequest = new DynamicActionRequest(
+			actionRequest);
+
+		long prefixId = getListTypeId(
+			actionRequest, "prefixValue", ListTypeConstants.CONTACT_PREFIX);
+
+		dynamicActionRequest.setParameter("prefixId", String.valueOf(prefixId));
+
+		long suffixId = getListTypeId(
+			actionRequest, "suffixValue", ListTypeConstants.CONTACT_SUFFIX);
+
+		dynamicActionRequest.setParameter("suffixId", String.valueOf(suffixId));
+
+		return dynamicActionRequest;
 	}
 
 	private static final boolean _AUTO_SCREEN_NAME = false;
