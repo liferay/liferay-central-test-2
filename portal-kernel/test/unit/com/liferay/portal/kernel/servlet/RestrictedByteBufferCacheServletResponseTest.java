@@ -353,7 +353,7 @@ public class RestrictedByteBufferCacheServletResponseTest {
 	@Test
 	public void testSetBufferSize() throws IOException {
 
-		// Set smaller buffer size has no affect
+		// Setting smaller buffer size has no affect
 
 		StubHttpServletResponse stubHttpServletResponse =
 			new StubHttpServletResponse() {
@@ -389,7 +389,7 @@ public class RestrictedByteBufferCacheServletResponseTest {
 		Assert.assertEquals(
 			1024, restrictedByteBufferCacheServletResponse.getBufferSize());
 
-		// Set larger buffer size causing overflow
+		// Setting a larger buffer size causes overflow
 
 		restrictedByteBufferCacheServletResponse.setBufferSize(2048);
 
@@ -410,7 +410,8 @@ public class RestrictedByteBufferCacheServletResponseTest {
 		catch (IllegalStateException ise) {
 		}
 
-		// Set larger buffer size causing overflow with flushing failure
+		// Setting a larger buffer size causes overflow with a failure in
+		// flushing
 
 		IOException ioe = new IOException();
 
