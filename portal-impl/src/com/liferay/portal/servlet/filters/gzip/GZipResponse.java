@@ -151,10 +151,8 @@ public class GZipResponse extends HttpServletResponseWrapper {
 		return new ServletOutputStreamAdapter(gzipOutputStream) {
 
 			@Override
-			public void write(int b) throws IOException {
-				emptyGZipBufferedOutputStream.setFlush(true);
-
-				super.write(b);
+			public void write(byte[] bytes) throws IOException {
+				write(bytes, 0, bytes.length);
 			}
 
 			@Override
@@ -169,14 +167,34 @@ public class GZipResponse extends HttpServletResponseWrapper {
 			}
 
 			@Override
-			public void write(byte[] bytes) throws IOException {
-				write(bytes, 0, bytes.length);
+			public void write(int b) throws IOException {
+				emptyGZipBufferedOutputStream.setFlush(true);
+
+				super.write(b);
 			}
 
 		};
 	}
 
+	private boolean _isGZipContentType() {
+		String contentType = getContentType();
+
+		if (contentType != null) {
+			if (contentType.equals(ContentTypes.APPLICATION_GZIP) ||
+				contentType.equals(ContentTypes.APPLICATION_X_GZIP)) {
+
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	private static final int _EMPTY_GZIP_OUTPUT_SIZE;
+
+	private static final String _GZIP = "gzip";
+
+	private static final Log _log = LogFactoryUtil.getLog(GZipResponse.class);
 
 	static {
 		try {
@@ -200,12 +218,11 @@ public class GZipResponse extends HttpServletResponseWrapper {
 		}
 	}
 
+	private PrintWriter _printWriter;
+	private ServletOutputStream _servletOutputStream;
+
 	private static class EmptyGZipBufferedOutputStream
 		extends UnsyncBufferedOutputStream {
-
-		private EmptyGZipBufferedOutputStream(OutputStream outputStream) {
-			super(outputStream, _EMPTY_GZIP_OUTPUT_SIZE);
-		}
 
 		@Override
 		public void flush() throws IOException {
@@ -218,29 +235,12 @@ public class GZipResponse extends HttpServletResponseWrapper {
 			_flush = flush;
 		}
 
+		private EmptyGZipBufferedOutputStream(OutputStream outputStream) {
+			super(outputStream, _EMPTY_GZIP_OUTPUT_SIZE);
+		}
+
 		private boolean _flush;
 
 	}
-
-	private boolean _isGZipContentType() {
-		String contentType = getContentType();
-
-		if (contentType != null) {
-			if (contentType.equals(ContentTypes.APPLICATION_GZIP) ||
-				contentType.equals(ContentTypes.APPLICATION_X_GZIP)) {
-
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	private static final String _GZIP = "gzip";
-
-	private static final Log _log = LogFactoryUtil.getLog(GZipResponse.class);
-
-	private PrintWriter _printWriter;
-	private ServletOutputStream _servletOutputStream;
 
 }
