@@ -195,6 +195,7 @@ AUI.add(
 
 						instance._getSelectTriggerAction().addClass(CSS_ACTIVE);
 
+						instance.get('container').one('.form-group').removeClass(CSS_HIDE);
 						instance.get('container').one('.' + CSS_DROP_CHOSEN).removeClass(CSS_HIDE);
 
 						instance._open = true;
