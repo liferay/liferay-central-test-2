@@ -55,6 +55,40 @@
 		</if>
 	</tear-down>
 
+	<command name="AddAndRemoveCustomTitleViaAP" priority="3">
+		<execute macro="Portlet#gotoPortletOptions">
+			<var name="portletOption" value="Look and Feel Configuration" />
+		</execute>
+
+		<execute macro="Portlet#configureCustomTitleViaLookandfeelPG">
+			<var name="portletName" value="Asset Publisher" />
+		</execute>
+
+		<execute macro="Navigator#gotoPage">
+			<var name="pageName" value="Asset Publisher Page" />
+		</execute>
+
+		<execute macro="Portlet#viewSpecificPG">
+			<var name="portletName" value="Asset Publisher Custom" />
+		</execute>
+
+		<execute macro="Portlet#gotoPortletOptions">
+			<var name="portletOption" value="Look and Feel Configuration" />
+		</execute>
+
+		<execute macro="Portlet#configureApplicationDecoratorsViaLookandfeelPG">
+			<var name="applicationDecorators" value="Barebone" />
+		</execute>
+
+		<execute macro="Navigator#gotoPage">
+			<var name="pageName" value="Asset Publisher Page" />
+		</execute>
+
+		<execute macro="Portlet#viewNoSpecificPG">
+			<var name="portletName" value="Asset Publisher Custom" />
+		</execute>
+	</command>
+
 	<command name="AddAPMultiplePortlet" priority="4">
 		<execute macro="Navigator#gotoPage">
 			<var name="pageName" value="Asset Publisher Page" />
@@ -292,24 +326,6 @@
 
 		<execute macro="Bookmark#viewBookmarkViaAP">
 			<var name="bookmarkName" value="Test Bookmark Name" />
-		</execute>
-	</command>
-
-	<command name="AddCustomTitleViaAP" priority="3">
-		<execute macro="Portlet#gotoPortletOptions">
-			<var name="portletOption" value="Look and Feel Configuration" />
-		</execute>
-
-		<execute macro="Portlet#configureCustomTitleViaLookandfeelPG">
-			<var name="portletName" value="Asset Publisher" />
-		</execute>
-
-		<execute macro="Navigator#gotoPage">
-			<var name="pageName" value="Asset Publisher Page" />
-		</execute>
-
-		<execute macro="Portlet#viewSpecificPG">
-			<var name="portletName" value="Asset Publisher Custom" />
 		</execute>
 	</command>
 
