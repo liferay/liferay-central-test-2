@@ -285,6 +285,8 @@
 	</command>
 
 	<command name="SitesPrivatePagesPermissions" priority="4">
+		<property name="test.name.skip.portal.instance" value="SitepagesUsecase#SitesPrivatePagesPermissions" />
+
 		<execute macro="ProductMenu#gotoControlPanelSites">
 			<var name="portlet" value="Sites" />
 		</execute>
