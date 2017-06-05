@@ -77,7 +77,8 @@ public class CalculateDDLFormRuleActionSerializerTest extends PowerMockito {
 				new CalculateDDLFormRuleActionSerializer(
 					_calculateDDLFormRuleAction);
 
-		String result = calculateDDLFormRuleActionSerializer.serialize();
+		String result = calculateDDLFormRuleActionSerializer.serialize(
+			_ddlFormRuleSerializerContext);
 
 		Assert.assertEquals(
 			"calculate('text2', (getValue('text') + getValue('text1')) * 2)",
@@ -96,6 +97,9 @@ public class CalculateDDLFormRuleActionSerializerTest extends PowerMockito {
 
 	@Mock
 	private CalculateDDLFormRuleAction _calculateDDLFormRuleAction;
+
+	@Mock
+	private DDLFormRuleSerializerContext _ddlFormRuleSerializerContext;
 
 	@Mock
 	private ServiceContext _serviceContext;

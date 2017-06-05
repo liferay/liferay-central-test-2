@@ -14,6 +14,7 @@
 
 package com.liferay.dynamic.data.lists.form.web.internal.converter;
 
+import com.liferay.dynamic.data.lists.form.web.internal.converter.serializer.DDLFormRuleSerializerContext;
 import com.liferay.dynamic.data.mapping.model.DDMForm;
 import com.liferay.dynamic.data.mapping.model.DDMFormField;
 import com.liferay.dynamic.data.mapping.model.DDMFormRule;
@@ -271,7 +272,8 @@ public class DDLFormRuleToDDMFormRuleConverterTest
 		String serializedDDLFormRules = read(fileName);
 
 		return _ddlFormRulesToDDMFormRulesConverter.convert(
-			_ddlFormRulesDeserializer.deserialize(serializedDDLFormRules));
+			_ddlFormRulesDeserializer.deserialize(serializedDDLFormRules),
+			_ddlFormRuleSerializerContext);
 	}
 
 	protected List<String> extractCallFunctionParameters(String callFunction) {
@@ -314,6 +316,9 @@ public class DDLFormRuleToDDMFormRuleConverterTest
 		new DDLFormRuleDeserializer();
 	private DDLFormRuleToDDMFormRuleConverter
 		_ddlFormRulesToDDMFormRulesConverter;
+
+	@Mock
+	private DDLFormRuleSerializerContext _ddlFormRuleSerializerContext;
 
 	@Mock
 	private ServiceContext _serviceContext;
