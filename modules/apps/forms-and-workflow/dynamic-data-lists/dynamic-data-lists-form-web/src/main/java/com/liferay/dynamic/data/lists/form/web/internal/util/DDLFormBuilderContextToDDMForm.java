@@ -189,8 +189,8 @@ public class DDLFormBuilderContextToDDMForm {
 	}
 
 	protected List<DDMFormRule> getDDMFormRules(
-			JSONArray jsonArray,
-			DDLFormRuleSerializerContext ddlFormRuleSerializerContext)
+			DDLFormRuleSerializerContext ddlFormRuleSerializerContext,
+			JSONArray jsonArray)
 		throws PortalException {
 
 		if ((jsonArray == null) || (jsonArray.length() == 0)) {
@@ -332,7 +332,7 @@ public class DDLFormBuilderContextToDDMForm {
 		ddlFormRuleSerializerContext.addAttribute("form", ddmForm);
 
 		List<DDMFormRule> ddmFormRules = getDDMFormRules(
-			jsonArray, ddlFormRuleSerializerContext);
+			ddlFormRuleSerializerContext, jsonArray);
 
 		ddmForm.setDDMFormRules(ddmFormRules);
 	}

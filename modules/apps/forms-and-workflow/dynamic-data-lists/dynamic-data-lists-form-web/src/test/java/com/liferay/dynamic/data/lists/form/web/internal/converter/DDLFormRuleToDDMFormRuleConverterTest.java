@@ -314,11 +314,12 @@ public class DDLFormRuleToDDMFormRuleConverterTest
 			"[0-9a-f]{12})\'\\s*,\\s*\'(.*)\'\\s*,\\s*\'(.*)\'\\s*\\)");
 	private final DDLFormRuleDeserializer _ddlFormRulesDeserializer =
 		new DDLFormRuleDeserializer();
-	private DDLFormRuleToDDMFormRuleConverter
-		_ddlFormRulesToDDMFormRulesConverter;
 
 	@Mock
 	private DDLFormRuleSerializerContext _ddlFormRuleSerializerContext;
+
+	private DDLFormRuleToDDMFormRuleConverter
+		_ddlFormRulesToDDMFormRulesConverter;
 
 	@Mock
 	private ServiceContext _serviceContext;
