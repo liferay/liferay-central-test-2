@@ -1,4 +1,12 @@
 <definition>
+	<command name="adaptAllImages">
+		<execute function="Click" locator1="Icon#HEADER_VERTICAL_ELLIPSIS" />
+
+		<execute function="AssertClick" locator1="MenuItem#ADAPT_ALL_IMAGES" value1="Adapt All Images" />
+
+		<execute macro="Alert#viewSuccessMessage" />
+	</command>
+
 	<command name="adaptRemainingImages">
 		<var name="key_imageName" value="${imageName}" />
 		<var name="key_percentAdapted" value="${percentAdapted}" />
