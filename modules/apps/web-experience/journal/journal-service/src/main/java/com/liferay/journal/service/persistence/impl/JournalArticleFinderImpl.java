@@ -1379,14 +1379,24 @@ public class JournalArticleFinderImpl
 			}
 
 			sql = CustomSQLUtil.replaceKeywords(
-				sql, "JournalArticleLocalization.title", StringPool.LIKE, false,
-				titles);
+				sql, "LOWER(JournalArticleLocalization.title)", StringPool.LIKE,
+				false, titles);
+
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "JournalArticleLocalization.description", StringPool.LIKE,
 				true, descriptions);
+
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "JournalArticle.content", StringPool.LIKE, false,
 				contents);
+
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "LOWER(tempJournalArticleLocalization.title)",
+				StringPool.LIKE, false, titles);
+
+			sql = CustomSQLUtil.replaceKeywords(
+				sql, "tempJournalArticleLocalization.description",
+				StringPool.LIKE, false, descriptions);
 
 			sql = replaceStructureTemplate(
 				sql, ddmStructureKeys, ddmTemplateKeys);
@@ -1454,6 +1464,8 @@ public class JournalArticleFinderImpl
 			}
 
 			qPos.add(contents, 2);
+			qPos.add(titles, 2);
+			qPos.add(descriptions, 2);
 			qPos.add(displayDateGT_TS);
 			qPos.add(displayDateGT_TS);
 			qPos.add(displayDateLT_TS);
