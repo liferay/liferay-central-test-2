@@ -4,5 +4,5 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.liferay.webjars</groupId>
   <artifactId>com.liferay.webjars.alloy-ui</artifactId>
-  <version>3.0.3-deprecated.49</version>
+  <version>3.0.3-deprecated.50</version>
 </project>
