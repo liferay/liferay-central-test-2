@@ -527,6 +527,46 @@
 		</execute>
 	</command>
 
+	<command name="ViewAutomaticOptimizationForImageResolution" priority="4">
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="Adaptive Media" />
+		</execute>
+
+		<execute macro="AdaptiveMedia#addImageResolution">
+			<var name="imageName" value="Automatically optimized variant" />
+			<var name="maxHeight" value="500" />
+			<var name="maxWidth" value="400" />
+		</execute>
+
+		<execute macro="AdaptiveMedia#viewImageResolutionTableEntry">
+			<var name="imageName" value="Automatically optimized variant" />
+			<var name="maxHeight" value="500" />
+			<var name="maxWidth" value="400" />
+			<var name="percentAdapted" value="0" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoSitesContent">
+			<var name="portlet" value="Documents and Media" />
+		</execute>
+
+		<execute macro="DMDocument#addCP">
+			<var name="dmDocumentDescription" value="DM Document Description" />
+			<var name="dmDocumentFile" value="Document_1.jpg" />
+			<var name="dmDocumentTitle" value="Document_1.jpg" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoControlPanelConfiguration">
+			<var name="portlet" value="Adaptive Media" />
+		</execute>
+
+		<execute macro="AdaptiveMedia#viewImageResolutionTableEntry">
+			<var name="imageName" value="Automatically optimized variant" />
+			<var name="maxHeight" value="500" />
+			<var name="maxWidth" value="400" />
+			<var name="percentAdapted" value="100" />
+		</execute>
+	</command>
+
 	<command name="ViewImageResolutionAcrossSites" priority="4">
 		<execute macro="ProductMenu#gotoControlPanelConfiguration">
 			<var name="portlet" value="Adaptive Media" />
