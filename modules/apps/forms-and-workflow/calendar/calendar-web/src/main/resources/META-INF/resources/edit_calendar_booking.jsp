@@ -860,32 +860,34 @@ while (manageableCalendarsIterator.hasNext()) {
 		var startDate = placeholderSchedulerEvent.get('startDate');
 		var endDate = placeholderSchedulerEvent.get('endDate');
 
-		var offset = startDate.getTimezoneOffset() * 60000;
-
-		var startTime = startDate.getTime() - offset;
-		var endTime = endDate.getTime() - offset;
-
 		var calendarId = calendar.calendarId;
 
-		var statuses = [
-			<%= CalendarBookingWorkflowConstants.STATUS_PENDING %>
-		];
+		var remoteServices = Liferay.component('<portlet:namespace />remoteServices');
 
-		Liferay.Service(
-			'/calendar.calendarbooking/get-calendar-bookings',
+		remoteServices._invokeResourceURL(
 			{
-				calendarId: calendarId,
-				statuses: statuses
-			},
-			function(results) {
-				for (var i = 0; i < results.length; i++) {
-					if ((startTime < results[i].endTime) && (results[i].startTime < endTime)) {
-							<portlet:namespace />calendarListDeclined.add(calendar);
-
-							return;
+				callback: function(result) {
+					if (result.hasExclusiveCalendarBooking) {
+						<portlet:namespace />calendarListDeclined.add(calendar);
 					}
-				}
-				<portlet:namespace />calendarListPending.add(calendar);
+					else {
+						<portlet:namespace />calendarListPending.add(calendar);
+					}
+				},
+				queryParameters: {
+					calendarId: calendar.calendarId,
+					endTimeDay: endDate.getDate(),
+					endTimeHour: endDate.getHours(),
+					endTimeMinute: endDate.getMinutes(),
+					endTimeMonth: endDate.getMonth(),
+					endTimeYear: endDate.getFullYear(),
+					startTimeDay: startDate.getDate(),
+					startTimeHour: startDate.getHours(),
+					startTimeMinute: startDate.getMinutes(),
+					startTimeMonth: startDate.getMonth(),
+					startTimeYear: startDate.getFullYear()
+				},
+				resourceId: 'hasExclusiveCalendarBooking'
 			}
 		);
 	};
