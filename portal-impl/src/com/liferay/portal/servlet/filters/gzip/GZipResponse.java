@@ -187,7 +187,36 @@ public class GZipResponse extends MetaInfoCacheServletResponse {
 
 		};
 
+<<<<<<< HEAD
 		return new ServletOutputStreamAdapter(gzipOutputStream);
+=======
+		return new ServletOutputStreamAdapter(gzipOutputStream) {
+
+			@Override
+			public void write(byte[] bytes) throws IOException {
+				write(bytes, 0, bytes.length);
+			}
+
+			@Override
+			public void write(byte[] bytes, int offset, int length)
+				throws IOException {
+
+				if (length > 0) {
+					emptyGZipBufferedOutputStream.setFlush(true);
+				}
+
+				super.write(bytes, offset, length);
+			}
+
+			@Override
+			public void write(int b) throws IOException {
+				emptyGZipBufferedOutputStream.setFlush(true);
+
+				super.write(b);
+			}
+
+		};
+>>>>>>> a8d1e23... LPS-72905 Auto SF
 	}
 
 	private boolean _isGZipContentType() {
@@ -199,19 +228,73 @@ public class GZipResponse extends MetaInfoCacheServletResponse {
 
 				return true;
 			}
+<<<<<<< HEAD
+=======
 		}
 
 		return false;
 	}
 
+	private static final int _EMPTY_GZIP_OUTPUT_SIZE;
+
 	private static final String _GZIP = "gzip";
 
 	private static final Log _log = LogFactoryUtil.getLog(GZipResponse.class);
 
+	static {
+		try {
+			UnsyncByteArrayOutputStream ubaos =
+				new UnsyncByteArrayOutputStream();
+
+			GZIPOutputStream gzipOutputStream = new GZIPOutputStream(ubaos) {
+
+				{
+					def.setLevel(PropsValues.GZIP_COMPRESSION_LEVEL);
+				}
+
+			};
+
+			gzipOutputStream.close();
+
+			_EMPTY_GZIP_OUTPUT_SIZE = ubaos.size();
+		}
+		catch (IOException ioe) {
+			throw new ExceptionInInitializerError(ioe);
+		}
+	}
+
+	private PrintWriter _printWriter;
+	private ServletOutputStream _servletOutputStream;
+
+	private static class EmptyGZipBufferedOutputStream
+		extends UnsyncBufferedOutputStream {
+
+		@Override
+		public void flush() throws IOException {
+			if (_flush) {
+				super.flush();
+			}
+		}
+
+		public void setFlush(boolean flush) {
+			_flush = flush;
+		}
+
+		private EmptyGZipBufferedOutputStream(OutputStream outputStream) {
+			super(outputStream, _EMPTY_GZIP_OUTPUT_SIZE);
+>>>>>>> a8d1e23... LPS-72905 Auto SF
+		}
+
+		private boolean _flush;
+
+<<<<<<< HEAD
 	private final boolean _firefox;
 	private PrintWriter _printWriter;
 	private final HttpServletResponse _response;
 	private ServletOutputStream _servletOutputStream;
 	private UnsyncByteArrayOutputStream _unsyncByteArrayOutputStream;
+=======
+	}
+>>>>>>> a8d1e23... LPS-72905 Auto SF
 
 }

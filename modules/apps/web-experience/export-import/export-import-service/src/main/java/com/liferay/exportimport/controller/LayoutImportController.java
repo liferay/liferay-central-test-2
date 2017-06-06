@@ -965,7 +965,15 @@ public class LayoutImportController implements ImportController {
 			_log.info("Importing layouts takes " + stopWatch.getTime() + " ms");
 		}
 
+<<<<<<< HEAD
 		ZipReader zipReader = portletDataContext.getZipReader();
+=======
+		nodesStream.map(
+			(node) -> (Element)node
+		).forEach(
+			portletElements::add
+		);
+>>>>>>> f754bf8... LPS-72705 SF
 
 		zipReader.close();
 	}
