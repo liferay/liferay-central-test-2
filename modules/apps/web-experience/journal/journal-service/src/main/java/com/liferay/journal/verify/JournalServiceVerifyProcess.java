@@ -422,6 +422,18 @@ public class JournalServiceVerifyProcess extends VerifyLayout {
 		}
 	}
 
+	/**
+	 * @deprecated As of 3.14.0
+	 */
+	@Deprecated
+	protected void updateExpirationDate(
+			long groupId, long articleId, Timestamp expirationDate, int status)
+		throws Exception {
+
+		updateExpirationDate(
+			groupId, String.valueOf(articleId), expirationDate, status);
+	}
+
 	protected void updateExpirationDate(
 			long groupId, String articleId, Timestamp expirationDate,
 			int status)
