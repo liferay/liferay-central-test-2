@@ -44,13 +44,30 @@ public class SelectDDMFormFieldValueAccessor
 	public JSONArray getValue(
 		DDMFormFieldValue ddmFormFieldValue, Locale locale) {
 
-		try {
-			Value value = ddmFormFieldValue.getValue();
+		Value value = ddmFormFieldValue.getValue();
 
-			return jsonFactory.createJSONArray(value.getString(locale));
+		return createJSONArray(value.getString(locale));
+	}
+
+	@Override
+	public boolean isEmpty(DDMFormFieldValue ddmFormFieldValue, Locale locale) {
+		JSONArray jsonArray = getValue(ddmFormFieldValue, locale);
+
+		if (jsonArray.length() > 0) {
+			return false;
+		}
+
+		return true;
+	}
+
+	protected JSONArray createJSONArray(String json) {
+		try {
+			return jsonFactory.createJSONArray(json);
 		}
 		catch (JSONException jsone) {
-			_log.error("Unable to parse JSON array", jsone);
+			if (_log.isDebugEnabled()) {
+				_log.debug("Unable to parse JSON array", jsone);
+			}
 
 			return jsonFactory.createJSONArray();
 		}
