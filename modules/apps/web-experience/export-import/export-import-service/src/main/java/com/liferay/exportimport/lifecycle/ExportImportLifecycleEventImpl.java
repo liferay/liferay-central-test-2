@@ -15,11 +15,11 @@
 package com.liferay.exportimport.lifecycle;
 
 import com.liferay.exportimport.kernel.lifecycle.ExportImportLifecycleEvent;
-import com.liferay.portal.kernel.util.ListUtil;
 
 import java.io.Serializable;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -45,7 +45,7 @@ public class ExportImportLifecycleEventImpl
 
 	@Override
 	public void setAttributes(Serializable... attributes) {
-		_attributes.addAll(ListUtil.fromArray(attributes));
+		Collections.addAll(_attributes, attributes);
 	}
 
 	@Override
