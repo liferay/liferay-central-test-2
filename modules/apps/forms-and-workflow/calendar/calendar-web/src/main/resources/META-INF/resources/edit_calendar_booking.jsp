@@ -801,12 +801,7 @@ while (manageableCalendarsIterator.hasNext()) {
 
 				calendar.disabled = true;
 
-				if (calendar.classNameId == <%= ClassNameLocalServiceUtil.getClassNameId(CalendarResource.class) %>) {
-					addToPendingOrDeclinedList(calendar);
-				}
-				else {
-					<portlet:namespace />calendarListPending.add(calendar);
-				}
+				addToList(calendar);
 
 				inviteResourcesInput.val('');
 			}
@@ -856,22 +851,27 @@ while (manageableCalendarsIterator.hasNext()) {
 		}
 	);
 
-	var addToPendingOrDeclinedList = function(calendar) {
-		var remoteServices = Liferay.component('<portlet:namespace />remoteServices');
+	var addToList = function(calendar) {
+		if (calendar.classNameId == <%= ClassNameLocalServiceUtil.getClassNameId(CalendarResource.class) %>) {
+			var remoteServices = Liferay.component('<portlet:namespace />remoteServices');
 
-		remoteServices.hasExclusiveCalendarBooking(
-			calendar.calendarId,
-			placeholderSchedulerEvent.get('startDate'),
-			placeholderSchedulerEvent.get('endDate'),
-			function(result) {
-				if (result) {
-					<portlet:namespace />calendarListDeclined.add(calendar);
+			remoteServices.hasExclusiveCalendarBooking(
+				calendar.calendarId,
+				placeholderSchedulerEvent.get('startDate'),
+				placeholderSchedulerEvent.get('endDate'),
+				function(result) {
+					if (result) {
+						<portlet:namespace />calendarListDeclined.add(calendar);
+					}
+					else {
+						<portlet:namespace />calendarListPending.add(calendar);
+					}
 				}
-				else {
-					<portlet:namespace />calendarListPending.add(calendar);
-				}
-			}
-		);
+			);
+		}
+		else {
+			<portlet:namespace />calendarListPending.add(calendar);
+		}
 	};
 
 	scheduler.load();
