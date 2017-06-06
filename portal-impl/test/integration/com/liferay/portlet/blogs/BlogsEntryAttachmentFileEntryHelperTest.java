@@ -176,8 +176,7 @@ public class BlogsEntryAttachmentFileEntryHelperTest {
 	}
 
 	protected List<BlogsEntryAttachmentFileEntryReference>
-			getBlogsEntryAttachmentFileEntryReferences(
-				FileEntry tempFileEntry)
+			getBlogsEntryAttachmentFileEntryReferences(FileEntry tempFileEntry)
 		throws Exception {
 
 		ServiceContext serviceContext =
