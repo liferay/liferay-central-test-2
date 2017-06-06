@@ -10,7 +10,7 @@
 <tbody>
 <tr>
 	<td>APPLICATION_DECORATORS</td>
-	<td>//div[label[contains(.,'Application Decorators')]]/select[contains(@id,'portlet-decorator')]</td>
+	<td>//div[label[contains(.,'Application Decorators')]]/select[contains(@id,'portletDecorator')]</td>
 	<td></td>
 </tr>
 <tr>
