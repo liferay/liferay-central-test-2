@@ -444,6 +444,8 @@
 	</command>
 
 	<command name="ResetPageChanges" priority="4">
+		<property name="testray.component.names" value="Training" />
+
 		<execute macro="TestCase#getSiteName">
 			<return from="siteName" name="siteName" />
 			<var name="siteName" value="${siteName}" />
