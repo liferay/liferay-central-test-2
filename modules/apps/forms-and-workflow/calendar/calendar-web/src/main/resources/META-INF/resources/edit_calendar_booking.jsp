@@ -806,6 +806,29 @@ while (manageableCalendarsIterator.hasNext()) {
 				inviteResourcesInput.val('');
 			}
 		);
+
+		var addToList = function(calendar) {
+			if (calendar.classNameId == <%= ClassNameLocalServiceUtil.getClassNameId(CalendarResource.class) %>) {
+				var remoteServices = Liferay.component('<portlet:namespace />remoteServices');
+
+				remoteServices.hasExclusiveCalendarBooking(
+					calendar.calendarId,
+					placeholderSchedulerEvent.get('startDate'),
+					placeholderSchedulerEvent.get('endDate'),
+					function(result) {
+						if (result) {
+							<portlet:namespace />calendarListDeclined.add(calendar);
+						}
+						else {
+							<portlet:namespace />calendarListPending.add(calendar);
+						}
+					}
+				);
+			}
+			else {
+				<portlet:namespace />calendarListPending.add(calendar);
+			}
+		};
 	</c:if>
 
 	window.<portlet:namespace />reminders = new Liferay.Reminders(
@@ -850,29 +873,6 @@ while (manageableCalendarsIterator.hasNext()) {
 			scheduler.syncEventsUI();
 		}
 	);
-
-	var addToList = function(calendar) {
-		if (calendar.classNameId == <%= ClassNameLocalServiceUtil.getClassNameId(CalendarResource.class) %>) {
-			var remoteServices = Liferay.component('<portlet:namespace />remoteServices');
-
-			remoteServices.hasExclusiveCalendarBooking(
-				calendar.calendarId,
-				placeholderSchedulerEvent.get('startDate'),
-				placeholderSchedulerEvent.get('endDate'),
-				function(result) {
-					if (result) {
-						<portlet:namespace />calendarListDeclined.add(calendar);
-					}
-					else {
-						<portlet:namespace />calendarListPending.add(calendar);
-					}
-				}
-			);
-		}
-		else {
-			<portlet:namespace />calendarListPending.add(calendar);
-		}
-	};
 
 	scheduler.load();
 </aui:script>
