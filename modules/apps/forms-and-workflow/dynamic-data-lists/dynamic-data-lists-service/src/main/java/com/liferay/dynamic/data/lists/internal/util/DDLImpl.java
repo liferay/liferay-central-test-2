@@ -110,30 +110,17 @@ public class DDLImpl implements DDL {
 		for (Field field : fields) {
 			String fieldName = field.getName();
 			String fieldType = field.getType();
-			Object fieldValue = field.getValue(locale);
+			Object[] fieldValues = getFieldValues(field, locale);
 
-			if (Validator.isNull(fieldValue)) {
+			if (fieldValues.length == 0) {
 				continue;
-			}
-
-			Object[] fieldValues;
-
-			if (fieldValue instanceof Object[]) {
-				fieldValues = (Object[])fieldValue;
-			}
-			else {
-				fieldValues = new Object[1];
-
-				fieldValues[0] = fieldValue;
 			}
 
 			JSONArray fieldJSONArray = null;
 			StringBundler sb = new StringBundler();
 			String jsonObjectValueName = null;
 
-			for (int i = 0; i < fieldValues.length; i++) {
-				fieldValue = fieldValues[i];
-
+			for (Object fieldValue : fieldValues) {
 				if (Validator.isNull(fieldValue)) {
 					continue;
 				}
@@ -405,6 +392,20 @@ public class DDLImpl implements DDL {
 
 		return updateRecord(
 			recordId, recordSetId, mergeFields, true, serviceContext);
+	}
+
+	protected Object[] getFieldValues(Field field, Locale locale) {
+		Object fieldValue = field.getValue(locale);
+
+		if (Validator.isNull(fieldValue)) {
+			return new Object[0];
+		}
+
+		if (isArray(fieldValue)) {
+			return (Object[])fieldValue;
+		}
+
+		return new Object[] {fieldValue};
 	}
 
 	protected String getFileEntryTitle(String uuid, long groupId) {
