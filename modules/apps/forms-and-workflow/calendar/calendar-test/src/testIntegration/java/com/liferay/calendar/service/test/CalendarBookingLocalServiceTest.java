@@ -272,6 +272,40 @@ public class CalendarBookingLocalServiceTest {
 	}
 
 	@Test
+	public void testAddCalendarBookingResourceRequestedNotifiesInvitees()
+		throws Exception {
+
+		_invitingUser = UserTestUtil.addUser();
+
+		Calendar invintingCalendar = CalendarTestUtil.addCalendar(
+			_invitingUser);
+
+		Calendar invitedCalendar = CalendarTestUtil.addCalendar(_user);
+
+		_resourceUser = UserTestUtil.addUser();
+
+		Calendar resourceCalendar =
+			CalendarTestUtil.addCalendarResourceCalendar(_resourceUser);
+
+		CalendarBooking firstChildCalendarBooking =
+			CalendarBookingTestUtil.addChildCalendarBooking(
+				invintingCalendar, resourceCalendar);
+
+		long[] childCalendarIds = new long[] {
+			invitedCalendar.getCalendarId(), resourceCalendar.getCalendarId()
+		};
+
+		CalendarBookingTestUtil.addMasterCalendarBooking(
+			_user, invintingCalendar, childCalendarIds,
+			firstChildCalendarBooking.getStartTime(),
+			firstChildCalendarBooking.getEndTime(), createServiceContext());
+
+		assertSentEmail(_user.getEmailAddress());
+
+		assertSentEmail(_invitingUser.getEmailAddress());
+	}
+
+	@Test
 	public void testAddCalendarBookingResourceRequestedOverlappingStart()
 		throws PortalException {
 
@@ -2109,6 +2143,13 @@ public class CalendarBookingLocalServiceTest {
 			actualJCalendar.get(java.util.Calendar.MINUTE));
 	}
 
+	protected void assertSentEmail(String to) {
+		List<com.dumbster.smtp.MailMessage> mailMessages =
+			MailServiceTestUtil.getMailMessages("To", to);
+
+		Assert.assertFalse(mailMessages.toString(), mailMessages.isEmpty());
+	}
+
 	protected ServiceContext createServiceContext() {
 		ServiceContext serviceContext = new ServiceContext();
 
@@ -2201,6 +2242,9 @@ public class CalendarBookingLocalServiceTest {
 
 	@DeleteAfterTestRun
 	private User _invitingUser;
+
+	@DeleteAfterTestRun
+	private User _resourceUser;
 
 	@DeleteAfterTestRun
 	private User _user;
