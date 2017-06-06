@@ -127,26 +127,22 @@ public abstract class BaseAdaptiveMediaImageConfigurationTestCase {
 			AdaptiveMediaImageDestinationNames.
 				ADAPTIVE_MEDIA_IMAGE_CONFIGURATION;
 
-		try (DestinationReplacer destinationReplacer = new DestinationReplacer(
-				destinationName)) {
+		List<Message> messages = new ArrayList<>();
 
-			List<Message> messages = new ArrayList<>();
+		MessageListener messageListener = messages::add;
 
-			MessageListener messageListener = messages::add;
+		MessageBusUtil.registerMessageListener(
+			destinationName, messageListener);
 
-			MessageBusUtil.registerMessageListener(
-				destinationName, messageListener);
-
-			try {
-				runnable.run();
-			}
-			finally {
-				MessageBusUtil.unregisterMessageListener(
-					destinationName, messageListener);
-			}
-
-			return messages;
+		try {
+			runnable.run();
 		}
+		finally {
+			MessageBusUtil.unregisterMessageListener(
+				destinationName, messageListener);
+		}
+
+		return messages;
 	}
 
 	protected static ServiceTracker
