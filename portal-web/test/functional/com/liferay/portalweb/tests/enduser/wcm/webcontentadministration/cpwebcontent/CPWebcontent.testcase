@@ -1892,6 +1892,8 @@
 	</command>
 
 	<command name="ImportTrainingLAR" priority="4">
+		<property name="testray.component.names" value="Training" />
+
 		<execute macro="ProductMenu#gotoControlPanelSites">
 			<var name="portlet" value="Sites" />
 		</execute>
