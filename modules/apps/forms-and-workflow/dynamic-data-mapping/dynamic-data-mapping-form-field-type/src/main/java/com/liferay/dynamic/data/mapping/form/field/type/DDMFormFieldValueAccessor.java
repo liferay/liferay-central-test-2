@@ -33,6 +33,10 @@ public interface DDMFormFieldValueAccessor<T> {
 
 		Value value = ddmFormFieldValue.getValue();
 
+		if (value == null) {
+			return true;
+		}
+
 		String valueString = StringUtil.trim(value.getString(locale));
 
 		return Validator.isNull(valueString);
