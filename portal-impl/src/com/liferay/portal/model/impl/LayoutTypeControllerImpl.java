@@ -74,10 +74,11 @@ public class LayoutTypeControllerImpl implements LayoutTypeController {
 			PropsUtil.get(PropsKeys.LAYOUT_URL, filter));
 		_urlFriendliable = GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.LAYOUT_URL_FRIENDLIABLE, filter), true);
-		_viewPage =
-			StrutsUtil.TEXT_HTML_DIR +
-				GetterUtil.getString(
-					PropsUtil.get(PropsKeys.LAYOUT_VIEW_PAGE, filter));
+
+		String viewPage = GetterUtil.getString(
+			PropsUtil.get(PropsKeys.LAYOUT_VIEW_PAGE, filter));
+
+		_viewPage = StrutsUtil.TEXT_HTML_DIR + viewPage;
 	}
 
 	@Override
