@@ -146,13 +146,13 @@ boolean containsCalendarsPermissionsAction = CalendarPortletPermission.contains(
 
 					var hiddenItems = [];
 
-					if (instance.calendarResourceId !== '<%= groupCalendarResource.getCalendarResourceId() %>') {
+					var isGroupCalendarResource = instance.calendarResourceId === '<%= groupCalendarResource.getCalendarResourceId() %>';
+
+					var containsCalendarPermissionAction = <%= containsCalendarsPermissionsAction %>;
+
+					if (!isGroupCalendarResource || !containsCalendarPermissionAction) {
 						hiddenItems.push('permissions');
 					}
-
-					<c:if test="<%= !containsCalendarsPermissionsAction %>">
-						hiddenItems.push('permissions');
-					</c:if>
 
 					instance.set('hiddenItems', hiddenItems);
 				}
