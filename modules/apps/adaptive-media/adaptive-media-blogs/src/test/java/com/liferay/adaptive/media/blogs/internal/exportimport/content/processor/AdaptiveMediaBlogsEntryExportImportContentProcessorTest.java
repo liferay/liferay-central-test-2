@@ -201,17 +201,22 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 		String suffix = StringUtil.randomString();
 
 		String content =
-			prefix + "<picture data-fileentryid=\"1\"></picture>" + infix +
-				"<picture data-fileentryid=\"2\"></picture>" + suffix;
+			prefix + "<picture data-fileentryid=\"1\"><img src=\"url1\" />" +
+				"</picture>" + infix + "<picture data-fileentryid=\"2\">" +
+					"<img src=\"url2\" /></picture>" + suffix;
 
 		String importedContent = _import(_export(content));
 
 		StringBundler sb = new StringBundler();
 
 		sb.append(prefix);
-		sb.append("<picture data-fileEntryId=\"1\"><source /></picture>");
+		sb.append("<picture data-fileEntryId=\"1\">");
+		sb.append("<source /><img src=\"URL_1\" />");
+		sb.append("</picture>");
 		sb.append(infix);
-		sb.append("<picture data-fileEntryId=\"2\"><source /></picture>");
+		sb.append("<picture data-fileEntryId=\"2\">");
+		sb.append("<source /><img src=\"URL_2\" />");
+		sb.append("</picture>");
 		sb.append(suffix);
 
 		Assert.assertEquals(sb.toString(), importedContent);
@@ -232,13 +237,30 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 		String suffix = StringUtil.randomString();
 
 		String content =
-			prefix + "<picture data-fileentryid=\"1\"></picture>" + suffix;
+			prefix + "<picture data-fileentryid=\"1\">" +
+				"<img src=\"url\" /></picture>" + suffix;
 
 		String importedContent = _import(_export(content));
 
 		Assert.assertEquals(
-			prefix + "<picture data-fileEntryId=\"1\"><source /></picture>" +
-				suffix,
+			prefix + "<picture data-fileEntryId=\"1\"><source />" +
+				"<img src=\"URL_1\" /></picture>" + suffix,
+			importedContent);
+	}
+
+	@Test
+	public void testExportImportContentWithStaticReferenceContainingImageWithAttributes()
+		throws Exception {
+
+		String content =
+			"<picture data-fileentryid=\"1\"><img src=\"url\" " +
+				"class=\"pretty\" /></picture>";
+
+		String importedContent = _import(_export(content));
+
+		Assert.assertEquals(
+			"<picture data-fileEntryId=\"1\"><source /><img src=\"URL_1\" " +
+				"class=\"pretty\" /></picture>",
 			importedContent);
 	}
 
@@ -416,8 +438,12 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 		Mockito.when(
 			_adaptiveMediaImageHTMLTagFactory.create(
 				Mockito.anyString(), Mockito.eq(fileEntry))
-		).thenReturn(
-			"<picture><source/></picture>"
+		).thenAnswer(
+			invocation -> {
+				String imgTag = invocation.getArgumentAt(0, String.class);
+
+				return "<picture><source/>" + imgTag + "</picture>";
+			}
 		);
 	}
 

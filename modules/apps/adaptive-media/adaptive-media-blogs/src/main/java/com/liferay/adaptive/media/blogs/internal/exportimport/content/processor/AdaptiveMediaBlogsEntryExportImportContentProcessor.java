@@ -158,7 +158,7 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessor
 	}
 
 	private Element _parseNode(String tag) {
-		Document document = Jsoup.parseBodyFragment(tag);
+		Document document = _parseDocument(tag);
 
 		Element body = document.body();
 
@@ -201,10 +201,13 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessor
 				element.attr("src", previewURL);
 			}
 			else if ("picture".equals(element.tagName())) {
+				Element img = element.getElementsByTag("img").first();
+
+				img.attr("src", previewURL);
+
 				Element picture = _parseNode(
 					_adaptiveMediaImageHTMLTagFactory.create(
-						String.format("<img src=\"%s\" />", previewURL),
-						fileEntry));
+						img.toString(), fileEntry));
 
 				element.html(picture.html());
 			}
