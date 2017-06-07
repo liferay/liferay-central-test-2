@@ -323,7 +323,6 @@ public class CalendarBookingLocalServiceTest {
 		long endTime =
 			firstChildCalendarBooking.getEndTime() +
 				firstChildCalendarBooking.getDuration() / 2;
-
 		long startTime =
 			firstChildCalendarBooking.getStartTime() +
 				firstChildCalendarBooking.getDuration() / 2;
