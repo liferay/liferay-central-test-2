@@ -119,27 +119,31 @@ public class DDLImpl implements DDL {
 			}
 
 			if (fieldType.equals(DDMFormFieldType.DOCUMENT_LIBRARY)) {
-				Stream<String> valuesStream = Arrays.stream(fieldValues).map(
+				Stream<Object> fieldValuesStream = Arrays.stream(fieldValues);
+
+				Stream<String> fieldValuesStringStream = fieldValuesStream.map(
 					fieldValue -> getDocumentLibraryFieldValue(fieldValue));
 
 				JSONObject fieldJSONObject = JSONFactoryUtil.createJSONObject();
 
 				fieldJSONObject.put(
 					"title",
-					valuesStream.collect(
+					fieldValuesStringStream.collect(
 						Collectors.joining(StringPool.COMMA_AND_SPACE)));
 
 				jsonObject.put(fieldName, fieldJSONObject.toString());
 			}
 			else if (fieldType.equals(DDMFormFieldType.LINK_TO_PAGE)) {
-				Stream<String> valuesStream = Arrays.stream(fieldValues).map(
+				Stream<Object> fieldValuesStream = Arrays.stream(fieldValues);
+
+				Stream<String> fieldValuesStringStream = fieldValuesStream.map(
 					fieldValue -> getLinkToPageFieldValue(fieldValue, locale));
 
 				JSONObject fieldJSONObject = JSONFactoryUtil.createJSONObject();
 
 				fieldJSONObject.put(
 					"name",
-					valuesStream.collect(
+					fieldValuesStringStream.collect(
 						Collectors.joining(StringPool.COMMA_AND_SPACE)));
 
 				jsonObject.put(fieldName, fieldJSONObject.toString());
@@ -159,10 +163,14 @@ public class DDLImpl implements DDL {
 				jsonObject.put(fieldName, fieldJSONArray);
 			}
 			else {
-				Stream<String> valuesStream = Arrays.stream(fieldValues).map(
+				Stream<Object> fieldValuesStream = Arrays.stream(fieldValues);
+
+				Stream<String> fieldValuesStringStream = fieldValuesStream.map(
 					fieldValue -> {
 						if (fieldValue instanceof Date) {
-							return String.valueOf(((Date)fieldValue).getTime());
+							Date fieldValueDate = (Date)fieldValue;
+
+							return String.valueOf(fieldValueDate.getTime());
 						}
 						else {
 							return String.valueOf(fieldValue);
@@ -171,7 +179,7 @@ public class DDLImpl implements DDL {
 
 				jsonObject.put(
 					fieldName,
-					valuesStream.collect(
+					fieldValuesStringStream.collect(
 						Collectors.joining(StringPool.COMMA_AND_SPACE)));
 			}
 		}
