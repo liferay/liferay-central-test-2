@@ -18,7 +18,6 @@ import com.liferay.adaptive.media.image.html.AdaptiveMediaImageHTMLTagFactory;
 import com.liferay.blogs.kernel.model.BlogsEntry;
 import com.liferay.document.library.kernel.exception.NoSuchFileEntryException;
 import com.liferay.document.library.kernel.service.DLAppLocalService;
-import com.liferay.document.library.kernel.util.DLUtil;
 import com.liferay.exportimport.content.processor.ExportImportContentProcessor;
 import com.liferay.exportimport.kernel.lar.ExportImportPathUtil;
 import com.liferay.exportimport.kernel.lar.PortletDataContext;
@@ -43,7 +42,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 /**
  * @author Adolfo Pérez
  */
-@PrepareForTest({ExportImportPathUtil.class, DLUtil.class})
+@PrepareForTest(ExportImportPathUtil.class)
 @RunWith(PowerMockRunner.class)
 public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 
@@ -77,7 +76,6 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 		);
 
 		PowerMockito.mockStatic(ExportImportPathUtil.class);
-		PowerMockito.mockStatic(DLUtil.class);
 
 		_defineFileEntryToExport(1, _fileEntry1);
 		_defineFileEntryToImport(1, _fileEntry1);
@@ -143,7 +141,7 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 		String importedContent = _import(_export(content));
 
 		Assert.assertEquals(
-			prefix + "<img src=\"URL_1\" data-fileEntryId=\"1\" />" +
+			prefix + "<img src=\"url\" data-fileEntryId=\"1\" />" +
 				suffix,
 			importedContent);
 	}
@@ -162,7 +160,7 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 		String importedContent = _import(_export(content));
 
 		Assert.assertEquals(
-			prefix + "<img attr1=\"1\" attr2=\"2\" src=\"URL_1\" attr3=\"3\" " +
+			prefix + "<img attr1=\"1\" attr2=\"2\" src=\"url\" attr3=\"3\" " +
 				"data-fileEntryId=\"1\" />" + suffix,
 			importedContent);
 	}
@@ -184,9 +182,9 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 		StringBundler sb = new StringBundler(4);
 
 		sb.append(prefix);
-		sb.append("<img src=\"URL_1\" data-fileEntryId=\"1\" />");
+		sb.append("<img src=\"url1\" data-fileEntryId=\"1\" />");
 		sb.append(infix);
-		sb.append("<img src=\"URL_2\" data-fileEntryId=\"2\" />");
+		sb.append("<img src=\"url2\" data-fileEntryId=\"2\" />");
 		sb.append(suffix);
 
 		Assert.assertEquals(sb.toString(), importedContent);
@@ -211,11 +209,11 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 
 		sb.append(prefix);
 		sb.append("<picture data-fileEntryId=\"1\">");
-		sb.append("<source /><img src=\"URL_1\" />");
+		sb.append("<source /><img src=\"url1\" />");
 		sb.append("</picture>");
 		sb.append(infix);
 		sb.append("<picture data-fileEntryId=\"2\">");
-		sb.append("<source /><img src=\"URL_2\" />");
+		sb.append("<source /><img src=\"url2\" />");
 		sb.append("</picture>");
 		sb.append(suffix);
 
@@ -244,7 +242,7 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 
 		Assert.assertEquals(
 			prefix + "<picture data-fileEntryId=\"1\"><source />" +
-				"<img src=\"URL_1\" /></picture>" + suffix,
+				"<img src=\"url\" /></picture>" + suffix,
 			importedContent);
 	}
 
@@ -259,7 +257,7 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 		String importedContent = _import(_export(content));
 
 		Assert.assertEquals(
-			"<picture data-fileEntryId=\"1\"><source /><img src=\"URL_1\" " +
+			"<picture data-fileEntryId=\"1\"><source /><img src=\"url\" " +
 				"class=\"pretty\" /></picture>",
 			importedContent);
 	}
@@ -426,13 +424,6 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 			_dlAppLocalService
 		).getFileEntry(
 			fileEntryId
-		);
-
-		Mockito.when(
-			DLUtil.getPreviewURL(
-				fileEntry, fileEntry.getFileVersion(), null, StringPool.BLANK)
-		).thenReturn(
-			"URL_" + fileEntryId
 		);
 
 		Mockito.when(

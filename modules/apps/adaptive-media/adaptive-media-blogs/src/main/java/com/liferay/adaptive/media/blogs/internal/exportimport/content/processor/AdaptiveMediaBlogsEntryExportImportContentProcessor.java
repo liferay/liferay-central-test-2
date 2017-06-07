@@ -16,7 +16,6 @@ package com.liferay.adaptive.media.blogs.internal.exportimport.content.processor
 
 import com.liferay.adaptive.media.image.html.AdaptiveMediaImageHTMLTagFactory;
 import com.liferay.document.library.kernel.service.DLAppLocalService;
-import com.liferay.document.library.kernel.util.DLUtil;
 import com.liferay.exportimport.content.processor.ExportImportContentProcessor;
 import com.liferay.exportimport.kernel.lar.ExportImportPathUtil;
 import com.liferay.exportimport.kernel.lar.PortletDataContext;
@@ -25,7 +24,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.model.StagedModel;
 import com.liferay.portal.kernel.repository.model.FileEntry;
-import com.liferay.portal.kernel.util.StringPool;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -194,16 +192,8 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessor
 			element.attr("data-fileEntryId", String.valueOf(fileEntryId));
 			element.removeAttr(_EXPORT_IMPORT_PATH_ATTR);
 
-			String previewURL = DLUtil.getPreviewURL(
-				fileEntry, fileEntry.getFileVersion(), null, StringPool.BLANK);
-
-			if ("img".equals(element.tagName())) {
-				element.attr("src", previewURL);
-			}
-			else if ("picture".equals(element.tagName())) {
+			if ("picture".equals(element.tagName())) {
 				Element img = element.getElementsByTag("img").first();
-
-				img.attr("src", previewURL);
 
 				Element picture = _parseNode(
 					_adaptiveMediaImageHTMLTagFactory.create(
