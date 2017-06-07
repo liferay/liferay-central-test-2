@@ -33,7 +33,8 @@ public class UpgradeJournalContentSearch extends UpgradeProcess {
 
 	protected void upgradePortletId() throws Exception {
 		try (PreparedStatement ps1 = connection.prepareStatement(
-				"select * from JournalContentSearch where portletId like '56%'");
+				"select * from JournalContentSearch where portletId like " +
+					"'56%'");
 			PreparedStatement ps2 = connection.prepareStatement(
 				"select contentSearchId from JournalContentSearch where " +
 					"groupId = ? AND privateLayout = ? AND layoutId = ? AND " +

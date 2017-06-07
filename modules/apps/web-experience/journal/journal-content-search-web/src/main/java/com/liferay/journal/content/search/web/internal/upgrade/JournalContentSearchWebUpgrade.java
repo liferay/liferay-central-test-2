@@ -15,7 +15,6 @@
 package com.liferay.journal.content.search.web.internal.upgrade;
 
 import com.liferay.journal.content.search.web.internal.constants.JournalContentSearchPortletKeys;
-import com.liferay.journal.content.search.web.internal.upgrade.v1_0_1.UpgradePortletId;
 import com.liferay.portal.kernel.upgrade.BaseUpgradePortletId;
 import com.liferay.portal.kernel.upgrade.DummyUpgradeStep;
 import com.liferay.portal.upgrade.registry.UpgradeStepRegistrator;
