@@ -149,6 +149,7 @@ boolean containsCalendarsPermissionsAction = CalendarPortletPermission.contains(
 					if (instance.calendarResourceId !== '<%= groupCalendarResource.getCalendarResourceId() %>') {
 						hiddenItems.push('permissions');
 					}
+
 					<c:if test="<%= !containsCalendarsPermissionsAction %>">
 						hiddenItems.push('permissions');
 					</c:if>
