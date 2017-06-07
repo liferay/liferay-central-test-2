@@ -33,9 +33,12 @@ public class UpgradeJournalContentSearch extends UpgradeProcess {
 
 	protected void upgradePortletId() throws Exception {
 		try (PreparedStatement ps1 = connection.prepareStatement(
-				"select contentSearchId, portletId from JournalContentSearch " +
-					"where portletId like '56%'");
-			PreparedStatement ps2 =
+				"select * from JournalContentSearch where portletId like '56%'");
+			PreparedStatement ps2 = connection.prepareStatement(
+				"select contentSearchId from JournalContentSearch where " +
+					"groupId = ? AND privateLayout = ? AND layoutId = ? AND " +
+						"portletId = ? AND articleId = ?");
+			PreparedStatement ps3 =
 				AutoBatchPreparedStatementUtil.concurrentAutoBatch(
 					connection,
 					"update JournalContentSearch set portletId = ? where " +
@@ -44,19 +47,42 @@ public class UpgradeJournalContentSearch extends UpgradeProcess {
 
 			while (rs.next()) {
 				long contentSearchId = rs.getLong("contentSearchId");
+				long groupId = rs.getLong("groupId");
+				boolean privateLayout = rs.getBoolean("privateLayout");
+				long layoutId = rs.getLong("layoutId");
 				String portletId = rs.getString("portletId");
+				String articleId = rs.getString("articleId");
 
 				String newPortletId = StringUtil.replaceFirst(
 					portletId, _OLD_ROOT_PORTLET_ID, _NEW_ROOT_PORTLET_ID);
 
-				ps2.setString(1, newPortletId);
+				ps2.setLong(1, groupId);
 
-				ps2.setLong(2, contentSearchId);
+				ps2.setBoolean(2, privateLayout);
 
-				ps2.addBatch();
+				ps2.setLong(3, layoutId);
+
+				ps2.setString(4, newPortletId);
+
+				ps2.setString(5, articleId);
+
+				try (ResultSet rs2 = ps2.executeQuery()) {
+					if (rs2.next()) {
+						runSQL(
+							"delete from JournalContentSearch where " +
+								"contentSearchId = " + contentSearchId);
+					}
+					else {
+						ps3.setString(1, newPortletId);
+
+						ps3.setLong(2, contentSearchId);
+
+						ps3.addBatch();
+					}
+				}
 			}
 
-			ps2.executeBatch();
+			ps3.executeBatch();
 		}
 	}
 
