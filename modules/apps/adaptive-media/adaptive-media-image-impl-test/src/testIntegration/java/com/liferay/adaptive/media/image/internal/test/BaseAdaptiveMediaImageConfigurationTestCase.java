@@ -16,7 +16,6 @@ package com.liferay.adaptive.media.image.internal.test;
 
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationEntry;
 import com.liferay.adaptive.media.image.configuration.AdaptiveMediaImageConfigurationHelper;
-import com.liferay.adaptive.media.image.internal.test.util.DestinationReplacer;
 import com.liferay.adaptive.media.image.messaging.AdaptiveMediaImageDestinationNames;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.messaging.Message;
