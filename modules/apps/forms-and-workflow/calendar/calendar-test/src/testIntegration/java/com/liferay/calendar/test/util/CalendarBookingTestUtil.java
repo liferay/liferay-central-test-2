@@ -347,7 +347,6 @@ public class CalendarBookingTestUtil {
 		ServiceContext serviceContext = new ServiceContext();
 
 		serviceContext.setCompanyId(user.getCompanyId());
-
 		serviceContext.setUserId(user.getUserId());
 
 		return serviceContext;
