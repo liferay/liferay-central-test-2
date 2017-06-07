@@ -33,7 +33,8 @@ public class UpgradeJournalContentSearch extends UpgradeProcess {
 
 	protected void upgradePortletId() throws Exception {
 		try (PreparedStatement ps1 = connection.prepareStatement(
-				"select contentSearchId, portletId from JournalContentSearch");
+				"select contentSearchId, portletId from JournalContentSearch " +
+					"where portletId like '56%'");
 			PreparedStatement ps2 =
 				AutoBatchPreparedStatementUtil.concurrentAutoBatch(
 					connection,
