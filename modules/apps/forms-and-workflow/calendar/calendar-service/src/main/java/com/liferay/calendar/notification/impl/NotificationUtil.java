@@ -142,7 +142,8 @@ public class NotificationUtil {
 
 			senderUser = getDefaultSenderUser(calendar);
 
-			String resourceName = calendar.getName(recipientUser.getLanguageId());
+			String resourceName = calendar.getName(
+				recipientUser.getLanguageId());
 
 			NotificationRecipient notificationRecipient =
 				new NotificationRecipient(recipientUser);
@@ -153,8 +154,8 @@ public class NotificationUtil {
 					recipientUser);
 
 			notificationSender.sendNotification(
-				senderUser.getEmailAddress(), resourceName, notificationRecipient,
-				notificationTemplateContext);
+				senderUser.getEmailAddress(), resourceName,
+				notificationRecipient, notificationTemplateContext);
 		}
 		else {
 			List<NotificationRecipient> notificationRecipients =
