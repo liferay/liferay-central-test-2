@@ -28,7 +28,7 @@ public class StartupFailureMessageGenerator
 	public String getMessage(
 		String buildURL, String consoleOutput, Hashtable<?, ?> properties) {
 
-		if (!consoleOutput.contains(_UNRESOLVED_REQ_STRING)) {
+		if (!consoleOutput.contains(_UNRESOLVED_REQUIREMENT_STRING)) {
 			return null;
 		}
 
@@ -37,7 +37,7 @@ public class StartupFailureMessageGenerator
 		sb.append(
 			"<p>Startup error: <strong>Unresolved Requirement(s)</strong></p>");
 
-		int start = consoleOutput.indexOf(_UNRESOLVED_REQ_STRING);
+		int start = consoleOutput.indexOf(_UNRESOLVED_REQUIREMENT_STRING);
 
 		start = consoleOutput.lastIndexOf("\n", start);
 
@@ -54,11 +54,11 @@ public class StartupFailureMessageGenerator
 	public Element getMessageElement(Build build) {
 		String consoleText = build.getConsoleText();
 
-		if (!consoleText.contains(_UNRESOLVED_REQ_STRING)) {
+		if (!consoleText.contains(_UNRESOLVED_REQUIREMENT_STRING)) {
 			return null;
 		}
 
-		int start = consoleText.indexOf(_UNRESOLVED_REQ_STRING);
+		int start = consoleText.indexOf(_UNRESOLVED_REQUIREMENT_STRING);
 
 		start = consoleText.lastIndexOf("\n", start);
 
@@ -77,7 +77,7 @@ public class StartupFailureMessageGenerator
 
 	private static final String _DELETING_STRING = "Deleting:";
 
-	private static final String _UNRESOLVED_REQ_STRING =
+	private static final String _UNRESOLVED_REQUIREMENT_STRING =
 		"Unresolved requirement:";
 
 }
