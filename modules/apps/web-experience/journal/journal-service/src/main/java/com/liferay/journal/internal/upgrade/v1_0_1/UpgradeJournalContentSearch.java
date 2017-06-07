@@ -24,7 +24,7 @@ import java.sql.ResultSet;
 /**
  * @author Jonathan McCann
  */
-public class UpgradePortletId extends UpgradeProcess {
+public class UpgradeJournalContentSearch extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
