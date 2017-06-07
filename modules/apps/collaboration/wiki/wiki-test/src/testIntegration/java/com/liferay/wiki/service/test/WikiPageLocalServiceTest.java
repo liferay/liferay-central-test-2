@@ -31,7 +31,6 @@ import com.liferay.expando.kernel.model.ExpandoColumnConstants;
 import com.liferay.expando.kernel.model.ExpandoValue;
 import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.repository.model.FileEntry;
-import com.liferay.portal.kernel.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.test.AssertUtils;
 import com.liferay.portal.kernel.test.rule.AggregateTestRule;
@@ -45,6 +44,7 @@ import com.liferay.portal.kernel.test.util.TestPropsValues;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.service.test.ServiceTestUtil;
@@ -93,7 +93,7 @@ public class WikiPageLocalServiceTest {
 	}
 
 	@Test
-	public void testAddFrontPageWithoutRequeiredCategory() throws Exception {
+	public void testAddFrontPageWithoutRequiredCategory() throws Exception {
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
@@ -101,21 +101,17 @@ public class WikiPageLocalServiceTest {
 			AssetVocabularyLocalServiceUtil.addDefaultVocabulary(
 				_group.getGroupId());
 
-		long classNameId = ClassNameLocalServiceUtil.getClassNameId(
-			WikiPage.class.getName());
+		long classNameId = PortalUtil.getClassNameId(WikiPage.class.getName());
 
-		StringBuilder sb = new StringBuilder();
+		StringBundler sb = new StringBundler(5);
 
-		sb.append("multiValued=true\n");
-		sb.append("requiredClassNameIds=");
+		sb.append("multiValued=true\nrequiredClassNameIds=");
 		sb.append(classNameId);
 		sb.append(":-1\nselectedClassNameIds=");
 		sb.append(classNameId);
 		sb.append(":-1");
 
-		String settings = sb.toString();
-
-		assetVocabulary.setSettings(settings);
+		assetVocabulary.setSettings(sb.toString());
 
 		AssetVocabularyLocalServiceUtil.updateAssetVocabulary(assetVocabulary);
 
