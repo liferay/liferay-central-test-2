@@ -2819,7 +2819,8 @@ public class PortalImpl implements Portal {
 
 	/**
 	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             #getLayoutFriendlyURLSeparatorComposite(long, boolean, String, Map<String, String[]>, Map<String, Object>)}
+	 *             #getLayoutFriendlyURLSeparatorComposite(long, boolean,
+	 *             String, Map<String, String[]>, Map<String, Object>)}
 	 */
 	@Deprecated
 	@Override
@@ -5014,8 +5015,8 @@ public class PortalImpl implements Portal {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             #getSiteAdminURL(Company, Group, String, Map)}
+	 * @deprecated As of 7.0.0, replaced by {@link #getSiteAdminURL(Company,
+	 *             Group, String, Map)}
 	 */
 	@Deprecated
 	@Override
@@ -7337,8 +7338,8 @@ public class PortalImpl implements Portal {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             #addRootModelResource(long, long, String)}
+	 * @deprecated As of 7.0.0, replaced by {@link #addRootModelResource(long,
+	 *             long, String)}
 	 */
 	@Deprecated
 	protected void addRootModelResource(
