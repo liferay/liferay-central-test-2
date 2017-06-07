@@ -176,9 +176,7 @@ public class PageRatingsPortletDataHandler extends BasePortletDataHandler {
 
 					long groupId = getGroupId(ratingsEntry);
 
-					if ((groupId > 0) &&
-						(groupId != portletDataContext.getScopeGroupId())) {
-
+					if (groupId != portletDataContext.getScopeGroupId()) {
 						return;
 					}
 
@@ -208,9 +206,7 @@ public class PageRatingsPortletDataHandler extends BasePortletDataHandler {
 
 					long groupId = getGroupId(ratingsEntry);
 
-					if ((groupId > 0) &&
-						(groupId != portletDataContext.getScopeGroupId())) {
-
+					if (groupId != portletDataContext.getScopeGroupId()) {
 						return;
 					}
 
