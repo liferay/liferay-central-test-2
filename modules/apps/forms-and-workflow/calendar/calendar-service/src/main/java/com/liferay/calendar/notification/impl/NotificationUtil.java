@@ -128,7 +128,7 @@ public class NotificationUtil {
 
 	public static void notifyCalendarBookingRecipients(
 			CalendarBooking calendarBooking, NotificationType notificationType,
-			NotificationTemplateType notificationTemplateType, User sender)
+			NotificationTemplateType notificationTemplateType, User senderUser)
 		throws Exception {
 
 		NotificationSender notificationSender =
@@ -136,24 +136,24 @@ public class NotificationUtil {
 				notificationType.toString());
 
 		if (notificationTemplateType == NotificationTemplateType.DECLINE) {
-			User recipient = sender;
+			User recipientUser = senderUser;
 
 			Calendar calendar = calendarBooking.getCalendar();
 
-			sender = getDefaultSenderUser(calendar);
+			senderUser = getDefaultSenderUser(calendar);
 
-			String resourceName = calendar.getName(recipient.getLanguageId());
+			String resourceName = calendar.getName(recipientUser.getLanguageId());
 
 			NotificationRecipient notificationRecipient =
-				new NotificationRecipient(recipient);
+				new NotificationRecipient(recipientUser);
 
 			NotificationTemplateContext notificationTemplateContext =
 				NotificationTemplateContextFactory.getInstance(
 					notificationType, notificationTemplateType, calendarBooking,
-					recipient);
+					recipientUser);
 
 			notificationSender.sendNotification(
-				sender.getEmailAddress(), resourceName, notificationRecipient,
+				senderUser.getEmailAddress(), resourceName, notificationRecipient,
 				notificationTemplateContext);
 		}
 		else {
@@ -165,7 +165,7 @@ public class NotificationUtil {
 
 				User user = notificationRecipient.getUser();
 
-				if (user.equals(sender)) {
+				if (user.equals(senderUser)) {
 					continue;
 				}
 
@@ -175,7 +175,7 @@ public class NotificationUtil {
 						calendarBooking, user);
 
 				notificationSender.sendNotification(
-					sender.getEmailAddress(), sender.getFullName(),
+					senderUser.getEmailAddress(), senderUser.getFullName(),
 					notificationRecipient, notificationTemplateContext);
 			}
 		}
