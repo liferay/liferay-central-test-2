@@ -92,7 +92,8 @@ public class SPAUtil {
 		sb.append(StringPool.OPEN_CURLY_BRACE);
 
 		_portletLocalService.visitPortlets(
-			themeDisplay.getCompanyId(), portlet -> {
+			themeDisplay.getCompanyId(),
+			portlet -> {
 				if (!portlet.isSinglePageApplication() &&
 					!portlet.isUndeployedPortlet() && portlet.isActive() &&
 					portlet.isReady()) {
