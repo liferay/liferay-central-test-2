@@ -53,7 +53,7 @@ public class JournalContentSearchWebUpgrade implements UpgradeStepRegistrator {
 
 		registry.register(
 			"com.liferay.journal.content.search.web", "1.0.0", "1.0.1",
-			new UpgradePortletId());
+			new DummyUpgradeStep());
 	}
 
 }
