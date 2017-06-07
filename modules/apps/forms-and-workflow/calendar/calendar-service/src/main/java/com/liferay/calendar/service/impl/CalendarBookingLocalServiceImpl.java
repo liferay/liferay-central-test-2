@@ -207,7 +207,7 @@ public class CalendarBookingLocalServiceImpl
 		calendarBooking.setSecondReminderType(secondReminderType);
 		calendarBooking.setExpandoBridgeAttributes(serviceContext);
 
-		int status;
+		int status = 0;
 
 		if (calendarBooking.isMasterBooking()) {
 			status = CalendarBookingWorkflowConstants.STATUS_DRAFT;
