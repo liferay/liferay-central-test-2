@@ -14,10 +14,13 @@
 
 package com.liferay.adaptive.media.blogs.internal.exportimport.content.processor;
 
+import com.liferay.adaptive.media.image.html.AdaptiveMediaImageHTMLTagFactory;
 import com.liferay.blogs.kernel.model.BlogsEntry;
 import com.liferay.document.library.kernel.exception.NoSuchFileEntryException;
 import com.liferay.document.library.kernel.service.DLAppLocalService;
+import com.liferay.document.library.kernel.util.DLUtil;
 import com.liferay.exportimport.content.processor.ExportImportContentProcessor;
+import com.liferay.exportimport.kernel.lar.ExportImportPathUtil;
 import com.liferay.exportimport.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.StagedModel;
@@ -29,12 +32,19 @@ import com.liferay.portal.kernel.util.StringUtil;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import org.mockito.Mockito;
+
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 /**
  * @author Adolfo Pérez
  */
+@PrepareForTest({ExportImportPathUtil.class, DLUtil.class})
+@RunWith(PowerMockRunner.class)
 public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 
 	@Before
@@ -43,11 +53,8 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 			_dlAppLocalService);
 		_blogsExportImportContentProcessor.setExportImportContentProcessor(
 			_exportImportContentProcessor);
-		_blogsExportImportContentProcessor.
-			setAdaptiveMediaExportImportPlaceholderFactory(
-				_adaptiveMediaExportImportPlaceholderFactory);
-		_blogsExportImportContentProcessor.setAdaptiveMediaTagFactory(
-			_adaptiveMediaTagFactory);
+		_blogsExportImportContentProcessor.setAdaptiveMediaImageHTMLTagFactory(
+			_adaptiveMediaImageHTMLTagFactory);
 		_blogsExportImportContentProcessor.
 			setAdaptiveMediaEmbeddedReferenceSetFactory(
 				_adaptiveMediaEmbeddedReferenceSetFactory);
@@ -60,6 +67,9 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 			Mockito.any(PortletDataContext.class),
 			Mockito.any(StagedModel.class)
 		);
+
+		PowerMockito.mockStatic(ExportImportPathUtil.class);
+		PowerMockito.mockStatic(DLUtil.class);
 	}
 
 	@Test
@@ -78,7 +88,10 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 			_blogsExportImportContentProcessor.replaceExportContentReferences(
 				_portletDataContext, _blogsEntry, content, false, false);
 
-		Assert.assertEquals(prefix + "PLACEHOLDER_1" + suffix, replacedContent);
+		Assert.assertEquals(
+			prefix + "<img src=\"url\" export-import-path=\"PATH_1\" />" +
+				suffix,
+			replacedContent);
 	}
 
 	@Test
@@ -100,7 +113,10 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 			_blogsExportImportContentProcessor.replaceExportContentReferences(
 				_portletDataContext, _blogsEntry, content, false, false);
 
-		Assert.assertEquals(prefix + "PLACEHOLDER_1" + suffix, replacedContent);
+		Assert.assertEquals(
+			prefix + "<img attr1=\"1\" attr2=\"2\" src=\"url\" attr3=\"3\" " +
+				"export-import-path=\"PATH_1\" />" + suffix,
+			replacedContent);
 	}
 
 	@Test
@@ -141,12 +157,12 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 			_blogsExportImportContentProcessor.replaceExportContentReferences(
 				_portletDataContext, _blogsEntry, content, false, false);
 
-		StringBundler sb = new StringBundler();
+		StringBundler sb = new StringBundler(4);
 
 		sb.append(prefix);
-		sb.append("PLACEHOLDER_1");
+		sb.append("<img src=\"url1\" export-import-path=\"PATH_1\" />");
 		sb.append(infix);
-		sb.append("PLACEHOLDER_2");
+		sb.append("<img src=\"url2\" export-import-path=\"PATH_2\" />");
 		sb.append(suffix);
 
 		Assert.assertEquals(sb.toString(), replacedContent);
@@ -176,9 +192,9 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 		StringBundler sb = new StringBundler();
 
 		sb.append(prefix);
-		sb.append("PLACEHOLDER_1");
+		sb.append("<picture export-import-path=\"PATH_1\"></picture>");
 		sb.append(infix);
-		sb.append("PLACEHOLDER_2");
+		sb.append("<picture export-import-path=\"PATH_2\"></picture>");
 		sb.append(suffix);
 
 		Assert.assertEquals(sb.toString(), replacedContent);
@@ -229,7 +245,10 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 			_blogsExportImportContentProcessor.replaceExportContentReferences(
 				_portletDataContext, _blogsEntry, content, false, false);
 
-		Assert.assertEquals(prefix + "PLACEHOLDER_1" + suffix, replacedContent);
+		Assert.assertEquals(
+			prefix + "<picture export-import-path=\"PATH_1\"></picture>" +
+				suffix,
+			replacedContent);
 	}
 
 	@Test
@@ -253,7 +272,7 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 	public void testImportContentIgnoresInvalidDynamicReferences()
 		throws Exception {
 
-		String content = "[$adaptive-media-dynamic-media path=\"PATH_1\"$]";
+		String content = "<img export-import-path=\"PATH_1\" />";
 
 		_makeOverridenProcessorReturn(content);
 
@@ -278,7 +297,7 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 	public void testImportContentIgnoresInvalidStaticReferences()
 		throws Exception {
 
-		String content = "[$adaptive-media-static-media path=\"PATH_1\"$]";
+		String content = "<picture export-import-path=\"PATH_1\"></picture>";
 
 		_makeOverridenProcessorReturn(content);
 
@@ -305,8 +324,7 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 		String suffix = StringUtil.randomString();
 
 		String content =
-			prefix + "[$adaptive-media-dynamic-media path=\"PATH_1\"$]" +
-				suffix;
+			prefix + "<img export-import-path=\"PATH_1\" />" + suffix;
 
 		_makeOverridenProcessorReturn(content);
 
@@ -316,7 +334,9 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 			_blogsExportImportContentProcessor.replaceImportContentReferences(
 				_portletDataContext, _blogsEntry, content);
 
-		Assert.assertEquals(prefix + "PLACEHOLDER_1" + suffix, replacedContent);
+		Assert.assertEquals(
+			prefix + "<img data-fileEntryId=\"1\" src=\"URL_1\" />" + suffix,
+			replacedContent);
 	}
 
 	@Test
@@ -328,9 +348,8 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 		String suffix = StringUtil.randomString();
 
 		String content =
-			prefix + "[$adaptive-media-dynamic-media path=\"PATH_1\"$]" +
-				infix + "[$adaptive-media-dynamic-media path=\"PATH_2\"$]" +
-					suffix;
+			prefix + "<img export-import-path=\"PATH_1\" />" + infix +
+				"<img export-import-path=\"PATH_2\" />" + suffix;
 
 		_makeOverridenProcessorReturn(content);
 
@@ -342,7 +361,8 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 				_portletDataContext, _blogsEntry, content);
 
 		Assert.assertEquals(
-			prefix + "PLACEHOLDER_1" + infix + "PLACEHOLDER_2" + suffix,
+			prefix + "<img data-fileEntryId=\"1\" src=\"URL_1\" />" + infix +
+				"<img data-fileEntryId=\"2\" src=\"URL_2\" />" + suffix,
 			replacedContent);
 	}
 
@@ -355,8 +375,9 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 		String suffix = StringUtil.randomString();
 
 		String content =
-			prefix + "[$adaptive-media-static-media path=\"PATH_1\"$]" + infix +
-				"[$adaptive-media-static-media path=\"PATH_2\"$]" + suffix;
+			prefix + "<picture export-import-path=\"PATH_1\"></picture>" +
+				infix + "<picture export-import-path=\"PATH_2\"></picture>" +
+					suffix;
 
 		_makeOverridenProcessorReturn(content);
 
@@ -368,7 +389,9 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 				_portletDataContext, _blogsEntry, content);
 
 		Assert.assertEquals(
-			prefix + "PLACEHOLDER_1" + infix + "PLACEHOLDER_2" + suffix,
+			prefix + "<picture data-fileEntryId=\"1\"><source /></picture>" +
+				infix + "<picture data-fileEntryId=\"2\"><source /></picture>" +
+					suffix,
 			replacedContent);
 	}
 
@@ -391,7 +414,8 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 		String suffix = StringUtil.randomString();
 
 		String content =
-			prefix + "[$adaptive-media-static-media path=\"PATH_1\"$]" + suffix;
+			prefix + "<picture export-import-path=\"PATH_1\"></picture>" +
+				suffix;
 
 		_makeOverridenProcessorReturn(content);
 
@@ -401,7 +425,10 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 			_blogsExportImportContentProcessor.replaceImportContentReferences(
 				_portletDataContext, _blogsEntry, content);
 
-		Assert.assertEquals(prefix + "PLACEHOLDER_1" + suffix, replacedContent);
+		Assert.assertEquals(
+			prefix + "<picture data-fileEntryId=\"1\"><source /></picture>" +
+				suffix,
+			replacedContent);
 	}
 
 	@Test(expected = NoSuchFileEntryException.class)
@@ -505,20 +532,10 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 			fileEntryId
 		);
 
-		Mockito.doReturn(
-			"PLACEHOLDER_" + fileEntryId
-		).when(
-			_adaptiveMediaExportImportPlaceholderFactory
-		).createDynamicPlaceholder(
-			fileEntry
-		);
-
-		Mockito.doReturn(
-			"PLACEHOLDER_" + fileEntryId
-		).when(
-			_adaptiveMediaExportImportPlaceholderFactory
-		).createStaticPlaceholder(
-			fileEntry
+		Mockito.when(
+			ExportImportPathUtil.getModelPath(fileEntry)
+		).thenReturn(
+			"PATH_" + fileEntryId
 		);
 	}
 
@@ -542,27 +559,25 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 		);
 
 		Mockito.doReturn(
-			"PLACEHOLDER_" + fileEntryId
-		).when(
-			_adaptiveMediaTagFactory
-		).createDynamicTag(
-			fileEntry
-		);
-
-		Mockito.doReturn(
-			"PLACEHOLDER_" + fileEntryId
-		).when(
-			_adaptiveMediaTagFactory
-		).createStaticTag(
-			fileEntry
-		);
-
-		Mockito.doReturn(
 			fileEntry
 		).when(
 			_dlAppLocalService
 		).getFileEntry(
 			fileEntryId
+		);
+
+		Mockito.when(
+			DLUtil.getPreviewURL(
+				fileEntry, fileEntry.getFileVersion(), null, StringPool.BLANK)
+		).thenReturn(
+			"URL_" + fileEntryId
+		);
+
+		Mockito.when(
+			_adaptiveMediaImageHTMLTagFactory.create(
+				Mockito.anyString(), Mockito.eq(fileEntry))
+		).thenReturn(
+			"<picture><source/></picture>"
 		);
 	}
 
@@ -604,11 +619,9 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessorTest {
 	private final AdaptiveMediaEmbeddedReferenceSetFactory
 		_adaptiveMediaEmbeddedReferenceSetFactory = Mockito.mock(
 			AdaptiveMediaEmbeddedReferenceSetFactory.class);
-	private final AdaptiveMediaExportImportPlaceholderFactory
-		_adaptiveMediaExportImportPlaceholderFactory = Mockito.mock(
-			AdaptiveMediaExportImportPlaceholderFactory.class);
-	private final AdaptiveMediaTagFactory _adaptiveMediaTagFactory =
-		Mockito.mock(AdaptiveMediaTagFactory.class);
+	private final AdaptiveMediaImageHTMLTagFactory
+		_adaptiveMediaImageHTMLTagFactory = Mockito.mock(
+			AdaptiveMediaImageHTMLTagFactory.class);
 	private final BlogsEntry _blogsEntry = Mockito.mock(BlogsEntry.class);
 	private final AdaptiveMediaBlogsEntryExportImportContentProcessor
 		_blogsExportImportContentProcessor =
