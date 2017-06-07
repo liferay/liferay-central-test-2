@@ -443,9 +443,8 @@ public class CalendarBookingLocalServiceTest {
 
 		Assert.assertTrue(firstCalendarBooking.isApproved());
 
-		long endTime = firstCalendarBooking.getEndTime() + Time.HOUR / 2;
-
 		long startTime = firstCalendarBooking.getStartTime() + Time.HOUR / 2;
+		long endTime = firstCalendarBooking.getEndTime() + Time.HOUR / 2;
 
 		Calendar calendar = CalendarTestUtil.addCalendar(_user);
 
