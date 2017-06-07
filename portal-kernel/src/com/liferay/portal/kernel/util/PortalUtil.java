@@ -1155,7 +1155,7 @@ public class PortalUtil {
 			groupId, privateLayout, friendlyURL, params, requestContext);
 	}
 
-	public static LayoutFriendlyURLComposite
+	public static LayoutFriendlyURLSeparatorComposite
 			getLayoutFriendlyURLSeparatorComposite(
 				long groupId, boolean privateLayout, String friendlyURL,
 				Map<String, String[]> params,
