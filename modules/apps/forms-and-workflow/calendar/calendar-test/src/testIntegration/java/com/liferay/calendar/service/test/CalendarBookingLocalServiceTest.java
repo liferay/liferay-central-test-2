@@ -320,11 +320,11 @@ public class CalendarBookingLocalServiceTest {
 
 		Assert.assertTrue(firstChildCalendarBooking.isPending());
 
-		long endTime =
-			firstChildCalendarBooking.getEndTime() +
-				firstChildCalendarBooking.getDuration() / 2;
 		long startTime =
 			firstChildCalendarBooking.getStartTime() +
+				firstChildCalendarBooking.getDuration() / 2;
+		long endTime =
+			firstChildCalendarBooking.getEndTime() +
 				firstChildCalendarBooking.getDuration() / 2;
 
 		CalendarBooking secondChildCalendarBooking =
