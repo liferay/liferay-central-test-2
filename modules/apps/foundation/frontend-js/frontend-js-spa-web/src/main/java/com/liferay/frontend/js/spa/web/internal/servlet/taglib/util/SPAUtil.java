@@ -37,7 +37,6 @@ import com.liferay.portal.kernel.util.WebKeys;
 
 import java.lang.reflect.Field;
 
-import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.ResourceBundle;
