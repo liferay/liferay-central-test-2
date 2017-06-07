@@ -317,6 +317,7 @@ behavior is controlled by the *Buffered Increment* mechanism. You can find
 more information about this in the `portal.properties` file.
 
 ---------------------------------------
+
 ### Moved Upload Servlet Request Portal Properties to OSGi Configuration
 - **Date:** 2017-May-30
 - **JIRA Ticket:** LPS-69102
