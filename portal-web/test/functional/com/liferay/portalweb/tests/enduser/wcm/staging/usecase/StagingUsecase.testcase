@@ -605,7 +605,7 @@
 		</execute>
 	</command>
 
-	<command name="PublishMBWithoutSetup" priority="5">
+	<command name="PublishMBWithoutSetup" priority="4">
 		<description message="This is a use case for LPS-44719." />
 
 		<execute macro="Portlet#addPG">
