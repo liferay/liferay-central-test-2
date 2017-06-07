@@ -58,15 +58,15 @@ public class FlagsTag extends TemplateRendererTag {
 		try {
 			Map<String, Object> context = getContext();
 
-			String className = (String)context.get("className");
-
-			long classPK = (Long)context.get("classPK");
-
 			boolean enabled = (Boolean)context.get("enabled");
 
 			putValue("cssClass", _getCssClass(randomNamespace, enabled));
 
+			String className = (String)context.get("className");
+			long classPK = (Long)context.get("classPK");
+
 			putValue("data", _getDataJSONObject(context, className, classPK));
+
 			putValue("flagsEnabled", _isFlagsEnabled(themeDisplay));
 			putValue("id", randomNamespace + "id");
 
