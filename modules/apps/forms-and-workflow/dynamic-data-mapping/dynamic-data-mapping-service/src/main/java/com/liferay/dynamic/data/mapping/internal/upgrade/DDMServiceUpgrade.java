@@ -106,7 +106,7 @@ public class DDMServiceUpgrade implements UpgradeStepRegistrator {
 					_ddmFormValuesJSONSerializer));
 
 		registry.register(
-			"com.liferay.dynamic.data.mapping.service", "1.0.3", "1_0_4",
+			"com.liferay.dynamic.data.mapping.service", "1.0.3", "1.0.4",
 			new UpgradeDDMTemplateSmallImageURL());
 	}
 
