@@ -45,7 +45,8 @@ public class DefaultMentionsMatcherTest {
 			null,
 			ProxyUtil.newProxyInstance(
 				ClassLoader.getSystemClassLoader(),
-				new Class<?>[] {Props.class}, (proxy, method, args) -> {
+				new Class<?>[] {Props.class},
+				(proxy, method, args) -> {
 					if (method.equals(
 							Props.class.getMethod("get", String.class)) &&
 						PropsKeys.USERS_SCREEN_NAME_SPECIAL_CHARACTERS.equals(
