@@ -262,8 +262,6 @@ AUI.add(
 					_afterEditingLanguageIdChange: function(event) {
 						var instance = this;
 
-						instance._updateSuccessPageSettings();
-
 						instance.set('editingLanguageId', event.newVal);
 
 						var wizard = instance._getWizard();
@@ -1054,30 +1052,6 @@ AUI.add(
 							paginationBoundingBox.hide();
 							wizardBoundingBox.hide();
 						}
-					},
-
-					_updateSuccessPageSettings: function() {
-						var instance = this;
-
-						var builder = instance.get('builder');
-
-						var boundingBox = builder.get('boundingBox');
-
-						var successPage = boundingBox.one('.' + CSS_FORM_BUILDER_SUCCESS_PAGE);
-
-						var wizard = instance._getWizard();
-
-						var successPageSettings = instance.get('successPageSettings');
-						var editingLanguageId = instance.get('editingLanguageId');
-
-						successPageSettings.enabled = wizard.get('successPage');
-
-						successPageSettings.body[editingLanguageId] = successPage.one('.' + CSS_FORM_BUILDER_SUCCESS_PAGE_CONTENT).val();
-						successPageSettings.title[editingLanguageId] = successPage.one('.' + CSS_FORM_BUILDER_SUCCESS_PAGE_TITLE).val();
-
-						instance.set('successPageSettings', successPageSettings);
-
-						return successPageSettings;
 					},
 
 					_validateMode: function(mode) {
