@@ -193,7 +193,9 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessor
 			element.removeAttr(_EXPORT_IMPORT_PATH_ATTR);
 
 			if ("picture".equals(element.tagName())) {
-				Element img = element.getElementsByTag("img").first();
+				Elements imgElements = element.getElementsByTag("img");
+
+				Element img = imgElements.first();
 
 				Element picture = _parseNode(
 					_adaptiveMediaImageHTMLTagFactory.create(
@@ -225,7 +227,9 @@ public class AdaptiveMediaBlogsEntryExportImportContentProcessor
 				ExportImportPathUtil.getModelPath(fileEntry));
 		}
 
-		return document.body().html();
+		Element body = document.body();
+
+		return body.html();
 	}
 
 	private static final String _EXPORT_IMPORT_PATH_ATTR = "export-import-path";

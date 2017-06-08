@@ -74,8 +74,12 @@ public class PathInterpreter {
 					Map<String, String> curProperties =
 						configurationEntry.getProperties();
 
+					AdaptiveMediaAttribute<?, String>
+						configurationUuidAdaptiveMediaAttribute =
+							AdaptiveMediaAttribute.configurationUuid();
+
 					curProperties.put(
-						AdaptiveMediaAttribute.configurationUuid().getName(),
+						configurationUuidAdaptiveMediaAttribute.getName(),
 						configurationEntry.getUUID());
 
 					return curProperties;
