@@ -136,12 +136,6 @@ AUI.add(
 					initializer: function() {
 						var instance = this;
 
-						instance._eventHandlers = [
-							A.on('windowresize', A.bind('_syncPageInformationHeight', instance)),
-							instance.after('editingLanguageIdChange', A.bind('_afterEditingLanguageIdChange', instance)),
-							instance.after('titlesChange', A.bind('_afterTitlesChange', instance))
-						];
-
 						var boundingBox = instance.get('builder').get('boundingBox');
 
 						var content = boundingBox.one('.form-builder-content');
@@ -161,6 +155,18 @@ AUI.add(
 						successPage.hide();
 
 						content.append(successPage);
+
+						var successPageTitle = successPage.one('.' + CSS_FORM_BUILDER_SUCCESS_PAGE_TITLE);
+
+						var successPageContent = successPage.one('.' + CSS_FORM_BUILDER_SUCCESS_PAGE_CONTENT);
+
+						instance._eventHandlers = [
+							A.on('windowresize', A.bind('_syncPageInformationHeight', instance)),
+							instance.after('editingLanguageIdChange', A.bind('_afterEditingLanguageIdChange', instance)),
+							instance.after('titlesChange', A.bind('_afterTitlesChange', instance)),
+							successPageContent.after('valueChange', A.bind('_afterSuccessPageContentChange', instance), instance),
+							successPageTitle.after('valueChange', A.bind('_afterSuccessPageTitleChange', instance), instance)
+						];
 
 						instance._createTitleForEditingLanguageId();
 					},
@@ -190,7 +196,7 @@ AUI.add(
 					getSuccessPageDefinition: function() {
 						var instance = this;
 
-						return instance._updateSuccessPageSettings();
+						return instance.get('successPageSettings');
 					},
 
 					setSuccessPage: function(successPageSettings) {
@@ -296,6 +302,26 @@ AUI.add(
 						var switchModeNode = popoverBoundingBox.one('.' + CSS_FORM_BUILDER_PAGE_MANAGER_SWITCH_MODE);
 
 						switchModeNode.toggle(event.newVal > 1);
+					},
+
+					_afterSuccessPageContentChange: function(event) {
+						var instance = this;
+
+						var editingLanguageId = instance.get('editingLanguageId');
+
+						var successPageSettings = instance.get('successPageSettings');
+
+						successPageSettings.body[editingLanguageId] = event.newVal;
+					},
+
+					_afterSuccessPageTitleChange: function(event) {
+						var instance = this;
+
+						var editingLanguageId = instance.get('editingLanguageId');
+
+						var successPageSettings = instance.get('successPageSettings');
+
+						successPageSettings.title[editingLanguageId] = event.newVal;
 					},
 
 					_afterTitlesChange: function(event) {
