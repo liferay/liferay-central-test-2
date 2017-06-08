@@ -121,10 +121,10 @@
 		<execute function="AssertClick" locator1="NavTab#DISPLAY_SETTINGS" value1="Display Settings" />
 
 		<if>
-			<isset var="toggleSwitchLabel" />
+			<isset var="disableConfiguration" />
 			<then>
 				<execute function="Uncheck#uncheckToggleSwitch" locator1="ToggleSwitch#ANY_TOGGLE_SWITCH">
-					<var name="key_toggleSwitchLabel" value="${toggleSwitchLabel}" />
+					<var name="key_toggleSwitchLabel" value="${disableConfiguration}" />
 				</execute>
 			</then>
 		</if>
