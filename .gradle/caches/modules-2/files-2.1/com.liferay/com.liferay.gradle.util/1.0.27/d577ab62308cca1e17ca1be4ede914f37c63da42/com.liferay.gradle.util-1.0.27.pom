@@ -4,7 +4,8 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.liferay</groupId>
   <artifactId>com.liferay.gradle.util</artifactId>
-  <version>1.0.26</version>
+  <version>1.0.27</version>
+  <description>Liferay Gradle Utilities</description>
   <licenses>
     <license>
       <name>LGPL 2.1</name>
