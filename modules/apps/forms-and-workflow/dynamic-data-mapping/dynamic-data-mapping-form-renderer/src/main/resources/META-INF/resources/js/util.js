@@ -48,35 +48,35 @@ AUI.add(
 					label: Liferay.Language.get('contains'),
 					name: 'contains',
 					parameterMessage: Liferay.Language.get('this-text'),
-					regex: /^contains\((.+), "(.+)"\)$/,
+					regex: /^contains\((\w+), "(\w+)"\)$/,
 					template: 'contains({name}, "{parameter}")'
 				},
 				{
 					label: Liferay.Language.get('not-contains'),
 					name: 'notContains',
 					parameterMessage: Liferay.Language.get('this-text'),
-					regex: /^NOT\(contains\((.+), "(.+)"\)\)$/,
+					regex: /^NOT\(contains\((\w+), "(\w+)"\)\)$/,
 					template: 'NOT(contains({name}, "{parameter}"))'
 				},
 				{
 					label: Liferay.Language.get('url'),
 					name: 'url',
 					parameterMessage: '',
-					regex: /^isURL\((.+)\)$/,
+					regex: /^isURL\((\w+)\)$/,
 					template: 'isURL({name})'
 				},
 				{
 					label: Liferay.Language.get('email'),
 					name: 'email',
 					parameterMessage: '',
-					regex: /^isEmailAddress\((.+)\)$/,
+					regex: /^isEmailAddress\((\w+)\)$/,
 					template: 'isEmailAddress({name})'
 				},
 				{
 					label: Liferay.Language.get('regular-expression'),
 					name: 'regularExpression',
 					parameterMessage: Liferay.Language.get('this-text'),
-					regex: /^match\((.+), "(.*)"\)$/,
+					regex: /^match\((\w+), "(.*)"\)$/,
 					template: 'match({name}, "{parameter}")'
 				}
 			]
