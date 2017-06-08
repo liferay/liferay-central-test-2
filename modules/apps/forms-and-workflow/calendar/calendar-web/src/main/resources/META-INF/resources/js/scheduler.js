@@ -529,6 +529,7 @@ AUI.add(
 
 				ATTRS: {
 					navigationDateFormatter: {
+						validator: isFunction,
 						value: function(date) {
 							var instance = this;
 
@@ -541,8 +542,7 @@ AUI.add(
 									locale: scheduler.get('locale')
 								}
 							);
-						},
-						validator: isFunction
+						}
 					}
 				}
 			}
