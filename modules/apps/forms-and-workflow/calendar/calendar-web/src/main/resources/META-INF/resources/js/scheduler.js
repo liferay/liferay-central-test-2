@@ -550,7 +550,60 @@ AUI.add(
 
 		Liferay.SchedulerDayView = SchedulerDayView;
 
-		Liferay.SchedulerWeekView = A.SchedulerWeekView;
+		Liferay.SchedulerWeekView = A.Component.create(
+			{
+				EXTENDS: A.SchedulerWeekView,
+
+				NAME: 'scheduler-week-view',
+
+				ATTRS: {
+					navigationDateFormatter: {
+						validator: isFunction,
+						value: function(date) {
+							var instance = this;
+
+							var scheduler = instance.get('scheduler');
+
+							var locale = scheduler.get('locale');
+
+							var startDate = instance._firstDayOfWeek(date);
+
+							var endDate = DateMath.add(startDate, DateMath.DAY, instance.get('days') - 1);
+
+							var startDateFormat = Liferay.Language.get('b-d');
+
+							var endDateFormat;
+
+							if (DateMath.isMonthOverlapWeek(startDate)) {
+								endDateFormat = Liferay.Language.get('b-d-y');
+							}
+							else {
+								endDateFormat = Liferay.Language.get('d-y');
+							}
+
+							var startDateLabel = A.DataType.Date.format(
+								startDate,
+								{
+									format: startDateFormat,
+									locale: locale
+								}
+							);
+
+							var endDateLabel = A.DataType.Date.format(
+								endDate,
+								{
+									format: endDateFormat,
+									locale: locale
+								}
+							);
+
+							return [startDateLabel, '&mdash;', endDateLabel].join(' ');
+
+						}
+					}
+				}
+			}
+		);
 
 		var SchedulerMonthView = A.Component.create(
 			{
