@@ -611,6 +611,25 @@ AUI.add(
 
 				NAME: 'scheduler-month-view',
 
+				ATTRS: {
+					navigationDateFormatter: {
+						validator: isFunction,
+						value: function(date) {
+							var instance = this;
+
+							var scheduler = instance.get('scheduler');
+
+							return A.DataType.Date.format(
+								date,
+								{
+									format: Liferay.Language.get('b-y'),
+									locale: scheduler.get('locale')
+								}
+							);
+						}
+					}
+				},
+
 				prototype: {
 					_syncCellDimensions: function() {
 						var instance = this;
