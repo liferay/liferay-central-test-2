@@ -82,12 +82,20 @@ public class SelectDDMFormFieldTemplateContextContributor
 		ResourceBundle resourceBundle = getResourceBundle(
 			ddmFormFieldRenderingContext.getLocale());
 
+		parameters.put(
+			"dataSourceType",
+			GetterUtil.getString(
+				ddmFormField.getProperty("dataSourceType"), "manual"));
+
 		stringsMap.put(
 			"chooseAnOption",
 			LanguageUtil.get(resourceBundle, "choose-an-option"));
 		stringsMap.put(
-			"chooseOptions",
-			LanguageUtil.get(resourceBundle, "choose-options"));
+			"chooseAnOption",
+			LanguageUtil.get(resourceBundle, "choose-an-option"));
+		stringsMap.put(
+			"dynamicallyLoadedData",
+			LanguageUtil.get(resourceBundle, "dynamically-loaded-data"));
 		stringsMap.put(
 			"emptyList", LanguageUtil.get(resourceBundle, "empty-list"));
 
