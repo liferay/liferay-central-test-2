@@ -54,7 +54,7 @@ public class CommandElement extends PoshiElement {
 
 	@Override
 	public void addAttributes(String readableSyntax) {
-		if (readableSyntax.contains(ReadableSyntaxKeys.DESCRIPTION + ":")) {
+		if (readableSyntax.contains(DESCRIPTION + ":")) {
 			_addDescriptionAttribute(readableSyntax);
 		}
 
@@ -108,7 +108,8 @@ public class CommandElement extends PoshiElement {
 			String description = attributeValue("description");
 
 			sb.append("\n");
-			sb.append("Description: ");
+			sb.append(DESCRIPTION);
+			sb.append(": ");
 			sb.append(description);
 		}
 
