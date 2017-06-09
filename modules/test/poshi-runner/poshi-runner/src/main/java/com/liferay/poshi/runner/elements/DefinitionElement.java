@@ -93,7 +93,9 @@ public class DefinitionElement extends PoshiElement {
 			sb.append(poshiElement.toReadableSyntax());
 		}
 
-		if (elements("var").size() != 0) {
+		List<Element> elements = elements("var");
+
+		if (!elements.isEmpty()) {
 			sb.append("\n\t");
 			sb.append(AND);
 			sb.append(" ");
