@@ -88,7 +88,7 @@ public class DefinitionElement extends PoshiElement {
 		sb.append(THESE_PROPERTIES);
 
 		for (PoshiElement poshiElement :
-				toPoshiElementList(elements("property"))) {
+				toPoshiElements(elements("property"))) {
 
 			sb.append(poshiElement.toReadableSyntax());
 		}
@@ -101,30 +101,26 @@ public class DefinitionElement extends PoshiElement {
 			sb.append(" ");
 			sb.append(THESE_VARIABLES);
 
-			for (PoshiElement poshiElement : toPoshiElementList(elements())) {
+			for (PoshiElement poshiElement : toPoshiElements(elements())) {
 				sb.append(poshiElement.toReadableSyntax());
 			}
 		}
 
 		sb.append("\n");
 
-		for (PoshiElement poshiElement :
-				toPoshiElementList(elements("set-up"))) {
-
+		for (PoshiElement poshiElement : toPoshiElements(elements("set-up"))) {
 			sb.append(poshiElement.toReadableSyntax());
 		}
 
 		sb.append("\n");
 
 		for (PoshiElement poshiElement :
-				toPoshiElementList(elements("tear-down"))) {
+				toPoshiElements(elements("tear-down"))) {
 
 			sb.append(poshiElement.toReadableSyntax());
 		}
 
-		for (PoshiElement poshiElement :
-				toPoshiElementList(elements("command"))) {
-
+		for (PoshiElement poshiElement : toPoshiElements(elements("command"))) {
 			sb.append(poshiElement.toReadableSyntax());
 		}
 

@@ -88,7 +88,7 @@ public abstract class PoshiElement extends DefaultElement {
 	public String toReadableSyntax() {
 		StringBuilder sb = new StringBuilder();
 
-		for (PoshiElement poshiElement : toPoshiElementList(elements())) {
+		for (PoshiElement poshiElement : toPoshiElements(elements())) {
 			sb.append(poshiElement.toReadableSyntax());
 		}
 
@@ -148,18 +148,18 @@ public abstract class PoshiElement extends DefaultElement {
 		return Dom4JUtil.toElementList(parentElement.elements());
 	}
 
-	protected List<PoshiElement> toPoshiElementList(List<?> list) {
+	protected List<PoshiElement> toPoshiElements(List<?> list) {
 		if (list == null) {
 			return null;
 		}
 
-		List<PoshiElement> elementList = new ArrayList<>(list.size());
+		List<PoshiElement> poshiElements = new ArrayList<>(list.size());
 
 		for (Object object : list) {
-			elementList.add((PoshiElement)object);
+			poshiElements.add((PoshiElement)object);
 		}
 
-		return elementList;
+		return poshiElements;
 	}
 
 	protected static final String[] READABLE_COMMAND_BLOCK_KEYS = {
