@@ -54,7 +54,7 @@ public class CommandElement extends PoshiElement {
 
 	@Override
 	public void addAttributes(String readableSyntax) {
-		if (readableSyntax.contains("Description:")) {
+		if (readableSyntax.contains(ReadableSyntaxKeys.DESCRIPTION + ":")) {
 			_addDescriptionAttribute(readableSyntax);
 		}
 
