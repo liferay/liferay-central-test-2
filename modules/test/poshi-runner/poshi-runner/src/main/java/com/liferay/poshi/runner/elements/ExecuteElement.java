@@ -91,15 +91,15 @@ public class ExecuteElement extends PoshiElement {
 
 			sb.append(_getReadableSyntaxCommandPhrase(function));
 
-			List<String> functionAttributes = Arrays.asList(
+			List<String> functionAttributeNames = Arrays.asList(
 				"value1", "locator1", "value2", "locator2");
 
-			for (String functionAttribute : functionAttributes) {
+			for (String functionAttributeName : functionAttributeNames) {
 				String functionAttributeValue = attributeValue(
-					functionAttribute);
+					functionAttributeName);
 
 				if (functionAttributeValue != null) {
-					if (functionAttribute.startsWith("locator")) {
+					if (functionAttributeName.startsWith("locator")) {
 						sb.append(" ");
 						sb.append(AT_LOCATOR);
 					}
