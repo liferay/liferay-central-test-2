@@ -118,11 +118,11 @@ public class CalendarUtilTest {
 	public void testToCalendarBookingJSONObjectWorksWithoutManageBookingsPermission()
 		throws Exception {
 
-		ServiceContext serviceContext = createServiceContext();
-
 		_privateUser = UserTestUtil.addUser();
 
 		Calendar calendar = CalendarTestUtil.addCalendar(_privateUser);
+
+		ServiceContext serviceContext = createServiceContext();
 
 		CalendarBooking calendarBooking =
 			CalendarBookingTestUtil.addRecurringCalendarBooking(
