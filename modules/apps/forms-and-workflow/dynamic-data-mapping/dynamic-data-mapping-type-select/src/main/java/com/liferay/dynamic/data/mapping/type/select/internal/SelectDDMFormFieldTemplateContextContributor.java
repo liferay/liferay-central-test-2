@@ -65,6 +65,11 @@ public class SelectDDMFormFieldTemplateContextContributor
 		Map<String, Object> parameters = new HashMap<>();
 
 		parameters.put(
+			"dataSourceType",
+			GetterUtil.getString(
+				ddmFormField.getProperty("dataSourceType"), "manual"));
+
+		parameters.put(
 			"multiple",
 			ddmFormField.isMultiple() ? "multiple" : StringPool.BLANK);
 
@@ -82,14 +87,6 @@ public class SelectDDMFormFieldTemplateContextContributor
 		ResourceBundle resourceBundle = getResourceBundle(
 			ddmFormFieldRenderingContext.getLocale());
 
-		parameters.put(
-			"dataSourceType",
-			GetterUtil.getString(
-				ddmFormField.getProperty("dataSourceType"), "manual"));
-
-		stringsMap.put(
-			"chooseAnOption",
-			LanguageUtil.get(resourceBundle, "choose-an-option"));
 		stringsMap.put(
 			"chooseAnOption",
 			LanguageUtil.get(resourceBundle, "choose-an-option"));
