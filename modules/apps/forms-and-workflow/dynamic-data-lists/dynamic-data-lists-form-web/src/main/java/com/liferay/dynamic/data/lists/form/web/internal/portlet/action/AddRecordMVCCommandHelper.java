@@ -94,11 +94,9 @@ public class AddRecordMVCCommandHelper {
 
 		stream = stream.filter(result -> !result.isVisible());
 
-		return stream.map(
-			result -> result.getName()
-		).collect(
-			Collectors.toSet()
-		);
+		Stream<String> fieldNameStream = stream.map(result -> result.getName());
+
+		return fieldNameStream.collect(Collectors.toSet());
 	}
 
 	protected List<DDMFormField> getRequiredFields(DDMForm ddmForm) {
@@ -109,11 +107,9 @@ public class AddRecordMVCCommandHelper {
 
 		Stream<DDMFormField> stream = ddmFormFields.stream();
 
-		return stream.filter(
-			ddmFormField -> ddmFormField.isRequired()
-		).collect(
-			Collectors.toList()
-		);
+		stream = stream.filter(ddmFormField -> ddmFormField.isRequired());
+
+		return stream.collect(Collectors.toList());
 	}
 
 	protected void removeRequiredProperty(DDMFormField ddmFormField) {
@@ -125,11 +121,10 @@ public class AddRecordMVCCommandHelper {
 
 		Stream<DDMFormField> fieldsStream = requiredFields.stream();
 
-		fieldsStream.filter(
-			field -> invisibleFields.contains(field.getName())
-		).forEach(
-			this::removeRequiredProperty
-		);
+		fieldsStream = fieldsStream.filter(
+			field -> invisibleFields.contains(field.getName()));
+
+		fieldsStream.forEach(this::removeRequiredProperty);
 	}
 
 	@Reference
