@@ -42,14 +42,21 @@ public class UnsupportedElement extends PoshiElement {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("\n");
-		sb.append("##########################################################");
+
+		for (int i = 0; i < 80; i++) {
+			sb.append("#");
+		}
+
 		sb.append("\n");
 		sb.append("The Poshi ");
 		sb.append(getName());
 		sb.append(" element is not supported in the readable syntax. ");
 		sb.append("Please update this test.");
 		sb.append("\n");
-		sb.append("##########################################################");
+
+		for (int i = 0; i < 80; i++) {
+			sb.append("#");
+		}
 
 		return sb.toString();
 	}
