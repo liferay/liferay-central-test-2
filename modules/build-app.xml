@@ -350,12 +350,12 @@
 			</condition>
 		</fail>
 
-		<condition else="${modules.dir}/apps/${app.name}" property="app.dir" value="${modules.dir}/apps/${app.name}">
-			<available file="${modules.dir}/apps/${app.name}" />
+		<condition else="${modules.dir}/apps/${app.name}" property="app.dir" value="${modules.dir}/private/apps/${app.name}">
+			<available file="${modules.dir}/private/apps/${app.name}" />
 		</condition>
 
-		<condition else="${modules.dir}/.releng/apps/${app.name}" property="releng.app.dir" value="${modules.dir}/.releng/apps/${app.name}">
-			<available file="${modules.dir}/.releng/apps/${app.name}" />
+		<condition else="${modules.dir}/.releng/apps/${app.name}" property="releng.app.dir" value="${modules.dir}/.releng/private/apps/${app.name}">
+			<available file="${modules.dir}/.releng/private/apps/${app.name}" />
 		</condition>
 
 		<property name="dist.dir" value="${releng.app.dir}/dist" />
@@ -375,7 +375,7 @@
 				</filtermapper>
 			</chainedmapper>
 			<path>
-				<dirset dir="${modules.dir}" excludes="**/*-test*" includes="apps/${app.name}/**,apps/${app.name}/**">
+				<dirset dir="${modules.dir}" excludes="**/*-test*" includes="apps/${app.name}/**,private/apps/${app.name}/**">
 					<present targetdir="${modules.dir}">
 						<mapper from="*" to="*/.lfrbuild-portal" type="glob" />
 					</present>
@@ -386,7 +386,7 @@
 		<pathconvert pathsep="," property="app.module.dirs">
 			<globmapper from="${modules.dir}${file.separator}*" to="*" />
 			<path>
-				<dirset dir="${modules.dir}" excludes="**/*-test*,${app.module.dirs.excludes}" includes="apps/${app.name}/**,apps/${app.name}/**">
+				<dirset dir="${modules.dir}" excludes="**/*-test*,${app.module.dirs.excludes}" includes="apps/${app.name}/**,private/apps/${app.name}/**">
 					<present targetdir="${modules.dir}">
 						<mapper from="*" to="*/.lfrbuild-portal" type="glob" />
 					</present>
@@ -412,7 +412,7 @@
 		<property file="${modules.dir}/../build.properties" />
 
 		<pathconvert property="app.bnd.file">
-			<fileset dir="${modules.dir}" includes="apps/${app.name}/app.bnd,apps/${app.name}/app.bnd" />
+			<fileset dir="${modules.dir}" includes="apps/${app.name}/app.bnd,private/apps/${app.name}/app.bnd" />
 		</pathconvert>
 
 		<loadproperties srcFile="${app.bnd.file}">
@@ -427,7 +427,7 @@
 			<and>
 				<istrue value="${current.branch.private}" />
 				<not>
-					<available file="${modules.dir}/apps/${app.name}" />
+					<available file="${modules.dir}/private/apps/${app.name}" />
 				</not>
 			</and>
 		</condition>
