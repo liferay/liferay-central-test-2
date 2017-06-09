@@ -48,9 +48,9 @@ public class UnsupportedElement extends PoshiElement {
 		}
 
 		sb.append("\n");
-		sb.append("The Poshi ");
+		sb.append("The Poshi \"");
 		sb.append(getName());
-		sb.append(" element is not supported in the readable syntax. ");
+		sb.append("\" element is not supported in the readable syntax. ");
 		sb.append("Please update this test.");
 		sb.append("\n");
 
