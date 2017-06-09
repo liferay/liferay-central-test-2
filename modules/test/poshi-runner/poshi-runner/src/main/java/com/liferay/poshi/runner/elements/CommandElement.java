@@ -117,7 +117,8 @@ public class CommandElement extends PoshiElement {
 			String priority = attributeValue("priority");
 
 			sb.append("\n");
-			sb.append("Priority: ");
+			sb.append(PRIORITY);
+			sb.append(": ");
 			sb.append(priority);
 		}
 
