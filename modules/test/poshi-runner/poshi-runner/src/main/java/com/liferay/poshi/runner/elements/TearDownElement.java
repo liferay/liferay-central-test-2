@@ -34,7 +34,7 @@ public class TearDownElement extends CommandElement {
 	}
 
 	protected String getReadableCommandTitle() {
-		return "Teardown: This executes after each scenario";
+		return "TearDown: This executes after each scenario";
 	}
 
 }

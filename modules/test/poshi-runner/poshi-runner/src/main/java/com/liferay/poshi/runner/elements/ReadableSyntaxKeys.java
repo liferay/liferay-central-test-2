@@ -37,7 +37,7 @@ public class ReadableSyntaxKeys {
 
 	public static final String SETUP = "Setup";
 
-	public static final String TEARDOWN = "Teardown";
+	public static final String TEAR_DOWN = "TearDown";
 
 	public static final String THE_VALUE = "the value";
 

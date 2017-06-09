@@ -20,7 +20,7 @@ import static com.liferay.poshi.runner.elements.ReadableSyntaxKeys.FEATURE;
 import static com.liferay.poshi.runner.elements.ReadableSyntaxKeys.PRIORITY;
 import static com.liferay.poshi.runner.elements.ReadableSyntaxKeys.SCENARIO;
 import static com.liferay.poshi.runner.elements.ReadableSyntaxKeys.SETUP;
-import static com.liferay.poshi.runner.elements.ReadableSyntaxKeys.TEARDOWN;
+import static com.liferay.poshi.runner.elements.ReadableSyntaxKeys.TEAR_DOWN;
 import static com.liferay.poshi.runner.elements.ReadableSyntaxKeys.THESE_PROPERTIES;
 import static com.liferay.poshi.runner.elements.ReadableSyntaxKeys.THESE_VARIABLES;
 import static com.liferay.poshi.runner.util.StringPool.COLON;
@@ -73,7 +73,7 @@ public class CommandElement extends PoshiElement {
 				readableBlock.contains(FEATURE) ||
 				readableBlock.contains(SCENARIO) ||
 				readableBlock.contains(SETUP) ||
-				readableBlock.contains(TEARDOWN)) {
+				readableBlock.contains(TEAR_DOWN)) {
 
 				continue;
 			}
