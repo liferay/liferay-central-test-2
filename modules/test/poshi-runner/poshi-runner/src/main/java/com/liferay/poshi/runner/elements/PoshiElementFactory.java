@@ -19,7 +19,7 @@ import static com.liferay.poshi.runner.elements.ReadableSyntaxKeys.FEATURE;
 import static com.liferay.poshi.runner.elements.ReadableSyntaxKeys.GIVEN;
 import static com.liferay.poshi.runner.elements.ReadableSyntaxKeys.SCENARIO;
 import static com.liferay.poshi.runner.elements.ReadableSyntaxKeys.SETUP;
-import static com.liferay.poshi.runner.elements.ReadableSyntaxKeys.TEARDOWN;
+import static com.liferay.poshi.runner.elements.ReadableSyntaxKeys.TEAR_DOWN;
 import static com.liferay.poshi.runner.elements.ReadableSyntaxKeys.THEN;
 import static com.liferay.poshi.runner.elements.ReadableSyntaxKeys.WHEN;
 import static com.liferay.poshi.runner.util.StringPool.PIPE;
@@ -98,7 +98,7 @@ public class PoshiElementFactory {
 					return new SetUpElement(readableSyntax);
 				}
 
-				if (line.startsWith(TEARDOWN)) {
+				if (line.startsWith(TEAR_DOWN)) {
 					return new TearDownElement(readableSyntax);
 				}
 
