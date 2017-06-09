@@ -18,7 +18,7 @@ import static com.liferay.poshi.runner.elements.ReadableSyntaxKeys.AND;
 import static com.liferay.poshi.runner.elements.ReadableSyntaxKeys.FEATURE;
 import static com.liferay.poshi.runner.elements.ReadableSyntaxKeys.GIVEN;
 import static com.liferay.poshi.runner.elements.ReadableSyntaxKeys.SCENARIO;
-import static com.liferay.poshi.runner.elements.ReadableSyntaxKeys.SETUP;
+import static com.liferay.poshi.runner.elements.ReadableSyntaxKeys.SET_UP;
 import static com.liferay.poshi.runner.elements.ReadableSyntaxKeys.TEAR_DOWN;
 import static com.liferay.poshi.runner.elements.ReadableSyntaxKeys.THEN;
 import static com.liferay.poshi.runner.elements.ReadableSyntaxKeys.WHEN;
@@ -94,7 +94,7 @@ public class PoshiElementFactory {
 					return new CommandElement(readableSyntax);
 				}
 
-				if (line.startsWith(SETUP)) {
+				if (line.startsWith(SET_UP)) {
 					return new SetUpElement(readableSyntax);
 				}
 

@@ -35,7 +35,7 @@ public class ReadableSyntaxKeys {
 
 	public static final String SCENARIO = "Scenario";
 
-	public static final String SETUP = "Setup";
+	public static final String SET_UP = "SetUp";
 
 	public static final String TEAR_DOWN = "TearDown";
 
