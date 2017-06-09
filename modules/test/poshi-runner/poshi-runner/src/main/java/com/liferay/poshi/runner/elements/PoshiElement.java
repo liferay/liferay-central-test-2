@@ -19,7 +19,7 @@ import static com.liferay.poshi.runner.elements.ReadableSyntaxKeys.BACKGROUND;
 import static com.liferay.poshi.runner.elements.ReadableSyntaxKeys.FEATURE;
 import static com.liferay.poshi.runner.elements.ReadableSyntaxKeys.GIVEN;
 import static com.liferay.poshi.runner.elements.ReadableSyntaxKeys.SCENARIO;
-import static com.liferay.poshi.runner.elements.ReadableSyntaxKeys.SETUP;
+import static com.liferay.poshi.runner.elements.ReadableSyntaxKeys.SET_UP;
 import static com.liferay.poshi.runner.elements.ReadableSyntaxKeys.TEAR_DOWN;
 import static com.liferay.poshi.runner.elements.ReadableSyntaxKeys.THEN;
 import static com.liferay.poshi.runner.elements.ReadableSyntaxKeys.THESE_PROPERTIES;
@@ -163,7 +163,7 @@ public abstract class PoshiElement extends DefaultElement {
 	}
 
 	protected static final String[] READABLE_COMMAND_BLOCK_KEYS = {
-		BACKGROUND + COLON, FEATURE + COLON, SCENARIO + COLON, SETUP + COLON,
+		BACKGROUND + COLON, FEATURE + COLON, SCENARIO + COLON, SET_UP + COLON,
 		TEAR_DOWN + COLON
 	};
 

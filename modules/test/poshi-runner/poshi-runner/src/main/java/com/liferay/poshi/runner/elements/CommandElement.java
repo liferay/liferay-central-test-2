@@ -19,7 +19,7 @@ import static com.liferay.poshi.runner.elements.ReadableSyntaxKeys.DESCRIPTION;
 import static com.liferay.poshi.runner.elements.ReadableSyntaxKeys.FEATURE;
 import static com.liferay.poshi.runner.elements.ReadableSyntaxKeys.PRIORITY;
 import static com.liferay.poshi.runner.elements.ReadableSyntaxKeys.SCENARIO;
-import static com.liferay.poshi.runner.elements.ReadableSyntaxKeys.SETUP;
+import static com.liferay.poshi.runner.elements.ReadableSyntaxKeys.SET_UP;
 import static com.liferay.poshi.runner.elements.ReadableSyntaxKeys.TEAR_DOWN;
 import static com.liferay.poshi.runner.elements.ReadableSyntaxKeys.THESE_PROPERTIES;
 import static com.liferay.poshi.runner.elements.ReadableSyntaxKeys.THESE_VARIABLES;
@@ -72,7 +72,7 @@ public class CommandElement extends PoshiElement {
 			if (readableBlock.contains(BACKGROUND) ||
 				readableBlock.contains(FEATURE) ||
 				readableBlock.contains(SCENARIO) ||
-				readableBlock.contains(SETUP) ||
+				readableBlock.contains(SET_UP) ||
 				readableBlock.contains(TEAR_DOWN)) {
 
 				continue;
