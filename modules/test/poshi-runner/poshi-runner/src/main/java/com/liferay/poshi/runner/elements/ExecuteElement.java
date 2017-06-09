@@ -128,17 +128,17 @@ public class ExecuteElement extends PoshiElement {
 	}
 
 	private void _addFunctionAttribute(
-		String readableSyntax, String attributeType) {
+		String readableSyntax, String attributeName) {
 
 		String attributeValue = getAttributeValue("'", "'", readableSyntax);
 
-		if (attributeValue(attributeType + "1") == null) {
-			addAttribute(attributeType + "1", attributeValue);
+		if (attributeValue(attributeName + "1") == null) {
+			addAttribute(attributeName + "1", attributeValue);
 
 			return;
 		}
 
-		addAttribute(attributeType + "2", attributeValue);
+		addAttribute(attributeName + "2", attributeValue);
 	}
 
 	private void _addFunctionAttributes(String readableSyntax) {
