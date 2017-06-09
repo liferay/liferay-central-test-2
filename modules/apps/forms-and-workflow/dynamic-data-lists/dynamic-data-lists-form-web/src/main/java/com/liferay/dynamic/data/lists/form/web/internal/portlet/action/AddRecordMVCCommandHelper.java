@@ -119,12 +119,12 @@ public class AddRecordMVCCommandHelper {
 	protected void removeRequiredProperty(
 		Set<String> invisibleFields, List<DDMFormField> requiredFields) {
 
-		Stream<DDMFormField> fieldsStream = requiredFields.stream();
+		Stream<DDMFormField> stream = requiredFields.stream();
 
-		fieldsStream = fieldsStream.filter(
+		stream = stream.filter(
 			field -> invisibleFields.contains(field.getName()));
 
-		fieldsStream.forEach(this::removeRequiredProperty);
+		stream.forEach(this::removeRequiredProperty);
 	}
 
 	@Reference
