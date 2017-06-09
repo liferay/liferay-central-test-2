@@ -173,28 +173,29 @@ public class ExecuteElement extends PoshiElement {
 		String line = readableSyntax.substring(0, index);
 
 		for (String key : READABLE_EXECUTE_BLOCK_KEYS) {
-			if (line.startsWith(key)) {
-				Pattern pattern = Pattern.compile(
-					".*?" + key + ".*?.([A-z]*)(.*)");
+			if (!line.startsWith(key)) {
+				continue;
+			}
 
-				Matcher matcher = pattern.matcher(line);
+			Pattern pattern = Pattern.compile(".*?" + key + ".*?.([A-z]*)(.*)");
 
-				if (matcher.find()) {
-					StringBuilder sb = new StringBuilder();
+			Matcher matcher = pattern.matcher(line);
 
-					sb.append(matcher.group(1));
+			if (matcher.find()) {
+				StringBuilder sb = new StringBuilder();
 
-					String commandName = matcher.group(2);
+				sb.append(matcher.group(1));
 
-					commandName = StringUtil.removeSpaces(commandName);
+				String commandName = matcher.group(2);
 
-					if (commandName.length() > 0) {
-						sb.append("#");
-						sb.append(commandName);
-					}
+				commandName = StringUtil.removeSpaces(commandName);
 
-					return sb.toString();
+				if (commandName.length() > 0) {
+					sb.append("#");
+					sb.append(commandName);
 				}
+
+				return sb.toString();
 			}
 		}
 
