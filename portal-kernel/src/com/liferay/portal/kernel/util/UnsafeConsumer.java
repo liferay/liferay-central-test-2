@@ -44,7 +44,7 @@ public interface UnsafeConsumer<E, T extends Throwable> {
 				if (!throwableClass.isInstance(t)) {
 
 					// Unexpected exception stops the loop and suppresses
-					// previous expected exceptions.
+					// previous expected exceptions
 
 					if (throwable != null) {
 						t.addSuppressed(throwable);
