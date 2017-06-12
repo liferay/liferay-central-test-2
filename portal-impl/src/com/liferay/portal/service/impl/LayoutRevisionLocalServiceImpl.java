@@ -272,7 +272,7 @@ public class LayoutRevisionLocalServiceImpl
 	public LayoutRevision fetchLayoutRevision(
 		long layoutSetBranchId, boolean head, long plid) {
 
-		return layoutRevisionPersistence.fetchByL_H_P_All_First(
+		return layoutRevisionPersistence.fetchByL_H_P_Collection_First(
 			layoutSetBranchId, head, plid, null);
 	}
 
@@ -319,7 +319,7 @@ public class LayoutRevisionLocalServiceImpl
 			long layoutSetBranchId, long plid, boolean head)
 		throws PortalException {
 
-		return layoutRevisionPersistence.findByL_H_P_All_First(
+		return layoutRevisionPersistence.findByL_H_P_Collection_First(
 			layoutSetBranchId, head, plid, null);
 	}
 
@@ -380,7 +380,7 @@ public class LayoutRevisionLocalServiceImpl
 	public List<LayoutRevision> getLayoutRevisions(
 		long layoutSetBranchId, long plid, boolean head) {
 
-		return layoutRevisionPersistence.findByL_H_P_All(
+		return layoutRevisionPersistence.findByL_H_P_Collection(
 			layoutSetBranchId, head, plid);
 	}
 
