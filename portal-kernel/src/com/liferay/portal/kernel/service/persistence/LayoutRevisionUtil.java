@@ -1791,9 +1791,10 @@ public class LayoutRevisionUtil {
 	* @param plid the plid
 	* @return the matching layout revisions
 	*/
-	public static List<LayoutRevision> findByL_H_P_All(long layoutSetBranchId,
-		boolean head, long plid) {
-		return getPersistence().findByL_H_P_All(layoutSetBranchId, head, plid);
+	public static List<LayoutRevision> findByL_H_P_Collection(
+		long layoutSetBranchId, boolean head, long plid) {
+		return getPersistence()
+				   .findByL_H_P_Collection(layoutSetBranchId, head, plid);
 	}
 
 	/**
@@ -1810,10 +1811,11 @@ public class LayoutRevisionUtil {
 	* @param end the upper bound of the range of layout revisions (not inclusive)
 	* @return the range of matching layout revisions
 	*/
-	public static List<LayoutRevision> findByL_H_P_All(long layoutSetBranchId,
-		boolean head, long plid, int start, int end) {
+	public static List<LayoutRevision> findByL_H_P_Collection(
+		long layoutSetBranchId, boolean head, long plid, int start, int end) {
 		return getPersistence()
-				   .findByL_H_P_All(layoutSetBranchId, head, plid, start, end);
+				   .findByL_H_P_Collection(layoutSetBranchId, head, plid,
+			start, end);
 	}
 
 	/**
@@ -1831,12 +1833,12 @@ public class LayoutRevisionUtil {
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching layout revisions
 	*/
-	public static List<LayoutRevision> findByL_H_P_All(long layoutSetBranchId,
-		boolean head, long plid, int start, int end,
+	public static List<LayoutRevision> findByL_H_P_Collection(
+		long layoutSetBranchId, boolean head, long plid, int start, int end,
 		OrderByComparator<LayoutRevision> orderByComparator) {
 		return getPersistence()
-				   .findByL_H_P_All(layoutSetBranchId, head, plid, start, end,
-			orderByComparator);
+				   .findByL_H_P_Collection(layoutSetBranchId, head, plid,
+			start, end, orderByComparator);
 	}
 
 	/**
@@ -1855,13 +1857,13 @@ public class LayoutRevisionUtil {
 	* @param retrieveFromCache whether to retrieve from the finder cache
 	* @return the ordered range of matching layout revisions
 	*/
-	public static List<LayoutRevision> findByL_H_P_All(long layoutSetBranchId,
-		boolean head, long plid, int start, int end,
+	public static List<LayoutRevision> findByL_H_P_Collection(
+		long layoutSetBranchId, boolean head, long plid, int start, int end,
 		OrderByComparator<LayoutRevision> orderByComparator,
 		boolean retrieveFromCache) {
 		return getPersistence()
-				   .findByL_H_P_All(layoutSetBranchId, head, plid, start, end,
-			orderByComparator, retrieveFromCache);
+				   .findByL_H_P_Collection(layoutSetBranchId, head, plid,
+			start, end, orderByComparator, retrieveFromCache);
 	}
 
 	/**
@@ -1874,12 +1876,12 @@ public class LayoutRevisionUtil {
 	* @return the first matching layout revision
 	* @throws NoSuchLayoutRevisionException if a matching layout revision could not be found
 	*/
-	public static LayoutRevision findByL_H_P_All_First(long layoutSetBranchId,
-		boolean head, long plid,
+	public static LayoutRevision findByL_H_P_Collection_First(
+		long layoutSetBranchId, boolean head, long plid,
 		OrderByComparator<LayoutRevision> orderByComparator)
 		throws com.liferay.portal.kernel.exception.NoSuchLayoutRevisionException {
 		return getPersistence()
-				   .findByL_H_P_All_First(layoutSetBranchId, head, plid,
+				   .findByL_H_P_Collection_First(layoutSetBranchId, head, plid,
 			orderByComparator);
 	}
 
@@ -1892,12 +1894,12 @@ public class LayoutRevisionUtil {
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching layout revision, or <code>null</code> if a matching layout revision could not be found
 	*/
-	public static LayoutRevision fetchByL_H_P_All_First(
+	public static LayoutRevision fetchByL_H_P_Collection_First(
 		long layoutSetBranchId, boolean head, long plid,
 		OrderByComparator<LayoutRevision> orderByComparator) {
 		return getPersistence()
-				   .fetchByL_H_P_All_First(layoutSetBranchId, head, plid,
-			orderByComparator);
+				   .fetchByL_H_P_Collection_First(layoutSetBranchId, head,
+			plid, orderByComparator);
 	}
 
 	/**
@@ -1910,12 +1912,12 @@ public class LayoutRevisionUtil {
 	* @return the last matching layout revision
 	* @throws NoSuchLayoutRevisionException if a matching layout revision could not be found
 	*/
-	public static LayoutRevision findByL_H_P_All_Last(long layoutSetBranchId,
-		boolean head, long plid,
+	public static LayoutRevision findByL_H_P_Collection_Last(
+		long layoutSetBranchId, boolean head, long plid,
 		OrderByComparator<LayoutRevision> orderByComparator)
 		throws com.liferay.portal.kernel.exception.NoSuchLayoutRevisionException {
 		return getPersistence()
-				   .findByL_H_P_All_Last(layoutSetBranchId, head, plid,
+				   .findByL_H_P_Collection_Last(layoutSetBranchId, head, plid,
 			orderByComparator);
 	}
 
@@ -1928,11 +1930,11 @@ public class LayoutRevisionUtil {
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching layout revision, or <code>null</code> if a matching layout revision could not be found
 	*/
-	public static LayoutRevision fetchByL_H_P_All_Last(long layoutSetBranchId,
-		boolean head, long plid,
+	public static LayoutRevision fetchByL_H_P_Collection_Last(
+		long layoutSetBranchId, boolean head, long plid,
 		OrderByComparator<LayoutRevision> orderByComparator) {
 		return getPersistence()
-				   .fetchByL_H_P_All_Last(layoutSetBranchId, head, plid,
+				   .fetchByL_H_P_Collection_Last(layoutSetBranchId, head, plid,
 			orderByComparator);
 	}
 
@@ -1947,12 +1949,12 @@ public class LayoutRevisionUtil {
 	* @return the previous, current, and next layout revision
 	* @throws NoSuchLayoutRevisionException if a layout revision with the primary key could not be found
 	*/
-	public static LayoutRevision[] findByL_H_P_All_PrevAndNext(
+	public static LayoutRevision[] findByL_H_P_Collection_PrevAndNext(
 		long layoutRevisionId, long layoutSetBranchId, boolean head, long plid,
 		OrderByComparator<LayoutRevision> orderByComparator)
 		throws com.liferay.portal.kernel.exception.NoSuchLayoutRevisionException {
 		return getPersistence()
-				   .findByL_H_P_All_PrevAndNext(layoutRevisionId,
+				   .findByL_H_P_Collection_PrevAndNext(layoutRevisionId,
 			layoutSetBranchId, head, plid, orderByComparator);
 	}
 
@@ -1963,9 +1965,9 @@ public class LayoutRevisionUtil {
 	* @param head the head
 	* @param plid the plid
 	*/
-	public static void removeByL_H_P_All(long layoutSetBranchId, boolean head,
-		long plid) {
-		getPersistence().removeByL_H_P_All(layoutSetBranchId, head, plid);
+	public static void removeByL_H_P_Collection(long layoutSetBranchId,
+		boolean head, long plid) {
+		getPersistence().removeByL_H_P_Collection(layoutSetBranchId, head, plid);
 	}
 
 	/**
@@ -1976,9 +1978,10 @@ public class LayoutRevisionUtil {
 	* @param plid the plid
 	* @return the number of matching layout revisions
 	*/
-	public static int countByL_H_P_All(long layoutSetBranchId, boolean head,
-		long plid) {
-		return getPersistence().countByL_H_P_All(layoutSetBranchId, head, plid);
+	public static int countByL_H_P_Collection(long layoutSetBranchId,
+		boolean head, long plid) {
+		return getPersistence()
+				   .countByL_H_P_Collection(layoutSetBranchId, head, plid);
 	}
 
 	/**
