@@ -216,12 +216,16 @@
 
 		<execute macro="CalendarNavigator#gotoAddEvent" />
 
-		<execute macro="CalendarEvent#add">
+		<execute macro="CalendarEvent#editTitle">
 			<var name="eventTitle" value="Calendar Event Title" />
-			<var name="eventType" value="Regular" />
-			<var name="frequency" value="Weekly" />
-			<var name="pageName" value="Calendar Test Page" />
 		</execute>
+
+		<execute macro="CalendarEvent#setTimes">
+			<var name="endDateTime" value="03:00 PM" />
+			<var name="startDateTime" value="02:00 PM" />
+		</execute>
+
+		<execute macro="CalendarEvent#publish" />
 
 		<execute macro="Navigator#gotoPage">
 			<var name="pageName" value="Calendar Test Page" />
@@ -249,7 +253,7 @@
 		<execute macro="BookmarksFolder#addPG">
 			<var name="folderDescription" value="Test Folder Description" />
 			<var name="folderName" value="Test Folder" />
-		</execute>
+		</execute> 
 
 		<execute macro="Navigator#gotoPage">
 			<var name="pageName" value="Bookmarks Test Page" />
@@ -262,7 +266,7 @@
 		<execute macro="Bookmark#addPG">
 			<var name="bookmarkDescription" value="Test Folder Entry 1 Description" />
 			<var name="bookmarkName" value="Test Folder Entry 1" />
-			<var name="bookmarkURL" value="https://www.liferay.com" />
+			<var name="bookmarkURL" value="http://iscaliforniaonfire.com" />
 		</execute>
 
 		<execute macro="Navigator#gotoPage">
@@ -275,7 +279,7 @@
 
 		<execute macro="Bookmark#viewBookmark">
 			<var name="bookmarkName" value="Test Folder Entry 1" />
-			<var name="bookmarkURL" value="https://www.liferay.com" />
+			<var name="bookmarkURL" value="http://iscaliforniaonfire.com" />
 		</execute>
 
 		<execute macro="Navigator#gotoPage">
