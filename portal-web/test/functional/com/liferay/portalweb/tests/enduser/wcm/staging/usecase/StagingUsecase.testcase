@@ -880,6 +880,20 @@
 			<var name="portlet" value="Staging" />
 		</execute>
 
+		<execute macro="Staging#activateStagingCP">
+			<var name="siteName" value="Site Name" />
+		</execute>
+
+		<execute macro="Navigator#openSiteURL">
+			<var name="siteName" value="Site Name" />
+		</execute>
+
+		<execute macro="Navigator#gotoStagedView" />
+
+		<execute macro="ProductMenu#gotoSitesPublishing">
+			<var name="portlet" value="Staging" />
+		</execute>
+
 		<execute macro="Staging#addPublishTemplate">
 			<var name="publishTemplateDescription" value="Publish Template Description" />
 			<var name="publishTemplateName" value="First Template" />
