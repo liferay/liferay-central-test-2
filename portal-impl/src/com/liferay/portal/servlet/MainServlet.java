@@ -1222,9 +1222,9 @@ public class MainServlet extends ActionServlet {
 				request.removeAttribute(RequestDispatcher.ERROR_EXCEPTION);
 				request.removeAttribute(RequestDispatcher.ERROR_EXCEPTION_TYPE);
 				request.removeAttribute(RequestDispatcher.ERROR_MESSAGE);
+				request.removeAttribute(RequestDispatcher.ERROR_REQUEST_URI);
 				request.removeAttribute(RequestDispatcher.ERROR_SERVLET_NAME);
 				request.removeAttribute(RequestDispatcher.ERROR_STATUS_CODE);
-				request.removeAttribute(RequestDispatcher.ERROR_REQUEST_URI);
 			}
 
 			return true;
