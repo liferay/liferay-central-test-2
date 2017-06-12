@@ -253,7 +253,7 @@
 		<execute macro="BookmarksFolder#addPG">
 			<var name="folderDescription" value="Test Folder Description" />
 			<var name="folderName" value="Test Folder" />
-		</execute> 
+		</execute>
 
 		<execute macro="Navigator#gotoPage">
 			<var name="pageName" value="Bookmarks Test Page" />
