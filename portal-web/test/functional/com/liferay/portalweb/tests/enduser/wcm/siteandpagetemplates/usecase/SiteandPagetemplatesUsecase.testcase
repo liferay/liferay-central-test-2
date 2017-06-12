@@ -239,6 +239,9 @@
 	</command>
 
 	<command name="SiteAdminCannotDeletePagesThatWereCreatedBySiteTemplates" priority="3">
+		<description message="This test is skipping portal instance setup due to LPS-72983" />
+		<property name="test.name.skip.portal.instance" value="SiteandPagetemplatesUsecase#SiteAdminCannotDeletePagesThatWereCreatedBySiteTemplates" />
+
 		<execute macro="ProductMenu#gotoControlPanelUsers">
 			<var name="portlet" value="User Groups" />
 		</execute>
@@ -269,6 +272,9 @@
 	</command>
 
 	<command name="SitesDynamicTemplateInheritance" priority="4">
+		<description message="This test is skipping portal instance setup due to LPS-72983" />
+		<property name="test.name.skip.portal.instance" value="SiteandPagetemplatesUsecase#SitesDynamicTemplateInheritance" />
+
 		<execute macro="TestCase#getSiteName">
 			<return from="siteName" name="siteName" />
 			<var name="siteName" value="${siteName}" />
