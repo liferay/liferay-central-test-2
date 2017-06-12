@@ -57,7 +57,7 @@ public class DefaultUniqueFileNameProvider implements UniqueFileNameProvider {
 	}
 
 	private String _removeParentheticalSuffix(String fileName) {
-		Matcher matcher = _PARENTHETICAL_SUFFIX_REGEX.matcher(fileName);
+		Matcher matcher = _pattern.matcher(fileName);
 
 		if (matcher.matches()) {
 			String name = matcher.group("name");
@@ -73,9 +73,9 @@ public class DefaultUniqueFileNameProvider implements UniqueFileNameProvider {
 		return fileName;
 	}
 
-	private static final Pattern _PARENTHETICAL_SUFFIX_REGEX = Pattern.compile(
-		"(?<name>.+) \\(\\d+\\)(\\.(?<extension>[^.]+))?");
-
 	private static final int _UNIQUE_FILE_NAME_TRIES = 50;
+
+	private static final Pattern _pattern = Pattern.compile(
+		"(?<name>.+) \\(\\d+\\)(\\.(?<extension>[^.]+))?");
 
 }
