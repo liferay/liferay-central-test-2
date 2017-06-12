@@ -1369,6 +1369,7 @@
 
 	<command name="AddListRecordWithLinkToPageField" priority="5">
 		<description message="This is a use case for LPS-65726" />
+
 		<property name="portal.acceptance" value="true" />
 
 		<execute macro="Page#add">

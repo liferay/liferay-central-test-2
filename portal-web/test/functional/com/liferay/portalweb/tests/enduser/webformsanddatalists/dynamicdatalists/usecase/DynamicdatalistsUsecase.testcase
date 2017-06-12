@@ -497,6 +497,7 @@
 
 	<command name="AddRecordWithPopulatedWebContentField" priority="5">
 		<description message="This is a use case for LPS-66439." />
+
 		<property name="portal.acceptance" value="true" />
 
 		<execute macro="Navigator#openURL" />
@@ -568,6 +569,7 @@
 
 	<command name="AddRecordWithRepeatableTextField" priority="5">
 		<description message="This is a use case for LPS-65069." />
+
 		<property name="portal.acceptance" value="true" />
 
 		<execute macro="Navigator#openURL" />
@@ -2151,6 +2153,7 @@
 
 	<command name="EditDefaultLanguageAndPublishRecord" priority="3">
 		<description message="This is a use case for LPS-59154 and LPS-62523." />
+
 		<property name="test.name.skip.portal.instance" value="DynamicdatalistUsecase#EditDefaultLanguageAndPublishRecord" />
 
 		<execute macro="Navigator#openURL" />

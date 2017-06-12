@@ -671,6 +671,7 @@
 
 	<command name="EditAllFormFieldsTypesUsedBySystemSettings" priority="4">
 		<description message="This is a use case for LPS-50757." />
+
 		<property name="test.name.skip.portal.instance" value="Forms#EditAllFormFieldsTypesUsedBySystemSettings" />
 
 		<execute macro="Navigator#openURL" />
@@ -893,6 +894,7 @@
 
 	<command name="EditFormsConfigurationViaSystemSettings" priority="3">
 		<description message="This is a use case for LPS-59749" />
+
 		<property name="test.name.skip.portal.instance" value="Forms#EditFormsConfigurationViaSystemSettings" />
 
 		<execute macro="ProductMenu#gotoSitesContent">
@@ -950,6 +952,7 @@
 
 	<command name="NavigateToCorrectForm" priority="5">
 		<description message="This is a use case for LPS-59331" />
+
 		<property name="portal.acceptance" value="true" />
 
 		<execute macro="Navigator#openURL" />
@@ -1053,6 +1056,7 @@
 
 	<command name="PreviewAndPublishForm" priority="5">
 		<description message="This is a use case for LPS-61740" />
+
 		<property name="portal.acceptance" value="true" />
 
 		<execute macro="Navigator#openURL" />
@@ -1503,6 +1507,7 @@
 
 	<command name="SubmitFormContainingCaptchaAndViewTextFieldValue" priority="5">
 		<description message="This is a use case for LPS-60818." />
+
 		<property name="captcha.max.challenges" value="0" />
 		<property name="portal.acceptance" value="true" />
 
@@ -1950,6 +1955,7 @@
 
 	<command name="SubmitFormWithAllFieldTypesAndTwoPages" priority="5">
 		<description message="This is a use case for LPS-64798." />
+
 		<property name="portal.acceptance" value="true" />
 
 		<execute macro="Navigator#openURL" />
@@ -2879,6 +2885,7 @@
 
 	<command name="SubmitFormWithRequiredRepeatingTextField" priority="5">
 		<description message="This is a use case for LPS-59335." />
+
 		<property name="portal.acceptance" value="true" />
 
 		<execute macro="Navigator#openURL" />

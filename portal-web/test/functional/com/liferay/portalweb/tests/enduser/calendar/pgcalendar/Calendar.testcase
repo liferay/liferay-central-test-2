@@ -3446,6 +3446,7 @@
 
 	<command name="EditLanguageSelectorAndViewEvent" priority="3">
 		<description message="This is a use case for LPS-58649." />
+
 		<property name="test.name.skip.portal.instance" value="Calendar#EditLanguageSelectorAndViewEvent" />
 
 		<execute macro="Navigator#gotoPage">
@@ -4744,6 +4745,7 @@
 
 	<command name="ViewDisplayedSiteCalendarEventsAsGuest" priority="3">
 		<description message="This is a use case for LPS-59251." />
+
 		<property name="test.name.skip.portal.instance" value="Calendar#ViewDisplayedSiteCalendarEventsAsGuest" />
 
 		<execute macro="TestCase#getSiteName">
@@ -5252,6 +5254,7 @@
 
 	<command ignore="true" name="ViewShowMoreLocalization" priority="3">
 		<description message="This is a use case for LPS-54786." />
+
 		<property name="test.name.skip.portal.instance" value="Calendar#ViewShowMoreLocalization" />
 
 		<execute macro="Navigator#gotoPage">
