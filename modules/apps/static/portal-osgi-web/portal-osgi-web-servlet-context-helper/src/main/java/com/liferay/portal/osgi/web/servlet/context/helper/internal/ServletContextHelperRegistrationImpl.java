@@ -330,24 +330,21 @@ public class ServletContextHelperRegistrationImpl
 	}
 
 	protected boolean isRTLRequired(Map<String, String> contextParameters) {
-		boolean rtlRequired = true;
+		String rtlRequired = contextParameters.get("rtl.required");
 
-		if (contextParameters.containsKey("rtl.required")) {
-			rtlRequired = GetterUtil.getBoolean(
-				contextParameters.get("rtl.required"));
-		}
-		else {
-			Dictionary<String, String> headers = _bundle.getHeaders();
-
-			String rtlRequiredString = headers.get(
-				"Liferay-RTL-Support-Required");
-
-			if (Validator.isNotNull(rtlRequiredString)) {
-				rtlRequired = GetterUtil.getBoolean(rtlRequiredString);
-			}
+		if (Validator.isNotNull(rtlRequired)) {
+			return GetterUtil.getBoolean(rtlRequired);
 		}
 
-		return rtlRequired;
+		Dictionary<String, String> headers = _bundle.getHeaders();
+
+		rtlRequired = headers.get("Liferay-RTL-Support-Required");
+
+		if (Validator.isNotNull(rtlRequired)) {
+			return GetterUtil.getBoolean(rtlRequired);
+		}
+
+		return true;
 	}
 
 	protected void registerServletContext() {
