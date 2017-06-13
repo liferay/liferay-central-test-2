@@ -2069,6 +2069,8 @@
 				<then>
 					<execute macro="Gmail#gotoHtmlMode" />
 
+					<execute function="Pause" locator1="10000" />
+
 					<execute function="Refresh" />
 
 					<execute macro="Gmail#viewMail">
