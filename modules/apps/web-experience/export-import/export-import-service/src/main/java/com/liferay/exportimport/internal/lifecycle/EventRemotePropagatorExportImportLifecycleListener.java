@@ -125,9 +125,9 @@ public class EventRemotePropagatorExportImportLifecycleListener
 
 		String remoteGroupUUID = typeSettings.getProperty("remoteGroupUUID");
 
-		// If the target group can be found and the UUID's are also match,
-		// then we must not propagate the event because it means remote staging
-		// is configured between two sites on the same portal instance
+		// If the target group can be found and the UUID's also match, then we
+		// must not propagate the event because it means remote staging is
+		// configured between two sites on the same portal instance
 
 		if (Validator.isNotNull(remoteGroupUUID) &&
 			Validator.isNotNull(targetGroup) &&
