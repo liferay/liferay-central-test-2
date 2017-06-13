@@ -2069,6 +2069,8 @@
 				<then>
 					<execute macro="Gmail#gotoHtmlMode" />
 
+					<execute function="Refresh" />
+
 					<execute macro="Gmail#viewMail">
 						<var name="emailFromUserName" value="Joe Bloggs" />
 						<var name="gmailAssetType" value="Your New Password" />
