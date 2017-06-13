@@ -55,13 +55,13 @@
 
 							<%
 							for (LayoutSetBranch layoutSetBranch : layoutSetBranches) {
+								boolean translateLayoutSetBranchName = LayoutSetBranchConstants.MASTER_BRANCH_NAME.equals(HtmlUtil.escape(layoutSetBranch.getName()));
+
 								boolean selected = false;
 
 								if ((layoutSetBranchId == layoutSetBranch.getLayoutSetBranchId()) || ((layoutSetBranchId == 0) && layoutSetBranch.isMaster())) {
 									selected = true;
 								}
-
-								boolean translateLayoutSetBranchName = LayoutSetBranchConstants.MASTER_BRANCH_NAME.equals(HtmlUtil.escape(layoutSetBranch.getName()));
 							%>
 
 								<aui:option label="<%= HtmlUtil.escape(layoutSetBranch.getName()) %>" localizeLabel="<%= translateLayoutSetBranchName %>" selected="<%= selected %>" value="<%= layoutSetBranch.getLayoutSetBranchId() %>" />
