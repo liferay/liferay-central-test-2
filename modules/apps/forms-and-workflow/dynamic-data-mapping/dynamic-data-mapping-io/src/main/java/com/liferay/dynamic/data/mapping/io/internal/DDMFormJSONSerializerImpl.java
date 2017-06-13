@@ -302,9 +302,11 @@ public class DDMFormJSONSerializerImpl implements DDMFormJSONSerializer {
 
 		JSONObject jsonObject = _jsonFactory.createJSONObject();
 
-		jsonObject.put("body", ddmFormSuccessPageSettings.getBody());
+		jsonObject.put(
+			"body", toJSONObject(ddmFormSuccessPageSettings.getBody()));
 		jsonObject.put("enabled", ddmFormSuccessPageSettings.isEnabled());
-		jsonObject.put("title", ddmFormSuccessPageSettings.getTitle());
+		jsonObject.put(
+			"title", toJSONObject(ddmFormSuccessPageSettings.getTitle()));
 
 		return jsonObject;
 	}
