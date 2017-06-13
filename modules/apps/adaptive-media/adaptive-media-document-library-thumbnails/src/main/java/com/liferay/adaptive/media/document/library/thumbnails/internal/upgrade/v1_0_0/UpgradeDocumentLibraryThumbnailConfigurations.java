@@ -59,7 +59,7 @@ public class UpgradeDocumentLibraryThumbnailConfigurations
 				(dlFileEntryThumbnailMaxWidth > 0)) {
 
 				_createAdaptiveMediaDocumentLibraryThumbnailConfiguration(
-					"dl.file.entry.thumbnail", dlFileEntryThumbnailMaxHeight,
+					dlFileEntryThumbnailMaxHeight,
 					dlFileEntryThumbnailMaxWidth);
 			}
 
@@ -73,7 +73,6 @@ public class UpgradeDocumentLibraryThumbnailConfigurations
 				(dlFileEntryThumbnailCustom1MaxWidth > 0)) {
 
 				_createAdaptiveMediaDocumentLibraryThumbnailConfiguration(
-					"dl.file.entry.thumbnail.custom1",
 					dlFileEntryThumbnailCustom1MaxHeight,
 					dlFileEntryThumbnailCustom1MaxWidth);
 			}
@@ -88,7 +87,6 @@ public class UpgradeDocumentLibraryThumbnailConfigurations
 				(dlFileEntryThumbnailCustom2MaxWidth > 0)) {
 
 				_createAdaptiveMediaDocumentLibraryThumbnailConfiguration(
-					"dl.file.entry.thumbnail.custom2",
 					dlFileEntryThumbnailCustom2MaxHeight,
 					dlFileEntryThumbnailCustom2MaxWidth);
 			}
@@ -96,7 +94,7 @@ public class UpgradeDocumentLibraryThumbnailConfigurations
 	}
 
 	private void _createAdaptiveMediaDocumentLibraryThumbnailConfiguration(
-			String name, int height, int width)
+			int height, int width)
 		throws AdaptiveMediaImageConfigurationException, IOException {
 
 		Map<String, String> properties = new HashMap<>();
@@ -106,13 +104,17 @@ public class UpgradeDocumentLibraryThumbnailConfigurations
 
 		List<Company> companies = _companyLocalService.getCompanies();
 
+		String name = String.format("%s %dx%d", _DEFAULT_NAME, width, height);
+
 		for (Company company : companies) {
 			_adaptiveMediaImageConfigurationHelper.
 				addAdaptiveMediaImageConfigurationEntry(
-					company.getCompanyId(), name, StringPool.BLANK,
-					PortalUUIDUtil.generate(), properties);
+					company.getCompanyId(), name, StringPool.BLANK, name,
+					properties);
 		}
 	}
+
+	private static final String _DEFAULT_NAME = "Thumbnail";
 
 	private final AdaptiveMediaImageConfigurationHelper
 		_adaptiveMediaImageConfigurationHelper;
