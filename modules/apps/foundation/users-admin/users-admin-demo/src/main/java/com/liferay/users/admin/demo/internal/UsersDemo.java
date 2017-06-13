@@ -39,13 +39,11 @@ public class UsersDemo extends BasePortalInstanceLifecycleListener {
 
 	@Override
 	public void portalInstanceRegistered(Company company) throws Exception {
-		long companyId = company.getCompanyId();
-
 		_companyAdminUserDemoDataCreator.create(
 			company.getCompanyId(), "bruno@liferay.com");
 
 		Group acmeCorpGroup = _siteDemoDataCreator.create(
-			companyId, "Acme’s Corporation");
+			company.getCompanyId(), "Acme’s Corporation");
 
 		_siteAdminUserDemoDataCreator.create(
 			acmeCorpGroup.getGroupId(), "helen@liferay.com");
@@ -56,7 +54,8 @@ public class UsersDemo extends BasePortalInstanceLifecycleListener {
 			UsersDemo.class, "dependencies/permissions-web-content-author.xml");
 
 		Role webContentAuthorRole = _siteRoleDemoDataCreator.create(
-			companyId, "Web Content Author", webContentAuthorPermissionsXML);
+			company.getCompanyId(), "Web Content Author",
+			webContentAuthorPermissionsXML);
 
 		_siteMemberUserDemoDataCreator.create(
 			acmeCorpGroup.getGroupId(), "joe@liferay.com",
@@ -65,13 +64,14 @@ public class UsersDemo extends BasePortalInstanceLifecycleListener {
 		// Forum moderator
 
 		Group petLoversGroup = _siteDemoDataCreator.create(
-			companyId, "Pet Lovers");
+			company.getCompanyId(), "Pet Lovers");
 
 		String forumModeratorPermissionsXML = StringUtil.read(
 			UsersDemo.class, "dependencies/permissions-forum-moderator.xml");
 
 		Role forumModeratorRole = _siteRoleDemoDataCreator.create(
-			companyId, "Forum Moderator", forumModeratorPermissionsXML);
+			company.getCompanyId(), "Forum Moderator",
+			forumModeratorPermissionsXML);
 
 		_siteMemberUserDemoDataCreator.create(
 			petLoversGroup.getGroupId(), "maria@liferay.com",
