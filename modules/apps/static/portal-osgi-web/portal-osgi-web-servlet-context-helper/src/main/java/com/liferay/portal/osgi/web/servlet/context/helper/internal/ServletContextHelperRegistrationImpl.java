@@ -272,9 +272,8 @@ public class ServletContextHelperRegistrationImpl
 		Map<String, String> contextParameters =
 			_webXMLDefinition.getContextParameters();
 
-		boolean rtlRequiredValue = isRTLRequired(contextParameters);
-
-		properties.put("rtl.required", Boolean.toString(rtlRequiredValue));
+		properties.put(
+			"rtl.required", String.valueOf(isRTLRequired(contextParameters)));
 
 		for (Map.Entry<String, String> entry : contextParameters.entrySet()) {
 			String key =
@@ -331,25 +330,24 @@ public class ServletContextHelperRegistrationImpl
 	}
 
 	protected boolean isRTLRequired(Map<String, String> contextParameters) {
-		boolean rtlRequiredValue = true;
+		boolean rtlRequired = true;
 
 		if (contextParameters.containsKey("rtl.required")) {
-			rtlRequiredValue = GetterUtil.getBoolean(
+			rtlRequired = GetterUtil.getBoolean(
 				contextParameters.get("rtl.required"));
 		}
 		else {
 			Dictionary<String, String> headers = _bundle.getHeaders();
 
-			String rtlSupportRequiredHeader = headers.get(
+			String rtlRequiredString = headers.get(
 				"Liferay-RTL-Support-Required");
 
-			if (Validator.isNotNull(rtlSupportRequiredHeader)) {
-				rtlRequiredValue = GetterUtil.getBoolean(
-					rtlSupportRequiredHeader);
+			if (Validator.isNotNull(rtlRequiredString)) {
+				rtlRequired = GetterUtil.getBoolean(rtlRequiredString);
 			}
 		}
 
-		return rtlRequiredValue;
+		return rtlRequired;
 	}
 
 	protected void registerServletContext() {
