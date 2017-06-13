@@ -312,13 +312,17 @@ public class DDMFormJSONSerializerImpl implements DDMFormJSONSerializer {
 	}
 
 	protected JSONObject toJSONObject(LocalizedValue localizedValue) {
-		Map<Locale, String> values = localizedValue.getValues();
-
-		if (values.isEmpty()) {
-			return null;
+		if (localizedValue == null) {
+			return _jsonFactory.createJSONObject();
 		}
 
 		JSONObject jsonObject = _jsonFactory.createJSONObject();
+
+		Map<Locale, String> values = localizedValue.getValues();
+
+		if (values.isEmpty()) {
+			return jsonObject;
+		}
 
 		for (Locale availableLocale : localizedValue.getAvailableLocales()) {
 			jsonObject.put(
