@@ -5839,9 +5839,9 @@ public class JournalArticleLocalServiceImpl
 				journalArticleResource.getResourcePrimKey(),
 				journalArticleResource.getUuid(), getClassTypeId(article),
 				assetCategoryIds, assetTagNames, isListable(article), visible,
-				null, null, publishDate, null, ContentTypes.TEXT_HTML, title,
-				description, description, null, article.getLayoutUuid(), 0, 0,
-				priority);
+				null, null, publishDate, article.getExpirationDate(),
+				ContentTypes.TEXT_HTML, title, description, description, null,
+				article.getLayoutUuid(), 0, 0, priority);
 		}
 
 		assetLinkLocalService.updateLinks(
