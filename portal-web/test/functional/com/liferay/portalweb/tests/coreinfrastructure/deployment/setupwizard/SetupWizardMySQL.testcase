@@ -14,7 +14,7 @@
 
 	<command name="MySQLtoMySQLEditedAdministratorUser" priority="4">
 		<execute macro="SetupWizard#viewDefaultPortalNamePG" />
-		<property name="test.name.skip.portal.instance" value="SetupWizardMySQL#MySQLtoMySQLEditAdministratorUser" />
+		<property name="test.name.skip.portal.instance" value="SetupWizardMySQL#MySQLtoMySQLEditedAdministratorUser" />
 
 		<execute macro="SetupWizard#configureSampleDataPG">
 			<var name="addSampleData" value="false" />

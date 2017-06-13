@@ -164,7 +164,7 @@
 		<property name="custom.properties" value="dl.store.impl=com.liferay.portal.store.db.DBStore" />
 		<property name="portal.release" value="true" />
 		<property name="remote.elasticsearch.enabled" value="true" />
-		<property name="test.name.skip.portal.instance" value="ElasticsearchEE#ElasticsearchRemoteSmokeTest" />
+		<property name="test.name.skip.portal.instance" value="ElasticsearchEE#ElasticsearchRemoteClusterSmokeTest" />
 
 		<execute macro="Elasticsearch#viewClusterStatusViaClusterHealthAPI">
 			<var name="numberOfNodes" value="1" />
@@ -277,7 +277,7 @@
 		<property name="elastic.kibana.enabled" value="true" />
 		<property name="elastic.shield.enabled" value="true" />
 		<property name="remote.elasticsearch.enabled" value="true" />
-		<property name="test.name.skip.portal.instance" value="ElasticsearchEE#ElasticsearchRemoteMarvelKibanaSmokeTest" />
+		<property name="test.name.skip.portal.instance" value="ElasticsearchEE#ElasticsearchRemoteWithMarvelAndKibanaAndShieldSmokeTest" />
 
 		<execute macro="Page#add">
 			<var name="pageName" value="Marvel Page" />
@@ -309,7 +309,7 @@
 	<command name="ElasticsearchRemoteWithMarvelAndKibanaSmokeTest" priority="5">
 		<property name="elastic.kibana.enabled" value="true" />
 		<property name="remote.elasticsearch.enabled" value="true" />
-		<property name="test.name.skip.portal.instance" value="ElasticsearchEE#ElasticsearchRemoteMarvelKibanaSmokeTest" />
+		<property name="test.name.skip.portal.instance" value="ElasticsearchEE#ElasticsearchRemoteWithMarvelAndKibanaSmokeTest" />
 
 		<execute macro="Page#add">
 			<var name="pageName" value="Marvel Page" />

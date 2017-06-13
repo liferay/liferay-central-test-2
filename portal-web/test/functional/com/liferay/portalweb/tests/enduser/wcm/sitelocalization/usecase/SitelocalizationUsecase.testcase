@@ -167,7 +167,7 @@
 
 	<command name="LocalizationStyle2" priority="3">
 		<property name="custom.properties" value="locale.prepend.friendly.url.style=2" />
-		<property name="test.name.skip.portal.instance" value="SitelocalizationUsecase#LOcalizationStyle2" />
+		<property name="test.name.skip.portal.instance" value="SitelocalizationUsecase#LocalizationStyle2" />
 
 		<var method="TestPropsUtil#get('portal.url')" name="portalURL" />
 
