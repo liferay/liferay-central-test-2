@@ -39,6 +39,37 @@
 		</execute>
 
 		<execute macro="Site#addBlankCP">
+			<var name="siteName" value="Site Name 0" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoControlPanelSites">
+			<var name="portlet" value="Sites" />
+		</execute>
+
+		<execute macro="Page#add">
+			<var name="pageName" value="Site Page" />
+			<var name="siteName" value="Site Name 0" />
+		</execute>
+
+		<execute macro="Navigator#gotoSitePage">
+			<var name="pageName" value="Site Page" />
+			<var name="siteName" value="Site Name 0" />
+		</execute>
+
+		<execute macro="Search#searchPG">
+			<var name="searchTerm" value="test" />
+		</execute>
+
+		<execute macro="Search#viewSearchResultPG">
+			<var name="searchAssetTitle" value="Test Test" />
+			<var name="searchAssetType" value="User" />
+		</execute>
+
+		<execute macro="ProductMenu#gotoControlPanelSites">
+			<var name="portlet" value="Sites" />
+		</execute>
+
+		<execute macro="Site#addBlankCP">
 			<var name="siteName" value="Site Name 1" />
 		</execute>
 
@@ -120,6 +151,17 @@
 		<execute macro="Search#viewSearchResultsPG">
 			<var name="searchAssetTitle" value="Apple" />
 			<var name="searchAssetType" value="Blogs Entry" />
+		</execute>
+
+		<execute macro="Navigator#openURL" />
+
+		<execute macro="Search#searchPG">
+			<var name="searchTerm" value="*" />
+		</execute>
+
+		<execute macro="Search#viewSearchResultPG">
+			<var name="searchAssetTitle" value="Test Test" />
+			<var name="searchAssetType" value="User" />
 		</execute>
 	</command>
 
