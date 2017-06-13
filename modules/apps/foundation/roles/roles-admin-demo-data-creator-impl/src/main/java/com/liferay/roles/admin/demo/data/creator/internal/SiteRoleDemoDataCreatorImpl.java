@@ -51,7 +51,7 @@ public class SiteRoleDemoDataCreatorImpl
 				String.valueOf(GroupConstants.DEFAULT_PARENT_GROUP_ID));
 		}
 
-		return roleLocalService.getRole(role.getRoleId());
+		return role;
 	}
 
 }
