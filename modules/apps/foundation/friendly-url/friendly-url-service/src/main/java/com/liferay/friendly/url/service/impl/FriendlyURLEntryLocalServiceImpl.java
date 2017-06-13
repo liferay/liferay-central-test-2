@@ -86,12 +86,12 @@ public class FriendlyURLEntryLocalServiceImpl
 		FriendlyURLEntry friendlyURLEntry = createFriendlyURLEntry(
 			friendlyURLEntryId);
 
+		friendlyURLEntry.setUuid(serviceContext.getUuid());
 		friendlyURLEntry.setCompanyId(companyId);
 		friendlyURLEntry.setGroupId(groupId);
 		friendlyURLEntry.setClassNameId(classNameId);
 		friendlyURLEntry.setClassPK(classPK);
 		friendlyURLEntry.setUrlTitle(normalizedUrlTitle);
-		friendlyURLEntry.setUuid(serviceContext.getUuid());
 		friendlyURLEntry.setMain(true);
 
 		return friendlyURLEntryPersistence.update(friendlyURLEntry);

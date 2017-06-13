@@ -338,6 +338,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		}
 
 		entry.setUrlTitle(urlTitle);
+
 		entry.setDescription(description);
 		entry.setContent(content);
 		entry.setDisplayDate(displayDate);
