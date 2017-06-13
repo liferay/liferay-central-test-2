@@ -83,7 +83,10 @@ public class PathInterpreter {
 						configurationEntry.getUUID());
 
 					return curProperties;
-				}).orElse(new HashMap<>());
+				}
+			).orElse(
+				new HashMap<>()
+			);
 
 			return Optional.of(Tuple.of(fileVersion, properties));
 		}
