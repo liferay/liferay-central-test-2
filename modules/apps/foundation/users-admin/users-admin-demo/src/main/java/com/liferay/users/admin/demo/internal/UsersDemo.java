@@ -48,7 +48,7 @@ public class UsersDemo extends BasePortalInstanceLifecycleListener {
 		_siteAdminUserDemoDataCreator.create(
 			acmeCorpGroup.getGroupId(), "helen@liferay.com");
 
-		// Web content author
+		// Web Content Author role
 
 		String webContentAuthorPermissionsXML = StringUtil.read(
 			UsersDemo.class, "dependencies/permissions-web-content-author.xml");
@@ -61,7 +61,7 @@ public class UsersDemo extends BasePortalInstanceLifecycleListener {
 			acmeCorpGroup.getGroupId(), "joe@liferay.com",
 			new long[] {webContentAuthorRole.getRoleId()});
 
-		// Forum moderator
+		// Forum Moderator role
 
 		Group petLoversGroup = _siteDemoDataCreator.create(
 			company.getCompanyId(), "Pet Lovers");
