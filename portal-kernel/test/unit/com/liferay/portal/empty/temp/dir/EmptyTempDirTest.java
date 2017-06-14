@@ -29,8 +29,7 @@ public class EmptyTempDirTest {
 
 	@Test
 	public void testEmptyTempDir() {
-		File tempDir = new File(
-			System.getProperty("liferay.portal.temp.dir"));
+		File tempDir = new File(System.getProperty("liferay.temp.dir"));
 
 		List<String> fileNames = Arrays.asList(tempDir.list());
 
