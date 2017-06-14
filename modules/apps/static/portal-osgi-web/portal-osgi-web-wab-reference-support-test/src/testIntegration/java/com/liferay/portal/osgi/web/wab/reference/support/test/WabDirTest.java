@@ -114,8 +114,7 @@ public class WabDirTest {
 	private void _setUp() throws Exception {
 		Bundle bundle = FrameworkUtil.getBundle(WabDirTest.class);
 
-		_bundleContext = FrameworkUtil.getBundle(
-			WabDirTest.class).getBundleContext();
+		_bundleContext = bundle.getBundleContext();
 
 		Filter filter = FrameworkUtil.createFilter(
 			"(" + URLConstants.URL_HANDLER_PROTOCOL + "=webbundledir)");
