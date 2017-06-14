@@ -29,15 +29,15 @@ public class EmptyTempDirTest {
 
 	@Test
 	public void testEmptyTempDir() {
-		File tempDirFile = new File(
+		File tempDir = new File(
 			System.getProperty("liferay.portal.temp.dir"));
 
-		List<String> tempDirFileList = Arrays.asList(tempDirFile.list());
+		List<String> fileNames = Arrays.asList(tempDir.list());
 
 		Assert.assertTrue(
-			"Unexpected file(s) detected in AppServer temp directory: " +
-				tempDirFileList,
-			tempDirFileList.isEmpty());
+			"Unexpected files found in the application server's temp " +
+				"directory: " + fileNames,
+			fileNames.isEmpty());
 	}
 
 }
