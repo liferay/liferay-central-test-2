@@ -177,7 +177,10 @@ public class JournalContentExportImportPortletPreferencesProcessor
 			return portletPreferences;
 		}
 
-		portletDataContext.getParameterMap().put(
+		Map<String, String[]> parameterMap =
+			portletDataContext.getParameterMap();
+
+		parameterMap.put(
 			PortletDataHandlerKeys.PORTLET_DATA_ALL,
 			new String[] {Boolean.TRUE.toString()});
 

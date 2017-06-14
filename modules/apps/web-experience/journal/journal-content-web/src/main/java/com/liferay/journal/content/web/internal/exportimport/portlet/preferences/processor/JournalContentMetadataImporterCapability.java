@@ -21,6 +21,8 @@ import com.liferay.exportimport.kernel.lar.PortletDataException;
 import com.liferay.exportimport.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.exportimport.portlet.preferences.processor.Capability;
 
+import java.util.Map;
+
 import javax.portlet.PortletPreferences;
 
 import org.osgi.service.component.annotations.Component;
@@ -41,7 +43,10 @@ public class JournalContentMetadataImporterCapability implements Capability {
 			PortletPreferences portletPreferences)
 		throws PortletDataException {
 
-		portletDataContext.getParameterMap().put(
+		Map<String, String[]> parameterMap =
+			portletDataContext.getParameterMap();
+
+		parameterMap.put(
 			PortletDataHandlerKeys.PORTLET_DATA_ALL,
 			new String[] {Boolean.TRUE.toString()});
 
