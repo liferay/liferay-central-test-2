@@ -211,11 +211,15 @@ AUI.add(
 						var wizard = instance._getWizard();
 
 						if (successPageSettings && successPageSettings.enabled) {
+							instance.set('successPageSettings', successPageSettings);
+
 							wizard.set('successPage', successPageSettings.enabled);
 
-							successPage.one('.' + CSS_FORM_BUILDER_SUCCESS_PAGE_TITLE).val(successPageSettings.title);
+							var editingLanguageId = instance.get('editingLanguageId');
 
-							successPage.one('.' + CSS_FORM_BUILDER_SUCCESS_PAGE_CONTENT).val(successPageSettings.body);
+							successPage.one('.' + CSS_FORM_BUILDER_SUCCESS_PAGE_TITLE).val(successPageSettings.title[editingLanguageId]);
+
+							successPage.one('.' + CSS_FORM_BUILDER_SUCCESS_PAGE_CONTENT).val(successPageSettings.body[editingLanguageId]);
 
 							instance._uiSetMode(instance.get('mode'));
 
