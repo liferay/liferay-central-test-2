@@ -2534,10 +2534,8 @@ information. Make sure to commit in all build services results.
 					</then>
 				</if>
 
-				<property name="source.formatter.jar" value="tools/sdk/dependencies/com.liferay.source.formatter/lib/com.liferay.source.formatter.jar" />
-
 				<loadproperties>
-					<zipentry zipfile="${source.formatter.jar}" name="META-INF/MANIFEST.MF"/>
+					<zipentry zipfile="tools/sdk/dependencies/com.liferay.source.formatter/lib/com.liferay.source.formatter.jar" name="META-INF/MANIFEST.MF"/>
 				</loadproperties>
 
 				<echo>Running 'com.liferay.source.formatter.jar' Bundle-Version: ${Bundle-Version}</echo>
