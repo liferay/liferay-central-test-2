@@ -197,6 +197,9 @@ public class UpgradeJournal extends UpgradeProcess {
 			long ddmStructureClassNameId = PortalUtil.getClassNameId(
 				DDMStructure.class.getName());
 
+			long journalArticleClassNameId = PortalUtil.getClassNameId(
+				JournalArticle.class.getName());
+
 			StringBundler sb = new StringBundler(6);
 
 			sb.append("select DDMTemplate.templateId, JournalArticle.id_ ");
@@ -215,10 +218,6 @@ public class UpgradeJournal extends UpgradeProcess {
 					while (rs.next()) {
 						long templateId = rs.getLong("templateId");
 						long id = rs.getLong("id_");
-
-						long journalArticleClassNameId =
-							PortalUtil.getClassNameId(
-								JournalArticle.class.getName());
 
 						_ddmTemplateLinkLocalService.addTemplateLink(
 							journalArticleClassNameId, id, templateId);
