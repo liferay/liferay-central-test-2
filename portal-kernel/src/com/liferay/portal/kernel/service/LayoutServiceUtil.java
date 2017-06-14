@@ -40,16 +40,6 @@ public class LayoutServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.portal.service.impl.LayoutServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
-
-	/**
-	* Returns true if there is a matching layout for UUID, groupId and
-	* privateLayout
-	*
-	* @param uuid the layout's UUID
-	* @param groupId the primary key of the group
-	* @param privateLayout whether the layout is private to the group
-	* @return true if the layout is found
-	*/
 	public static boolean hasLayout(java.lang.String uuid, long groupId,
 		boolean privateLayout)
 		throws com.liferay.portal.kernel.exception.PortalException {

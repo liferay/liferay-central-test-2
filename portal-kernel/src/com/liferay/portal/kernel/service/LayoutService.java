@@ -61,16 +61,6 @@ public interface LayoutService extends BaseService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link LayoutServiceUtil} to access the layout remote service. Add custom service methods to {@link com.liferay.portal.service.impl.LayoutServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-
-	/**
-	* Returns true if there is a matching layout for UUID, groupId and
-	* privateLayout
-	*
-	* @param uuid the layout's UUID
-	* @param groupId the primary key of the group
-	* @param privateLayout whether the layout is private to the group
-	* @return true if the layout is found
-	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasLayout(java.lang.String uuid, long groupId,
 		boolean privateLayout) throws PortalException;
