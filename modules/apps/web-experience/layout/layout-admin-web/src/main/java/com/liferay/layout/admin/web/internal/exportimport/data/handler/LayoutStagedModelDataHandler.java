@@ -649,7 +649,7 @@ public class LayoutStagedModelDataHandler
 
 		importedLayout.setExpandoBridgeAttributes(serviceContext);
 
-		staging.updateLastImportSettings(
+		_staging.updateLastImportSettings(
 			layoutElement, importedLayout, portletDataContext);
 
 		fixImportTypeSettings(importedLayout);
