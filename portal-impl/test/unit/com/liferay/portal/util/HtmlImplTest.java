@@ -106,7 +106,6 @@ public class HtmlImplTest {
 		Assert.assertEquals(
 			"http&#x3a;&#x2f;&#x2f;localhost&#x3a;8080",
 			_htmlImpl.escapeHREF("http://localhost:8080"));
-
 		Assert.assertEquals(
 			"javascript&#x09;&#x25;3aalert&#x28;1&#x29;",
 			_htmlImpl.escapeHREF("javascript\t:alert(1)"));

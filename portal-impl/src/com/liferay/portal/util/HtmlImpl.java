@@ -357,16 +357,16 @@ public class HtmlImpl implements Html {
 			return StringPool.BLANK;
 		}
 
-		char ch = href.charAt(0);
+		char c = href.charAt(0);
 
-		if ((ch == CharPool.BACK_SLASH) || (ch == CharPool.SLASH)) {
+		if ((c == CharPool.BACK_SLASH) || (c == CharPool.SLASH)) {
 			return escapeAttribute(href);
 		}
 
-		ch = Character.toLowerCase(ch);
+		c = Character.toLowerCase(c);
 
-		if ((ch >= CharPool.LOWER_CASE_A) && (ch <= CharPool.LOWER_CASE_Z) &&
-			(ch != CharPool.LOWER_CASE_D) && (ch != CharPool.LOWER_CASE_J)) {
+		if ((c >= CharPool.LOWER_CASE_A) && (c <= CharPool.LOWER_CASE_Z) &&
+			(c != CharPool.LOWER_CASE_D) && (c != CharPool.LOWER_CASE_J)) {
 
 			return escapeAttribute(href);
 		}
