@@ -49,7 +49,6 @@ public class MVCCPortalCacheTest {
 	@Rule
 	public static final AggregateTestRule aggregateTestRule =
 		new AggregateTestRule(
-			AspectJNewEnvTestRule.INSTANCE,
 			new CodeCoverageAssertor() {
 
 				@Override
@@ -57,7 +56,8 @@ public class MVCCPortalCacheTest {
 					assertClasses.add(MVCCPortalCache.class);
 				}
 
-			});
+			},
+			AspectJNewEnvTestRule.INSTANCE);
 
 	@Before
 	public void setUp() {

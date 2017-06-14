@@ -49,7 +49,6 @@ public class RPCDatagramReceiveHandlerTest {
 	@Rule
 	public static final AggregateTestRule aggregateTestRule =
 		new AggregateTestRule(
-			AspectJNewEnvTestRule.INSTANCE,
 			new CodeCoverageAssertor() {
 
 				@Override
@@ -57,7 +56,8 @@ public class RPCDatagramReceiveHandlerTest {
 					assertClasses.add(RPCResponse.class);
 				}
 
-			});
+			},
+			AspectJNewEnvTestRule.INSTANCE);
 
 	@Before
 	public void setUp() {
