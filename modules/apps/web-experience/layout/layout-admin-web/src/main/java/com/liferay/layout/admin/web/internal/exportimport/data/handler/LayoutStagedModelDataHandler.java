@@ -649,7 +649,7 @@ public class LayoutStagedModelDataHandler
 
 		importedLayout.setExpandoBridgeAttributes(serviceContext);
 
-		StagingUtil.updateLastImportSettings(
+		staging.updateLastImportSettings(
 			layoutElement, importedLayout, portletDataContext);
 
 		fixImportTypeSettings(importedLayout);
@@ -1371,6 +1371,9 @@ public class LayoutStagedModelDataHandler
 	private LayoutTemplateLocalService _layoutTemplateLocalService;
 	private PortletLocalService _portletLocalService;
 	private ResourceLocalService _resourceLocalService;
+
+	@Reference
+	private Staging _staging;
 
 	private class ImportLinkedLayoutCallable implements Callable<Void> {
 
