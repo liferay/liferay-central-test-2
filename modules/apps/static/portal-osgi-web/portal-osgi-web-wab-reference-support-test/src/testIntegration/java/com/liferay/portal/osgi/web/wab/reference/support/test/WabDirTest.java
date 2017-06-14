@@ -22,6 +22,7 @@ import com.liferay.portal.test.rule.LiferayIntegrationTestRule;
 import java.io.File;
 import java.io.FileOutputStream;
 
+import java.net.URI;
 import java.net.URL;
 
 import org.junit.Assert;
@@ -68,18 +69,18 @@ public class WabDirTest {
 
 	@Test
 	public void testWebBundlerDirInstall() throws Exception {
-		File themeZip = _getFile("exploded-test-theme.zip");
+		File themeZipFile = _getFile("exploded-test-theme.zip");
 
-		Assert.assertTrue(themeZip.exists());
+		Assert.assertTrue(themeZipFile.exists());
 
-		File themeTempFolder = tempFolder.newFolder("exploded-test-theme");
+		File themeTempDir = tempFolder.newFolder("exploded-test-theme");
 
-		FileUtil.unzip(themeZip, themeTempFolder);
+		FileUtil.unzip(themeZipFile, themeTempDir);
 
-		String themeTempFolderURI = themeTempFolder.toURI().toASCIIString();
+		URI themeTempDirURI = themeTempDir.toURI();
 
 		Bundle themeBundle = _bundleContext.installBundle(
-			"webbundledir:" + themeTempFolderURI);
+			"webbundledir:" + themeTempDirURI.toASCIIString());
 
 		Assert.assertNotNull(themeBundle);
 
@@ -97,7 +98,9 @@ public class WabDirTest {
 	}
 
 	private File _getFile(String fileName) throws Exception {
-		ClassLoader classLoader = getClass().getClassLoader();
+		Class<?> clazz = getClass();
+
+		ClassLoader classLoader = clazz.getClassLoader();
 
 		URL url = classLoader.getResource(fileName);
 
@@ -109,6 +112,8 @@ public class WabDirTest {
 	}
 
 	private void _setUp() throws Exception {
+		Bundle bundle = FrameworkUtil.getBundle(WabDirTest.class);
+
 		_bundleContext = FrameworkUtil.getBundle(
 			WabDirTest.class).getBundleContext();
 
