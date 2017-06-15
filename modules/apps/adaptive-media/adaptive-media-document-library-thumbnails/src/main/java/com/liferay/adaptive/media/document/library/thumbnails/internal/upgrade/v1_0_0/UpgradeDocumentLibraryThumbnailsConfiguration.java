@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.LoggingTimer;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 
 import java.io.IOException;
@@ -34,10 +33,10 @@ import java.util.Map;
 /**
  * @author Roberto Díaz
  */
-public class UpgradeDocumentLibraryThumbnailConfigurations
+public class UpgradeDocumentLibraryThumbnailsConfiguration
 	extends UpgradeProcess {
 
-	public UpgradeDocumentLibraryThumbnailConfigurations(
+	public UpgradeDocumentLibraryThumbnailsConfiguration(
 		AdaptiveMediaImageConfigurationHelper
 			adaptiveMediaImageConfigurationHelper,
 		CompanyLocalService companyLocalService) {
