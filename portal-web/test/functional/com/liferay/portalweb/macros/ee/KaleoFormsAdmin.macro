@@ -7,6 +7,10 @@
 
 				<execute function="Click" locator1="Button#PLUS" />
 
+				<execute function="AssertElementPresent" locator1="DDMEditStructure#NAME_FIELD" />
+
+				<execute function="Click" locator1="DDMEditStructure#NAME_FIELD" />
+
 				<execute function="Type" locator1="DDMEditStructure#NAME_FIELD" value1="${kfFieldSetName}" />
 			</then>
 			<else>
@@ -32,6 +36,8 @@
 		<execute function="SelectFrame" locator1="DDMEditStructure#IFRAME" />
 
 		<execute function="Click" locator1="Button#PLUS" />
+
+		<execute function="AssertElementPresent" locator1="DDMEditStructure#NAME_FIELD" />
 
 		<execute function="Click" locator1="DDMEditStructure#NAME_FIELD" />
 
