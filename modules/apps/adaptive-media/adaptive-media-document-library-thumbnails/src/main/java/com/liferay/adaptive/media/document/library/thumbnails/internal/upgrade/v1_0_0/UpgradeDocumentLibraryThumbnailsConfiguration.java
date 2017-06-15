@@ -93,17 +93,18 @@ public class UpgradeDocumentLibraryThumbnailsConfiguration
 	}
 
 	private void _createAdaptiveMediaDocumentLibraryThumbnailConfiguration(
-			int height, int width)
+			int maxHeight, int maxWidth)
 		throws AdaptiveMediaImageConfigurationException, IOException {
 
 		Map<String, String> properties = new HashMap<>();
 
-		properties.put("max-height", String.valueOf(height));
-		properties.put("max-width", String.valueOf(width));
+		properties.put("max-height", String.valueOf(maxHeight));
+		properties.put("max-width", String.valueOf(maxWidth));
 
 		List<Company> companies = _companyLocalService.getCompanies();
 
-		String name = String.format("%s %dx%d", _DEFAULT_NAME, width, height);
+		String name = String.format(
+			"%s %dx%d", _DEFAULT_NAME, maxWidth, maxHeight);
 
 		for (Company company : companies) {
 			_adaptiveMediaImageConfigurationHelper.
