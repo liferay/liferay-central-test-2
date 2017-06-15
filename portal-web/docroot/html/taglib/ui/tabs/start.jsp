@@ -210,9 +210,9 @@ String type = GetterUtil.getString((String)request.getAttribute("liferay-ui:tabs
 			<c:when test="<%= themeDisplay.isFacebook() %>">
 				<fb:tab_item
 					align="left"
-					href="<%= curURL %>"
+					href="<%= HtmlUtil.escapeAttribute(curURL) %>"
 					selected="<%= selected %>"
-					title="<%= LanguageUtil.get(resourceBundle, names[i]) %>"
+					title="<%= LanguageUtil.get(resourceBundle, HtmlUtil.escapeAttribute(names[i])) %>"
 				/>
 			</c:when>
 			<c:otherwise>
