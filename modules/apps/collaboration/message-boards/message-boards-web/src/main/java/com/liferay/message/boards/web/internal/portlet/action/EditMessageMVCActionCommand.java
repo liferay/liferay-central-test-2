@@ -34,9 +34,9 @@ import com.liferay.message.boards.kernel.service.MBMessageService;
 import com.liferay.message.boards.kernel.service.MBThreadLocalService;
 import com.liferay.message.boards.kernel.service.MBThreadService;
 import com.liferay.message.boards.web.constants.MBPortletKeys;
+import com.liferay.portal.kernel.captcha.Captcha;
 import com.liferay.portal.kernel.captcha.CaptchaConfigurationException;
 import com.liferay.portal.kernel.captcha.CaptchaTextException;
-import com.liferay.portal.kernel.captcha.CaptchaUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
@@ -427,7 +427,7 @@ public class EditMessageMVCActionCommand extends BaseMVCActionCommand {
 				if (PropsValues.
 						CAPTCHA_CHECK_PORTLET_MESSAGE_BOARDS_EDIT_MESSAGE) {
 
-					CaptchaUtil.check(actionRequest);
+					_captcha.check(actionRequest);
 				}
 
 				if (threadId <= 0) {
@@ -505,6 +505,9 @@ public class EditMessageMVCActionCommand extends BaseMVCActionCommand {
 			}
 		}
 	}
+
+	@Reference
+	private Captcha _captcha;
 
 	private MBCategoryService _mbCategoryService;
 	private MBMessageService _mbMessageService;

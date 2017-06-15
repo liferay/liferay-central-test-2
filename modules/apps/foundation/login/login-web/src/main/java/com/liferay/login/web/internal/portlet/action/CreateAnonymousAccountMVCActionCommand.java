@@ -15,9 +15,9 @@
 package com.liferay.login.web.internal.portlet.action;
 
 import com.liferay.login.web.constants.LoginPortletKeys;
+import com.liferay.portal.kernel.captcha.Captcha;
 import com.liferay.portal.kernel.captcha.CaptchaConfigurationException;
 import com.liferay.portal.kernel.captcha.CaptchaTextException;
-import com.liferay.portal.kernel.captcha.CaptchaUtil;
 import com.liferay.portal.kernel.exception.CompanyMaxUsersException;
 import com.liferay.portal.kernel.exception.ContactNameException;
 import com.liferay.portal.kernel.exception.EmailAddressException;
@@ -118,7 +118,7 @@ public class CreateAnonymousAccountMVCActionCommand
 		serviceContext.setAttribute("anonymousUser", Boolean.TRUE);
 
 		if (PropsValues.CAPTCHA_CHECK_PORTAL_CREATE_ACCOUNT) {
-			CaptchaUtil.check(actionRequest);
+			_captcha.check(actionRequest);
 		}
 
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_SAVE_DRAFT);
@@ -319,6 +319,9 @@ public class CreateAnonymousAccountMVCActionCommand
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		CreateAnonymousAccountMVCActionCommand.class);
+
+	@Reference
+	private Captcha _captcha;
 
 	@Reference
 	private Portal _portal;

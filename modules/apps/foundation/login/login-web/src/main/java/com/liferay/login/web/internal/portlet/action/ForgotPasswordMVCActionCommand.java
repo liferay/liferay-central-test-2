@@ -16,10 +16,10 @@ package com.liferay.login.web.internal.portlet.action;
 
 import com.liferay.login.web.constants.LoginPortletKeys;
 import com.liferay.login.web.internal.portlet.util.LoginUtil;
+import com.liferay.portal.kernel.captcha.Captcha;
 import com.liferay.portal.kernel.captcha.CaptchaConfigurationException;
 import com.liferay.portal.kernel.captcha.CaptchaException;
 import com.liferay.portal.kernel.captcha.CaptchaTextException;
-import com.liferay.portal.kernel.captcha.CaptchaUtil;
 import com.liferay.portal.kernel.exception.NoSuchUserException;
 import com.liferay.portal.kernel.exception.RequiredReminderQueryException;
 import com.liferay.portal.kernel.exception.SendPasswordException;
@@ -73,7 +73,7 @@ public class ForgotPasswordMVCActionCommand extends BaseMVCActionCommand {
 		throws CaptchaException {
 
 		if (PropsValues.CAPTCHA_CHECK_PORTAL_SEND_PASSWORD) {
-			CaptchaUtil.check(actionRequest);
+			_captcha.check(actionRequest);
 		}
 	}
 
@@ -288,6 +288,9 @@ public class ForgotPasswordMVCActionCommand extends BaseMVCActionCommand {
 	protected void setUserLocalService(UserLocalService userLocalService) {
 		_userLocalService = userLocalService;
 	}
+
+	@Reference
+	private Captcha _captcha;
 
 	@Reference
 	private Portal _portal;
