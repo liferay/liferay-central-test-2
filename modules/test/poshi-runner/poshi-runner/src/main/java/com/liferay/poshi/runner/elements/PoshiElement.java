@@ -125,7 +125,7 @@ public abstract class PoshiElement extends DefaultElement {
 		return substring.trim();
 	}
 
-	protected Element getPreviousSibling() {
+	protected Element getPreviousSiblingElement() {
 		Element parentElement = getParent();
 
 		if (parentElement != null) {

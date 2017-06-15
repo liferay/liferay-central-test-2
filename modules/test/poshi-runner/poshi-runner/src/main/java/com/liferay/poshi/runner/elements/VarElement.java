@@ -98,10 +98,10 @@ public class VarElement extends PoshiElement {
 
 			String previousSiblingElementName = null;
 
-			Element previousSiblingElement = getPreviousSibling();
+			Element previousSiblingElement = getPreviousSiblingElement();
 
 			if (previousSiblingElement != null) {
-				previousSiblingElementName = getPreviousSibling().getName();
+				previousSiblingElementName = getPreviousSiblingElement().getName();
 			}
 
 			if ((previousSiblingElement == null) ||
