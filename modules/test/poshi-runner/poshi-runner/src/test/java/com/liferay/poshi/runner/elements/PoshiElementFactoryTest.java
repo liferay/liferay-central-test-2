@@ -39,7 +39,7 @@ public class PoshiElementFactoryTest {
 
 		if (!readableSyntax.equals(baselineReadableSyntax)) {
 			throw new Exception(
-				"Poshi syntax does not translate to readable syntax.");
+				"Poshi syntax does not translate to readable syntax");
 		}
 	}
 
@@ -56,7 +56,7 @@ public class PoshiElementFactoryTest {
 		Element baselineElement = _getBaselineElement();
 
 		if (!_areElementsEqual(baselineElement, elementFromReadableSyntax)) {
-			throw new Exception("Readable syntax does not translate to XML.");
+			throw new Exception("Readable syntax does not translate to XML");
 		}
 	}
 
