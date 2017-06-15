@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.service.CompanyLocalService;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.LoggingTimer;
 import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PrefsPropsUtil;
 
 import java.io.IOException;
@@ -109,10 +108,13 @@ public class UpgradeDocumentLibraryThumbnailsConfiguration
 		for (Company company : companies) {
 			_adaptiveMediaImageConfigurationHelper.
 				addAdaptiveMediaImageConfigurationEntry(
-					company.getCompanyId(), name, StringPool.BLANK, name,
+					company.getCompanyId(), name, _DEFAULT_DESCRIPTION, name,
 					properties);
 		}
 	}
+
+	private static final String _DEFAULT_DESCRIPTION =
+		"This image resolution has been added automatically.";
 
 	private static final String _DEFAULT_NAME = "Thumbnail";
 
