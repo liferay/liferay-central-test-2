@@ -101,7 +101,7 @@ public class VarElement extends PoshiElement {
 			Element previousSiblingElement = getPreviousSiblingElement();
 
 			if (previousSiblingElement != null) {
-				previousSiblingElementName = getPreviousSiblingElement().getName();
+				previousSiblingElementName = previousSiblingElement.getName();
 			}
 
 			if ((previousSiblingElement == null) ||
