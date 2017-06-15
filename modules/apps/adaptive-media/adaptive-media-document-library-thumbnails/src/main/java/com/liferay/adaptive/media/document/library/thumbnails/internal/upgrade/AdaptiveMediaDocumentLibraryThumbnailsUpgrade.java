@@ -38,11 +38,11 @@ public class AdaptiveMediaDocumentLibraryThumbnailsUpgrade
 				_adaptiveMediaImageConfigurationHelper, _companyLocalService));
 	}
 
-	@Reference(unbind = "_")
+	@Reference(unbind = "-")
 	private AdaptiveMediaImageConfigurationHelper
 		_adaptiveMediaImageConfigurationHelper;
 
-	@Reference(unbind = "_")
+	@Reference(unbind = "-")
 	private CompanyLocalService _companyLocalService;
 
 }
