@@ -303,19 +303,19 @@ public class PACLAggregateTest extends AutoBalanceTestCase {
 
 			List<CaptureAppender> captureAppenders = null;
 
-			String originalTempDir = System.getProperty(
+			String originalTempDirName = System.getProperty(
 				SystemProperties.TMP_DIR);
 
-			Path newTempDir = Paths.get(originalTempDir, "PACL");
+			Path newTempDirPath = Paths.get(originalTempDirName, "PACL");
 
 			try {
-				Files.createDirectories(newTempDir);
+				Files.createDirectories(newTempDirPath);
 
 				System.setProperty(
-					SystemProperties.TMP_DIR, newTempDir.toString());
+					SystemProperties.TMP_DIR, newTempDirPath.toString());
 
 				Path tempStatePath = Files.createTempDirectory(
-					newTempDir, null);
+					newTempDirPath, null);
 
 				System.setProperty(
 					"portal:" + PropsKeys.MODULE_FRAMEWORK_STATE_DIR,
@@ -347,12 +347,13 @@ public class PACLAggregateTest extends AutoBalanceTestCase {
 
 				MPIHelperUtil.shutdown();
 
-				System.setProperty(SystemProperties.TMP_DIR, originalTempDir);
+				System.setProperty(
+					SystemProperties.TMP_DIR, originalTempDirName);
 
-				if (newTempDir != null) {
+				if (newTempDirPath != null) {
 					try {
 						Files.walkFileTree(
-							newTempDir,
+							newTempDirPath,
 							new SimpleFileVisitor<Path>() {
 
 								@Override
