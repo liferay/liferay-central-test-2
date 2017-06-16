@@ -365,10 +365,6 @@ public class PortletConfigurationCSSPortletDisplayContext {
 	}
 
 	private String _getDefaultDecoratorId() {
-		if (_defaultPortletDecoratorId != null) {
-			return _defaultPortletDecoratorId;
-		}
-
 		ThemeDisplay themeDisplay = (ThemeDisplay)_renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
@@ -386,22 +382,16 @@ public class PortletConfigurationCSSPortletDisplayContext {
 				Collectors.toList()
 			);
 
-		if (portletDecoratorsList.size() != 1) {
-			_defaultPortletDecoratorId = StringPool.BLANK;
-
-			return _defaultPortletDecoratorId;
+		if (ListUtil.isEmpty(portletDecoratorsList)) {
+			return StringPool.BLANK;
 		}
 
 		PortletDecorator defaultPortletDecorator = portletDecoratorsList.get(0);
 
-		_defaultPortletDecoratorId =
-			defaultPortletDecorator.getPortletDecoratorId();
-
-		return _defaultPortletDecoratorId;
+		return defaultPortletDecorator.getPortletDecoratorId();
 	}
 
 	private DecimalFormat _decimalFormat;
-	private String _defaultPortletDecoratorId;
 	private String _linkToLayoutUuid;
 	private String _portletDecoratorId;
 	private final String _portletResource;
