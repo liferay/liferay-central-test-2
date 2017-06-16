@@ -4,8 +4,8 @@
 [subrepo]
 	autopull = false
 	cmdver = liferay
-	commit = dc5abef1a6198f7cfd543cee8d06ccc7903239d7
+	commit = 6789304e876d2c992df94055a4929e2157f67564
 	mergebuttonmergecommits = false
 	mode = push
-	parent = 1f17dc0bf83ca9ded25720726f27ac64929f5757
+	parent = 183c2a1f2967876572c102b6b76d8fb4a50fdd43
 	remote = git@github.com:liferay/com-liferay-server.git
