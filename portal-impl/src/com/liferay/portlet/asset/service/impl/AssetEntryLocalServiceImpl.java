@@ -750,7 +750,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 
 		// Tags
 
-		if (tagNames != null) {
+		if ((tagNames != null) && (!entry.isNew() || (tagNames.length > 0))) {
 			long siteGroupId = PortalUtil.getSiteGroupId(groupId);
 
 			Group siteGroup = groupLocalService.getGroup(siteGroupId);
@@ -758,21 +758,19 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			List<AssetTag> tags = assetTagLocalService.checkTags(
 				userId, siteGroup, tagNames);
 
-			List<AssetTag> oldTags = assetEntryPersistence.getAssetTags(
-				entry.getEntryId());
-
 			assetEntryPersistence.setAssetTags(entry.getEntryId(), tags);
 
 			if (entry.isVisible()) {
-				boolean isNew = entry.isNew();
-
-				if (isNew) {
+				if (entry.isNew()) {
 					for (AssetTag tag : tags) {
 						assetTagLocalService.incrementAssetCount(
 							tag.getTagId(), classNameId);
 					}
 				}
 				else {
+					List<AssetTag> oldTags = assetEntryPersistence.getAssetTags(
+						entry.getEntryId());
+
 					for (AssetTag oldTag : oldTags) {
 						if (!tags.contains(oldTag)) {
 							assetTagLocalService.decrementAssetCount(
@@ -789,6 +787,9 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 				}
 			}
 			else if (oldVisible) {
+				List<AssetTag> oldTags = assetEntryPersistence.getAssetTags(
+					entry.getEntryId());
+
 				for (AssetTag oldTag : oldTags) {
 					assetTagLocalService.decrementAssetCount(
 						oldTag.getTagId(), classNameId);
