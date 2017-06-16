@@ -614,6 +614,8 @@ public class LayoutStagedModelDataHandler
 		}
 		else if (importedLayout.getIconImageId() > 0) {
 			_imageLocalService.deleteImage(importedLayout.getIconImageId());
+
+			importedLayout.setIconImageId(0);
 		}
 
 		if (existingLayout == null) {
