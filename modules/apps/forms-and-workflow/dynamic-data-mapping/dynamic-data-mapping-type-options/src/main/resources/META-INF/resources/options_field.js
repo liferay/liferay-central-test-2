@@ -495,6 +495,10 @@ AUI.add(
 
 						var form = instance.get('parent');
 
+						if (!form) {
+							return instance.get('locale');
+						}
+
 						var field = form.get('field');
 
 						return field.get('locale');
@@ -617,7 +621,7 @@ AUI.add(
 
 						var value = context.value;
 
-						if (!value[locale]) {
+						if (value && !value[locale]) {
 							value[locale] = value[context.defaultLanguageId];
 						}
 
