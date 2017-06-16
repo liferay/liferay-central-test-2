@@ -375,18 +375,19 @@ public class PortletConfigurationCSSPortletDisplayContext {
 		Stream<PortletDecorator> portletDecoratorsStream =
 			portletDecorators.stream();
 
-		List<PortletDecorator> portletDecoratorsList =
+		List<PortletDecorator> filteredPortletDecorators =
 			portletDecoratorsStream.filter(
 				portletDecorator -> portletDecorator.isDefaultPortletDecorator()
 			).collect(
 				Collectors.toList()
 			);
 
-		if (ListUtil.isEmpty(portletDecoratorsList)) {
+		if (ListUtil.isEmpty(filteredPortletDecorators)) {
 			return StringPool.BLANK;
 		}
 
-		PortletDecorator defaultPortletDecorator = portletDecoratorsList.get(0);
+		PortletDecorator defaultPortletDecorator =
+			filteredPortletDecorators.get(0);
 
 		return defaultPortletDecorator.getPortletDecoratorId();
 	}
