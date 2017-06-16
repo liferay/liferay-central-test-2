@@ -317,8 +317,8 @@ public class PortletIdCodecTest {
 		}
 		catch (InvalidParameterException ipe) {
 			Assert.assertEquals(
-				"The portlet name '" + encodedPortletId +
-					"' must not contain the keyword _INSTANCE_",
+				"The portlet name \"" + encodedPortletId +
+					"\" must not contain the keyword _INSTANCE_",
 				ipe.getMessage());
 		}
 
@@ -333,8 +333,8 @@ public class PortletIdCodecTest {
 		}
 		catch (InvalidParameterException ipe) {
 			Assert.assertEquals(
-				"The portlet name '" + encodedPortletId +
-					"' must not contain the keyword _INSTANCE_",
+				"The portlet name \"" + encodedPortletId +
+					"\" must not contain the keyword _INSTANCE_",
 				ipe.getMessage());
 		}
 
@@ -349,8 +349,8 @@ public class PortletIdCodecTest {
 		}
 		catch (InvalidParameterException ipe) {
 			Assert.assertEquals(
-				"The portlet name '" + encodedPortletId +
-					"' must not contain the keyword _USER_",
+				"The portlet name \"" + encodedPortletId +
+					"\" must not contain the keyword _USER_",
 				ipe.getMessage());
 		}
 
@@ -365,8 +365,8 @@ public class PortletIdCodecTest {
 		}
 		catch (InvalidParameterException ipe) {
 			Assert.assertEquals(
-				"The portlet name '" + encodedPortletId +
-					"' must not contain the keyword _INSTANCE_",
+				"The portlet name \"" + encodedPortletId +
+					"\" must not contain the keyword _INSTANCE_",
 				ipe.getMessage());
 		}
 	}
