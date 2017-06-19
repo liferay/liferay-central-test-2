@@ -138,19 +138,6 @@ public class MergeCentralSubrepositoryUtil {
 		String subrepositoryUpstreamCommit =
 			centralSubrepository.getSubrepositoryUpstreamCommit();
 
-		String mergeBranchName = _getMergeBranchName(
-			subrepositoryName, subrepositoryUpstreamCommit);
-
-		String title = subrepositoryName + " - Central Merge Pull Request";
-
-		String body = JenkinsResultsParserUtil.combine(
-			"Merging the following commit: [", subrepositoryUpstreamCommit,
-			"](https://github.com/", receiverUserName, "/", subrepositoryName,
-			"/commit/", subrepositoryUpstreamCommit, ")");
-
-		String pullRequestURL = centralGitWorkingDirectory.createPullRequest(
-			body, mergeBranchName, receiverUserName, title);
-
 		String url = JenkinsResultsParserUtil.combine(
 			"https://api.github.com/repos/", receiverUserName, "/",
 			subrepositoryName, "/statuses/", subrepositoryUpstreamCommit);
@@ -160,6 +147,18 @@ public class MergeCentralSubrepositoryUtil {
 		requestJSONObject.put("context", "liferay/central-pull-request");
 		requestJSONObject.put("description", "Tests are queued on Jenkins.");
 		requestJSONObject.put("state", "pending");
+
+		String body = JenkinsResultsParserUtil.combine(
+			"Merging the following commit: [", subrepositoryUpstreamCommit,
+			"](https://github.com/", receiverUserName, "/", subrepositoryName,
+			"/commit/", subrepositoryUpstreamCommit, ")");
+		String mergeBranchName = _getMergeBranchName(
+			subrepositoryName, subrepositoryUpstreamCommit);
+		String title = subrepositoryName + " - Central Merge Pull Request";
+
+		String pullRequestURL = centralGitWorkingDirectory.createPullRequest(
+			body, mergeBranchName, receiverUserName, title);
+
 		requestJSONObject.put("target_url", pullRequestURL);
 
 		JenkinsResultsParserUtil.toJSONObject(
