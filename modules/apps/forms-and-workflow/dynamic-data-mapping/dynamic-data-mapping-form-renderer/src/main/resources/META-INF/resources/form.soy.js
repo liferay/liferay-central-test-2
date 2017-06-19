@@ -161,7 +161,7 @@ if (goog.DEBUG) {
 
 
 ddm.tabbed_form = function(opt_data, opt_ignored) {
-  var output = '<div class="lfr-ddm-form-container" id="' + soy.$$escapeHtmlAttribute(opt_data.containerId) + '"><div class="lfr-ddm-form-tabs"><ul class="nav navbar-nav">';
+  var output = '<div class="lfr-ddm-form-container" id="' + soy.$$escapeHtmlAttribute(opt_data.containerId) + '"><div class="lfr-ddm-form-tabs"><ul class="nav">';
   var pageList204 = opt_data.pages;
   var pageListLen204 = pageList204.length;
   for (var pageIndex204 = 0; pageIndex204 < pageListLen204; pageIndex204++) {
