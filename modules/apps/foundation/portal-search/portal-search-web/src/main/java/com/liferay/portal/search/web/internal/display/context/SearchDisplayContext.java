@@ -112,8 +112,6 @@ public class SearchDisplayContext {
 
 		SearchContext searchContext = SearchContextFactory.getInstance(request);
 
-		searchContext.setKeywords(_keywords.getKeywords());
-
 		boolean luceneSyntax = isUseAdvancedSearchSyntax();
 
 		if (!luceneSyntax) {
@@ -123,6 +121,8 @@ public class SearchDisplayContext {
 		if (luceneSyntax) {
 			searchContext.setAttribute("luceneSyntax", Boolean.TRUE);
 		}
+
+		searchContext.setKeywords(_keywords.getKeywords());
 
 		SearchRequestImpl searchRequestImpl = new SearchRequestImpl(
 			() -> searchContext, searchContainerOptions -> searchContainer,

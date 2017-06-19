@@ -108,10 +108,10 @@ public class FacetedSearcherImpl
 
 		BooleanQuery searchQuery = new BooleanQueryImpl();
 
-		String keywords = searchContext.getKeywords();
-
 		boolean luceneSyntax = GetterUtil.getBoolean(
 			searchContext.getAttribute("luceneSyntax"));
+
+		String keywords = searchContext.getKeywords();
 
 		if (Validator.isNotNull(keywords)) {
 			if (luceneSyntax) {
