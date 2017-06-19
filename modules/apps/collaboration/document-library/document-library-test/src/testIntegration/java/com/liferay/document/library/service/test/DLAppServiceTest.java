@@ -132,6 +132,7 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 				assetTagNames, assetEntry.getTagNames());
 		}
 
+		@Ignore
 		@Test
 		public void shouldCallWorkflowHandler() throws Exception {
 			try (WorkflowHandlerInvocationCounter<DLFileEntry>
@@ -552,6 +553,7 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 				new LiferayIntegrationTestRule(),
 				SynchronousDestinationTestRule.INSTANCE);
 
+		@Ignore
 		@Test
 		public void shouldCallWorkflowHandler() throws Exception {
 			try (WorkflowHandlerInvocationCounter<FileEntry>
@@ -663,6 +665,7 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 				new LiferayIntegrationTestRule(),
 				SynchronousDestinationTestRule.INSTANCE);
 
+		@Ignore
 		@Test
 		public void shouldCallWorkflowHandler() throws Exception {
 			try (WorkflowHandlerInvocationCounter<DLFileEntry>
@@ -1092,6 +1095,7 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 				new LiferayIntegrationTestRule(),
 				SynchronousDestinationTestRule.INSTANCE);
 
+		@Ignore
 		@Test
 		public void shouldCallWorkflowHandler() throws Exception {
 			try (WorkflowHandlerInvocationCounter<FileEntry>
@@ -1367,6 +1371,7 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 				assetTagNames, assetEntry.getTagNames());
 		}
 
+		@Ignore
 		@Test
 		public void shouldCallWorkflowHandler() throws Exception {
 			try (WorkflowHandlerInvocationCounter<DLFileEntry>
