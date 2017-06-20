@@ -71,7 +71,6 @@ public class DDMStructureModelListener extends BaseModelListener<DDMStructure> {
 				}
 
 			});
-
 		actionableDynamicQuery.setPerformActionMethod(
 			new ActionableDynamicQuery.PerformActionMethod<DDLRecordSet>() {
 
