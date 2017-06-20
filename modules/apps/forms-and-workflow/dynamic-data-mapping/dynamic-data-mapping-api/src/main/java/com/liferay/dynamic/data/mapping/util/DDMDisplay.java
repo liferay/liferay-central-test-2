@@ -120,6 +120,10 @@ public interface DDMDisplay {
 
 	public boolean isShowAddButton(Group group);
 
+	/**
+	 * @deprecated As of 3.6.0
+	 */
+	@Deprecated
 	public boolean isShowAddStructureButton();
 
 	public boolean isShowBackURLInTitleBar();
