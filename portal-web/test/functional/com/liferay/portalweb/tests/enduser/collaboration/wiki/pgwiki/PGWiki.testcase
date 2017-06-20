@@ -65,7 +65,7 @@
 			<var name="site" value="Child SiteName" />
 		</execute>
 
- 		<execute macro="ProductMenu#gotoSitesContent">
+		<execute macro="ProductMenu#gotoSitesContent">
 			<var name="portlet" value="Wiki" />
 		</execute>
 
@@ -125,8 +125,8 @@
 		</execute>
 
 		<execute macro="WikiPage#viewFrontPagePG">
-			<var name="wikiPageContent" value="Edited My first paragraph." />
 			<var name="wikiNodeName" value="FrontPage" />
+			<var name="wikiPageContent" value="Edited My first paragraph." />
 		</execute>
 	</command>
 
