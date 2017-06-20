@@ -298,9 +298,8 @@ public class PortletSessionImplTest {
 	}
 
 	@AdviseWith(
-		adviceClasses = {
-			PropsUtilAdvice.class, PortalClassLoaderUtilAdvice.class
-		}
+		adviceClasses =
+			{PropsUtilAdvice.class, PortalClassLoaderUtilAdvice.class}
 	)
 	@Test
 	public void testSerializableHttpSessionWrapper() {
