@@ -3795,7 +3795,10 @@
 		</execute>
 	</command>
 
-	<command name="ViewBooleanFieldPredefinedValue" priority="3">
+	<command name="ViewBooleanFieldPredefinedValue" priority="5">
+		<property name="portal.acceptance" value="true" />
+		<property name="testray.component.names" value="Training" />
+
 		<execute macro="Navigator#openURL" />
 
 		<execute macro="ProductMenu#gotoSitesContent">
