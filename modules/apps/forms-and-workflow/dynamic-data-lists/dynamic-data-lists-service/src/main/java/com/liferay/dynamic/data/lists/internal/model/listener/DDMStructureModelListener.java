@@ -24,6 +24,8 @@ import com.liferay.portal.kernel.exception.ModelListenerException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.BaseModelListener;
 import com.liferay.portal.kernel.model.ModelListener;
+import com.liferay.portal.kernel.service.ServiceContext;
+import com.liferay.portal.kernel.service.UserLocalService;
 
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -77,9 +79,23 @@ public class DDMStructureModelListener extends BaseModelListener<DDMStructure> {
 				public void performAction(DDLRecordSet recordSet)
 					throws PortalException {
 
-					recordSet.setModifiedDate(ddmStructure.getModifiedDate());
+					ServiceContext serviceContext = new ServiceContext();
 
-					_ddlRecordSetLocalService.updateDDLRecordSet(recordSet);
+					serviceContext.setAddGuestPermissions(true);
+					serviceContext.setAddGroupPermissions(true);
+
+					serviceContext.setScopeGroupId(recordSet.getGroupId());
+
+					long defaultUserId = _userLocalService.getDefaultUserId(
+						recordSet.getCompanyId());
+
+					serviceContext.setUserId(defaultUserId);
+
+					_ddlRecordSetLocalService.updateRecordSet(
+						recordSet.getRecordSetId(),
+						ddmStructure.getStructureId(), recordSet.getNameMap(),
+						recordSet.getDescriptionMap(),
+						recordSet.getMinDisplayRows(), serviceContext);
 				}
 
 			});
@@ -89,5 +105,8 @@ public class DDMStructureModelListener extends BaseModelListener<DDMStructure> {
 
 	@Reference
 	private DDLRecordSetLocalService _ddlRecordSetLocalService;
+
+	@Reference
+	private UserLocalService _userLocalService;
 
 }
