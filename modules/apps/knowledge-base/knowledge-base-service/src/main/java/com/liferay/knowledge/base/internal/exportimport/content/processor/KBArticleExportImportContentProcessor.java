@@ -25,8 +25,8 @@ import org.osgi.service.component.annotations.Component;
 @Component(
 	property = {"model.class.name=com.liferay.knowledge.base.model.KBArticle"},
 	service = {
-		KBArticleExportImportContentProcessor.class,
-		ExportImportContentProcessor.class
+		ExportImportContentProcessor.class,
+		KBArticleExportImportContentProcessor.class
 	}
 )
 public class KBArticleExportImportContentProcessor
