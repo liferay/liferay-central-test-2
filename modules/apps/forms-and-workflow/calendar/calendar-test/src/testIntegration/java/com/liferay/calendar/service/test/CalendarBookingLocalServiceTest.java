@@ -2437,17 +2437,16 @@ public class CalendarBookingLocalServiceTest {
 			ServiceContextTestUtil.getServiceContext(group.getGroupId());
 
 		addStagingAttribute(
+			serviceContext,
+			StagingUtil.getStagedPortletId(CalendarPortletKeys.CALENDAR),
+			enableCalendarStaging);
+		addStagingAttribute(
 			serviceContext, PortletDataHandlerKeys.PORTLET_CONFIGURATION_ALL,
 			false);
 		addStagingAttribute(
 			serviceContext, PortletDataHandlerKeys.PORTLET_DATA_ALL, false);
 		addStagingAttribute(
 			serviceContext, PortletDataHandlerKeys.PORTLET_SETUP_ALL, false);
-
-		addStagingAttribute(
-			serviceContext,
-			StagingUtil.getStagedPortletId(CalendarPortletKeys.CALENDAR),
-			enableCalendarStaging);
 
 		StagingLocalServiceUtil.enableLocalStaging(
 			_user.getUserId(), group, false, false, serviceContext);
