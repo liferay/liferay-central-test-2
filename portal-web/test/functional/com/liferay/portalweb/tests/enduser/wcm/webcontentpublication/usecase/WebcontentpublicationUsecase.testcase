@@ -2138,7 +2138,10 @@
 		</execute>
 	</command>
 
-	<command name="ViewWebContentWithConfiguredDisplayPageViaAP" priority="4">
+	<command name="ViewWebContentWithConfiguredDisplayPageViaAP" priority="5">
+		<property name="portal.acceptance" value="true" />
+		<property name="testray.component.names" value="Training" />
+
 		<execute macro="TestCase#getSiteName">
 			<return from="siteName" name="siteName" />
 			<var name="siteName" value="${siteName}" />
