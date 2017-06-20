@@ -82,6 +82,26 @@
 		</execute>
 	</command>
 
+	<command name="EditPageFromControlMenu" priority="5">
+		<description message="This is a use case for LPS-71160" />
+
+		<execute macro="Dockbar#editPageFromControlMenu" >
+			<var name="pageName" value="Welcome" />
+		</execute>
+
+		<execute macro="Page#editName">
+			<var name="pageNameEdit" value="Welcome Page Edit" />
+		</execute>
+
+		<execute macro="Navigator#gotoPage">
+			<var name="pageName" value="Welcome Page Edit" />
+		</execute>
+
+		<execute macro="Page#view">
+			<var name="pageName" value="Welcome Page Edit" />
+		</execute>
+	</command>
+
 	<command name="EditSitePage" priority="4">
 		<execute macro="Navigator#openURL" />
 
