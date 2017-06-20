@@ -110,7 +110,6 @@ public class CalendarBookingLocalServiceTest {
 	@After
 	public void tearDown() {
 		tearDownCheckBookingMessageListener();
-
 		tearDownPortletPreferences();
 	}
 
