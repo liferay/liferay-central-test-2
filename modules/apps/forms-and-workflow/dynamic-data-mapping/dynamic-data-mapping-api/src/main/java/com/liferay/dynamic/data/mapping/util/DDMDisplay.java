@@ -18,6 +18,7 @@ import aQute.bnd.annotation.ProviderType;
 
 import com.liferay.dynamic.data.mapping.model.DDMStructure;
 import com.liferay.dynamic.data.mapping.model.DDMTemplate;
+import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
@@ -116,6 +117,8 @@ public interface DDMDisplay {
 
 	public boolean isEnableSelectStructureLink(
 		DDMStructure structure, long classPK);
+
+	public boolean isShowAddButton(Group group);
 
 	public boolean isShowAddStructureButton();
 
