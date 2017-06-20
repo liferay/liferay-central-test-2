@@ -301,7 +301,6 @@ public class ActionUtil {
 				article.getDescriptionMap();
 
 				article.setNew(true);
-
 				article.setId(0);
 				article.setGroupId(groupId);
 				article.setClassNameId(
