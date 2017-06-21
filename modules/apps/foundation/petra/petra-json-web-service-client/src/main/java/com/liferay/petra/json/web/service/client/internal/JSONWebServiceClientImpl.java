@@ -788,9 +788,9 @@ public class JSONWebServiceClientImpl implements JSONWebServiceClient {
 		Map<String, String> headers = new HashMap<>();
 
 		for (String header : headersString.split(";")) {
-			String[] headerKeyValue = header.split("=");
+			String[] headerParts = header.split("=");
 
-			if (headerKeyValue.length != 2) {
+			if (headerParts.length != 2) {
 				if (_logger.isDebugEnabled()) {
 					_logger.debug(
 						"Unexpected header syntax. Skipp header " + header);
@@ -799,7 +799,7 @@ public class JSONWebServiceClientImpl implements JSONWebServiceClient {
 				continue;
 			}
 
-			headers.put(headerKeyValue[0], headerKeyValue[1]);
+			headers.put(headerParts[0], headerParts[1]);
 		}
 
 		setHeaders(headers);
