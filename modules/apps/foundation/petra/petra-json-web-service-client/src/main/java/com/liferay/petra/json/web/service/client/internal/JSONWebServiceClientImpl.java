@@ -119,6 +119,7 @@ public class JSONWebServiceClientImpl implements JSONWebServiceClient {
 		setHostName(String.valueOf(properties.get("hostName")));
 		setHostPort(
 			Integer.parseInt(String.valueOf(properties.get("hostPort"))));
+		setKeyStore((KeyStore)properties.get("keyStore"));
 		setLogin(String.valueOf(properties.get("login")));
 		setPassword(String.valueOf(properties.get("password")));
 		setProtocol(String.valueOf(properties.get("protocol")));
@@ -138,8 +139,6 @@ public class JSONWebServiceClientImpl implements JSONWebServiceClient {
 			setProxyLogin(String.valueOf(properties.get("proxyLogin")));
 			setProxyPassword(String.valueOf(properties.get("proxyPassword")));
 		}
-
-		setKeyStore((KeyStore)properties.get("keyStore"));
 
 		afterPropertiesSet();
 	}
