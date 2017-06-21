@@ -200,44 +200,6 @@
 		<execute macro="Navigator#openURL" />
 
 		<execute macro="Page#add">
-			<var name="columnName" value="1 Column" />
-			<var name="pageName" value="Calendar Test Page" />
-			<var name="sitePageType" value="Empty Page" />
-		</execute>
-
-		<execute macro="Portlet#addPG">
-			<var name="pageName" value="Calendar Test Page" />
-			<var name="portletName" value="Calendar" />
-		</execute>
-
-		<execute macro="Navigator#gotoPage">
-			<var name="pageName" value="Calendar Test Page" />
-		</execute>
-
-		<execute macro="CalendarNavigator#gotoAddEvent" />
-
-		<execute macro="CalendarEvent#editTitle">
-			<var name="eventTitle" value="Calendar Event Title" />
-		</execute>
-
-		<execute macro="CalendarEvent#setTimes">
-			<var name="endDateTime" value="03:00 PM" />
-			<var name="startDateTime" value="02:00 PM" />
-		</execute>
-
-		<execute macro="CalendarEvent#publish" />
-
-		<execute macro="Navigator#gotoPage">
-			<var name="pageName" value="Calendar Test Page" />
-		</execute>
-
-		<execute macro="CalendarEvent#view">
-			<var name="eventTitle" value="Calendar Event Title" />
-		</execute>
-
-		<execute macro="Navigator#openURL" />
-
-		<execute macro="Page#add">
 			<var name="pageName" value="Bookmarks Test Page" />
 		</execute>
 
