@@ -83,7 +83,7 @@ public class CycleDetectorWikiPageModelListenerTest {
 
 			wikiPage2.setParentTitle("Title3");
 
-			wikiPage2 = WikiPageLocalServiceUtil.updateWikiPage(wikiPage2);
+			WikiPageLocalServiceUtil.updateWikiPage(wikiPage2);
 
 			wikiPage3.setParentTitle("Title1");
 
@@ -103,11 +103,11 @@ public class CycleDetectorWikiPageModelListenerTest {
 		try {
 			wikiPage3.setParentTitle("Other");
 
-			wikiPage3 = WikiPageLocalServiceUtil.updateWikiPage(wikiPage3);
+			WikiPageLocalServiceUtil.updateWikiPage(wikiPage3);
 
 			wikiPage1.setTitle("Other");
 
-			wikiPage1 = WikiPageLocalServiceUtil.updateWikiPage(wikiPage1);
+			WikiPageLocalServiceUtil.updateWikiPage(wikiPage1);
 
 			Assert.fail();
 		}
@@ -173,7 +173,7 @@ public class CycleDetectorWikiPageModelListenerTest {
 
 			wikiPage1.setTitle("Other Title");
 
-			wikiPage1 = WikiPageLocalServiceUtil.updateWikiPage(wikiPage1);
+			WikiPageLocalServiceUtil.updateWikiPage(wikiPage1);
 
 			Assert.fail();
 		}
