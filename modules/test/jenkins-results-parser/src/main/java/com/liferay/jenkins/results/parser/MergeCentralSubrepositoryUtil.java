@@ -52,7 +52,7 @@ public class MergeCentralSubrepositoryUtil {
 					new CentralSubrepository(
 						gitrepoFile, centralUpstreamBranchName);
 
-				if (centralSubrepository.isAutopullEnabled()) {
+				if (centralSubrepository.isAutoPullEnabled()) {
 					if (centralSubrepository.isCentralPullRequestCandidate()) {
 						String mergeBranchName = _getMergeBranchName(
 							centralSubrepository.getSubrepositoryName(),
