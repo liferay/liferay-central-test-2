@@ -435,12 +435,7 @@ public class GitWorkingDirectory {
 				"Deleting remote branch ", remoteBranchName, " from ",
 				remoteURL));
 
-		PushCommand pushCommand = _git.push();
-
-		pushCommand.setRefSpecs(new RefSpec(":refs/heads/" + remoteBranchName));
-		pushCommand.setRemote(remoteURL);
-
-		pushCommand.call();
+		pushToRemote(true, "", remoteBranchName, remoteConfig);
 	}
 
 	public void fetch(RefSpec refSpec, RemoteConfig remoteConfig)
