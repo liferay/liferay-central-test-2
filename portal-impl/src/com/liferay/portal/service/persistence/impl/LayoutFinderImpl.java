@@ -60,10 +60,6 @@ public class LayoutFinderImpl
 		Session session = null;
 
 		try {
-			Role role = RoleUtil.findByPrimaryKey(roleId);
-
-			long companyId = role.getCompanyId();
-
 			session = openSession();
 
 			String sql = CustomSQLUtil.get(FIND_BY_NO_PERMISSIONS);
@@ -77,7 +73,10 @@ public class LayoutFinderImpl
 			qPos.add(Layout.class.getName());
 			qPos.add(ResourceConstants.SCOPE_INDIVIDUAL);
 			qPos.add(roleId);
-			qPos.add(companyId);
+
+			Role role = RoleUtil.findByPrimaryKey(roleId);
+
+			qPos.add(role.getCompanyId());
 
 			return q.list(true);
 		}
