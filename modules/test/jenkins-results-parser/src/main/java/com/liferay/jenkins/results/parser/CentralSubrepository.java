@@ -56,7 +56,7 @@ public class CentralSubrepository {
 		return _subrepositoryUpstreamCommit;
 	}
 
-	public Boolean isAutoPullEnabled() throws IOException {
+	public boolean isAutoPullEnabled() throws IOException {
 		String mode = _gitrepoProperties.getProperty("mode", "push");
 
 		if (!mode.equals("pull")) {
@@ -67,7 +67,7 @@ public class CentralSubrepository {
 			_gitrepoProperties.getProperty("autopull", "false"));
 	}
 
-	public Boolean isCentralPullRequestCandidate() throws IOException {
+	public boolean isCentralPullRequestCandidate() throws IOException {
 		if (_centralPullRequestCandidate == null) {
 			_centralPullRequestCandidate = _isCentralPullRequestCandidate();
 		}
@@ -75,7 +75,7 @@ public class CentralSubrepository {
 		return _centralPullRequestCandidate;
 	}
 
-	public Boolean isSubrepositoryUpstreamCommitMerged() throws IOException {
+	public boolean isSubrepositoryUpstreamCommitMerged() throws IOException {
 		String subrepositoryMergedCommit = _gitrepoProperties.getProperty(
 			"commit", "");
 
