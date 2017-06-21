@@ -251,6 +251,7 @@
 	<command name="DeleteCheckedoutDocument" priority="5">
 		<description message="This is a use case for LPS-68454" />
 
+		<property name="portal.release" value="false" />
 		<property name="test.name.skip.portal.instance" value="CPDocumentum#DeleteCheckedoutDocument" />
 
 		<execute macro="DMRepository#gotoCP">
