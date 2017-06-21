@@ -20,8 +20,10 @@ import com.liferay.portal.kernel.model.ModelListener;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.wiki.model.WikiPage;
+import com.liferay.wiki.service.persistence.WikiPagePersistence;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 /**
  * @author Tomas Polesovsky
@@ -74,10 +76,14 @@ public class CycleDetectorWikiPageModelListener
 				return true;
 			}
 
-			wikiPage = wikiPage.fetchParentPage();
+			wikiPage = _wikiPagePersistence.fetchByN_T_H_First(
+				wikiPage.getNodeId(), wikiPage.getParentTitle(), true, null);
 		}
 
 		return false;
 	}
+
+	@Reference
+	private WikiPagePersistence _wikiPagePersistence;
 
 }
