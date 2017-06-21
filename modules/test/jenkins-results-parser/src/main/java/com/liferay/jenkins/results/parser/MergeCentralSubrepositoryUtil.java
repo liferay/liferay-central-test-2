@@ -43,54 +43,56 @@ public class MergeCentralSubrepositoryUtil {
 		File modulesDir = new File(
 			centralGitWorkingDirectory.getWorkingDirectory(), "modules");
 
-		if (modulesDir.exists()) {
-			List<File> gitrepoFiles = JenkinsResultsParserUtil.findFiles(
-				modulesDir, ".gitrepo");
+		if (!modulesDir.exists()) {
+			return;
+		}
 
-			for (File gitrepoFile : gitrepoFiles) {
-				CentralSubrepository centralSubrepository =
-					new CentralSubrepository(
-						gitrepoFile, centralUpstreamBranchName);
+		List<File> gitrepoFiles = JenkinsResultsParserUtil.findFiles(
+			modulesDir, ".gitrepo");
 
-				if (centralSubrepository.isAutoPullEnabled()) {
-					if (centralSubrepository.isCentralPullRequestCandidate()) {
-						String mergeBranchName = _getMergeBranchName(
-							centralSubrepository.getSubrepositoryName(),
-							centralSubrepository.
-								getSubrepositoryUpstreamCommit());
-						RemoteConfig upstreamRemoteConfig =
-							centralGitWorkingDirectory.getRemoteConfig(
-								"upstream");
+		for (File gitrepoFile : gitrepoFiles) {
+			CentralSubrepository centralSubrepository =
+				new CentralSubrepository(
+					gitrepoFile, centralUpstreamBranchName);
 
-						if (!centralGitWorkingDirectory.branchExists(
-								mergeBranchName, upstreamRemoteConfig)) {
+			if (!centralSubrepository.isAutoPullEnabled()) {
+				return;
+			}
 
-							_createMergeBranch(
-								centralGitWorkingDirectory,
-								centralSubrepository, topLevelBranchName);
+			if (centralSubrepository.isCentralPullRequestCandidate()) {
+				String mergeBranchName = _getMergeBranchName(
+					centralSubrepository.getSubrepositoryName(),
+					centralSubrepository.getSubrepositoryUpstreamCommit());
+				RemoteConfig upstreamRemoteConfig =
+					centralGitWorkingDirectory.getRemoteConfig("upstream");
 
-							_commitCiMergeFile(
-								centralGitWorkingDirectory,
-								centralSubrepository, gitrepoFile);
+				if (!centralGitWorkingDirectory.branchExists(
+						mergeBranchName, upstreamRemoteConfig)) {
 
-							_pushMergeBranchToRemote(
-								centralGitWorkingDirectory,
-								centralSubrepository, receiverUserName);
-						}
+					_createMergeBranch(
+						centralGitWorkingDirectory, centralSubrepository,
+						topLevelBranchName);
 
-						_createMergePullRequest(
-							centralGitWorkingDirectory, centralSubrepository,
-							receiverUserName);
-					}
+					_commitCiMergeFile(
+						centralGitWorkingDirectory, centralSubrepository,
+						gitrepoFile);
 
-					_deleteStalePulls(
+					_pushMergeBranchToRemote(
 						centralGitWorkingDirectory, centralSubrepository,
 						receiverUserName);
-
-					_deleteStaleBranches(
-						centralGitWorkingDirectory, centralSubrepository);
 				}
+
+				_createMergePullRequest(
+					centralGitWorkingDirectory, centralSubrepository,
+					receiverUserName);
 			}
+
+			_deleteStalePulls(
+				centralGitWorkingDirectory, centralSubrepository,
+				receiverUserName);
+
+			_deleteStaleBranches(
+				centralGitWorkingDirectory, centralSubrepository);
 		}
 	}
 
