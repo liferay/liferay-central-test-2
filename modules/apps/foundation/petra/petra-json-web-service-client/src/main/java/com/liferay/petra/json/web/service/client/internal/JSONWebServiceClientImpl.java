@@ -792,8 +792,7 @@ public class JSONWebServiceClientImpl implements JSONWebServiceClient {
 
 			if (headerParts.length != 2) {
 				if (_logger.isDebugEnabled()) {
-					_logger.debug(
-						"Unexpected header syntax. Skipp header " + header);
+					_logger.debug("Ignoring invalid header " + header);
 				}
 
 				continue;
