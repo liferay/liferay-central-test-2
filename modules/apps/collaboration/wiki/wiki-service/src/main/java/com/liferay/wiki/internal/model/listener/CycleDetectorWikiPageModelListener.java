@@ -53,8 +53,6 @@ public class CycleDetectorWikiPageModelListener
 	}
 
 	protected boolean isCycleDetectedInWikiPagesGraph(WikiPage wikiPage) {
-		WikiPage parentPage = wikiPage;
-
 		String title = wikiPage.getTitle();
 
 		if (Validator.isBlank(title)) {
@@ -63,8 +61,8 @@ public class CycleDetectorWikiPageModelListener
 
 		title = title.trim();
 
-		while (parentPage != null) {
-			String parentTitle = parentPage.getParentTitle();
+		while (wikiPage != null) {
+			String parentTitle = wikiPage.getParentTitle();
 
 			if (Validator.isBlank(parentTitle)) {
 				return false;
@@ -76,7 +74,7 @@ public class CycleDetectorWikiPageModelListener
 				return true;
 			}
 
-			parentPage = parentPage.fetchParentPage();
+			wikiPage = wikiPage.fetchParentPage();
 		}
 
 		return false;
