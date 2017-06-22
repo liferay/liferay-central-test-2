@@ -1,6 +1,6 @@
 Bundle-Name: Liferay Shopping API
 Bundle-SymbolicName: com.liferay.shopping.api
-Bundle-Version: 3.0.4
+Bundle-Version: 3.0.5
 Export-Package:\
 	com.liferay.shopping.configuration,\
 	com.liferay.shopping.configuration.definition,\
