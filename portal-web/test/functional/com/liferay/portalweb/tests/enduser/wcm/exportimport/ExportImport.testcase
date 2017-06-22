@@ -954,8 +954,6 @@
 		</execute>
 	</command>
 
-	<!-- LRQA-26034 -->
-
 	<command name="ImportCorruptedFile" priority="5">
 		<property name="portal.acceptance" value="true" />
 
