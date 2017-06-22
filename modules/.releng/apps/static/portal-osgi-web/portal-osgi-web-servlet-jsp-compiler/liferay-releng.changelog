@@ -117,3 +117,8 @@ bb5bff29ebe621c6280566840bead0db8a2878c3^..2b5da534d6bd8c087c2f6fbc75846fddf7250
 # Bundle Version 2.0.23
 #
 fb5afc6f3cfd295ad18ccf343c8e54ccd8841831^..ba75d3ce0bd0541f112bbd38596a5c0ae38e7fbb=LPS-67352
+
+#
+# Bundle Version 2.0.24
+#
+ba75d3ce0bd0541f112bbd38596a5c0ae38e7fbb^..c406b12fcef0866598a435f187c1b0b56de1deab=LPS-72705
