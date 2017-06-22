@@ -16,6 +16,7 @@ package com.liferay.journal.web.dynamic.data.mapping.util;
 
 import com.liferay.dynamic.data.mapping.util.DDMDisplay;
 import com.liferay.journal.constants.JournalPortletKeys;
+import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.util.Portal;
 
 import org.osgi.service.component.annotations.Component;
@@ -36,7 +37,7 @@ public class JournalFilterStructuresDDMDisplay extends JournalDDMDisplay {
 	}
 
 	@Override
-	public boolean isShowAddStructureButton() {
+	public boolean isShowAddButton(Group scopeGroup) {
 		return false;
 	}
 
