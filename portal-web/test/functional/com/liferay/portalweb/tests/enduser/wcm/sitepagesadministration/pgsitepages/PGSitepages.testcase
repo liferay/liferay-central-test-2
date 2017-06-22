@@ -101,10 +101,6 @@
 			<var name="pageNameEdit" value="Site Page Edit" />
 		</execute>
 
-		<execute macro="Navigator#gotoPage">
-			<var name="pageName" value="Site Page Edit" />
-		</execute>
-
 		<execute macro="Page#view">
 			<var name="pageName" value="Site Page Edit" />
 		</execute>
