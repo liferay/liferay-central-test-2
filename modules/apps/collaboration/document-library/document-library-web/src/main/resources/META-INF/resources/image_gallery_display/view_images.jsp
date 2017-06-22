@@ -233,11 +233,13 @@ embeddedPlayerURL.setWindowState(LiferayWindowState.POP_UP);
 		}
 	).render();
 
-	Liferay.on('<portlet:namespace />Video:play', function() {
-		imageViewer.pause();
+	Liferay.on(
+		'<portlet:namespace />Video:play',
+		function() {
+			imageViewer.pause();
 
-		playingVideoIndex = this.get('currentIndex');
-	});
+			playingVideoIndex = this.get('currentIndex');
+		});
 
 	var onClickLinksDefaultFn = imageViewer._onClickLinks;
 
