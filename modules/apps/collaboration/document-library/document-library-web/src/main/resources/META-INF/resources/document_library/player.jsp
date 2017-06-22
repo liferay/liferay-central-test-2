@@ -70,7 +70,7 @@ for (String previewFileURL : previewFileURLs) {
 	</c:when>
 	<c:when test="<%= supportedVideo %>">
 		<aui:script use="aui-base,aui-video">
-			var isVideoPlaying = false;
+			var playing = false;
 
 			var video = new A.Video(
 				{
@@ -83,12 +83,12 @@ for (String previewFileURL : previewFileURLs) {
 
 					on: {
 						'pause' : function() {
-							isVideoPlaying = false;
+							playing = false;
 						},
 						'play': function() {
 							window.parent.Liferay.fire('<portlet:namespace /><%= randomNamespace %>Video:play');
 
-							isVideoPlaying = true;
+							playing = true;
 						}
 					},
 
@@ -107,7 +107,7 @@ for (String previewFileURL : previewFileURLs) {
 			window.parent.Liferay.on(
 				'<portlet:namespace /><%= randomNamespace %>ImageViewer:currentIndexChange',
 				function() {
-					if (isVideoPlaying) {
+					if (playing) {
 						video.pause();
 					}
 				}
