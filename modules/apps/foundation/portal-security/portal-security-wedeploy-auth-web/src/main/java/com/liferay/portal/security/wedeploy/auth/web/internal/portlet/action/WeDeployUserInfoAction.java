@@ -52,9 +52,14 @@ public class WeDeployUserInfoAction extends BaseStrutsAction {
 			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
-		String accessToken = ParamUtil.getString(request, "token");
+		response.setContentType(ContentTypes.APPLICATION_JSON);
+		response.setHeader(
+			HttpHeaders.CACHE_CONTROL,
+			HttpHeaders.CACHE_CONTROL_NO_CACHE_VALUE);
 
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+
+		String accessToken = ParamUtil.getString(request, "token");
 
 		try {
 			WeDeployAuthToken weDeployAuthToken =
@@ -81,11 +86,6 @@ public class WeDeployUserInfoAction extends BaseStrutsAction {
 					"an-error-occurred-while-processing-the-requested-" +
 						"resource"));
 		}
-
-		response.setContentType(ContentTypes.APPLICATION_JSON);
-		response.setHeader(
-			HttpHeaders.CACHE_CONTROL,
-			HttpHeaders.CACHE_CONTROL_NO_CACHE_VALUE);
 
 		ServletResponseUtil.write(response, jsonObject.toString());
 
